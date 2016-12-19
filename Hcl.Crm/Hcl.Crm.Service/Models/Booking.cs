@@ -1,4 +1,4 @@
-﻿namespace Hcl.Crm.Service.Models
+﻿namespace Tc.Crm.Service.Models
 {
 
     public class Booking

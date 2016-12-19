@@ -1,11 +1,11 @@
-﻿using Hcl.Crm.Service.Models;
+﻿using Tc.Crm.Service.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace Hcl.Crm.Service.Controllers
+namespace Tc.Crm.Service.Controllers
 {
 
     public class BookingController : ApiController

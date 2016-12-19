@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Routing;
 
-namespace Hcl.Crm.Service
+namespace Tc.Crm.Service
 {
     public class WebApiApplication : System.Web.HttpApplication
     {

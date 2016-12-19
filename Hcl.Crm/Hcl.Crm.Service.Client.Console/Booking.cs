@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hcl.Crm.Service.Client.Console
+namespace Tc.Crm.Service.Client.Console
 {
     public class Booking
     {
