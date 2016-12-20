@@ -7,6 +7,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
+using System.Net;
 
 namespace Tc.Crm.Service.Client.Console
 {
@@ -31,6 +32,11 @@ namespace Tc.Crm.Service.Client.Console
                     {
                         Content = new StringContent(serializedString, Encoding.UTF8, "application/json")
                     };
+
+                    //var credentials = new NetworkCredential("TC-DEV1\\$TC-DEV1", "jP2s0bWcrbciM7MflYqSTwoERCBqa5L5bMFQ6ziyk9w92FK3iFEdeexAi9iJ");
+                    //var handler = new HttpClientHandler { Credentials = credentials };
+
+
                     HttpClient client = new HttpClient();
                     client.BaseAddress = new Uri(GetUrl());
 
