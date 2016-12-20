@@ -6,11 +6,13 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace Tc.Crm.Service.Client.Console
 {
     class Program
     {
+        static string Url = string.Empty;
         static void Main(string[] args)
         {
             while (true)
@@ -24,24 +26,25 @@ namespace Tc.Crm.Service.Client.Console
 
                     var b = GetBookingFromConsole();
 
-                    //var b = new Booking { FirstName = "Deb", LastName = "Majumder", BookingId = 100 };
-
                     var serializedString = JsonConvert.SerializeObject(b);
                     var inputMessage = new HttpRequestMessage
                     {
                         Content = new StringContent(serializedString, Encoding.UTF8, "application/json")
                     };
                     HttpClient client = new HttpClient();
-                    client.BaseAddress = new Uri("http://localhost:48912");
+                    client.BaseAddress = new Uri(GetUrl());
 
                     inputMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     HttpResponseMessage message = client.PutAsync("api/booking", inputMessage.Content).Result;
 
-                    message.EnsureSuccessStatusCode();
                     if (message.IsSuccessStatusCode)
                     {
                         IEnumerable<string> headerValues = message.Headers.GetValues("Message");
                         System.Console.WriteLine(headerValues.FirstOrDefault().ToString());
+                    }
+                    else
+                    {
+                        System.Console.WriteLine(message.ReasonPhrase);
                     }
 
 
@@ -51,10 +54,17 @@ namespace Tc.Crm.Service.Client.Console
                 catch (Exception ex)
                 {
 
-                    System.Console.WriteLine(ex.StackTrace);
+                    System.Console.WriteLine(ex.Message);
                 }
             }
             System.Console.ReadLine();
+        }
+
+        private static string GetUrl()
+        {
+            if(string.IsNullOrWhiteSpace(Url))
+                Url =  ConfigurationManager.AppSettings["ApiUrl"];
+            return Url;
         }
 
         private static object GetBookingFromConsole()
