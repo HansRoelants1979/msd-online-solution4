@@ -91,11 +91,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\BookingsController.cs" />
+    <Compile Include="BusinessServices\CRM\BookingService.cs" />
+    <Compile Include="BusinessServices\CRM\CustomerService.cs" />
+    <Compile Include="BusinessServices\CRM\IBookingService.cs" />
+    <Compile Include="BusinessServices\CRM\ICustomerService.cs" />
+    <Compile Include="BusinessServices\Custom\CustomUserService.cs" />
+    <Compile Include="BusinessServices\IUserService.cs" />
+    <Compile Include="Controllers\BookingController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Filters\ApiAuthenticationFilter.cs" />
+    <Compile Include="Filters\BasicAuthenticationIdentity.cs" />
+    <Compile Include="Filters\GenericAuthenticationFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Booking.cs" />
+    <Compile Include="Models\Customer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
