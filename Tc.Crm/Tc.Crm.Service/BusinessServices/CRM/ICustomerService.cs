@@ -9,9 +9,8 @@ namespace Tc.Crm.Service.BusinessServices.CRM
 {
     interface ICustomerService
     {
-        Customer GetCustomerBy(string sourceSystemId);
-        void Update(Customer customer);
-        Customer Create(Customer customer);
-        Customer Upsert(Customer customer);
+        Task<bool> Update(Customer customer);
+        Task<Guid> Create(Customer customer);
+        Task<Customer> Upsert(Customer customer);
     }
 }

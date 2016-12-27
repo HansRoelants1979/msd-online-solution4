@@ -9,10 +9,8 @@ namespace Tc.Crm.Service.BusinessServices.CRM
 {
     interface IBookingService
     {
-
-        Booking GetBookingBy(int id);
-        void Update(Booking booking);
-        Booking Create(Booking booking);
-        Booking Upsert(Booking booking);
+        Task<bool> Update(Booking booking);
+        Task<Guid> Create(Booking booking);
+        Task<Booking> Upsert(Booking booking);
     }
 }

@@ -11,6 +11,6 @@
         public string Country { get; set; }
         public decimal TotalAmount { get; set; }
 
-        public int BookingId { get; set; }
+        public string Id { get; set; }
     }
 }

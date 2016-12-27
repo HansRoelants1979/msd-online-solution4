@@ -14,9 +14,9 @@ namespace Tc.Crm.Service.Controllers
     {
         Booking[] bookings = new Booking[]
            {
-                new Booking { FirstName = "John", LastName = "Doe",Country="Phillippines",TotalAmount=200,BookingId=101},
-                new Booking { FirstName = "Joe", LastName = "Blog",Country="China",TotalAmount=400,BookingId=100},
-                new Booking { FirstName = "John", LastName = "Jones",Country="Italy",TotalAmount=400,BookingId=102},
+                new Booking { FirstName = "John", LastName = "Doe",Country="Phillippines",TotalAmount=200,Id="101"},
+                new Booking { FirstName = "Joe", LastName = "Blog",Country="China",TotalAmount=400,Id="100"},
+                new Booking { FirstName = "John", LastName = "Jones",Country="Italy",TotalAmount=400,Id="102"},
            };
         [Route("api/bookings")]
         [Route("api/v1/bookings")]
@@ -26,9 +26,9 @@ namespace Tc.Crm.Service.Controllers
         }
         [Route("api/bookings/{id}/booking")]
         [Route("api/v1/bookings/{id}/booking")]
-        public IHttpActionResult GetBooking(int id)
+        public IHttpActionResult GetBooking(string id)
         {
-            var booking = bookings.FirstOrDefault((p) => p.BookingId == id);
+            var booking = bookings.FirstOrDefault((p) => p.Id == id);
             if (booking == null)
             {
                 return NotFound();
@@ -40,7 +40,7 @@ namespace Tc.Crm.Service.Controllers
         [Route("api/v1/bookings/create")]
         public HttpResponseMessage CreateBooking(Booking booking)
         {
-            var b  = bookings.FirstOrDefault((p) => p.BookingId == booking.BookingId);
+            var b  = bookings.FirstOrDefault((p) => p.Id == booking.Id);
             if (b == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
