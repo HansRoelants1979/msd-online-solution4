@@ -5,53 +5,41 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Tc.Crm.Service.Filters;
-
+using System;
+using Tc.Crm.Service.Services;
 
 namespace Tc.Crm.Service.Controllers
 {
-    [ApiAuthenticationFilter]
+    [RequireHttps]
     public class BookingController : ApiController
     {
-        Booking[] bookings = new Booking[]
-           {
-                new Booking { FirstName = "John", LastName = "Doe",Country="Phillippines",TotalAmount=200,Id="101"},
-                new Booking { FirstName = "Joe", LastName = "Blog",Country="China",TotalAmount=400,Id="100"},
-                new Booking { FirstName = "John", LastName = "Jones",Country="Italy",TotalAmount=400,Id="102"},
-           };
-        [Route("api/bookings")]
-        [Route("api/v1/bookings")]
-        public IEnumerable<Booking> GetAllBookings()
+        [Route("api/v1/booking/update")]
+        [Route("api/booking/update")]
+        [HttpPut]
+        [JwtAuthorize]
+
+        public IHttpActionResult Update()
         {
-            return bookings;
-        }
-        [Route("api/bookings/{id}/booking")]
-        [Route("api/v1/bookings/{id}/booking")]
-        public IHttpActionResult GetBooking(string id)
-        {
-            var booking = bookings.FirstOrDefault((p) => p.Id == id);
-            if (booking == null)
-            {
-                return NotFound();
-            }
-            return Ok(booking);
+            var t = JwtHelper.GetToken(Request);
+            var p = JwtHelper.DecodePayloadToObject<JwtPayload>(t);
+            var c = BookingService.GetBookingFromPayload(p.Data);
+
+            return StatusCode(HttpStatusCode.NoContent);
+
+
         }
 
-        [Route("api/bookings/create")]
-        [Route("api/v1/bookings/create")]
-        public HttpResponseMessage CreateBooking(Booking booking)
+        [Route("api/v1/booking/create")]
+        [Route("api/booking/create")]
+        [HttpPut]
+        [JwtAuthorize]
+        public IHttpActionResult Create()
         {
-            var b  = bookings.FirstOrDefault((p) => p.Id == booking.Id);
-            if (b == null)
-            {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
-            }
-            else
-            {
-                var response = new HttpResponseMessage();
-                response.Headers.Add("Message", "Hello World!!!");
-                return response;
-            }
+            var t = JwtHelper.GetToken(Request);
+            var p = JwtHelper.DecodePayloadToObject<JwtPayload>(t);
+            var c = BookingService.GetBookingFromPayload(p.Data);
 
+            return Ok(c);
         }
     }
 }

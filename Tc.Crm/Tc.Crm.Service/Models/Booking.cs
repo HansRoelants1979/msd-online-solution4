@@ -1,16 +1,16 @@
-﻿namespace Tc.Crm.Service.Models
+﻿using System.Runtime.Serialization;
+
+namespace Tc.Crm.Service.Models
 {
 
+    [DataContract]
     public class Booking
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-
-        public string Postcode { get; set; }
-
-        public string Country { get; set; }
+        [DataMember(Name = "sourcekey")]
+        public string SourceKey { get; set; }
+        [DataMember(Name = "total")]
         public decimal TotalAmount { get; set; }
-
-        public string Id { get; set; }
+        [DataMember(Name = "customerkey")]
+        public string CustomerId { get; set; }
     }
 }

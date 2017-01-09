@@ -15,7 +15,7 @@ namespace Tc.Crm.Service
             // Web API routes
             config.MapHttpAttributeRoutes();
 
-            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
         }
     }
 }
