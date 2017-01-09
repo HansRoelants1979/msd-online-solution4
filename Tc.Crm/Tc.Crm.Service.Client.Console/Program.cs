@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 using System.Net;
+using Newtonsoft.Json;
+using Tc.Crm.Service.Models;
+using JWT;
 
 namespace Tc.Crm.Service.Client.Console
 {
@@ -16,82 +19,165 @@ namespace Tc.Crm.Service.Client.Console
         static string Url = string.Empty;
         static void Main(string[] args)
         {
-            while (true)
+            System.Console.Write("Customer or Booking(c/b):");
+            var r = System.Console.ReadLine();
+            var api = "";
+            var data = "";
+            if (r == "c")
             {
-                try
-                {
-                    System.Console.WriteLine("Do it again. (y/n):");
-                    var ans = System.Console.ReadLine();
-                    if (ans == "n")
-                        break;
+                Customer c = new Customer();
+                //customer
+                System.Console.Write("Enter First Name:");
+                c.FirstName = System.Console.ReadLine();
 
-                    var b = GetBookingFromConsole();
+                System.Console.Write("Enter Last Name:");
+                c.LastName = System.Console.ReadLine();
 
-                    var serializedString = JsonConvert.SerializeObject(b);
-                    var inputMessage = new HttpRequestMessage
-                    {
-                        Content = new StringContent(serializedString, Encoding.UTF8, "application/json")
-                    };
+                System.Console.Write("Enter Source Key:");
+                c.Id = System.Console.ReadLine();
 
-                    //var credentials = new NetworkCredential("TC-DEV1\\$TC-DEV1", "jP2s0bWcrbciM7MflYqSTwoERCBqa5L5bMFQ6ziyk9w92FK3iFEdeexAi9iJ");
-                    //var handler = new HttpClientHandler { Credentials = credentials };
+                System.Console.Write("Enter Email:");
+                c.Email = System.Console.ReadLine();
 
+                //Serialize to JSON
+                data = JsonConvert.SerializeObject(c);
 
-                    HttpClient client = new HttpClient();
-                    client.BaseAddress = new Uri(GetUrl());
-
-                    inputMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    HttpResponseMessage message = client.PutAsync("api/booking", inputMessage.Content).Result;
-
-                    if (message.IsSuccessStatusCode)
-                    {
-                        IEnumerable<string> headerValues = message.Headers.GetValues("Message");
-                        System.Console.WriteLine(headerValues.FirstOrDefault().ToString());
-                    }
-                    else
-                    {
-                        System.Console.WriteLine(message.ReasonPhrase);
-                    }
-
-
-
-
-                }
-                catch (Exception ex)
-                {
-
-                    System.Console.WriteLine(ex.Message);
-                }
+                api = "api/customer/update";
             }
+            else if (r == "b")
+            {
+                Booking b = new Booking();
+                //booking
+                System.Console.Write("Enter Total Amount:");
+                b.TotalAmount = Decimal.Parse(System.Console.ReadLine());
+
+                System.Console.Write("Enter Customer Key:");
+                b.CustomerId = System.Console.ReadLine();
+
+                System.Console.Write("Enter Source Key:");
+                b.Id = System.Console.ReadLine();
+
+                //Serialize to JSON
+                data = JsonConvert.SerializeObject(b);
+
+                api = "api/booking/update";
+            }
+            else
+                return;
+
+            //create the token
+            var token = CreateJWTToken(data);
+
+            //Call
+            HttpClient cons = new HttpClient();
+
+            cons.BaseAddress = new Uri(GetUrl());
+
+            cons.DefaultRequestHeaders.Accept.Clear();
+            cons.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+            cons.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            Task<HttpResponseMessage> t = cons.PutAsync(api, null);
+
+            var res = t.Result;
+
+            res.EnsureSuccessStatusCode();
+
+            //while (true)
+            //{
+            //    try
+            //    {
+            //        System.Console.WriteLine("Do it again. (y/n):");
+            //        var ans = System.Console.ReadLine();
+            //        if (ans == "n")
+            //            break;
+
+            //        var b = GetBookingFromConsole();
+
+            //        var serializedString = JsonConvert.SerializeObject(b);
+            //        var inputMessage = new HttpRequestMessage
+            //        {
+            //            Content = new StringContent(serializedString, Encoding.UTF8, "application/json")
+            //        };
+
+            //        //var credentials = new NetworkCredential("TC-DEV1\\$TC-DEV1", "jP2s0bWcrbciM7MflYqSTwoERCBqa5L5bMFQ6ziyk9w92FK3iFEdeexAi9iJ");
+            //        //var handler = new HttpClientHandler { Credentials = credentials };
+
+
+            //        HttpClient client = new HttpClient();
+            //        client.BaseAddress = new Uri(GetUrl());
+
+            //        inputMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            //        HttpResponseMessage message = client.PutAsync("api/v1/customer/update", inputMessage.Content).Result;
+
+            //        if (message.IsSuccessStatusCode)
+            //        {
+            //            IEnumerable<string> headerValues = message.Headers.GetValues("Message");
+            //            System.Console.WriteLine(headerValues.FirstOrDefault().ToString());
+            //        }
+            //        else
+            //        {
+            //            System.Console.WriteLine(message.ReasonPhrase);
+            //        }
+
+
+
+
+            //    }
+            //    catch (Exception ex)
+            //    {
+
+            //        System.Console.WriteLine(ex.Message);
+            //    }
+            //}
             System.Console.ReadLine();
+        }
+
+        private static string CreateJWTToken(string data)
+        {
+            byte[] secretKey = Encoding.UTF8.GetBytes(GetJwtKey());
+            
+            var payload = new Dictionary<string, object>()
+            {
+                {"iss", "TC"},
+                {"aud", "CRM"},
+                {"sub", "anonymous"},
+                {"iat", GetIat().ToString()},
+                {"exp", GetNbf().ToString()},
+                {"data", data}
+            };
+
+            var header = new Dictionary<string, object>()
+            {
+                {"alg", "HS256"},
+                {"typ", "JWT"},
+            };
+
+            return JWT.JsonWebToken.Encode(payload, secretKey, JwtHashAlgorithm.HS256);
+
+        }
+        private static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+        private static double GetIat()
+        {
+            return Math.Round((DateTime.UtcNow - UnixEpoch).TotalSeconds);
+        }
+
+        private static double GetNbf()
+        {
+            return Math.Round((DateTime.UtcNow - UnixEpoch).TotalSeconds + 1800);
         }
 
         private static string GetUrl()
         {
-            if(string.IsNullOrWhiteSpace(Url))
-                Url =  ConfigurationManager.AppSettings["ApiUrl"];
+            if (string.IsNullOrWhiteSpace(Url))
+                Url = ConfigurationManager.AppSettings["ApiUrl"];
             return Url;
         }
 
-        private static object GetBookingFromConsole()
+        private static string GetJwtKey()
         {
-            Booking b = new Booking();
-            System.Console.Write("Enter first name:");
-            b.FirstName = System.Console.ReadLine();
-
-            System.Console.Write("Enter last name:");
-            b.LastName = System.Console.ReadLine();
-
-            System.Console.Write("Enter country:");
-            b.Country = System.Console.ReadLine();
-
-            System.Console.Write("Enter postcode:");
-            b.Postcode = System.Console.ReadLine();
-
-            System.Console.Write("Enter booking id(integer please, else might crash):");
-            b.BookingId = Int32.Parse( System.Console.ReadLine());
-
-            return b;
+            return ConfigurationManager.AppSettings["jwtkey"];
         }
+
+
     }
 }

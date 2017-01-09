@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.Serialization;
 
-namespace Tc.Crm.Service.Client.Console
+namespace Tc.Crm.Service.Models
 {
+
+    [DataContract]
     public class Booking
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-
-        public string Postcode { get; set; }
-
-        public string Country { get; set; }
+        [DataMember(Name = "sourcekey")]
+        public string Id { get; set; }
+        [DataMember(Name = "total")]
         public decimal TotalAmount { get; set; }
-
-        public int BookingId { get; set; }
+        [DataMember(Name = "customerkey")]
+        public string CustomerId { get; set; }
     }
 }
