@@ -20,26 +20,27 @@ namespace Tc.Crm.Service.Controllers
 
         public IHttpActionResult Update()
         {
-            var t = JwtHelper.GetToken(Request);
-            var p = JwtHelper.DecodePayloadToObject<JwtPayload>(t);
-            var c = BookingService.GetBookingFromPayload(p.Data);
+            try
+            {
+                var t = JwtHelper.GetToken(Request);
+                var p = JwtHelper.DecodePayloadToObject<JwtPayload>(t);
+                var b = BookingService.GetBookingFromPayload(p.Data);
+                try
+                {
+                    var response = BookingService.Update(b);
+                    if (response.Created) return StatusCode(HttpStatusCode.Created);
+                }
+                catch (Exception)
+                {
+                    return StatusCode(HttpStatusCode.InternalServerError);
+                }
+                return StatusCode(HttpStatusCode.NoContent);
+            }
+            catch (Exception)
+            {
+                return StatusCode(HttpStatusCode.InternalServerError);
+            }
 
-            return StatusCode(HttpStatusCode.NoContent);
-
-
-        }
-
-        [Route("api/v1/booking/create")]
-        [Route("api/booking/create")]
-        [HttpPut]
-        [JwtAuthorize]
-        public IHttpActionResult Create()
-        {
-            var t = JwtHelper.GetToken(Request);
-            var p = JwtHelper.DecodePayloadToObject<JwtPayload>(t);
-            var c = BookingService.GetBookingFromPayload(p.Data);
-
-            return Ok(c);
         }
     }
 }
