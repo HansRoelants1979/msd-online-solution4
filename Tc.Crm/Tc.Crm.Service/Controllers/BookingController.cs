@@ -27,6 +27,7 @@ namespace Tc.Crm.Service.Controllers
                 var b = BookingService.GetBookingFromPayload(p.Data);
                 try
                 {
+                    if(string.IsNullOrEmpty(b.Id)) return StatusCode(HttpStatusCode.BadRequest);
                     var response = BookingService.Update(b);
                     if (response.Created) return StatusCode(HttpStatusCode.Created);
                 }

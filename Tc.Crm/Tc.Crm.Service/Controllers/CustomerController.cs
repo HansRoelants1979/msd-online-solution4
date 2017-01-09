@@ -26,6 +26,7 @@ namespace Tc.Crm.Service.Controllers
                 var c = CustomerService.GetCustomerFromPayload(p.Data);
                 try
                 {
+                    if (string.IsNullOrEmpty(c.Id)) return StatusCode(HttpStatusCode.BadRequest);
                     var response = CustomerService.Update(c);
                     if(response.Created) return StatusCode(HttpStatusCode.Created);
                 }
