@@ -8,5 +8,6 @@ namespace Tc.Crm.Service.Models
     public class CustomerUpdateResponse
     {
         public bool Created { get; set; }
+        public string Id { get; set; }
     }
 }

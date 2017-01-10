@@ -17,58 +17,30 @@ namespace Tc.Crm.Service.Controllers
         [Route("api/customer/update")]
         [HttpPut]
         [JwtAuthorize]
-        public IHttpActionResult Update()
+        public HttpResponseMessage Update()
         {
             try
             {
-                var t = JwtHelper.GetToken(Request);
-                var p = JwtHelper.DecodePayloadToObject<JwtPayload>(t);
-                var c = CustomerService.GetCustomerFromPayload(p.Data);
+                var token = JwtHelper.GetToken(Request);
+                var payload = JwtHelper.DecodePayloadToObject<JwtPayload>(token);
+                var customer = CustomerService.GetCustomerFromPayload(payload.Data);
                 try
                 {
-                    if (string.IsNullOrEmpty(c.Id)) return StatusCode(HttpStatusCode.BadRequest);
-                    var response = CustomerService.Update(c);
-                    if(response.Created) return StatusCode(HttpStatusCode.Created);
+                    if (string.IsNullOrEmpty(customer.Id)) return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.SOURCE_KEY_NOT_PRESENT);
+
+                    var response = CustomerService.Update(customer);
+                    if(response.Created) return Request.CreateResponse(HttpStatusCode.Created, "<GUID>");
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    return StatusCode(HttpStatusCode.InternalServerError);
+                    return Request.CreateResponse(HttpStatusCode.InternalServerError,ex.Message);
                 }
-                return StatusCode(HttpStatusCode.NoContent);
+                return Request.CreateResponse(HttpStatusCode.NoContent);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return StatusCode(HttpStatusCode.InternalServerError);
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
-
-        [Route("api/v1/customer/create")]
-        [Route("api/customer/create")]
-        [HttpPut]
-        [JwtAuthorize]
-        public IHttpActionResult Create()
-        {
-            try
-            {
-                var t = JwtHelper.GetToken(Request);
-                var p = JwtHelper.DecodePayloadToObject<JwtPayload>(t);
-                var c = CustomerService.GetCustomerFromPayload(p.Data);
-                try
-                {
-                    CustomerService.Create(c);
-                }
-                catch (Exception)
-                {
-                    return StatusCode(HttpStatusCode.InternalServerError);
-                }
-                return Ok(c);
-            }
-            catch (Exception)
-            {
-                return StatusCode(HttpStatusCode.InternalServerError);
-            }
-        }
-
-
     }
 }

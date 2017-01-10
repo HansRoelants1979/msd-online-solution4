@@ -15,58 +15,23 @@ using System.Configuration;
 using Microsoft.Xrm.Sdk.Query;
 using Microsoft.Xrm.Client;
 using Microsoft.Xrm.Client.Services;
+using Microsoft.Xrm.Sdk.Messages;
 
 namespace Tc.Crm.Service.Services
 {
 
     public class CrmService
     {
-        private static HttpClient httpClient;
         private static IOrganizationService orgService;
-
-        private static void ConnectToCRM(string key)
-        {
-            Microsoft.Crm.Sdk.Samples.HelperCode.Configuration config = null;
-
-            config = new FileConfiguration(key);
-
-            //Create a helper object to authenticate the user with this connection info.
-            Authentication auth = new Authentication(config);
-            //Next use a HttpClient object to connect to specified CRM Web service.
-            httpClient = new HttpClient(auth.ClientHandler, true);
-            //Define the Web API base address, the max period of execute time, the 
-            // default OData version, and the default response payload format.
-            httpClient.BaseAddress = new Uri(config.ServiceUrl + "api/data/v8.1/");
-            httpClient.Timeout = new TimeSpan(0, 2, 0);
-            httpClient.DefaultRequestHeaders.Add("OData-MaxVersion", "4.0");
-            httpClient.DefaultRequestHeaders.Add("OData-Version", "4.0");
-            httpClient.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
-        }
-
-
-        public static async Task<HttpResponseMessage> Create(JObject e,string uri)
-        {
-            if (e == null) throw new ArgumentNullException("entity");
-            if (string.IsNullOrWhiteSpace(uri)) throw new ArgumentNullException("uri");
-
-            var client = GetHttpClient();
-            var request = new HttpRequestMessage(HttpMethod.Post, uri);
-            request.Content = new StringContent(e.ToString(),Encoding.UTF8, "application/json");
-            var response = await httpClient.SendAsync(request);
-            return response;
-        }
-
-        public static Guid Create(Entity e)
+        
+        public static UpsertResponse Upsert(Entity entity)
         {
             var service = GetOrgService();
-            return service.Create(e);
-        }
-
-        public static void Update(Entity e)
-        {
-            var service = GetOrgService();
-            service.Update(e);
+            UpsertRequest request = new UpsertRequest
+            {
+                Target = entity
+            };
+            return service.Execute<UpsertResponse>(request);
         }
 
         public static Guid? RetrieveBy(string sourceKey,string sourceKeyValue,string name,string primaryKey)
@@ -86,7 +51,6 @@ namespace Tc.Crm.Service.Services
             return response.Entities[0].Id;
         }
 
-
         public static IOrganizationService GetOrgService()
         {
             if (orgService == null)
@@ -101,34 +65,6 @@ namespace Tc.Crm.Service.Services
             return orgService;
         }
 
-        public static string GetEntityUri(HttpResponseMessage response)
-        {
-            var uri = response.Headers.GetValues("OData-EntityId").FirstOrDefault();
-            return uri;
-        }
-
-        public static async Task<HttpResponseMessage> Update(JObject e,string uri)
-        {
-            if (e == null) throw new ArgumentNullException("entity");
-            if (string.IsNullOrWhiteSpace(uri)) throw new ArgumentNullException("uri");
-
-            var request = new HttpRequestMessage(new HttpMethod("PATCH"), uri);
-            request.Content = new StringContent(e.ToString(),Encoding.UTF8, "application/json");
-            var response = await httpClient.SendAsync(request);
-            return response;
-        }
-
-        public static async Task<HttpResponseMessage> Retrieve(string queryOptions, string uri)
-        {
-            var response = await httpClient.GetAsync(uri+ queryOptions);
-            return response;
-        }
-
-        private static HttpClient GetHttpClient()
-        {
-            if (httpClient == null)
-                ConnectToCRM("Crm");
-            return httpClient;
-        }
+                
     }
 }

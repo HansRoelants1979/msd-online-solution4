@@ -17,29 +17,28 @@ namespace Tc.Crm.Service.Controllers
         [Route("api/booking/update")]
         [HttpPut]
         [JwtAuthorize]
-
-        public IHttpActionResult Update()
+        public HttpResponseMessage Update()
         {
             try
             {
-                var t = JwtHelper.GetToken(Request);
-                var p = JwtHelper.DecodePayloadToObject<JwtPayload>(t);
-                var b = BookingService.GetBookingFromPayload(p.Data);
+                var token = JwtHelper.GetToken(Request);
+                var payload = JwtHelper.DecodePayloadToObject<JwtPayload>(token);
+                var booking = BookingService.GetBookingFromPayload(payload.Data);
                 try
                 {
-                    if(string.IsNullOrEmpty(b.Id)) return StatusCode(HttpStatusCode.BadRequest);
-                    var response = BookingService.Update(b);
-                    if (response.Created) return StatusCode(HttpStatusCode.Created);
+                    if(string.IsNullOrEmpty(booking.Id)) return Request.CreateResponse(HttpStatusCode.BadRequest,Constants.Messages.SOURCE_KEY_NOT_PRESENT);
+                    var response = BookingService.Update(booking);
+                    if (response.Created) return Request.CreateResponse(HttpStatusCode.Created,"<Guid>");
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    return StatusCode(HttpStatusCode.InternalServerError);
+                    return Request.CreateResponse(HttpStatusCode.InternalServerError,ex.Message);
                 }
-                return StatusCode(HttpStatusCode.NoContent);
+                return Request.CreateResponse(HttpStatusCode.NoContent);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return StatusCode(HttpStatusCode.InternalServerError);
+                return Request.CreateResponse(HttpStatusCode.InternalServerError,ex.Message);
             }
 
         }

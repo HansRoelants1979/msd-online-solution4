@@ -15,58 +15,39 @@ namespace Tc.Crm.Service.Services
             return JsonConvert.DeserializeObject<Booking>(dataJson);
         }
 
-        public static void Create(Booking b)
+        internal static BookingUpdateResponse Update(Booking booking)
         {
-            Entity e = new Entity("new_booking");
-            e["new_sourcekey"] = b.Id;
-            e["new_total"] = new Money(b.TotalAmount);
-            if (!string.IsNullOrWhiteSpace(b.CrmCustomerKey))
-                e["new_customerid"] = new EntityReference("contact", new Guid(b.CrmCustomerKey));
-            var id = CrmService.Create(e);
-            b.CrmKey = id.ToString();
+            //get the customer from CRM
+            GetCustomerFor(booking);
+
+            KeyAttributeCollection keys = new KeyAttributeCollection();
+            keys.Add(Constants.Crm.Contact.Fields.SOURCE_KEY, booking.Id);
+
+            //Upsert
+            Entity entity = new Entity(Constants.Crm.Booking.LOGICAL_NAME,keys);
+            entity[Constants.Crm.Booking.Fields.SOURCE_KEY] = booking.Id;
+            entity[Constants.Crm.Booking.Fields.TOTAL] = new Money(booking.TotalAmount);
+
+            if (!string.IsNullOrWhiteSpace(booking.CrmCustomerKey))
+                entity[Constants.Crm.Booking.Fields.CUSTOMER_ID] = new EntityReference(Constants.Crm.Contact.LOGICAL_NAME, new Guid(booking.CrmCustomerKey));
+
+            var response = CrmService.Upsert(entity);
+            if (response.RecordCreated) return new BookingUpdateResponse { Created = true };
+            return new BookingUpdateResponse { Created = false };
         }
 
-        internal static BookingUpdateResponse Update(Booking b)
+        private static void GetCustomerFor(Booking booking)
         {
-            //check if customer key is present
-            if (!string.IsNullOrEmpty(b.CustomerId))
+            if (!string.IsNullOrEmpty(booking.CustomerId))
             {
                 //check in CRM if customer is present
-                var customerId = CrmService.RetrieveBy("new_sourcekey", b.CustomerId, "contact", "contactid");
+                var customerId = CrmService.RetrieveBy(Constants.Crm.Contact.Fields.SOURCE_KEY
+                                                        , booking.CustomerId
+                                                        , Constants.Crm.Contact.LOGICAL_NAME
+                                                        , Constants.Crm.Contact.Fields.CONTACT_ID);
 
                 if (customerId != null)
-                    b.CrmCustomerKey = customerId.Value.ToString();
-            }
-
-            if (!string.IsNullOrEmpty(b.Id))
-            {
-                //check if the booking exists in CRM
-                if (string.IsNullOrEmpty(b.CrmKey))
-                {
-                    var bookingId = CrmService.RetrieveBy("new_sourcekey", b.Id, "new_booking", "new_bookingid");
-                    if (bookingId == null)
-                    {
-                        Create(b);
-                        return new BookingUpdateResponse { Created = true };
-                    }
-                    b.CrmKey = bookingId.Value.ToString();
-                }
-                Entity e = new Entity("new_booking");
-                e.Id = new Guid(b.CrmKey);
-                e["new_sourcekey"] = b.Id;
-                e["new_total"] = new Money(b.TotalAmount);
-
-                if (!string.IsNullOrWhiteSpace(b.CrmCustomerKey))
-                    e["new_customerid"] = new EntityReference("contact", new Guid(b.CrmCustomerKey));
-
-
-                CrmService.Update(e);
-                return new BookingUpdateResponse { Created = false };
-            }
-            else
-            {
-                Create(b);
-                return new BookingUpdateResponse { Created = true };
+                    booking.CrmCustomerKey = customerId.Value.ToString();
             }
         }
     }
