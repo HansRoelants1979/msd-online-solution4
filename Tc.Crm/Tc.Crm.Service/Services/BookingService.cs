@@ -17,9 +17,6 @@ namespace Tc.Crm.Service.Services
 
         internal static BookingUpdateResponse Update(Booking booking)
         {
-            //get the customer from CRM
-            GetCustomerFor(booking);
-
             KeyAttributeCollection keys = new KeyAttributeCollection();
             keys.Add(Constants.Crm.Contact.Fields.SOURCE_KEY, booking.Id);
 
@@ -28,8 +25,9 @@ namespace Tc.Crm.Service.Services
             entity[Constants.Crm.Booking.Fields.SOURCE_KEY] = booking.Id;
             entity[Constants.Crm.Booking.Fields.TOTAL] = new Money(booking.TotalAmount);
 
-            if (!string.IsNullOrWhiteSpace(booking.CrmCustomerKey))
-                entity[Constants.Crm.Booking.Fields.CUSTOMER_ID] = new EntityReference(Constants.Crm.Contact.LOGICAL_NAME, new Guid(booking.CrmCustomerKey));
+            entity[Constants.Crm.Booking.Fields.CUSTOMER_ID] = new EntityReference(Constants.Crm.Contact.LOGICAL_NAME
+                                                                                    , Constants.Crm.Contact.Fields.SOURCE_KEY
+                                                                                    ,booking.CustomerId);
 
             var response = CrmService.Upsert(entity);
             if (response.RecordCreated) return new BookingUpdateResponse { Created = true };
