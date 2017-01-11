@@ -16,26 +16,29 @@ namespace Tc.Crm.Service.Controllers
         [Route("api/v1/customer/update")]
         [Route("api/customer/update")]
         [HttpPut]
-        [JwtAuthorize]
+        [JsonWebTokenAuthorize]
         public HttpResponseMessage Update()
         {
             try
             {
-                var token = JwtHelper.GetToken(Request);
-                var payload = JwtHelper.DecodePayloadToObject<JwtPayload>(token);
+                var token = JsonWebTokenHelper.GetToken(Request);
+                var payload = JsonWebTokenHelper.DecodePayloadToObject<JsonWebTokenPayload>(token);
                 var customer = CustomerService.GetCustomerFromPayload(payload.Data);
                 try
                 {
-                    if (string.IsNullOrEmpty(customer.Id)) return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.SOURCE_KEY_NOT_PRESENT);
+                    if (string.IsNullOrEmpty(customer.Id))
+                        return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.SOURCE_KEY_NOT_PRESENT);
 
                     var response = CustomerService.Update(customer);
-                    if(response.Created) return Request.CreateResponse(HttpStatusCode.Created, "<GUID>");
+                    if(response.Created)
+                        return Request.CreateResponse(HttpStatusCode.Created, response.Id);
+                    else
+                        return Request.CreateResponse(HttpStatusCode.NoContent, response.Id);
                 }
                 catch (Exception ex)
                 {
                     return Request.CreateResponse(HttpStatusCode.InternalServerError,ex.Message);
                 }
-                return Request.CreateResponse(HttpStatusCode.NoContent);
             }
             catch (Exception ex)
             {

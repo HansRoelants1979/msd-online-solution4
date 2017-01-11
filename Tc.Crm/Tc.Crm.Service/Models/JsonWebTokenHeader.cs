@@ -7,7 +7,7 @@ using System.Web;
 namespace Tc.Crm.Service.Models
 {
     [DataContract]
-    public class JwtHeader
+    public class JsonWebTokenHeader
     {
         [DataMember(Name ="typ")]
         public string Type { get; set; }

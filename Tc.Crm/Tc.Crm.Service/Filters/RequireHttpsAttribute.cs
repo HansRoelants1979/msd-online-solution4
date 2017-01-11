@@ -13,8 +13,8 @@ namespace Tc.Crm.Service.Filters
     {
         public override void OnAuthorization(HttpActionContext actionContext)
         {
-            var setting = ConfigurationManager.AppSettings["redirectToHttps"];
-            if (!setting.Equals("true", StringComparison.OrdinalIgnoreCase))
+            var setting = ConfigurationManager.AppSettings[Constants.Configuration.AppSettings.REDIRECT_TO_HTTPS];
+            if (!setting.Equals(Constants.TRUE_VALUE, StringComparison.OrdinalIgnoreCase))
             {
                 base.OnAuthorization(actionContext);
                 return;
@@ -24,7 +24,7 @@ namespace Tc.Crm.Service.Filters
             {
                 actionContext.Response = new HttpResponseMessage(System.Net.HttpStatusCode.Forbidden)
                 {
-                    ReasonPhrase = "HTTPS Required"
+                    ReasonPhrase = Constants.Messages.HTTPS_REQUIRED
                 };
             }
             else

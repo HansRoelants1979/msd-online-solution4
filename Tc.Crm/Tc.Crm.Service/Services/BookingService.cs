@@ -1,9 +1,6 @@
 ﻿using Microsoft.Xrm.Sdk;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using Tc.Crm.Service.Models;
 
 namespace Tc.Crm.Service.Services
@@ -12,11 +9,14 @@ namespace Tc.Crm.Service.Services
     {
         public static Booking GetBookingFromPayload(string dataJson)
         {
+            if (string.IsNullOrWhiteSpace(dataJson)) throw new ArgumentNullException(Constants.Parameters.DATA_JSON);
             return JsonConvert.DeserializeObject<Booking>(dataJson);
         }
 
         internal static BookingUpdateResponse Update(Booking booking)
         {
+            if (booking == null) throw new ArgumentNullException(Constants.Parameters.BOOKING);
+
             KeyAttributeCollection keys = new KeyAttributeCollection();
             keys.Add(Constants.Crm.Contact.Fields.SOURCE_KEY, booking.Id);
 
@@ -30,23 +30,9 @@ namespace Tc.Crm.Service.Services
                                                                                     ,booking.CustomerId);
 
             var response = CrmService.Upsert(entity);
-            if (response.RecordCreated) return new BookingUpdateResponse { Created = true };
-            return new BookingUpdateResponse { Created = false };
-        }
-
-        private static void GetCustomerFor(Booking booking)
-        {
-            if (!string.IsNullOrEmpty(booking.CustomerId))
-            {
-                //check in CRM if customer is present
-                var customerId = CrmService.RetrieveBy(Constants.Crm.Contact.Fields.SOURCE_KEY
-                                                        , booking.CustomerId
-                                                        , Constants.Crm.Contact.LOGICAL_NAME
-                                                        , Constants.Crm.Contact.Fields.CONTACT_ID);
-
-                if (customerId != null)
-                    booking.CrmCustomerKey = customerId.Value.ToString();
-            }
+            if (response == null) throw new InvalidOperationException(Constants.Messages.RESPONSE_NULL);
+            if (response.RecordCreated) return new BookingUpdateResponse { Created = true,Id = response.Target.Id.ToString() };
+            return new BookingUpdateResponse { Created = false, Id = response.Target.Id.ToString() };
         }
     }
 }
