@@ -5,11 +5,13 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tc.Crm.Plugins", "Tc.Crm.Plugins", "{28E27A6E-C184-4019-AAF3-3D5A0F13222D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tc.Crm.Plugins", "Tc.Crm.Plugins\Tc.Crm.Plugins\Tc.Crm.Plugins.csproj", "{56ACE05E-3756-4B7D-9B6F-672BB2FFC19B}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tc.Crm.CustomWorkflowSteps", "Tc.Crm.CustomWorkflowSteps", "{A27ECFA7-7BEB-465D-A915-E9B7CD2484F1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tfs.Crm.CustomWorkflowSteps", "Tfs.Crm.CustomWorkflowSteps\Tfs.Crm.CustomWorkflowSteps.csproj", "{1F39272E-66E8-44D7-BB6F-74BF89E1B8E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tc.Crm.Plugins", "Tc.Crm.Plugins\Tc.Crm.Plugins.csproj", "{56ACE05E-3756-4B7D-9B6F-672BB2FFC19B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tc.Crm.ServiceLayer", "Tc.Crm.ServiceLayer", "{C91228F0-139F-46AF-B023-C54F9C9870A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,24 +19,24 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{56ACE05E-3756-4B7D-9B6F-672BB2FFC19B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{56ACE05E-3756-4B7D-9B6F-672BB2FFC19B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{56ACE05E-3756-4B7D-9B6F-672BB2FFC19B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{56ACE05E-3756-4B7D-9B6F-672BB2FFC19B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1F39272E-66E8-44D7-BB6F-74BF89E1B8E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1F39272E-66E8-44D7-BB6F-74BF89E1B8E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F39272E-66E8-44D7-BB6F-74BF89E1B8E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F39272E-66E8-44D7-BB6F-74BF89E1B8E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56ACE05E-3756-4B7D-9B6F-672BB2FFC19B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56ACE05E-3756-4B7D-9B6F-672BB2FFC19B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56ACE05E-3756-4B7D-9B6F-672BB2FFC19B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56ACE05E-3756-4B7D-9B6F-672BB2FFC19B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{56ACE05E-3756-4B7D-9B6F-672BB2FFC19B} = {28E27A6E-C184-4019-AAF3-3D5A0F13222D}
 		{1F39272E-66E8-44D7-BB6F-74BF89E1B8E6} = {A27ECFA7-7BEB-465D-A915-E9B7CD2484F1}
+		{56ACE05E-3756-4B7D-9B6F-672BB2FFC19B} = {28E27A6E-C184-4019-AAF3-3D5A0F13222D}
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
+		SccNumberOfProjects = 3
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://hclmsemea.visualstudio.com/
 		SccLocalPath0 = .
@@ -42,5 +44,9 @@ Global
 		SccProjectTopLevelParentUniqueName1 = Thomas\u0020Cook.sln
 		SccProjectName1 = Tfs.Crm.CustomWorkflowSteps
 		SccLocalPath1 = Tfs.Crm.CustomWorkflowSteps
+		SccProjectUniqueName2 = Tc.Crm.Plugins\\Tc.Crm.Plugins.csproj
+		SccProjectTopLevelParentUniqueName2 = Thomas\u0020Cook.sln
+		SccProjectName2 = Tc.Crm.Plugins
+		SccLocalPath2 = Tc.Crm.Plugins
 	EndGlobalSection
 EndGlobal
