@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
@@ -26,6 +27,7 @@ namespace Tc.Crm.Service.Filters
 
             if (actionContext.Request.RequestUri.Scheme != Uri.UriSchemeHttps)
             {
+                Trace.TraceWarning("Request uri scheme is not https.");
                 actionContext.Response = new HttpResponseMessage(System.Net.HttpStatusCode.Forbidden)
                 {
                     ReasonPhrase = Constants.Messages.HttpsRequired

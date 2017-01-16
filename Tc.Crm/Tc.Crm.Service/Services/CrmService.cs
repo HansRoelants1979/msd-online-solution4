@@ -32,17 +32,15 @@ namespace Tc.Crm.Service.Services
             var connectionString = ConfigurationManager.ConnectionStrings[Constants.Configuration.ConnectionStrings.Crm];
             if (connectionString == null)
             {
-                //todo:logging
                 throw new InvalidOperationException(Constants.Messages.ConnectionStringNull);
             }
-            //todo:logging
+
             CrmConnection crmConnection = null;
             try
             {
                 crmConnection = CrmConnection.Parse(connectionString.ConnectionString);
                 if (crmConnection == null)
                 {
-                    //todo:logging
                     throw new InvalidOperationException(Constants.Messages.CrmConnectionIsNull);
                 }
             }
@@ -52,7 +50,6 @@ namespace Tc.Crm.Service.Services
             }
             orgService = new OrganizationService(crmConnection);
 
-            //TODO:logging
             return orgService;
 
 

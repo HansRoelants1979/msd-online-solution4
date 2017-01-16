@@ -43,6 +43,7 @@ namespace Tc.Crm.Service.Services
             }
             catch (Exception ex)
             {
+                Trace.TraceError("Unexpected error in GetRequestObject::Message:{0}||Trace:{1}", ex.Message, ex.StackTrace);
                 jsonWebTokenRequest.Errors.Add(new JsonWebTokenRequestError(ex.Message, ex.StackTrace));
                 jsonWebTokenRequest.Errors.Add(new JsonWebTokenRequestError(Constants.Messages.JsonWebTokenParserError));
             }
@@ -108,15 +109,7 @@ namespace Tc.Crm.Service.Services
             if (request.Headers == null) throw new ArgumentNullException(Constants.Parameters.RequestHeaders);
             if (request.Headers.Authorization == null) throw new ArgumentNullException(Constants.Parameters.RequestHeadersAuthorization);
 
-            try
-            {
-                return request.Headers.Authorization.Parameter;
-            }
-            catch (Exception)
-            {
-                //TODO: logging
-                throw;
-            }
+            return request.Headers.Authorization.Parameter;
         }
 
         /// <summary>

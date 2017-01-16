@@ -36,6 +36,10 @@ namespace Tc.Crm.Service.Constants
         public const string ClaimNotInteger = "Claim value must be an integer.";
         public const string TokenFormatError = "Token must consist from 3 delimited by dot parts";
         public const string ExpiryNotInteger = "Expiry value in config is not an integer.";
+        public const string TokenIsNull = "Token is null.";
+        public const string PayloadIsNull = "Payload is null.";
+        public const string BookingObjectIsNull = "Booking object is null.";
+        public const string CustomerObjectIsNull = "Customer object is null.";
     }
     public static class Parameters
     {

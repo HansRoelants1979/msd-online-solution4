@@ -7,6 +7,7 @@ using System.Web.Http;
 using Tc.Crm.Service.Filters;
 using System;
 using Tc.Crm.Service.Services;
+using System.Diagnostics;
 
 namespace Tc.Crm.Service.Controllers
 {
@@ -23,8 +24,14 @@ namespace Tc.Crm.Service.Controllers
             try
             {
                 var token = JsonWebTokenHelper.GetToken(Request);
+                if (token == null)
+                    throw new ArgumentNullException(Constants.Messages.TokenIsNull);
                 var payload = JsonWebTokenHelper.DecodePayloadToObject<JsonWebTokenPayload>(token);
+                if(payload == null)
+                    throw new ArgumentNullException(Constants.Messages.PayloadIsNull);
                 var booking = BookingService.GetBookingFromPayload(payload.Data);
+                if(booking == null)
+                    throw new ArgumentNullException(Constants.Messages.BookingObjectIsNull);
                 try
                 {
                     if(string.IsNullOrEmpty(booking.Id)) return Request.CreateResponse(HttpStatusCode.BadRequest,Constants.Messages.SourceKeyNotPresent);
@@ -36,11 +43,13 @@ namespace Tc.Crm.Service.Controllers
                 }
                 catch (Exception ex)
                 {
+                    Trace.TraceError("Unexpected error in Booking.Update::Message:{0}||Trace:{1}", ex.Message, ex.StackTrace);
                     return Request.CreateResponse(HttpStatusCode.InternalServerError,ex.Message);
                 }
             }
             catch (Exception ex)
             {
+                Trace.TraceError("Unexpected error Booking.Update::Message:{0}||Trace:{1}",ex.Message,ex.StackTrace);
                 return Request.CreateResponse(HttpStatusCode.InternalServerError,ex.Message);
             }
 

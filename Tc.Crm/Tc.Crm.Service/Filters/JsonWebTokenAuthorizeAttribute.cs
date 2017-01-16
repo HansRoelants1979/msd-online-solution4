@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Controllers;
@@ -17,24 +18,23 @@ namespace Tc.Crm.Service.Filters
             //presence of errors indicate bad request
             if (request.Errors != null && request.Errors.Count > 0)
             {
+                Trace.TraceWarning("Bad Request: Error while parsing the request object");
                 actionContext.Response = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest)
                 {
                     ReasonPhrase = Constants.Messages.JsonWebTokenParserError
                 };
-                //todo: logging
                 return;
             }
             //check token validation flags
             if (!request.HeaderAlgorithmValid || !request.HeaderTypeValid || !request.IssuedAtTimeValid || !request.NotBeforetimeValid || !request.SignatureValid)
             {
+                Trace.TraceWarning("Bad Request: One or more information is missing in the token or signature didn't match.");
                 actionContext.Response = new HttpResponseMessage(System.Net.HttpStatusCode.Forbidden)
                 {
                     ReasonPhrase = Constants.Messages.JsonWebTokenExpiredOrNoMatch
                 };
-                //todo: logging
                 return;
             }
-            //todo: logging
         }
     }
 }

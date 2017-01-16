@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -23,8 +24,14 @@ namespace Tc.Crm.Service.Controllers
             try
             {
                 var token = JsonWebTokenHelper.GetToken(Request);
+                if (token == null)
+                    throw new ArgumentNullException(Constants.Messages.TokenIsNull);
                 var payload = JsonWebTokenHelper.DecodePayloadToObject<JsonWebTokenPayload>(token);
+                if (payload == null)
+                    throw new ArgumentNullException(Constants.Messages.PayloadIsNull);
                 var customer = CustomerService.GetCustomerFromPayload(payload.Data);
+                if (customer == null)
+                    throw new ArgumentNullException(Constants.Messages.CustomerObjectIsNull);
                 try
                 {
                     if (string.IsNullOrEmpty(customer.Id))
@@ -38,11 +45,13 @@ namespace Tc.Crm.Service.Controllers
                 }
                 catch (Exception ex)
                 {
+                    Trace.TraceError("Unexpected error in Customer.Update::Message:{0}||Trace:{1}", ex.Message, ex.StackTrace);
                     return Request.CreateResponse(HttpStatusCode.InternalServerError,ex.Message);
                 }
             }
             catch (Exception ex)
             {
+                Trace.TraceError("Unexpected error in Cstomer.Update::Message:{0}||Trace:{1}", ex.Message, ex.StackTrace);
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
