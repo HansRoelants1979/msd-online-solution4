@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tc.Crm.Plugins", "Tc.Crm.Plugins", "{28E27A6E-C184-4019-AAF3-3D5A0F13222D}"
 EndProject
@@ -26,10 +26,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{EE30D865-AE6A-4493-91D5-701A8D979EB4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CustomWorkflowSteps", "CustomWorkflowSteps", "{B081A2B4-AA52-4F17-B43C-DEC8D0980541}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{21930A93-B240-4EC9-8BC5-166BDD69E5E7}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "JavaScript", "JavaScript", "{42595316-4296-4DD3-9784-C20EC7C1F71C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionZips", "SolutionZips", "{5DE2E9C6-B59E-4FA1-B3CE-7F6C03BB4B1A}"
 EndProject
@@ -57,6 +53,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tc.Crm.PackageDeployer", "T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tc.Crm.PackageDeployer", "Tc.Crm.PackageDeployer\Tc.Crm.PackageDeployer.csproj", "{170C0103-3F94-4896-9062-6314167F596A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tc.Crm.WebResources", "Tc.Crm.WebResources\Tc.Crm.WebResources.csproj", "{68670149-40FE-4EA9-A624-572B2C595F69}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +77,10 @@ Global
 		{170C0103-3F94-4896-9062-6314167F596A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{170C0103-3F94-4896-9062-6314167F596A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{170C0103-3F94-4896-9062-6314167F596A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68670149-40FE-4EA9-A624-572B2C595F69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68670149-40FE-4EA9-A624-572B2C595F69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68670149-40FE-4EA9-A624-572B2C595F69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68670149-40FE-4EA9-A624-572B2C595F69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -89,8 +91,6 @@ Global
 		{7C6D8FA0-4FC0-4A54-BA41-BDE74B695763} = {0C0139D5-1C87-4AA8-AD12-B91CE4526419}
 		{EE30D865-AE6A-4493-91D5-701A8D979EB4} = {0C0139D5-1C87-4AA8-AD12-B91CE4526419}
 		{B081A2B4-AA52-4F17-B43C-DEC8D0980541} = {0C0139D5-1C87-4AA8-AD12-B91CE4526419}
-		{21930A93-B240-4EC9-8BC5-166BDD69E5E7} = {143A4405-24E9-4BC1-9423-D1313CC8A029}
-		{42595316-4296-4DD3-9784-C20EC7C1F71C} = {143A4405-24E9-4BC1-9423-D1313CC8A029}
 		{5DE2E9C6-B59E-4FA1-B3CE-7F6C03BB4B1A} = {D3C200AD-612D-45D8-8197-F31F4B73F91C}
 		{5105FBD3-844D-450A-88B1-39E82BD74161} = {5DE2E9C6-B59E-4FA1-B3CE-7F6C03BB4B1A}
 		{9710F8AC-3254-49F7-93EC-8AC0EAAC8C7A} = {70F3E084-CE1A-4FBC-A483-39265BB49456}
@@ -102,9 +102,10 @@ Global
 		{C3B09F20-CCE4-4DD1-8A1D-43367B9398EC} = {17FDEE31-B2C7-4720-89E5-4930CA148B8C}
 		{64EAF413-6A2A-4A83-9211-BCC18D2297AE} = {B081A2B4-AA52-4F17-B43C-DEC8D0980541}
 		{170C0103-3F94-4896-9062-6314167F596A} = {5397BFB2-5A5D-40E8-A062-8F43EEAB8685}
+		{68670149-40FE-4EA9-A624-572B2C595F69} = {143A4405-24E9-4BC1-9423-D1313CC8A029}
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
+		SccNumberOfProjects = 6
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://hclmsemea.visualstudio.com/
 		SccLocalPath0 = .
@@ -124,5 +125,9 @@ Global
 		SccProjectTopLevelParentUniqueName4 = Thomas\u0020Cook.sln
 		SccProjectName4 = Tc.Crm.PackageDeployer
 		SccLocalPath4 = Tc.Crm.PackageDeployer
+		SccProjectUniqueName5 = Tc.Crm.WebResources\\Tc.Crm.WebResources.csproj
+		SccProjectTopLevelParentUniqueName5 = Thomas\u0020Cook.sln
+		SccProjectName5 = Tc.Crm.WebResources
+		SccLocalPath5 = Tc.Crm.WebResources
 	EndGlobalSection
 EndGlobal
