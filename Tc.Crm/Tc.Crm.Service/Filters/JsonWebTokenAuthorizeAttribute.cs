@@ -7,28 +7,29 @@ using Tc.Crm.Service.Services;
 namespace Tc.Crm.Service.Filters
 {
     [AttributeUsage(AttributeTargets.Method, Inherited = false, AllowMultiple = true)]
-    public class JsonWebTokenAuthorizeAttribute : AuthorizeAttribute
+    public sealed class JsonWebTokenAuthorizeAttribute : AuthorizeAttribute
     {
         protected override void HandleUnauthorizedRequest(HttpActionContext actionContext)
         {
-
+            //guard clause
+            if (actionContext == null) throw new ArgumentNullException(Constants.Parameters.ActionContext);
             var request = JsonWebTokenHelper.GetRequestObject(actionContext.Request);
             //presence of errors indicate bad request
             if (request.Errors != null && request.Errors.Count > 0)
             {
                 actionContext.Response = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest)
                 {
-                    ReasonPhrase = Constants.Messages.JSON_WEB_TOKEN_PARSES_ERROR
+                    ReasonPhrase = Constants.Messages.JsonWebTokenParserError
                 };
                 //todo: logging
                 return;
             }
             //check token validation flags
-            if (!request.HeaderAlgorithmValid || !request.HeaderTypeValid || !request.IssuedAtTimeValid || !request.NotBeforeTimeValid || !request.SignaturValid)
+            if (!request.HeaderAlgorithmValid || !request.HeaderTypeValid || !request.IssuedAtTimeValid || !request.NotBeforetimeValid || !request.SignatureValid)
             {
                 actionContext.Response = new HttpResponseMessage(System.Net.HttpStatusCode.Forbidden)
                 {
-                    ReasonPhrase = Constants.Messages.JSON_WEB_TOKEN_EXPIRED_NO_MATCH
+                    ReasonPhrase = Constants.Messages.JsonWebTokenExpiredOrNoMatch
                 };
                 //todo: logging
                 return;

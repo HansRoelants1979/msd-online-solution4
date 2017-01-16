@@ -10,7 +10,7 @@ namespace Tc.Crm.Service.Models
     public class JsonWebTokenHeader
     {
         [DataMember(Name ="typ")]
-        public string Type { get; set; }
+        public string TokenType { get; set; }
 
         [DataMember(Name = "alg")]
         public string Algorithm { get; set; }

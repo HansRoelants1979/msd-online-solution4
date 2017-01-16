@@ -37,6 +37,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>ExtendedDesignGuidelineRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -123,14 +125,12 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="index.html" />
-    <Content Include="Web API Helper Code\LicenseTerms.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BusinessServices\Custom\CustomUserService.cs" />
     <Compile Include="BusinessServices\IUserService.cs" />
-    <Compile Include="Common\Constants.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
@@ -154,9 +154,6 @@
     <Compile Include="Services\CrmService.cs" />
     <Compile Include="Services\CustomerService.cs" />
     <Compile Include="Services\JsonWebTokenHelper.cs" />
-    <Compile Include="Web API Helper Code\Authentication.cs" />
-    <Compile Include="Web API Helper Code\Configuration.cs" />
-    <Compile Include="Web API Helper Code\Exceptions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -170,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Common\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

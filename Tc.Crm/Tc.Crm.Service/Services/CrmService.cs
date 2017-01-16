@@ -9,13 +9,14 @@ using Microsoft.Xrm.Sdk.Messages;
 namespace Tc.Crm.Service.Services
 {
 
-    public class CrmService
+    public static class CrmService
     {
         private static IOrganizationService orgService;
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Upsert")]
         public static UpsertResponse Upsert(Entity entity)
         {
-            var service = GetOrgService();
+            var service = CreateOrgService();
             UpsertRequest request = new UpsertRequest
             {
                 Target = entity
@@ -23,16 +24,16 @@ namespace Tc.Crm.Service.Services
             return service.Execute<UpsertResponse>(request);
         }
 
-        public static IOrganizationService GetOrgService()
+        public static IOrganizationService CreateOrgService()
         {
 
             if (orgService != null) return orgService;
 
-            var connectionString = ConfigurationManager.ConnectionStrings[Constants.Configuration.ConnectionStrings.CRM];
+            var connectionString = ConfigurationManager.ConnectionStrings[Constants.Configuration.ConnectionStrings.Crm];
             if (connectionString == null)
             {
                 //todo:logging
-                throw new InvalidOperationException(Constants.Messages.CONNECTION_STRING_NULL);
+                throw new InvalidOperationException(Constants.Messages.ConnectionStringNull);
             }
             //todo:logging
             CrmConnection crmConnection = null;
@@ -42,12 +43,12 @@ namespace Tc.Crm.Service.Services
                 if (crmConnection == null)
                 {
                     //todo:logging
-                    throw new InvalidOperationException(Constants.Messages.CRM_CONNECTION_IS_NULL);
+                    throw new InvalidOperationException(Constants.Messages.CrmConnectionIsNull);
                 }
             }
             catch (Exception)
             {
-                throw new InvalidOperationException(Constants.Messages.CRM_CONNECTION_PARSE_ERROR);
+                throw new InvalidOperationException(Constants.Messages.CrmConnectionParseError);
             }
             orgService = new OrganizationService(crmConnection);
 

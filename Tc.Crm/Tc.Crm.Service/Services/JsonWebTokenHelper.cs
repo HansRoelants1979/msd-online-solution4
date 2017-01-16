@@ -12,7 +12,7 @@ using System.Security.Cryptography;
 
 namespace Tc.Crm.Service.Services
 {
-    public class JsonWebTokenHelper
+    public static class JsonWebTokenHelper
     {
         private static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
 
@@ -22,6 +22,7 @@ namespace Tc.Crm.Service.Services
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         public static JsonWebTokenRequest GetRequestObject(HttpRequestMessage request)
         {
             var jsonWebTokenRequest = new JsonWebTokenRequest();
@@ -37,13 +38,13 @@ namespace Tc.Crm.Service.Services
 
                 //validate the parts
                 ValidateHeader(jsonWebTokenRequest);
-                ValidatePayLoad(jsonWebTokenRequest);
+                ValidatePayload(jsonWebTokenRequest);
                 ValidateSignature(jsonWebTokenRequest);
             }
             catch (Exception ex)
             {
                 jsonWebTokenRequest.Errors.Add(new JsonWebTokenRequestError(ex.Message, ex.StackTrace));
-                jsonWebTokenRequest.Errors.Add(new JsonWebTokenRequestError(Constants.Messages.JSON_WEB_TOKEN_PARSES_ERROR));
+                jsonWebTokenRequest.Errors.Add(new JsonWebTokenRequestError(Constants.Messages.JsonWebTokenParserError));
             }
 
             return jsonWebTokenRequest;
@@ -53,15 +54,17 @@ namespace Tc.Crm.Service.Services
         /// Validates the signature
         /// </summary>
         /// <param name="jsonWebTokenRequest"></param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         private static void ValidateSignature(JsonWebTokenRequest jsonWebTokenRequest)
         {
             try
             {
                 //guard clause
-                if (jsonWebTokenRequest == null) throw new ArgumentNullException(Constants.Parameters.JSON_WEB_TOKEN_REQUEST);
-                if (jsonWebTokenRequest.Token == null) throw new ArgumentNullException(Constants.Parameters.JSON_WEB_TOKEN_REQUEST_TOKEN);
+                if (jsonWebTokenRequest == null) throw new ArgumentNullException(Constants.Parameters.JsonWebTokenRequest);
+                if (jsonWebTokenRequest.Token == null) throw new ArgumentNullException(Constants.Parameters.JsonWebTokenRequestToken);
 
-                var tokenParts = jsonWebTokenRequest.Token.Split(Constants.Delimiters.DOT);
+                var tokenParts = jsonWebTokenRequest.Token.Split(Constants.Delimiters.Dot);
 
                 //get the decoded signature from the request
                 var crypto = JsonWebToken.Base64UrlDecode(tokenParts[2]);
@@ -70,9 +73,9 @@ namespace Tc.Crm.Service.Services
                 //Recreating the signature from the JWT request header and payload
                 var header = tokenParts[0];
                 var payload = tokenParts[1];
-                var bytesToSign = Encoding.UTF8.GetBytes(string.Concat(header, Constants.Delimiters.DOT, payload));
+                var bytesToSign = Encoding.UTF8.GetBytes(string.Concat(header, Constants.Delimiters.Dot, payload));
                 byte[] signatureData;
-                var key = ConfigurationManager.AppSettings[Constants.Configuration.AppSettings.JSON_WEB_TOKEN_SECRET];
+                var key = ConfigurationManager.AppSettings[Constants.Configuration.AppSettings.JsonWebTokenSecret];
                 using (var sha = new HMACSHA256(Encoding.UTF8.GetBytes(key)))
                 {
                     signatureData = sha.ComputeHash(bytesToSign);
@@ -81,14 +84,14 @@ namespace Tc.Crm.Service.Services
 
                 //compare signatures
                 if (decodedCrypto == decodedSignature)
-                    jsonWebTokenRequest.SignaturValid = true;
+                    jsonWebTokenRequest.SignatureValid = true;
                 else
-                    jsonWebTokenRequest.SignaturValid = false;
+                    jsonWebTokenRequest.SignatureValid = false;
             }
             catch (Exception ex)
             {
                 jsonWebTokenRequest.Errors.Add(new JsonWebTokenRequestError(ex.Message, ex.StackTrace));
-                jsonWebTokenRequest.Errors.Add(new JsonWebTokenRequestError(Constants.Messages.SIGNATURE_VALIDATION_UNHANDLED_ERROR));
+                jsonWebTokenRequest.Errors.Add(new JsonWebTokenRequestError(Constants.Messages.SignatureValidationUnhandledError));
             }
         }
 
@@ -97,15 +100,16 @@ namespace Tc.Crm.Service.Services
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly")]
         public static string GetToken(HttpRequestMessage request)
         {
+            //guard clause
+            if (request == null) throw new ArgumentNullException(Constants.Parameters.Request);
+            if (request.Headers == null) throw new ArgumentNullException(Constants.Parameters.RequestHeaders);
+            if (request.Headers.Authorization == null) throw new ArgumentNullException(Constants.Parameters.RequestHeadersAuthorization);
+
             try
             {
-                //guard clause
-                if (request == null) throw new ArgumentNullException(Constants.Parameters.REQUEST);
-                if (request.Headers == null) throw new ArgumentNullException(Constants.Parameters.REQUEST_HEADERS);
-                if (request.Headers.Authorization == null) throw new ArgumentNullException(Constants.Parameters.REQUEST_HEADERS_AUTHORIZATION);
-
                 return request.Headers.Authorization.Parameter;
             }
             catch (Exception)
@@ -119,19 +123,21 @@ namespace Tc.Crm.Service.Services
         /// Validates the Json Web token header
         /// </summary>
         /// <param name="request"></param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         public static void ValidateHeader(JsonWebTokenRequest request)
         {
+            //guard clause
+            if (request == null) throw new ArgumentNullException(Constants.Parameters.Request);
+            if (request.Header == null) throw new ArgumentNullException(Constants.Parameters.RequestHeader);
+            if (string.IsNullOrWhiteSpace(request.Header.Algorithm))
+                throw new ArgumentNullException(Constants.Parameters.RequestHeaderAlgorithm);
+            if (string.IsNullOrWhiteSpace(request.Header.TokenType))
+                throw new ArgumentNullException(Constants.Parameters.RequestHeaderType);
+
             try
             {
-                //guard clause
-                if (request == null) throw new ArgumentNullException(Constants.Parameters.REQUEST);
-                if (request.Header == null) throw new ArgumentNullException(Constants.Parameters.REQUEST_HEADER);
-                if (string.IsNullOrWhiteSpace(request.Header.Algorithm))
-                    throw new ArgumentNullException(Constants.Parameters.REQUEST_HEADER_ALGORITHM);
-                if (string.IsNullOrWhiteSpace(request.Header.Type))
-                    throw new ArgumentNullException(Constants.Parameters.REQUEST_HEADER_TYPE);
-
-                if (!request.Header.Algorithm.Equals(Constants.JsonWebTokenContent.ALGORITHM_HS256
+                if (!request.Header.Algorithm.Equals(Constants.JsonWebTokenContent.AlgorithmHS256
                                                         , StringComparison.OrdinalIgnoreCase))
                 {
                     request.HeaderAlgorithmValid = false;
@@ -141,7 +147,7 @@ namespace Tc.Crm.Service.Services
                     request.HeaderAlgorithmValid = true;
                 }
 
-                if (!request.Header.Type.Equals(Constants.JsonWebTokenContent.TYPE_JWT
+                if (!request.Header.TokenType.Equals(Constants.JsonWebTokenContent.TypeJwt
                                                 , StringComparison.OrdinalIgnoreCase))
                 {
                     request.HeaderTypeValid = false;
@@ -151,10 +157,15 @@ namespace Tc.Crm.Service.Services
                     request.HeaderTypeValid = true;
                 }
             }
+            catch (NullReferenceException ex)
+            {
+                request.Errors.Add(new JsonWebTokenRequestError(ex.Message, ex.StackTrace));
+                request.Errors.Add(new JsonWebTokenRequestError(Constants.Messages.HeaderValidationUnhandledError));
+            }
             catch (Exception ex)
             {
                 request.Errors.Add(new JsonWebTokenRequestError(ex.Message, ex.StackTrace));
-                request.Errors.Add(new JsonWebTokenRequestError(Constants.Messages.HEADER_VALIDATION_UNHANDLED_ERROR));
+                request.Errors.Add(new JsonWebTokenRequestError(Constants.Messages.HeaderValidationUnhandledError));
             }
         }
 
@@ -162,26 +173,27 @@ namespace Tc.Crm.Service.Services
         /// Validates the payload
         /// </summary>
         /// <param name="request"></param>
-        public static void ValidatePayLoad(JsonWebTokenRequest request)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
+        public static void ValidatePayload(JsonWebTokenRequest request)
         {
+            //guard clause
+            if (request == null) throw new ArgumentNullException(Constants.Parameters.Request);
+            if (request.Payload == null) throw new ArgumentNullException(Constants.Parameters.RequestPayload);
             try
             {
-                //guard clause
-                if (request == null) throw new ArgumentNullException(Constants.Parameters.REQUEST);
-                if (request.Payload == null) throw new ArgumentNullException(Constants.Parameters.REQUEST_PAYLOAD);
-
                 if (string.IsNullOrEmpty(request.Payload.NotBefore))
                 {
-                    request.NotBeforeTimeValid = true;
+                    request.NotBeforetimeValid = true;
                 }
                 else
                 {
                     int expInt = ConvertToInt(request.Payload.NotBefore);
                     var secondsSinceEpoch = Math.Round((DateTime.UtcNow - UnixEpoch).TotalSeconds);
                     if (secondsSinceEpoch >= expInt)
-                        request.NotBeforeTimeValid = false;
+                        request.NotBeforetimeValid = false;
                     else
-                        request.NotBeforeTimeValid = true;
+                        request.NotBeforetimeValid = true;
                 }
 
                 //check iat
@@ -197,11 +209,11 @@ namespace Tc.Crm.Service.Services
                     int expiry = -1;
                     try
                     {
-                        expiry = Int32.Parse(ConfigurationManager.AppSettings[Constants.Configuration.AppSettings.ISSUED_AT_TIME_EXPIRY_IN_SECONDS]);
+                        expiry = Int32.Parse(ConfigurationManager.AppSettings[Constants.Configuration.AppSettings.IssuedAtTimeExpiryInSeconds]);
                     }
-                    catch (Exception)
+                    catch (FormatException)
                     {
-                        throw new FormatException(Constants.Messages.EXPIRY_NOT_INT);
+                        throw new FormatException(Constants.Messages.ExpiryNotInteger);
                     }
                      
                     if (expInt >= secondsSinceEpoch + expiry)
@@ -210,10 +222,15 @@ namespace Tc.Crm.Service.Services
                         request.IssuedAtTimeValid = true;
                 }
             }
+            catch (NullReferenceException ex)
+            {
+                request.Errors.Add(new JsonWebTokenRequestError(ex.Message, ex.StackTrace));
+                request.Errors.Add(new JsonWebTokenRequestError(Constants.Messages.PayloadValidationUnhandledError));
+            }
             catch (Exception ex)
             {
                 request.Errors.Add(new JsonWebTokenRequestError(ex.Message, ex.StackTrace));
-                request.Errors.Add(new JsonWebTokenRequestError(Constants.Messages.PAYLOAD_VALIDATION_UNHANDLED_ERROR));
+                request.Errors.Add(new JsonWebTokenRequestError(Constants.Messages.PayloadValidationUnhandledError));
             }
         }
         /// <summary>
@@ -226,7 +243,7 @@ namespace Tc.Crm.Service.Services
             int i;
             if (Int32.TryParse(v, out i))
                 return i;
-            throw new SignatureVerificationException(Constants.Messages.CLAIM_NOT_INT);
+            throw new SignatureVerificationException(Constants.Messages.ClaimNotInteger);
         }
 
         /// <summary>
@@ -238,12 +255,12 @@ namespace Tc.Crm.Service.Services
         public static T DecodeHeaderToObject<T>(string token)
         {
             //guard clause
-            if (string.IsNullOrWhiteSpace(token)) throw new ArgumentNullException(Constants.Parameters.TOKEN);
+            if (string.IsNullOrWhiteSpace(token)) throw new ArgumentNullException(Constants.Parameters.Token);
 
-            var parts = token.Split(Constants.Delimiters.DOT);
+            var parts = token.Split(Constants.Delimiters.Dot);
             if (parts.Length != 3)
             {
-                throw new FormatException(Constants.Messages.TOKEN_FORMAT_ERROR);
+                throw new FormatException(Constants.Messages.TokenFormatError);
             }
 
             var header = parts[0];
@@ -261,12 +278,12 @@ namespace Tc.Crm.Service.Services
         public static T DecodePayloadToObject<T>(string token)
         {
             //guard clause
-            if (string.IsNullOrWhiteSpace(token)) throw new ArgumentNullException(Constants.Parameters.TOKEN);
+            if (string.IsNullOrWhiteSpace(token)) throw new ArgumentNullException(Constants.Parameters.Token);
 
-            var parts = token.Split(Constants.Delimiters.DOT);
+            var parts = token.Split(Constants.Delimiters.Dot);
             if (parts.Length != 3)
             {
-                throw new FormatException(Constants.Messages.TOKEN_FORMAT_ERROR);
+                throw new FormatException(Constants.Messages.TokenFormatError);
             }
 
             var payLoad = parts[1];

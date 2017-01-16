@@ -13,6 +13,7 @@ namespace Tc.Crm.Service.Controllers
     [RequireHttps]
     public class CustomerController : ApiController
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         [Route("api/v1/customer/update")]
         [Route("api/customer/update")]
         [HttpPut]
@@ -27,7 +28,7 @@ namespace Tc.Crm.Service.Controllers
                 try
                 {
                     if (string.IsNullOrEmpty(customer.Id))
-                        return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.SOURCE_KEY_NOT_PRESENT);
+                        return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.SourceKeyNotPresent);
 
                     var response = CustomerService.Update(customer);
                     if(response.Created)

@@ -11,6 +11,9 @@ using System.Net.Http;
 
 namespace Tc.Crm.Service.Filters
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1019:DefineAccessorsForAttributeArguments")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes")]
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false)]
     public class GenericAuthenticationFilter: AuthorizationFilterAttribute
     {
@@ -36,6 +39,7 @@ namespace Tc.Crm.Service.Filters
         /// Checks basic authentication request
         /// </summary>
         /// <param name="filterContext"></param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration", MessageId = "0#")]
         public override void OnAuthorization(HttpActionContext filterContext)
         {
             if (!_isActive) return;
@@ -73,6 +77,8 @@ namespace Tc.Crm.Service.Filters
         /// Checks for autrhorization header in the request and parses it, creates user credentials and returns as BasicAuthenticationIdentity
         /// </summary>
         /// <param name="filterContext"></param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Auth")]
         protected virtual BasicAuthenticationIdentity FetchAuthHeader(HttpActionContext filterContext)
         {
             string authHeaderValue = null;

@@ -9,12 +9,16 @@ using System.Web.Http.Filters;
 
 namespace Tc.Crm.Service.Filters
 {
-    public class RequireHttpsAttribute : AuthorizationFilterAttribute
+    [AttributeUsage(AttributeTargets.All)]
+    public sealed class RequireHttpsAttribute : AuthorizationFilterAttribute
     {
         public override void OnAuthorization(HttpActionContext actionContext)
         {
-            var setting = ConfigurationManager.AppSettings[Constants.Configuration.AppSettings.REDIRECT_TO_HTTPS];
-            if (!setting.Equals(Constants.TRUE_VALUE, StringComparison.OrdinalIgnoreCase))
+            //guard clause
+            if (actionContext == null) throw new ArgumentNullException(Constants.Parameters.ActionContext);
+
+            var setting = ConfigurationManager.AppSettings[Constants.Configuration.AppSettings.RedirectToHttps];
+            if (!setting.Equals(Constants.General.TrueValue, StringComparison.OrdinalIgnoreCase))
             {
                 base.OnAuthorization(actionContext);
                 return;
@@ -24,7 +28,7 @@ namespace Tc.Crm.Service.Filters
             {
                 actionContext.Response = new HttpResponseMessage(System.Net.HttpStatusCode.Forbidden)
                 {
-                    ReasonPhrase = Constants.Messages.HTTPS_REQUIRED
+                    ReasonPhrase = Constants.Messages.HttpsRequired
                 };
             }
             else

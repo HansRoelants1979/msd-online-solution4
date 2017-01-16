@@ -13,6 +13,7 @@ namespace Tc.Crm.Service.Controllers
     [RequireHttps]
     public class BookingController : ApiController
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         [Route("api/v1/booking/update")]
         [Route("api/booking/update")]
         [HttpPut]
@@ -26,7 +27,7 @@ namespace Tc.Crm.Service.Controllers
                 var booking = BookingService.GetBookingFromPayload(payload.Data);
                 try
                 {
-                    if(string.IsNullOrEmpty(booking.Id)) return Request.CreateResponse(HttpStatusCode.BadRequest,Constants.Messages.SOURCE_KEY_NOT_PRESENT);
+                    if(string.IsNullOrEmpty(booking.Id)) return Request.CreateResponse(HttpStatusCode.BadRequest,Constants.Messages.SourceKeyNotPresent);
                     var response = BookingService.Update(booking);
                     if (response.Created)
                         return Request.CreateResponse(HttpStatusCode.Created,response.Id);
