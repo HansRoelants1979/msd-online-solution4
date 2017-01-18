@@ -10,6 +10,8 @@ using System.Web;
 using Tc.Crm.Service.Models;
 using System.Security.Cryptography;
 using System.Diagnostics;
+using System.IO;
+using System.Net;
 
 namespace Tc.Crm.Service.Services
 {
@@ -68,27 +70,47 @@ namespace Tc.Crm.Service.Services
 
                 var tokenParts = jsonWebTokenRequest.Token.Split(Constants.Delimiters.Dot);
 
-                //get the decoded signature from the request
-                var crypto = JsonWebToken.Base64UrlDecode(tokenParts[2]);
-                var decodedCrypto = Convert.ToBase64String(crypto);
+                ////get the decoded signature from the request
+                //var crypto = JsonWebToken.Base64UrlDecode(tokenParts[2]);
+                //var decodedCrypto = Convert.ToBase64String(crypto);
 
-                //Recreating the signature from the JWT request header and payload
-                var header = tokenParts[0];
-                var payload = tokenParts[1];
-                var bytesToSign = Encoding.UTF8.GetBytes(string.Concat(header, Constants.Delimiters.Dot, payload));
-                byte[] signatureData;
-                var key = ConfigurationManager.AppSettings[Constants.Configuration.AppSettings.JsonWebTokenSecret];
-                using (var sha = new HMACSHA256(Encoding.UTF8.GetBytes(key)))
-                {
-                    signatureData = sha.ComputeHash(bytesToSign);
-                }
-                var decodedSignature = Convert.ToBase64String(signatureData);
+                ////Recreating the signature from the JWT request header and payload
+                //var header = tokenParts[0];
+                //var payload = tokenParts[1];
+                //var bytesToSign = Encoding.UTF8.GetBytes(string.Concat(header, Constants.Delimiters.Dot, payload));
+                //byte[] signatureData;
+                //var key = ConfigurationManager.AppSettings[Constants.Configuration.AppSettings.JsonWebTokenSecret];
+                //using (var sha = new HMACSHA256(Encoding.UTF8.GetBytes(key)))
+                //{
+                //    signatureData = sha.ComputeHash(bytesToSign);
+                //}
+                //var decodedSignature = Convert.ToBase64String(signatureData);
+                
+                ////compare signatures
+                //if (decodedCrypto == decodedSignature)
+                //    jsonWebTokenRequest.SignatureValid = true;
+                //else
+                //    jsonWebTokenRequest.SignatureValid = false;
 
-                //compare signatures
-                if (decodedCrypto == decodedSignature)
-                    jsonWebTokenRequest.SignatureValid = true;
-                else
+
+                //var keyBytes = Convert.FromBase64String(key); // your key here
+
+                RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
+                var fileName = ConfigurationManager.AppSettings["publicKeyFileName"];
+                var path = HttpContext.Current.Server.MapPath(@"~/" + fileName);
+                string publicKeyXml = new WebClient().DownloadString(path);
+                
+                rsa.FromXmlString(publicKeyXml);
+
+                SHA256 sha256 = SHA256.Create();
+                byte[] hash = sha256.ComputeHash(Encoding.UTF8.GetBytes(tokenParts[0] + '.' + tokenParts[1]));
+
+                RSAPKCS1SignatureDeformatter rsaDeformatter = new RSAPKCS1SignatureDeformatter(rsa);
+                rsaDeformatter.SetHashAlgorithm("SHA256");
+                if (!rsaDeformatter.VerifySignature(hash, JsonWebToken.Base64UrlDecode(tokenParts[2])))
                     jsonWebTokenRequest.SignatureValid = false;
+                else
+                    jsonWebTokenRequest.SignatureValid = true;
             }
             catch (Exception ex)
             {
@@ -286,6 +308,6 @@ namespace Tc.Crm.Service.Services
             return JsonConvert.DeserializeObject<T>(payLoadJson);
         }
 
-
+        
     }
 }

@@ -7,12 +7,6 @@ namespace Tc.Crm.Service.Services
 {
     public static class CustomerService
     {
-        public static Customer GetCustomerFromPayload(string dataJson)
-        {
-            if (string.IsNullOrWhiteSpace(dataJson)) throw new ArgumentNullException(Constants.Parameters.DataJson);
-            return JsonConvert.DeserializeObject<Customer>(dataJson);
-        }
-
         public static CustomerUpdateResponse Update(Customer customer)
         {
             if (customer == null) throw new ArgumentNullException(Constants.Parameters.Customer);

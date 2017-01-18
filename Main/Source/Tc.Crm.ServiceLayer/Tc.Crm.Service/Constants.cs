@@ -12,7 +12,7 @@ namespace Tc.Crm.Service.Constants
     }
     public static class JsonWebTokenContent
     {
-        public const string AlgorithmHS256= "HS256";
+        public const string AlgorithmHS256= "RS256";
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Jwt")]
         public const string TypeJwt = "JWT";
     }

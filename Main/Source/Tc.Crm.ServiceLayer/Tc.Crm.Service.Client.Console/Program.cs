@@ -11,6 +11,9 @@ using System.Net;
 using Newtonsoft.Json;
 using Tc.Crm.Service.Models;
 using JWT;
+using System.Security.Cryptography;
+using System.IO;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Tc.Crm.Service.Client.Console
 {
@@ -66,7 +69,7 @@ namespace Tc.Crm.Service.Client.Console
                 return;
 
             //create the token
-            var token = CreateJWTToken(data);
+            var token = CreateJWTToken();
 
             //Call
             HttpClient cons = new HttpClient();
@@ -76,63 +79,17 @@ namespace Tc.Crm.Service.Client.Console
             cons.DefaultRequestHeaders.Accept.Clear();
             cons.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
             cons.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            Task<HttpResponseMessage> t = cons.PutAsync(api, null);
+            Task<HttpResponseMessage> t = cons.PutAsync(api,new StringContent(data,Encoding.UTF8,"application/json"));
 
             var res = t.Result;
 
             res.EnsureSuccessStatusCode();
 
-            //while (true)
-            //{
-            //    try
-            //    {
-            //        System.Console.WriteLine("Do it again. (y/n):");
-            //        var ans = System.Console.ReadLine();
-            //        if (ans == "n")
-            //            break;
-
-            //        var b = GetBookingFromConsole();
-
-            //        var serializedString = JsonConvert.SerializeObject(b);
-            //        var inputMessage = new HttpRequestMessage
-            //        {
-            //            Content = new StringContent(serializedString, Encoding.UTF8, "application/json")
-            //        };
-
-            //        //var credentials = new NetworkCredential("TC-DEV1\\$TC-DEV1", "jP2s0bWcrbciM7MflYqSTwoERCBqa5L5bMFQ6ziyk9w92FK3iFEdeexAi9iJ");
-            //        //var handler = new HttpClientHandler { Credentials = credentials };
-
-
-            //        HttpClient client = new HttpClient();
-            //        client.BaseAddress = new Uri(GetUrl());
-
-            //        inputMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            //        HttpResponseMessage message = client.PutAsync("api/v1/customer/update", inputMessage.Content).Result;
-
-            //        if (message.IsSuccessStatusCode)
-            //        {
-            //            IEnumerable<string> headerValues = message.Headers.GetValues("Message");
-            //            System.Console.WriteLine(headerValues.FirstOrDefault().ToString());
-            //        }
-            //        else
-            //        {
-            //            System.Console.WriteLine(message.ReasonPhrase);
-            //        }
-
-
-
-
-            //    }
-            //    catch (Exception ex)
-            //    {
-
-            //        System.Console.WriteLine(ex.Message);
-            //    }
-            //}
+           
             System.Console.ReadLine();
         }
 
-        private static string CreateJWTToken(string data)
+        private static string CreateJWTToken()
         {
             byte[] secretKey = Encoding.UTF8.GetBytes(GetJwtKey());
             
@@ -143,7 +100,6 @@ namespace Tc.Crm.Service.Client.Console
                 {"sub", "anonymous"},
                 {"iat", GetIat().ToString()},
                 {"exp", GetNbf().ToString()},
-                {"data", data}
             };
 
             var header = new Dictionary<string, object>()
@@ -152,8 +108,11 @@ namespace Tc.Crm.Service.Client.Console
                 {"typ", "JWT"},
             };
 
-            return JWT.JsonWebToken.Encode(payload, secretKey, JwtHashAlgorithm.HS256);
-
+            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
+            var fileName = ConfigurationManager.AppSettings["privateKeyFileName"];
+            rsa.FromXmlString(File.ReadAllText(fileName));
+            return Jose.JWT.Encode(payload,rsa,Jose.JwsAlgorithm.RS256);
+           
         }
         private static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
         private static double GetIat()

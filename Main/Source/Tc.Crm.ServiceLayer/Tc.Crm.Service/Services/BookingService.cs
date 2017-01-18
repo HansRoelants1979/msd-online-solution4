@@ -7,12 +7,6 @@ namespace Tc.Crm.Service.Services
 {
     public static class BookingService
     {
-        public static Booking GetBookingFromPayload(string dataJson)
-        {
-            if (string.IsNullOrWhiteSpace(dataJson)) throw new ArgumentNullException(Constants.Parameters.DataJson);
-            return JsonConvert.DeserializeObject<Booking>(dataJson);
-        }
-
         internal static BookingUpdateResponse Update(Booking booking)
         {
             if (booking == null) throw new ArgumentNullException(Constants.Parameters.Booking);

@@ -14,8 +14,5 @@ namespace Tc.Crm.Service.Models
 
         [DataMember(Name = "iat")]
         public string IssuedAtTime { get; set; }
-
-        [DataMember(Name = "data")]
-        public string Data { get; set; }
     }
 }

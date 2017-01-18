@@ -19,19 +19,12 @@ namespace Tc.Crm.Service.Controllers
         [Route("api/booking/update")]
         [HttpPut]
         [JsonWebTokenAuthorize]
-        public HttpResponseMessage Update()
+        public HttpResponseMessage Update(Booking booking)
         {
             try
             {
-                var token = JsonWebTokenHelper.GetToken(Request);
-                if (token == null)
-                    throw new ArgumentNullException(Constants.Messages.TokenIsNull);
-                var payload = JsonWebTokenHelper.DecodePayloadToObject<JsonWebTokenPayload>(token);
-                if(payload == null)
-                    throw new ArgumentNullException(Constants.Messages.PayloadIsNull);
-                var booking = BookingService.GetBookingFromPayload(payload.Data);
                 if(booking == null)
-                    throw new ArgumentNullException(Constants.Messages.BookingObjectIsNull);
+                    throw new ArgumentNullException(Constants.Parameters.Booking);
                 try
                 {
                     if(string.IsNullOrEmpty(booking.Id)) return Request.CreateResponse(HttpStatusCode.BadRequest,Constants.Messages.SourceKeyNotPresent);

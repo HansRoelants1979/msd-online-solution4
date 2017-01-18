@@ -19,19 +19,12 @@ namespace Tc.Crm.Service.Controllers
         [Route("api/customer/update")]
         [HttpPut]
         [JsonWebTokenAuthorize]
-        public HttpResponseMessage Update()
+        public HttpResponseMessage Update(Customer customer)
         {
             try
             {
-                var token = JsonWebTokenHelper.GetToken(Request);
-                if (token == null)
-                    throw new ArgumentNullException(Constants.Messages.TokenIsNull);
-                var payload = JsonWebTokenHelper.DecodePayloadToObject<JsonWebTokenPayload>(token);
-                if (payload == null)
-                    throw new ArgumentNullException(Constants.Messages.PayloadIsNull);
-                var customer = CustomerService.GetCustomerFromPayload(payload.Data);
                 if (customer == null)
-                    throw new ArgumentNullException(Constants.Messages.CustomerObjectIsNull);
+                    throw new ArgumentNullException(Constants.Parameters.Customer);
                 try
                 {
                     if (string.IsNullOrEmpty(customer.Id))
