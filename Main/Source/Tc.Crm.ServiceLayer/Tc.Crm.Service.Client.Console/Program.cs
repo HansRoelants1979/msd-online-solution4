@@ -81,10 +81,12 @@ namespace Tc.Crm.Service.Client.Console
             cons.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             Task<HttpResponseMessage> t = cons.PutAsync(api,new StringContent(data,Encoding.UTF8,"application/json"));
 
-            var res = t.Result;
+            var response = t.Result;
 
-            res.EnsureSuccessStatusCode();
+            Task<string> task = response.Content.ReadAsStringAsync();
+            var content = task.Result;
 
+            System.Console.WriteLine("Operation:{0} :: GUID::{1}",response.ReasonPhrase,content);
            
             System.Console.ReadLine();
         }
