@@ -70,33 +70,8 @@ namespace Tc.Crm.Service.Services
 
                 var tokenParts = jsonWebTokenRequest.Token.Split(Constants.Delimiters.Dot);
 
-                ////get the decoded signature from the request
-                //var crypto = JsonWebToken.Base64UrlDecode(tokenParts[2]);
-                //var decodedCrypto = Convert.ToBase64String(crypto);
-
-                ////Recreating the signature from the JWT request header and payload
-                //var header = tokenParts[0];
-                //var payload = tokenParts[1];
-                //var bytesToSign = Encoding.UTF8.GetBytes(string.Concat(header, Constants.Delimiters.Dot, payload));
-                //byte[] signatureData;
-                //var key = ConfigurationManager.AppSettings[Constants.Configuration.AppSettings.JsonWebTokenSecret];
-                //using (var sha = new HMACSHA256(Encoding.UTF8.GetBytes(key)))
-                //{
-                //    signatureData = sha.ComputeHash(bytesToSign);
-                //}
-                //var decodedSignature = Convert.ToBase64String(signatureData);
-                
-                ////compare signatures
-                //if (decodedCrypto == decodedSignature)
-                //    jsonWebTokenRequest.SignatureValid = true;
-                //else
-                //    jsonWebTokenRequest.SignatureValid = false;
-
-
-                //var keyBytes = Convert.FromBase64String(key); // your key here
-
                 RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
-                var fileName = ConfigurationManager.AppSettings["publicKeyFileName"];
+                var fileName = ConfigurationManager.AppSettings[Constants.Configuration.AppSettings.PublicKeyFileName];
                 var path = HttpContext.Current.Server.MapPath(@"~/" + fileName);
                 string publicKeyXml = new WebClient().DownloadString(path);
                 
@@ -153,7 +128,7 @@ namespace Tc.Crm.Service.Services
 
             try
             {
-                if (!request.Header.Algorithm.Equals(Constants.JsonWebTokenContent.AlgorithmHS256
+                if (!request.Header.Algorithm.Equals(Constants.JsonWebTokenContent.AlgorithmRS256
                                                         , StringComparison.OrdinalIgnoreCase))
                 {
                     request.HeaderAlgorithmValid = false;

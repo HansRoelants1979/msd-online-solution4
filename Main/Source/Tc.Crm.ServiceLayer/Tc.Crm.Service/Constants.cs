@@ -12,7 +12,7 @@ namespace Tc.Crm.Service.Constants
     }
     public static class JsonWebTokenContent
     {
-        public const string AlgorithmHS256= "RS256";
+        public const string AlgorithmRS256= "RS256";
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Jwt")]
         public const string TypeJwt = "JWT";
     }
@@ -66,6 +66,7 @@ namespace Tc.Crm.Service.Constants.Configuration
         public const string JsonWebTokenSecret = "jwtkey";
         public const string RedirectToHttps = "redirectToHttps";
         public const string IssuedAtTimeExpiryInSeconds = "issuedAtTimeExpiryInSeconds";
+        public const string PublicKeyFileName = "publicKeyFileName";
     }
     public static class ConnectionStrings
     {
