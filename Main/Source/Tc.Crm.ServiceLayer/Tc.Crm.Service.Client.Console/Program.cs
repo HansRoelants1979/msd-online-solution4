@@ -93,8 +93,6 @@ namespace Tc.Crm.Service.Client.Console
 
         private static string CreateJWTToken()
         {
-            byte[] secretKey = Encoding.UTF8.GetBytes(GetJwtKey());
-            
             var payload = new Dictionary<string, object>()
             {
                 {"iss", "TC"},
@@ -132,11 +130,6 @@ namespace Tc.Crm.Service.Client.Console
             if (string.IsNullOrWhiteSpace(Url))
                 Url = ConfigurationManager.AppSettings["ApiUrl"];
             return Url;
-        }
-
-        private static string GetJwtKey()
-        {
-            return ConfigurationManager.AppSettings["jwtkey"];
         }
 
 
