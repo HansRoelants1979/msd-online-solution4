@@ -5,9 +5,9 @@ using Tc.Crm.Service.Models;
 
 namespace Tc.Crm.Service.Services
 {
-    public static class CustomerService
+    public class CustomerService:ICustomerService
     {
-        public static CustomerUpdateResponse Update(Customer customer)
+        public CustomerUpdateResponse Update(Customer customer,ICrmService crmService)
         {
             if (customer == null) throw new ArgumentNullException(Constants.Parameters.Customer);
 
@@ -20,7 +20,7 @@ namespace Tc.Crm.Service.Services
             contact[Constants.Crm.Fields.Contact.LastName] = customer.LastName;
             contact[Constants.Crm.Fields.Contact.Email] = customer.Email;
 
-            var response = CrmService.Upsert(contact);
+            var response = crmService.Upsert(contact);
 
             if (response == null) throw new InvalidOperationException(Constants.Messages.ResponseNull);
             if (response.RecordCreated)

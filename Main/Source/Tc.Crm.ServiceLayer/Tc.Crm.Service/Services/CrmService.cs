@@ -5,26 +5,37 @@ using Microsoft.Xrm.Sdk.Query;
 using Microsoft.Xrm.Client;
 using Microsoft.Xrm.Client.Services;
 using Microsoft.Xrm.Sdk.Messages;
+using tcm = Tc.Crm.Service.Models;
 
 namespace Tc.Crm.Service.Services
 {
 
-    public static class CrmService
+    public  class CrmService:ICrmService
     {
-        private static IOrganizationService orgService;
+        private  IOrganizationService orgService;
+
+        public CrmService()
+        {
+            orgService = CreateOrgService();
+        }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Upsert")]
-        public static UpsertResponse Upsert(Entity entity)
+        public  tcm.UpsertResponse Upsert(Entity entity)
         {
-            var service = CreateOrgService();
             UpsertRequest request = new UpsertRequest
             {
                 Target = entity
             };
-            return service.Execute<UpsertResponse>(request);
+            var response =  orgService.Execute<UpsertResponse>(request);
+            if (response == null) return null;
+            return new tcm.UpsertResponse
+            {
+                RecordCreated = response.RecordCreated,
+                Target = response.Target
+            };
         }
 
-        public static IOrganizationService CreateOrgService()
+        public  IOrganizationService CreateOrgService()
         {
 
             if (orgService != null) return orgService;

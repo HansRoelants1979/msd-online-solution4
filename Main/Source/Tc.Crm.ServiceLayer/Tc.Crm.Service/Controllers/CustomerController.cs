@@ -14,6 +14,15 @@ namespace Tc.Crm.Service.Controllers
     [RequireHttps]
     public class CustomerController : ApiController
     {
+        ICustomerService customerService = null;
+        ICrmService crmService = null;
+
+        public CustomerController(ICustomerService customerService,ICrmService crmService)
+        {
+            this.customerService = customerService;
+            this.crmService = crmService;
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         [Route("api/v1/customer/update")]
         [Route("api/customer/update")]
@@ -30,7 +39,7 @@ namespace Tc.Crm.Service.Controllers
                     if (string.IsNullOrEmpty(customer.Id))
                         return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.SourceKeyNotPresent);
 
-                    var response = CustomerService.Update(customer);
+                    var response = customerService.Update(customer,crmService);
                     if(response.Created)
                         return Request.CreateResponse(HttpStatusCode.Created, response.Id);
                     else

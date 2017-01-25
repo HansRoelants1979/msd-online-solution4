@@ -5,9 +5,9 @@ using Tc.Crm.Service.Models;
 
 namespace Tc.Crm.Service.Services
 {
-    public static class BookingService
+    public class BookingService:IBookingService
     {
-        internal static BookingUpdateResponse Update(Booking booking)
+        public BookingUpdateResponse Update(Booking booking,ICrmService crmService)
         {
             if (booking == null) throw new ArgumentNullException(Constants.Parameters.Booking);
 
@@ -23,7 +23,7 @@ namespace Tc.Crm.Service.Services
                                                                                     , Constants.Crm.Fields.Contact.SourceKey
                                                                                     ,booking.CustomerId);
 
-            var response = CrmService.Upsert(entity);
+            var response = crmService.Upsert(entity);
             if (response == null) throw new InvalidOperationException(Constants.Messages.ResponseNull);
             if (response.RecordCreated) return new BookingUpdateResponse { Created = true,Id = response.Target.Id.ToString() };
             return new BookingUpdateResponse { Created = false, Id = response.Target.Id.ToString() };
