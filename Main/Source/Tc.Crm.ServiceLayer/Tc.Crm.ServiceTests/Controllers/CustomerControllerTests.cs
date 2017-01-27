@@ -18,24 +18,43 @@ namespace Tc.Crm.Service.Controllers.Tests
     [TestClass()]
     public class CustomerControllerTests
     {
+        XrmFakedContext context;
+        ICustomerService customerService;
+        CustomerController controller;
+        ICrmService crmService;
+        Entity testEntity1;
+        [TestInitialize()]
+        public void TestSetup()
+        {
+            context = new XrmFakedContext();
+            context.Data = new Dictionary<string, Dictionary<Guid, Microsoft.Xrm.Sdk.Entity>>();
+            context.Data.Add("contact", new Dictionary<Guid, Microsoft.Xrm.Sdk.Entity>());
+            testEntity1 = new Entity("contact");
+            testEntity1.Id = Guid.NewGuid();
+            testEntity1["firstname"] = "Axe";
+            testEntity1["lastname"] = "Him";
+            testEntity1["emailaddress1"] = "Axe@tc.com";
+            testEntity1["new_sourcekey"] = "CON002";
+            context.Data["contact"].Add(testEntity1.Id, testEntity1);
+
+            customerService = new CustomerService();
+            crmService = new TestCrmService(context);
+            controller = new CustomerController(customerService,crmService);
+            controller.Request = new System.Net.Http.HttpRequestMessage();
+            controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+        }
+
         [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException),"customer")]
         public void UpdateTest_CustomerIsNull()
         {
-            CustomerService cs = new CustomerService();
-            CustomerController c = new CustomerController(cs,new TestCrmService(new XrmFakedContext()));
-            c.Update(null);
-            Assert.Fail();
+            var response = controller.Update(null);
+            Assert.AreEqual(response.StatusCode,HttpStatusCode.InternalServerError);
         }
 
         [TestMethod()]
         public void UpdateTest_CustomerIdIsNull()
         {
-            CustomerService cs = new CustomerService();
-            CustomerController c = new CustomerController(cs, new TestCrmService(new XrmFakedContext()));
-            c.Request = new System.Net.Http.HttpRequestMessage();
-            c.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-            var response = c.Update(new Models.Customer { Id = null });
+            var response = controller.Update(new Models.Customer { Id = null });
             Task<string> task = response.Content.ReadAsStringAsync();
             var content = task.Result;
             Assert.AreEqual("\"Source key is empty or null.\"", content);
@@ -44,11 +63,7 @@ namespace Tc.Crm.Service.Controllers.Tests
         [TestMethod()]
         public void UpdateTest_CustomerIdIsEmpty()
         {
-            CustomerService cs = new CustomerService();
-            CustomerController c = new CustomerController(cs, new TestCrmService(new XrmFakedContext()));
-            c.Request = new System.Net.Http.HttpRequestMessage();
-            c.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-            var response = c.Update(new Models.Customer { Id=string.Empty});
+            var response = controller.Update(new Models.Customer { Id=string.Empty});
             Task<string> task = response.Content.ReadAsStringAsync();
             var content = task.Result;
             Assert.AreEqual("\"Source key is empty or null.\"", content);
@@ -58,14 +73,6 @@ namespace Tc.Crm.Service.Controllers.Tests
         [TestMethod()]
         public void UpdateTest_CustomerCreate()
         {
-            var context = new XrmFakedContext();
-            context.Data = new Dictionary<string, Dictionary<Guid, Microsoft.Xrm.Sdk.Entity>>();
-            context.Data.Add("contact", new Dictionary<Guid, Microsoft.Xrm.Sdk.Entity>());
-            CustomerService cs = new CustomerService();
-            CustomerController c = new CustomerController(cs, new TestCrmService(context));
-            c.Request = new System.Net.Http.HttpRequestMessage();
-            c.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-            
             Models.Customer customer = new Models.Customer
             {
                 Email = "joliver@tc.com",
@@ -74,7 +81,7 @@ namespace Tc.Crm.Service.Controllers.Tests
                 Id = "CON001"
             };
 
-            var response = c.Update(customer);
+            var response = controller.Update(customer);
             Task<string> task = response.Content.ReadAsStringAsync();
             var content = task.Result;
             content = content.Trim('"');
@@ -90,33 +97,17 @@ namespace Tc.Crm.Service.Controllers.Tests
         [TestMethod()]
         public void UpdateTest_CustomerUpdate()
         {
-            var context = new XrmFakedContext();
-            context.Data = new Dictionary<string, Dictionary<Guid, Microsoft.Xrm.Sdk.Entity>>();
-            context.Data.Add("contact", new Dictionary<Guid, Microsoft.Xrm.Sdk.Entity>());
-            Entity e = new Entity("contact");
-            e.Id = Guid.NewGuid();
-            e["firstname"] = "John";
-            e["lastname"] = "John";
-            e["emailaddress1"] = "John";
-            e["new_sourcekey"] = "CON001";
-            context.Data["contact"].Add(e.Id, e);
-
-            CustomerService cs = new CustomerService();
-            CustomerController c = new CustomerController(cs, new TestCrmService(context));
-            c.Request = new System.Net.Http.HttpRequestMessage();
-            c.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-
             Models.Customer customer = new Models.Customer
             {
-                Email = "joliver@tc.com",
-                FirstName = "John",
-                LastName = "Oliver",
-                Id = "CON001"
+                Email = "Axe.Her@tc.com",
+                FirstName = "Axe",
+                LastName = "Her",
+                Id = "CON002"
             };
 
-            var response = c.Update(customer);
+            var response = controller.Update(customer);
 
-            var expected = context.Data["contact"][e.Id];
+            var expected = context.Data["contact"][testEntity1.Id];
 
             Assert.AreEqual(customer.Email,expected["emailaddress1"].ToString());
             Assert.AreEqual(customer.LastName, expected["lastname"].ToString());
