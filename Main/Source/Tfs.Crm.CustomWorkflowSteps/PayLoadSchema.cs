@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tfs.Crm.CustomWorkflowSteps
+namespace Tc.Crm.CustomWorkflowSteps
 {
-    public class Class1
+    public class PayLoadSchema
     {
     }
 }
