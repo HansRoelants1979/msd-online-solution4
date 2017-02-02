@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tc.Crm.CustomWorkflowSteps
 {
-    public static class Entity
+    public static class EntityName
     {
 
         public const string Account = "account";
