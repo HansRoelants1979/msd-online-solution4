@@ -2,6 +2,7 @@
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using System.ServiceModel;
+using Microsoft.Xrm.Sdk.Query;
 
 namespace Tc.Crm.CustomWorkflowSteps
 {
@@ -15,6 +16,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         const string _updateStatus = "204";
         const string _deleteStatus = "204";
 
+        public IOrganizationService _service = null;
 
         /// <summary>
         /// Call this method to create or update record
@@ -23,11 +25,11 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// <param name="service">OrganizationServiceProxy to Execute Request</param>
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.CustomWorkflowSteps.SuccessMessage.set_Message(System.String)")]
-        public SuccessMessage UpsertEntity(Entity entityRecord, IOrganizationService service)
+        public SuccessMessage UpsertEntity(Entity entityRecord)
         {  
 
             SuccessMessage successMsg = null;
-            if (service != null)
+            if (_service != null)
             {
                 UpsertRequest request = new UpsertRequest()
                 {
@@ -38,7 +40,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                 {
 
                     // Execute UpsertRequest and obtain UpsertResponse. 
-                    UpsertResponse response = (UpsertResponse)service.Execute(request);
+                    UpsertResponse response = (UpsertResponse)_service.Execute(request);
                     if (response.RecordCreated)
                         successMsg = new SuccessMessage
                         {
@@ -77,10 +79,10 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// <param name="entities"></param>
         /// <param name="service"></param>
         /// <returns></returns>
-        public List<SuccessMessage> BulkCreate(DataCollection<Entity> entities, IOrganizationService service)
+        public List<SuccessMessage> BulkCreate(DataCollection<Entity> entities)
         {
             List<SuccessMessage> successMsg = null;
-            if (service != null && entities != null && entities.Count > 0)
+            if (_service != null && entities != null && entities.Count > 0)
             {
                 var requestWithResults = new ExecuteMultipleRequest()
                 {
@@ -106,7 +108,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                 {
                     // Execute all the requests in the request collection using a single web method call.
                     ExecuteMultipleResponse responseWithResults =
-                        (ExecuteMultipleResponse)service.Execute(requestWithResults);
+                        (ExecuteMultipleResponse)_service.Execute(requestWithResults);
 
                     successMsg = new List<SuccessMessage>();
 
@@ -149,10 +151,10 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// </summary>
         /// <param name="service">Org Service</param>
         /// <param name="entityReferences">Collection of EntityReferences to Delete</param>
-        public static void BulkDelete(IOrganizationService service, DataCollection<EntityReference> entityReferences)
+        public void BulkDelete(DataCollection<EntityReference> entityReferences)
         {
             List<SuccessMessage> successMsg = null;
-            if (service != null && entityReferences != null && entityReferences.Count > 0)
+            if (_service != null && entityReferences != null && entityReferences.Count > 0)
             {
                 // Create an ExecuteMultipleRequest object.
                 var requestWithResults = new ExecuteMultipleRequest()
@@ -176,7 +178,7 @@ namespace Tc.Crm.CustomWorkflowSteps
 
                 try {
                     // Execute all the requests in the request collection using a single web method call.
-                    ExecuteMultipleResponse responseWithResults = (ExecuteMultipleResponse)service.Execute(requestWithResults);
+                    ExecuteMultipleResponse responseWithResults = (ExecuteMultipleResponse)_service.Execute(requestWithResults);
 
                     // Get the results returned in the responses.
                     foreach (var responseItem in responseWithResults.Responses)
@@ -209,6 +211,27 @@ namespace Tc.Crm.CustomWorkflowSteps
         }
 
         
+
+        public EntityReference SetLookupValueUsingAlternateKey(string logicalName, string alternateKey, string alternateKeyValue)
+        {
+            EntityReference entRef = null;
+            QueryByAttribute querybyexpression = new QueryByAttribute(logicalName);
+            querybyexpression.ColumnSet = new ColumnSet(logicalName + "id");           
+            querybyexpression.Attributes.AddRange(alternateKey);           
+            querybyexpression.Values.AddRange(alternateKeyValue);           
+            EntityCollection retrieved = _service.RetrieveMultiple(querybyexpression);
+            if (retrieved != null && retrieved.Entities.Count == 1)
+            {
+                entRef = new EntityReference(logicalName, retrieved.Entities[0].Id);
+            }
+            return entRef;
+        }
+
+        public OptionSetValue SetOptionSetValue(int value)
+        {
+            OptionSetValue optionValue = new OptionSetValue(value);
+            return optionValue;
+        }
 
     }
 

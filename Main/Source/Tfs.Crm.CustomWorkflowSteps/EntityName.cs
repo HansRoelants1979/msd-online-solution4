@@ -32,6 +32,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         public const string User = "systemuser";
     }
 
+
     public static class Attributes
     {
         public class Contact
@@ -40,12 +41,67 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string FirstName = "firstname";
             public const string Gender = "tc_gender";
             public const string Language = "tc_language";
+            public const string SourceMarketId = "tc_sourcemarketid";
+            public const string Salutation = "tc_salutation";
+            public const string Telephone1Type = "tc_telephone1type";
+            public const string Telephone2Type = "tc_telephone2type";
+            public const string Telephone3Type = "tc_telephone3type";
+            public const string AcademicTitle = "tc_academictitle";
+            public const string Address1_AdditionalInformation = "tc_address1_additionalinformation";
+            public const string Address1_County = "tc_address1_county";
+            public const string Address1_FlatOrUnitNumber = "tc_address1_flatorunitnumber";
+            public const string Address1_HouseNumberOrBuilding = "tc_address1_housenumberorbuilding";
+            public const string Address1_Town = "tc_address1_town";
+            public const string Address1_CountryId = "tc_address1_countryid";
+            public const string Address1_PostalCode = "tc_address1_postalcode";
+            public const string Address2_AdditionalInformation = "tc_address2_additionalinformation";
+            public const string Address2_CountryId = "tc_address2_countryid";
+            public const string Address2_County = "tc_address2_county";
+            public const string Address2_FlatOrUnitNumber = "tc_address2_flatorunitnumber";
+            public const string Address2_HouseNumberorBuilding = "tc_address2_housenumberorbuilding";
+            public const string Address2_PostalCode = "tc_address2_postalcode";
+            public const string Address2_Town = "tc_address2_town";
+            public const string StatusCode = "statuscode";
+            public const string DateofDeath = "tc_dateofdeath";
+            public const string EmailAddress1Type = "tc_emailaddress1type";
+            public const string EmailAddress2Type = "tc_emailaddress2type";
+            public const string EmailAddress3Type = "tc_emailaddress3type";
+            public const string Segment = "tc_segment";
+            public const string Telephone1 = "telephone1";
+            public const string Telephone2 = "telephone2";
+            public const string Telephone3 = "telephone3";
+            public const string EMailAddress1 = "emailaddress1";
+            public const string EMailAddress2 = "emailaddress2";
+            public const string EMailAddress3 = "emailaddress3";
+            public const string MiddleName = "middlename";
+            public const string BirthDate = "birthdate";
+
 
         }
 
         public class Account
         {
             public const string Name = "name";
+            //public const string SourceMarketId = "tc_sourcemarketid";
+            public const string Address1_AdditionalInformation = "tc_address1_additionalinformation";
+            public const string Address1_FlatOrUnitNumber = "tc_address1_flatorunitnumber";
+            public const string Address1_HouseNumberOrBuilding = "tc_address1_housenumberorbuilding";
+            public const string Address1_Town = "tc_address1_town";
+            public const string Address1_CountryId = "tc_address1_countryid";
+            public const string Address1_Count = "tc_address1_county";
+            public const string Address1_PostalCode = "tc_address1_postalcode";
+            public const string Telephone1_Type = "tc_telephone1_type";
+            public const string Telephone2_Type = "tc_telephone2_type";
+            public const string Telephone3_Type = "tc_telephone3_type";
+            public const string EmailAddress1_Type = "tc_emailaddress1_type";
+            public const string EmailAddress2_Type = "tc_emailaddress2_type";
+            public const string EmailAddress3_Type = "tc_emailaddress3_type";
+            public const string Telephone1 = "telephone1";
+            public const string Telephone2 = "telephone2";
+            public const string Telephone3 = "telephone3";
+            public const string EMailAddress1 = "emailaddress1";
+            public const string EMailAddress2 = "emailaddress2";
+            public const string EMailAddress3 = "emailaddress3";
         }
         public class Booking
         {
@@ -58,8 +114,8 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string BookerPhone1 = "tc_bookerphone1";
             public const string BookerPhone2 = "tc_bookerphone2";
             public const string BookingDate = "tc_bookingdate";
-            public const string BookingId = "tc_bookingid";//added ID
-            public const string Brand = "tc_brand ";//brand
+            public const string BookingId = "tc_bookingid";
+            public const string BrandId = "tc_brandid";
             public const string BrochureCode = "tc_brochurecode";
             public const string DepartureDate = "tc_departuredate";
             public const string DestinationGateway = "tc_destinationgatewayid";
@@ -69,7 +125,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string ExtraServiceRemarks = "tc_extraserviceremarks";
             public const string HasSourceMarketComplaint = "tc_hassourcemarketcomplaint";
             public const string IsLateBooking = "tc_islatebooking";
-            public const string SourceSystemBookingId = "tc_name";
+            public const string Name = "tc_name";
             public const string NumberofAdults = "tc_numberofadults";
             public const string NumberofChildren = "tc_numberofchildren";
             public const string NumberofInfants = "tc_numberofinfants";
@@ -79,23 +135,25 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string ParticipantRemarks = "tc_participantremarks";
             public const string Participants = "tc_participants";
             public const string ReturnDate = "tc_returndate";
-            public const string ShopChannel = "tc_shopchannel ";
+            public const string Statuscode = "statuscode";
+            public const string ShopChannel = "tc_shopchannel";
             public const string ShopCode = "tc_shopcode";
             public const string ShopCompany = "tc_shopcompany";
             public const string ShopName = "tc_shopname";
-            public const string SourceMarket = "tc_sourcemarketid";
-            public const string TourOperator = "tc_touroperatorid";
+            public const string SourceMarketId = "tc_sourcemarketid";
+            public const string TourOperatorId = "tc_touroperatorid";
             public const string TourOperatorUpdatedDate = "tc_touroperatorupdateddate";
             public const string TourOperatorVersion = " tc_touroperatorversion ";
             public const string Transfer = "tc_transfer";
             public const string TransferRemarks = "tc_transferremarks";
             public const string TravelAmount = "tc_travelamount";
+            public const string TransactionCurrencyId = "transactioncurrencyid";
         }
         public class BookingAccommodation
         {
             public const string BoardType = "tc_boardtype";
             public const string BookingAccommodationid = "tc_bookingaccommodationid";
-            public const string BookingId = "tc_bookingid";//added ID
+            public const string BookingId = "tc_bookingid";
             public const string EndDateandTime = "tc_enddateandtime";
             public const string ExternalServiceCode = "tc_externalservicecode";
             public const string ExternalTransfer = "tc_externaltransfer";
@@ -110,6 +168,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string Order = "tc_order";
             public const string Participants = "tc_participants";
             public const string RoomType = "tc_roomtype";
+            public const string StatusCode = "statuscode";
             public const string ServiceType = "tc_servicetype";
             public const string SourceMarketHotelCode = "tc_sourcemarkethotelcode";
             public const string StartDateandTime = "tc_startdateandtime ";
@@ -119,7 +178,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         public class BookingTransport
         {
             public const string ArrivalGateway = "tc_arrivalgatewayid";
-            public const string Booking = "tc_bookingid"; //
+            public const string Booking = "tc_bookingid";
             public const string BookingTransportId = "tc_bookingtransportid";
             public const string CarrierCode = "tc_carriercode";
             public const string DepartureGateway = "tc_departuregatewayid";
@@ -143,7 +202,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         }
         public class Country
         {
-            public const string CountryId = "tc_countryid";//added ID
+            public const string CountryId = "tc_countryid";
             //public const string Country = "tc_iso_code";
         }
         public class CustomerBookingRole
@@ -157,7 +216,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         public class Gateway
         {
             public const string Country = "tc_countryid";
-            public const string GatewayName = "tc_gateway";//added Name
+            public const string GatewayName = "tc_gateway";
             public const string GatewayId = "tc_gatewayid";
             public const string IATA = "tc_iata";
         }
@@ -227,7 +286,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string BookingAccommodationId = "tc_bookingaccommodationid";
             public const string BookingTransport = "tc_bookingtransportid";
             public const string Name = "tc_name";
-            public const string RemarkName = "tc_remark";//added Name
+            public const string RemarkName = "tc_remark";
             public const string RemarkId = "tc_remarkid";
             public const string SourceMarketID = "tc_sourcemarketid";
             public const string SourceSystemID = "tc_sourcesystemid";
