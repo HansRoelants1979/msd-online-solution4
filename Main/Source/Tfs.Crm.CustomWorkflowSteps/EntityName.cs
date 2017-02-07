@@ -82,7 +82,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         public class Account
         {
             public const string Name = "name";
-            //public const string SourceMarketId = "tc_sourcemarketid";
+            public const string SourceMarketId = "tc_sourcemarketid";
             public const string Address1_AdditionalInformation = "tc_address1_additionalinformation";
             public const string Address1_FlatOrUnitNumber = "tc_address1_flatorunitnumber";
             public const string Address1_HouseNumberOrBuilding = "tc_address1_housenumberorbuilding";
@@ -118,8 +118,8 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string BrandId = "tc_brandid";
             public const string BrochureCode = "tc_brochurecode";
             public const string DepartureDate = "tc_departuredate";
-            public const string DestinationGateway = "tc_destinationgatewayid";
-            public const string Destination = "tc_destinationid";
+            public const string DestinationGatewayId = "tc_destinationgatewayid";
+            public const string DestinationId = "tc_destinationid";
             public const string Duration = "tc_duration";
             public const string ExtraService = "tc_extraservice";
             public const string ExtraServiceRemarks = "tc_extraserviceremarks";
@@ -158,7 +158,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string ExternalServiceCode = "tc_externalservicecode";
             public const string ExternalTransfer = "tc_externaltransfer";
             public const string HasSharedRoom = "tc_hassharedroom";
-            public const string Hotel = "tc_hotelid";
+            public const string HotelId = "tc_hotelid";
             public const string IsExternalService = "tc_isexternalservice";
             public const string Name = "tc_name";
             public const string NeedTourGuideAssignment = "tc_needtourguideassignment";
@@ -215,7 +215,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         }
         public class Gateway
         {
-            public const string Country = "tc_countryid";
+            public const string CountryId = "tc_countryid";
             public const string GatewayName = "tc_gateway";
             public const string GatewayId = "tc_gatewayid";
             public const string IATA = "tc_iata";
@@ -223,7 +223,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         public class Hotel
         {
             public const string AdditionalInformation = "tc_address1_additionalinformation";
-            public const string Country = "tc_address1_countryid";
+            public const string CountryId = "tc_address1_countryid";
             public const string County = "tc_address1_county";
             public const string FlatorUnitNumber = "tc_address1_flatorunitnumber";
             public const string HouseNumberorBuilding = "tc_address1_housenumberorbuilding";
@@ -234,7 +234,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string CCEmailAddress = "tc_ccemailaddress";
             public const string FaxNumber = "tc_faxnumber";
             public const string HotelId = "tc_hotelid";
-            public const string Location = "tc_locationid";
+            public const string LocationId = "tc_locationid";
             public const string MasterHotelID = "tc_masterhotelid";
             public const string Name = "tc_name";
             public const string PrimaryEmailAddress = "tc_primaryemailaddress";
@@ -244,8 +244,8 @@ namespace Tc.Crm.CustomWorkflowSteps
         }
         public class HotelPromises
         {
-            public const string Brand = "tc_brandid";
-            public const string Hotel = "tc_hotelid";
+            public const string BrandId = "tc_brandid";
+            public const string HotelId = "tc_hotelid";
             public const string HotelPromisesId = "tc_hotelpromisesid";
             public const string Name = "tc_name";
             public const string PromiseType = "tc_promisetype";
@@ -254,17 +254,17 @@ namespace Tc.Crm.CustomWorkflowSteps
         {
             public const string LocationCode = "tc_locationcode";
             public const string LocationId = "tc_locationid";
-            public const string LocationOffice = "tc_locationofficeid";
+            public const string LocationOfficeId = "tc_locationofficeid";
             public const string Name = "tc_name";
-            public const string PrimaryLocation = "tc_primarylocationid";
-            public const string Region = "tc_regionid";
+            public const string PrimaryLocationId = "tc_primarylocationid";
+            public const string RegionId = "tc_regionid";
             public const string Type = "tc_type";
         }
         public class LocationOffice
         {
             public const string CityTownLocality = "tc_citytownlocality";
             public const string HouseBuildingNumber = "tc_housebuildingnumber";
-            public const string Location = "tc_locationid";
+            public const string LocationId = "tc_locationid";
             public const string LocationOfficeId = "tc_locationofficeid";
             public const string Name = "tc_name";
             public const string PostalCode = "tc_postalcode";
@@ -276,7 +276,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         }
         public class Region
         {
-            public const string Country = "tc_countryid";
+            public const string CountryId = "tc_countryid";
             public const string Name = "tc_name";
             public const string RegionCode = "tc_regioncode";
             public const string RegionId = "tc_regionid";
@@ -284,7 +284,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         public class Remark
         {
             public const string BookingAccommodationId = "tc_bookingaccommodationid";
-            public const string BookingTransport = "tc_bookingtransportid";
+            public const string BookingTransportId = "tc_bookingtransportid";
             public const string Name = "tc_name";
             public const string RemarkName = "tc_remark";
             public const string RemarkId = "tc_remarkid";
@@ -294,7 +294,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         }
         public class TourOperator
         {
-            public const string SourceMarket = "tc_countryid";
+            public const string SourceMarketId = "tc_countryid";
             public const string Name = "tc_name";
             public const string TourOperatorCode = "tc_touroperatorcode";
             public const string TourOperatorId = "tc_touroperatorid";
