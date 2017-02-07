@@ -436,8 +436,61 @@ namespace Tc.Crm.CustomWorkflowSteps
                     _xrm.BulkCreate(entColAccomodationRemarks);
             }
         }
+        List<SuccessMessage> ProcessTransport(PayloadBooking payloadInfo)
+        {
 
-        
+            EntityCollection entColTransport = new EntityCollection();
+            Entity transportEntity = null;
+
+
+            for (int i = 0; i < payloadInfo.BookingInfo.Services.Transport.Length; i++)
+            {
+                transportEntity = new Entity(EntityName.BookingTransport, "", "");
+                transportEntity[Attributes.BookingTransport.TransportCode] = payloadInfo.BookingInfo.Services.Transport[i].TransportCode;
+                transportEntity[Attributes.BookingTransport.Description] = payloadInfo.BookingInfo.Services.Transport[i].TransportDescription;
+                transportEntity[Attributes.BookingTransport.Order] = payloadInfo.BookingInfo.Services.Transport[i].Order;
+                transportEntity[Attributes.BookingTransport.StartDateandTime] = payloadInfo.BookingInfo.Services.Transport[i].StartDate;
+                transportEntity[Attributes.BookingTransport.EndDateandTime] = payloadInfo.BookingInfo.Services.Transport[i].EndDate;
+                transportEntity[Attributes.BookingTransport.TransferType] = payloadInfo.BookingInfo.Services.Transport[i].TransferType;
+                transportEntity[Attributes.BookingTransport.DepartureGatewayId] = _xrm.SetLookupValueUsingAlternateKey(EntityName.Gateway, "", payloadInfo.BookingInfo.Services.Transport[i].DepartureAirport);
+                transportEntity[Attributes.BookingTransport.ArrivalGatewayId] = _xrm.SetLookupValueUsingAlternateKey(EntityName.Gateway, "", payloadInfo.BookingInfo.Services.Transport[i].ArrivalAirport);
+                transportEntity[Attributes.BookingTransport.CarrierCode] = payloadInfo.BookingInfo.Services.Transport[i].CarrierCode;
+                transportEntity[Attributes.BookingTransport.FlightNumber] = payloadInfo.BookingInfo.Services.Transport[i].FlightNumber;
+                transportEntity[Attributes.BookingTransport.FlightIdentifier] = payloadInfo.BookingInfo.Services.Transport[i].FlightIdentifier;
+                transportEntity[Attributes.BookingTransport.NumberofParticipants] = payloadInfo.BookingInfo.Services.Transport[i].NumberOfParticipants;
+                transportEntity[Attributes.BookingTransport.FlightNumber] = payloadInfo.BookingInfo.Services.Transport[i].FlightNumber;
+
+                entColTransport.Entities.Add(transportEntity);
+
+
+            }
+
+            return _xrm.BulkCreate(entColTransport);
+        }
+
+        void ProcessTransportRemarks(PayloadBooking payloadInfo, List<SuccessMessage> Messages )
+        {
+
+            EntityCollection entColTransportRemark = new EntityCollection();
+            Entity TransportRemark = null;
+
+
+            for (int i = 0; i < payloadInfo.BookingInfo.Services.Transport.Length; i++)
+            {
+                for (int j = 0; j < payloadInfo.BookingInfo.Services.Transport[i].Remark.Length;j++)
+                {
+                    TransportRemark = new Entity(EntityName.BookingTransport, "", "");
+                    TransportRemark[Attributes.Remark.Type] = payloadInfo.BookingInfo.Services.Transport[i].Remark[j].Type;
+                    TransportRemark[Attributes.Remark.RemarkName] = payloadInfo.BookingInfo.Services.Transport[i].Remark[j].Text;
+                    TransportRemark[Attributes.Remark.BookingTransportId] = new EntityReference(EntityName.BookingTransport, new Guid(Messages[0].Id));
+                    
+                    entColTransportRemark.Entities.Add(TransportRemark);
+                }
+
+
+            }
+        }
+
 
     }
 }

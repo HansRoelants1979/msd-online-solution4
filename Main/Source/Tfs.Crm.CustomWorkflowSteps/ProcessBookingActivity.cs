@@ -26,6 +26,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             {
                 ProcessBooking process = new ProcessBooking();
                 Response.Set(executionContext, process.ProcessPayload(BookingInfo.Get<string>(executionContext), service));
+                
             }
             catch (FaultException<OrganizationServiceFault> ex)
             {
