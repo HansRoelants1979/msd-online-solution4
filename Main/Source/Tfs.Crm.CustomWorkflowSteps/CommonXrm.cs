@@ -8,13 +8,7 @@ namespace Tc.Crm.CustomWorkflowSteps
 {
     public class CommonXrm
     {
-
-        const string _createMessage = "New record is created";
-        const string _updateMessage = "Existing record was updated";
-        const string _deleteMessage = "Record got deleted successfully";
-        const string _createStatus = "201";
-        const string _updateStatus = "204";
-        const string _deleteStatus = "204";
+              
 
         public IOrganizationService _service = null;
 
@@ -44,16 +38,15 @@ namespace Tc.Crm.CustomWorkflowSteps
                         {
                             Id = response.Target.Id.ToString(),
                             EntityName = entityRecord.LogicalName,
-                            Message = _createMessage,
-                            Status = _createStatus
+                            Create = true
+                           
                         };
                     else
                         successMsg = new SuccessMessage()
                         {
                             Id = response.Target.Id.ToString(),
                             EntityName = entityRecord.LogicalName,
-                            Message = _updateMessage,
-                            Status = _updateStatus
+                            Create = false
                         };
 
 
@@ -76,10 +69,10 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// </summary>
         /// <param name="entities"></param>       
         /// <returns></returns>
-        public List<SuccessMessage> BulkCreate(DataCollection<Entity> entities)
+        public List<SuccessMessage> BulkCreate(EntityCollection entities)
         {
             List<SuccessMessage> successMsg = null;
-            if (_service != null && entities != null && entities.Count > 0)
+            if (_service != null && entities != null && entities.Entities.Count > 0)
             {
                 var requestWithResults = new ExecuteMultipleRequest()
                 {
@@ -95,7 +88,7 @@ namespace Tc.Crm.CustomWorkflowSteps
 
 
                 // Add a CreateRequest for each entity to the request collection.
-                foreach (var entity in entities)
+                foreach (var entity in entities.Entities)
                 {
                     CreateRequest createRequest = new CreateRequest { Target = entity };
                     requestWithResults.Requests.Add(createRequest);
@@ -119,8 +112,8 @@ namespace Tc.Crm.CustomWorkflowSteps
                             {
                                 Id = requestWithResults.Requests[responseItem.RequestIndex].RequestId.Value.ToString(),
                                 EntityName = requestWithResults.Requests[responseItem.RequestIndex].RequestName,
-                                Message = _createMessage,
-                                Status = _createStatus
+                                Key = requestWithResults.Requests[responseItem.RequestIndex].Parameters[""].ToString()
+                              
                             };
                             successMsg.Add(msg);
                         }
@@ -185,9 +178,8 @@ namespace Tc.Crm.CustomWorkflowSteps
                             var msg = new SuccessMessage
                             {
                                 Id = requestWithResults.Requests[responseItem.RequestIndex].RequestId.Value.ToString(),
-                                EntityName = requestWithResults.Requests[responseItem.RequestIndex].RequestName,
-                                Message = _deleteMessage,
-                                Status = _deleteStatus
+                                EntityName = requestWithResults.Requests[responseItem.RequestIndex].RequestName
+                              
                             };
                             successMsg.Add(msg);
                         }
@@ -249,7 +241,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         public string EntityName { get; set; }
         public string Id { get; set; }
         public string Message { get; set; }
-        public string Status { get; set; }
+        public string Key { get; set; }       
 
     }
 
