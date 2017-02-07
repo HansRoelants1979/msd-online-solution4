@@ -1,11 +1,4 @@
-﻿using Microsoft.Xrm.Sdk;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Schema;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
+﻿using System;
 using Tc.Crm.Service.Models;
 
 namespace Tc.Crm.Service.Services
@@ -25,22 +18,6 @@ namespace Tc.Crm.Service.Services
             return new BookingUpdateResponse { Created = false, Id = response.Id.ToString() };
         }
 
-        public bool DataValid(string data)
-        {
-            var schema =JSchema.Parse(Constants.General.BookingJsonSchema);
-            JObject bookingObject = JObject.Parse(data);
-            IList<string> messages;
-            StringBuilder messageBuilder = new StringBuilder();
-            bool valid = bookingObject.IsValid(schema, out messages);
-            if(messages != null && messages.Count>0)
-            {
-                foreach (var item in messages)
-                {
-                    messageBuilder.AppendLine(item);
-                }
-            }
-            Trace.TraceError("Error while validating booking json. Error:{0}",messageBuilder.ToString());
-            return valid;
-        }
+       
     }
 }

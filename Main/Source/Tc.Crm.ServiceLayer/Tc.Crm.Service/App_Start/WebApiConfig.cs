@@ -1,8 +1,4 @@
 ﻿using Microsoft.Practices.Unity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
 using System.Web.Http;
 using Tc.Crm.Service.Resolver;
 using Tc.Crm.Service.Services;

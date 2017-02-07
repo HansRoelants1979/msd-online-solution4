@@ -1,6 +1,4 @@
 ﻿using Tc.Crm.Service.Models;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -35,22 +33,14 @@ namespace Tc.Crm.Service.Controllers
                 {
                     return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.BookingDataPassedIsNullOrCouldNotBeParsed);
                 }
-                try
-                {
-                    var jsonData = JsonConvert.SerializeObject(booking);
-                    if(!bookingService.DataValid(jsonData))
-                        return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.BookingDataDoesNotComplyToSchema);
-                    var response = bookingService.Update(jsonData, crmService);
-                    if (response.Created)
-                        return Request.CreateResponse(HttpStatusCode.Created, response.Id);
-                    else
-                        return Request.CreateResponse(HttpStatusCode.NoContent, response.Id);
-                }
-                catch (Exception ex)
-                {
-                    Trace.TraceError("Unexpected error in Booking.Update::Message:{0}||Trace:{1}", ex.Message, ex.StackTrace.ToString());
-                    return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
-                }
+
+                var jsonData = JsonConvert.SerializeObject(booking);
+                var response = bookingService.Update(jsonData, crmService);
+                if (response.Created)
+                    return Request.CreateResponse(HttpStatusCode.Created, response.Id);
+                else
+                    return Request.CreateResponse(HttpStatusCode.NoContent, response.Id);
+
             }
             catch (Exception ex)
             {
