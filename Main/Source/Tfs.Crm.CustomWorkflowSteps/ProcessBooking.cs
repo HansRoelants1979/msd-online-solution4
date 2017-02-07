@@ -13,6 +13,8 @@ namespace Tc.Crm.CustomWorkflowSteps
     {
 
         CommonXrm _xrm = null;
+        string _seperator = ",";
+        string _nextLine = "\r\n";
 
         /// <summary>
         /// To process booking data
@@ -132,19 +134,152 @@ namespace Tc.Crm.CustomWorkflowSteps
             bookingEntity[Attributes.Booking.NumberofChildren] = payloadInfo.BookingInfo.BookingGeneral.NumberOfChildren;
             bookingEntity[Attributes.Booking.NumberofInfants] = payloadInfo.BookingInfo.BookingGeneral.NumberOfInfants;
             bookingEntity[Attributes.Booking.BookerPhone1] = payloadInfo.BookingInfo.BookingIdentity.Booker.Phone;
-            //bookingEntity[Attributes.Booking.]
-
+            bookingEntity[Attributes.Booking.BookerPhone2] = payloadInfo.BookingInfo.BookingIdentity.Booker.Mobile;
+            bookingEntity[Attributes.Booking.BookerEmergencyPhone] = payloadInfo.BookingInfo.BookingIdentity.Booker.EmergencyNumber;
+            bookingEntity[Attributes.Booking.Participants] = PrepareTravelParticipantsInfo(payloadInfo);
+            bookingEntity[Attributes.Booking.ParticipantRemarks] = PrepareTravelParticipantsRemarks(payloadInfo);
+            bookingEntity[Attributes.Booking.Transfer] = PrepareTransferInfo(payloadInfo);
+            bookingEntity[Attributes.Booking.TransferRemarks] = PrepareTransferRemarks(payloadInfo);
+            bookingEntity[Attributes.Booking.ExtraService] = PrepareExtraServicesInfo(payloadInfo);
 
             return _xrm.UpsertEntity(bookingEntity);
         }
 
+        /// <summary>
+        /// To prepare travel participants information
+        /// </summary>
+        /// <param name="payloadInfo"></param>
+        /// <returns></returns>
+        string PrepareTravelParticipantsInfo(PayloadBooking payloadInfo)
+        {
+            string travelParticipants = string.Empty;
+            for (int i = 0; i < payloadInfo.BookingInfo.TravelParticipant.Length; i++)
+            {
+                if (!string.IsNullOrEmpty(travelParticipants))
+                    travelParticipants += _nextLine;
+
+                travelParticipants += payloadInfo.BookingInfo.TravelParticipant[i].TravelParticipantIDOnTour + _seperator +
+                                      payloadInfo.BookingInfo.TravelParticipant[i].FirstName + _seperator +
+                                      payloadInfo.BookingInfo.TravelParticipant[i].LastName + _seperator +
+                                      payloadInfo.BookingInfo.TravelParticipant[i].Age + _seperator +
+                                      payloadInfo.BookingInfo.TravelParticipant[i].BirthDate + _seperator +
+                                      payloadInfo.BookingInfo.TravelParticipant[i].Gender + _seperator +
+                                      payloadInfo.BookingInfo.TravelParticipant[i].Relation + _seperator +
+                                      payloadInfo.BookingInfo.TravelParticipant[i].Language;
+
+            }
+            return travelParticipants;
+        }
+
+        /// <summary>
+        /// To prepare travel participants remarks information
+        /// </summary>
+        /// <param name="payloadInfo"></param>
+        /// <returns></returns>
+        string PrepareTravelParticipantsRemarks(PayloadBooking payloadInfo)
+        {
+            string remarks = string.Empty;
+            for (int i = 0; i < payloadInfo.BookingInfo.TravelParticipant.Length; i++)
+            {
+                for (int j = 0; j < payloadInfo.BookingInfo.TravelParticipant[i].Remark.Length; j++)
+                {
+                    if (!string.IsNullOrEmpty(remarks))
+                        remarks += _nextLine;
+
+                    remarks += payloadInfo.BookingInfo.TravelParticipant[i].TravelParticipantIDOnTour + _seperator +
+                               payloadInfo.BookingInfo.TravelParticipant[i].Remark[j].Type + _seperator +
+                               payloadInfo.BookingInfo.TravelParticipant[i].Remark[j].Text;
+                }
+
+            }
+            return remarks;
+        }
+        
+        /// <summary>
+        /// To prepare transfer information
+        /// </summary>
+        /// <param name="payloadInfo"></param>
+        /// <returns></returns>
+        string PrepareTransferInfo(PayloadBooking payloadInfo)
+        {
+            string transferInfo = string.Empty;
+            for (int i = 0; i < payloadInfo.BookingInfo.Services.Transfer.Length; i++)
+            {
+                if (!string.IsNullOrEmpty(transferInfo))
+                    transferInfo += _nextLine;
+
+                transferInfo += payloadInfo.BookingInfo.Services.Transfer[i].TransferCode + _seperator +
+                                payloadInfo.BookingInfo.Services.Transfer[i].TransferDescription + _seperator +
+                                payloadInfo.BookingInfo.Services.Transfer[i].Order + _seperator +
+                                payloadInfo.BookingInfo.Services.Transfer[i].StartDate + _seperator +
+                                payloadInfo.BookingInfo.Services.Transfer[i].EndDate + _seperator +
+                                payloadInfo.BookingInfo.Services.Transfer[i].Category + _seperator +
+                                payloadInfo.BookingInfo.Services.Transfer[i].TransferType + _seperator +
+                                payloadInfo.BookingInfo.Services.Transfer[i].DepartureAirport + _seperator +
+                                payloadInfo.BookingInfo.Services.Transfer[i].ArrivalAirport;
+
+
+            }
+            return transferInfo;
+        }
+
+        /// <summary>
+        /// To prepare trasnfer remarks information
+        /// </summary>
+        /// <param name="payloadInfo"></param>
+        /// <returns></returns>
+        string PrepareTransferRemarks(PayloadBooking payloadInfo)
+        {
+            string remarks = string.Empty;
+            for (int i = 0; i < payloadInfo.BookingInfo.Services.Transfer.Length; i++)
+            {
+                for (int j = 0; j < payloadInfo.BookingInfo.Services.Transfer[i].Remark.Length; j++)
+                {
+                    if (!string.IsNullOrEmpty(remarks))
+                        remarks += _nextLine;
+
+                    remarks += payloadInfo.BookingInfo.Services.Transfer[i].Remark[j].Type + _seperator +
+                               payloadInfo.BookingInfo.Services.Transfer[i].Remark[j].Text;
+                }
+
+            }
+            return remarks;
+        }
+
+        /// <summary>
+        /// To prepare extraservice information
+        /// </summary>
+        /// <param name="payloadInfo"></param>
+        /// <returns></returns>
+        string PrepareExtraServicesInfo(PayloadBooking payloadInfo)
+        {
+            string extraServices = string.Empty;
+            for (int i = 0; i < payloadInfo.BookingInfo.Services.ExtraService.Length; i++)
+            {
+               
+                    if (!string.IsNullOrEmpty(extraServices))
+                        extraServices += _nextLine;
+
+                extraServices += payloadInfo.BookingInfo.Services.ExtraService[i].ExtraServiceCode + _seperator +
+                                 payloadInfo.BookingInfo.Services.ExtraService[i].ExtraServiceDescription + _seperator +
+                                 payloadInfo.BookingInfo.Services.ExtraService[i].Order + _seperator +
+                                 payloadInfo.BookingInfo.Services.ExtraService[i].StartDate + _seperator +
+                                 payloadInfo.BookingInfo.Services.ExtraService[i].EndDate;
+
+
+            }
+            return extraServices;
+        }
+
+
 
         List<SuccessMessage> ProcessAccomodation(PayloadBooking bookingInfo)
         {
-           
-           
+            Entity accomodationEntity = new Entity(EntityName.BookingAccommodation, "", "");
+            //accomodationEntity[Attributes.BookingAccommodation.Name] = 
 
             return _xrm.BulkCreate(null);
         }
+
     }
 }

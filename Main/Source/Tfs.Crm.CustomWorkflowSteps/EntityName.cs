@@ -177,11 +177,11 @@ namespace Tc.Crm.CustomWorkflowSteps
         }
         public class BookingTransport
         {
-            public const string ArrivalGateway = "tc_arrivalgatewayid";
-            public const string Booking = "tc_bookingid";
+            public const string ArrivalGatewayId = "tc_arrivalgatewayid";
+            public const string BookingId = "tc_bookingid";
             public const string BookingTransportId = "tc_bookingtransportid";
             public const string CarrierCode = "tc_carriercode";
-            public const string DepartureGateway = "tc_departuregatewayid";
+            public const string DepartureGatewayId = "tc_departuregatewayid";
             public const string Description = "tc_description";
             public const string EndDateandTime = "tc_enddateandtime";
             public const string FlightIdentifier = "tc_flightidentifier";
@@ -207,7 +207,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         }
         public class CustomerBookingRole
         {
-            public const string Booking = "tc_bookingid";
+            public const string BookingId = "tc_bookingid";
             public const string Customer = "tc_customer";
             public const string Role = "tc_customerbookingrole";
             public const string CustomerBookingRoleId = "tc_customerbookingroleid";

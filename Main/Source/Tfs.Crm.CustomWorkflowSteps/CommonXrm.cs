@@ -22,9 +22,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// Call this method to create or update record
         /// </summary>
         /// <param name="entityRecord">Entity to Create or Update</param>
-        /// <param name="service">OrganizationServiceProxy to Execute Request</param>
         /// <returns></returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.CustomWorkflowSteps.SuccessMessage.set_Message(System.String)")]
         public SuccessMessage UpsertEntity(Entity entityRecord)
         {  
 
@@ -76,8 +74,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// <summary>
         /// Call this method for bulk create
         /// </summary>
-        /// <param name="entities"></param>
-        /// <param name="service"></param>
+        /// <param name="entities"></param>       
         /// <returns></returns>
         public List<SuccessMessage> BulkCreate(DataCollection<Entity> entities)
         {
@@ -148,8 +145,7 @@ namespace Tc.Crm.CustomWorkflowSteps
 
         /// <summary>
         /// Call this method for bulk delete
-        /// </summary>
-        /// <param name="service">Org Service</param>
+        /// </summary>      
         /// <param name="entityReferences">Collection of EntityReferences to Delete</param>
         public void BulkDelete(DataCollection<EntityReference> entityReferences)
         {
@@ -211,7 +207,13 @@ namespace Tc.Crm.CustomWorkflowSteps
         }
 
         
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="logicalName"></param>
+        /// <param name="alternateKey"></param>
+        /// <param name="alternateKeyValue"></param>
+        /// <returns></returns>
         public EntityReference SetLookupValueUsingAlternateKey(string logicalName, string alternateKey, string alternateKeyValue)
         {
             EntityReference entRef = null;
@@ -227,6 +229,11 @@ namespace Tc.Crm.CustomWorkflowSteps
             return entRef;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public OptionSetValue SetOptionSetValue(int value)
         {
             OptionSetValue optionValue = new OptionSetValue(value);
@@ -238,6 +245,7 @@ namespace Tc.Crm.CustomWorkflowSteps
 
     public class SuccessMessage
     {
+        public bool Create { get; set; }
         public string EntityName { get; set; }
         public string Id { get; set; }
         public string Message { get; set; }
