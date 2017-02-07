@@ -12,6 +12,7 @@ using System.Security.Cryptography;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Globalization;
 
 namespace Tc.Crm.Service.Services
 {
@@ -25,6 +26,7 @@ namespace Tc.Crm.Service.Services
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.Service.Models.JsonWebTokenRequestError.#ctor(System.String)")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         public static JsonWebTokenRequest GetRequestObject(HttpRequestMessage request)
         {
@@ -58,6 +60,7 @@ namespace Tc.Crm.Service.Services
         /// Validates the signature
         /// </summary>
         /// <param name="jsonWebTokenRequest"></param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.Service.Models.JsonWebTokenRequestError.#ctor(System.String)")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         private static void ValidateSignature(JsonWebTokenRequest jsonWebTokenRequest)
@@ -70,22 +73,29 @@ namespace Tc.Crm.Service.Services
 
                 var tokenParts = jsonWebTokenRequest.Token.Split(Constants.Delimiters.Dot);
 
-                RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
-                var fileName = ConfigurationManager.AppSettings[Constants.Configuration.AppSettings.PublicKeyFileName];
-                var path = HttpContext.Current.Server.MapPath(@"~/" + fileName);
-                string publicKeyXml = new WebClient().DownloadString(path);
-                
-                rsa.FromXmlString(publicKeyXml);
+                using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
+                {
+                    var fileName = ConfigurationManager.AppSettings[Constants.Configuration.AppSettings.PublicKeyFileName];
+                    var path = HttpContext.Current.Server.MapPath(@"~/" + fileName);
 
-                SHA256 sha256 = SHA256.Create();
-                byte[] hash = sha256.ComputeHash(Encoding.UTF8.GetBytes(tokenParts[0] + '.' + tokenParts[1]));
+                    using (var webClient = new WebClient())
+                    {
+                        var publicKeyXml = webClient.DownloadString(path);
+                        rsa.FromXmlString(publicKeyXml);
+                    }
 
-                RSAPKCS1SignatureDeformatter rsaDeformatter = new RSAPKCS1SignatureDeformatter(rsa);
-                rsaDeformatter.SetHashAlgorithm("SHA256");
-                if (!rsaDeformatter.VerifySignature(hash, JsonWebToken.Base64UrlDecode(tokenParts[2])))
-                    jsonWebTokenRequest.SignatureValid = false;
-                else
-                    jsonWebTokenRequest.SignatureValid = true;
+                    using (SHA256 sha256 = SHA256.Create())
+                    {
+                        byte[] hash = sha256.ComputeHash(Encoding.UTF8.GetBytes(tokenParts[0] + '.' + tokenParts[1]));
+
+                        RSAPKCS1SignatureDeformatter rsaDeformatter = new RSAPKCS1SignatureDeformatter(rsa);
+                        rsaDeformatter.SetHashAlgorithm("SHA256");
+                        if (!rsaDeformatter.VerifySignature(hash, JsonWebToken.Base64UrlDecode(tokenParts[2])))
+                            jsonWebTokenRequest.SignatureValid = false;
+                        else
+                            jsonWebTokenRequest.SignatureValid = true;
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -114,6 +124,7 @@ namespace Tc.Crm.Service.Services
         /// Validates the Json Web token header
         /// </summary>
         /// <param name="request"></param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.Service.Models.JsonWebTokenRequestError.#ctor(System.String)")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         public static void ValidateHeader(JsonWebTokenRequest request)
@@ -164,6 +175,7 @@ namespace Tc.Crm.Service.Services
         /// Validates the payload
         /// </summary>
         /// <param name="request"></param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.Service.Models.JsonWebTokenRequestError.#ctor(System.String)")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         public static void ValidatePayload(JsonWebTokenRequest request)
@@ -200,13 +212,14 @@ namespace Tc.Crm.Service.Services
                     int expiry = -1;
                     try
                     {
-                        expiry = Int32.Parse(ConfigurationManager.AppSettings[Constants.Configuration.AppSettings.IssuedAtTimeExpiryInSeconds]);
+                        expiry = Int32.Parse(ConfigurationManager.AppSettings[Constants.Configuration.AppSettings.IssuedAtTimeExpiryInSeconds]
+                            , CultureInfo.CurrentCulture);
                     }
                     catch (FormatException)
                     {
                         throw new FormatException(Constants.Messages.ExpiryNotInteger);
                     }
-                     
+
                     if (expInt >= secondsSinceEpoch + expiry)
                         request.IssuedAtTimeValid = false;
                     else
@@ -283,6 +296,6 @@ namespace Tc.Crm.Service.Services
             return JsonConvert.DeserializeObject<T>(payLoadJson);
         }
 
-        
+
     }
 }

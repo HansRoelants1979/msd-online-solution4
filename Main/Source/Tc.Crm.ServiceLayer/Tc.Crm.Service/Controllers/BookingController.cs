@@ -8,6 +8,7 @@ using Tc.Crm.Service.Filters;
 using System;
 using Tc.Crm.Service.Services;
 using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace Tc.Crm.Service.Controllers
 {
@@ -16,7 +17,7 @@ namespace Tc.Crm.Service.Controllers
     {
         IBookingService bookingService;
         ICrmService crmService;
-        public BookingController(IBookingService bookingService,ICrmService crmService)
+        public BookingController(IBookingService bookingService, ICrmService crmService)
         {
             this.bookingService = bookingService;
             this.crmService = crmService;
@@ -30,27 +31,31 @@ namespace Tc.Crm.Service.Controllers
         {
             try
             {
-                if(booking == null)
-                    throw new ArgumentNullException(Constants.Parameters.Booking);
+                if (booking == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.BookingDataPassedIsNullOrCouldNotBeParsed);
+                }
                 try
                 {
-                    if(string.IsNullOrEmpty(booking.Id)) return Request.CreateResponse(HttpStatusCode.BadRequest,Constants.Messages.SourceKeyNotPresent);
-                    var response = bookingService.Update(booking,crmService);
+                    var jsonData = JsonConvert.SerializeObject(booking);
+                    if(!bookingService.DataValid(jsonData))
+                        return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.BookingDataDoesNotComplyToSchema);
+                    var response = bookingService.Update(jsonData, crmService);
                     if (response.Created)
-                        return Request.CreateResponse(HttpStatusCode.Created,response.Id);
+                        return Request.CreateResponse(HttpStatusCode.Created, response.Id);
                     else
                         return Request.CreateResponse(HttpStatusCode.NoContent, response.Id);
                 }
                 catch (Exception ex)
                 {
-                    Trace.TraceError("Unexpected error in Booking.Update::Message:{0}||Trace:{1}", ex.Message, ex.StackTrace);
-                    return Request.CreateResponse(HttpStatusCode.InternalServerError,ex.Message);
+                    Trace.TraceError("Unexpected error in Booking.Update::Message:{0}||Trace:{1}", ex.Message, ex.StackTrace.ToString());
+                    return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
                 }
             }
             catch (Exception ex)
             {
-                Trace.TraceError("Unexpected error Booking.Update::Message:{0}||Trace:{1}",ex.Message,ex.StackTrace);
-                return Request.CreateResponse(HttpStatusCode.InternalServerError,ex.Message);
+                Trace.TraceError("Unexpected error Booking.Update::Message:{0}||Trace:{1}", ex.Message, ex.StackTrace.ToString());
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
         }

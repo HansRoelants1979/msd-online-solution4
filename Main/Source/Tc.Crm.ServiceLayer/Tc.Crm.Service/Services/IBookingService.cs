@@ -9,6 +9,7 @@ namespace Tc.Crm.Service.Services
 {
     public interface IBookingService
     {
-        BookingUpdateResponse Update(Booking booking,ICrmService crmService);
+        BookingUpdateResponse Update(string bookingData,ICrmService crmService);
+        bool DataValid(string bookingData);
     }
 }

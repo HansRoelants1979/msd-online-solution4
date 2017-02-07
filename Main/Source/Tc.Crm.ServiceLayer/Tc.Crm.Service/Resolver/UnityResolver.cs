@@ -9,7 +9,14 @@ namespace Tc.Crm.Service.Resolver
 {
     public class UnityResolver : IDependencyResolver
     {
-        protected IUnityContainer container;
+        private IUnityContainer container;
+
+         protected IUnityContainer Container
+        {
+            get { return container; }
+            set { container = value; }
+        }
+
 
         public UnityResolver(IUnityContainer container)
         {
@@ -52,7 +59,20 @@ namespace Tc.Crm.Service.Resolver
 
         public void Dispose()
         {
-            container.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        bool disposed = false;
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed) return;
+            if (disposing)
+            {
+                //dispose org service
+                if (container != null) ((IDisposable)container).Dispose();
+            }
+
+            disposed = true;
         }
     }
 }

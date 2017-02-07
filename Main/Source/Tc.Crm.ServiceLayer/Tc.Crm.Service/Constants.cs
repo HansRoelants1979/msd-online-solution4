@@ -5,14 +5,15 @@ using System.Web;
 
 namespace Tc.Crm.Service.Constants
 {
-
+    
     public static class General
     {
-        public const string TrueValue= "true";
+        public const string BookingJsonSchema = "{ \"$schema\": \"http://json-schema.org/draft-04/schema#\", \"type\": \"object\", \"title\": \"ThomasCookIntegrationLayer\", \"description\": \"ThomasCookIntegrationLayer-draft\", \"definitions\": { \"address\": { \"type\": \"object\", \"properties\": { \"additionalAddressInfo\": { \"type\": \"string\" }, \"flatNumberUnit\": { \"type\": \"string\" }, \"houseNumberBuilding\": { \"type\": \"string\" }, \"box\": { \"type\": \"string\" }, \"town\": { \"type\": \"string\" }, \"country\": { \"type\": \"string\" }, \"county\": { \"type\": \"string\" }, \"number\": { \"type\": \"string\" }, \"postalCode\": { \"type\": \"string\" }, \"street\": { \"type\": \"string\" }, \"type\": { \"type\": \"string\", \"enum\": [ \"M\" ] } } }, \"booking\": { \"type\": \"object\", \"properties\": { \"bookingIdentifier\": { \"type\": \"object\", \"properties\": { \"sourceMarket\": { \"type\": \"string\" }, \"sourceSystem\": { \"type\": \"string\" }, \"bookingNumber\": { \"type\": \"string\" }, \"bookingVersionOnTour\": { \"type\": \"string\" }, \"bookingVersionTourOperator\": { \"type\": \"string\" }, \"bookingUpdateDateOnTour\": { \"type\": \"string\" }, \"bookingUpdateDateTourOperator\": { \"type\": \"string\" } } }, \"general\": { \"type\": \"object\", \"properties\": { \"bookingStatus\": { \"type\": \"string\", \"enum\": [ \"B\", \"C\" ] }, \"bookingDate\": { \"type\": \"string\" }, \"departureDate\": { \"type\": \"string\" }, \"returnDate\": { \"type\": \"string\" }, \"duration\": { \"type\": \"string\" }, \"destination\": { \"type\": \"string\" }, \"toCode\": { \"type\": \"string\" }, \"brand\": { \"type\": \"string\" }, \"brochureCode\": { \"type\": \"string\" }, \"isLateBooking\": { \"type\": \"boolean\" }, \"numberofParticipants\": { \"type\": \"integer\" }, \"numberOfAdults\": { \"type\": \"integer\" }, \"numberOfChildren\": { \"type\": \"integer\" }, \"numberOfInfants\": { \"type\": \"integer\" }, \"travelAmount\": { \"type\": \"number\" }, \"currency\": { \"type\": \"string\" }, \"hasComplaint\": { \"type\": \"boolean\" } } }, \"bookingIdentity\": { \"type\": \"object\", \"properties\": { \"booker\": { \"$ref\": \"#/definitions/booking_booker\" } } }, \"travelParticipant\": { \"type\": \"array\", \"items\": { \"type\": \"object\", \"properties\": { \"firstName\": { \"type\": \"string\" }, \"lastName\": { \"type\": \"string\" }, \"age\": { \"type\": \"integer\" }, \"gender\": { \"type\": \"string\", \"enum\": [ \"M\", \"F\", \"U\" ] }, \"relation\": { \"type\": \"string\", \"enum\": [ \"P\", \"C\", \"I\" ] }, \"travelParticipantIDOnTour\": { \"type\": \"string\" }, \"language\": { \"type\": \"string\" }, \"birthDate\": { \"type\": \"string\" }, \"Remark\": { \"type\": \"array\", \"items\": { \"$ref\": \"#/definitions/remark\" } } } } }, \"services\": { \"type\": \"object\", \"properties\": { \"accommodation\": { \"type\": \"array\", \"items\": { \"type\": \"object\", \"properties\": { \"accommodationCode\": { \"type\": \"string\" }, \"groupAccommodationCode\": { \"type\": \"string\" }, \"accommodationDescription\": { \"type\": \"string\" }, \"order\": { \"type\": \"integer\" }, \"startDate\": { \"type\": \"string\" }, \"endDate\": { \"type\": \"string\" }, \"roomType\": { \"type\": \"string\" }, \"boardType\": { \"type\": \"string\", \"enum\": [ \"AI\", \"HB\" ] }, \"status\": { \"type\": \"string\", \"enum\": [ \"OK\", \"R\", \"PR\" ] }, \"hasSharedRoom\": { \"type\": \"boolean\" }, \"numberOfParticipants\": { \"type\": \"integer\" }, \"numberOfRooms\": { \"type\": \"integer\" }, \"withTransfer\": { \"type\": \"boolean\" }, \"isExternalService\": { \"type\": \"boolean\" }, \"externalServiceCode\": { \"type\": \"string\" }, \"notificationRequired\": { \"type\": \"boolean\" }, \"needsTourGuideAssignment\": { \"type\": \"boolean\" }, \"isExternalTransfer\": { \"type\": \"boolean\" }, \"transferServiceLevel\": { \"type\": \"string\" }, \"travelParticipantAssignment\": { \"type\": \"array\", \"items\": { \"properties\": { \"travelParticipantID\": { \"type\": \"string\" } } } }, \"remark\": { \"type\": \"array\", \"items\": { \"$ref\": \"#/definitions/remark\" } }, \"tourguideAssignment\": { \"type\": \"object\", \"properties\": { \"tourguide\": { \"type\": \"object\", \"properties\": { \"tourguideID\": { \"type\": \"string\" }, \"tourguideName\": { \"type\": \"string\" }, \"brands\": { \"type\": \"array\", \"items\": { \"items\": [ { \"type\": \"object\", \"properties\": { \"brand\": { \"type\": \"string\" } } } ] } } } } } } } } }, \"transport\": { \"type\": \"array\", \"items\": { \"type\": \"object\", \"properties\": { \"transportCode\": { \"type\": \"string\" }, \"transportDescription\": { \"type\": \"string\" }, \"order\": { \"type\": \"integer\" }, \"startDate\": { \"type\": \"string\" }, \"endDate\": { \"type\": \"string\" }, \"transferType\": { \"type\": \"string\", \"enum\": [ \"I\", \"O\", \"TH\" ] }, \"departureAirport\": { \"type\": \"string\" }, \"arrivalAirport\": { \"type\": \"string\" }, \"carrierCode\": { \"type\": \"string\" }, \"flightNumber\": { \"type\": \"string\" }, \"flightIdentifier\": { \"type\": \"string\" }, \"numberOfParticipants\": { \"type\": \"integer\" }, \"travelParticipantAssignment\": { \"type\": \"array\", \"items\": { \"properties\": { \"travelParticipantID\": { \"type\": \"string\" } } } }, \"remark\": { \"type\": \"array\", \"items\": { \"$ref\": \"#/definitions/remark\" } } } } }, \"transfer\": { \"type\": \"array\", \"items\": { \"type\": \"object\", \"properties\": { \"transferCode\": { \"type\": \"string\" }, \"transferDescription\": { \"type\": \"string\" }, \"order\": { \"type\": \"integer\" }, \"startDate\": { \"type\": \"string\" }, \"category\": { \"type\": \"string\" }, \"endDate\": { \"type\": \"string\" }, \"transferType\": { \"type\": \"string\", \"enum\": [ \"I\", \"O\", \"TH\" ] }, \"departureAirport\": { \"type\": \"string\" }, \"arrivalAirport\": { \"type\": \"string\" }, \"travelParticipantAssignment\": { \"type\": \"array\", \"items\": { \"properties\": { \"travelParticipantID\": { \"type\": \"string\" } } } }, \"remark\": { \"type\": \"array\", \"items\": { \"$ref\": \"#/definitions/remark\" } } } } }, \"extraService\": { \"type\": \"array\", \"items\": { \"type\": \"object\", \"properties\": { \"extraServiceCode\": { \"type\": \"object\", \"properties\": {} }, \"extraServiceDescription\": { \"type\": \"object\", \"properties\": {} }, \"order\": { \"type\": \"integer\" }, \"startDate\": { \"type\": \"string\" }, \"endDate\": { \"type\": \"string\" }, \"travelParticipantAssignment\": { \"type\": \"array\", \"items\": { \"properties\": { \"travelParticipantID\": { \"type\": \"string\" } } } }, \"remark\": { \"type\": \"array\", \"items\": { \"$ref\": \"#/definitions/remark\" } } } } } } }, \"customer\": { \"$ref\": \"#/definitions/customer\" }, \"remark\": { \"type\": \"array\", \"items\": { \"$ref\": \"#/definitions/remark\" } } } }, \"customer\": { \"type\": \"object\", \"properties\": { \"customerIdentifier\": { \"type\": \"object\", \"properties\": { \"customerID\": { \"type\": \"string\" }, \"businessArea\": { \"type\": \"string\" }, \"sourceMarket\": { \"type\": \"string\" }, \"sourceSystem\": { \"type\": \"string\" } } }, \"general\": { \"type\": \"object\", \"properties\": { \"customerStatus\": { \"type\": \"string\", \"enum\": [ \"A\", \"D\", \"B\" ] }, \"customerType\": { \"type\": \"string\", \"enum\": [ \"P\", \"B\" ] } } }, \"customerIdentity\": { \"type\": \"object\", \"properties\": { \"salutation\": { \"type\": \"string\" }, \"academictitle\": { \"type\": \"string\" }, \"firstName\": { \"type\": \"string\" }, \"middleName\": { \"type\": \"string\" }, \"lastName\": { \"type\": \"string\" }, \"language\": { \"type\": \"string\" }, \"gender\": { \"type\": \"string\", \"enum\": [ \"M\", \"F\", \"U\" ] }, \"birthdate\": { \"type\": \"string\" } } }, \"company\": { \"type\": \"object\", \"properties\": { \"companyName\": { \"type\": \"string\" } } }, \"additional\": { \"type\": \"object\", \"properties\": { \"segment\": { \"type\": \"string\" }, \"dateOfdeath\": { \"type\": \"string\" } } }, \"address\": { \"type\": \"array\", \"items\": { \"$ref\": \"#/definitions/address\" } }, \"phone\": { \"type\": \"array\", \"additionalItems\": false, \"items\": [ { \"type\": \"object\", \"properties\": { \"type\": { \"type\": \"string\", \"enum\": [ \"H\", \"M\" ] }, \"number\": { \"type\": \"string\" } } } ] }, \"email\": { \"type\": \"array\", \"additionalItems\": false, \"items\": [ { \"type\": \"object\", \"properties\": { \"type\": { \"type\": \"string\", \"enum\": [ \"Pri\", \"Pro\" ] }, \"address\": { \"type\": \"string\" } } } ] }, \"social\": { \"type\": \"array\", \"additionalItems\": false, \"items\": [ { \"type\": \"object\", \"properties\": { \"type\": { \"type\": \"string\" }, \"value\": { \"type\": \"string\" } } } ] } } }, \"remark\": { \"type\": \"object\", \"properties\": { \"type\": { \"type\": \"string\", \"enum\": [ \"T\", \"A\" ] }, \"text\": { \"type\": \"string\" } } }, \"booking_booker\": { \"anyOf\": [ { \"$ref\": \"#/definitions/address\" }, { \"properties\": { \"email\": { \"type\": \"string\" }, \"phone\": { \"type\": \"string\" }, \"mobile\": { \"type\": \"string\" }, \"emergencyNumber\": { \"type\": \"string\" } } } ] } } }";
+        public const string TrueValue = "true";
     }
     public static class JsonWebTokenContent
     {
-        public const string AlgorithmRS256= "RS256";
+        public const string AlgorithmRS256 = "RS256";
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Jwt")]
         public const string TypeJwt = "JWT";
     }
@@ -40,6 +41,9 @@ namespace Tc.Crm.Service.Constants
         public const string PayloadIsNull = "Payload is null.";
         public const string BookingObjectIsNull = "Booking object is null.";
         public const string CustomerObjectIsNull = "Customer object is null.";
+        public const string ResponseFromCrmIsNull = "Response from CRM is NULL.";
+        public const string BookingDataPassedIsNullOrCouldNotBeParsed = "Booking data passed is null or could not be parsed.";
+        public const string BookingDataDoesNotComplyToSchema = "Booking data passed does not comply to schema.";
     }
     public static class Parameters
     {
@@ -54,9 +58,11 @@ namespace Tc.Crm.Service.Constants
         public const string RequestHeaderType = "request.Header.Type";
         public const string Customer = "customer";
         public const string Booking = "booking";
+        public const string BookingData = "bookingData";
         public const string DataJson = "dataJson";
         public const string Token = "token";
         public const string ActionContext = "actionContext";
+        public const string CrmService = "crmService";
     }
 }
 namespace Tc.Crm.Service.Constants.Configuration
@@ -67,6 +73,11 @@ namespace Tc.Crm.Service.Constants.Configuration
         public const string RedirectToHttps = "redirectToHttps";
         public const string IssuedAtTimeExpiryInSeconds = "issuedAtTimeExpiryInSeconds";
         public const string PublicKeyFileName = "publicKeyFileName";
+        public const string CrmUserName = "crmUserName";
+        public const string CrmPassword = "crmPassword";
+        public const string CrmOrgUniqueName = "crmOrgUniqueName";
+        public const string CrmDiscoveryAddress = "crmDiscoveryAddress";
+
     }
     public static class ConnectionStrings
     {
@@ -75,6 +86,12 @@ namespace Tc.Crm.Service.Constants.Configuration
 }
 namespace Tc.Crm.Service.Constants.Crm
 {
+    public static class Actions
+    {
+        public const string ProcessBooking = "tc_ProcessBooking";
+        public const string ParameterData = "BookingInfo";
+        public const string ProcessBookingResponse = "Response";
+    }
     public static class Booking
     {
         public const string LogicalName = "new_booking";

@@ -13,6 +13,7 @@ namespace Tc.Crm.Service.Filters
     [AttributeUsage(AttributeTargets.All)]
     public sealed class RequireHttpsAttribute : AuthorizationFilterAttribute
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
         public override void OnAuthorization(HttpActionContext actionContext)
         {
             //guard clause

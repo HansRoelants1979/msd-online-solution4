@@ -1,32 +1,46 @@
 ﻿using Microsoft.Xrm.Sdk;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Schema;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Text;
 using Tc.Crm.Service.Models;
 
 namespace Tc.Crm.Service.Services
 {
-    public class BookingService:IBookingService
+    public class BookingService : IBookingService
     {
-        public BookingUpdateResponse Update(Booking booking,ICrmService crmService)
+        public BookingUpdateResponse Update(string bookingData, ICrmService crmService)
         {
-            if (booking == null) throw new ArgumentNullException(Constants.Parameters.Booking);
+            if (string.IsNullOrWhiteSpace(bookingData)) throw new ArgumentNullException(Constants.Parameters.BookingData);
+            if (crmService == null) throw new ArgumentNullException(Constants.Parameters.CrmService);
 
-            KeyAttributeCollection keys = new KeyAttributeCollection();
-            keys.Add(Constants.Crm.Fields.Booking.SourceKey, booking.Id);
-
-            //Upsert
-            Entity entity = new Entity(Constants.Crm.Booking.LogicalName,keys);
-            entity[Constants.Crm.Fields.Booking.SourceKey] = booking.Id;
-            entity[Constants.Crm.Fields.Booking.Total] = new Money(booking.TotalAmount);
-
-            entity[Constants.Crm.Fields.Booking.CustomerId] = new EntityReference(Constants.Crm.Contact.LogicalName
-                                                                                    , Constants.Crm.Fields.Contact.SourceKey
-                                                                                    ,booking.CustomerId);
-
-            var response = crmService.Upsert(entity);
+            var response = crmService.ExecuteActionForBookingUpdate(bookingData);
             if (response == null) throw new InvalidOperationException(Constants.Messages.ResponseNull);
-            if (response.RecordCreated) return new BookingUpdateResponse { Created = true,Id = response.Target.Id.ToString() };
-            return new BookingUpdateResponse { Created = false, Id = response.Target.Id.ToString() };
+            if (!response.Success)
+                throw new InvalidOperationException(response.ErrorMessage);
+            if (response.Created) return new BookingUpdateResponse { Created = true, Id = response.Id.ToString() };
+            return new BookingUpdateResponse { Created = false, Id = response.Id.ToString() };
+        }
+
+        public bool DataValid(string data)
+        {
+            var schema =JSchema.Parse(Constants.General.BookingJsonSchema);
+            JObject bookingObject = JObject.Parse(data);
+            IList<string> messages;
+            StringBuilder messageBuilder = new StringBuilder();
+            bool valid = bookingObject.IsValid(schema, out messages);
+            if(messages != null && messages.Count>0)
+            {
+                foreach (var item in messages)
+                {
+                    messageBuilder.AppendLine(item);
+                }
+            }
+            Trace.TraceError("Error while validating booking json. Error:{0}",messageBuilder.ToString());
+            return valid;
         }
     }
 }

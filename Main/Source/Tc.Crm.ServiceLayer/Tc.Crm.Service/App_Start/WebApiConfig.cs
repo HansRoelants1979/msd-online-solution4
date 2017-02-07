@@ -12,13 +12,13 @@ namespace Tc.Crm.Service
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Api")]
     public static class WebApiConfig
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0")]
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
             var container = new UnityContainer();
             container.RegisterType<IBookingService, BookingService>();
-            container.RegisterType<ICustomerService, CustomerService>();
             container.RegisterType<ICrmService, CrmService>(new ContainerControlledLifetimeManager());
             config.DependencyResolver = new UnityResolver(container);
             
@@ -27,5 +27,6 @@ namespace Tc.Crm.Service
 
             config.Formatters.Remove(config.Formatters.XmlFormatter);
         }
+
     }
 }

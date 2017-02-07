@@ -11,6 +11,6 @@ namespace Tc.Crm.Service.Services
 {
     public interface ICrmService
     {
-        tcm.UpsertResponse Upsert(Entity entity);
+        tcm.UpdateResponse ExecuteActionForBookingUpdate(string data);
     }
 }

@@ -10,6 +10,7 @@ namespace Tc.Crm.Service.Filters
     [AttributeUsage(AttributeTargets.Method, Inherited = false, AllowMultiple = true)]
     public sealed class JsonWebTokenAuthorizeAttribute : AuthorizeAttribute
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
         protected override void HandleUnauthorizedRequest(HttpActionContext actionContext)
         {
             //guard clause
