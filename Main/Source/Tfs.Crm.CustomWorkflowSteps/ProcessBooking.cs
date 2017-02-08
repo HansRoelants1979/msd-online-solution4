@@ -7,6 +7,7 @@ using System.Runtime.Serialization;
 using System.Web.Script.Serialization;
 using Microsoft.Xrm.Sdk;
 
+
 namespace Tc.Crm.CustomWorkflowSteps
 {
     public class ProcessBooking
@@ -15,6 +16,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         CommonXrm _xrm = null;
         string _seperator = ",";
         string _nextLine = "\r\n";
+       
 
         /// <summary>
         /// To process booking data
@@ -25,6 +27,8 @@ namespace Tc.Crm.CustomWorkflowSteps
         public string ProcessPayload(string json, IOrganizationService service)
         {
             string response = string.Empty;
+            bool isCustomerTypeAccount;
+            bool deleteBookingRole=true;
             _xrm = new CommonXrm();
             _xrm._service = service;
 
@@ -34,14 +38,17 @@ namespace Tc.Crm.CustomWorkflowSteps
             //Need to update this condition based on customer type
             if (payloadInfo.CustomerInfo.CustomerGeneral.CustomerType == PayloadBooking.AccountType)
             {
-                ProcessAccount(payloadInfo);
+                ProcessAccount(payloadInfo, ref deleteBookingRole);
+                isCustomerTypeAccount = true;
             }
             else if (payloadInfo.CustomerInfo.CustomerGeneral.CustomerType == PayloadBooking.ContactType)
             {
-                ProcessContact(payloadInfo);
+                ProcessContact(payloadInfo, ref deleteBookingRole);
+                isCustomerTypeAccount = false;
             }
 
-            ProcessBookingInfo(payloadInfo);
+            ProcessBookingInfo(payloadInfo, ref deleteBookingRole);            
+
             ProcessAccomodation(payloadInfo);
             
 
@@ -79,52 +86,62 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// <param name="bookingInfo"></param>
         /// <param name="service"></param>
         /// <returns></returns>
-        void ProcessContact(PayloadBooking payloadInfo)
+        SuccessMessage ProcessContact(PayloadBooking payloadInfo, ref bool deleteBookingRole)
         {
-            
-            Entity contactEntity = new Entity(EntityName.Contact, "", "");
-            contactEntity[Attributes.Contact.FirstName] = payloadInfo.BookingInfo.Customer.CustomerIdentity.FirstName;
-            contactEntity[Attributes.Contact.MiddleName] = payloadInfo.BookingInfo.Customer.CustomerIdentity.MiddleName;
-            contactEntity[Attributes.Contact.LastName] = payloadInfo.BookingInfo.Customer.CustomerIdentity.LastName;
-            contactEntity[Attributes.Contact.Language] = payloadInfo.BookingInfo.Customer.CustomerIdentity.Language;
-            contactEntity[Attributes.Contact.Gender] = payloadInfo.BookingInfo.Customer.CustomerIdentity.Gender;
-            contactEntity[Attributes.Contact.AcademicTitle] = payloadInfo.BookingInfo.Customer.CustomerIdentity.Academictitle;
-            contactEntity[Attributes.Contact.Salutation] = payloadInfo.BookingInfo.Customer.CustomerIdentity.Salutation;
-            contactEntity[Attributes.Contact.BirthDate] = payloadInfo.BookingInfo.Customer.CustomerIdentity.Birthdate;
-            contactEntity[Attributes.Contact.StatusCode] = payloadInfo.BookingInfo.Customer.CustomerGeneral.CustomerStatus;
-            // couldn't find segment,DateofDeath in booking.customer.identity.additional
-            contactEntity[Attributes.Contact.Segment] = payloadInfo.BookingInfo.Customer.Additional.Segment;
-            contactEntity[Attributes.Contact.DateofDeath] = payloadInfo.BookingInfo.Customer.Additional.DateOfdeath;
-            
-            contactEntity[Attributes.Contact.Address1_AdditionalInformation] = payloadInfo.BookingInfo.Customer.Address[0].AdditionalAddressInfo;
-            contactEntity[Attributes.Contact.Address1_FlatOrUnitNumber] = payloadInfo.BookingInfo.Customer.Address[0].FlatNumberUnit;
-            contactEntity[Attributes.Contact.Address1_HouseNumberOrBuilding] = payloadInfo.BookingInfo.Customer.Address[0].HouseNumberBuilding;
-            contactEntity[Attributes.Contact.Address1_Town] = payloadInfo.BookingInfo.Customer.Address[0].Town;
-            contactEntity[Attributes.Contact.Address1_CountryId] = payloadInfo.BookingInfo.Customer.Address[0].Country;
-            contactEntity[Attributes.Contact.Address1_County] = payloadInfo.BookingInfo.Customer.Address[0].County;
-            contactEntity[Attributes.Contact.Address1_PostalCode] = payloadInfo.BookingInfo.Customer.Address[0].PostalCode;
-            contactEntity[Attributes.Contact.Address2_AdditionalInformation] = payloadInfo.BookingInfo.Customer.Address[1].AdditionalAddressInfo;
-            contactEntity[Attributes.Contact.Address2_FlatOrUnitNumber] = payloadInfo.BookingInfo.Customer.Address[1].FlatNumberUnit;
-            contactEntity[Attributes.Contact.Address2_HouseNumberorBuilding] = payloadInfo.BookingInfo.Customer.Address[1].HouseNumberBuilding;
-            contactEntity[Attributes.Contact.Address2_Town] = payloadInfo.BookingInfo.Customer.Address[1].Town;
-            contactEntity[Attributes.Contact.Address2_CountryId] = payloadInfo.BookingInfo.Customer.Address[1].Country;
-            contactEntity[Attributes.Contact.Address2_County] = payloadInfo.BookingInfo.Customer.Address[1].County;
-            contactEntity[Attributes.Contact.Address2_PostalCode] = payloadInfo.BookingInfo.Customer.Address[1].PostalCode;
-            contactEntity[Attributes.Contact.Telephone2Type] = payloadInfo.BookingInfo.Customer.Phone[0].Type;
-            contactEntity[Attributes.Contact.Telephone1] = payloadInfo.BookingInfo.Customer.Phone[0].Number;
-            contactEntity[Attributes.Contact.Telephone2Type] = payloadInfo.BookingInfo.Customer.Phone[1].Type;
-            contactEntity[Attributes.Contact.Telephone2] = payloadInfo.BookingInfo.Customer.Phone[1].Number;
-            contactEntity[Attributes.Contact.Telephone3Type] = payloadInfo.BookingInfo.Customer.Phone[2].Type;
-            contactEntity[Attributes.Contact.Telephone3] = payloadInfo.BookingInfo.Customer.Phone[2].Type;
-            contactEntity[Attributes.Contact.EMailAddress1] = payloadInfo.BookingInfo.Customer.Email[0].Address;
-            contactEntity[Attributes.Contact.EmailAddress1Type] = payloadInfo.BookingInfo.Customer.Email[0].Type;
-            contactEntity[Attributes.Contact.EMailAddress2] = payloadInfo.BookingInfo.Customer.Email[1].Address;
-            contactEntity[Attributes.Contact.EmailAddress2Type] = payloadInfo.BookingInfo.Customer.Email[1].Type;
-            contactEntity[Attributes.Contact.EMailAddress3] = payloadInfo.BookingInfo.Customer.Email[2].Address;
-            contactEntity[Attributes.Contact.EmailAddress3Type] = payloadInfo.BookingInfo.Customer.Email[2].Type;
-            contactEntity[Attributes.Contact.SourceMarketId] = payloadInfo.BookingInfo.Customer.CustomerIdentifier.SourceMarket;
-           
-            _xrm.UpsertEntity(contactEntity);
+            SuccessMessage sucMsg = null;
+            if (payloadInfo.BookingInfo.Customer != null)
+            {
+
+                Entity contactEntity = new Entity(EntityName.Contact, "", "");
+
+                contactEntity[Attributes.Contact.FirstName] = payloadInfo.BookingInfo.Customer.CustomerIdentity.FirstName;
+                contactEntity[Attributes.Contact.MiddleName] = payloadInfo.BookingInfo.Customer.CustomerIdentity.MiddleName;
+                contactEntity[Attributes.Contact.LastName] = payloadInfo.BookingInfo.Customer.CustomerIdentity.LastName;
+                contactEntity[Attributes.Contact.Language] = payloadInfo.BookingInfo.Customer.CustomerIdentity.Language;
+                contactEntity[Attributes.Contact.Gender] = payloadInfo.BookingInfo.Customer.CustomerIdentity.Gender;
+                contactEntity[Attributes.Contact.AcademicTitle] = payloadInfo.BookingInfo.Customer.CustomerIdentity.Academictitle;
+                contactEntity[Attributes.Contact.Salutation] = payloadInfo.BookingInfo.Customer.CustomerIdentity.Salutation;
+                contactEntity[Attributes.Contact.BirthDate] = payloadInfo.BookingInfo.Customer.CustomerIdentity.Birthdate;
+                contactEntity[Attributes.Contact.StatusCode] = payloadInfo.BookingInfo.Customer.CustomerGeneral.CustomerStatus;
+                // couldn't find segment,DateofDeath in booking.customer.identity.additional
+                contactEntity[Attributes.Contact.Segment] = payloadInfo.BookingInfo.Customer.Additional.Segment;
+                contactEntity[Attributes.Contact.DateofDeath] = payloadInfo.BookingInfo.Customer.Additional.DateOfdeath;
+
+                contactEntity[Attributes.Contact.Address1_AdditionalInformation] = payloadInfo.BookingInfo.Customer.Address[0].AdditionalAddressInfo;
+                contactEntity[Attributes.Contact.Address1_FlatOrUnitNumber] = payloadInfo.BookingInfo.Customer.Address[0].FlatNumberUnit;
+                contactEntity[Attributes.Contact.Address1_HouseNumberOrBuilding] = payloadInfo.BookingInfo.Customer.Address[0].HouseNumberBuilding;
+                contactEntity[Attributes.Contact.Address1_Town] = payloadInfo.BookingInfo.Customer.Address[0].Town;
+                contactEntity[Attributes.Contact.Address1_CountryId] = payloadInfo.BookingInfo.Customer.Address[0].Country;
+                contactEntity[Attributes.Contact.Address1_County] = payloadInfo.BookingInfo.Customer.Address[0].County;
+                contactEntity[Attributes.Contact.Address1_PostalCode] = payloadInfo.BookingInfo.Customer.Address[0].PostalCode;
+                contactEntity[Attributes.Contact.Address2_AdditionalInformation] = payloadInfo.BookingInfo.Customer.Address[1].AdditionalAddressInfo;
+                contactEntity[Attributes.Contact.Address2_FlatOrUnitNumber] = payloadInfo.BookingInfo.Customer.Address[1].FlatNumberUnit;
+                contactEntity[Attributes.Contact.Address2_HouseNumberorBuilding] = payloadInfo.BookingInfo.Customer.Address[1].HouseNumberBuilding;
+                contactEntity[Attributes.Contact.Address2_Town] = payloadInfo.BookingInfo.Customer.Address[1].Town;
+                contactEntity[Attributes.Contact.Address2_CountryId] = payloadInfo.BookingInfo.Customer.Address[1].Country;
+                contactEntity[Attributes.Contact.Address2_County] = payloadInfo.BookingInfo.Customer.Address[1].County;
+                contactEntity[Attributes.Contact.Address2_PostalCode] = payloadInfo.BookingInfo.Customer.Address[1].PostalCode;
+                contactEntity[Attributes.Contact.Telephone2Type] = payloadInfo.BookingInfo.Customer.Phone[0].Type;
+                contactEntity[Attributes.Contact.Telephone1] = payloadInfo.BookingInfo.Customer.Phone[0].Number;
+                contactEntity[Attributes.Contact.Telephone2Type] = payloadInfo.BookingInfo.Customer.Phone[1].Type;
+                contactEntity[Attributes.Contact.Telephone2] = payloadInfo.BookingInfo.Customer.Phone[1].Number;
+                contactEntity[Attributes.Contact.Telephone3Type] = payloadInfo.BookingInfo.Customer.Phone[2].Type;
+                contactEntity[Attributes.Contact.Telephone3] = payloadInfo.BookingInfo.Customer.Phone[2].Type;
+                contactEntity[Attributes.Contact.EMailAddress1] = payloadInfo.BookingInfo.Customer.Email[0].Address;
+                contactEntity[Attributes.Contact.EmailAddress1Type] = payloadInfo.BookingInfo.Customer.Email[0].Type;
+                contactEntity[Attributes.Contact.EMailAddress2] = payloadInfo.BookingInfo.Customer.Email[1].Address;
+                contactEntity[Attributes.Contact.EmailAddress2Type] = payloadInfo.BookingInfo.Customer.Email[1].Type;
+                contactEntity[Attributes.Contact.EMailAddress3] = payloadInfo.BookingInfo.Customer.Email[2].Address;
+                contactEntity[Attributes.Contact.EmailAddress3Type] = payloadInfo.BookingInfo.Customer.Email[2].Type;
+                contactEntity[Attributes.Contact.SourceMarketId] = payloadInfo.BookingInfo.Customer.CustomerIdentifier.SourceMarket;
+
+                sucMsg = _xrm.UpsertEntity(contactEntity);
+
+                if (sucMsg.Create)
+                    deleteBookingRole = false;
+            }
+
+            return sucMsg;
         }
 
         /// <summary>
@@ -132,33 +149,51 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// </summary>
         /// <param name="bookingInfo"></param>
         /// <returns></returns>
-        void ProcessAccount(PayloadBooking payloadInfo)
+        SuccessMessage ProcessAccount(PayloadBooking payloadInfo, ref bool deleteBookingRole)
         {
-            
-            Entity accountEntity = new Entity(EntityName.Account, "", "");
-            accountEntity[Attributes.Account.Name] = payloadInfo.BookingInfo.Customer.Company;
-            accountEntity[Attributes.Account.Address1_AdditionalInformation] = payloadInfo.BookingInfo.Customer.Address[0].AdditionalAddressInfo;
-            accountEntity[Attributes.Account.Address1_FlatOrUnitNumber] = payloadInfo.BookingInfo.Customer.Address[0].FlatNumberUnit;
-            accountEntity[Attributes.Account.Address1_HouseNumberOrBuilding] = payloadInfo.BookingInfo.Customer.Address[0].HouseNumberBuilding;
-            accountEntity[Attributes.Account.Address1_Town] = payloadInfo.BookingInfo.Customer.Address[0].Town;
-            accountEntity[Attributes.Account.Address1_PostalCode] = payloadInfo.BookingInfo.Customer.Address[0].PostalCode;
-            accountEntity[Attributes.Account.Address1_CountryId] = payloadInfo.BookingInfo.Customer.Address[0].Country;
-            accountEntity[Attributes.Account.Address1_Count] = payloadInfo.BookingInfo.Customer.Address[0].County;
-            accountEntity[Attributes.Account.Telephone1_Type] = payloadInfo.BookingInfo.Customer.Phone[0].Type;
-            accountEntity[Attributes.Account.Telephone1] = payloadInfo.BookingInfo.Customer.Phone[0].Number;
-            accountEntity[Attributes.Account.Telephone2_Type] = payloadInfo.BookingInfo.Customer.Phone[1].Type;
-            accountEntity[Attributes.Account.Telephone2] = payloadInfo.BookingInfo.Customer.Phone[1].Number;
-            accountEntity[Attributes.Account.Telephone3_Type] = payloadInfo.BookingInfo.Customer.Phone[2].Type;
-            accountEntity[Attributes.Account.Telephone3] = payloadInfo.BookingInfo.Customer.Phone[2].Type;
-            accountEntity[Attributes.Account.EMailAddress1] = payloadInfo.BookingInfo.Customer.Email[0].Address;
-            accountEntity[Attributes.Account.EmailAddress1_Type] = payloadInfo.BookingInfo.Customer.Email[0].Type;
-            accountEntity[Attributes.Account.EMailAddress2] = payloadInfo.BookingInfo.Customer.Email[1].Address;
-            accountEntity[Attributes.Account.EmailAddress2_Type] = payloadInfo.BookingInfo.Customer.Email[1].Type;
-            accountEntity[Attributes.Account.EMailAddress3] = payloadInfo.BookingInfo.Customer.Email[2].Address;
-            accountEntity[Attributes.Account.EmailAddress3_Type] = payloadInfo.BookingInfo.Customer.Email[2].Type;
-            
+            SuccessMessage sucMsg = null;
 
-             _xrm.UpsertEntity(accountEntity);
+            if (payloadInfo.BookingInfo.Customer != null)
+            {
+                Entity accountEntity = new Entity(EntityName.Account, "", "");
+                accountEntity[Attributes.Account.Name] = payloadInfo.BookingInfo.Customer.Company;
+                if (payloadInfo.BookingInfo.Customer.Address != null && payloadInfo.BookingInfo.Customer.Address.Length > 0)
+                {
+                    accountEntity[Attributes.Account.Address1_AdditionalInformation] = payloadInfo.BookingInfo.Customer.Address[0].AdditionalAddressInfo;
+                    accountEntity[Attributes.Account.Address1_FlatOrUnitNumber] = payloadInfo.BookingInfo.Customer.Address[0].FlatNumberUnit;
+                    accountEntity[Attributes.Account.Address1_HouseNumberOrBuilding] = payloadInfo.BookingInfo.Customer.Address[0].HouseNumberBuilding;
+                    accountEntity[Attributes.Account.Address1_Town] = payloadInfo.BookingInfo.Customer.Address[0].Town;
+                    accountEntity[Attributes.Account.Address1_PostalCode] = payloadInfo.BookingInfo.Customer.Address[0].PostalCode;
+                    accountEntity[Attributes.Account.Address1_CountryId] = payloadInfo.BookingInfo.Customer.Address[0].Country;
+                    accountEntity[Attributes.Account.Address1_Count] = payloadInfo.BookingInfo.Customer.Address[0].County;
+                }
+                if (payloadInfo.BookingInfo.Customer.Phone != null && payloadInfo.BookingInfo.Customer.Phone.Length > 0)
+                {
+                    accountEntity[Attributes.Account.Telephone1_Type] = payloadInfo.BookingInfo.Customer.Phone[0].Type;
+                    accountEntity[Attributes.Account.Telephone1] = payloadInfo.BookingInfo.Customer.Phone[0].Number;
+                    accountEntity[Attributes.Account.Telephone2_Type] = payloadInfo.BookingInfo.Customer.Phone[1].Type;
+                    accountEntity[Attributes.Account.Telephone2] = payloadInfo.BookingInfo.Customer.Phone[1].Number;
+                    accountEntity[Attributes.Account.Telephone3_Type] = payloadInfo.BookingInfo.Customer.Phone[2].Type;
+                    accountEntity[Attributes.Account.Telephone3] = payloadInfo.BookingInfo.Customer.Phone[2].Type;
+                }
+                if (payloadInfo.BookingInfo.Customer.Email != null && payloadInfo.BookingInfo.Customer.Email.Length > 0)
+                {
+                    accountEntity[Attributes.Account.EMailAddress1] = payloadInfo.BookingInfo.Customer.Email[0].Address;
+                    accountEntity[Attributes.Account.EmailAddress1_Type] = payloadInfo.BookingInfo.Customer.Email[0].Type;
+                    accountEntity[Attributes.Account.EMailAddress2] = payloadInfo.BookingInfo.Customer.Email[1].Address;
+                    accountEntity[Attributes.Account.EmailAddress2_Type] = payloadInfo.BookingInfo.Customer.Email[1].Type;
+                    accountEntity[Attributes.Account.EMailAddress3] = payloadInfo.BookingInfo.Customer.Email[2].Address;
+                    accountEntity[Attributes.Account.EmailAddress3_Type] = payloadInfo.BookingInfo.Customer.Email[2].Type;
+                }
+
+
+                sucMsg = _xrm.UpsertEntity(accountEntity);
+                if (sucMsg.Create)
+                    deleteBookingRole = false;
+            }
+            sucMsg.Key = payloadInfo.CustomerInfo.CustomerIdentifier.SourceSystem;
+
+            return sucMsg;
         }
 
         /// <summary>
@@ -167,12 +202,13 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// <param name="payloadInfo"></param>
         /// <param name="service"></param>
         /// <returns></returns>
-        void ProcessBookingInfo(PayloadBooking payloadInfo)
+        SuccessMessage ProcessBookingInfo(PayloadBooking payloadInfo, ref bool deleteBookingRole)
         {
+            SuccessMessage sucMsg = null;
             if (payloadInfo.BookingInfo.BookingIdentifier != null)
             {
 
-                Entity bookingEntity = new Entity(EntityName.Booking, "", "");
+                Entity bookingEntity = new Entity(EntityName.Booking, "", payloadInfo.BookingInfo.BookingIdentifier.SourceSystem);
 
                 bookingEntity[Attributes.Booking.Name] = payloadInfo.BookingInfo.BookingIdentifier.BookingNumber;
                 bookingEntity[Attributes.Booking.OnTourVersion] = payloadInfo.BookingInfo.BookingIdentifier.BookingVersionOnTour;
@@ -202,8 +238,12 @@ namespace Tc.Crm.CustomWorkflowSteps
                 bookingEntity[Attributes.Booking.ExtraService] = PrepareExtraServicesInfo(payloadInfo);
                 bookingEntity[Attributes.Booking.ExtraServiceRemarks] = PrepareExtraServiceRemarks(payloadInfo);
 
-                _xrm.UpsertEntity(bookingEntity);
+                sucMsg = _xrm.UpsertEntity(bookingEntity);
+
+                if (sucMsg.Create)
+                    deleteBookingRole = false;
             }
+            return sucMsg;
         }
 
         /// <summary>
@@ -490,6 +530,56 @@ namespace Tc.Crm.CustomWorkflowSteps
 
             }
         }
+
+        void ProcessBookingRole(PayloadBooking payloadInfo, bool isCustomerTypeAccount, bool deleteBookingRole)
+        {
+            if (deleteBookingRole)
+            {
+                ProcessRecordsToDelete(EntityName.CustomerBookingRole,
+                    new string[] { Attributes.CustomerBookingRole.CustomerBookingRoleId },
+                    new string[] { Attributes.CustomerBookingRole.BookingId, Attributes.CustomerBookingRole.Customer },
+                    new string[] { "" });
+
+            }
+
+            Entity entCustBookingRole = new Entity(EntityName.CustomerBookingRole);
+            entCustBookingRole[Attributes.CustomerBookingRole.BookingId] = new EntityReference(EntityName.Booking, "", "");
+            if (isCustomerTypeAccount)
+            {
+                entCustBookingRole[Attributes.CustomerBookingRole.Customer] = new EntityReference(EntityName.Account, "","");
+            }
+            else
+            {
+                entCustBookingRole[Attributes.CustomerBookingRole.Customer] = new EntityReference(EntityName.Contact, "", "");
+            }
+
+            EntityCollection entCol = new EntityCollection();            
+            entCol.Entities.Add(entCustBookingRole);
+
+            _xrm.BulkCreate(entCol);
+        }
+
+        /// <summary>
+        /// To process records to delete
+        /// </summary>
+        /// <param name="entityName"></param>
+        /// <param name="columns"></param>
+        /// <param name="filterKeys"></param>
+        /// <param name="filterValues"></param>
+        void ProcessRecordsToDelete(string entityName, string[] columns, string[] filterKeys, string[] filterValues)
+        {
+            EntityCollection entCollection = _xrm.RetrieveMultipleRecords(entityName, columns, filterKeys, filterValues);                   
+            if (entCollection != null && entCollection.Entities.Count > 0)
+            {
+                EntityReferenceCollection entRefCollection = new EntityReferenceCollection();
+                foreach (Entity ent in entCollection.Entities)
+                {
+                    entRefCollection.Add(new EntityReference(ent.LogicalName, ent.Id));
+                }
+                _xrm.BulkDelete(entRefCollection);
+            }
+        }
+
 
 
     }

@@ -221,6 +221,34 @@ namespace Tc.Crm.CustomWorkflowSteps
             return entRef;
         }
 
+        public EntityCollection RetrieveMultipleRecords(string entityName, string[] columns, string[] filterKeys, string[] filterValues)
+        {
+            var query = new QueryExpression(entityName);
+            query.ColumnSet = new ColumnSet(columns);
+            FilterExpression fltrExpr = null;
+            for (int i = 0; i < filterKeys.Length; i++)
+            {
+                ConditionExpression condExpr = new ConditionExpression();
+                condExpr.AttributeName = filterKeys[i];
+                condExpr.Operator = ConditionOperator.Equal;
+                condExpr.Values.Add(filterValues[i]);
+
+                fltrExpr = new FilterExpression(LogicalOperator.And);
+                fltrExpr.AddCondition(condExpr);
+
+                query.Criteria.AddFilter(fltrExpr);
+            }
+           return GetRecordsUsingQuery(query);
+
+        }
+
+        EntityCollection GetRecordsUsingQuery(QueryExpression queryExpr)
+        {
+            EntityCollection entCollection = null;
+            entCollection = _service.RetrieveMultiple(queryExpr);
+            return entCollection;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -232,6 +260,8 @@ namespace Tc.Crm.CustomWorkflowSteps
             return optionValue;
         }
 
+
+
     }
 
 
@@ -240,7 +270,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         public bool Create { get; set; }
         public string EntityName { get; set; }
         public string Id { get; set; }
-        public string Message { get; set; }
+        public string Details { get; set; }
         public string Key { get; set; }       
 
     }
