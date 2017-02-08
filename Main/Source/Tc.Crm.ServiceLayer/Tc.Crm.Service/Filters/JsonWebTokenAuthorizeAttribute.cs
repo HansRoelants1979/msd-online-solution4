@@ -10,12 +10,14 @@ namespace Tc.Crm.Service.Filters
     [AttributeUsage(AttributeTargets.Method, Inherited = false, AllowMultiple = true)]
     public sealed class JsonWebTokenAuthorizeAttribute : AuthorizeAttribute
     {
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
         protected override void HandleUnauthorizedRequest(HttpActionContext actionContext)
         {
             //guard clause
             if (actionContext == null) throw new ArgumentNullException(Constants.Parameters.ActionContext);
-            var request = JsonWebTokenHelper.GetRequestObject(actionContext.Request);
+            JsonWebTokenHelper helper = new JsonWebTokenHelper(new ConfigurationService());
+            var request = helper.GetRequestObject(actionContext.Request);
             //presence of errors indicate bad request
             if (request.Errors != null && request.Errors.Count > 0)
             {

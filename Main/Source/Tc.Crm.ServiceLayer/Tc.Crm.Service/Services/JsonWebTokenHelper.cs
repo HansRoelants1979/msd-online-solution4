@@ -16,10 +16,15 @@ using System.Globalization;
 
 namespace Tc.Crm.Service.Services
 {
-    public static class JsonWebTokenHelper
+    public class JsonWebTokenHelper
     {
-        private static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+        private readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+        private IConfigurationService configurationService;
 
+        public JsonWebTokenHelper(IConfigurationService configurationService)
+        {
+            this.configurationService = configurationService;
+        }
         /// <summary>
         /// Parses the request to an object
         /// Validates the Header pay load and signature
@@ -28,7 +33,7 @@ namespace Tc.Crm.Service.Services
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.Service.Models.JsonWebTokenRequestError.#ctor(System.String)")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-        public static JsonWebTokenRequest GetRequestObject(HttpRequestMessage request)
+        public JsonWebTokenRequest GetRequestObject(HttpRequestMessage request)
         {
             var jsonWebTokenRequest = new JsonWebTokenRequest();
             try
@@ -63,7 +68,7 @@ namespace Tc.Crm.Service.Services
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.Service.Models.JsonWebTokenRequestError.#ctor(System.String)")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-        private static void ValidateSignature(JsonWebTokenRequest jsonWebTokenRequest)
+        private void ValidateSignature(JsonWebTokenRequest jsonWebTokenRequest)
         {
             try
             {
@@ -75,14 +80,8 @@ namespace Tc.Crm.Service.Services
 
                 using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
                 {
-                    var fileName = ConfigurationManager.AppSettings[Constants.Configuration.AppSettings.PublicKeyFileName];
-                    var path = HttpContext.Current.Server.MapPath(@"~/" + fileName);
-
-                    using (var webClient = new WebClient())
-                    {
-                        var publicKeyXml = webClient.DownloadString(path);
-                        rsa.FromXmlString(publicKeyXml);
-                    }
+                    var publicKeyXml = configurationService.GetPublicKey();
+                    rsa.FromXmlString(publicKeyXml);
 
                     using (SHA256 sha256 = SHA256.Create())
                     {
@@ -110,7 +109,7 @@ namespace Tc.Crm.Service.Services
         /// <param name="request"></param>
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly")]
-        public static string GetToken(HttpRequestMessage request)
+        public string GetToken(HttpRequestMessage request)
         {
             //guard clause
             if (request == null) throw new ArgumentNullException(Constants.Parameters.Request);
@@ -127,7 +126,7 @@ namespace Tc.Crm.Service.Services
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.Service.Models.JsonWebTokenRequestError.#ctor(System.String)")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-        public static void ValidateHeader(JsonWebTokenRequest request)
+        public void ValidateHeader(JsonWebTokenRequest request)
         {
             //guard clause
             if (request == null) throw new ArgumentNullException(Constants.Parameters.Request);
@@ -178,7 +177,7 @@ namespace Tc.Crm.Service.Services
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.Service.Models.JsonWebTokenRequestError.#ctor(System.String)")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-        public static void ValidatePayload(JsonWebTokenRequest request)
+        public void ValidatePayload(JsonWebTokenRequest request)
         {
             //guard clause
             if (request == null) throw new ArgumentNullException(Constants.Parameters.Request);
@@ -212,7 +211,7 @@ namespace Tc.Crm.Service.Services
                     int expiry = -1;
                     try
                     {
-                        expiry = Int32.Parse(ConfigurationManager.AppSettings[Constants.Configuration.AppSettings.IssuedAtTimeExpiryInSeconds]
+                        expiry = Int32.Parse(configurationService.GetIssuedAtTimeExpiryInSeconds()
                             , CultureInfo.CurrentCulture);
                     }
                     catch (FormatException)
@@ -242,7 +241,7 @@ namespace Tc.Crm.Service.Services
         /// </summary>
         /// <param name="v"></param>
         /// <returns></returns>
-        private static int ConvertToInt(string v)
+        private int ConvertToInt(string v)
         {
             int i;
             if (Int32.TryParse(v, out i))
@@ -256,7 +255,7 @@ namespace Tc.Crm.Service.Services
         /// <typeparam name="T"></typeparam>
         /// <param name="token"></param>
         /// <returns></returns>
-        public static T DecodeHeaderToObject<T>(string token)
+        public T DecodeHeaderToObject<T>(string token)
         {
             //guard clause
             if (string.IsNullOrWhiteSpace(token)) throw new ArgumentNullException(Constants.Parameters.Token);
@@ -279,7 +278,7 @@ namespace Tc.Crm.Service.Services
         /// <typeparam name="T"></typeparam>
         /// <param name="token"></param>
         /// <returns></returns>
-        public static T DecodePayloadToObject<T>(string token)
+        public T DecodePayloadToObject<T>(string token)
         {
             //guard clause
             if (string.IsNullOrWhiteSpace(token)) throw new ArgumentNullException(Constants.Parameters.Token);

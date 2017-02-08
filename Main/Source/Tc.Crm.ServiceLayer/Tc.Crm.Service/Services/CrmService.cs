@@ -19,6 +19,9 @@ namespace Tc.Crm.Service.Services
 
         public tcm.UpdateResponse ExecuteActionForBookingUpdate(string data)
         {
+            if (string.IsNullOrWhiteSpace(data))
+                throw new ArgumentNullException(Constants.Parameters.Data);
+
             var request = new OrganizationRequest(Constants.Crm.Actions.ProcessBooking);
             request[Constants.Crm.Actions.ParameterData] = data;
             var response = orgService.Execute(request);

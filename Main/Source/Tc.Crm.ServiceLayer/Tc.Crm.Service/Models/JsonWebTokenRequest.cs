@@ -23,8 +23,6 @@ namespace Tc.Crm.Service.Models
 
         public bool HeaderTypeValid { get; set; }
 
-        public bool HeaderValid { get; set; }
-
         public bool IssuedAtTimeValid { get; set; }
 
         public bool NotBeforetimeValid { get; set; }

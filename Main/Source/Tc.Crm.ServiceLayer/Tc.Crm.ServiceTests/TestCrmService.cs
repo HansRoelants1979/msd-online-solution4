@@ -8,42 +8,45 @@ using Microsoft.Xrm.Sdk.Messages;
 using Tc.Crm.Service.Services;
 using FakeXrmEasy;
 using Microsoft.Xrm.Sdk.Query;
+using Newtonsoft.Json;
 
 namespace Tc.Crm.ServiceTests
 {
+    public enum DataSwitch
+    {
+        Created,
+        Updated,
+        Response_NULL,
+        Response_Failed,
+        Return_NULL
+    }
     public class TestCrmService : ICrmService
     {
         XrmFakedContext context;
+
+        public DataSwitch Switch { get; set; }
 
         public TestCrmService(XrmFakedContext context)
         {
             this.context = context;
         }
-        public Tc.Crm.Service.Models.UpsertResponse Upsert(Entity entity)
+        public Tc.Crm.Service.Models.UpdateResponse ExecuteActionForBookingUpdate(string data)
         {
-            var orgService = context.GetFakedOrganizationService();
-            QueryExpression query = new QueryExpression("contact");
-            query.ColumnSet = new ColumnSet(true);
-            query.Criteria = new FilterExpression(LogicalOperator.And);
-            query.Criteria.AddCondition("new_sourcekey", ConditionOperator.Equal, entity["new_sourcekey"].ToString());
+            object Constants = null;
+            if (Switch == DataSwitch.Created)
+                return new Tc.Crm.Service.Models.UpdateResponse { Created = true, Id = Guid.NewGuid().ToString(), Success = true };
 
-            var response = orgService.RetrieveMultiple(query);
+            else if (Switch == DataSwitch.Updated)
+                return new Tc.Crm.Service.Models.UpdateResponse { Created = false, Id = Guid.NewGuid().ToString(), Success = true };
 
-            var upsertResponse = new Tc.Crm.Service.Models.UpsertResponse();
-            if (response.Entities.Count > 0)
-            {
-                entity.Id = response.Entities[0].Id;
-                orgService.Update(entity);
-                upsertResponse.RecordCreated = false;
-            }
-            else
-            {
-                orgService.Create(entity);
-                upsertResponse.RecordCreated = true;
-            }
-            upsertResponse.Target = new EntityReference(entity.LogicalName,entity.Id);
+            else if (Switch == DataSwitch.Response_NULL)
+                throw new InvalidOperationException(Tc.Crm.Service.Constants.Messages.ResponseFromCrmIsNull);
 
-            return upsertResponse;
+            else if (Switch == DataSwitch.Response_Failed)
+                return new Tc.Crm.Service.Models.UpdateResponse { Created = false, Id = null, Success = false, ErrorMessage = "Unexpcted Error" };
+            else if (Switch == DataSwitch.Return_NULL)
+                return null;
+            return null;
         }
     }
 }

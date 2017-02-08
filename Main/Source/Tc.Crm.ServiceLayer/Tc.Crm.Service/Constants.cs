@@ -63,6 +63,7 @@ namespace Tc.Crm.Service.Constants
         public const string Token = "token";
         public const string ActionContext = "actionContext";
         public const string CrmService = "crmService";
+        public const string Data = "data";
     }
 }
 namespace Tc.Crm.Service.Constants.Configuration
