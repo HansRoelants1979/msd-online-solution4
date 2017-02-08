@@ -29,6 +29,8 @@ namespace Tc.Crm.CustomWorkflowSteps
             string response = string.Empty;
             bool isCustomerTypeAccount;
             bool deleteBookingRole=true;
+            bool deleteBookingAccomdation = true;
+            bool deleteBookingTransport = true;
             _xrm = new CommonXrm();
             _xrm._service = service;
 
@@ -47,10 +49,10 @@ namespace Tc.Crm.CustomWorkflowSteps
                 isCustomerTypeAccount = false;
             }
 
-            ProcessBookingInfo(payloadInfo, ref deleteBookingRole);            
+            ProcessBookingInfo(payloadInfo, ref deleteBookingRole, ref deleteBookingAccomdation, ref deleteBookingTransport);
 
-            ProcessAccomodation(payloadInfo);
             
+
 
             response = SerializeJson(successMsg);
             return response;
@@ -212,7 +214,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// <param name="payloadInfo"></param>
         /// <param name="service"></param>
         /// <returns></returns>
-        SuccessMessage ProcessBookingInfo(PayloadBooking payloadInfo, ref bool deleteBookingRole)
+        SuccessMessage ProcessBookingInfo(PayloadBooking payloadInfo, ref bool deleteBookingRole, ref bool deleteBookingAccomdation, ref bool deleteBookingTransport)
         {
             SuccessMessage sucMsg = null;
             if (payloadInfo.BookingInfo.BookingIdentifier != null)
@@ -257,6 +259,9 @@ namespace Tc.Crm.CustomWorkflowSteps
 
                 if (sucMsg.Create)
                     deleteBookingRole = false;
+                 deleteBookingAccomdation = false;
+                 deleteBookingTransport = false;
+
             }
             return sucMsg;
         }
@@ -426,8 +431,17 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// </summary>
         /// <param name="payloadInfo"></param>
         /// <returns></returns>
-        void ProcessAccomodation(PayloadBooking payloadInfo)
+        void ProcessAccomodation(PayloadBooking payloadInfo , ref bool deleteBookingAccomdation)
         {
+            if (deleteBookingAccomdation)
+            {
+                ProcessRecordsToDelete(EntityName.BookingAccommodation,
+                    new string[] { Attributes.BookingAccommodation.BookingId },
+                    new string[] { Attributes.BookingAccommodation.BookingId },
+                    new string[] { "" });
+
+            }
+
             if (payloadInfo.BookingInfo.Services != null && payloadInfo.BookingInfo.Services.Accommodation != null)
             {
                 EntityCollection entColAccomodation = new EntityCollection();
@@ -491,11 +505,22 @@ namespace Tc.Crm.CustomWorkflowSteps
                     _xrm.BulkCreate(entColAccomodationRemarks);
             }
         }
-        List<SuccessMessage> ProcessTransport(PayloadBooking payloadInfo)
+        List<SuccessMessage> ProcessTransport(PayloadBooking payloadInfo, ref bool deleteBookingTransport)
         {
-
             EntityCollection entColTransport = new EntityCollection();
             Entity transportEntity = null;
+
+            if (deleteBookingTransport)
+            {
+                ProcessRecordsToDelete(EntityName.BookingTransport,
+                    new string[] { Attributes.BookingTransport.BookingId },
+                    new string[] { Attributes.BookingAccommodation.BookingId },
+                    new string[] { "" });
+
+            }
+
+            
+
 
 
             for (int i = 0; i < payloadInfo.BookingInfo.Services.Transport.Length; i++)
@@ -544,6 +569,10 @@ namespace Tc.Crm.CustomWorkflowSteps
 
 
             }
+
+            if (entColTransportRemark.Entities.Count > 0)
+                _xrm.BulkCreate(entColTransportRemark);
+
         }
 
         void ProcessBookingRole(PayloadBooking payloadInfo, bool isCustomerTypeAccount, bool deleteBookingRole)
