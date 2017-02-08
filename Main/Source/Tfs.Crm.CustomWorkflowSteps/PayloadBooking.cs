@@ -71,7 +71,138 @@ namespace Tc.Crm.CustomWorkflowSteps
             public string Street { get; set; }
 
             [DataMember(Name = "type")]
-            public string Type { get; set; }
+            public AddressType AddressType { get; set; }
+        }
+
+        [DataContract(Name = "AddressType")]
+        public enum AddressType
+        {
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "M")]
+            [EnumMember]
+            M
+        }
+
+        [DataContract(Name = "BookingStatus")]
+        public enum BookingStatus
+        {
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "B")]
+            [EnumMember]
+            B,
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "C")]
+            [EnumMember]
+            C
+        }
+
+        [DataContract(Name = "Gender")]
+        public enum Gender
+        {
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "M")]
+            [EnumMember]
+            M,
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "F")]
+            [EnumMember]
+            F,
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "U")]
+            [EnumMember]
+            U
+        }
+        [DataContract(Name = "Relation")]
+        public enum Relation
+        {
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "P")]
+            [EnumMember]
+            P,
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "C")]
+            [EnumMember]
+            C,
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "I")]
+            [EnumMember]
+            I
+        }
+        [DataContract(Name = "BoardType")]
+        public enum BoardType
+        {
+            [EnumMember]
+            AI,
+            [EnumMember]
+            HB
+        }
+
+        [DataContract(Name = "AccomodationStatus")]
+        public enum AccommodationStatus
+        {
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "OK")]
+            [EnumMember]
+            OK,
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "R")]
+            [EnumMember]
+            R,
+            [EnumMember]
+            PR
+        }
+        [DataContract(Name = "TransferType")]
+        public enum TransferType
+        {
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "I")]
+            [EnumMember]
+            I,
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "O")]
+            [EnumMember]
+            O,
+            [EnumMember]
+            TH
+        }
+        [DataContract(Name = "CustomerStatus")]
+        public enum CustomerStatus
+        {
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "A")]
+            [EnumMember]
+            A,
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "D")]
+            [EnumMember]
+            D,
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "B")]
+            [EnumMember]
+            B
+        }
+        [DataContract(Name = "CustomerType")]
+        public enum CustomerType
+        {
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "P")]
+            [EnumMember]
+            P,
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "B")]
+            [EnumMember]
+            B
+        }
+        [DataContract(Name = "PhoneType")]
+        public enum PhoneType
+        {
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "H")]
+            [EnumMember]
+            H,
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "M")]
+            [EnumMember]
+            M
+        }
+        [DataContract(Name = "EmailType")]
+        public enum EmailType
+        {
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pri")]
+            [EnumMember]
+            Pri,
+            [EnumMember]
+            Pro
+        }
+        [DataContract(Name = "RemarkType")]
+        public enum RemarkType
+        {
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "T")]
+            [EnumMember]
+            T,
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "A")]
+            [EnumMember]
+            A
         }
 
         [DataContract(Name = "bookingIdentifier")]
@@ -105,7 +236,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         {
 
             [DataMember(Name = "bookingStatus")]
-            public string BookingStatus { get; set; }
+            public BookingStatus BookingStatus { get; set; }
 
             [DataMember(Name = "bookingDate")]
             public string BookingDate { get; set; }
@@ -135,7 +266,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public bool IsLateBooking { get; set; }
 
             [DataMember(Name = "numberofParticipants")]
-            public int NumberofParticipants { get; set; }
+            public int NumberOfParticipants { get; set; }
 
             [DataMember(Name = "numberOfAdults")]
             public int NumberOfAdults { get; set; }
@@ -161,7 +292,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         {
 
             [DataMember(Name = "booker")]
-            public Booking_Booker Booker { get; set; }
+            public BookingBooker Booker { get; set; }
         }
 
         [DataContract(Name = "Remark")]
@@ -169,7 +300,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         {
 
             [DataMember(Name = "type")]
-            public string Type { get; set; }
+            public RemarkType RemarkType { get; set; }
 
             [DataMember(Name = "text")]
             public string Text { get; set; }
@@ -189,20 +320,21 @@ namespace Tc.Crm.CustomWorkflowSteps
             public int Age { get; set; }
 
             [DataMember(Name = "gender")]
-            public string Gender { get; set; }
+            public Gender Gender { get; set; }
 
             [DataMember(Name = "relation")]
-            public string Relation { get; set; }
+            public Relation Relation { get; set; }
 
             [DataMember(Name = "travelParticipantIDOnTour")]
-            public string TravelParticipantIDOnTour { get; set; }
+            public string TravelParticipantIdOnTour { get; set; }
 
             [DataMember(Name = "language")]
             public string Language { get; set; }
 
             [DataMember(Name = "birthDate")]
-            public string BirthDate { get; set; }
+            public string Birthdate { get; set; }
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
             [DataMember(Name = "Remark")]
             public Remark[] Remark { get; set; }
         }
@@ -212,7 +344,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         {
 
             [DataMember(Name = "travelParticipantID")]
-            public string TravelParticipantID { get; set; }
+            public string TravelParticipantId { get; set; }
         }
 
         [DataContract(Name = "brands")]
@@ -221,25 +353,26 @@ namespace Tc.Crm.CustomWorkflowSteps
         }
 
         [DataContract(Name = "tourguide")]
-        public class Tourguide
+        public class TourGuide
         {
 
             [DataMember(Name = "tourguideID")]
-            public string TourguideID { get; set; }
+            public string TourGuideId { get; set; }
 
             [DataMember(Name = "tourguideName")]
-            public string TourguideName { get; set; }
+            public string TourGuideName { get; set; }
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
             [DataMember(Name = "brands")]
             public Brands[] Brands { get; set; }
         }
 
         [DataContract(Name = "tourguideAssignment")]
-        public class TourguideAssignment
+        public class TourGuideAssignment
         {
 
             [DataMember(Name = "tourguide")]
-            public Tourguide Tourguide { get; set; }
+            public TourGuide TourGuide { get; set; }
         }
 
         [DataContract(Name = "accommodation")]
@@ -268,10 +401,10 @@ namespace Tc.Crm.CustomWorkflowSteps
             public string RoomType { get; set; }
 
             [DataMember(Name = "boardType")]
-            public string BoardType { get; set; }
+            public BoardType BoardType { get; set; }
 
             [DataMember(Name = "status")]
-            public string Status { get; set; }
+            public AccommodationStatus Status { get; set; }
 
             [DataMember(Name = "hasSharedRoom")]
             public bool HasSharedRoom { get; set; }
@@ -303,14 +436,16 @@ namespace Tc.Crm.CustomWorkflowSteps
             [DataMember(Name = "transferServiceLevel")]
             public string TransferServiceLevel { get; set; }
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
             [DataMember(Name = "travelParticipantAssignment")]
             public TravelParticipantAssignment[] TravelParticipantAssignment { get; set; }
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
             [DataMember(Name = "remark")]
             public Remark[] Remark { get; set; }
 
             [DataMember(Name = "tourguideAssignment")]
-            public TourguideAssignment TourguideAssignment { get; set; }
+            public TourGuideAssignment TourGuideAssignment { get; set; }
         }
 
         [DataContract(Name = "transport")]
@@ -333,7 +468,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public string EndDate { get; set; }
 
             [DataMember(Name = "transferType")]
-            public string TransferType { get; set; }
+            public TransferType TransferType { get; set; }
 
             [DataMember(Name = "departureAirport")]
             public string DepartureAirport { get; set; }
@@ -353,9 +488,11 @@ namespace Tc.Crm.CustomWorkflowSteps
             [DataMember(Name = "numberOfParticipants")]
             public int NumberOfParticipants { get; set; }
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
             [DataMember(Name = "travelParticipantAssignment")]
             public TravelParticipantAssignment[] TravelParticipantAssignment { get; set; }
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
             [DataMember(Name = "remark")]
             public Remark[] Remark { get; set; }
         }
@@ -383,7 +520,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public string EndDate { get; set; }
 
             [DataMember(Name = "transferType")]
-            public string TransferType { get; set; }
+            public TransferType TransferType { get; set; }
 
             [DataMember(Name = "departureAirport")]
             public string DepartureAirport { get; set; }
@@ -391,9 +528,11 @@ namespace Tc.Crm.CustomWorkflowSteps
             [DataMember(Name = "arrivalAirport")]
             public string ArrivalAirport { get; set; }
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
             [DataMember(Name = "travelParticipantAssignment")]
             public TravelParticipantAssignment[] TravelParticipantAssignment { get; set; }
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
             [DataMember(Name = "remark")]
             public Remark[] Remark { get; set; }
         }
@@ -427,26 +566,32 @@ namespace Tc.Crm.CustomWorkflowSteps
             [DataMember(Name = "endDate")]
             public string EndDate { get; set; }
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
             [DataMember(Name = "travelParticipantAssignment")]
             public TravelParticipantAssignment[] TravelParticipantAssignment { get; set; }
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
             [DataMember(Name = "remark")]
             public Remark[] Remark { get; set; }
         }
 
         [DataContract(Name = "services")]
-        public class Services
+        public class BookingServices
         {
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
             [DataMember(Name = "accommodation")]
             public Accommodation[] Accommodation { get; set; }
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
             [DataMember(Name = "transport")]
             public Transport[] Transport { get; set; }
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
             [DataMember(Name = "transfer")]
             public Transfer[] Transfer { get; set; }
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
             [DataMember(Name = "extraService")]
             public ExtraService[] ExtraService { get; set; }
         }
@@ -456,7 +601,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         {
 
             [DataMember(Name = "customerID")]
-            public string CustomerID { get; set; }
+            public string CustomerId { get; set; }
 
             [DataMember(Name = "businessArea")]
             public string BusinessArea { get; set; }
@@ -473,10 +618,10 @@ namespace Tc.Crm.CustomWorkflowSteps
         {
 
             [DataMember(Name = "customerStatus")]
-            public string CustomerStatus { get; set; }
+            public CustomerStatus CustomerStatus { get; set; }
 
             [DataMember(Name = "customerType")]
-            public string CustomerType { get; set; }
+            public CustomerType CustomerType { get; set; }
         }
 
         [DataContract(Name = "customerIdentity")]
@@ -487,7 +632,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public string Salutation { get; set; }
 
             [DataMember(Name = "academictitle")]
-            public string Academictitle { get; set; }
+            public string AcademicTitle { get; set; }
 
             [DataMember(Name = "firstName")]
             public string FirstName { get; set; }
@@ -502,7 +647,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public string Language { get; set; }
 
             [DataMember(Name = "gender")]
-            public string Gender { get; set; }
+            public Gender Gender { get; set; }
 
             [DataMember(Name = "birthdate")]
             public string Birthdate { get; set; }
@@ -524,7 +669,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public string Segment { get; set; }
 
             [DataMember(Name = "dateOfdeath")]
-            public string DateOfdeath { get; set; }
+            public string DateOfDeath { get; set; }
         }
 
         [DataContract(Name = "phone")]
@@ -532,7 +677,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         {
 
             [DataMember(Name = "type")]
-            public string Type { get; set; }
+            public PhoneType PhoneType { get; set; }
 
             [DataMember(Name = "number")]
             public string Number { get; set; }
@@ -543,7 +688,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         {
 
             [DataMember(Name = "type")]
-            public string Type { get; set; }
+            public EmailType EmailType { get; set; }
 
             [DataMember(Name = "address")]
             public string Address { get; set; }
@@ -554,7 +699,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         {
 
             [DataMember(Name = "type")]
-            public string Type { get; set; }
+            public string SocialType { get; set; }
 
             [DataMember(Name = "value")]
             public string Value { get; set; }
@@ -579,15 +724,19 @@ namespace Tc.Crm.CustomWorkflowSteps
             [DataMember(Name = "additional")]
             public Additional Additional { get; set; }
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
             [DataMember(Name = "address")]
             public Address[] Address { get; set; }
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
             [DataMember(Name = "phone")]
             public Phone[] Phone { get; set; }
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
             [DataMember(Name = "email")]
             public Email[] Email { get; set; }
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
             [DataMember(Name = "social")]
             public Social[] Social { get; set; }
         }
@@ -605,21 +754,23 @@ namespace Tc.Crm.CustomWorkflowSteps
             [DataMember(Name = "bookingIdentity")]
             public BookingIdentity BookingIdentity { get; set; }
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
             [DataMember(Name = "travelParticipant")]
             public TravelParticipant[] TravelParticipant { get; set; }
 
             [DataMember(Name = "services")]
-            public Services Services { get; set; }
+            public BookingServices Services { get; set; }
 
             [DataMember(Name = "customer")]
             public Customer Customer { get; set; }
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
             [DataMember(Name = "remark")]
             public Remark[] Remark { get; set; }
         }
 
         [DataContract(Name = "booking_booker")]
-        public class Booking_Booker
+        public class BookingBooker
         {
             [DataMember(Name = "address")]
             public Address Address { get; set; }
@@ -632,6 +783,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             [DataMember(Name = "emergencyNumber")]
             public string EmergencyNumber { get; set; }
         }
+
 
 
 

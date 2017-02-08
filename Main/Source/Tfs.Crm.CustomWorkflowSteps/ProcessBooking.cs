@@ -36,12 +36,12 @@ namespace Tc.Crm.CustomWorkflowSteps
             List<SuccessMessage> successMsg = new List<SuccessMessage>();
 
             //Need to update this condition based on customer type
-            if (payloadInfo.CustomerInfo.CustomerGeneral.CustomerType == PayloadBooking.AccountType)
+            if (payloadInfo.CustomerInfo.CustomerGeneral.CustomerType.ToString() == PayloadBooking.AccountType)
             {
                 ProcessAccount(payloadInfo, ref deleteBookingRole);
                 isCustomerTypeAccount = true;
             }
-            else if (payloadInfo.CustomerInfo.CustomerGeneral.CustomerType == PayloadBooking.ContactType)
+            else if (payloadInfo.CustomerInfo.CustomerGeneral.CustomerType.ToString() == PayloadBooking.ContactType)
             {
                 ProcessContact(payloadInfo, ref deleteBookingRole);
                 isCustomerTypeAccount = false;
@@ -99,13 +99,13 @@ namespace Tc.Crm.CustomWorkflowSteps
                 contactEntity[Attributes.Contact.LastName] = payloadInfo.BookingInfo.Customer.CustomerIdentity.LastName;
                 contactEntity[Attributes.Contact.Language] = payloadInfo.BookingInfo.Customer.CustomerIdentity.Language;
                 contactEntity[Attributes.Contact.Gender] = payloadInfo.BookingInfo.Customer.CustomerIdentity.Gender;
-                contactEntity[Attributes.Contact.AcademicTitle] = payloadInfo.BookingInfo.Customer.CustomerIdentity.Academictitle;
+                contactEntity[Attributes.Contact.AcademicTitle] = payloadInfo.BookingInfo.Customer.CustomerIdentity.AcademicTitle;
                 contactEntity[Attributes.Contact.Salutation] = payloadInfo.BookingInfo.Customer.CustomerIdentity.Salutation;
                 contactEntity[Attributes.Contact.BirthDate] = payloadInfo.BookingInfo.Customer.CustomerIdentity.Birthdate;
                 contactEntity[Attributes.Contact.StatusCode] = payloadInfo.BookingInfo.Customer.CustomerGeneral.CustomerStatus;
                 // couldn't find segment,DateofDeath in booking.customer.identity.additional
                 contactEntity[Attributes.Contact.Segment] = payloadInfo.BookingInfo.Customer.Additional.Segment;
-                contactEntity[Attributes.Contact.DateofDeath] = payloadInfo.BookingInfo.Customer.Additional.DateOfdeath;
+                contactEntity[Attributes.Contact.DateofDeath] = payloadInfo.BookingInfo.Customer.Additional.DateOfDeath;
 
                 contactEntity[Attributes.Contact.Address1_AdditionalInformation] = payloadInfo.BookingInfo.Customer.Address[0].AdditionalAddressInfo;
                 contactEntity[Attributes.Contact.Address1_FlatOrUnitNumber] = payloadInfo.BookingInfo.Customer.Address[0].FlatNumberUnit;
@@ -121,18 +121,18 @@ namespace Tc.Crm.CustomWorkflowSteps
                 contactEntity[Attributes.Contact.Address2_CountryId] = payloadInfo.BookingInfo.Customer.Address[1].Country;
                 contactEntity[Attributes.Contact.Address2_County] = payloadInfo.BookingInfo.Customer.Address[1].County;
                 contactEntity[Attributes.Contact.Address2_PostalCode] = payloadInfo.BookingInfo.Customer.Address[1].PostalCode;
-                contactEntity[Attributes.Contact.Telephone2Type] = payloadInfo.BookingInfo.Customer.Phone[0].Type;
+                contactEntity[Attributes.Contact.Telephone2Type] = payloadInfo.BookingInfo.Customer.Phone[0].PhoneType;
                 contactEntity[Attributes.Contact.Telephone1] = payloadInfo.BookingInfo.Customer.Phone[0].Number;
-                contactEntity[Attributes.Contact.Telephone2Type] = payloadInfo.BookingInfo.Customer.Phone[1].Type;
+                contactEntity[Attributes.Contact.Telephone2Type] = payloadInfo.BookingInfo.Customer.Phone[1].PhoneType;
                 contactEntity[Attributes.Contact.Telephone2] = payloadInfo.BookingInfo.Customer.Phone[1].Number;
-                contactEntity[Attributes.Contact.Telephone3Type] = payloadInfo.BookingInfo.Customer.Phone[2].Type;
-                contactEntity[Attributes.Contact.Telephone3] = payloadInfo.BookingInfo.Customer.Phone[2].Type;
+                contactEntity[Attributes.Contact.Telephone3Type] = payloadInfo.BookingInfo.Customer.Phone[2].PhoneType;
+                contactEntity[Attributes.Contact.Telephone3] = payloadInfo.BookingInfo.Customer.Phone[2].Number;
                 contactEntity[Attributes.Contact.EMailAddress1] = payloadInfo.BookingInfo.Customer.Email[0].Address;
-                contactEntity[Attributes.Contact.EmailAddress1Type] = payloadInfo.BookingInfo.Customer.Email[0].Type;
+                contactEntity[Attributes.Contact.EmailAddress1Type] = payloadInfo.BookingInfo.Customer.Email[0].EmailType;
                 contactEntity[Attributes.Contact.EMailAddress2] = payloadInfo.BookingInfo.Customer.Email[1].Address;
-                contactEntity[Attributes.Contact.EmailAddress2Type] = payloadInfo.BookingInfo.Customer.Email[1].Type;
+                contactEntity[Attributes.Contact.EmailAddress2Type] = payloadInfo.BookingInfo.Customer.Email[1].EmailType;
                 contactEntity[Attributes.Contact.EMailAddress3] = payloadInfo.BookingInfo.Customer.Email[2].Address;
-                contactEntity[Attributes.Contact.EmailAddress3Type] = payloadInfo.BookingInfo.Customer.Email[2].Type;
+                contactEntity[Attributes.Contact.EmailAddress3Type] = payloadInfo.BookingInfo.Customer.Email[2].EmailType;
                 contactEntity[Attributes.Contact.SourceMarketId] = payloadInfo.BookingInfo.Customer.CustomerIdentifier.SourceMarket;
 
                 sucMsg = _xrm.UpsertEntity(contactEntity);
@@ -169,21 +169,21 @@ namespace Tc.Crm.CustomWorkflowSteps
                 }
                 if (payloadInfo.BookingInfo.Customer.Phone != null && payloadInfo.BookingInfo.Customer.Phone.Length > 0)
                 {
-                    accountEntity[Attributes.Account.Telephone1_Type] = payloadInfo.BookingInfo.Customer.Phone[0].Type;
+                    accountEntity[Attributes.Account.Telephone1_Type] = payloadInfo.BookingInfo.Customer.Phone[0].PhoneType;
                     accountEntity[Attributes.Account.Telephone1] = payloadInfo.BookingInfo.Customer.Phone[0].Number;
-                    accountEntity[Attributes.Account.Telephone2_Type] = payloadInfo.BookingInfo.Customer.Phone[1].Type;
+                    accountEntity[Attributes.Account.Telephone2_Type] = payloadInfo.BookingInfo.Customer.Phone[1].PhoneType;
                     accountEntity[Attributes.Account.Telephone2] = payloadInfo.BookingInfo.Customer.Phone[1].Number;
-                    accountEntity[Attributes.Account.Telephone3_Type] = payloadInfo.BookingInfo.Customer.Phone[2].Type;
-                    accountEntity[Attributes.Account.Telephone3] = payloadInfo.BookingInfo.Customer.Phone[2].Type;
+                    accountEntity[Attributes.Account.Telephone3_Type] = payloadInfo.BookingInfo.Customer.Phone[2].PhoneType;
+                    accountEntity[Attributes.Account.Telephone3] = payloadInfo.BookingInfo.Customer.Phone[2].Number;
                 }
                 if (payloadInfo.BookingInfo.Customer.Email != null && payloadInfo.BookingInfo.Customer.Email.Length > 0)
                 {
                     accountEntity[Attributes.Account.EMailAddress1] = payloadInfo.BookingInfo.Customer.Email[0].Address;
-                    accountEntity[Attributes.Account.EmailAddress1_Type] = payloadInfo.BookingInfo.Customer.Email[0].Type;
+                    accountEntity[Attributes.Account.EmailAddress1_Type] = payloadInfo.BookingInfo.Customer.Email[0].EmailType;
                     accountEntity[Attributes.Account.EMailAddress2] = payloadInfo.BookingInfo.Customer.Email[1].Address;
-                    accountEntity[Attributes.Account.EmailAddress2_Type] = payloadInfo.BookingInfo.Customer.Email[1].Type;
+                    accountEntity[Attributes.Account.EmailAddress2_Type] = payloadInfo.BookingInfo.Customer.Email[1].EmailType;
                     accountEntity[Attributes.Account.EMailAddress3] = payloadInfo.BookingInfo.Customer.Email[2].Address;
-                    accountEntity[Attributes.Account.EmailAddress3_Type] = payloadInfo.BookingInfo.Customer.Email[2].Type;
+                    accountEntity[Attributes.Account.EmailAddress3_Type] = payloadInfo.BookingInfo.Customer.Email[2].EmailType;
                 }
 
 
@@ -224,7 +224,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                 bookingEntity[Attributes.Booking.BrandId] = new EntityReference(EntityName.Brand, "", payloadInfo.BookingInfo.BookingGeneral.Brand);
                 bookingEntity[Attributes.Booking.BrochureCode] = payloadInfo.BookingInfo.BookingGeneral.BrochureCode;
                 bookingEntity[Attributes.Booking.IsLateBooking] = payloadInfo.BookingInfo.BookingGeneral.IsLateBooking;
-                bookingEntity[Attributes.Booking.NumberofParticipants] = payloadInfo.BookingInfo.BookingGeneral.NumberofParticipants;
+                bookingEntity[Attributes.Booking.NumberofParticipants] = payloadInfo.BookingInfo.BookingGeneral.NumberOfParticipants;
                 bookingEntity[Attributes.Booking.NumberofAdults] = payloadInfo.BookingInfo.BookingGeneral.NumberOfAdults;
                 bookingEntity[Attributes.Booking.NumberofChildren] = payloadInfo.BookingInfo.BookingGeneral.NumberOfChildren;
                 bookingEntity[Attributes.Booking.NumberofInfants] = payloadInfo.BookingInfo.BookingGeneral.NumberOfInfants;
@@ -260,11 +260,11 @@ namespace Tc.Crm.CustomWorkflowSteps
                 if (!string.IsNullOrEmpty(travelParticipants))
                     travelParticipants += _nextLine;
 
-                travelParticipants += payloadInfo.BookingInfo.TravelParticipant[i].TravelParticipantIDOnTour + _seperator +
+                travelParticipants += payloadInfo.BookingInfo.TravelParticipant[i].TravelParticipantIdOnTour + _seperator +
                                       payloadInfo.BookingInfo.TravelParticipant[i].FirstName + _seperator +
                                       payloadInfo.BookingInfo.TravelParticipant[i].LastName + _seperator +
                                       payloadInfo.BookingInfo.TravelParticipant[i].Age + _seperator +
-                                      payloadInfo.BookingInfo.TravelParticipant[i].BirthDate + _seperator +
+                                      payloadInfo.BookingInfo.TravelParticipant[i].Birthdate + _seperator +
                                       payloadInfo.BookingInfo.TravelParticipant[i].Gender + _seperator +
                                       payloadInfo.BookingInfo.TravelParticipant[i].Relation + _seperator +
                                       payloadInfo.BookingInfo.TravelParticipant[i].Language;
@@ -290,8 +290,8 @@ namespace Tc.Crm.CustomWorkflowSteps
                     if (!string.IsNullOrEmpty(remarks))
                         remarks += _nextLine;
 
-                    remarks += payloadInfo.BookingInfo.TravelParticipant[i].TravelParticipantIDOnTour + _seperator +
-                               payloadInfo.BookingInfo.TravelParticipant[i].Remark[j].Type + _seperator +
+                    remarks += payloadInfo.BookingInfo.TravelParticipant[i].TravelParticipantIdOnTour + _seperator +
+                               payloadInfo.BookingInfo.TravelParticipant[i].Remark[j].RemarkType + _seperator +
                                payloadInfo.BookingInfo.TravelParticipant[i].Remark[j].Text;
                 }
 
@@ -345,7 +345,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                     if (!string.IsNullOrEmpty(remarks))
                         remarks += _nextLine;
 
-                    remarks += payloadInfo.BookingInfo.Services.Transfer[i].Remark[j].Type + _seperator +
+                    remarks += payloadInfo.BookingInfo.Services.Transfer[i].Remark[j].RemarkType + _seperator +
                                payloadInfo.BookingInfo.Services.Transfer[i].Remark[j].Text;
                 }
 
@@ -396,7 +396,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                     if (!string.IsNullOrEmpty(extraServiceRemarks))
                         extraServiceRemarks += _nextLine;
 
-                    extraServiceRemarks += payloadInfo.BookingInfo.Services.ExtraService[i].Remark[j].Type + _seperator +
+                    extraServiceRemarks += payloadInfo.BookingInfo.Services.ExtraService[i].Remark[j].RemarkType + _seperator +
                                      payloadInfo.BookingInfo.Services.ExtraService[i].Remark[j].Text;
                                    
                 }
@@ -463,7 +463,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                         for (int j = 0; j < payloadInfo.BookingInfo.Services.Accommodation[i].Remark.Length; j++)
                         {
                             remarkEntity = new Entity(EntityName.Remark);
-                            remarkEntity[Attributes.Remark.Type] = payloadInfo.BookingInfo.Services.Accommodation[i].Remark[j].Type;
+                            remarkEntity[Attributes.Remark.Type] = payloadInfo.BookingInfo.Services.Accommodation[i].Remark[j].RemarkType;
                             remarkEntity[Attributes.Remark.RemarkName] = payloadInfo.BookingInfo.Services.Accommodation[i].Remark[j].Text;
                             //messageList.Find()
                             remarkEntity[Attributes.Remark.BookingAccommodationId] = new EntityReference(EntityName.BookingAccommodation, Guid.Parse(messageList[i].Id));
@@ -520,7 +520,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                 for (int j = 0; j < payloadInfo.BookingInfo.Services.Transport[i].Remark.Length;j++)
                 {
                     TransportRemark = new Entity(EntityName.BookingTransport, "", "");
-                    TransportRemark[Attributes.Remark.Type] = payloadInfo.BookingInfo.Services.Transport[i].Remark[j].Type;
+                    TransportRemark[Attributes.Remark.Type] = payloadInfo.BookingInfo.Services.Transport[i].Remark[j].RemarkType;
                     TransportRemark[Attributes.Remark.RemarkName] = payloadInfo.BookingInfo.Services.Transport[i].Remark[j].Text;
                     TransportRemark[Attributes.Remark.BookingTransportId] = new EntityReference(EntityName.BookingTransport, new Guid(Messages[0].Id));
                     
