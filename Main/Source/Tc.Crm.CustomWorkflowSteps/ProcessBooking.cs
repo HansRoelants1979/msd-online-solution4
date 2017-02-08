@@ -13,11 +13,6 @@ namespace Tc.Crm.CustomWorkflowSteps
     public class ProcessBooking
     {
 
-        CommonXrm _xrm = null;
-        string _seperator = ",";
-        string _nextLine = "\r\n";
-       
-
         /// <summary>
         /// To process booking data
         /// </summary>
@@ -27,12 +22,11 @@ namespace Tc.Crm.CustomWorkflowSteps
         public string ProcessPayload(string json, IOrganizationService service)
         {
             string response = string.Empty;
-            bool isCustomerTypeAccount;
-            bool deleteBookingRole=true;
-            bool deleteBookingAccomdation = true;
-            bool deleteBookingTransport = true;
-            _xrm = new CommonXrm();
-            _xrm._service = service;
+
+            GlobalVariables globalVariable = new GlobalVariables();
+            globalVariable.service = service;
+            globalVariable.xrm = new CommonXrm();
+
 
             PayloadBooking payloadInfo = DeSerializeJson(json);
             List<SuccessMessage> successMsg = new List<SuccessMessage>();
@@ -40,18 +34,24 @@ namespace Tc.Crm.CustomWorkflowSteps
             //Need to update this condition based on customer type
             if (payloadInfo.CustomerInfo.CustomerGeneral.CustomerType.ToString() == PayloadBooking.AccountType)
             {
-                ProcessAccount(payloadInfo, ref deleteBookingRole);
-                isCustomerTypeAccount = true;
+                ProcessAccount(payloadInfo, globalVariable);
+                globalVariable.IsCustomerTypeAccount = true;
             }
             else if (payloadInfo.CustomerInfo.CustomerGeneral.CustomerType.ToString() == PayloadBooking.ContactType)
             {
-                ProcessContact(payloadInfo, ref deleteBookingRole);
-                isCustomerTypeAccount = false;
+                ProcessContact(payloadInfo, globalVariable);
+                globalVariable.IsCustomerTypeAccount = false;
             }
 
-            ProcessBookingInfo(payloadInfo, ref deleteBookingRole, ref deleteBookingAccomdation, ref deleteBookingTransport);
+            ProcessBookingInfo(payloadInfo, globalVariable);
 
-            
+            ProcessAccomodation(payloadInfo, globalVariable);
+
+            ProcessTransport(payloadInfo, globalVariable);
+
+            ProcessAccomodationRemarks(payloadInfo, globalVariable);
+
+            ProcessTransportRemarks(payloadInfo, globalVariable);
 
 
             response = SerializeJson(successMsg);
@@ -66,7 +66,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         string SerializeJson(List<SuccessMessage> successMsg)
         {
             var jsonSerializer = new JavaScriptSerializer();
-            return jsonSerializer.Serialize(successMsg);           
+            return jsonSerializer.Serialize(successMsg);
         }
 
 
@@ -78,7 +78,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         PayloadBooking DeSerializeJson(string json)
         {
             var jsonSerializer = new JavaScriptSerializer();
-            PayloadBooking bookingInfo = jsonSerializer.Deserialize<PayloadBooking>(json);           
+            PayloadBooking bookingInfo = jsonSerializer.Deserialize<PayloadBooking>(json);
             return bookingInfo;
         }
 
@@ -88,7 +88,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// <param name="bookingInfo"></param>
         /// <param name="service"></param>
         /// <returns></returns>
-        SuccessMessage ProcessContact(PayloadBooking payloadInfo, ref bool deleteBookingRole)
+        SuccessMessage ProcessContact(PayloadBooking payloadInfo, GlobalVariables globalVariable)
         {
             SuccessMessage sucMsg = null;
             if (payloadInfo.BookingInfo.Customer != null)
@@ -108,7 +108,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                 // couldn't find segment,DateofDeath in booking.customer.identity.additional
                 contactEntity[Attributes.Contact.Segment] = payloadInfo.BookingInfo.Customer.Additional.Segment;
                 contactEntity[Attributes.Contact.DateofDeath] = payloadInfo.BookingInfo.Customer.Additional.DateOfDeath;
-                if (payloadInfo.BookingInfo.Customer.Address != null && payloadInfo.BookingInfo.Customer.Address.Length>0)
+                if (payloadInfo.BookingInfo.Customer.Address != null && payloadInfo.BookingInfo.Customer.Address.Length > 0)
                 {
                     contactEntity[Attributes.Contact.Address1_AdditionalInformation] = payloadInfo.BookingInfo.Customer.Address[0].AdditionalAddressInfo;
                     contactEntity[Attributes.Contact.Address1_FlatOrUnitNumber] = payloadInfo.BookingInfo.Customer.Address[0].FlatNumberUnit;
@@ -125,7 +125,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                     contactEntity[Attributes.Contact.Address2_County] = payloadInfo.BookingInfo.Customer.Address[1].County;
                     contactEntity[Attributes.Contact.Address2_PostalCode] = payloadInfo.BookingInfo.Customer.Address[1].PostalCode;
                 }
-                if (payloadInfo.BookingInfo.Customer.Phone != null && payloadInfo.BookingInfo.Customer.Phone.Length>0)
+                if (payloadInfo.BookingInfo.Customer.Phone != null && payloadInfo.BookingInfo.Customer.Phone.Length > 0)
                 {
                     contactEntity[Attributes.Contact.Telephone2Type] = payloadInfo.BookingInfo.Customer.Phone[0].PhoneType;
                     contactEntity[Attributes.Contact.Telephone1] = payloadInfo.BookingInfo.Customer.Phone[0].Number;
@@ -134,7 +134,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                     contactEntity[Attributes.Contact.Telephone3Type] = payloadInfo.BookingInfo.Customer.Phone[2].PhoneType;
                     contactEntity[Attributes.Contact.Telephone3] = payloadInfo.BookingInfo.Customer.Phone[2].Number;
                 }
-                if (payloadInfo.BookingInfo.Customer.Email != null && payloadInfo.BookingInfo.Customer.Email.Length>0)
+                if (payloadInfo.BookingInfo.Customer.Email != null && payloadInfo.BookingInfo.Customer.Email.Length > 0)
                 {
                     contactEntity[Attributes.Contact.EMailAddress1] = payloadInfo.BookingInfo.Customer.Email[0].Address;
                     contactEntity[Attributes.Contact.EmailAddress1Type] = payloadInfo.BookingInfo.Customer.Email[0].EmailType;
@@ -145,10 +145,10 @@ namespace Tc.Crm.CustomWorkflowSteps
                 }
                 contactEntity[Attributes.Contact.SourceMarketId] = payloadInfo.BookingInfo.Customer.CustomerIdentifier.SourceMarket;
                 contactEntity[Attributes.Contact.SourceSystemID] = payloadInfo.BookingInfo.Customer.CustomerIdentifier.CustomerId;
-                sucMsg = _xrm.UpsertEntity(contactEntity);
+                sucMsg = globalVariable.xrm.UpsertEntity(contactEntity, globalVariable.service);
 
                 if (sucMsg.Create)
-                    deleteBookingRole = false;
+                    globalVariable.DeleteBookingRole = false;
             }
 
             return sucMsg;
@@ -159,7 +159,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// </summary>
         /// <param name="bookingInfo"></param>
         /// <returns></returns>
-        SuccessMessage ProcessAccount(PayloadBooking payloadInfo, ref bool deleteBookingRole)
+        SuccessMessage ProcessAccount(PayloadBooking payloadInfo, GlobalVariables globalVariable)
         {
             SuccessMessage sucMsg = null;
 
@@ -199,11 +199,11 @@ namespace Tc.Crm.CustomWorkflowSteps
                 accountEntity[Attributes.Account.SourceSystemID] = payloadInfo.BookingInfo.Customer.CustomerIdentifier.CustomerId;
 
 
-                sucMsg = _xrm.UpsertEntity(accountEntity);
+                sucMsg = globalVariable.xrm.UpsertEntity(accountEntity, globalVariable.service);
                 if (sucMsg.Create)
-                    deleteBookingRole = false;
+                    globalVariable.DeleteBookingRole = false;
             }
-            sucMsg.Key = payloadInfo.CustomerInfo.CustomerIdentifier.SourceSystem;
+            //sucMsg.Key = payloadInfo.CustomerInfo.CustomerIdentifier.SourceSystem;
 
             return sucMsg;
         }
@@ -214,7 +214,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// <param name="payloadInfo"></param>
         /// <param name="service"></param>
         /// <returns></returns>
-        SuccessMessage ProcessBookingInfo(PayloadBooking payloadInfo, ref bool deleteBookingRole, ref bool deleteBookingAccomdation, ref bool deleteBookingTransport)
+        SuccessMessage ProcessBookingInfo(PayloadBooking payloadInfo, GlobalVariables globalVariable)
         {
             SuccessMessage sucMsg = null;
             if (payloadInfo.BookingInfo.BookingIdentifier != null)
@@ -243,25 +243,25 @@ namespace Tc.Crm.CustomWorkflowSteps
                 bookingEntity[Attributes.Booking.BookerPhone1] = payloadInfo.BookingInfo.BookingIdentity.Booker.Phone;
                 bookingEntity[Attributes.Booking.BookerPhone2] = payloadInfo.BookingInfo.BookingIdentity.Booker.Mobile;
                 bookingEntity[Attributes.Booking.BookerEmergencyPhone] = payloadInfo.BookingInfo.BookingIdentity.Booker.EmergencyNumber;
-                bookingEntity[Attributes.Booking.Participants] = PrepareTravelParticipantsInfo(payloadInfo);
-                bookingEntity[Attributes.Booking.ParticipantRemarks] = PrepareTravelParticipantsRemarks(payloadInfo);
-                bookingEntity[Attributes.Booking.Transfer] = PrepareTransferInfo(payloadInfo);
-                bookingEntity[Attributes.Booking.TransferRemarks] = PrepareTransferRemarks(payloadInfo);
-                bookingEntity[Attributes.Booking.ExtraService] = PrepareExtraServicesInfo(payloadInfo);
-                bookingEntity[Attributes.Booking.ExtraServiceRemarks] = PrepareExtraServiceRemarks(payloadInfo);
+                bookingEntity[Attributes.Booking.Participants] = PrepareTravelParticipantsInfo(payloadInfo, globalVariable);
+                bookingEntity[Attributes.Booking.ParticipantRemarks] = PrepareTravelParticipantsRemarks(payloadInfo, globalVariable);
+                bookingEntity[Attributes.Booking.Transfer] = PrepareTransferInfo(payloadInfo, globalVariable);
+                bookingEntity[Attributes.Booking.TransferRemarks] = PrepareTransferRemarks(payloadInfo, globalVariable);
+                bookingEntity[Attributes.Booking.ExtraService] = PrepareExtraServicesInfo(payloadInfo, globalVariable);
+                bookingEntity[Attributes.Booking.ExtraServiceRemarks] = PrepareExtraServiceRemarks(payloadInfo, globalVariable);
                 bookingEntity[Attributes.Booking.SourceMarketId] = new EntityReference(EntityName.Country, "", payloadInfo.BookingInfo.BookingIdentifier.SourceMarket);
                 bookingEntity[Attributes.Booking.Statuscode] = payloadInfo.BookingInfo.BookingGeneral.BookingStatus;
                 bookingEntity[Attributes.Booking.TravelAmount] = payloadInfo.BookingInfo.BookingGeneral.TravelAmount;
                 bookingEntity[Attributes.Booking.TransactionCurrencyId] = payloadInfo.BookingInfo.BookingGeneral.Currency;
                 bookingEntity[Attributes.Booking.HasSourceMarketComplaint] = payloadInfo.BookingInfo.BookingGeneral.HasComplaint;
                 bookingEntity[Attributes.Booking.BookerEmail] = payloadInfo.BookingInfo.BookingIdentity.Booker.Email;
-                sucMsg = _xrm.UpsertEntity(bookingEntity);
+                sucMsg = globalVariable.xrm.UpsertEntity(bookingEntity, globalVariable.service);
 
                 if (sucMsg.Create)
-                    deleteBookingRole = false;
-                 deleteBookingAccomdation = false;
-                 deleteBookingTransport = false;
-
+                {
+                    globalVariable.DeleteBookingRole = false;
+                    globalVariable.DeleteAccomdOrTrnsprt = false;
+                }
             }
             return sucMsg;
         }
@@ -271,25 +271,25 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// </summary>
         /// <param name="payloadInfo"></param>
         /// <returns></returns>
-        string PrepareTravelParticipantsInfo(PayloadBooking payloadInfo)
+        string PrepareTravelParticipantsInfo(PayloadBooking payloadInfo, GlobalVariables globalVariable)
         {
             string travelParticipants = string.Empty;
-            if(payloadInfo.BookingInfo.TravelParticipant != null)
-            for (int i = 0; i < payloadInfo.BookingInfo.TravelParticipant.Length; i++)
-            {
-                if (!string.IsNullOrEmpty(travelParticipants))
-                    travelParticipants += _nextLine;
+            if (payloadInfo.BookingInfo.TravelParticipant != null)
+                for (int i = 0; i < payloadInfo.BookingInfo.TravelParticipant.Length; i++)
+                {
+                    if (!string.IsNullOrEmpty(travelParticipants))
+                        travelParticipants += globalVariable.NextLine;
 
-                travelParticipants += payloadInfo.BookingInfo.TravelParticipant[i].TravelParticipantIdOnTour + _seperator +
-                                      payloadInfo.BookingInfo.TravelParticipant[i].FirstName + _seperator +
-                                      payloadInfo.BookingInfo.TravelParticipant[i].LastName + _seperator +
-                                      payloadInfo.BookingInfo.TravelParticipant[i].Age + _seperator +
-                                      payloadInfo.BookingInfo.TravelParticipant[i].Birthdate + _seperator +
-                                      payloadInfo.BookingInfo.TravelParticipant[i].Gender + _seperator +
-                                      payloadInfo.BookingInfo.TravelParticipant[i].Relation + _seperator +
-                                      payloadInfo.BookingInfo.TravelParticipant[i].Language;
+                    travelParticipants += payloadInfo.BookingInfo.TravelParticipant[i].TravelParticipantIdOnTour + globalVariable.Seperator +
+                                          payloadInfo.BookingInfo.TravelParticipant[i].FirstName + globalVariable.Seperator +
+                                          payloadInfo.BookingInfo.TravelParticipant[i].LastName + globalVariable.Seperator +
+                                          payloadInfo.BookingInfo.TravelParticipant[i].Age + globalVariable.Seperator +
+                                          payloadInfo.BookingInfo.TravelParticipant[i].Birthdate + globalVariable.Seperator +
+                                          payloadInfo.BookingInfo.TravelParticipant[i].Gender + globalVariable.Seperator +
+                                          payloadInfo.BookingInfo.TravelParticipant[i].Relation + globalVariable.Seperator +
+                                          payloadInfo.BookingInfo.TravelParticipant[i].Language;
 
-            }
+                }
             return travelParticipants;
         }
 
@@ -298,53 +298,53 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// </summary>
         /// <param name="payloadInfo"></param>
         /// <returns></returns>
-        string PrepareTravelParticipantsRemarks(PayloadBooking payloadInfo)
+        string PrepareTravelParticipantsRemarks(PayloadBooking payloadInfo, GlobalVariables globalVariable)
         {
             string remarks = string.Empty;
-            if(payloadInfo.BookingInfo.TravelParticipant != null)
-            for (int i = 0; i < payloadInfo.BookingInfo.TravelParticipant.Length; i++)
-            {
-                if(payloadInfo.BookingInfo.TravelParticipant[i].Remark != null)
-                for (int j = 0; j < payloadInfo.BookingInfo.TravelParticipant[i].Remark.Length; j++)
+            if (payloadInfo.BookingInfo.TravelParticipant != null)
+                for (int i = 0; i < payloadInfo.BookingInfo.TravelParticipant.Length; i++)
                 {
-                    if (!string.IsNullOrEmpty(remarks))
-                        remarks += _nextLine;
+                    if (payloadInfo.BookingInfo.TravelParticipant[i].Remark != null)
+                        for (int j = 0; j < payloadInfo.BookingInfo.TravelParticipant[i].Remark.Length; j++)
+                        {
+                            if (!string.IsNullOrEmpty(remarks))
+                                remarks += globalVariable.NextLine;
 
-                    remarks += payloadInfo.BookingInfo.TravelParticipant[i].TravelParticipantIdOnTour + _seperator +
-                               payloadInfo.BookingInfo.TravelParticipant[i].Remark[j].RemarkType + _seperator +
-                               payloadInfo.BookingInfo.TravelParticipant[i].Remark[j].Text;
+                            remarks += payloadInfo.BookingInfo.TravelParticipant[i].TravelParticipantIdOnTour + globalVariable.Seperator +
+                                       payloadInfo.BookingInfo.TravelParticipant[i].Remark[j].RemarkType + globalVariable.Seperator +
+                                       payloadInfo.BookingInfo.TravelParticipant[i].Remark[j].Text;
+                        }
+
                 }
-
-            }
             return remarks;
         }
-        
+
         /// <summary>
         /// To prepare transfer information
         /// </summary>
         /// <param name="payloadInfo"></param>
         /// <returns></returns>
-        string PrepareTransferInfo(PayloadBooking payloadInfo)
+        string PrepareTransferInfo(PayloadBooking payloadInfo, GlobalVariables globalVariable)
         {
             string transferInfo = string.Empty;
-            if(payloadInfo.BookingInfo.Services != null && payloadInfo.BookingInfo.Services.Transfer != null)
-            for (int i = 0; i < payloadInfo.BookingInfo.Services.Transfer.Length; i++)
-            {
-                if (!string.IsNullOrEmpty(transferInfo))
-                    transferInfo += _nextLine;
+            if (payloadInfo.BookingInfo.Services != null && payloadInfo.BookingInfo.Services.Transfer != null)
+                for (int i = 0; i < payloadInfo.BookingInfo.Services.Transfer.Length; i++)
+                {
+                    if (!string.IsNullOrEmpty(transferInfo))
+                        transferInfo += globalVariable.NextLine;
 
-                transferInfo += payloadInfo.BookingInfo.Services.Transfer[i].TransferCode + _seperator +
-                                payloadInfo.BookingInfo.Services.Transfer[i].TransferDescription + _seperator +
-                                payloadInfo.BookingInfo.Services.Transfer[i].Order + _seperator +
-                                payloadInfo.BookingInfo.Services.Transfer[i].StartDate + _seperator +
-                                payloadInfo.BookingInfo.Services.Transfer[i].EndDate + _seperator +
-                                payloadInfo.BookingInfo.Services.Transfer[i].Category + _seperator +
-                                payloadInfo.BookingInfo.Services.Transfer[i].TransferType + _seperator +
-                                payloadInfo.BookingInfo.Services.Transfer[i].DepartureAirport + _seperator +
-                                payloadInfo.BookingInfo.Services.Transfer[i].ArrivalAirport;
+                    transferInfo += payloadInfo.BookingInfo.Services.Transfer[i].TransferCode + globalVariable.Seperator +
+                                    payloadInfo.BookingInfo.Services.Transfer[i].TransferDescription + globalVariable.Seperator +
+                                    payloadInfo.BookingInfo.Services.Transfer[i].Order + globalVariable.Seperator +
+                                    payloadInfo.BookingInfo.Services.Transfer[i].StartDate + globalVariable.Seperator +
+                                    payloadInfo.BookingInfo.Services.Transfer[i].EndDate + globalVariable.Seperator +
+                                    payloadInfo.BookingInfo.Services.Transfer[i].Category + globalVariable.Seperator +
+                                    payloadInfo.BookingInfo.Services.Transfer[i].TransferType + globalVariable.Seperator +
+                                    payloadInfo.BookingInfo.Services.Transfer[i].DepartureAirport + globalVariable.Seperator +
+                                    payloadInfo.BookingInfo.Services.Transfer[i].ArrivalAirport;
 
 
-            }
+                }
             return transferInfo;
         }
 
@@ -353,23 +353,23 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// </summary>
         /// <param name="payloadInfo"></param>
         /// <returns></returns>
-        string PrepareTransferRemarks(PayloadBooking payloadInfo)
+        string PrepareTransferRemarks(PayloadBooking payloadInfo, GlobalVariables globalVariable)
         {
             string remarks = string.Empty;
-            if(payloadInfo.BookingInfo.Services != null && payloadInfo.BookingInfo.Services.Transfer != null)
-            for (int i = 0; i < payloadInfo.BookingInfo.Services.Transfer.Length; i++)
-            {
-                if(payloadInfo.BookingInfo.Services.Transfer[i].Remark != null)
-                for (int j = 0; j < payloadInfo.BookingInfo.Services.Transfer[i].Remark.Length; j++)
+            if (payloadInfo.BookingInfo.Services != null && payloadInfo.BookingInfo.Services.Transfer != null)
+                for (int i = 0; i < payloadInfo.BookingInfo.Services.Transfer.Length; i++)
                 {
-                    if (!string.IsNullOrEmpty(remarks))
-                        remarks += _nextLine;
+                    if (payloadInfo.BookingInfo.Services.Transfer[i].Remark != null)
+                        for (int j = 0; j < payloadInfo.BookingInfo.Services.Transfer[i].Remark.Length; j++)
+                        {
+                            if (!string.IsNullOrEmpty(remarks))
+                                remarks += globalVariable.NextLine;
 
-                    remarks += payloadInfo.BookingInfo.Services.Transfer[i].Remark[j].RemarkType + _seperator +
-                               payloadInfo.BookingInfo.Services.Transfer[i].Remark[j].Text;
+                            remarks += payloadInfo.BookingInfo.Services.Transfer[i].Remark[j].RemarkType + globalVariable.Seperator +
+                                       payloadInfo.BookingInfo.Services.Transfer[i].Remark[j].Text;
+                        }
+
                 }
-
-            }
             return remarks;
         }
 
@@ -378,24 +378,24 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// </summary>
         /// <param name="payloadInfo"></param>
         /// <returns></returns>
-        string PrepareExtraServicesInfo(PayloadBooking payloadInfo)
+        string PrepareExtraServicesInfo(PayloadBooking payloadInfo, GlobalVariables globalVariable)
         {
             string extraServices = string.Empty;
-            if(payloadInfo.BookingInfo.Services != null && payloadInfo.BookingInfo.Services.ExtraService != null)
-            for (int i = 0; i < payloadInfo.BookingInfo.Services.ExtraService.Length; i++)
-            {
-               
+            if (payloadInfo.BookingInfo.Services != null && payloadInfo.BookingInfo.Services.ExtraService != null)
+                for (int i = 0; i < payloadInfo.BookingInfo.Services.ExtraService.Length; i++)
+                {
+
                     if (!string.IsNullOrEmpty(extraServices))
-                        extraServices += _nextLine;
+                        extraServices += globalVariable.NextLine;
 
-                extraServices += payloadInfo.BookingInfo.Services.ExtraService[i].ExtraServiceCode + _seperator +
-                                 payloadInfo.BookingInfo.Services.ExtraService[i].ExtraServiceDescription + _seperator +
-                                 payloadInfo.BookingInfo.Services.ExtraService[i].Order + _seperator +
-                                 payloadInfo.BookingInfo.Services.ExtraService[i].StartDate + _seperator +
-                                 payloadInfo.BookingInfo.Services.ExtraService[i].EndDate;
+                    extraServices += payloadInfo.BookingInfo.Services.ExtraService[i].ExtraServiceCode + globalVariable.Seperator +
+                                     payloadInfo.BookingInfo.Services.ExtraService[i].ExtraServiceDescription + globalVariable.Seperator +
+                                     payloadInfo.BookingInfo.Services.ExtraService[i].Order + globalVariable.Seperator +
+                                     payloadInfo.BookingInfo.Services.ExtraService[i].StartDate + globalVariable.Seperator +
+                                     payloadInfo.BookingInfo.Services.ExtraService[i].EndDate;
 
 
-            }
+                }
             return extraServices;
         }
 
@@ -404,24 +404,24 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// </summary>
         /// <param name="payloadInfo"></param>
         /// <returns></returns>
-        string PrepareExtraServiceRemarks(PayloadBooking payloadInfo)
+        string PrepareExtraServiceRemarks(PayloadBooking payloadInfo, GlobalVariables globalVariable)
         {
             string extraServiceRemarks = string.Empty;
-            if(payloadInfo.BookingInfo.Services != null && payloadInfo.BookingInfo.Services.ExtraService != null)
-            for (int i = 0; i < payloadInfo.BookingInfo.Services.ExtraService.Length; i++)
-            {
-                if(payloadInfo.BookingInfo.Services.ExtraService[i].Remark != null)
-                for (int j = 0; j < payloadInfo.BookingInfo.Services.ExtraService[i].Remark.Length; j++)
+            if (payloadInfo.BookingInfo.Services != null && payloadInfo.BookingInfo.Services.ExtraService != null)
+                for (int i = 0; i < payloadInfo.BookingInfo.Services.ExtraService.Length; i++)
                 {
-                    if (!string.IsNullOrEmpty(extraServiceRemarks))
-                        extraServiceRemarks += _nextLine;
+                    if (payloadInfo.BookingInfo.Services.ExtraService[i].Remark != null)
+                        for (int j = 0; j < payloadInfo.BookingInfo.Services.ExtraService[i].Remark.Length; j++)
+                        {
+                            if (!string.IsNullOrEmpty(extraServiceRemarks))
+                                extraServiceRemarks += globalVariable.NextLine;
 
-                    extraServiceRemarks += payloadInfo.BookingInfo.Services.ExtraService[i].Remark[j].RemarkType + _seperator +
-                                     payloadInfo.BookingInfo.Services.ExtraService[i].Remark[j].Text;
-                                   
+                            extraServiceRemarks += payloadInfo.BookingInfo.Services.ExtraService[i].Remark[j].RemarkType + globalVariable.Seperator +
+                                             payloadInfo.BookingInfo.Services.ExtraService[i].Remark[j].Text;
+
+                        }
+
                 }
-
-            }
             return extraServiceRemarks;
         }
 
@@ -431,14 +431,15 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// </summary>
         /// <param name="payloadInfo"></param>
         /// <returns></returns>
-        void ProcessAccomodation(PayloadBooking payloadInfo , ref bool deleteBookingAccomdation)
+        void ProcessAccomodation(PayloadBooking payloadInfo, GlobalVariables globalVariable)
         {
-            if (deleteBookingAccomdation)
+            if (globalVariable.DeleteAccomdOrTrnsprt)
             {
                 ProcessRecordsToDelete(EntityName.BookingAccommodation,
                     new string[] { Attributes.BookingAccommodation.BookingId },
                     new string[] { Attributes.BookingAccommodation.BookingId },
-                    new string[] { "" });
+                    new string[] { "" },
+                    globalVariable);
 
             }
 
@@ -449,7 +450,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                 for (int i = 0; i < payloadInfo.BookingInfo.Services.Accommodation.Length; i++)
                 {
                     accomodationEntity = new Entity(EntityName.BookingAccommodation, "", "");
-                    accomodationEntity[Attributes.BookingAccommodation.HotelId] = _xrm.SetLookupValueUsingAlternateKey(EntityName.Hotel, "", payloadInfo.BookingInfo.Services.Accommodation[i].GroupAccommodationCode);
+                    accomodationEntity[Attributes.BookingAccommodation.HotelId] = new EntityReference(EntityName.Hotel, "", payloadInfo.BookingInfo.Services.Accommodation[i].GroupAccommodationCode);
                     accomodationEntity[Attributes.BookingAccommodation.Order] = payloadInfo.BookingInfo.Services.Accommodation[i].Order;
                     accomodationEntity[Attributes.BookingAccommodation.StartDateandTime] = payloadInfo.BookingInfo.Services.Accommodation[i].StartDate;
                     accomodationEntity[Attributes.BookingAccommodation.EndDateandTime] = payloadInfo.BookingInfo.Services.Accommodation[i].EndDate;
@@ -470,7 +471,7 @@ namespace Tc.Crm.CustomWorkflowSteps
 
                 }
 
-                _xrm.BulkCreate(entColAccomodation);
+                globalVariable.xrm.BulkCreate(entColAccomodation, globalVariable.service);
             }
         }
 
@@ -479,7 +480,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// </summary>
         /// <param name="payloadInfo"></param>
         /// <param name="messageList"></param>
-        void ProcessAccomodationRemarks(PayloadBooking payloadInfo, List<SuccessMessage> messageList)
+        void ProcessAccomodationRemarks(PayloadBooking payloadInfo, GlobalVariables globalVariable)
         {
             EntityCollection entColAccomodationRemarks = new EntityCollection();
             Entity remarkEntity = null;
@@ -495,33 +496,31 @@ namespace Tc.Crm.CustomWorkflowSteps
                             remarkEntity[Attributes.Remark.Type] = payloadInfo.BookingInfo.Services.Accommodation[i].Remark[j].RemarkType;
                             remarkEntity[Attributes.Remark.RemarkName] = payloadInfo.BookingInfo.Services.Accommodation[i].Remark[j].Text;
                             //messageList.Find()
-                            remarkEntity[Attributes.Remark.BookingAccommodationId] = new EntityReference(EntityName.BookingAccommodation, Guid.Parse(messageList[i].Id));
+                            remarkEntity[Attributes.Remark.BookingAccommodationId] = new EntityReference(EntityName.BookingAccommodation, "", "");
                             entColAccomodationRemarks.Entities.Add(remarkEntity);
                         }
                     }
                 }
 
                 if (entColAccomodationRemarks.Entities.Count > 0)
-                    _xrm.BulkCreate(entColAccomodationRemarks);
+                    globalVariable.xrm.BulkCreate(entColAccomodationRemarks, globalVariable.service);
             }
         }
-        List<SuccessMessage> ProcessTransport(PayloadBooking payloadInfo, ref bool deleteBookingTransport)
+
+        List<SuccessMessage> ProcessTransport(PayloadBooking payloadInfo, GlobalVariables globalVariable)
         {
             EntityCollection entColTransport = new EntityCollection();
             Entity transportEntity = null;
 
-            if (deleteBookingTransport)
+            if (globalVariable.DeleteAccomdOrTrnsprt)
             {
                 ProcessRecordsToDelete(EntityName.BookingTransport,
                     new string[] { Attributes.BookingTransport.BookingId },
                     new string[] { Attributes.BookingAccommodation.BookingId },
-                    new string[] { "" });
+                    new string[] { "" },
+                    globalVariable);
 
             }
-
-            
-
-
 
             for (int i = 0; i < payloadInfo.BookingInfo.Services.Transport.Length; i++)
             {
@@ -532,8 +531,8 @@ namespace Tc.Crm.CustomWorkflowSteps
                 transportEntity[Attributes.BookingTransport.StartDateandTime] = payloadInfo.BookingInfo.Services.Transport[i].StartDate;
                 transportEntity[Attributes.BookingTransport.EndDateandTime] = payloadInfo.BookingInfo.Services.Transport[i].EndDate;
                 transportEntity[Attributes.BookingTransport.TransferType] = payloadInfo.BookingInfo.Services.Transport[i].TransferType;
-                transportEntity[Attributes.BookingTransport.DepartureGatewayId] = _xrm.SetLookupValueUsingAlternateKey(EntityName.Gateway, "", payloadInfo.BookingInfo.Services.Transport[i].DepartureAirport);
-                transportEntity[Attributes.BookingTransport.ArrivalGatewayId] = _xrm.SetLookupValueUsingAlternateKey(EntityName.Gateway, "", payloadInfo.BookingInfo.Services.Transport[i].ArrivalAirport);
+                transportEntity[Attributes.BookingTransport.DepartureGatewayId] = new EntityReference(EntityName.Gateway, "", payloadInfo.BookingInfo.Services.Transport[i].DepartureAirport);
+                transportEntity[Attributes.BookingTransport.ArrivalGatewayId] = new EntityReference(EntityName.Gateway, "", payloadInfo.BookingInfo.Services.Transport[i].ArrivalAirport);
                 transportEntity[Attributes.BookingTransport.CarrierCode] = payloadInfo.BookingInfo.Services.Transport[i].CarrierCode;
                 transportEntity[Attributes.BookingTransport.FlightNumber] = payloadInfo.BookingInfo.Services.Transport[i].FlightNumber;
                 transportEntity[Attributes.BookingTransport.FlightIdentifier] = payloadInfo.BookingInfo.Services.Transport[i].FlightIdentifier;
@@ -545,10 +544,10 @@ namespace Tc.Crm.CustomWorkflowSteps
 
             }
 
-            return _xrm.BulkCreate(entColTransport);
+            return globalVariable.xrm.BulkCreate(entColTransport, globalVariable.service);
         }
 
-        void ProcessTransportRemarks(PayloadBooking payloadInfo, List<SuccessMessage> Messages )
+        void ProcessTransportRemarks(PayloadBooking payloadInfo, GlobalVariables globalVariable)
         {
 
             EntityCollection entColTransportRemark = new EntityCollection();
@@ -557,13 +556,13 @@ namespace Tc.Crm.CustomWorkflowSteps
 
             for (int i = 0; i < payloadInfo.BookingInfo.Services.Transport.Length; i++)
             {
-                for (int j = 0; j < payloadInfo.BookingInfo.Services.Transport[i].Remark.Length;j++)
+                for (int j = 0; j < payloadInfo.BookingInfo.Services.Transport[i].Remark.Length; j++)
                 {
                     TransportRemark = new Entity(EntityName.BookingTransport, "", "");
                     TransportRemark[Attributes.Remark.Type] = payloadInfo.BookingInfo.Services.Transport[i].Remark[j].RemarkType;
                     TransportRemark[Attributes.Remark.RemarkName] = payloadInfo.BookingInfo.Services.Transport[i].Remark[j].Text;
-                    TransportRemark[Attributes.Remark.BookingTransportId] = new EntityReference(EntityName.BookingTransport, new Guid(Messages[0].Id));
-                    
+                    TransportRemark[Attributes.Remark.BookingTransportId] = new EntityReference(EntityName.BookingTransport, "", "");
+
                     entColTransportRemark.Entities.Add(TransportRemark);
                 }
 
@@ -571,36 +570,37 @@ namespace Tc.Crm.CustomWorkflowSteps
             }
 
             if (entColTransportRemark.Entities.Count > 0)
-                _xrm.BulkCreate(entColTransportRemark);
+                globalVariable.xrm.BulkCreate(entColTransportRemark, globalVariable.service);
 
         }
 
-        void ProcessBookingRole(PayloadBooking payloadInfo, bool isCustomerTypeAccount, bool deleteBookingRole)
+        void ProcessBookingRole(PayloadBooking payloadInfo, GlobalVariables globalVariable)
         {
-            if (deleteBookingRole)
+            if (globalVariable.DeleteBookingRole)
             {
                 ProcessRecordsToDelete(EntityName.CustomerBookingRole,
                     new string[] { Attributes.CustomerBookingRole.CustomerBookingRoleId },
                     new string[] { Attributes.CustomerBookingRole.BookingId, Attributes.CustomerBookingRole.Customer },
-                    new string[] { "" });
+                    new string[] { "" },
+                    globalVariable);
 
             }
 
             Entity entCustBookingRole = new Entity(EntityName.CustomerBookingRole);
             entCustBookingRole[Attributes.CustomerBookingRole.BookingId] = new EntityReference(EntityName.Booking, "", "");
-            if (isCustomerTypeAccount)
+            if (globalVariable.IsCustomerTypeAccount)
             {
-                entCustBookingRole[Attributes.CustomerBookingRole.Customer] = new EntityReference(EntityName.Account, "","");
+                entCustBookingRole[Attributes.CustomerBookingRole.Customer] = new EntityReference(EntityName.Account, "", "");
             }
             else
             {
                 entCustBookingRole[Attributes.CustomerBookingRole.Customer] = new EntityReference(EntityName.Contact, "", "");
             }
 
-            EntityCollection entCol = new EntityCollection();            
+            EntityCollection entCol = new EntityCollection();
             entCol.Entities.Add(entCustBookingRole);
 
-            _xrm.BulkCreate(entCol);
+            globalVariable.xrm.BulkCreate(entCol, globalVariable.service);
         }
 
         /// <summary>
@@ -610,9 +610,9 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// <param name="columns"></param>
         /// <param name="filterKeys"></param>
         /// <param name="filterValues"></param>
-        void ProcessRecordsToDelete(string entityName, string[] columns, string[] filterKeys, string[] filterValues)
+        void ProcessRecordsToDelete(string entityName, string[] columns, string[] filterKeys, string[] filterValues, GlobalVariables globalVariable)
         {
-            EntityCollection entCollection = _xrm.RetrieveMultipleRecords(entityName, columns, filterKeys, filterValues);                   
+            EntityCollection entCollection = globalVariable.xrm.RetrieveMultipleRecords(entityName, columns, filterKeys, filterValues, globalVariable.service);
             if (entCollection != null && entCollection.Entities.Count > 0)
             {
                 EntityReferenceCollection entRefCollection = new EntityReferenceCollection();
@@ -620,11 +620,28 @@ namespace Tc.Crm.CustomWorkflowSteps
                 {
                     entRefCollection.Add(new EntityReference(ent.LogicalName, ent.Id));
                 }
-                _xrm.BulkDelete(entRefCollection);
+                globalVariable.xrm.BulkDelete(entRefCollection, globalVariable.service);
             }
         }
 
 
 
+    }
+
+    public class GlobalVariables
+    {
+        public CommonXrm xrm { get; set; }
+
+        public IOrganizationService service { get; set; }
+
+        public string Seperator { get { return ","; }  }
+
+        public string NextLine { get { return "\r\n"; } }
+
+        public bool IsCustomerTypeAccount { get; set; }
+
+        public bool DeleteBookingRole  { get; set; }
+
+        public bool DeleteAccomdOrTrnsprt { get; set; }
     }
 }

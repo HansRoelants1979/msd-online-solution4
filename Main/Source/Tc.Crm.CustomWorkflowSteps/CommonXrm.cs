@@ -9,19 +9,17 @@ namespace Tc.Crm.CustomWorkflowSteps
     public class CommonXrm
     {
               
-
-        public IOrganizationService _service = null;
-
+        
         /// <summary>
         /// Call this method to create or update record
         /// </summary>
         /// <param name="entityRecord">Entity to Create or Update</param>
         /// <returns></returns>
-        public SuccessMessage UpsertEntity(Entity entityRecord)
+        public SuccessMessage UpsertEntity(Entity entityRecord, IOrganizationService service)
         {  
 
             SuccessMessage successMsg = null;
-            if (_service != null)
+            if (service != null)
             {
                 UpsertRequest request = new UpsertRequest()
                 {
@@ -32,7 +30,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                 {
 
                     // Execute UpsertRequest and obtain UpsertResponse. 
-                    UpsertResponse response = (UpsertResponse)_service.Execute(request);
+                    UpsertResponse response = (UpsertResponse)service.Execute(request);
                     if (response.RecordCreated)
                         successMsg = new SuccessMessage
                         {
@@ -69,10 +67,10 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// </summary>
         /// <param name="entities"></param>       
         /// <returns></returns>
-        public List<SuccessMessage> BulkCreate(EntityCollection entities)
+        public List<SuccessMessage> BulkCreate(EntityCollection entities, IOrganizationService service)
         {
             List<SuccessMessage> successMsg = null;
-            if (_service != null && entities != null && entities.Entities.Count > 0)
+            if (service != null && entities != null && entities.Entities.Count > 0)
             {
                 var requestWithResults = new ExecuteMultipleRequest()
                 {
@@ -98,7 +96,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                 {
                     // Execute all the requests in the request collection using a single web method call.
                     ExecuteMultipleResponse responseWithResults =
-                        (ExecuteMultipleResponse)_service.Execute(requestWithResults);
+                        (ExecuteMultipleResponse)service.Execute(requestWithResults);
 
                     successMsg = new List<SuccessMessage>();
 
@@ -140,10 +138,10 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// Call this method for bulk delete
         /// </summary>      
         /// <param name="entityReferences">Collection of EntityReferences to Delete</param>
-        public void BulkDelete(DataCollection<EntityReference> entityReferences)
+        public void BulkDelete(DataCollection<EntityReference> entityReferences, IOrganizationService service)
         {
             List<SuccessMessage> successMsg = null;
-            if (_service != null && entityReferences != null && entityReferences.Count > 0)
+            if (service != null && entityReferences != null && entityReferences.Count > 0)
             {
                 // Create an ExecuteMultipleRequest object.
                 var requestWithResults = new ExecuteMultipleRequest()
@@ -167,7 +165,7 @@ namespace Tc.Crm.CustomWorkflowSteps
 
                 try {
                     // Execute all the requests in the request collection using a single web method call.
-                    ExecuteMultipleResponse responseWithResults = (ExecuteMultipleResponse)_service.Execute(requestWithResults);
+                    ExecuteMultipleResponse responseWithResults = (ExecuteMultipleResponse)service.Execute(requestWithResults);
 
                     // Get the results returned in the responses.
                     foreach (var responseItem in responseWithResults.Responses)
@@ -206,14 +204,14 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// <param name="alternateKey"></param>
         /// <param name="alternateKeyValue"></param>
         /// <returns></returns>
-        public EntityReference SetLookupValueUsingAlternateKey(string logicalName, string alternateKey, string alternateKeyValue)
+        public EntityReference SetLookupValueUsingAlternateKey(string logicalName, string alternateKey, string alternateKeyValue, IOrganizationService service)
         {
             EntityReference entRef = null;
             QueryByAttribute querybyexpression = new QueryByAttribute(logicalName);
             querybyexpression.ColumnSet = new ColumnSet(logicalName + "id");           
             querybyexpression.Attributes.AddRange(alternateKey);           
             querybyexpression.Values.AddRange(alternateKeyValue);           
-            EntityCollection retrieved = _service.RetrieveMultiple(querybyexpression);
+            EntityCollection retrieved = service.RetrieveMultiple(querybyexpression);
             if (retrieved != null && retrieved.Entities.Count == 1)
             {
                 entRef = new EntityReference(logicalName, retrieved.Entities[0].Id);
@@ -221,7 +219,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             return entRef;
         }
 
-        public EntityCollection RetrieveMultipleRecords(string entityName, string[] columns, string[] filterKeys, string[] filterValues)
+        public EntityCollection RetrieveMultipleRecords(string entityName, string[] columns, string[] filterKeys, string[] filterValues, IOrganizationService service)
         {
             var query = new QueryExpression(entityName);
             query.ColumnSet = new ColumnSet(columns);
@@ -238,14 +236,14 @@ namespace Tc.Crm.CustomWorkflowSteps
 
                 query.Criteria.AddFilter(fltrExpr);
             }
-           return GetRecordsUsingQuery(query);
+           return GetRecordsUsingQuery(query, service);
 
         }
 
-        EntityCollection GetRecordsUsingQuery(QueryExpression queryExpr)
+        EntityCollection GetRecordsUsingQuery(QueryExpression queryExpr, IOrganizationService service)
         {
             EntityCollection entCollection = null;
-            entCollection = _service.RetrieveMultiple(queryExpr);
+            entCollection = service.RetrieveMultiple(queryExpr);
             return entCollection;
         }
 
