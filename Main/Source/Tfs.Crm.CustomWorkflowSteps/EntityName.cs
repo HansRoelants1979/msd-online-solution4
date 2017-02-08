@@ -75,6 +75,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string EMailAddress3 = "emailaddress3";
             public const string MiddleName = "middlename";
             public const string BirthDate = "birthdate";
+            public const string SourceSystemID = "tc_sourcesystemid";
 
 
         }
@@ -102,6 +103,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string EMailAddress1 = "emailaddress1";
             public const string EMailAddress2 = "emailaddress2";
             public const string EMailAddress3 = "emailaddress3";
+            public const string SourceSystemID = "tc_sourcesystemid";
         }
         public class Booking
         {
@@ -171,6 +173,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string StatusCode = "statuscode";
             public const string ServiceType = "tc_servicetype";
             public const string SourceMarketHotelCode = "tc_sourcemarkethotelcode";
+            public const string SourceMarketHotelName = "tc_sourcemarkethotelname";
             public const string StartDateandTime = "tc_startdateandtime ";
             public const string TransferServiceLevel = "tc_transferservicelevel";
             public const string WithTransfer = "tc_withtransfer";
