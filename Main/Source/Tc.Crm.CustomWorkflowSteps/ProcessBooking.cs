@@ -24,7 +24,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// <returns></returns>
         public string ProcessPayload(string json)
         {
-            //payloadBooking.Trace.Trace("Processing Process payload");
+            payloadBooking.Trace.Trace("Processing Process payload");
             string response = string.Empty;
             payloadBooking.BookingInfo = DeSerializeJson(json);
             payloadBooking.DeleteBookingRole = true;
@@ -62,7 +62,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// <returns></returns>
         string SerializeJson(BookingResponse response)
         {
-            //payloadBooking.Trace.Trace("Processing Serialization of BookingResponse");
+            payloadBooking.Trace.Trace("Processing Serialization of BookingResponse");
             var jsonSerializer = new JavaScriptSerializer();
             return jsonSerializer.Serialize(response);
         }
@@ -75,7 +75,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// <returns></returns>
         Booking DeSerializeJson(string json)
         {
-            //payloadBooking.Trace.Trace("Processing DeSerialization of json Payload");
+            payloadBooking.Trace.Trace("Processing DeSerialization of json Payload");
             var jsonSerializer = new JavaScriptSerializer();
             var bookingInfo = jsonSerializer.Deserialize<Booking>(json);
             return bookingInfo;
@@ -90,7 +90,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             XrmResponse xrmResponse = null;
             if (payloadBooking.BookingInfo.Customer != null)
             {
-                //payloadBooking.Trace.Trace("Processing Contact information");
+                payloadBooking.Trace.Trace("Processing Contact information");
 
                 Entity contactEntity = new Entity(EntityName.Contact, Attributes.Contact.SourceSystemID, payloadBooking.BookingInfo.Customer.CustomerIdentifier.CustomerId);
 
@@ -108,7 +108,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                 contactEntity[Attributes.Contact.DateofDeath] = Convert.ToDateTime(payloadBooking.BookingInfo.Customer.Additional.DateOfDeath);
                 if (payloadBooking.BookingInfo.Customer.Address != null && payloadBooking.BookingInfo.Customer.Address.Length > 0)
                 {
-                    //payloadBooking.Trace.Trace("Processing Contact Address information");
+                    payloadBooking.Trace.Trace("Processing Contact Address information");
                     contactEntity[Attributes.Contact.Address1_AdditionalInformation] = payloadBooking.BookingInfo.Customer.Address[0].AdditionalAddressInfo;
                     contactEntity[Attributes.Contact.Address1_FlatOrUnitNumber] = payloadBooking.BookingInfo.Customer.Address[0].FlatNumberUnit;
                     contactEntity[Attributes.Contact.Address1_HouseNumberOrBuilding] = payloadBooking.BookingInfo.Customer.Address[0].HouseNumberBuilding;
@@ -130,7 +130,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                 }
                 if (payloadBooking.BookingInfo.Customer.Phone != null && payloadBooking.BookingInfo.Customer.Phone.Length > 0)
                 {
-                    //payloadBooking.Trace.Trace("Processing Contact Phone information");
+                    payloadBooking.Trace.Trace("Processing Contact Phone information");
                     contactEntity[Attributes.Contact.Telephone1Type] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Phone[0].PhoneType.ToString());
                     contactEntity[Attributes.Contact.Telephone1] = payloadBooking.BookingInfo.Customer.Phone[0].Number;
                     if (payloadBooking.BookingInfo.Customer.Phone.Length > 1)
@@ -146,7 +146,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                 }
                 if (payloadBooking.BookingInfo.Customer.Email != null && payloadBooking.BookingInfo.Customer.Email.Length > 0)
                 {
-                    //payloadBooking.Trace.Trace("Processing Contact Email information");
+                    payloadBooking.Trace.Trace("Processing Contact Email information");
                     contactEntity[Attributes.Contact.EMailAddress1] = payloadBooking.BookingInfo.Customer.Email[0].Address;
                     contactEntity[Attributes.Contact.EmailAddress1Type] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Email[0].EmailType.ToString());
                     if (payloadBooking.BookingInfo.Customer.Email.Length > 1)
@@ -186,13 +186,13 @@ namespace Tc.Crm.CustomWorkflowSteps
 
             if (payloadBooking.BookingInfo.Customer != null)
             {
-                //payloadBooking.Trace.Trace("Processing Account information");
+                payloadBooking.Trace.Trace("Processing Account information");
 
                 Entity accountEntity = new Entity(EntityName.Account, Attributes.Account.SourceSystemID, payloadBooking.BookingInfo.Customer.CustomerIdentifier.CustomerId);
                 accountEntity[Attributes.Account.Name] = payloadBooking.BookingInfo.Customer.Company.CompanyName;
                 if (payloadBooking.BookingInfo.Customer.Address != null && payloadBooking.BookingInfo.Customer.Address.Length > 0)
                 {
-                    //payloadBooking.Trace.Trace("Processing Account Address information");
+                    payloadBooking.Trace.Trace("Processing Account Address information");
                     accountEntity[Attributes.Account.Address1_AdditionalInformation] = payloadBooking.BookingInfo.Customer.Address[0].AdditionalAddressInfo;
                     accountEntity[Attributes.Account.Address1_FlatOrUnitNumber] = payloadBooking.BookingInfo.Customer.Address[0].FlatNumberUnit;
                     accountEntity[Attributes.Account.Address1_HouseNumberOrBuilding] = payloadBooking.BookingInfo.Customer.Address[0].HouseNumberBuilding;
@@ -206,7 +206,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                 }
                 if (payloadBooking.BookingInfo.Customer.Phone != null && payloadBooking.BookingInfo.Customer.Phone.Length > 0)
                 {
-                    //payloadBooking.Trace.Trace("Processing Account Phone information");
+                    payloadBooking.Trace.Trace("Processing Account Phone information");
                     accountEntity[Attributes.Account.Telephone1_Type] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Phone[0].PhoneType.ToString());
 
                     accountEntity[Attributes.Account.Telephone1] = payloadBooking.BookingInfo.Customer.Phone[0].Number;
@@ -223,7 +223,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                 }
                 if (payloadBooking.BookingInfo.Customer.Email != null && payloadBooking.BookingInfo.Customer.Email.Length > 0)
                 {
-                    //payloadBooking.Trace.Trace("Processing Account Email information");
+                    payloadBooking.Trace.Trace("Processing Account Email information");
                     accountEntity[Attributes.Account.EMailAddress1] = payloadBooking.BookingInfo.Customer.Email[0].Address;
                     accountEntity[Attributes.Account.EmailAddress1_Type] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Email[0].EmailType.ToString());
                     if (payloadBooking.BookingInfo.Customer.Email.Length > 1)
@@ -265,7 +265,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             XrmResponse xrmResponse = null;
             if (payloadBooking.BookingInfo.BookingIdentifier != null)
             {
-                //payloadBooking.Trace.Trace("Processing Booking information");
+                payloadBooking.Trace.Trace("Processing Booking information");
                 Entity bookingEntity = new Entity(EntityName.Booking, Attributes.Booking.Name, payloadBooking.BookingInfo.BookingIdentifier.BookingNumber);
 
                 bookingEntity[Attributes.Booking.Name] = payloadBooking.BookingInfo.BookingIdentifier.BookingNumber;
@@ -337,7 +337,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             string travelParticipants = string.Empty;
             if (payloadBooking.BookingInfo.TravelParticipant != null)
             {
-                //payloadBooking.Trace.Trace("Processing Travel Participants information");
+                payloadBooking.Trace.Trace("Processing Travel Participants information");
                 for (int i = 0; i < payloadBooking.BookingInfo.TravelParticipant.Length; i++)
                 {
                     if (!string.IsNullOrEmpty(travelParticipants))
@@ -366,7 +366,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             string remarks = string.Empty;
             if (payloadBooking.BookingInfo.TravelParticipant != null)
             {
-                //payloadBooking.Trace.Trace("Processing Travel Participant Remarks information");
+                payloadBooking.Trace.Trace("Processing Travel Participant Remarks information");
                 for (int i = 0; i < payloadBooking.BookingInfo.TravelParticipant.Length; i++)
                 {
                     if (payloadBooking.BookingInfo.TravelParticipant[i].Remark != null)
@@ -394,7 +394,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             string transferInfo = string.Empty;
             if (payloadBooking.BookingInfo.Services != null && payloadBooking.BookingInfo.Services.Transfer != null)
             {
-                //payloadBooking.Trace.Trace("Processing Transfer information");
+                payloadBooking.Trace.Trace("Processing Transfer information");
                 for (int i = 0; i < payloadBooking.BookingInfo.Services.Transfer.Length; i++)
                 {
                     if (!string.IsNullOrEmpty(transferInfo))
@@ -424,7 +424,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             string remarks = string.Empty;
             if (payloadBooking.BookingInfo.Services != null && payloadBooking.BookingInfo.Services.Transfer != null)
             {
-                //payloadBooking.Trace.Trace("Processing Transfer Remarks information");
+                payloadBooking.Trace.Trace("Processing Transfer Remarks information");
                 for (int i = 0; i < payloadBooking.BookingInfo.Services.Transfer.Length; i++)
                 {
                     if (payloadBooking.BookingInfo.Services.Transfer[i].Remark != null)
@@ -451,7 +451,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             string extraServices = string.Empty;
             if (payloadBooking.BookingInfo.Services != null && payloadBooking.BookingInfo.Services.ExtraService != null)
             {
-                //payloadBooking.Trace.Trace("Processing Extra Services information");
+                payloadBooking.Trace.Trace("Processing Extra Services information");
                 for (int i = 0; i < payloadBooking.BookingInfo.Services.ExtraService.Length; i++)
                 {
 
@@ -479,7 +479,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             string extraServiceRemarks = string.Empty;
             if (payloadBooking.BookingInfo.Services != null && payloadBooking.BookingInfo.Services.ExtraService != null)
             {
-                //payloadBooking.Trace.Trace("Processing ExtraService Remarks information");
+                payloadBooking.Trace.Trace("Processing ExtraService Remarks information");
                 for (int i = 0; i < payloadBooking.BookingInfo.Services.ExtraService.Length; i++)
                 {
                     if (payloadBooking.BookingInfo.Services.ExtraService[i].Remark != null)
@@ -504,7 +504,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// </summary>
         void ProcessRemarks()
         {
-            //payloadBooking.Trace.Trace("Processing Remarks information");
+            payloadBooking.Trace.Trace("Processing Remarks information");
             if (payloadBooking.DeleteAccomodationOrTransportOrRemarks)
             {
                 ProcessRecordsToDelete(EntityName.Remark,
@@ -543,7 +543,7 @@ namespace Tc.Crm.CustomWorkflowSteps
 
             if (payloadBooking.DeleteAccomodationOrTransportOrRemarks)
             {
-                //payloadBooking.Trace.Trace("Processing Delete Accomodation information");
+                payloadBooking.Trace.Trace("Processing Delete Accomodation information");
                 ProcessRecordsToDelete(EntityName.BookingAccommodation,
                     new string[] { Attributes.BookingAccommodation.BookingAccommodationid },
                     new string[] { Attributes.BookingAccommodation.BookingId },
@@ -553,7 +553,7 @@ namespace Tc.Crm.CustomWorkflowSteps
 
             if (payloadBooking.BookingInfo.Services != null && payloadBooking.BookingInfo.Services.Accommodation != null)
             {
-                //payloadBooking.Trace.Trace("Processing Accomodation information");
+                payloadBooking.Trace.Trace("Processing Accomodation information");
                 EntityCollection entityCollectionAccomodation = new EntityCollection();
                 Entity accomodationEntity = null;
                 for (int i = 0; i < payloadBooking.BookingInfo.Services.Accommodation.Length; i++)
@@ -600,7 +600,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             Entity remarkEntity = null;
             if (payloadBooking.BookingInfo.Services != null && payloadBooking.BookingInfo.Services.Accommodation != null && listXrmResponse.Count > 0)
             {
-                //payloadBooking.Trace.Trace("Processing Accomodation Remarks information");
+                payloadBooking.Trace.Trace("Processing Accomodation Remarks information");
                 for (int i = 0; i < payloadBooking.BookingInfo.Services.Accommodation.Length; i++)
                 {
                     if (payloadBooking.BookingInfo.Services.Accommodation[i].Remark != null)
@@ -635,7 +635,7 @@ namespace Tc.Crm.CustomWorkflowSteps
 
                 if (payloadBooking.DeleteAccomodationOrTransportOrRemarks)
                 {
-                    //payloadBooking.Trace.Trace("Processing Delete Transport information");
+                    payloadBooking.Trace.Trace("Processing Delete Transport information");
                     ProcessRecordsToDelete(EntityName.BookingTransport,
                         new string[] { Attributes.BookingTransport.BookingTransportId },
                         new string[] { Attributes.BookingAccommodation.BookingId },
@@ -645,7 +645,7 @@ namespace Tc.Crm.CustomWorkflowSteps
 
                 for (int i = 0; i < payloadBooking.BookingInfo.Services.Transport.Length; i++)
                 {
-                    //payloadBooking.Trace.Trace("Processing Transport information");
+                    payloadBooking.Trace.Trace("Processing Transport information");
                     // BN -  DepartureGFate - ArrivalAGateway
                     transportEntity = new Entity(EntityName.BookingTransport);
                     transportEntity[Attributes.BookingTransport.Name] = payloadBooking.BookingInfo.BookingIdentifier.BookingNumber + " - " + payloadBooking.BookingInfo.Services.Transport[i].DepartureAirport + " - " + payloadBooking.BookingInfo.Services.Transport[i].ArrivalAirport;
@@ -686,7 +686,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                 EntityCollection entityColllectionTransportRemark = new EntityCollection();
                 Entity transportRemark = null;
 
-                //payloadBooking.Trace.Trace("Processing Transport Remarks information");
+                payloadBooking.Trace.Trace("Processing Transport Remarks information");
 
                 for (int i = 0; i < payloadBooking.BookingInfo.Services.Transport.Length; i++)
                 {
@@ -720,14 +720,14 @@ namespace Tc.Crm.CustomWorkflowSteps
 
             if (payloadBooking.DeleteBookingRole)
             {
-                //payloadBooking.Trace.Trace("Processing Delete Booking Roles information");
+                payloadBooking.Trace.Trace("Processing Delete Booking Roles information");
                 ProcessRecordsToDelete(EntityName.CustomerBookingRole,
                     new string[] { Attributes.CustomerBookingRole.CustomerBookingRoleId },
                     new string[] { Attributes.CustomerBookingRole.BookingId, Attributes.CustomerBookingRole.Customer },
                     new string[] { payloadBooking.BookingId, payloadBooking.CustomerId });
 
             }
-            //payloadBooking.Trace.Trace("Processing Booking Roles information");
+            payloadBooking.Trace.Trace("Processing Booking Roles information");
             Entity entityBookingRole = new Entity(EntityName.CustomerBookingRole);
             entityBookingRole[Attributes.CustomerBookingRole.BookingId] = new EntityReference(EntityName.Booking, Attributes.Booking.Name, payloadBooking.BookingInfo.BookingIdentifier.BookingNumber);
             if (payloadBooking.BookingInfo.Customer.CustomerGeneral.CustomerType.ToString() == PayloadBooking.Account)
