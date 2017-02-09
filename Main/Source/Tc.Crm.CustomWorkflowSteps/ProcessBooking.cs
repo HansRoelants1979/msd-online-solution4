@@ -101,21 +101,27 @@ namespace Tc.Crm.CustomWorkflowSteps
                 contactEntity[Attributes.Contact.StatusCode] = payloadBooking.BookingInfo.Customer.CustomerGeneral.CustomerStatus;
                 // couldn't find segment,DateofDeath in booking.customer.identity.additional
                 contactEntity[Attributes.Contact.Segment] = payloadBooking.BookingInfo.Customer.Additional.Segment;
-                contactEntity[Attributes.Contact.DateofDeath] = payloadBooking.BookingInfo.Customer.Additional.DateOfDeath;
+                contactEntity[Attributes.Contact.DateofDeath] = Convert.ToDateTime(payloadBooking.BookingInfo.Customer.Additional.DateOfDeath);
                 if (payloadBooking.BookingInfo.Customer.Address != null && payloadBooking.BookingInfo.Customer.Address.Length > 0)
                 {
                     contactEntity[Attributes.Contact.Address1_AdditionalInformation] = payloadBooking.BookingInfo.Customer.Address[0].AdditionalAddressInfo;
                     contactEntity[Attributes.Contact.Address1_FlatOrUnitNumber] = payloadBooking.BookingInfo.Customer.Address[0].FlatNumberUnit;
                     contactEntity[Attributes.Contact.Address1_HouseNumberOrBuilding] = payloadBooking.BookingInfo.Customer.Address[0].HouseNumberBuilding;
                     contactEntity[Attributes.Contact.Address1_Town] = payloadBooking.BookingInfo.Customer.Address[0].Town;
-                    contactEntity[Attributes.Contact.Address1_CountryId] = payloadBooking.BookingInfo.Customer.Address[0].Country;
+                    if (payloadBooking.BookingInfo.Customer.Address[0].Country != null)
+                    {
+                        contactEntity[Attributes.Contact.Address1_CountryId] = new EntityReference(EntityName.Country,Attributes.Booking.Name,payloadBooking.BookingInfo.Customer.Address[0].Country);
+                    }
                     contactEntity[Attributes.Contact.Address1_County] = payloadBooking.BookingInfo.Customer.Address[0].County;
                     contactEntity[Attributes.Contact.Address1_PostalCode] = payloadBooking.BookingInfo.Customer.Address[0].PostalCode;
                     contactEntity[Attributes.Contact.Address2_AdditionalInformation] = payloadBooking.BookingInfo.Customer.Address[1].AdditionalAddressInfo;
                     contactEntity[Attributes.Contact.Address2_FlatOrUnitNumber] = payloadBooking.BookingInfo.Customer.Address[1].FlatNumberUnit;
                     contactEntity[Attributes.Contact.Address2_HouseNumberorBuilding] = payloadBooking.BookingInfo.Customer.Address[1].HouseNumberBuilding;
                     contactEntity[Attributes.Contact.Address2_Town] = payloadBooking.BookingInfo.Customer.Address[1].Town;
-                    contactEntity[Attributes.Contact.Address2_CountryId] = payloadBooking.BookingInfo.Customer.Address[1].Country;
+                    if (payloadBooking.BookingInfo.Customer.Address[1].Country != null)
+                    {
+                        contactEntity[Attributes.Contact.Address2_CountryId] = new EntityReference(EntityName.Country, Attributes.Booking.Name, payloadBooking.BookingInfo.Customer.Address[1].Country);
+                    }
                     contactEntity[Attributes.Contact.Address2_County] = payloadBooking.BookingInfo.Customer.Address[1].County;
                     contactEntity[Attributes.Contact.Address2_PostalCode] = payloadBooking.BookingInfo.Customer.Address[1].PostalCode;
                 }
@@ -137,7 +143,10 @@ namespace Tc.Crm.CustomWorkflowSteps
                     contactEntity[Attributes.Contact.EMailAddress3] = payloadBooking.BookingInfo.Customer.Email[2].Address;
                     contactEntity[Attributes.Contact.EmailAddress3Type] = payloadBooking.BookingInfo.Customer.Email[2].EmailType;
                 }
-                contactEntity[Attributes.Contact.SourceMarketId] = payloadBooking.BookingInfo.Customer.CustomerIdentifier.SourceMarket;
+                if (payloadBooking.BookingInfo.Customer.CustomerIdentifier.SourceMarket != null)
+                {
+                    contactEntity[Attributes.Contact.SourceMarketId] = new EntityReference(EntityName.Country, Attributes.Country.ISO2Code, payloadBooking.BookingInfo.Customer.CustomerIdentifier.SourceMarket);
+                }
                 contactEntity[Attributes.Contact.SourceSystemID] = payloadBooking.BookingInfo.Customer.CustomerIdentifier.CustomerId;
                 sucMsg = CommonXrm.UpsertEntity(contactEntity, payloadBooking.CrmService);
 
@@ -202,7 +211,11 @@ namespace Tc.Crm.CustomWorkflowSteps
                         accountEntity[Attributes.Account.EmailAddress3_Type] = payloadBooking.BookingInfo.Customer.Email[2].EmailType;
                     }
                 }
-                accountEntity[Attributes.Account.SourceMarketId] = payloadBooking.BookingInfo.Customer.CustomerIdentifier.SourceMarket;
+                if(payloadBooking.BookingInfo.Customer.CustomerIdentifier.SourceMarket!=null)
+                {
+                    accountEntity[Attributes.Account.SourceMarketId] = new EntityReference(EntityName.Country,Attributes.Country.ISO2Code,payloadBooking.BookingInfo.Customer.CustomerIdentifier.SourceMarket);
+                }
+              
                 accountEntity[Attributes.Account.SourceSystemID] = payloadBooking.BookingInfo.Customer.CustomerIdentifier.CustomerId;
 
 
@@ -232,21 +245,30 @@ namespace Tc.Crm.CustomWorkflowSteps
                 bookingEntity[Attributes.Booking.Name] = payloadBooking.BookingInfo.BookingIdentifier.BookingNumber;
                 bookingEntity[Attributes.Booking.OnTourVersion] = payloadBooking.BookingInfo.BookingIdentifier.BookingVersionOnTour;
                 bookingEntity[Attributes.Booking.TourOperatorVersion] = payloadBooking.BookingInfo.BookingIdentifier.BookingVersionTourOperator;
-                bookingEntity[Attributes.Booking.OnTourUpdatedDate] = payloadBooking.BookingInfo.BookingIdentifier.BookingUpdateDateOnTour;
-                bookingEntity[Attributes.Booking.TourOperatorUpdatedDate] = payloadBooking.BookingInfo.BookingIdentifier.BookingUpdateDateTourOperator;
-                bookingEntity[Attributes.Booking.BookingDate] = payloadBooking.BookingInfo.BookingGeneral.BookingDate;
-                bookingEntity[Attributes.Booking.DepartureDate] = payloadBooking.BookingInfo.BookingGeneral.DepartureDate;
-                bookingEntity[Attributes.Booking.ReturnDate] = payloadBooking.BookingInfo.BookingGeneral.ReturnDate;
-                bookingEntity[Attributes.Booking.Duration] = payloadBooking.BookingInfo.BookingGeneral.Duration;
-                bookingEntity[Attributes.Booking.DestinationGatewayId] = new EntityReference(EntityName.Gateway, Attributes.Gateway.IATA, payloadBooking.BookingInfo.BookingGeneral.Destination);
-                bookingEntity[Attributes.Booking.TourOperatorId] = new EntityReference(EntityName.TourOperator, Attributes.TourOperator.TourOperatorCode, payloadBooking.BookingInfo.BookingGeneral.ToCode);
-                bookingEntity[Attributes.Booking.BrandId] = new EntityReference(EntityName.Brand, Attributes.Brand.BrandCode, payloadBooking.BookingInfo.BookingGeneral.Brand);
+                bookingEntity[Attributes.Booking.OnTourUpdatedDate] = Convert.ToDateTime(payloadBooking.BookingInfo.BookingIdentifier.BookingUpdateDateOnTour);
+                bookingEntity[Attributes.Booking.TourOperatorUpdatedDate] = Convert.ToDateTime(payloadBooking.BookingInfo.BookingIdentifier.BookingUpdateDateTourOperator);
+                bookingEntity[Attributes.Booking.BookingDate] = Convert.ToDateTime(payloadBooking.BookingInfo.BookingGeneral.BookingDate);
+                bookingEntity[Attributes.Booking.DepartureDate] = Convert.ToDateTime(payloadBooking.BookingInfo.BookingGeneral.DepartureDate);
+                bookingEntity[Attributes.Booking.ReturnDate] = Convert.ToDateTime(payloadBooking.BookingInfo.BookingGeneral.ReturnDate);
+                bookingEntity[Attributes.Booking.Duration] = Convert.ToInt64(payloadBooking.BookingInfo.BookingGeneral.Duration);
+                if (payloadBooking.BookingInfo.BookingGeneral.Destination != null)
+                {
+                    bookingEntity[Attributes.Booking.DestinationGatewayId] = new EntityReference(EntityName.Gateway, Attributes.Gateway.IATA, payloadBooking.BookingInfo.BookingGeneral.Destination);
+                }
+                if (payloadBooking.BookingInfo.BookingGeneral.ToCode != null)
+                {
+                    bookingEntity[Attributes.Booking.TourOperatorId] = new EntityReference(EntityName.TourOperator, Attributes.TourOperator.TourOperatorCode, payloadBooking.BookingInfo.BookingGeneral.ToCode);
+                }
+                if (payloadBooking.BookingInfo.BookingGeneral.Brand != null)
+                {
+                    bookingEntity[Attributes.Booking.BrandId] = new EntityReference(EntityName.Brand, Attributes.Brand.BrandCode, payloadBooking.BookingInfo.BookingGeneral.Brand);
+                }
                 bookingEntity[Attributes.Booking.BrochureCode] = payloadBooking.BookingInfo.BookingGeneral.BrochureCode;
-                bookingEntity[Attributes.Booking.IsLateBooking] = payloadBooking.BookingInfo.BookingGeneral.IsLateBooking;
-                bookingEntity[Attributes.Booking.NumberofParticipants] = payloadBooking.BookingInfo.BookingGeneral.NumberOfParticipants;
-                bookingEntity[Attributes.Booking.NumberofAdults] = payloadBooking.BookingInfo.BookingGeneral.NumberOfAdults;
-                bookingEntity[Attributes.Booking.NumberofChildren] = payloadBooking.BookingInfo.BookingGeneral.NumberOfChildren;
-                bookingEntity[Attributes.Booking.NumberofInfants] = payloadBooking.BookingInfo.BookingGeneral.NumberOfInfants;
+                bookingEntity[Attributes.Booking.IsLateBooking] = Convert.ToBoolean(payloadBooking.BookingInfo.BookingGeneral.IsLateBooking);
+                bookingEntity[Attributes.Booking.NumberofParticipants] = Convert.ToInt64(payloadBooking.BookingInfo.BookingGeneral.NumberOfParticipants);
+                bookingEntity[Attributes.Booking.NumberofAdults] = Convert.ToInt64(payloadBooking.BookingInfo.BookingGeneral.NumberOfAdults);
+                bookingEntity[Attributes.Booking.NumberofChildren] = Convert.ToInt64(payloadBooking.BookingInfo.BookingGeneral.NumberOfChildren);
+                bookingEntity[Attributes.Booking.NumberofInfants] = Convert.ToInt64(payloadBooking.BookingInfo.BookingGeneral.NumberOfInfants);
                 bookingEntity[Attributes.Booking.BookerPhone1] = payloadBooking.BookingInfo.BookingIdentity.Booker.Phone;
                 bookingEntity[Attributes.Booking.BookerPhone2] = payloadBooking.BookingInfo.BookingIdentity.Booker.Mobile;
                 bookingEntity[Attributes.Booking.BookerEmergencyPhone] = payloadBooking.BookingInfo.BookingIdentity.Booker.EmergencyNumber;
@@ -260,7 +282,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                 bookingEntity[Attributes.Booking.Statuscode] = payloadBooking.BookingInfo.BookingGeneral.BookingStatus;
                 bookingEntity[Attributes.Booking.TravelAmount] = payloadBooking.BookingInfo.BookingGeneral.TravelAmount;
                 bookingEntity[Attributes.Booking.TransactionCurrencyId] = payloadBooking.BookingInfo.BookingGeneral.Currency;
-                bookingEntity[Attributes.Booking.HasSourceMarketComplaint] = payloadBooking.BookingInfo.BookingGeneral.HasComplaint;
+                bookingEntity[Attributes.Booking.HasSourceMarketComplaint] = Convert.ToBoolean(payloadBooking.BookingInfo.BookingGeneral.HasComplaint);
                 bookingEntity[Attributes.Booking.BookerEmail] = payloadBooking.BookingInfo.BookingIdentity.Booker.Email;
                 xrmResp = CommonXrm.UpsertEntity(bookingEntity,payloadBooking.CrmService);
 
