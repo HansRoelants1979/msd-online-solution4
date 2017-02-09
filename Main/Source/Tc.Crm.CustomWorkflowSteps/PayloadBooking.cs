@@ -8,19 +8,35 @@ using System.Runtime.Serialization;
 namespace Tc.Crm.CustomWorkflowSteps
 {
     public class PayloadBooking
-    {        
+    {
 
         public const string AccountType = "B";
 
         public const string ContactType = "P";
 
-        public Address AddressInfo { get; set; }
 
-        public Booking BookingInfo { get; set; }
+        [DataMember(Name = "bookingIdentifier")]
+        public BookingIdentifier bookingIdentifier { get; set; }
 
-        public Customer CustomerInfo { get; set; }
+        [DataMember(Name = "bookingGeneral")]
+        public BookingGeneral bookingGeneral { get; set; }
 
-        public Remark RemarkInfo { get; set; }
+        [DataMember(Name = "bookingIdentity")]
+        public BookingIdentity bookingIdentity { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
+        [DataMember(Name = "travelParticipant")]
+        public TravelParticipant[] travelParticipant { get; set; }
+
+        [DataMember(Name = "services")]
+        public BookingServices services { get; set; }
+
+        [DataMember(Name = "customer")]
+        public Customer customer { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
+        [DataMember(Name = "remark")]
+        public Remark[] remark { get; set; }
 
         //public Accommodation AccommdationkInfo { get; set; }
 

@@ -89,7 +89,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string Address1_HouseNumberOrBuilding = "tc_address1_housenumberorbuilding";
             public const string Address1_Town = "tc_address1_town";
             public const string Address1_CountryId = "tc_address1_countryid";
-            public const string Address1_Count = "tc_address1_county";
+            public const string Address1_County = "tc_address1_county";
             public const string Address1_PostalCode = "tc_address1_postalcode";
             public const string Telephone1_Type = "tc_telephone1_type";
             public const string Telephone2_Type = "tc_telephone2_type";
