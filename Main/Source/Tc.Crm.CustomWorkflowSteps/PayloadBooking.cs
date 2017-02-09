@@ -20,15 +20,17 @@ namespace Tc.Crm.CustomWorkflowSteps
         public ITracingService Trace { get; set; }
         public BookingResponse Response { get; set; }
 
-        public readonly string Seperator = ",";
+        public const string Seperator = ",";
 
-        public readonly string NextLine = "\r\n";
+        public const string NextLine = "\r\n";
 
-        public bool IsCustomerTypeAccount { get; set; }
+        public const string Account = "B";
+
+        public const string Contact = "P";
 
         public bool DeleteBookingRole { get; set; }
 
-        public bool DeleteAccomdOrTrnsprt { get; set; }
+        public bool DeleteAccomodationOrTransportOrRemarks { get; set; }
 
         public string BookingId { get; set; }
 

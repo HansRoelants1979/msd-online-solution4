@@ -20,25 +20,21 @@ namespace Tc.Crm.CustomWorkflowSteps
             //Create the context
             IWorkflowContext context = executionContext.GetExtension<IWorkflowContext>();
             IOrganizationServiceFactory serviceFactory = executionContext.GetExtension<IOrganizationServiceFactory>();
-            IOrganizationService service = serviceFactory.CreateOrganizationService(context.UserId);
-            PayloadBooking payloadBooking = null;
-            ProcessBooking process = null;
+            IOrganizationService service = serviceFactory.CreateOrganizationService(context.UserId);           
             try
             {
-                payloadBooking = new PayloadBooking(tracingService, service);
-                process = new ProcessBooking(payloadBooking);
+                PayloadBooking payloadBooking = new PayloadBooking(tracingService, service);
+                ProcessBooking process = new ProcessBooking(payloadBooking);
                 Response.Set(executionContext, process.ProcessPayload(BookingInfo.Get<string>(executionContext)));
 
             }
             catch (FaultException<OrganizationServiceFault> ex)
-            {
-                Response.Set(executionContext, process.SerializeJson(payloadBooking.Response));
-                //throw new InvalidPluginExecutionException(ex.ToString());
+            {  
+                throw new InvalidPluginExecutionException(ex.ToString());
             }
             catch (Exception ex)
-            {
-                Response.Set(executionContext, process.SerializeJson(payloadBooking.Response));
-                //throw new InvalidPluginExecutionException(ex.ToString());
+            {   
+                throw new InvalidPluginExecutionException(ex.ToString());
             }
 
         }

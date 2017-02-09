@@ -67,7 +67,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string Address2_PostalCode = "tc_address2_postalcode";
             public const string Address2_Town = "tc_address2_town";
             public const string StatusCode = "statuscode";
-            public const string DateofDeath = "tc_dateofdeath"; 
+            public const string DateofDeath = "tc_dateofdeath";
             public const string EmailAddress1Type = "tc_emailaddress1type";
             public const string EmailAddress2Type = "tc_emailaddress2type";
             public const string EmailAddress3Type = "tc_emailaddress3type";
@@ -96,7 +96,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string Address1_CountryId = "tc_address1_countryid";
             public const string Address1_County = "tc_address1_county";
             public const string Address1_PostalCode = "tc_address1_postalcode";
-            public const string Telephone1_Type = "tc_telephone1_type";  
+            public const string Telephone1_Type = "tc_telephone1_type";
             public const string Telephone2_Type = "tc_telephone2_type";
             public const string Telephone3_Type = "tc_telephone3_type";
             public const string EmailAddress1_Type = "tc_emailaddress1_type";
@@ -122,7 +122,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string BookerPhone2 = "tc_bookerphone2";
             public const string BookingDate = "tc_bookingdate";
             public const string BookingId = "tc_bookingid";
-            public const string BrandId = "tc_brandid"; 
+            public const string BrandId = "tc_brandid";
             public const string BrochureCode = "tc_brochurecode";
             public const string DepartureDate = "tc_departuredate";
             public const string DestinationGatewayId = "tc_destinationgatewayid";
@@ -150,7 +150,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string SourceMarketId = "tc_sourcemarketid";
             public const string TourOperatorId = "tc_touroperatorid";
             public const string TourOperatorUpdatedDate = "tc_touroperatorupdateddate";
-            public const string TourOperatorVersion = " tc_touroperatorversion ";
+            public const string TourOperatorVersion = "tc_touroperatorversion";
             public const string Transfer = "tc_transfer";
             public const string TransferRemarks = "tc_transferremarks";
             public const string TravelAmount = "tc_travelamount";
@@ -179,7 +179,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string ServiceType = "tc_servicetype";
             public const string SourceMarketHotelCode = "tc_sourcemarkethotelcode";
             public const string SourceMarketHotelName = "tc_sourcemarkethotelname";
-            public const string StartDateandTime = "tc_startdateandtime ";
+            public const string StartDateandTime = "tc_startdateandtime";
             public const string TransferServiceLevel = "tc_transferservicelevel";
             public const string WithTransfer = "tc_withtransfer";
         }
@@ -293,6 +293,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         public class Remark
         {
             public const string BookingAccommodationId = "tc_bookingaccommodationid";
+            public const string BookingId = "tc_bookingid";
             public const string BookingTransportId = "tc_bookingtransportid";
             public const string Name = "tc_name";
             public const string RemarkName = "tc_remark";
@@ -309,6 +310,20 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string TourOperatorId = "tc_touroperatorid";
         }
 
+
+    }
+
+    public static class OptionSet
+    {
+        public enum PhoneType : int
+        {
+            [System.Runtime.Serialization.EnumMemberAttribute()]
+            M = 950000000,
+
+            [System.Runtime.Serialization.EnumMemberAttribute()]
+            H = 950000001,
+
+        }
 
     }
 }
