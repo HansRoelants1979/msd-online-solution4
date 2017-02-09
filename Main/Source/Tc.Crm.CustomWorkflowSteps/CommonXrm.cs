@@ -15,10 +15,10 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// </summary>
         /// <param name="entityRecord">Entity to Create or Update</param>
         /// <returns></returns>
-        public SuccessMessage UpsertEntity(Entity entityRecord, IOrganizationService service)
+        public static XrmResponse UpsertEntity(Entity entityRecord, IOrganizationService service)
         {  
 
-            SuccessMessage successMsg = null;
+            XrmResponse xrmResp = null;
             if (service != null)
             {
                 UpsertRequest request = new UpsertRequest()
@@ -26,39 +26,31 @@ namespace Tc.Crm.CustomWorkflowSteps
                     Target = entityRecord
                 };
 
-                try
-                {
-
-                    // Execute UpsertRequest and obtain UpsertResponse. 
-                    UpsertResponse response = (UpsertResponse)service.Execute(request);
-                    if (response.RecordCreated)
-                        successMsg = new SuccessMessage
-                        {
-                            Id = response.Target.Id.ToString(),
-                            EntityName = entityRecord.LogicalName,
-                            Create = true
-                           
-                        };
-                    else
-                        successMsg = new SuccessMessage()
-                        {
-                            Id = response.Target.Id.ToString(),
-                            EntityName = entityRecord.LogicalName,
-                            Create = false
-                        };
 
 
-                }
+                // Execute UpsertRequest and obtain UpsertResponse. 
+                UpsertResponse response = (UpsertResponse)service.Execute(request);
+                if (response.RecordCreated)
+                    xrmResp = new XrmResponse
+                    {
+                        Id = response.Target.Id.ToString(),
+                        EntityName = entityRecord.LogicalName,
+                        Create = true
 
-                // Catch any service fault exceptions that Microsoft Dynamics CRM throws.
-                catch (FaultException<Microsoft.Xrm.Sdk.OrganizationServiceFault>)
-                {
-                    throw;
-                }
+                    };
+                else
+                    xrmResp = new XrmResponse()
+                    {
+                        Id = response.Target.Id.ToString(),
+                        EntityName = entityRecord.LogicalName,
+                        Create = false
+                    };
+
+
             }
 
            
-            return successMsg;
+            return xrmResp;
         }
 
 
@@ -67,9 +59,9 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// </summary>
         /// <param name="entities"></param>       
         /// <returns></returns>
-        public List<SuccessMessage> BulkCreate(EntityCollection entities, IOrganizationService service)
+        public static List<XrmResponse> BulkCreate(EntityCollection entities, IOrganizationService service)
         {
-            List<SuccessMessage> successMsg = null;
+            List<XrmResponse> listXrmResp = null;
             if (service != null && entities != null && entities.Entities.Count > 0)
             {
                 var requestWithResults = new ExecuteMultipleRequest()
@@ -92,13 +84,12 @@ namespace Tc.Crm.CustomWorkflowSteps
                     requestWithResults.Requests.Add(createRequest);
                 }
 
-                try
-                {
+               
                     // Execute all the requests in the request collection using a single web method call.
                     ExecuteMultipleResponse responseWithResults =
                         (ExecuteMultipleResponse)service.Execute(requestWithResults);
 
-                    successMsg = new List<SuccessMessage>();
+                    listXrmResp = new List<XrmResponse>();
 
                     // Get the results returned in the responses.
                     foreach (var responseItem in responseWithResults.Responses)
@@ -106,14 +97,14 @@ namespace Tc.Crm.CustomWorkflowSteps
                         // A valid response.
                         if (responseItem.Response != null)
                         {
-                            var msg = new SuccessMessage
+                            var xrmResp = new XrmResponse
                             {
                                 Id = requestWithResults.Requests[responseItem.RequestIndex].RequestId.Value.ToString(),
                                 EntityName = requestWithResults.Requests[responseItem.RequestIndex].RequestName,
                                 Key = requestWithResults.Requests[responseItem.RequestIndex].Parameters[""].ToString()
                               
                             };
-                            successMsg.Add(msg);
+                            listXrmResp.Add(xrmResp);
                         }
                         // An error has occurred.
                         else if (responseItem.Fault != null)
@@ -121,16 +112,11 @@ namespace Tc.Crm.CustomWorkflowSteps
 
                         }
                     }
-                }
-                // Catch any service fault exceptions that Microsoft Dynamics CRM throws.
-                catch (FaultException<Microsoft.Xrm.Sdk.OrganizationServiceFault>)
-                {
-                    throw;
-                }
+                
 
             }
 
-            return successMsg;
+            return listXrmResp;
         }
 
 
@@ -138,9 +124,9 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// Call this method for bulk delete
         /// </summary>      
         /// <param name="entityReferences">Collection of EntityReferences to Delete</param>
-        public void BulkDelete(DataCollection<EntityReference> entityReferences, IOrganizationService service)
+        public static void BulkDelete(DataCollection<EntityReference> entityReferences, IOrganizationService service)
         {
-            List<SuccessMessage> successMsg = null;
+            List<XrmResponse> listXrmResp = null;
             if (service != null && entityReferences != null && entityReferences.Count > 0)
             {
                 // Create an ExecuteMultipleRequest object.
@@ -163,7 +149,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                     requestWithResults.Requests.Add(deleteRequest);
                 }
 
-                try {
+              
                     // Execute all the requests in the request collection using a single web method call.
                     ExecuteMultipleResponse responseWithResults = (ExecuteMultipleResponse)service.Execute(requestWithResults);
 
@@ -173,13 +159,13 @@ namespace Tc.Crm.CustomWorkflowSteps
                         // A valid response.
                         if (responseItem.Response != null)
                         {
-                            var msg = new SuccessMessage
+                            var xrmResp = new XrmResponse
                             {
                                 Id = requestWithResults.Requests[responseItem.RequestIndex].RequestId.Value.ToString(),
                                 EntityName = requestWithResults.Requests[responseItem.RequestIndex].RequestName
                               
                             };
-                            successMsg.Add(msg);
+                            listXrmResp.Add(xrmResp);
                         }
                         // An error has occurred.
                         else if (responseItem.Fault != null)
@@ -187,12 +173,7 @@ namespace Tc.Crm.CustomWorkflowSteps
 
                         }
                     }
-                }
-                // Catch any service fault exceptions that Microsoft Dynamics CRM throws.
-                catch (FaultException<Microsoft.Xrm.Sdk.OrganizationServiceFault>)
-                {
-                    throw;
-                }
+               
             }
         }
 
@@ -204,7 +185,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// <param name="alternateKey"></param>
         /// <param name="alternateKeyValue"></param>
         /// <returns></returns>
-        public EntityReference SetLookupValueUsingAlternateKey(string logicalName, string alternateKey, string alternateKeyValue, IOrganizationService service)
+        public static EntityReference SetLookupValueUsingAlternateKey(string logicalName, string alternateKey, string alternateKeyValue, IOrganizationService service)
         {
             EntityReference entRef = null;
             QueryByAttribute querybyexpression = new QueryByAttribute(logicalName);
@@ -219,7 +200,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             return entRef;
         }
 
-        public EntityCollection RetrieveMultipleRecords(string entityName, string[] columns, string[] filterKeys, string[] filterValues, IOrganizationService service)
+        public static EntityCollection RetrieveMultipleRecords(string entityName, string[] columns, string[] filterKeys, string[] filterValues, IOrganizationService service)
         {
             var query = new QueryExpression(entityName);
             query.ColumnSet = new ColumnSet(columns);
@@ -240,7 +221,7 @@ namespace Tc.Crm.CustomWorkflowSteps
 
         }
 
-        EntityCollection GetRecordsUsingQuery(QueryExpression queryExpr, IOrganizationService service)
+        static EntityCollection GetRecordsUsingQuery(QueryExpression queryExpr, IOrganizationService service)
         {
             EntityCollection entCollection = null;
             entCollection = service.RetrieveMultiple(queryExpr);
@@ -262,18 +243,14 @@ namespace Tc.Crm.CustomWorkflowSteps
 
     }
 
-
-    public class SuccessMessage
+    public class XrmResponse
     {
         public bool Create { get; set; }
         public string EntityName { get; set; }
         public string Id { get; set; }
         public string Details { get; set; }
-        public string Key { get; set; }       
+        public string Key { get; set; }
 
     }
-
-
-
 
 }

@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace Tc.Crm.CustomWorkflowSteps
 {
+    public static class General {
+        public const string AccountType = "B";
+
+        public const string ContactType = "P";
+    }
     public static class EntityName
     {
         public const string Account = "account";
