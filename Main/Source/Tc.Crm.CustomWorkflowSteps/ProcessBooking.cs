@@ -115,20 +115,20 @@ namespace Tc.Crm.CustomWorkflowSteps
             contactEntity[Attributes.Contact.FirstName] = payloadBooking.BookingInfo.Customer.CustomerIdentity.FirstName;
             contactEntity[Attributes.Contact.MiddleName] = payloadBooking.BookingInfo.Customer.CustomerIdentity.MiddleName;
             contactEntity[Attributes.Contact.LastName] = payloadBooking.BookingInfo.Customer.CustomerIdentity.LastName;
-            contactEntity[Attributes.Contact.Language] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.CustomerIdentity.Language);
-            contactEntity[Attributes.Contact.Gender] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.CustomerIdentity.Gender.ToString());
+            contactEntity[Attributes.Contact.Language] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.CustomerIdentity.Language, Attributes.Contact.Language);
+            contactEntity[Attributes.Contact.Gender] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.CustomerIdentity.Gender.ToString(), Attributes.Contact.Gender);
             contactEntity[Attributes.Contact.AcademicTitle] = payloadBooking.BookingInfo.Customer.CustomerIdentity.AcademicTitle;
-            contactEntity[Attributes.Contact.Salutation] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.CustomerIdentity.Salutation);
+            contactEntity[Attributes.Contact.Salutation] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.CustomerIdentity.Salutation, Attributes.Contact.Salutation);
             contactEntity[Attributes.Contact.BirthDate] = Convert.ToDateTime(payloadBooking.BookingInfo.Customer.CustomerIdentity.Birthdate);
 
             if (payloadBooking.BookingInfo.Customer.CustomerGeneral.CustomerStatus.ToString() == General.Blacklisted ||
                 payloadBooking.BookingInfo.Customer.CustomerGeneral.CustomerStatus.ToString() == General.Deceased)
             {
                 contactEntity[Attributes.Contact.StateCode] = new OptionSetValue((int)Statecode.InActive);
-                contactEntity[Attributes.Contact.StatusCode] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.CustomerGeneral.CustomerStatus.ToString());
+                contactEntity[Attributes.Contact.StatusCode] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.CustomerGeneral.CustomerStatus.ToString(), Attributes.Contact.StatusCode);
             }
             // couldn't find segment,DateofDeath in booking.customer.identity.additional
-            contactEntity[Attributes.Contact.Segment] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Additional.Segment);
+            contactEntity[Attributes.Contact.Segment] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Additional.Segment, Attributes.Contact.Segment);
             contactEntity[Attributes.Contact.DateofDeath] = Convert.ToDateTime(payloadBooking.BookingInfo.Customer.Additional.DateOfDeath);
             if (payloadBooking.BookingInfo.Customer.Address != null && payloadBooking.BookingInfo.Customer.Address.Length > 0)
             {
@@ -162,33 +162,33 @@ namespace Tc.Crm.CustomWorkflowSteps
             if (payloadBooking.BookingInfo.Customer.Phone != null && payloadBooking.BookingInfo.Customer.Phone.Length > 0)
             {
                 payloadBooking.Trace.Trace("Processing Contact Phone information");
-                contactEntity[Attributes.Contact.Telephone1Type] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Phone[0].PhoneType.ToString());
+                contactEntity[Attributes.Contact.Telephone1Type] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Phone[0].PhoneType.ToString(), Attributes.Contact.Telephone1Type);
                 contactEntity[Attributes.Contact.Telephone1] = payloadBooking.BookingInfo.Customer.Phone[0].Number;
                 if (payloadBooking.BookingInfo.Customer.Phone.Length > 1)
                 {
-                    contactEntity[Attributes.Contact.Telephone2Type] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Phone[1].PhoneType.ToString());
+                    contactEntity[Attributes.Contact.Telephone2Type] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Phone[1].PhoneType.ToString(), Attributes.Contact.Telephone2Type);
                     contactEntity[Attributes.Contact.Telephone2] = payloadBooking.BookingInfo.Customer.Phone[1].Number;
                 }
                 if (payloadBooking.BookingInfo.Customer.Phone.Length > 2)
                 {
-                    contactEntity[Attributes.Contact.Telephone3Type] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Phone[2].PhoneType.ToString());
-                    contactEntity[Attributes.Contact.Telephone3] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Phone[2].PhoneType.ToString());
+                    contactEntity[Attributes.Contact.Telephone3Type] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Phone[2].PhoneType.ToString(), Attributes.Contact.Telephone3Type);
+                    contactEntity[Attributes.Contact.Telephone3] = payloadBooking.BookingInfo.Customer.Phone[2].Number;
                 }
             }
             if (payloadBooking.BookingInfo.Customer.Email != null && payloadBooking.BookingInfo.Customer.Email.Length > 0)
             {
                 payloadBooking.Trace.Trace("Processing Contact Email information");
                 contactEntity[Attributes.Contact.EMailAddress1] = payloadBooking.BookingInfo.Customer.Email[0].Address;
-                contactEntity[Attributes.Contact.EmailAddress1Type] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Email[0].EmailType.ToString());
+                contactEntity[Attributes.Contact.EmailAddress1Type] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Email[0].EmailType.ToString(), Attributes.Contact.EmailAddress1Type);
                 if (payloadBooking.BookingInfo.Customer.Email.Length > 1)
                 {
                     contactEntity[Attributes.Contact.EMailAddress2] = payloadBooking.BookingInfo.Customer.Email[1].Address;
-                    contactEntity[Attributes.Contact.EmailAddress2Type] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Email[1].EmailType.ToString());
+                    contactEntity[Attributes.Contact.EmailAddress2Type] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Email[1].EmailType.ToString(), Attributes.Contact.EmailAddress2Type);
                 }
                 if (payloadBooking.BookingInfo.Customer.Email.Length > 2)
                 {
                     contactEntity[Attributes.Contact.EMailAddress3] = payloadBooking.BookingInfo.Customer.Email[2].Address;
-                    contactEntity[Attributes.Contact.EmailAddress3Type] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Email[2].EmailType.ToString());
+                    contactEntity[Attributes.Contact.EmailAddress3Type] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Email[2].EmailType.ToString(), Attributes.Contact.EmailAddress3Type);
                 }
             }
             if (payloadBooking.BookingInfo.Customer.CustomerIdentifier.SourceMarket != null)
@@ -236,17 +236,17 @@ namespace Tc.Crm.CustomWorkflowSteps
             if (payloadBooking.BookingInfo.Customer.Phone != null && payloadBooking.BookingInfo.Customer.Phone.Length > 0)
             {
                 payloadBooking.Trace.Trace("Processing Account Phone information");
-                accountEntity[Attributes.Account.Telephone1_Type] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Phone[0].PhoneType.ToString());
+                accountEntity[Attributes.Account.Telephone1_Type] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Phone[0].PhoneType.ToString(), Attributes.Account.Telephone1_Type);
 
                 accountEntity[Attributes.Account.Telephone1] = payloadBooking.BookingInfo.Customer.Phone[0].Number;
                 if (payloadBooking.BookingInfo.Customer.Phone.Length > 1)
                 {
-                    accountEntity[Attributes.Account.Telephone2_Type] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Phone[1].PhoneType.ToString());
+                    accountEntity[Attributes.Account.Telephone2_Type] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Phone[1].PhoneType.ToString(), Attributes.Account.Telephone2_Type);
                     accountEntity[Attributes.Account.Telephone2] = payloadBooking.BookingInfo.Customer.Phone[1].Number;
                 }
                 if (payloadBooking.BookingInfo.Customer.Phone.Length > 2)
                 {
-                    accountEntity[Attributes.Account.Telephone3_Type] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Phone[2].PhoneType.ToString());
+                    accountEntity[Attributes.Account.Telephone3_Type] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Phone[2].PhoneType.ToString(), Attributes.Account.Telephone3_Type);
                     accountEntity[Attributes.Account.Telephone3] = payloadBooking.BookingInfo.Customer.Phone[2].Number;
                 }
             }
@@ -254,16 +254,16 @@ namespace Tc.Crm.CustomWorkflowSteps
             {
                 payloadBooking.Trace.Trace("Processing Account Email information");
                 accountEntity[Attributes.Account.EMailAddress1] = payloadBooking.BookingInfo.Customer.Email[0].Address;
-                accountEntity[Attributes.Account.EmailAddress1_Type] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Email[0].EmailType.ToString());
+                accountEntity[Attributes.Account.EmailAddress1_Type] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Email[0].EmailType.ToString(), Attributes.Account.EmailAddress1_Type);
                 if (payloadBooking.BookingInfo.Customer.Email.Length > 1)
                 {
                     accountEntity[Attributes.Account.EMailAddress2] = payloadBooking.BookingInfo.Customer.Email[1].Address;
-                    accountEntity[Attributes.Account.EmailAddress2_Type] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Email[1].EmailType.ToString());
+                    accountEntity[Attributes.Account.EmailAddress2_Type] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Email[1].EmailType.ToString(), Attributes.Account.EmailAddress2_Type);
                 }
                 if (payloadBooking.BookingInfo.Customer.Email.Length > 2)
                 {
                     accountEntity[Attributes.Account.EMailAddress3] = payloadBooking.BookingInfo.Customer.Email[2].Address;
-                    accountEntity[Attributes.Account.EmailAddress3_Type] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Email[2].EmailType.ToString());
+                    accountEntity[Attributes.Account.EmailAddress3_Type] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Email[2].EmailType.ToString(), Attributes.Account.EmailAddress3_Type);
                 }
             }
             if (payloadBooking.BookingInfo.Customer.CustomerIdentifier.SourceMarket != null)
@@ -338,7 +338,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                 if (payloadBooking.BookingInfo.BookingGeneral.BookingStatus.ToString() == General.Booked || payloadBooking.BookingInfo.BookingGeneral.BookingStatus.ToString() == General.Cancelled)
                 {
                     bookingEntity[Attributes.Booking.StateCode] = new OptionSetValue((int)Statecode.InActive);
-                    bookingEntity[Attributes.Booking.StatusCode] = GetOptionSetValue(payloadBooking.BookingInfo.BookingGeneral.BookingStatus.ToString(), EntityName.Booking);
+                    bookingEntity[Attributes.Booking.StatusCode] = GetOptionSetValue(payloadBooking.BookingInfo.BookingGeneral.BookingStatus.ToString(), Attributes.Booking.StatusCode);
                 }
                 
                 bookingEntity[Attributes.Booking.TravelAmount] = new Money(payloadBooking.BookingInfo.BookingGeneral.TravelAmount);
@@ -557,7 +557,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                 {
                     remarkEntity = new Entity(EntityName.Remark);
                     remarkEntity[Attributes.Remark.Name] = payloadBooking.BookingInfo.BookingIdentifier.BookingNumber + " - " + payloadBooking.BookingInfo.Remark[i].RemarkType.ToString();
-                    remarkEntity[Attributes.Remark.Type] = GetOptionSetValue(payloadBooking.BookingInfo.Remark[i].RemarkType.ToString());
+                    remarkEntity[Attributes.Remark.Type] = GetOptionSetValue(payloadBooking.BookingInfo.Remark[i].RemarkType.ToString(), Attributes.Remark.Type);
                     remarkEntity[Attributes.Remark.RemarkName] = payloadBooking.BookingInfo.Remark[i].Text;
                     remarkEntity[Attributes.Remark.BookingId] = new EntityReference(EntityName.Booking, new Guid(payloadBooking.BookingId));
                     entityCollectionRemarks.Entities.Add(remarkEntity);
@@ -601,17 +601,17 @@ namespace Tc.Crm.CustomWorkflowSteps
                     accomodationEntity[Attributes.BookingAccommodation.StartDateandTime] = DateTime.Parse(payloadBooking.BookingInfo.Services.Accommodation[i].StartDate);
                     accomodationEntity[Attributes.BookingAccommodation.EndDateandTime] = DateTime.Parse(payloadBooking.BookingInfo.Services.Accommodation[i].EndDate);
                     accomodationEntity[Attributes.BookingAccommodation.RoomType] = payloadBooking.BookingInfo.Services.Accommodation[i].RoomType;
-                    accomodationEntity[Attributes.BookingAccommodation.BoardType] = GetOptionSetValue(payloadBooking.BookingInfo.Services.Accommodation[i].BoardType.ToString());
+                    accomodationEntity[Attributes.BookingAccommodation.BoardType] = GetOptionSetValue(payloadBooking.BookingInfo.Services.Accommodation[i].BoardType.ToString(), Attributes.BookingAccommodation.BoardType);
                     accomodationEntity[Attributes.BookingAccommodation.HasSharedRoom] = payloadBooking.BookingInfo.Services.Accommodation[i].HasSharedRoom;
                     accomodationEntity[Attributes.BookingAccommodation.NumberofParticipants] = payloadBooking.BookingInfo.Services.Accommodation[i].NumberOfParticipants;
                     accomodationEntity[Attributes.BookingAccommodation.NumberofRooms] = payloadBooking.BookingInfo.Services.Accommodation[i].NumberOfRooms;
                     accomodationEntity[Attributes.BookingAccommodation.WithTransfer] = payloadBooking.BookingInfo.Services.Accommodation[i].WithTransfer;
                     accomodationEntity[Attributes.BookingAccommodation.IsExternalService] = payloadBooking.BookingInfo.Services.Accommodation[i].IsExternalService;
-                    accomodationEntity[Attributes.BookingAccommodation.ExternalServiceCode] = GetOptionSetValue(payloadBooking.BookingInfo.Services.Accommodation[i].ExternalServiceCode.ToString());
+                    accomodationEntity[Attributes.BookingAccommodation.ExternalServiceCode] = GetOptionSetValue(payloadBooking.BookingInfo.Services.Accommodation[i].ExternalServiceCode.ToString(), Attributes.BookingAccommodation.ExternalServiceCode);
                     accomodationEntity[Attributes.BookingAccommodation.NotificationRequired] = payloadBooking.BookingInfo.Services.Accommodation[i].NotificationRequired;
                     accomodationEntity[Attributes.BookingAccommodation.NeedTourGuideAssignment] = payloadBooking.BookingInfo.Services.Accommodation[i].NeedsTourGuideAssignment;
                     accomodationEntity[Attributes.BookingAccommodation.ExternalTransfer] = payloadBooking.BookingInfo.Services.Accommodation[i].IsExternalTransfer;
-                    accomodationEntity[Attributes.BookingAccommodation.TransferServiceLevel] = GetOptionSetValue(payloadBooking.BookingInfo.Services.Accommodation[i].TransferServiceLevel);
+                    accomodationEntity[Attributes.BookingAccommodation.TransferServiceLevel] = GetOptionSetValue(payloadBooking.BookingInfo.Services.Accommodation[i].TransferServiceLevel, Attributes.BookingAccommodation.TransferServiceLevel);
                     accomodationEntity[Attributes.BookingAccommodation.SourceMarketHotelName] = payloadBooking.BookingInfo.Services.Accommodation[i].AccommodationDescription;
 
                     accomodationEntity[Attributes.BookingAccommodation.BookingId] = new EntityReference(EntityName.Booking, new Guid(payloadBooking.BookingId));
@@ -644,7 +644,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                         {
                             remarkEntity = new Entity(EntityName.Remark);
                             remarkEntity[Attributes.Remark.Name] = payloadBooking.BookingInfo.BookingIdentifier.BookingNumber + " - " + payloadBooking.BookingInfo.Services.Accommodation[i].Remark[j].RemarkType.ToString();
-                            remarkEntity[Attributes.Remark.Type] = GetOptionSetValue(payloadBooking.BookingInfo.Services.Accommodation[i].Remark[j].RemarkType.ToString());
+                            remarkEntity[Attributes.Remark.Type] = GetOptionSetValue(payloadBooking.BookingInfo.Services.Accommodation[i].Remark[j].RemarkType.ToString(), Attributes.Remark.Type);
                             remarkEntity[Attributes.Remark.RemarkName] = payloadBooking.BookingInfo.Services.Accommodation[i].Remark[j].Text;
                             //messageList.Find()
                             remarkEntity[Attributes.Remark.BookingAccommodationId] = new EntityReference(EntityName.BookingAccommodation, Guid.Parse(xrmResponseList[i].Id));
@@ -689,7 +689,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                     transportEntity[Attributes.BookingTransport.Order] = payloadBooking.BookingInfo.Services.Transport[i].Order;
                     transportEntity[Attributes.BookingTransport.StartDateandTime] = DateTime.Parse(payloadBooking.BookingInfo.Services.Transport[i].StartDate);
                     transportEntity[Attributes.BookingTransport.EndDateandTime] = DateTime.Parse(payloadBooking.BookingInfo.Services.Transport[i].EndDate);
-                    transportEntity[Attributes.BookingTransport.TransferType] = GetOptionSetValue(payloadBooking.BookingInfo.Services.Transport[i].TransferType.ToString());
+                    transportEntity[Attributes.BookingTransport.TransferType] = GetOptionSetValue(payloadBooking.BookingInfo.Services.Transport[i].TransferType.ToString(), Attributes.BookingTransport.TransferType);
                     transportEntity[Attributes.BookingTransport.DepartureGatewayId] = new EntityReference(EntityName.Gateway, Attributes.Gateway.IATA, payloadBooking.BookingInfo.Services.Transport[i].DepartureAirport);
                     transportEntity[Attributes.BookingTransport.ArrivalGatewayId] = new EntityReference(EntityName.Gateway, Attributes.Gateway.IATA, payloadBooking.BookingInfo.Services.Transport[i].ArrivalAirport);
                     transportEntity[Attributes.BookingTransport.CarrierCode] = payloadBooking.BookingInfo.Services.Transport[i].CarrierCode;
@@ -731,7 +731,7 @@ namespace Tc.Crm.CustomWorkflowSteps
 
                         transportRemark = new Entity(EntityName.Remark);
                         transportRemark[Attributes.Remark.Name] = payloadBooking.BookingInfo.BookingIdentifier.BookingNumber + " - " + payloadBooking.BookingInfo.Services.Transport[i].Remark[j].RemarkType.ToString();
-                        transportRemark[Attributes.Remark.Type] = GetOptionSetValue(payloadBooking.BookingInfo.Services.Transport[i].Remark[j].RemarkType.ToString());
+                        transportRemark[Attributes.Remark.Type] = GetOptionSetValue(payloadBooking.BookingInfo.Services.Transport[i].Remark[j].RemarkType.ToString(), Attributes.Remark.Type);
                         transportRemark[Attributes.Remark.RemarkName] = payloadBooking.BookingInfo.Services.Transport[i].Remark[j].Text;
                         transportRemark[Attributes.Remark.BookingTransportId] = new EntityReference(EntityName.BookingTransport, new Guid(xrmResponseList[i].Id));
 
@@ -801,15 +801,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             }
         }
 
-        /// <summary>
-        /// To get OptionSetValue by text
-        /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        OptionSetValue GetOptionSetValue(string text)
-        {
-            return GetOptionSetValue(text, string.Empty);
-        }
+       
 
         /// <summary>
         /// To get OptionSetValue by text and entityName
@@ -817,89 +809,251 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// <param name="text"></param>
         /// <param name="entityName"></param>
         /// <returns></returns>
-        OptionSetValue GetOptionSetValue(string text, string entityName)
-        {
-            OptionSetValue optionSetValue = null;
-            switch (entityName)
+        OptionSetValue GetOptionSetValue(string text, string optionSetName)
+        {   
+            int value = -1;
+            switch (optionSetName)
             {
-                case "tc_booking":
+                case "tc_language":
                     {
                         switch (text)
                         {
-                            case "C":
-                                optionSetValue = new OptionSetValue(950000000);
+                            case "English":
+                                value = 950000000;
                                 break;
-                            case "B":
-                                optionSetValue = new OptionSetValue(2);
+                            case "German":
+                                value = 950000001;
+                                break;
+                            case "Dutch":
+                                value = 950000002;
+                                break;
+                            case "French":
+                                value = 950000003;
+                                break;
+                            case "Spanish":
+                                value = 950000004;
+                                break;
+                            case "Danish":
+                                value = 950000005;
                                 break;
 
                         }
                     }
                     break;
-                default:
+
+                case "tc_gender":
                     {
                         switch (text)
                         {
-                            case "M":
-                            case "Pri":
-                            case "T":
-                            case "AI":
-                            case "I":
-                            case "C":
-                            case "D":
-                            case "English":
                             case "Mr":
-                            case "1":
-                                optionSetValue = new OptionSetValue(950000000);
+                                value = 950000000;
                                 break;
-                            case "H":
-                            case "Pro":
-                            case "A":
-                            case "O":
-                            case "F":
-                            case "B":
-                            case "German":
                             case "Mrs":
-                            case "2":
-                                optionSetValue = new OptionSetValue(950000001);
+                                value = 950000001;
                                 break;
-                            case "HB":
-                            case "TH":
-                            case "U":
-                            case "Dutch":
                             case "Ms":
-                            case "3":
-                                optionSetValue = new OptionSetValue(950000002);
+                                value = 950000002;
                                 break;
-                            case "French":
                             case "Miss":
-                            case "4":
-                                optionSetValue = new OptionSetValue(950000003);
+                                value = 950000003;
                                 break;
-                            case "Spanish":
                             case "Dr":
-                            case "5":
-                                optionSetValue = new OptionSetValue(950000004);
+                                value = 950000004;
                                 break;
-                            case "Danish":
                             case "Sir":
-                                optionSetValue = new OptionSetValue(950000005);
+                                value = 950000005;
                                 break;
                             case "Prof.":
-                                optionSetValue = new OptionSetValue(950000006);
+                                value = 950000006;
                                 break;
                             case "Lord":
-                                optionSetValue = new OptionSetValue(950000007);
+                                value = 950000007;
                                 break;
                             case "Lady":
-                                optionSetValue = new OptionSetValue(950000008);
+                                value = 950000008;
+                                break;
+                        }
+                    }
+                    break;
+                case "tc_segment":
+                    {
+                        switch (text)
+                        {
+                            case "1":
+                                value = 950000000;
+                                break;
+                            case "2":
+                                value = 950000001;
+                                break;
+                            case "3":
+                                value = 950000002;
+                                break;
+                            case "4":
+                                value = 950000003;
+                                break;
+                            case "5":
+                                value = 950000004;
+                                break;
+                          
+                        }
+                    }
+                    break;
+                case "tc_salutation":
+                    {
+                        switch (text)
+                        {
+                            case "1":
+                                value = 950000000;
+                                break;                          
+                            case "2":
+                                value = 950000001;
+                                break;                           
+                            case "3":
+                                value = 950000002;
+                                break;                           
+                            case "4":
+                                value = 950000003;
+                                break;                          
+                            case "5":
+                                value = 950000004;
+                                break;
+                        }
+                    }
+                    break;
+                case "tc_type":
+                    {
+                        switch (text)
+                        {
+                            case "T":
+                                value = 950000000;
+                                break;
+                            case "A":
+                                value = 950000001;
+                                break;                          
+                        }
+                    }
+                    break;
+                case "tc_transfertype":
+                    {
+                        switch (text)
+                        {
+                            case "I":
+                                value = 950000000;
+                                break;
+                            case "O":
+                                value = 950000001;
+                                break;
+                            case "TH":
+                                value = 950000002;
+                                break;
+                        }
+                    }
+                    break;
+                case "tc_transferservicelevel":
+                    {
+                        switch (text)
+                        {
+                            case "Service Level 1":
+                                value = 950000000;
+                                break;
+                            case "Service Level 2":
+                                value = 950000001;
+                                break;
+                            case "Service Level 3":
+                                value = 950000002;
+                                break;
+                        }
+                    }
+                    break;
+                case "tc_externalservicecode":
+                    {
+                        switch (text)
+                        {
+                            case "Service Code A":
+                                value = 950000000;
+                                break;
+                            case "Service Code B":
+                                value = 950000001;
+                                break;
+                            case "Service Code C":
+                                value = 950000002;
+                                break;
+                        }
+                    }
+                    break;
+                case "tc_boardtype":
+                    {
+                        switch (text)
+                        {
+                            case "AI":
+                                value = 950000000;
+                                break;
+                            case "HB":
+                                value = 950000002;
+                                break;
+                            case "FB":
+                                value = 950000001;
+                                break;
+                        }
+                    }
+                    break;
+                case "tc_emailaddress1_type":
+                case "tc_emailaddress2_type":
+                case "tc_emailaddress3_type":
+                    {
+                        switch (text)
+                        {
+                            case "Pri":
+                                value = 950000000;
+                                break;
+                            case "Pro":
+                                value = 950000001;
+                                break;
+                          
+                        }
+                    }
+                    break;
+                case "tc_telephone1_type":
+                case "tc_telephone2_type":
+                case "tc_telephone3_type":
+                    {
+                        switch (text)
+                        {
+                            case "H":
+                                value = 950000001;
+                                break;
+                            case "M":
+                                value = 950000000;
+                                break;
+
+                        }
+                    }
+                    break;
+                case "statuscode":
+                    {
+                        switch (text)
+                        {
+                            case "A":
+                                value = 1;
+                                break;
+                            case "B":
+                                value = 950000001;
+                                break;
+                            case "C":
+                                value = 950000000;
+                                break;
+                            case "D":
+                                value = 950000000;
+                                break;
+                            case "Inactive":
+                                value = 2;
                                 break;
 
                         }
                     }
                     break;
             }
-            return optionSetValue;
+            return  (value != -1) ? new OptionSetValue(value) : new OptionSetValue();
         }
 
         enum Statecode
