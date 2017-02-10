@@ -115,14 +115,20 @@ namespace Tc.Crm.CustomWorkflowSteps
             contactEntity[Attributes.Contact.FirstName] = payloadBooking.BookingInfo.Customer.CustomerIdentity.FirstName;
             contactEntity[Attributes.Contact.MiddleName] = payloadBooking.BookingInfo.Customer.CustomerIdentity.MiddleName;
             contactEntity[Attributes.Contact.LastName] = payloadBooking.BookingInfo.Customer.CustomerIdentity.LastName;
-            contactEntity[Attributes.Contact.Language] = payloadBooking.BookingInfo.Customer.CustomerIdentity.Language;
-            contactEntity[Attributes.Contact.Gender] = payloadBooking.BookingInfo.Customer.CustomerIdentity.Gender;
+            contactEntity[Attributes.Contact.Language] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.CustomerIdentity.Language);
+            contactEntity[Attributes.Contact.Gender] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.CustomerIdentity.Gender.ToString());
             contactEntity[Attributes.Contact.AcademicTitle] = payloadBooking.BookingInfo.Customer.CustomerIdentity.AcademicTitle;
-            contactEntity[Attributes.Contact.Salutation] = payloadBooking.BookingInfo.Customer.CustomerIdentity.Salutation;
-            contactEntity[Attributes.Contact.BirthDate] = payloadBooking.BookingInfo.Customer.CustomerIdentity.Birthdate;
-            contactEntity[Attributes.Contact.StatusCode] = payloadBooking.BookingInfo.Customer.CustomerGeneral.CustomerStatus;
+            contactEntity[Attributes.Contact.Salutation] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.CustomerIdentity.Salutation);
+            contactEntity[Attributes.Contact.BirthDate] = Convert.ToDateTime(payloadBooking.BookingInfo.Customer.CustomerIdentity.Birthdate);
+
+            if (payloadBooking.BookingInfo.Customer.CustomerGeneral.CustomerStatus.ToString() == General.Blacklisted ||
+                payloadBooking.BookingInfo.Customer.CustomerGeneral.CustomerStatus.ToString() == General.Deceased)
+            {
+                contactEntity[Attributes.Contact.StateCode] = new OptionSetValue((int)Statecode.InActive);
+                contactEntity[Attributes.Contact.StatusCode] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.CustomerGeneral.CustomerStatus.ToString());
+            }
             // couldn't find segment,DateofDeath in booking.customer.identity.additional
-            contactEntity[Attributes.Contact.Segment] = payloadBooking.BookingInfo.Customer.Additional.Segment;
+            contactEntity[Attributes.Contact.Segment] = GetOptionSetValue(payloadBooking.BookingInfo.Customer.Additional.Segment);
             contactEntity[Attributes.Contact.DateofDeath] = Convert.ToDateTime(payloadBooking.BookingInfo.Customer.Additional.DateOfDeath);
             if (payloadBooking.BookingInfo.Customer.Address != null && payloadBooking.BookingInfo.Customer.Address.Length > 0)
             {
@@ -133,18 +139,25 @@ namespace Tc.Crm.CustomWorkflowSteps
                 contactEntity[Attributes.Contact.Address1_Town] = payloadBooking.BookingInfo.Customer.Address[0].Town;
                 if (payloadBooking.BookingInfo.Customer.Address[0].Country != null)
                 {
-                    contactEntity[Attributes.Contact.Address1_CountryId] = new EntityReference(EntityName.Country, Attributes.Booking.Name, payloadBooking.BookingInfo.Customer.Address[0].Country);
+                    contactEntity[Attributes.Contact.Address1_CountryId] = new EntityReference(EntityName.Country, Attributes.Country.ISO2Code, payloadBooking.BookingInfo.Customer.Address[0].Country);
                 }
                 contactEntity[Attributes.Contact.Address1_County] = payloadBooking.BookingInfo.Customer.Address[0].County;
                 contactEntity[Attributes.Contact.Address1_PostalCode] = payloadBooking.BookingInfo.Customer.Address[0].PostalCode;
-                contactEntity[Attributes.Contact.Address2_AdditionalInformation] = payloadBooking.BookingInfo.Customer.Address[1].AdditionalAddressInfo;
-                contactEntity[Attributes.Contact.Address2_FlatOrUnitNumber] = payloadBooking.BookingInfo.Customer.Address[1].FlatNumberUnit;
-                contactEntity[Attributes.Contact.Address2_HouseNumberorBuilding] = payloadBooking.BookingInfo.Customer.Address[1].HouseNumberBuilding;
-                contactEntity[Attributes.Contact.Address2_Town] = payloadBooking.BookingInfo.Customer.Address[1].Town;
-                if (payloadBooking.BookingInfo.Customer.Address[1].Country != null)
-                    contactEntity[Attributes.Contact.Address2_CountryId] = new EntityReference(EntityName.Country, Attributes.Country.ISO2Code, payloadBooking.BookingInfo.Customer.Address[1].Country);
-                contactEntity[Attributes.Contact.Address2_County] = payloadBooking.BookingInfo.Customer.Address[1].County;
-                contactEntity[Attributes.Contact.Address2_PostalCode] = payloadBooking.BookingInfo.Customer.Address[1].PostalCode;
+
+                if (payloadBooking.BookingInfo.Customer.Address.Length > 1)
+                {
+
+                    contactEntity[Attributes.Contact.Address2_AdditionalInformation] = payloadBooking.BookingInfo.Customer.Address[1].AdditionalAddressInfo;
+                    contactEntity[Attributes.Contact.Address2_FlatOrUnitNumber] = payloadBooking.BookingInfo.Customer.Address[1].FlatNumberUnit;
+                    contactEntity[Attributes.Contact.Address2_HouseNumberorBuilding] = payloadBooking.BookingInfo.Customer.Address[1].HouseNumberBuilding;
+                    contactEntity[Attributes.Contact.Address2_Town] = payloadBooking.BookingInfo.Customer.Address[1].Town;
+
+                    if (payloadBooking.BookingInfo.Customer.Address[1].Country != null)
+                        contactEntity[Attributes.Contact.Address2_CountryId] = new EntityReference(EntityName.Country, Attributes.Country.ISO2Code, payloadBooking.BookingInfo.Customer.Address[1].Country);
+
+                    contactEntity[Attributes.Contact.Address2_County] = payloadBooking.BookingInfo.Customer.Address[1].County;
+                    contactEntity[Attributes.Contact.Address2_PostalCode] = payloadBooking.BookingInfo.Customer.Address[1].PostalCode;
+                }
             }
             if (payloadBooking.BookingInfo.Customer.Phone != null && payloadBooking.BookingInfo.Customer.Phone.Length > 0)
             {
@@ -322,10 +335,10 @@ namespace Tc.Crm.CustomWorkflowSteps
                 bookingEntity[Attributes.Booking.ExtraServiceRemarks] = PrepareExtraServiceRemarks();
                 bookingEntity[Attributes.Booking.SourceMarketId] = new EntityReference(EntityName.Country, Attributes.Country.ISO2Code, payloadBooking.BookingInfo.BookingIdentifier.SourceMarket);
 
-                if (payloadBooking.BookingInfo.BookingGeneral.BookingStatus.ToString() == PayloadBooking.Booked || payloadBooking.BookingInfo.BookingGeneral.BookingStatus.ToString() == PayloadBooking.Cancelled)
+                if (payloadBooking.BookingInfo.BookingGeneral.BookingStatus.ToString() == General.Booked || payloadBooking.BookingInfo.BookingGeneral.BookingStatus.ToString() == General.Cancelled)
                 {
-                    bookingEntity[Attributes.Booking.Statecode] = new OptionSetValue((int)Statecode.InActive);
-                    bookingEntity[Attributes.Booking.Statuscode] = GetOptionSetValue(payloadBooking.BookingInfo.BookingGeneral.BookingStatus.ToString(), EntityName.Booking);
+                    bookingEntity[Attributes.Booking.StateCode] = new OptionSetValue((int)Statecode.InActive);
+                    bookingEntity[Attributes.Booking.StatusCode] = GetOptionSetValue(payloadBooking.BookingInfo.BookingGeneral.BookingStatus.ToString(), EntityName.Booking);
                 }
                 
                 bookingEntity[Attributes.Booking.TravelAmount] = new Money(payloadBooking.BookingInfo.BookingGeneral.TravelAmount);
@@ -363,15 +376,15 @@ namespace Tc.Crm.CustomWorkflowSteps
                 for (int i = 0; i < payloadBooking.BookingInfo.TravelParticipant.Length; i++)
                 {
                     if (!string.IsNullOrEmpty(travelParticipants))
-                        travelParticipants += PayloadBooking.NextLine;
+                        travelParticipants += General.NextLine;
 
-                    travelParticipants += payloadBooking.BookingInfo.TravelParticipant[i].TravelParticipantIdOnTour + PayloadBooking.Seperator +
-                                          payloadBooking.BookingInfo.TravelParticipant[i].FirstName + PayloadBooking.Seperator +
-                                          payloadBooking.BookingInfo.TravelParticipant[i].LastName + PayloadBooking.Seperator +
-                                          payloadBooking.BookingInfo.TravelParticipant[i].Age.ToString() + PayloadBooking.Seperator +
-                                          payloadBooking.BookingInfo.TravelParticipant[i].Birthdate + PayloadBooking.Seperator +
-                                          payloadBooking.BookingInfo.TravelParticipant[i].Gender.ToString() + PayloadBooking.Seperator +
-                                          payloadBooking.BookingInfo.TravelParticipant[i].Relation.ToString() + PayloadBooking.Seperator +
+                    travelParticipants += payloadBooking.BookingInfo.TravelParticipant[i].TravelParticipantIdOnTour + General.Seperator +
+                                          payloadBooking.BookingInfo.TravelParticipant[i].FirstName + General.Seperator +
+                                          payloadBooking.BookingInfo.TravelParticipant[i].LastName + General.Seperator +
+                                          payloadBooking.BookingInfo.TravelParticipant[i].Age.ToString() + General.Seperator +
+                                          payloadBooking.BookingInfo.TravelParticipant[i].Birthdate + General.Seperator +
+                                          payloadBooking.BookingInfo.TravelParticipant[i].Gender.ToString() + General.Seperator +
+                                          payloadBooking.BookingInfo.TravelParticipant[i].Relation.ToString() + General.Seperator +
                                           payloadBooking.BookingInfo.TravelParticipant[i].Language;
 
                 }
@@ -395,10 +408,10 @@ namespace Tc.Crm.CustomWorkflowSteps
                         for (int j = 0; j < payloadBooking.BookingInfo.TravelParticipant[i].Remark.Length; j++)
                         {
                             if (!string.IsNullOrEmpty(remarks))
-                                remarks += PayloadBooking.NextLine;
+                                remarks += General.NextLine;
 
-                            remarks += payloadBooking.BookingInfo.TravelParticipant[i].TravelParticipantIdOnTour + PayloadBooking.Seperator +
-                                       payloadBooking.BookingInfo.TravelParticipant[i].Remark[j].RemarkType.ToString() + PayloadBooking.Seperator +
+                            remarks += payloadBooking.BookingInfo.TravelParticipant[i].TravelParticipantIdOnTour + General.Seperator +
+                                       payloadBooking.BookingInfo.TravelParticipant[i].Remark[j].RemarkType.ToString() + General.Seperator +
                                        payloadBooking.BookingInfo.TravelParticipant[i].Remark[j].Text;
                         }
 
@@ -420,16 +433,16 @@ namespace Tc.Crm.CustomWorkflowSteps
                 for (int i = 0; i < payloadBooking.BookingInfo.Services.Transfer.Length; i++)
                 {
                     if (!string.IsNullOrEmpty(transferInfo))
-                        transferInfo += PayloadBooking.NextLine;
+                        transferInfo += General.NextLine;
 
-                    transferInfo += payloadBooking.BookingInfo.Services.Transfer[i].TransferCode + PayloadBooking.Seperator +
-                                    payloadBooking.BookingInfo.Services.Transfer[i].TransferDescription + PayloadBooking.Seperator +
-                                    payloadBooking.BookingInfo.Services.Transfer[i].Order.ToString() + PayloadBooking.Seperator +
-                                    payloadBooking.BookingInfo.Services.Transfer[i].StartDate + PayloadBooking.Seperator +
-                                    payloadBooking.BookingInfo.Services.Transfer[i].EndDate + PayloadBooking.Seperator +
-                                    payloadBooking.BookingInfo.Services.Transfer[i].Category + PayloadBooking.Seperator +
-                                    payloadBooking.BookingInfo.Services.Transfer[i].TransferType.ToString() + PayloadBooking.Seperator +
-                                    payloadBooking.BookingInfo.Services.Transfer[i].DepartureAirport + PayloadBooking.Seperator +
+                    transferInfo += payloadBooking.BookingInfo.Services.Transfer[i].TransferCode + General.Seperator +
+                                    payloadBooking.BookingInfo.Services.Transfer[i].TransferDescription + General.Seperator +
+                                    payloadBooking.BookingInfo.Services.Transfer[i].Order.ToString() + General.Seperator +
+                                    payloadBooking.BookingInfo.Services.Transfer[i].StartDate + General.Seperator +
+                                    payloadBooking.BookingInfo.Services.Transfer[i].EndDate + General.Seperator +
+                                    payloadBooking.BookingInfo.Services.Transfer[i].Category + General.Seperator +
+                                    payloadBooking.BookingInfo.Services.Transfer[i].TransferType.ToString() + General.Seperator +
+                                    payloadBooking.BookingInfo.Services.Transfer[i].DepartureAirport + General.Seperator +
                                     payloadBooking.BookingInfo.Services.Transfer[i].ArrivalAirport;
                 }
 
@@ -453,9 +466,9 @@ namespace Tc.Crm.CustomWorkflowSteps
                         for (int j = 0; j < payloadBooking.BookingInfo.Services.Transfer[i].Remark.Length; j++)
                         {
                             if (!string.IsNullOrEmpty(remarks))
-                                remarks += PayloadBooking.NextLine;
+                                remarks += General.NextLine;
 
-                            remarks += payloadBooking.BookingInfo.Services.Transfer[i].Remark[j].RemarkType.ToString() + PayloadBooking.Seperator +
+                            remarks += payloadBooking.BookingInfo.Services.Transfer[i].Remark[j].RemarkType.ToString() + General.Seperator +
                                        payloadBooking.BookingInfo.Services.Transfer[i].Remark[j].Text;
                         }
 
@@ -478,12 +491,12 @@ namespace Tc.Crm.CustomWorkflowSteps
                 {
 
                     if (!string.IsNullOrEmpty(extraServices))
-                        extraServices += PayloadBooking.NextLine;
+                        extraServices += General.NextLine;
 
-                    extraServices += payloadBooking.BookingInfo.Services.ExtraService[i].ExtraServiceCode.ToString() + PayloadBooking.Seperator +
-                                     payloadBooking.BookingInfo.Services.ExtraService[i].ExtraServiceDescription.ToString() + PayloadBooking.Seperator +
-                                     payloadBooking.BookingInfo.Services.ExtraService[i].Order.ToString() + PayloadBooking.Seperator +
-                                     payloadBooking.BookingInfo.Services.ExtraService[i].StartDate + PayloadBooking.Seperator +
+                    extraServices += payloadBooking.BookingInfo.Services.ExtraService[i].ExtraServiceCode.ToString() + General.Seperator +
+                                     payloadBooking.BookingInfo.Services.ExtraService[i].ExtraServiceDescription.ToString() + General.Seperator +
+                                     payloadBooking.BookingInfo.Services.ExtraService[i].Order.ToString() + General.Seperator +
+                                     payloadBooking.BookingInfo.Services.ExtraService[i].StartDate + General.Seperator +
                                      payloadBooking.BookingInfo.Services.ExtraService[i].EndDate;
 
 
@@ -508,9 +521,9 @@ namespace Tc.Crm.CustomWorkflowSteps
                         for (int j = 0; j < payloadBooking.BookingInfo.Services.ExtraService[i].Remark.Length; j++)
                         {
                             if (!string.IsNullOrEmpty(extraServiceRemarks))
-                                extraServiceRemarks += PayloadBooking.NextLine;
+                                extraServiceRemarks += General.NextLine;
 
-                            extraServiceRemarks += payloadBooking.BookingInfo.Services.ExtraService[i].Remark[j].RemarkType.ToString() + PayloadBooking.Seperator +
+                            extraServiceRemarks += payloadBooking.BookingInfo.Services.ExtraService[i].Remark[j].RemarkType.ToString() + General.Seperator +
                                                    payloadBooking.BookingInfo.Services.ExtraService[i].Remark[j].Text;
 
                         }
@@ -752,7 +765,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             payloadBooking.Trace.Trace("Processing Booking Roles information");
             Entity entityBookingRole = new Entity(EntityName.CustomerBookingRole);
             entityBookingRole[Attributes.CustomerBookingRole.BookingId] = new EntityReference(EntityName.Booking, Attributes.Booking.Name, payloadBooking.BookingInfo.BookingIdentifier.BookingNumber);
-            if (payloadBooking.BookingInfo.Customer.CustomerGeneral.CustomerType.ToString() == PayloadBooking.Account)
+            if (payloadBooking.BookingInfo.Customer.CustomerGeneral.CustomerType == CustomerType.B)
             {
                 entityBookingRole[Attributes.CustomerBookingRole.Customer] = new EntityReference(EntityName.Account, Attributes.Account.SourceSystemID, payloadBooking.BookingInfo.Customer.CustomerIdentifier.CustomerId);
             }
@@ -834,6 +847,9 @@ namespace Tc.Crm.CustomWorkflowSteps
                             case "I":
                             case "C":
                             case "D":
+                            case "English":
+                            case "Mr":
+                            case "1":
                                 optionSetValue = new OptionSetValue(950000000);
                                 break;
                             case "H":
@@ -842,12 +858,41 @@ namespace Tc.Crm.CustomWorkflowSteps
                             case "O":
                             case "F":
                             case "B":
+                            case "German":
+                            case "Mrs":
+                            case "2":
                                 optionSetValue = new OptionSetValue(950000001);
                                 break;
                             case "HB":
                             case "TH":
                             case "U":
+                            case "Dutch":
+                            case "Ms":
+                            case "3":
                                 optionSetValue = new OptionSetValue(950000002);
+                                break;
+                            case "French":
+                            case "Miss":
+                            case "4":
+                                optionSetValue = new OptionSetValue(950000003);
+                                break;
+                            case "Spanish":
+                            case "Dr":
+                            case "5":
+                                optionSetValue = new OptionSetValue(950000004);
+                                break;
+                            case "Danish":
+                            case "Sir":
+                                optionSetValue = new OptionSetValue(950000005);
+                                break;
+                            case "Prof.":
+                                optionSetValue = new OptionSetValue(950000006);
+                                break;
+                            case "Lord":
+                                optionSetValue = new OptionSetValue(950000007);
+                                break;
+                            case "Lady":
+                                optionSetValue = new OptionSetValue(950000008);
                                 break;
 
                         }

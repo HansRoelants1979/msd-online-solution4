@@ -19,18 +19,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         public IOrganizationService CrmService { get; set; }
         public ITracingService Trace { get; set; }
         public BookingResponse Response { get; set; }
-
-        public const string Seperator = ",";
-
-        public const string NextLine = "\r\n";
-
-        public const string Account = "B";
-
-        public const string Contact = "P";
-
-        public const string Booked = "B";
-
-        public const string Cancelled = "C";      
+        
 
         public bool DeleteBookingRole { get; set; }
 

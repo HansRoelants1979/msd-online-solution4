@@ -6,10 +6,23 @@ using System.Threading.Tasks;
 
 namespace Tc.Crm.CustomWorkflowSteps
 {
-    public static class General {
+    public static class General
+    {
         public const string AccountType = "B";
 
         public const string ContactType = "P";
+
+        public const string Seperator = ",";
+
+        public const string NextLine = "\r\n";
+
+        public const string Booked = "B";
+
+        public const string Cancelled = "C";
+
+        public const string Deceased = "D";
+
+        public const string Blacklisted = "B";
     }
     public static class EntityName
     {
@@ -36,7 +49,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         public const string SocialProfile = "socialprofile";
         public const string TourOperator = "tc_touroperator";
         public const string User = "systemuser";
-        
+
     }
 
 
@@ -68,6 +81,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string Address2_HouseNumberorBuilding = "tc_address2_housenumberorbuilding";
             public const string Address2_PostalCode = "tc_address2_postalcode";
             public const string Address2_Town = "tc_address2_town";
+            public const string StateCode = "statecode";
             public const string StatusCode = "statuscode";
             public const string DateofDeath = "tc_dateofdeath";
             public const string EmailAddress1Type = "tc_emailaddress1type";
@@ -144,8 +158,8 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string ParticipantRemarks = "tc_participantremarks";
             public const string Participants = "tc_participants";
             public const string ReturnDate = "tc_returndate";
-            public const string Statecode = "statecode";
-            public const string Statuscode = "statuscode";
+            public const string StateCode = "statecode";
+            public const string StatusCode = "statuscode";
             public const string ShopChannel = "tc_shopchannel";
             public const string ShopCode = "tc_shopcode";
             public const string ShopCompany = "tc_shopcompany";
@@ -312,7 +326,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string Type = "tc_type";
         }
 
-        
+
 
         public class TourOperator
         {
@@ -324,17 +338,4 @@ namespace Tc.Crm.CustomWorkflowSteps
 
     }
 
-    public static class OptionSet
-    {
-        public enum PhoneType : int
-        {
-            [System.Runtime.Serialization.EnumMemberAttribute()]
-            M = 950000000,
-
-            [System.Runtime.Serialization.EnumMemberAttribute()]
-            H = 950000001,
-
-        }
-
-    }
 }
