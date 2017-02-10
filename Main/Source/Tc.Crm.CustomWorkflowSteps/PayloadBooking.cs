@@ -28,6 +28,10 @@ namespace Tc.Crm.CustomWorkflowSteps
 
         public const string Contact = "P";
 
+        public const string Booked = "B";
+
+        public const string Cancelled = "C";      
+
         public bool DeleteBookingRole { get; set; }
 
         public bool DeleteAccomodationOrTransportOrRemarks { get; set; }

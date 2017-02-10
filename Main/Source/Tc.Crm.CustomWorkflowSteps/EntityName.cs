@@ -23,6 +23,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         public const string CaseCategory = "tc_casecategory";
         public const string CaseType = "tc_casetype";
         public const string Country = "tc_country";
+        public const string Currency = "transactioncurrency";
         public const string Gateway = "tc_gateway";
         public const string CustomerBookingRole = "tc_customerbookingrole";
         public const string Hotel = "tc_hotel";
@@ -35,6 +36,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         public const string SocialProfile = "socialprofile";
         public const string TourOperator = "tc_touroperator";
         public const string User = "systemuser";
+        
     }
 
 
@@ -142,6 +144,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string ParticipantRemarks = "tc_participantremarks";
             public const string Participants = "tc_participants";
             public const string ReturnDate = "tc_returndate";
+            public const string Statecode = "statecode";
             public const string Statuscode = "statuscode";
             public const string ShopChannel = "tc_shopchannel";
             public const string ShopCode = "tc_shopcode";
@@ -214,6 +217,12 @@ namespace Tc.Crm.CustomWorkflowSteps
             //public const string Country = "tc_iso_code";
             public const string ISO2Code = "tc_iso2code";
         }
+
+        public class Currency
+        {
+            public const string Name = "currencyname";
+        }
+
         public class CustomerBookingRole
         {
             public const string BookingId = "tc_bookingid";
@@ -302,6 +311,9 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string SourceSystemID = "tc_sourcesystemid";
             public const string Type = "tc_type";
         }
+
+        
+
         public class TourOperator
         {
             public const string SourceMarketId = "tc_countryid";
@@ -309,7 +321,6 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string TourOperatorCode = "tc_touroperatorcode";
             public const string TourOperatorId = "tc_touroperatorid";
         }
-
 
     }
 
