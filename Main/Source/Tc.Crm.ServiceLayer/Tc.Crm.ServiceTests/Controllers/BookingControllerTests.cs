@@ -22,6 +22,7 @@ namespace Tc.Crm.Service.Controllers.Tests
         IBookingService bookingService;
         BookingController controller;
         ICrmService crmService;
+        Booking bookingWithNmber;
 
         [TestInitialize()]
         public void TestSetup()
@@ -32,6 +33,13 @@ namespace Tc.Crm.Service.Controllers.Tests
             controller = new BookingController(bookingService, crmService);
             controller.Request = new System.Net.Http.HttpRequestMessage();
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+            bookingWithNmber = new Booking
+            {
+                BookingIdentifier = new BookingIdentifier
+                {
+                    BookingNumber = "1234"
+                }
+            };
         }
 
         [TestMethod()]
@@ -43,54 +51,81 @@ namespace Tc.Crm.Service.Controllers.Tests
         }
 
         [TestMethod()]
-        public void BookingCreated()
+        public void BookingIdentifierIsNull()
         {
             Booking booking = new Booking();
+            var response = controller.Update(booking);
+            Assert.AreEqual(response.StatusCode, HttpStatusCode.BadRequest);
+            Assert.AreEqual(((System.Net.Http.ObjectContent)response.Content).Value, Constants.Messages.SourceKeyNotPresent);
+        }
+
+        [TestMethod()]
+        public void BookingNumberIsNull()
+        {
+            Booking booking = new Booking();
+            booking.BookingIdentifier = new BookingIdentifier();
+            var response = controller.Update(booking);
+            Assert.AreEqual(response.StatusCode, HttpStatusCode.BadRequest);
+            Assert.AreEqual(((System.Net.Http.ObjectContent)response.Content).Value, Constants.Messages.SourceKeyNotPresent);
+        }
+
+        [TestMethod()]
+        public void BookingCreated()
+        {
             TestCrmService service = new TestCrmService(context);
             service.Switch = DataSwitch.Created;
-            controller = new BookingController(bookingService, service );
+            controller = new BookingController(bookingService, service);
             controller.Request = new System.Net.Http.HttpRequestMessage();
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-            var response = controller.Update(booking);
+            var response = controller.Update(bookingWithNmber);
             Assert.AreEqual(response.StatusCode, HttpStatusCode.Created);
         }
 
         [TestMethod()]
         public void BookingUpdated()
         {
-            Booking booking = new Booking();
             TestCrmService service = new TestCrmService(context);
             service.Switch = DataSwitch.Updated;
             controller = new BookingController(bookingService, service);
             controller.Request = new System.Net.Http.HttpRequestMessage();
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-            var response = controller.Update(booking);
+            var response = controller.Update(bookingWithNmber);
             Assert.AreEqual(response.StatusCode, HttpStatusCode.NoContent);
         }
 
         [TestMethod()]
         public void ActionResponseIsNull()
         {
-            Booking booking = new Booking();
             TestCrmService service = new TestCrmService(context);
             service.Switch = DataSwitch.Response_NULL;
             controller = new BookingController(bookingService, service);
             controller.Request = new System.Net.Http.HttpRequestMessage();
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-            var response = controller.Update(booking);
+            var response = controller.Update(bookingWithNmber);
             Assert.AreEqual(response.StatusCode, HttpStatusCode.InternalServerError);
         }
 
         [TestMethod()]
         public void ActionResponseIsFailure()
         {
-            Booking booking = new Booking();
             TestCrmService service = new TestCrmService(context);
             service.Switch = DataSwitch.Response_Failed;
             controller = new BookingController(bookingService, service);
             controller.Request = new System.Net.Http.HttpRequestMessage();
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-            var response = controller.Update(booking);
+            var response = controller.Update(bookingWithNmber);
+            Assert.AreEqual(response.StatusCode, HttpStatusCode.InternalServerError);
+        }
+
+        [TestMethod()]
+        public void ActionThrowsException()
+        {
+            TestCrmService service = new TestCrmService(context);
+            service.Switch = DataSwitch.ActionThrowsError;
+            controller = new BookingController(bookingService, service);
+            controller.Request = new System.Net.Http.HttpRequestMessage();
+            controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+            var response = controller.Update(bookingWithNmber);
             Assert.AreEqual(response.StatusCode, HttpStatusCode.InternalServerError);
         }
 

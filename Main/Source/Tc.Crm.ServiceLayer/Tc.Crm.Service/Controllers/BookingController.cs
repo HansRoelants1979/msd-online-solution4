@@ -33,7 +33,9 @@ namespace Tc.Crm.Service.Controllers
                 {
                     return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.BookingDataPassedIsNullOrCouldNotBeParsed);
                 }
-
+                if(booking.BookingIdentifier == null ||
+                    string.IsNullOrWhiteSpace(booking.BookingIdentifier.BookingNumber))
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.SourceKeyNotPresent);
                 var jsonData = JsonConvert.SerializeObject(booking);
                 var response = bookingService.Update(jsonData, crmService);
                 if (response.Created)

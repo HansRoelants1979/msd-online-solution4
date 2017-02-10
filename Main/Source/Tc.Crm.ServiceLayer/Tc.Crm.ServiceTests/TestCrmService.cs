@@ -18,7 +18,8 @@ namespace Tc.Crm.ServiceTests
         Updated,
         Response_NULL,
         Response_Failed,
-        Return_NULL
+        Return_NULL,
+        ActionThrowsError
     }
     public class TestCrmService : ICrmService
     {
@@ -46,6 +47,8 @@ namespace Tc.Crm.ServiceTests
                 return new Tc.Crm.Service.Models.UpdateResponse { Created = false, Id = null, Success = false, ErrorMessage = "Unexpcted Error" };
             else if (Switch == DataSwitch.Return_NULL)
                 return null;
+            else if (Switch == DataSwitch.ActionThrowsError)
+                throw new Exception("Action faulted");
             return null;
         }
     }

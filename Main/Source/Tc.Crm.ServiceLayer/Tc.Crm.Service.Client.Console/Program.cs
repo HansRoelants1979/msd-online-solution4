@@ -448,6 +448,11 @@ namespace Tc.Crm.Service.Client.Console
                     else if (response.StatusCode == HttpStatusCode.InternalServerError)
                         System.Console.WriteLine("Internal Server Error.");
 
+                    if (string.IsNullOrWhiteSpace(content))
+                        System.Console.WriteLine("No content.");
+                    else
+                        System.Console.WriteLine("Content:{0}", content);
+
                     System.Console.Write("Do one more test(y/n):");
                     var ans = System.Console.ReadLine();
                     if (ans == "n") break;

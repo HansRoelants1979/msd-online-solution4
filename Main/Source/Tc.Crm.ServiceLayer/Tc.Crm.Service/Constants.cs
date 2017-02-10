@@ -24,7 +24,7 @@ namespace Tc.Crm.Service.Constants
     public static class Messages
     {
         public const string ResponseNull = "Response is Null.";
-        public const string SourceKeyNotPresent = "Source key is empty or null.";
+        public const string SourceKeyNotPresent = "Source system id of booking record is empty or null.";
         public const string JsonWebTokenParserError = "Error while parsing JSON Web Token.";
         public const string SignatureValidationUnhandledError = "Error while validating the signature.";
         public const string HeaderValidationUnhandledError = "Error while validating the header.";
