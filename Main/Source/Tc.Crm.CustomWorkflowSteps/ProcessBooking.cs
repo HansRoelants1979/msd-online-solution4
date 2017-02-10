@@ -801,16 +801,16 @@ namespace Tc.Crm.CustomWorkflowSteps
             }
         }
 
-       
+
 
         /// <summary>
-        /// To get OptionSetValue by text and entityName
+        /// To get OptionSetValue by text and optionSetName
         /// </summary>
         /// <param name="text"></param>
         /// <param name="entityName"></param>
         /// <returns></returns>
         OptionSetValue GetOptionSetValue(string text, string optionSetName)
-        {   
+        {
             int value = -1;
             switch (optionSetName)
             {
@@ -845,6 +845,45 @@ namespace Tc.Crm.CustomWorkflowSteps
                     {
                         switch (text)
                         {
+                            case "M":
+                                value = 950000000;
+                                break;
+                            case "F":
+                                value = 950000001;
+                                break;
+                            case "U":
+                                value = 950000002;
+                                break;
+                        }
+                    }
+                    break;
+                case "tc_segment":
+                    {
+                        switch (text)
+                        {
+                            case "1":
+                                value = 950000000;
+                                break;
+                            case "2":
+                                value = 950000001;
+                                break;
+                            case "3":
+                                value = 950000002;
+                                break;
+                            case "4":
+                                value = 950000003;
+                                break;
+                            case "5":
+                                value = 950000004;
+                                break;
+
+                        }
+                    }
+                    break;
+                case "tc_salutation":
+                    {
+                        switch (text)
+                        {
                             case "Mr":
                                 value = 950000000;
                                 break;
@@ -875,51 +914,6 @@ namespace Tc.Crm.CustomWorkflowSteps
                         }
                     }
                     break;
-                case "tc_segment":
-                    {
-                        switch (text)
-                        {
-                            case "1":
-                                value = 950000000;
-                                break;
-                            case "2":
-                                value = 950000001;
-                                break;
-                            case "3":
-                                value = 950000002;
-                                break;
-                            case "4":
-                                value = 950000003;
-                                break;
-                            case "5":
-                                value = 950000004;
-                                break;
-                          
-                        }
-                    }
-                    break;
-                case "tc_salutation":
-                    {
-                        switch (text)
-                        {
-                            case "1":
-                                value = 950000000;
-                                break;                          
-                            case "2":
-                                value = 950000001;
-                                break;                           
-                            case "3":
-                                value = 950000002;
-                                break;                           
-                            case "4":
-                                value = 950000003;
-                                break;                          
-                            case "5":
-                                value = 950000004;
-                                break;
-                        }
-                    }
-                    break;
                 case "tc_type":
                     {
                         switch (text)
@@ -929,7 +923,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                                 break;
                             case "A":
                                 value = 950000001;
-                                break;                          
+                                break;
                         }
                     }
                     break;
@@ -1009,7 +1003,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                             case "Pro":
                                 value = 950000001;
                                 break;
-                          
+
                         }
                     }
                     break;
@@ -1053,7 +1047,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                     }
                     break;
             }
-            return  (value != -1) ? new OptionSetValue(value) : new OptionSetValue();
+            return (value != -1) ? new OptionSetValue(value) : null;
         }
 
         enum Statecode
