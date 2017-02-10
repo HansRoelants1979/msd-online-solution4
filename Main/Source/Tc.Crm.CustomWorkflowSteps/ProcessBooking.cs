@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.Serialization;
-using System.Web.Script.Serialization;
 using Microsoft.Xrm.Sdk;
-
+using System.Runtime.Serialization.Json;
+using System.IO;
+using System.Text;
 
 namespace Tc.Crm.CustomWorkflowSteps
 {
@@ -63,8 +60,13 @@ namespace Tc.Crm.CustomWorkflowSteps
         string SerializeJson(BookingResponse response)
         {
             payloadBooking.Trace.Trace("Processing Serialization of BookingResponse");
-            var jsonSerializer = new JavaScriptSerializer();
-            return jsonSerializer.Serialize(response);
+            MemoryStream memoryStream = new MemoryStream();
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(BookingResponse));
+
+            serializer.WriteObject(memoryStream, response);
+            byte[] json = memoryStream.ToArray();
+            memoryStream.Close();
+            return Encoding.UTF8.GetString(json, 0, json.Length);
         }
 
 
@@ -75,10 +77,15 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// <returns></returns>
         Booking DeSerializeJson(string json)
         {
-            payloadBooking.Trace.Trace("Processing DeSerialization of json Payload");
-            var jsonSerializer = new JavaScriptSerializer();
-            var bookingInfo = jsonSerializer.Deserialize<Booking>(json);
+            payloadBooking.Trace.Trace("Processing DeSerialization of json Payload");          
+
+            Booking bookingInfo = new Booking();
+            MemoryStream memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(json));
+            DataContractJsonSerializer deSerializer = new DataContractJsonSerializer(bookingInfo.GetType());
+            bookingInfo = deSerializer.ReadObject(memoryStream) as Booking;
+            memoryStream.Close();
             return bookingInfo;
+
         }
 
         /// <summary>
@@ -521,7 +528,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                 for (int i = 0; i < payloadBooking.BookingInfo.Remark.Length; i++)
                 {
                     remarkEntity = new Entity(EntityName.Remark);
-                    remarkEntity[Attributes.Remark.Name] = payloadBooking.BookingInfo.BookingIdentifier.BookingNumber + " - " + payloadBooking.BookingInfo.Remark[i].RemarkType;
+                    remarkEntity[Attributes.Remark.Name] = payloadBooking.BookingInfo.BookingIdentifier.BookingNumber + " - " + payloadBooking.BookingInfo.Remark[i].RemarkType.ToString();
                     remarkEntity[Attributes.Remark.Type] = GetOptionSetValue(payloadBooking.BookingInfo.Remark[i].RemarkType.ToString());
                     remarkEntity[Attributes.Remark.RemarkName] = payloadBooking.BookingInfo.Remark[i].Text;
                     remarkEntity[Attributes.Remark.BookingId] = new EntityReference(EntityName.Booking, new Guid(payloadBooking.BookingId));
@@ -585,20 +592,20 @@ namespace Tc.Crm.CustomWorkflowSteps
 
                 }
 
-                List<XrmResponse> listXrmResponse = CommonXrm.BulkCreate(entityCollectionAccomodation, payloadBooking.CrmService);
-                ProcessAccomodationRemarks(listXrmResponse);
+                List<XrmResponse> xrmResponseList = CommonXrm.BulkCreate(entityCollectionAccomodation, payloadBooking.CrmService);
+                ProcessAccomodationRemarks(xrmResponseList);
             }
         }
 
         /// <summary>
         /// To process accomodation remarks
         /// </summary>       
-        /// <param name="listXrmResponse"></param>
-        void ProcessAccomodationRemarks(List<XrmResponse> listXrmResponse)
+        /// <param name="xrmResponseList"></param>
+        void ProcessAccomodationRemarks(List<XrmResponse> xrmResponseList)
         {
             EntityCollection entityCollectionAccomodationRemarks = new EntityCollection();
             Entity remarkEntity = null;
-            if (payloadBooking.BookingInfo.Services != null && payloadBooking.BookingInfo.Services.Accommodation != null && listXrmResponse.Count > 0)
+            if (payloadBooking.BookingInfo.Services != null && payloadBooking.BookingInfo.Services.Accommodation != null && xrmResponseList.Count > 0)
             {
                 payloadBooking.Trace.Trace("Processing Accomodation Remarks information");
                 for (int i = 0; i < payloadBooking.BookingInfo.Services.Accommodation.Length; i++)
@@ -608,11 +615,11 @@ namespace Tc.Crm.CustomWorkflowSteps
                         for (int j = 0; j < payloadBooking.BookingInfo.Services.Accommodation[i].Remark.Length; j++)
                         {
                             remarkEntity = new Entity(EntityName.Remark);
-                            remarkEntity[Attributes.Remark.Name] = payloadBooking.BookingInfo.BookingIdentifier.BookingNumber + " - " + payloadBooking.BookingInfo.Services.Accommodation[i].Remark[j].RemarkType;
+                            remarkEntity[Attributes.Remark.Name] = payloadBooking.BookingInfo.BookingIdentifier.BookingNumber + " - " + payloadBooking.BookingInfo.Services.Accommodation[i].Remark[j].RemarkType.ToString();
                             remarkEntity[Attributes.Remark.Type] = GetOptionSetValue(payloadBooking.BookingInfo.Services.Accommodation[i].Remark[j].RemarkType.ToString());
                             remarkEntity[Attributes.Remark.RemarkName] = payloadBooking.BookingInfo.Services.Accommodation[i].Remark[j].Text;
                             //messageList.Find()
-                            remarkEntity[Attributes.Remark.BookingAccommodationId] = new EntityReference(EntityName.BookingAccommodation, Guid.Parse(listXrmResponse[i].Id));
+                            remarkEntity[Attributes.Remark.BookingAccommodationId] = new EntityReference(EntityName.BookingAccommodation, Guid.Parse(xrmResponseList[i].Id));
                             entityCollectionAccomodationRemarks.Entities.Add(remarkEntity);
                         }
                     }
@@ -670,18 +677,18 @@ namespace Tc.Crm.CustomWorkflowSteps
 
                 }
 
-                List<XrmResponse> listXrmResponse = CommonXrm.BulkCreate(entityCollectionTransport, payloadBooking.CrmService);
-                ProcessTransportRemarks(listXrmResponse);
+                List<XrmResponse> xrmResponseList = CommonXrm.BulkCreate(entityCollectionTransport, payloadBooking.CrmService);
+                ProcessTransportRemarks(xrmResponseList);
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="listXrmResponse"></param>
-        void ProcessTransportRemarks(List<XrmResponse> listXrmResponse)
+        /// <param name="xrmResponseList"></param>
+        void ProcessTransportRemarks(List<XrmResponse> xrmResponseList)
         {
-            if (payloadBooking.BookingInfo.Services.Transport != null && listXrmResponse.Count > 0)
+            if (payloadBooking.BookingInfo.Services.Transport != null && xrmResponseList.Count > 0)
             {
                 EntityCollection entityColllectionTransportRemark = new EntityCollection();
                 Entity transportRemark = null;
@@ -695,10 +702,10 @@ namespace Tc.Crm.CustomWorkflowSteps
                         //BN - Type
 
                         transportRemark = new Entity(EntityName.Remark);
-                        transportRemark[Attributes.Remark.Name] = payloadBooking.BookingInfo.BookingIdentifier.BookingNumber + " - " + payloadBooking.BookingInfo.Services.Transport[i].Remark[j].RemarkType;
+                        transportRemark[Attributes.Remark.Name] = payloadBooking.BookingInfo.BookingIdentifier.BookingNumber + " - " + payloadBooking.BookingInfo.Services.Transport[i].Remark[j].RemarkType.ToString();
                         transportRemark[Attributes.Remark.Type] = GetOptionSetValue(payloadBooking.BookingInfo.Services.Transport[i].Remark[j].RemarkType.ToString());
                         transportRemark[Attributes.Remark.RemarkName] = payloadBooking.BookingInfo.Services.Transport[i].Remark[j].Text;
-                        transportRemark[Attributes.Remark.BookingTransportId] = new EntityReference(EntityName.BookingTransport, new Guid(listXrmResponse[i].Id));
+                        transportRemark[Attributes.Remark.BookingTransportId] = new EntityReference(EntityName.BookingTransport, new Guid(xrmResponseList[i].Id));
 
                         entityColllectionTransportRemark.Entities.Add(transportRemark);
                     }

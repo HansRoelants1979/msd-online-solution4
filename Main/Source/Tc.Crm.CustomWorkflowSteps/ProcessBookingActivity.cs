@@ -20,7 +20,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             //Create the context
             IWorkflowContext context = executionContext.GetExtension<IWorkflowContext>();
             IOrganizationServiceFactory serviceFactory = executionContext.GetExtension<IOrganizationServiceFactory>();
-            IOrganizationService service = serviceFactory.CreateOrganizationService(context.UserId);           
+            IOrganizationService service = serviceFactory.CreateOrganizationService(context.UserId);
             try
             {
                 PayloadBooking payloadBooking = new PayloadBooking(tracingService, service);
@@ -29,11 +29,15 @@ namespace Tc.Crm.CustomWorkflowSteps
 
             }
             catch (FaultException<OrganizationServiceFault> ex)
-            {  
+            {
+                throw new InvalidPluginExecutionException(ex.ToString());
+            }
+            catch (TimeoutException ex)
+            {
                 throw new InvalidPluginExecutionException(ex.ToString());
             }
             catch (Exception ex)
-            {   
+            {
                 throw new InvalidPluginExecutionException(ex.ToString());
             }
 
