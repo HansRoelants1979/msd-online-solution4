@@ -6,11 +6,16 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 {
     public static class ContactHelper
     {
-        internal static Entity GetContactEntityForBookingPayload(Customer customer, ITracingService trace)
+        public static Entity GetContactEntityForBookingPayload(Customer customer, ITracingService trace)
         {
             if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
             trace.Trace("Contact populate fields - start");
-            if (customer == null) throw new InvalidPluginExecutionException("Customer passed is null");
+            if (customer == null) throw new InvalidPluginExecutionException("Customer payload is null");
+
+            if (customer.CustomerIdentifier == null || string.IsNullOrWhiteSpace(customer.CustomerIdentifier.CustomerId))
+                throw new InvalidPluginExecutionException("Customer Id could not be retrieved from payload.");
+
+
             Entity contact = new Entity(EntityName.Contact
                                         , Attributes.Contact.SourceSystemID
                                         , customer.CustomerIdentifier.CustomerId);
@@ -25,12 +30,13 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                     contact[Attributes.Contact.StatusCode] = CommonXrm.GetOptionSetValue(customer.CustomerGeneral.CustomerStatus.ToString(), Attributes.Contact.StatusCode);
                 }
             }
-            // couldn't find segment,DateofDeath in booking.customer.identity.additional
+
             if (customer.Additional != null)
             {
                 contact[Attributes.Contact.Segment] = CommonXrm.GetOptionSetValue(customer.Additional.Segment, Attributes.Contact.Segment);
                 contact[Attributes.Contact.DateofDeath] = Convert.ToDateTime(customer.Additional.DateOfDeath);
             }
+
             PopulateAddress(contact, customer.Address, trace);
             PopulatePhone(contact, customer.Phone, trace);
             PopulateEmail(contact, customer.Email, trace);
@@ -114,6 +120,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             trace.Trace("Contact populate idenity - start");
             if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
             if (identity == null) return;
+
+            if (string.IsNullOrWhiteSpace(identity.LastName))
+                throw new InvalidPluginExecutionException("Last name could not be retrieved from payload.");
 
             contact[Attributes.Contact.FirstName] = identity.FirstName;
             contact[Attributes.Contact.MiddleName] = identity.MiddleName;
