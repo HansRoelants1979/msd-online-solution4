@@ -447,6 +447,8 @@ namespace Tc.Crm.Service.Client.Console
                         System.Console.WriteLine("Bad Request.");
                     else if (response.StatusCode == HttpStatusCode.InternalServerError)
                         System.Console.WriteLine("Internal Server Error.");
+                    else if (response.StatusCode == HttpStatusCode.Forbidden)
+                        System.Console.WriteLine("Forbidden.");
 
                     if (string.IsNullOrWhiteSpace(content))
                         System.Console.WriteLine("No content.");
@@ -488,12 +490,14 @@ namespace Tc.Crm.Service.Client.Console
         private static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
         private static double GetIssuedAtTime()
         {
-            return Math.Round((DateTime.UtcNow - UnixEpoch).TotalSeconds);
+            var sec = Int32.Parse(ConfigurationManager.AppSettings["iatSecondsFromNow"]);
+            return Math.Round((DateTime.UtcNow - UnixEpoch).TotalSeconds + sec);
         }
 
         private static double GetNotBeforeTime()
         {
-            return Math.Round((DateTime.UtcNow - UnixEpoch).TotalSeconds + 1800);
+            var sec = Int32.Parse(ConfigurationManager.AppSettings["nbfSecondsFromNow"]);
+            return Math.Round((DateTime.UtcNow - UnixEpoch).TotalSeconds + sec);
         }
 
         private static string GetUrl()
