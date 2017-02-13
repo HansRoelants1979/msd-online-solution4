@@ -113,7 +113,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string Address1_County = "tc_address1_county";
             public const string Address1_PostalCode = "tc_address1_postalcode";
             public const string Telephone1_Type = "tc_telephone1type";
-            public const string Telephone2_Type = "tc_telephone2_type";
+            public const string Telephone2_Type = "tc_telephone2type";
             public const string Telephone3_Type = "tc_telephone3type";
             public const string EmailAddress1_Type = "tc_emailaddress1type";
             public const string EmailAddress2_Type = "tc_emailaddress2type";
