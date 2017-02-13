@@ -105,17 +105,7 @@ namespace Tc.Crm.Service.Controllers.Tests
             Assert.AreEqual(response.StatusCode, HttpStatusCode.InternalServerError);
         }
 
-        [TestMethod()]
-        public void ActionResponseIsFailure()
-        {
-            TestCrmService service = new TestCrmService(context);
-            service.Switch = DataSwitch.Response_Failed;
-            controller = new BookingController(bookingService, service);
-            controller.Request = new System.Net.Http.HttpRequestMessage();
-            controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-            var response = controller.Update(bookingWithNmber);
-            Assert.AreEqual(response.StatusCode, HttpStatusCode.InternalServerError);
-        }
+        
 
         [TestMethod()]
         public void ActionThrowsException()

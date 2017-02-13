@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Activities;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Workflow;
 using System.ServiceModel;
+using Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services;
+using Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models;
 
-namespace Tc.Crm.CustomWorkflowSteps
+namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking
 {
     public class ProcessBookingActivity : CodeActivity
     {
@@ -23,9 +21,11 @@ namespace Tc.Crm.CustomWorkflowSteps
             IOrganizationService service = serviceFactory.CreateOrganizationService(context.UserId);
             try
             {
+                var bookingJson = BookingInfo.Get<string>(executionContext);
                 PayloadBooking payloadBooking = new PayloadBooking(tracingService, service);
-                ProcessBooking process = new ProcessBooking(payloadBooking);
-                Response.Set(executionContext, process.ProcessPayload(BookingInfo.Get<string>(executionContext)));
+                payloadBooking.BookingInfo = JsonHelper.DeSerializeJson(bookingJson,tracingService);
+                ProcessBookingService process = new ProcessBookingService(payloadBooking);
+                Response.Set(executionContext, process.ProcessPayload());
 
             }
             catch (FaultException<OrganizationServiceFault> ex)

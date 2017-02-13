@@ -82,13 +82,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Booking.cs" />
+    <Compile Include="ProcessBooking\Models\Booking.cs" />
     <Compile Include="CommonXrm.cs" />
     <Compile Include="EntityName.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="PayloadBooking.cs" />
-    <Compile Include="ProcessBooking.cs" />
-    <Compile Include="ProcessBookingActivity.cs" />
+    <Compile Include="ProcessBooking\Models\BookingResponse.cs" />
+    <Compile Include="ProcessBooking\Services\AccountHelper.cs" />
+    <Compile Include="ProcessBooking\Services\BookingHelper.cs" />
+    <Compile Include="ProcessBooking\Services\ContactHelper.cs" />
+    <Compile Include="JsonHelper.cs" />
+    <Compile Include="ProcessBooking\Models\PayloadBooking.cs" />
+    <Compile Include="ProcessBooking\Services\ProcessBookingService.cs" />
+    <Compile Include="ProcessBooking\ProcessBookingActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

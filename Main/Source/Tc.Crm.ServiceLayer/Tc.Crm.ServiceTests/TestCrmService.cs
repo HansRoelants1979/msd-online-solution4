@@ -35,16 +35,16 @@ namespace Tc.Crm.ServiceTests
         {
             object Constants = null;
             if (Switch == DataSwitch.Created)
-                return new Tc.Crm.Service.Models.UpdateResponse { Created = true, Id = Guid.NewGuid().ToString(), Success = true };
+                return new Tc.Crm.Service.Models.UpdateResponse { Created = true, Id = Guid.NewGuid().ToString() };
 
             else if (Switch == DataSwitch.Updated)
-                return new Tc.Crm.Service.Models.UpdateResponse { Created = false, Id = Guid.NewGuid().ToString(), Success = true };
+                return new Tc.Crm.Service.Models.UpdateResponse { Created = false, Id = Guid.NewGuid().ToString() };
 
             else if (Switch == DataSwitch.Response_NULL)
                 throw new InvalidOperationException(Tc.Crm.Service.Constants.Messages.ResponseFromCrmIsNull);
 
             else if (Switch == DataSwitch.Response_Failed)
-                return new Tc.Crm.Service.Models.UpdateResponse { Created = false, Id = null, Success = false, ErrorMessage = "Unexpcted Error" };
+                return new Tc.Crm.Service.Models.UpdateResponse { Created = false, Id = null};
             else if (Switch == DataSwitch.Return_NULL)
                 return null;
             else if (Switch == DataSwitch.ActionThrowsError)

@@ -103,7 +103,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="TestData\ProcessBookingData.cs" />
+    <Compile Include="ProcessBooking\Services\AccountHelperTests.cs" />
     <Compile Include="TestOrganizationService.cs" />
     <Compile Include="TestTracingService.cs" />
     <Compile Include="UnitTest1.cs" />
@@ -116,12 +116,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Fakes Include="Fakes\Tc.Crm.CustomWorkflowSteps.fakes" />
-  </ItemGroup>
-  <ItemGroup>
-    <Fakes Include="Fakes\Microsoft.Xrm.Sdk.fakes" />
-    <Fakes Include="Fakes\Microsoft.Xrm.Sdk.Workflow.fakes" />
-    <Fakes Include="Fakes\System.Activities.fakes" />
     <None Include="packages.config" />
   </ItemGroup>
   <Choose>

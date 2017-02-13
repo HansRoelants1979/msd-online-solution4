@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.Serialization;
-using Microsoft.Xrm.Sdk;
+﻿using Microsoft.Xrm.Sdk;
 
-namespace Tc.Crm.CustomWorkflowSteps
+namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
 {
     public class PayloadBooking
     {

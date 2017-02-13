@@ -12,10 +12,7 @@ namespace Tc.Crm.Service.Services
 
             var response = crmService.ExecuteActionForBookingUpdate(bookingData);
             if (response == null) throw new InvalidOperationException(Constants.Messages.ResponseNull);
-            if (!response.Success)
-                throw new InvalidOperationException(response.ErrorMessage);
-            if (response.Created) return new BookingUpdateResponse { Created = true, Id = response.Id.ToString() };
-            return new BookingUpdateResponse { Created = false, Id = response.Id.ToString() };
+            return new BookingUpdateResponse { Created = response.Created, Id = response.Id.ToString() };
         }
 
        

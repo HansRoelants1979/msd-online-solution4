@@ -34,7 +34,7 @@ namespace Tc.Crm.Service.Services
 
             var responseObject = JsonConvert.DeserializeObject<tcm.UpdateResponse>(actionResponse);
 
-            return new tcm.UpdateResponse { Created= responseObject.Created, Id=responseObject.Id,Success=responseObject.Success,ErrorMessage=responseObject.ErrorMessage};
+            return new tcm.UpdateResponse { Created= responseObject.Created, Id=responseObject.Id};
         }
         
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]

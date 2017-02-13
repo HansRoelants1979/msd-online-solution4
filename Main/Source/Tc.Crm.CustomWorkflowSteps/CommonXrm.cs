@@ -1,14 +1,259 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
-using System.ServiceModel;
 using Microsoft.Xrm.Sdk.Query;
 
 namespace Tc.Crm.CustomWorkflowSteps
 {
     public class CommonXrm
     {
+        /// <summary>
+        /// To get OptionSetValue by text and entityName
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="entityName"></param>
+        /// <returns></returns>
+        public static OptionSetValue GetOptionSetValue(string text, string optionsetName)
 
+        {
+            int value = -1;
+            switch (optionsetName)
+            {
+                case "tc_language":
+                    {
+                        switch (text)
+                        {
+                            case "English":
+                                value = 950000000;
+                                break;
+                            case "German":
+                                value = 950000001;
+                                break;
+                            case "Dutch":
+                                value = 950000002;
+                                break;
+                            case "French":
+                                value = 950000003;
+                                break;
+                            case "Spanish":
+                                value = 950000004;
+                                break;
+                            case "Danish":
+                                value = 950000005;
+                                break;
+
+                        }
+                    }
+                    break;
+
+                case "tc_gender":
+                    {
+                        switch (text)
+                        {
+                            case "M":
+                                value = 950000000;
+                                break;
+                            case "F":
+                                value = 950000001;
+                                break;
+                            case "U":
+                                value = 950000002;
+                                break;
+                        }
+                    }
+                    break;
+                case "tc_segment":
+                    {
+                        switch (text)
+                        {
+                            case "1":
+                                value = 950000000;
+                                break;
+                            case "2":
+                                value = 950000001;
+                                break;
+                            case "3":
+                                value = 950000002;
+                                break;
+                            case "4":
+                                value = 950000003;
+                                break;
+                            case "5":
+                                value = 950000004;
+                                break;
+
+                        }
+                    }
+                    break;
+                case "tc_salutation":
+                    {
+                        switch (text)
+                        {
+                            case "Mr":
+                                value = 950000000;
+                                break;
+                            case "Mrs":
+                                value = 950000001;
+                                break;
+                            case "Ms":
+                                value = 950000002;
+                                break;
+                            case "Miss":
+                                value = 950000003;
+                                break;
+                            case "Dr":
+                                value = 950000004;
+                                break;
+                            case "Sir":
+                                value = 950000005;
+                                break;
+                            case "Prof.":
+                                value = 950000006;
+                                break;
+                            case "Lord":
+                                value = 950000007;
+                                break;
+                            case "Lady":
+                                value = 950000008;
+                                break;
+                        }
+                    }
+                    break;
+                case "tc_type":
+                    {
+                        switch (text)
+                        {
+                            case "T":
+                                value = 950000000;
+                                break;
+                            case "A":
+                                value = 950000001;
+                                break;
+                        }
+                    }
+                    break;
+                case "tc_transfertype":
+                    {
+                        switch (text)
+                        {
+                            case "I":
+                                value = 950000000;
+                                break;
+                            case "O":
+                                value = 950000001;
+                                break;
+                            case "TH":
+                                value = 950000002;
+                                break;
+                        }
+                    }
+                    break;
+                case "tc_transferservicelevel":
+                    {
+                        switch (text)
+                        {
+                            case "Service Level 1":
+                                value = 950000000;
+                                break;
+                            case "Service Level 2":
+                                value = 950000001;
+                                break;
+                            case "Service Level 3":
+                                value = 950000002;
+                                break;
+                        }
+                    }
+                    break;
+                case "tc_externalservicecode":
+                    {
+                        switch (text)
+                        {
+                            case "Service Code A":
+                                value = 950000000;
+                                break;
+                            case "Service Code B":
+                                value = 950000001;
+                                break;
+                            case "Service Code C":
+                                value = 950000002;
+                                break;
+                        }
+                    }
+                    break;
+                case "tc_boardtype":
+                    {
+                        switch (text)
+                        {
+                            case "AI":
+                                value = 950000000;
+                                break;
+                            case "HB":
+                                value = 950000002;
+                                break;
+                            case "FB":
+                                value = 950000001;
+                                break;
+                        }
+                    }
+                    break;
+                case "tc_emailaddress1type":
+                case "tc_emailaddress2type":
+                case "tc_emailaddress3type":
+                    {
+                        switch (text)
+                        {
+                            case "Pri":
+                                value = 950000000;
+                                break;
+                            case "Pro":
+                                value = 950000001;
+                                break;
+
+                        }
+                    }
+                    break;
+                case "tc_telephone1type":
+                case "tc_telephone2type":
+                case "tc_telephone3type":
+                    {
+                        switch (text)
+                        {
+                            case "H":
+                                value = 950000001;
+                                break;
+                            case "M":
+                                value = 950000000;
+                                break;
+
+                        }
+                    }
+                    break;
+                case "statuscode":
+                    {
+                        switch (text)
+                        {
+                            case "A":
+                                value = 1;
+                                break;
+                            case "B":
+                                value = 950000001;
+                                break;
+                            case "C":
+                                value = 950000000;
+                                break;
+                            case "D":
+                                value = 950000000;
+                                break;
+                            case "Inactive":
+                                value = 2;
+                                break;
+
+                        }
+                    }
+                    break;
+            }
+            return (value != -1) ? new OptionSetValue(value) : null;
+        }
 
         /// <summary>
         /// Call this method to create or update record

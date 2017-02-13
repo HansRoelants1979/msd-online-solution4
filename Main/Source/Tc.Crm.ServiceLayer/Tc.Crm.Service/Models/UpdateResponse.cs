@@ -13,9 +13,5 @@ namespace Tc.Crm.Service.Models
         public bool Created { get; set; }
         [DataMember]
         public string Id { get; set; }
-        [DataMember]
-        public bool Success { get; set; }
-        [DataMember]
-        public string ErrorMessage { get; set; }
     }
 }
