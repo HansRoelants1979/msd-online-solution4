@@ -7,6 +7,30 @@ namespace Tc.Crm.CustomWorkflowSteps
 {
     public class CommonXrm
     {
+
+
+        /// <summary>
+        /// To delete records by filtering the data
+        /// </summary>
+        /// <param name="entityName"></param>
+        /// <param name="columns"></param>
+        /// <param name="filterKeys"></param>
+        /// <param name="filterValues"></param>
+        /// <param name="service"></param>
+        public static void DeleteRecords(string entityName, string[] columns, string[] filterKeys, string[] filterValues,IOrganizationService service)
+        {
+            EntityCollection entityCollection = CommonXrm.RetrieveMultipleRecords(entityName, columns, filterKeys, filterValues, service);
+            if (entityCollection != null && entityCollection.Entities.Count > 0)
+            {
+                EntityReferenceCollection entityReferenceCollection = new EntityReferenceCollection();
+                foreach (Entity entity in entityCollection.Entities)
+                {
+                    entityReferenceCollection.Add(new EntityReference(entity.LogicalName, entity.Id));
+                }
+                CommonXrm.BulkDelete(entityReferenceCollection, service);
+            }
+        }
+
         /// <summary>
         /// To get OptionSetValue by text and entityName
         /// </summary>
@@ -14,7 +38,6 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// <param name="entityName"></param>
         /// <returns></returns>
         public static OptionSetValue GetOptionSetValue(string text, string optionsetName)
-
         {
             int value = -1;
             switch (optionsetName)
@@ -199,6 +222,9 @@ namespace Tc.Crm.CustomWorkflowSteps
                 case "tc_emailaddress1type":
                 case "tc_emailaddress2type":
                 case "tc_emailaddress3type":
+                case "tc_emailaddress1_type":
+                case "tc_emailaddress2_type":
+                case "tc_emailaddress3_type":
                     {
                         switch (text)
                         {
@@ -215,6 +241,9 @@ namespace Tc.Crm.CustomWorkflowSteps
                 case "tc_telephone1type":
                 case "tc_telephone2type":
                 case "tc_telephone3type":
+                case "tc_telephone1_type":
+                case "tc_telephone2_type":
+                case "tc_telephone3_type":   
                     {
                         switch (text)
                         {

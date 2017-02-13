@@ -77,6 +77,12 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 payloadBooking.DeleteBookingRole = false;
 
             payloadBooking.CustomerId = xrmResponse.Id;
+
+            var contactToDeActivate = ContactHelper.DeActivateContact(customer, Guid.Parse(payloadBooking.CustomerId), trace);
+            if (contactToDeActivate != null)
+                CommonXrm.UpsertEntity(contactToDeActivate, payloadBooking.CrmService);           
+
+           
             trace.Trace("Processing Contact information - end");
         }
 
@@ -111,6 +117,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             var bookingEntity = BookingHelper.GetBookingEntityFromPayload(payloadBooking.BookingInfo, payloadBooking.Trace);
             xrmResponse = CommonXrm.UpsertEntity(bookingEntity, payloadBooking.CrmService);
             payloadBooking.Response = new BookingResponse();
+
             if (xrmResponse.Create)
             {
                 payloadBooking.DeleteBookingRole = false;
@@ -118,9 +125,14 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 payloadBooking.Response.Created = true;
 
             }
-
             payloadBooking.BookingId = xrmResponse.Id;
             payloadBooking.Response.Id = xrmResponse.Id;
+
+            var bookingToDeactivate = BookingHelper.DeActivateBooking(payloadBooking.BookingInfo, Guid.Parse(payloadBooking.BookingId), trace);
+            if (bookingToDeactivate != null)
+                CommonXrm.UpsertEntity(bookingToDeactivate,payloadBooking.CrmService);
+
+            
             trace.Trace("Processing Booking - end");
         }
 
@@ -381,18 +393,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
         /// <param name="filterKeys"></param>
         /// <param name="filterValues"></param>
         public void ProcessRecordsToDelete(string entityName, string[] columns, string[] filterKeys, string[] filterValues)
-
         {
-            EntityCollection entityCollection = CommonXrm.RetrieveMultipleRecords(entityName, columns, filterKeys, filterValues, payloadBooking.CrmService);
-            if (entityCollection != null && entityCollection.Entities.Count > 0)
-            {
-                EntityReferenceCollection entityReferenceCollection = new EntityReferenceCollection();
-                foreach (Entity entity in entityCollection.Entities)
-                {
-                    entityReferenceCollection.Add(new EntityReference(entity.LogicalName, entity.Id));
-                }
-                CommonXrm.BulkDelete(entityReferenceCollection, payloadBooking.CrmService);
-            }
+            CommonXrm.DeleteRecords(entityName, columns, filterKeys, filterValues, payloadBooking.CrmService);
         }
 
 

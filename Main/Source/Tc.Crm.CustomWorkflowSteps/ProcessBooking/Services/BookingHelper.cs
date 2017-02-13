@@ -27,13 +27,24 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             trace.Trace("Booking populate identity - start");
             if (booking == null) throw new InvalidPluginExecutionException("Booking entity is null.");
             if (identity == null) throw new InvalidPluginExecutionException("Booking identity information is null.");
-            if (identity.Booker == null) return;
+            if (identity.Booker == null) { ClearBookerInformation(booking); return; }
             booking[Attributes.Booking.BookerPhone1] = identity.Booker.Phone;
             booking[Attributes.Booking.BookerPhone2] = identity.Booker.Mobile;
             booking[Attributes.Booking.BookerEmergencyPhone] = identity.Booker.EmergencyNumber;
             booking[Attributes.Booking.BookerEmail] = identity.Booker.Email;
             trace.Trace("Booking populate identity - end");
         }
+
+        private static Attributes.Booking ClearBookerInformation(Entity booking)
+        {
+            booking[Attributes.Booking.BookerPhone1] = string.Empty;
+            booking[Attributes.Booking.BookerPhone2] = string.Empty;
+            booking[Attributes.Booking.BookerEmergencyPhone] = string.Empty;
+            booking[Attributes.Booking.BookerEmail] = string.Empty;
+
+            return null;
+        }
+
 
         public static void PopulateGeneralFields(Entity booking, BookingGeneral general, ITracingService trace)
         {
@@ -63,21 +74,28 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             booking[Attributes.Booking.NumberofAdults] = general.NumberOfAdults;
             booking[Attributes.Booking.NumberofChildren] = general.NumberOfChildren;
             booking[Attributes.Booking.NumberofInfants] = general.NumberOfInfants;
-            //if (general.BookingStatus == BookingStatus.B || general.BookingStatus == BookingStatus.C)
-            //{
-            //    booking[Attributes.Booking.StateCode] = new OptionSetValue((int)Statecode.InActive);
-            //    booking[Attributes.Booking.StatusCode] = CommonXrm.GetOptionSetValue(general.BookingStatus.ToString(), Attributes.Booking.StatusCode);
-            //}
-            //else
-            //{
-            //    throw new InvalidPluginExecutionException("Booking status provided in payload is invalid. It an be eiher B or C");
-            //}
-
             booking[Attributes.Booking.TravelAmount] = new Money(general.TravelAmount);
             booking[Attributes.Booking.TransactionCurrencyId] = new EntityReference(EntityName.Currency, Attributes.Currency.Name, general.Currency);
             booking[Attributes.Booking.HasSourceMarketComplaint] = general.HasComplaint;
             trace.Trace("Booking populate general - end");
 
+        }
+
+        public static Entity DeActivateBooking(Booking booking, Guid bookingId, ITracingService trace)
+        {
+            Entity bookingEntity = null;
+            if (booking.BookingGeneral.BookingStatus == BookingStatus.B || booking.BookingGeneral.BookingStatus == BookingStatus.C)
+            {
+                trace.Trace("Processing Booking record DeActivation.");
+                bookingEntity = new Entity(EntityName.Booking, bookingId);
+                bookingEntity[Attributes.Booking.StateCode] = new OptionSetValue((int)Statecode.InActive);
+                bookingEntity[Attributes.Booking.StatusCode] = CommonXrm.GetOptionSetValue(booking.BookingGeneral.BookingStatus.ToString(), Attributes.Booking.StatusCode);
+            }
+            else
+            {
+                //throw new InvalidPluginExecutionException("Booking status provided in payload is invalid. It an be eiher B or C");
+            }
+            return bookingEntity;
         }
 
         public static void PopulateServices(Entity booking,BookingServices service, ITracingService trace)
@@ -89,8 +107,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 
             booking[Attributes.Booking.Transfer] = PrepareTransferInfo(service.Transfer, trace);
             booking[Attributes.Booking.TransferRemarks] = PrepareTransferRemarks(service.Transfer, trace);
-            booking[Attributes.Booking.ExtraService] = PrepareExtraServicesInfo(service.ExtraService, trace);
-            booking[Attributes.Booking.ExtraServiceRemarks] = PrepareExtraServiceRemarks(service.ExtraService, trace);
+            //booking[Attributes.Booking.ExtraService] = PrepareExtraServicesInfo(service.ExtraService, trace);
+            //booking[Attributes.Booking.ExtraServiceRemarks] = PrepareExtraServiceRemarks(service.ExtraService, trace);
             
             trace.Trace("Booking populate service - end");
         }
