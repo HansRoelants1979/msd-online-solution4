@@ -5,4 +5,11 @@
         Active = 0,
         InActive = 1
     };
+
+    public enum RemarkType
+    {
+        Remark,
+        AccomodationRemark,
+        TransportRemark
+    }
 }

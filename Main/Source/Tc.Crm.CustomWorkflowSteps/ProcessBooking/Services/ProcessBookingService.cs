@@ -151,24 +151,12 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                     new string[] { payloadBooking.BookingId });
 
             }
-
             if (payloadBooking.BookingInfo.Remark != null)
             {
-                EntityCollection entityCollectionRemarks = new EntityCollection();
-                Entity remarkEntity = null;
-                for (int i = 0; i < payloadBooking.BookingInfo.Remark.Length; i++)
-                {
-                    remarkEntity = new Entity(EntityName.Remark);
-                    remarkEntity[Attributes.Remark.Name] = payloadBooking.BookingInfo.BookingIdentifier.BookingNumber + " - " + payloadBooking.BookingInfo.Remark[i].RemarkType.ToString();
-                    remarkEntity[Attributes.Remark.Type] = CommonXrm.GetOptionSetValue(payloadBooking.BookingInfo.Remark[i].RemarkType.ToString(), Attributes.Remark.Type);
-                    remarkEntity[Attributes.Remark.RemarkName] = payloadBooking.BookingInfo.Remark[i].Text;
-                    remarkEntity[Attributes.Remark.BookingId] = new EntityReference(EntityName.Booking, new Guid(payloadBooking.BookingId));
-                    entityCollectionRemarks.Entities.Add(remarkEntity);
-
-                }
+                string bookingNumber = payloadBooking.BookingInfo.BookingIdentifier.BookingNumber;
+                var entityCollectionRemarks = RemarksHelper.GetRemarksEntityFromPayload(bookingNumber, payloadBooking.BookingInfo.Remark, Guid.Parse(payloadBooking.BookingId), trace, RemarkType.Remark);
                 CommonXrm.BulkCreate(entityCollectionRemarks, payloadBooking.CrmService);
             }
-
             trace.Trace("Processing Remarks information - end");
         }
 
@@ -179,8 +167,6 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
         /// <returns></returns>
         public void ProcessAccomodation()
         {
-
-
             if (payloadBooking.DeleteAccomodationOrTransportOrRemarks)
             {
                 payloadBooking.Trace.Trace("Processing Delete Accomodation information");
@@ -188,43 +174,12 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                     new string[] { Attributes.BookingAccommodation.BookingAccommodationid },
                     new string[] { Attributes.BookingAccommodation.BookingId },
                     new string[] { payloadBooking.BookingId });
-
             }
 
             if (payloadBooking.BookingInfo.Services != null && payloadBooking.BookingInfo.Services.Accommodation != null)
             {
-                payloadBooking.Trace.Trace("Processing Accomodation information");
-                EntityCollection entityCollectionAccomodation = new EntityCollection();
-                Entity accomodationEntity = null;
-                for (int i = 0; i < payloadBooking.BookingInfo.Services.Accommodation.Length; i++)
-                {
-                    accomodationEntity = new Entity(EntityName.BookingAccommodation);
-                    //BN - HotelId 
-                    accomodationEntity[Attributes.BookingAccommodation.Name] = payloadBooking.BookingInfo.BookingIdentifier.BookingNumber + " - " + payloadBooking.BookingInfo.Services.Accommodation[i].GroupAccommodationCode;
-                    accomodationEntity[Attributes.BookingAccommodation.HotelId] = new EntityReference(EntityName.Hotel, Attributes.Hotel.MasterHotelID, payloadBooking.BookingInfo.Services.Accommodation[i].GroupAccommodationCode);
-                    accomodationEntity[Attributes.BookingAccommodation.Order] = payloadBooking.BookingInfo.Services.Accommodation[i].Order.ToString();
-                    accomodationEntity[Attributes.BookingAccommodation.StartDateandTime] = DateTime.Parse(payloadBooking.BookingInfo.Services.Accommodation[i].StartDate);
-                    accomodationEntity[Attributes.BookingAccommodation.EndDateandTime] = DateTime.Parse(payloadBooking.BookingInfo.Services.Accommodation[i].EndDate);
-                    accomodationEntity[Attributes.BookingAccommodation.RoomType] = payloadBooking.BookingInfo.Services.Accommodation[i].RoomType;
-                    accomodationEntity[Attributes.BookingAccommodation.BoardType] = CommonXrm.GetOptionSetValue(payloadBooking.BookingInfo.Services.Accommodation[i].BoardType.ToString(), Attributes.BookingAccommodation.BoardType);
-                    accomodationEntity[Attributes.BookingAccommodation.HasSharedRoom] = payloadBooking.BookingInfo.Services.Accommodation[i].HasSharedRoom;
-                    accomodationEntity[Attributes.BookingAccommodation.NumberofParticipants] = payloadBooking.BookingInfo.Services.Accommodation[i].NumberOfParticipants;
-                    accomodationEntity[Attributes.BookingAccommodation.NumberofRooms] = payloadBooking.BookingInfo.Services.Accommodation[i].NumberOfRooms;
-                    accomodationEntity[Attributes.BookingAccommodation.WithTransfer] = payloadBooking.BookingInfo.Services.Accommodation[i].WithTransfer;
-                    accomodationEntity[Attributes.BookingAccommodation.IsExternalService] = payloadBooking.BookingInfo.Services.Accommodation[i].IsExternalService;
-                    accomodationEntity[Attributes.BookingAccommodation.ExternalServiceCode] = CommonXrm.GetOptionSetValue(payloadBooking.BookingInfo.Services.Accommodation[i].ExternalServiceCode.ToString(), Attributes.BookingAccommodation.ExternalServiceCode);
-                    accomodationEntity[Attributes.BookingAccommodation.NotificationRequired] = payloadBooking.BookingInfo.Services.Accommodation[i].NotificationRequired;
-                    accomodationEntity[Attributes.BookingAccommodation.NeedTourGuideAssignment] = payloadBooking.BookingInfo.Services.Accommodation[i].NeedsTourGuideAssignment;
-                    accomodationEntity[Attributes.BookingAccommodation.ExternalTransfer] = payloadBooking.BookingInfo.Services.Accommodation[i].IsExternalTransfer;
-                    accomodationEntity[Attributes.BookingAccommodation.TransferServiceLevel] = CommonXrm.GetOptionSetValue(payloadBooking.BookingInfo.Services.Accommodation[i].TransferServiceLevel, Attributes.BookingAccommodation.TransferServiceLevel);
-                    accomodationEntity[Attributes.BookingAccommodation.SourceMarketHotelName] = payloadBooking.BookingInfo.Services.Accommodation[i].AccommodationDescription;
-
-                    accomodationEntity[Attributes.BookingAccommodation.BookingId] = new EntityReference(EntityName.Booking, new Guid(payloadBooking.BookingId));
-
-                    entityCollectionAccomodation.Entities.Add(accomodationEntity);
-
-                }
-
+                payloadBooking.Trace.Trace("Processing Accomodation information");                
+                var entityCollectionAccomodation = BookingAccomodationHelper.GetBookingAccomodationEntityFromPayload(payloadBooking.BookingInfo, Guid.Parse(payloadBooking.BookingId), trace);
                 List<XrmResponse> xrmResponseList = CommonXrm.BulkCreate(entityCollectionAccomodation, payloadBooking.CrmService);
                 ProcessAccomodationRemarks(xrmResponseList);
             }
@@ -236,30 +191,23 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
         /// <param name="xrmResponseList"></param>
         public void ProcessAccomodationRemarks(List<XrmResponse> xrmResponseList)
         {
-            EntityCollection entityCollectionAccomodationRemarks = new EntityCollection();
-            Entity remarkEntity = null;
+            EntityCollection entityCollectionAccomodationRemarks = null;           
             if (payloadBooking.BookingInfo.Services != null && payloadBooking.BookingInfo.Services.Accommodation != null && xrmResponseList.Count > 0)
             {
-                payloadBooking.Trace.Trace("Processing Accomodation Remarks information");
+                payloadBooking.Trace.Trace("Processing Accomodation Remarks information - Start");
+                string bookingNumber = payloadBooking.BookingInfo.BookingIdentifier.BookingNumber;
                 for (int i = 0; i < payloadBooking.BookingInfo.Services.Accommodation.Length; i++)
-                {
-                    if (payloadBooking.BookingInfo.Services.Accommodation[i].Remark != null)
+                {  
+                    if(payloadBooking.BookingInfo.Services.Accommodation[i].Remark != null)                 
+                    for (int j = 0; j < payloadBooking.BookingInfo.Services.Accommodation[i].Remark.Length; j++)
                     {
-                        for (int j = 0; j < payloadBooking.BookingInfo.Services.Accommodation[i].Remark.Length; j++)
-                        {
-                            remarkEntity = new Entity(EntityName.Remark);
-                            remarkEntity[Attributes.Remark.Name] = payloadBooking.BookingInfo.BookingIdentifier.BookingNumber + " - " + payloadBooking.BookingInfo.Services.Accommodation[i].Remark[j].RemarkType.ToString();
-                            remarkEntity[Attributes.Remark.Type] = CommonXrm.GetOptionSetValue(payloadBooking.BookingInfo.Services.Accommodation[i].Remark[j].RemarkType.ToString(), Attributes.Remark.Type);
-                            remarkEntity[Attributes.Remark.RemarkName] = payloadBooking.BookingInfo.Services.Accommodation[i].Remark[j].Text;
-                            //messageList.Find()
-                            remarkEntity[Attributes.Remark.BookingAccommodationId] = new EntityReference(EntityName.BookingAccommodation, Guid.Parse(xrmResponseList[i].Id));
-                            entityCollectionAccomodationRemarks.Entities.Add(remarkEntity);
-                        }
-                    }
+                        entityCollectionAccomodationRemarks = RemarksHelper.GetRemarksEntityFromPayload(bookingNumber, payloadBooking.BookingInfo.Services.Accommodation[i].Remark, Guid.Parse(xrmResponseList[i].Id), trace, RemarkType.AccomodationRemark);
+                    }                   
                 }
 
                 if (entityCollectionAccomodationRemarks.Entities.Count > 0)
                     CommonXrm.BulkCreate(entityCollectionAccomodationRemarks, payloadBooking.CrmService);
+                payloadBooking.Trace.Trace("Processing Accomodation Remarks information - End");
             }
         }
 
@@ -300,33 +248,24 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
         /// <param name="xrmResponseList"></param>
         public void ProcessTransportRemarks(List<XrmResponse> xrmResponseList)
         {
-            if (payloadBooking.BookingInfo.Services.Transport != null && xrmResponseList.Count > 0)
+            if (payloadBooking.BookingInfo.Services != null && payloadBooking.BookingInfo.Services.Transport != null && xrmResponseList.Count > 0)
             {
-                EntityCollection entityColllectionTransportRemark = new EntityCollection();
-                Entity transportRemark = null;
-
-                payloadBooking.Trace.Trace("Processing Transport Remarks information");
-
+                EntityCollection entityColllectionTransportRemark = null;
+                string bookingNumber = payloadBooking.BookingInfo.BookingIdentifier.BookingNumber;
+                payloadBooking.Trace.Trace("Processing Transport Remarks information - Start");
                 for (int i = 0; i < payloadBooking.BookingInfo.Services.Transport.Length; i++)
                 {
+                    if(payloadBooking.BookingInfo.Services.Transport[i].Remark != null)
                     for (int j = 0; j < payloadBooking.BookingInfo.Services.Transport[i].Remark.Length; j++)
                     {
                         //BN - Type
-
-                        transportRemark = new Entity(EntityName.Remark);
-                        transportRemark[Attributes.Remark.Name] = payloadBooking.BookingInfo.BookingIdentifier.BookingNumber + " - " + payloadBooking.BookingInfo.Services.Transport[i].Remark[j].RemarkType.ToString();
-                        transportRemark[Attributes.Remark.Type] = CommonXrm.GetOptionSetValue(payloadBooking.BookingInfo.Services.Transport[i].Remark[j].RemarkType.ToString(), Attributes.Remark.Type);
-                        transportRemark[Attributes.Remark.RemarkName] = payloadBooking.BookingInfo.Services.Transport[i].Remark[j].Text;
-                        transportRemark[Attributes.Remark.BookingTransportId] = new EntityReference(EntityName.BookingTransport, new Guid(xrmResponseList[i].Id));
-
-                        entityColllectionTransportRemark.Entities.Add(transportRemark);
+                        entityColllectionTransportRemark = RemarksHelper.GetRemarksEntityFromPayload(bookingNumber, payloadBooking.BookingInfo.Services.Transport[i].Remark, Guid.Parse(xrmResponseList[i].Id), trace, RemarkType.TransportRemark);
                     }
-
-
                 }
 
                 if (entityColllectionTransportRemark.Entities.Count > 0)
                     CommonXrm.BulkCreate(entityColllectionTransportRemark, payloadBooking.CrmService);
+                payloadBooking.Trace.Trace("Processing Transport Remarks information - End");
             }
 
         }
