@@ -42,7 +42,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                                                                             new EntityReference(EntityName.Country
                                                                             , Attributes.Country.ISO2Code,
                                                                             customer.CustomerIdentifier.SourceMarket) : null;
-            contact[Attributes.Contact.SourceSystemID] = customer.CustomerIdentifier.CustomerId;
+            contact[Attributes.Contact.SourceSystemID] = (customer.CustomerIdentifier.CustomerId !=null) ? customer.CustomerIdentifier.CustomerId : string.Empty ;
 
             trace.Trace("Contact populate fields - end");
 
@@ -79,17 +79,17 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 
             if (email1 == null) return;
             trace.Trace("email 1");
-            contact[Attributes.Contact.EMailAddress1] = email1.Address;
+            contact[Attributes.Contact.EMailAddress1] = (email1.Address != null) ? email1.Address : string.Empty ;
             contact[Attributes.Contact.EmailAddress1Type] = CommonXrm.GetOptionSetValue(email1.EmailType.ToString(), Attributes.Contact.EmailAddress1Type);
             if (email2 == null) return;
 
             trace.Trace("email 2");
-            contact[Attributes.Contact.EMailAddress2] = email2.Address;
+            contact[Attributes.Contact.EMailAddress2] = (email2.Address != null) ? email2.Address:string.Empty;
             contact[Attributes.Contact.EmailAddress2Type] = CommonXrm.GetOptionSetValue(email2.EmailType.ToString(), Attributes.Contact.EmailAddress2Type);
 
             trace.Trace("email 3");
             if (email3 == null) return;
-            contact[Attributes.Contact.EMailAddress3] = email3.Address;
+            contact[Attributes.Contact.EMailAddress3] = (email3.Address!= null) ? email3.Address:string.Empty;
             contact[Attributes.Contact.EmailAddress3Type] = CommonXrm.GetOptionSetValue(email3.EmailType.ToString(), Attributes.Contact.EmailAddress3Type);
             trace.Trace("Contact populate email - end");
 
@@ -140,19 +140,19 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             if (phone1 == null) return;
             if (phone1.PhoneType == PhoneType.H || phone1.PhoneType == PhoneType.M)
                 contact[Attributes.Contact.Telephone1Type] = CommonXrm.GetOptionSetValue(phone1.PhoneType.ToString(), Attributes.Contact.Telephone1Type);
-            contact[Attributes.Contact.Telephone1] = phone1.Number;
+            contact[Attributes.Contact.Telephone1] = (phone1.Number != null) ? phone1.Number:string.Empty ;
 
             trace.Trace("phone 2");
             if (phone2 == null) return;
             if (phone2.PhoneType == PhoneType.H || phone2.PhoneType == PhoneType.M)
                 contact[Attributes.Contact.Telephone2Type] = CommonXrm.GetOptionSetValue(phone2.PhoneType.ToString(), Attributes.Contact.Telephone2Type);
-            contact[Attributes.Contact.Telephone2] = phone2.Number;
+            contact[Attributes.Contact.Telephone2] = (phone2.Number != null) ? phone2.Number : string.Empty;
 
             trace.Trace("phone 3");
             if (phone3 == null) return;
             if (phone3.PhoneType == PhoneType.H || phone3.PhoneType == PhoneType.M)
                 contact[Attributes.Contact.Telephone3Type] = CommonXrm.GetOptionSetValue(phone3.PhoneType.ToString(), Attributes.Contact.Telephone3Type);
-            contact[Attributes.Contact.Telephone3] = phone3.Number;
+            contact[Attributes.Contact.Telephone3] = (phone3.Number != null) ? phone3.Number : string.Empty;
 
             trace.Trace("Contact populate phone - end");
         }
@@ -219,30 +219,30 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 
             trace.Trace("Address 1");
             if (address1 == null) return;
-            contact[Attributes.Contact.Address1_AdditionalInformation] = address1.AdditionalAddressInfo;
-            contact[Attributes.Contact.Address1_FlatOrUnitNumber] = address1.FlatNumberUnit;
-            contact[Attributes.Contact.Address1_HouseNumberOrBuilding] = address1.HouseNumberBuilding;
-            contact[Attributes.Contact.Address1_Town] = address1.Town;
+            contact[Attributes.Contact.Address1_AdditionalInformation] = (address1.AdditionalAddressInfo != null) ? address1.AdditionalAddressInfo:string.Empty;
+            contact[Attributes.Contact.Address1_FlatOrUnitNumber] = (address1.FlatNumberUnit != null)? address1.FlatNumberUnit : string.Empty;
+            contact[Attributes.Contact.Address1_HouseNumberOrBuilding] = (address1.HouseNumberBuilding != null) ? address1.HouseNumberBuilding : string.Empty ;
+            contact[Attributes.Contact.Address1_Town] = (address1.Town != null) ? address1.Town : string.Empty;
             contact[Attributes.Contact.Address1_CountryId] = (!string.IsNullOrWhiteSpace(address1.Country)) ?
                                                                              new EntityReference(EntityName.Country,
                                                                              Attributes.Country.ISO2Code,
                                                                              address1.Country) : null;
 
-            contact[Attributes.Contact.Address1_County] = address1.County;
-            contact[Attributes.Contact.Address1_PostalCode] = address1.PostalCode;
+            contact[Attributes.Contact.Address1_County] = (address1.County != null) ? address1.County :string.Empty ;
+            contact[Attributes.Contact.Address1_PostalCode] = (address1.PostalCode != null) ? address1.PostalCode : string.Empty;
 
             trace.Trace("Address 2");
             if (address2 == null) return;
-            contact[Attributes.Contact.Address2_AdditionalInformation] = address2.AdditionalAddressInfo;
-            contact[Attributes.Contact.Address2_FlatOrUnitNumber] = address2.FlatNumberUnit;
-            contact[Attributes.Contact.Address2_HouseNumberorBuilding] = address2.HouseNumberBuilding;
-            contact[Attributes.Contact.Address2_Town] = address2.Town;
+            contact[Attributes.Contact.Address2_AdditionalInformation] = (address2.AdditionalAddressInfo != null)?address2.AdditionalAddressInfo:string.Empty;
+            contact[Attributes.Contact.Address2_FlatOrUnitNumber] = (address2.FlatNumberUnit != null)?address2.FlatNumberUnit:string.Empty;
+            contact[Attributes.Contact.Address2_HouseNumberorBuilding] = (address2.HouseNumberBuilding != null)?address2.HouseNumberBuilding:string.Empty;
+            contact[Attributes.Contact.Address2_Town] = (address2.Town != null) ? address2.Town:string.Empty ;
             contact[Attributes.Contact.Address2_CountryId] = (!string.IsNullOrWhiteSpace(address2.Country)) ?
                                                                                  new EntityReference(EntityName.Country,
                                                                                  Attributes.Country.ISO2Code,
                                                                                  address2.Country) : null;
-            contact[Attributes.Contact.Address2_County] = address2.County;
-            contact[Attributes.Contact.Address2_PostalCode] = address2.PostalCode;
+            contact[Attributes.Contact.Address2_County] = (address2.County != null) ? address2.Country:string.Empty;
+            contact[Attributes.Contact.Address2_PostalCode] = (address2.PostalCode != null) ? address2.PostalCode :string.Empty ;
             trace.Trace("Contact populate address - end");
         }
 
