@@ -283,35 +283,14 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 
                 }
 
-                for (int i = 0; i < payloadBooking.BookingInfo.Services.Transport.Length; i++)
+                if (payloadBooking.BookingInfo.Services != null && payloadBooking.BookingInfo.Services.Transport != null)
                 {
                     payloadBooking.Trace.Trace("Processing Transport information");
-                    // BN -  DepartureGFate - ArrivalAGateway
-                    transportEntity = new Entity(EntityName.BookingTransport);
-                    transportEntity[Attributes.BookingTransport.Name] = payloadBooking.BookingInfo.BookingIdentifier.BookingNumber + " - " + payloadBooking.BookingInfo.Services.Transport[i].DepartureAirport + " - " + payloadBooking.BookingInfo.Services.Transport[i].ArrivalAirport;
-                    transportEntity[Attributes.BookingTransport.TransportCode] = payloadBooking.BookingInfo.Services.Transport[i].TransportCode;
-                    transportEntity[Attributes.BookingTransport.Description] = payloadBooking.BookingInfo.Services.Transport[i].TransportDescription;
-                    transportEntity[Attributes.BookingTransport.Order] = payloadBooking.BookingInfo.Services.Transport[i].Order;
-                    transportEntity[Attributes.BookingTransport.StartDateandTime] = DateTime.Parse(payloadBooking.BookingInfo.Services.Transport[i].StartDate);
-                    transportEntity[Attributes.BookingTransport.EndDateandTime] = DateTime.Parse(payloadBooking.BookingInfo.Services.Transport[i].EndDate);
-                    transportEntity[Attributes.BookingTransport.TransferType] = CommonXrm.GetOptionSetValue(payloadBooking.BookingInfo.Services.Transport[i].TransferType.ToString(), Attributes.BookingTransport.TransferType);
-                    transportEntity[Attributes.BookingTransport.DepartureGatewayId] = new EntityReference(EntityName.Gateway, Attributes.Gateway.IATA, payloadBooking.BookingInfo.Services.Transport[i].DepartureAirport);
-                    transportEntity[Attributes.BookingTransport.ArrivalGatewayId] = new EntityReference(EntityName.Gateway, Attributes.Gateway.IATA, payloadBooking.BookingInfo.Services.Transport[i].ArrivalAirport);
-                    transportEntity[Attributes.BookingTransport.CarrierCode] = payloadBooking.BookingInfo.Services.Transport[i].CarrierCode;
-                    transportEntity[Attributes.BookingTransport.FlightNumber] = payloadBooking.BookingInfo.Services.Transport[i].FlightNumber;
-                    transportEntity[Attributes.BookingTransport.FlightIdentifier] = payloadBooking.BookingInfo.Services.Transport[i].FlightIdentifier;
-                    transportEntity[Attributes.BookingTransport.NumberofParticipants] = payloadBooking.BookingInfo.Services.Transport[i].NumberOfParticipants;
-
-
-                    transportEntity[Attributes.BookingTransport.BookingId] = new EntityReference(EntityName.Booking, new Guid(payloadBooking.BookingId));
-
-                    entityCollectionTransport.Entities.Add(transportEntity);
-
-
+                    entityCollectionTransport = BookingTransportHelper.GetAccountEntityForBookingPayload(payloadBooking.BookingInfo, Guid.Parse(payloadBooking.BookingId), trace);
+                    List<XrmResponse> xrmResponseList = CommonXrm.BulkCreate(entityCollectionTransport, payloadBooking.CrmService);
+                    ProcessTransportRemarks(xrmResponseList);
                 }
 
-                List<XrmResponse> xrmResponseList = CommonXrm.BulkCreate(entityCollectionTransport, payloadBooking.CrmService);
-                ProcessTransportRemarks(xrmResponseList);
             }
         }
 
