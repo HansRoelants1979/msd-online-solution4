@@ -195,7 +195,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                                                                 , customer.CustomerIdentifier.SourceMarket):
                                                                 null;
 
-            account[Attributes.Account.SourceSystemID] = (customer.CustomerIdentifier.CustomerId !=null) ? customer.CustomerIdentifier.CustomerId:string.Empty ;
+            account[Attributes.Account.SourceSystemID] = (customer.CustomerIdentifier.CustomerId !=null) ? customer.CustomerIdentifier.CustomerId:string.Empty;
             trace.Trace("Account populate fields - end");
             return account;
         }

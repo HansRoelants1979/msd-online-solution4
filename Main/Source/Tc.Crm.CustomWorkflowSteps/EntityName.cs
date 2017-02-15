@@ -23,6 +23,8 @@ namespace Tc.Crm.CustomWorkflowSteps
         public const string Deceased = "D";
 
         public const string Blacklisted = "B";
+
+        public const string Concatenator = " - ";
     }
     public static class EntityName
     {

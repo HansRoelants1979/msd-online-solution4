@@ -1,0 +1,80 @@
+﻿using Microsoft.Xrm.Sdk;
+using System;
+using Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models;
+using System.Collections.Generic;
+
+namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
+{
+    public static class BookingAccommodationHelper
+    {
+        public static EntityCollection GetBookingAccommodationEntityFromPayload(Booking booking, Guid bookingId, ITracingService trace)
+        {
+            if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
+            trace.Trace("Accommodation populate records - start");
+            if (booking.Services == null) throw new InvalidPluginExecutionException("Booking Services is null.");
+            if (booking.Services.Accommodation == null) throw new InvalidPluginExecutionException("Booking Services accommodation is null.");
+            if (booking.BookingIdentifier.BookingNumber == null || string.IsNullOrWhiteSpace(booking.BookingIdentifier.BookingNumber))
+                throw new InvalidPluginExecutionException("Booking Number should not be null.");
+            EntityCollection entityCollectionaccommodation = new EntityCollection();
+            if (booking.Services.Accommodation != null)
+            {
+                Accommodation[] accommodation = booking.Services.Accommodation;
+                trace.Trace("Processing "+ accommodation.Length .ToString()+ " Booking accommodation records - start");
+                Entity accommodationEntity = null;
+                for (int i = 0; i < accommodation.Length; i++)
+                {
+                    trace.Trace("Processing Booking accommodation " + i.ToString() + " - start");
+                    accommodationEntity = PrepareBookingAccommodation(booking.BookingIdentifier.BookingNumber, accommodation[i], bookingId, trace);
+                    entityCollectionaccommodation.Entities.Add(accommodationEntity);
+                    trace.Trace("Processing Booking accommodation " + i.ToString() + " - end");
+                }
+                trace.Trace("Processing " + accommodation.Length.ToString() + " Booking accommodation records - end");
+            }
+            trace.Trace("Accommodation populate records - end");
+            return entityCollectionaccommodation;
+        }
+
+        private static Entity PrepareBookingAccommodation(string bookingNumber, Accommodation accommodation, Guid bookingId, ITracingService trace)
+        {
+            trace.Trace("Preparing Booking Transport information - Start");
+
+            var accommodationEntity = new Entity(EntityName.BookingAccommodation);
+            //BN - HotelId 
+            if (accommodation.AccommodationCode != null)
+                accommodationEntity[Attributes.BookingAccommodation.SourceMarketHotelCode] = "";
+            if (accommodation.GroupAccommodationCode != null)
+            {
+                accommodationEntity[Attributes.BookingAccommodation.Name] = bookingNumber + General.Concatenator + accommodation.GroupAccommodationCode;
+                accommodationEntity[Attributes.BookingAccommodation.HotelId] = new EntityReference(EntityName.Hotel, Attributes.Hotel.MasterHotelID, accommodation.GroupAccommodationCode);
+            }
+            accommodationEntity[Attributes.BookingAccommodation.Order] = accommodation.Order.ToString();
+            if(accommodation.StartDate != null)
+            accommodationEntity[Attributes.BookingAccommodation.StartDateandTime] = DateTime.Parse(accommodation.StartDate);
+            if(accommodation.EndDate != null)
+            accommodationEntity[Attributes.BookingAccommodation.EndDateandTime] = DateTime.Parse(accommodation.EndDate);
+            if(accommodation.RoomType != null)
+            accommodationEntity[Attributes.BookingAccommodation.RoomType] = accommodation.RoomType;
+            accommodationEntity[Attributes.BookingAccommodation.BoardType] = CommonXrm.GetOptionSetValue(accommodation.BoardType.ToString(), Attributes.BookingAccommodation.BoardType);
+            accommodationEntity[Attributes.BookingAccommodation.HasSharedRoom] = accommodation.HasSharedRoom;
+            accommodationEntity[Attributes.BookingAccommodation.NumberofParticipants] = accommodation.NumberOfParticipants;
+            accommodationEntity[Attributes.BookingAccommodation.NumberofRooms] = accommodation.NumberOfRooms;
+            accommodationEntity[Attributes.BookingAccommodation.WithTransfer] = accommodation.WithTransfer;
+            accommodationEntity[Attributes.BookingAccommodation.IsExternalService] = accommodation.IsExternalService;
+            if(accommodation.ExternalServiceCode != null)
+            accommodationEntity[Attributes.BookingAccommodation.ExternalServiceCode] = CommonXrm.GetOptionSetValue(accommodation.ExternalServiceCode.ToString(), Attributes.BookingAccommodation.ExternalServiceCode);           
+            accommodationEntity[Attributes.BookingAccommodation.NotificationRequired] = accommodation.NotificationRequired;
+            accommodationEntity[Attributes.BookingAccommodation.NeedTourGuideAssignment] = accommodation.NeedsTourGuideAssignment;
+            accommodationEntity[Attributes.BookingAccommodation.ExternalTransfer] = accommodation.IsExternalTransfer;
+            if(accommodation.TransferServiceLevel != null)
+            accommodationEntity[Attributes.BookingAccommodation.TransferServiceLevel] = CommonXrm.GetOptionSetValue(accommodation.TransferServiceLevel, Attributes.BookingAccommodation.TransferServiceLevel);
+            if(accommodation.AccommodationDescription != null)
+            accommodationEntity[Attributes.BookingAccommodation.SourceMarketHotelName] = accommodation.AccommodationDescription;
+            accommodationEntity[Attributes.BookingAccommodation.BookingId] = new EntityReference(EntityName.Booking, bookingId);
+
+            trace.Trace("Preparing Booking Transport information - End");
+
+            return accommodationEntity;
+        }
+
+    }
+}

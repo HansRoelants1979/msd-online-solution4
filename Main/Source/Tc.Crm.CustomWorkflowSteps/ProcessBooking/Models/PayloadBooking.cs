@@ -17,7 +17,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
 
         public bool DeleteBookingRole { get; set; }
 
-        public bool DeleteAccomodationOrTransportOrRemarks { get; set; }
+        public bool DeleteAccommodationOrTransportOrRemarks { get; set; }
 
         public string BookingId { get; set; }
 

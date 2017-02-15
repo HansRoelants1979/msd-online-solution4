@@ -18,9 +18,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
         /// <returns></returns>
         public static EntityCollection GetRemarksEntityFromPayload(string bookingNumber, Remark[] remark, Guid parentRecordId, ITracingService trace, RemarkType type)
         {
-
             if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
-            trace.Trace("RemarksHelper GetRemarksEntityFromPayload - start");
+            trace.Trace("Populate Remarks information - start");
                       
             if (string.IsNullOrWhiteSpace(bookingNumber))
                 throw new InvalidPluginExecutionException("Booking Number should not be null.");
@@ -28,8 +27,10 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             EntityCollection entityCollectionRemarks = new EntityCollection();
             if (remark != null && remark.Length > 0)
             {
+                trace.Trace("Processing "+ remark.Length .ToString()+ " Remarks - start");
                 for (int i = 0; i < remark.Length; i++)
                 {
+                    trace.Trace("Processing Remark " + i.ToString() + " - start");
                     var remarkEntity = PrepareBookingRemarks(bookingNumber, remark[i], trace);
                     switch (type)
                     {
@@ -44,10 +45,11 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                             break;
                     }
                     entityCollectionRemarks.Entities.Add(remarkEntity);
-
+                    trace.Trace("Processing Remark " + i.ToString() + " - end");
                 }
+                trace.Trace("Processing " + remark.Length.ToString() + " Remarks - end");
             }
-            trace.Trace("RemarksHelper GetRemarksEntityFromPayload - End");
+            trace.Trace("Populate Remarks information - end");
             return entityCollectionRemarks;
 
         }
@@ -63,7 +65,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
         {
             trace.Trace("Preparing Remark information - Start");
             var remarkEntity = new Entity(EntityName.Remark);
-            remarkEntity[Attributes.Remark.Name] = bookingNumber + " - " + remark.RemarkType.ToString();
+            remarkEntity[Attributes.Remark.Name] = bookingNumber + General.Concatenator + remark.RemarkType.ToString();
             remarkEntity[Attributes.Remark.Type] = CommonXrm.GetOptionSetValue(remark.RemarkType.ToString(), Attributes.Remark.Type);
             if(remark.Text != null)
             remarkEntity[Attributes.Remark.RemarkName] = remark.Text;            
