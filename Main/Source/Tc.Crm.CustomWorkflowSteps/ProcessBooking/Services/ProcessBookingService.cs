@@ -169,12 +169,12 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
         {
             if (payloadBooking.DeleteAccommodationOrTransportOrRemarks)
             {
-                payloadBooking.Trace.Trace("Delete Accomodation information - start");
+                payloadBooking.Trace.Trace("Delete Accommodation information - start");
                 ProcessRecordsToDelete(EntityName.BookingAccommodation,
                     new string[] { Attributes.BookingAccommodation.BookingAccommodationid },
                     new string[] { Attributes.BookingAccommodation.BookingId },
                     new string[] { payloadBooking.BookingId });
-                payloadBooking.Trace.Trace("Delete Accomodation information - end");
+                payloadBooking.Trace.Trace("Delete Accommodation information - end");
             }
 
             if (payloadBooking.BookingInfo.Services != null && payloadBooking.BookingInfo.Services.Accommodation != null)
@@ -183,6 +183,15 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 var entityCollectionAccomodation = BookingAccommodationHelper.GetBookingAccommodationEntityFromPayload(payloadBooking.BookingInfo, Guid.Parse(payloadBooking.BookingId), trace);
                 List<XrmResponse> xrmResponseList = CommonXrm.BulkCreate(entityCollectionAccomodation, payloadBooking.CrmService);
                 payloadBooking.Trace.Trace("Booking Accommodation information - end");
+                var accommodation = payloadBooking.BookingInfo.Services.Accommodation;
+                var bookingAccommodationToDeactivate = BookingAccommodationHelper.DeActivateBookingAccommodation(accommodation, xrmResponseList, trace);
+                if (bookingAccommodationToDeactivate != null)
+                {
+                    foreach (Entity entityBookingAccomodation in bookingAccommodationToDeactivate.Entities)
+                    {
+                        CommonXrm.UpsertEntity(entityBookingAccomodation, payloadBooking.CrmService);
+                    }
+                }
                 ProcessAccomodationRemarks(xrmResponseList);
             }
         }

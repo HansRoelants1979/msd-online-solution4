@@ -41,7 +41,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             var accommodationEntity = new Entity(EntityName.BookingAccommodation);
             //BN - HotelId 
             if (accommodation.AccommodationCode != null)
-                accommodationEntity[Attributes.BookingAccommodation.SourceMarketHotelCode] = "";
+                accommodationEntity[Attributes.BookingAccommodation.SourceMarketHotelCode] = accommodation.AccommodationCode;
             if (accommodation.GroupAccommodationCode != null)
             {
                 accommodationEntity[Attributes.BookingAccommodation.Name] = bookingNumber + General.Concatenator + accommodation.GroupAccommodationCode;
@@ -74,6 +74,34 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             trace.Trace("Preparing Booking Transport information - End");
 
             return accommodationEntity;
+        }
+
+        public static EntityCollection DeActivateBookingAccommodation(Accommodation[] accommodation, List<XrmResponse> xrmResponseList, ITracingService trace)
+        {
+            EntityCollection bookingAccommodationEntityList = new EntityCollection();
+            trace.Trace("Booking Accommodation populate Deactivation - start");
+            if (accommodation != null && accommodation.Length > 0)
+            {
+                for (int i = 0; i < accommodation.Length; i++)
+                {
+
+                    if (accommodation[i].Status == AccommodationStatus.OK || accommodation[i].Status == AccommodationStatus.PR || accommodation[i].Status == AccommodationStatus.R)
+                    {
+                        trace.Trace("Booking " + i.ToString() + " Accommodation record Deactivation - start");
+                        var bookingAccommodationEntity = new Entity(EntityName.BookingAccommodation, Guid.Parse(xrmResponseList[i].Id));
+                        bookingAccommodationEntity[Attributes.Booking.StateCode] = new OptionSetValue((int)Statecode.InActive);
+                        bookingAccommodationEntity[Attributes.Booking.StatusCode] = CommonXrm.GetOptionSetValue(accommodation[i].Status.ToString(), Attributes.Booking.StatusCode);
+                        bookingAccommodationEntityList.Entities.Add(bookingAccommodationEntity);
+                        trace.Trace("Booking " + i.ToString() + " Accommodation record Deactivation - end");
+                    }
+                    else
+                    {
+                        //throw new InvalidPluginExecutionException("Booking status provided in payload is invalid. It an be eiher B or C");
+                    }
+                }
+            }
+            trace.Trace("Booking Accommodation populate Deactivation - end");
+            return bookingAccommodationEntityList;
         }
 
     }

@@ -276,6 +276,15 @@ namespace Tc.Crm.CustomWorkflowSteps
                             case "Inactive":
                                 value = 2;
                                 break;
+                            case "OK":
+                                value = 2;
+                                break;
+                            case "PR":
+                                value = 950000001;
+                                break;
+                            case "R":
+                                value = 950000000;
+                                break;
 
                         }
                     }
