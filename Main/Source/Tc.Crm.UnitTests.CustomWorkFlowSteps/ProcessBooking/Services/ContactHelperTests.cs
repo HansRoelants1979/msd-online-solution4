@@ -300,7 +300,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
             var contact = ContactHelper.GetContactEntityForBookingPayload(c, trace);
 
             Assert.AreEqual(950000000, ((OptionSetValue)(contact[Attributes.Contact.Segment])).Value);
-            Assert.AreEqual(950000001, ((OptionSetValue)(contact[Attributes.Contact.StatusCode])).Value);
+            //Assert.AreEqual(950000001, ((OptionSetValue)(contact[Attributes.Contact.StatusCode])).Value);
         }
     }
 }
