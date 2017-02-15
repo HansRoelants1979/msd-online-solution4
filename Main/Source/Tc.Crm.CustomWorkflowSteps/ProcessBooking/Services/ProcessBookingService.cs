@@ -202,18 +202,19 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
         /// <param name="xrmResponseList"></param>
         public void ProcessAccomodationRemarks(List<XrmResponse> xrmResponseList)
         {
-            EntityCollection entityCollectionAccomodationRemarks = null;           
+            EntityCollection entityCollectionAccomodationRemarks = new EntityCollection();           
             if (payloadBooking.BookingInfo.Services != null && payloadBooking.BookingInfo.Services.Accommodation != null && xrmResponseList.Count > 0)
             {
                 payloadBooking.Trace.Trace("Accommodation Remarks information - Start");
                 string bookingNumber = payloadBooking.BookingInfo.BookingIdentifier.BookingNumber;
                 for (int i = 0; i < payloadBooking.BookingInfo.Services.Accommodation.Length; i++)
-                {  
-                    if(payloadBooking.BookingInfo.Services.Accommodation[i].Remark != null)                 
-                    for (int j = 0; j < payloadBooking.BookingInfo.Services.Accommodation[i].Remark.Length; j++)
+                {
+                    if (payloadBooking.BookingInfo.Services.Accommodation[i].Remark != null)
                     {
-                        entityCollectionAccomodationRemarks = RemarksHelper.GetRemarksEntityFromPayload(bookingNumber, payloadBooking.BookingInfo.Services.Accommodation[i].Remark, Guid.Parse(xrmResponseList[i].Id), trace, RemarkType.AccomodationRemark);
-                    }                   
+                        var accommodationRemarks = RemarksHelper.GetRemarksEntityFromPayload(bookingNumber, payloadBooking.BookingInfo.Services.Accommodation[i].Remark, Guid.Parse(xrmResponseList[i].Id), trace, RemarkType.AccomodationRemark);
+                        entityCollectionAccomodationRemarks.Entities.AddRange(accommodationRemarks.Entities);
+                    }
+                                     
                 }
 
                 if (entityCollectionAccomodationRemarks.Entities.Count > 0)
@@ -259,17 +260,18 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
         {
             if (payloadBooking.BookingInfo.Services != null && payloadBooking.BookingInfo.Services.Transport != null && xrmResponseList.Count > 0)
             {
-                EntityCollection entityColllectionTransportRemark = null;
+                EntityCollection entityColllectionTransportRemark = new EntityCollection();
                 string bookingNumber = payloadBooking.BookingInfo.BookingIdentifier.BookingNumber;
                 payloadBooking.Trace.Trace("Transport Remarks information - Start");
                 for (int i = 0; i < payloadBooking.BookingInfo.Services.Transport.Length; i++)
                 {
-                    if(payloadBooking.BookingInfo.Services.Transport[i].Remark != null)
-                    for (int j = 0; j < payloadBooking.BookingInfo.Services.Transport[i].Remark.Length; j++)
+                    if (payloadBooking.BookingInfo.Services.Transport[i].Remark != null)
                     {
                         //BN - Type
-                        entityColllectionTransportRemark = RemarksHelper.GetRemarksEntityFromPayload(bookingNumber, payloadBooking.BookingInfo.Services.Transport[i].Remark, Guid.Parse(xrmResponseList[i].Id), trace, RemarkType.TransportRemark);
+                        var transportRemarks = RemarksHelper.GetRemarksEntityFromPayload(bookingNumber, payloadBooking.BookingInfo.Services.Transport[i].Remark, Guid.Parse(xrmResponseList[i].Id), trace, RemarkType.TransportRemark);
+                        entityColllectionTransportRemark.Entities.AddRange(transportRemarks.Entities);
                     }
+                    
                 }
 
                 if (entityColllectionTransportRemark.Entities.Count > 0)
