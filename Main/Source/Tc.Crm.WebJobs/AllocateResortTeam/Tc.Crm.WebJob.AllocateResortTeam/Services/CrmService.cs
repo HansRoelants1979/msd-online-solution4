@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.Xrm.Sdk;
 using Tc.Crm.WebJob.AllocateResortTeam.Models;
 using Tc.Crm.WebJob.AllocateResortTeam.Services;
+using Microsoft.Xrm.Tooling.Connector;
+using System.Configuration;
 
 namespace Tc.Crm.WebJob.AllocateResortTeam
 {
@@ -16,7 +18,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
         public CrmService(IConfigurationService configurationService)
         {
             this.configurationService = configurationService;
-
+            this.organizationService = GetOrganizationService();
         }
 
         public IList<BookingAllocation> GetBookingAllocations()
@@ -26,7 +28,11 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
 
         public IOrganizationService GetOrganizationService()
         {
-            throw new NotImplementedException();
+            if (organizationService != null) return organizationService;
+
+            var connectionString = ConfigurationManager.ConnectionStrings["Crm"];
+            CrmServiceClient client = new CrmServiceClient(connectionString.ConnectionString);
+            return (IOrganizationService)client;
         }
 
         public void Update(BookingAllocation bookingAllocation)
@@ -45,12 +51,23 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
             if (disposed) return;
             if (disposing)
             {
-                //dispose org service
-                if (organizationService != null) ((IDisposable)organizationService).Dispose();
-                if (configurationService != null) configurationService = null;
+                DisposeObject(organizationService);
+                DisposeObject(configurationService);
             }
 
             disposed = true;
+        }
+
+        void DisposeObject(Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj is IDisposable)
+                    ((IDisposable)obj).Dispose();
+                else
+                    obj = null;
+            }
+                
         }
     }
 }

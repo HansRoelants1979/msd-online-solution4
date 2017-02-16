@@ -40,11 +40,22 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
             if (disposed) return;
             if (disposing)
             {
-                //dispose org service
-                if (crmService != null) ((IDisposable)crmService).Dispose();
+                DisposeObject(crmService);
             }
 
             disposed = true;
+        }
+
+        void DisposeObject(Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj is IDisposable)
+                    ((IDisposable)obj).Dispose();
+                else
+                    obj = null;
+            }
+
         }
     }
 }
