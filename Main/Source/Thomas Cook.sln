@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tc.Crm.Plugins", "Tc.Crm.Plugins", "{28E27A6E-C184-4019-AAF3-3D5A0F13222D}"
 EndProject
@@ -63,6 +63,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tc.Crm.ServiceTests", "Tc.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tc.Crm.CustomWorkflowSteps", "Tc.Crm.CustomWorkflowSteps\Tc.Crm.CustomWorkflowSteps.csproj", "{1F39272E-66E8-44D7-BB6F-74BF89E1B8E6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tc.Crm.WebJobs", "Tc.Crm.WebJobs", "{250DA148-FED0-475C-BA42-07007E84C333}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AllocateResortTeam", "AllocateResortTeam", "{D80E9610-DE5D-4012-9481-C53FF255A7C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tc.Crm.WebJob.AllocateResortTeam", "Tc.Crm.WebJobs\AllocateResortTeam\Tc.Crm.WebJob.AllocateResortTeam\Tc.Crm.WebJob.AllocateResortTeam.csproj", "{9684169E-7382-4DBA-8CB6-B202B96E145C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +111,10 @@ Global
 		{1F39272E-66E8-44D7-BB6F-74BF89E1B8E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F39272E-66E8-44D7-BB6F-74BF89E1B8E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F39272E-66E8-44D7-BB6F-74BF89E1B8E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9684169E-7382-4DBA-8CB6-B202B96E145C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9684169E-7382-4DBA-8CB6-B202B96E145C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9684169E-7382-4DBA-8CB6-B202B96E145C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9684169E-7382-4DBA-8CB6-B202B96E145C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -131,9 +141,11 @@ Global
 		{49185C6D-9553-4299-B324-84381B1EF7C8} = {C91228F0-139F-46AF-B023-C54F9C9870A5}
 		{12722390-2846-48B1-BB5E-8DA6C7664A14} = {7C6D8FA0-4FC0-4A54-BA41-BDE74B695763}
 		{1F39272E-66E8-44D7-BB6F-74BF89E1B8E6} = {A27ECFA7-7BEB-465D-A915-E9B7CD2484F1}
+		{D80E9610-DE5D-4012-9481-C53FF255A7C2} = {250DA148-FED0-475C-BA42-07007E84C333}
+		{9684169E-7382-4DBA-8CB6-B202B96E145C} = {D80E9610-DE5D-4012-9481-C53FF255A7C2}
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 10
+		SccNumberOfProjects = 11
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://hclmsemea.visualstudio.com/
 		SccLocalPath0 = .
@@ -173,5 +185,9 @@ Global
 		SccProjectTopLevelParentUniqueName9 = Thomas\u0020Cook.sln
 		SccProjectName9 = Tc.Crm.CustomWorkflowSteps
 		SccLocalPath9 = Tc.Crm.CustomWorkflowSteps
+		SccProjectUniqueName10 = Tc.Crm.WebJobs\\AllocateResortTeam\\Tc.Crm.WebJob.AllocateResortTeam\\Tc.Crm.WebJob.AllocateResortTeam.csproj
+		SccProjectTopLevelParentUniqueName10 = Thomas\u0020Cook.sln
+		SccProjectName10 = Tc.Crm.WebJobs/AllocateResortTeam/Tc.Crm.WebJob.AllocateResortTeam
+		SccLocalPath10 = Tc.Crm.WebJobs\\AllocateResortTeam\\Tc.Crm.WebJob.AllocateResortTeam
 	EndGlobalSection
 EndGlobal
