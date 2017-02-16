@@ -41,10 +41,15 @@ namespace Tc.Crm.Service.Services
                 if (request == null)
                     throw new ArgumentNullException("request");
 
+                Trace.TraceInformation("requst is not null");
                 //parse json web token parts
                 jsonWebTokenRequest.Token = GetToken(request);
+                Trace.TraceInformation("token: {0}", jsonWebTokenRequest.Token);
                 jsonWebTokenRequest.Header = DecodeHeaderToObject<JsonWebTokenHeader>(jsonWebTokenRequest.Token);
+                Trace.TraceInformation("algo: {0},type:{1}", jsonWebTokenRequest.Header.Algorithm, jsonWebTokenRequest.Header.TokenType);
                 jsonWebTokenRequest.Payload = DecodePayloadToObject<JsonWebTokenPayload>(jsonWebTokenRequest.Token);
+                Trace.TraceInformation("iat: {0},nbf:{1}", jsonWebTokenRequest.Payload.IssuedAtTime, jsonWebTokenRequest.Payload.NotBefore);
+
 
                 //validate the parts
                 ValidateHeader(jsonWebTokenRequest);
@@ -90,9 +95,14 @@ namespace Tc.Crm.Service.Services
                         RSAPKCS1SignatureDeformatter rsaDeformatter = new RSAPKCS1SignatureDeformatter(rsa);
                         rsaDeformatter.SetHashAlgorithm("SHA256");
                         if (!rsaDeformatter.VerifySignature(hash, JsonWebToken.Base64UrlDecode(tokenParts[2])))
+                        {
+                            Trace.TraceWarning("public key:{0}, token signature:{1}", publicKeyXml,tokenParts[2]);
                             jsonWebTokenRequest.SignatureValid = false;
+                        }
                         else
+                        {
                             jsonWebTokenRequest.SignatureValid = true;
+                        }
                     }
                 }
             }
@@ -193,7 +203,10 @@ namespace Tc.Crm.Service.Services
                     int expInt = ConvertToInt(request.Payload.NotBefore);
                     var secondsSinceEpoch = Math.Round((DateTime.UtcNow - UnixEpoch).TotalSeconds);
                     if (secondsSinceEpoch >= expInt)
+                    {
+                        Trace.TraceWarning("iat:{0}, current:{1}",expInt,secondsSinceEpoch);
                         request.NotBeforetimeValid = false;
+                    }
                     else
                         request.NotBeforetimeValid = true;
                 }
@@ -220,7 +233,10 @@ namespace Tc.Crm.Service.Services
                     }
 
                     if (expInt >= secondsSinceEpoch + expiry)
+                    {
+                        Trace.TraceWarning("nbf:{0}, current:{1}", expInt, secondsSinceEpoch);
                         request.IssuedAtTimeValid = false;
+                    }
                     else
                         request.IssuedAtTimeValid = true;
                 }

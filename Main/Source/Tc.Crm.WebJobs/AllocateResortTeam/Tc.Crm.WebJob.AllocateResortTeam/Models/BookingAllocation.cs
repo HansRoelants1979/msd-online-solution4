@@ -8,7 +8,7 @@ using Microsoft.Xrm.Sdk;
 
 namespace Tc.Crm.WebJob.AllocateResortTeam.Models
 {
-    class BookingAllocation
+    public class BookingAllocation
     {
                
         public EntityReference HotelId { get; set; }

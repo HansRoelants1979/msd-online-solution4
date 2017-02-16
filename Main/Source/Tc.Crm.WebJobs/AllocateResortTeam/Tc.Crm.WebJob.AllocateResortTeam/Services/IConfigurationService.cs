@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tc.Crm.WebJob.AllocateResortTeam
+namespace Tc.Crm.WebJob.AllocateResortTeam.Services
 {
-    class CrmHelper
+    public interface IConfigurationService
     {
+        string ConnectionString { get; set; }
     }
 }
