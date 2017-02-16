@@ -7,25 +7,21 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 {
     public static class BookingTransportHelper
     {
-        public static EntityCollection GetTransportEntityForBookingPayload(Booking booking, Guid bookingId, ITracingService trace)
+        public static EntityCollection GetTransportEntityForBookingPayload(Transport[] transport, string bookingNumber, Guid bookingId, ITracingService trace)
         {
             if (trace == null) throw new InvalidPluginExecutionException("Tracing Service is null.");
-            trace.Trace("Transport populate records - start");
-            if (booking.Services == null) throw new InvalidPluginExecutionException("Booking services payload is null.");
-            if (booking.Services.Transport == null)
-                throw new InvalidPluginExecutionException("Transport could not be retrieved from payload.");
-            if (booking.BookingIdentifier.BookingNumber == null || string.IsNullOrWhiteSpace(booking.BookingIdentifier.BookingNumber))                
+            trace.Trace("Transport populate records - start");           
+            if (bookingNumber == null || string.IsNullOrWhiteSpace(bookingNumber))                
                 throw new InvalidPluginExecutionException("Booking Number should not be null.");
             EntityCollection entityCollectionTransport = new EntityCollection();
-            if (booking.Services.Transport != null)
-            {
-                Transport[] transport = booking.Services.Transport;
+            if (transport != null && transport.Length > 0)
+            {  
                 Entity transportEntity = null;
                 trace.Trace("Processing " + transport.Length.ToString() + " transport records - start");
                 for (int i = 0; i < transport.Length; i++)
                 {
                     trace.Trace("Processing transport record " + i.ToString() + " - start");
-                    transportEntity = PrepareBookingTransport(booking, transport[i], bookingId, trace);
+                    transportEntity = PrepareBookingTransport(bookingNumber, transport[i], bookingId, trace);
                     entityCollectionTransport.Entities.Add(transportEntity);
                     trace.Trace("Processing transport record " + i.ToString() + " - end");
                 }
@@ -35,11 +31,11 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             return entityCollectionTransport;
         }
 
-        private static Entity PrepareBookingTransport(Booking booking, Transport transport, Guid bookingId, ITracingService trace)
+        private static Entity PrepareBookingTransport(string bookingNumber, Transport transport, Guid bookingId, ITracingService trace)
         {
             trace.Trace("Transport populate fields - start");
             var transportEntity = new Entity(EntityName.BookingTransport);
-            transportEntity[Attributes.BookingTransport.Name] = booking.BookingIdentifier.BookingNumber + General.Concatenator + transport.DepartureAirport + General.Concatenator + transport.ArrivalAirport;
+            transportEntity[Attributes.BookingTransport.Name] = bookingNumber + General.Concatenator + transport.DepartureAirport + General.Concatenator + transport.ArrivalAirport;
             if (transport.TransportCode != null)
                 transportEntity[Attributes.BookingTransport.TransportCode] = transport.TransportCode;
             if (transport.TransportDescription != null)

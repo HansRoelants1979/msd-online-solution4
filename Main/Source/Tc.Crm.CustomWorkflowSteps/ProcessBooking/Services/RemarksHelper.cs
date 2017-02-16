@@ -20,8 +20,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
         {
             if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
             trace.Trace("Populate Remarks information - start");
-                      
-            if (string.IsNullOrWhiteSpace(bookingNumber))
+
+            if (bookingNumber == null || string.IsNullOrWhiteSpace(bookingNumber))
                 throw new InvalidPluginExecutionException("Booking Number should not be null.");
             
             EntityCollection entityCollectionRemarks = new EntityCollection();

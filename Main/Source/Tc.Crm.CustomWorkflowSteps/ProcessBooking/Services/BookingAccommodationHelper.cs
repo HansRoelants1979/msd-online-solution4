@@ -7,24 +7,21 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 {
     public static class BookingAccommodationHelper
     {
-        public static EntityCollection GetBookingAccommodationEntityFromPayload(Booking booking, Guid bookingId, ITracingService trace)
+        public static EntityCollection GetBookingAccommodationEntityFromPayload(Accommodation[] accommodation, string bookingNumber, Guid bookingId, ITracingService trace)
         {
             if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
-            trace.Trace("Accommodation populate records - start");
-            if (booking.Services == null) throw new InvalidPluginExecutionException("Booking Services is null.");
-            if (booking.Services.Accommodation == null) throw new InvalidPluginExecutionException("Booking Services accommodation is null.");
-            if (booking.BookingIdentifier.BookingNumber == null || string.IsNullOrWhiteSpace(booking.BookingIdentifier.BookingNumber))
+            trace.Trace("Accommodation populate records - start");           
+            if (bookingNumber == null || string.IsNullOrWhiteSpace(bookingNumber))
                 throw new InvalidPluginExecutionException("Booking Number should not be null.");
             EntityCollection entityCollectionaccommodation = new EntityCollection();
-            if (booking.Services.Accommodation != null)
-            {
-                Accommodation[] accommodation = booking.Services.Accommodation;
+            if (accommodation != null && accommodation.Length > 0)
+            {               
                 trace.Trace("Processing "+ accommodation.Length .ToString()+ " Booking accommodation records - start");
                 Entity accommodationEntity = null;
                 for (int i = 0; i < accommodation.Length; i++)
                 {
                     trace.Trace("Processing Booking accommodation " + i.ToString() + " - start");
-                    accommodationEntity = PrepareBookingAccommodation(booking.BookingIdentifier.BookingNumber, accommodation[i], bookingId, trace);
+                    accommodationEntity = PrepareBookingAccommodation(bookingNumber, accommodation[i], bookingId, trace);
                     entityCollectionaccommodation.Entities.Add(accommodationEntity);
                     trace.Trace("Processing Booking accommodation " + i.ToString() + " - end");
                 }
