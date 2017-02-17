@@ -24,12 +24,12 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
 
         public IList<BookingAllocation> GetBookingAllocations()
         {
-            return new List<BookingAllocation>();
+           return crmService.GetBookingAllocations(new BookingAllocationRequest { DepartureDateinNextXDays=9,DepartureDate=DateTime.Now,ReturnDate=DateTime.Now,Destination= new List<Guid> { Guid.Empty } });
         }
 
         public void Run()
         {
-            
+            GetBookingAllocations();
         }
 
         public void Dispose()

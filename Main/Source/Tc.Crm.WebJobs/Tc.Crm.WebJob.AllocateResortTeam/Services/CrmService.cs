@@ -25,9 +25,50 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
             this.logger = logger;
         }
 
-        public IList<BookingAllocation> GetBookingAllocations()
+        public IList<BookingAllocation> GetBookingAllocations(BookingAllocationRequest bookingRequest)
         {
-            throw new NotImplementedException();
+            IList<BookingAllocation> bookingAllocationList = new List<BookingAllocation>();
+
+            string query = @"<fetch distinct='true' version='1.0' output-format='xml-platform' mapping='logical'>
+                             <entity name='tc_booking'>
+                                <attribute name='tc_bookingid'/>
+                                <attribute name='tc_name'/>
+                                <attribute name='ownerid'/>
+                                <order attribute='tc_name' descending='false'/>
+                                <filter type='and'>
+                                    <filter type='and'>
+                                            <filter type='or'>
+                                            <condition attribute='tc_departuredate' operator='next-x-days' value='9'/>
+                                                <filter type='and'>
+                                                    <condition attribute='tc_departuredate' operator='on-or-after' value='2017-02-18'/>
+                                                    <condition attribute='tc_returndate' operator='on-or-before' value='2017-02-18'/>
+                                                </filter>
+                                            </filter>
+                                        <condition attribute='tc_destinationgatewayid' operator='in'>
+                                        <value uiname='CDG' uitype='tc_gateway'>{54218CAD-37ED-E611-80FE-3863BB354FF0}</value>
+                                        <value uiname='MEX' uitype='tc_gateway'>{FF1B2B35-D7EE-E611-8106-3863BB34FB48}</value>
+                                        <value uiname='OPO' uitype='tc_gateway'>{F0D11EF9-D9EE-E611-8106-3863BB34FB48}</value>
+                                        </condition>
+                                    </filter>
+                                </filter>
+                                <link-entity name='tc_bookingaccommodation' alias='ad' from='tc_bookingid' to='tc_bookingid'>
+                                    <attribute name='tc_startdateandtime'/>
+                                    <attribute name='tc_enddateandtime'/>
+                                        <link-entity name='tc_hotel' alias='ae' from='tc_hotelid' to='tc_hotelid'>
+                                            <attribute name='ownerid'/>
+                                        </link-entity>
+                                </link-entity>
+                                <link-entity name='tc_customerbookingrole' alias='af' from='tc_bookingid' to='tc_bookingid'>
+                                    <attribute name='tc_customer'/>
+                                </link-entity>
+                             </entity>
+                             </fetch>";
+
+           EntityCollection bookings = RetrieveMultipleRecordsFetchXml(query);
+           bookingAllocationList.Add(new BookingAllocation { });
+
+           return bookingAllocationList;
+
         }
 
         public EntityCollection RetrieveMultipleRecords(string entityName, string[] columns, string[] filterKeys, string[] filterValues, IOrganizationService service)
@@ -52,11 +93,11 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
 
         }
 
-        public EntityCollection RetrieveMultipleRecordsFetchXml(string Query, IOrganizationService service)
+        public EntityCollection RetrieveMultipleRecordsFetchXml(string query)
         {
             //paging has to be implimented 
-            FetchExpression fetch = new FetchExpression(Query);
-            return service.RetrieveMultiple(fetch);
+            FetchExpression fetch = new FetchExpression(query);
+            return organizationService.RetrieveMultiple(fetch);
 
         }
         public EntityCollection GetRecordsUsingQuery(QueryExpression queryExpr, IOrganizationService service)

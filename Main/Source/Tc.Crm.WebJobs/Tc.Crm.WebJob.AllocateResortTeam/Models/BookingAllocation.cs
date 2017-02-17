@@ -9,47 +9,39 @@ using Microsoft.Xrm.Sdk;
 namespace Tc.Crm.WebJob.AllocateResortTeam.Models
 {
     public class BookingAllocation
-    {
-               
-        public Guid HotelId { get; set; }
+    {               
+       public BookingAllocationRequest BookingRequest {get; set;}
+       public IList<BookingAllocationData> BookingData { get; set; }
+    }
 
+    public class BookingAllocationRequest
+    {
+        public int DepartureDateinNextXDays { get; set; }
+        public DateTime DepartureDate { get; set; }
+        public DateTime ReturnDate { get; set; }
+        public IList<Guid> Destination { get; set; }
+    }
+
+    public class BookingAllocationData
+    {
+        public Guid BookingId { get; set; }
+        public DateTime AccommodationStartDate { get; set; }
+        public DateTime AccommodationEndDate { get; set; }
+        public Owner OwnerId { get; set; }        
         
-
-        public ResortTeam Team { get; set; }
-
-        public List<ResortTeam> ResortTeam { get; set; }
-
-        public List<Accommodation> Accommodation { get; set; }
-
-        public List<Booking> Booking { get; set; }
-
-        public int Days { get; set; }
     }
 
-    
-
-    public class ResortTeam
+    public class Owner
     {
         public string Name { get; set; }
         public Guid Id { get; set; }
+        public OwnerType OwnerType { get; set; }
     }
 
-    public class Accommodation
+    public enum OwnerType
     {
-        public string Name { get; set; }
-        public Guid Id { get; set; }
-    }
-
-    public class Booking
-    {
-        public string Name { get; set; }
-        public Guid Id { get; set; }
-    }
-
-    public class Hotel
-    {
-        public string Name { get; set; }
-        public Guid Id { get; set; }
+        User,
+        Team
     }
 
 }
