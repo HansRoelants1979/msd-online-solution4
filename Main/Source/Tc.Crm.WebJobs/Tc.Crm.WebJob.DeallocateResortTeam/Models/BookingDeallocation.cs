@@ -9,14 +9,42 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Models
 {
     public class BookingDeallocation
     {
-        public EntityReference HotelId { get; set; }
+        public Guid HotelId { get; set; }
 
-        
 
-        public EntityCollection Accommodation { get; set; }
 
-        public EntityCollection Booking { get; set; }
+        public ResortTeam Team { get; set; }
+
+        public List<ResortTeam> ResortTeam { get; set; }
+
+        public List<Accommodation> Accommodation { get; set; }
+
+        public List<Booking> Booking { get; set; }
 
         public int Days { get; set; }
+    }
+
+    public class ResortTeam
+    {
+        public string Name { get; set; }
+        public Guid Id { get; set; }
+    }
+
+    public class Accommodation
+    {
+        public string Name { get; set; }
+        public Guid Id { get; set; }
+    }
+
+    public class Booking
+    {
+        public string Name { get; set; }
+        public Guid Id { get; set; }
+    }
+
+    public class Hotel
+    {
+        public string Name { get; set; }
+        public Guid Id { get; set; }
     }
 }

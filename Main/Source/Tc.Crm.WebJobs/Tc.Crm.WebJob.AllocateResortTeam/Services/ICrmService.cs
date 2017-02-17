@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xrm.Sdk;
+using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
 using System;
 using System.Collections.Generic;
@@ -13,5 +14,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
         IOrganizationService GetOrganizationService();
         EntityCollection RetrieveMultipleRecords(string entityName, string[] columns, string[] filterKeys, string[] filterValues, IOrganizationService service);
         EntityCollection GetRecordsUsingQuery(QueryExpression queryExpr, IOrganizationService service);
+        EntityCollection RetrieveMultipleRecordsFetchXml(string Query, IOrganizationService service);
+        ExecuteMultipleResponse BulkUpdate(EntityCollection entityCollection, IOrganizationService service);
     }
 }
