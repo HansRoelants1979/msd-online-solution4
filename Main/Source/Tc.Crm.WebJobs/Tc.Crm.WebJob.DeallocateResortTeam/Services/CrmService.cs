@@ -176,7 +176,9 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
             public const string BookingId = "tc_bookingid";
             public const string Owner = "ownerid";
             public const string Name = "tc_name";
-
+            public const string DepartureDate = "tc_departuredate";
+            public const string DestinationId = "tc_destinationid";
+            public const string ReturnDate = "tc_returndate";
         }
 
         public class BookingAccommodation
@@ -190,6 +192,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
             public const string SourceMarketHotelCode = "tc_sourcemarkethotelcode";
             public const string SourceMarketHotelName = "tc_sourcemarkethotelname";
             public const string StartDateandTime = "tc_startdateandtime";
+            public const string Owner = "ownerid";
 
         }
 
@@ -211,6 +214,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
             public const string Name = "tc_name";
             public const string SourceMarketHotelID = "tc_sourcemarkethotelid";
             public const string ResortTeam = "tc_teamid";
+            public const string Owner = "ownerid";
 
         }
         public class Team

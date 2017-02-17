@@ -182,7 +182,9 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
             public const string BookingId = "tc_bookingid";
             public const string Owner = "ownerid";
             public const string Name = "tc_name";
-
+            public const string DepartureDate = "tc_departuredate";
+            public const string DestinationId = "tc_destinationid";
+            public const string ReturnDate = "tc_returndate";
         }
 
         public class BookingAccommodation
@@ -191,12 +193,9 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
             public const string BookingId = "tc_bookingid";
             public const string EndDateandTime = "tc_enddateandtime";
             public const string HotelId = "tc_hotelid";
-            public const string NumberofParticipants = "tc_numberofparticipants";
-            public const string NumberofRooms = "tc_numberofrooms";
-            public const string SourceMarketHotelCode = "tc_sourcemarkethotelcode";
-            public const string SourceMarketHotelName = "tc_sourcemarkethotelname";
             public const string StartDateandTime = "tc_startdateandtime";
-            
+            public const string Owner = "ownerid";
+
         }
 
         public class CustomerBookingRole
@@ -217,7 +216,8 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
             public const string Name = "tc_name";
             public const string SourceMarketHotelID = "tc_sourcemarkethotelid";
             public const string ResortTeam = "tc_teamid";
-            
+            public const string Owner = "ownerid";
+
         }
         public class Team
             {
