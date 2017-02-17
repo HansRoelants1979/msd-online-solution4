@@ -15,10 +15,12 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
     {
         IOrganizationService organizationService;
         IConfigurationService configurationService;
-        public CrmService(IConfigurationService configurationService)
+        ILogger logger;
+        public CrmService(IConfigurationService configurationService,ILogger logger)
         {
             this.configurationService = configurationService;
             this.organizationService = GetOrganizationService();
+            this.logger = logger;
         }
 
         public IList<BookingAllocation> GetBookingAllocations()
@@ -30,8 +32,8 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
         {
             if (organizationService != null) return organizationService;
 
-            var connectionString = ConfigurationManager.ConnectionStrings["Crm"];
-            CrmServiceClient client = new CrmServiceClient(connectionString.ConnectionString);
+            var connectionString = configurationService.ConnectionString;
+            CrmServiceClient client = new CrmServiceClient(connectionString);
             return (IOrganizationService)client;
         }
 
@@ -53,6 +55,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
             {
                 DisposeObject(organizationService);
                 DisposeObject(configurationService);
+                DisposeObject(logger);
             }
 
             disposed = true;

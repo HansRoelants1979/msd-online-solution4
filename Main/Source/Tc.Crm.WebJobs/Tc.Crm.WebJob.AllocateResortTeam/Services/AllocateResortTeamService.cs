@@ -10,9 +10,12 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
     public class AllocateResortTeamService : IAllocateResortTeamService
     {
         ICrmService crmService;
-        public AllocateResortTeamService(ICrmService crmService)
+        ILogger logger;
+        
+        public AllocateResortTeamService(ICrmService crmService,ILogger logger)
         {
             this.crmService = crmService;
+            this.logger = logger;
         }
         public void AllocateBookingToResortTeam(IList<BookingAllocation> bookingAllocations)
         {

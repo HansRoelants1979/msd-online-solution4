@@ -14,10 +14,12 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
         {
             //setup our DI
             IUnityContainer unitycontainer = new UnityContainer();
+            unitycontainer.RegisterType<ILogger, Logger>(new ContainerControlledLifetimeManager());
             unitycontainer.RegisterType<IConfigurationService, ConfigurationService>(new ContainerControlledLifetimeManager());
             unitycontainer.RegisterType<ICrmService, CrmService>(new ContainerControlledLifetimeManager());
             unitycontainer.RegisterType<IAllocateResortTeamService, AllocateResortTeamService>(new ContainerControlledLifetimeManager());
-            
+
+            var logger = unitycontainer.Resolve<ILogger>();
 
             using (var allocateResortTeamService = unitycontainer.Resolve<IAllocateResortTeamService>())
             {
