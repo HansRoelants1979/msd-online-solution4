@@ -17,14 +17,31 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
             this.crmService = crmService;
             this.logger = logger;
         }
-        public void AllocateBookingToResortTeam(IList<BookingAllocation> bookingAllocations)
+        public void AllocateBookingToResortTeam(IList<BookingAllocationResortTeamRequest> bookingAllocationResortTeamRequest)
         {
             
         }
 
-        public IList<BookingAllocation> GetBookingAllocations()
+        public void GetBookingAllocations()
         {
-           return crmService.GetBookingAllocations(new BookingAllocationRequest { DepartureDateinNextXDays=9,DepartureDate=DateTime.Now,ReturnDate=DateTime.Now,Destination= new List<Guid> { Guid.Empty } });
+          IList<BookingAllocationResponse> bookingAllocationResponse = crmService.GetBookingAllocations(new BookingAllocationRequest { DepartureDateinNextXDays=9,DepartureDate=DateTime.Now,ReturnDate=DateTime.Now,Destination= new List<Guid> { Guid.Empty } });
+          if (bookingAllocationResponse != null && bookingAllocationResponse.Count > 0)
+          {
+                PrepareResortTeamRequest(bookingAllocationResponse);
+          }
+        }
+
+        public IList<BookingAllocationResortTeamRequest> PrepareResortTeamRequest(IList<BookingAllocationResponse> bookingAllocationResponse)
+        {
+            if (bookingAllocationResponse != null && bookingAllocationResponse.Count > 0)
+            {
+                for(int i =0; i< bookingAllocationResponse.Count; i++)
+                {
+                    var bookingResponse = bookingAllocationResponse[i];
+                    
+                }
+            }
+            return null;
         }
 
         public void Run()

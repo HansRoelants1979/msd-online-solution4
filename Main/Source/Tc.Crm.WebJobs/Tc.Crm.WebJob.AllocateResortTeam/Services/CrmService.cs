@@ -25,9 +25,8 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
             this.logger = logger;
         }
 
-        public IList<BookingAllocation> GetBookingAllocations(BookingAllocationRequest bookingRequest)
-        {
-            IList<BookingAllocation> bookingAllocationList = new List<BookingAllocation>();
+        public IList<BookingAllocationResponse> GetBookingAllocations(BookingAllocationRequest bookingRequest)
+        {            
 
             string query = @"<fetch distinct='true' version='1.0' output-format='xml-platform' mapping='logical'>
                              <entity name='tc_booking'>
@@ -64,14 +63,48 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
                              </entity>
                              </fetch>";
 
-           EntityCollection bookings = RetrieveMultipleRecordsFetchXml(query);
-           bookingAllocationList.Add(new BookingAllocation { });
+           EntityCollection bookings = RetrieveMultipleRecordsFetchXml(query);           
 
-           return bookingAllocationList;
+           return PrepareBookingAllocation(bookings);
 
         }
 
-        public EntityCollection RetrieveMultipleRecords(string entityName, string[] columns, string[] filterKeys, string[] filterValues, IOrganizationService service)
+        public IList<BookingAllocationResponse> PrepareBookingAllocation(EntityCollection bookingCollection)
+        {
+            IList <BookingAllocationResponse> bookingAllocationResponse = null;
+            if (bookingCollection != null && bookingCollection.Entities.Count > 0)
+            {
+                bookingAllocationResponse = new List<BookingAllocationResponse>();
+                foreach (Entity booking in bookingCollection.Entities)
+                {
+                    var response = new BookingAllocationResponse();
+                    if (booking.Attributes.Contains(Attributes.Booking.BookingId) && booking.Attributes[Attributes.Booking.BookingId] != null)
+                        response.BookingId = Guid.Parse(booking.Attributes[Attributes.Booking.BookingId].ToString());
+                    if (booking.Attributes.Contains(Attributes.BookingAccommodation.StartDateandTime) && booking.Attributes[Attributes.BookingAccommodation.StartDateandTime] != null)
+                        response.AccommodationStartDate = DateTime.Parse(booking.Attributes[Attributes.BookingAccommodation.StartDateandTime].ToString());
+                    if (booking.Attributes.Contains(Attributes.BookingAccommodation.EndDateandTime) && booking.Attributes[Attributes.BookingAccommodation.EndDateandTime] != null)
+                        response.AccommodationEndDate = DateTime.Parse(booking.Attributes[Attributes.BookingAccommodation.EndDateandTime].ToString());
+                    if (booking.Attributes.Contains(Attributes.Hotel.Owner) && booking.Attributes[Attributes.Hotel.Owner] != null)
+                    {
+                        EntityReference owner = (EntityReference)booking.Attributes[Attributes.Hotel.Owner];
+                        OwnerType ownerType;
+
+                        if (owner.LogicalName == EntityName.User)
+                            ownerType = OwnerType.User;
+                        else
+                            ownerType = OwnerType.Team;
+
+                        response.OwnerId = new Owner() { Id = owner.Id,Name=owner.Name,OwnerType= ownerType};
+                    }
+
+                    bookingAllocationResponse.Add(response);
+                }
+            }
+
+            return bookingAllocationResponse;
+        }
+
+        public EntityCollection RetrieveMultipleRecords(string entityName, string[] columns, string[] filterKeys, string[] filterValues)
         {
             var query = new QueryExpression(entityName);
             query.ColumnSet = new ColumnSet(columns);
@@ -89,7 +122,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
 
                 query.Criteria.AddFilter(fltrExpr);
             }
-            return GetRecordsUsingQuery(query, service);
+            return GetRecordsUsingQuery(query);
 
         }
 
@@ -100,7 +133,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
             return organizationService.RetrieveMultiple(fetch);
 
         }
-        public EntityCollection GetRecordsUsingQuery(QueryExpression queryExpr, IOrganizationService service)
+        public EntityCollection GetRecordsUsingQuery(QueryExpression queryExpr)
         {
             int pageNumber = 1;
             int recordCount = 1;
@@ -111,7 +144,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
             EntityCollection entityCollection = null;
             while (true)
             {
-                entityCollection = service.RetrieveMultiple(queryExpr);
+                entityCollection = organizationService.RetrieveMultiple(queryExpr);
 
                 // Check for more records, if it returns true.
                 if (entityCollection.MoreRecords)
@@ -134,7 +167,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
         }
 
 
-        public ExecuteMultipleResponse BulkUpdate(EntityCollection entityCollection, IOrganizationService service)
+        public ExecuteMultipleResponse BulkUpdate(EntityCollection entityCollection)
         {
             ExecuteMultipleRequest request = new ExecuteMultipleRequest()
             {
@@ -151,7 +184,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
                 request.Requests.Add(new UpdateRequest() { Target = entityCollection[i] });
             }
 
-            return (ExecuteMultipleResponse)service.Execute(request);
+            return (ExecuteMultipleResponse)organizationService.Execute(request);
         }
 
 
@@ -165,10 +198,6 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
             return (IOrganizationService)client;
         }
 
-        public void Update(BookingAllocation bookingAllocation)
-        {
-            throw new NotImplementedException();
-        }
 
 
 

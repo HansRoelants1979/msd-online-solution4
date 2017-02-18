@@ -8,12 +8,7 @@ using Microsoft.Xrm.Sdk;
 
 namespace Tc.Crm.WebJob.AllocateResortTeam.Models
 {
-    public class BookingAllocation
-    {               
-       public BookingAllocationRequest BookingRequest {get; set;}
-       public IList<BookingAllocationData> BookingData { get; set; }
-    }
-
+   
     public class BookingAllocationRequest
     {
         public int DepartureDateinNextXDays { get; set; }
@@ -22,13 +17,22 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Models
         public IList<Guid> Destination { get; set; }
     }
 
-    public class BookingAllocationData
+    public class BookingAllocationResponse
     {
         public Guid BookingId { get; set; }
         public DateTime AccommodationStartDate { get; set; }
         public DateTime AccommodationEndDate { get; set; }
         public Owner OwnerId { get; set; }        
         
+    }
+
+    public class BookingAllocationResortTeamRequest
+    {
+        public Guid Id { get; set; }
+
+        public EntityType EntityType { get; set; }
+
+        public CustomerType CustomerType { get; set; }
     }
 
     public class Owner
@@ -42,6 +46,18 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Models
     {
         User,
         Team
+    }
+
+    public enum EntityType
+    {
+        Customer,
+        Booking
+    }
+
+    public enum CustomerType
+    {
+        Contact,
+        Account
     }
 
 }

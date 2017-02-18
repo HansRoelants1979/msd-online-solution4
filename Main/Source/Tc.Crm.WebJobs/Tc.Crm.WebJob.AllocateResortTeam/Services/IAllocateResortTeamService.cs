@@ -10,7 +10,8 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
     public interface IAllocateResortTeamService:IDisposable
     {
         void Run();
-        IList<BookingAllocation> GetBookingAllocations();
-        void AllocateBookingToResortTeam(IList<BookingAllocation> bookingAllocations);
+        void GetBookingAllocations();
+        void AllocateBookingToResortTeam(IList<BookingAllocationResortTeamRequest> bookingAllocationResortTeamRequest);
+        IList<BookingAllocationResortTeamRequest> PrepareResortTeamRequest(IList<BookingAllocationResponse> bookingAllocationResponse);
     }
 }
