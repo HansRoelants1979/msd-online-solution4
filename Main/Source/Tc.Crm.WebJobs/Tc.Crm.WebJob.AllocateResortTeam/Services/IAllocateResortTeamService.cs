@@ -12,6 +12,8 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
         void Run();
         void GetBookingAllocations();
         void AllocateBookingToResortTeam(IList<BookingAllocationResortTeamRequest> bookingAllocationResortTeamRequest);
-        IList<BookingAllocationResortTeamRequest> PrepareResortTeamRequest(IList<BookingAllocationResponse> bookingAllocationResponse);
+        BookingAllocationResortTeamRequest PrepareResortTeamRequest(BookingAllocationResponse bookingAllocationResponse);
+        IList<BookingAllocationResortTeamRequest> ProcessAllocationResponse(IList<BookingAllocationResponse> bookingAllocationResponse);
+        IList<Guid> GetDestinationGateways();
     }
 }

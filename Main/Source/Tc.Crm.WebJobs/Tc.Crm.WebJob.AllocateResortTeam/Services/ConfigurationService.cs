@@ -21,5 +21,29 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                 throw new NotImplementedException();
             }
         }
+
+        public string DepartureDateinNextXDays
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["DepartureDateinNextXDays"].ToString();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string DestinationGatewayIds
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["DestinationGatewayIds"].ToString();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }

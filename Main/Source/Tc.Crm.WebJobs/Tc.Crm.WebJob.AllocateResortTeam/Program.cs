@@ -17,13 +17,15 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
             unitycontainer.RegisterType<ILogger, Logger>(new ContainerControlledLifetimeManager());
             unitycontainer.RegisterType<IConfigurationService, ConfigurationService>(new ContainerControlledLifetimeManager());
             unitycontainer.RegisterType<ICrmService, CrmService>(new ContainerControlledLifetimeManager());
+            unitycontainer.RegisterType<IAllocationService, AllocationService>(new ContainerControlledLifetimeManager());
             unitycontainer.RegisterType<IAllocateResortTeamService, AllocateResortTeamService>(new ContainerControlledLifetimeManager());
 
-            var logger = unitycontainer.Resolve<ILogger>();
-
+            var logger = unitycontainer.Resolve<ILogger>();            
             using (var allocateResortTeamService = unitycontainer.Resolve<IAllocateResortTeamService>())
             {
+                logger.LogInformation("Tc.Crm.WebJob.AllocateResortTeam Job Starts");
                 allocateResortTeamService.Run();
+                logger.LogInformation("Tc.Crm.WebJob.AllocateResortTeam Job End");
             }
 
                 

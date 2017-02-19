@@ -22,17 +22,26 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Models
         public Guid BookingId { get; set; }
         public DateTime AccommodationStartDate { get; set; }
         public DateTime AccommodationEndDate { get; set; }
-        public Owner OwnerId { get; set; }        
-        
+        public Owner OwnerId { get; set; }
+        public Customer CustomerId { get; set; }
     }
 
     public class BookingAllocationResortTeamRequest
     {
+       public BookingResortTeamRequest BookingResortTeamRequest { get; set; }
+       public CustomerResortTeamRequest CustomerResortTeamRequest { get; set; }
+
+    }
+
+    public class BookingResortTeamRequest
+    {
         public Guid Id { get; set; }
+    }
 
-        public EntityType EntityType { get; set; }
-
-        public CustomerType CustomerType { get; set; }
+    public class CustomerResortTeamRequest
+    {
+        public Guid Id { get; set; }
+        public Customer Customer { get; set; }
     }
 
     public class Owner
@@ -40,6 +49,13 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Models
         public string Name { get; set; }
         public Guid Id { get; set; }
         public OwnerType OwnerType { get; set; }
+    }
+
+    public class Customer
+    {
+        public string Name { get; set; }
+        public Guid Id { get; set; }
+        public CustomerType CustomerType { get; set; }
     }
 
     public enum OwnerType

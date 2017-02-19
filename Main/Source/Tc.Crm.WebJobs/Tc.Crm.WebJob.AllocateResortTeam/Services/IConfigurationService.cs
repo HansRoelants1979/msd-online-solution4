@@ -9,5 +9,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
     public interface IConfigurationService
     {
         string ConnectionString { get; set; }
+        string DepartureDateinNextXDays { get; set; }
+        string DestinationGatewayIds { get; set; }
     }
 }
