@@ -51,8 +51,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 throw new InvalidPluginExecutionException("Customer info missing in payload.");
             if (payloadBooking.BookingInfo.Customer.CustomerIdentifier == null)
                 throw new InvalidPluginExecutionException("Customer Identifier is missing.");
-            if (string.IsNullOrWhiteSpace(payloadBooking.BookingInfo.Customer.CustomerIdentifier.CustomerId))
-                throw new InvalidPluginExecutionException("Customer source system id is missing.");
+            
 
             if (payloadBooking.BookingInfo.Customer.CustomerGeneral.CustomerType == CustomerType.B)
             {
@@ -319,11 +318,25 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             entityBookingRole[Attributes.CustomerBookingRole.BookingId] = new EntityReference(EntityName.Booking, Attributes.Booking.Name, payloadBooking.BookingInfo.BookingIdentifier.BookingNumber);
             if (payloadBooking.BookingInfo.Customer.CustomerGeneral.CustomerType == CustomerType.B)
             {
-                entityBookingRole[Attributes.CustomerBookingRole.Customer] = new EntityReference(EntityName.Account, Attributes.Account.SourceSystemID, payloadBooking.BookingInfo.Customer.CustomerIdentifier.CustomerId);
+                if (payloadBooking.BookingInfo.Customer.CustomerIdentifier.CustomerId != null && payloadBooking.BookingInfo.Customer.CustomerIdentifier.CustomerId != "")
+                {
+                    entityBookingRole[Attributes.CustomerBookingRole.Customer] = new EntityReference(EntityName.Account, Attributes.Contact.SourceSystemID, payloadBooking.BookingInfo.Customer.CustomerIdentifier.CustomerId);
+                }
+                else
+                {
+                    entityBookingRole[Attributes.CustomerBookingRole.Customer] = new EntityReference(EntityName.Account, new Guid(payloadBooking.CustomerId));
+                }
             }
             else
             {
-                entityBookingRole[Attributes.CustomerBookingRole.Customer] = new EntityReference(EntityName.Contact, Attributes.Contact.SourceSystemID, payloadBooking.BookingInfo.Customer.CustomerIdentifier.CustomerId);
+                if (payloadBooking.BookingInfo.Customer.CustomerIdentifier.CustomerId != null && payloadBooking.BookingInfo.Customer.CustomerIdentifier.CustomerId != "")
+                {
+                    entityBookingRole[Attributes.CustomerBookingRole.Customer] = new EntityReference(EntityName.Contact, Attributes.Contact.SourceSystemID, payloadBooking.BookingInfo.Customer.CustomerIdentifier.CustomerId);
+                }
+                else
+                {
+                    entityBookingRole[Attributes.CustomerBookingRole.Customer] = new EntityReference(EntityName.Contact, new Guid(payloadBooking.CustomerId));
+                }
             }
 
             EntityCollection entityCollection = new EntityCollection();

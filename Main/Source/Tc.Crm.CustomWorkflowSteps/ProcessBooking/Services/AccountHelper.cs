@@ -173,12 +173,12 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null.");
             trace.Trace("Account populate fields - start");
             if (customer == null) throw new InvalidPluginExecutionException("Customer payload is null.");
-            if (customer.CustomerIdentifier == null || string.IsNullOrWhiteSpace(customer.CustomerIdentifier.CustomerId))
-                throw new InvalidPluginExecutionException("Customer Id could not be retrieved from payload.");
+            if (customer.CustomerIdentifier == null )
+                throw new InvalidPluginExecutionException("Customer Identifier could not be retrieved from payload.");
 
-            Entity account = new Entity(EntityName.Account
+            Entity account = (customer.CustomerIdentifier.CustomerId != null && customer.CustomerIdentifier.CustomerId != "") ? new Entity(EntityName.Account
                                               , Attributes.Account.SourceSystemID
-                                              , customer.CustomerIdentifier.CustomerId);
+                                              , customer.CustomerIdentifier.CustomerId) : new Entity(EntityName.Account);
 
             if (customer.Company == null || string.IsNullOrWhiteSpace(customer.Company.CompanyName))
                 throw new InvalidPluginExecutionException("Account name could not be retrieved from payload.");

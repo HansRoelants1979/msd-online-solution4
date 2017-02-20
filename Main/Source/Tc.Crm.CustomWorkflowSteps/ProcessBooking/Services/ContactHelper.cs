@@ -12,13 +12,12 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             trace.Trace("Contact populate fields - start");
             if (customer == null) throw new InvalidPluginExecutionException("Customer payload is null");
 
-            if (customer.CustomerIdentifier == null || string.IsNullOrWhiteSpace(customer.CustomerIdentifier.CustomerId))
-                throw new InvalidPluginExecutionException("Customer Id could not be retrieved from payload.");
+            
 
 
-            Entity contact = new Entity(EntityName.Contact
+            Entity contact = (customer.CustomerIdentifier.CustomerId != null && customer.CustomerIdentifier.CustomerId != "") ? new Entity(EntityName.Contact
                                         , Attributes.Contact.SourceSystemID
-                                        , customer.CustomerIdentifier.CustomerId);
+                                        , customer.CustomerIdentifier.CustomerId) : new Entity(EntityName.Contact);
 
             PopulateIdentityInformation(contact, customer.CustomerIdentity, trace);
 
