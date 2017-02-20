@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Text;
+using System.Xml;
+using System.IO;
 using Microsoft.Xrm.Sdk;
 using Tc.Crm.WebJob.AllocateResortTeam.Services;
 using Microsoft.Xrm.Tooling.Connector;
@@ -17,8 +20,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
         {
             this.configurationService = configurationService;
             this.organizationService = GetOrganizationService();
-            this.logger = logger;
-            
+            this.logger = logger;            
         }   
 
         
@@ -45,13 +47,91 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
 
         }
 
+       
+
         public EntityCollection RetrieveMultipleRecordsFetchXml(string query)
         {
-            //paging has to be implimented 
-            FetchExpression fetch = new FetchExpression(query);
-            return organizationService.RetrieveMultiple(fetch);
+            EntityCollection entityCollection = new EntityCollection();
+            //paging has to be implimented
+          
+            //<snippetFetchPagingWithCookie1>
+            // Define the fetch attributes.
+            // Set the number of records per page to retrieve.
+            int fetchCount = 4;
+            // Initialize the page number.
+            int pageNumber = 1;           
+            // Specify the current paging cookie. For retrieving the first page, 
+            // pagingCookie should be null.
+            string pagingCookie = null;
+
+            while (true)
+            {
+                // Build fetchXml string with the placeholders.
+                string xml = CreateXml(query, pagingCookie, pageNumber, fetchCount);
+                FetchExpression fetch = new FetchExpression(xml);
+                EntityCollection returnCollection = organizationService.RetrieveMultiple(fetch);
+                entityCollection.Entities.AddRange(returnCollection.Entities);
+                // Check for morerecords, if it returns 1.
+                if (returnCollection.MoreRecords)
+                {
+                    // Increment the page number to retrieve the next page.
+                    pageNumber++;
+
+                    // Set the paging cookie to the paging cookie returned from current results.
+                    //Commented as we are getting incorrect cookie value                            
+                    //pagingCookie = returnCollection.PagingCookie;
+                }
+                else
+                {
+                    // If no more records in the result nodes, exit the loop.
+                    break;
+                }
+            }
+            return entityCollection;
 
         }
+
+        public string CreateXml(string xml, string cookie, int page, int count)
+        {
+            StringReader stringReader = new StringReader(xml);
+            XmlTextReader reader = new XmlTextReader(stringReader);
+
+            // Load document
+            XmlDocument doc = new XmlDocument();
+            doc.Load(reader);
+
+            return CreateXml(doc, cookie, page, count);
+        }
+
+        public string CreateXml(XmlDocument doc, string cookie, int page, int count)
+        {
+            XmlAttributeCollection attrs = doc.DocumentElement.Attributes;
+
+            if (cookie != null)
+            {
+                XmlAttribute pagingAttr = doc.CreateAttribute("paging-cookie");
+                pagingAttr.Value = cookie;
+                attrs.Append(pagingAttr);
+            }
+
+            XmlAttribute pageAttr = doc.CreateAttribute("page");
+            pageAttr.Value = System.Convert.ToString(page);
+            attrs.Append(pageAttr);
+
+            XmlAttribute countAttr = doc.CreateAttribute("count");
+            countAttr.Value = System.Convert.ToString(count);
+            attrs.Append(countAttr);
+
+            StringBuilder sb = new StringBuilder(1024);
+            StringWriter stringWriter = new StringWriter(sb);
+
+            XmlTextWriter writer = new XmlTextWriter(stringWriter);
+            doc.WriteTo(writer);
+            writer.Close();
+
+            return sb.ToString();
+        }
+
         public EntityCollection GetRecordsUsingQuery(QueryExpression queryExpr)
         {
             int pageNumber = 1;
@@ -213,6 +293,11 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
         {
             public const string TeamId = "teamid";
             public const string Name = "name";
+        }
+
+        public class Customer
+        {
+            public const string Owner = "ownerid";
         }
     }
 }

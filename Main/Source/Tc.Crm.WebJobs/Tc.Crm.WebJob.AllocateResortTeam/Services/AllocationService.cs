@@ -26,8 +26,9 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                 if (bookingAllocationRequest.Destination != null)
                 {
                     var destinationGateWays = GetDestinationGateways(bookingAllocationRequest.Destination);
-
-                    var query = string.Format(@"<fetch distinct='true' version='1.0' output-format='xml-platform' mapping='logical'>
+                    if (bookingAllocationRequest.DepartureDate != null && bookingAllocationRequest.ReturnDate != null)
+                    {
+                        var query = string.Format(@"<fetch version='1.0' output-format='xml-platform' mapping='logical'>
                                                  <entity name='tc_booking'>
                                                     <attribute name='tc_bookingid'/>
                                                     <attribute name='tc_name'/>
@@ -58,15 +59,16 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                                                         <attribute name='tc_customer'/>
                                                     </link-entity>
                                                  </entity>
-                                                 </fetch>", 
-                                                 new object[] { bookingAllocationRequest.DepartureDateinNextXDays,
-                                                     bookingAllocationRequest.DepartureDate,
-                                                     bookingAllocationRequest.ReturnDate,
+                                                 </fetch>",
+                                                     new object[] { bookingAllocationRequest.DepartureDateinNextXDays,
+                                                     bookingAllocationRequest.DepartureDate.ToString("yyyy-MM-dd"),
+                                                     bookingAllocationRequest.ReturnDate.ToString("yyyy-MM-dd"),
                                                      destinationGateWays.ToString() });
 
-                    EntityCollection bookings = crmService.RetrieveMultipleRecordsFetchXml(query);
+                        EntityCollection bookingCollection = crmService.RetrieveMultipleRecordsFetchXml(query);
 
-                    bookingAllocationResponse = PrepareBookingAllocation(bookings);
+                        bookingAllocationResponse = PrepareBookingAllocation(bookingCollection);
+                    }
                 }
             }
             return bookingAllocationResponse;
@@ -94,46 +96,134 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
             if (bookingCollection != null && bookingCollection.Entities.Count > 0)
             {
                 bookingAllocationResponse = new List<BookingAllocationResponse>();
-                for (int i=0; i<bookingCollection.Entities.Count; i++)
+                for (int i = 0; i < bookingCollection.Entities.Count; i++)
                 {
                     var booking = bookingCollection.Entities[i];
-                    var response = new BookingAllocationResponse();
-                    if (booking.Attributes.Contains(Attributes.Booking.BookingId) && booking.Attributes[Attributes.Booking.BookingId] != null)
-                        response.BookingId = Guid.Parse(booking.Attributes[Attributes.Booking.BookingId].ToString());
-                    if (booking.Attributes.Contains(accommodationAliasName + Attributes.BookingAccommodation.StartDateandTime) && booking.Attributes[accommodationAliasName + Attributes.BookingAccommodation.StartDateandTime] != null)
-                        response.AccommodationStartDate = DateTime.Parse(((AliasedValue)booking.Attributes[accommodationAliasName + Attributes.BookingAccommodation.StartDateandTime]).Value.ToString());
-                    if (booking.Attributes.Contains(accommodationAliasName + Attributes.BookingAccommodation.EndDateandTime) && booking.Attributes[accommodationAliasName + Attributes.BookingAccommodation.EndDateandTime] != null)
-                        response.AccommodationEndDate = DateTime.Parse(((AliasedValue)booking.Attributes[accommodationAliasName + Attributes.BookingAccommodation.EndDateandTime]).Value.ToString());
-                    if (booking.Attributes.Contains(hotelAliasName + Attributes.Hotel.Owner) && booking.Attributes[hotelAliasName + Attributes.Hotel.Owner] != null)
+                    if (booking != null)
                     {
-                        EntityReference owner = (EntityReference)((AliasedValue)booking.Attributes[hotelAliasName + Attributes.Hotel.Owner]).Value;
-                        OwnerType ownerType;
+                        var response = new BookingAllocationResponse();
+                        if (booking.Attributes.Contains(Attributes.Booking.BookingId) && booking.Attributes[Attributes.Booking.BookingId] != null)
+                            response.BookingId = Guid.Parse(booking.Attributes[Attributes.Booking.BookingId].ToString());
+                        if (booking.Attributes.Contains(Attributes.Booking.Owner) && booking.Attributes[Attributes.Booking.Owner] != null)
+                        {
+                            EntityReference owner = (EntityReference)booking.Attributes[Attributes.Booking.Owner];
+                            OwnerType ownerType;
+                            if (owner.LogicalName == EntityName.User)
+                                ownerType = OwnerType.User;
+                            else
+                                ownerType = OwnerType.Team;
 
-                        if (owner.LogicalName == EntityName.User)
-                            ownerType = OwnerType.User;
-                        else
-                            ownerType = OwnerType.Team;
+                            response.BookingOwner = new Owner() { Id = owner.Id, Name = owner.Name, OwnerType = ownerType };
+                        }
+                        if (booking.Attributes.Contains(accommodationAliasName + Attributes.BookingAccommodation.StartDateandTime) && booking.Attributes[accommodationAliasName + Attributes.BookingAccommodation.StartDateandTime] != null)
+                            response.AccommodationStartDate = DateTime.Parse(((AliasedValue)booking.Attributes[accommodationAliasName + Attributes.BookingAccommodation.StartDateandTime]).Value.ToString());
+                        if (booking.Attributes.Contains(accommodationAliasName + Attributes.BookingAccommodation.EndDateandTime) && booking.Attributes[accommodationAliasName + Attributes.BookingAccommodation.EndDateandTime] != null)
+                            response.AccommodationEndDate = DateTime.Parse(((AliasedValue)booking.Attributes[accommodationAliasName + Attributes.BookingAccommodation.EndDateandTime]).Value.ToString());
+                        if (booking.Attributes.Contains(hotelAliasName + Attributes.Hotel.Owner) && booking.Attributes[hotelAliasName + Attributes.Hotel.Owner] != null)
+                        {
+                            EntityReference owner = (EntityReference)((AliasedValue)booking.Attributes[hotelAliasName + Attributes.Hotel.Owner]).Value;
+                            OwnerType ownerType;
 
-                        response.OwnerId = new Owner() { Id = owner.Id, Name = owner.Name, OwnerType = ownerType };
+                            if (owner.LogicalName == EntityName.User)
+                                ownerType = OwnerType.User;
+                            else
+                                ownerType = OwnerType.Team;
+
+                            response.HotelOwner = new Owner() { Id = owner.Id, Name = owner.Name, OwnerType = ownerType };
+                        }
+                        if (booking.Attributes.Contains(roleAliasName + Attributes.CustomerBookingRole.Customer) && booking.Attributes[roleAliasName + Attributes.CustomerBookingRole.Customer] != null)
+                        {
+                            EntityReference customer = (EntityReference)((AliasedValue)booking.Attributes[roleAliasName + Attributes.CustomerBookingRole.Customer]).Value;
+                            CustomerType customerType;
+
+                            if (customer.LogicalName == EntityName.Contact)
+                                customerType = CustomerType.Contact;
+                            else
+                                customerType = CustomerType.Account;
+
+                            response.Customer = new Customer() { Id = customer.Id, Name = customer.Name, CustomerType = customerType };
+                        }
+
+                        bookingAllocationResponse.Add(response);
                     }
-                    if (booking.Attributes.Contains(roleAliasName + Attributes.CustomerBookingRole.Customer) && booking.Attributes[roleAliasName + Attributes.CustomerBookingRole.Customer] != null)
-                    {
-                        EntityReference customer = (EntityReference)((AliasedValue)booking.Attributes[roleAliasName + Attributes.CustomerBookingRole.Customer]).Value;
-                        CustomerType customerType;
-
-                        if (customer.LogicalName == EntityName.Contact)
-                            customerType = CustomerType.Contact;
-                        else
-                            customerType = CustomerType.Account;
-
-                        response.CustomerId = new Customer() { Id = customer.Id, Name = customer.Name, CustomerType = customerType };
-                    }
-
-                    bookingAllocationResponse.Add(response);
                 }
             }
 
             return bookingAllocationResponse;
+        }
+
+        public void ProcessBookingAllocations(IList<BookingAllocationResortTeamRequest> bookingAllocationResortTeamRequest)
+        {
+            EntityCollection bookingTeamCollection = null;
+            if (bookingAllocationResortTeamRequest != null && bookingAllocationResortTeamRequest.Count > 0)
+            {
+                bookingTeamCollection = new EntityCollection();
+                for (int i = 0; i < bookingAllocationResortTeamRequest.Count; i++)
+                {
+                    if (bookingAllocationResortTeamRequest[i] != null)
+                    {                       
+                        var bookingTeamRequest = bookingAllocationResortTeamRequest[i];
+                        if (bookingTeamRequest != null)
+                        {
+                            AddBookingResortTeamRequest(bookingTeamRequest.BookingResortTeamRequest, bookingTeamCollection);                            
+                            AddCustomerResortTeamRequest(bookingTeamRequest.CustomerResortTeamRequest, bookingTeamCollection);
+                        }
+
+                    }
+                }
+
+                if (bookingTeamCollection != null && bookingTeamCollection.Entities.Count > 0)
+                    crmService.BulkUpdate(bookingTeamCollection);
+            }
+        }
+
+        public void AddBookingResortTeamRequest(BookingResortTeamRequest bookingResortTeamRequest,EntityCollection bookingTeamCollection)
+        {            
+            if (bookingResortTeamRequest != null && bookingResortTeamRequest.Id != null)
+            {
+                var bookingEntity = new Entity(EntityName.Booking, bookingResortTeamRequest.Id);               
+                if (bookingResortTeamRequest.Owner != null && bookingResortTeamRequest.Owner.Id != null)
+                {
+                    if (bookingResortTeamRequest.Owner.OwnerType == OwnerType.Team)
+                        bookingEntity.Attributes[Attributes.Booking.Owner] = new EntityReference(EntityName.Team, bookingResortTeamRequest.Owner.Id);
+                    else
+                        bookingEntity.Attributes[Attributes.Booking.Owner] = new EntityReference(EntityName.User, bookingResortTeamRequest.Owner.Id);
+
+                    if (bookingTeamCollection != null)
+                        bookingTeamCollection.Entities.Add(bookingEntity);
+                }
+            }           
+        }
+
+        public void AddCustomerResortTeamRequest(CustomerResortTeamRequest customerResortTeamRequest, EntityCollection bookingTeamCollection)
+        {            
+            if (customerResortTeamRequest != null)
+            {
+                if (customerResortTeamRequest.Customer != null && customerResortTeamRequest.Customer.Id != null)
+                {
+                    Entity customerEntity = null;
+                    if (customerResortTeamRequest.Customer.CustomerType == CustomerType.Account)
+                        customerEntity = new Entity(EntityName.Account, customerResortTeamRequest.Customer.Id);
+                    else if (customerResortTeamRequest.Customer.CustomerType == CustomerType.Contact)
+                        customerEntity = new Entity(EntityName.Contact, customerResortTeamRequest.Customer.Id);
+
+                    if (customerEntity != null)
+                    {
+                        if (customerResortTeamRequest.Owner != null && customerResortTeamRequest.Owner.Id != null)
+                        {
+                            if (customerResortTeamRequest.Owner.OwnerType == OwnerType.Team)
+                                customerEntity.Attributes[Attributes.Customer.Owner] = new EntityReference(EntityName.Team, customerResortTeamRequest.Owner.Id);
+                            else
+                                customerEntity.Attributes[Attributes.Customer.Owner] = new EntityReference(EntityName.User, customerResortTeamRequest.Owner.Id);
+
+                            if (bookingTeamCollection != null)
+                                bookingTeamCollection.Entities.Add(customerEntity);
+                        }
+                    }
+                    
+                }
+
+            }           
         }
 
         #region IDisposable Support
@@ -146,6 +236,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                 if (disposing)
                 {
                     DisposeObject(crmService);
+                    DisposeObject(logger);
                 }
 
                 // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
@@ -181,6 +272,8 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
             }
 
         }
+
+       
         #endregion
     }
 }

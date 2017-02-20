@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Tc.Crm.WebJob.AllocateResortTeam.Services;
+using System.ServiceModel;
 using Microsoft.Practices.Unity;
 
 namespace Tc.Crm.WebJob.AllocateResortTeam
@@ -12,24 +9,43 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
     {
         static void Main(string[] args)
         {
-            //setup our DI
-            IUnityContainer unitycontainer = new UnityContainer();
-            unitycontainer.RegisterType<ILogger, Logger>(new ContainerControlledLifetimeManager());
-            unitycontainer.RegisterType<IConfigurationService, ConfigurationService>(new ContainerControlledLifetimeManager());
-            unitycontainer.RegisterType<ICrmService, CrmService>(new ContainerControlledLifetimeManager());
-            unitycontainer.RegisterType<IAllocationService, AllocationService>(new ContainerControlledLifetimeManager());
-            unitycontainer.RegisterType<IAllocateResortTeamService, AllocateResortTeamService>(new ContainerControlledLifetimeManager());
-
-            var logger = unitycontainer.Resolve<ILogger>();            
-            using (var allocateResortTeamService = unitycontainer.Resolve<IAllocateResortTeamService>())
+            ILogger logger = null;
+            try
             {
-                logger.LogInformation("Tc.Crm.WebJob.AllocateResortTeam Job Starts");
-                allocateResortTeamService.Run();
-                logger.LogInformation("Tc.Crm.WebJob.AllocateResortTeam Job End");
+                //setup our DI
+                IUnityContainer unitycontainer = new UnityContainer();
+                unitycontainer.RegisterType<ILogger, Logger>(new ContainerControlledLifetimeManager());
+                unitycontainer.RegisterType<IConfigurationService, ConfigurationService>(new ContainerControlledLifetimeManager());
+                unitycontainer.RegisterType<ICrmService, CrmService>(new ContainerControlledLifetimeManager());
+                unitycontainer.RegisterType<IAllocationService, AllocationService>(new ContainerControlledLifetimeManager());
+                unitycontainer.RegisterType<IAllocateResortTeamService, AllocateResortTeamService>(new ContainerControlledLifetimeManager());
+
+                logger = unitycontainer.Resolve<ILogger>();
+                using (var allocateResortTeamService = unitycontainer.Resolve<IAllocateResortTeamService>())
+                {
+                    logger.LogInformation("Tc.Crm.WebJob.AllocateResortTeam Job Starts");
+                    allocateResortTeamService.Run();
+                    logger.LogInformation("Tc.Crm.WebJob.AllocateResortTeam Job End");
+                }
+            }
+            catch (FaultException<Microsoft.Xrm.Sdk.OrganizationServiceFault> ex)
+            {
+                logger.LogError(ex.ToString());
+            }
+            catch (TimeoutException ex)
+            {
+                logger.LogError(ex.ToString());
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.ToString());
             }
 
-                
-            
         }
+
+      
+
+
+
     }
 }
