@@ -487,7 +487,8 @@ namespace Tc.Crm.Service.Client.Console
                 {"aud", "CRM"},
                 {"sub", "anonymous"},
                 {"iat", GetIssuedAtTime().ToString()},
-                {"exp", GetNotBeforeTime().ToString()},
+                {"nbf", GetNotBeforeTime().ToString()},
+                {"exp", GetExpiry().ToString()},
             };
 
             var header = new Dictionary<string, object>()
@@ -502,7 +503,15 @@ namespace Tc.Crm.Service.Client.Console
             return Jose.JWT.Encode(payload, rsa, Jose.JwsAlgorithm.RS256);
 
         }
+
+        
+
         private static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+        private static double GetExpiry()
+        {
+            var sec = Int32.Parse(ConfigurationManager.AppSettings["expiryFromNow"]);
+            return Math.Round((DateTime.UtcNow - UnixEpoch).TotalSeconds + sec);
+        }
         private static double GetIssuedAtTime()
         {
             var sec = Int32.Parse(ConfigurationManager.AppSettings["iatSecondsFromNow"]);
