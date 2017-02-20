@@ -20,6 +20,7 @@ namespace Tc.Crm.Service.Services.Tests
         TestConfigurationService configurationService;
         bool issuedAtTimeInvalid = false;
         bool nbfInvalid = false;
+        bool expInvalid = false;
         JsonWebTokenHelper helper;
         [TestInitialize()]
         public void TestSetup()
@@ -88,6 +89,7 @@ namespace Tc.Crm.Service.Services.Tests
             Assert.AreEqual(true, tokenRequest.IssuedAtTimeValid);
             Assert.AreEqual(true, tokenRequest.NotBeforetimeValid);
             Assert.AreEqual(true, tokenRequest.SignatureValid);
+            Assert.AreEqual(true, tokenRequest.ExpiryValid);
         }
 
         [TestMethod()]
@@ -127,6 +129,19 @@ namespace Tc.Crm.Service.Services.Tests
             nbfInvalid = false;
         }
 
+        [TestMethod()]
+        public void ExpiryInvalid()
+        {
+            expInvalid = true;
+            configurationService.CorrectSignaure = false;
+            HttpRequestMessage request = new HttpRequestMessage();
+            var token = CreateJWTToken();
+            request.Headers.Add("Authorization", "Bearer " + token);
+            var tokenRequest = helper.GetRequestObject(request);
+            Assert.AreEqual(false, tokenRequest.ExpiryValid);
+            expInvalid = false;
+        }
+
 
         #region Helper Functions
         private string CreateJWTToken()
@@ -137,7 +152,8 @@ namespace Tc.Crm.Service.Services.Tests
                 {"aud", "CRM"},
                 {"sub", "anonymous"},
                 {"iat", GetIssuedAtTime().ToString()},
-                {"exp", GetNotBeforeTime().ToString()},
+                {"nbf", GetNotBeforeTime().ToString()},
+                {"exp", GetExpiryTime().ToString()},
             };
 
             RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
@@ -157,9 +173,17 @@ namespace Tc.Crm.Service.Services.Tests
         private double GetNotBeforeTime()
         {
             if(nbfInvalid)
-                return Math.Round((DateTime.UtcNow - UnixEpoch).TotalSeconds -1);
+                return Math.Round((DateTime.UtcNow - UnixEpoch).TotalSeconds + 10);
             else
-            return Math.Round((DateTime.UtcNow - UnixEpoch).TotalSeconds + 1800);
+            return Math.Round((DateTime.UtcNow - UnixEpoch).TotalSeconds);
+        }
+
+        private double GetExpiryTime()
+        {
+            if (expInvalid)
+                return Math.Round((DateTime.UtcNow - UnixEpoch).TotalSeconds - 10);
+            else
+                return Math.Round((DateTime.UtcNow - UnixEpoch).TotalSeconds);
         }
         #endregion
     }

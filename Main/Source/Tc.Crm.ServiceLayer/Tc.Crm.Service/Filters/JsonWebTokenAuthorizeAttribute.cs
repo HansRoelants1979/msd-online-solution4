@@ -29,9 +29,21 @@ namespace Tc.Crm.Service.Filters
                 return;
             }
             //check token validation flags
-            if (!request.HeaderAlgorithmValid || !request.HeaderTypeValid || !request.IssuedAtTimeValid || !request.NotBeforetimeValid || !request.SignatureValid)
+            if (!request.HeaderAlgorithmValid 
+                || !request.HeaderTypeValid 
+                || !request.IssuedAtTimeValid 
+                || !request.NotBeforetimeValid 
+                || !request.SignatureValid 
+                || !request.ExpiryValid)
             {
                 Trace.TraceWarning("Bad Request: One or more information is missing in the token or signature didn't match.");
+                Trace.TraceWarning("Type:{0},Algorithm:{1},IatValid:{2},NbfValid:{3},SignValid:{4},Expiry:{5}"
+                                     ,request.HeaderTypeValid
+                                     , request.HeaderAlgorithmValid
+                                     ,request.IssuedAtTimeValid
+                                     ,request.NotBeforetimeValid
+                                     ,request.SignatureValid
+                                     ,request.ExpiryValid);
                 actionContext.Response = new HttpResponseMessage(System.Net.HttpStatusCode.Forbidden)
                 {
                     ReasonPhrase = Constants.Messages.JsonWebTokenExpiredOrNoMatch

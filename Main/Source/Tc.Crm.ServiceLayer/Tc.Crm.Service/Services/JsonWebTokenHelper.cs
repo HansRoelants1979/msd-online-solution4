@@ -48,7 +48,7 @@ namespace Tc.Crm.Service.Services
                 jsonWebTokenRequest.Header = DecodeHeaderToObject<JsonWebTokenHeader>(jsonWebTokenRequest.Token);
                 Trace.TraceInformation("algo: {0},type:{1}", jsonWebTokenRequest.Header.Algorithm, jsonWebTokenRequest.Header.TokenType);
                 jsonWebTokenRequest.Payload = DecodePayloadToObject<JsonWebTokenPayload>(jsonWebTokenRequest.Token);
-                Trace.TraceInformation("iat: {0},nbf:{1}", jsonWebTokenRequest.Payload.IssuedAtTime, jsonWebTokenRequest.Payload.NotBefore);
+                Trace.TraceInformation("iat: {0},nbf:{1},exp:{2}", jsonWebTokenRequest.Payload.IssuedAtTime, jsonWebTokenRequest.Payload.NotBefore, jsonWebTokenRequest.Payload.Expiry);
 
 
                 //validate the parts
@@ -194,21 +194,46 @@ namespace Tc.Crm.Service.Services
             if (request.Payload == null) throw new ArgumentNullException(Constants.Parameters.RequestPayload);
             try
             {
+                //check nbf
                 if (string.IsNullOrEmpty(request.Payload.NotBefore))
                 {
                     request.NotBeforetimeValid = true;
                 }
                 else
                 {
-                    int expInt = ConvertToInt(request.Payload.NotBefore);
+                    int nbf = ConvertToInt(request.Payload.NotBefore);
                     var secondsSinceEpoch = Math.Round((DateTime.UtcNow - UnixEpoch).TotalSeconds);
-                    if (secondsSinceEpoch >= expInt)
+                    if (secondsSinceEpoch >= nbf)
                     {
-                        Trace.TraceWarning("iat:{0}, current:{1}",expInt,secondsSinceEpoch);
-                        request.NotBeforetimeValid = false;
+                        Trace.TraceWarning("nbf:{0}, current:{1}", nbf, secondsSinceEpoch);
+                        request.NotBeforetimeValid = true;
                     }
                     else
-                        request.NotBeforetimeValid = true;
+                    {
+                        Trace.TraceWarning("nbf:{0}, current:{1}", nbf, secondsSinceEpoch);
+                        request.NotBeforetimeValid = false;
+                    }
+                }
+
+                //check exp
+                if (string.IsNullOrEmpty(request.Payload.Expiry))
+                {
+                    request.ExpiryValid = true;
+                }
+                else
+                {
+                    int expiry = ConvertToInt(request.Payload.Expiry);
+                    var secondsSinceEpoch = Math.Round((DateTime.UtcNow - UnixEpoch).TotalSeconds);
+                    if (secondsSinceEpoch <= expiry)
+                    {
+                        Trace.TraceWarning("exp:{0}, current:{1}", expiry, secondsSinceEpoch);
+                        request.ExpiryValid = true;
+                    }
+                    else
+                    {
+                        Trace.TraceWarning("exp:{0}, current:{1}", expiry, secondsSinceEpoch);
+                        request.ExpiryValid = false;
+                    }
                 }
 
                 //check iat
@@ -219,7 +244,7 @@ namespace Tc.Crm.Service.Services
                 else
                 {
                     //convert  iat to integer
-                    int expInt = ConvertToInt(request.Payload.IssuedAtTime);
+                    int issuedAtTime = ConvertToInt(request.Payload.IssuedAtTime);
                     var secondsSinceEpoch = Math.Round((DateTime.UtcNow - UnixEpoch).TotalSeconds);
                     int expiry = -1;
                     try
@@ -232,13 +257,16 @@ namespace Tc.Crm.Service.Services
                         throw new FormatException(Constants.Messages.ExpiryNotInteger);
                     }
 
-                    if (expInt >= secondsSinceEpoch + expiry)
+                    if (issuedAtTime > secondsSinceEpoch + expiry)
                     {
-                        Trace.TraceWarning("nbf:{0}, current:{1}", expInt, secondsSinceEpoch);
+                        Trace.TraceWarning("iat:{0}, current:{1}", issuedAtTime, secondsSinceEpoch);
                         request.IssuedAtTimeValid = false;
                     }
                     else
+                    {
+                        Trace.TraceWarning("iat:{0}, current:{1}", issuedAtTime, secondsSinceEpoch);
                         request.IssuedAtTimeValid = true;
+                    }
                 }
             }
             catch (NullReferenceException ex)

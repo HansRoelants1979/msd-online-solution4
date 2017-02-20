@@ -27,6 +27,8 @@ namespace Tc.Crm.Service.Models
 
         public bool NotBeforetimeValid { get; set; }
 
+        public bool ExpiryValid { get; set; }
+
         public bool SignatureValid { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
