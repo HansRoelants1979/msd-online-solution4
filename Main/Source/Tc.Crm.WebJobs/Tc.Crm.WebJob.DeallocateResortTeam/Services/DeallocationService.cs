@@ -27,6 +27,39 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                 if (bookingDeallocationRequest.Destination != null)
                 {
                     var destinationGateWays = GetDestinationGateways(bookingDeallocationRequest.Destination);
+                    if (bookingDeallocationRequest.AccommodationEndDate != null)
+                    {
+                        var query = string.Format(@"<fetch distinct='true' mapping='logical' output-format='xml-platform' version='1.0'>
+                                                 <entity name='tc_booking'>
+                                                    <attribute name='tc_bookingid'/>
+                                                    <attribute name='tc_name'/>
+                                                    <order descending='false' attribute='tc_name'/>
+                                                    <filter type='and'>
+                                                    <condition attribute='tc_destinationgatewayid' operator='in'>
+                                                    {1}
+                                                    </condition>
+                                                    </filter>
+                                                      <link-entity name='tc_bookingaccommodation' alias='accommodation' to='tc_bookingid' from='tc_bookingid'>
+                                                        <attribute name='tc_enddateandtime'/>
+                                                        <filter type='and'>
+                                                          <condition attribute='tc_enddateandtime' value='{0}' operator='on'/>
+                                                        </filter>
+                                                        <link-entity name='tc_hotel' alias='hotel' to='tc_hotelid' from='tc_hotelid'>
+                                                            <attribute name='tc_hotelid'/>
+                                                        </link-entity>
+                                                        </link-entity>
+                                                        <link-entity name='tc_customerbookingrole' alias='role' to='tc_bookingid' from='tc_bookingid'>
+                                                            <attribute name='tc_customer'/>
+                                                        </link-entity>                                                    
+                                                    </entity>
+                                                    </fetch>",
+                                                     new object[] { bookingDeallocationRequest.AccommodationEndDate.ToString("yyyy-MM-dd"),
+                                                     destinationGateWays.ToString() });
+
+                        EntityCollection bookingCollection = crmService.RetrieveMultipleRecordsFetchXml(query);
+
+                        bookingAllocationResponse = PrepareBookingDeallocation(bookingCollection);
+                    }
                 }
             }
             return bookingAllocationResponse;
@@ -65,7 +98,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                             response.BookingId = Guid.Parse(booking.Attributes[Attributes.Booking.BookingId].ToString());
 
                         if (booking.Attributes.Contains(hotelAliasName + Attributes.Hotel.HotelId) && booking.Attributes[hotelAliasName + Attributes.Hotel.HotelId] != null)
-                            response.HotelId = ((EntityReference)((AliasedValue)booking.Attributes[hotelAliasName + Attributes.Hotel.HotelId]).Value).Id;
+                            response.HotelId = Guid.Parse(((AliasedValue)booking.Attributes[hotelAliasName + Attributes.Hotel.HotelId]).Value.ToString());
 
                         if (booking.Attributes.Contains(accommodationAliasName + Attributes.BookingAccommodation.EndDateandTime) && booking.Attributes[accommodationAliasName + Attributes.BookingAccommodation.EndDateandTime] != null)
                             response.AccommodationEndDate = DateTime.Parse(((AliasedValue)booking.Attributes[accommodationAliasName + Attributes.BookingAccommodation.EndDateandTime]).Value.ToString());

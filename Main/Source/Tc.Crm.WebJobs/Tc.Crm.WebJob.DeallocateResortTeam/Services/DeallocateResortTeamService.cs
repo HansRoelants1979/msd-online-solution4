@@ -31,10 +31,11 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
             if (destinationGateways != null && destinationGateways.Count > 0)
             {
                 logger.LogInformation("Processing for " + destinationGateways.Count.ToString() + " Destination Gateways");
-                
+
                 IList<BookingDeallocationResponse> bookingDeallocationResponse = deAllocationService.GetBookingAllocations(new
                                                                                 BookingDeallocationRequest
-                { 
+                {
+                    AccommodationEndDate = DateTime.Now.Date,
                     Destination = destinationGateways
                 });
 
@@ -70,8 +71,8 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
             if (bookingDeallocationResponse != null && bookingDeallocationResponse.Count > 0)
             {
                 bookingDeallocationResortTeamRequest = new List<BookingDeallocationResortTeamRequest>();
+                var currentHotelGuid = Guid.Empty;
                 var currentBookingId = Guid.Empty;
-                var currentAccommodationStartDate = (DateTime?)null;
                 var currentAccommodationEndDate = (DateTime?)null;
                 for (int i = 0; i < bookingDeallocationResponse.Count; i++)
                 {
@@ -80,7 +81,21 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                         var bookingResponse = bookingDeallocationResponse[i];
                         if (bookingResponse != null)
                         {
-                           
+                            var previousHotelGuid = currentHotelGuid;
+                            var previousBookingId = currentBookingId;
+                            var previousAccommodationEndDate = currentAccommodationEndDate;
+
+                            currentHotelGuid = bookingResponse.HotelId;
+                            currentBookingId = bookingResponse.BookingId;
+                            currentAccommodationEndDate = bookingResponse.AccommodationEndDate;
+
+                            if (currentAccommodationEndDate.Value.Date == DateTime.Now.Date)
+                            {
+                                if (previousHotelGuid != currentHotelGuid && previousBookingId != currentBookingId && previousAccommodationEndDate != currentAccommodationEndDate)
+                                {
+                                    AddResortTeamRequest(bookingResponse, bookingDeallocationResortTeamRequest);
+                                }
+                            }
                         }
                     }
                 }
@@ -98,7 +113,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
         public BookingDeallocationResortTeamRequest PrepareResortTeamRequest(BookingDeallocationResponse bookingResponse)
         {
             BookingDeallocationResortTeamRequest bookingTeamRequest = null;
-            if (bookingResponse != null)
+            if (bookingResponse != null && configurationService.DefaultUserId != null)
             {
                 bookingTeamRequest = new BookingDeallocationResortTeamRequest();
                 if (bookingResponse.BookingId != null)
@@ -106,7 +121,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                     bookingTeamRequest.BookingResortTeamRequest = new BookingResortTeamRequest
                     {
                         Id = bookingResponse.BookingId,
-                        Owner = new Owner { Id= Guid.Empty,OwnerType=OwnerType.User }
+                        Owner = new Owner { Id= Guid.Parse(configurationService.DefaultUserId),OwnerType=OwnerType.User }
                     };
                 }
                 if (bookingResponse.Customer != null && bookingResponse.Customer.Id != null)
@@ -114,7 +129,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                     bookingTeamRequest.CustomerResortTeamRequest = new CustomerResortTeamRequest
                     {
                         Customer = bookingResponse.Customer,
-                        Owner = new Owner { Id = Guid.Empty, OwnerType = OwnerType.User }
+                        Owner = new Owner { Id = Guid.Parse(configurationService.DefaultUserId), OwnerType = OwnerType.User }
                     };
                 }
             }

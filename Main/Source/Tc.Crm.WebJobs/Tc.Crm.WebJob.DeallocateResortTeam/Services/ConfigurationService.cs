@@ -14,7 +14,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
         {
             get
             {
-                throw new NotImplementedException();
+                return ConfigurationManager.ConnectionStrings["Crm"].ConnectionString;
             }
 
             set
@@ -28,6 +28,17 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
             get
             {
                 return ConfigurationManager.AppSettings["DestinationGatewayIds"].ToString();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+        public string DefaultUserId
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["DeallocationOwner"].ToString();
             }
             set
             {

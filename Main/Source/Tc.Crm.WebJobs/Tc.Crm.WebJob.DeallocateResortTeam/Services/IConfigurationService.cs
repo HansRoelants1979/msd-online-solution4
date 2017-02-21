@@ -10,5 +10,6 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
     {
         string ConnectionString { get; set; }
         string DestinationGatewayIds { get; set; }
+        string DefaultUserId { get; set; }
     }
 }
