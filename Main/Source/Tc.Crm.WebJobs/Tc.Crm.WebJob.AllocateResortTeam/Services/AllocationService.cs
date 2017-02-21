@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xrm.Sdk;
 using Tc.Crm.WebJob.AllocateResortTeam.Models;
+using System.Collections.ObjectModel;
+
 
 namespace Tc.Crm.WebJob.AllocateResortTeam.Services
 {
@@ -18,17 +20,19 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
             this.crmService = crmService;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "GetBookingAllocations")]
         public IList<BookingAllocationResponse> GetBookingAllocations(BookingAllocationRequest bookingAllocationRequest)
         {
-            IList <BookingAllocationResponse> bookingAllocationResponse = null;
-            if (bookingAllocationRequest != null)
-            {
-                if (bookingAllocationRequest.Destination != null)
-                {
-                    var destinationGateWays = GetDestinationGateways(bookingAllocationRequest.Destination);
-                    if (bookingAllocationRequest.DepartureDate != null && bookingAllocationRequest.ReturnDate != null)
-                    {
-                        var query = string.Format(@"<fetch version='1.0' output-format='xml-platform' mapping='logical'>
+            logger.LogInformation("GetBookingAllocations - start");
+            if (bookingAllocationRequest == null) throw new ArgumentNullException("bookingAllocationRequest");
+
+            if (bookingAllocationRequest.Destination == null) throw new ArgumentNullException("bookingAllocationRequest.Destination");
+
+            var destinationGateWays = GetDestinationGateways(bookingAllocationRequest.Destination);
+            if (bookingAllocationRequest.DepartureDate == null || bookingAllocationRequest.ReturnDate == null)
+                throw new ArgumentNullException("bookingAllocationRequest.DepartureDate and bookingAllocationRequest.ReturnDate");
+
+            var query = string.Format(@"<fetch version='1.0' output-format='xml-platform' mapping='logical'>
                                                  <entity name='tc_booking'>
                                                     <attribute name='tc_bookingid'/>
                                                     <attribute name='tc_name'/>
@@ -60,171 +64,139 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                                                     </link-entity>
                                                  </entity>
                                                  </fetch>",
-                                                     new object[] { bookingAllocationRequest.DepartureDateinNextXDays,
+                                         new object[] { bookingAllocationRequest.DepartureDateInNextXDays,
                                                      bookingAllocationRequest.DepartureDate.ToString("yyyy-MM-dd"),
                                                      bookingAllocationRequest.ReturnDate.ToString("yyyy-MM-dd"),
                                                      destinationGateWays.ToString() });
 
-                        EntityCollection bookingCollection = crmService.RetrieveMultipleRecordsFetchXml(query);
+            EntityCollection bookingCollection = crmService.RetrieveMultipleRecordsFetchXml(query);
 
-                        bookingAllocationResponse = PrepareBookingAllocation(bookingCollection);
-                    }
-                }
-            }
-            return bookingAllocationResponse;
+            logger.LogInformation("GetBookingAllocations - end");
+            return PrepareBookingAllocation(bookingCollection);
         }
 
         public StringBuilder GetDestinationGateways(IList<Guid> destinationGateways)
         {
+            logger.LogInformation("GetDestinationGateways - start");
             StringBuilder gateways = new StringBuilder();
-            if (destinationGateways != null && destinationGateways.Count > 0)
-            {                            
-                for (int i = 0; i < destinationGateways.Count; i++)
-                {
-                    gateways.Append("<value>" + destinationGateways[i].ToString() + "</value>");
-                }                
+            if (destinationGateways == null || destinationGateways.Count == 0)
+                throw new ArgumentNullException("destinationGateways");
+
+            for (int i = 0; i < destinationGateways.Count; i++)
+            {
+                gateways.Append("<value>" + destinationGateways[i].ToString() + "</value>");
             }
+            logger.LogInformation("GetDestinationGateways - end");
             return gateways;
         }
 
         public IList<BookingAllocationResponse> PrepareBookingAllocation(EntityCollection bookingCollection)
         {
-            string accommodationAliasName = "accommodation.";
-            string hotelAliasName = "hotel.";
-            string roleAliasName = "role.";
-            IList<BookingAllocationResponse> bookingAllocationResponse = null;
-            if (bookingCollection != null && bookingCollection.Entities.Count > 0)
+            logger.LogInformation("PrepareBookingAllocation - start");
+            if (bookingCollection == null || bookingCollection.Entities.Count == 0)
+                throw new ArgumentNullException("bookingCollection");
+
+            var bookingAllocationResponse = new List<BookingAllocationResponse>();
+            for (int i = 0; i < bookingCollection.Entities.Count; i++)
             {
-                bookingAllocationResponse = new List<BookingAllocationResponse>();
-                for (int i = 0; i < bookingCollection.Entities.Count; i++)
+                var booking = bookingCollection.Entities[i];
+                if (booking == null) continue;
+
+                var response = new BookingAllocationResponse();
+                if (booking.Contains(Attributes.Booking.BookingId) && booking[Attributes.Booking.BookingId] != null)
+                    response.BookingId = Guid.Parse(booking.Attributes[Attributes.Booking.BookingId].ToString());
+                if (booking.Contains(Attributes.Booking.Owner) && booking[Attributes.Booking.Owner] != null)
                 {
-                    var booking = bookingCollection.Entities[i];
-                    if (booking != null)
-                    {
-                        var response = new BookingAllocationResponse();
-                        if (booking.Attributes.Contains(Attributes.Booking.BookingId) && booking.Attributes[Attributes.Booking.BookingId] != null)
-                            response.BookingId = Guid.Parse(booking.Attributes[Attributes.Booking.BookingId].ToString());
-                        if (booking.Attributes.Contains(Attributes.Booking.Owner) && booking.Attributes[Attributes.Booking.Owner] != null)
-                        {
-                            EntityReference owner = (EntityReference)booking.Attributes[Attributes.Booking.Owner];
-                            OwnerType ownerType;
-                            if (owner.LogicalName == EntityName.User)
-                                ownerType = OwnerType.User;
-                            else
-                                ownerType = OwnerType.Team;
+                    EntityReference owner = (EntityReference)booking.Attributes[Attributes.Booking.Owner];
+                    OwnerType ownerType;
+                    if (owner.LogicalName == EntityName.User)
+                        ownerType = OwnerType.User;
+                    else
+                        ownerType = OwnerType.Team;
 
-                            response.BookingOwner = new Owner() { Id = owner.Id, Name = owner.Name, OwnerType = ownerType };
-                        }
-                        if (booking.Attributes.Contains(accommodationAliasName + Attributes.BookingAccommodation.StartDateandTime) && booking.Attributes[accommodationAliasName + Attributes.BookingAccommodation.StartDateandTime] != null)
-                            response.AccommodationStartDate = DateTime.Parse(((AliasedValue)booking.Attributes[accommodationAliasName + Attributes.BookingAccommodation.StartDateandTime]).Value.ToString());
-                        if (booking.Attributes.Contains(accommodationAliasName + Attributes.BookingAccommodation.EndDateandTime) && booking.Attributes[accommodationAliasName + Attributes.BookingAccommodation.EndDateandTime] != null)
-                            response.AccommodationEndDate = DateTime.Parse(((AliasedValue)booking.Attributes[accommodationAliasName + Attributes.BookingAccommodation.EndDateandTime]).Value.ToString());
-                        if (booking.Attributes.Contains(hotelAliasName + Attributes.Hotel.Owner) && booking.Attributes[hotelAliasName + Attributes.Hotel.Owner] != null)
-                        {
-                            EntityReference owner = (EntityReference)((AliasedValue)booking.Attributes[hotelAliasName + Attributes.Hotel.Owner]).Value;
-                            OwnerType ownerType;
-
-                            if (owner.LogicalName == EntityName.User)
-                                ownerType = OwnerType.User;
-                            else
-                                ownerType = OwnerType.Team;
-
-                            response.HotelOwner = new Owner() { Id = owner.Id, Name = owner.Name, OwnerType = ownerType };
-                        }
-                        if (booking.Attributes.Contains(roleAliasName + Attributes.CustomerBookingRole.Customer) && booking.Attributes[roleAliasName + Attributes.CustomerBookingRole.Customer] != null)
-                        {
-                            EntityReference customer = (EntityReference)((AliasedValue)booking.Attributes[roleAliasName + Attributes.CustomerBookingRole.Customer]).Value;
-                            CustomerType customerType;
-
-                            if (customer.LogicalName == EntityName.Contact)
-                                customerType = CustomerType.Contact;
-                            else
-                                customerType = CustomerType.Account;
-
-                            response.Customer = new Customer() { Id = customer.Id, Name = customer.Name, CustomerType = customerType };
-                        }
-
-                        bookingAllocationResponse.Add(response);
-                    }
+                    response.BookingOwner = new Owner() { Id = owner.Id, Name = owner.Name, OwnerType = ownerType };
                 }
-            }
 
+                var fieldStartDate = AliasName.AccommodationAliasName + Attributes.BookingAccommodation.StartDateandTime;
+                var fieldEndDate = AliasName.AccommodationAliasName + Attributes.BookingAccommodation.EndDateandTime;
+                var fieldOwner = AliasName.HotelAliasName + Attributes.Hotel.Owner;
+                var fieldCustomer = AliasName.RoleAliasName + Attributes.CustomerBookingRole.Customer;
+
+                if (booking.Contains(fieldStartDate) && booking[fieldStartDate] != null)
+                    response.AccommodationStartDate = DateTime.Parse(((AliasedValue)booking[fieldStartDate]).Value.ToString());
+                if (booking.Contains(fieldEndDate) && booking[fieldEndDate] != null)
+                    response.AccommodationEndDate = DateTime.Parse(((AliasedValue)booking[fieldEndDate]).Value.ToString());
+                if (booking.Contains(fieldOwner) && booking[fieldOwner] != null)
+                {
+                    EntityReference owner = (EntityReference)((AliasedValue)booking[fieldOwner]).Value;
+                    OwnerType ownerType;
+
+                    if (owner.LogicalName == EntityName.User)
+                        ownerType = OwnerType.User;
+                    else
+                        ownerType = OwnerType.Team;
+
+                    response.HotelOwner = new Owner() { Id = owner.Id, Name = owner.Name, OwnerType = ownerType };
+                }
+                if (booking.Contains(fieldCustomer) && booking[fieldCustomer] != null)
+                {
+                    EntityReference customer = (EntityReference)((AliasedValue)booking[fieldCustomer]).Value;
+                    CustomerType customerType;
+
+                    if (customer.LogicalName == EntityName.Contact)
+                        customerType = CustomerType.Contact;
+                    else
+                        customerType = CustomerType.Account;
+
+                    response.Customer = new Customer() { Id = customer.Id, Name = customer.Name, CustomerType = customerType };
+                }
+
+                bookingAllocationResponse.Add(response);
+
+
+            }
+            logger.LogInformation("PrepareBookingAllocation - end");
             return bookingAllocationResponse;
         }
 
-        public void ProcessBookingAllocations(IList<BookingAllocationResortTeamRequest> bookingAllocationResortTeamRequest)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "ProcessBookingAllocations")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.WebJob.AllocateResortTeam.Services.ILogger.LogInformation(System.String)")]
+        public void ProcessBookingAllocations(IList<BookingAllocationResortTeamRequest> bookingAllocationResortTeamRequests)
         {
-            EntityCollection bookingTeamCollection = null;
-            if (bookingAllocationResortTeamRequest != null && bookingAllocationResortTeamRequest.Count > 0)
+            logger.LogInformation("ProcessBookingAllocations - start");
+            if (bookingAllocationResortTeamRequests == null || bookingAllocationResortTeamRequests.Count == 0)
+                return;
+
+            var assignRequests = new Collection<AssignInformation>();
+
+            for (int i = 0; i < bookingAllocationResortTeamRequests.Count; i++)
             {
-                bookingTeamCollection = new EntityCollection();
-                for (int i = 0; i < bookingAllocationResortTeamRequest.Count; i++)
+                if (bookingAllocationResortTeamRequests[i] == null) continue;
+
+                var bookingTeamRequest = bookingAllocationResortTeamRequests[i];
+                var assignBookingRequest = new AssignInformation
                 {
-                    if (bookingAllocationResortTeamRequest[i] != null)
-                    {                       
-                        var bookingTeamRequest = bookingAllocationResortTeamRequest[i];
-                        if (bookingTeamRequest != null)
-                        {
-                            AddBookingResortTeamRequest(bookingTeamRequest.BookingResortTeamRequest, bookingTeamCollection);                            
-                            AddCustomerResortTeamRequest(bookingTeamRequest.CustomerResortTeamRequest, bookingTeamCollection);
-                        }
+                    EntityName = EntityName.Booking,
+                    RecordId = bookingTeamRequest.BookingResortTeamRequest.Id,
+                    RecordOwner = bookingTeamRequest.BookingResortTeamRequest.Owner
+                };
+                assignRequests.Add(assignBookingRequest);
+                var assignCustomerRequest = new AssignInformation
+                {
+                    EntityName = bookingTeamRequest.CustomerResortTeamRequest.Customer.CustomerType.ToString(),
+                    RecordId = bookingTeamRequest.CustomerResortTeamRequest.Customer.Id,
+                    RecordOwner = bookingTeamRequest.CustomerResortTeamRequest.Owner
+                };
+                assignRequests.Add(assignCustomerRequest);
 
-                    }
-                }
-
-                if (bookingTeamCollection != null && bookingTeamCollection.Entities.Count > 0)
-                    crmService.BulkUpdate(bookingTeamCollection);
             }
+
+            if (assignRequests != null && assignRequests.Count > 0)
+                crmService.BulkAssign(assignRequests);
+
+            logger.LogInformation("ProcessBookingAllocations - end");
         }
 
-        public void AddBookingResortTeamRequest(BookingResortTeamRequest bookingResortTeamRequest,EntityCollection bookingTeamCollection)
-        {            
-            if (bookingResortTeamRequest != null && bookingResortTeamRequest.Id != null)
-            {
-                var bookingEntity = new Entity(EntityName.Booking, bookingResortTeamRequest.Id);               
-                if (bookingResortTeamRequest.Owner != null && bookingResortTeamRequest.Owner.Id != null)
-                {
-                    if (bookingResortTeamRequest.Owner.OwnerType == OwnerType.Team)
-                        bookingEntity.Attributes[Attributes.Booking.Owner] = new EntityReference(EntityName.Team, bookingResortTeamRequest.Owner.Id);
-                    else
-                        bookingEntity.Attributes[Attributes.Booking.Owner] = new EntityReference(EntityName.User, bookingResortTeamRequest.Owner.Id);
-
-                    if (bookingTeamCollection != null)
-                        bookingTeamCollection.Entities.Add(bookingEntity);
-                }
-            }           
-        }
-
-        public void AddCustomerResortTeamRequest(CustomerResortTeamRequest customerResortTeamRequest, EntityCollection bookingTeamCollection)
-        {            
-            if (customerResortTeamRequest != null)
-            {
-                if (customerResortTeamRequest.Customer != null && customerResortTeamRequest.Customer.Id != null)
-                {
-                    Entity customerEntity = null;
-                    if (customerResortTeamRequest.Customer.CustomerType == CustomerType.Account)
-                        customerEntity = new Entity(EntityName.Account, customerResortTeamRequest.Customer.Id);
-                    else if (customerResortTeamRequest.Customer.CustomerType == CustomerType.Contact)
-                        customerEntity = new Entity(EntityName.Contact, customerResortTeamRequest.Customer.Id);
-
-                    if (customerEntity != null)
-                    {
-                        if (customerResortTeamRequest.Owner != null && customerResortTeamRequest.Owner.Id != null)
-                        {
-                            if (customerResortTeamRequest.Owner.OwnerType == OwnerType.Team)
-                                customerEntity.Attributes[Attributes.Customer.Owner] = new EntityReference(EntityName.Team, customerResortTeamRequest.Owner.Id);
-                            else
-                                customerEntity.Attributes[Attributes.Customer.Owner] = new EntityReference(EntityName.User, customerResortTeamRequest.Owner.Id);
-
-                            if (bookingTeamCollection != null)
-                                bookingTeamCollection.Entities.Add(customerEntity);
-                        }
-                    }
-                    
-                }
-
-            }           
-        }
 
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
@@ -273,7 +245,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
 
         }
 
-       
+
         #endregion
     }
 }

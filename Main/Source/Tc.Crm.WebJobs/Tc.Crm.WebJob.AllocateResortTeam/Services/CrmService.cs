@@ -7,6 +7,10 @@ using Tc.Crm.WebJob.AllocateResortTeam.Services;
 using Microsoft.Xrm.Tooling.Connector;
 using Microsoft.Xrm.Sdk.Query;
 using Microsoft.Xrm.Sdk.Messages;
+using System.Collections.ObjectModel;
+using Microsoft.Crm.Sdk.Messages;
+using Tc.Crm.WebJob.AllocateResortTeam.Models;
+using System.Globalization;
 
 namespace Tc.Crm.WebJob.AllocateResortTeam
 {
@@ -21,12 +25,14 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
             this.configurationService = configurationService;
             this.organizationService = GetOrganizationService();
             this.logger = logger;            
-        }   
+        }
 
-        
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "RetrieveMultipleRecords")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.WebJob.AllocateResortTeam.Services.ILogger.LogInformation(System.String)")]
         public EntityCollection RetrieveMultipleRecords(string entityName, string[] columns, string[] filterKeys, string[] filterValues)
         {
+            logger.LogInformation("RetrieveMultipleRecords - start");
             var query = new QueryExpression(entityName);
             query.ColumnSet = new ColumnSet(columns);
 
@@ -43,68 +49,64 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
 
                 query.Criteria.AddFilter(fltrExpr);
             }
+            logger.LogInformation("RetrieveMultipleRecords - end");
             return GetRecordsUsingQuery(query);
 
         }
 
-       
-
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "RetrieveMultipleRecordsFetchXml")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.WebJob.AllocateResortTeam.Services.ILogger.LogInformation(System.String)")]
         public EntityCollection RetrieveMultipleRecordsFetchXml(string query)
         {
+            logger.LogInformation("RetrieveMultipleRecordsFetchXml - start");
             EntityCollection entityCollection = new EntityCollection();
-            //paging has to be implimented
-          
-            //<snippetFetchPagingWithCookie1>
-            // Define the fetch attributes.
-            // Set the number of records per page to retrieve.
+            
             int fetchCount = 4;
-            // Initialize the page number.
             int pageNumber = 1;           
-            // Specify the current paging cookie. For retrieving the first page, 
-            // pagingCookie should be null.
             string pagingCookie = null;
 
             while (true)
             {
-                // Build fetchXml string with the placeholders.
                 string xml = CreateXml(query, pagingCookie, pageNumber, fetchCount);
                 FetchExpression fetch = new FetchExpression(xml);
                 EntityCollection returnCollection = organizationService.RetrieveMultiple(fetch);
                 entityCollection.Entities.AddRange(returnCollection.Entities);
-                // Check for morerecords, if it returns 1.
                 if (returnCollection.MoreRecords)
                 {
-                    // Increment the page number to retrieve the next page.
                     pageNumber++;
-
-                    // Set the paging cookie to the paging cookie returned from current results.
-                    //Commented as we are getting incorrect cookie value                            
-                    //pagingCookie = returnCollection.PagingCookie;
                 }
                 else
                 {
-                    // If no more records in the result nodes, exit the loop.
                     break;
                 }
             }
+            logger.LogInformation("RetrieveMultipleRecordsFetchXml - end");
             return entityCollection;
 
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "CreateXml")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.WebJob.AllocateResortTeam.Services.ILogger.LogInformation(System.String)")]
         public string CreateXml(string xml, string cookie, int page, int count)
         {
+            logger.LogInformation("CreateXml - start");
             StringReader stringReader = new StringReader(xml);
             XmlTextReader reader = new XmlTextReader(stringReader);
 
             // Load document
             XmlDocument doc = new XmlDocument();
             doc.Load(reader);
-
+            logger.LogInformation("CreateXml - end");
             return CreateXml(doc, cookie, page, count);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.WebJob.AllocateResortTeam.Services.ILogger.LogInformation(System.String)")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "CreateXml")]
         public string CreateXml(XmlDocument doc, string cookie, int page, int count)
         {
+            logger.LogInformation("CreateXml - start");
+            if (doc == null) throw new ArgumentNullException("doc");
             XmlAttributeCollection attrs = doc.DocumentElement.Attributes;
 
             if (cookie != null)
@@ -115,25 +117,28 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
             }
 
             XmlAttribute pageAttr = doc.CreateAttribute("page");
-            pageAttr.Value = System.Convert.ToString(page);
+            pageAttr.Value = System.Convert.ToString(page,CultureInfo.CurrentCulture);
             attrs.Append(pageAttr);
 
             XmlAttribute countAttr = doc.CreateAttribute("count");
-            countAttr.Value = System.Convert.ToString(count);
+            countAttr.Value = System.Convert.ToString(count, CultureInfo.CurrentCulture);
             attrs.Append(countAttr);
 
             StringBuilder sb = new StringBuilder(1024);
-            StringWriter stringWriter = new StringWriter(sb);
+            StringWriter stringWriter = new StringWriter(sb,CultureInfo.CurrentCulture);
 
             XmlTextWriter writer = new XmlTextWriter(stringWriter);
             doc.WriteTo(writer);
             writer.Close();
 
+            logger.LogInformation("CreateXml - end");
             return sb.ToString();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.WebJob.AllocateResortTeam.Services.ILogger.LogInformation(System.String)")]
         public EntityCollection GetRecordsUsingQuery(QueryExpression queryExpr)
         {
+            logger.LogInformation("GetRecordsUsingQuery - start");
             int pageNumber = 1;
             int recordCount = 1;
             queryExpr.PageInfo = new PagingInfo();
@@ -161,13 +166,19 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
                 }
 
             }
-
+            logger.LogInformation("GetRecordsUsingQuery - end");
             return entityCollection;
         }
 
-
-        public ExecuteMultipleResponse BulkUpdate(EntityCollection entityCollection)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "BulkAssign")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.WebJob.AllocateResortTeam.Services.ILogger.LogInformation(System.String)")]
+        public void BulkAssign(Collection<AssignInformation> assignRequestCollection)
         {
+            logger.LogInformation("BulkAssign - start");
+            if (assignRequestCollection == null || assignRequestCollection.Count == 0)
+                throw new ArgumentNullException("assignRequestCollection");
+
+            var batch = configurationService.ExecuteMultipleBatchSize;
             ExecuteMultipleRequest request = new ExecuteMultipleRequest()
             {
                 Settings = new ExecuteMultipleSettings()
@@ -178,26 +189,58 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
                 Requests = new OrganizationRequestCollection()
             };
 
-            for (int i = 0; i < entityCollection.Entities.Count; i++)
+            for (int i = 0; i < assignRequestCollection.Count; i++)
             {
-                request.Requests.Add(new UpdateRequest() { Target = entityCollection[i] });
-            }
+                var targetEntityName = assignRequestCollection[i].EntityName;
+                var targetId = assignRequestCollection[i].RecordId;
+                var ownerType = assignRequestCollection[i].RecordOwner.OwnerType.ToString();
+                var ownerId = assignRequestCollection[i].RecordOwner.Id;
+                request.Requests.Add(new AssignRequest {
+                                                            Target = new EntityReference(targetEntityName, targetId)
+                                                            , Assignee = new EntityReference(ownerType, ownerId)
+                                                        });
+                if (request.Requests.Count == batch)
+                {
+                    var response = (ExecuteMultipleResponse)organizationService.Execute(request);
+                    LogResponses(response.Responses, request.Requests);
+                    request.Requests.Clear();
+                }
 
-            return (ExecuteMultipleResponse)organizationService.Execute(request);
+                if (request.Requests.Count < batch && i== assignRequestCollection.Count-1)
+                {
+                    var response = (ExecuteMultipleResponse)organizationService.Execute(request);
+                    LogResponses(response.Responses, request.Requests);
+                    request.Requests.Clear();
+                }
+            }
+            logger.LogInformation("BulkAssign - end");
         }
 
+        public void LogResponses(ExecuteMultipleResponseItemCollection responses, OrganizationRequestCollection requests)
+        {
+            for (int i = 0; i < responses.Count; i++)
+            {
+                if(responses[i].Fault != null)
+                {
 
+                    logger.LogError("Id: " + ((AssignRequest)requests[i]).Target.Id + "::Error:" + responses[i].Fault.TraceText);
+                }
+            }
+        }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.WebJob.AllocateResortTeam.Services.ILogger.LogInformation(System.String)")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "GetOrganizationService")]
         public IOrganizationService GetOrganizationService()
         {
+            logger.LogInformation("GetOrganizationService - start");
             if (organizationService != null) return organizationService;
 
             var connectionString = configurationService.ConnectionString;
             CrmServiceClient client = new CrmServiceClient(connectionString);
+            logger.LogInformation("GetOrganizationService - end");
             return (IOrganizationService)client;
         }
-
-
 
 
         public void Dispose()
@@ -219,6 +262,8 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
             disposed = true;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
         void DisposeObject(Object obj)
         {
             if (obj != null)
@@ -232,73 +277,6 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
         }
     }
 
-    public static class EntityName
-    {
-
-        public const string Booking = "tc_booking";
-        public const string BookingAccommodation = "tc_bookingaccommodation";
-        public const string CustomerBookingRole = "tc_customerbookingrole";
-        public const string Hotel = "tc_hotel";
-        public const string Team = "team";
-        public const string User = "systemuser";
-        public const string Account = "account";
-        public const string Contact = "contact";
-    }
-
-    public static class Attributes
-    {
-        public class Booking
-        {
-            public const string BookingId = "tc_bookingid";
-            public const string Owner = "ownerid";
-            public const string Name = "tc_name";
-            public const string DepartureDate = "tc_departuredate";
-            public const string DestinationId = "tc_destinationid";
-            public const string ReturnDate = "tc_returndate";
-        }
-
-        public class BookingAccommodation
-        {
-            public const string BookingAccommodationid = "tc_bookingaccommodationid";
-            public const string BookingId = "tc_bookingid";
-            public const string EndDateandTime = "tc_enddateandtime";
-            public const string HotelId = "tc_hotelid";
-            public const string StartDateandTime = "tc_startdateandtime";
-            public const string Owner = "ownerid";
-
-        }
-
-        public class CustomerBookingRole
-        {
-            public const string BookingId = "tc_bookingid";
-            public const string Customer = "tc_customer";
-            public const string Role = "tc_customerbookingrole";
-            public const string CustomerBookingRoleId = "tc_customerbookingroleid";
-            public const string Name = "tc_name";
-        }
-
-        public class Hotel
-        {
-           
-            public const string HotelId = "tc_hotelid";
-            public const string LocationId = "tc_locationid";
-            public const string MasterHotelID = "tc_masterhotelid";
-            public const string Name = "tc_name";
-            public const string SourceMarketHotelID = "tc_sourcemarkethotelid";
-            public const string ResortTeam = "tc_teamid";
-            public const string Owner = "ownerid";
-
-        }
-        public class Team
-        {
-            public const string TeamId = "teamid";
-            public const string Name = "name";
-        }
-
-        public class Customer
-        {
-            public const string Owner = "ownerid";
-        }
-    }
+    
 }
 

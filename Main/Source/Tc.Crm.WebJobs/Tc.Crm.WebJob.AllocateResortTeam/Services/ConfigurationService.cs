@@ -22,15 +22,34 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
             }
         }
 
-        public string DepartureDateinNextXDays
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "DepartureDateinNextXDays")]
+        public int DepartureDateInNextXDays
         {
             get
             {
-                return ConfigurationManager.AppSettings["DepartureDateinNextXDays"].ToString();
+                var daysInString = ConfigurationManager.AppSettings["DepartureDateinNextXDays"];
+                int days;
+                if (Int32.TryParse(daysInString,out days))
+                {
+                    return days;
+                }
+                throw new FormatException("DepartureDateinNextXDays has not been provided in config or has been provided in an incorrect format.");
             }
-            set
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
+        public int ExecuteMultipleBatchSize
+        {
+            get
             {
-                throw new NotImplementedException();
+                var batchInString = ConfigurationManager.AppSettings["ExecuteMultipleBatchSize"];
+                int batch;
+                if (Int32.TryParse(batchInString, out batch))
+                {
+                    return batch;
+                }
+                throw new FormatException("Batch has not been provided in config or has been provided in an incorrect format.");
             }
         }
 

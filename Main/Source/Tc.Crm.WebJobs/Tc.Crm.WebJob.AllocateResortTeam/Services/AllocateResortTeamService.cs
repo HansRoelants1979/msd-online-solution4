@@ -9,45 +9,49 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
 {
     public class AllocateResortTeamService : IAllocateResortTeamService
     {
-        
+
         ILogger logger;
         IAllocationService allocationService;
         IConfigurationService configurationService;
-        public AllocateResortTeamService(ILogger logger, IAllocationService allocationService,IConfigurationService configurationService)
+        public AllocateResortTeamService(ILogger logger, IAllocationService allocationService, IConfigurationService configurationService)
         {
             this.logger = logger;
             this.allocationService = allocationService;
             this.configurationService = configurationService;
         }
-       
 
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "GetBookingAllocations")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.WebJob.AllocateResortTeam.Services.ILogger.LogInformation(System.String)")]
         public void GetBookingAllocations()
         {
             logger.LogInformation("Executing GetBookingAllocations");
             IList<Guid> destinationGateways = GetDestinationGateways();
-            if (destinationGateways != null && destinationGateways.Count > 0)
-            {
-                logger.LogInformation("Processing for " + destinationGateways.Count.ToString() + " Destination Gateways");
-                if (configurationService.DepartureDateinNextXDays != null)
-                {
-                    IList<BookingAllocationResponse> bookingAllocationResponse = allocationService.GetBookingAllocations(new
-                                                                                    BookingAllocationRequest
-                    {
-                        DepartureDateinNextXDays = int.Parse(configurationService.DepartureDateinNextXDays),
-                        DepartureDate = DateTime.Now.Date,
-                        ReturnDate = DateTime.Now.Date,
-                        Destination = destinationGateways
-                    });
-
-                    IList<BookingAllocationResortTeamRequest> bookingAllocationResortTeamRequest = ProcessAllocationResponse(bookingAllocationResponse);
-                    allocationService.ProcessBookingAllocations(bookingAllocationResortTeamRequest);
-                }
-            }
-            else
+            if (destinationGateways == null || destinationGateways.Count == 0)
             {
                 logger.LogInformation("No Gateways found to process");
+                throw new InvalidOperationException("No Gateways found to process");
             }
-           
+
+            logger.LogInformation("Processing for " + destinationGateways.Count.ToString() + " Destination Gateways");
+            var departureDateinNextXDays = configurationService.DepartureDateInNextXDays;
+
+            IList<BookingAllocationResponse> bookingAllocationResponses
+                = allocationService.GetBookingAllocations(new
+                                                                BookingAllocationRequest
+                {
+                    DepartureDateInNextXDays = configurationService.DepartureDateInNextXDays,
+                    DepartureDate = DateTime.Now.Date,
+                    ReturnDate = DateTime.Now.Date,
+                    Destination = destinationGateways
+                });
+            logger.LogInformation("bookingAllocationResponses.Count:" + bookingAllocationResponses.Count);
+            if (bookingAllocationResponses.Count == 0)
+                return;
+            IList<BookingAllocationResortTeamRequest> bookingAllocationResortTeamRequests = ProcessAllocationResponse(bookingAllocationResponses);
+            if (bookingAllocationResortTeamRequests.Count == 0)
+                return;
+            allocationService.ProcessBookingAllocations(bookingAllocationResortTeamRequests);
         }
 
         public IList<Guid> GetDestinationGateways()
@@ -65,85 +69,93 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
             return destinationGateways;
         }
 
-        public IList<BookingAllocationResortTeamRequest> ProcessAllocationResponse(IList<BookingAllocationResponse> bookingAllocationResponse)
+        public IList<BookingAllocationResortTeamRequest> ProcessAllocationResponse(IList<BookingAllocationResponse> bookingAllocationResponses)
         {
-            IList<BookingAllocationResortTeamRequest> bookingAllocationResortTeamRequest = null;
-            if (bookingAllocationResponse != null && bookingAllocationResponse.Count > 0)
+            logger.LogInformation("ProcessAllocationResponse - start");
+            if (bookingAllocationResponses == null || bookingAllocationResponses.Count == 0) return null;
+
+            var bookingAllocationResortTeamRequest = new List<BookingAllocationResortTeamRequest>();
+            var currentBookingId = Guid.Empty;
+            var currentAccommodationStartDate = (DateTime?)null;
+            var currentAccommodationEndDate = (DateTime?)null;
+            for (int i = 0; i < bookingAllocationResponses.Count; i++)
             {
-                bookingAllocationResortTeamRequest = new List<BookingAllocationResortTeamRequest>();
-                var currentBookingId = Guid.Empty;
-                var currentAccommodationStartDate = (DateTime?)null;
-                var currentAccommodationEndDate = (DateTime?)null;
-                for (int i = 0; i < bookingAllocationResponse.Count; i++)
+                if (bookingAllocationResponses[i] == null) continue;
+
+                var bookingResponse = bookingAllocationResponses[i];
+                var previousBookingId = currentBookingId;
+                var previousAccommodationStartDate = currentAccommodationStartDate;
+                var previousAccommodationEndDate = currentAccommodationEndDate;
+
+                currentBookingId = bookingResponse.BookingId;
+                currentAccommodationStartDate = bookingResponse.AccommodationStartDate;
+                currentAccommodationEndDate = bookingResponse.AccommodationEndDate;
+
+                if (previousBookingId != currentBookingId)
                 {
-                    if (bookingAllocationResponse[i] != null)
+                    if (bookingResponse.BookingOwner.OwnerType == OwnerType.User)
                     {
-                        var bookingResponse = bookingAllocationResponse[i];
-                        if (bookingResponse != null)
+                        if (currentAccommodationEndDate != DateTime.Now.Date)
                         {
-                            var previousBookingId = currentBookingId;
-                            var previousAccommodationStartDate = currentAccommodationStartDate;
-                            var previousAccommodationEndDate = currentAccommodationEndDate;
-
-                            currentBookingId = bookingResponse.BookingId;
-                            currentAccommodationStartDate = bookingResponse.AccommodationStartDate;
-                            currentAccommodationEndDate = bookingResponse.AccommodationEndDate;
-
-                            if (previousBookingId != currentBookingId)
-                            {
-                                if (bookingResponse.BookingOwner.OwnerType == OwnerType.User)
-                                {
-                                    if (currentAccommodationEndDate != DateTime.Now.Date)
-                                    {
-                                        AddResortTeamRequest(bookingResponse, bookingAllocationResortTeamRequest);
-                                    }
-                                }
-                            }
-
-                            if (currentAccommodationStartDate == DateTime.Now.Date)
-                            {
-                                if (previousBookingId == currentBookingId && previousAccommodationStartDate != currentAccommodationStartDate)
-                                {
-                                    AddResortTeamRequest(bookingResponse, bookingAllocationResortTeamRequest);
-                                }
-                            }
+                            AddResortTeamRequest(bookingResponse, bookingAllocationResortTeamRequest);
                         }
                     }
                 }
+
+                if (currentAccommodationStartDate == DateTime.Now.Date)
+                {
+                    if (previousBookingId == currentBookingId && previousAccommodationStartDate != currentAccommodationStartDate)
+                    {
+                        AddResortTeamRequest(bookingResponse, bookingAllocationResortTeamRequest);
+                    }
+                }
+
             }
+            logger.LogInformation("ProcessAllocationResponse - end");
             return bookingAllocationResortTeamRequest;
         }
 
-        public void AddResortTeamRequest(BookingAllocationResponse bookingResponse, IList<BookingAllocationResortTeamRequest> bookingAllocationResortTeamRequest)
+        public void AddResortTeamRequest(BookingAllocationResponse bookingResponse, IList<BookingAllocationResortTeamRequest> bookingAllocationResortTeamRequests)
         {
+            logger.LogInformation("AddResortTeamRequest - start");
+            if (bookingAllocationResortTeamRequests == null)
+                throw new ArgumentNullException("bookingAllocationResortTeamRequests");
+            if (bookingResponse == null)
+                throw new ArgumentNullException("bookingResponse");
+
             BookingAllocationResortTeamRequest bookingTeamRequest = PrepareResortTeamRequest(bookingResponse);
-            if (bookingTeamRequest != null && bookingAllocationResortTeamRequest != null)
-                bookingAllocationResortTeamRequest.Add(bookingTeamRequest);
+            if (bookingTeamRequest == null) return;
+
+            bookingAllocationResortTeamRequests.Add(bookingTeamRequest);
+
+            logger.LogInformation("AddResortTeamRequest - end");
         }
 
         public BookingAllocationResortTeamRequest PrepareResortTeamRequest(BookingAllocationResponse bookingResponse)
         {
-            BookingAllocationResortTeamRequest bookingTeamRequest = null;
-            if (bookingResponse != null)
+            logger.LogInformation("PrepareResortTeamRequest - start");
+
+            if (bookingResponse == null) throw new ArgumentNullException("bookingResponse");
+            
+            var bookingTeamRequest = new BookingAllocationResortTeamRequest();
+
+            if (bookingResponse.BookingId != null && bookingResponse.HotelOwner != null)
             {
-                bookingTeamRequest = new BookingAllocationResortTeamRequest();
-                if (bookingResponse.BookingId != null && bookingResponse.HotelOwner != null)
+                bookingTeamRequest.BookingResortTeamRequest = new BookingResortTeamRequest
                 {
-                    bookingTeamRequest.BookingResortTeamRequest = new BookingResortTeamRequest
-                    {
-                        Id = bookingResponse.BookingId,
-                        Owner = bookingResponse.HotelOwner
-                    };
-                }
-                if (bookingResponse.Customer != null && bookingResponse.Customer.Id != null && bookingResponse.HotelOwner != null)
-                {
-                    bookingTeamRequest.CustomerResortTeamRequest = new CustomerResortTeamRequest
-                    {  
-                        Customer = bookingResponse.Customer,
-                        Owner = bookingResponse.HotelOwner
-                    };
-                }
+                    Id = bookingResponse.BookingId,
+                    Owner = bookingResponse.HotelOwner
+                };
             }
+            if (bookingResponse.Customer != null && bookingResponse.Customer.Id != null && bookingResponse.HotelOwner != null)
+            {
+                bookingTeamRequest.CustomerResortTeamRequest = new CustomerResortTeamRequest
+                {
+                    Customer = bookingResponse.Customer,
+                    Owner = bookingResponse.HotelOwner
+                };
+            }
+            logger.LogInformation("PrepareResortTeamRequest - end");
             return bookingTeamRequest;
         }
 
