@@ -1,9 +1,7 @@
-﻿using System;
+﻿using Microsoft.Xrm.Sdk;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xrm.Sdk;
 using Tc.Crm.WebJob.AllocateResortTeam.Models;
 
 namespace Tc.Crm.WebJob.AllocateResortTeam.Services

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Diagnostics;
 
-namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
+namespace Tc.Crm.Common.Services
 {
     public class Logger : ILogger
     {
@@ -16,12 +16,12 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
 
         public void LogInformation(string message)
         {
-            Trace.TraceError(message);
+            Trace.TraceInformation(message);
         }
 
         public void LogWarning(string message)
         {
-            Trace.TraceError(message);
+            Trace.TraceWarning(message);
         }
     }
 }

@@ -2,6 +2,7 @@
 using Tc.Crm.WebJob.AllocateResortTeam.Services;
 using System.ServiceModel;
 using Microsoft.Practices.Unity;
+using Tc.Crm.Common.Services;
 
 namespace Tc.Crm.WebJob.AllocateResortTeam
 {
@@ -33,10 +34,6 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
                     allocateResortTeamService.Run();
                     logger.LogInformation("Tc.Crm.WebJob.AllocateResortTeam Job End");
                 }
-            }
-            catch (FaultException<Microsoft.Xrm.Sdk.OrganizationServiceFault> ex)
-            {
-                logger.LogError(ex.ToString());
             }
             catch (TimeoutException ex)
             {

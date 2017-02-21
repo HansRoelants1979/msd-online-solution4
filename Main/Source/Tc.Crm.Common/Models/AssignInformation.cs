@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tc.Crm.WebJob.AllocateResortTeam.Models
+namespace Tc.Crm.Common.Models
 {
     public class AssignInformation
     {

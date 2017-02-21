@@ -3,16 +3,16 @@ using System.Text;
 using System.Xml;
 using System.IO;
 using Microsoft.Xrm.Sdk;
-using Tc.Crm.WebJob.AllocateResortTeam.Services;
 using Microsoft.Xrm.Tooling.Connector;
 using Microsoft.Xrm.Sdk.Query;
 using Microsoft.Xrm.Sdk.Messages;
 using System.Collections.ObjectModel;
 using Microsoft.Crm.Sdk.Messages;
-using Tc.Crm.WebJob.AllocateResortTeam.Models;
 using System.Globalization;
+using Tc.Crm.Common.Services;
+using Tc.Crm.Common.Models;
 
-namespace Tc.Crm.WebJob.AllocateResortTeam
+namespace Tc.Crm.Common.Services
 {
     public class CrmService : ICrmService
     {
@@ -22,17 +22,19 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
         
         public CrmService(IConfigurationService configurationService, ILogger logger)
         {
+            this.logger = logger;
             this.configurationService = configurationService;
             this.organizationService = GetOrganizationService();
-            this.logger = logger;            
         }
 
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.Common.Services.ILogger.LogInformation(System.String)")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "RetrieveMultipleRecords")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.WebJob.AllocateResortTeam.Services.ILogger.LogInformation(System.String)")]
         public EntityCollection RetrieveMultipleRecords(string entityName, string[] columns, string[] filterKeys, string[] filterValues)
         {
             logger.LogInformation("RetrieveMultipleRecords - start");
+            
             var query = new QueryExpression(entityName);
             query.ColumnSet = new ColumnSet(columns);
 

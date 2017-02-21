@@ -5,10 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tc.Crm.WebJob.AllocateResortTeam.Services
+namespace Tc.Crm.Common.Services
 {
     public class ConfigurationService : IConfigurationService
     {
+        public string DefaultUserId
+        {
+            get { return ConfigurationManager.ConnectionStrings["DeallocationOwner"].ConnectionString; }
+        }
+
         public string ConnectionString
         {
             get

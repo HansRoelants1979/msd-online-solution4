@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xrm.Sdk;
-using Tc.Crm.WebJob.AllocateResortTeam.Models;
 using System.Collections.ObjectModel;
-
+using Tc.Crm.Common.Constants.Attributes;
+using Tc.Crm.Common.Constants;
+using Tc.Crm.Common.Services;
+using Tc.Crm.Common;
+using Tc.Crm.Common.Models;
+using Tc.Crm.WebJob.AllocateResortTeam.Models;
+using Microsoft.Xrm.Sdk;
 
 namespace Tc.Crm.WebJob.AllocateResortTeam.Services
 {
@@ -94,7 +96,10 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
         {
             logger.LogInformation("PrepareBookingAllocation - start");
             if (bookingCollection == null || bookingCollection.Entities.Count == 0)
-                throw new ArgumentNullException("bookingCollection");
+            {
+                logger.LogWarning("No records found in CRM for he schedule.");
+                return null;
+            }
 
             var bookingAllocationResponse = new List<BookingAllocationResponse>();
             for (int i = 0; i < bookingCollection.Entities.Count; i++)
@@ -103,11 +108,11 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                 if (booking == null) continue;
 
                 var response = new BookingAllocationResponse();
-                if (booking.Contains(Attributes.Booking.BookingId) && booking[Attributes.Booking.BookingId] != null)
-                    response.BookingId = Guid.Parse(booking.Attributes[Attributes.Booking.BookingId].ToString());
-                if (booking.Contains(Attributes.Booking.Owner) && booking[Attributes.Booking.Owner] != null)
+                if (booking.Contains(Booking.BookingId) && booking[Booking.BookingId] != null)
+                    response.BookingId = Guid.Parse(booking.Attributes[Booking.BookingId].ToString());
+                if (booking.Contains(Booking.Owner) && booking[Booking.Owner] != null)
                 {
-                    EntityReference owner = (EntityReference)booking.Attributes[Attributes.Booking.Owner];
+                    EntityReference owner = (EntityReference)booking.Attributes[Booking.Owner];
                     OwnerType ownerType;
                     if (owner.LogicalName == EntityName.User)
                         ownerType = OwnerType.User;
@@ -117,10 +122,10 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                     response.BookingOwner = new Owner() { Id = owner.Id, Name = owner.Name, OwnerType = ownerType };
                 }
 
-                var fieldStartDate = AliasName.AccommodationAliasName + Attributes.BookingAccommodation.StartDateandTime;
-                var fieldEndDate = AliasName.AccommodationAliasName + Attributes.BookingAccommodation.EndDateandTime;
-                var fieldOwner = AliasName.HotelAliasName + Attributes.Hotel.Owner;
-                var fieldCustomer = AliasName.RoleAliasName + Attributes.CustomerBookingRole.Customer;
+                var fieldStartDate = AliasName.AccommodationAliasName + BookingAccommodation.StartDateandTime;
+                var fieldEndDate = AliasName.AccommodationAliasName + BookingAccommodation.EndDateandTime;
+                var fieldOwner = AliasName.HotelAliasName + Hotel.Owner;
+                var fieldCustomer = AliasName.RoleAliasName + CustomerBookingRole.Customer;
 
                 if (booking.Contains(fieldStartDate) && booking[fieldStartDate] != null)
                     response.AccommodationStartDate = DateTime.Parse(((AliasedValue)booking[fieldStartDate]).Value.ToString());
@@ -148,7 +153,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                     else
                         customerType = CustomerType.Account;
 
-                    response.Customer = new Customer() { Id = customer.Id, Name = customer.Name, CustomerType = customerType };
+                    response.Customer = new Common.Models.Customer() { Id = customer.Id, Name = customer.Name, CustomerType = customerType };
                 }
 
                 bookingAllocationResponse.Add(response);

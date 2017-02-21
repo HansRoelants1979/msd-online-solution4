@@ -1,13 +1,11 @@
 ﻿using Microsoft.Xrm.Sdk;
-using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
 using System;
 using System.Xml;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Tc.Crm.WebJob.AllocateResortTeam.Models;
+using Tc.Crm.Common.Models;
 
-namespace Tc.Crm.WebJob.AllocateResortTeam.Services
+namespace Tc.Crm.Common.Services
 {
     public interface ICrmService : IDisposable
     {

@@ -27,6 +27,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -44,14 +45,6 @@
     </Reference>
     <Reference Include="Microsoft.IdentityModel, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.IdentityModel.6.1.7600.16394\lib\net35\Microsoft.IdentityModel.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory, Version=2.22.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.2.22.302111727\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms, Version=2.22.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.2.22.302111727\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -72,18 +65,6 @@
     </Reference>
     <Reference Include="Microsoft.Xrm.Sdk, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.CrmSdk.CoreAssemblies.8.2.0.2\lib\net452\Microsoft.Xrm.Sdk.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Xrm.Sdk.Deployment, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.CrmSdk.Deployment.8.2.0\lib\net45\Microsoft.Xrm.Sdk.Deployment.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Xrm.Sdk.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.CrmSdk.Workflow.8.2.0\lib\net45\Microsoft.Xrm.Sdk.Workflow.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Xrm.Tooling.Connector, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.CrmSdk.XrmTooling.CoreAssembly.8.2.0.2\lib\net452\Microsoft.Xrm.Tooling.Connector.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PresentationFramework" />
@@ -112,25 +93,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\BookingDeallocation.cs" />
+    <Compile Include="Models\CustomerResortTeamRequest.cs" />
+    <Compile Include="Models\BookingDeAllocationRequest.cs" />
+    <Compile Include="Models\BookingDeallocationResortTeamRequest.cs" />
+    <Compile Include="Models\BookingResortTeamRequest.cs" />
+    <Compile Include="Models\BookngDeallocationResponse.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ConfigurationService.cs" />
-    <Compile Include="Services\CrmService.cs" />
     <Compile Include="Services\DeallocateResortTeamService.cs" />
     <Compile Include="Services\DeallocationService.cs" />
-    <Compile Include="Services\IConfigurationService.cs" />
-    <Compile Include="Services\ICrmService.cs" />
     <Compile Include="Services\IDeallocateResortTeamService.cs" />
     <Compile Include="Services\IDeallocationService.cs" />
-    <Compile Include="Services\ILogger.cs" />
-    <Compile Include="Services\Logger.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Tc.Crm.Common\Tc.Crm.Common.csproj">
+      <Project>{860e3979-f2c6-4c90-9fa6-e130bd1ee9be}</Project>
+      <Name>Tc.Crm.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
