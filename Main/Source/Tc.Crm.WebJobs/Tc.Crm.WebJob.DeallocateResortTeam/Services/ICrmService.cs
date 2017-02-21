@@ -2,20 +2,19 @@
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
 using System;
-using System.Collections.Generic;
-using Tc.Crm.WebJob.DeallocateResortTeam.Models;
+using System.Xml;
 
 namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
 {
     public interface ICrmService : IDisposable
     {
 
-        IList<BookingDeallocation> GetBookingDeallocations();
-        void Update(BookingDeallocation bookingDeallocation);
         IOrganizationService GetOrganizationService();
-        EntityCollection RetrieveMultipleRecords(string entityName, string[] columns, string[] filterKeys, string[] filterValues, IOrganizationService service);
-        EntityCollection GetRecordsUsingQuery(QueryExpression queryExpr, IOrganizationService service);
-        EntityCollection RetrieveMultipleRecordsFetchXml(string Query, IOrganizationService service);
-        ExecuteMultipleResponse BulkUpdate(EntityCollection entityCollection, IOrganizationService service);
+        EntityCollection RetrieveMultipleRecords(string entityName, string[] columns, string[] filterKeys, string[] filterValues);
+        EntityCollection GetRecordsUsingQuery(QueryExpression queryExpr);
+        EntityCollection RetrieveMultipleRecordsFetchXml(string query);
+        ExecuteMultipleResponse BulkUpdate(EntityCollection entityCollection);
+        string CreateXml(string xml, string cookie, int page, int count);
+        string CreateXml(XmlDocument doc, string cookie, int page, int count);
     }
 }

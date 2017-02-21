@@ -7,44 +7,70 @@ using Microsoft.Xrm.Sdk;
 
 namespace Tc.Crm.WebJob.DeallocateResortTeam.Models
 {
-    public class BookingDeallocation
+    public class BookingDeallocationRequest
     {
+        public DateTime AccommodationEndDate { get; set; }
+        public IList<Guid> Destination { get; set; }
+       
+    }
+
+
+    public class BookingDeallocationResponse
+    {
+        public Guid BookingId { get; set; }
+        public DateTime AccommodationEndDate { get; set; }
         public Guid HotelId { get; set; }
-
-
-
-        public ResortTeam Team { get; set; }
-
-        public List<ResortTeam> ResortTeam { get; set; }
-
-        public List<Accommodation> Accommodation { get; set; }
-
-        public List<Booking> Booking { get; set; }
-
-        public int Days { get; set; }
+        public Customer Customer { get; set; }
     }
 
-    public class ResortTeam
+    public class BookingDeallocationResortTeamRequest
+    {
+        public BookingResortTeamRequest BookingResortTeamRequest { get; set; }
+        public CustomerResortTeamRequest CustomerResortTeamRequest { get; set; }
+
+    }
+
+
+    public class BookingResortTeamRequest
+    {
+        public Guid Id { get; set; }
+        public Owner Owner { get; set; }
+    }
+
+    public class CustomerResortTeamRequest
+    {
+        public Customer Customer { get; set; }
+        public Owner Owner { get; set; }
+    }
+
+    public class Owner
     {
         public string Name { get; set; }
         public Guid Id { get; set; }
+        public OwnerType OwnerType { get; set; }
     }
-
-    public class Accommodation
+        
+    public class Customer
     {
         public string Name { get; set; }
         public Guid Id { get; set; }
+        public CustomerType CustomerType { get; set; }
     }
 
-    public class Booking
+    public enum OwnerType
     {
-        public string Name { get; set; }
-        public Guid Id { get; set; }
+        User,
+        Team
     }
 
-    public class Hotel
+
+    public enum CustomerType
     {
-        public string Name { get; set; }
-        public Guid Id { get; set; }
+        Contact,
+        Account
     }
+
+
+
+
 }

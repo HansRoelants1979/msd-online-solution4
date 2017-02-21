@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
 {
-    public interface IConfigurationService
+    public interface ILogger
     {
-        string ConnectionString { get; set; }
-        string DestinationGatewayIds { get; set; }
+        void LogError(string message);
+        void LogWarning(string message);
+        void LogInformation(string message);
     }
 }
