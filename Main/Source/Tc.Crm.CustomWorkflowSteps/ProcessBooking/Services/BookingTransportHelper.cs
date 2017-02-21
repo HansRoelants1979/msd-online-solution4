@@ -7,10 +7,12 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 {
     public static class BookingTransportHelper
     {
-        public static EntityCollection GetTransportEntityForBookingPayload(Transport[] transport, string bookingNumber, Guid bookingId, ITracingService trace)
+        public static EntityCollection GetTransportEntityForBookingPayload(Booking bookinginfo,Guid bookingId, ITracingService trace)
         {
             if (trace == null) throw new InvalidPluginExecutionException("Tracing Service is null.");
-            trace.Trace("Transport populate records - start");           
+            trace.Trace("Transport populate records - start");
+            string bookingNumber = bookinginfo.BookingIdentifier.BookingNumber;
+            var transport = bookinginfo.Services.Transport;
             if (bookingNumber == null || string.IsNullOrWhiteSpace(bookingNumber))                
                 throw new InvalidPluginExecutionException("Booking Number should not be null.");
             EntityCollection entityCollectionTransport = new EntityCollection();
@@ -21,7 +23,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 for (int i = 0; i < transport.Length; i++)
                 {
                     trace.Trace("Processing transport record " + i.ToString() + " - start");
-                    transportEntity = PrepareBookingTransport(bookingNumber, transport[i], bookingId, trace);
+                    transportEntity = PrepareBookingTransport(bookinginfo, transport[i], bookingId, trace);
                     entityCollectionTransport.Entities.Add(transportEntity);
                     trace.Trace("Processing transport record " + i.ToString() + " - end");
                 }
@@ -31,9 +33,10 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             return entityCollectionTransport;
         }
 
-        private static Entity PrepareBookingTransport(string bookingNumber, Transport transport, Guid bookingId, ITracingService trace)
+        private static Entity PrepareBookingTransport(Booking bookinginfo, Transport transport, Guid bookingId, ITracingService trace)
         {
             trace.Trace("Transport populate fields - start");
+            string bookingNumber = bookinginfo.BookingIdentifier.BookingNumber;
             var transportEntity = new Entity(EntityName.BookingTransport);
             transportEntity[Attributes.BookingTransport.Name] = bookingNumber + General.Concatenator + transport.DepartureAirport + General.Concatenator + transport.ArrivalAirport;
             if (transport.TransportCode != null)
@@ -58,6 +61,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 transportEntity[Attributes.BookingTransport.FlightIdentifier] = transport.FlightIdentifier;
             transportEntity[Attributes.BookingTransport.NumberofParticipants] = transport.NumberOfParticipants;
             transportEntity[Attributes.BookingTransport.BookingId] = new EntityReference(EntityName.Booking, bookingId);
+            transportEntity[Attributes.BookingTransport.Participants] = BookingHelper.PrepareTravelParticipantsInfoForChildRecords(bookinginfo.TravelParticipant, trace, transport.TravelParticipantAssignment);
             trace.Trace("Transport populate fields - end");
             return transportEntity;
         }

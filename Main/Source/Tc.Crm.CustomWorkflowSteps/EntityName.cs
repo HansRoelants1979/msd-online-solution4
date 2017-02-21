@@ -25,6 +25,8 @@ namespace Tc.Crm.CustomWorkflowSteps
         public const string Blacklisted = "B";
 
         public const string Concatenator = " - ";
+
+        public const string Space = " ";
     }
     public static class EntityName
     {
@@ -51,6 +53,8 @@ namespace Tc.Crm.CustomWorkflowSteps
         public const string SocialProfile = "socialprofile";
         public const string TourOperator = "tc_touroperator";
         public const string User = "systemuser";
+        public const string BookingTransfer = "tc_bookingtransfer";
+        public const string BookingExtraService = "tc_bookingextraservice";
 
     }
 
@@ -216,9 +220,11 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string Name = "tc_name";
             public const string NumberofParticipants = "tc_numberofparticipants";
             public const string Order = "tc_order";
+            public const string Participants = "tc_participants";
             public const string StartDateandTime = "tc_startdateandtime";
             public const string TransferType = "tc_transfertype";
             public const string TransportCode = "tc_transportcode";
+           
         }
         public class Brand
         {
@@ -328,6 +334,36 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string Type = "tc_type";
         }
 
+        public class BookingTransfer
+        {
+            public const string ArrivalGatewayId = "tc_arrivalgatewayid";
+            public const string BookingId = "tc_bookingid";
+            public const string BookingTransferId = "tc_bookingid";
+            public const string Category = "tc_category";
+            public const string DepartureGatewayId = "tc_departuregatewayid";
+            public const string EndDateTime = "tc_enddateandtime";
+            public const string Name = "tc_name";
+            public const string Order = "tc_order";
+            public const string Participants = "tc_participants";
+            public const string StartDateandTime = "tc_startdateandtime";
+            public const string TransferCode = "tc_transfercode";
+            public const string TransferType = "tc_transfertype";
+
+        }
+
+        public class BookingExtraService
+        {
+            public const string BookingId = "tc_bookingid";
+            public const string BookingExtraServiceId = "tc_bookingextraserviceid";
+            public const string ExtraServiceCode = "tc_extraservicecode";
+            public const string EndDateTime = "tc_enddateandtime";
+            public const string Name = "tc_name";
+            public const string Order = "tc_order";
+            public const string Participants = "tc_participants";
+            public const string StartDateandTime = "tc_startdateandtime";
+
+        }
+
 
 
         public class TourOperator
@@ -338,6 +374,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string TourOperatorId = "tc_touroperatorid";
         }
 
+        
     }
 
 }

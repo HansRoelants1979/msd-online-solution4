@@ -10,6 +10,8 @@
     {
         Remark,
         AccomodationRemark,
-        TransportRemark
+        TransportRemark,
+        TransferRemark,
+        ExtraServiceRemark
     }
 }

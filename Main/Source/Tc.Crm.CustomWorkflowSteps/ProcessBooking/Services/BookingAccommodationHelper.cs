@@ -7,10 +7,12 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 {
     public static class BookingAccommodationHelper
     {
-        public static EntityCollection GetBookingAccommodationEntityFromPayload(Accommodation[] accommodation, string bookingNumber, Guid bookingId, ITracingService trace)
+        public static EntityCollection GetBookingAccommodationEntityFromPayload(Booking bookinginfo, Guid bookingId, ITracingService trace)
         {
             if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
-            trace.Trace("Accommodation populate records - start");           
+            trace.Trace("Accommodation populate records - start");
+            string bookingNumber = bookinginfo.BookingIdentifier.BookingNumber;
+            var accommodation = bookinginfo.Services.Accommodation;
             if (bookingNumber == null || string.IsNullOrWhiteSpace(bookingNumber))
                 throw new InvalidPluginExecutionException("Booking Number should not be null.");
             EntityCollection entityCollectionaccommodation = new EntityCollection();
@@ -21,7 +23,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 for (int i = 0; i < accommodation.Length; i++)
                 {
                     trace.Trace("Processing Booking accommodation " + i.ToString() + " - start");
-                    accommodationEntity = PrepareBookingAccommodation(bookingNumber, accommodation[i], bookingId, trace);
+                    accommodationEntity = PrepareBookingAccommodation(bookinginfo, accommodation[i], bookingId, trace);
                     entityCollectionaccommodation.Entities.Add(accommodationEntity);
                     trace.Trace("Processing Booking accommodation " + i.ToString() + " - end");
                 }
@@ -31,10 +33,10 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             return entityCollectionaccommodation;
         }
 
-        private static Entity PrepareBookingAccommodation(string bookingNumber, Accommodation accommodation, Guid bookingId, ITracingService trace)
+        private static Entity PrepareBookingAccommodation(Booking bookinginfo, Accommodation accommodation, Guid bookingId, ITracingService trace)
         {
             trace.Trace("Preparing Booking Accommodation information - Start");
-
+            string bookingNumber = bookinginfo.BookingIdentifier.BookingNumber;
             var accommodationEntity = new Entity(EntityName.BookingAccommodation);
             //BN - HotelId 
             if (accommodation.AccommodationCode != null)
@@ -72,7 +74,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             if(accommodation.AccommodationDescription != null)
             accommodationEntity[Attributes.BookingAccommodation.SourceMarketHotelName] = accommodation.AccommodationDescription;
             accommodationEntity[Attributes.BookingAccommodation.BookingId] = new EntityReference(EntityName.Booking, bookingId);
-
+            accommodationEntity[Attributes.BookingAccommodation.Participants] = BookingHelper.PrepareTravelParticipantsInfoForChildRecords(bookinginfo.TravelParticipant, trace, accommodation.TravelParticipantAssignment);
             trace.Trace("Preparing Booking Transport information - End");
 
             return accommodationEntity;

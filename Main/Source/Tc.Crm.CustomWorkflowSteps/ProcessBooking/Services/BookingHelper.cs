@@ -2,6 +2,7 @@
 using System;
 using System.Text;
 using Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models;
+using System.Linq;
 
 namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 {
@@ -147,6 +148,39 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 participantBuilder.Append(travelParticipants[i].Language);
                 participantsBuilder.AppendLine(participantBuilder.ToString());
                 trace.Trace("Processing Travel Participant " + i.ToString() + " information - end");
+            }
+            trace.Trace("Processing " + travelParticipants.Length.ToString() + " Travel Participants information - end");
+            trace.Trace("Travel Participants information - end");
+            return participantsBuilder.ToString();
+        }
+        public static string PrepareTravelParticipantsInfoForChildRecords(TravelParticipant[] travelParticipants, ITracingService trace, TravelParticipantAssignment[] travelParticipantsAssignment)
+        {
+            if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
+            trace.Trace("Travel Participants information - start");
+            if (travelParticipants == null || travelParticipants.Length == 0) return null;
+            StringBuilder participantsBuilder = new StringBuilder();
+            for (int i = 0; i < travelParticipantsAssignment.Length; i++)
+            {
+                var Participants = travelParticipants.Where(item => item.TravelParticipantIdOnTour == travelParticipantsAssignment[i].TravelParticipantId)
+                                           .Select(item => item).ToArray();
+
+                trace.Trace("Processing " + Participants.Length.ToString() + " Travel Participants information - start");
+                for (int j = 0; j < Participants.Length; j++)
+                {
+                    trace.Trace("Processing Travel Participant " + j.ToString() + " information - start");
+                    StringBuilder participantBuilder = new StringBuilder();
+
+                    if (Participants[j].FirstName != null)
+                        participantBuilder.Append(Participants[j].FirstName + General.Space);
+                    if (Participants[j].LastName != null)
+                        participantBuilder.Append(Participants[j].LastName + General.Seperator);
+
+                    participantsBuilder.AppendLine(participantBuilder.ToString());
+                    if (j == Participants.Length - 1)
+                        participantsBuilder = participantsBuilder.Remove(participantsBuilder.Length - 1, 1);
+
+                    trace.Trace("Processing Travel Participant " + j.ToString() + " information - end");
+                }
             }
             trace.Trace("Processing " + travelParticipants.Length.ToString() + " Travel Participants information - end");
             trace.Trace("Travel Participants information - end");
