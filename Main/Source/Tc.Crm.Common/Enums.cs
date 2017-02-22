@@ -14,8 +14,8 @@ namespace Tc.Crm.Common
 
 
     public enum CustomerType
-    {
+    {        
         Contact,
-        Account
+        Account 
     }
 }

@@ -9,7 +9,7 @@ using Microsoft.Xrm.Sdk.Messages;
 using System.Collections.ObjectModel;
 using Microsoft.Crm.Sdk.Messages;
 using System.Globalization;
-using Tc.Crm.Common.Services;
+using Tc.Crm.Common.Constants;
 using Tc.Crm.Common.Models;
 
 namespace Tc.Crm.Common.Services
@@ -193,9 +193,9 @@ namespace Tc.Crm.Common.Services
 
             for (int i = 0; i < assignRequestCollection.Count; i++)
             {
-                var targetEntityName = assignRequestCollection[i].EntityName;
+                var targetEntityName = assignRequestCollection[i].EntityName.ToLower();
                 var targetId = assignRequestCollection[i].RecordId;
-                var ownerType = assignRequestCollection[i].RecordOwner.OwnerType.ToString();
+                var ownerType = (assignRequestCollection[i].RecordOwner.OwnerType == OwnerType.Team) ? EntityName.Team : EntityName.User;
                 var ownerId = assignRequestCollection[i].RecordOwner.Id;
                 request.Requests.Add(new AssignRequest {
                                                             Target = new EntityReference(targetEntityName, targetId)
@@ -244,6 +244,7 @@ namespace Tc.Crm.Common.Services
             return (IOrganizationService)client;
         }
 
+       
 
         public void Dispose()
         {
