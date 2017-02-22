@@ -33,7 +33,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 
             ProcessCustomer();
             ProcessBookingInfo();
-            ProcessRemarks();
+           // ProcessRemarks();
             ProcessAccommodation();
             ProcessTransport();
             ProcessTransfers();
@@ -165,7 +165,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             if (payloadBooking.BookingInfo.Remark != null)
             {
                 string bookingNumber = payloadBooking.BookingInfo.BookingIdentifier.BookingNumber;
-                var entityCollectionRemarks = RemarksHelper.GetRemarksEntityFromPayload(bookingNumber, payloadBooking.BookingInfo.Remark, Guid.Parse(payloadBooking.BookingId), trace, RemarkType.Remark);
+                var entityCollectionRemarks = RemarksHelper.GetRemarksEntityFromPayload( payloadBooking.BookingInfo.Remark, Guid.Parse(payloadBooking.BookingId), trace, RemarkType.Remark);
                 CommonXrm.BulkCreate(entityCollectionRemarks, crmService);
             }
             trace.Trace("Remarks information - end");
@@ -222,12 +222,12 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             if (payloadBooking.BookingInfo.Services != null && payloadBooking.BookingInfo.Services.Accommodation != null && xrmResponseList.Count > 0)
             {
                 trace.Trace("Accommodation Remarks information - Start");
-                string bookingNumber = payloadBooking.BookingInfo.BookingIdentifier.BookingNumber;
+                //string bookingNumber = payloadBooking.BookingInfo.BookingIdentifier.BookingNumber;
                 for (int i = 0; i < payloadBooking.BookingInfo.Services.Accommodation.Length; i++)
                 {
                     if (payloadBooking.BookingInfo.Services.Accommodation[i].Remark != null)
                     {
-                        var accommodationRemarks = RemarksHelper.GetRemarksEntityFromPayload(bookingNumber, payloadBooking.BookingInfo.Services.Accommodation[i].Remark, Guid.Parse(xrmResponseList[i].Id), trace, RemarkType.AccomodationRemark);
+                        var accommodationRemarks = RemarksHelper.GetRemarksEntityFromPayload( payloadBooking.BookingInfo.Services.Accommodation[i].Remark, Guid.Parse(xrmResponseList[i].Id), trace, RemarkType.AccomodationRemark);
                         entityCollectionAccomodationRemarks.Entities.AddRange(accommodationRemarks.Entities);
                     }
                                      
@@ -287,7 +287,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                     if (payloadBooking.BookingInfo.Services.Transport[i].Remark != null)
                     {
                         //BN - Type
-                        var transportRemarks = RemarksHelper.GetRemarksEntityFromPayload(bookingNumber, payloadBooking.BookingInfo.Services.Transport[i].Remark, Guid.Parse(xrmResponseList[i].Id), trace, RemarkType.TransportRemark);
+                        var transportRemarks = RemarksHelper.GetRemarksEntityFromPayload( payloadBooking.BookingInfo.Services.Transport[i].Remark, Guid.Parse(xrmResponseList[i].Id), trace, RemarkType.TransportRemark);
                         entityColllectionTransportRemarks.Entities.AddRange(transportRemarks.Entities);
                     }
                     
@@ -325,30 +325,31 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 List<XrmResponse> xrmResponseList = CommonXrm.BulkCreate(entityCollectionTransfer, crmService);
                 trace.Trace("Booking Transfer information - end");
 
-                // ProcessTransfertRemarks(xrmResponseList);
+                 ProcessTransferRemarks(xrmResponseList);
             }
         }
-        public void ProcessTransfertRemarks(List<XrmResponse> xrmResponseList)
+
+        public void ProcessTransferRemarks(List<XrmResponse> xrmResponseList)
         {
-            if (payloadBooking.BookingInfo.Services != null && payloadBooking.BookingInfo.Services.Transport != null && xrmResponseList.Count > 0)
+            if (payloadBooking.BookingInfo.Services != null && payloadBooking.BookingInfo.Services.Transfer != null && xrmResponseList.Count > 0)
             {
                 EntityCollection entityColllectionTransferRemarks = new EntityCollection();
-                string bookingNumber = payloadBooking.BookingInfo.BookingIdentifier.BookingNumber;
+
                 trace.Trace("Transfer Remarks information - Start");
                 for (int i = 0; i < payloadBooking.BookingInfo.Services.Transfer.Length; i++)
                 {
                     if (payloadBooking.BookingInfo.Services.Transfer[i].Remark != null)
                     {
                         //BN - Type
-                        var transfertRemarks = RemarksHelper.GetRemarksEntityFromPayload(bookingNumber, payloadBooking.BookingInfo.Services.Transfer[i].Remark, Guid.Parse(xrmResponseList[i].Id), trace, RemarkType.TransferRemark);
-                        entityColllectionTransferRemarks.Entities.AddRange(transfertRemarks.Entities);
+                        var transferRemarks = RemarksHelper.GetRemarksEntityFromPayload(payloadBooking.BookingInfo.Services.Transfer[i].Remark, Guid.Parse(xrmResponseList[i].Id), trace, RemarkType.TransferRemark);
+                        entityColllectionTransferRemarks.Entities.AddRange(transferRemarks.Entities);
                     }
 
                 }
 
                 if (entityColllectionTransferRemarks.Entities.Count > 0)
                     CommonXrm.BulkCreate(entityColllectionTransferRemarks, crmService);
-                trace.Trace("Transport Remarks information - End");
+                trace.Trace("Transfer Remarks information - End");
             }
 
         }
@@ -378,31 +379,31 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 List<XrmResponse> xrmResponseList = CommonXrm.BulkCreate(entityCollectionExtraService, crmService);
                 trace.Trace("Booking Transfer information - end");
 
-                // ProcessExtraServiceRemarks(xrmResponseList);
+                 ProcessExtraServiceRemarks(xrmResponseList);
             }
         }
 
         public void ProcessExtraServiceRemarks(List<XrmResponse> xrmResponseList)
         {
-            if (payloadBooking.BookingInfo.Services != null && payloadBooking.BookingInfo.Services.Transport != null && xrmResponseList.Count > 0)
+            if (payloadBooking.BookingInfo.Services != null && payloadBooking.BookingInfo.Services.ExtraService != null && xrmResponseList.Count > 0)
             {
                 EntityCollection entityColllectionExtraServiceRemarks = new EntityCollection();
-                string bookingNumber = payloadBooking.BookingInfo.BookingIdentifier.BookingNumber;
-                trace.Trace("Extra Service Remarks information - Start");
+
+                trace.Trace("ExtraService Remarks information - Start");
                 for (int i = 0; i < payloadBooking.BookingInfo.Services.ExtraService.Length; i++)
                 {
                     if (payloadBooking.BookingInfo.Services.ExtraService[i].Remark != null)
                     {
                         //BN - Type
-                        var extraServiceRemarks = RemarksHelper.GetRemarksEntityFromPayload(bookingNumber, payloadBooking.BookingInfo.Services.ExtraService[i].Remark, Guid.Parse(xrmResponseList[i].Id), trace, RemarkType.ExtraServiceRemark);
-                        entityColllectionExtraServiceRemarks.Entities.AddRange(extraServiceRemarks.Entities);
+                        var transferRemarks = RemarksHelper.GetRemarksEntityFromPayload(payloadBooking.BookingInfo.Services.ExtraService[i].Remark, Guid.Parse(xrmResponseList[i].Id), trace, RemarkType.ExtraServiceRemark);
+                        entityColllectionExtraServiceRemarks.Entities.AddRange(transferRemarks.Entities);
                     }
 
                 }
 
                 if (entityColllectionExtraServiceRemarks.Entities.Count > 0)
                     CommonXrm.BulkCreate(entityColllectionExtraServiceRemarks, crmService);
-                trace.Trace("Extra Service Remarks information - End");
+                trace.Trace("ExtraService Remarks information - End");
             }
 
         }

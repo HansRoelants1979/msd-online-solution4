@@ -31,6 +31,7 @@ namespace Tc.Crm.CustomWorkflowSteps
     public static class EntityName
     {
         public const string Account = "account";
+        public const string Annotation = "annotation";
         public const string Contact = "contact";
         public const string Booking = "tc_booking";
         public const string BookingAccommodation = "tc_bookingaccommodation";
@@ -131,6 +132,15 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string EMailAddress2 = "emailaddress2";
             public const string EMailAddress3 = "emailaddress3";
             public const string SourceSystemID = "tc_sourcesystemid";
+        }
+
+        public class Annotation
+        {
+            public const string AnnotationId = "annotationid";
+            public const string NoteText = "notetext";
+            public const string Subject = "subject";
+            public const string Regarding = "objectid";
+
         }
         public class Booking
         {
@@ -333,6 +343,8 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string SourceSystemID = "tc_sourcesystemid";
             public const string Type = "tc_type";
         }
+
+
 
         public class BookingTransfer
         {
