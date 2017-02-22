@@ -90,6 +90,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="Tc.Crm.Common">
+      <HintPath>..\..\Tc.Crm.Common\bin\Debug\Tc.Crm.Common.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
@@ -108,12 +111,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Tc.Crm.Common\Tc.Crm.Common.csproj">
-      <Project>{860e3979-f2c6-4c90-9fa6-e130bd1ee9be}</Project>
-      <Name>Tc.Crm.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

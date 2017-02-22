@@ -97,14 +97,14 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                 {
                     if (bookingResponse.BookingOwner.OwnerType == OwnerType.User)
                     {
-                        if (currentAccommodationEndDate != DateTime.Now.Date)
+                        if (currentAccommodationEndDate.Value.Date != DateTime.Now.Date)
                         {
                             AddResortTeamRequest(bookingResponse, bookingAllocationResortTeamRequest);
                         }
                     }
                 }
 
-                if (currentAccommodationStartDate == DateTime.Now.Date)
+                if (currentAccommodationStartDate.Value.Date == DateTime.Now.Date)
                 {
                     if (previousBookingId == currentBookingId && previousAccommodationStartDate != currentAccommodationStartDate)
                     {

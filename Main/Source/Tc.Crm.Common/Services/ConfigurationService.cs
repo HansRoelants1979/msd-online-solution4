@@ -11,7 +11,7 @@ namespace Tc.Crm.Common.Services
     {
         public string DefaultUserId
         {
-            get { return ConfigurationManager.ConnectionStrings["DeallocationOwner"].ConnectionString; }
+            get { return ConfigurationManager.AppSettings["DeallocationOwner"]; }
         }
 
         public string ConnectionString
