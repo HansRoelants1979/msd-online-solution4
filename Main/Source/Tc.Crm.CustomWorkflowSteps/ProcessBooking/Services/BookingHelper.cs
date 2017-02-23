@@ -176,15 +176,14 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                         participantBuilder.Append(Participants[j].LastName + General.Seperator);
 
                     participantsBuilder.AppendLine(participantBuilder.ToString());
-                    if (j == Participants.Length - 1)
-                        participantsBuilder = participantsBuilder.Remove(participantsBuilder.Length - 1, 1);
+                    
 
                     trace.Trace("Processing Travel Participant " + j.ToString() + " information - end");
                 }
             }
             trace.Trace("Processing " + travelParticipants.Length.ToString() + " Travel Participants information - end");
             trace.Trace("Travel Participants information - end");
-            return participantsBuilder.ToString();
+            return participantsBuilder.ToString().Remove(participantsBuilder.Length - 3);
         }
 
         /// <summary>

@@ -27,7 +27,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 for (int i = 0; i < extraService.Length; i++)
                 {
                     trace.Trace("Processing Booking Transfer " + i.ToString() + " - start");
-                    extraServiceEntity = PrepareBookingTransfer(bookinginfo, extraService[i], bookingId, trace);
+                    extraServiceEntity = PrepareBookingExtraService(bookinginfo, extraService[i], bookingId, trace);
                     entityCollectionextraService.Entities.Add(extraServiceEntity);
                     trace.Trace("Processing Booking accommodation " + i.ToString() + " - end");
                 }
@@ -37,7 +37,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             return entityCollectionextraService;
         }
 
-        private static Entity PrepareBookingTransfer(Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models.Booking bookinginfo, ExtraService extraService, Guid bookingId, ITracingService trace)
+        private static Entity PrepareBookingExtraService(Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models.Booking bookinginfo, ExtraService extraService, Guid bookingId, ITracingService trace)
         {
             trace.Trace("Preparing Booking Transfer information - Start");
             string bookingNumber = bookinginfo.BookingIdentifier.BookingNumber;
