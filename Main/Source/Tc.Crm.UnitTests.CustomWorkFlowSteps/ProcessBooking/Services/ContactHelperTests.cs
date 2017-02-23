@@ -36,14 +36,14 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(InvalidPluginExecutionException), "Customer Id could not be retrieved from payload.")]
         public void GetContactEntityForBookingPayload_CustomerIdentifierIsNull()
         {
-            ContactHelper.GetContactEntityForBookingPayload(new Models.Customer(), trace);
+            var contact = ContactHelper.GetContactEntityForBookingPayload(new Models.Customer(), trace);
+            Assert.IsNotNull(contact);
+            Assert.AreEqual("", contact[Attributes.Contact.SourceSystemID].ToString());
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(InvalidPluginExecutionException), "Customer Id could not be retrieved from payload.")]
         public void GetContactEntityForBookingPayload_CustomerIdIsNull()
         {
             Customer c = new Customer
@@ -55,7 +55,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
                     SourceSystem = "On Tour"
                 }
             };
-            ContactHelper.GetContactEntityForBookingPayload(c, trace);
+            var contact = ContactHelper.GetContactEntityForBookingPayload(c, trace);
+            Assert.IsNotNull(contact);
+            Assert.AreEqual("", contact[Attributes.Contact.SourceSystemID].ToString());
         }
 
         [TestMethod()]

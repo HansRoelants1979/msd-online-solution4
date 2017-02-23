@@ -15,7 +15,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             
 
 
-            Entity contact = (customer.CustomerIdentifier.CustomerId != null && customer.CustomerIdentifier.CustomerId != "") ? new Entity(EntityName.Contact
+            Entity contact = (customer.CustomerIdentifier != null && customer.CustomerIdentifier.CustomerId != null && customer.CustomerIdentifier.CustomerId != "") ? new Entity(EntityName.Contact
                                         , Attributes.Contact.SourceSystemID
                                         , customer.CustomerIdentifier.CustomerId) : new Entity(EntityName.Contact);
 
@@ -39,11 +39,17 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             PopulateAddress(contact, customer.Address, trace);
             PopulatePhone(contact, customer.Phone, trace);
             PopulateEmail(contact, customer.Email, trace);            
-            contact[Attributes.Contact.SourceMarketId] = (!string.IsNullOrWhiteSpace(customer.CustomerIdentifier.SourceMarket)) ?
-                                                                            new EntityReference(EntityName.Country
-                                                                            , Attributes.Country.ISO2Code,
-                                                                            customer.CustomerIdentifier.SourceMarket) : null;
-            contact[Attributes.Contact.SourceSystemID] = (customer.CustomerIdentifier.CustomerId !=null) ? customer.CustomerIdentifier.CustomerId : string.Empty;
+            contact[Attributes.Contact.SourceMarketId] = (customer.CustomerIdentifier!=null &&
+                                                            !string.IsNullOrWhiteSpace(customer.CustomerIdentifier.SourceMarket))
+                                                                ?new EntityReference(EntityName.Country
+                                                                                    , Attributes.Country.ISO2Code,
+                                                                                    customer.CustomerIdentifier.SourceMarket) 
+                                                                : null;
+
+            contact[Attributes.Contact.SourceSystemID] = (customer.CustomerIdentifier != null 
+                                                            && customer.CustomerIdentifier.CustomerId !=null) 
+                                                                ?customer.CustomerIdentifier.CustomerId 
+                                                                : string.Empty;
 
             trace.Trace("Contact populate fields - end");
 

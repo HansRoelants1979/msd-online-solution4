@@ -112,7 +112,7 @@ namespace Tc.Crm.Service.Client.Console
                                 AcademicTitle = "BTech",
                                 Birthdate = "19821008",
                                 FirstName = "Barney",
-                                Gender = Gender.M,
+                                Gender = Gender.Male,
                                 Language = "Bro-English",
                                 LastName = "Stinston",
                                 MiddleName = "bro",
@@ -177,13 +177,13 @@ namespace Tc.Crm.Service.Client.Console
                         BookingGeneral = new BookingGeneral
                         {
                             BookingDate = "20170101",
-                            BookingStatus = BookingStatus.B,
+                            BookingStatus = BookingStatus.Booked,
                             Brand = "Humma",
                             BrochureCode = "BROCODE1",
                             Currency = "Pounds",
                             DepartureDate = "20170131",
                             Destination = "NYC",
-                            Duration = "2 nights",
+                            Duration = 2,
                             HasComplaint = false,
                             IsLateBooking = false,
                             NumberOfAdults = 1,
@@ -274,15 +274,10 @@ namespace Tc.Crm.Service.Client.Console
                         new ExtraService {
                             EndDate = "20170202",
                             #region booking.services.extraservice.extraservicecode
-                            ExtraServiceCode = new ExtraServiceCode {
-
-                            },
+                            ExtraServiceCode = "ESCODE001",
                             #endregion booking.services.extraservice.extraservicecode
                             #region  booking.services.extraservicedescription
-                            ExtraServiceDescription = new ExtraServiceDescription
-                            {
-
-                            },
+                            ExtraServiceDescription = "Extra Service For You.",
                             #endregion  booking.services.extraservicedescription
                             Order = 1,
                             #region booking.services.remark
@@ -334,12 +329,12 @@ namespace Tc.Crm.Service.Client.Console
                                     new Remark
                                     {
                                         Text = "Transport remark 1",
-                                        RemarkType = RemarkType.T
+                                        RemarkType = RemarkType.TO
                                     }
                                 },
                                 #endregion booking.services,transport.remark
                                 StartDate = "20170131",
-                                TransferType = TransferType.I,
+                                TransferType = TransferType.IN,
                                 TransportCode = "TR001",
                                 TransportDescription = "Flight to new york"
                             }
@@ -374,7 +369,7 @@ namespace Tc.Crm.Service.Client.Console
                                 },
                                 #endregion booking.services.transfer.remark
                                 StartDate = "20170131",
-                                TransferType = TransferType.I,
+                                TransferType = TransferType.IN,
                                 TransferCode = "TR001",
                                 TransferDescription = "Flight to new york",
                                 Category = "Flight"
@@ -388,20 +383,20 @@ namespace Tc.Crm.Service.Client.Console
                         {
                     new TravelParticipant
                     {
-                        Age = 21,
+                        Age = "21",
                         Birthdate = "08101982",
                         FirstName = "Barney",
-                        Gender = Gender.M,
+                        Gender = Gender.Male,
                         Language = "Bro-English",
                         LastName = "Stinston",
-                        Relation =Relation.C,
+                        Relation =Relation.Child,
                         #region booking.TravelParticipant.remark
                         Remark = new Remark[]
                         {
                             new Remark
                             {
                                 Text = "Travel Participant Remark 1",
-                                RemarkType = RemarkType.T
+                                RemarkType = RemarkType.TO
                             }
                         },
                         #endregion booking.TravelParticipant.remark
