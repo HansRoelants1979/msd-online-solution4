@@ -94,39 +94,34 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
     [DataContract(Name = "BookingStatus")]
     public enum BookingStatus
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "B")]
         [EnumMember]
-        B,
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "C")]
+        Booked,
         [EnumMember]
-        C
+        Cancelled
     }
 
     [DataContract(Name = "Gender")]
     public enum Gender
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "M")]
         [EnumMember]
-        M,
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "F")]
+        Male,
         [EnumMember]
-        F,
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "U")]
+        Female,
         [EnumMember]
-        U
+        Unknown
     }
     [DataContract(Name = "Relation")]
     public enum Relation
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "P")]
         [EnumMember]
-        P,
+        Participant,
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "C")]
         [EnumMember]
-        C,
+        Child,
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "I")]
         [EnumMember]
-        I
+        Infant
     }
     [DataContract(Name = "BoardType")]
     public enum BoardType
@@ -143,36 +138,36 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "OK")]
         [EnumMember]
         OK,
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "R")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "RQ")]
         [EnumMember]
-        R,
+        RQ,
         [EnumMember]
         PR
     }
     [DataContract(Name = "TransferType")]
     public enum TransferType
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "I")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "IN")]
         [EnumMember]
-        I,
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "O")]
+        IN,
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "OT")]
         [EnumMember]
-        O,
+        OT,
         [EnumMember]
         TH
     }
     [DataContract(Name = "CustomerStatus")]
     public enum CustomerStatus
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "A")]
         [EnumMember]
         A,
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "D")]
         [EnumMember]
         D,
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "B")]
         [EnumMember]
-        B
+        B,
+        [EnumMember]
+        I
+        
     }
     [DataContract(Name = "CustomerType")]
     public enum CustomerType
@@ -206,9 +201,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
     [DataContract(Name = "RemarkType")]
     public enum RemarkType
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "T")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "TO")]
         [EnumMember]
-        T,
+        TO,
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "A")]
         [EnumMember]
         A
@@ -257,7 +252,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         public string ReturnDate { get; set; }
 
         [DataMember(Name = "duration")]
-        public string Duration { get; set; }
+        public int Duration { get; set; }
 
         [DataMember(Name = "destination")]
         public string Destination { get; set; }
@@ -326,7 +321,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         public string LastName { get; set; }
 
         [DataMember(Name = "age")]
-        public int Age { get; set; }
+        public string Age { get; set; }
 
         [DataMember(Name = "gender")]
         public Gender Gender { get; set; }
@@ -546,25 +541,17 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         public Remark[] Remark { get; set; }
     }
 
-    [DataContract(Name = "extraServiceCode")]
-    public class ExtraServiceCode
-    {
-    }
 
-    [DataContract(Name = "extraServiceDescription")]
-    public class ExtraServiceDescription
-    {
-    }
 
     [DataContract(Name = "extraService")]
     public class ExtraService
     {
 
         [DataMember(Name = "extraServiceCode")]
-        public ExtraServiceCode ExtraServiceCode { get; set; }
+        public string ExtraServiceCode { get; set; }
 
         [DataMember(Name = "extraServiceDescription")]
-        public ExtraServiceDescription ExtraServiceDescription { get; set; }
+        public string ExtraServiceDescription { get; set; }
 
         [DataMember(Name = "order")]
         public int Order { get; set; }
@@ -748,7 +735,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
         [DataMember(Name = "social")]
         public Social[] Social { get; set; }
-    }      
+    }
 
     [DataContract(Name = "booking_booker")]
     public class BookingBooker
@@ -765,3 +752,4 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         public string EmergencyNumber { get; set; }
     }
 }
+

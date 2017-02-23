@@ -97,7 +97,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
                     LastName = "Blog",
                     AcademicTitle = "MS",
                     Birthdate = "1982-10-08",
-                    Gender = Gender.F,
+                    Gender = Gender.Female,
                     Language = "English",
                     MiddleName = "Tom",
                     Salutation = "Mr"
@@ -133,7 +133,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
                     LastName = "Blog",
                     AcademicTitle = "MS",
                     Birthdate = "1982-10-08",
-                    Gender = Gender.F,
+                    Gender = Gender.Female,
                     Language = "English",
                     MiddleName = "Tom",
                     Salutation = "Mr"
@@ -174,7 +174,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
                     LastName = "Blog",
                     AcademicTitle = "MS",
                     Birthdate = "1982-10-08",
-                    Gender = Gender.F,
+                    Gender = Gender.Female,
                     Language = "English",
                     MiddleName = "Tom",
                     Salutation = "Mr"
@@ -215,7 +215,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
                     LastName = "Blog",
                     AcademicTitle = "MS",
                     Birthdate = "1982-10-08",
-                    Gender = Gender.F,
+                    Gender = Gender.Female,
                     Language = "English",
                     MiddleName = "Tom",
                     Salutation = "Mr"
@@ -282,7 +282,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
                     LastName = "Blog",
                     AcademicTitle = "MS",
                     Birthdate = "1982-10-08",
-                    Gender = Gender.F,
+                    Gender = Gender.Female,
                     Language = "English",
                     MiddleName = "Tom",
                     Salutation = "Mr"

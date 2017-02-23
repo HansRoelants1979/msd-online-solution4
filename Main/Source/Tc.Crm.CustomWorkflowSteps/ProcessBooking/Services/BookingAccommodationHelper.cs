@@ -89,7 +89,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 for (int i = 0; i < accommodation.Length; i++)
                 {
 
-                    if (accommodation[i].Status == AccommodationStatus.OK || accommodation[i].Status == AccommodationStatus.PR || accommodation[i].Status == AccommodationStatus.R)
+                    if (accommodation[i].Status == AccommodationStatus.OK || accommodation[i].Status == AccommodationStatus.PR || accommodation[i].Status == AccommodationStatus.RQ)
                     {
                         trace.Trace("Booking " + i.ToString() + " Accommodation record Deactivation - start");
                         var bookingAccommodationEntity = new Entity(EntityName.BookingAccommodation, Guid.Parse(xrmResponseList[i].Id));

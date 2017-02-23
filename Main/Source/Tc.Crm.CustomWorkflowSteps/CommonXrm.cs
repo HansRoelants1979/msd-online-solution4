@@ -73,13 +73,13 @@ namespace Tc.Crm.CustomWorkflowSteps
                     {
                         switch (text)
                         {
-                            case "M":
+                            case "Male":
                                 value = 950000000;
                                 break;
-                            case "F":
+                            case "Female":
                                 value = 950000001;
                                 break;
-                            case "U":
+                            case "Unknown":
                                 value = 950000002;
                                 break;
                         }
@@ -282,7 +282,13 @@ namespace Tc.Crm.CustomWorkflowSteps
                             case "PR":
                                 value = 950000001;
                                 break;
-                            case "R":
+                            case "RQ":
+                                value = 950000000;
+                                break;
+                            case "Booked":
+                                value = 950000001;
+                                break;
+                            case "Cancelled":
                                 value = 950000000;
                                 break;
 

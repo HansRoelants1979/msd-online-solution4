@@ -42,19 +42,19 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             trace.Trace("Preparing Booking Transfer information - Start");
             string bookingNumber = bookinginfo.BookingIdentifier.BookingNumber;
             var extraServiceEntity = new Entity(EntityName.BookingExtraService);
-            //please dont remove comments ...need to talk with John or deba on this 
-            //if (extraService.ExtraServiceCode != null)
-            //    extraServiceEntity[Attributes.BookingExtraService.ExtraServiceCode] = extraService.ExtraServiceCode;
-            //if (extraService.ExtraServiceDescription != null)
-            //{
-            //    extraServiceEntity[Attributes.BookingExtraService.Name] = extraService.ExtraServiceDescription.ToString();
 
-            //}
-            //else
-            //{
-            extraServiceEntity[Attributes.BookingExtraService.Name] = bookingNumber;
+            if (extraService.ExtraServiceCode != null)
+                extraServiceEntity[Attributes.BookingExtraService.ExtraServiceCode] = extraService.ExtraServiceCode;
+            if (extraService.ExtraServiceDescription != null)
+            {
+                extraServiceEntity[Attributes.BookingExtraService.Name] = extraService.ExtraServiceDescription;
 
-            //}
+            }
+            else
+            {
+                extraServiceEntity[Attributes.BookingExtraService.Name] = bookingNumber;
+
+            }
             extraServiceEntity[Attributes.BookingExtraService.Order] = extraService.Order;
             if (extraService.StartDate != null)
                 extraServiceEntity[Attributes.BookingExtraService.StartDateandTime] = DateTime.Parse(extraService.StartDate);

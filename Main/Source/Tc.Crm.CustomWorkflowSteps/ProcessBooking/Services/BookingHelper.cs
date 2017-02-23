@@ -90,7 +90,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
         public static Entity DeActivateBooking(Booking booking, Guid bookingId, ITracingService trace)
         {
             Entity bookingEntity = null;
-            if (booking.BookingGeneral.BookingStatus == BookingStatus.B || booking.BookingGeneral.BookingStatus == BookingStatus.C)
+            if (booking.BookingGeneral.BookingStatus == BookingStatus.Booked || booking.BookingGeneral.BookingStatus == BookingStatus.Cancelled)
             {
                 trace.Trace("Booking record Deactivation - start");
                 bookingEntity = new Entity(EntityName.Booking, bookingId);
