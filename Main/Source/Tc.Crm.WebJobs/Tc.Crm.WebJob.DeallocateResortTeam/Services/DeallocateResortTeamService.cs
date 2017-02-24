@@ -33,6 +33,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
             IList<Guid> destinationGateways = GetDestinationGateways();
             if (destinationGateways != null && destinationGateways.Count > 0)
             {
+
                 logger.LogInformation("Processing for " + destinationGateways.Count.ToString() + " Destination Gateways");
 
                 IList<BookingDeallocationResponse> bookingDeallocationResponse = deAllocationService.GetBookingAllocations(new
@@ -42,6 +43,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                     Destination = destinationGateways
                 });
 
+                logger.LogInformation("bookingDeallocationResponse.Count:" + bookingDeallocationResponse.Count);
                 IList<BookingDeallocationResortTeamRequest> bookingAllocationResortTeamRequest = ProcessDeallocationResponse(bookingDeallocationResponse);
                 deAllocationService.ProcessBookingAllocations(bookingAllocationResortTeamRequest);
                 
@@ -49,6 +51,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
             else
             {
                 logger.LogInformation("No Gateways found to process");
+                throw new InvalidOperationException("No Gateways found to process");
             }
 
         }
@@ -70,6 +73,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
 
         public IList<BookingDeallocationResortTeamRequest> ProcessDeallocationResponse(IList<BookingDeallocationResponse> bookingDeallocationResponse)
         {
+            logger.LogInformation("ProcessDeallocationResponse - start");
             IList<BookingDeallocationResortTeamRequest> bookingDeallocationResortTeamRequest = null;
             if (bookingDeallocationResponse != null && bookingDeallocationResponse.Count > 0)
             {
@@ -103,18 +107,22 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                     }
                 }
             }
+            logger.LogInformation("ProcessDeallocationResponse - end");
             return bookingDeallocationResortTeamRequest;
         }
 
         public void AddResortTeamRequest(BookingDeallocationResponse bookingResponse, IList<BookingDeallocationResortTeamRequest> bookingDeallocationResortTeamRequest)
         {
+            logger.LogInformation("AddResortTeamRequest - start");
             BookingDeallocationResortTeamRequest bookingTeamRequest = PrepareResortTeamRequest(bookingResponse);
             if (bookingTeamRequest != null && bookingDeallocationResortTeamRequest != null)
                 bookingDeallocationResortTeamRequest.Add(bookingTeamRequest);
+            logger.LogInformation("AddResortTeamRequest - end");
         }
 
         public BookingDeallocationResortTeamRequest PrepareResortTeamRequest(BookingDeallocationResponse bookingResponse)
         {
+            logger.LogInformation("PrepareResortTeamRequest - start");
             BookingDeallocationResortTeamRequest bookingTeamRequest = null;
             if (bookingResponse != null && configurationService.DefaultUserId != null)
             {
@@ -136,6 +144,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                     };
                 }
             }
+            logger.LogInformation("PrepareResortTeamRequest - end");
             return bookingTeamRequest;
         }
 
