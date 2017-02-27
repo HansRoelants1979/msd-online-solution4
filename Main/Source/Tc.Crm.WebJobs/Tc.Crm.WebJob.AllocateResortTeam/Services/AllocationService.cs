@@ -39,7 +39,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                                                     <attribute name='tc_bookingid'/>
                                                     <attribute name='tc_name'/>
                                                     <attribute name='ownerid'/>
-                                                    <order attribute='tc_name' descending='false'/>
+                                                    <order attribute='tc_name' descending='false'/>                                                    
                                                     <filter type='and'>
                                                         <filter type='and'>
                                                                 <filter type='or'>
@@ -57,6 +57,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                                                     <link-entity name='tc_bookingaccommodation' alias='accommodation' from='tc_bookingid' to='tc_bookingid'>
                                                         <attribute name='tc_startdateandtime'/>
                                                         <attribute name='tc_enddateandtime'/>
+                                                        <order attribute='tc_startdateandtime' descending='false'/>
                                                             <link-entity name='tc_hotel' alias='hotel' from='tc_hotelid' to='tc_hotelid'>
                                                                 <attribute name='ownerid'/>
                                                             </link-entity>
@@ -97,7 +98,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
             logger.LogInformation("PrepareBookingAllocation - start");
             if (bookingCollection == null || bookingCollection.Entities.Count == 0)
             {
-                logger.LogWarning("No records found in CRM for he schedule.");
+                logger.LogWarning("No records found in CRM for the schedule.");
                 return null;
             }
 
@@ -110,6 +111,8 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                 var response = new BookingAllocationResponse();
                 if (booking.Contains(Booking.BookingId) && booking[Booking.BookingId] != null)
                     response.BookingId = Guid.Parse(booking.Attributes[Booking.BookingId].ToString());
+                if (booking.Contains(Booking.Name) && booking.Attributes[Booking.Name] != null)
+                    response.BookingNumber = booking.Attributes[Booking.Name].ToString();
                 if (booking.Contains(Booking.Owner) && booking[Booking.Owner] != null)
                 {
                     EntityReference owner = (EntityReference)booking.Attributes[Booking.Owner];

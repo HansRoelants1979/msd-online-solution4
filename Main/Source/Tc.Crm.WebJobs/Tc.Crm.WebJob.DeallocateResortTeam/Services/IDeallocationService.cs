@@ -10,7 +10,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
 {
     public interface IDeallocationService:IDisposable
     {
-        IList<BookingDeallocationResponse> GetBookingAllocations(BookingDeallocationRequest bookingDeallocationRequest);
+        IList<BookingDeallocationResponse> GetBookingDeallocations(BookingDeallocationRequest bookingDeallocationRequest);
         IList<BookingDeallocationResponse> PrepareBookingDeallocation(EntityCollection bookingCollection);
         StringBuilder GetDestinationGateways(IList<Guid> destinationGateways);
         void ProcessBookingAllocations(IList<BookingDeallocationResortTeamRequest> bookingDeallocationResortTeamRequest);

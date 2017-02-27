@@ -24,7 +24,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
             this.crmService = crmService;
         }
 
-        public IList<BookingDeallocationResponse> GetBookingAllocations(BookingDeallocationRequest bookingDeallocationRequest)
+        public IList<BookingDeallocationResponse> GetBookingDeallocations(BookingDeallocationRequest bookingDeallocationRequest)
         {
             logger.LogInformation("GetBookingAllocations - start");
             IList<BookingDeallocationResponse> bookingAllocationResponse = null;
@@ -103,15 +103,22 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                         if (booking.Contains(Booking.BookingId) && booking[Booking.BookingId] != null)
                             response.BookingId = Guid.Parse(booking[Booking.BookingId].ToString());
 
-                        if (booking.Contains(AliasName.HotelAliasName + Hotel.HotelId) && booking[AliasName.HotelAliasName + Hotel.HotelId] != null)
-                            response.HotelId = Guid.Parse(((AliasedValue)booking[AliasName.HotelAliasName + Hotel.HotelId]).Value.ToString());
+                        if (booking.Contains(Booking.Name) && booking[Booking.Name] != null)
+                            response.BookingNumber = booking[Booking.Name].ToString();
 
-                        if (booking.Contains(AliasName.AccommodationAliasName + BookingAccommodation.EndDateandTime) && booking[AliasName.AccommodationAliasName + BookingAccommodation.EndDateandTime] != null)
-                            response.AccommodationEndDate = DateTime.Parse(((AliasedValue)booking[AliasName.AccommodationAliasName + BookingAccommodation.EndDateandTime]).Value.ToString());
+                        var fieldHotelId = AliasName.HotelAliasName + Hotel.HotelId;
+                        var fieldEndDate = AliasName.AccommodationAliasName + BookingAccommodation.EndDateandTime;
+                        var fieldCustomer = AliasName.RoleAliasName + CustomerBookingRole.Customer;
 
-                        if (booking.Contains(AliasName.RoleAliasName + CustomerBookingRole.Customer) && booking[AliasName.RoleAliasName + CustomerBookingRole.Customer] != null)
+                        if (booking.Contains(fieldHotelId) && booking[fieldHotelId] != null)
+                            response.HotelId = Guid.Parse(((AliasedValue)booking[fieldHotelId]).Value.ToString());
+
+                        if (booking.Contains(fieldEndDate) && booking[fieldEndDate] != null)
+                            response.AccommodationEndDate = DateTime.Parse(((AliasedValue)booking[fieldEndDate]).Value.ToString());
+
+                        if (booking.Contains(fieldCustomer) && booking[fieldCustomer] != null)
                         {
-                            EntityReference customer = (EntityReference)((AliasedValue)booking[AliasName.RoleAliasName + CustomerBookingRole.Customer]).Value;
+                            EntityReference customer = (EntityReference)((AliasedValue)booking[fieldCustomer]).Value;
                             CustomerType customerType;
 
                             if (customer.LogicalName == EntityName.Contact)

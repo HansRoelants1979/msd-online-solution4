@@ -35,6 +35,10 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
                     logger.LogInformation("Tc.Crm.WebJob.AllocateResortTeam Job End");
                 }
             }
+            catch (FaultException<Microsoft.Xrm.Sdk.OrganizationServiceFault> ex)
+            {
+                logger.LogError(ex.ToString());
+            }
             catch (TimeoutException ex)
             {
                 logger.LogError(ex.ToString());

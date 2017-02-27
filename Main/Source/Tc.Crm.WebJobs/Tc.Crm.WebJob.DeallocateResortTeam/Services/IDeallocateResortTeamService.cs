@@ -10,10 +10,10 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
     interface IDeallocateResortTeamService : IDisposable
     {
         void Run();
-        void GetBookingAllocations();
-        BookingDeallocationResortTeamRequest PrepareResortTeamRequest(BookingDeallocationResponse bookingDeallocationResponse);
+        void GetBookingDeallocations();
+        BookingDeallocationResortTeamRequest PrepareResortTeamRemovalRequest(BookingDeallocationResponse bookingDeallocationResponse);
         IList<BookingDeallocationResortTeamRequest> ProcessDeallocationResponse(IList<BookingDeallocationResponse> bookingDeallocationResponse);
         IList<Guid> GetDestinationGateways();
-        void AddResortTeamRequest(BookingDeallocationResponse bookingResponse, IList<BookingDeallocationResortTeamRequest> bookingDeallocationResortTeamRequest);
+        void AddResortTeamRemovalRequest(BookingDeallocationResponse bookingResponse, IList<BookingDeallocationResortTeamRequest> bookingDeallocationResortTeamRequest);
     }
 }

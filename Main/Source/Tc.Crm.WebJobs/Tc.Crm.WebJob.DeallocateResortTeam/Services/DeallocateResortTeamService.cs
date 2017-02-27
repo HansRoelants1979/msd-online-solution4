@@ -24,10 +24,10 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
 
         public void Run()
         {
-            GetBookingAllocations();
+            GetBookingDeallocations();
         }
 
-        public void GetBookingAllocations()
+        public void GetBookingDeallocations()
         {
             logger.LogInformation("Executing GetBookingAllocations");
             IList<Guid> destinationGateways = GetDestinationGateways();
@@ -36,16 +36,19 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
 
                 logger.LogInformation("Processing for " + destinationGateways.Count.ToString() + " Destination Gateways");
 
-                IList<BookingDeallocationResponse> bookingDeallocationResponse = deAllocationService.GetBookingAllocations(new
+                IList<BookingDeallocationResponse> bookingDeallocationResponse = deAllocationService.GetBookingDeallocations(new
                                                                                 BookingDeallocationRequest
                 {
                     AccommodationEndDate = DateTime.Now.Date,
                     Destination = destinationGateways
                 });
 
-                logger.LogInformation("bookingDeallocationResponse.Count:" + bookingDeallocationResponse.Count);
-                IList<BookingDeallocationResortTeamRequest> bookingAllocationResortTeamRequest = ProcessDeallocationResponse(bookingDeallocationResponse);
-                deAllocationService.ProcessBookingAllocations(bookingAllocationResortTeamRequest);
+                if (bookingDeallocationResponse != null)
+                {
+                    logger.LogInformation("bookingDeallocationResponse.Count:" + bookingDeallocationResponse.Count);
+                    IList<BookingDeallocationResortTeamRequest> bookingDeallocationResortTeamRequest = ProcessDeallocationResponse(bookingDeallocationResponse);
+                    deAllocationService.ProcessBookingAllocations(bookingDeallocationResortTeamRequest);
+                }
                 
             }
             else
@@ -77,10 +80,9 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
             IList<BookingDeallocationResortTeamRequest> bookingDeallocationResortTeamRequest = null;
             if (bookingDeallocationResponse != null && bookingDeallocationResponse.Count > 0)
             {
-                bookingDeallocationResortTeamRequest = new List<BookingDeallocationResortTeamRequest>();
-                var currentHotelGuid = Guid.Empty;
-                var currentBookingId = Guid.Empty;
+                bookingDeallocationResortTeamRequest = new List<BookingDeallocationResortTeamRequest>();               
                 var currentAccommodationEndDate = (DateTime?)null;
+                List<Guid> processedCustomer = new List<Guid>();
                 for (int i = 0; i < bookingDeallocationResponse.Count; i++)
                 {
                     if (bookingDeallocationResponse[i] != null)
@@ -88,20 +90,14 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                         var bookingResponse = bookingDeallocationResponse[i];
                         if (bookingResponse != null)
                         {
-                            var previousHotelGuid = currentHotelGuid;
-                            var previousBookingId = currentBookingId;
-                            var previousAccommodationEndDate = currentAccommodationEndDate;
-
-                            currentHotelGuid = bookingResponse.HotelId;
-                            currentBookingId = bookingResponse.BookingId;
                             currentAccommodationEndDate = bookingResponse.AccommodationEndDate;
-
                             if (currentAccommodationEndDate.Value.Date == DateTime.Now.Date)
                             {
-                                if (previousHotelGuid != currentHotelGuid && previousBookingId != currentBookingId && previousAccommodationEndDate != currentAccommodationEndDate)
+                                if (bookingResponse.Customer != null && bookingResponse.Customer.Id != null && !processedCustomer.Contains(bookingResponse.Customer.Id))
                                 {
-                                    AddResortTeamRequest(bookingResponse, bookingDeallocationResortTeamRequest);
-                                }
+                                    AddResortTeamRemovalRequest(bookingResponse, bookingDeallocationResortTeamRequest);
+                                    processedCustomer.Add(bookingResponse.Customer.Id);
+                                }                             
                             }
                         }
                     }
@@ -111,25 +107,25 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
             return bookingDeallocationResortTeamRequest;
         }
 
-        public void AddResortTeamRequest(BookingDeallocationResponse bookingResponse, IList<BookingDeallocationResortTeamRequest> bookingDeallocationResortTeamRequest)
+        public void AddResortTeamRemovalRequest(BookingDeallocationResponse bookingResponse, IList<BookingDeallocationResortTeamRequest> bookingDeallocationResortTeamRequest)
         {
             logger.LogInformation("AddResortTeamRequest - start");
-            BookingDeallocationResortTeamRequest bookingTeamRequest = PrepareResortTeamRequest(bookingResponse);
+            BookingDeallocationResortTeamRequest bookingTeamRequest = PrepareResortTeamRemovalRequest(bookingResponse);
             if (bookingTeamRequest != null && bookingDeallocationResortTeamRequest != null)
                 bookingDeallocationResortTeamRequest.Add(bookingTeamRequest);
             logger.LogInformation("AddResortTeamRequest - end");
         }
 
-        public BookingDeallocationResortTeamRequest PrepareResortTeamRequest(BookingDeallocationResponse bookingResponse)
+        public BookingDeallocationResortTeamRequest PrepareResortTeamRemovalRequest(BookingDeallocationResponse bookingResponse)
         {
             logger.LogInformation("PrepareResortTeamRequest - start");
-            BookingDeallocationResortTeamRequest bookingTeamRequest = null;
+            BookingDeallocationResortTeamRequest bookingDeallocationResortTeamRequest = null;
             if (bookingResponse != null && configurationService.DefaultUserId != null)
             {
-                bookingTeamRequest = new BookingDeallocationResortTeamRequest();
+                bookingDeallocationResortTeamRequest = new BookingDeallocationResortTeamRequest();
                 if (bookingResponse.BookingId != null)
                 {
-                    bookingTeamRequest.BookingResortTeamRequest = new BookingResortTeamRequest
+                    bookingDeallocationResortTeamRequest.BookingResortTeamRequest = new BookingResortTeamRequest
                     {
                         Id = bookingResponse.BookingId,
                         Owner = new Owner { Id= Guid.Parse(configurationService.DefaultUserId),OwnerType=OwnerType.User }
@@ -137,7 +133,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                 }
                 if (bookingResponse.Customer != null && bookingResponse.Customer.Id != null)
                 {
-                    bookingTeamRequest.CustomerResortTeamRequest = new CustomerResortTeamRequest
+                    bookingDeallocationResortTeamRequest.CustomerResortTeamRequest = new CustomerResortTeamRequest
                     {
                         Customer = bookingResponse.Customer,
                         Owner = new Owner { Id = Guid.Parse(configurationService.DefaultUserId), OwnerType = OwnerType.User }
@@ -145,7 +141,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                 }
             }
             logger.LogInformation("PrepareResortTeamRequest - end");
-            return bookingTeamRequest;
+            return bookingDeallocationResortTeamRequest;
         }
 
         public void Dispose()
