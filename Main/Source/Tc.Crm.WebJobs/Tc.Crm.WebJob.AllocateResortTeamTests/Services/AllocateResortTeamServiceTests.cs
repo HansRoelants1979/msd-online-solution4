@@ -133,8 +133,6 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             hotelEntityCollection.Add(hot1Id, hot1);
             #endregion Hotel
 
-
-
             #region accommodation
             var accommodationEntityCollection = new Dictionary<Guid, Entity>();
             var acc1Id = Guid.NewGuid();

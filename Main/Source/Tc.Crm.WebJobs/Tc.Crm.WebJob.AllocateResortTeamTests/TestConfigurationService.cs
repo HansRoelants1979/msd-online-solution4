@@ -22,11 +22,11 @@ namespace Tc.Crm.WebJob.AllocateResortTeamTests
             }
         }
 
-        public string DefaultUserId
+        public Guid DefaultUserId
         {
             get
             {
-                return "my connection string";
+                return Guid.Empty;
             }
         }
 

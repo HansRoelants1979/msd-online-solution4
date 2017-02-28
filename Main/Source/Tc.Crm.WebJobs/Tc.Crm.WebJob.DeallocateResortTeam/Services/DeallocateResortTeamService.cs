@@ -10,7 +10,7 @@ using Tc.Crm.WebJob.DeallocateResortTeam.Models;
 
 namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
 {
-    class DeallocateResortTeamService : IDeallocateResortTeamService
+    public class DeallocateResortTeamService : IDeallocateResortTeamService
     {
         ILogger logger;
         IDeallocationService deAllocationService;
@@ -43,13 +43,11 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                     Destination = destinationGateways
                 });
 
-                if (bookingDeallocationResponse != null)
-                {
-                    logger.LogInformation("bookingDeallocationResponse.Count:" + bookingDeallocationResponse.Count);
-                    IList<BookingDeallocationResortTeamRequest> bookingDeallocationResortTeamRequest = ProcessDeallocationResponse(bookingDeallocationResponse);
-                    deAllocationService.ProcessBookingAllocations(bookingDeallocationResortTeamRequest);
-                }
-                
+                if (bookingDeallocationResponse == null) return;
+
+                logger.LogInformation("bookingDeallocationResponse.Count:" + bookingDeallocationResponse.Count);
+                IList<BookingDeallocationResortTeamRequest> bookingDeallocationResortTeamRequest = ProcessDeallocationResponse(bookingDeallocationResponse);
+                deAllocationService.ProcessBookingAllocations(bookingDeallocationResortTeamRequest);
             }
             else
             {
@@ -77,86 +75,80 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
         public IList<BookingDeallocationResortTeamRequest> ProcessDeallocationResponse(IList<BookingDeallocationResponse> bookingDeallocationResponse)
         {
             logger.LogInformation("ProcessDeallocationResponse - start");
-            IList<BookingDeallocationResortTeamRequest> bookingDeallocationResortTeamRequest = null;
-            if (bookingDeallocationResponse != null && bookingDeallocationResponse.Count > 0)
+            if (bookingDeallocationResponse == null || bookingDeallocationResponse.Count == 0)
+                return null;
+
+            var bookingDeallocationResortTeamRequest = new List<BookingDeallocationResortTeamRequest>();
+            var processedCustomers = new List<Guid>();
+            var processedBookings = new List<Guid>();
+
+            for (int i = 0; i < bookingDeallocationResponse.Count; i++)
             {
-                bookingDeallocationResortTeamRequest = new List<BookingDeallocationResortTeamRequest>();
-                List<Guid> processedCustomer = new List<Guid>();
-                var previousCustomerId = Guid.Empty;
-                var currentCustomerId = Guid.Empty;
-                var currentAccommodationEndDate = (DateTime?)null;
-                var previousAccommodationEndDate = (DateTime?)null;
-                var currentBookingId = Guid.Empty;
-                var previousBookingId = Guid.Empty;
-                bool differentBooking, sameBookingDifferentCustomer;
-                for (int i = 0; i < bookingDeallocationResponse.Count; i++)
+                var bookingResponse = bookingDeallocationResponse[i];
+                if (!ValidForProcessing(bookingResponse, processedCustomers)) continue;
+
+                var differentBooking = !processedBookings.Contains(bookingResponse.BookingId);
+
+                var sameBookingDifferentCustomer = (processedBookings.Contains(bookingResponse.BookingId)
+                                                    && !processedCustomers.Contains(bookingResponse.Customer.Id));
+
+
+                if (!differentBooking && !sameBookingDifferentCustomer) continue;
+
+                WriteDeallocationResponseLog(bookingResponse);
+                if (sameBookingDifferentCustomer)
                 {
-                    if (bookingDeallocationResponse[i] != null)
+                    //Add only Customer
+                    bookingDeallocationResortTeamRequest.Add(new BookingDeallocationResortTeamRequest()
                     {
-                        var bookingResponse = bookingDeallocationResponse[i];
-                        if (bookingResponse.Customer == null) continue;
-                        if (bookingResponse != null)
-                        {
-                            currentBookingId = bookingResponse.BookingId;
-                            currentCustomerId = bookingResponse.Customer.Id;
-                            currentAccommodationEndDate = bookingResponse.AccommodationEndDate;
-
-                            if (processedCustomer.Contains(currentCustomerId))
-                            {
-                                logger.LogWarning("Customer " + bookingResponse.Customer.Name + " was already processed.");
-                                continue;
-                            }
-                            if (currentAccommodationEndDate == null)
-                            {
-                                logger.LogWarning("Accommodation EndDate is null");
-                                continue;
-                            }
-                            
-
-                            differentBooking = (previousBookingId != currentBookingId);
-                            sameBookingDifferentCustomer = (previousBookingId == currentBookingId && previousAccommodationEndDate == currentAccommodationEndDate && previousCustomerId != currentCustomerId);
-
-                           
-                            if (differentBooking || sameBookingDifferentCustomer)
-                            {
-                                if (bookingResponse.BookingOwner.OwnerType == OwnerType.Team)
-                                {
-                                    WriteDeallocationResponseLog(bookingResponse);
-                                    if (sameBookingDifferentCustomer)
-                                    {
-                                        //Add only Customer
-                                        bookingDeallocationResortTeamRequest.Add(PrepareCustomerResortTeamRemovalRequest(bookingResponse));
-                                    }
-                                    else
-                                    {
-                                        //Add Booking, Customer
-                                        AddResortTeamRemovalRequest(bookingResponse, bookingDeallocationResortTeamRequest);
-                                    }
-                                    previousCustomerId = currentCustomerId;
-                                    previousBookingId = currentBookingId;
-                                    previousAccommodationEndDate = currentAccommodationEndDate;
-                                    processedCustomer.Add(currentCustomerId);
-                                }
-                            }
-                        }
-                    }
+                        CustomerResortTeamRequest = PrepareCustomerResortTeamRemovalRequest(bookingResponse)
+                    });
                 }
+                else if (differentBooking)
+                {
+                    //Add Booking, Customer
+                    AddResortTeamRemovalRequest(bookingResponse, bookingDeallocationResortTeamRequest);
+                }
+
+                processedCustomers.Add(bookingResponse.Customer.Id);
+                processedBookings.Add(bookingResponse.BookingId);
             }
             logger.LogInformation("ProcessDeallocationResponse - end");
             return bookingDeallocationResortTeamRequest;
+        }
+
+        private bool ValidForProcessing(BookingDeallocationResponse bookingResponse, List<Guid> processedCustomers)
+        {
+            if (bookingResponse == null) return false;
+            if (bookingResponse.Customer == null) return false;
+            if (bookingResponse.BookingOwner.OwnerType == OwnerType.User) return false;
+
+            //customer already deallocated
+            if (processedCustomers.Contains(bookingResponse.Customer.Id))
+            {
+                logger.LogWarning("Customer " + bookingResponse.Customer.Name + " was already processed.");
+                return false;
+            }
+            //accommodation end date is not provided
+            if (bookingResponse.AccommodationEndDate == null)
+            {
+                logger.LogWarning("Accommodation EndDate is null");
+                return false;
+            }
+            return true;
         }
 
         public void WriteDeallocationResponseLog(BookingDeallocationResponse bookingDeallocationResponse)
         {
             if (bookingDeallocationResponse != null)
             {
-                StringBuilder information = new StringBuilder();
+                var information = new StringBuilder();
                 if (bookingDeallocationResponse.BookingNumber != null)
                     information.AppendLine("****** Deallocating Booking: " + bookingDeallocationResponse.BookingNumber + " ******");
                 if (bookingDeallocationResponse.Customer != null)
                     information.AppendLine("Customer: " + bookingDeallocationResponse.Customer.Name + " of Type " + bookingDeallocationResponse.Customer.CustomerType.ToString());
                 if (bookingDeallocationResponse.AccommodationEndDate != null)
-                    information.AppendLine("Accommodation End Date: " + bookingDeallocationResponse.AccommodationEndDate.Value.ToString());                
+                    information.AppendLine("Accommodation End Date: " + bookingDeallocationResponse.AccommodationEndDate.Value.ToString());
 
                 logger.LogInformation(information.ToString());
             }
@@ -166,56 +158,51 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
         public void AddResortTeamRemovalRequest(BookingDeallocationResponse bookingResponse, IList<BookingDeallocationResortTeamRequest> bookingDeallocationResortTeamRequest)
         {
             logger.LogInformation("AddResortTeamRemovalRequest - start");
-            BookingDeallocationResortTeamRequest bookingTeamRequest = PrepareResortTeamRemovalRequest(bookingResponse);
+            var bookingTeamRequest = PrepareResortTeamRemovalRequest(bookingResponse);
             if (bookingTeamRequest != null && bookingDeallocationResortTeamRequest != null)
                 bookingDeallocationResortTeamRequest.Add(bookingTeamRequest);
             logger.LogInformation("AddResortTeamRemovalRequest - end");
         }
 
-        public BookingDeallocationResortTeamRequest PrepareCustomerResortTeamRemovalRequest(BookingDeallocationResponse bookingResponse)
+        public CustomerResortTeamRequest PrepareCustomerResortTeamRemovalRequest(BookingDeallocationResponse bookingResponse)
         {
             logger.LogInformation("PrepareCustomerResortTeamRemovalRequest - start");
-            BookingDeallocationResortTeamRequest bookingDeallocationResortTeamRequest = null;
-            if (bookingResponse != null && configurationService.DefaultUserId != null)
+            //guard clause
+            if (bookingResponse == null) return null;
+            if (bookingResponse.Customer == null || bookingResponse.Customer.Id == Guid.Empty) return null;
+            var customerResortTeamRequest = new CustomerResortTeamRequest
             {
-                bookingDeallocationResortTeamRequest = new BookingDeallocationResortTeamRequest();               
-                if (bookingResponse.Customer != null && bookingResponse.Customer.Id != null)
-                {
-                    bookingDeallocationResortTeamRequest.CustomerResortTeamRequest = new CustomerResortTeamRequest
-                    {
-                        Customer = bookingResponse.Customer,
-                        Owner = new Owner { Id = Guid.Parse(configurationService.DefaultUserId), OwnerType = OwnerType.User }
-                    };
-                }
-            }
+                Customer = bookingResponse.Customer,
+                Owner = new Owner { Id = configurationService.DefaultUserId, OwnerType = OwnerType.User }
+            };
             logger.LogInformation("PrepareCustomerResortTeamRemovalRequest - end");
-            return bookingDeallocationResortTeamRequest;
+            return customerResortTeamRequest;
+        }
+
+        public BookingResortTeamRequest PrepareBookingResortTeamRemovalRequest(BookingDeallocationResponse bookingResponse)
+        {
+            logger.LogInformation("PrepareCustomerResortTeamRemovalRequest - start");
+            if (bookingResponse == null) return null;
+            if (bookingResponse.BookingId == null || bookingResponse.BookingId == Guid.Empty) return null;
+
+            var bookingResortTeamRequest = new BookingResortTeamRequest
+            {
+                Id = bookingResponse.BookingId,
+                Owner = new Owner { Id = configurationService.DefaultUserId, OwnerType = OwnerType.User }
+            };
+
+            logger.LogInformation("PrepareCustomerResortTeamRemovalRequest - end");
+            return bookingResortTeamRequest;
         }
 
         public BookingDeallocationResortTeamRequest PrepareResortTeamRemovalRequest(BookingDeallocationResponse bookingResponse)
         {
             logger.LogInformation("PrepareResortTeamRemovalRequest - start");
-            BookingDeallocationResortTeamRequest bookingDeallocationResortTeamRequest = null;
-            if (bookingResponse != null && configurationService.DefaultUserId != null)
+            var bookingDeallocationResortTeamRequest = new BookingDeallocationResortTeamRequest()
             {
-                bookingDeallocationResortTeamRequest = new BookingDeallocationResortTeamRequest();
-                if (bookingResponse.BookingId != null)
-                {
-                    bookingDeallocationResortTeamRequest.BookingResortTeamRequest = new BookingResortTeamRequest
-                    {
-                        Id = bookingResponse.BookingId,
-                        Owner = new Owner { Id= Guid.Parse(configurationService.DefaultUserId),OwnerType=OwnerType.User }
-                    };
-                }
-                if (bookingResponse.Customer != null && bookingResponse.Customer.Id != null)
-                {
-                    bookingDeallocationResortTeamRequest.CustomerResortTeamRequest = new CustomerResortTeamRequest
-                    {
-                        Customer = bookingResponse.Customer,
-                        Owner = new Owner { Id = Guid.Parse(configurationService.DefaultUserId), OwnerType = OwnerType.User }
-                    };
-                }
-            }
+                CustomerResortTeamRequest = PrepareCustomerResortTeamRemovalRequest(bookingResponse),
+                BookingResortTeamRequest = PrepareBookingResortTeamRemovalRequest(bookingResponse)
+            };
             logger.LogInformation("PrepareResortTeamRemovalRequest - end");
             return bookingDeallocationResortTeamRequest;
         }

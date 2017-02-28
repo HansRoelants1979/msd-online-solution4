@@ -12,6 +12,6 @@ namespace Tc.Crm.Common.Services
         int DepartureDateInNextXDays { get; }
         int ExecuteMultipleBatchSize { get; }
         string DestinationGatewayIds { get; set; }
-        string DefaultUserId { get; }
+        Guid DefaultUserId { get; }
     }
 }
