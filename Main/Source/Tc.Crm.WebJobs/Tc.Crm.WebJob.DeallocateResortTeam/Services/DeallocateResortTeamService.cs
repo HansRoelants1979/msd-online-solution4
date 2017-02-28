@@ -29,7 +29,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
 
         public void GetBookingDeallocations()
         {
-            logger.LogInformation("Executing GetBookingAllocations");
+            logger.LogInformation("Executing GetBookingDeallocations");
             IList<Guid> destinationGateways = GetDestinationGateways();
             if (destinationGateways != null && destinationGateways.Count > 0)
             {

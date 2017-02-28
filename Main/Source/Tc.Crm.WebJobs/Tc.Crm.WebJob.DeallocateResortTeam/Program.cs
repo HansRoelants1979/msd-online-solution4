@@ -24,9 +24,9 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam
                 logger = unitycontainer.Resolve<ILogger>();
                 using (var deallocateResortTeamService = unitycontainer.Resolve<IDeallocateResortTeamService>())
                 {
-                    logger.LogInformation("Tc.Crm.WebJob.AllocateResortTeam Job Starts");
+                    logger.LogInformation("Tc.Crm.WebJob.DeallocateResortTeam Job Starts");
                     deallocateResortTeamService.Run();
-                    logger.LogInformation("Tc.Crm.WebJob.AllocateResortTeam Job End");
+                    logger.LogInformation("Tc.Crm.WebJob.DeallocateResortTeam Job End");
                 }                
             }
             catch (FaultException<Microsoft.Xrm.Sdk.OrganizationServiceFault> ex)
