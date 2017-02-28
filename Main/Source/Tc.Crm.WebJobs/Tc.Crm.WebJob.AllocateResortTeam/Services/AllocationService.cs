@@ -182,20 +182,26 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                 if (bookingAllocationResortTeamRequests[i] == null) continue;
 
                 var bookingTeamRequest = bookingAllocationResortTeamRequests[i];
-                var assignBookingRequest = new AssignInformation
+                if (bookingTeamRequest.BookingResortTeamRequest != null)
                 {
-                    EntityName = EntityName.Booking,
-                    RecordId = bookingTeamRequest.BookingResortTeamRequest.Id,
-                    RecordOwner = bookingTeamRequest.BookingResortTeamRequest.Owner
-                };
-                assignRequests.Add(assignBookingRequest);
-                var assignCustomerRequest = new AssignInformation
+                    var assignBookingRequest = new AssignInformation
+                    {
+                        EntityName = EntityName.Booking,
+                        RecordId = bookingTeamRequest.BookingResortTeamRequest.Id,
+                        RecordOwner = bookingTeamRequest.BookingResortTeamRequest.Owner
+                    };
+                    assignRequests.Add(assignBookingRequest);
+                }
+                if (bookingTeamRequest.CustomerResortTeamRequest != null)
                 {
-                    EntityName = bookingTeamRequest.CustomerResortTeamRequest.Customer.CustomerType.ToString(),
-                    RecordId = bookingTeamRequest.CustomerResortTeamRequest.Customer.Id,
-                    RecordOwner = bookingTeamRequest.CustomerResortTeamRequest.Owner
-                };
-                assignRequests.Add(assignCustomerRequest);
+                    var assignCustomerRequest = new AssignInformation
+                    {
+                        EntityName = bookingTeamRequest.CustomerResortTeamRequest.Customer.CustomerType.ToString(),
+                        RecordId = bookingTeamRequest.CustomerResortTeamRequest.Customer.Id,
+                        RecordOwner = bookingTeamRequest.CustomerResortTeamRequest.Owner
+                    };
+                    assignRequests.Add(assignCustomerRequest);
+                }
 
             }
 

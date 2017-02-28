@@ -13,8 +13,6 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
         IList<BookingDeallocationResponse> GetBookingDeallocations(BookingDeallocationRequest bookingDeallocationRequest);
         IList<BookingDeallocationResponse> PrepareBookingDeallocation(EntityCollection bookingCollection);
         StringBuilder GetDestinationGateways(IList<Guid> destinationGateways);
-        void ProcessBookingAllocations(IList<BookingDeallocationResortTeamRequest> bookingDeallocationResortTeamRequest);
-        void AddBookingResortTeamRequest(BookingResortTeamRequest bookingResortTeamRequest, EntityCollection bookingTeamCollection);
-        void AddCustomerResortTeamRequest(CustomerResortTeamRequest customerResortTeamRequest, EntityCollection bookingTeamCollection);
+        void ProcessBookingAllocations(IList<BookingDeallocationResortTeamRequest> bookingDeallocationResortTeamRequest);       
     }
 }

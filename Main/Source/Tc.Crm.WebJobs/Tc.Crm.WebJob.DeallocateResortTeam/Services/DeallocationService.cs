@@ -47,6 +47,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                                                     </filter>
                                                       <link-entity name='tc_bookingaccommodation' alias='accommodation' to='tc_bookingid' from='tc_bookingid'>
                                                         <attribute name='tc_enddateandtime'/>
+                                                        <order descending='false' attribute='tc_enddateandtime'/>
                                                         <filter type='and'>
                                                           <condition attribute='tc_enddateandtime' value='{0}' operator='on'/>
                                                         </filter>
@@ -90,10 +91,10 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
         public IList<BookingDeallocationResponse> PrepareBookingDeallocation(EntityCollection bookingCollection)
         {
             logger.LogInformation("PrepareBookingDeallocation - start");
-            IList<BookingDeallocationResponse> bookingAllocationResponse = null;
+            IList<BookingDeallocationResponse> bookingDeallocationResponse = null;
             if (bookingCollection != null && bookingCollection.Entities.Count > 0)
             {
-                bookingAllocationResponse = new List<BookingDeallocationResponse>();
+                bookingDeallocationResponse = new List<BookingDeallocationResponse>();
                 for (int i = 0; i < bookingCollection.Entities.Count; i++)
                 {
                     var booking = bookingCollection.Entities[i];
@@ -129,18 +130,30 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                             response.Customer = new Common.Models.Customer() { Id = customer.Id, Name = customer.Name, CustomerType = customerType };
                         }
 
-                        bookingAllocationResponse.Add(response);
+                        if (booking.Contains(Booking.Owner) && booking[Booking.Owner] != null)
+                        {
+                            EntityReference owner = (EntityReference)booking.Attributes[Booking.Owner];
+                            OwnerType ownerType;
+                            if (owner.LogicalName == EntityName.User)
+                                ownerType = OwnerType.User;
+                            else
+                                ownerType = OwnerType.Team;
+
+                            response.BookingOwner = new Owner() { Id = owner.Id, Name = owner.Name, OwnerType = ownerType };
+                        }
+
+                        bookingDeallocationResponse.Add(response);
                     }
 
                 }
             }
             logger.LogInformation("PrepareBookingDeallocation - end");
-            return bookingAllocationResponse;
+            return bookingDeallocationResponse;
         }
 
         public void ProcessBookingAllocations(IList<BookingDeallocationResortTeamRequest> bookingDeallocationResortTeamRequest)
         {
-            EntityCollection bookingTeamCollection = null;
+            
             if (bookingDeallocationResortTeamRequest != null && bookingDeallocationResortTeamRequest.Count > 0)
             {
                 var assignRequests = new Collection<AssignInformation>();
@@ -150,77 +163,33 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                     if (bookingDeallocationResortTeamRequest[i] == null) continue;
 
                     var bookingTeamRequest = bookingDeallocationResortTeamRequest[i];
-                    var assignBookingRequest = new AssignInformation
+                    if (bookingTeamRequest.BookingResortTeamRequest != null)
                     {
-                        EntityName = EntityName.Booking,
-                        RecordId = bookingTeamRequest.BookingResortTeamRequest.Id,
-                        RecordOwner = bookingTeamRequest.BookingResortTeamRequest.Owner
-                    };
-                    assignRequests.Add(assignBookingRequest);
-                    var assignCustomerRequest = new AssignInformation
+                        var assignBookingRequest = new AssignInformation
+                        {
+                            EntityName = EntityName.Booking,
+                            RecordId = bookingTeamRequest.BookingResortTeamRequest.Id,
+                            RecordOwner = bookingTeamRequest.BookingResortTeamRequest.Owner
+                        };
+                        assignRequests.Add(assignBookingRequest);
+                    }
+                    if (bookingTeamRequest.CustomerResortTeamRequest != null)
                     {
-                        EntityName = bookingTeamRequest.CustomerResortTeamRequest.Customer.CustomerType.ToString(),
-                        RecordId = bookingTeamRequest.CustomerResortTeamRequest.Customer.Id,
-                        RecordOwner = bookingTeamRequest.CustomerResortTeamRequest.Owner
-                    };
-                    assignRequests.Add(assignCustomerRequest);
-                    AddBookingResortTeamRequest(bookingTeamRequest.BookingResortTeamRequest, bookingTeamCollection);
-                    AddCustomerResortTeamRequest(bookingTeamRequest.CustomerResortTeamRequest, bookingTeamCollection);
+                        var assignCustomerRequest = new AssignInformation
+                        {
+                            EntityName = bookingTeamRequest.CustomerResortTeamRequest.Customer.CustomerType.ToString(),
+                            RecordId = bookingTeamRequest.CustomerResortTeamRequest.Customer.Id,
+                            RecordOwner = bookingTeamRequest.CustomerResortTeamRequest.Owner
+                        };
+                        assignRequests.Add(assignCustomerRequest);
+                    }                 
                 }
 
                 if (assignRequests != null && assignRequests.Count > 0)
                     crmService.BulkAssign(assignRequests);
             }
         }
-
-        public void AddBookingResortTeamRequest(BookingResortTeamRequest bookingResortTeamRequest, EntityCollection bookingTeamCollection)
-        {
-            if (bookingResortTeamRequest != null && bookingResortTeamRequest.Id != null)
-            {
-                var bookingEntity = new Entity(EntityName.Booking, bookingResortTeamRequest.Id);
-                if (bookingResortTeamRequest.Owner != null && bookingResortTeamRequest.Owner.Id != null)
-                {
-                    if (bookingResortTeamRequest.Owner.OwnerType == OwnerType.Team)
-                        bookingEntity.Attributes[Booking.Owner] = new EntityReference(EntityName.Team, bookingResortTeamRequest.Owner.Id);
-                    else
-                        bookingEntity.Attributes[Booking.Owner] = new EntityReference(EntityName.User, bookingResortTeamRequest.Owner.Id);
-
-                    if (bookingTeamCollection != null)
-                        bookingTeamCollection.Entities.Add(bookingEntity);
-                }
-            }
-        }
-
-        public void AddCustomerResortTeamRequest(CustomerResortTeamRequest customerResortTeamRequest, EntityCollection bookingTeamCollection)
-        {
-            if (customerResortTeamRequest != null)
-            {
-                if (customerResortTeamRequest.Customer != null && customerResortTeamRequest.Customer.Id != null)
-                {
-                    Entity customerEntity = null;
-                    if (customerResortTeamRequest.Customer.CustomerType == CustomerType.Account)
-                        customerEntity = new Entity(EntityName.Account, customerResortTeamRequest.Customer.Id);
-                    else if (customerResortTeamRequest.Customer.CustomerType == CustomerType.Contact)
-                        customerEntity = new Entity(EntityName.Contact, customerResortTeamRequest.Customer.Id);
-
-                    if (customerEntity != null)
-                    {
-                        if (customerResortTeamRequest.Owner != null && customerResortTeamRequest.Owner.Id != null)
-                        {
-                            if (customerResortTeamRequest.Owner.OwnerType == OwnerType.Team)
-                                customerEntity.Attributes[Common.Constants.Attributes.Customer.Owner] = new EntityReference(EntityName.Team, customerResortTeamRequest.Owner.Id);
-                            else
-                                customerEntity.Attributes[Common.Constants.Attributes.Customer.Owner] = new EntityReference(EntityName.User, customerResortTeamRequest.Owner.Id);
-
-                            if (bookingTeamCollection != null)
-                                bookingTeamCollection.Entities.Add(customerEntity);
-                        }
-                    }
-
-                }
-
-            }
-        }
+        
 
 
         #region IDisposable Support

@@ -15,5 +15,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
         IList<BookingDeallocationResortTeamRequest> ProcessDeallocationResponse(IList<BookingDeallocationResponse> bookingDeallocationResponse);
         IList<Guid> GetDestinationGateways();
         void AddResortTeamRemovalRequest(BookingDeallocationResponse bookingResponse, IList<BookingDeallocationResortTeamRequest> bookingDeallocationResortTeamRequest);
+        void WriteDeallocationResponseLog(BookingDeallocationResponse bookingDeallocationResponse);
+        BookingDeallocationResortTeamRequest PrepareCustomerResortTeamRemovalRequest(BookingDeallocationResponse bookingResponse);
     }
 }

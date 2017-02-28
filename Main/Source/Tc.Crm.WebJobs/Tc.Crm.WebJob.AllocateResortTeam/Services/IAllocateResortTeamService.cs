@@ -12,9 +12,11 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
         void Run();
         void GetBookingAllocations();        
         BookingAllocationResortTeamRequest PrepareResortTeamRequest(BookingAllocationResponse bookingAllocationResponse);
-        IList<BookingAllocationResortTeamRequest> ProcessAllocationResponse(IList<BookingAllocationResponse> bookingAllocationResponse);
+        IList<BookingAllocationResortTeamRequest> ProcessAllocationResponse(IList<BookingAllocationResponse> bookingAllocationResponses);
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
         IList<Guid> GetDestinationGateways();
         void AddResortTeamRequest(BookingAllocationResponse bookingResponse, IList<BookingAllocationResortTeamRequest> bookingAllocationResortTeamRequest);
+        void WriteAllocationResponseLog(BookingAllocationResponse bookingAllocationResponse);
+        BookingAllocationResortTeamRequest PrepareCustomerResortTeamRequest(BookingAllocationResponse bookingResponse);
     }
 }

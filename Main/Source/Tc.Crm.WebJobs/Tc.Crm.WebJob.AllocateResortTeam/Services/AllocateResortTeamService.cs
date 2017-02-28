@@ -82,33 +82,84 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
             var bookingAllocationResortTeamRequest = new List<BookingAllocationResortTeamRequest>();
             var currentBookingId = Guid.Empty;
             var currentAccommodationStartDate = (DateTime?)null;
+            var previousAccommodationStartDate = (DateTime?)null;
             var previousBookingId = Guid.Empty;
+            var previousCustomerId = Guid.Empty;
+            var currentCustomerId = Guid.Empty;
+            bool differentBooking, sameBookingDifferentCustomer;
             List<Guid> processedCustomer = new List<Guid>();
             for (int i = 0; i < bookingAllocationResponses.Count; i++)
             {
                 if (bookingAllocationResponses[i] == null) continue;
-                var bookingResponse = bookingAllocationResponses[i]; 
+                var bookingResponse = bookingAllocationResponses[i];
+                if (bookingResponse.Customer == null) continue; 
                 currentBookingId = bookingResponse.BookingId;
+                currentCustomerId = bookingResponse.Customer.Id;
                 currentAccommodationStartDate = bookingResponse.AccommodationStartDate;
+              
 
-                if (previousBookingId != currentBookingId)
+                if (processedCustomer.Contains(currentCustomerId))
+                {
+                    logger.LogWarning("Customer " + bookingResponse.Customer.Name + " was already processed.");
+                    continue;
+                }
+                if (currentAccommodationStartDate == null)
+                {
+                    logger.LogWarning("Accommodation StartDate is null");
+                    continue;
+                }
+
+                differentBooking = (previousBookingId != currentBookingId);
+                sameBookingDifferentCustomer = (previousBookingId == currentBookingId && previousAccommodationStartDate == currentAccommodationStartDate && previousCustomerId != currentCustomerId);
+
+                if (differentBooking || sameBookingDifferentCustomer)
                 {
                     if (bookingResponse.BookingOwner.OwnerType == OwnerType.User)
                     {
                         if (currentAccommodationStartDate.Value.Date >= DateTime.Now.Date)
-                        {
-                            if(bookingResponse.Customer != null && bookingResponse.Customer.Id != null && !processedCustomer.Contains(bookingResponse.Customer.Id))
-                            {
-                                AddResortTeamRequest(bookingResponse, bookingAllocationResortTeamRequest);
-                                previousBookingId = currentBookingId;
-                                processedCustomer.Add(bookingResponse.Customer.Id);
+                        {                            
+                            WriteAllocationResponseLog(bookingResponse);
+                            if (sameBookingDifferentCustomer)
+                            { 
+                                //Add only Customer
+                                bookingAllocationResortTeamRequest.Add(PrepareCustomerResortTeamRequest(bookingResponse));
                             }
+                            else
+                            {
+                                //Add Booking, Customer
+                                AddResortTeamRequest(bookingResponse, bookingAllocationResortTeamRequest);
+                            }
+                            previousBookingId = currentBookingId;
+                            previousCustomerId = currentCustomerId;
+                            previousAccommodationStartDate = currentAccommodationStartDate;
+                            processedCustomer.Add(currentCustomerId);
                         }
                     }
                 } 
             }
             logger.LogInformation("ProcessAllocationResponse - end");
             return bookingAllocationResortTeamRequest;
+        }
+
+        public void WriteAllocationResponseLog(BookingAllocationResponse bookingAllocationResponse)
+        {
+            if (bookingAllocationResponse != null)
+            {
+                StringBuilder information = new StringBuilder();
+                if (bookingAllocationResponse.BookingNumber != null)
+                    information.AppendLine("****** Allocating Booking: " + bookingAllocationResponse.BookingNumber + " ******");
+                if (bookingAllocationResponse.Customer != null)
+                    information.AppendLine("Customer: " + bookingAllocationResponse.Customer.Name + " of Type " + bookingAllocationResponse.Customer.CustomerType.ToString());
+                if (bookingAllocationResponse.AccommodationStartDate != null)
+                    information.AppendLine("Accommodation Start Date: " + bookingAllocationResponse.AccommodationStartDate.Value.ToString());
+                if (bookingAllocationResponse.BookingOwner != null)
+                    information.AppendLine("Booking Owner: "+ bookingAllocationResponse.BookingOwner.Name + " of Type " + bookingAllocationResponse.BookingOwner.OwnerType.ToString());
+                if (bookingAllocationResponse.HotelOwner != null)
+                    information.AppendLine("Hotel Owner: " + bookingAllocationResponse.HotelOwner.Name + " of Type " + bookingAllocationResponse.HotelOwner.OwnerType.ToString());                
+
+                logger.LogInformation(information.ToString());
+            }
+
         }
 
         public void AddResortTeamRequest(BookingAllocationResponse bookingResponse, IList<BookingAllocationResortTeamRequest> bookingAllocationResortTeamRequests)
@@ -152,6 +203,26 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                 };
             }
             logger.LogInformation("PrepareResortTeamRequest - end");
+            return bookingTeamRequest;
+        }
+
+        public BookingAllocationResortTeamRequest PrepareCustomerResortTeamRequest(BookingAllocationResponse bookingResponse)
+        {
+            logger.LogInformation("PrepareCustomerResortTeamRequest - start");
+
+            if (bookingResponse == null) throw new ArgumentNullException("bookingResponse");
+
+            var bookingTeamRequest = new BookingAllocationResortTeamRequest();
+          
+            if (bookingResponse.Customer != null && bookingResponse.Customer.Id != null && bookingResponse.HotelOwner != null)
+            {
+                bookingTeamRequest.CustomerResortTeamRequest = new CustomerResortTeamRequest
+                {
+                    Customer = bookingResponse.Customer,
+                    Owner = bookingResponse.HotelOwner
+                };
+            }
+            logger.LogInformation("PrepareCustomerResortTeamRequest - end");
             return bookingTeamRequest;
         }
 
