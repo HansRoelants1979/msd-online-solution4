@@ -123,28 +123,66 @@ namespace Tc.Crm.WebJob.AllocateResortTeamTests
                                                         , List<Entity> customerBookingRoles)
         {
             var bookings = new List<Entity>();
-            foreach (var booking in bookingCollection)
-            {
-                var bookingStartDate = (DateTime)booking["tc_departuredate"] ;
-                if (bookingStartDate > DateTime.Now.Date.AddDays(9)) continue;
-                var bookingEndDate = (DateTime)booking["tc_returndate"];
-                if (bookingEndDate < DateTime.Now.Date) continue;
+            var bookings1 = (from b in bookingCollection
+                            join a in accommodations on b.Id equals ((EntityReference)a["tc_bookingid"]).Id
+                            join h in hotels on ((EntityReference)a["tc_hotelid"]).Id equals h.Id
+                            join cbr in customerBookingRoles on b.Id equals ((EntityReference)cbr["tc_bookingid"]).Id
+                            where ((DateTime)b["tc_departuredate"]) <= DateTime.Now.Date.AddDays(9)
+                            && ((DateTime)b["tc_returndate"]) >= DateTime.Now.Date
+                            orderby b["tc_name"].ToString(), ((DateTime)a["tc_startdateandtime"])
+                            select new
+                            {
+                                BookingId = b.Id,
+                                Name = b["tc_name"].ToString(),
+                                OwnerId = ((EntityReference)b["ownerid"]),
+                                DepartureDate = ((DateTime)b["tc_departuredate"]),
+                                ReturnDate = ((DateTime)b["tc_returndate"]),
+                                AccommodationStart = ((DateTime)a["tc_startdateandtime"]),
+                                AccommodationEnd = ((DateTime)a["tc_enddateandtime"]),
+                                HotelOwner = ((EntityReference)h["ownerid"]),
+                                Customer = ((EntityReference)cbr["tc_customer"])
+                            }).ToList();
 
-                foreach (var a in accommodations)
-                {
-                    var b = GetBooking(booking);
-                    if (b.Id == ((EntityReference)a["tc_bookingid"]).Id)
-                    {
-                        b["accommodation.tc_startdateandtime"] = new AliasedValue("tc_accommodation", "tc_startdateandtime", a["tc_startdateandtime"]);
-                        b["accommodation.tc_enddateandtime"] = new AliasedValue("tc_accommodation", "tc_enddateandtime", a["tc_enddateandtime"]);
-                        var hotel = hotels.Find(h => h.Id == ((EntityReference)a["tc_hotelid"]).Id);
-                        b["hotel.ownerid"] = new AliasedValue("tc_hotel", "ownerid", hotel["ownerid"]);
-                        var customer = customerBookingRoles.Find(cbr => ((EntityReference)cbr["tc_bookingid"]).Id == b.Id);
-                        b["role.tc_customer"] = new AliasedValue("tc_customerbookingrole", "tc_customer", customer["tc_customer"]);
-                        bookings.Add(b);
-                    }
-                }
+            
+            foreach (var item in bookings1)
+            {
+                var b = new Entity("tc_booking",item.BookingId);
+                b["tc_departuredate"] = item.DepartureDate;
+                b["tc_returndate"] = item.ReturnDate;
+                b["tc_name"] = item.Name;
+                b["tc_bookingid"] = item.BookingId;
+                b["ownerid"] = item.OwnerId;
+                b["accommodation.tc_startdateandtime"] = new AliasedValue("tc_accommodation", "tc_startdateandtime", item.AccommodationStart);
+                b["accommodation.tc_enddateandtime"] = new AliasedValue("tc_accommodation", "tc_enddateandtime", item.AccommodationEnd);
+                b["hotel.ownerid"] = new AliasedValue("tc_hotel", "ownerid", item.HotelOwner);
+                b["role.tc_customer"] = new AliasedValue("tc_customerbookingrole", "tc_customer", item.Customer);
+                bookings.Add(b);
             }
+
+
+                 
+            //foreach (var booking in bookingCollection)
+            //{
+            //    var bookingStartDate = (DateTime)booking["tc_departuredate"] ;
+            //    if (bookingStartDate > DateTime.Now.Date.AddDays(9)) continue;
+            //    var bookingEndDate = (DateTime)booking["tc_returndate"];
+            //    if (bookingEndDate < DateTime.Now.Date) continue;
+
+            //    foreach (var a in accommodations)
+            //    {
+            //        var b = GetBooking(booking);
+            //        if (b.Id == ((EntityReference)a["tc_bookingid"]).Id)
+            //        {
+            //            b["accommodation.tc_startdateandtime"] = new AliasedValue("tc_accommodation", "tc_startdateandtime", a["tc_startdateandtime"]);
+            //            b["accommodation.tc_enddateandtime"] = new AliasedValue("tc_accommodation", "tc_enddateandtime", a["tc_enddateandtime"]);
+            //            var hotel = hotels.Find(h => h.Id == ((EntityReference)a["tc_hotelid"]).Id);
+            //            b["hotel.ownerid"] = new AliasedValue("tc_hotel", "ownerid", hotel["ownerid"]);
+            //            var customer = customerBookingRoles.Find(cbr => ((EntityReference)cbr["tc_bookingid"]).Id == b.Id);
+            //            b["role.tc_customer"] = new AliasedValue("tc_customerbookingrole", "tc_customer", customer["tc_customer"]);
+            //            bookings.Add(b);
+            //        }
+            //    }
+            //}
             return new EntityCollection(bookings);
 
         }
