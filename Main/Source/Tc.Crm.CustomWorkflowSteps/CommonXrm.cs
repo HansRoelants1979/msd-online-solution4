@@ -162,6 +162,9 @@ namespace Tc.Crm.CustomWorkflowSteps
                             case "I":
                                 value = 950000000;
                                 break;
+                            case "IN":
+                                value = 950000000;
+                                break;
                             case "O":
                                 value = 950000001;
                                 break;

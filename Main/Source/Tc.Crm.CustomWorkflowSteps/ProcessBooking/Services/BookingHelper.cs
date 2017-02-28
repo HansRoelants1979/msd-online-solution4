@@ -111,8 +111,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             if (service == null) throw new InvalidPluginExecutionException("Booking service is null.");
             if (booking == null) throw new InvalidPluginExecutionException("Booking entiy is null.");
             trace.Trace("Booking populate service - start");
-            booking[Attributes.Booking.Transfer] = PrepareTransferInfo(service.Transfer, trace);
-            booking[Attributes.Booking.TransferRemarks] = PrepareTransferRemarks(service.Transfer, trace);
+            //booking[Attributes.Booking.Transfer] = PrepareTransferInfo(service.Transfer, trace);
+            //booking[Attributes.Booking.TransferRemarks] = PrepareTransferRemarks(service.Transfer, trace);
             //booking[Attributes.Booking.ExtraService] = PrepareExtraServicesInfo(service.ExtraService, trace);
             //booking[Attributes.Booking.ExtraServiceRemarks] = PrepareExtraServiceRemarks(service.ExtraService, trace);            
             trace.Trace("Booking populate service - end");
