@@ -124,10 +124,12 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                                     WriteDeallocationResponseLog(bookingResponse);
                                     if (sameBookingDifferentCustomer)
                                     {
+                                        //Add only Customer
                                         bookingDeallocationResortTeamRequest.Add(PrepareCustomerResortTeamRemovalRequest(bookingResponse));
                                     }
                                     else
                                     {
+                                        //Add Booking, Customer
                                         AddResortTeamRemovalRequest(bookingResponse, bookingDeallocationResortTeamRequest);
                                     }
                                     previousCustomerId = currentCustomerId;

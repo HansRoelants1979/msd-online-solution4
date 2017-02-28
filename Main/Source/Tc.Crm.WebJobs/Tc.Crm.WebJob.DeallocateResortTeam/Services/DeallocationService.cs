@@ -39,6 +39,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                                                  <entity name='tc_booking'>
                                                     <attribute name='tc_bookingid'/>
                                                     <attribute name='tc_name'/>
+                                                    <attribute name='ownerid'/>
                                                     <order descending='false' attribute='tc_name'/>
                                                     <filter type='and'>
                                                     <condition attribute='tc_destinationgatewayid' operator='in'>
