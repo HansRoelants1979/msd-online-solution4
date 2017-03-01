@@ -97,7 +97,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeamTests
             if (Switch == DataSwitch.Returns_Data)
             {
                 return GetBookings(context.Data["tc_booking"].Values.ToList<Entity>()
-                                    , context.Data["tc_accommodation"].Values.ToList<Entity>()
+                                    , context.Data["tc_bookingaccommodation"].Values.ToList<Entity>()
                                     , context.Data["tc_hotel"].Values.ToList<Entity>()
                                     , context.Data["tc_customerbookingrole"].Values.ToList<Entity>());
             }
@@ -152,8 +152,8 @@ namespace Tc.Crm.WebJob.AllocateResortTeamTests
                 b["tc_name"] = item.Name;
                 b["tc_bookingid"] = item.BookingId;
                 b["ownerid"] = item.OwnerId;
-                b["accommodation.tc_startdateandtime"] = new AliasedValue("tc_accommodation", "tc_startdateandtime", item.AccommodationStart);
-                b["accommodation.tc_enddateandtime"] = new AliasedValue("tc_accommodation", "tc_enddateandtime", item.AccommodationEnd);
+                b["accommodation.tc_startdateandtime"] = new AliasedValue("tc_bookingaccommodation", "tc_startdateandtime", item.AccommodationStart);
+                b["accommodation.tc_enddateandtime"] = new AliasedValue("tc_bookingaccommodation", "tc_enddateandtime", item.AccommodationEnd);
                 b["hotel.ownerid"] = new AliasedValue("tc_hotel", "ownerid", item.HotelOwner);
                 b["role.tc_customer"] = new AliasedValue("tc_customerbookingrole", "tc_customer", item.Customer);
                 bookings.Add(b);

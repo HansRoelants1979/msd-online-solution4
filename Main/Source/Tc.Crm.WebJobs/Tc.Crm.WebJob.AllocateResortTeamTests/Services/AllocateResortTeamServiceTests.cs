@@ -136,8 +136,8 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             #region accommodation
             var accommodationEntityCollection = new Dictionary<Guid, Entity>();
             var acc1Id = Guid.NewGuid();
-            var acc1 = new Entity("tc_accommodation", acc1Id);
-            acc1["tc_accommodationid"] = acc1Id;
+            var acc1 = new Entity("tc_bookingaccommodation", acc1Id);
+            acc1["tc_bookingaccommodationid"] = acc1Id;
             acc1["tc_startdateandtime"] = DateTime.Now.Date.AddDays(9);
             acc1["tc_enddateandtime"] = DateTime.Now.Date.AddDays(11);
             acc1["tc_bookingid"] = new EntityReference("tc_booking", b1Id);
@@ -162,7 +162,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             context.Data.Add("contact", contactEntityCollection);
             context.Data.Add("tc_hotel", hotelEntityCollection);
             context.Data.Add("tc_booking", bookingEntityCollection);
-            context.Data.Add("tc_accommodation", accommodationEntityCollection);
+            context.Data.Add("tc_bookingaccommodation", accommodationEntityCollection);
             context.Data.Add("tc_customerbookingrole", customerBookingRoleEntityCollection);
 
             var service = new AllocateResortTeamService(logger, allocationService, configurationService);
@@ -263,8 +263,8 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             #region accommodation
             var accommodationEntityCollection = new Dictionary<Guid, Entity>();
             var acc1Id = Guid.NewGuid();
-            var acc1 = new Entity("tc_accommodation", acc1Id);
-            acc1["tc_accommodationid"] = acc1Id;
+            var acc1 = new Entity("tc_bookingaccommodation", acc1Id);
+            acc1["tc_bookingaccommodationid"] = acc1Id;
             acc1["tc_startdateandtime"] = DateTime.Now.Date.AddDays(10);
             acc1["tc_enddateandtime"] = DateTime.Now.Date.AddDays(12);
             acc1["tc_bookingid"] = new EntityReference("tc_booking", b1Id);
@@ -289,7 +289,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             context.Data.Add("contact", contactEntityCollection);
             context.Data.Add("tc_hotel", hotelEntityCollection);
             context.Data.Add("tc_booking", bookingEntityCollection);
-            context.Data.Add("tc_accommodation", accommodationEntityCollection);
+            context.Data.Add("tc_bookingaccommodation", accommodationEntityCollection);
             context.Data.Add("tc_customerbookingrole", customerBookingRoleEntityCollection);
 
             var service = new AllocateResortTeamService(logger, allocationService, configurationService);
@@ -390,8 +390,8 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             #region accommodation
             var accommodationEntityCollection = new Dictionary<Guid, Entity>();
             var acc1Id = Guid.NewGuid();
-            var acc1 = new Entity("tc_accommodation", acc1Id);
-            acc1["tc_accommodationid"] = acc1Id;
+            var acc1 = new Entity("tc_bookingaccommodation", acc1Id);
+            acc1["tc_bookingaccommodationid"] = acc1Id;
             acc1["tc_startdateandtime"] = DateTime.Now.Date.AddDays(10);
             acc1["tc_enddateandtime"] = DateTime.Now.Date.AddDays(11);
             acc1["tc_bookingid"] = new EntityReference("tc_booking", b1Id);
@@ -416,7 +416,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             context.Data.Add("contact", contactEntityCollection);
             context.Data.Add("tc_hotel", hotelEntityCollection);
             context.Data.Add("tc_booking", bookingEntityCollection);
-            context.Data.Add("tc_accommodation", accommodationEntityCollection);
+            context.Data.Add("tc_bookingaccommodation", accommodationEntityCollection);
             context.Data.Add("tc_customerbookingrole", customerBookingRoleEntityCollection);
 
             var service = new AllocateResortTeamService(logger, allocationService, configurationService);
@@ -517,8 +517,8 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             #region accommodation
             var accommodationEntityCollection = new Dictionary<Guid, Entity>();
             var acc1Id = Guid.NewGuid();
-            var acc1 = new Entity("tc_accommodation", acc1Id);
-            acc1["tc_accommodationid"] = acc1Id;
+            var acc1 = new Entity("tc_bookingaccommodation", acc1Id);
+            acc1["tc_bookingaccommodationid"] = acc1Id;
             acc1["tc_startdateandtime"] = DateTime.Now.Date.AddDays(9);
             acc1["tc_enddateandtime"] = DateTime.Now.Date.AddDays(11);
             acc1["tc_bookingid"] = new EntityReference("tc_booking", b1Id);
@@ -543,7 +543,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             context.Data.Add("contact", contactEntityCollection);
             context.Data.Add("tc_hotel", hotelEntityCollection);
             context.Data.Add("tc_booking", bookingEntityCollection);
-            context.Data.Add("tc_accommodation", accommodationEntityCollection);
+            context.Data.Add("tc_bookingaccommodation", accommodationEntityCollection);
             context.Data.Add("tc_customerbookingrole", customerBookingRoleEntityCollection);
 
             var service = new AllocateResortTeamService(logger, allocationService, configurationService);
@@ -644,8 +644,8 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             #region accommodation
             var accommodationEntityCollection = new Dictionary<Guid, Entity>();
             var acc1Id = Guid.NewGuid();
-            var acc1 = new Entity("tc_accommodation", acc1Id);
-            acc1["tc_accommodationid"] = acc1Id;
+            var acc1 = new Entity("tc_bookingaccommodation", acc1Id);
+            acc1["tc_bookingaccommodationid"] = acc1Id;
             acc1["tc_startdateandtime"] = DateTime.Now.Date.AddDays(8);
             acc1["tc_enddateandtime"] = DateTime.Now.Date.AddDays(11);
             acc1["tc_bookingid"] = new EntityReference("tc_booking", b1Id);
@@ -670,7 +670,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             context.Data.Add("contact", contactEntityCollection);
             context.Data.Add("tc_hotel", hotelEntityCollection);
             context.Data.Add("tc_booking", bookingEntityCollection);
-            context.Data.Add("tc_accommodation", accommodationEntityCollection);
+            context.Data.Add("tc_bookingaccommodation", accommodationEntityCollection);
             context.Data.Add("tc_customerbookingrole", customerBookingRoleEntityCollection);
 
             var service = new AllocateResortTeamService(logger, allocationService, configurationService);
@@ -771,8 +771,8 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             #region accommodation
             var accommodationEntityCollection = new Dictionary<Guid, Entity>();
             var acc1Id = Guid.NewGuid();
-            var acc1 = new Entity("tc_accommodation", acc1Id);
-            acc1["tc_accommodationid"] = acc1Id;
+            var acc1 = new Entity("tc_bookingaccommodation", acc1Id);
+            acc1["tc_bookingaccommodationid"] = acc1Id;
             acc1["tc_startdateandtime"] = DateTime.Now.Date;
             acc1["tc_enddateandtime"] = DateTime.Now.Date.AddDays(11);
             acc1["tc_bookingid"] = new EntityReference("tc_booking", b1Id);
@@ -784,7 +784,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             var customerBookingRoleEntityCollection = new Dictionary<Guid, Entity>();
 
             var cbr1Id = Guid.NewGuid();
-            var cbr1 = new Entity("tc_customerbookingrole");
+            var cbr1 = new Entity("tc_customerbookingrole",cbr1Id);
             cbr1["tc_customerbookingrole"] = cbr1Id;
             cbr1["tc_bookingid"] = new EntityReference("tc_booking", b1Id);
             cbr1["tc_customer"] = new EntityReference("contact", con1Id);
@@ -797,7 +797,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             context.Data.Add("contact", contactEntityCollection);
             context.Data.Add("tc_hotel", hotelEntityCollection);
             context.Data.Add("tc_booking", bookingEntityCollection);
-            context.Data.Add("tc_accommodation", accommodationEntityCollection);
+            context.Data.Add("tc_bookingaccommodation", accommodationEntityCollection);
             context.Data.Add("tc_customerbookingrole", customerBookingRoleEntityCollection);
 
             var service = new AllocateResortTeamService(logger, allocationService, configurationService);
@@ -898,8 +898,8 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             #region accommodation
             var accommodationEntityCollection = new Dictionary<Guid, Entity>();
             var acc1Id = Guid.NewGuid();
-            var acc1 = new Entity("tc_accommodation", acc1Id);
-            acc1["tc_accommodationid"] = acc1Id;
+            var acc1 = new Entity("tc_bookingaccommodation", acc1Id);
+            acc1["tc_bookingaccommodationid"] = acc1Id;
             acc1["tc_startdateandtime"] = DateTime.Now.Date.AddDays(1);
             acc1["tc_enddateandtime"] = DateTime.Now.Date.AddDays(11);
             acc1["tc_bookingid"] = new EntityReference("tc_booking", b1Id);
@@ -911,7 +911,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             var customerBookingRoleEntityCollection = new Dictionary<Guid, Entity>();
 
             var cbr1Id = Guid.NewGuid();
-            var cbr1 = new Entity("tc_customerbookingrole");
+            var cbr1 = new Entity("tc_customerbookingrole",cbr1Id);
             cbr1["tc_customerbookingrole"] = cbr1Id;
             cbr1["tc_bookingid"] = new EntityReference("tc_booking", b1Id);
             cbr1["tc_customer"] = new EntityReference("contact", con1Id);
@@ -924,7 +924,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             context.Data.Add("contact", contactEntityCollection);
             context.Data.Add("tc_hotel", hotelEntityCollection);
             context.Data.Add("tc_booking", bookingEntityCollection);
-            context.Data.Add("tc_accommodation", accommodationEntityCollection);
+            context.Data.Add("tc_bookingaccommodation", accommodationEntityCollection);
             context.Data.Add("tc_customerbookingrole", customerBookingRoleEntityCollection);
 
             var service = new AllocateResortTeamService(logger, allocationService, configurationService);
@@ -1026,7 +1026,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             #region accommodation
             var accommodationEntityCollection = new Dictionary<Guid, Entity>();
             var acc1Id = Guid.NewGuid();
-            var acc1 = new Entity("tc_accommodation", acc1Id);
+            var acc1 = new Entity("tc_bookingaccommodation", acc1Id);
             acc1["tc_accommodationid"] = acc1Id;
             acc1["tc_startdateandtime"] = DateTime.Now.Date.AddDays(-1);
             acc1["tc_enddateandtime"] = DateTime.Now.Date.AddDays(11);
@@ -1052,7 +1052,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             context.Data.Add("contact", contactEntityCollection);
             context.Data.Add("tc_hotel", hotelEntityCollection);
             context.Data.Add("tc_booking", bookingEntityCollection);
-            context.Data.Add("tc_accommodation", accommodationEntityCollection);
+            context.Data.Add("tc_bookingaccommodation", accommodationEntityCollection);
             context.Data.Add("tc_customerbookingrole", customerBookingRoleEntityCollection);
 
             var service = new AllocateResortTeamService(logger, allocationService, configurationService);
@@ -1160,16 +1160,16 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             var accommodationEntityCollection = new Dictionary<Guid, Entity>();
 
             var acc1Id = Guid.NewGuid();
-            var acc1 = new Entity("tc_accommodation", acc1Id);
-            acc1["tc_accommodationid"] = acc1Id;
+            var acc1 = new Entity("tc_bookingaccommodation", acc1Id);
+            acc1["tc_bookingaccommodationid"] = acc1Id;
             acc1["tc_startdateandtime"] = DateTime.Now.Date.AddDays(1);
             acc1["tc_enddateandtime"] = DateTime.Now.Date.AddDays(2);
             acc1["tc_bookingid"] = new EntityReference("tc_booking", b1Id);
             acc1["tc_hotelid"] = new EntityReference("tc_hotel", hot2Id);
 
             var acc2Id = Guid.NewGuid();
-            var acc2 = new Entity("tc_accommodation", acc2Id);
-            acc2["tc_accommodationid"] = acc2Id;
+            var acc2 = new Entity("tc_bookingaccommodation", acc2Id);
+            acc2["tc_bookingaccommodationid"] = acc2Id;
             acc2["tc_startdateandtime"] = DateTime.Now.Date.AddDays(2);
             acc2["tc_enddateandtime"] = DateTime.Now.Date.AddDays(3);
             acc2["tc_bookingid"] = new EntityReference("tc_booking", b1Id);
@@ -1196,7 +1196,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             context.Data.Add("contact", contactEntityCollection);
             context.Data.Add("tc_hotel", hotelEntityCollection);
             context.Data.Add("tc_booking", bookingEntityCollection);
-            context.Data.Add("tc_accommodation", accommodationEntityCollection);
+            context.Data.Add("tc_bookingaccommodation", accommodationEntityCollection);
             context.Data.Add("tc_customerbookingrole", customerBookingRoleEntityCollection);
 
             var service = new AllocateResortTeamService(logger, allocationService, configurationService);
@@ -1208,7 +1208,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
         }
 
         [TestMethod()]
-        public void RunTest_Only_Multiple_Accomodations_SecondTripToStart()
+        public void RunTest_Multiple_Accomodations_SecondTripToStart()
         {
             crmService.Switch = DataSwitch.Returns_Data;
             var context = crmService.context;
@@ -1259,7 +1259,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
 
             var con2Id = Guid.NewGuid();
             var con2 = new Entity("contact", con2Id);
-            con2["contactid"] = con1Id;
+            con2["contactid"] = con2Id;
             con2["lastname"] = "Kunal";
             con2["firstname"] = "Basu";
             con2["ownerid"] = new EntityReference("systemuser", u1Id);
@@ -1314,16 +1314,16 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             var accommodationEntityCollection = new Dictionary<Guid, Entity>();
 
             var acc1Id = Guid.NewGuid();
-            var acc1 = new Entity("tc_accommodation", acc1Id);
-            acc1["tc_accommodationid"] = acc1Id;
+            var acc1 = new Entity("tc_bookingaccommodation", acc1Id);
+            acc1["tc_bookingaccommodationid"] = acc1Id;
             acc1["tc_startdateandtime"] = DateTime.Now.Date.AddDays(-2);
             acc1["tc_enddateandtime"] = DateTime.Now.Date.AddDays(-1);
             acc1["tc_bookingid"] = new EntityReference("tc_booking", b1Id);
             acc1["tc_hotelid"] = new EntityReference("tc_hotel", hot2Id);
 
             var acc2Id = Guid.NewGuid();
-            var acc2 = new Entity("tc_accommodation", acc2Id);
-            acc2["tc_accommodationid"] = acc2Id;
+            var acc2 = new Entity("tc_bookingaccommodation", acc2Id);
+            acc2["tc_bookingaccommodationid"] = acc2Id;
             acc2["tc_startdateandtime"] = DateTime.Now.Date.AddDays(0);
             acc2["tc_enddateandtime"] = DateTime.Now.Date.AddDays(1);
             acc2["tc_bookingid"] = new EntityReference("tc_booking", b1Id);
@@ -1337,14 +1337,14 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             var customerBookingRoleEntityCollection = new Dictionary<Guid, Entity>();
 
             var cbr1Id = Guid.NewGuid();
-            var cbr1 = new Entity("tc_customerbookingrole");
+            var cbr1 = new Entity("tc_customerbookingrole", cbr1Id);
             cbr1["tc_customerbookingrole"] = cbr1Id;
             cbr1["tc_bookingid"] = new EntityReference("tc_booking", b1Id);
             cbr1["tc_customer"] = new EntityReference("contact", con1Id);
 
             var cbr2Id = Guid.NewGuid();
-            var cbr2 = new Entity("tc_customerbookingrole");
-            cbr2["tc_customerbookingrole"] = cbr1Id;
+            var cbr2 = new Entity("tc_customerbookingrole", cbr2Id);
+            cbr2["tc_customerbookingrole"] = cbr2Id;
             cbr2["tc_bookingid"] = new EntityReference("tc_booking", b1Id);
             cbr2["tc_customer"] = new EntityReference("contact", con2Id);
 
@@ -1357,7 +1357,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             context.Data.Add("contact", contactEntityCollection);
             context.Data.Add("tc_hotel", hotelEntityCollection);
             context.Data.Add("tc_booking", bookingEntityCollection);
-            context.Data.Add("tc_accommodation", accommodationEntityCollection);
+            context.Data.Add("tc_bookingaccommodation", accommodationEntityCollection);
             context.Data.Add("tc_customerbookingrole", customerBookingRoleEntityCollection);
 
             var service = new AllocateResortTeamService(logger, allocationService, configurationService);
@@ -1422,7 +1422,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
 
             var con2Id = Guid.NewGuid();
             var con2 = new Entity("contact", con2Id);
-            con2["contactid"] = con1Id;
+            con2["contactid"] = con2Id;
             con2["lastname"] = "Kunal";
             con2["firstname"] = "Basu";
             con2["ownerid"] = new EntityReference("team", t2Id);
@@ -1477,15 +1477,15 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             var accommodationEntityCollection = new Dictionary<Guid, Entity>();
 
             var acc1Id = Guid.NewGuid();
-            var acc1 = new Entity("tc_accommodation", acc1Id);
-            acc1["tc_accommodationid"] = acc1Id;
+            var acc1 = new Entity("tc_bookingaccommodation", acc1Id);
+            acc1["tc_bookingaccommodationid"] = acc1Id;
             acc1["tc_startdateandtime"] = DateTime.Now.Date.AddDays(-2);
             acc1["tc_enddateandtime"] = DateTime.Now.Date.AddDays(0);
             acc1["tc_bookingid"] = new EntityReference("tc_booking", b1Id);
             acc1["tc_hotelid"] = new EntityReference("tc_hotel", hot2Id);
 
             var acc2Id = Guid.NewGuid();
-            var acc2 = new Entity("tc_accommodation", acc2Id);
+            var acc2 = new Entity("tc_bookingaccommodation", acc2Id);
             acc2["tc_accommodationid"] = acc2Id;
             acc2["tc_startdateandtime"] = DateTime.Now.Date.AddDays(0);
             acc2["tc_enddateandtime"] = DateTime.Now.Date.AddDays(1);
@@ -1500,13 +1500,13 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             var customerBookingRoleEntityCollection = new Dictionary<Guid, Entity>();
 
             var cbr1Id = Guid.NewGuid();
-            var cbr1 = new Entity("tc_customerbookingrole");
+            var cbr1 = new Entity("tc_customerbookingrole",cbr1Id);
             cbr1["tc_customerbookingrole"] = cbr1Id;
             cbr1["tc_bookingid"] = new EntityReference("tc_booking", b1Id);
             cbr1["tc_customer"] = new EntityReference("contact", con1Id);
 
             var cbr2Id = Guid.NewGuid();
-            var cbr2 = new Entity("tc_customerbookingrole");
+            var cbr2 = new Entity("tc_customerbookingrole",cbr2Id);
             cbr2["tc_customerbookingrole"] = cbr1Id;
             cbr2["tc_bookingid"] = new EntityReference("tc_booking", b1Id);
             cbr2["tc_customer"] = new EntityReference("contact", con2Id);
@@ -1520,7 +1520,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             context.Data.Add("contact", contactEntityCollection);
             context.Data.Add("tc_hotel", hotelEntityCollection);
             context.Data.Add("tc_booking", bookingEntityCollection);
-            context.Data.Add("tc_accommodation", accommodationEntityCollection);
+            context.Data.Add("tc_bookingaccommodation", accommodationEntityCollection);
             context.Data.Add("tc_customerbookingrole", customerBookingRoleEntityCollection);
 
             var service = new AllocateResortTeamService(logger, allocationService, configurationService);
@@ -1585,7 +1585,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
 
             var con2Id = Guid.NewGuid();
             var con2 = new Entity("contact", con2Id);
-            con2["contactid"] = con1Id;
+            con2["contactid"] = con2Id;
             con2["lastname"] = "Kunal";
             con2["firstname"] = "Basu";
             con2["ownerid"] = new EntityReference("systemuser", u1Id);
@@ -1618,8 +1618,8 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
 
             var b2Id = Guid.NewGuid();
             var b2 = new Entity("tc_booking", b2Id);
-            b2["tc_bookingid"] = b1Id;
-            b2["tc_name"] = "b1";
+            b2["tc_bookingid"] = b2Id;
+            b2["tc_name"] = "b2";
             b2["ownerid"] = new EntityReference("systemuser", u1Id);
             b2["tc_departuredate"] = DateTime.Now.Date.AddDays(2);
             b2["tc_returndate"] = DateTime.Now.Date.AddDays(3);
@@ -1650,19 +1650,19 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             var accommodationEntityCollection = new Dictionary<Guid, Entity>();
 
             var acc1Id = Guid.NewGuid();
-            var acc1 = new Entity("tc_accommodation", acc1Id);
-            acc1["tc_accommodationid"] = acc1Id;
+            var acc1 = new Entity("tc_bookingaccommodation", acc1Id);
+            acc1["tc_bookingaccommodationid"] = acc1Id;
             acc1["tc_startdateandtime"] = DateTime.Now.Date.AddDays(0);
             acc1["tc_enddateandtime"] = DateTime.Now.Date.AddDays(1);
             acc1["tc_bookingid"] = new EntityReference("tc_booking", b1Id);
             acc1["tc_hotelid"] = new EntityReference("tc_hotel", hot2Id);
 
             var acc2Id = Guid.NewGuid();
-            var acc2 = new Entity("tc_accommodation", acc2Id);
-            acc2["tc_accommodationid"] = acc2Id;
+            var acc2 = new Entity("tc_bookingaccommodation", acc2Id);
+            acc2["tc_bookingaccommodationid"] = acc2Id;
             acc2["tc_startdateandtime"] = DateTime.Now.Date.AddDays(2);
             acc2["tc_enddateandtime"] = DateTime.Now.Date.AddDays(3);
-            acc2["tc_bookingid"] = new EntityReference("tc_booking", b1Id);
+            acc2["tc_bookingid"] = new EntityReference("tc_booking", b2Id);
             acc2["tc_hotelid"] = new EntityReference("tc_hotel", hot1Id);
 
             accommodationEntityCollection.Add(acc1Id, acc1);
@@ -1673,16 +1673,16 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             var customerBookingRoleEntityCollection = new Dictionary<Guid, Entity>();
 
             var cbr1Id = Guid.NewGuid();
-            var cbr1 = new Entity("tc_customerbookingrole");
+            var cbr1 = new Entity("tc_customerbookingrole",cbr1Id);
             cbr1["tc_customerbookingroleid"] = cbr1Id;
             cbr1["tc_bookingid"] = new EntityReference("tc_booking", b1Id);
             cbr1["tc_customer"] = new EntityReference("contact", con1Id);
 
             var cbr2Id = Guid.NewGuid();
-            var cbr2 = new Entity("tc_customerbookingrole");
+            var cbr2 = new Entity("tc_customerbookingrole",cbr2Id);
             cbr2["tc_customerbookingroleid"] = cbr2Id;
             cbr2["tc_bookingid"] = new EntityReference("tc_booking", b2Id);
-            cbr2["tc_customer"] = new EntityReference("contact", con2Id);
+            cbr2["tc_customer"] = new EntityReference("contact", con1Id);
 
             customerBookingRoleEntityCollection.Add(cbr1Id, cbr1);
             customerBookingRoleEntityCollection.Add(cbr2Id, cbr2);
@@ -1693,7 +1693,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             context.Data.Add("contact", contactEntityCollection);
             context.Data.Add("tc_hotel", hotelEntityCollection);
             context.Data.Add("tc_booking", bookingEntityCollection);
-            context.Data.Add("tc_accommodation", accommodationEntityCollection);
+            context.Data.Add("tc_bookingaccommodation", accommodationEntityCollection);
             context.Data.Add("tc_customerbookingrole", customerBookingRoleEntityCollection);
 
             var service = new AllocateResortTeamService(logger, allocationService, configurationService);
