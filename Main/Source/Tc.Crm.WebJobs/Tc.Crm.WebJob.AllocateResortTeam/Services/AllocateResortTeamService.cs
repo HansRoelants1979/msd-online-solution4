@@ -81,8 +81,8 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
 
             var bookingAllocationResortTeamRequest = new List<BookingAllocationResortTeamRequest>();
 
-            List<Guid> processedCustomers = new List<Guid>();
-            var processedBookings = new Dictionary<Guid, BookingAllocationResponse>();
+            var processedCustomers = new List<Guid>();
+            var processedBookings = new List<BookingAllocationResponse>();
             for (int i = 0; i < bookingAllocationResponses.Count; i++)
             {
                 var bookingResponse = bookingAllocationResponses[i];
@@ -90,11 +90,11 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
 
                 if (bookingResponse.AccommodationStartDate.Value.Date < DateTime.Now.Date) continue;
 
-                var differentBooking = !processedBookings.ContainsKey(bookingResponse.BookingId);
+                var differentBooking = processedBookings.Find(b => b.BookingId == bookingResponse.BookingId) == null;
+                var sameBookingDifferentCustomer = processedBookings.Find(b => b.BookingId == bookingResponse.BookingId
+                                                                            && b.AccommodationStartDate == bookingResponse.AccommodationStartDate
+                                                                            && b.Customer.Id != bookingResponse.Customer.Id) != null;
 
-                var sameBookingDifferentCustomer = (processedBookings.ContainsKey(bookingResponse.BookingId)
-                                                    && processedBookings.ContainsKey(bookingResponse.BookingId) ? processedBookings[bookingResponse.BookingId].AccommodationStartDate == bookingResponse.AccommodationStartDate : false
-                                                    && processedBookings.ContainsKey(bookingResponse.BookingId) ? processedBookings[bookingResponse.BookingId].Customer.Id != bookingResponse.Customer.Id : false);
 
                 if (!differentBooking && !sameBookingDifferentCustomer) continue;
 
@@ -113,7 +113,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                     AddResortTeamRequest(bookingResponse, bookingAllocationResortTeamRequest);
                 }
                 processedCustomers.Add(bookingResponse.Customer.Id);
-                processedBookings.Add(bookingResponse.BookingId, bookingResponse);
+                processedBookings.Add(bookingResponse);
             }
             logger.LogInformation("ProcessAllocationResponse - end");
             return bookingAllocationResortTeamRequest;
@@ -124,6 +124,8 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
             if (bookingResponse == null) return false;
             if (bookingResponse.Customer == null) return false;
             if (bookingResponse.BookingOwner.OwnerType == OwnerType.Team) return false;
+            if (bookingResponse.Customer.Owner == null) return false;
+            if (bookingResponse.Customer.Owner.OwnerType == OwnerType.Team) return false;
 
             //customer already deallocated
             if (processedCustomers.Contains(bookingResponse.Customer.Id))

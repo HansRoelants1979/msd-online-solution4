@@ -58,6 +58,12 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                                                         </link-entity>
                                                         <link-entity name='tc_customerbookingrole' alias='role' to='tc_bookingid' from='tc_bookingid'>
                                                             <attribute name='tc_customer'/>
+                                                             <link-entity link-type='outer' name='account' alias='account' from='accountid' to='tc_customer'>
+                                                                <attribute name='ownerid'/>
+                                                             </link-entity>
+                                                             <link-entity link-type='outer' name='contact' alias='contact' from='contactid' to='tc_customer'>
+                                                                <attribute name='ownerid'/>
+                                                             </link-entity>
                                                         </link-entity>                                                    
                                                     </entity>
                                                     </fetch>",
@@ -111,6 +117,8 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                         var fieldHotelId = AliasName.HotelAliasName + Hotel.HotelId;
                         var fieldEndDate = AliasName.AccommodationAliasName + BookingAccommodation.EndDateandTime;
                         var fieldCustomer = AliasName.RoleAliasName + CustomerBookingRole.Customer;
+                        var fieldAccountOwner = AliasName.AccountAliasName + Common.Constants.Attributes.Customer.Owner;
+                        var fieldContactOwner = AliasName.ContactAliasName + Common.Constants.Attributes.Customer.Owner;
 
                         if (booking.Contains(fieldHotelId) && booking[fieldHotelId] != null)
                             response.HotelId = Guid.Parse(((AliasedValue)booking[fieldHotelId]).Value.ToString());
@@ -122,26 +130,22 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                         {
                             EntityReference customer = (EntityReference)((AliasedValue)booking[fieldCustomer]).Value;
                             CustomerType customerType;
+                            Owner owner;
 
                             if (customer.LogicalName == EntityName.Contact)
                                 customerType = CustomerType.Contact;
                             else
                                 customerType = CustomerType.Account;
 
-                            response.Customer = new Common.Models.Customer() { Id = customer.Id, Name = customer.Name, CustomerType = customerType };
-                        }
-
-                        if (booking.Contains(Booking.Owner) && booking[Booking.Owner] != null)
-                        {
-                            EntityReference owner = (EntityReference)booking.Attributes[Booking.Owner];
-                            OwnerType ownerType;
-                            if (owner.LogicalName == EntityName.User)
-                                ownerType = OwnerType.User;
+                            if (booking.Contains(fieldContactOwner) && booking[fieldContactOwner] != null)
+                                owner = GetOwner(booking, fieldContactOwner, true);
                             else
-                                ownerType = OwnerType.Team;
+                                owner = GetOwner(booking, fieldAccountOwner, true);
 
-                            response.BookingOwner = new Owner() { Id = owner.Id, Name = owner.Name, OwnerType = ownerType };
+                            response.Customer = new Common.Models.Customer() { Id = customer.Id, Name = customer.Name, CustomerType = customerType,Owner=owner };
                         }
+
+                            response.BookingOwner = GetOwner(booking, Booking.Owner, false);                        
 
                         bookingDeallocationResponse.Add(response);
                     }
@@ -150,6 +154,30 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
             }
             logger.LogInformation("PrepareBookingDeallocation - end");
             return bookingDeallocationResponse;
+        }
+
+        public OwnerType GetOwnerType(EntityReference owner)
+        {
+            if (owner.LogicalName == EntityName.User)
+                return OwnerType.User;
+            else
+                return OwnerType.Team;
+        }
+
+        public Owner GetOwner(Entity entity, string attributeName, bool isAliasedValue)
+        {
+            if (entity == null) return null;
+            if (!entity.Contains(attributeName)) return null;
+            if (entity[attributeName] == null) return null;
+            EntityReference owner;
+            if (isAliasedValue)
+                owner = (EntityReference)((AliasedValue)entity[attributeName]).Value;
+            else
+                owner = (EntityReference)entity.Attributes[attributeName];
+
+            var ownerType = GetOwnerType(owner);
+
+            return new Owner() { Id = owner.Id, Name = owner.Name, OwnerType = ownerType };
         }
 
         public void ProcessBookingAllocations(IList<BookingDeallocationResortTeamRequest> bookingDeallocationResortTeamRequest)

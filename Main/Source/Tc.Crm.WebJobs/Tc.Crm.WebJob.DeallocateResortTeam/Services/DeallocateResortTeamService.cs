@@ -122,6 +122,8 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
             if (bookingResponse == null) return false;
             if (bookingResponse.Customer == null) return false;
             if (bookingResponse.BookingOwner.OwnerType == OwnerType.User) return false;
+            if (bookingResponse.Customer.Owner == null) return false;
+            if (bookingResponse.Customer.Owner.OwnerType == OwnerType.User) return false;
 
             //customer already deallocated
             if (processedCustomers.Contains(bookingResponse.Customer.Id))

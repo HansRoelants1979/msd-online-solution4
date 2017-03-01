@@ -12,5 +12,6 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Models
         public Owner HotelOwner { get; set; }
         public Customer Customer { get; set; }
         public Owner BookingOwner { get; set; }
+        
     }
 }

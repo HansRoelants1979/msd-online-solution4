@@ -64,6 +64,12 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                                                     </link-entity>
                                                     <link-entity name='tc_customerbookingrole' alias='role' from='tc_bookingid' to='tc_bookingid'>
                                                         <attribute name='tc_customer'/>
+                                                         <link-entity link-type='outer' name='account' alias='account' from='accountid' to='tc_customer'>
+                                                            <attribute name='ownerid'/>
+                                                         </link-entity>
+                                                         <link-entity link-type='outer' name='contact' alias='contact' from='contactid' to='tc_customer'>
+                                                            <attribute name='ownerid'/>
+                                                         </link-entity>
                                                     </link-entity>
                                                  </entity>
                                                  </fetch>",
@@ -113,51 +119,43 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                     response.BookingId = Guid.Parse(booking.Attributes[Booking.BookingId].ToString());
                 if (booking.Contains(Booking.Name) && booking.Attributes[Booking.Name] != null)
                     response.BookingNumber = booking.Attributes[Booking.Name].ToString();
-                if (booking.Contains(Booking.Owner) && booking[Booking.Owner] != null)
-                {
-                    EntityReference owner = (EntityReference)booking.Attributes[Booking.Owner];
-                    OwnerType ownerType;
-                    if (owner.LogicalName == EntityName.User)
-                        ownerType = OwnerType.User;
-                    else
-                        ownerType = OwnerType.Team;
-
-                    response.BookingOwner = new Owner() { Id = owner.Id, Name = owner.Name, OwnerType = ownerType };
-                }
+               
+                    response.BookingOwner = GetOwner(booking, Booking.Owner, false);               
 
                 var fieldStartDate = AliasName.AccommodationAliasName + BookingAccommodation.StartDateandTime;
                 var fieldEndDate = AliasName.AccommodationAliasName + BookingAccommodation.EndDateandTime;
                 var fieldOwner = AliasName.HotelAliasName + Hotel.Owner;
                 var fieldCustomer = AliasName.RoleAliasName + CustomerBookingRole.Customer;
+                var fieldAccountOwner = AliasName.AccountAliasName + Common.Constants.Attributes.Customer.Owner;
+                var fieldContactOwner = AliasName.ContactAliasName + Common.Constants.Attributes.Customer.Owner;
 
                 if (booking.Contains(fieldStartDate) && booking[fieldStartDate] != null)
                     response.AccommodationStartDate = DateTime.Parse(((AliasedValue)booking[fieldStartDate]).Value.ToString());
                 if (booking.Contains(fieldEndDate) && booking[fieldEndDate] != null)
                     response.AccommodationEndDate = DateTime.Parse(((AliasedValue)booking[fieldEndDate]).Value.ToString());
-                if (booking.Contains(fieldOwner) && booking[fieldOwner] != null)
-                {
-                    EntityReference owner = (EntityReference)((AliasedValue)booking[fieldOwner]).Value;
-                    OwnerType ownerType;
-
-                    if (owner.LogicalName == EntityName.User)
-                        ownerType = OwnerType.User;
-                    else
-                        ownerType = OwnerType.Team;
-
-                    response.HotelOwner = new Owner() { Id = owner.Id, Name = owner.Name, OwnerType = ownerType };
-                }
+                 
+                    response.HotelOwner = GetOwner(booking, fieldOwner, true);
+                
                 if (booking.Contains(fieldCustomer) && booking[fieldCustomer] != null)
                 {
-                    EntityReference customer = (EntityReference)((AliasedValue)booking[fieldCustomer]).Value;
+                    var customer = (EntityReference)((AliasedValue)booking[fieldCustomer]).Value;
                     CustomerType customerType;
+                    Owner owner;
 
                     if (customer.LogicalName == EntityName.Contact)
                         customerType = CustomerType.Contact;
                     else
                         customerType = CustomerType.Account;
 
-                    response.Customer = new Common.Models.Customer() { Id = customer.Id, Name = customer.Name, CustomerType = customerType };
+                    if (booking.Contains(fieldContactOwner) && booking[fieldContactOwner] != null)                    
+                        owner = GetOwner(booking, fieldContactOwner, true);                   
+                    else
+                        owner = GetOwner(booking, fieldAccountOwner, true);
+                    
+
+                    response.Customer = new Common.Models.Customer() { Id = customer.Id, Name = customer.Name, CustomerType = customerType,Owner= owner };
                 }
+
 
                 bookingAllocationResponse.Add(response);
 
@@ -166,6 +164,31 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
             logger.LogInformation("PrepareBookingAllocation - end");
             return bookingAllocationResponse;
         }
+
+        public OwnerType GetOwnerType(EntityReference owner)
+        {
+            if (owner.LogicalName == EntityName.User)
+                return OwnerType.User;
+            else
+                return OwnerType.Team;
+        }
+
+        public Owner GetOwner(Entity entity, string attributeName, bool isAliasedValue)
+        {
+            if (entity == null) return null;
+            if (!entity.Contains(attributeName)) return null;
+            if (entity[attributeName] == null) return null;
+            EntityReference owner;
+            if (isAliasedValue)           
+                owner = (EntityReference)((AliasedValue)entity[attributeName]).Value;
+            else
+                owner = (EntityReference)entity.Attributes[attributeName];
+
+            var ownerType = GetOwnerType(owner);
+
+            return new Owner() { Id = owner.Id, Name = owner.Name, OwnerType = ownerType };
+        }
+
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "ProcessBookingAllocations")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.WebJob.AllocateResortTeam.Services.ILogger.LogInformation(System.String)")]

@@ -11,5 +11,6 @@ namespace Tc.Crm.Common.Models
         public string Name { get; set; }
         public Guid Id { get; set; }
         public CustomerType CustomerType { get; set; }
+        public Owner Owner { get; set; }
     }
 }

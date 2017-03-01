@@ -63,7 +63,7 @@ namespace Tc.Crm.Common.Services
             logger.LogInformation("RetrieveMultipleRecordsFetchXml - start");
             EntityCollection entityCollection = new EntityCollection();
             
-            int fetchCount = 4;
+            int fetchCount = 10000;
             int pageNumber = 1;           
             string pagingCookie = null;
 

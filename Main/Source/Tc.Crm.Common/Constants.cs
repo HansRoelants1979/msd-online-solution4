@@ -24,6 +24,8 @@ namespace Tc.Crm.Common.Constants
         public const string AccommodationAliasName = "accommodation.";
         public const string HotelAliasName = "hotel.";
         public const string RoleAliasName = "role.";
+        public const string AccountAliasName = "account.";
+        public const string ContactAliasName = "contact.";
     }
    
 }
