@@ -22,11 +22,11 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
             }
         }
 
-        public string DefaultUserId
+        public Guid DefaultUserId
         {
             get
             {
-                return "my connection string";
+                return new Guid("35ECF2B8-90E4-E611-8105-3863BB34FA70");
             }
         }
 

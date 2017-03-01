@@ -124,9 +124,8 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
                             join a in accommodations on b.Id equals ((EntityReference)a["tc_bookingid"]).Id
                             join h in hotels on ((EntityReference)a["tc_hotelid"]).Id equals h.Id
                             join cbr in customerBookingRoles on b.Id equals ((EntityReference)cbr["tc_bookingid"]).Id
-                            where ((DateTime)b["tc_departuredate"]) <= DateTime.Now.Date.AddDays(9)
-                            && ((DateTime)b["tc_returndate"]) >= DateTime.Now.Date
-                            orderby b["tc_name"].ToString(), ((DateTime)a["tc_startdateandtime"])
+                            where ((DateTime)a["tc_enddatetime"]).Date <= DateTime.Now.Date
+                            orderby b["tc_name"].ToString()
                             select new
                             {
                                 BookingId = b.Id,
