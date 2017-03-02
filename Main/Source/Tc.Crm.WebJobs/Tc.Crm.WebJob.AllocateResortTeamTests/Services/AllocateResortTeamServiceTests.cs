@@ -64,7 +64,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
         /// Expected Result: Booking.Owner = Hotel.Owner, Customer.Owner = Hotel.Owner
         /// </summary>
         [TestMethod()]
-        public void RunTest_Only_1_Accomodation_Departure_9th_Day_Exactly()
+        public void RunTest_BookingDepartureDateIs9DaysFromNow()
         {
             crmService.Switch = DataSwitch.Returns_Data;
             crmService.PrepareData();
@@ -109,7 +109,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
         /// Booking.Owner = User, Customer.Owner = User
         /// </summary>
         [TestMethod()]
-        public void RunTest_Only_1_Accomodation_Departure_10th_Day_Exactly()
+        public void RunTest_BookingDepartureDateIs10DaysFromNow()
         {
             crmService.Switch = DataSwitch.Returns_Data;
             crmService.PrepareData();
@@ -153,7 +153,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
         /// Expected Result: Booking.Owner = Hotel.Owner, Customer.Owner = Hotel.Owner
         /// </summary>
         [TestMethod()]
-        public void RunTest_Only_1_Accomodation_Departure_9th_Day_Exactly_Acc_On_10th_Day()
+        public void RunTest_BookingDepartsOnOrBefore9DaysButAccomodationsStartsAfter9Days()
         {
             crmService.Switch = DataSwitch.Returns_Data;
             crmService.PrepareData();
