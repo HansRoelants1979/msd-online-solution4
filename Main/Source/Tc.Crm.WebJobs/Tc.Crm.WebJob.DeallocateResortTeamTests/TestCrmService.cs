@@ -124,6 +124,25 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
             context.Data.Add("tc_booking", bookingEntityCollection);
         }
 
+        public void AddMultipleBookingsToContext()
+        {
+            var bookingEntityCollection = new Dictionary<Guid, Entity>();
+
+            for (int i = 0; i < 10; i++)
+            {
+                var booking1Id = Guid.NewGuid();
+                var booking1 = new Entity("tc_booking", booking1Id);
+                booking1["tc_bookingid"] = booking1Id;
+                booking1["tc_name"] = "BKG00" + i.ToString();
+                booking1["tc_departuredate"] = DateTime.Now.Date;
+                booking1["tc_returndate"] = DateTime.Now.Date;
+
+                bookingEntityCollection.Add(booking1Id, booking1);
+                
+            }
+            context.Data.Add("tc_booking", bookingEntityCollection);
+        }
+
         public void AddHotelsToContext()
         {
             var hotelEntityCollection = new Dictionary<Guid, Entity>();
@@ -139,13 +158,16 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
         public void AddAccomodationsToContext()
         {
             var accommodationEntityCollection = new Dictionary<Guid, Entity>();
-            var accommodation1Id = Guid.NewGuid();
-            var accommodation1 = new Entity("tc_bookingaccommodation", accommodation1Id);
-            accommodation1["tc_bookingaccommodationid"] = accommodation1Id;
-            accommodation1["tc_startdateandtime"] = DateTime.Now.Date;
-            accommodation1["tc_enddateandtime"] = DateTime.Now.Date;
+            for (int i = 0; i < 30; i++)
+            {
+                var accommodation1Id = Guid.NewGuid();
+                var accommodation1 = new Entity("tc_bookingaccommodation", accommodation1Id);
+                accommodation1["tc_bookingaccommodationid"] = accommodation1Id;
+                accommodation1["tc_startdateandtime"] = DateTime.Now.Date;
+                accommodation1["tc_enddateandtime"] = DateTime.Now.Date;
 
-            accommodationEntityCollection.Add(accommodation1Id, accommodation1);
+                accommodationEntityCollection.Add(accommodation1Id, accommodation1);
+            }
 
             context.Data.Add("tc_bookingaccommodation", accommodationEntityCollection);
         }
@@ -170,7 +192,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
             AddResortTeamsToContext();
             AddCustomersToContext();
             AddGatewaysToContext();
-            AddBookingsToContext();
+            AddMultipleBookingsToContext();
             AddHotelsToContext();
             AddAccomodationsToContext();
             AddBookingRolesToContext();
@@ -332,7 +354,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
                              join c in contacts on ((EntityReference)cbr["tc_customer"]).Id equals c.Id
                              where ((DateTime)a["tc_enddateandtime"]).Date == DateTime.Now.Date
                              && validGatewayIds.Contains(((EntityReference)b["tc_destinationgatewayid"]).Id)
-                             orderby b["tc_name"].ToString() descending, ((DateTime)a["tc_startdateandtime"]) descending
+                             orderby b["tc_name"].ToString() ascending, ((DateTime)a["tc_enddateandtime"]) ascending
                              select new
                              {
                                  BookingId = b.Id,
@@ -366,6 +388,11 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
 
 
             return new EntityCollection(bookings);
+
+        }
+
+        private void ProcessMultipleBookings(Entity booking, EntityCollection accommodations, EntityReference customer)
+        {
 
         }
     }
