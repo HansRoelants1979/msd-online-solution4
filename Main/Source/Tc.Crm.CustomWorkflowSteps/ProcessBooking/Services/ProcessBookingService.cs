@@ -33,7 +33,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 
             ProcessCustomer();
             ProcessBookingInfo();
-           // ProcessRemarks();
+            ProcessRemarks();
             ProcessAccommodation();
             ProcessTransport();
             ProcessTransfers();
@@ -156,9 +156,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             if (payloadBooking.DeleteAccommodationOrTransportOrRemarksOrTransferOrExtraService)
             {
                 trace.Trace("Delete Remarks information - start");
-                ProcessRecordsToDelete(EntityName.Remark,
-                    new string[] { Attributes.Remark.RemarkId },
-                    new string[] { Attributes.BookingAccommodation.BookingId },
+                ProcessRecordsToDelete(EntityName.Annotation,
+                    new string[] { Attributes.Annotation.Regarding },
+                    new string[] { Attributes.Annotation.Regarding },
                     new string[] { payloadBooking.BookingId });
                 trace.Trace("Delete Remarks information - end");
             }
