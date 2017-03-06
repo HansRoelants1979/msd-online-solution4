@@ -138,7 +138,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
                 booking1["tc_returndate"] = DateTime.Now.Date;
 
                 bookingEntityCollection.Add(booking1Id, booking1);
-                
+
             }
             context.Data.Add("tc_booking", bookingEntityCollection);
         }
@@ -158,16 +158,15 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
         public void AddAccomodationsToContext()
         {
             var accommodationEntityCollection = new Dictionary<Guid, Entity>();
-            for (int i = 0; i < 30; i++)
-            {
-                var accommodation1Id = Guid.NewGuid();
-                var accommodation1 = new Entity("tc_bookingaccommodation", accommodation1Id);
-                accommodation1["tc_bookingaccommodationid"] = accommodation1Id;
-                accommodation1["tc_startdateandtime"] = DateTime.Now.Date;
-                accommodation1["tc_enddateandtime"] = DateTime.Now.Date;
 
-                accommodationEntityCollection.Add(accommodation1Id, accommodation1);
-            }
+            var accommodation1Id = Guid.NewGuid();
+            var accommodation1 = new Entity("tc_bookingaccommodation", accommodation1Id);
+            accommodation1["tc_bookingaccommodationid"] = accommodation1Id;
+            accommodation1["tc_startdateandtime"] = DateTime.Now.Date;
+            accommodation1["tc_enddateandtime"] = DateTime.Now.Date;
+            accommodation1["tc_bookingid"] = null;
+            accommodationEntityCollection.Add(accommodation1Id, accommodation1);
+
 
             context.Data.Add("tc_bookingaccommodation", accommodationEntityCollection);
         }
