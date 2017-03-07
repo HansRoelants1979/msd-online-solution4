@@ -16,6 +16,12 @@ namespace Tc.Crm.Service.Models
     //     the code is regenerated.
     // </auto-generated>
     //------------------------------------------------------------------------------
+    [DataContract(Name = "bookingInfo")]
+    public class BookingInformation
+    {
+        [DataMember(Name = "booking")]
+        public Booking Booking { get; set; }
+    }
 
     [DataContract(Name = "booking")]
     public class Booking

@@ -43,9 +43,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             string bookingNumber = bookinginfo.BookingIdentifier.BookingNumber;
             var transferEntity = new Entity(EntityName.BookingTransfer);
 
-            if (transfer.TransferCode != null)
+            if (!string.IsNullOrWhiteSpace(transfer.TransferCode))
                 transferEntity[Attributes.BookingTransfer.TransferCode] = transfer.TransferCode;
-            if (transfer.TransferDescription != null && transfer.TransferDescription != "")
+            if (!string.IsNullOrWhiteSpace(transfer.TransferDescription))
             {
                 transferEntity[Attributes.BookingTransfer.Name] = transfer.TransferDescription;
 
@@ -56,16 +56,16 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 
             }
             transferEntity[Attributes.BookingTransfer.Order] = transfer.Order;
-            if (transfer.StartDate != null)
+            if (!string.IsNullOrWhiteSpace(transfer.StartDate))
                 transferEntity[Attributes.BookingTransfer.StartDateandTime] = DateTime.Parse(transfer.StartDate);
-            if (transfer.EndDate != null)
+            if (!string.IsNullOrWhiteSpace(transfer.EndDate))
                 transferEntity[Attributes.BookingTransfer.EndDateTime] = DateTime.Parse(transfer.EndDate);
 
             transferEntity[Attributes.BookingTransfer.TransferType] = CommonXrm.GetOptionSetValue(transfer.TransferType.ToString(), Attributes.BookingTransport.TransferType);
             transferEntity[Attributes.BookingTransfer.Category] = transfer.Category;
-            if (transfer.DepartureAirport != null)
+            if (!string.IsNullOrWhiteSpace(transfer.DepartureAirport))
                 transferEntity[Attributes.BookingTransfer.DepartureGatewayId] = new EntityReference(EntityName.Gateway, Attributes.Gateway.IATA, transfer.DepartureAirport);
-            if (transfer.ArrivalAirport != null)
+            if (!string.IsNullOrWhiteSpace(transfer.ArrivalAirport))
                 transferEntity[Attributes.BookingTransfer.ArrivalGatewayId] = new EntityReference(EntityName.Gateway, Attributes.Gateway.IATA, transfer.ArrivalAirport);
 
             transferEntity[Attributes.BookingTransfer.Participants] = BookingHelper.PrepareTravelParticipantsInfoForChildRecords(bookinginfo.TravelParticipant, trace, transfer.TravelParticipantAssignment);

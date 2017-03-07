@@ -17,8 +17,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 throw new InvalidPluginExecutionException("Booking Number should not be null.");
             EntityCollection entityCollectionaccommodation = new EntityCollection();
             if (accommodation != null && accommodation.Length > 0)
-            {               
-                trace.Trace("Processing "+ accommodation.Length .ToString()+ " Booking accommodation records - start");
+            {
+                trace.Trace("Processing " + accommodation.Length.ToString() + " Booking accommodation records - start");
                 Entity accommodationEntity = null;
                 for (int i = 0; i < accommodation.Length; i++)
                 {
@@ -41,7 +41,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             //BN - HotelId 
             if (accommodation.AccommodationCode != null)
                 accommodationEntity[Attributes.BookingAccommodation.SourceMarketHotelCode] = accommodation.AccommodationCode;
-            if (accommodation.GroupAccommodationCode != null && accommodation.GroupAccommodationCode != "")
+            if (!string.IsNullOrWhiteSpace(accommodation.GroupAccommodationCode))
             {
                 accommodationEntity[Attributes.BookingAccommodation.Name] = bookingNumber + General.Concatenator + accommodation.GroupAccommodationCode;
                 accommodationEntity[Attributes.BookingAccommodation.HotelId] = new EntityReference(EntityName.Hotel, Attributes.Hotel.MasterHotelID, accommodation.GroupAccommodationCode);
@@ -52,27 +52,27 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 
             }
             accommodationEntity[Attributes.BookingAccommodation.Order] = accommodation.Order.ToString();
-            if(accommodation.StartDate != null)
-            accommodationEntity[Attributes.BookingAccommodation.StartDateandTime] = DateTime.Parse(accommodation.StartDate);
-            if(accommodation.EndDate != null)
-            accommodationEntity[Attributes.BookingAccommodation.EndDateandTime] = DateTime.Parse(accommodation.EndDate);
-            if(accommodation.RoomType != null)
-            accommodationEntity[Attributes.BookingAccommodation.RoomType] = accommodation.RoomType;
+            if (!string.IsNullOrWhiteSpace(accommodation.StartDate))
+                accommodationEntity[Attributes.BookingAccommodation.StartDateandTime] = DateTime.Parse(accommodation.StartDate);
+            if (!string.IsNullOrWhiteSpace(accommodation.EndDate))
+                accommodationEntity[Attributes.BookingAccommodation.EndDateandTime] = DateTime.Parse(accommodation.EndDate);
+            if (!string.IsNullOrWhiteSpace(accommodation.RoomType))
+                accommodationEntity[Attributes.BookingAccommodation.RoomType] = accommodation.RoomType;
             accommodationEntity[Attributes.BookingAccommodation.BoardType] = CommonXrm.GetOptionSetValue(accommodation.BoardType.ToString(), Attributes.BookingAccommodation.BoardType);
             accommodationEntity[Attributes.BookingAccommodation.HasSharedRoom] = accommodation.HasSharedRoom;
             accommodationEntity[Attributes.BookingAccommodation.NumberofParticipants] = accommodation.NumberOfParticipants;
             accommodationEntity[Attributes.BookingAccommodation.NumberofRooms] = accommodation.NumberOfRooms;
             accommodationEntity[Attributes.BookingAccommodation.WithTransfer] = accommodation.WithTransfer;
             accommodationEntity[Attributes.BookingAccommodation.IsExternalService] = accommodation.IsExternalService;
-            if(accommodation.ExternalServiceCode != null)
-            accommodationEntity[Attributes.BookingAccommodation.ExternalServiceCode] = CommonXrm.GetOptionSetValue(accommodation.ExternalServiceCode.ToString(), Attributes.BookingAccommodation.ExternalServiceCode);           
+            if (!string.IsNullOrWhiteSpace(accommodation.ExternalServiceCode))
+                accommodationEntity[Attributes.BookingAccommodation.ExternalServiceCode] = CommonXrm.GetOptionSetValue(accommodation.ExternalServiceCode.ToString(), Attributes.BookingAccommodation.ExternalServiceCode);
             accommodationEntity[Attributes.BookingAccommodation.NotificationRequired] = accommodation.NotificationRequired;
             accommodationEntity[Attributes.BookingAccommodation.NeedTourGuideAssignment] = accommodation.NeedsTourGuideAssignment;
             accommodationEntity[Attributes.BookingAccommodation.ExternalTransfer] = accommodation.IsExternalTransfer;
-            if(accommodation.TransferServiceLevel != null)
-            accommodationEntity[Attributes.BookingAccommodation.TransferServiceLevel] = CommonXrm.GetOptionSetValue(accommodation.TransferServiceLevel, Attributes.BookingAccommodation.TransferServiceLevel);
-            if(accommodation.AccommodationDescription != null)
-            accommodationEntity[Attributes.BookingAccommodation.SourceMarketHotelName] = accommodation.AccommodationDescription;
+            if (!string.IsNullOrWhiteSpace(accommodation.TransferServiceLevel))
+                accommodationEntity[Attributes.BookingAccommodation.TransferServiceLevel] = CommonXrm.GetOptionSetValue(accommodation.TransferServiceLevel, Attributes.BookingAccommodation.TransferServiceLevel);
+            if (!string.IsNullOrWhiteSpace(accommodation.AccommodationDescription))
+                accommodationEntity[Attributes.BookingAccommodation.SourceMarketHotelName] = accommodation.AccommodationDescription;
             accommodationEntity[Attributes.BookingAccommodation.BookingId] = new EntityReference(EntityName.Booking, bookingId);
             accommodationEntity[Attributes.BookingAccommodation.Participants] = BookingHelper.PrepareTravelParticipantsInfoForChildRecords(bookinginfo.TravelParticipant, trace, accommodation.TravelParticipantAssignment);
             trace.Trace("Preparing Booking Transport information - End");

@@ -43,9 +43,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             string bookingNumber = bookinginfo.BookingIdentifier.BookingNumber;
             var extraServiceEntity = new Entity(EntityName.BookingExtraService);
 
-            if (extraService.ExtraServiceCode != null)
+            if (!string.IsNullOrWhiteSpace(extraService.ExtraServiceCode ))
                 extraServiceEntity[Attributes.BookingExtraService.ExtraServiceCode] = extraService.ExtraServiceCode;
-            if (extraService.ExtraServiceDescription != null)
+            if (!string.IsNullOrWhiteSpace(extraService.ExtraServiceDescription ))
             {
                 extraServiceEntity[Attributes.BookingExtraService.Name] = extraService.ExtraServiceDescription;
 
@@ -56,9 +56,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 
             }
             extraServiceEntity[Attributes.BookingExtraService.Order] = extraService.Order;
-            if (extraService.StartDate != null)
+            if (!string.IsNullOrWhiteSpace(extraService.StartDate ))
                 extraServiceEntity[Attributes.BookingExtraService.StartDateandTime] = DateTime.Parse(extraService.StartDate);
-            if (extraService.EndDate != null)
+            if (!string.IsNullOrWhiteSpace(extraService.EndDate ))
                 extraServiceEntity[Attributes.BookingExtraService.EndDateTime] = DateTime.Parse(extraService.EndDate);
 
 

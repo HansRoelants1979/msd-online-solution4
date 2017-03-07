@@ -21,16 +21,16 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
             trace.Trace("Populate Remarks information - start");
 
-            
-            
+
+
             EntityCollection entityCollectionRemarks = new EntityCollection();
             if (remark != null && remark.Length > 0)
             {
-                trace.Trace("Processing "+ remark.Length .ToString()+ " Remarks - start");
+                trace.Trace("Processing " + remark.Length.ToString() + " Remarks - start");
                 for (int i = 0; i < remark.Length; i++)
                 {
                     trace.Trace("Processing Remark " + i.ToString() + " - start");
-                    var annotationEntity = PrepareBookingRemarks( remark[i], trace);
+                    var annotationEntity = PrepareBookingRemarks(remark[i], trace);
                     switch (type)
                     {
                         case RemarkType.Remark:
@@ -66,12 +66,12 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
         /// <param name="remark"></param>
         /// <param name="trace"></param>
         /// <returns></returns>
-        private static Entity PrepareBookingRemarks( Remark remark,  ITracingService trace)
+        private static Entity PrepareBookingRemarks(Remark remark, ITracingService trace)
         {
             trace.Trace("Preparing Remark information - Start");
             var annotationEntity = new Entity(EntityName.Annotation);
             annotationEntity[Attributes.Annotation.Subject] = remark.RemarkType.ToString();
-            if (remark.Text != null)
+            if (!string.IsNullOrWhiteSpace(remark.Text))
                 annotationEntity[Attributes.Annotation.NoteText] = remark.Text;
             trace.Trace("Preparing Remark information - End");
             return annotationEntity;

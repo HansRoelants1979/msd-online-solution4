@@ -25,15 +25,16 @@ namespace Tc.Crm.Service.Controllers
         [Route("api/booking/update")]
         [HttpPut]
         [JsonWebTokenAuthorize]
-        public HttpResponseMessage Update(Booking booking)
+        public HttpResponseMessage Update(BookingInformation bookingInfo)
         {
             try
             {
-                if (booking == null)
+                if (bookingInfo == null || bookingInfo.Booking == null)
                 {
                     return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.BookingDataPassedIsNullOrCouldNotBeParsed);
                 }
-                if(booking.BookingIdentifier == null ||
+                var booking = bookingInfo.Booking;
+                if (booking.BookingIdentifier == null ||
                     string.IsNullOrWhiteSpace(booking.BookingIdentifier.BookingNumber))
                     return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.SourceKeyNotPresent);
                 var jsonData = JsonConvert.SerializeObject(booking);

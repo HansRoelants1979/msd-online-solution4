@@ -65,21 +65,21 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             if (general != null)
             {
                 trace.Trace("Booking populate general - start");
-                booking[Attributes.Booking.BookingDate] = (general.BookingDate != null) ? Convert.ToDateTime(general.BookingDate) : (DateTime?)null;
-                booking[Attributes.Booking.DepartureDate] = (general.DepartureDate != null) ? Convert.ToDateTime(general.DepartureDate) : (DateTime?)null;
-                booking[Attributes.Booking.ReturnDate] = (general.ReturnDate != null) ? Convert.ToDateTime(general.ReturnDate) : (DateTime?)null;
+                booking[Attributes.Booking.BookingDate] = (!string.IsNullOrWhiteSpace(general.BookingDate)) ? Convert.ToDateTime(general.BookingDate) : (DateTime?)null;
+                booking[Attributes.Booking.DepartureDate] = (!string.IsNullOrWhiteSpace(general.DepartureDate)) ? Convert.ToDateTime(general.DepartureDate) : (DateTime?)null;
+                booking[Attributes.Booking.ReturnDate] = (!string.IsNullOrWhiteSpace(general.ReturnDate)) ? Convert.ToDateTime(general.ReturnDate) : (DateTime?)null;
                 booking[Attributes.Booking.Duration] = Convert.ToInt32(general.Duration);
-                booking[Attributes.Booking.DestinationGatewayId] = (general.Destination != null) ? new EntityReference(EntityName.Gateway, Attributes.Gateway.IATA, general.Destination) : null;
-                booking[Attributes.Booking.TourOperatorId] = (general.ToCode != null) ? new EntityReference(EntityName.TourOperator, Attributes.TourOperator.TourOperatorCode, general.ToCode) : null;
-                booking[Attributes.Booking.BrandId] = (general.Brand != null) ? new EntityReference(EntityName.Brand, Attributes.Brand.BrandCode, general.Brand) : null;
-                booking[Attributes.Booking.BrochureCode] = (general.BrochureCode != null) ? general.BrochureCode : string.Empty;
+                booking[Attributes.Booking.DestinationGatewayId] = (!string.IsNullOrWhiteSpace(general.Destination)) ? new EntityReference(EntityName.Gateway, Attributes.Gateway.IATA, general.Destination) : null;
+                booking[Attributes.Booking.TourOperatorId] = (!string.IsNullOrWhiteSpace(general.ToCode)) ? new EntityReference(EntityName.TourOperator, Attributes.TourOperator.TourOperatorCode, general.ToCode) : null;
+                booking[Attributes.Booking.BrandId] = (!string.IsNullOrWhiteSpace(general.Brand)) ? new EntityReference(EntityName.Brand, Attributes.Brand.BrandCode, general.Brand) : null;
+                booking[Attributes.Booking.BrochureCode] = (!string.IsNullOrWhiteSpace(general.BrochureCode)) ? general.BrochureCode : string.Empty;
                 booking[Attributes.Booking.IsLateBooking] = general.IsLateBooking;
                 booking[Attributes.Booking.NumberofParticipants] = general.NumberOfParticipants;
                 booking[Attributes.Booking.NumberofAdults] = general.NumberOfAdults;
                 booking[Attributes.Booking.NumberofChildren] = general.NumberOfChildren;
                 booking[Attributes.Booking.NumberofInfants] = general.NumberOfInfants;
                 booking[Attributes.Booking.TravelAmount] = new Money(general.TravelAmount);
-                booking[Attributes.Booking.TransactionCurrencyId] = (general.Currency != null) ? new EntityReference(EntityName.Currency, Attributes.Currency.Name, general.Currency) : null;
+                booking[Attributes.Booking.TransactionCurrencyId] = (!string.IsNullOrWhiteSpace(general.Currency)) ? new EntityReference(EntityName.Currency, Attributes.Currency.Name, general.Currency) : null;
                 booking[Attributes.Booking.HasSourceMarketComplaint] = general.HasComplaint;
                 trace.Trace("Booking populate general - end");
             }
@@ -107,14 +107,10 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 
         public static void PopulateServices(Entity booking, BookingServices service, ITracingService trace)
         {
-            if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");            
+            if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
             if (service == null) throw new InvalidPluginExecutionException("Booking service is null.");
             if (booking == null) throw new InvalidPluginExecutionException("Booking entiy is null.");
             trace.Trace("Booking populate service - start");
-            //booking[Attributes.Booking.Transfer] = PrepareTransferInfo(service.Transfer, trace);
-            //booking[Attributes.Booking.TransferRemarks] = PrepareTransferRemarks(service.Transfer, trace);
-            //booking[Attributes.Booking.ExtraService] = PrepareExtraServicesInfo(service.ExtraService, trace);
-            //booking[Attributes.Booking.ExtraServiceRemarks] = PrepareExtraServiceRemarks(service.ExtraService, trace);            
             trace.Trace("Booking populate service - end");
         }
 
@@ -128,24 +124,24 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             trace.Trace("Travel Participants information - start");
             if (travelParticipants == null || travelParticipants.Length == 0) return null;
             StringBuilder participantsBuilder = new StringBuilder();
-            trace.Trace("Processing "+ travelParticipants.Length.ToString() + " Travel Participants information - start");
+            trace.Trace("Processing " + travelParticipants.Length.ToString() + " Travel Participants information - start");
             for (int i = 0; i < travelParticipants.Length; i++)
             {
-                trace.Trace("Processing Travel Participant "+ i.ToString()+" information - start");
+                trace.Trace("Processing Travel Participant " + i.ToString() + " information - start");
                 StringBuilder participantBuilder = new StringBuilder();
-                if(travelParticipants[i].TravelParticipantIdOnTour !=  null)
-                participantBuilder.Append(travelParticipants[i].TravelParticipantIdOnTour + General.Seperator);
-                if(travelParticipants[i].FirstName != null)
-                participantBuilder.Append(travelParticipants[i].FirstName + General.Seperator);
-                if(travelParticipants[i].LastName != null)
-                participantBuilder.Append(travelParticipants[i].LastName + General.Seperator);
+                if (!string.IsNullOrWhiteSpace(travelParticipants[i].TravelParticipantIdOnTour))
+                    participantBuilder.Append(travelParticipants[i].TravelParticipantIdOnTour + General.Seperator);
+                if (!string.IsNullOrWhiteSpace(travelParticipants[i].FirstName))
+                    participantBuilder.Append(travelParticipants[i].FirstName + General.Seperator);
+                if (!string.IsNullOrWhiteSpace(travelParticipants[i].LastName))
+                    participantBuilder.Append(travelParticipants[i].LastName + General.Seperator);
                 participantBuilder.Append(travelParticipants[i].Age.ToString() + General.Seperator);
-                if(travelParticipants[i].Birthdate != null)
-                participantBuilder.Append(travelParticipants[i].Birthdate + General.Seperator);
+                if (!string.IsNullOrWhiteSpace(travelParticipants[i].Birthdate))
+                    participantBuilder.Append(travelParticipants[i].Birthdate + General.Seperator);
                 participantBuilder.Append(travelParticipants[i].Gender.ToString() + General.Seperator);
                 participantBuilder.Append(travelParticipants[i].Relation.ToString() + General.Seperator);
-                if(travelParticipants[i].Language != null)
-                participantBuilder.Append(travelParticipants[i].Language);
+                if (!string.IsNullOrWhiteSpace(travelParticipants[i].Language))
+                    participantBuilder.Append(travelParticipants[i].Language);
                 participantsBuilder.AppendLine(participantBuilder.ToString());
                 trace.Trace("Processing Travel Participant " + i.ToString() + " information - end");
             }
@@ -170,13 +166,13 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                     trace.Trace("Processing Travel Participant " + j.ToString() + " information - start");
                     StringBuilder participantBuilder = new StringBuilder();
 
-                    if (Participants[j].FirstName != null)
+                    if (!string.IsNullOrWhiteSpace(Participants[j].FirstName))
                         participantBuilder.Append(Participants[j].FirstName + General.Space);
-                    if (Participants[j].LastName != null)
+                    if (!string.IsNullOrWhiteSpace(Participants[j].LastName))
                         participantBuilder.Append(Participants[j].LastName + General.Seperator);
 
                     participantsBuilder.AppendLine(participantBuilder.ToString());
-                    
+
 
                     trace.Trace("Processing Travel Participant " + j.ToString() + " information - end");
                 }
@@ -196,7 +192,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             trace.Trace("Booking populate participants remarks - start");
             if (travelParticipants == null || travelParticipants.Length == 0) return string.Empty;
             StringBuilder remarksbuilder = new StringBuilder();
-            trace.Trace("Processing "+ travelParticipants.Length.ToString() + " Travel Participant Remarks information - start");
+            trace.Trace("Processing " + travelParticipants.Length.ToString() + " Travel Participant Remarks information - start");
             for (int i = 0; i < travelParticipants.Length; i++)
             {
                 if (travelParticipants[i].Remark == null || travelParticipants[i].Remark.Length == 0) continue;
@@ -205,12 +201,12 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 {
                     if (travelParticipants[i].Remark[j] == null) continue;
                     StringBuilder remarkbuilder = new StringBuilder();
-                    trace.Trace("Processing Remark " + j.ToString() +" information - start");
-                    if (travelParticipants[i].TravelParticipantIdOnTour != null)
-                    remarkbuilder.Append(travelParticipants[i].TravelParticipantIdOnTour + General.Seperator);
+                    trace.Trace("Processing Remark " + j.ToString() + " information - start");
+                    if (!string.IsNullOrWhiteSpace(travelParticipants[i].TravelParticipantIdOnTour))
+                        remarkbuilder.Append(travelParticipants[i].TravelParticipantIdOnTour + General.Seperator);
                     remarkbuilder.Append(travelParticipants[i].Remark[j].RemarkType.ToString() + General.Seperator);
-                    if(travelParticipants[i].Remark[j].Text != null)
-                    remarkbuilder.Append(travelParticipants[i].Remark[j].Text);
+                    if (!string.IsNullOrWhiteSpace(travelParticipants[i].Remark[j].Text))
+                        remarkbuilder.Append(travelParticipants[i].Remark[j].Text);
 
                     remarksbuilder.AppendLine(remarkbuilder.ToString());
                     trace.Trace("Processing Remark " + j.ToString() + " information - end");
@@ -234,27 +230,27 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             if (transfers == null || transfers.Length == 0) return string.Empty;
 
             StringBuilder transfersBuilder = new StringBuilder();
-            trace.Trace("Processing "+ transfers.Length.ToString() + " transfers - start");
+            trace.Trace("Processing " + transfers.Length.ToString() + " transfers - start");
             for (int i = 0; i < transfers.Length; i++)
             {
                 StringBuilder transferBuilder = new StringBuilder();
                 trace.Trace("Processing transfer " + i.ToString() + " - start");
-                if (transfers[i].TransferCode != null)
-                transferBuilder.Append(transfers[i].TransferCode + General.Seperator);
-                if(transfers[i].TransferDescription != null)
-                transferBuilder.Append(transfers[i].TransferDescription + General.Seperator);
+                if (!string.IsNullOrWhiteSpace(transfers[i].TransferCode))
+                    transferBuilder.Append(transfers[i].TransferCode + General.Seperator);
+                if (!string.IsNullOrWhiteSpace(transfers[i].TransferDescription))
+                    transferBuilder.Append(transfers[i].TransferDescription + General.Seperator);
                 transferBuilder.Append(transfers[i].Order.ToString() + General.Seperator);
-                if(transfers[i].StartDate != null)
-                transferBuilder.Append(transfers[i].StartDate + General.Seperator);
-                if(transfers[i].EndDate != null)
-                transferBuilder.Append(transfers[i].EndDate + General.Seperator);
-                if(transfers[i].Category != null)
-                transferBuilder.Append(transfers[i].Category + General.Seperator);
+                if (!string.IsNullOrWhiteSpace(transfers[i].StartDate))
+                    transferBuilder.Append(transfers[i].StartDate + General.Seperator);
+                if (!string.IsNullOrWhiteSpace(transfers[i].EndDate))
+                    transferBuilder.Append(transfers[i].EndDate + General.Seperator);
+                if (!string.IsNullOrWhiteSpace(transfers[i].Category))
+                    transferBuilder.Append(transfers[i].Category + General.Seperator);
                 transferBuilder.Append(transfers[i].TransferType.ToString() + General.Seperator);
-                if(transfers[i].DepartureAirport != null)
-                transferBuilder.Append(transfers[i].DepartureAirport + General.Seperator);
-                if(transfers[i].ArrivalAirport != null)
-                transferBuilder.Append(transfers[i].ArrivalAirport);
+                if (!string.IsNullOrWhiteSpace(transfers[i].DepartureAirport))
+                    transferBuilder.Append(transfers[i].DepartureAirport + General.Seperator);
+                if (!string.IsNullOrWhiteSpace(transfers[i].ArrivalAirport))
+                    transferBuilder.Append(transfers[i].ArrivalAirport);
 
                 transfersBuilder.AppendLine(transferBuilder.ToString());
                 trace.Trace("Processing transfer " + i.ToString() + " - end");
@@ -280,14 +276,14 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             for (int i = 0; i < transfers.Length; i++)
             {
                 if (transfers[i].Remark == null) continue;
-                trace.Trace("Processing "+i.ToString()+" Transfer and its " + transfers[i].Remark.Length.ToString() + " Transfer service remarks - start");
+                trace.Trace("Processing " + i.ToString() + " Transfer and its " + transfers[i].Remark.Length.ToString() + " Transfer service remarks - start");
                 for (int j = 0; j < transfers[i].Remark.Length; j++)
                 {
                     StringBuilder remarkBuilder = new StringBuilder();
                     trace.Trace("Processing Transfer Remark " + j.ToString() + " information - start");
                     remarkBuilder.Append(transfers[i].Remark[j].RemarkType.ToString() + General.Seperator);
-                    if(transfers[i].Remark[j].Text != null)
-                    remarkBuilder.Append(transfers[i].Remark[j].Text);
+                    if (!string.IsNullOrWhiteSpace(transfers[i].Remark[j].Text))
+                        remarkBuilder.Append(transfers[i].Remark[j].Text);
                     remarksBuilder.AppendLine(remarkBuilder.ToString());
                     trace.Trace("Processing Transfer Remark " + j.ToString() + " information - end");
                 }
@@ -297,7 +293,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             return remarksBuilder.ToString();
         }
 
-        
+
         /// <summary>
         /// To prepare extraservice information
         /// </summary>       
@@ -309,18 +305,20 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             if (extraServices == null || extraServices.Length == 0) return string.Empty;
 
             StringBuilder extraServicesBuilder = new StringBuilder();
-            trace.Trace("Booking populate "+ extraServices.Length.ToString() + " extra services - start");
+            trace.Trace("Booking populate " + extraServices.Length.ToString() + " extra services - start");
             for (int i = 0; i < extraServices.Length; i++)
             {
                 StringBuilder extraServiceBuilder = new StringBuilder();
-                trace.Trace("Processing extra service "+i.ToString()+" - start");
-                extraServiceBuilder.Append(extraServices[i].ExtraServiceCode.ToString() + General.Seperator);
-                extraServiceBuilder.Append(extraServices[i].ExtraServiceDescription.ToString() + General.Seperator);
+                trace.Trace("Processing extra service " + i.ToString() + " - start");
+                if (!string.IsNullOrWhiteSpace(extraServices[i].ExtraServiceCode))
+                    extraServiceBuilder.Append(extraServices[i].ExtraServiceCode + General.Seperator);
+                if (!string.IsNullOrWhiteSpace(extraServices[i].ExtraServiceDescription))
+                    extraServiceBuilder.Append(extraServices[i].ExtraServiceDescription + General.Seperator);
                 extraServiceBuilder.Append(extraServices[i].Order.ToString() + General.Seperator);
-                if(extraServices[i].StartDate != null)
-                extraServiceBuilder.Append(extraServices[i].StartDate + General.Seperator);
-                if(extraServices[i].EndDate != null)
-                extraServiceBuilder.Append(extraServices[i].EndDate);
+                if (!string.IsNullOrWhiteSpace(extraServices[i].StartDate))
+                    extraServiceBuilder.Append(extraServices[i].StartDate + General.Seperator);
+                if (!string.IsNullOrWhiteSpace(extraServices[i].EndDate))
+                    extraServiceBuilder.Append(extraServices[i].EndDate);
 
                 extraServicesBuilder.AppendLine(extraServiceBuilder.ToString());
                 trace.Trace("Processing extra service " + i.ToString() + " - End");
@@ -343,14 +341,14 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             for (int i = 0; i < extraServices.Length; i++)
             {
                 if (extraServices[i].Remark == null) continue;
-                trace.Trace("Processing "+i.ToString()+" extra service and its "+ extraServices[i].Remark.Length.ToString() + " extra service remarks - start");
+                trace.Trace("Processing " + i.ToString() + " extra service and its " + extraServices[i].Remark.Length.ToString() + " extra service remarks - start");
                 for (int j = 0; j < extraServices[i].Remark.Length; j++)
                 {
                     StringBuilder remarkBuilder = new StringBuilder();
                     trace.Trace("Processing Extra Service Remark " + j.ToString() + " information - start");
                     remarkBuilder.Append(extraServices[i].Remark[j].RemarkType.ToString() + General.Seperator);
-                    if(extraServices[i].Remark[j].Text != null)
-                    remarkBuilder.Append(extraServices[i].Remark[j].Text);
+                    if (!string.IsNullOrWhiteSpace(extraServices[i].Remark[j].Text ))
+                        remarkBuilder.Append(extraServices[i].Remark[j].Text);
                     remarksBuilder.AppendLine(remarkBuilder.ToString());
                     trace.Trace("Processing Extra Service Remark " + j.ToString() + " information - end");
                 }
@@ -367,7 +365,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             trace.Trace("Booking populate fields - start");
             if (booking == null) throw new InvalidPluginExecutionException("Booking is null.");
             if (booking.BookingIdentifier == null) throw new InvalidPluginExecutionException("Booking identifier is null.");
-            if(booking.BookingIdentifier.BookingNumber == null || string.IsNullOrWhiteSpace(booking.BookingIdentifier.BookingNumber))
+            if (booking.BookingIdentifier.BookingNumber == null || string.IsNullOrWhiteSpace(booking.BookingIdentifier.BookingNumber))
                 throw new InvalidPluginExecutionException("Booking Number should not be null.");
 
             Entity bookingEntity = new Entity(EntityName.Booking, Attributes.Booking.Name, booking.BookingIdentifier.BookingNumber);

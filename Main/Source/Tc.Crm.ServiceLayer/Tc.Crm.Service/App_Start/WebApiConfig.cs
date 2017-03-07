@@ -1,4 +1,5 @@
 ﻿using Microsoft.Practices.Unity;
+using Newtonsoft.Json.Converters;
 using System.Web.Http;
 using Tc.Crm.Service.Resolver;
 using Tc.Crm.Service.Services;
@@ -20,7 +21,7 @@ namespace Tc.Crm.Service
             
             // Web API routes
             config.MapHttpAttributeRoutes();
-
+            config.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new StringEnumConverter());
             config.Formatters.Remove(config.Formatters.XmlFormatter);
         }
 
