@@ -39,12 +39,12 @@ namespace Tc.Crm.Service.Client.Console
                         #region Booking.bookingidentifier
                         BookingIdentifier = new BookingIdentifier
                         {
-                            BookingNumber = "BOO101",
-                            BookingUpdateDateOnTour = "20170102",
-                            BookingUpdateDateTourOperator = "20170102",
+                            BookingNumber = "BKG00001",
+                            BookingUpdateDateOnTour = "20170202",
+                            BookingUpdateDateTourOperator = "20170202",
                             BookingVersionOnTour = "v1",
                             BookingVersionTourOperator = "v1",
-                            SourceMarket = "England",
+                            SourceMarket = "AX",
                             SourceSystem = "OnTour"
                         },
                         #endregion
@@ -61,15 +61,15 @@ namespace Tc.Crm.Service.Client.Console
                             #region booking.customer.address
                             Address = new Address[] {
                         new Address {
-                            AdditionalAddressInfo = "Nothing Man",
+                            AdditionalAddressInfo = "Near to Cricket stadium",
                             Box = "Hmm",
-                            Country = "England",
+                            Country = "AX",
                             County = "Worcestorshire",
                             FlatNumberUnit = "402",
                             HouseNumberBuilding = "22",
                             Number = "22",
                             PostalCode = "WA1123",
-                            Street = "Village",
+                            Street = "Nathans",
                             Town = "UU Gully",
                             AddressType = AddressType.M
                         }
@@ -86,8 +86,8 @@ namespace Tc.Crm.Service.Client.Console
                             CustomerIdentifier = new CustomerIdentifier
                             {
                                 BusinessArea = "Hotel",
-                                CustomerId = "CON001",
-                                SourceMarket = "England",
+                                CustomerId = "CNTBST0001",
+                                SourceMarket = "AX",
                                 SourceSystem = "OnTour",
                             },
                             #endregion booking.customer.identifier
@@ -109,14 +109,14 @@ namespace Tc.Crm.Service.Client.Console
                             #region booking.customer.identity
                             CustomerIdentity = new CustomerIdentity
                             {
-                                AcademicTitle = "BTech",
+                                AcademicTitle = "Mr",
                                 Birthdate = "19821008",
                                 FirstName = "Barney",
                                 Gender = Gender.Male,
                                 Language = "Bro-English",
                                 LastName = "Stinston",
                                 MiddleName = "bro",
-                                Salutation = "YoBro"
+                                Salutation = "Mr"
                             },
                             #endregion booking.customer.identity
                             #region booking.customer.phone
@@ -165,9 +165,9 @@ namespace Tc.Crm.Service.Client.Console
                                 },
                                 #endregion booking.edentity.booker.address
                                 Email = "booker@tc.com",
-                                EmergencyNumber = "121212",
-                                Mobile = "2222",
-                                Phone = "1212121",
+                                EmergencyNumber = "100",
+                                Mobile = "0856387455",
+                                Phone = "0567865433",
 
                             }
                             #endregion booking.edentity.booker
@@ -176,21 +176,21 @@ namespace Tc.Crm.Service.Client.Console
                         #region booking.general
                         BookingGeneral = new BookingGeneral
                         {
-                            BookingDate = "20170101",
+                            BookingDate = "20170202",
                             BookingStatus = BookingStatus.Booked,
-                            Brand = "Humma",
+                            Brand = "AT",
                             BrochureCode = "BROCODE1",
-                            Currency = "Pounds",
-                            DepartureDate = "20170131",
-                            Destination = "NYC",
+                            Currency = "EUR",
+                            DepartureDate = "20170304",
+                            Destination = "ASW",
                             Duration = 2,
                             HasComplaint = false,
                             IsLateBooking = false,
                             NumberOfAdults = 1,
-                            NumberOfChildren = 0,
+                            NumberOfChildren = 2,
                             NumberOfInfants = 0,
-                            ReturnDate = "20170202",
-                            ToCode = "NYC",
+                            ReturnDate = "20170324",
+                            ToCode = "CDG",
                             TravelAmount = 2000
 
                         },
@@ -198,7 +198,7 @@ namespace Tc.Crm.Service.Client.Console
                         #region booking.remark
                         Remark = new Remark[] {
                     new Remark {
-                        Text = "Booking Remark 1",
+                        Text = "Every room should have good sea view",
                         RemarkType = RemarkType.A
                     }
                 },
@@ -210,31 +210,31 @@ namespace Tc.Crm.Service.Client.Console
                             Accommodation = new Accommodation[] {
                         new Accommodation
                         {
-                            AccommodationCode = "acc01",
+                            AccommodationCode = "ACM0001",
                             AccommodationDescription ="5star",
                             BoardType = BoardType.AI,
-                            EndDate = "20170202",
+                            EndDate = "20170306",
                             ExternalServiceCode = "extserv02",
-                            GroupAccommodationCode = "grp02",
+                            GroupAccommodationCode = "RYP0001",
                             HasSharedRoom = false,
                             IsExternalService = false,
                             IsExternalTransfer = false,
                             NeedsTourGuideAssignment= false,
                             NotificationRequired = true,
-                              NumberOfParticipants=2,
-                              NumberOfRooms = 1,
+                              NumberOfParticipants=4,
+                              NumberOfRooms = 2,
                               Order = 1,
                               #region booking.services.accomodation.Remark
                               Remark = new Remark[] {
                                   new Remark
                                   {
-                                      Text = "acc remark",
+                                      Text = "Room should have 2 beds and a sofa",
                                       RemarkType = RemarkType.A
                                   }
                               },
                               #endregion booking.services.accomodation.Remark
                               RoomType = "sea view",
-                              StartDate = "20170131",
+                              StartDate = "20170304",
                               Status = AccommodationStatus.OK,
                               #region booking.services.accomodation.tourguideassignment
                               TourGuideAssignment = new TourGuideAssignment
@@ -265,6 +265,120 @@ namespace Tc.Crm.Service.Client.Console
                             #endregion booking.services.accomodation.travelparticipantassignment
                             WithTransfer = true,
                         },
+                        new Accommodation
+                        {
+                            AccommodationCode = "ACM0002",
+                            AccommodationDescription ="5star",
+                            BoardType = BoardType.AI,
+                            EndDate = "20170318",
+                            ExternalServiceCode = "extserv02",
+                            GroupAccommodationCode = "HHM001",
+                            HasSharedRoom = false,
+                            IsExternalService = false,
+                            IsExternalTransfer = false,
+                            NeedsTourGuideAssignment= false,
+                            NotificationRequired = true,
+                              NumberOfParticipants=4,
+                              NumberOfRooms = 2,
+                              Order = 1,
+                              #region booking.services.accomodation.Remark
+                              Remark = new Remark[] {
+                                  new Remark
+                                  {
+                                      Text = "Room should have 2 beds and a sofa",
+                                      RemarkType = RemarkType.A
+                                  }
+                              },
+                              #endregion booking.services.accomodation.Remark
+                              RoomType = "sea view",
+                              StartDate = "20170309",
+                              Status = AccommodationStatus.OK,
+                              #region booking.services.accomodation.tourguideassignment
+                              TourGuideAssignment = new TourGuideAssignment
+                              {
+                                  TourGuide = new TourGuide
+                                  {
+                                      Brands = new Brands[]
+                                      {
+                                          new Brands
+                                          {
+
+                                          }
+                                      },
+                                      TourGuideId = "tg001",
+                                      TourGuideName = "Mori Aami"
+                                  }
+                              },
+                              #endregion booking.services.accomodation.tourguideassignment
+                              TransferServiceLevel = "tsl01",
+                              #region booking.services.accomodation.travelparticipantassignment
+                              TravelParticipantAssignment = new TravelParticipantAssignment[]
+                              {
+                                  new TravelParticipantAssignment
+                                  {
+                                      TravelParticipantId = "TP001"
+                                  }
+                              },
+                            #endregion booking.services.accomodation.travelparticipantassignment
+                            WithTransfer = true,
+                        },
+                        new Accommodation
+                        {
+                            AccommodationCode = "ACM0003",
+                            AccommodationDescription ="5star",
+                            BoardType = BoardType.AI,
+                            EndDate = "20170324",
+                            ExternalServiceCode = "extserv02",
+                            GroupAccommodationCode = "GH0011",
+                            HasSharedRoom = false,
+                            IsExternalService = false,
+                            IsExternalTransfer = false,
+                            NeedsTourGuideAssignment= false,
+                            NotificationRequired = true,
+                              NumberOfParticipants=4,
+                              NumberOfRooms = 2,
+                              Order = 1,
+                              #region booking.services.accomodation.Remark
+                              Remark = new Remark[] {
+                                  new Remark
+                                  {
+                                      Text = "Room should have 2 beds and a sofa",
+                                      RemarkType = RemarkType.A
+                                  }
+                              },
+                              #endregion booking.services.accomodation.Remark
+                              RoomType = "sea view",
+                              StartDate = "20170319",
+                              Status = AccommodationStatus.OK,
+                              #region booking.services.accomodation.tourguideassignment
+                              TourGuideAssignment = new TourGuideAssignment
+                              {
+                                  TourGuide = new TourGuide
+                                  {
+                                      Brands = new Brands[]
+                                      {
+                                          new Brands
+                                          {
+
+                                          }
+                                      },
+                                      TourGuideId = "tg001",
+                                      TourGuideName = "Mori Aami"
+                                  }
+                              },
+                              #endregion booking.services.accomodation.tourguideassignment
+                              TransferServiceLevel = "tsl01",
+                              #region booking.services.accomodation.travelparticipantassignment
+                              TravelParticipantAssignment = new TravelParticipantAssignment[]
+                              {
+                                  new TravelParticipantAssignment
+                                  {
+                                      TravelParticipantId = "TP001"
+                                  }
+                              },
+                            #endregion booking.services.accomodation.travelparticipantassignment
+                            WithTransfer = true,
+                        }
 
                     },
                             #endregion booking.services.accomodation
@@ -272,12 +386,12 @@ namespace Tc.Crm.Service.Client.Console
                             ExtraService = new ExtraService[]
                             {
                         new ExtraService {
-                            EndDate = "20170202",
+                            EndDate = "20170324",
                             #region booking.services.extraservice.extraservicecode
                             ExtraServiceCode = "ESCODE001",
                             #endregion booking.services.extraservice.extraservicecode
                             #region  booking.services.extraservicedescription
-                            ExtraServiceDescription = "Extra Service For You.",
+                            ExtraServiceDescription = "Need a cab everyday to go out.",
                             #endregion  booking.services.extraservicedescription
                             Order = 1,
                             #region booking.services.remark
@@ -285,12 +399,12 @@ namespace Tc.Crm.Service.Client.Console
                             {
                                 new Remark
                                 {
-                                    Text = "extra service remark 1",
+                                    Text = "Cab should be of type MUV with 3 seats with good luggage space",
                                     RemarkType = RemarkType.A
                                 }
                             },
                              #endregion booking.services.remark
-                            StartDate = "20170131",
+                            StartDate = "20170304",
                             #region booking.services.travelparticipantassignment
                             TravelParticipantAssignment = new TravelParticipantAssignment[]
                             {
@@ -308,10 +422,10 @@ namespace Tc.Crm.Service.Client.Console
                                 {
                             new Transport {
                                 FlightNumber = "SGP3231",
-                                ArrivalAirport = "Newark",
+                                ArrivalAirport = "ACA",
                                 CarrierCode = "CC001",
-                                DepartureAirport = "Heathrow",
-                                EndDate = "20170202",
+                                DepartureAirport = "MEX",
+                                EndDate = "20170318",
                                 #region booking.services,transport.travelparticipantassignment
                                 TravelParticipantAssignment = new TravelParticipantAssignment[]
                                 {
@@ -322,18 +436,18 @@ namespace Tc.Crm.Service.Client.Console
                                 },
                                 #endregion booking.services,transport.travelparticipantassignment
                                 FlightIdentifier = "FL001",
-                                NumberOfParticipants = 2,
+                                NumberOfParticipants = 4,
                                 Order = 1,
                                 #region booking.services,transport.remark
                                 Remark = new Remark[] {
                                     new Remark
                                     {
-                                        Text = "Transport remark 1",
+                                        Text = "Need a cab from Airport to Hotel",
                                         RemarkType = RemarkType.TO
                                     }
                                 },
                                 #endregion booking.services,transport.remark
-                                StartDate = "20170131",
+                                StartDate = "20170310",
                                 TransferType = TransferType.IN,
                                 TransportCode = "TR001",
                                 TransportDescription = "Flight to new york"
@@ -346,9 +460,9 @@ namespace Tc.Crm.Service.Client.Console
                         new Transfer
                         {
 
-                                ArrivalAirport = "Newark",
-                                DepartureAirport = "Heathrow",
-                                EndDate = "20170202",
+                                ArrivalAirport = "ACA",
+                                DepartureAirport = "MEX",
+                                EndDate = "20170318",
                                 #region booking.services.transfer.travelparticipantassignment
                                 TravelParticipantAssignment = new TravelParticipantAssignment[]
                                 {
@@ -363,12 +477,12 @@ namespace Tc.Crm.Service.Client.Console
                                 Remark = new Remark[] {
                                     new Remark
                                     {
-                                        Text = "Transport remark 1",
+                                        Text = "Please book a direct trip",
                                         RemarkType = RemarkType.A
                                     }
                                 },
                                 #endregion booking.services.transfer.remark
-                                StartDate = "20170131",
+                                StartDate = "20170312",
                                 TransferType = TransferType.IN,
                                 TransferCode = "TR001",
                                 TransferDescription = "Flight to new york",
@@ -383,24 +497,87 @@ namespace Tc.Crm.Service.Client.Console
                         {
                     new TravelParticipant
                     {
-                        Age = "21",
+                        Age = "36",
                         Birthdate = "08101982",
                         FirstName = "Barney",
                         Gender = Gender.Male,
                         Language = "Bro-English",
                         LastName = "Stinston",
+                        Relation =Relation.Participant,
+                        #region booking.TravelParticipant.remark
+                        Remark = new Remark[]
+                        {
+                            new Remark
+                            {
+                                Text = "Need window ticket",
+                                RemarkType = RemarkType.TO
+                            }
+                        },
+                        #endregion booking.TravelParticipant.remark
+                        TravelParticipantIdOnTour = "TP001",
+                    },
+                    new TravelParticipant
+                    {
+                        Age = "32",
+                        Birthdate = "08101984",
+                        FirstName = "Kate",
+                        Gender = Gender.Female,
+                        Language = "Bro-English",
+                        LastName = "Winslet",
+                        Relation =Relation.Participant,
+                        #region booking.TravelParticipant.remark
+                        Remark = new Remark[]
+                        {
+                            new Remark
+                            {
+                                Text = "Need window ticket",
+                                RemarkType = RemarkType.TO
+                            }
+                        },
+                        #endregion booking.TravelParticipant.remark
+                        TravelParticipantIdOnTour = "TP002",
+                    },
+                    new TravelParticipant
+                    {
+                        Age = "16",
+                        Birthdate = "08102000",
+                        FirstName = "Marc",
+                        Gender = Gender.Male,
+                        Language = "Bro-English",
+                        LastName = "marquez",
                         Relation =Relation.Child,
                         #region booking.TravelParticipant.remark
                         Remark = new Remark[]
                         {
                             new Remark
                             {
-                                Text = "Travel Participant Remark 1",
+                                Text = "Need window ticket",
                                 RemarkType = RemarkType.TO
                             }
                         },
                         #endregion booking.TravelParticipant.remark
-                        TravelParticipantIdOnTour = "TP001",
+                        TravelParticipantIdOnTour = "TP003",
+                    },
+                    new TravelParticipant
+                    {
+                        Age = "14",
+                        Birthdate = "08102002",
+                        FirstName = "shender",
+                        Gender = Gender.Female,
+                        Language = "Bro-English",
+                        LastName = "stella",
+                        Relation =Relation.Child,
+                        #region booking.TravelParticipant.remark
+                        Remark = new Remark[]
+                        {
+                            new Remark
+                            {
+                                Text = "Need window ticket",
+                                RemarkType = RemarkType.TO
+                            }
+                        },
+                        #endregion booking.TravelParticipant.remark
+                        TravelParticipantIdOnTour = "TP004",
                     }
                         }
                     #endregion booking.TravelParticipant

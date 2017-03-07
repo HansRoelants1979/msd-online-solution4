@@ -10,6 +10,8 @@ using Tc.Crm.Common.Services;
 using FakeXrmEasy;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
+using Microsoft.Crm.Sdk.Messages;
+using Microsoft.Xrm.Sdk.Messages;
 
 namespace Tc.Crm.WebJob.AllocateResortTeamTests
 {
@@ -371,6 +373,16 @@ namespace Tc.Crm.WebJob.AllocateResortTeamTests
             
             return new EntityCollection(bookings);
 
+        }
+
+        public void ExecuteBulkAssignRequests(ExecuteMultipleRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string FormatFaultException(AssignRequest assignRequest, OrganizationServiceFault fault)
+        {
+            throw new NotImplementedException();
         }
     }
 }

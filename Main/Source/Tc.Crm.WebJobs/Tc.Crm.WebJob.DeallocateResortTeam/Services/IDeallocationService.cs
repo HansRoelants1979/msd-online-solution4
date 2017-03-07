@@ -15,7 +15,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
         IList<BookingDeallocationResponse> GetBookingDeallocations(BookingDeallocationRequest bookingDeallocationRequest);
         IList<BookingDeallocationResponse> PrepareBookingDeallocation(EntityCollection bookingCollection);
         StringBuilder GetDestinationGateways(IList<Guid> destinationGateways);
-        void ProcessBookingAllocations(IList<BookingDeallocationResortTeamRequest> bookingDeallocationResortTeamRequest);
+        void ProcessBookingDeallocations(IList<BookingDeallocationResortTeamRequest> bookingDeallocationResortTeamRequest);
         OwnerType GetOwnerType(EntityReference owner);
         Owner GetOwner(Entity entity, string attributeName, bool isAliasedValue);
 

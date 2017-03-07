@@ -1,9 +1,11 @@
 ﻿using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
+using Microsoft.Xrm.Sdk.Messages;
 using System;
 using System.Xml;
 using System.Collections.ObjectModel;
 using Tc.Crm.Common.Models;
+using Microsoft.Crm.Sdk.Messages;
 
 namespace Tc.Crm.Common.Services
 {
@@ -17,5 +19,7 @@ namespace Tc.Crm.Common.Services
         void BulkAssign(Collection<AssignInformation> assignRequests);
         string CreateXml(string xml, string cookie, int page, int count);
         string CreateXml(XmlDocument doc, string cookie, int page, int count);
+        void ExecuteBulkAssignRequests(ExecuteMultipleRequest request);
+        string FormatFaultException(AssignRequest assignRequest, OrganizationServiceFault fault);
     }
 }

@@ -11,5 +11,6 @@ namespace Tc.Crm.Common.Services
         void LogError(string message);
         void LogWarning(string message);
         void LogInformation(string message);
+        string FormatMessage(string message);
     }
 }

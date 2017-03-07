@@ -11,17 +11,28 @@ namespace Tc.Crm.Common.Services
     {
         public void LogError(string message)
         {
-            Trace.TraceError(message);
+            Trace.TraceError(FormatMessage(message));
         }
 
         public void LogInformation(string message)
         {
-            Trace.TraceInformation(message);
+            Trace.TraceInformation(FormatMessage(message));
         }
 
         public void LogWarning(string message)
         {
-            Trace.TraceWarning(message);
+            Trace.TraceWarning(FormatMessage(message));
         }
+
+        /// <summary>
+        /// Appends timestamp at the end of the message
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public string FormatMessage(string message)
+        {
+            return message + " " + DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss");
+        }
+
     }
 }

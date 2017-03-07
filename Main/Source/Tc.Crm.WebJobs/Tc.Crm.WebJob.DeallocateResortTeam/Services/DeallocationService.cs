@@ -26,7 +26,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
 
         public IList<BookingDeallocationResponse> GetBookingDeallocations(BookingDeallocationRequest bookingDeallocationRequest)
         {
-            logger.LogInformation("GetBookingAllocations - start");
+            //logger.LogInformation("GetBookingAllocations - start");
             IList<BookingDeallocationResponse> bookingAllocationResponse = null;
             if (bookingDeallocationRequest != null)
             {
@@ -71,7 +71,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                                                      destinationGateWays.ToString() });
 
                         EntityCollection bookingCollection = crmService.RetrieveMultipleRecordsFetchXml(query);
-                        logger.LogInformation("GetBookingAllocations - end");
+                        //logger.LogInformation("GetBookingAllocations - end");
                         bookingAllocationResponse = PrepareBookingDeallocation(bookingCollection);
                     }
                 }
@@ -81,7 +81,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
 
         public StringBuilder GetDestinationGateways(IList<Guid> destinationGateways)
         {
-            logger.LogInformation("GetDestinationGateways - start");
+            //logger.LogInformation("GetDestinationGateways - start");
             StringBuilder gateways = new StringBuilder();
             if (destinationGateways != null && destinationGateways.Count > 0)
             {
@@ -90,14 +90,14 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                     gateways.Append("<value>" + destinationGateways[i].ToString() + "</value>");
                 }
             }
-            logger.LogInformation("GetDestinationGateways - end");
+            //logger.LogInformation("GetDestinationGateways - end");
             return gateways;
         }
 
 
         public IList<BookingDeallocationResponse> PrepareBookingDeallocation(EntityCollection bookingCollection)
         {
-            logger.LogInformation("PrepareBookingDeallocation - start");
+            //logger.LogInformation("PrepareBookingDeallocation - start");
             IList<BookingDeallocationResponse> bookingDeallocationResponse = null;
             if (bookingCollection != null && bookingCollection.Entities.Count > 0)
             {
@@ -152,7 +152,11 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
 
                 }
             }
-            logger.LogInformation("PrepareBookingDeallocation - end");
+            else
+            {
+                logger.LogWarning("No booking records found to process in CRM for the schedule.");
+            }
+            //logger.LogInformation("PrepareBookingDeallocation - end");
             return bookingDeallocationResponse;
         }
 
@@ -180,7 +184,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
             return new Owner() { Id = owner.Id, Name = owner.Name, OwnerType = ownerType };
         }
 
-        public void ProcessBookingAllocations(IList<BookingDeallocationResortTeamRequest> bookingDeallocationResortTeamRequest)
+        public void ProcessBookingDeallocations(IList<BookingDeallocationResortTeamRequest> bookingDeallocationResortTeamRequest)
         {
             
             if (bookingDeallocationResortTeamRequest != null && bookingDeallocationResortTeamRequest.Count > 0)

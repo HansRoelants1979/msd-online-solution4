@@ -7,6 +7,8 @@ using System.Linq;
 using System.Xml;
 using Tc.Crm.Common.Models;
 using Tc.Crm.Common.Services;
+using Microsoft.Crm.Sdk.Messages;
+using Microsoft.Xrm.Sdk.Messages;
 
 namespace Tc.Crm.WebJob.DeallocateResortTeamTests
 {
@@ -393,6 +395,16 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
         private void ProcessMultipleBookings(Entity booking, EntityCollection accommodations, EntityReference customer)
         {
 
+        }
+
+        public void ExecuteBulkAssignRequests(ExecuteMultipleRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string FormatFaultException(AssignRequest assignRequest, OrganizationServiceFault fault)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -9,6 +9,11 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
 {
     public class TestLogger : ILogger
     {
+        public string FormatMessage(string message)
+        {
+            return string.Empty;
+        }
+
         public void LogError(string message)
         {
             return;

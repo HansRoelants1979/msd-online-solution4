@@ -25,7 +25,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "GetBookingAllocations")]
         public IList<BookingAllocationResponse> GetBookingAllocations(BookingAllocationRequest bookingAllocationRequest)
         {
-            logger.LogInformation("GetBookingAllocations - start");
+            //logger.LogInformation("GetBookingAllocations - start");
             if (bookingAllocationRequest == null) throw new ArgumentNullException("bookingAllocationRequest");
 
             if (bookingAllocationRequest.Destination == null) throw new ArgumentNullException("bookingAllocationRequest.Destination");
@@ -80,13 +80,13 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
 
             EntityCollection bookingCollection = crmService.RetrieveMultipleRecordsFetchXml(query);
 
-            logger.LogInformation("GetBookingAllocations - end");
+            //logger.LogInformation("GetBookingAllocations - end");
             return PrepareBookingAllocation(bookingCollection);
         }
 
         public StringBuilder GetDestinationGateways(IList<Guid> destinationGateways)
         {
-            logger.LogInformation("GetDestinationGateways - start");
+            //logger.LogInformation("GetDestinationGateways - start");
             StringBuilder gateways = new StringBuilder();
             if (destinationGateways == null || destinationGateways.Count == 0)
                 throw new ArgumentNullException("destinationGateways");
@@ -95,16 +95,16 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
             {
                 gateways.Append("<value>" + destinationGateways[i].ToString() + "</value>");
             }
-            logger.LogInformation("GetDestinationGateways - end");
+            //logger.LogInformation("GetDestinationGateways - end");
             return gateways;
         }
 
         public IList<BookingAllocationResponse> PrepareBookingAllocation(EntityCollection bookingCollection)
         {
-            logger.LogInformation("PrepareBookingAllocation - start");
+            //logger.LogInformation("PrepareBookingAllocation - start");
             if (bookingCollection == null || bookingCollection.Entities.Count == 0)
             {
-                logger.LogWarning("No records found in CRM for the schedule.");
+                logger.LogWarning("No booking records found to process in CRM for the schedule.");
                 return null;
             }
 
@@ -161,7 +161,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
 
 
             }
-            logger.LogInformation("PrepareBookingAllocation - end");
+            //logger.LogInformation("PrepareBookingAllocation - end");
             return bookingAllocationResponse;
         }
 
@@ -194,7 +194,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.WebJob.AllocateResortTeam.Services.ILogger.LogInformation(System.String)")]
         public void ProcessBookingAllocations(IList<BookingAllocationResortTeamRequest> bookingAllocationResortTeamRequests)
         {
-            logger.LogInformation("ProcessBookingAllocations - start");
+            //logger.LogInformation("ProcessBookingAllocations - start");
             if (bookingAllocationResortTeamRequests == null || bookingAllocationResortTeamRequests.Count == 0)
                 return;
 
@@ -231,7 +231,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
             if (assignRequests != null && assignRequests.Count > 0)
                 crmService.BulkAssign(assignRequests);
 
-            logger.LogInformation("ProcessBookingAllocations - end");
+            //logger.LogInformation("ProcessBookingAllocations - end");
         }
 
 
