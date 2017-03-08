@@ -379,20 +379,20 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 
         public void ProcessExtraServices()
         {
-            if (payloadBooking.BookingInfo.Services == null) throw new InvalidPluginExecutionException("Booking Services is missing in payload.");
-            if (payloadBooking.BookingInfo.Services.ExtraService == null) throw new InvalidPluginExecutionException("Booking Services Transfer is missing in payload.");
 
+
+
+            if (payloadBooking.DeleteAccommodationOrTransportOrRemarksOrTransferOrExtraService)
+            {
+                trace.Trace("Delete Extra Service information - start");
+                ProcessRecordsToDelete(EntityName.BookingExtraService,
+                    new string[] { Attributes.BookingExtraService.BookingExtraServiceId },
+                    new string[] { Attributes.BookingExtraService.BookingId },
+                    new string[] { payloadBooking.BookingId });
+                trace.Trace("Delete Extra Service information - end");
+            }
             if (payloadBooking.BookingInfo.Services != null && payloadBooking.BookingInfo.Services.ExtraService != null)
             {
-                if (payloadBooking.DeleteAccommodationOrTransportOrRemarksOrTransferOrExtraService)
-                {
-                    trace.Trace("Delete Extra Service information - start");
-                    ProcessRecordsToDelete(EntityName.BookingExtraService,
-                        new string[] { Attributes.BookingExtraService.BookingExtraServiceId },
-                        new string[] { Attributes.BookingExtraService.BookingId },
-                        new string[] { payloadBooking.BookingId });
-                    trace.Trace("Delete Extra Service information - end");
-                }
 
                 trace.Trace("Booking ExtraService information - start");
                 //string bookingNumber = payloadBooking.BookingInfo.BookingIdentifier.BookingNumber;
