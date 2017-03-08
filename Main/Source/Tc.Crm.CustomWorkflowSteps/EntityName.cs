@@ -344,7 +344,14 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string Type = "tc_type";
         }
 
+        public class SocialProfile
+        {
+            public const string ProfileName = "profilename";
+            public const string Customer = "customerid";
+            public const string SocialChannel = "community";
+            public const string UniqueProfileID = "uniqueprofileid";
 
+        }
 
         public class BookingTransfer
         {

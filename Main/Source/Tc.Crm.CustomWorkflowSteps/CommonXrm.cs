@@ -298,6 +298,27 @@ namespace Tc.Crm.CustomWorkflowSteps
                         }
                     }
                     break;
+                case "community":
+                    {
+                        switch (text)
+                        {
+                            case "Facebook":
+                                value = 1;
+                                break;
+                            case "Google":
+                                value = 0;
+                                break;
+                            case "Twitter":
+                                value = 2;
+                                break;
+                            case "Other":
+                                value = 0;
+                                break;
+
+
+                        }
+                    }
+                    break;
             }
             return (value != -1) ? new OptionSetValue(value) : null;
         }

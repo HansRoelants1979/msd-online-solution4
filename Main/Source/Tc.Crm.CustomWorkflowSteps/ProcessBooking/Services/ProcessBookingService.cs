@@ -95,6 +95,32 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
         }
 
         /// <summary>
+        /// To process social profile information of contact 
+        /// </summary>       
+        /// <returns></returns>
+        public void ProcessSocialProfile()
+        {
+            trace.Trace("Processing Social profile information - start");
+
+
+            if (payloadBooking.BookingInfo != null && payloadBooking.BookingInfo.Customer != null && payloadBooking.BookingInfo.Customer.Social != null)
+            {
+                var socialprofile = payloadBooking.BookingInfo.Customer.Social;
+                var entityCollectionsocialProfiles = SocialProfileHelper.GetSocialProfileEntityFromPayload(payloadBooking.BookingInfo, Guid.Parse(payloadBooking.CustomerId), trace);
+                if (entityCollectionsocialProfiles != null && entityCollectionsocialProfiles.Entities.Count > 0)
+                {
+                    foreach (Entity entitySocialProfile in entityCollectionsocialProfiles.Entities)
+                    {
+                        CommonXrm.UpsertEntity(entitySocialProfile, crmService);
+                    }
+                }
+
+
+                trace.Trace("Processing Social Profile information - end");
+            }
+        }
+
+        /// <summary>
         /// To process account information
         /// </summary>        
         /// <returns></returns>
