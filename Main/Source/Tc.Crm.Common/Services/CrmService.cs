@@ -199,11 +199,19 @@ namespace Tc.Crm.Common.Services
                 var targetId = assignRequestCollection[i].RecordId;
                 var ownerType = (assignRequestCollection[i].RecordOwner.OwnerType == OwnerType.Team) ? EntityName.Team : EntityName.User;
                 var ownerId = assignRequestCollection[i].RecordOwner.Id;
+
+                var target = new EntityReference(targetEntityName, targetId);
+                if(!string.IsNullOrWhiteSpace(assignRequestCollection[i].RecordName))
+                target.Name = assignRequestCollection[i].RecordName;
+
+                var assignee = new EntityReference(ownerType, ownerId);
+                if(!string.IsNullOrWhiteSpace(assignRequestCollection[i].RecordOwner.Name))
+                assignee.Name = assignRequestCollection[i].RecordOwner.Name;
+
                 request.Requests.Add(new AssignRequest
                 {
-                    Target = new EntityReference(targetEntityName, targetId)
-                                                            ,
-                    Assignee = new EntityReference(ownerType, ownerId)
+                    Target = target,
+                    Assignee = assignee
                 });
                 if (request.Requests.Count == batch)
                 {

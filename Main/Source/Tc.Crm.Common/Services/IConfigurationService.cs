@@ -13,5 +13,6 @@ namespace Tc.Crm.Common.Services
         int ExecuteMultipleBatchSize { get; }
         string DestinationGatewayIds { get; set; }
         Guid DefaultUserId { get; }
+        string DefaultUserName { get; }
     }
 }

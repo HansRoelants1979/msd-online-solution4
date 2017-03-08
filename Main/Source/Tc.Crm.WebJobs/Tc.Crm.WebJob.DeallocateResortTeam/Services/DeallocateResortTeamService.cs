@@ -200,7 +200,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
             var customerResortTeamRequest = new CustomerResortTeamRequest
             {
                 Customer = bookingResponse.Customer,
-                Owner = new Owner { Id = configurationService.DefaultUserId, OwnerType = OwnerType.User }
+                Owner = new Owner { Id = configurationService.DefaultUserId, OwnerType = OwnerType.User, Name=configurationService.DefaultUserName }
             };
             //logger.LogInformation("PrepareCustomerResortTeamRemovalRequest - end");
             return customerResortTeamRequest;
@@ -215,6 +215,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
             var bookingResortTeamRequest = new BookingResortTeamRequest
             {
                 Id = bookingResponse.BookingId,
+                Name = bookingResponse.BookingNumber,
                 Owner = new Owner { Id = configurationService.DefaultUserId, OwnerType = OwnerType.User }
             };
 

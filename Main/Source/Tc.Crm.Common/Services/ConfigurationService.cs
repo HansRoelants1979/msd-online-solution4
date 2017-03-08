@@ -13,10 +13,18 @@ namespace Tc.Crm.Common.Services
         {
             get {
                 Guid defaultUserId = Guid.Empty;
-                var defaultUserIdString = ConfigurationManager.AppSettings["DeallocationOwner"];
+                var defaultUserIdString = ConfigurationManager.AppSettings["DeallocationOwnerId"];
                 if(Guid.TryParse(defaultUserIdString, out defaultUserId))
                     return defaultUserId;
                 throw new InvalidOperationException("Default user id provided in configuration is not valid.");
+            }
+        }
+
+        public string DefaultUserName
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["DeallocationOwnerName"];
             }
         }
 

@@ -202,6 +202,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                         {
                             EntityName = EntityName.Booking,
                             RecordId = bookingTeamRequest.BookingResortTeamRequest.Id,
+                            RecordName = bookingTeamRequest.BookingResortTeamRequest.Name,
                             RecordOwner = bookingTeamRequest.BookingResortTeamRequest.Owner
                         };
                         assignRequests.Add(assignBookingRequest);
@@ -212,6 +213,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                         {
                             EntityName = bookingTeamRequest.CustomerResortTeamRequest.Customer.CustomerType.ToString(),
                             RecordId = bookingTeamRequest.CustomerResortTeamRequest.Customer.Id,
+                            RecordName = bookingTeamRequest.CustomerResortTeamRequest.Customer.Name,
                             RecordOwner = bookingTeamRequest.CustomerResortTeamRequest.Owner
                         };
                         assignRequests.Add(assignCustomerRequest);

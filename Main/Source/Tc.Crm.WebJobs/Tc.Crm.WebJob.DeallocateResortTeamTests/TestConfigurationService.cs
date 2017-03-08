@@ -30,6 +30,14 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
             }
         }
 
+        public string DefaultUserName
+        {
+            get
+            {
+                return string.Empty;
+            }
+        }
+
         public int DepartureDateInNextXDays
         {
             get

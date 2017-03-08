@@ -31,7 +31,7 @@ namespace Tc.Crm.Common.Services
         /// <returns></returns>
         public string FormatMessage(string message)
         {
-            return message + " " + DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss");
+            return string.Format(message + " on ({0})", DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss"));
         }
 
     }

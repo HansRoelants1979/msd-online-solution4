@@ -244,6 +244,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
             var bookingResortTeamRequest = new BookingResortTeamRequest
             {
                 Id = bookingResponse.BookingId,
+                Name = bookingResponse.BookingNumber,
                 Owner = bookingResponse.HotelOwner
             };
 
