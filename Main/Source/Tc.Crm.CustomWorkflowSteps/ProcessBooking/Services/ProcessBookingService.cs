@@ -151,7 +151,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
         {
             trace.Trace("Processing Booking - start");
             XrmResponse xrmResponse = null;
-            var bookingEntity = BookingHelper.GetBookingEntityFromPayload(payloadBooking.BookingInfo, trace);
+            var bookingEntity = BookingHelper.GetBookingEntityFromPayload(payloadBooking.BookingInfo, trace, crmService);
             xrmResponse = CommonXrm.UpsertEntity(bookingEntity, crmService);
             payloadBooking.Response = new BookingResponse();
 

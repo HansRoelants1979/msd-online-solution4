@@ -2,6 +2,11 @@
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
+using System.IO;
+using System.Text;
+using System.Globalization;
+using System.Xml;
+using System;
 
 namespace Tc.Crm.CustomWorkflowSteps
 {
@@ -462,6 +467,85 @@ namespace Tc.Crm.CustomWorkflowSteps
             entityCollection = service.RetrieveMultiple(queryExpr);
             return entityCollection;
         }
+
+        public static EntityCollection RetrieveMultipleRecordsFetchXml(string query, IOrganizationService service)
+        {
+
+            EntityCollection entityCollection = new EntityCollection();
+
+            int fetchCount = 10000;
+            int pageNumber = 1;
+            string pagingCookie = null;
+
+            while (true)
+            {
+                string xml = CreateXml(query, pagingCookie, pageNumber, fetchCount);
+                FetchExpression fetch = new FetchExpression(xml);
+                EntityCollection returnCollection = service.RetrieveMultiple(fetch);
+                entityCollection.Entities.AddRange(returnCollection.Entities);
+                if (returnCollection.MoreRecords)
+                {
+                    pageNumber++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return entityCollection;
+
+        }
+
+
+        public static string CreateXml(string xml, string cookie, int page, int count)
+        {
+
+            StringReader stringReader = new StringReader(xml);
+            XmlTextReader reader = new XmlTextReader(stringReader);
+
+            // Load document
+            XmlDocument doc = new XmlDocument();
+            doc.Load(reader);
+
+            return CreateXml(doc, cookie, page, count);
+        }
+
+
+        public static string CreateXml(XmlDocument doc, string cookie, int page, int count)
+        {
+
+            if (doc == null) throw new ArgumentNullException("doc");
+            XmlAttributeCollection attrs = doc.DocumentElement.Attributes;
+
+            if (cookie != null)
+            {
+                XmlAttribute pagingAttr = doc.CreateAttribute("paging-cookie");
+                pagingAttr.Value = cookie;
+                attrs.Append(pagingAttr);
+            }
+
+            XmlAttribute pageAttr = doc.CreateAttribute("page");
+            pageAttr.Value = System.Convert.ToString(page, CultureInfo.CurrentCulture);
+            attrs.Append(pageAttr);
+
+            XmlAttribute countAttr = doc.CreateAttribute("count");
+            countAttr.Value = System.Convert.ToString(count, CultureInfo.CurrentCulture);
+            attrs.Append(countAttr);
+
+            StringBuilder sb = new StringBuilder(1024);
+            StringWriter stringWriter = new StringWriter(sb, CultureInfo.CurrentCulture);
+
+            XmlTextWriter writer = new XmlTextWriter(stringWriter);
+            doc.WriteTo(writer);
+            writer.Close();
+
+            return sb.ToString();
+        }
+
+
+
+
 
     }
 

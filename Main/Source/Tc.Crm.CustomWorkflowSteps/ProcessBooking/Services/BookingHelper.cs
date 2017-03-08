@@ -219,6 +219,52 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             return remarksbuilder.ToString();
         }
 
+        static EntityReference SetBookingDestination(Accommodation[] accommodatations, ITracingService trace, IOrganizationService service)
+        {
+            EntityReference Destination = null;
+            EntityCollection RegionCollection = null;
+            if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
+            trace.Trace(" Booking Destination information - start");
+            if (accommodatations == null || accommodatations.Length == 0) return null;
+
+
+            var FirstAccomdation = accommodatations.Where(item => item.Order == 1)
+                                       .Select(item => item).ToArray();
+            if (FirstAccomdation != null && FirstAccomdation.Length == 1 && FirstAccomdation[0].GroupAccommodationCode != null && FirstAccomdation[0].GroupAccommodationCode != "")
+            {
+                var query = string.Format(@"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='true'>
+                                <entity name='tc_region'>
+                               <attribute name='tc_name' />
+                               <attribute name='tc_regioncode' />
+                               <attribute name='tc_countryid' />
+                               <attribute name='tc_regionid' />
+                               <order attribute='tc_name' descending='false' />
+                              <link-entity name='tc_location' from='tc_regionid' to='tc_regionid' alias='af'>
+                            <link-entity name='tc_hotel' from='tc_locationid' to='tc_locationid' alias='ag'>
+                             <filter type='and'>
+                             <condition attribute='tc_masterhotelid' operator='eq' value='{0}' />
+                          </filter>
+                          </link-entity>
+                          </link-entity>
+                          </entity>
+                          </fetch>",
+                                         new object[] { FirstAccomdation[0].GroupAccommodationCode,
+                                                      });
+
+
+                RegionCollection = CommonXrm.RetrieveMultipleRecordsFetchXml(query, service);
+            }
+
+            if (RegionCollection != null && RegionCollection.Entities != null && RegionCollection.Entities.Count > 0)
+            {
+
+                Destination = new EntityReference(EntityName.Region, RegionCollection.Entities[0].Id);
+
+
+            }
+
+            return Destination;
+        }
         /// <summary>
         /// To prepare transfer information
         /// </summary>     
@@ -359,7 +405,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             return remarksBuilder.ToString();
         }
 
-        public static Entity GetBookingEntityFromPayload(Booking booking, ITracingService trace)
+        public static Entity GetBookingEntityFromPayload(Booking booking, ITracingService trace, IOrganizationService service)
         {
             if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
             trace.Trace("Booking populate fields - start");
@@ -375,7 +421,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             PopulateGeneralFields(bookingEntity, booking.BookingGeneral, trace);
             bookingEntity[Attributes.Booking.Participants] = PrepareTravelParticipantsInfo(booking.TravelParticipant, trace);
             bookingEntity[Attributes.Booking.ParticipantRemarks] = PrepareTravelParticipantsRemarks(booking.TravelParticipant, trace);
-
+            bookingEntity[Attributes.Booking.DestinationId] = SetBookingDestination(booking.Services.Accommodation, trace, service);
             PopulateServices(bookingEntity, booking.Services, trace);
 
             bookingEntity[Attributes.Booking.SourceMarketId] = (booking.BookingIdentifier.SourceMarket != null) ? new EntityReference(EntityName.Country
