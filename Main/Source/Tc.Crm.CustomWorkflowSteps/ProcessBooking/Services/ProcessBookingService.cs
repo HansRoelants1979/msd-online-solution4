@@ -62,6 +62,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             else if (payloadBooking.BookingInfo.Customer.CustomerGeneral.CustomerType == CustomerType.P)
             {
                 ProcessContact();
+                ProcessSocialProfile();
             }
         }
 
