@@ -265,6 +265,64 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 
             return Destination;
         }
+        static EntityReference SetBookingOwner(string sourceMarket, ITracingService trace, IOrganizationService service)
+        {
+            EntityReference Owner = null;
+            EntityCollection Team = null;
+
+            if ((!string.IsNullOrEmpty(sourceMarket)))
+            {
+                var query = string.Format(@"<fetch distinct='true' mapping='logical' output-format='xml-platform' version='1.0'>
+
+
+                          <entity name='team'>
+
+                          <attribute name='name'/>
+
+                         <attribute name='businessunitid'/>
+
+                        <attribute name='teamid'/>
+
+                      <attribute name='teamtype'/>
+
+                     <order descending='false' attribute='name'/>
+                      <filter type='and'>
+
+                 <condition attribute='isdefault' value='1' operator='eq'/>
+
+                </filter>
+
+            <link-entity name='businessunit' alias='ac' to='businessunitid' from='businessunitid'>
+          <link-entity name='tc_country' alias='ad' to='businessunitid' from='tc_sourcemarketbusinessunitid'>
+               <filter type='and'>
+               <condition attribute='tc_iso2code' value='{0}' operator='eq'/>
+
+               </filter>
+
+           </link-entity>
+
+           </link-entity>
+
+            </entity>
+
+            </fetch>", new object[] { sourceMarket,
+             });
+
+                Team = CommonXrm.RetrieveMultipleRecordsFetchXml(query, service);
+
+            }
+
+            if (Team != null && Team.Entities != null && Team.Entities.Count > 0)
+            {
+
+                Owner = new EntityReference(EntityName.Team, Team.Entities[0].Id);
+
+
+            }
+
+
+            return Owner;
+        }
         /// <summary>
         /// To prepare transfer information
         /// </summary>     
@@ -422,6 +480,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             bookingEntity[Attributes.Booking.Participants] = PrepareTravelParticipantsInfo(booking.TravelParticipant, trace);
             bookingEntity[Attributes.Booking.ParticipantRemarks] = PrepareTravelParticipantsRemarks(booking.TravelParticipant, trace);
             bookingEntity[Attributes.Booking.DestinationId] = SetBookingDestination(booking.Services.Accommodation, trace, service);
+            bookingEntity[Attributes.Booking.Owner] = SetBookingOwner(booking.BookingIdentifier.SourceMarket, trace, service);
             PopulateServices(bookingEntity, booking.Services, trace);
 
             bookingEntity[Attributes.Booking.SourceMarketId] = (booking.BookingIdentifier.SourceMarket != null) ? new EntityReference(EntityName.Country
@@ -436,3 +495,4 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
         }
     }
 }
+

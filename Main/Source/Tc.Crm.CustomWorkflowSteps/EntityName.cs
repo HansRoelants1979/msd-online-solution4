@@ -171,6 +171,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string NumberofParticipants = "tc_numberofparticipants";
             public const string OnTourUpdatedDate = "tc_ontourupdateddate";
             public const string OnTourVersion = "tc_ontourversion";
+            public const string Owner = "ownerid";
             public const string ParticipantRemarks = "tc_participantremarks";
             public const string Participants = "tc_participants";
             public const string ReturnDate = "tc_returndate";
