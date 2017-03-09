@@ -26,7 +26,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam
                 {
                     logger.LogInformation("Tc.Crm.WebJob.DeallocateResortTeam Job Starts");
                     deallocateResortTeamService.Run();
-                    logger.LogInformation("Tc.Crm.WebJob.DeallocateResortTeam Job End");
+                    logger.LogInformation("\r\n\r\nTc.Crm.WebJob.DeallocateResortTeam Job End");
                 }                
             }
             catch (FaultException<Microsoft.Xrm.Sdk.OrganizationServiceFault> ex)

@@ -47,6 +47,11 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
 
                 logger.LogInformation("Processing booking deallocations: " + bookingDeallocationResponse.Count);
                 IList<BookingDeallocationResortTeamRequest> bookingDeallocationResortTeamRequest = ProcessDeallocationResponse(bookingDeallocationResponse);
+                if(bookingDeallocationResortTeamRequest == null || bookingDeallocationResortTeamRequest.Count == 0)
+                {
+                    logger.LogInformation("No booking records matched the criteria to assign it to Default user");
+                    return;
+                }
                 deAllocationService.ProcessBookingDeallocations(bookingDeallocationResortTeamRequest);
             }
             else
@@ -85,8 +90,8 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
             for (int i = 0; i < bookingDeallocationResponse.Count; i++)
             {
                 var bookingResponse = bookingDeallocationResponse[i];
-                WriteDeallocationResponseLog(bookingResponse);
-                if (!ValidForProcessing(bookingResponse, processedCustomers)) continue;
+                var responseLog = WriteDeallocationResponseLog(bookingResponse);
+                if (!ValidForProcessing(bookingResponse, processedCustomers, responseLog)) continue;
 
                 var differentBooking = !processedBookings.Contains(bookingResponse.BookingId);
 
@@ -96,7 +101,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
 
                 if (!differentBooking && !sameBookingDifferentCustomer)
                 {
-                    logger.LogInformation("Not processing this record as the booking was already processed");
+                    logger.LogInformation(responseLog+"Not processing this record as the booking was already processed");
                     continue;
                 }
 
@@ -108,13 +113,13 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                     {
                         CustomerResortTeamRequest = PrepareCustomerResortTeamRemovalRequest(bookingResponse)
                     });
-                    logger.LogInformation("<<Processing only customer record as the booking was already processed>>");
+                    logger.LogInformation(responseLog+"<<Processing only customer record as the booking was already processed>>");
                 }
                 else if (differentBooking)
                 {
                     //Add Booking, Customer
                     AddResortTeamRemovalRequest(bookingResponse, bookingDeallocationResortTeamRequest);
-                    logger.LogInformation("<<Processing both booking and customer records>>");
+                    logger.LogInformation(responseLog+"<<Processing both booking and customer records>>");
                 }
 
                 processedCustomers.Add(bookingResponse.Customer.Id);
@@ -124,46 +129,48 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
             return bookingDeallocationResortTeamRequest;
         }
 
-        private bool ValidForProcessing(BookingDeallocationResponse bookingResponse, List<Guid> processedCustomers)
+        public bool ValidForProcessing(BookingDeallocationResponse bookingResponse, List<Guid> processedCustomers, string responseLog)
         {
             if (bookingResponse == null) return false;
             if (bookingResponse.Customer == null)
             {
-                logger.LogWarning("Not processing this record as no customer exists");
+                logger.LogWarning(responseLog+"Not processing this record as no customer exists");
                 return false;
             }
             if (bookingResponse.BookingOwner.OwnerType == OwnerType.User)
             {
-                logger.LogInformation("Not processing this record as the booking owner type is user");
+                logger.LogInformation(responseLog+"Not processing this record as the booking owner type is user");
                 return false;
             }
             if (bookingResponse.Customer.Owner == null) return false;
             if (bookingResponse.Customer.Owner.OwnerType == OwnerType.User)
             {
-                logger.LogInformation("Not processing this record as the customer owner type is user");
+                logger.LogInformation(responseLog+"Not processing this record as the customer owner type is user");
                 return false;
             }
 
             //customer already deallocated
             if (processedCustomers.Contains(bookingResponse.Customer.Id))
             {
-                logger.LogWarning("Not processing this record as customer: " + bookingResponse.Customer.Name + " was already got processed.");
+                logger.LogWarning(responseLog+"Not processing this record as customer: " + bookingResponse.Customer.Name + " was already got processed.");
                 return false;
             }
             //accommodation end date is not provided
             if (bookingResponse.AccommodationEndDate == null)
             {
-                logger.LogWarning("Not processing this record as accommodation enddate is null");
+                logger.LogWarning(responseLog+"Not processing this record as accommodation enddate is null");
                 return false;
             }
             return true;
         }
 
-        public void WriteDeallocationResponseLog(BookingDeallocationResponse bookingDeallocationResponse)
+        public string WriteDeallocationResponseLog(BookingDeallocationResponse bookingDeallocationResponse)
         {
+            var information = new StringBuilder();
             if (bookingDeallocationResponse != null)
             {
-                var information = new StringBuilder();
+               
+                information.AppendLine();
                 information.AppendLine();
                 if (bookingDeallocationResponse.BookingNumber != null)
                     information.AppendLine("Processing Booking: " + bookingDeallocationResponse.BookingNumber);
@@ -176,10 +183,8 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                     information.AppendLine("Booking Customer: " + bookingDeallocationResponse.Customer.Name + " of type " + bookingDeallocationResponse.Customer.CustomerType.ToString());
                     information.AppendLine("Customer Owner: " + bookingDeallocationResponse.Customer.Owner.Name + " of type " + bookingDeallocationResponse.Customer.Owner.OwnerType.ToString());
                 }
-
-                logger.LogInformation(information.ToString());
             }
-
+            return information.ToString();
         }
 
         public void AddResortTeamRemovalRequest(BookingDeallocationResponse bookingResponse, IList<BookingDeallocationResortTeamRequest> bookingDeallocationResortTeamRequest)
@@ -216,7 +221,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
             {
                 Id = bookingResponse.BookingId,
                 Name = bookingResponse.BookingNumber,
-                Owner = new Owner { Id = configurationService.DefaultUserId, OwnerType = OwnerType.User }
+                Owner = new Owner { Id = configurationService.DefaultUserId, OwnerType = OwnerType.User, Name = configurationService.DefaultUserName }
             };
 
             //logger.LogInformation("PrepareCustomerResortTeamRemovalRequest - end");

@@ -54,7 +54,10 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                     return;
                 IList<BookingAllocationResortTeamRequest> bookingAllocationResortTeamRequests = ProcessAllocationResponse(bookingAllocationResponses);
                 if (bookingAllocationResortTeamRequests.Count == 0)
+                {
+                    logger.LogInformation("No booking records matched the criteria to assign it to Resort Team");
                     return;
+                }
                 allocationService.ProcessBookingAllocations(bookingAllocationResortTeamRequests);
             }
         }
@@ -86,13 +89,13 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
             for (int i = 0; i < bookingAllocationResponses.Count; i++)
             {
                 var bookingResponse = bookingAllocationResponses[i];
-                WriteAllocationResponseLog(bookingResponse);
+                var responseLog = WriteAllocationResponseLog(bookingResponse);
 
-                if (!ValidForProcessing(bookingResponse, processedCustomers)) continue;
+                if (!ValidForProcessing(bookingResponse, processedCustomers, responseLog)) continue;
 
                 if (bookingResponse.AccommodationStartDate.Value.Date < DateTime.Now.Date)
                 {
-                    logger.LogInformation("Not processing this record as accommodation start date is less than current date");
+                    logger.LogInformation(responseLog + "Not processing this record as accommodation start date is less than current date");
                     continue;
                 }
 
@@ -104,7 +107,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
 
                 if (!differentBooking && !sameBookingDifferentCustomer)
                 {
-                    logger.LogInformation("Not processing this record as the booking was already processed");
+                    logger.LogInformation(responseLog + "Not processing this record as the booking was already processed");
                     continue;
                 }
 
@@ -116,13 +119,13 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                     {
                         CustomerResortTeamRequest = PrepareCustomerResortTeamRequest(bookingResponse)
                     });
-                    logger.LogInformation("<<Processing only customer record as the booking was already processed>>");                    
+                    logger.LogInformation(responseLog+"<<Processing only customer record as the booking was already processed>>");                    
                 }
                 else if (differentBooking)
                 {
                     //Add Booking, Customer
                     AddResortTeamRequest(bookingResponse, bookingAllocationResortTeamRequest);
-                    logger.LogInformation("<<Processing both booking and customer records>>");                    
+                    logger.LogInformation(responseLog+"<<Processing both booking and customer records>>");                    
                 }
                 processedCustomers.Add(bookingResponse.Customer.Id);
                 processedBookings.Add(bookingResponse);
@@ -131,46 +134,47 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
             return bookingAllocationResortTeamRequest;
         }
 
-        private bool ValidForProcessing(BookingAllocationResponse bookingResponse, List<Guid> processedCustomers)
+        public bool ValidForProcessing(BookingAllocationResponse bookingResponse, List<Guid> processedCustomers, string responseLog)
         {
             if (bookingResponse == null) return false;
             if (bookingResponse.Customer == null)
             {
-                logger.LogWarning("Not processing this record as no customer exists");
+                logger.LogWarning(responseLog+"Not processing this record as no customer exists");
                 return false;
             }
             if (bookingResponse.BookingOwner.OwnerType == OwnerType.Team)
             {
-                logger.LogInformation("Not processing this record as the booking owner type is team");
+                logger.LogInformation(responseLog+"Not processing this record as the booking owner type is team");
                 return false;
             }
             if (bookingResponse.Customer.Owner == null) return false;
             if (bookingResponse.Customer.Owner.OwnerType == OwnerType.Team)
             {
-                logger.LogInformation("Not processing this record as the customer owner type is team");
+                logger.LogInformation(responseLog+"Not processing this record as the customer owner type is team");
                 return false;
             }
 
             //customer already allocated
             if (processedCustomers.Contains(bookingResponse.Customer.Id))
             {
-                logger.LogWarning("Not processing this record as customer: " + bookingResponse.Customer.Name + " was already got processed.");
+                logger.LogWarning(responseLog+"Not processing this record as customer: " + bookingResponse.Customer.Name + " was already got processed.");
                 return false;
             }
             //accommodation start date is not provided
             if (bookingResponse.AccommodationStartDate == null)
             {
-                logger.LogWarning("Not processing this record as accommodation startdate is null");
+                logger.LogWarning(responseLog+"Not processing this record as accommodation startdate is null");
                 return false;
             }
             return true;
         }
 
-        public void WriteAllocationResponseLog(BookingAllocationResponse bookingAllocationResponse)
+        public string WriteAllocationResponseLog(BookingAllocationResponse bookingAllocationResponse)
         {
+            var information = new StringBuilder();
             if (bookingAllocationResponse != null)
-            {
-                StringBuilder information = new StringBuilder();
+            {                
+                information.AppendLine();
                 information.AppendLine();
                 if (bookingAllocationResponse.BookingNumber != null)
                     information.AppendLine("Processing Booking: " + bookingAllocationResponse.BookingNumber);
@@ -185,9 +189,9 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                 }                
                 if (bookingAllocationResponse.HotelOwner != null)
                     information.AppendLine("Hotel Owner: " + bookingAllocationResponse.HotelOwner.Name + " of Type " + bookingAllocationResponse.HotelOwner.OwnerType.ToString());
-
-                logger.LogInformation(information.ToString());
+                
             }
+            return information.ToString();
 
         }
 

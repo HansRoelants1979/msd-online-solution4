@@ -32,7 +32,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam
                 {
                     logger.LogInformation("Tc.Crm.WebJob.AllocateResortTeam Job Starts");
                     allocateResortTeamService.Run();
-                    logger.LogInformation("Tc.Crm.WebJob.AllocateResortTeam Job End");
+                    logger.LogInformation("\r\n\r\nTc.Crm.WebJob.AllocateResortTeam Job End");
                 }
             }
             catch (FaultException<Microsoft.Xrm.Sdk.OrganizationServiceFault> ex)
