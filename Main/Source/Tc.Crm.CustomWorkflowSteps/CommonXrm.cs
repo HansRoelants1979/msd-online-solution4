@@ -41,7 +41,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// </summary>
         /// <param name="text"></param>
         /// <param name="entityName"></param>
-        /// <returns></returns>
+        /// <returns></returns><>
         public static OptionSetValue GetOptionSetValue(string text, string optionsetName)
         {
             int value = -1;
@@ -49,182 +49,48 @@ namespace Tc.Crm.CustomWorkflowSteps
             {
                 case "tc_language":
                     {
-                        switch (text)
-                        {
-                            case "English":
-                                value = 950000000;
-                                break;
-                            case "German":
-                                value = 950000001;
-                                break;
-                            case "Dutch":
-                                value = 950000002;
-                                break;
-                            case "French":
-                                value = 950000003;
-                                break;
-                            case "Spanish":
-                                value = 950000004;
-                                break;
-                            case "Danish":
-                                value = 950000005;
-                                break;
-
-                        }
+                        value = GetLanguage(text, value);
                     }
                     break;
 
                 case "tc_gender":
                     {
-                        switch (text)
-                        {
-                            case "Male":
-                                value = 950000000;
-                                break;
-                            case "Female":
-                                value = 950000001;
-                                break;
-                            case "Unknown":
-                                value = 950000002;
-                                break;
-                        }
+                        value = GetGender(text, value);
                     }
                     break;
                 case "tc_segment":
                     {
-                        switch (text)
-                        {
-                            case "1":
-                                value = 950000000;
-                                break;
-                            case "2":
-                                value = 950000001;
-                                break;
-                            case "3":
-                                value = 950000002;
-                                break;
-                            case "4":
-                                value = 950000003;
-                                break;
-                            case "5":
-                                value = 950000004;
-                                break;
-
-                        }
+                        value = GetSegment(text, value);
                     }
                     break;
                 case "tc_salutation":
                     {
-                        switch (text)
-                        {
-                            case "Mr":
-                                value = 950000000;
-                                break;
-                            case "Mrs":
-                                value = 950000001;
-                                break;
-                            case "Ms":
-                                value = 950000002;
-                                break;
-                            case "Miss":
-                                value = 950000003;
-                                break;
-                            case "Dr":
-                                value = 950000004;
-                                break;
-                            case "Sir":
-                                value = 950000005;
-                                break;
-                            case "Prof.":
-                                value = 950000006;
-                                break;
-                            case "Lord":
-                                value = 950000007;
-                                break;
-                            case "Lady":
-                                value = 950000008;
-                                break;
-                        }
+                        value = GetSalutation(text, value);
                     }
                     break;
                 case "tc_type":
                     {
-                        switch (text)
-                        {
-                            case "T":
-                                value = 950000000;
-                                break;
-                            case "A":
-                                value = 950000001;
-                                break;
-                        }
+                        value = GetType(text, value);
                     }
                     break;
                 case "tc_transfertype":
                     {
-                        switch (text)
-                        {
-                            case "I":
-                                value = 950000000;
-                                break;
-                            case "IN":
-                                value = 950000000;
-                                break;
-                            case "O":
-                                value = 950000001;
-                                break;
-                            case "TH":
-                                value = 950000002;
-                                break;
-                        }
+                        value = GetTransferType(text, value);
                     }
                     break;
                 case "tc_transferservicelevel":
                     {
-                        switch (text)
-                        {
-                            case "Service Level 1":
-                                value = 950000000;
-                                break;
-                            case "Service Level 2":
-                                value = 950000001;
-                                break;
-                            case "Service Level 3":
-                                value = 950000002;
-                                break;
-                        }
+                        value = GetTransferServiceLevel(text, value);
                     }
                     break;
                 case "tc_externalservicecode":
                     {
-                        switch (text)
-                        {
-                            case "Service Code A":
-                                value = 950000000;
-                                break;
-                            case "Service Code B":
-                                value = 950000001;
-                                break;
-                            case "Service Code C":
-                                value = 950000002;
-                                break;
-                        }
+                        value = GetExternalServiceCode(text, value);
                     }
                     break;
                 case "tc_boardtype":
                     {
-                        switch (text)
-                        {
-                            case "AI":
-                                value = 950000000;
-                                break;
-                            case "HB":
-                                value = 950000002;
-                                break;
-                            case "FB":
-                                value = 950000001;
-                                break;
-                        }
+                        value = GetBoardType(text, value);
                     }
                     break;
                 case "tc_emailaddress1type":
@@ -234,16 +100,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                 case "tc_emailaddress2_type":
                 case "tc_emailaddress3_type":
                     {
-                        switch (text)
-                        {
-                            case "Pri":
-                                value = 950000000;
-                                break;
-                            case "Pro":
-                                value = 950000001;
-                                break;
-
-                        }
+                        value = GetEmailType(text, value);
                     }
                     break;
                 case "tc_telephone1type":
@@ -251,81 +108,313 @@ namespace Tc.Crm.CustomWorkflowSteps
                 case "tc_telephone3type":
                 case "tc_telephone1_type":
                 case "tc_telephone2_type":
-                case "tc_telephone3_type":   
+                case "tc_telephone3_type":
                     {
-                        switch (text)
-                        {
-                            case "H":
-                                value = 950000001;
-                                break;
-                            case "M":
-                                value = 950000000;
-                                break;
-
-                        }
+                        value = GetPhoneType(text, value);
                     }
                     break;
                 case "statuscode":
                     {
-                        switch (text)
-                        {
-                            case "A":
-                                value = 1;
-                                break;
-                            case "B":
-                                value = 950000001;
-                                break;
-                            case "C":
-                                value = 950000000;
-                                break;
-                            case "D":
-                                value = 950000000;
-                                break;
-                            case "Inactive":
-                                value = 2;
-                                break;
-                            case "OK":
-                                value = 2;
-                                break;
-                            case "PR":
-                                value = 950000001;
-                                break;
-                            case "RQ":
-                                value = 950000000;
-                                break;
-                            case "Booked":
-                                value = 950000001;
-                                break;
-                            case "Cancelled":
-                                value = 950000000;
-                                break;
-
-                        }
+                        value = GetStatusCode(text, value);
                     }
                     break;
                 case "community":
                     {
-                        switch (text)
-                        {
-                            case "Facebook":
-                                value = 1;
-                                break;
-                            case "Google":
-                                value = 0;
-                                break;
-                            case "Twitter":
-                                value = 2;
-                                break;
-                            case "Other":
-                                value = 0;
-                                break;
-
-
-                        }
+                        value = GetCommunity(text, value);
                     }
                     break;
             }
             return (value != -1) ? new OptionSetValue(value) : null;
+        }
+
+        private static int GetCommunity(string text, int value)
+        {
+            switch (text)
+            {
+                case "Facebook":
+                    value = 1;
+                    break;
+                case "Google":
+                    value = 0;
+                    break;
+                case "Twitter":
+                    value = 2;
+                    break;
+                case "Other":
+                    value = 0;
+                    break;
+            }
+
+            return value;
+        }
+
+        private static int GetStatusCode(string text, int value)
+        {
+            switch (text)
+            {
+                case "A":
+                    value = 1;
+                    break;
+                case "B":
+                    value = 950000001;
+                    break;
+                case "C":
+                    value = 950000000;
+                    break;
+                case "D":
+                    value = 950000000;
+                    break;
+                case "Inactive":
+                    value = 2;
+                    break;
+                case "OK":
+                    value = 2;
+                    break;
+                case "PR":
+                    value = 950000001;
+                    break;
+                case "RQ":
+                    value = 950000000;
+                    break;
+                case "Booked":
+                    value = 950000001;
+                    break;
+                case "Cancelled":
+                    value = 950000000;
+                    break;
+
+            }
+
+            return value;
+        }
+
+        private static int GetPhoneType(string text, int value)
+        {
+            switch (text)
+            {
+                case "H":
+                    value = 950000001;
+                    break;
+                case "M":
+                    value = 950000000;
+                    break;
+
+            }
+
+            return value;
+        }
+
+        private static int GetEmailType(string text, int value)
+        {
+            switch (text)
+            {
+                case "Pri":
+                    value = 950000000;
+                    break;
+                case "Pro":
+                    value = 950000001;
+                    break;
+
+            }
+
+            return value;
+        }
+
+        private static int GetBoardType(string text, int value)
+        {
+            switch (text)
+            {
+                case "AI":
+                    value = 950000000;
+                    break;
+                case "HB":
+                    value = 950000002;
+                    break;
+                case "FB":
+                    value = 950000001;
+                    break;
+            }
+
+            return value;
+        }
+
+        private static int GetExternalServiceCode(string text, int value)
+        {
+            switch (text)
+            {
+                case "Service Code A":
+                    value = 950000000;
+                    break;
+                case "Service Code B":
+                    value = 950000001;
+                    break;
+                case "Service Code C":
+                    value = 950000002;
+                    break;
+            }
+
+            return value;
+        }
+
+        private static int GetTransferServiceLevel(string text, int value)
+        {
+            switch (text)
+            {
+                case "Service Level 1":
+                    value = 950000000;
+                    break;
+                case "Service Level 2":
+                    value = 950000001;
+                    break;
+                case "Service Level 3":
+                    value = 950000002;
+                    break;
+            }
+
+            return value;
+        }
+
+        private static int GetTransferType(string text, int value)
+        {
+            switch (text)
+            {
+                case "I":
+                    value = 950000000;
+                    break;
+                case "IN":
+                    value = 950000000;
+                    break;
+                case "O":
+                    value = 950000001;
+                    break;
+                case "TH":
+                    value = 950000002;
+                    break;
+            }
+
+            return value;
+        }
+
+        private static int GetType(string text, int value)
+        {
+            switch (text)
+            {
+                case "T":
+                    value = 950000000;
+                    break;
+                case "A":
+                    value = 950000001;
+                    break;
+            }
+
+            return value;
+        }
+
+        private static int GetSalutation(string text, int value)
+        {
+            switch (text)
+            {
+                case "Mr":
+                    value = 950000000;
+                    break;
+                case "Mrs":
+                    value = 950000001;
+                    break;
+                case "Ms":
+                    value = 950000002;
+                    break;
+                case "Miss":
+                    value = 950000003;
+                    break;
+                case "Dr":
+                    value = 950000004;
+                    break;
+                case "Sir":
+                    value = 950000005;
+                    break;
+                case "Prof.":
+                    value = 950000006;
+                    break;
+                case "Lord":
+                    value = 950000007;
+                    break;
+                case "Lady":
+                    value = 950000008;
+                    break;
+            }
+
+            return value;
+        }
+
+        private static int GetSegment(string text, int value)
+        {
+            switch (text)
+            {
+                case "1":
+                    value = 950000000;
+                    break;
+                case "2":
+                    value = 950000001;
+                    break;
+                case "3":
+                    value = 950000002;
+                    break;
+                case "4":
+                    value = 950000003;
+                    break;
+                case "5":
+                    value = 950000004;
+                    break;
+
+            }
+
+            return value;
+        }
+
+        private static int GetGender(string text, int value)
+        {
+            switch (text)
+            {
+                case "Male":
+                    value = 950000000;
+                    break;
+                case "Female":
+                    value = 950000001;
+                    break;
+                case "Unknown":
+                    value = 950000002;
+                    break;
+            }
+
+            return value;
+        }
+
+        private static int GetLanguage(string text, int value)
+        {
+            switch (text)
+            {
+                case "EN":
+                    value = 950000000;
+                    break;
+                case "DE":
+                    value = 950000001;
+                    break;
+                case "NL":
+                    value = 950000002;
+                    break;
+                case "FR":
+                    value = 950000003;
+                    break;
+                case "ES":
+                    value = 950000004;
+                    break;
+                case "DA":
+                    value = 950000005;
+                    break;
+
+            }
+
+            return value;
         }
 
         /// <summary>
