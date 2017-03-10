@@ -25,6 +25,7 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
     var CASE_CATEGORY_1_ID = "tc_categorylevel1id";
     var CASE_CATEGORY_2_ID = "tc_casecategory2id";
     var CASE_CATEGORY_3_ID = "tc_category3id";
+    var CASE_CATEGORY_4_ID = "tc_categorylevel4id";
     var CASE_CATEGORY_ENTITY = "tc_casecategory";
     var FORM_MODE_CREATE = 1;
     var VIEW_RANDOM_GUID = "{5A8261E7-71F5-4904-B046-EE8001A01CF5}";
@@ -39,6 +40,8 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
         Xrm.Page.getControl(CASE_CATEGORY_2_ID).addPreSearch(filterCategoryByParentCaseCategory);
         // filter level 3 case categories by selected level 2
         Xrm.Page.getControl(CASE_CATEGORY_3_ID).addPreSearch(filterCategoryByParentCaseCategory);
+        // filter level 4 case categories by selected level 3
+        Xrm.Page.getControl(CASE_CATEGORY_4_ID).addPreSearch(filterCategoryByParentCaseCategory);
     }
 
     ///
@@ -49,7 +52,8 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
         // clean-up selection of level 2 and level 3
         Xrm.Page.getControl(CASE_CATEGORY_2_ID).getAttribute().setValue(null);
         Xrm.Page.getControl(CASE_CATEGORY_3_ID).getAttribute().setValue(null);
-        // add filter for lookup view by case type complain
+        Xrm.Page.getControl(CASE_CATEGORY_4_ID).getAttribute().setValue(null);
+        // add filter for lookup view by case type of case line
         // get the proper control: in header for main form, field in case of quick create
         var caseTypeControl = Xrm.Page.getControl(CASE_TYPE_CONTROL_REG);
         if (Xrm.Page.ui.getFormType() === FORM_MODE_CREATE) {
@@ -72,14 +76,20 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
         {
             case CASE_CATEGORY_2_ID:
                 parentControlId = CASE_CATEGORY_1_ID;
-                // clean-up case category level 3 selection
+                // clean-up case category level 3, 4 selection
                 Xrm.Page.getControl(CASE_CATEGORY_3_ID).getAttribute().setValue(null);
+                Xrm.Page.getControl(CASE_CATEGORY_4_ID).getAttribute().setValue(null);
                 break
             case CASE_CATEGORY_3_ID:
+                // clean-up case category level 4 selection
+                Xrm.Page.getControl(CASE_CATEGORY_4_ID).getAttribute().setValue(null);
                 parentControlId = CASE_CATEGORY_2_ID;
                 break
+            case CASE_CATEGORY_4_ID:
+                parentControlId = CASE_CATEGORY_3_ID;
+                break
             default:
-                break;
+                return;
         }
         // get selected value of parent control
         var parentCaseCategory = Xrm.Page.getControl(parentControlId).getAttribute().getValue();
