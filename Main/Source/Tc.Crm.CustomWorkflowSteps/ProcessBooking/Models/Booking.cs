@@ -86,6 +86,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
     [DataContract(Name = "AddressType")]
     public enum AddressType
     {
+        [EnumMember]
+        NotSpecified,
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "M")]
         [EnumMember]
         M
@@ -94,6 +96,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
     [DataContract(Name = "BookingStatus")]
     public enum BookingStatus
     {
+        [EnumMember]
+        NotSpecified,
         [EnumMember]
         Booked,
         [EnumMember]
@@ -104,6 +108,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
     public enum Gender
     {
         [EnumMember]
+        NotSpecified,
+        [EnumMember]
         Male,
         [EnumMember]
         Female,
@@ -113,6 +119,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
     [DataContract(Name = "Relation")]
     public enum Relation
     {
+        [EnumMember]
+        NotSpecified,
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "P")]
         [EnumMember]
         Participant,
@@ -127,6 +135,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
     public enum BoardType
     {
         [EnumMember]
+        NotSpecified,
+        [EnumMember]
         AI,
         [EnumMember]
         HB
@@ -135,6 +145,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
     [DataContract(Name = "AccomodationStatus")]
     public enum AccommodationStatus
     {
+        [EnumMember]
+        NotSpecified,
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "OK")]
         [EnumMember]
         OK,
@@ -147,6 +159,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
     [DataContract(Name = "TransferType")]
     public enum TransferType
     {
+        [EnumMember]
+        NotSpecified,
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "IN")]
         [EnumMember]
         IN,
@@ -160,28 +174,35 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
     public enum CustomerStatus
     {
         [EnumMember]
-        A,
+        NotSpecified,
         [EnumMember]
-        D,
+        A,
         [EnumMember]
         B,
         [EnumMember]
+        D,
+        [EnumMember]
         I
         
+
     }
     [DataContract(Name = "CustomerType")]
     public enum CustomerType
     {
+        [EnumMember]
+        NotSpecified,
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "P")]
         [EnumMember]
-        P,
+        Person,
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "B")]
         [EnumMember]
-        B
+        Company
     }
     [DataContract(Name = "PhoneType")]
     public enum PhoneType
     {
+        [EnumMember]
+        NotSpecified,
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "H")]
         [EnumMember]
         H,
@@ -192,6 +213,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
     [DataContract(Name = "EmailType")]
     public enum EmailType
     {
+        [EnumMember]
+        NotSpecified,
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pri")]
         [EnumMember]
         Pri,
@@ -201,6 +224,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
     [DataContract(Name = "RemarkType")]
     public enum RemarkType
     {
+        [EnumMember]
+        NotSpecified,
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "TO")]
         [EnumMember]
         TO,

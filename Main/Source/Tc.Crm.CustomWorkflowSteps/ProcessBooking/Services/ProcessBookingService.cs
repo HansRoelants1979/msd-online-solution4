@@ -55,11 +55,11 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 throw new InvalidPluginExecutionException("Customer Identifier is missing.");
 
 
-            if (payloadBooking.BookingInfo.Customer.CustomerGeneral.CustomerType == CustomerType.B)
+            if (payloadBooking.BookingInfo.Customer.CustomerGeneral.CustomerType == CustomerType.Company)
             {
                 ProcessAccount();
             }
-            else if (payloadBooking.BookingInfo.Customer.CustomerGeneral.CustomerType == CustomerType.P)
+            else if (payloadBooking.BookingInfo.Customer.CustomerGeneral.CustomerType == CustomerType.Person)
             {
                 ProcessContact();
                 ProcessSocialProfile();
@@ -449,7 +449,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             trace.Trace("Booking Roles information - start");
             Entity entityBookingRole = new Entity(EntityName.CustomerBookingRole);
             entityBookingRole[Attributes.CustomerBookingRole.BookingId] = new EntityReference(EntityName.Booking, Attributes.Booking.Name, payloadBooking.BookingInfo.BookingIdentifier.BookingNumber);
-            if (payloadBooking.BookingInfo.Customer.CustomerGeneral.CustomerType == CustomerType.B)
+            if (payloadBooking.BookingInfo.Customer.CustomerGeneral.CustomerType == CustomerType.Company)
             {
                 if (payloadBooking.BookingInfo.Customer.CustomerIdentifier.CustomerId != null && payloadBooking.BookingInfo.Customer.CustomerIdentifier.CustomerId != "")
                 {
