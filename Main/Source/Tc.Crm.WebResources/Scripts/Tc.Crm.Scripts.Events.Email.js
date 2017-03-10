@@ -24,6 +24,7 @@ Tc.Crm.Scripts.Events.Email = ( function () {
     //put your private stuff here
     var clearEmailFrom = function () {
         if (Xrm.Page.ui.getFormType() === FORM_MODE_CREATE) {
+            console.log("Clear from field");
             Xrm.Page.getAttribute("from").setValue(null);
         }
     }

@@ -34,6 +34,7 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
     /// Add OnLoad event handlers
     ///
     var addEventHandlers = function () {
+        console.log("Register case category PreSearch handlers");
         // filter level 1 case categories by case type complain
         Xrm.Page.getControl(CASE_CATEGORY_1_ID).addPreSearch(filterCategoryByComplainCaseType);
         // filter level 2 case categories by selected level 1
@@ -49,6 +50,7 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
     /// Show only active level 1 case categories
     ///
     var filterCategoryByComplainCaseType = function () {
+        console.log("Call PreSearch:" + CASE_CATEGORY_1_ID);
         // clean-up selection of level 2 and level 3
         Xrm.Page.getControl(CASE_CATEGORY_2_ID).getAttribute().setValue(null);
         Xrm.Page.getControl(CASE_CATEGORY_3_ID).getAttribute().setValue(null);
@@ -71,6 +73,7 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
     var filterCategoryByParentCaseCategory = function (context) {
         var viewModel = context.getEventSource();
         var controlId = viewModel.getKey();
+        console.log("Call PreSearch:" + controlId);
         var parentControlId = '';
         switch (controlId)
         {
@@ -89,11 +92,13 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
                 parentControlId = CASE_CATEGORY_3_ID;
                 break
             default:
+                console.warn("Call PreSearch for not supported field");
                 return;
         }
         // get selected value of parent control
         var parentCaseCategory = Xrm.Page.getControl(parentControlId).getAttribute().getValue();
         if (parentCaseCategory == null) {
+            console.warn("Parent control value is null.");
             return;
         }        
         var parentCaseCategoryId = parentCaseCategory[0].id;
