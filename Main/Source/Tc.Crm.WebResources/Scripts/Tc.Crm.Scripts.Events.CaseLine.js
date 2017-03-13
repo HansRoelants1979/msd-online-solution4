@@ -38,11 +38,11 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
         // filter level 1 case categories by case type complain
         Xrm.Page.getControl(CASE_CATEGORY_1_ID).addPreSearch(filterCategoryByComplainCaseType);
         // filter level 2 case categories by selected level 1
-        Xrm.Page.getControl(CASE_CATEGORY_2_ID).addPreSearch(filterCategoryByParentCaseCategory);
+        Xrm.Page.getControl(CASE_CATEGORY_2_ID).addPreSearch(filterLevel2CaseCategory);
         // filter level 3 case categories by selected level 2
-        Xrm.Page.getControl(CASE_CATEGORY_3_ID).addPreSearch(filterCategoryByParentCaseCategory);
+        Xrm.Page.getControl(CASE_CATEGORY_3_ID).addPreSearch(filterLevel3CaseCategory);
         // filter level 4 case categories by selected level 3
-        Xrm.Page.getControl(CASE_CATEGORY_4_ID).addPreSearch(filterCategoryByParentCaseCategory);
+        Xrm.Page.getControl(CASE_CATEGORY_4_ID).addPreSearch(filterLevel4CaseCategory);
     }
 
     ///
@@ -50,7 +50,7 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
     /// Show only active level 1 case categories
     ///
     var filterCategoryByComplainCaseType = function () {
-        console.log("Call PreSearch:" + CASE_CATEGORY_1_ID);
+        console.log("Call PreSearch: " + CASE_CATEGORY_1_ID);
         // clean-up selection of level 2 and level 3
         Xrm.Page.getControl(CASE_CATEGORY_2_ID).getAttribute().setValue(null);
         Xrm.Page.getControl(CASE_CATEGORY_3_ID).getAttribute().setValue(null);
@@ -67,25 +67,45 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
     }
 
     ///
-    /// PreSearch method for case category level 2 and 3 look up.
+    /// PreSearch method for case category level 2
+    ///
+    var filterLevel2CaseCategory = function () {
+        console.log("Call PreSearch: " + CASE_CATEGORY_2_ID);
+        // clean-up case category level 3, 4 selection
+        Xrm.Page.getControl(CASE_CATEGORY_3_ID).getAttribute().setValue(null);
+        Xrm.Page.getControl(CASE_CATEGORY_4_ID).getAttribute().setValue(null);
+        filterCategoryByParentCaseCategory(CASE_CATEGORY_2_ID);
+    }
+
+    ///
+    /// PreSearch method for case category level 3
+    ///
+    var filterLevel3CaseCategory = function () {
+        console.log("Call PreSearch: " + CASE_CATEGORY_3_ID);
+        // clean-up case category level 4 selection
+        Xrm.Page.getControl(CASE_CATEGORY_4_ID).getAttribute().setValue(null);
+        filterCategoryByParentCaseCategory(CASE_CATEGORY_3_ID);
+    }
+
+    ///
+    /// PreSearch method for case category level 4
+    ///
+    var filterLevel4CaseCategory = function () {
+        console.log("Call PreSearch: " + CASE_CATEGORY_4_ID);
+        filterCategoryByParentCaseCategory(CASE_CATEGORY_4_ID);
+    }
+
+    ///
     /// Filter search result to show only active records related to selected parent case category.
     ///
-    var filterCategoryByParentCaseCategory = function (context) {
-        var viewModel = context.getEventSource();
-        var controlId = viewModel.getKey();
-        console.log("Call PreSearch:" + controlId);
+    var filterCategoryByParentCaseCategory = function (controlId) {
         var parentControlId = '';
         switch (controlId)
         {
             case CASE_CATEGORY_2_ID:
                 parentControlId = CASE_CATEGORY_1_ID;
-                // clean-up case category level 3, 4 selection
-                Xrm.Page.getControl(CASE_CATEGORY_3_ID).getAttribute().setValue(null);
-                Xrm.Page.getControl(CASE_CATEGORY_4_ID).getAttribute().setValue(null);
                 break
             case CASE_CATEGORY_3_ID:
-                // clean-up case category level 4 selection
-                Xrm.Page.getControl(CASE_CATEGORY_4_ID).getAttribute().setValue(null);
                 parentControlId = CASE_CATEGORY_2_ID;
                 break
             case CASE_CATEGORY_4_ID:
