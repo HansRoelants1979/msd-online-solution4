@@ -32,8 +32,6 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
             trace.Trace("Booking Identity - start");
             if (booking == null) throw new InvalidPluginExecutionException("Booking entity is null.");
-            if (identity == null) throw new InvalidPluginExecutionException("Booking identity information is null.");
-            if (identity.Booker == null) throw new InvalidPluginExecutionException("Booking identity booker information is null.");
             if (identity == null || identity.Booker == null) { ClearBookerInformation(booking, trace); trace.Trace("Booking Identity - end"); return; }
             trace.Trace("Booking populate identity - start");
             booking[Attributes.Booking.BookerPhone1] = (identity.Booker.Phone != null) ? identity.Booker.Phone : string.Empty;
