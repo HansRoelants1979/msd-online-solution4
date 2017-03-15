@@ -226,9 +226,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             if (accommodatations == null || accommodatations.Length == 0) return null;
 
 
-            var FirstAccomdation = accommodatations.Where(item => item.Order == 1)
-                                       .Select(item => item).ToArray();
-            if (FirstAccomdation != null && FirstAccomdation.Length == 1 && FirstAccomdation[0].GroupAccommodationCode != null && FirstAccomdation[0].GroupAccommodationCode != "")
+            var FirstAccomdation = accommodatations[0];
+
+            if (FirstAccomdation != null && FirstAccomdation.GroupAccommodationCode != null && FirstAccomdation.GroupAccommodationCode != "")
             {
                 var query = string.Format(@"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='true'>
                                 <entity name='tc_region'>
@@ -246,7 +246,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                           </link-entity>
                           </entity>
                           </fetch>",
-                                         new object[] { FirstAccomdation[0].GroupAccommodationCode,
+                                         new object[] { FirstAccomdation.GroupAccommodationCode,
                                                       });
 
 
