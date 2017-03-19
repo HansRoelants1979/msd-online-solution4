@@ -64,9 +64,6 @@ namespace Tc.Crm.Service.Models
         [DataMember(Name = "houseNumberBuilding")]
         public string HouseNumberBuilding { get; set; }
 
-        [DataMember(Name = "box")]
-        public string Box { get; set; }
-
         [DataMember(Name = "town")]
         public string Town { get; set; }
 
@@ -75,9 +72,6 @@ namespace Tc.Crm.Service.Models
 
         [DataMember(Name = "county")]
         public string County { get; set; }
-
-        [DataMember(Name = "number")]
-        public string Number { get; set; }
 
         [DataMember(Name = "postalCode")]
         public string PostalCode { get; set; }
@@ -92,14 +86,18 @@ namespace Tc.Crm.Service.Models
     [DataContract(Name = "AddressType")]
     public enum AddressType
     {
+        [EnumMember]
+        NotSpecified,
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "M")]
         [EnumMember]
-        M
+        Main
     }
 
     [DataContract(Name = "BookingStatus")]
     public enum BookingStatus
     {
+        [EnumMember]
+        NotSpecified,
         [EnumMember]
         Booked,
         [EnumMember]
@@ -110,15 +108,18 @@ namespace Tc.Crm.Service.Models
     public enum Gender
     {
         [EnumMember]
+        NotSpecified,
+        [EnumMember]
         Male,
         [EnumMember]
-        Female,
-        [EnumMember]
-        Unknown
+        Female
     }
+
     [DataContract(Name = "Relation")]
     public enum Relation
     {
+        [EnumMember]
+        NotSpecified,
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "P")]
         [EnumMember]
         Participant,
@@ -133,61 +134,123 @@ namespace Tc.Crm.Service.Models
     public enum BoardType
     {
         [EnumMember]
-        AI,
-        [EnumMember]
-        HB
+        NotSpecified,
+        [EnumMember(Value = "All Inclusive")]
+        AllInclusive,
+        [EnumMember(Value = "All Inclusive +")]
+        AllInclusivePlus,
+        [EnumMember(Value = "American Breakfast")]
+        AmericanBreakfast,
+        [EnumMember(Value = "Bed and Breakfast")]
+        BedAndBreakfast,
+        [EnumMember(Value = "Bed English Bfast")]
+        BedEnglishBfast,
+        [EnumMember(Value = "Board according to description")]
+        BoardAccordingToDescription,
+        [EnumMember(Value = "Breakfast")]
+        Breakfast,
+        [EnumMember(Value = "Catered Chalet")]
+        CateredChalet,
+        [EnumMember(Value = "Club Board")]
+        ClubBoard,
+        [EnumMember(Value = "Cruise Board")]
+        CruiseBoard,
+        [EnumMember(Value = "Deluxe Half Board")]
+        DeluxeHalfBoard,
+        [EnumMember(Value = "Dine Out")]
+        DineOut,
+        [EnumMember(Value = "Drinks Inclusive")]
+        DrinksInclusive,
+        [EnumMember(Value = "Evening Meal")]
+        EveningMeal,
+        [EnumMember(Value = "Fly Drive")]
+        FlyDrive,
+        [EnumMember(Value = "Full Board")]
+        FullBoard,
+        [EnumMember(Value = "Full Board +")]
+        FullBoardPlus,
+        [EnumMember(Value = "Half Board")]
+        HalfBoard,
+        [EnumMember(Value = "Half Board Upgrade")]
+        HalfBoardUpgrade,
+        [EnumMember(Value = "Meal Plan")]
+        MealPlan,
+        [EnumMember(Value = "Not Applicable")]
+        NotApplicable,
+        [EnumMember(Value = "Room Only")]
+        RoomOnly,
+        [EnumMember(Value = "Unknown")]
+        Unknown,
+        [EnumMember(Value = "Value Dining Plan")]
+        ValueDiningPlan,
+        [EnumMember(Value = "Variable Board")]
+        VariableBoard,
+        [EnumMember(Value = "Without any")]
+        WithoutAny,
+
+
     }
 
     [DataContract(Name = "AccomodationStatus")]
     public enum AccommodationStatus
     {
+        [EnumMember]
+        NotSpecified,
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "OK")]
         [EnumMember]
         OK,
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "RQ")]
         [EnumMember]
-        RQ,
-        [EnumMember]
-        PR
+        Request,
+        [EnumMember(Value ="Partial Request")]
+        PartialRequest
     }
     [DataContract(Name = "TransferType")]
     public enum TransferType
     {
+        [EnumMember]
+        NotSpecified,
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "IN")]
         [EnumMember]
-        IN,
+        Inbound,
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "OT")]
         [EnumMember]
-        OT,
-        [EnumMember]
-        TH
+        Outbound,
+        [EnumMember(Value ="Transfer Between Hotels")]
+        TransferBetweenHotels
     }
     [DataContract(Name = "CustomerStatus")]
     public enum CustomerStatus
     {
         [EnumMember]
-        A,
+        NotSpecified,
         [EnumMember]
-        D,
+        Active,
         [EnumMember]
-        B,
+        Blacklisted,
         [EnumMember]
-        I
+        Deceased,
+        [EnumMember]
+        Inactive
 
     }
     [DataContract(Name = "CustomerType")]
     public enum CustomerType
     {
+        [EnumMember]
+        NotSpecified,
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "P")]
         [EnumMember]
-        P,
+        Person,
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "B")]
         [EnumMember]
-        B
+        Company
     }
     [DataContract(Name = "PhoneType")]
     public enum PhoneType
     {
+        [EnumMember]
+        NotSpecified,
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "H")]
         [EnumMember]
         H,
@@ -198,6 +261,8 @@ namespace Tc.Crm.Service.Models
     [DataContract(Name = "EmailType")]
     public enum EmailType
     {
+        [EnumMember]
+        NotSpecified,
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pri")]
         [EnumMember]
         Pri,
@@ -207,12 +272,48 @@ namespace Tc.Crm.Service.Models
     [DataContract(Name = "RemarkType")]
     public enum RemarkType
     {
+        [EnumMember]
+        NotSpecified,
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "TO")]
         [EnumMember]
-        TO,
+        TourOperator,
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "A")]
         [EnumMember]
-        A
+        Agency
+    }
+
+    [DataContract(Name = "ExternalServiceCode")]
+    public enum ExternalServiceCode
+    {
+        [EnumMember]
+        NotSpecified,
+        [EnumMember]
+        BedBank,
+        [EnumMember]
+        GTA,
+        [EnumMember]
+        HBSI,
+        [EnumMember]
+        Hotel4You,
+        [EnumMember(Value = "Iberostar BedBank")]
+        IberostarBedBank,
+        [EnumMember]
+        Juniper,
+        [EnumMember]
+        SunHotels,
+        [EnumMember]
+        Unknown
+    }
+
+    [DataContract(Name = "TransferServiceLevel")]
+    public enum TransferServiceLevel
+    {
+        [EnumMember]
+        NotSpecified,
+        [EnumMember(Value = "Differentiated")]
+        Differentiated,
+        [EnumMember(Value = "Regular Complementary")]
+        RegularComplementary
     }
 
     [DataContract(Name = "bookingIdentifier")]
@@ -239,6 +340,9 @@ namespace Tc.Crm.Service.Models
 
         [DataMember(Name = "bookingUpdateDateTourOperator")]
         public string BookingUpdateDateTourOperator { get; set; }
+
+        [DataMember(Name = "integrationProcessingInitiated")]
+        public string IntegrationProcessingInitiated { get; set; }
     }
 
     [DataContract(Name = "bookingGeneral")]
@@ -432,7 +536,7 @@ namespace Tc.Crm.Service.Models
         public bool IsExternalService { get; set; }
 
         [DataMember(Name = "externalServiceCode")]
-        public string ExternalServiceCode { get; set; }
+        public ExternalServiceCode ExternalServiceCode { get; set; }
 
         [DataMember(Name = "notificationRequired")]
         public bool NotificationRequired { get; set; }
@@ -444,7 +548,7 @@ namespace Tc.Crm.Service.Models
         public bool IsExternalTransfer { get; set; }
 
         [DataMember(Name = "transferServiceLevel")]
-        public string TransferServiceLevel { get; set; }
+        public TransferServiceLevel TransferServiceLevel { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
         [DataMember(Name = "travelParticipantAssignment")]
@@ -611,8 +715,11 @@ namespace Tc.Crm.Service.Models
         [DataMember(Name = "sourceMarket")]
         public string SourceMarket { get; set; }
 
-        [DataMember(Name = "sourceSystem")]
+        [DataMember(Name = "sourceApplication")]
         public string SourceSystem { get; set; }
+
+        [DataMember(Name = "integrationProcessingInitiated")]
+        public string IntegrationProcessingInitiated { get; set; }
     }
 
     [DataContract(Name = "customerGeneral")]
@@ -741,6 +848,7 @@ namespace Tc.Crm.Service.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
         [DataMember(Name = "social")]
         public Social[] Social { get; set; }
+
     }
 
     [DataContract(Name = "booking_booker")]
