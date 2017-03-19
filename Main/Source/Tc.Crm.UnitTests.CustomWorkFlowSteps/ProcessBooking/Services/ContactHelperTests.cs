@@ -111,7 +111,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
             Assert.AreEqual(c.CustomerIdentity.FirstName, contact[Attributes.Contact.FirstName].ToString());
             Assert.AreEqual(c.CustomerIdentity.LastName, contact[Attributes.Contact.LastName].ToString());
             Assert.AreEqual(c.CustomerIdentity.MiddleName, contact[Attributes.Contact.MiddleName].ToString());
-            Assert.AreEqual(950000000, ((OptionSetValue)(contact[Attributes.Contact.Language])).Value);
+            //checking for language which is not available in CRM
+            Assert.AreEqual(950000006, ((OptionSetValue)(contact[Attributes.Contact.Language])).Value);
             Assert.AreEqual(950000000, ((OptionSetValue)(contact[Attributes.Contact.Salutation])).Value);
             Assert.AreEqual(950000001, ((OptionSetValue)(contact[Attributes.Contact.Gender])).Value);
        
@@ -136,7 +137,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
                     AcademicTitle = "MS",
                     Birthdate = "1982-10-08",
                     Gender = Gender.Female,
-                    Language = "English",
+                    Language = "EN",
                     MiddleName = "Tom",
                     Salutation = "Mr"
                 },
@@ -155,6 +156,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
             Assert.AreEqual(950000001, ((OptionSetValue)(contact[Attributes.Contact.Telephone1Type])).Value);
             Assert.AreEqual(950000000, ((OptionSetValue)(contact[Attributes.Contact.Telephone2Type])).Value);
             Assert.AreEqual(950000000, ((OptionSetValue)(contact[Attributes.Contact.Telephone3Type])).Value);
+
+            //checking for language = english
+            Assert.AreEqual(950000000, ((OptionSetValue)(contact[Attributes.Contact.Language])).Value);
 
         }
 
@@ -227,13 +231,11 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
                     new Address
                     {
                         AdditionalAddressInfo = "Tes",
-                        AddressType = AddressType.M,
-                        Box = "21",
+                        AddressType = AddressType.Main,
                         Country = "England",
                         County = "Ferro",
                         FlatNumberUnit="A",
                         HouseNumberBuilding="21",
-                        Number="21",
                         PostalCode = "WA113",
                         Street="Handy",
                         Town="Man"
@@ -241,13 +243,11 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
                     new Address
                     {
                         AdditionalAddressInfo = "Tes",
-                        AddressType = AddressType.M,
-                        Box = "211",
+                        AddressType = AddressType.Main,
                         Country = "Engl1and1",
                         County = "Ferro",
                         FlatNumberUnit="A",
                         HouseNumberBuilding="211",
-                        Number="211",
                         PostalCode = "WA1131",
                         Street="Handy1",
                         Town="Man1"
@@ -291,7 +291,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
                 },
                 CustomerGeneral = new CustomerGeneral
                 {
-                    CustomerStatus = CustomerStatus.B
+                    CustomerStatus = CustomerStatus.Blacklisted
                 },
                 Additional = new Additional
                 {

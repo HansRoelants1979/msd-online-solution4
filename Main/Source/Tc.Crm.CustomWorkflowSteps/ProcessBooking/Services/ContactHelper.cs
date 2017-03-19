@@ -48,8 +48,11 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                                                                 ?customer.CustomerIdentifier.CustomerId 
                                                                 : string.Empty;
 
-            contact[Attributes.Contact.StateCode] = new OptionSetValue((int)Statecode.Active);
-            contact[Attributes.Contact.StatusCode] = CommonXrm.GetCustomerStatus(customer.CustomerGeneral.CustomerStatus); 
+            if (customer.CustomerGeneral != null)
+            {
+                contact[Attributes.Contact.StateCode] = new OptionSetValue((int)Statecode.Active);
+                contact[Attributes.Contact.StatusCode] = CommonXrm.GetCustomerStatus(customer.CustomerGeneral.CustomerStatus);
+            }
 
             trace.Trace("Contact populate fields - end");
 

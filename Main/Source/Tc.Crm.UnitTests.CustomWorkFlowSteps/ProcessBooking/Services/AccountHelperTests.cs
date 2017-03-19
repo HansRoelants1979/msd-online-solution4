@@ -114,13 +114,11 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
                     new Address
                     {
                         AdditionalAddressInfo = "Tes",
-                        AddressType = AddressType.M,
-                        Box = "21",
+                        AddressType = AddressType.Main,
                         Country = "England",
                         County = "Ferro",
                         FlatNumberUnit="A",
                         HouseNumberBuilding="21",
-                        Number="21",
                         PostalCode = "WA113",
                         Street="Handy",
                         Town="Man"
@@ -157,13 +155,11 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
                     new Address
                     {
                         AdditionalAddressInfo = "Tes",
-                        AddressType = AddressType.M,
-                        Box = "21",
+                        AddressType = AddressType.Main,
                         Country = "England",
                         County = "Ferro",
                         FlatNumberUnit="A",
                         HouseNumberBuilding="21",
-                        Number="21",
                         PostalCode = "WA113",
                         Street="Handy",
                         Town="Man"
@@ -171,13 +167,11 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
                     new Address
                     {
                         AdditionalAddressInfo = "Tes",
-                        AddressType = AddressType.M,
-                        Box = "211",
+                        AddressType = AddressType.Main,
                         Country = "Engl1and1",
                         County = "Ferro",
                         FlatNumberUnit="A",
                         HouseNumberBuilding="211",
-                        Number="211",
                         PostalCode = "WA1131",
                         Street="Handy1",
                         Town="Man1"
