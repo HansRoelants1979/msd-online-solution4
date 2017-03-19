@@ -48,7 +48,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 transportEntity[Attributes.BookingTransport.StartDateandTime] = DateTime.Parse(transport.StartDate);
             if (!string.IsNullOrWhiteSpace(transport.EndDate))
                 transportEntity[Attributes.BookingTransport.EndDateandTime] = DateTime.Parse(transport.EndDate);
-            transportEntity[Attributes.BookingTransport.TransferType] = CommonXrm.GetOptionSetValue(transport.TransferType.ToString(), Attributes.BookingTransport.TransferType);
+            transportEntity[Attributes.BookingTransport.TransferType] = CommonXrm.GetTransferType(transport.TransferType);
             if (!string.IsNullOrWhiteSpace(transport.DepartureAirport))
                 transportEntity[Attributes.BookingTransport.DepartureGatewayId] = new EntityReference(EntityName.Gateway, Attributes.Gateway.IATA, transport.DepartureAirport);
             if (!string.IsNullOrWhiteSpace(transport.ArrivalAirport))

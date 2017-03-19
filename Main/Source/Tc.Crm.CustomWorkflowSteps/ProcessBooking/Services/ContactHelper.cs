@@ -24,11 +24,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             if (customer.Additional != null)
             {
                 trace.Trace("Contact populate Additional details - start");
-                if (!string.IsNullOrWhiteSpace(customer.Additional.Segment ))
-                    contact[Attributes.Contact.Segment] = CommonXrm.GetOptionSetValue(customer.Additional.Segment, Attributes.Contact.Segment);
-                else
-                    contact[Attributes.Contact.Segment] = null;
-
+                contact[Attributes.Contact.Segment] = CommonXrm.GetSegment(customer.Additional.Segment);
+                
                 if (!string.IsNullOrWhiteSpace(customer.Additional.DateOfDeath))
                     contact[Attributes.Contact.DateofDeath] = Convert.ToDateTime(customer.Additional.DateOfDeath);
                 else
@@ -51,26 +48,10 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                                                                 ?customer.CustomerIdentifier.CustomerId 
                                                                 : string.Empty;
 
+            contact[Attributes.Contact.StateCode] = new OptionSetValue((int)Statecode.Active);
+            contact[Attributes.Contact.StatusCode] = CommonXrm.GetCustomerStatus(customer.CustomerGeneral.CustomerStatus); 
+
             trace.Trace("Contact populate fields - end");
-
-            return contact;
-        }
-
-        public static Entity DeActivateContact(Customer customer, Guid contactId, ITracingService trace)
-        {
-            Entity contact = null;
-            if (customer.CustomerGeneral != null)
-            {
-                if (customer.CustomerGeneral.CustomerStatus == CustomerStatus.B ||
-                    customer.CustomerGeneral.CustomerStatus == CustomerStatus.D)
-                {
-                    trace.Trace("Processing Customer Deactivation - start");
-                    contact = new Entity(EntityName.Contact, contactId);
-                    contact[Attributes.Contact.StateCode] = new OptionSetValue((int)Statecode.InActive);
-                    contact[Attributes.Contact.StatusCode] = CommonXrm.GetOptionSetValue(customer.CustomerGeneral.CustomerStatus.ToString(), Attributes.Contact.StatusCode);
-                    trace.Trace("Processing Customer Deactivation - end");
-                }
-            }
 
             return contact;
         }
@@ -88,17 +69,17 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             if (email1 == null) return;
             trace.Trace("email 1");
             contact[Attributes.Contact.EMailAddress1] = (!string.IsNullOrWhiteSpace(email1.Address )) ? email1.Address : string.Empty ;
-            contact[Attributes.Contact.EmailAddress1Type] = CommonXrm.GetOptionSetValue(email1.EmailType.ToString(), Attributes.Contact.EmailAddress1Type);
+            contact[Attributes.Contact.EmailAddress1Type] = CommonXrm.GetEmailType(email1.EmailType);
             if (email2 == null) return;
 
             trace.Trace("email 2");
             contact[Attributes.Contact.EMailAddress2] = (!string.IsNullOrWhiteSpace(email2.Address )) ? email2.Address:string.Empty;
-            contact[Attributes.Contact.EmailAddress2Type] = CommonXrm.GetOptionSetValue(email2.EmailType.ToString(), Attributes.Contact.EmailAddress2Type);
+            contact[Attributes.Contact.EmailAddress2Type] = CommonXrm.GetEmailType(email2.EmailType);
 
             trace.Trace("email 3");
             if (email3 == null) return;
             contact[Attributes.Contact.EMailAddress3] = (!string.IsNullOrWhiteSpace(email3.Address )) ? email3.Address:string.Empty;
-            contact[Attributes.Contact.EmailAddress3Type] = CommonXrm.GetOptionSetValue(email3.EmailType.ToString(), Attributes.Contact.EmailAddress3Type);
+            contact[Attributes.Contact.EmailAddress3Type] = CommonXrm.GetEmailType(email3.EmailType);
             trace.Trace("Contact populate email - end");
 
         }
@@ -146,20 +127,17 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 
             trace.Trace("phone 1");
             if (phone1 == null) return;
-            if (phone1.PhoneType == PhoneType.H || phone1.PhoneType == PhoneType.M)
-                contact[Attributes.Contact.Telephone1Type] = CommonXrm.GetOptionSetValue(phone1.PhoneType.ToString(), Attributes.Contact.Telephone1Type);
+            contact[Attributes.Contact.Telephone1Type] = CommonXrm.GetPhoneType(phone1.PhoneType);
             contact[Attributes.Contact.Telephone1] = (!string.IsNullOrWhiteSpace(phone1.Number )) ? phone1.Number:string.Empty ;
 
             trace.Trace("phone 2");
             if (phone2 == null) return;
-            if (phone2.PhoneType == PhoneType.H || phone2.PhoneType == PhoneType.M)
-                contact[Attributes.Contact.Telephone2Type] = CommonXrm.GetOptionSetValue(phone2.PhoneType.ToString(), Attributes.Contact.Telephone2Type);
+            contact[Attributes.Contact.Telephone2Type] = CommonXrm.GetPhoneType(phone2.PhoneType);
             contact[Attributes.Contact.Telephone2] = (!string.IsNullOrWhiteSpace(phone2.Number )) ? phone2.Number : string.Empty;
 
             trace.Trace("phone 3");
             if (phone3 == null) return;
-            if (phone3.PhoneType == PhoneType.H || phone3.PhoneType == PhoneType.M)
-                contact[Attributes.Contact.Telephone3Type] = CommonXrm.GetOptionSetValue(phone3.PhoneType.ToString(), Attributes.Contact.Telephone3Type);
+            contact[Attributes.Contact.Telephone3Type] = CommonXrm.GetPhoneType(phone3.PhoneType);
             contact[Attributes.Contact.Telephone3] = (!string.IsNullOrWhiteSpace(phone3.Number )) ? phone3.Number : string.Empty;
 
             trace.Trace("Contact populate phone - end");
@@ -205,14 +183,10 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             contact[Attributes.Contact.FirstName] = (!string.IsNullOrWhiteSpace(identity.FirstName )) ? identity.FirstName : string.Empty;
             contact[Attributes.Contact.MiddleName] = (!string.IsNullOrWhiteSpace(identity.MiddleName )) ? identity.MiddleName : string.Empty;
             contact[Attributes.Contact.LastName] = (!string.IsNullOrWhiteSpace(identity.LastName )) ? identity.LastName : string.Empty;
-            contact[Attributes.Contact.Language] = (!string.IsNullOrWhiteSpace(identity.Language )) ?
-                                                   CommonXrm.GetOptionSetValue(identity.Language, Attributes.Contact.Language) 
-                                                   : null;
-            contact[Attributes.Contact.Gender] = CommonXrm.GetOptionSetValue(identity.Gender.ToString(), Attributes.Contact.Gender);
+            contact[Attributes.Contact.Language] = CommonXrm.GetLanguage(identity.Language);                                                   
+            contact[Attributes.Contact.Gender] = CommonXrm.GetGender(identity.Gender);
             contact[Attributes.Contact.AcademicTitle] = (!string.IsNullOrWhiteSpace(identity.AcademicTitle )) ? identity.AcademicTitle : string.Empty;
-            contact[Attributes.Contact.Salutation] = (!string.IsNullOrWhiteSpace(identity.Salutation )) ?
-                                                      CommonXrm.GetOptionSetValue(identity.Salutation, Attributes.Contact.Salutation)
-                                                      : null;
+            contact[Attributes.Contact.Salutation] = CommonXrm.GetSalutation(identity.Salutation);
             contact[Attributes.Contact.BirthDate] = (!string.IsNullOrWhiteSpace(identity.Birthdate )) ? Convert.ToDateTime(identity.Birthdate) : (DateTime?)null;
             trace.Trace("Contact populate idenity - end");
         }

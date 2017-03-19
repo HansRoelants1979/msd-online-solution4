@@ -7,6 +7,7 @@ using System.Text;
 using System.Globalization;
 using System.Xml;
 using System;
+using Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models;
 
 namespace Tc.Crm.CustomWorkflowSteps
 {
@@ -22,113 +23,33 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// <param name="filterKeys"></param>
         /// <param name="filterValues"></param>
         /// <param name="service"></param>
-        public static void DeleteRecords(string entityName, string[] columns, string[] filterKeys, string[] filterValues,IOrganizationService service)
+        public static void MarkEntityRecordsAsPendingDelete(string entityName, string[] columns, string[] filterKeys, string[] filterValues, IOrganizationService service)
         {
             EntityCollection entityCollection = CommonXrm.RetrieveMultipleRecords(entityName, columns, filterKeys, filterValues, service);
-            if (entityCollection != null && entityCollection.Entities.Count > 0)
+            foreach (var item in entityCollection.Entities)
             {
-                EntityReferenceCollection entityReferenceCollection = new EntityReferenceCollection();
-                foreach (Entity entity in entityCollection.Entities)
-                {
-                    entityReferenceCollection.Add(new EntityReference(entity.LogicalName, entity.Id));
-                }
-                CommonXrm.BulkDelete(entityReferenceCollection, service);
+                var entityToMarkAsPendingDelete = new Entity(entityName);
+                entityToMarkAsPendingDelete.Id = item.Id;
+                entityToMarkAsPendingDelete[Attributes.Booking.StateCode] = new OptionSetValue((int)Statecode.InActive);
+                if (entityName == EntityName.BookingAccommodation)
+                    entityToMarkAsPendingDelete[Attributes.Booking.StatusCode] = new OptionSetValue(950000007);
+                else if (entityName == EntityName.BookingTransfer)
+                    entityToMarkAsPendingDelete[Attributes.Booking.StatusCode] = new OptionSetValue(950000000);
+                else if (entityName == EntityName.BookingTransport)
+                    entityToMarkAsPendingDelete[Attributes.Booking.StatusCode] = new OptionSetValue(950000000);
+                else if (entityName == EntityName.BookingExtraService)
+                    entityToMarkAsPendingDelete[Attributes.Booking.StatusCode] = new OptionSetValue(950000001);
+                else if (entityName == EntityName.CustomerBookingRole)
+                    entityToMarkAsPendingDelete[Attributes.Booking.StatusCode] = new OptionSetValue(950000000);
+
+                service.Update(entityToMarkAsPendingDelete);
             }
         }
 
-        /// <summary>
-        /// To get OptionSetValue by text and entityName
-        /// </summary>
-        /// <param name="text"></param>
-        /// <param name="entityName"></param>
-        /// <returns></returns><>
-        public static OptionSetValue GetOptionSetValue(string text, string optionsetName)
+        #region Option set mappings
+        public static OptionSetValue GetCommunity(string text)
         {
             int value = -1;
-            switch (optionsetName)
-            {
-                case "tc_language":
-                    {
-                        value = GetLanguage(text, value);
-                    }
-                    break;
-
-                case "tc_gender":
-                    {
-                        value = GetGender(text, value);
-                    }
-                    break;
-                case "tc_segment":
-                    {
-                        value = GetSegment(text, value);
-                    }
-                    break;
-                case "tc_salutation":
-                    {
-                        value = GetSalutation(text, value);
-                    }
-                    break;
-                case "tc_type":
-                    {
-                        value = GetType(text, value);
-                    }
-                    break;
-                case "tc_transfertype":
-                    {
-                        value = GetTransferType(text, value);
-                    }
-                    break;
-                case "tc_transferservicelevel":
-                    {
-                        value = GetTransferServiceLevel(text, value);
-                    }
-                    break;
-                case "tc_externalservicecode":
-                    {
-                        value = GetExternalServiceCode(text, value);
-                    }
-                    break;
-                case "tc_boardtype":
-                    {
-                        value = GetBoardType(text, value);
-                    }
-                    break;
-                case "tc_emailaddress1type":
-                case "tc_emailaddress2type":
-                case "tc_emailaddress3type":
-                case "tc_emailaddress1_type":
-                case "tc_emailaddress2_type":
-                case "tc_emailaddress3_type":
-                    {
-                        value = GetEmailType(text, value);
-                    }
-                    break;
-                case "tc_telephone1type":
-                case "tc_telephone2type":
-                case "tc_telephone3type":
-                case "tc_telephone1_type":
-                case "tc_telephone2_type":
-                case "tc_telephone3_type":
-                    {
-                        value = GetPhoneType(text, value);
-                    }
-                    break;
-                case "statuscode":
-                    {
-                        value = GetStatusCode(text, value);
-                    }
-                    break;
-                case "community":
-                    {
-                        value = GetCommunity(text, value);
-                    }
-                    break;
-            }
-            return (value != -1) ? new OptionSetValue(value) : null;
-        }
-
-        private static int GetCommunity(string text, int value)
-        {
             switch (text)
             {
                 case "Facebook":
@@ -143,175 +64,365 @@ namespace Tc.Crm.CustomWorkflowSteps
                 case "Other":
                     value = 0;
                     break;
+                case "":
+                case null:
+                    value = 0;
+                    break;
+                default:
+                    value = 0;
+                    break;
             }
 
-            return value;
+            return new OptionSetValue(value);
         }
-
-        private static int GetStatusCode(string text, int value)
+        public static OptionSetValue GetExternalServiceCode(ExternalServiceCode externalServiceCode)
         {
-            switch (text)
+            int value = -1;
+            switch (externalServiceCode)
             {
-                case "A":
+                case ExternalServiceCode.NotSpecified:
+                    value = 950000000;
+                    break;
+                case ExternalServiceCode.BedBank:
+                    value = 950000001;
+                    break;
+                case ExternalServiceCode.GTA:
+                    value = 950000002;
+                    break;
+                case ExternalServiceCode.HBSI:
+                    value = 950000003;
+                    break;
+                case ExternalServiceCode.Hotel4You:
+                    value = 950000004;
+                    break;
+                case ExternalServiceCode.IberostarBedBank:
+                    value = 950000005;
+                    break;
+                case ExternalServiceCode.Juniper:
+                    value = 950000007;
+                    break;
+                case ExternalServiceCode.SunHotels:
+                    value = 950000008;
+                    break;
+                case ExternalServiceCode.Unknown:
+                    value = 950000000;
+                    break;
+                default:
+                    value = 950000000;
+                    break;
+            }
+            return new OptionSetValue(value);
+        }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        public static OptionSetValue GetBoardType(BoardType boardType)
+        {
+            int value = -1;
+            switch (boardType)
+            {
+                case BoardType.NotSpecified:
+                    value = 950000003;
+                    break;
+                case BoardType.AllInclusive:
+                    value = 950000000;
+                    break;
+                case BoardType.AllInclusivePlus:
+                    value = 950000028;
+                    break;
+                case BoardType.AmericanBreakfast:
+                    value = 950000004;
+                    break;
+                case BoardType.BedAndBreakfast:
+                    value = 950000005;
+                    break;
+                case BoardType.BedEnglishBfast:
+                    value = 950000006;
+                    break;
+                case BoardType.BoardAccordingToDescription:
+                    value = 950000007;
+                    break;
+                case BoardType.Breakfast:
+                    value = 950000008;
+                    break;
+                case BoardType.CateredChalet:
+                    value = 950000009;
+                    break;
+                case BoardType.ClubBoard:
+                    value = 950000010;
+                    break;
+                case BoardType.ContinentalBfast:
+                    value = 950000011;
+                    break;
+                case BoardType.CruiseBoard:
+                    value = 950000012;
+                    break;
+                case BoardType.DeluxeHalfBoard:
+                    value = 950000013;
+                    break;
+                case BoardType.DineOut:
+                    value = 950000014;
+                    break;
+                case BoardType.DrinksInclusive:
+                    value = 950000015;
+                    break;
+                case BoardType.EveningMeal:
+                    value = 950000016;
+                    break;
+                case BoardType.FlyDrive:
+                    value = 950000017;
+                    break;
+                case BoardType.FullBoard:
+                    value = 950000001;
+                    break;
+                case BoardType.FullBoardPlus:
+                    value = 950000018;
+                    break;
+                case BoardType.HalfBoard:
+                    value = 950000002;
+                    break;
+                case BoardType.HalfBoardUpgrade:
+                    value = 950000020;
+                    break;
+                case BoardType.MealPlan:
+                    value = 950000021;
+                    break;
+                case BoardType.NotApplicable:
+                    value = 950000022;
+                    break;
+                case BoardType.RoomOnly:
+                    value = 950000023;
+                    break;
+                case BoardType.Unknown:
+                    value = 950000003;
+                    break;
+                case BoardType.ValueDiningPlan:
+                    value = 950000025;
+                    break;
+                case BoardType.VariableBoard:
+                    value = 950000026;
+                    break;
+                case BoardType.WithoutAny:
+                    value = 950000027;
+                    break;
+                default:
+                    value = 950000003;
+                    break;
+            }
+            return new OptionSetValue(value);
+        }
+        public static OptionSetValue GetTransferServiceLevel(TransferServiceLevel transferServiceLevel)
+        {
+            int value = -1;
+            switch (transferServiceLevel)
+            {
+                case TransferServiceLevel.NotSpecified:
+                    value = 950000000;
+                    break;
+                case TransferServiceLevel.Differentiated:
+                    value = 950000001;
+                    break;
+                case TransferServiceLevel.RegularComplementary:
+                    value = 950000002;
+                    break;
+                default:
+                    value = 950000000;
+                    break;
+            }
+            return new OptionSetValue(value);
+        }
+        public static OptionSetValue GetAccommodationStatus(AccommodationStatus accommodationStatus)
+        {
+            int value = -1;
+            switch (accommodationStatus)
+            {
+                case AccommodationStatus.NotSpecified:
                     value = 1;
                     break;
-                case "B":
-                    value = 950000001;
-                    break;
-                case "C":
-                    value = 950000000;
-                    break;
-                case "D":
-                    value = 950000000;
-                    break;
-                case "Inactive":
-                    value = 2;
-                    break;
-                case "OK":
-                    value = 2;
-                    break;
-                case "PR":
-                    value = 950000001;
-                    break;
-                case "RQ":
-                    value = 950000000;
-                    break;
-                case "Booked":
-                    value = 950000001;
-                    break;
-                case "Cancelled":
-                    value = 950000000;
-                    break;
-
-            }
-
-            return value;
-        }
-
-        private static int GetPhoneType(string text, int value)
-        {
-            switch (text)
-            {
-                case "H":
-                    value = 950000001;
-                    break;
-                case "M":
-                    value = 950000000;
-                    break;
-
-            }
-
-            return value;
-        }
-
-        private static int GetEmailType(string text, int value)
-        {
-            switch (text)
-            {
-                case "Pri":
-                    value = 950000000;
-                    break;
-                case "Pro":
-                    value = 950000001;
-                    break;
-
-            }
-
-            return value;
-        }
-
-        private static int GetBoardType(string text, int value)
-        {
-            switch (text)
-            {
-                case "AI":
-                    value = 950000000;
-                    break;
-                case "HB":
+                case AccommodationStatus.OK:
                     value = 950000002;
                     break;
-                case "FB":
-                    value = 950000001;
+                case AccommodationStatus.Request:
+                    value = 950000003;
                     break;
+                case AccommodationStatus.PartialRequest:
+                    value = 950000004;
+                    break;
+                default:
+                    value = 1;
+                    break;
+
             }
 
-            return value;
+            return new OptionSetValue(value);
         }
-
-        private static int GetExternalServiceCode(string text, int value)
+        public static OptionSetValue GetCustomerStatus(CustomerStatus customerStatus)
         {
-            switch (text)
+            int value = -1;
+            switch (customerStatus)
             {
-                case "Service Code A":
-                    value = 950000000;
+                case CustomerStatus.NotSpecified:
+                    value = 950000002;
                     break;
-                case "Service Code B":
-                    value = 950000001;
+                case CustomerStatus.Active:
+                    value = 1;
                     break;
-                case "Service Code C":
+                case CustomerStatus.Blacklisted:
+                    value = 950000003;
+                    break;
+                case CustomerStatus.Deceased:
+                    value = 950000004;
+                    break;
+                case CustomerStatus.Inactive:
+                    value = 950000005;
+                    break;
+                default:
                     value = 950000002;
                     break;
             }
-
-            return value;
+            return new OptionSetValue(value);
         }
-
-        private static int GetTransferServiceLevel(string text, int value)
+        public static OptionSetValue GetGender(Gender gender)
         {
-            switch (text)
+            int value = -1;
+            switch (gender)
             {
-                case "Service Level 1":
+                case Gender.NotSpecified:
+                    value = 950000002;
+                    break;
+                case Gender.Male:
                     value = 950000000;
                     break;
-                case "Service Level 2":
+                case Gender.Female:
                     value = 950000001;
                     break;
-                case "Service Level 3":
+                default:
                     value = 950000002;
                     break;
             }
-
-            return value;
+            return new OptionSetValue(value);
         }
-
-        private static int GetTransferType(string text, int value)
+        public static OptionSetValue GetEmailType(EmailType emailType)
         {
-            switch (text)
+            int value = -1;
+            switch (emailType)
             {
-                case "I":
-                    value = 950000000;
+                case EmailType.NotSpecified:
+                    value = 950000002;
                     break;
-                case "IN":
+                    
+                case EmailType.Pri:
                     value = 950000000;
+                    
                     break;
-                case "O":
+                case EmailType.Pro:
                     value = 950000001;
                     break;
-                case "TH":
+                default:
                     value = 950000002;
                     break;
             }
-
-            return value;
+            return new OptionSetValue(value);
         }
-
-        private static int GetType(string text, int value)
+        public static OptionSetValue GetBookingStatus(BookingStatus bookingStatus)
         {
-            switch (text)
+            int value = -1;
+            switch (bookingStatus)
             {
-                case "T":
+                case BookingStatus.NotSpecified:
+                    value = 1;
+                    break;
+                case BookingStatus.Booked:
+                    value = 950000002;
+                    break;
+                case BookingStatus.Cancelled:
+                    value = 950000003;
+                    break;
+                default:
+                    value = 1;
+                    break;
+            }
+            
+            return new OptionSetValue(value);
+        }
+        public static OptionSetValue GetPhoneType(PhoneType phoneType)
+        {
+            int value = -1;
+            switch (phoneType)
+            {
+                case PhoneType.NotSpecified:
+                    value = 950000002;
+                    break;
+                case PhoneType.H:
+                    value = 950000001;
+                    break;
+                case PhoneType.M:
                     value = 950000000;
                     break;
-                case "A":
+                default:
+                    value = 950000002;
+                    break;
+
+            }
+            return new OptionSetValue(value);
+        }
+        public static OptionSetValue GetTransferType(TransferType transferType)
+        {
+            int value = -1;
+            switch (transferType)
+            {
+                case TransferType.NotSpecified:
+                    value = 950000003;
+                    break;
+                case TransferType.Inbound:
+                    value = 950000000;
+                    break;
+                case TransferType.Outbound:
                     value = 950000001;
+                    break;
+                case TransferType.TransferBetweenHotels:
+                    value = 950000002;
+                    break;
+                default:
+                    value = 950000003;
+                    break;
+            }
+           
+            return new OptionSetValue(value);
+        }
+        public static OptionSetValue GetSegment(string text)
+        {
+            int value = -1;
+            switch (text)
+            {
+                case "1":
+                    value = 950000000;
+                    break;
+                case "2":
+                    value = 950000001;
+                    break;
+                case "3":
+                    value = 950000002;
+                    break;
+                case "4":
+                    value = 950000003;
+                    break;
+                case "5":
+                    value = 950000004;
+                    break;
+                case "":
+                case null:
+                    value = 950000005;
+                    break;
+                default:
+                    value = 950000005;
                     break;
             }
 
-            return value;
+            return new OptionSetValue(value);
         }
-
-        private static int GetSalutation(string text, int value)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        public static OptionSetValue GetSalutation(string text)
         {
+            int value = -1;
             switch (text)
             {
                 case "Mr":
@@ -341,56 +452,20 @@ namespace Tc.Crm.CustomWorkflowSteps
                 case "Lady":
                     value = 950000008;
                     break;
-            }
-
-            return value;
-        }
-
-        private static int GetSegment(string text, int value)
-        {
-            switch (text)
-            {
-                case "1":
-                    value = 950000000;
+                case "":
+                case null:
+                    value = 950000009;
                     break;
-                case "2":
-                    value = 950000001;
-                    break;
-                case "3":
-                    value = 950000002;
-                    break;
-                case "4":
-                    value = 950000003;
-                    break;
-                case "5":
-                    value = 950000004;
-                    break;
-
-            }
-
-            return value;
-        }
-
-        private static int GetGender(string text, int value)
-        {
-            switch (text)
-            {
-                case "Male":
-                    value = 950000000;
-                    break;
-                case "Female":
-                    value = 950000001;
-                    break;
-                case "Unknown":
-                    value = 950000002;
+                default:
+                    value = 950000009;
                     break;
             }
 
-            return value;
+            return new OptionSetValue(value);
         }
-
-        private static int GetLanguage(string text, int value)
+        public static OptionSetValue GetLanguage(string text)
         {
+            int value = -1;
             switch (text)
             {
                 case "EN":
@@ -411,11 +486,21 @@ namespace Tc.Crm.CustomWorkflowSteps
                 case "DA":
                     value = 950000005;
                     break;
-
+                case "":
+                case null:
+                    value = 950000006;
+                    break;
+                default:
+                    value = 950000006;
+                    break;
             }
 
-            return value;
+            return new OptionSetValue(value);
         }
+        #endregion Option set mappings
+
+
+
 
         /// <summary>
         /// Call this method to create or update record
@@ -423,8 +508,9 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// <param name="entityRecord"></param>
         /// <param name="service"></param>
         /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Upsert")]
         public static XrmResponse UpsertEntity(Entity entityRecord, IOrganizationService service)
-        {  
+        {
 
             XrmResponse xrmResponse = null;
             if (service != null)
@@ -457,7 +543,7 @@ namespace Tc.Crm.CustomWorkflowSteps
 
             }
 
-           
+
             return xrmResponse;
         }
 
@@ -478,7 +564,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                 foreach (var entity in entities.Entities)
                 {
                     var createRequest = new CreateRequest { Target = entity };
-                    var response =  (CreateResponse)service.Execute(createRequest);
+                    var response = (CreateResponse)service.Execute(createRequest);
                     var xrmResponse = new XrmResponse
                     {
                         Id = response.id.ToString(),
@@ -500,7 +586,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// <param name="entityReferences"></param>
         /// <param name="service"></param>
         public static void BulkDelete(DataCollection<EntityReference> entityReferences, IOrganizationService service)
-        {   
+        {
             if (service != null && entityReferences != null && entityReferences.Count > 0)
             {
 
@@ -509,11 +595,11 @@ namespace Tc.Crm.CustomWorkflowSteps
                 {
                     var deleteRequest = new DeleteRequest { Target = entityRef };
                     service.Execute(deleteRequest);
-                }   
-               
+                }
+
             }
         }
-               
+
         /// <summary>
         /// To get records by using filter keys and values
         /// </summary>
@@ -527,7 +613,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         {
             var query = new QueryExpression(entityName);
             query.ColumnSet = new ColumnSet(columns);
-            
+
             for (int i = 0; i < filterKeys.Length; i++)
             {
                 var condExpr = new ConditionExpression();
@@ -540,7 +626,7 @@ namespace Tc.Crm.CustomWorkflowSteps
 
                 query.Criteria.AddFilter(fltrExpr);
             }
-           return GetRecordsUsingQuery(query, service);
+            return GetRecordsUsingQuery(query, service);
 
         }
 
@@ -631,7 +717,6 @@ namespace Tc.Crm.CustomWorkflowSteps
 
             return sb.ToString();
         }
-
 
 
 

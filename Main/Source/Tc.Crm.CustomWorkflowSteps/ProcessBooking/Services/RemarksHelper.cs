@@ -26,10 +26,10 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             EntityCollection entityCollectionRemarks = new EntityCollection();
             if (remark != null && remark.Length > 0)
             {
-                trace.Trace("Processing " + remark.Length.ToString() + " Remarks - start");
+                trace.Trace("Processing " + remark.Length + " Remarks - start");
                 for (int i = 0; i < remark.Length; i++)
                 {
-                    trace.Trace("Processing Remark " + i.ToString() + " - start");
+                    trace.Trace("Processing Remark " + i + " - start");
                     var annotationEntity = PrepareBookingRemarks(remark[i], trace);
                     switch (type)
                     {
@@ -50,9 +50,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                             break;
                     }
                     entityCollectionRemarks.Entities.Add(annotationEntity);
-                    trace.Trace("Processing Remark " + i.ToString() + " - end");
+                    trace.Trace("Processing Remark " + i + " - end");
                 }
-                trace.Trace("Processing " + remark.Length.ToString() + " Remarks - end");
+                trace.Trace("Processing " + remark.Length + " Remarks - end");
             }
             trace.Trace("Populate Remarks information - end");
             return entityCollectionRemarks;

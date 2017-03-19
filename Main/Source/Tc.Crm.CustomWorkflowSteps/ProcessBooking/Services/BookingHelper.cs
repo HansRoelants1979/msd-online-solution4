@@ -85,23 +85,6 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 
         }
 
-        public static Entity DeActivateBooking(Booking booking, Guid bookingId, ITracingService trace)
-        {
-            Entity bookingEntity = null;
-            if (booking.BookingGeneral.BookingStatus == BookingStatus.Booked || booking.BookingGeneral.BookingStatus == BookingStatus.Cancelled)
-            {
-                trace.Trace("Booking record Deactivation - start");
-                bookingEntity = new Entity(EntityName.Booking, bookingId);
-                bookingEntity[Attributes.Booking.StateCode] = new OptionSetValue((int)Statecode.InActive);
-                bookingEntity[Attributes.Booking.StatusCode] = CommonXrm.GetOptionSetValue(booking.BookingGeneral.BookingStatus.ToString(), Attributes.Booking.StatusCode);
-                trace.Trace("Booking record Deactivation - end");
-            }
-            else
-            {
-                //throw new InvalidPluginExecutionException("Booking status provided in payload is invalid. It an be eiher B or C");
-            }
-            return bookingEntity;
-        }
 
         public static void PopulateServices(Entity booking, BookingServices service, ITracingService trace)
         {
@@ -263,64 +246,37 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 
             return Destination;
         }
-        static EntityReference SetBookingOwner(string sourceMarket, ITracingService trace, IOrganizationService service)
+        static void SetBookingOwner(Entity booking, string sourceMarket, ITracingService trace, IOrganizationService service)
         {
-            EntityReference Owner = null;
-            EntityCollection Team = null;
+            if (string.IsNullOrEmpty(sourceMarket)) return;
 
-            if ((!string.IsNullOrEmpty(sourceMarket)))
-            {
-                var query = string.Format(@"<fetch distinct='true' mapping='logical' output-format='xml-platform' version='1.0'>
+            var query = string.Format(@"<fetch distinct='true' mapping='logical' output-format='xml-platform' version='1.0'>
+                                                <entity name='team'>
+                                                    <attribute name='name'/>
+                                                    <attribute name='businessunitid'/>
+                                                    <attribute name='teamid'/>
+                                                    <attribute name='teamtype'/>
+                                                    <order descending='false' attribute='name'/>
+                                                    <filter type='and'>
+                                                        <condition attribute='isdefault' value='1' operator='eq'/>
+                                                    </filter>
+                                                    <link-entity name='businessunit' alias='ac' to='businessunitid' from='businessunitid'>
+                                                        <link-entity name='tc_country' alias='ad' to='businessunitid' from='tc_sourcemarketbusinessunitid'>
+                                                            <filter type='and'>
+                                                                <condition attribute='tc_iso2code' value='{0}' operator='eq'/>
+                                                            </filter>
+                                                        </link-entity>
+                                                    </link-entity>
+                                                </entity>
+                                            </fetch>", new object[] { sourceMarket,
+                                             });
 
+            var team = CommonXrm.RetrieveMultipleRecordsFetchXml(query, service);
+            if (team == null || team.Entities == null | team.Entities.Count == 0) return;
 
-                          <entity name='team'>
-
-                          <attribute name='name'/>
-
-                         <attribute name='businessunitid'/>
-
-                        <attribute name='teamid'/>
-
-                      <attribute name='teamtype'/>
-
-                     <order descending='false' attribute='name'/>
-                      <filter type='and'>
-
-                 <condition attribute='isdefault' value='1' operator='eq'/>
-
-                </filter>
-
-            <link-entity name='businessunit' alias='ac' to='businessunitid' from='businessunitid'>
-          <link-entity name='tc_country' alias='ad' to='businessunitid' from='tc_sourcemarketbusinessunitid'>
-               <filter type='and'>
-               <condition attribute='tc_iso2code' value='{0}' operator='eq'/>
-
-               </filter>
-
-           </link-entity>
-
-           </link-entity>
-
-            </entity>
-
-            </fetch>", new object[] { sourceMarket,
-             });
-
-                Team = CommonXrm.RetrieveMultipleRecordsFetchXml(query, service);
-
-            }
-
-            if (Team != null && Team.Entities != null && Team.Entities.Count > 0)
-            {
-
-                Owner = new EntityReference(EntityName.Team, Team.Entities[0].Id);
-
-
-            }
-
-
-            return Owner;
+            booking[Attributes.Booking.Owner] = new EntityReference(EntityName.Team, team.Entities[0].Id);
         }
+
         /// <summary>
         /// To prepare transfer information
         /// </summary>     
@@ -449,7 +405,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                     StringBuilder remarkBuilder = new StringBuilder();
                     trace.Trace("Processing Extra Service Remark " + j.ToString() + " information - start");
                     remarkBuilder.Append(extraServices[i].Remark[j].RemarkType.ToString() + General.Seperator);
-                    if (!string.IsNullOrWhiteSpace(extraServices[i].Remark[j].Text ))
+                    if (!string.IsNullOrWhiteSpace(extraServices[i].Remark[j].Text))
                         remarkBuilder.Append(extraServices[i].Remark[j].Text);
                     remarksBuilder.AppendLine(remarkBuilder.ToString());
                     trace.Trace("Processing Extra Service Remark " + j.ToString() + " information - end");
@@ -478,13 +434,16 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             bookingEntity[Attributes.Booking.Participants] = PrepareTravelParticipantsInfo(booking.TravelParticipant, trace);
             bookingEntity[Attributes.Booking.ParticipantRemarks] = PrepareTravelParticipantsRemarks(booking.TravelParticipant, trace);
             bookingEntity[Attributes.Booking.DestinationId] = SetBookingDestination(booking.Services.Accommodation, trace, service);
-            bookingEntity[Attributes.Booking.Owner] = SetBookingOwner(booking.BookingIdentifier.SourceMarket, trace, service);
+            SetBookingOwner(bookingEntity, booking.BookingIdentifier.SourceMarket, trace, service);
             PopulateServices(bookingEntity, booking.Services, trace);
 
             bookingEntity[Attributes.Booking.SourceMarketId] = (booking.BookingIdentifier.SourceMarket != null) ? new EntityReference(EntityName.Country
                                                                                     , Attributes.Country.ISO2Code
                                                                                     , booking.BookingIdentifier.SourceMarket)
                                                                                     : null;
+
+            bookingEntity[Attributes.Booking.StateCode] = new OptionSetValue((int)Statecode.Active);
+            bookingEntity[Attributes.Booking.StatusCode] = CommonXrm.GetBookingStatus(booking.BookingGeneral.BookingStatus);
 
             trace.Trace("Booking populate fields - end");
 

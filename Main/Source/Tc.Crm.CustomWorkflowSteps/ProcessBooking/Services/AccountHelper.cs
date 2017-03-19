@@ -21,19 +21,19 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             if (email1 == null) return;
 
             account[Attributes.Account.EMailAddress1] = (!string.IsNullOrWhiteSpace(email1.Address)) ? email1.Address : string.Empty ;
-            account[Attributes.Account.EmailAddress1_Type] = CommonXrm.GetOptionSetValue(email1.EmailType.ToString() , Attributes.Account.EmailAddress1_Type);
+            account[Attributes.Account.EmailAddress1_Type] = CommonXrm.GetEmailType(email1.EmailType);
 
             trace.Trace("email 2");
             if (email2 == null) return;
 
             account[Attributes.Account.EMailAddress2] = (!string.IsNullOrWhiteSpace(email2.Address )) ? email2.Address : string.Empty ;
-            account[Attributes.Account.EmailAddress2_Type] = CommonXrm.GetOptionSetValue(email2.EmailType.ToString(), Attributes.Account.EmailAddress2_Type);
+            account[Attributes.Account.EmailAddress2_Type] = CommonXrm.GetEmailType(email2.EmailType);
 
             trace.Trace("email 3");
             if (email3 == null) return;
 
             account[Attributes.Account.EMailAddress3] = (!string.IsNullOrWhiteSpace(email3.Address )) ? email3.Address : string.Empty;
-            account[Attributes.Account.EmailAddress3_Type] = CommonXrm.GetOptionSetValue(email3.EmailType.ToString(), Attributes.Account.EmailAddress3_Type);
+            account[Attributes.Account.EmailAddress3_Type] = CommonXrm.GetEmailType(email3.EmailType);
 
             trace.Trace("Account populate email - end");
 
@@ -87,19 +87,19 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             trace.Trace("phone 1");
             if (phone1 == null) return;
 
-            account[Attributes.Account.Telephone1_Type] = CommonXrm.GetOptionSetValue(phone1.PhoneType.ToString(), Attributes.Account.Telephone1_Type);
+            account[Attributes.Account.Telephone1_Type] = CommonXrm.GetPhoneType(phone1.PhoneType);
             account[Attributes.Account.Telephone1] = (!string.IsNullOrWhiteSpace(phone1.Number)) ? phone1.Number :string.Empty;
 
             trace.Trace("phone 2");
             if (phone2 == null) return;
 
-            account[Attributes.Account.Telephone2_Type] = CommonXrm.GetOptionSetValue(phone2.PhoneType.ToString(), Attributes.Account.Telephone2_Type);
+            account[Attributes.Account.Telephone2_Type] = CommonXrm.GetPhoneType(phone2.PhoneType);
             account[Attributes.Account.Telephone2] = (!string.IsNullOrWhiteSpace(phone2.Number )) ? phone2.Number :string.Empty;
 
             trace.Trace("phone 3");
             if (phone3 == null) return;
 
-            account[Attributes.Account.Telephone3_Type] = CommonXrm.GetOptionSetValue(phone3.PhoneType.ToString(), Attributes.Account.Telephone3_Type);
+            account[Attributes.Account.Telephone3_Type] = CommonXrm.GetPhoneType(phone2.PhoneType);
             account[Attributes.Account.Telephone3] = (!string.IsNullOrWhiteSpace(phone3.Number )) ? phone3.Number :string.Empty ;
 
             trace.Trace("Account populate phone - end");

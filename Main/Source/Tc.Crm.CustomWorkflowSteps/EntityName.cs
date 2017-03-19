@@ -196,7 +196,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string BookingAccommodationid = "tc_bookingaccommodationid";
             public const string BookingId = "tc_bookingid";
             public const string EndDateandTime = "tc_enddateandtime";
-            public const string ExternalServiceCode = "tc_externalservicecode";
+            public const string ExternalServiceCode = "tc_externalservicecodetype";
             public const string ExternalTransfer = "tc_externaltransfer";
             public const string HasSharedRoom = "tc_hassharedroom";
             public const string HotelId = "tc_hotelid";
@@ -214,7 +214,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string SourceMarketHotelCode = "tc_sourcemarkethotelcode";
             public const string SourceMarketHotelName = "tc_sourcemarkethotelname";
             public const string StartDateandTime = "tc_startdateandtime";
-            public const string TransferServiceLevel = "tc_transferservicelevel";
+            public const string TransferServiceLevel = "tc_transferserviceleveltype";
             public const string WithTransfer = "tc_withtransfer";
         }
         public class BookingTransport
