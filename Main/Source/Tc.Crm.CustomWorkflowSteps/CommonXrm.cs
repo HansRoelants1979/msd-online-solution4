@@ -616,6 +616,7 @@ namespace Tc.Crm.CustomWorkflowSteps
 
             for (int i = 0; i < filterKeys.Length; i++)
             {
+                if (filterValues[i] == null) continue;
                 var condExpr = new ConditionExpression();
                 condExpr.AttributeName = filterKeys[i];
                 condExpr.Operator = ConditionOperator.Equal;

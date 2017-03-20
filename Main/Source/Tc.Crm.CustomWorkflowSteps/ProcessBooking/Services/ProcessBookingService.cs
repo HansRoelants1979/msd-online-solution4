@@ -51,7 +51,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             if (payloadBooking.BookingInfo == null)
                 throw new InvalidPluginExecutionException("Booking info missing in payload.");
             if (payloadBooking.BookingInfo.Customer == null)
-                throw new InvalidPluginExecutionException("Customer info missing in payload.");
+                return;
             if (payloadBooking.BookingInfo.Customer.CustomerIdentifier == null)
                 throw new InvalidPluginExecutionException("Customer Identifier is missing.");
 
@@ -242,8 +242,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
         /// </summary>
         public void ProcessTransport()
         {
-            if (payloadBooking.BookingInfo.Services == null) throw new InvalidPluginExecutionException("Booking Services is missing in payload.");
-            if (payloadBooking.BookingInfo.Services.Transport == null) throw new InvalidPluginExecutionException("Booking Services Transport is missing in payload.");
+            if (payloadBooking.BookingInfo.Services == null) return;
+            if (payloadBooking.BookingInfo.Services.Transport == null) return;
 
             if (payloadBooking.BookingInfo.Services != null && payloadBooking.BookingInfo.Services.Transport != null)
             {
@@ -420,6 +420,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 trace.Trace("Delete Booking Roles information - end");
             }
             trace.Trace("Booking Roles information - start");
+            if (payloadBooking.BookingInfo.Customer == null) return;
             if (payloadBooking.BookingInfo.Customer.CustomerGeneral.CustomerType == CustomerType.NotSpecified)
             {
                 trace.Trace("Customer type has not been specified.");

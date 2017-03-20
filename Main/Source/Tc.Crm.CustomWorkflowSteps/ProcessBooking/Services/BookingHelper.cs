@@ -77,7 +77,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 booking[Attributes.Booking.NumberofChildren] = general.NumberOfChildren;
                 booking[Attributes.Booking.NumberofInfants] = general.NumberOfInfants;
                 booking[Attributes.Booking.TravelAmount] = new Money(general.TravelAmount);
-                booking[Attributes.Booking.TransactionCurrencyId] = (!string.IsNullOrWhiteSpace(general.Currency)) ? new EntityReference(EntityName.Currency, Attributes.Currency.Name, general.Currency) : null;
+                if (!string.IsNullOrWhiteSpace(general.Currency))
+                    booking[Attributes.Booking.TransactionCurrencyId] = new EntityReference(EntityName.Currency, Attributes.Currency.Name, general.Currency);
                 booking[Attributes.Booking.HasSourceMarketComplaint] = general.HasComplaint;
                 trace.Trace("Booking populate general - end");
             }
@@ -89,7 +90,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
         public static void PopulateServices(Entity booking, BookingServices service, ITracingService trace)
         {
             if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
-            if (service == null) throw new InvalidPluginExecutionException("Booking service is null.");
+            if (service == null) return;
             if (booking == null) throw new InvalidPluginExecutionException("Booking entiy is null.");
             trace.Trace("Booking populate service - start");
             trace.Trace("Booking populate service - end");
@@ -433,8 +434,10 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             PopulateGeneralFields(bookingEntity, booking.BookingGeneral, trace);
             bookingEntity[Attributes.Booking.Participants] = PrepareTravelParticipantsInfo(booking.TravelParticipant, trace);
             bookingEntity[Attributes.Booking.ParticipantRemarks] = PrepareTravelParticipantsRemarks(booking.TravelParticipant, trace);
-            bookingEntity[Attributes.Booking.DestinationId] = SetBookingDestination(booking.Services.Accommodation, trace, service);
-            SetBookingOwner(bookingEntity, booking.BookingIdentifier.SourceMarket, trace, service);
+            if (booking.Services != null)
+                bookingEntity[Attributes.Booking.DestinationId] = SetBookingDestination(booking.Services.Accommodation, trace, service);
+            if (booking.BookingIdentifier != null)
+                SetBookingOwner(bookingEntity, booking.BookingIdentifier.SourceMarket, trace, service);
             PopulateServices(bookingEntity, booking.Services, trace);
 
             bookingEntity[Attributes.Booking.SourceMarketId] = (booking.BookingIdentifier.SourceMarket != null) ? new EntityReference(EntityName.Country
