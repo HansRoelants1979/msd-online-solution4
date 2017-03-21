@@ -10,10 +10,14 @@ namespace Tc.Crm.Service.Services
 {
     public class SurveyService : ISurveyService
     {
-        public SurveyResponse ProcessSurvey(IList<Response> response)
+        public SurveyReturnResponse ProcessSurvey(string surveyData, ICrmService crmService)
         {
+            if (string.IsNullOrWhiteSpace(surveyData)) throw new ArgumentNullException(Constants.Parameters.DataJson);
+            if (crmService == null) throw new ArgumentNullException(Constants.Parameters.CrmService);
 
-            return new SurveyResponse { Created=true };
+            var response = crmService.ExecuteActionForSurveyCreate(surveyData);
+            if (response == null) throw new InvalidOperationException(Constants.Messages.ResponseNull);
+            return new SurveyReturnResponse { Created = true };
         }
     }
 }

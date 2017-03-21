@@ -56,6 +56,9 @@ namespace Tc.Crm.CustomWorkflowSteps
         public const string User = "systemuser";
         public const string BookingTransfer = "tc_bookingtransfer";
         public const string BookingExtraService = "tc_bookingextraservice";
+        public const string SurveyResponse = "tc_surveyresponse";
+        public const string SurveyResponseFeedback = "tc_surveyresponsefeedback";
+        public const string ActivityParty = "activityparty";
 
     }
 
@@ -104,6 +107,8 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string MiddleName = "middlename";
             public const string BirthDate = "birthdate";
             public const string SourceSystemID = "tc_sourcesystemid";
+            public const string FullName = "fullname";
+            public const string ContactId = "contactid";
 
 
         }
@@ -394,7 +399,43 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string TourOperatorId = "tc_touroperatorid";
         }
 
-        
+        public class SurveyResponse
+        {
+            public const string ResponseId = "tc_response_id";
+            public const string SurveyId = "tc_survey_id";
+            public const string Subject = "subject";
+            public const string SurveyDescription = "tc_survey_description";
+            public const string Mode = "tc_mode";
+            public const string BeginTime = "tc_begintime";
+            public const string ActivityAdditionalParams = "activityadditionalparams";
+            public const string BookingId = "tc_bookingid";
+            public const string CustomerId = "customers";
+        }
+
+        public class SurveyResponseFeedback
+        {
+            public const string Name = "tc_name";
+            public const string QuestionId = "tc_question_id";
+            public const string QuestionFieldId = "tc_question_field_id";
+            public const string QuestionName = "tc_question_name";
+            public const string QuestionFieldLabel = "tc_question_fieldlabel";
+            public const string QuestionFieldType = "tc_question_fieldtype";
+            public const string QuestionResponse = "tc_question_response";
+            public const string SurveyFeedbackId = "tc_surveyfeedbackid";
+        }
+
+
+        public class ActivityParty
+        {
+            public const string PartyId = "partyid";
+        }
+
+
+    }
+
+    public class RelationShips
+    {
+        public const string SurveyResponseFeedback = "tc_surveyresponse_tc_surveyresponsefeedback";
     }
 
 }

@@ -1,21 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using InMoment.WebService.Rest.Data;
 
-
-namespace Tc.Crm.Service.Models
+namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Models
 {
-
     public class Survey
     {
-        [DataMember(Name = "response")]
-        public IList<SurveyResponse> Responses { get; set; }
+        public List<Response> Responses { get; set; }
     }
 
-    [DataContract(Name ="response")]
-    public class SurveyResponse
+    [DataContract(Name = "response")]
+    public class Response
     {
-       
+
 
         [DataMember(Name = "id")]
         public long Id { get; set; }
@@ -94,10 +90,9 @@ namespace Tc.Crm.Service.Models
 
         [DataMember(Name = "answers")]
         public List<Answer> Answers { get; set; }
-       
     }
 
-    [DataContract(Name ="answers")]
+    [DataContract(Name = "answers")]
     public class Answer
     {
         [DataMember(Name = "id")]
@@ -131,11 +126,11 @@ namespace Tc.Crm.Service.Models
         public string CommentType { get; set; }
 
         [DataMember(Name = "commentArchived")]
-        public bool? CommentArchived { get; set; }       
+        public bool? CommentArchived { get; set; }
 
     }
 
-    [DataContract(Name ="option")]
+    [DataContract(Name = "option")]
     public class Option
     {
 
@@ -152,7 +147,6 @@ namespace Tc.Crm.Service.Models
         public string DefaultLabel { get; set; }
     }
 
-
     [DataContract(Name = "LocalizedString")]
     public class LocalizedString
     {
@@ -163,7 +157,6 @@ namespace Tc.Crm.Service.Models
         [DataMember(Name = "Value")]
         public string Value { get; set; }
     }
-
 
     [DataContract(Name = "FieldType")]
     public enum FieldType
@@ -191,5 +184,4 @@ namespace Tc.Crm.Service.Models
         [EnumMember]
         MONTH = 10
     }
-
 }

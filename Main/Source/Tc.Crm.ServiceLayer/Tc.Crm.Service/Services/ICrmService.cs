@@ -12,5 +12,7 @@ namespace Tc.Crm.Service.Services
     public interface ICrmService
     {
         tcm.UpdateResponse ExecuteActionForBookingUpdate(string data);
+
+        tcm.SurveyReturnResponse ExecuteActionForSurveyCreate(string data);
     }
 }

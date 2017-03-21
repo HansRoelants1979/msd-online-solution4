@@ -36,7 +36,27 @@ namespace Tc.Crm.Service.Services
 
             return new tcm.UpdateResponse { Created= responseObject.Created, Id=responseObject.Id};
         }
-        
+
+        public tcm.SurveyReturnResponse ExecuteActionForSurveyCreate(string data)
+        {
+            if (string.IsNullOrWhiteSpace(data))
+                throw new ArgumentNullException(Constants.Parameters.Data);
+
+            var request = new OrganizationRequest(Constants.Crm.Actions.ProcessSurvey);
+            request[Constants.Crm.Actions.ParameterSurveyData] = data;
+            var response = orgService.Execute(request);
+            if (response == null || response.Results == null ||
+                !response.Results.ContainsKey(Constants.Crm.Actions.ProcessSurveyResponse) ||
+                response.Results[Constants.Crm.Actions.ProcessSurveyResponse] == null)
+                throw new InvalidOperationException(Constants.Messages.ResponseFromCrmIsNull);
+
+            var actionResponse = response.Results[Constants.Crm.Actions.ProcessSurveyResponse].ToString();
+
+            var responseObject = JsonConvert.DeserializeObject<tcm.SurveyReturnResponse>(actionResponse);
+
+            return new tcm.SurveyReturnResponse { Created= responseObject.Created };
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
         public IOrganizationService CreateOrgService()
         {

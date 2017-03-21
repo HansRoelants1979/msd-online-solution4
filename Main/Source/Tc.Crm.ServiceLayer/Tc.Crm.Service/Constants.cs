@@ -90,7 +90,10 @@ namespace Tc.Crm.Service.Constants.Crm
     public static class Actions
     {
         public const string ProcessBooking = "tc_ProcessBooking";
+        public const string ProcessSurvey = "tc_ProcessSurvey";
         public const string ParameterData = "BookingInfo";
+        public const string ParameterSurveyData = "SurveyResponseInfo";
+        public const string ProcessSurveyResponse = "Response";
         public const string ProcessBookingResponse = "Response";
     }
     public static class Booking
