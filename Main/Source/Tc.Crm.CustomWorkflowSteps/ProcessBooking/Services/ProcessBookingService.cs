@@ -65,6 +65,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 ProcessContact();
                 ProcessSocialProfile();
             }
+            else
+                throw new InvalidPluginExecutionException("Customer type has not been specified.");
         }
 
         /// <summary>
