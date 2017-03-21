@@ -6,7 +6,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 {
     public static class ContactHelper
     {
-        public static Entity GetContactEntityForBookingPayload(Customer customer, ITracingService trace)
+        public static Entity GetContactEntityForBookingPayload(Customer customer, ITracingService trace,IOrganizationService service)
         {
             if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
             trace.Trace("Contact populate fields - start");
@@ -47,6 +47,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                                                             && !string.IsNullOrWhiteSpace(customer.CustomerIdentifier.CustomerId )) 
                                                                 ?customer.CustomerIdentifier.CustomerId 
                                                                 : string.Empty;
+            if (customer.CustomerIdentifier != null)
+                BookingHelper.SetOwner(contact, customer.CustomerIdentifier.SourceMarket, trace, service);
 
             if (customer.CustomerGeneral != null)
             {

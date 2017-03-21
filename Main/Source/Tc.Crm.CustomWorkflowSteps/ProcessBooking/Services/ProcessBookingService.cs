@@ -79,7 +79,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             if (payloadBooking.BookingInfo != null && payloadBooking.BookingInfo.Customer != null)
             {
                 var customer = payloadBooking.BookingInfo.Customer;
-                var contact = ContactHelper.GetContactEntityForBookingPayload(customer, trace);
+                var contact = ContactHelper.GetContactEntityForBookingPayload(customer, trace,crmService);
                 xrmResponse = CommonXrm.UpsertEntity(contact, crmService);
 
                 if (xrmResponse.Create)
@@ -128,7 +128,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             if (payloadBooking.BookingInfo != null && payloadBooking.BookingInfo.Customer != null)
             {
                 var customer = payloadBooking.BookingInfo.Customer;
-                var account = AccountHelper.GetAccountEntityForBookingPayload(customer, trace);
+                var account = AccountHelper.GetAccountEntityForBookingPayload(customer, trace, crmService);
                 xrmResponse = CommonXrm.UpsertEntity(account, crmService);
                 if (xrmResponse.Create)
                     payloadBooking.DeleteBookingRole = false;

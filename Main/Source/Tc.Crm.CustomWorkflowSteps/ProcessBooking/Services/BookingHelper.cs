@@ -247,7 +247,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 
             return Destination;
         }
-        static void SetBookingOwner(Entity booking, string sourceMarket, ITracingService trace, IOrganizationService service)
+        public static void SetOwner(Entity booking, string sourceMarket, ITracingService trace, IOrganizationService service)
         {
             if (string.IsNullOrEmpty(sourceMarket)) return;
 
@@ -437,7 +437,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             if (booking.Services != null)
                 bookingEntity[Attributes.Booking.DestinationId] = SetBookingDestination(booking.Services.Accommodation, trace, service);
             if (booking.BookingIdentifier != null)
-                SetBookingOwner(bookingEntity, booking.BookingIdentifier.SourceMarket, trace, service);
+                SetOwner(bookingEntity, booking.BookingIdentifier.SourceMarket, trace, service);
             PopulateServices(bookingEntity, booking.Services, trace);
 
             bookingEntity[Attributes.Booking.SourceMarketId] = (booking.BookingIdentifier.SourceMarket != null) ? new EntityReference(EntityName.Country

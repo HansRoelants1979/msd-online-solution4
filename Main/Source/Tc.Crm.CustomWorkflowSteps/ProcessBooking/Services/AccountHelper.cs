@@ -168,7 +168,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             return null;
         }
 
-        public static Entity GetAccountEntityForBookingPayload(Customer customer, ITracingService trace)
+        public static Entity GetAccountEntityForBookingPayload(Customer customer, ITracingService trace, IOrganizationService service)
         {
             if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null.");
             trace.Trace("Account populate fields - start");
@@ -196,6 +196,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                                                                 null;
 
             account[Attributes.Account.SourceSystemID] = (!string.IsNullOrWhiteSpace(customer.CustomerIdentifier.CustomerId )) ? customer.CustomerIdentifier.CustomerId:string.Empty;
+            if (customer.CustomerIdentifier != null)
+                BookingHelper.SetOwner(account, customer.CustomerIdentifier.SourceMarket, trace, service);
             trace.Trace("Account populate fields - end");
             return account;
         }
