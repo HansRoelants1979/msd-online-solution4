@@ -37,30 +37,49 @@ namespace Tc.Crm.Service.Client.Console
                 var Records_to_Create = Int32.Parse(ConfigurationManager.AppSettings["Records_to_Create"]);
                 var Records_to_Update = Int32.Parse(ConfigurationManager.AppSettings["Records_to_Update"]);
                 //calculate threads for create and update
-                var totalThreadsForCreate = (((Totalrecords * Records_to_Create)/100) / Batch);
-                var totalThreadsForUpdate = (((Totalrecords * Records_to_Update)/100)  / Batch);
+                int totalThreadsForCreate = 0;
+                int totalThreadsForUpdate = 0;
+                var totalRecordsToCreate = (Totalrecords * Records_to_Create) / 100;
+                var totalRecordsToUpdate = Totalrecords - totalRecordsToCreate;
 
-                var json = File.ReadAllText("bookingper.json");
+                if (totalRecordsToCreate % Batch > 0)
+                    totalThreadsForCreate = (totalRecordsToCreate / Batch) + 1;
+                else
+                    totalThreadsForCreate = (totalRecordsToCreate / Batch);
+                if (totalRecordsToUpdate % Batch > 0)
+                    totalThreadsForUpdate = (totalRecordsToUpdate / Batch) + 1;
+                else
+                    totalThreadsForCreate = (totalRecordsToUpdate / Batch);
+
+                var json = File.ReadAllText("booking.json");
                 var booking = JsonConvert.DeserializeObject<BookingInformation>(json);
                 List<Thread> createThreads = new List<Thread>();
                 List<Thread> updateThreads = new List<Thread>();
                 ////create
+                var recordsProcessed = 0;
                 System.Console.WriteLine("Start:{0}", DateTime.Now.ToString());
                 for (int i = 0; i < totalThreadsForCreate; i++)
                 {
-                    createThreads.Add(StartThread(json, Batch));
-
+                    if (totalRecordsToCreate - recordsProcessed >= Batch)
+                        createThreads.Add(StartThread(json, Batch));
+                    else
+                        createThreads.Add(StartThread(json, totalRecordsToCreate - recordsProcessed));
+                    recordsProcessed += Batch;
                 }
 
                 foreach (var item in createThreads)
                 {
                     item.Join();
                 }
-
+                ///update
+                recordsProcessed = 0;
                 for (int i = 0; i < totalThreadsForUpdate; i++)
                 {
-                    updateThreads.Add(StartThreadForUpdate(json, Batch));
-
+                    if (totalRecordsToUpdate - recordsProcessed >= Batch)
+                        updateThreads.Add(StartThreadForUpdate(json, Batch));
+                    else
+                        updateThreads.Add(StartThreadForUpdate(json, totalRecordsToUpdate - recordsProcessed));
+                    recordsProcessed += Batch;
                 }
 
                 foreach (var item in updateThreads)
@@ -68,7 +87,7 @@ namespace Tc.Crm.Service.Client.Console
                     item.Join();
                 }
 
-                System.Console.WriteLine("End:{0}",DateTime.Now.ToString());
+                System.Console.WriteLine("End:{0}", DateTime.Now.ToString());
             }
             catch (Exception ex)
             {
@@ -82,7 +101,7 @@ namespace Tc.Crm.Service.Client.Console
 
         {
 
-           
+
             Thread thread = new Thread(() =>
             {
 
@@ -101,7 +120,7 @@ namespace Tc.Crm.Service.Client.Console
                     booking.Booking.Customer.CustomerIdentifier.CustomerId = customerid;
                     //modify booking
                     var data = JsonConvert.SerializeObject(booking);
-                    CreateOrUpdate(data);
+                    //CreateOrUpdate(data);
                 }
             });
 
@@ -121,14 +140,14 @@ namespace Tc.Crm.Service.Client.Console
                 for (int i = 0; i < batch; i++)
                 {
                     var booking = JsonConvert.DeserializeObject<BookingInformation>(json);
-                     
-                    
+
+
 
                     booking.Booking.BookingIdentifier.BookingNumber = bookingidtoUpdate;
                     booking.Booking.Customer.CustomerIdentifier.CustomerId = CustomeridtoUpdate;
                     //modify booking
                     var data = JsonConvert.SerializeObject(booking);
-                    CreateOrUpdate(data);
+                    //CreateOrUpdate(data);
                 }
             });
 

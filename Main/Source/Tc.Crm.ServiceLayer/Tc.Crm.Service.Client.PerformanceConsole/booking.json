@@ -1,239 +1,304 @@
-{ "booking": {
-      "bookingIdentifier": {
-        "sourceMarket": "LK",
-        "bookingNumber": "TEST_SCHCH_8213308812",
-        "bookingVersionOnTour": "2",
-        "bookingVersionTourOperator": "2",
-        "bookingUpdateDateOnTour": "2016-11-30",
-        "bookingUpdateDateTourOperator": "2016-07-27"
-      },
-      "bookingGeneral": {
-        "bookingStatus": "Booked",
-        "bookingDate": "2016-04-04",
-        "departureDate": "2016-12-18",
-        "returnDate": "2017-01-02",
-        "destination": "ASW",
-        "toCode": "01",
-        "brand": "BUC",
-        "brochureCode": "BUC",
-        "isLateBooking": false,
-        "hasComplaint": false,
-        "travelAmount": 1,
-        "numberOfParticipants": 2,
-        "numberOfAdults": 2,
-        "numberOfChildren": 0,
-        "numberOfInfants": 0,
-        "currency": "EUR",
-        "duration": 14
-      },
-      "travelParticipant": [
-        {
-          "firstName": "MARCEL",
-          "lastName": "HIOB",
-          "age": "28",
-          "gender": "Male",
-          "relation": "Participant",
-          "travelParticipantIdOnTour": 4461293,
-          "language": "DE",
-          "birthDate": "2017-01-02",
-          "remark": [
-            {
-              "type": "",
-              "text": null
-            }
-          ]
-        },
-        {
-          "firstName": "SABRINA",
-          "lastName": "SCHAPPEL",
-          "age": "24",
-          "gender": "Female",
-          "relation": "Participant",
-          "travelParticipantIdOnTour": 4461294,
-          "language": "DE",
-          "birthDate": "",
-          "remark": [
-            {
-              "type": "",
-              "text": null
-            }
-          ]
-        }
-      ],
-      "services": {
-        "accommodation": [
+{
+  "booking": {
+    "bookingIdentifier": {
+      "integrationProcessingInitiated": "2017-03-20T07:40:30.026",
+      "sourceMarket": "DE",
+      "bookingNumber": "1",
+      "bookingVersionOnTour": "2",
+      "bookingVersionTourOperator": "2",
+      "bookingUpdateDateOnTour": "2016-11-30",
+      "bookingUpdateDateTourOperator": "2016-07-27"
+    },
+    "bookingGeneral": {
+      "bookingStatus": "Booked",
+      "bookingDate": "2016-04-04",
+      "departureDate": "2016-12-18",
+      "returnDate": "2017-01-02",
+      "destination": "PKG",
+      "toCode": "01",
+      "brand": "BUC",
+      "brochureCode": "BUC",
+      "isLateBooking": false,
+      "hasComplaint": false,
+      "travelAmount": 1,
+      "numberOfParticipants": 2,
+      "numberOfAdults": 2,
+      "numberOfChildren": 0,
+      "numberOfInfants": 0,
+      "currency": "EUR",
+      "duration": 14
+    },
+    "travelParticipant": [
+      {
+        "firstName": "MARCEL",
+        "lastName": "HIOB",
+        "age": "28",
+        "gender": "Male",
+        "relation": "Infant",
+        "travelParticipantIdOnTour": 4461293,
+        "language": "DE",
+        "birthDate": "2017-01-02",
+        "remark": [
           {
-            "accommodationCode": "nxhukyg",
-            "accommodationDescription": "TRENDY VERBENA BEACH",
-            "order": 489933,
-            "startDate": "2016-12-18T12:34:00",
-            "endDate": "2017-01-02T22:22:00",
-            "roomType": "A2D",
-            "boardType": "All Inclusive +",
-            "status": "Partial Request",
-            "hasSharedRoom": false,
-            "numberOfParticipants": 0,
-            "numberOfRooms": 1,
-            "withTransfer": false,
-            "isExternalService": false,
-            "externalServiceCode": "Iberostar BedBank",
-            "notificationRequired": false,
-            "needsTourGuideAssignment": false,
-            "isExternalTransfer": false,
-            "travelParticipantAssignment": [
-              {
-                "travelParticipantId": 4461293
-              },
-              {
-                "travelParticipantId": 4461294
-              },
-              {
-                "travelParticipantId": 4461295
-              },
-              {
-                "travelParticipantId": 4461296
-              }
-            ],
-            "remark": [
-              {
-                "type": "",
-                "text": "EKMS Hotel Code: 40165"
-              },
-              {
-                "type": "",
-                "text": "EKMS Room Code: A2B"
-              },
-              {
-                "type": "",
-                "text": "GIATA Code: 135744"
-              }
-            ]
-          }
-        ],
-        "transport": [
-          {
-            "transportCode": "XQ0141",
-            "transportDescription": "XQ0141",
-            "order": 1,
-            "startDate": "2016-12-18T18:40:00",
-            "endDate": "2016-12-18T23:05:00",
-            "transferType": "Transfer Between Hotels",
-            "departureAirport": "FRA",
-            "arrivalAirport": "AYT",
-            "carrierCode": "XQ",
-            "flightNumber": "0141",
-            "flightIdentifier": "XQ0141FRAAYT",
-            "numberOfParticipants": 4,
-            "travelParticipantAssignment": [
-              {
-                "travelParticipantId": 4461293
-              },
-              {
-                "travelParticipantId": 4461294
-              },
-              {
-                "travelParticipantId": 4461295
-              },
-              {
-                "travelParticipantId": 4461296
-              }
-            ],
-            "remark": [
-              {
-                "type": "TourOperator",
-                "text": "EKMS Hotel Code: 40165"
-              },
-              {
-                "type": "Agency",
-                "text": "EKMS Room Code: A2B"
-              }
-            ]
-          }
-        ],
-        "extraService": [
-          {
-            "extraServiceCode": "XQ0140",
-            "extraServiceDescription": "XQ0140",
-            "order": 2,
-            "startDate": "2017-01-02T15:55:00",
-            "endDate": "2017-01-02T17:45:00",
-            "travelParticipantAssignment": [
-              {
-                "travelParticipantId": 4461293
-              },
-              {
-                "travelParticipantId": 4461294
-              },
-              {
-                "travelParticipantId": 4461295
-              },
-              {
-                "travelParticipantId": 4461296
-              }
-            ],
-            "remark": [
-              {
-                "type": "TO",
-                "text": "EKMS Hotel Code: 40165"
-              },
-              {
-                "type": "A",
-                "text": "EKMS Room Code: A2B"
-              }
-            ]
+            "type": "TourOperator",
+            "text": null
           }
         ]
       },
-      "remark": [
-        {
-          "type": "",
-          "text": "TO Booking version:2"
-        },
-        {
-          "type": "A",
-          "text": "TO Booking version:2"
-        }
-      ],
-      "bookingIdentity": {
-        "booker": {
-          "mobile": "0931111111",
-          "bookerEmail": "esd@mail.us",
-          "phone": "02151/315696",
-          "emergencyNumber": "213"
-        }
-      },
-      "customer": {
-        "customerIdentifier": {
-          "customerId": "TEST_SCHCH_11610429912",
-          "businessArea": "sf"
-        },
-        "customerGeneral": {
-          "customerType": "Person",
-          "customerStatus": "Active"
-        },
-        "customerIdentity": {
-          "salutation": "Mr",
-          "language": "TE",
-          "academicTitle": "sdfg",
-          "firstName": "Tedd",
-          "lastName": "Lawson",
-          "middleName": "dxfv",
-          "gender": "Male"
-        },
-        "company": {},
-        "address": [
+      {
+        "firstName": "SABRINA",
+        "lastName": "SCHAPPEL",
+        "age": "24",
+        "gender": "Male",
+        "relation": "Participant",
+        "travelParticipantIdOnTour": 4461294,
+        "language": "DE",
+        "birthDate": "",
+        "remark": [
           {
-            "type": "Main",
-            "additionalAddressInfo": "sdfv",
-            "flatNumberUnit": "safd",
-            "houseNumberBuilding": "dxzf",
-            "street": "Rotdornweg",
-            "postalCode": "47804",
-            "town": "Krefeld",
-            "county": "dxv",
-            "country": ""
+            "type": "Agency",
+            "text": null
           }
         ]
+      },
+      {
+        "firstName": "DARIO",
+        "lastName": "SCHAPPEL",
+        "age": "3",
+        "gender": "Male",
+        "relation": "Child",
+        "travelParticipantIdOnTour": 4461295,
+        "language": "DE",
+        "birthDate": ""
+      },
+      {
+        "firstName": "MADLIN",
+        "lastName": "SCHAPPEL",
+        "age": "5",
+        "gender": "Male",
+        "relation": "Infant",
+        "travelParticipantIdOnTour": 4461296,
+        "language": "DE",
+        "birthDate": ""
       }
+    ],
+    "services": {
+      "accommodation": [
+        {
+          "accommodationCode": "21274A",
+          "accommodationDescription": "TRENDY VERBENA BEACH",
+          "order": 489933,
+          "startDate": "2016-12-18T12:34:00",
+          "endDate": "2017-01-02T22:22:00",
+          "roomType": "A2D",
+          "boardType": "FlyDrive",
+          "status": "Request",
+          "hasSharedRoom": false,
+          "numberOfParticipants": 0,
+          "numberOfRooms": 1,
+          "withTransfer": false,
+          "isExternalService": false,
+          "externalServiceCode": "Unknown",
+          "notificationRequired": false,
+          "needsTourGuideAssignment": false,
+          "isExternalTransfer": false,
+          "transferServiceLevel": "Differentiated",
+          "travelParticipantAssignment": [
+            {
+              "travelParticipantId": 4461293
+            },
+            {
+              "travelParticipantId": 4461294
+            },
+            {
+              "travelParticipantId": 4461295
+            },
+            {
+              "travelParticipantId": 4461296
+            }
+          ],
+          "remark": [
+            {
+              "type": "TourOperator",
+              "text": "EKMS Hotel Code: 40165"
+            },
+            {
+              "type": "TourOperator",
+              "text": "EKMS Room Code: A2B"
+            },
+            {
+              "type": "TourOperator",
+              "text": "GIATA Code: 135744"
+            }
+          ]
+        }
+      ],
+      "transport": [
+        {
+          "transportCode": "XQ0141",
+          "transportDescription": "XQ0141",
+          "order": 1,
+          "startDate": "2016-12-18T18:40:00",
+          "endDate": "2016-12-18T23:05:00",
+          "transferType": "TransferBetweenHotels",
+          "departureAirport": "FRA",
+          "arrivalAirport": "AYT",
+          "carrierCode": "XQ",
+          "flightNumber": "0141",
+          "flightIdentifier": "XQ0141FRAAYT",
+          "numberOfParticipants": 4,
+          "travelParticipantAssignment": [
+            {
+              "travelParticipantId": 4461293
+            },
+            {
+              "travelParticipantId": 4461294
+            },
+            {
+              "travelParticipantId": 4461295
+            },
+            {
+              "travelParticipantId": 4461296
+            }
+          ],
+          "remark": [
+            {
+              "type": "TourOperator",
+              "text": "EKMS Hotel Code: 40165"
+            },
+            {
+              "type": "Agency",
+              "text": "EKMS Room Code: A2B"
+            }
+          ]
+        }
+      ],
+      "transfer": [
+        {
+          "transferCode": "21274A",
+          "transferDescription": "TRENDY VERBENA BEACH",
+          "order": 489933,
+          "startDate": "2016-12-18T12:34:00",
+          "endDate": "2017-01-02T22:22:00",
+          "category": "A2D",
+          "transferType": "Inbound",
+          "departureAirport": "",
+          "arrivalAirport": "",
+          "travelParticipantAssignment": [
+            {
+              "travelParticipantId": 4461293
+            },
+            {
+              "travelParticipantId": 4461294
+            },
+            {
+              "travelParticipantId": 4461295
+            },
+            {
+              "travelParticipantId": 4461296
+            }
+          ],
+          "remark": [
+            {
+              "type": "TourOperator",
+              "text": "EKMS Hotel Code: 40165"
+            },
+            {
+              "type": "TourOperator",
+              "text": "EKMS Room Code: A2B"
+            },
+            {
+              "type": "TourOperator",
+              "text": "GIATA Code: 135744"
+            }
+          ]
+        }
+      ],
+      "extraService": [
+        {
+          "extraServiceCode": "XQ0140",
+          "extraServiceDescription": "XQ0140",
+          "order": 2,
+          "startDate": "2017-01-02T15:55:00",
+          "endDate": "2017-01-02T17:45:00",
+          "travelParticipantAssignment": [
+            {
+              "travelParticipantId": 4461293
+            },
+            {
+              "travelParticipantId": 4461294
+            },
+            {
+              "travelParticipantId": 4461295
+            },
+            {
+              "travelParticipantId": 4461296
+            }
+          ],
+          "remark": [
+            {
+              "type": "TourOperator",
+              "text": "EKMS Hotel Code: 40165"
+            },
+            {
+              "type": "Agency",
+              "text": "EKMS Room Code: A2B"
+            }
+          ]
+        }
+      ]
+    },
+    "remark": [
+      {
+        "type": "TourOperator",
+        "text": "TO Booking version:2"
+      },
+      {
+        "type": "Agency",
+        "text": "TO Booking version:2"
+      }
+    ],
+    "bookingIdentity": {
+      "booker": {
+        "mobile": "",
+        "email": "email",
+        "phone": "02151/315696",
+        "emergencyNumber": ""
+      }
+    },
+    "customer": {
+      "customerIdentifier": {
+        "integrationProcessingInitiated": "2017-03-20T07:40:30.026",
+        "customerID": "116104299",
+        "businessArea": "Thomas Cook Austria"
+      },
+      "customerGeneral": {
+        "customerType": "Person",
+        "customerStatus": "Deceased"
+      },
+      "customerIdentity": {
+        "salutation": "",
+        "language": "",
+        "academicTitle": "",
+        "firstName": "Horst",
+        "lastName": "Heilmann",
+        "middleName": "",
+        "gender": "Male"
+      },
+      "company": {},
+      "address": [
+        {
+          "type": "Main",
+          "additionalAddressInfo": "addresssup",
+          "street": "Rotdornweg",
+          "houseNumberBuilding": "17",
+          "flatNumberUnit": "nosuppl",
+          "postalCode": "47804",
+          "town": "Krefeld",
+          "county": "region",
+          "country": "DE"
+        }
+      ]
     }
-	}
+  }
+}
