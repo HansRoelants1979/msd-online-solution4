@@ -24,8 +24,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey
                 var surveyJson = SurveyResponseInfo.Get<string>(executionContext);
                 PayloadSurvey payloadSurvey = new PayloadSurvey(tracingService, service);
                 payloadSurvey.SurveyResponse = JsonHelper.DeSerializeSurveyJson(surveyJson, tracingService);
-                ProcessSurveyService process = new ProcessSurveyService(payloadSurvey);
-                Response.Set(executionContext, process.ProcessSurveyResponse());
+                ProcessSurveyService processSurveyService = new ProcessSurveyService(payloadSurvey);
+                Response.Set(executionContext, processSurveyService.ProcessSurveyResponse());
 
             }
             catch (FaultException<OrganizationServiceFault> ex)

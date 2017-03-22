@@ -37,18 +37,156 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         private void ProcessResponses()
         {
             trace.Trace("Processing ProcessResponses - start");
-            if (payloadSurvey.SurveyResponse.Responses == null) throw new InvalidPluginExecutionException("Response object created from payload json is null;");
+            if (payloadSurvey.SurveyResponse == null) throw new InvalidPluginExecutionException("SurveyResponse is null in json payload");
+            if (payloadSurvey.SurveyResponse.Responses == null) throw new InvalidPluginExecutionException("Response object in payload json is null");
             List<Response> responses = payloadSurvey.SurveyResponse.Responses;
+            var surveyResponseCollection = new EntityCollection();
             for (int i = 0; i < responses.Count; i++)
             {
-                var surveyResponse = SurveyResponseHelper.GetResponseEntityFromPayLoad(responses[i]);
-                MapBookingContact(surveyResponse, responses[i].Answers);
-                ProcessFeedback(surveyResponse, responses[i].Answers);
-                var surveyResponseCollection = new EntityCollection();
+                var surveyResponse = SurveyResponseHelper.GetResponseEntityFromPayLoad(responses[i], trace);
+                if (responses[i].Answers != null && responses[i].Answers.Count > 0)
+                {
+                    MapBookingContact(surveyResponse, responses[i].Answers);
+                    ProcessFeedback(surveyResponse, responses[i].Answers);
+                }
                 surveyResponseCollection.Entities.Add(surveyResponse);
-                CommonXrm.BulkCreate(surveyResponseCollection, payloadSurvey.CrmService);
             }
+            if (surveyResponseCollection.Entities.Count > 0)
+                CommonXrm.BulkCreate(surveyResponseCollection, payloadSurvey.CrmService);
             trace.Trace("Processing ProcessResponses - end");
+        }
+
+
+
+        /// <summary>
+        /// To map booking and contact records
+        /// </summary>
+        /// <param name="surveyResponse"></param>
+        /// <param name="answers"></param>
+        private void MapBookingContact(Entity surveyResponse, List<Answer> answers)
+        {
+            trace.Trace("Processing MapBookingContact - start");
+            var bookingNumber = AnswerHelper.FindBooking(answers,trace);
+            var contactName = AnswerHelper.FindCustomer(answers,trace);
+            if (!string.IsNullOrWhiteSpace(bookingNumber))
+            {
+                FetchBookingContact(bookingNumber, contactName, surveyResponse);
+            }
+            trace.Trace("Processing MapBookingContact - end");
+        }
+
+
+        /// <summary>
+        /// To fetch booking, contact
+        /// </summary>
+        /// <param name="bookingNumber"></param>
+        /// <param name="contactName"></param>
+        /// <param name="surveyResponse"></param>
+        private void FetchBookingContact(string bookingNumber, string contactName, Entity surveyResponse)
+        {
+            trace.Trace("Processing FetchBookingContact - start");
+            var contactCondition = PrepareContactCondition(contactName);
+            var query = string.Format(@"<fetch output-format='xml-platform' distinct='false' version='1.0' mapping='logical'>
+                                        <entity name='tc_customerbookingrole'>
+                                          <link-entity name='tc_booking' alias='booking' from='tc_bookingid' to='tc_bookingid'>
+                                            <attribute name='tc_bookingid' />                                               
+                                              <filter type = 'and'>
+                                                <condition attribute='tc_name' operator='eq' value='{0}' />
+                                              </filter>
+                                          </link-entity>
+                                        {1}
+                                        </entity>
+                                        </fetch>", bookingNumber, contactCondition);
+
+            var entColBookingContact = CommonXrm.RetrieveMultipleRecordsFetchXml(query, payloadSurvey.CrmService);
+            MapBooking(surveyResponse, entColBookingContact);
+            MapContact(surveyResponse, entColBookingContact);
+            trace.Trace("Processing FetchBookingContact - end");
+        }
+
+        /// <summary>
+        /// To prepare link entity for contact when contact name is not empty
+        /// </summary>
+        /// <param name="contactName"></param>
+        /// <returns></returns>
+        private string PrepareContactCondition(string contactName)
+        {
+            var contactCondition = string.Empty;
+            if (!string.IsNullOrWhiteSpace(contactName))
+            {
+                contactCondition = string.Format(@"<link-entity name='contact' alias='contact' from='contactid' to='tc_customer' link-type='outer'>
+                                                    <attribute name='contactid' />
+                                                        <filter type='and' >
+                                                            <condition attribute='fullname' operator='eq' value='{0}' />
+                                                        </filter>
+                                                   </link-entity>", contactName);
+            }
+            return contactCondition;
+        } 
+
+
+        /// <summary>
+        /// To map booking to survey response
+        /// </summary>
+        /// <param name="surveyResponse"></param>
+        /// <param name="entColBookingContact"></param>
+        private void MapBooking(Entity surveyResponse, EntityCollection entColBookingContact)
+        {
+            trace.Trace("Processing MapBooking - start");
+            if (entColBookingContact != null && entColBookingContact.Entities.Count > 0)
+            {
+                var fieldBooking = AliasName.Booking + Attributes.Booking.BookingId;
+                var entity = entColBookingContact.Entities[0];
+                if (entity != null && entity.Attributes.Contains(fieldBooking) && entity.Attributes[fieldBooking] != null)
+                {
+                    var booking = (AliasedValue)entity.Attributes[fieldBooking];
+                    surveyResponse[Attributes.SurveyResponse.Regarding] = new EntityReference(booking.EntityLogicalName, Guid.Parse(booking.Value.ToString()));
+                }
+            }
+            trace.Trace("Processing MapBooking - end");
+        }
+
+        /// <summary>
+        /// To map contact to survey response (when only one contact found)
+        /// </summary>
+        /// <param name="surveyResponse"></param>
+        /// <param name="entColBookingContact"></param>
+        private void MapContact(Entity surveyResponse, EntityCollection entColBookingContact)
+        {
+            trace.Trace("Processing MapContact - start");
+            if (entColBookingContact != null && entColBookingContact.Entities.Count == 1)
+            {
+                var fieldContact = AliasName.Contact + Attributes.Contact.ContactId;
+                var entity = entColBookingContact.Entities[0];
+                if (entity != null && entity.Attributes.Contains(fieldContact) && entity.Attributes[fieldContact] != null)
+                {
+                    var contact = (AliasedValue)entity.Attributes[fieldContact];
+                    var customer = GetPartyList(contact);
+                    if (customer != null && customer.Entities.Count > 0)
+                        surveyResponse[Attributes.SurveyResponse.CustomerId] = customer;
+                }
+            }
+            trace.Trace("Processing MapContact - end");
+        }
+
+
+        /// <summary>
+        /// To prepare partylist for contact
+        /// </summary>
+        /// <param name="aliasValue"></param>
+        /// <returns></returns>
+        private EntityCollection GetPartyList(AliasedValue aliasValue)
+        {
+            trace.Trace("Processing GetPartyList - start");
+            var customers = new EntityCollection();
+            if (aliasValue != null)
+            {   
+                var party = new Entity(EntityName.ActivityParty);
+                party[Attributes.ActivityParty.PartyId] = new EntityReference() { LogicalName = aliasValue.EntityLogicalName, Id = Guid.Parse(aliasValue.Value.ToString()) };
+                customers.Entities.Add(party);
+            }
+            trace.Trace("Processing GetPartyList - end");
+            return customers;
         }
 
         /// <summary>
@@ -61,140 +199,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
             trace.Trace("Processing ProcessFeedback - start");
             var feedbackCollection = ProcessAnswers(answers);
             if (feedbackCollection != null && feedbackCollection.Entities.Count > 0)
-                surveyResponse.RelatedEntities.Add(new Relationship(RelationShips.SurveyResponseFeedback), feedbackCollection);
+                surveyResponse.RelatedEntities.Add(new Relationship(Relationships.SurveyResponseFeedback), feedbackCollection);
             trace.Trace("Processing ProcessFeedback - end");
-        }
-
-        /// <summary>
-        /// To map booking and contact records to survey response
-        /// </summary>
-        /// <param name="surveyResponse"></param>
-        /// <param name="answers"></param>
-        private void MapBookingContact(Entity surveyResponse, List<Answer> answers)
-        {
-            trace.Trace("Processing MapBookingContact - start");
-            var bookingId = MapBooking(surveyResponse, answers);
-            if (bookingId != Guid.Empty)
-                MapContact(surveyResponse, answers, bookingId);
-            trace.Trace("Processing MapBookingContact - end");
-        }
-
-
-        /// <summary>
-        /// To map booking to survey response
-        /// </summary>
-        /// <param name="surveyResponse"></param>
-        /// <param name="answers"></param>
-        /// <returns></returns>
-        private Guid MapBooking(Entity surveyResponse, List<Answer> answers)
-        {
-            trace.Trace("Processing MapBooking - start");
-            var bookingId = Guid.Empty;
-            var bookingNumber = AnswerHelper.FindBooking(answers);
-            if (!string.IsNullOrWhiteSpace(bookingNumber))
-            {
-                var booking = FetchBooking(bookingNumber);
-                if (booking != null)
-                {
-                    surveyResponse[Attributes.SurveyResponse.BookingId] = booking;
-                    bookingId = booking.Id;
-                }
-            }
-            trace.Trace("Processing MapBooking - end");
-            return bookingId;
-        }
-
-
-        /// <summary>
-        /// To map contact to survey response
-        /// </summary>
-        /// <param name="surveyResponse"></param>
-        /// <param name="answers"></param>
-        /// <param name="bookingId"></param>
-        private void MapContact(Entity surveyResponse, List<Answer> answers, Guid bookingId)
-        {
-            trace.Trace("Processing MapContact - start");
-            var customerName = AnswerHelper.FindCustomer(answers);
-            if (!string.IsNullOrWhiteSpace(customerName))
-            {
-                var contact = FetchContact(bookingId, customerName);
-                if (contact != null)
-                    surveyResponse[Attributes.SurveyResponse.CustomerId] = contact;
-            }
-            trace.Trace("Processing MapContact - end");
-        }
-
-        /// <summary>
-        /// To fetch booking based on booking number
-        /// </summary>
-        /// <param name="bookingNumber"></param>
-        /// <returns></returns>
-        private EntityReference FetchBooking(string bookingNumber)
-        {
-            trace.Trace("Processing FetchBooking Booking Number: '"+ bookingNumber +"' - start");
-            var booking = CommonXrm.RetrieveMultipleRecords(EntityName.Booking,
-                                                                    new string[] { Attributes.Booking.BookingId },
-                                                                    new string[] { Attributes.Booking.Name },
-                                                                    new string[] { bookingNumber },
-                                                                    payloadSurvey.CrmService);
-            if (booking != null && booking.Entities.Count == 1)
-            {
-                trace.Trace("Processing FetchBooking (1 booking found) - end");
-                return new EntityReference(EntityName.Booking, booking.Entities[0].Id);
-            }
-            trace.Trace("Processing FetchBooking (No booking found) - end");
-            return null;
-        }
-
-        /// <summary>
-        /// To fetch contact based on bookingid and contact name
-        /// </summary>
-        /// <param name="bookingId"></param>
-        /// <param name="contactName"></param>
-        /// <returns></returns>
-        private EntityCollection FetchContact(Guid bookingId, string contactName)
-        {
-            trace.Trace("Processing FetchContact - start");
-            var customers = CommonXrm.RetrieveMultipleRecords(EntityName.CustomerBookingRole,
-                                                                               new string[] { Attributes.CustomerBookingRole.Customer },
-                                                                               new string[] { Attributes.CustomerBookingRole.BookingId },
-                                                                               new string[] { bookingId.ToString() },
-                                                                               payloadSurvey.CrmService);
-            if (customers != null && customers.Entities.Count == 1)
-            {
-                if (customers.Entities[0].Attributes.Contains(Attributes.CustomerBookingRole.Customer)
-                   &&
-                   customers.Entities[0].Attributes[Attributes.CustomerBookingRole.Customer] != null)
-                {
-                    var customer = (EntityReference)customers.Entities[0].Attributes[Attributes.CustomerBookingRole.Customer];
-                    if (customer.LogicalName == EntityName.Contact && customer.Name == contactName)
-                    {
-                        trace.Trace("Processing FetchContact (1 contact found) - end");
-                        return GetPartyList(new EntityReferenceCollection() { customer });
-                    }
-                }
-            }
-            trace.Trace("Processing FetchContact (No contact found) - end");
-            return null;
-        }
-
-        /// <summary>
-        /// To prepare partylist
-        /// </summary>
-        /// <param name="entityReferenceCollection"></param>
-        /// <returns></returns>
-        private EntityCollection GetPartyList(EntityReferenceCollection entityReferenceCollection)
-        {
-            trace.Trace("Processing GetPartyList - start");
-            var entityCollection = new EntityCollection();
-            for (int i = 0; i < entityReferenceCollection.Count; i++)
-            {
-                var party = new Entity(EntityName.ActivityParty);
-                party[Attributes.ActivityParty.PartyId] = entityReferenceCollection[i];
-                entityCollection.Entities.Add(party);
-            }
-            trace.Trace("Processing GetPartyList - end");
-            return entityCollection;
         }
 
         /// <summary>
@@ -205,16 +211,19 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         private EntityCollection ProcessAnswers(List<Answer> answers)
         {
             trace.Trace("Processing ProcessAnswers - start");
-            if (answers == null) throw new InvalidPluginExecutionException("Answers in Survey reponse is null");
             var feedbackCollection = new EntityCollection();
-            for (int i = 0; i < answers.Count; i++)
+            if (answers != null)
             {
-                var feedback = AnswerHelper.GetFeedbackEntityFromPayLoad(answers[i]);
-                feedback.Id = Guid.NewGuid();
-                feedbackCollection.Entities.Add(feedback);
+                for (int i = 0; i < answers.Count; i++)
+                {
+                    var feedback = AnswerHelper.GetFeedbackEntityFromPayLoad(answers[i],trace);
+                    feedback.Id = Guid.NewGuid();
+                    feedbackCollection.Entities.Add(feedback);
+                }                
             }
             trace.Trace("Processing ProcessAnswers - end");
             return feedbackCollection;
         }
+
     }
 }

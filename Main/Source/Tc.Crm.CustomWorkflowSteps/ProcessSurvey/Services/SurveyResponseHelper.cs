@@ -12,8 +12,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// </summary>
         /// <param name="response"></param>
         /// <returns></returns>
-        public static Entity GetResponseEntityFromPayLoad(Response response)
+        public static Entity GetResponseEntityFromPayLoad(Response response, ITracingService trace)
         {
+            trace.Trace("Processing GetResponseEntityFromPayLoad - start");
             if (response == null) throw new InvalidPluginExecutionException("Response in Json is null");
             var surveyResponse = new Entity(EntityName.SurveyResponse);
             surveyResponse[Attributes.SurveyResponse.ResponseId] = Convert.ToInt32(response.Id);
@@ -33,8 +34,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
             if (!string.IsNullOrWhiteSpace(response.BeginTime))
                 surveyResponse[Attributes.SurveyResponse.BeginTime] = DateTime.Parse(response.BeginTime);
 
-            surveyResponse[Attributes.SurveyResponse.ActivityAdditionalParams] = PrepareAdditionalParameters(response);
-
+            surveyResponse[Attributes.SurveyResponse.ActivityAdditionalParams] = PrepareAdditionalParameters(response, trace);
+            trace.Trace("Processing GetResponseEntityFromPayLoad - end");
             return surveyResponse;
         }
 
@@ -43,8 +44,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// </summary>
         /// <param name="response"></param>
         /// <returns></returns>
-        private static string PrepareAdditionalParameters(Response response)
+        private static string PrepareAdditionalParameters(Response response, ITracingService trace)
         {
+            trace.Trace("Processing PrepareAdditionalParameters - start");
             var additionalParameters = new StringBuilder();
             additionalParameters.Append("Id: " + response.Id);
             if (response.SurveyGatewayId != null)
@@ -92,7 +94,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
                 additionalParameters.AppendLine("Mode: " + response.Mode);
             if (!string.IsNullOrWhiteSpace(response.SurveyDescription))
                 additionalParameters.AppendLine("SurveyDescription: " + response.SurveyDescription);
-
+            trace.Trace("Processing PrepareAdditionalParameters - end");
             return additionalParameters.ToString();
         }
 

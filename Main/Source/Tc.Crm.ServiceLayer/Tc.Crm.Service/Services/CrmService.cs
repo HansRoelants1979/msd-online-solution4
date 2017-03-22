@@ -54,7 +54,7 @@ namespace Tc.Crm.Service.Services
 
             var responseObject = JsonConvert.DeserializeObject<tcm.SurveyReturnResponse>(actionResponse);
 
-            return new tcm.SurveyReturnResponse { Created= responseObject.Created };
+            return responseObject;
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]

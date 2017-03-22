@@ -410,6 +410,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string ActivityAdditionalParams = "activityadditionalparams";
             public const string BookingId = "tc_bookingid";
             public const string CustomerId = "customers";
+            public const string Regarding = "regardingobjectid";
         }
 
         public class SurveyResponseFeedback
@@ -433,9 +434,23 @@ namespace Tc.Crm.CustomWorkflowSteps
 
     }
 
-    public class RelationShips
+    public class Relationships
     {
         public const string SurveyResponseFeedback = "tc_surveyresponse_tc_surveyresponsefeedback";
+    }
+
+    public class AliasName
+    {
+        public const string Booking = "booking.";
+        public const string Contact = "contact.";
+    }
+
+    public class PayloadSurveyFieldMapping
+    {
+        public const int BookingNumber = 251884;
+        public const int SourceMarket = 251727;        
+        public const int ForeName = 251886;
+        public const int SurName = 251887;
     }
 
 }

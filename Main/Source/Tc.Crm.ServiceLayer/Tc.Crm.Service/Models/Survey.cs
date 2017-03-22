@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using InMoment.WebService.Rest.Data;
-
 
 namespace Tc.Crm.Service.Models
 {
@@ -14,8 +12,7 @@ namespace Tc.Crm.Service.Models
 
     [DataContract(Name ="response")]
     public class SurveyResponse
-    {
-       
+    {       
 
         [DataMember(Name = "id")]
         public long Id { get; set; }

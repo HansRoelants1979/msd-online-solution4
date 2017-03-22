@@ -13,8 +13,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// </summary>
         /// <param name="answer"></param>
         /// <returns></returns>
-        public static Entity GetFeedbackEntityFromPayLoad(Answer answer)
+        public static Entity GetFeedbackEntityFromPayLoad(Answer answer, ITracingService trace)
         {
+            trace.Trace("Processing GetFeedbackEntityFromPayLoad - start");
             if (answer == null) throw new InvalidPluginExecutionException("Answer class in json payload is null");
             var feedback = new Entity(EntityName.SurveyResponseFeedback);
             if (!string.IsNullOrWhiteSpace(answer.FieldText))
@@ -29,8 +30,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
             if (!string.IsNullOrWhiteSpace(answer.FieldType.ToString()))
             {
                 feedback[Attributes.SurveyResponseFeedback.QuestionFieldType] = answer.FieldType.ToString();
-                feedback[Attributes.SurveyResponseFeedback.QuestionResponse] = GetValueByFieldType(answer);
+                feedback[Attributes.SurveyResponseFeedback.QuestionResponse] = GetValueByFieldType(answer,trace);
             }
+            trace.Trace("Processing GetFeedbackEntityFromPayLoad - end");
             return feedback;
         }
 
@@ -39,8 +41,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// </summary>
         /// <param name="answer"></param>
         /// <returns></returns>
-        private static string GetValueByFieldType(Answer answer)
+        private static string GetValueByFieldType(Answer answer, ITracingService trace)
         {
+            trace.Trace("Processing GetValueByFieldType - start");
             string value = string.Empty;
             switch (answer.FieldType)
             {
@@ -56,12 +59,13 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
                     break;
                 case FieldType.RATING:
                 case FieldType.MULTIPLE_CHOICE:
-                    value = GetOptionValue(answer.Option);
+                    value = GetOptionValue(answer.Option,trace);
                     break;
                 case FieldType.COMMENT:
-                    value = GetCommentValue(answer);
+                    value = GetCommentValue(answer,trace);
                     break;
             }
+            trace.Trace("Processing GetValueByFieldType - end");
             return value;
         }
 
@@ -70,8 +74,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// </summary>
         /// <param name="option"></param>
         /// <returns></returns>
-        private static string GetOptionValue(Option option)
+        private static string GetOptionValue(Option option, ITracingService trace)
         {
+            trace.Trace("Processing GetOptionValue - start");
             var value = new StringBuilder();
             value.Append("Id: " + option.Id);
             if (!string.IsNullOrWhiteSpace(option.Name))
@@ -86,10 +91,10 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
                 for (int i = 0; i < option.Label.Count; i++)
                 {
                     if (option.Label[i] != null)
-                        value.AppendLine(GetLocalizedValue(option.Label[i]));
+                        value.AppendLine(GetLocalizedValue(option.Label[i],trace));
                 }
             }
-
+            trace.Trace("Processing GetOptionValue - end");
             return value.ToString();
         }
 
@@ -98,13 +103,15 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// </summary>
         /// <param name="localizedString"></param>
         /// <returns></returns>
-        private static string GetLocalizedValue(LocalizedString localizedString)
+        private static string GetLocalizedValue(LocalizedString localizedString, ITracingService trace)
         {
+            trace.Trace("Processing GetLocalizedValue - start");
             var value = new StringBuilder();
             if (!string.IsNullOrWhiteSpace(localizedString.Value))
                 value.AppendLine("Label: " + localizedString.Value);
             if (!string.IsNullOrWhiteSpace(localizedString.Locale))
                 value.AppendLine("Locale: " + localizedString.Locale);
+            trace.Trace("Processing GetLocalizedValue - end");
             return value.ToString();
         }
 
@@ -113,8 +120,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// </summary>
         /// <param name="answer"></param>
         /// <returns></returns>
-        private static string GetCommentValue(Answer answer)
+        private static string GetCommentValue(Answer answer, ITracingService trace)
         {
+            trace.Trace("Processing GetCommentValue - start");
             var value = new StringBuilder();
             if (answer.CommentId != null)
                 value.Append("CommentId: " + answer.CommentId);
@@ -122,6 +130,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
                 value.AppendLine("CommentType: " + answer.CommentType);
             if (answer.CommentArchived != null)
                 value.AppendLine("CommentArchived: " + answer.CommentArchived);
+            trace.Trace("Processing GetCommentValue - end");
             return value.ToString();
         }
 
@@ -130,13 +139,14 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// </summary>
         /// <param name="answers"></param>
         /// <returns></returns>
-        public static string FindBooking(List<Answer> answers)
+        public static string FindBooking(List<Answer> answers, ITracingService trace)
         {
+            trace.Trace("Processing FindBooking - start");
             var bookingNumber = string.Empty;
             if (answers != null && answers.Count > 0)
             {
-                var booking = answers.Find(a => a.FieldId == 251884);
-                var sourceMarket = answers.Find(a => a.FieldId == 251727);
+                var booking = answers.Find(a => a.FieldId == PayloadSurveyFieldMapping.BookingNumber);
+                var sourceMarket = answers.Find(a => a.FieldId == PayloadSurveyFieldMapping.SourceMarket);
                 if (booking != null && !string.IsNullOrWhiteSpace(booking.LiteralValue))
                 {
                     if (sourceMarket != null && !string.IsNullOrWhiteSpace(sourceMarket.LiteralValue))
@@ -145,6 +155,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
                     }
                 }
             }
+            trace.Trace("Processing FindBooking - end");
             return bookingNumber;
         }
 
@@ -153,13 +164,14 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// </summary>
         /// <param name="answers"></param>
         /// <returns></returns>
-        public static string FindCustomer(List<Answer> answers)
+        public static string FindCustomer(List<Answer> answers, ITracingService trace)
         {
+            trace.Trace("Processing FindCustomer - start");
             var customer = string.Empty;
             if (answers != null && answers.Count > 0)
             {
-                var forename = answers.Find(a => a.FieldId == 251886);
-                var surName = answers.Find(a => a.FieldId == 251887);
+                var forename = answers.Find(a => a.FieldId == PayloadSurveyFieldMapping.ForeName);
+                var surName = answers.Find(a => a.FieldId == PayloadSurveyFieldMapping.SurName);
                 if (forename != null && !string.IsNullOrWhiteSpace(forename.LiteralValue))
                 {
                     if (surName != null && !string.IsNullOrWhiteSpace(surName.LiteralValue))
@@ -168,6 +180,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
                     }
                 }
             }
+            trace.Trace("Processing FindCustomer - end");
             return customer;
         }
     }
