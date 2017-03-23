@@ -66,11 +66,12 @@ namespace Tc.Crm.Service.Client.Console
                         createThreads.Add(StartThread(json, totalRecordsToCreate - recordsProcessed));
                     recordsProcessed += Batch;
                 }
-
+                
                 foreach (var item in createThreads)
                 {
                     item.Join();
                 }
+                System.Console.WriteLine("records processed:" + recordsProcessed);
                 ///update
                 recordsProcessed = 0;
                 for (int i = 0; i < totalThreadsForUpdate; i++)
@@ -120,7 +121,7 @@ namespace Tc.Crm.Service.Client.Console
                     booking.Booking.Customer.CustomerIdentifier.CustomerId = customerid;
                     //modify booking
                     var data = JsonConvert.SerializeObject(booking);
-                    //CreateOrUpdate(data);
+                    CreateOrUpdate(data);
                 }
             });
 
@@ -147,7 +148,7 @@ namespace Tc.Crm.Service.Client.Console
                     booking.Booking.Customer.CustomerIdentifier.CustomerId = CustomeridtoUpdate;
                     //modify booking
                     var data = JsonConvert.SerializeObject(booking);
-                    //CreateOrUpdate(data);
+                    CreateOrUpdate(data);
                 }
             });
 
@@ -159,6 +160,10 @@ namespace Tc.Crm.Service.Client.Console
 
         private static void CreateOrUpdate(string data)
         {
+            try
+            {
+
+            
             var api = "api/booking/update";
             //create the token
             var token = CreateJWTToken();
@@ -194,6 +199,12 @@ namespace Tc.Crm.Service.Client.Console
                 System.Console.WriteLine("No content.");
             else
                 System.Console.WriteLine("Content:{0}", content);
+            }
+            catch (Exception ex)
+            {
+
+                System.Console.WriteLine("Error");
+            }
         }
 
         private static string CreateJWTToken()
