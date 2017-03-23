@@ -12,12 +12,9 @@ namespace Tc.Crm.Service.Services
         {
             if (string.IsNullOrWhiteSpace(surveyData)) throw new ArgumentNullException(Constants.Parameters.DataJson);
             if (crmService == null) throw new ArgumentNullException(Constants.Parameters.CrmService);
-            Survey survey = new Survey();
-            survey.Responses = (IList<SurveyResponse>)JsonConvert.DeserializeObject(surveyData, survey.Responses.GetType());
-            var surveyJson = JsonConvert.SerializeObject(survey);
             try
             {
-                var response = crmService.ExecuteActionForSurveyCreate(surveyJson);
+                var response = crmService.ExecuteActionForSurveyCreate(surveyData);
                 if (response == null) throw new InvalidOperationException(Constants.Messages.ResponseNull);
             }
             catch(Exception ex)

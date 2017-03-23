@@ -8,6 +8,7 @@ using Tc.Crm.Service.Services;
 using System.Diagnostics;
 using InMoment.WebService.Rest.Data;
 using Newtonsoft.Json;
+using Tc.Crm.Service.Models;
 
 namespace Tc.Crm.Service.Controllers
 {
@@ -27,11 +28,15 @@ namespace Tc.Crm.Service.Controllers
         [Route("api/survey/create")]
         [HttpPut]
         [JsonWebTokenAuthorize]
-        public HttpResponseMessage Create(IList<Response> survey)
+        public HttpResponseMessage Create(IList<SurveyResponse> survey)
         {
             try
             {
                 if (survey == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.BookingDataPassedIsNullOrCouldNotBeParsed);
+                }
+                if(survey.Count == 0)
                 {
                     return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.BookingDataPassedIsNullOrCouldNotBeParsed);
                 }
