@@ -1,7 +1,5 @@
 ﻿using System;
 using Tc.Crm.Service.Models;
-using Newtonsoft.Json;
-using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Tc.Crm.Service.Services

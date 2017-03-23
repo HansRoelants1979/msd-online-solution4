@@ -43,6 +43,7 @@ namespace Tc.Crm.Service.Constants
         public const string CustomerObjectIsNull = "Customer object is null.";
         public const string ResponseFromCrmIsNull = "Response from CRM is NULL.";
         public const string BookingDataPassedIsNullOrCouldNotBeParsed = "Booking data passed is null or could not be parsed.";
+        public const string SurveyDataPassedIsNullOrCouldNotBeParsed = "Survey data passed is null or could not be parsed.";
         public const string BookingDataDoesNotComplyToSchema = "Booking data passed does not comply to schema.";
         public const string FailedtoCreateSurvey = "The corresponding operations can not be completed on downstream applications (MSD) for some reason. This should be considered as a temporary issue and retried.";
     }

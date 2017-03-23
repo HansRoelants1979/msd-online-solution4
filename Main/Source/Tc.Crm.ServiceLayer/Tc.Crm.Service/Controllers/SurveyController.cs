@@ -6,7 +6,6 @@ using System.Web.Http;
 using Tc.Crm.Service.Filters;
 using Tc.Crm.Service.Services;
 using System.Diagnostics;
-using InMoment.WebService.Rest.Data;
 using Newtonsoft.Json;
 using Tc.Crm.Service.Models;
 
@@ -34,11 +33,11 @@ namespace Tc.Crm.Service.Controllers
             {
                 if (survey == null)
                 {
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.BookingDataPassedIsNullOrCouldNotBeParsed);
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.SurveyDataPassedIsNullOrCouldNotBeParsed);
                 }
                 if(survey.Count == 0)
                 {
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.BookingDataPassedIsNullOrCouldNotBeParsed);
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.SurveyDataPassedIsNullOrCouldNotBeParsed);
                 }
                 var jsonData = JsonConvert.SerializeObject(survey);
                 var response = surveyService.ProcessSurvey(jsonData, crmService);
