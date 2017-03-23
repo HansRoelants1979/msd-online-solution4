@@ -8,7 +8,7 @@ using Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services;
 
 namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey
 {
-    class ProcessSurveyActivity : CodeActivity
+    public class ProcessSurveyActivity : CodeActivity
     {
         protected override void Execute(CodeActivityContext executionContext)
         {
