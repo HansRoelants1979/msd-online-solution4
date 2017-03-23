@@ -43,6 +43,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
             var surveyResponseCollection = new EntityCollection();
             for (int i = 0; i < responses.Count; i++)
             {
+                trace.Trace("Processing Response " + i + " - start");
                 var surveyResponse = SurveyResponseHelper.GetResponseEntityFromPayLoad(responses[i], trace);
                 if (responses[i].Answers != null && responses[i].Answers.Count > 0)
                 {
@@ -50,6 +51,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
                     ProcessFeedback(surveyResponse, responses[i].Answers);
                 }
                 surveyResponseCollection.Entities.Add(surveyResponse);
+                trace.Trace("Processing Response " + i + " - end");
             }
             if (surveyResponseCollection.Entities.Count > 0)
                 CommonXrm.BulkCreate(surveyResponseCollection, payloadSurvey.CrmService);
@@ -216,9 +218,11 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
             {
                 for (int i = 0; i < answers.Count; i++)
                 {
+                    trace.Trace("Processing Answer " + i + " - start");
                     var feedback = AnswerHelper.GetFeedbackEntityFromPayLoad(answers[i],trace);
                     feedback.Id = Guid.NewGuid();
                     feedbackCollection.Entities.Add(feedback);
+                    trace.Trace("Processing Answer " + i + " - end");
                 }                
             }
             trace.Trace("Processing ProcessAnswers - end");
