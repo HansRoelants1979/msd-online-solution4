@@ -21,7 +21,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
             if (!string.IsNullOrWhiteSpace(answer.FieldText))
                 feedback[Attributes.SurveyResponseFeedback.Name] = answer.FieldText;
             if (answer.Id != null)
-                feedback[Attributes.SurveyResponseFeedback.QuestionId] = Int32.Parse(answer.Id.ToString());
+                feedback[Attributes.SurveyResponseFeedback.QuestionId] = answer.Id.ToString();
             feedback[Attributes.SurveyResponseFeedback.QuestionFieldId] = Convert.ToInt32(answer.FieldId);
             if (!string.IsNullOrWhiteSpace(answer.FieldName))
                 feedback[Attributes.SurveyResponseFeedback.QuestionName] = answer.FieldName;
@@ -55,14 +55,12 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
                 case FieldType.DAY_OF_WEEK:
                 case FieldType.MONTH:
                 case FieldType.BOOLEAN:
+                case FieldType.COMMENT:
                     value = answer.LiteralValue;
                     break;
                 case FieldType.RATING:
                 case FieldType.MULTIPLE_CHOICE:
                     value = GetOptionValue(answer.Option,trace);
-                    break;
-                case FieldType.COMMENT:
-                    value = GetCommentValue(answer,trace);
                     break;
             }
             trace.Trace("Processing GetValueByFieldType - end");
@@ -76,64 +74,11 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// <returns></returns>
         private static string GetOptionValue(Option option, ITracingService trace)
         {
-            trace.Trace("Processing GetOptionValue - start");
-            var value = new StringBuilder();
-            value.Append("Id: " + option.Id);
-            if (!string.IsNullOrWhiteSpace(option.Name))
-                value.AppendLine("Name: " + option.Name);
-
-            if (!string.IsNullOrWhiteSpace(option.DefaultLabel))
-            {
-                value.AppendLine("Label: " + option.DefaultLabel);
-            }
-            else if (option.Label != null && option.Label.Count > 0)
-            {
-                for (int i = 0; i < option.Label.Count; i++)
-                {
-                    if (option.Label[i] != null)
-                        value.AppendLine(GetLocalizedValue(option.Label[i],trace));
-                }
-            }
+            trace.Trace("Processing GetOptionValue - start");            
             trace.Trace("Processing GetOptionValue - end");
-            return value.ToString();
+            return option.DefaultLabel;
         }
-
-        /// <summary>
-        /// To get localized value
-        /// </summary>
-        /// <param name="localizedString"></param>
-        /// <returns></returns>
-        private static string GetLocalizedValue(LocalizedString localizedString, ITracingService trace)
-        {
-            trace.Trace("Processing GetLocalizedValue - start");
-            var value = new StringBuilder();
-            if (!string.IsNullOrWhiteSpace(localizedString.Value))
-                value.AppendLine("Label: " + localizedString.Value);
-            if (!string.IsNullOrWhiteSpace(localizedString.Locale))
-                value.AppendLine("Locale: " + localizedString.Locale);
-            trace.Trace("Processing GetLocalizedValue - end");
-            return value.ToString();
-        }
-
-        /// <summary>
-        /// To get comment value
-        /// </summary>
-        /// <param name="answer"></param>
-        /// <returns></returns>
-        private static string GetCommentValue(Answer answer, ITracingService trace)
-        {
-            trace.Trace("Processing GetCommentValue - start");
-            var value = new StringBuilder();
-            if (answer.CommentId != null)
-                value.Append("CommentId: " + answer.CommentId);
-            if (!string.IsNullOrWhiteSpace(answer.CommentType))
-                value.AppendLine("CommentType: " + answer.CommentType);
-            if (answer.CommentArchived != null)
-                value.AppendLine("CommentArchived: " + answer.CommentArchived);
-            trace.Trace("Processing GetCommentValue - end");
-            return value.ToString();
-        }
-
+                      
         /// <summary>
         /// To find booking from survey payload
         /// </summary>
@@ -170,15 +115,11 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
             var customer = string.Empty;
             if (answers != null && answers.Count > 0)
             {
-                var forename = answers.Find(a => a.FieldId == PayloadSurveyFieldMapping.ForeName);
-                var surName = answers.Find(a => a.FieldId == PayloadSurveyFieldMapping.SurName);
-                if (forename != null && !string.IsNullOrWhiteSpace(forename.LiteralValue))
+                var surName = answers.Find(a => a.FieldId == PayloadSurveyFieldMapping.SurName);               
+                if (surName != null && !string.IsNullOrWhiteSpace(surName.LiteralValue))
                 {
-                    if (surName != null && !string.IsNullOrWhiteSpace(surName.LiteralValue))
-                    {
-                        customer = surName.LiteralValue + " " + forename.LiteralValue;
-                    }
-                }
+                    customer = surName.LiteralValue;
+                }                
             }
             trace.Trace("Processing FindCustomer - end");
             return customer;

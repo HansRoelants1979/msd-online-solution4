@@ -69,10 +69,10 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         {
             trace.Trace("Processing MapBookingContact - start");
             var bookingNumber = AnswerHelper.FindBooking(answers,trace);
-            var contactName = AnswerHelper.FindCustomer(answers,trace);
+            var contactLastName = AnswerHelper.FindCustomer(answers,trace);
             if (!string.IsNullOrWhiteSpace(bookingNumber))
             {
-                FetchBookingContact(bookingNumber, contactName, surveyResponse);
+                FetchBookingContact(bookingNumber, contactLastName, surveyResponse);
             }
             trace.Trace("Processing MapBookingContact - end");
         }
@@ -82,12 +82,12 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// To fetch booking, contact
         /// </summary>
         /// <param name="bookingNumber"></param>
-        /// <param name="contactName"></param>
+        /// <param name="contactLastName"></param>
         /// <param name="surveyResponse"></param>
-        private void FetchBookingContact(string bookingNumber, string contactName, Entity surveyResponse)
+        private void FetchBookingContact(string bookingNumber, string contactLastName, Entity surveyResponse)
         {
             trace.Trace("Processing FetchBookingContact - start");
-            var contactCondition = PrepareContactCondition(contactName);
+            var contactCondition = PrepareContactCondition(contactLastName);
             var query = string.Format(@"<fetch output-format='xml-platform' distinct='false' version='1.0' mapping='logical'>
                                         <entity name='tc_customerbookingrole'>
                                           <link-entity name='tc_booking' alias='booking' from='tc_bookingid' to='tc_bookingid'>
@@ -109,19 +109,19 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// <summary>
         /// To prepare link entity for contact when contact name is not empty
         /// </summary>
-        /// <param name="contactName"></param>
+        /// <param name="contactLastName"></param>
         /// <returns></returns>
-        private string PrepareContactCondition(string contactName)
+        private string PrepareContactCondition(string contactLastName)
         {
             var contactCondition = string.Empty;
-            if (!string.IsNullOrWhiteSpace(contactName))
+            if (!string.IsNullOrWhiteSpace(contactLastName))
             {
                 contactCondition = string.Format(@"<link-entity name='contact' alias='contact' from='contactid' to='tc_customer' link-type='outer'>
                                                     <attribute name='contactid' />
                                                         <filter type='and' >
-                                                            <condition attribute='fullname' operator='eq' value='{0}' />
+                                                            <condition attribute='lastname' operator='eq' value='{0}' />
                                                         </filter>
-                                                   </link-entity>", contactName);
+                                                   </link-entity>", contactLastName);
             }
             return contactCondition;
         } 
@@ -219,8 +219,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
                 for (int i = 0; i < answers.Count; i++)
                 {
                     trace.Trace("Processing Answer " + i + " - start");
-                    var feedback = AnswerHelper.GetFeedbackEntityFromPayLoad(answers[i],trace);
-                    feedback.Id = Guid.NewGuid();
+                    var feedback = AnswerHelper.GetFeedbackEntityFromPayLoad(answers[i],trace);                    
                     feedbackCollection.Entities.Add(feedback);
                     trace.Trace("Processing Answer " + i + " - end");
                 }                

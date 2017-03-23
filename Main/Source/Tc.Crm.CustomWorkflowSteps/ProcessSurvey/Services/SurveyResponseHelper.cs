@@ -17,10 +17,10 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
             trace.Trace("Processing GetResponseEntityFromPayLoad - start");
             if (response == null) throw new InvalidPluginExecutionException("Response in Json is null");
             var surveyResponse = new Entity(EntityName.SurveyResponse);
-            surveyResponse[Attributes.SurveyResponse.ResponseId] = Convert.ToInt32(response.Id);
+            surveyResponse[Attributes.SurveyResponse.ResponseId] = response.Id.ToString();
 
             if (response.SurveyId != null)
-                surveyResponse[Attributes.SurveyResponse.SurveyId] = Convert.ToInt32(response.SurveyId);
+                surveyResponse[Attributes.SurveyResponse.SurveyId] = response.SurveyId.Value.ToString();
 
             if (!string.IsNullOrWhiteSpace(response.SurveyName))
                 surveyResponse[Attributes.SurveyResponse.Subject] = response.SurveyName;
@@ -48,7 +48,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         {
             trace.Trace("Processing PrepareAdditionalParameters - start");
             var additionalParameters = new StringBuilder();
-            additionalParameters.Append("Id: " + response.Id);
+            additionalParameters.AppendLine("Id: " + response.Id);
             if (response.SurveyGatewayId != null)
                 additionalParameters.AppendLine("SurveyGatewayId: " + response.SurveyGatewayId);
             if (!string.IsNullOrWhiteSpace(response.SurveyGatewayName))
