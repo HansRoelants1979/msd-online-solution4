@@ -7,6 +7,7 @@ using System.ServiceModel;
 using Microsoft.Xrm.Sdk.Query;
 using Microsoft.Xrm.Sdk.Messages;
 using System.Collections.Generic;
+using Tc.Crm.CommonCustomWorkflowStepLibrary.RetrieveParentRecord.Services;
 
 namespace Tc.Crm.CommonCustomWorkflowStepLibrary
 {
@@ -24,11 +25,11 @@ namespace Tc.Crm.CommonCustomWorkflowStepLibrary
             IOrganizationService service = serviceFactory.CreateOrganizationService(context.UserId);
             try
             {
-                //var sourceEntity = SourceEntity.Get<EntityReference>(executionContext);
-                //var targetEntity = TargetEntity.Get<string>(executionContext);
-                //var relationshipName = RelationshipName.Get<string>(executionContext);
-                //ParentRecord.Set(executionContext, RetrieveParentRecord(sourceEntity, targetEntity, relationshipName, service));
+
                 
+                var expression = Expression.Get<string>(executionContext);
+                ReturnValue.Set(executionContext, RetrieveRecordProcessHelper.RetrieveParentRecord(expression, service,context));
+
             }
             catch (FaultException<OrganizationServiceFault> ex)
             {
@@ -46,16 +47,18 @@ namespace Tc.Crm.CommonCustomWorkflowStepLibrary
         }
 
         
+
         //starting entity should be the entity on which the workflow runs
         //case||customerid;contact||parentaccountid;account||companyname
-        [Input("Expression")]
-        public string Expression { get; set; }
+
+        [Input("String Expression")]
+        public InArgument<string> Expression { get; set; }
 
         //entity reference - string
         //optionset - string
-        [Output("ReturnValue")]
-        public string ReturnValue { get; set; }
 
+        [Output("String ReturnValue")]
+        public OutArgument<string> ReturnValue { get; set; }
 
 
 
