@@ -100,6 +100,13 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
             return additionalParameters.ToString().Remove(additionalParameters.ToString().Length - 6, 1);
         }
 
+        /// <summary>
+        /// To format as JSON key value
+        /// </summary>
+        /// <param name="fieldName"></param>
+        /// <param name="fieldValue"></param>
+        /// <param name="isNotStringType"></param>
+        /// <returns></returns>
         private static string FormatJson(string fieldName, object fieldValue, bool isNotStringType)
         {
             var format = string.Empty;
@@ -111,6 +118,12 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
             return format;
         }
 
+        /// <summary>
+        /// To format as JSON key value
+        /// </summary>
+        /// <param name="fieldName"></param>
+        /// <param name="fieldValue"></param>
+        /// <returns></returns>
         private static string FormatJson(string fieldName, object fieldValue)
         {
             return FormatJson(fieldName, fieldValue, false);
