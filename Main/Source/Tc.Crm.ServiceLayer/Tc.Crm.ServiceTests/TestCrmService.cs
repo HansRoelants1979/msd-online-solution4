@@ -9,6 +9,7 @@ using Tc.Crm.Service.Services;
 using FakeXrmEasy;
 using Microsoft.Xrm.Sdk.Query;
 using Newtonsoft.Json;
+using Tc.Crm.Service.Models;
 
 namespace Tc.Crm.ServiceTests
 {
@@ -45,6 +46,23 @@ namespace Tc.Crm.ServiceTests
 
             else if (Switch == DataSwitch.Response_Failed)
                 return new Tc.Crm.Service.Models.UpdateResponse { Created = false, Id = null};
+            else if (Switch == DataSwitch.Return_NULL)
+                return null;
+            else if (Switch == DataSwitch.ActionThrowsError)
+                throw new Exception("Action faulted");
+            return null;
+        }
+
+        public SurveyReturnResponse ExecuteActionForSurveyCreate(string data)
+        {
+            if (Switch == DataSwitch.Created)
+                return new Tc.Crm.Service.Models.SurveyReturnResponse { Created = true };
+        
+            else if (Switch == DataSwitch.Response_NULL)
+                throw new InvalidOperationException(Tc.Crm.Service.Constants.Messages.ResponseFromCrmIsNull);
+
+            else if (Switch == DataSwitch.Response_Failed)
+                return new Tc.Crm.Service.Models.SurveyReturnResponse { Created = false };
             else if (Switch == DataSwitch.Return_NULL)
                 return null;
             else if (Switch == DataSwitch.ActionThrowsError)

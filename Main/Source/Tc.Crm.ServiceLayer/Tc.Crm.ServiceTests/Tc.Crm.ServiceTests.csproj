@@ -129,6 +129,10 @@
     <Reference Include="Tc.Crm.Service.Fakes">
       <HintPath>FakesAssemblies\Tc.Crm.Service.Fakes.dll</HintPath>
     </Reference>
+    <Reference Include="WebServiceDTO, Version=2.0.0.0, Culture=neutral, PublicKeyToken=3c96a07d71ed493c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Applications\WebServiceDTO.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -147,6 +151,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BookingServiceTests.cs" />
     <Compile Include="Services\JsonWebTokenHelperTests.cs" />
+    <Compile Include="Services\SurveyServiceTests.cs" />
     <Compile Include="TestConfigurationService.cs" />
     <Compile Include="TestCrmService.cs" />
   </ItemGroup>
