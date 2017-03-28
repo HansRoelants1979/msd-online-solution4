@@ -62,7 +62,7 @@ namespace Tc.Crm.ServiceTests
                 throw new InvalidOperationException(Tc.Crm.Service.Constants.Messages.ResponseFromCrmIsNull);
 
             else if (Switch == DataSwitch.Response_Failed)
-                return new Tc.Crm.Service.Models.SurveyReturnResponse { Created = false };
+                throw new InvalidOperationException(Tc.Crm.Service.Constants.Messages.ResponseFromCrmIsNull);
             else if (Switch == DataSwitch.Return_NULL)
                 return null;
             else if (Switch == DataSwitch.ActionThrowsError)
