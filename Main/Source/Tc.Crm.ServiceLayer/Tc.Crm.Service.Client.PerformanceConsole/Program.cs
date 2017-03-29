@@ -37,58 +37,68 @@ namespace Tc.Crm.Service.Client.Console
                 var Records_to_Create = Int32.Parse(ConfigurationManager.AppSettings["Records_to_Create"]);
                 var Records_to_Update = Int32.Parse(ConfigurationManager.AppSettings["Records_to_Update"]);
                 //calculate threads for create and update
-                int totalThreadsForCreate = 0;
-                int totalThreadsForUpdate = 0;
                 var totalRecordsToCreate = (Totalrecords * Records_to_Create) / 100;
                 var totalRecordsToUpdate = Totalrecords - totalRecordsToCreate;
 
-                if (totalRecordsToCreate % Batch > 0)
-                    totalThreadsForCreate = (totalRecordsToCreate / Batch) + 1;
-                else
-                    totalThreadsForCreate = (totalRecordsToCreate / Batch);
-                if (totalRecordsToUpdate % Batch > 0)
-                    totalThreadsForUpdate = (totalRecordsToUpdate / Batch) + 1;
-                else
-                    totalThreadsForCreate = (totalRecordsToUpdate / Batch);
-
+                
                 var json = File.ReadAllText("booking.json");
                 var booking = JsonConvert.DeserializeObject<BookingInformation>(json);
                 List<Thread> createThreads = new List<Thread>();
                 List<Thread> updateThreads = new List<Thread>();
                 ////create
                 var recordsProcessed = 0;
+                var start = DateTime.Now;
                 System.Console.WriteLine("Start:{0}", DateTime.Now.ToString());
-                for (int i = 0; i < totalThreadsForCreate; i++)
+
+                while (recordsProcessed < totalRecordsToCreate)
                 {
+                    var threadCount = 0;
                     if (totalRecordsToCreate - recordsProcessed >= Batch)
-                        createThreads.Add(StartThread(json, Batch));
+                        threadCount = Batch;
                     else
-                        createThreads.Add(StartThread(json, totalRecordsToCreate - recordsProcessed));
-                    recordsProcessed += Batch;
+                        threadCount = totalRecordsToCreate - recordsProcessed;
+                    for (int i = 0; i < threadCount; i++)
+                    {
+                        createThreads.Add(StartThread(json));
+                       
+                    }
+                    foreach (var item in createThreads)
+                    {
+                        item.Join();
+                    }
+                    recordsProcessed += threadCount;
                 }
+
                 
-                foreach (var item in createThreads)
-                {
-                    item.Join();
-                }
                 System.Console.WriteLine("records processed:" + recordsProcessed);
                 ///update
                 recordsProcessed = 0;
-                for (int i = 0; i < totalThreadsForUpdate; i++)
+                while (recordsProcessed < totalRecordsToUpdate)
                 {
+                    var threadCount = 0;
                     if (totalRecordsToUpdate - recordsProcessed >= Batch)
-                        updateThreads.Add(StartThreadForUpdate(json, Batch));
+                        threadCount = Batch;
                     else
-                        updateThreads.Add(StartThreadForUpdate(json, totalRecordsToUpdate - recordsProcessed));
-                    recordsProcessed += Batch;
+                        threadCount = totalRecordsToUpdate - recordsProcessed;
+
+                    for (int i = 0; i < threadCount; i++)
+                    {
+                        updateThreads.Add(StartThreadForUpdate(json));
+                       
+                    }
+                    foreach (var item in updateThreads)
+                    {
+                        item.Join();
+                    }
+                    recordsProcessed += threadCount;
                 }
 
-                foreach (var item in updateThreads)
-                {
-                    item.Join();
-                }
 
-                System.Console.WriteLine("End:{0}", DateTime.Now.ToString());
+                System.Console.WriteLine("records processed:" + recordsProcessed);
+                var end = DateTime.Now;
+                System.Console.WriteLine("End:{0}", end);
+
+                System.Console.WriteLine("Elapsed time:" + (end - start).TotalSeconds);
             }
             catch (Exception ex)
             {
@@ -98,31 +108,25 @@ namespace Tc.Crm.Service.Client.Console
             System.Console.ReadLine();
         }
 
-        private static Thread StartThread(string json, int batch)
+        private static Thread StartThread(string json)
 
         {
-
-
             Thread thread = new Thread(() =>
             {
+                var booking = JsonConvert.DeserializeObject<BookingInformation>(json);
+                //i = i++;
+                var bookingid = "perfTest_" + DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss.fff") + Thread.CurrentThread.ManagedThreadId;
+                if (bookingidtoUpdate == null)
+                    bookingidtoUpdate = bookingid;
+                var customerid = "perfcust_" + DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss.fff") + Thread.CurrentThread.ManagedThreadId;
+                if (CustomeridtoUpdate == null)
+                    CustomeridtoUpdate = customerid;
 
-                for (int i = 0; i < batch; i++)
-                {
-                    var booking = JsonConvert.DeserializeObject<BookingInformation>(json);
-                    //i = i++;
-                    var bookingid = "perfTest_" + DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss.fff") + Thread.CurrentThread.ManagedThreadId;
-                    if (bookingidtoUpdate == null)
-                        bookingidtoUpdate = bookingid;
-                    var customerid = "perfcust_" + DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss.fff") + Thread.CurrentThread.ManagedThreadId;
-                    if (CustomeridtoUpdate == null)
-                        CustomeridtoUpdate = customerid;
-
-                    booking.Booking.BookingIdentifier.BookingNumber = bookingid;
-                    booking.Booking.Customer.CustomerIdentifier.CustomerId = customerid;
-                    //modify booking
-                    var data = JsonConvert.SerializeObject(booking);
-                    CreateOrUpdate(data);
-                }
+                booking.Booking.BookingIdentifier.BookingNumber = bookingid;
+                booking.Booking.Customer.CustomerIdentifier.CustomerId = customerid;
+                //modify booking
+                var data = JsonConvert.SerializeObject(booking);
+                CreateOrUpdate(data);
             });
 
             thread.Start();
@@ -130,7 +134,7 @@ namespace Tc.Crm.Service.Client.Console
 
 
         }
-        private static Thread StartThreadForUpdate(string json, int batch)
+        private static Thread StartThreadForUpdate(string json)
 
         {
 
@@ -138,24 +142,17 @@ namespace Tc.Crm.Service.Client.Console
             Thread thread = new Thread(() =>
             {
 
-                for (int i = 0; i < batch; i++)
-                {
-                    var booking = JsonConvert.DeserializeObject<BookingInformation>(json);
+                var booking = JsonConvert.DeserializeObject<BookingInformation>(json);
+                booking.Booking.BookingIdentifier.BookingNumber = bookingidtoUpdate;
+                booking.Booking.Customer.CustomerIdentifier.CustomerId = CustomeridtoUpdate;
+                //modify booking
+                var data = JsonConvert.SerializeObject(booking);
+               CreateOrUpdate(data);
 
-
-
-                    booking.Booking.BookingIdentifier.BookingNumber = bookingidtoUpdate;
-                    booking.Booking.Customer.CustomerIdentifier.CustomerId = CustomeridtoUpdate;
-                    //modify booking
-                    var data = JsonConvert.SerializeObject(booking);
-                    CreateOrUpdate(data);
-                }
             });
 
             thread.Start();
             return thread;
-
-
         }
 
         private static void CreateOrUpdate(string data)
@@ -163,42 +160,42 @@ namespace Tc.Crm.Service.Client.Console
             try
             {
 
-            
-            var api = "api/booking/update";
-            //create the token
-            var token = CreateJWTToken();
 
-            //Call
-            HttpClient cons = new HttpClient();
+                var api = "api/booking/update";
+                //create the token
+                var token = CreateJWTToken();
 
-            cons.BaseAddress = new Uri(GetUrl());
+                //Call
+                HttpClient cons = new HttpClient();
 
-            cons.DefaultRequestHeaders.Accept.Clear();
-            cons.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-            cons.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            Task<HttpResponseMessage> t = cons.PutAsync(api, new StringContent(data, Encoding.UTF8, "application/json"));
+                cons.BaseAddress = new Uri(GetUrl());
 
-            var response = t.Result;
+                cons.DefaultRequestHeaders.Accept.Clear();
+                cons.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                cons.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                Task<HttpResponseMessage> t = cons.PutAsync(api, new StringContent(data, Encoding.UTF8, "application/json"));
 
-            Task<string> task = response.Content.ReadAsStringAsync();
-            var content = task.Result;
+                var response = t.Result;
 
-            System.Console.WriteLine("Response Code: {0}", response.StatusCode.GetHashCode());
-            if (response.StatusCode == HttpStatusCode.Created)
-                System.Console.WriteLine("Booking has been created with GUID::{0}", content);
-            else if (response.StatusCode == HttpStatusCode.NoContent)
-                System.Console.WriteLine("Booking has been updated.");
-            else if (response.StatusCode == HttpStatusCode.BadRequest)
-                System.Console.WriteLine("Bad Request.");
-            else if (response.StatusCode == HttpStatusCode.InternalServerError)
-                System.Console.WriteLine("Internal Server Error.");
-            else if (response.StatusCode == HttpStatusCode.Forbidden)
-                System.Console.WriteLine("Forbidden.");
+                Task<string> task = response.Content.ReadAsStringAsync();
+                var content = task.Result;
 
-            if (string.IsNullOrWhiteSpace(content))
-                System.Console.WriteLine("No content.");
-            else
-                System.Console.WriteLine("Content:{0}", content);
+                System.Console.WriteLine("Response Code: {0}", response.StatusCode.GetHashCode());
+                if (response.StatusCode == HttpStatusCode.Created)
+                    System.Console.WriteLine("Booking has been created with GUID::{0}", content);
+                else if (response.StatusCode == HttpStatusCode.NoContent)
+                    System.Console.WriteLine("Booking has been updated.");
+                else if (response.StatusCode == HttpStatusCode.BadRequest)
+                    System.Console.WriteLine("Bad Request.");
+                else if (response.StatusCode == HttpStatusCode.InternalServerError)
+                    System.Console.WriteLine("Internal Server Error.");
+                else if (response.StatusCode == HttpStatusCode.Forbidden)
+                    System.Console.WriteLine("Forbidden.");
+
+                if (string.IsNullOrWhiteSpace(content))
+                    System.Console.WriteLine("No content.");
+                else
+                    System.Console.WriteLine("Content:{0}", content);
             }
             catch (Exception ex)
             {
