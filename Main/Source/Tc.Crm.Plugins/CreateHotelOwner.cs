@@ -2,6 +2,7 @@
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using System;
+using System.ServiceModel;
 
 namespace Tc.Crm.Plugins
 {
@@ -13,32 +14,66 @@ namespace Tc.Crm.Plugins
                 serviceProvider.GetService(typeof(Microsoft.Xrm.Sdk.IPluginExecutionContext));
 
             ITracingService tracingService =
-                (ITracingService)serviceProvider.GetService(typeof(ITracingService));
-
-            tracingService.Trace("Begin - CreateHotelOwner");
+                (ITracingService)serviceProvider.GetService(typeof(ITracingService));            
 
             IOrganizationServiceFactory serviceFactory = (IOrganizationServiceFactory)serviceProvider.GetService(typeof(IOrganizationServiceFactory));
             IOrganizationService service = serviceFactory.CreateOrganizationService(localContext.UserId);
-
-            Entity hotel = localContext.InputParameters["Target"] as Entity;
-            string hotelName = hotel.GetAttributeValue<string>("tc_name");
-            
-            if (!string.IsNullOrEmpty(hotelName))
+            try
             {
-                string teamName = string.Format("Hotel Team: {0}", hotelName);
-                tracingService.Trace("Output - Creating Team with Name: {0}", teamName);
-                Entity team = new Entity("team");
-                team.Attributes.Add("name", teamName);
-                team.Attributes.Add("tc_hotelteam", true);
-                team.Attributes.Add("businessunitid", new EntityReference("businessunit",
-                    localContext.BusinessUnitId));                    
-                Guid teamId = service.Create(team);
-                tracingService.Trace("Output - Created Team with Id: {0}", teamId);
+                tracingService.Trace("Begin - CreateHotelOwner");
+                CreateTeam(service, localContext, tracingService);
+                tracingService.Trace("End - CreateHotelOwner");
+            }
+            catch (FaultException<OrganizationServiceFault> ex)
+            {
+                throw new InvalidPluginExecutionException(ex.ToString());
+            }
+            catch (TimeoutException ex)
+            {
+                throw new InvalidPluginExecutionException(ex.ToString());
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidPluginExecutionException(ex.ToString());
+            }
+        }
 
-                QueryExpression queryForSecurityRole = new QueryExpression("role")
+        private void CreateTeam(IOrganizationService service, IPluginExecutionContext context, ITracingService trace)
+        {
+            
+            if (context.InputParameters.Contains(General.Target) && context.InputParameters[General.Target] is Entity)
+            {
+                Entity hotel = context.InputParameters["Target"] as Entity;
+                string hotelName = hotel.GetAttributeValue<string>("tc_name");
+
+                if (!string.IsNullOrEmpty(hotelName))
                 {
-                    Distinct = false,
-                    Criteria =
+                    string teamName = string.Format("Hotel Team: {0}", hotelName);
+                    trace.Trace("Output - Creating Team with Name: {0}", teamName);
+                    Entity team = new Entity(Entities.Team);
+                    team.Attributes.Add(Attributes.Team.Name, teamName);
+                    team.Attributes.Add(Attributes.Team.HotelTeam, true);
+                    team.Attributes.Add(Attributes.Team.BusinessUnitId, new EntityReference(Entities.BusinessUnit,
+                        context.BusinessUnitId));
+                    Guid teamId = service.Create(team);
+                    if (teamId != Guid.Empty)
+                    {
+                        trace.Trace("Output - Created Team with Id: {0}", teamId);
+                        AssociateSecurityRole(service, context, trace, teamId);
+                        hotel.Attributes[Attributes.Hotel.Owner] = new EntityReference(Entities.Team, teamId);
+                        trace.Trace("Output - Update owner of hotel");
+                    }
+                }
+            }
+            
+        }
+
+        private void AssociateSecurityRole(IOrganizationService service, IPluginExecutionContext context, ITracingService trace, Guid teamId)
+        {
+            QueryExpression queryForSecurityRole = new QueryExpression(Entities.Role)
+            {
+                Distinct = false,
+                Criteria =
                     {
                         Filters =
                         {
@@ -47,36 +82,31 @@ namespace Tc.Crm.Plugins
                                 FilterOperator = LogicalOperator.And,
                                 Conditions =
                                 {
-                                    new ConditionExpression("businessunitid", ConditionOperator.Equal, localContext.BusinessUnitId),
-                                    new ConditionExpression("name", ConditionOperator.Equal, "Tc.Ids.Base")
+                                    new ConditionExpression(Attributes.Role.BusinessUnitId, ConditionOperator.Equal, context.BusinessUnitId),
+                                    new ConditionExpression(Attributes.Role.Name, ConditionOperator.Equal, General.TeamRoleName)
                                 },
                             },
                         }
                     }
-                };
+            };
 
-                DataCollection<Entity> entityCollection = service.RetrieveMultiple(queryForSecurityRole).Entities;
-                tracingService.Trace("Output - Query for security roles");
-                if (entityCollection.Count == 1)
-                {
-                    tracingService.Trace("Output - One security role with found with matching name and BU");
-                    service.Associate(
-                        "team",
-                        teamId,
-                        new Relationship("teamroles_association"),
-                        new EntityReferenceCollection()
-                        {
-                            new EntityReference("role", entityCollection[0].Id)
-                        });
-                    tracingService.Trace("Output - Associated security role with team");
-                    hotel["ownerid"] = new EntityReference("team", teamId);
-                    tracingService.Trace("Output - Update owner of hotel");
-                }
-                else                    
-                    throw new InvalidPluginExecutionException("The role Tc.Ids.Base does not exist in the required business unit");
-
-                tracingService.Trace("End - CreateHotelOwner");
+            DataCollection<Entity> entityCollection = service.RetrieveMultiple(queryForSecurityRole).Entities;
+            trace.Trace("Output - Query for security roles");
+            if (entityCollection.Count == 1)
+            {
+                trace.Trace("Output - One security role with found with matching name and BU");
+                service.Associate(
+                    Entities.Team,
+                    teamId,
+                    new Relationship(Relationships.TeamRoles),
+                    new EntityReferenceCollection()
+                    {
+                            new EntityReference(Entities.Role, entityCollection[0].Id)
+                    });
+                trace.Trace("Output - Associated security role with team");
             }
+            else
+                throw new InvalidPluginExecutionException("The role Tc.Ids.Base does not exist in the required business unit");
         }
     }
 }
