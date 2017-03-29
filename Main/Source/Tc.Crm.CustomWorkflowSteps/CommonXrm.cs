@@ -547,6 +547,11 @@ namespace Tc.Crm.CustomWorkflowSteps
             return xrmResponse;
         }
 
+        public static XrmResponse CreateEntity(Entity entityRecord, IOrganizationService service)
+        {
+            var id = service.Create(entityRecord);
+            return new XrmResponse { Create = true, Id = id.ToString(), EntityName = entityRecord.LogicalName };
+        }
 
         /// <summary>
         /// Call this method for bulk create

@@ -10,14 +10,15 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
         {
             if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
             trace.Trace("Contact populate fields - start");
-            if (customer == null) throw new InvalidPluginExecutionException("Customer payload is null");
-
-            
+            if (customer == null) return null;
 
 
-            Entity contact = (customer.CustomerIdentifier != null && customer.CustomerIdentifier.CustomerId != null && customer.CustomerIdentifier.CustomerId != "") ? new Entity(EntityName.Contact
-                                        , Attributes.Contact.SourceSystemID
-                                        , customer.CustomerIdentifier.CustomerId) : new Entity(EntityName.Contact);
+            Entity contact = null;
+            if (customer.CustomerIdentifier == null || customer.CustomerIdentifier.CustomerId == null || customer.CustomerIdentifier.CustomerId == "")
+                contact = new Entity(EntityName.Contact);
+            else
+                contact = new Entity(EntityName.Contact, Attributes.Contact.SourceSystemID
+                                            , customer.CustomerIdentifier.CustomerId);
 
             PopulateIdentityInformation(contact, customer.CustomerIdentity, trace);
 
@@ -39,8 +40,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             contact[Attributes.Contact.SourceMarketId] = (customer.CustomerIdentifier!=null &&
                                                             !string.IsNullOrWhiteSpace(customer.CustomerIdentifier.SourceMarket))
                                                                 ?new EntityReference(EntityName.Country
-                                                                                    , Attributes.Country.ISO2Code,
-                                                                                    customer.CustomerIdentifier.SourceMarket) 
+                                                                                    , CountryService.GetBy(customer.CustomerIdentifier.SourceMarket)) 
                                                                 : null;
 
             contact[Attributes.Contact.SourceSystemID] = (customer.CustomerIdentifier != null 
@@ -212,8 +212,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             contact[Attributes.Contact.Address1_Town] = (!string.IsNullOrWhiteSpace(address1.Town )) ? address1.Town : string.Empty;
             contact[Attributes.Contact.Address1_CountryId] = (!string.IsNullOrWhiteSpace(address1.Country)) ?
                                                                              new EntityReference(EntityName.Country,
-                                                                             Attributes.Country.ISO2Code,
-                                                                             address1.Country) : null;
+                                                                             CountryService.GetBy(address1.Country)) : null;
 
             contact[Attributes.Contact.Address1_County] = (!string.IsNullOrWhiteSpace(address1.County )) ? address1.County :string.Empty ;
             contact[Attributes.Contact.Address1_PostalCode] = (!string.IsNullOrWhiteSpace(address1.PostalCode )) ? address1.PostalCode : string.Empty;
@@ -225,9 +224,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             contact[Attributes.Contact.Address2_HouseNumberorBuilding] = (!string.IsNullOrWhiteSpace(address2.HouseNumberBuilding ))?address2.HouseNumberBuilding:string.Empty;
             contact[Attributes.Contact.Address2_Town] = (!string.IsNullOrWhiteSpace(address2.Town )) ? address2.Town:string.Empty;
             contact[Attributes.Contact.Address2_CountryId] = (!string.IsNullOrWhiteSpace(address2.Country)) ?
-                                                                                 new EntityReference(EntityName.Country,
-                                                                                 Attributes.Country.ISO2Code,
-                                                                                 address2.Country) : null;
+                                                                             new EntityReference(EntityName.Country,
+                                                                             CountryService.GetBy(address2.Country)) : null;
             contact[Attributes.Contact.Address2_County] = (!string.IsNullOrWhiteSpace(address2.County )) ? address2.Country:string.Empty;
             contact[Attributes.Contact.Address2_PostalCode] = (!string.IsNullOrWhiteSpace(address2.PostalCode )) ? address2.PostalCode :string.Empty;
             trace.Trace("Contact populate address - end");

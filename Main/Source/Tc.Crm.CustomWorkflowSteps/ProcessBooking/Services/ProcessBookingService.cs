@@ -34,15 +34,16 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 
             ProcessCustomer();
             ProcessBookingInfo();
-            ProcessRemarks();
-            ProcessAccommodation();
-            ProcessTransport();
-            ProcessTransfers();
-            ProcessExtraServices();
-            ProcessBookingRole();
+            //ProcessRemarks();
+            //ProcessAccommodation();
+            //ProcessTransport();
+            //ProcessTransfers();
+            //ProcessExtraServices();
+            //ProcessBookingRole();
 
             trace.Trace("Processing Process payload - end");
             return JsonHelper.SerializeJson(payloadBooking.Response, trace);
+            //return JsonHelper.SerializeJson(new BookingResponse { Created=true,Id=Guid.NewGuid().ToString()}, trace);
         }
 
         private void ProcessCustomer()
