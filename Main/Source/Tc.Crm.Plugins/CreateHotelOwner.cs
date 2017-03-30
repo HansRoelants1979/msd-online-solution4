@@ -41,7 +41,7 @@ namespace Tc.Crm.Plugins
         private void CreateTeam(IOrganizationService service, IPluginExecutionContext context, ITracingService trace)
         {
             
-            if (context.InputParameters.Contains(General.Target) && context.InputParameters[General.Target] is Entity)
+            if (context.InputParameters.Contains(InputParameters.Target) && context.InputParameters[InputParameters.Target] is Entity)
             {
                 Entity hotel = context.InputParameters["Target"] as Entity;
                 string hotelName = hotel.GetAttributeValue<string>("tc_name");
@@ -98,7 +98,7 @@ namespace Tc.Crm.Plugins
                 service.Associate(
                     Entities.Team,
                     teamId,
-                    new Relationship(Relationships.TeamRoles),
+                    new Relationship(Relationships.TeamRolesAssociation),
                     new EntityReferenceCollection()
                     {
                             new EntityReference(Entities.Role, entityCollection[0].Id)
