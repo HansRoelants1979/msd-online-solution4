@@ -15,6 +15,7 @@ using System.Security.Cryptography;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
+using System.Diagnostics;
 
 namespace Tc.Crm.Service.Client.Console
 {
@@ -99,6 +100,7 @@ namespace Tc.Crm.Service.Client.Console
                 System.Console.WriteLine("End:{0}", end);
 
                 System.Console.WriteLine("Elapsed time:" + (end - start).TotalSeconds);
+                Trace.TraceInformation((end - start).TotalSeconds.ToString());
             }
             catch (Exception ex)
             {
@@ -115,10 +117,10 @@ namespace Tc.Crm.Service.Client.Console
             {
                 var booking = JsonConvert.DeserializeObject<BookingInformation>(json);
                 //i = i++;
-                var bookingid = "perfTest_" + DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss.fff") + Thread.CurrentThread.ManagedThreadId;
+                var bookingid = "p_" + DateTime.Now.ToString("MM/dd HH:mm:ss.fff") + Thread.CurrentThread.ManagedThreadId;
                 if (bookingidtoUpdate == null)
                     bookingidtoUpdate = bookingid;
-                var customerid = "perfcust_" + DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss.fff") + Thread.CurrentThread.ManagedThreadId;
+                var customerid = "p_" + DateTime.Now.ToString("MM/dd HH:mm:ss.fff") + Thread.CurrentThread.ManagedThreadId;
                 if (CustomeridtoUpdate == null)
                     CustomeridtoUpdate = customerid;
 
