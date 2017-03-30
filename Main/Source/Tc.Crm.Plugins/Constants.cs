@@ -9,8 +9,7 @@ namespace Tc.Crm.Plugins
 
     public static class General
     {        
-        public const string TeamRoleName = "Tc.Ids.Base";
-               
+        public const string TeamRoleName = "Tc.Ids.Base";               
     }
 
     public static class Messages
@@ -67,6 +66,6 @@ namespace Tc.Crm.Plugins
     public static class Relationships
     {
         public const string TeamRolesAssociation = "teamroles_association";
-        public const string TeamMembershipAssociation = "teammembership_association.";
+        public const string TeamMembershipAssociation = "teammembership_association";
     }
 }
