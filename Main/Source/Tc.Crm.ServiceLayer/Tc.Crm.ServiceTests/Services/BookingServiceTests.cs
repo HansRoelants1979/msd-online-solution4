@@ -21,7 +21,7 @@ namespace Tc.Crm.Service.Services.Tests
         public void TestSetup()
         {
             context = new XrmFakedContext();
-            bookingService = new BookingService();
+            bookingService = new BookingService(null, null, null, null, null, null);
             crmService = new TestCrmService(context);
         }
 

@@ -10,6 +10,7 @@ using FakeXrmEasy;
 using Microsoft.Xrm.Sdk.Query;
 using Newtonsoft.Json;
 using Tc.Crm.Service.Models;
+using System.Collections.ObjectModel;
 
 namespace Tc.Crm.ServiceTests
 {
@@ -68,6 +69,36 @@ namespace Tc.Crm.ServiceTests
             else if (Switch == DataSwitch.ActionThrowsError)
                 throw new Exception("Action faulted");
             return null;
+        }
+
+        public Collection<Brand> GetBrands()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Collection<Country> GetCountries()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Collection<Currency> GetCurrencies()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Collection<Gateway> GetGateways()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Collection<TourOperator> GetTourOperators()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Collection<SourceMarket> GetSourceMarkets()
+        {
+            throw new NotImplementedException();
         }
     }
 }
