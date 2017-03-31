@@ -161,9 +161,34 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
-    <Content Include="Lib\WebServiceDTO.dll">
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Scripts\jquery-1.9.1.intellisense.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Scripts\bootstrap.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\bootstrap.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\jquery-1.9.1.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\jquery-1.9.1.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Tc.PublicKey.xml">
@@ -175,8 +200,10 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BusinessServices\Custom\CustomUserService.cs" />
     <Compile Include="BusinessServices\IUserService.cs" />
+    <Compile Include="CacheBuckets\ISourceMarketBucket.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\BookingController.cs" />
+    <Compile Include="Controllers\CacheController.cs" />
     <Compile Include="Controllers\SurveyController.cs" />
     <Compile Include="Filters\ApiAuthenticationFilter.cs" />
     <Compile Include="Filters\BasicAuthenticationIdentity.cs" />
@@ -188,11 +215,24 @@
     </Compile>
     <Compile Include="Models\Booking.cs" />
     <Compile Include="Models\BookingUpdateResponse.cs" />
+    <Compile Include="Models\Brand.cs" />
+    <Compile Include="CacheBuckets\BrandBucket.cs" />
+    <Compile Include="CacheBuckets\CountryBucket.cs" />
+    <Compile Include="CacheBuckets\CurrencyBucket.cs" />
+    <Compile Include="CacheBuckets\GatewayBucket.cs" />
+    <Compile Include="CacheBuckets\IBucket.cs" />
+    <Compile Include="CacheBuckets\SourceMarketBucket.cs" />
+    <Compile Include="CacheBuckets\TourOperatorBucket.cs" />
+    <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\Currency.cs" />
+    <Compile Include="Models\Gateway.cs" />
     <Compile Include="Models\JsonWebTokenHeader.cs" />
     <Compile Include="Models\JsonWebTokenPayload.cs" />
     <Compile Include="Models\JsonWebTokenRequest.cs" />
+    <Compile Include="Models\SourceMarket.cs" />
     <Compile Include="Models\Survey.cs" />
     <Compile Include="Models\SurveyReturnResponse.cs" />
+    <Compile Include="Models\TourOperator.cs" />
     <Compile Include="Models\UpdateResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resolver\UnityResolver.cs" />
@@ -211,6 +251,9 @@
     <None Include="Properties\PublishProfiles\tcdev-ne - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\tcsit-ne.pubxml" />
     <None Include="Properties\PublishProfiles\Web Deploy - TC-DEV1.pubxml" />
+    <Content Include="Scripts\jquery-1.9.1.min.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

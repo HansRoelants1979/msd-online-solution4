@@ -26,6 +26,8 @@ namespace Tc.Crm.Service.Models
     [DataContract(Name = "booking")]
     public class Booking
     {
+        [DataMember(Name = "owner")]
+        public string Owner { get; set; }
 
         [DataMember(Name = "bookingIdentifier")]
         public BookingIdentifier BookingIdentifier { get; set; }
@@ -817,6 +819,8 @@ namespace Tc.Crm.Service.Models
     [DataContract(Name = "customer")]
     public class Customer
     {
+        [DataMember(Name = "owner")]
+        public string Owner { get; set; }
 
         [DataMember(Name = "customerIdentifier")]
         public CustomerIdentifier CustomerIdentifier { get; set; }

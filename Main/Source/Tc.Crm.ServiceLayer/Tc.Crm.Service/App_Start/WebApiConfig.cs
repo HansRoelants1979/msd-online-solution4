@@ -1,6 +1,7 @@
 ﻿using Microsoft.Practices.Unity;
 using Newtonsoft.Json.Converters;
 using System.Web.Http;
+using Tc.Crm.Service.CacheBuckets;
 using Tc.Crm.Service.Resolver;
 using Tc.Crm.Service.Services;
 
@@ -18,6 +19,12 @@ namespace Tc.Crm.Service
             container.RegisterType<IBookingService, BookingService>();
             container.RegisterType<ISurveyService, SurveyService>();
             container.RegisterType<ICrmService, CrmService>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IBucket, BrandBucket>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IBucket, CountryBucket>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IBucket, CurrencyBucket>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IBucket, GatewayBucket>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IBucket, TourOperatorBucket>(new ContainerControlledLifetimeManager());
+            container.RegisterType<ISourceMarketBucket, SourceMarketBucket>(new ContainerControlledLifetimeManager());
             config.DependencyResolver = new UnityResolver(container);
             
             // Web API routes
