@@ -64,9 +64,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             transferEntity[Attributes.BookingTransfer.TransferType] = CommonXrm.GetTransferType(transfer.TransferType);
             transferEntity[Attributes.BookingTransfer.Category] = transfer.Category;
             if (!string.IsNullOrWhiteSpace(transfer.DepartureAirport))
-                transferEntity[Attributes.BookingTransfer.DepartureGatewayId] = new EntityReference(EntityName.Gateway, Attributes.Gateway.IATA, transfer.DepartureAirport);
+                transferEntity[Attributes.BookingTransfer.DepartureGatewayId] = new EntityReference(EntityName.Gateway, new Guid(transfer.DepartureAirport));
             if (!string.IsNullOrWhiteSpace(transfer.ArrivalAirport))
-                transferEntity[Attributes.BookingTransfer.ArrivalGatewayId] = new EntityReference(EntityName.Gateway, Attributes.Gateway.IATA, transfer.ArrivalAirport);
+                transferEntity[Attributes.BookingTransfer.ArrivalGatewayId] = new EntityReference(EntityName.Gateway, new Guid(transfer.ArrivalAirport));
 
             transferEntity[Attributes.BookingTransfer.Participants] = BookingHelper.PrepareTravelParticipantsInfoForChildRecords(bookinginfo.TravelParticipant, trace, transfer.TravelParticipantAssignment);
 

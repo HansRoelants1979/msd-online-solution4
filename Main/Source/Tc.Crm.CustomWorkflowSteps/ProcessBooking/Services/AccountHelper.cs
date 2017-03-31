@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xrm.Sdk;
+using System;
 using Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models;
 
 namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
@@ -20,19 +21,19 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             trace.Trace("email 1");
             if (email1 == null) return;
 
-            account[Attributes.Account.EMailAddress1] = (!string.IsNullOrWhiteSpace(email1.Address)) ? email1.Address : string.Empty ;
+            account[Attributes.Account.EMailAddress1] = (!string.IsNullOrWhiteSpace(email1.Address)) ? email1.Address : string.Empty;
             account[Attributes.Account.EmailAddress1_Type] = CommonXrm.GetEmailType(email1.EmailType);
 
             trace.Trace("email 2");
             if (email2 == null) return;
 
-            account[Attributes.Account.EMailAddress2] = (!string.IsNullOrWhiteSpace(email2.Address )) ? email2.Address : string.Empty ;
+            account[Attributes.Account.EMailAddress2] = (!string.IsNullOrWhiteSpace(email2.Address)) ? email2.Address : string.Empty;
             account[Attributes.Account.EmailAddress2_Type] = CommonXrm.GetEmailType(email2.EmailType);
 
             trace.Trace("email 3");
             if (email3 == null) return;
 
-            account[Attributes.Account.EMailAddress3] = (!string.IsNullOrWhiteSpace(email3.Address )) ? email3.Address : string.Empty;
+            account[Attributes.Account.EMailAddress3] = (!string.IsNullOrWhiteSpace(email3.Address)) ? email3.Address : string.Empty;
             account[Attributes.Account.EmailAddress3_Type] = CommonXrm.GetEmailType(email3.EmailType);
 
             trace.Trace("Account populate email - end");
@@ -88,19 +89,19 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             if (phone1 == null) return;
 
             account[Attributes.Account.Telephone1_Type] = CommonXrm.GetPhoneType(phone1.PhoneType);
-            account[Attributes.Account.Telephone1] = (!string.IsNullOrWhiteSpace(phone1.Number)) ? phone1.Number :string.Empty;
+            account[Attributes.Account.Telephone1] = (!string.IsNullOrWhiteSpace(phone1.Number)) ? phone1.Number : string.Empty;
 
             trace.Trace("phone 2");
             if (phone2 == null) return;
 
             account[Attributes.Account.Telephone2_Type] = CommonXrm.GetPhoneType(phone2.PhoneType);
-            account[Attributes.Account.Telephone2] = (!string.IsNullOrWhiteSpace(phone2.Number )) ? phone2.Number :string.Empty;
+            account[Attributes.Account.Telephone2] = (!string.IsNullOrWhiteSpace(phone2.Number)) ? phone2.Number : string.Empty;
 
             trace.Trace("phone 3");
             if (phone3 == null) return;
 
             account[Attributes.Account.Telephone3_Type] = CommonXrm.GetPhoneType(phone2.PhoneType);
-            account[Attributes.Account.Telephone3] = (!string.IsNullOrWhiteSpace(phone3.Number )) ? phone3.Number :string.Empty ;
+            account[Attributes.Account.Telephone3] = (!string.IsNullOrWhiteSpace(phone3.Number)) ? phone3.Number : string.Empty;
 
             trace.Trace("Account populate phone - end");
         }
@@ -123,7 +124,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
         {
             account[Attributes.Account.Telephone2_Type] = null;
             account[Attributes.Account.Telephone2] = string.Empty;
-            return null;            
+            return null;
         }
 
         private static Phone ClearPhone3(Entity account)
@@ -142,16 +143,16 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             var address = (addresses != null && addresses.Length > 0) ? addresses[0] : ClearAddress(account);
 
             if (address == null) return;
-            account[Attributes.Account.Address1_AdditionalInformation] = (!string.IsNullOrWhiteSpace(address.AdditionalAddressInfo ))? address.AdditionalAddressInfo:string.Empty;
-            account[Attributes.Account.Address1_FlatOrUnitNumber] = (!string.IsNullOrWhiteSpace(address.FlatNumberUnit )) ? address.FlatNumberUnit :string.Empty;
-            account[Attributes.Account.Address1_HouseNumberOrBuilding] = (!string.IsNullOrWhiteSpace(address.HouseNumberBuilding )) ? address.HouseNumberBuilding : string.Empty;
-            account[Attributes.Account.Address1_Town] = (!string.IsNullOrWhiteSpace(address.Town )) ? address.Town : string.Empty ;
-            account[Attributes.Account.Address1_PostalCode] = (!string.IsNullOrWhiteSpace(address.PostalCode)) ? address.PostalCode : string.Empty ;            
+            account[Attributes.Account.Address1_AdditionalInformation] = (!string.IsNullOrWhiteSpace(address.AdditionalAddressInfo)) ? address.AdditionalAddressInfo : string.Empty;
+            account[Attributes.Account.Address1_FlatOrUnitNumber] = (!string.IsNullOrWhiteSpace(address.FlatNumberUnit)) ? address.FlatNumberUnit : string.Empty;
+            account[Attributes.Account.Address1_HouseNumberOrBuilding] = (!string.IsNullOrWhiteSpace(address.HouseNumberBuilding)) ? address.HouseNumberBuilding : string.Empty;
+            account[Attributes.Account.Address1_Town] = (!string.IsNullOrWhiteSpace(address.Town)) ? address.Town : string.Empty;
+            account[Attributes.Account.Address1_PostalCode] = (!string.IsNullOrWhiteSpace(address.PostalCode)) ? address.PostalCode : string.Empty;
             account[Attributes.Account.Address1_CountryId] = (!string.IsNullOrWhiteSpace(address.Country)) ? new EntityReference(EntityName.Country
                                                                                                            , Attributes.Country.ISO2Code
                                                                                                            , address.Country)
                                                                                                            : null;
-            account[Attributes.Account.Address1_County] = (!string.IsNullOrWhiteSpace(address.County)) ? address.County:string.Empty ;
+            account[Attributes.Account.Address1_County] = (!string.IsNullOrWhiteSpace(address.County)) ? address.County : string.Empty;
             trace.Trace("Account populate address - end");
 
         }
@@ -168,12 +169,12 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             return null;
         }
 
-        public static Entity GetAccountEntityForBookingPayload(Customer customer, ITracingService trace, IOrganizationService service)
+        public static Entity GetAccountEntityForBookingPayload(Customer customer, ITracingService trace)
         {
             if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null.");
             trace.Trace("Account populate fields - start");
             if (customer == null) throw new InvalidPluginExecutionException("Customer payload is null.");
-            if (customer.CustomerIdentifier == null )
+            if (customer.CustomerIdentifier == null)
                 throw new InvalidPluginExecutionException("Customer Identifier could not be retrieved from payload.");
 
             Entity account = (customer.CustomerIdentifier.CustomerId != null && customer.CustomerIdentifier.CustomerId != "") ? new Entity(EntityName.Account
@@ -188,16 +189,19 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             PopulatePhone(account, customer.Phone, trace);
             PopulateEmail(account, customer.Email, trace);
 
-            
+
             account[Attributes.Account.SourceMarketId] = (!string.IsNullOrWhiteSpace(customer.CustomerIdentifier.SourceMarket)) ?
                                                                 new EntityReference(EntityName.Country
                                                                 , Attributes.Country.ISO2Code
-                                                                , customer.CustomerIdentifier.SourceMarket):
+                                                                , customer.CustomerIdentifier.SourceMarket) :
                                                                 null;
 
-            account[Attributes.Account.SourceSystemID] = (!string.IsNullOrWhiteSpace(customer.CustomerIdentifier.CustomerId )) ? customer.CustomerIdentifier.CustomerId:string.Empty;
+            account[Attributes.Account.SourceSystemID] = (!string.IsNullOrWhiteSpace(customer.CustomerIdentifier.CustomerId)) ? customer.CustomerIdentifier.CustomerId : string.Empty;
             if (customer.CustomerIdentifier != null)
-                BookingHelper.SetOwner(account, customer.CustomerIdentifier.SourceMarket, trace, service);
+            {
+                if (!string.IsNullOrWhiteSpace(customer.Owner))
+                    account[Attributes.Booking.Owner] = new EntityReference(EntityName.Team, new Guid(customer.Owner));
+            }
             trace.Trace("Account populate fields - end");
             return account;
         }

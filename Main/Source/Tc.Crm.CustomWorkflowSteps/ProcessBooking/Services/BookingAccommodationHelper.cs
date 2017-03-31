@@ -15,20 +15,21 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             var accommodation = bookinginfo.Services.Accommodation;
             if (bookingNumber == null || string.IsNullOrWhiteSpace(bookingNumber))
                 throw new InvalidPluginExecutionException("Booking Number should not be null.");
+
             EntityCollection entityCollectionaccommodation = new EntityCollection();
-            if (accommodation != null && accommodation.Length > 0)
+            if (accommodation == null || accommodation.Length == 0) return entityCollectionaccommodation;
+
+            trace.Trace("Processing " + accommodation.Length.ToString() + " Booking accommodation records - start");
+            Entity accommodationEntity = null;
+            for (int i = 0; i < accommodation.Length; i++)
             {
-                trace.Trace("Processing " + accommodation.Length.ToString() + " Booking accommodation records - start");
-                Entity accommodationEntity = null;
-                for (int i = 0; i < accommodation.Length; i++)
-                {
-                    trace.Trace("Processing Booking accommodation " + i.ToString() + " - start");
-                    accommodationEntity = PrepareBookingAccommodation(bookinginfo, accommodation[i], bookingId, trace);
-                    entityCollectionaccommodation.Entities.Add(accommodationEntity);
-                    trace.Trace("Processing Booking accommodation " + i.ToString() + " - end");
-                }
-                trace.Trace("Processing " + accommodation.Length.ToString() + " Booking accommodation records - end");
+                trace.Trace("Processing Booking accommodation " + i.ToString() + " - start");
+                accommodationEntity = PrepareBookingAccommodation(bookinginfo, accommodation[i], bookingId, trace);
+                entityCollectionaccommodation.Entities.Add(accommodationEntity);
+                trace.Trace("Processing Booking accommodation " + i.ToString() + " - end");
             }
+            trace.Trace("Processing " + accommodation.Length.ToString() + " Booking accommodation records - end");
+
             trace.Trace("Accommodation populate records - end");
             return entityCollectionaccommodation;
         }
@@ -80,7 +81,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             return accommodationEntity;
         }
 
-        
+
 
     }
 }

@@ -19,12 +19,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking
             IWorkflowContext context = executionContext.GetExtension<IWorkflowContext>();
             IOrganizationServiceFactory serviceFactory = executionContext.GetExtension<IOrganizationServiceFactory>();
             IOrganizationService service = serviceFactory.CreateOrganizationService(context.UserId);
-            CountryService.Init();
-            SourceMarketService.Init();
-            BrandService.Init();
-            CurrencyService.Init();
-            TourOperatorService.Init();
-            GatewayService.Init();
+           
             try
             {
                 var bookingJson = BookingInfo.Get<string>(executionContext);

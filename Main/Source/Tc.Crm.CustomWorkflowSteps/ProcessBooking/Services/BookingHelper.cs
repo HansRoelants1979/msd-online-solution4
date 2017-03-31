@@ -67,9 +67,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 booking[Attributes.Booking.DepartureDate] = (!string.IsNullOrWhiteSpace(general.DepartureDate)) ? Convert.ToDateTime(general.DepartureDate) : (DateTime?)null;
                 booking[Attributes.Booking.ReturnDate] = (!string.IsNullOrWhiteSpace(general.ReturnDate)) ? Convert.ToDateTime(general.ReturnDate) : (DateTime?)null;
                 booking[Attributes.Booking.Duration] = Convert.ToInt32(general.Duration);
-                booking[Attributes.Booking.DestinationGatewayId] = (!string.IsNullOrWhiteSpace(general.Destination)) ? new EntityReference(EntityName.Gateway, GatewayService.GetBy(general.Destination)) : null;
-                booking[Attributes.Booking.TourOperatorId] = (!string.IsNullOrWhiteSpace(general.ToCode)) ? new EntityReference(EntityName.TourOperator, TourOperatorService.GetBy(general.ToCode)) : null;
-                booking[Attributes.Booking.BrandId] = (!string.IsNullOrWhiteSpace(general.Brand)) ? new EntityReference(EntityName.Brand, BrandService.GetBy(general.Brand)) : null;
+                booking[Attributes.Booking.DestinationGatewayId] = (!string.IsNullOrWhiteSpace(general.Destination)) ? new EntityReference(EntityName.Gateway, new Guid(general.Destination)) : null;
+                booking[Attributes.Booking.TourOperatorId] = (!string.IsNullOrWhiteSpace(general.ToCode)) ? new EntityReference(EntityName.TourOperator, new Guid(general.ToCode)) : null;
+                booking[Attributes.Booking.BrandId] = (!string.IsNullOrWhiteSpace(general.Brand)) ? new EntityReference(EntityName.Brand, new Guid(general.Brand)) : null;
                 booking[Attributes.Booking.BrochureCode] = (!string.IsNullOrWhiteSpace(general.BrochureCode)) ? general.BrochureCode : string.Empty;
                 booking[Attributes.Booking.IsLateBooking] = general.IsLateBooking;
                 booking[Attributes.Booking.NumberofParticipants] = general.NumberOfParticipants;
@@ -78,7 +78,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 booking[Attributes.Booking.NumberofInfants] = general.NumberOfInfants;
                 booking[Attributes.Booking.TravelAmount] = new Money(general.TravelAmount);
                 if (!string.IsNullOrWhiteSpace(general.Currency))
-                    booking[Attributes.Booking.TransactionCurrencyId] = new EntityReference(EntityName.Currency,CurrencyService.GetBy(general.Currency));
+                    booking[Attributes.Booking.TransactionCurrencyId] = new EntityReference(EntityName.Currency, new Guid(general.Currency));
                 booking[Attributes.Booking.HasSourceMarketComplaint] = general.HasComplaint;
                 trace.Trace("Booking populate general - end");
             }
@@ -247,35 +247,6 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 
             return Destination;
         }
-        public static void SetOwner(Entity booking, string sourceMarket, ITracingService trace, IOrganizationService service)
-        {
-            if (string.IsNullOrEmpty(sourceMarket)) return;
-            var sm = SourceMarketService.GetBy(sourceMarket);
-            if (sm == null) return;
-            if (sm.TeamId == Guid.Empty)
-            {
-                var query = string.Format(@"<fetch distinct='true' mapping='logical' output-format='xml-platform' version='1.0'>
-                                                <entity name='team'>
-                                                    <attribute name='name'/>
-                                                    <attribute name='businessunitid'/>
-                                                    <attribute name='teamid'/>
-                                                    <attribute name='teamtype'/>
-                                                    <order descending='false' attribute='name'/>
-                                                    <filter type='and'>
-                                                        <condition attribute='isdefault' value='1' operator='eq'/>
-                                                        <condition attribute='businessunitid' value='{0}' operator='eq'/>
-                                                    </filter>
-                                                </entity>
-                                            </fetch>", sm.BusinessUnitId);
-
-                var team = CommonXrm.RetrieveMultipleRecordsFetchXml(query, service);
-                if (team == null || team.Entities == null | team.Entities.Count == 0) return;
-
-                sm.TeamId = team.Entities[0].Id;
-            }
-
-            booking[Attributes.Booking.Owner] = new EntityReference(EntityName.Team, sm.TeamId);
-        }
 
         /// <summary>
         /// To prepare transfer information
@@ -436,11 +407,15 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             if (booking.Services != null)
                 bookingEntity[Attributes.Booking.DestinationId] = SetBookingDestination(booking.Services.Accommodation, trace, service);
             if (booking.BookingIdentifier != null)
-                SetOwner(bookingEntity, booking.BookingIdentifier.SourceMarket, trace, service);
+            {
+                if (!string.IsNullOrWhiteSpace(booking.Owner))
+                    bookingEntity[Attributes.Booking.Owner] = new EntityReference(EntityName.Team, new Guid(booking.Owner));
+            }
+
             PopulateServices(bookingEntity, booking.Services, trace);
 
             bookingEntity[Attributes.Booking.SourceMarketId] = (booking.BookingIdentifier.SourceMarket != null) ? new EntityReference(EntityName.Country
-                                                                                    , CountryService.GetBy(booking.BookingIdentifier.SourceMarket))
+                                                                                    , new Guid(booking.BookingIdentifier.SourceMarket))
                                                                                     : null;
 
             bookingEntity[Attributes.Booking.StateCode] = new OptionSetValue((int)Statecode.Active);

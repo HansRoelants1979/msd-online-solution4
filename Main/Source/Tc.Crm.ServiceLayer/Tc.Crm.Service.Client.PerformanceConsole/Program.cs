@@ -117,10 +117,10 @@ namespace Tc.Crm.Service.Client.Console
             {
                 var booking = JsonConvert.DeserializeObject<BookingInformation>(json);
                 //i = i++;
-                var bookingid = "p_" + DateTime.Now.ToString("MM/dd HH:mm:ss.fff") + Thread.CurrentThread.ManagedThreadId;
+                var bookingid = "p_" + DateTime.Now.ToString("HH:mm:ss.fff") + Thread.CurrentThread.ManagedThreadId;
                 if (bookingidtoUpdate == null)
                     bookingidtoUpdate = bookingid;
-                var customerid = "p_" + DateTime.Now.ToString("MM/dd HH:mm:ss.fff") + Thread.CurrentThread.ManagedThreadId;
+                var customerid = "p_" + DateTime.Now.ToString("HH:mm:ss.fff") + Thread.CurrentThread.ManagedThreadId;
                 if (CustomeridtoUpdate == null)
                     CustomeridtoUpdate = customerid;
 

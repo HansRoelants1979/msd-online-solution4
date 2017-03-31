@@ -6,7 +6,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 {
     public static class ContactHelper
     {
-        public static Entity GetContactEntityForBookingPayload(Customer customer, ITracingService trace,IOrganizationService service)
+        public static Entity GetContactEntityForBookingPayload(Customer customer, ITracingService trace)
         {
             if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
             trace.Trace("Contact populate fields - start");
@@ -40,7 +40,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             contact[Attributes.Contact.SourceMarketId] = (customer.CustomerIdentifier!=null &&
                                                             !string.IsNullOrWhiteSpace(customer.CustomerIdentifier.SourceMarket))
                                                                 ?new EntityReference(EntityName.Country
-                                                                                    , CountryService.GetBy(customer.CustomerIdentifier.SourceMarket)) 
+                                                                                    , new Guid(customer.CustomerIdentifier.SourceMarket)) 
                                                                 : null;
 
             contact[Attributes.Contact.SourceSystemID] = (customer.CustomerIdentifier != null 
@@ -48,8 +48,11 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                                                                 ?customer.CustomerIdentifier.CustomerId 
                                                                 : string.Empty;
             if (customer.CustomerIdentifier != null)
-                BookingHelper.SetOwner(contact, customer.CustomerIdentifier.SourceMarket, trace, service);
-
+            {
+                if (!string.IsNullOrWhiteSpace(customer.Owner))
+                    contact[Attributes.Booking.Owner] = new EntityReference(EntityName.Team, new Guid(customer.Owner));
+            }
+            
             if (customer.CustomerGeneral != null)
             {
                 contact[Attributes.Contact.StateCode] = new OptionSetValue((int)Statecode.Active);
@@ -212,7 +215,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             contact[Attributes.Contact.Address1_Town] = (!string.IsNullOrWhiteSpace(address1.Town )) ? address1.Town : string.Empty;
             contact[Attributes.Contact.Address1_CountryId] = (!string.IsNullOrWhiteSpace(address1.Country)) ?
                                                                              new EntityReference(EntityName.Country,
-                                                                             CountryService.GetBy(address1.Country)) : null;
+                                                                             new Guid(address1.Country)) : null;
 
             contact[Attributes.Contact.Address1_County] = (!string.IsNullOrWhiteSpace(address1.County )) ? address1.County :string.Empty ;
             contact[Attributes.Contact.Address1_PostalCode] = (!string.IsNullOrWhiteSpace(address1.PostalCode )) ? address1.PostalCode : string.Empty;
@@ -225,7 +228,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             contact[Attributes.Contact.Address2_Town] = (!string.IsNullOrWhiteSpace(address2.Town )) ? address2.Town:string.Empty;
             contact[Attributes.Contact.Address2_CountryId] = (!string.IsNullOrWhiteSpace(address2.Country)) ?
                                                                              new EntityReference(EntityName.Country,
-                                                                             CountryService.GetBy(address2.Country)) : null;
+                                                                             new Guid(address2.Country)) : null;
             contact[Attributes.Contact.Address2_County] = (!string.IsNullOrWhiteSpace(address2.County )) ? address2.Country:string.Empty;
             contact[Attributes.Contact.Address2_PostalCode] = (!string.IsNullOrWhiteSpace(address2.PostalCode )) ? address2.PostalCode :string.Empty;
             trace.Trace("Contact populate address - end");

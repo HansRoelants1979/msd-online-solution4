@@ -50,9 +50,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 transportEntity[Attributes.BookingTransport.EndDateandTime] = DateTime.Parse(transport.EndDate);
             transportEntity[Attributes.BookingTransport.TransferType] = CommonXrm.GetTransferType(transport.TransferType);
             if (!string.IsNullOrWhiteSpace(transport.DepartureAirport))
-                transportEntity[Attributes.BookingTransport.DepartureGatewayId] = new EntityReference(EntityName.Gateway, Attributes.Gateway.IATA, transport.DepartureAirport);
+                transportEntity[Attributes.BookingTransport.DepartureGatewayId] = new EntityReference(EntityName.Gateway, new Guid(transport.DepartureAirport));
             if (!string.IsNullOrWhiteSpace(transport.ArrivalAirport))
-                transportEntity[Attributes.BookingTransport.ArrivalGatewayId] = new EntityReference(EntityName.Gateway, Attributes.Gateway.IATA, transport.ArrivalAirport);
+                transportEntity[Attributes.BookingTransport.ArrivalGatewayId] = new EntityReference(EntityName.Gateway, new Guid(transport.ArrivalAirport));
             if (!string.IsNullOrWhiteSpace(transport.CarrierCode))
                 transportEntity[Attributes.BookingTransport.CarrierCode] = transport.CarrierCode;
             if (!string.IsNullOrWhiteSpace(transport.FlightNumber))
