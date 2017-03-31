@@ -83,7 +83,7 @@ namespace Tc.Crm.Plugins
                                 Conditions =
                                 {
                                     new ConditionExpression(Attributes.Role.BusinessUnitId, ConditionOperator.Equal, context.BusinessUnitId),
-                                    new ConditionExpression(Attributes.Role.Name, ConditionOperator.Equal, General.TeamRoleName)
+                                    new ConditionExpression(Attributes.Role.Name, ConditionOperator.Equal, General.RoleTcIdBase)
                                 },
                             },
                         }
