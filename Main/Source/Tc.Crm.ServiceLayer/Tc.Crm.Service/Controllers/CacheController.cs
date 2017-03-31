@@ -17,13 +17,15 @@ namespace Tc.Crm.Service.Controllers
         GatewayBucket gatewayBucket;
         SourceMarketBucket sourceMarketBucket;
         TourOperatorBucket tourOperatorBucket;
+        HotelBucket hotelBucket;
 
         public CacheController(BrandBucket brandBucket
                                 , CountryBucket countryBucket
                                 , CurrencyBucket currencyBucket
                                 , GatewayBucket gatewayBucket
                                 , SourceMarketBucket sourceMarketBucket
-                                , TourOperatorBucket tourOperatorBucket)
+                                , TourOperatorBucket tourOperatorBucket
+                                , HotelBucket hotelBucket)
         {
             this.brandBucket = brandBucket;
             this.countryBucket = countryBucket;
@@ -31,6 +33,7 @@ namespace Tc.Crm.Service.Controllers
             this.gatewayBucket = gatewayBucket;
             this.sourceMarketBucket = sourceMarketBucket;
             this.tourOperatorBucket = tourOperatorBucket;
+            this.hotelBucket = hotelBucket;
         }
 
         [Route("api/v1/booking/cache/refresh")]
@@ -54,6 +57,8 @@ namespace Tc.Crm.Service.Controllers
                         this.sourceMarketBucket.FillBucket();
                     else if (key.Equals("TOUROPERATOR", StringComparison.OrdinalIgnoreCase))
                         this.tourOperatorBucket.FillBucket();
+                    else if (key.Equals("HOTEL", StringComparison.OrdinalIgnoreCase))
+                        this.hotelBucket.FillBucket();
                 }
 
                 return new HttpResponseMessage(HttpStatusCode.OK);

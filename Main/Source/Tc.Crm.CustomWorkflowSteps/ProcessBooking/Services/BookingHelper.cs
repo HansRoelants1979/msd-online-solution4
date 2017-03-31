@@ -201,53 +201,6 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             return remarksbuilder.ToString();
         }
 
-        static EntityReference SetBookingDestination(Accommodation[] accommodatations, ITracingService trace, IOrganizationService service)
-        {
-            EntityReference Destination = null;
-            EntityCollection RegionCollection = null;
-            if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
-            trace.Trace(" Booking Destination information - start");
-            if (accommodatations == null || accommodatations.Length == 0) return null;
-
-
-            var FirstAccomdation = accommodatations[0];
-
-            if (FirstAccomdation != null && FirstAccomdation.GroupAccommodationCode != null && FirstAccomdation.GroupAccommodationCode != "")
-            {
-                var query = string.Format(@"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='true'>
-                                <entity name='tc_region'>
-                               <attribute name='tc_name' />
-                               <attribute name='tc_regioncode' />
-                               <attribute name='tc_countryid' />
-                               <attribute name='tc_regionid' />
-                               <order attribute='tc_name' descending='false' />
-                              <link-entity name='tc_location' from='tc_regionid' to='tc_regionid' alias='af'>
-                            <link-entity name='tc_hotel' from='tc_locationid' to='tc_locationid' alias='ag'>
-                             <filter type='and'>
-                             <condition attribute='tc_masterhotelid' operator='eq' value='{0}' />
-                          </filter>
-                          </link-entity>
-                          </link-entity>
-                          </entity>
-                          </fetch>",
-                                         new object[] { FirstAccomdation.GroupAccommodationCode,
-                                                      });
-
-
-                RegionCollection = CommonXrm.RetrieveMultipleRecordsFetchXml(query, service);
-            }
-
-            if (RegionCollection != null && RegionCollection.Entities != null && RegionCollection.Entities.Count > 0)
-            {
-
-                Destination = new EntityReference(EntityName.Region, RegionCollection.Entities[0].Id);
-
-
-            }
-
-            return Destination;
-        }
-
         /// <summary>
         /// To prepare transfer information
         /// </summary>     
@@ -404,8 +357,11 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             PopulateGeneralFields(bookingEntity, booking.BookingGeneral, trace);
             bookingEntity[Attributes.Booking.Participants] = PrepareTravelParticipantsInfo(booking.TravelParticipant, trace);
             bookingEntity[Attributes.Booking.ParticipantRemarks] = PrepareTravelParticipantsRemarks(booking.TravelParticipant, trace);
-            if (booking.Services != null)
-                bookingEntity[Attributes.Booking.DestinationId] = SetBookingDestination(booking.Services.Accommodation, trace, service);
+            if (!string.IsNullOrWhiteSpace(booking.DestinationId))
+                bookingEntity[Attributes.Booking.DestinationId] = new EntityReference(EntityName.Region, new Guid(booking.DestinationId));
+            else
+                bookingEntity[Attributes.Booking.DestinationId] = null;
+
             if (booking.BookingIdentifier != null)
             {
                 if (!string.IsNullOrWhiteSpace(booking.Owner))

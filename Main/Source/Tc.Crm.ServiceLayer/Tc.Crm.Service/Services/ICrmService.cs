@@ -22,6 +22,6 @@ namespace Tc.Crm.Service.Services
         Collection<tcm.Gateway> GetGateways();
         Collection<tcm.TourOperator> GetTourOperators();
         Collection<tcm.SourceMarket> GetSourceMarkets();
-
+        Collection<tcm.Hotel> GetHotels();
     }
 }

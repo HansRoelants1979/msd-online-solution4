@@ -25,6 +25,7 @@ namespace Tc.Crm.Service
             container.RegisterType<IBucket, GatewayBucket>(new ContainerControlledLifetimeManager());
             container.RegisterType<IBucket, TourOperatorBucket>(new ContainerControlledLifetimeManager());
             container.RegisterType<ISourceMarketBucket, SourceMarketBucket>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IHotelBucket, HotelBucket>(new ContainerControlledLifetimeManager());
             config.DependencyResolver = new UnityResolver(container);
             
             // Web API routes

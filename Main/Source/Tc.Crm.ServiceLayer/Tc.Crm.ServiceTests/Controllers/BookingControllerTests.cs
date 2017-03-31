@@ -28,7 +28,7 @@ namespace Tc.Crm.Service.Controllers.Tests
         public void TestSetup()
         {
             context = new XrmFakedContext();
-            bookingService = new BookingService(null,null,null,null,null,null);
+            bookingService = new BookingService(null,null,null,null,null,null,null);
             crmService = new TestCrmService(context);
             controller = new BookingController(bookingService, crmService);
             controller.Request = new System.Net.Http.HttpRequestMessage();

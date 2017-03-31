@@ -26,6 +26,9 @@ namespace Tc.Crm.Service.Models
     [DataContract(Name = "booking")]
     public class Booking
     {
+        [DataMember(Name = "destinationId")]
+        public string DestinationId { get; set; }
+
         [DataMember(Name = "owner")]
         public string Owner { get; set; }
 

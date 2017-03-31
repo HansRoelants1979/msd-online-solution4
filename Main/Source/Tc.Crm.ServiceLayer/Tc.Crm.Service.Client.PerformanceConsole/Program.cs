@@ -182,22 +182,22 @@ namespace Tc.Crm.Service.Client.Console
                 Task<string> task = response.Content.ReadAsStringAsync();
                 var content = task.Result;
 
-                System.Console.WriteLine("Response Code: {0}", response.StatusCode.GetHashCode());
-                if (response.StatusCode == HttpStatusCode.Created)
-                    System.Console.WriteLine("Booking has been created with GUID::{0}", content);
-                else if (response.StatusCode == HttpStatusCode.NoContent)
-                    System.Console.WriteLine("Booking has been updated.");
-                else if (response.StatusCode == HttpStatusCode.BadRequest)
-                    System.Console.WriteLine("Bad Request.");
-                else if (response.StatusCode == HttpStatusCode.InternalServerError)
-                    System.Console.WriteLine("Internal Server Error.");
-                else if (response.StatusCode == HttpStatusCode.Forbidden)
-                    System.Console.WriteLine("Forbidden.");
+                //System.Console.WriteLine("Response Code: {0}", response.StatusCode.GetHashCode());
+                //if (response.StatusCode == HttpStatusCode.Created)
+                //    System.Console.WriteLine("Booking has been created with GUID::{0}", content);
+                //else if (response.StatusCode == HttpStatusCode.NoContent)
+                //    System.Console.WriteLine("Booking has been updated.");
+                //else if (response.StatusCode == HttpStatusCode.BadRequest)
+                //    System.Console.WriteLine("Bad Request.");
+                //else if (response.StatusCode == HttpStatusCode.InternalServerError)
+                //    System.Console.WriteLine("Internal Server Error.");
+                //else if (response.StatusCode == HttpStatusCode.Forbidden)
+                //    System.Console.WriteLine("Forbidden.");
 
-                if (string.IsNullOrWhiteSpace(content))
-                    System.Console.WriteLine("No content.");
-                else
-                    System.Console.WriteLine("Content:{0}", content);
+                //if (string.IsNullOrWhiteSpace(content))
+                //    System.Console.WriteLine("No content.");
+                //else
+                //    System.Console.WriteLine("Content:{0}", content);
             }
             catch (Exception ex)
             {

@@ -12,13 +12,15 @@ namespace Tc.Crm.Service.Services
         GatewayBucket gatewayBucket;
         SourceMarketBucket sourceMarketBucket;
         TourOperatorBucket tourOperatorBucket;
+        HotelBucket hotelBucket;
 
         public BookingService(BrandBucket brandBucket
                                 , CountryBucket countryBucket
                                 , CurrencyBucket currencyBucket
                                 , GatewayBucket gatewayBucket
                                 , SourceMarketBucket sourceMarketBucket
-                                , TourOperatorBucket tourOperatorBucket)
+                                , TourOperatorBucket tourOperatorBucket
+                                , HotelBucket hotelBucket)
         {
             this.brandBucket = brandBucket;
             this.countryBucket = countryBucket;
@@ -26,6 +28,7 @@ namespace Tc.Crm.Service.Services
             this.gatewayBucket = gatewayBucket;
             this.sourceMarketBucket = sourceMarketBucket;
             this.tourOperatorBucket = tourOperatorBucket;
+            this.hotelBucket = hotelBucket;
         }
         public BookingUpdateResponse Update(string bookingData, ICrmService crmService)
         {
@@ -56,9 +59,33 @@ namespace Tc.Crm.Service.Services
             {
                 ResolveTransportReferences(booking.Services.Transport);
                 ResolveTransferReferences(booking.Services.Transfer);
+                ResolveAccommodationReferences(booking);
             }
         }
+        public void ResolveAccommodationReferences(Booking booking)
+        {
+            if (booking.Services.Accommodation == null || booking.Services.Accommodation.Length == 0)
+                return;
+            var dest = hotelBucket.GetBy(booking.Services.Accommodation[0].GroupAccommodationCode);
 
+            if (dest == null || string.IsNullOrWhiteSpace(dest.DestinationId))
+            {
+                booking.DestinationId = null;
+            }
+            else
+            {
+                booking.DestinationId = dest.DestinationId;
+            }
+
+            foreach (var acc in booking.Services.Accommodation)
+            {
+                var hotel = hotelBucket.GetBy(acc.GroupAccommodationCode);
+                if (hotel == null || string.IsNullOrWhiteSpace(hotel.Id))
+                    acc.GroupAccommodationCode = null;
+                else
+                    acc.GroupAccommodationCode = hotel.Id;
+            }
+        }
         public void ResolveTransportReferences(Transport[] transports)
         {
             if (transports == null) return;

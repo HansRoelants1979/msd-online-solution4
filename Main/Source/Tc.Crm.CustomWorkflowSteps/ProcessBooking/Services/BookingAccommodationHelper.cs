@@ -45,7 +45,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             if (!string.IsNullOrWhiteSpace(accommodation.GroupAccommodationCode))
             {
                 accommodationEntity[Attributes.BookingAccommodation.Name] = bookingNumber + General.Concatenator + accommodation.GroupAccommodationCode;
-                accommodationEntity[Attributes.BookingAccommodation.HotelId] = new EntityReference(EntityName.Hotel, Attributes.Hotel.MasterHotelID, accommodation.GroupAccommodationCode);
+                accommodationEntity[Attributes.BookingAccommodation.HotelId] = new EntityReference(EntityName.Hotel, new Guid(accommodation.GroupAccommodationCode));
             }
             else
             {

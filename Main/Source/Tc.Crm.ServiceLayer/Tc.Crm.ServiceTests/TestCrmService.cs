@@ -100,5 +100,10 @@ namespace Tc.Crm.ServiceTests
         {
             throw new NotImplementedException();
         }
+
+        public Collection<Hotel> GetHotels()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
