@@ -35,7 +35,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// </summary>
         /// <param name="json"></param>
         /// <returns></returns>
-        public static Booking DeSerializeJson(string json,ITracingService trace)
+        public static Booking DeserializeJson(string json,ITracingService trace)
         {
             if (trace == null) throw new InvalidPluginExecutionException("trace is null.");
             trace.Trace("Processing DeSerialization of json Payload - start");

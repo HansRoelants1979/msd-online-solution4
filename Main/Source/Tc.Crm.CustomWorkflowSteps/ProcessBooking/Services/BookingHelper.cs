@@ -86,7 +86,6 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 
         }
 
-
         public static void PopulateServices(Entity booking, BookingServices service, ITracingService trace)
         {
             if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
@@ -96,10 +95,6 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             trace.Trace("Booking populate service - end");
         }
 
-        /// <summary>
-        /// To prepare travel participants information
-        /// </summary>        
-        /// <returns></returns>
         static string PrepareTravelParticipantsInfo(TravelParticipant[] travelParticipants, ITracingService trace)
         {
             if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
@@ -131,6 +126,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             trace.Trace("Travel Participants information - end");
             return participantsBuilder.ToString();
         }
+
         public static string PrepareTravelParticipantsInfoForChildRecords(TravelParticipant[] travelParticipants, ITracingService trace, TravelParticipantAssignment[] travelParticipantsAssignment)
         {
             if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
@@ -164,10 +160,6 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             return participantsBuilder.ToString().Remove(participantsBuilder.Length - 3);
         }
 
-        /// <summary>
-        /// To prepare travel participants remarks information
-        /// </summary>       
-        /// <returns></returns>
         static string PrepareTravelParticipantsRemarks(TravelParticipant[] travelParticipants, ITracingService trace)
         {
             if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
@@ -200,147 +192,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             trace.Trace("Booking populate participants remarks - end");
             return remarksbuilder.ToString();
         }
-
-        /// <summary>
-        /// To prepare transfer information
-        /// </summary>     
-        /// <returns></returns>
-        static string PrepareTransferInfo(Transfer[] transfers, ITracingService trace)
-        {
-            if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
-            trace.Trace("Booking populate transfers - start");
-            if (transfers == null || transfers.Length == 0) return string.Empty;
-
-            StringBuilder transfersBuilder = new StringBuilder();
-            trace.Trace("Processing " + transfers.Length.ToString() + " transfers - start");
-            for (int i = 0; i < transfers.Length; i++)
-            {
-                StringBuilder transferBuilder = new StringBuilder();
-                trace.Trace("Processing transfer " + i.ToString() + " - start");
-                if (!string.IsNullOrWhiteSpace(transfers[i].TransferCode))
-                    transferBuilder.Append(transfers[i].TransferCode + General.Seperator);
-                if (!string.IsNullOrWhiteSpace(transfers[i].TransferDescription))
-                    transferBuilder.Append(transfers[i].TransferDescription + General.Seperator);
-                transferBuilder.Append(transfers[i].Order.ToString() + General.Seperator);
-                if (!string.IsNullOrWhiteSpace(transfers[i].StartDate))
-                    transferBuilder.Append(transfers[i].StartDate + General.Seperator);
-                if (!string.IsNullOrWhiteSpace(transfers[i].EndDate))
-                    transferBuilder.Append(transfers[i].EndDate + General.Seperator);
-                if (!string.IsNullOrWhiteSpace(transfers[i].Category))
-                    transferBuilder.Append(transfers[i].Category + General.Seperator);
-                transferBuilder.Append(transfers[i].TransferType.ToString() + General.Seperator);
-                if (!string.IsNullOrWhiteSpace(transfers[i].DepartureAirport))
-                    transferBuilder.Append(transfers[i].DepartureAirport + General.Seperator);
-                if (!string.IsNullOrWhiteSpace(transfers[i].ArrivalAirport))
-                    transferBuilder.Append(transfers[i].ArrivalAirport);
-
-                transfersBuilder.AppendLine(transferBuilder.ToString());
-                trace.Trace("Processing transfer " + i.ToString() + " - end");
-            }
-            trace.Trace("Processing " + transfers.Length.ToString() + " transfers - end");
-
-            trace.Trace("Booking populate transfers - end");
-            return transfersBuilder.ToString();
-        }
-
-        /// <summary>
-        /// To prepare trasnfer remarks information
-        /// </summary>  
-        /// <returns></returns>
-        static string PrepareTransferRemarks(Transfer[] transfers, ITracingService trace)
-        {
-            if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
-            trace.Trace("Booking populate transfer remarks - start");
-            if (transfers == null || transfers.Length == 0) return string.Empty;
-
-            StringBuilder remarksBuilder = new StringBuilder();
-
-            for (int i = 0; i < transfers.Length; i++)
-            {
-                if (transfers[i].Remark == null) continue;
-                trace.Trace("Processing " + i.ToString() + " Transfer and its " + transfers[i].Remark.Length.ToString() + " Transfer service remarks - start");
-                for (int j = 0; j < transfers[i].Remark.Length; j++)
-                {
-                    StringBuilder remarkBuilder = new StringBuilder();
-                    trace.Trace("Processing Transfer Remark " + j.ToString() + " information - start");
-                    remarkBuilder.Append(transfers[i].Remark[j].RemarkType.ToString() + General.Seperator);
-                    if (!string.IsNullOrWhiteSpace(transfers[i].Remark[j].Text))
-                        remarkBuilder.Append(transfers[i].Remark[j].Text);
-                    remarksBuilder.AppendLine(remarkBuilder.ToString());
-                    trace.Trace("Processing Transfer Remark " + j.ToString() + " information - end");
-                }
-                trace.Trace("Processing " + i.ToString() + " Transfer and its " + transfers[i].Remark.Length.ToString() + " Transfer service remarks - end");
-            }
-            trace.Trace("Booking populate transfer remarks - end");
-            return remarksBuilder.ToString();
-        }
-
-
-        /// <summary>
-        /// To prepare extraservice information
-        /// </summary>       
-        /// <returns></returns>
-        static string PrepareExtraServicesInfo(ExtraService[] extraServices, ITracingService trace)
-        {
-            if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
-            trace.Trace("Booking populate extra services - start");
-            if (extraServices == null || extraServices.Length == 0) return string.Empty;
-
-            StringBuilder extraServicesBuilder = new StringBuilder();
-            trace.Trace("Booking populate " + extraServices.Length.ToString() + " extra services - start");
-            for (int i = 0; i < extraServices.Length; i++)
-            {
-                StringBuilder extraServiceBuilder = new StringBuilder();
-                trace.Trace("Processing extra service " + i.ToString() + " - start");
-                if (!string.IsNullOrWhiteSpace(extraServices[i].ExtraServiceCode))
-                    extraServiceBuilder.Append(extraServices[i].ExtraServiceCode + General.Seperator);
-                if (!string.IsNullOrWhiteSpace(extraServices[i].ExtraServiceDescription))
-                    extraServiceBuilder.Append(extraServices[i].ExtraServiceDescription + General.Seperator);
-                extraServiceBuilder.Append(extraServices[i].Order.ToString() + General.Seperator);
-                if (!string.IsNullOrWhiteSpace(extraServices[i].StartDate))
-                    extraServiceBuilder.Append(extraServices[i].StartDate + General.Seperator);
-                if (!string.IsNullOrWhiteSpace(extraServices[i].EndDate))
-                    extraServiceBuilder.Append(extraServices[i].EndDate);
-
-                extraServicesBuilder.AppendLine(extraServiceBuilder.ToString());
-                trace.Trace("Processing extra service " + i.ToString() + " - End");
-            }
-            trace.Trace("Booking populate " + extraServices.Length.ToString() + " extra services - end");
-            trace.Trace("Booking populate extra services - end");
-            return extraServicesBuilder.ToString();
-        }
-
-        /// <summary>
-        /// To prepare extra service remarks information
-        /// </summary>     
-        /// <returns></returns>
-        static string PrepareExtraServiceRemarks(ExtraService[] extraServices, ITracingService trace)
-        {
-            if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
-            trace.Trace("Booking populate extra service remarks - start");
-            if (extraServices == null || extraServices.Length == 0) return string.Empty;
-            StringBuilder remarksBuilder = new StringBuilder();
-            for (int i = 0; i < extraServices.Length; i++)
-            {
-                if (extraServices[i].Remark == null) continue;
-                trace.Trace("Processing " + i.ToString() + " extra service and its " + extraServices[i].Remark.Length.ToString() + " extra service remarks - start");
-                for (int j = 0; j < extraServices[i].Remark.Length; j++)
-                {
-                    StringBuilder remarkBuilder = new StringBuilder();
-                    trace.Trace("Processing Extra Service Remark " + j.ToString() + " information - start");
-                    remarkBuilder.Append(extraServices[i].Remark[j].RemarkType.ToString() + General.Seperator);
-                    if (!string.IsNullOrWhiteSpace(extraServices[i].Remark[j].Text))
-                        remarkBuilder.Append(extraServices[i].Remark[j].Text);
-                    remarksBuilder.AppendLine(remarkBuilder.ToString());
-                    trace.Trace("Processing Extra Service Remark " + j.ToString() + " information - end");
-                }
-                trace.Trace("Processing " + i.ToString() + " extra service and its " + extraServices[i].Remark.Length.ToString() + " extra service remarks - end");
-
-            }
-            trace.Trace("Booking populate extra service remarks - start");
-            return remarksBuilder.ToString();
-        }
-
+        
         public static Entity GetBookingEntityFromPayload(Booking booking, ITracingService trace, IOrganizationService service)
         {
             if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
@@ -376,7 +228,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 
             bookingEntity[Attributes.Booking.StateCode] = new OptionSetValue((int)Statecode.Active);
             bookingEntity[Attributes.Booking.StatusCode] = CommonXrm.GetBookingStatus(booking.BookingGeneral.BookingStatus);
-
+            bookingEntity[Attributes.Booking.Remarks] = RemarksHelper.GetRemarksTextFromPayload(booking.Remark);
             trace.Trace("Booking populate fields - end");
 
             return bookingEntity;

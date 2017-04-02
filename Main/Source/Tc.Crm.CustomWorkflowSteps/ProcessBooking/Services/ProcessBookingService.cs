@@ -34,7 +34,6 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 
             ProcessCustomer();
             ProcessBookingInfo();
-            //ProcessRemarks();
             ProcessAccommodation();
             ProcessTransport();
             ProcessTransfers();
@@ -166,27 +165,6 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             trace.Trace("Processing Booking - end");
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void ProcessRemarks()
-        {
-            trace.Trace("Remarks information - start");
-            //for booking remarks will not be removed
-            if (payloadBooking.BookingInfo.Remark != null)
-            {
-                var entityCollectionRemarks = RemarksHelper.GetRemarksEntityFromPayload(payloadBooking.BookingInfo.Remark, Guid.Parse(payloadBooking.BookingId), trace, RemarkType.Remark);
-                CommonXrm.BulkCreate(entityCollectionRemarks, crmService);
-            }
-            trace.Trace("Remarks information - end");
-        }
-
-
-        /// <summary>
-        /// To process accomodation informaation
-        /// </summary>      
-        /// <returns></returns>
         public void ProcessAccommodation()
         {
 
@@ -207,38 +185,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             var entityCollectionAccommodation = BookingAccommodationHelper.GetBookingAccommodationEntityFromPayload(bookinginfo, Guid.Parse(payloadBooking.BookingId), trace);
             List<XrmResponse> xrmResponseList = CommonXrm.BulkCreate(entityCollectionAccommodation, crmService);
             trace.Trace("Booking Accommodation information - end");
-            //ProcessAccommodationRemarks(xrmResponseList);
-
         }
 
-        /// <summary>
-        /// To process accomodation remarks
-        /// </summary>       
-        /// <param name="responseList"></param>
-        public void ProcessAccommodationRemarks(List<XrmResponse> responseList)
-        {
-            if (responseList == null || responseList.Count == 0) return;
-            EntityCollection entityCollectionAccomodationRemarks = new EntityCollection();
-            if (payloadBooking.BookingInfo.Services != null 
-                && payloadBooking.BookingInfo.Services.Accommodation != null)
-            {
-                trace.Trace("Accommodation Remarks information - Start");
-                //string bookingNumber = payloadBooking.BookingInfo.BookingIdentifier.BookingNumber;
-                for (int i = 0; i < payloadBooking.BookingInfo.Services.Accommodation.Length; i++)
-                {
-                    if (payloadBooking.BookingInfo.Services.Accommodation[i].Remark != null)
-                    {
-                        var accommodationRemarks = RemarksHelper.GetRemarksEntityFromPayload(payloadBooking.BookingInfo.Services.Accommodation[i].Remark, Guid.Parse(responseList[i].Id), trace, RemarkType.AccomodationRemark);
-                        entityCollectionAccomodationRemarks.Entities.AddRange(accommodationRemarks.Entities);
-                    }
-
-                }
-
-                if (entityCollectionAccomodationRemarks.Entities.Count > 0)
-                    CommonXrm.BulkCreate(entityCollectionAccomodationRemarks, crmService);
-                trace.Trace("Accommodation Remarks information - End");
-            }
-        }
+        
 
         /// <summary>
         /// 
@@ -265,41 +214,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 var bookinginfo = payloadBooking.BookingInfo;
                 var entityCollectionTransport = BookingTransportHelper.GetTransportEntityForBookingPayload(bookinginfo, Guid.Parse(payloadBooking.BookingId), trace);
                 List<XrmResponse> xrmResponseList = CommonXrm.BulkCreate(entityCollectionTransport, crmService);
-                //ProcessTransportRemarks(xrmResponseList);
                 trace.Trace("Transport information - end");
 
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="xrmResponseList"></param>
-        public void ProcessTransportRemarks(List<XrmResponse> responseList)
-        {
-            if (responseList == null || responseList.Count == 0) return;
-
-            if (payloadBooking.BookingInfo.Services != null 
-                && payloadBooking.BookingInfo.Services.Transport != null )
-            {
-                EntityCollection entityColllectionTransportRemarks = new EntityCollection();
-                trace.Trace("Transport Remarks information - Start");
-                for (int i = 0; i < payloadBooking.BookingInfo.Services.Transport.Length; i++)
-                {
-                    if (payloadBooking.BookingInfo.Services.Transport[i].Remark != null)
-                    {
-                        //BN - Type
-                        var transportRemarks = RemarksHelper.GetRemarksEntityFromPayload(payloadBooking.BookingInfo.Services.Transport[i].Remark, Guid.Parse(responseList[i].Id), trace, RemarkType.TransportRemark);
-                        entityColllectionTransportRemarks.Entities.AddRange(transportRemarks.Entities);
-                    }
-
-                }
-
-                if (entityColllectionTransportRemarks.Entities.Count > 0)
-                    CommonXrm.BulkCreate(entityColllectionTransportRemarks, crmService);
-                trace.Trace("Transport Remarks information - End");
-            }
-
         }
 
         public void ProcessTransfers()
@@ -320,42 +237,13 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 var entityCollectionTransfer = BookingTransferHelper.GetBookingTransferEntityFromPayload(bookinginfo, Guid.Parse(payloadBooking.BookingId), trace);
                 List<XrmResponse> xrmResponseList = CommonXrm.BulkCreate(entityCollectionTransfer, crmService);
                 trace.Trace("Booking Transfer information - end");
-
-                //ProcessTransferRemarks(xrmResponseList);
             }
         }
 
-        public void ProcessTransferRemarks(List<XrmResponse> responseList)
-        {
-            if (responseList == null || responseList.Count == 0) return;
-            if (payloadBooking.BookingInfo.Services != null 
-                && payloadBooking.BookingInfo.Services.Transfer != null )
-            {
-                EntityCollection entityColllectionTransferRemarks = new EntityCollection();
-
-                trace.Trace("Transfer Remarks information - Start");
-                for (int i = 0; i < payloadBooking.BookingInfo.Services.Transfer.Length; i++)
-                {
-                    if (payloadBooking.BookingInfo.Services.Transfer[i].Remark != null)
-                    {
-                        //BN - Type
-                        var transferRemarks = RemarksHelper.GetRemarksEntityFromPayload(payloadBooking.BookingInfo.Services.Transfer[i].Remark, Guid.Parse(responseList[i].Id), trace, RemarkType.TransferRemark);
-                        entityColllectionTransferRemarks.Entities.AddRange(transferRemarks.Entities);
-                    }
-
-                }
-
-                if (entityColllectionTransferRemarks.Entities.Count > 0)
-                    CommonXrm.BulkCreate(entityColllectionTransferRemarks, crmService);
-                trace.Trace("Transfer Remarks information - End");
-            }
-
-        }
+        
 
         public void ProcessExtraServices()
         {
-
-
 
             if (payloadBooking.DeleteAccommodationOrTransportOrRemarksOrTransferOrExtraService)
             {
@@ -375,37 +263,10 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 var entityCollectionExtraService = BookingExtraServiceHelper.GetBookingExtraServicerEntityFromPayload(bookinginfo, Guid.Parse(payloadBooking.BookingId), trace);
                 List<XrmResponse> xrmResponseList = CommonXrm.BulkCreate(entityCollectionExtraService, crmService);
                 trace.Trace("Booking Transfer information - end");
-
-                //ProcessExtraServiceRemarks(xrmResponseList);
             }
         }
 
-        public void ProcessExtraServiceRemarks(List<XrmResponse> responseList)
-        {
-            if (responseList == null || responseList.Count == 0) return;
-            if (payloadBooking.BookingInfo.Services != null 
-                && payloadBooking.BookingInfo.Services.ExtraService != null )
-            {
-                EntityCollection entityColllectionExtraServiceRemarks = new EntityCollection();
-
-                trace.Trace("ExtraService Remarks information - Start");
-                for (int i = 0; i < payloadBooking.BookingInfo.Services.ExtraService.Length; i++)
-                {
-                    if (payloadBooking.BookingInfo.Services.ExtraService[i].Remark != null)
-                    {
-                        //BN - Type
-                        var transferRemarks = RemarksHelper.GetRemarksEntityFromPayload(payloadBooking.BookingInfo.Services.ExtraService[i].Remark, Guid.Parse(responseList[i].Id), trace, RemarkType.ExtraServiceRemark);
-                        entityColllectionExtraServiceRemarks.Entities.AddRange(transferRemarks.Entities);
-                    }
-
-                }
-
-                if (entityColllectionExtraServiceRemarks.Entities.Count > 0)
-                    CommonXrm.BulkCreate(entityColllectionExtraServiceRemarks, crmService);
-                trace.Trace("ExtraService Remarks information - End");
-            }
-
-        }
+        
 
         /// <summary>
         /// 

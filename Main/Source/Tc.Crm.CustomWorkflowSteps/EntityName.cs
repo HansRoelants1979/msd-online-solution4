@@ -149,6 +149,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         }
         public class Booking
         {
+            public static string Remarks = "tc_remark";
             public const string AgentFullName = "tc_agentfullname";
             public const string AgentPersonalNumber = "tc_agentpersonalnumber";
             public const string AgentShortName = "tc_agentshortname";

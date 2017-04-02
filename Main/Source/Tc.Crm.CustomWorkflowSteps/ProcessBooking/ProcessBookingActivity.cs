@@ -24,7 +24,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking
             {
                 var bookingJson = BookingInfo.Get<string>(executionContext);
                 PayloadBooking payloadBooking = new PayloadBooking(tracingService, service);
-                payloadBooking.BookingInfo = JsonHelper.DeSerializeJson(bookingJson,tracingService);
+                payloadBooking.BookingInfo = JsonHelper.DeserializeJson(bookingJson,tracingService);
                 ProcessBookingService process = new ProcessBookingService(payloadBooking);
                 Response.Set(executionContext, process.ProcessPayload());
 

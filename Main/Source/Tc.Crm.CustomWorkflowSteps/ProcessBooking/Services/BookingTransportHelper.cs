@@ -62,6 +62,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             transportEntity[Attributes.BookingTransport.NumberofParticipants] = transport.NumberOfParticipants;
             transportEntity[Attributes.BookingTransport.BookingId] = new EntityReference(EntityName.Booking, bookingId);
             transportEntity[Attributes.BookingTransport.Participants] = BookingHelper.PrepareTravelParticipantsInfoForChildRecords(bookinginfo.TravelParticipant, trace, transport.TravelParticipantAssignment);
+            transportEntity[Attributes.Booking.Remarks] = RemarksHelper.GetRemarksTextFromPayload(transport.Remark);
+
             trace.Trace("Transport populate fields - end");
             return transportEntity;
         }

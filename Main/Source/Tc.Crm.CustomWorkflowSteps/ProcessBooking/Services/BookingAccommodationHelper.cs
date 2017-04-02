@@ -76,6 +76,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             accommodationEntity[Attributes.BookingAccommodation.Participants] = BookingHelper.PrepareTravelParticipantsInfoForChildRecords(bookinginfo.TravelParticipant, trace, accommodation.TravelParticipantAssignment);
             accommodationEntity[Attributes.Booking.StateCode] = new OptionSetValue((int)Statecode.Active);
             accommodationEntity[Attributes.Booking.StatusCode] = CommonXrm.GetAccommodationStatus(accommodation.Status);
+            accommodationEntity[Attributes.Booking.Remarks] = RemarksHelper.GetRemarksTextFromPayload(accommodation.Remark);
             trace.Trace("Preparing Booking Transport information - End");
 
             return accommodationEntity;
