@@ -8,11 +8,12 @@ using Microsoft.Xrm.Sdk.Query;
 using Microsoft.Xrm.Sdk.Messages;
 using System.Collections.Generic;
 
+
 namespace Tc.Crm.CustomWorkflowSteps.RetrieveParentRecord.Services
 {
-      class RetrieveRecordProcessHelper
+    class RetrieveRecordProcessHelper
     {
-        public static string RetrieveParentRecord(string expression, IOrganizationService service, IWorkflowContext context)
+        public static EntityReference RetrieveParentRecord(string expression, IOrganizationService service, IWorkflowContext context)
         {
             if (expression == null)
                 throw new InvalidPluginExecutionException("Expression is null");
@@ -22,7 +23,7 @@ namespace Tc.Crm.CustomWorkflowSteps.RetrieveParentRecord.Services
                 throw new InvalidPluginExecutionException("context is null");
 
             string SourceId = string.Empty;
-            string ReturnValue = string.Empty;
+            EntityReference ReturnValue = null;
             string ReturnValuecolName = string.Empty;
 
             #region ParseString
@@ -33,7 +34,7 @@ namespace Tc.Crm.CustomWorkflowSteps.RetrieveParentRecord.Services
 
             #endregion ParseString
             #region RetrievParentRecord
-            for (var i = 0; i < words.Length - 2; i++)
+            for (var i = 0; i < words.Length - 1; i++)
             {
 
                 List<Entity> ParentEntityRecords = new List<Entity>();
@@ -42,18 +43,16 @@ namespace Tc.Crm.CustomWorkflowSteps.RetrieveParentRecord.Services
                 QueryExpression query = new QueryExpression();
 
                 query.EntityName = words[i + 1].Substring(words[i + 1].IndexOf(";") + 1);
-                if (i == words.Length - 3)
-                {
-                    query.ColumnSet = new ColumnSet(words[i + 2]);
-                    ReturnValuecolName = words[i + 2];
-                }
-                else
-                {
-                    query.ColumnSet = new ColumnSet();
-                }
 
+                query.ColumnSet = new ColumnSet();
+
+                //check relationship Exist or not in the CRM system
+                RelationshipExistOrNot(words[i + 1].Substring(0, words[i + 1].IndexOf(";")), service);
                 //the relationship that links the primary to the target
                 Relationship relationship = new Relationship(words[i + 1].Substring(0, words[i + 1].IndexOf(";")));
+
+
+
                 relationship.PrimaryEntityRole = EntityRole.Referenced; //important if the relationship is self-referencing
 
                 //the query collection which forms the request
@@ -66,12 +65,14 @@ namespace Tc.Crm.CustomWorkflowSteps.RetrieveParentRecord.Services
                 request.ColumnSet = new ColumnSet();
                 if (i == 0)
                 {
+                    if (context.PrimaryEntityName != words[i].Substring(words[i].IndexOf(";") + 1))
+                        throw new InvalidPluginExecutionException("First Entity name should be the name of workflow excution entity ");
 
                     request.Target = new EntityReference(context.PrimaryEntityName, context.PrimaryEntityId);
                 }
                 else
                 {
-                    request.Target = new EntityReference(words[i].Substring(words[i + 1].IndexOf(";") + 2), new Guid(SourceId));
+                    request.Target = new EntityReference(words[i].Substring(words[i].IndexOf(";") + 1), new Guid(SourceId));
                 }
 
                 RetrieveResponse r = (RetrieveResponse)service.Execute(request);
@@ -82,25 +83,35 @@ namespace Tc.Crm.CustomWorkflowSteps.RetrieveParentRecord.Services
                 {
                     SourceId = ParentEntityRecords[0].Id.ToString();
 
-                    if (ParentEntityRecords[0].Attributes.Contains(ReturnValuecolName) && ParentEntityRecords[0].Attributes[ReturnValuecolName] != null)
-                    
-                    {
-                        var ReturnValueType = ParentEntityRecords[0].Attributes[ReturnValuecolName].GetType();
-                        if (ReturnValueType.Name == "String")
-                            ReturnValue = ParentEntityRecords[0].Attributes[ReturnValuecolName].ToString();
-                        if (ReturnValueType.Name == "EntityReference")
-                            ReturnValue = ((EntityReference)(ParentEntityRecords[0].Attributes[ReturnValuecolName])).Name;
-                        if (ReturnValueType.Name == "OptionSetValue")
-                            ReturnValue = ((ParentEntityRecords[0].FormattedValues[ReturnValuecolName]));
-                    }
-                }
 
+                    if (i == (words.Length - 2))
+                    {
+
+                        ReturnValue = new EntityReference(words[i + 1].Substring(words[i + 1].IndexOf(";") + 1), ParentEntityRecords[0].Id);
+                    }
+
+
+                }
 
             }
 
 
             return ReturnValue;
             #endregion RetrievParentRecord
+        }
+        static void RelationshipExistOrNot(string relationshipname, IOrganizationService service)
+        {
+            try
+            {
+
+                RetrieveRelationshipRequest retrieveManyToOneRequest = new RetrieveRelationshipRequest { Name = relationshipname };
+                RetrieveRelationshipResponse retrieveManyToOneResponse = (RetrieveRelationshipResponse)service.Execute(retrieveManyToOneRequest);
+
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidPluginExecutionException("" + relationshipname + " relationship is not present in the CRM system");
+            }
         }
     }
 }
