@@ -4,15 +4,8 @@ using Microsoft.Xrm.Sdk;
 
 namespace Tc.Crm.Plugins
 {
-    public class AddUserToHotelTeam : IPlugin
-    {
-        public string[] businessUnitNames;
-        public AddUserToHotelTeam(string unSecureConfig, string SecureConfig)
-        {
-            if (!string.IsNullOrWhiteSpace(unSecureConfig))
-                businessUnitNames = unSecureConfig.Split(',');
-        }
-
+    public class RemoveUserFromHotelTeam : IPlugin
+    {        
         public void Execute(IServiceProvider serviceProvider)
         {
             IPluginExecutionContext localContext = (IPluginExecutionContext)
@@ -28,26 +21,25 @@ namespace Tc.Crm.Plugins
                 if (localContext.Depth > 1)
                     return;
 
-                
-                if (localContext.MessageName == Messages.Associate)
+                if (localContext.MessageName == Messages.Disassociate)
                 {
                     tracingService.Trace("Begin - PluginExecution");
-                    string relationshipName = string.Empty;                 
+                    string relationshipName = string.Empty;
                     if (localContext.InputParameters.Contains(InputParameters.Relationship))
                     {
                         relationshipName = localContext.InputParameters[InputParameters.Relationship].ToString();
                         tracingService.Trace("Relationship " + relationshipName);
                     }
-                   
+
                     if (relationshipName != Relationships.TeamMembershipAssociation + ".")
                         return;
 
-                    ProcessAddUserToHotelTeam processUserHotelTeam = new ProcessAddUserToHotelTeam(service, localContext, tracingService, businessUnitNames);
-                    processUserHotelTeam.ProcessAssociateUserToHotelTeam();                    
+                    ProcessRemoveUserFromHotelTeam processRemoveUser = new ProcessRemoveUserFromHotelTeam(service, localContext, tracingService);
+                    processRemoveUser.ProcessDisassociateUserFromHotelTeam();
+                   
                     tracingService.Trace("End - PluginExecution");
                 }
 
-                
             }
             catch (FaultException<OrganizationServiceFault> ex)
             {
@@ -62,6 +54,7 @@ namespace Tc.Crm.Plugins
                 throw new InvalidPluginExecutionException(ex.ToString());
             }
         }
-        
+
+       
     }
 }

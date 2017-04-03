@@ -17,6 +17,7 @@ namespace Tc.Crm.Plugins
     {
         public const string Associate = "Associate";
         public const string Create = "Create";
+        public const string Disassociate = "Disassociate";
     }
     
 

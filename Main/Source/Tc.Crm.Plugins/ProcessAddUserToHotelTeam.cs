@@ -7,7 +7,7 @@ using Microsoft.Xrm.Sdk.Query;
 
 namespace Tc.Crm.Plugins
 {
-    public class ProcessUserHotelTeam
+    public class ProcessAddUserToHotelTeam
     {
 
         /// <summary>
@@ -16,7 +16,7 @@ namespace Tc.Crm.Plugins
         /// <param name="service"></param>
         /// <param name="context"></param>
         /// <param name="tracingService"></param>
-        public ProcessUserHotelTeam(IOrganizationService service, IPluginExecutionContext context, ITracingService tracingService, string[] businessUnitNames)
+        public ProcessAddUserToHotelTeam(IOrganizationService service, IPluginExecutionContext context, ITracingService tracingService, string[] businessUnitNames)
         {
             this.Service = service;
             this.Context = context;
@@ -27,7 +27,7 @@ namespace Tc.Crm.Plugins
         /// <summary>
         /// To process Teams, add user to team and add role to team
         /// </summary>
-        public void ProcessAddUserToHotelTeam()
+        public void ProcessAssociateUserToHotelTeam()
         {
             Guid hotelTeamId = Guid.Empty;
             string teamName = string.Empty;
@@ -44,12 +44,10 @@ namespace Tc.Crm.Plugins
         }
 
         /// <summary>
-        /// To get teamId, userId from context
+        /// To get teamId, users from context
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="trace"></param>
         /// <param name="hotelTeamId"></param>
-        /// <param name="userId"></param>
+        /// <returns></returns>
         private EntityReferenceCollection GetInformationFromContext(ref Guid hotelTeamId)
         {
             EntityReferenceCollection relatedEntities = null;
@@ -83,9 +81,8 @@ namespace Tc.Crm.Plugins
         /// <summary>
         /// To check whether Team is Hotel Team or not
         /// </summary>
-        /// <param name="service"></param>
         /// <param name="teamId"></param>
-        /// <param name="trace"></param>
+        /// <param name="teamName"></param>
         /// <returns></returns>
         private bool IsHotelTeam(Guid teamId, ref string teamName)
         {
@@ -113,12 +110,9 @@ namespace Tc.Crm.Plugins
         /// <summary>
         /// To process Users, teams and roles functionality
         /// </summary>
-        /// <param name="service"></param>
-        /// <param name="context"></param>
-        /// <param name="trace"></param>
         /// <param name="businessUnitId"></param>
-        /// <param name="teamId"></param>
-        /// <param name="userId"></param>
+        /// <param name="hotelTeamId"></param>
+        /// <param name="users"></param>
         /// <param name="teamName"></param>
         private void ProcessUserTeams(Guid businessUnitId, Guid hotelTeamId, EntityReferenceCollection users, string teamName)
         {
@@ -140,10 +134,10 @@ namespace Tc.Crm.Plugins
         /// <summary>
         /// To add security role, user to newly created teams
         /// </summary>
-        /// <param name="service"></param>
-        /// <param name="trace"></param>
+        /// <param name="buToProcess"></param>
         /// <param name="roleCollection"></param>
-        /// <param name="userId"></param>
+        /// <param name="users"></param>
+        /// <param name="hotelTeamId"></param>
         /// <param name="teamName"></param>
         private void AddUserToNewTeam(Dictionary<Guid,string> buToProcess, EntityCollection roleCollection, EntityReferenceCollection users, Guid hotelTeamId, string teamName)
         {
@@ -151,7 +145,7 @@ namespace Tc.Crm.Plugins
             foreach (KeyValuePair<Guid,string> b in buToProcess)
             {
                 var roles = FilterRolesByBusinessUnit(roleCollection, b.Key);
-                if (roles != null || roles.Count == 2)
+                if (roles != null && roles.Count == 2)
                 {
                     var teamId = CreateTeam(hotelTeamId, b.Value + " : " + teamName, b.Key);
                     AssociateRoleToTeam(teamId, roles);
@@ -174,9 +168,12 @@ namespace Tc.Crm.Plugins
             IEnumerable<Entity> roles = from role in securityRoles.Entities
                                         where ((EntityReference)role.Attributes[Attributes.Role.BusinessUnitId]).Id == businessUnitId
                                         select role;
-            foreach(var role in roles)
+            if (roles != null && roles.Count<Entity>() > 0)
             {
-                rolesOfBusinessUnit.Add(new EntityReference(role.LogicalName, role.Id));
+                foreach (var role in roles)
+                {
+                    rolesOfBusinessUnit.Add(new EntityReference(role.LogicalName, role.Id));
+                }
             }
             TracingService.Trace("FilterRolesByBusinessUnit - End");
             return rolesOfBusinessUnit;
@@ -185,10 +182,8 @@ namespace Tc.Crm.Plugins
         /// <summary>
         /// To add user to existing teams of Business units
         /// </summary>
-        /// <param name="service"></param>
-        /// <param name="trace"></param>
         /// <param name="buCollection"></param>
-        /// <param name="userId"></param>
+        /// <param name="users"></param>
         /// <returns></returns>
         private Dictionary<Guid,string> AddUserToExistingTeam(EntityCollection buCollection, EntityReferenceCollection users)
         {
@@ -233,9 +228,6 @@ namespace Tc.Crm.Plugins
         /// <summary>
         /// To get Business units that are to be processed
         /// </summary>
-        /// <param name="service"></param>
-        /// <param name="trace"></param>
-        /// <param name="businessUnitId"></param>
         /// <param name="hotelTeamId"></param>
         /// <returns></returns>
         private EntityCollection GetBusinessUnits(Guid hotelTeamId)
@@ -280,10 +272,8 @@ namespace Tc.Crm.Plugins
         }
 
         /// <summary>
-        /// To get Security roles for different Business units using name Tc.Ids.Base
+        /// To get Security roles for different Business units using name Tc.Ids.Base and Tc.Ids.Rep
         /// </summary>
-        /// <param name="service"></param>
-        /// <param name="trace"></param>
         /// <param name="businessUnits"></param>
         /// <returns></returns>
         private EntityCollection GetSecurityRolesByBusinessUnit(Dictionary<Guid,string> businessUnits)
@@ -351,10 +341,8 @@ namespace Tc.Crm.Plugins
         /// <summary>
         /// To Asscoiate Security role to Team
         /// </summary>
-        /// <param name="service"></param>
-        /// <param name="trace"></param>
         /// <param name="teamId"></param>
-        /// <param name="roleId"></param>
+        /// <param name="roles"></param>
         private void AssociateRoleToTeam(Guid teamId, EntityReferenceCollection roles)
         {
             TracingService.Trace("AssociateRoleToTeam - Start");
@@ -368,10 +356,8 @@ namespace Tc.Crm.Plugins
         /// <summary>
         /// To Associate User to Team
         /// </summary>
-        /// <param name="service"></param>
-        /// <param name="trace"></param>
         /// <param name="teamId"></param>
-        /// <param name="userId"></param>
+        /// <param name="users"></param>
         private void AssociateUserToTeam(Guid teamId, EntityReferenceCollection users)
         {
             TracingService.Trace("AssociateUserToTeam - Start");
