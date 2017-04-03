@@ -88,6 +88,63 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         public AddressType AddressType { get; set; }
     }
 
+    [DataContract(Name = "SourceApplication")]
+    public enum SourceApplication
+    {
+        [EnumMember]
+        NotSpecified,
+        [EnumMember(Value = "SAP BW")]
+        SAPBW,
+        [EnumMember(Value = "SF WEST")]
+        SFWEST,
+        [EnumMember(Value = "SF EAST")]
+        SFEAST,
+        [EnumMember(Value = "TCV")]
+        TCV,
+        [EnumMember(Value = "Easiware CRM")]
+        EasiwareCRM
+    }
+    [DataContract(Name = "BookingSystem")]
+    public enum BookingSystem
+    {
+        [EnumMember]
+        Unknown,
+        [EnumMember]
+        Nurvis,
+        [EnumMember]
+        AtCore,
+        [EnumMember]
+        Phonix,
+        [EnumMember]
+        AlteaGambit,
+        [EnumMember]
+        Centerparcs,
+        [EnumMember]
+        TrollTours,
+        [EnumMember]
+        ClubMed,
+        [EnumMember]
+        DavinciAldiana,
+        [EnumMember]
+        TCTicketShop,
+        [EnumMember]
+        Tourvital,
+        [EnumMember]
+        Aventoura,
+        [EnumMember]
+        Weinradel,
+        [EnumMember]
+        KiwiTours,
+        [EnumMember]
+        JackPlusTCPG,
+        [EnumMember]
+        IberoTours,
+        [EnumMember]
+        LufthansaHolidaysMidoco,
+        [EnumMember]
+        MidocoOwnSite
+    }
+
     [DataContract(Name = "AddressType")]
     public enum AddressType
     {
@@ -330,8 +387,11 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         [DataMember(Name = "sourceMarket")]
         public string SourceMarket { get; set; }
 
-        [DataMember(Name = "sourceSystem")]
-        public string SourceSystem { get; set; }
+        [DataMember(Name = "sourceApplication")]
+        public SourceApplication SourceApplication { get; set; }
+
+        [DataMember(Name = "bookingSystem")]
+        public BookingSystem BookingSystem { get; set; }
 
         [DataMember(Name = "bookingNumber")]
         public string BookingNumber { get; set; }

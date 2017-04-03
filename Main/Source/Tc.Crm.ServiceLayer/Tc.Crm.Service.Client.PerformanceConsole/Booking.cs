@@ -26,6 +26,11 @@ namespace Tc.Crm.Service.Models
     [DataContract(Name = "booking")]
     public class Booking
     {
+        [DataMember(Name = "destinationId")]
+        public string DestinationId { get; set; }
+
+        [DataMember(Name = "owner")]
+        public string Owner { get; set; }
 
         [DataMember(Name = "bookingIdentifier")]
         public BookingIdentifier BookingIdentifier { get; set; }
@@ -81,6 +86,63 @@ namespace Tc.Crm.Service.Models
 
         [DataMember(Name = "type")]
         public AddressType AddressType { get; set; }
+    }
+
+    [DataContract(Name = "SourceApplication")]
+    public enum SourceApplication
+    {
+        [EnumMember]
+        NotSpecified,
+        [EnumMember(Value = "SAP BW")]
+        SAPBW,
+        [EnumMember(Value = "SF WEST")]
+        SFWEST,
+        [EnumMember(Value = "SF EAST")]
+        SFEAST,
+        [EnumMember(Value = "TCV")]
+        TCV,
+        [EnumMember(Value = "Easiware CRM")]
+        EasiwareCRM
+    }
+    [DataContract(Name = "BookingSystem")]
+    public enum BookingSystem
+    {
+        [EnumMember]
+        Unknown,
+        [EnumMember]
+        Nurvis,
+        [EnumMember]
+        AtCore,
+        [EnumMember]
+        Phonix,
+        [EnumMember]
+        AlteaGambit,
+        [EnumMember]
+        Centerparcs,
+        [EnumMember]
+        TrollTours,
+        [EnumMember]
+        ClubMed,
+        [EnumMember]
+        DavinciAldiana,
+        [EnumMember]
+        TCTicketShop,
+        [EnumMember]
+        Tourvital,
+        [EnumMember]
+        Aventoura,
+        [EnumMember]
+        Weinradel,
+        [EnumMember]
+        KiwiTours,
+        [EnumMember]
+        JackPlusTCPG,
+        [EnumMember]
+        IberoTours,
+        [EnumMember]
+        LufthansaHolidaysMidoco,
+        [EnumMember]
+        MidocoOwnSite
     }
 
     [DataContract(Name = "AddressType")]
@@ -153,6 +215,8 @@ namespace Tc.Crm.Service.Models
         CateredChalet,
         [EnumMember(Value = "Club Board")]
         ClubBoard,
+        [EnumMember(Value = "Continental Bfast")]
+        ContinentalBfast,
         [EnumMember(Value = "Cruise Board")]
         CruiseBoard,
         [EnumMember(Value = "Deluxe Half Board")]
@@ -323,11 +387,14 @@ namespace Tc.Crm.Service.Models
         [DataMember(Name = "sourceMarket")]
         public string SourceMarket { get; set; }
 
-        [DataMember(Name = "sourceSystem")]
-        public string SourceSystem { get; set; }
+        [DataMember(Name = "sourceApplication")]
+        public SourceApplication SourceApplication { get; set; }
 
         [DataMember(Name = "bookingNumber")]
         public string BookingNumber { get; set; }
+
+        [DataMember(Name = "bookingSystem")]
+        public BookingSystem BookingSystem { get; set; }
 
         [DataMember(Name = "bookingVersionOnTour")]
         public string BookingVersionOnTour { get; set; }
@@ -716,7 +783,10 @@ namespace Tc.Crm.Service.Models
         public string SourceMarket { get; set; }
 
         [DataMember(Name = "sourceApplication")]
-        public string SourceSystem { get; set; }
+        public SourceApplication SourceSystem { get; set; }
+
+        [DataMember(Name = "bookingSystem")]
+        public BookingSystem BookingSystem { get; set; }
 
         [DataMember(Name = "integrationProcessingInitiated")]
         public string IntegrationProcessingInitiated { get; set; }
@@ -817,6 +887,8 @@ namespace Tc.Crm.Service.Models
     [DataContract(Name = "customer")]
     public class Customer
     {
+        [DataMember(Name = "owner")]
+        public string Owner { get; set; }
 
         [DataMember(Name = "customerIdentifier")]
         public CustomerIdentifier CustomerIdentifier { get; set; }

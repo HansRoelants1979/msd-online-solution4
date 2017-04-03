@@ -68,6 +68,7 @@ namespace Tc.Crm.Service.Client.Console
                         item.Join();
                     }
                     recordsProcessed += threadCount;
+                    System.Console.WriteLine("records processed:" + recordsProcessed);
                 }
 
                 
@@ -116,11 +117,10 @@ namespace Tc.Crm.Service.Client.Console
             Thread thread = new Thread(() =>
             {
                 var booking = JsonConvert.DeserializeObject<BookingInformation>(json);
-                //i = i++;
-                var bookingid = "p_" + DateTime.Now.ToString("HH:mm:ss.fff") + Thread.CurrentThread.ManagedThreadId;
+                var bookingid = "q_" + DateTime.Now.ToString("HH:mm:ss.fff") + Thread.CurrentThread.ManagedThreadId;
                 if (bookingidtoUpdate == null)
                     bookingidtoUpdate = bookingid;
-                var customerid = "p_" + DateTime.Now.ToString("HH:mm:ss.fff") + Thread.CurrentThread.ManagedThreadId;
+                var customerid = "q_" + DateTime.Now.ToString("HH:mm:ss.fff") + Thread.CurrentThread.ManagedThreadId;
                 if (CustomeridtoUpdate == null)
                     CustomeridtoUpdate = customerid;
 
@@ -182,22 +182,22 @@ namespace Tc.Crm.Service.Client.Console
                 Task<string> task = response.Content.ReadAsStringAsync();
                 var content = task.Result;
 
-                //System.Console.WriteLine("Response Code: {0}", response.StatusCode.GetHashCode());
-                //if (response.StatusCode == HttpStatusCode.Created)
-                //    System.Console.WriteLine("Booking has been created with GUID::{0}", content);
-                //else if (response.StatusCode == HttpStatusCode.NoContent)
-                //    System.Console.WriteLine("Booking has been updated.");
-                //else if (response.StatusCode == HttpStatusCode.BadRequest)
-                //    System.Console.WriteLine("Bad Request.");
-                //else if (response.StatusCode == HttpStatusCode.InternalServerError)
-                //    System.Console.WriteLine("Internal Server Error.");
-                //else if (response.StatusCode == HttpStatusCode.Forbidden)
-                //    System.Console.WriteLine("Forbidden.");
+                System.Console.WriteLine("Response Code: {0}", response.StatusCode.GetHashCode());
+                if (response.StatusCode == HttpStatusCode.Created)
+                    System.Console.WriteLine("Booking has been created with GUID::{0}", content);
+                else if (response.StatusCode == HttpStatusCode.NoContent)
+                    System.Console.WriteLine("Booking has been updated.");
+                else if (response.StatusCode == HttpStatusCode.BadRequest)
+                    System.Console.WriteLine("Bad Request.");
+                else if (response.StatusCode == HttpStatusCode.InternalServerError)
+                    System.Console.WriteLine("Internal Server Error.");
+                else if (response.StatusCode == HttpStatusCode.Forbidden)
+                    System.Console.WriteLine("Forbidden.");
 
-                //if (string.IsNullOrWhiteSpace(content))
-                //    System.Console.WriteLine("No content.");
-                //else
-                //    System.Console.WriteLine("Content:{0}", content);
+                if (string.IsNullOrWhiteSpace(content))
+                    System.Console.WriteLine("No content.");
+                else
+                    System.Console.WriteLine("Content:{0}", content);
             }
             catch (Exception ex)
             {

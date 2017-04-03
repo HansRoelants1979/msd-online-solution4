@@ -45,7 +45,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             //return JsonHelper.SerializeJson(new BookingResponse { Created=true,Id=Guid.NewGuid().ToString()}, trace);
         }
 
-        private void ProcessCustomer()
+        public void ProcessCustomer()
         {
             //Validate payload for customer
             if (payloadBooking.BookingInfo == null)
@@ -104,7 +104,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 
             if (payloadBooking.BookingInfo != null && payloadBooking.BookingInfo.Customer != null && payloadBooking.BookingInfo.Customer.Social != null)
             {
-                var entityCollectionsocialProfiles = SocialProfileHelper.GetSocialProfileEntityFromPayload(payloadBooking.BookingInfo,Guid.Parse(payloadBooking.CustomerId), trace);
+                var entityCollectionsocialProfiles = SocialProfileHelper.GetSocialProfileEntityFromPayload(payloadBooking.BookingInfo, Guid.Parse(payloadBooking.CustomerId), trace);
                 if (entityCollectionsocialProfiles != null && entityCollectionsocialProfiles.Entities.Count > 0)
                 {
                     foreach (Entity entitySocialProfile in entityCollectionsocialProfiles.Entities)
@@ -187,7 +187,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             trace.Trace("Booking Accommodation information - end");
         }
 
-        
+
 
         /// <summary>
         /// 
@@ -240,7 +240,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             }
         }
 
-        
+
 
         public void ProcessExtraServices()
         {
@@ -266,7 +266,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             }
         }
 
-        
+
 
         /// <summary>
         /// 
@@ -284,7 +284,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 trace.Trace("Delete Booking Roles information - end");
             }
             trace.Trace("Booking Roles information - start");
-            if (payloadBooking.BookingInfo.Customer == null) return;
+            if (string.IsNullOrWhiteSpace(payloadBooking.CustomerId)) return;
             if (payloadBooking.BookingInfo.Customer.CustomerGeneral.CustomerType == CustomerType.NotSpecified)
             {
                 trace.Trace("Customer type has not been specified.");
@@ -292,28 +292,16 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             }
 
             Entity entityBookingRole = new Entity(EntityName.CustomerBookingRole);
-            entityBookingRole[Attributes.CustomerBookingRole.BookingId] = new EntityReference(EntityName.Booking, Attributes.Booking.Name, payloadBooking.BookingInfo.BookingIdentifier.BookingNumber);
+            entityBookingRole[Attributes.CustomerBookingRole.BookingId] = new EntityReference(EntityName.Booking, new Guid(payloadBooking.BookingId));
+
             if (payloadBooking.BookingInfo.Customer.CustomerGeneral.CustomerType == CustomerType.Company)
             {
-                if (!string.IsNullOrWhiteSpace(payloadBooking.BookingInfo.Customer.CustomerIdentifier.CustomerId))
-                {
-                    entityBookingRole[Attributes.CustomerBookingRole.Customer] = new EntityReference(EntityName.Account, Attributes.Contact.SourceSystemID, payloadBooking.BookingInfo.Customer.CustomerIdentifier.CustomerId);
-                }
-                else
-                {
-                    entityBookingRole[Attributes.CustomerBookingRole.Customer] = new EntityReference(EntityName.Account, new Guid(payloadBooking.CustomerId));
-                }
+                entityBookingRole[Attributes.CustomerBookingRole.Customer] = new EntityReference(EntityName.Account, new Guid(payloadBooking.CustomerId));
             }
             else
             {
-                if (!string.IsNullOrWhiteSpace(payloadBooking.BookingInfo.Customer.CustomerIdentifier.CustomerId))
-                {
-                    entityBookingRole[Attributes.CustomerBookingRole.Customer] = new EntityReference(EntityName.Contact, Attributes.Contact.SourceSystemID, payloadBooking.BookingInfo.Customer.CustomerIdentifier.CustomerId);
-                }
-                else
-                {
-                    entityBookingRole[Attributes.CustomerBookingRole.Customer] = new EntityReference(EntityName.Contact, new Guid(payloadBooking.CustomerId));
-                }
+                entityBookingRole[Attributes.CustomerBookingRole.Customer] = new EntityReference(EntityName.Contact, new Guid(payloadBooking.CustomerId));
+
             }
 
             EntityCollection entityCollection = new EntityCollection();

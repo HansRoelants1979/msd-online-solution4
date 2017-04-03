@@ -195,6 +195,8 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string TransferRemarks = "tc_transferremarks";
             public const string TravelAmount = "tc_travelamount";
             public const string TransactionCurrencyId = "transactioncurrencyid";
+            public const string SourceSystem = "tc_sourcesystem";
+            public const string SourceApplication = "tc_sourceapplication";
         }
         public class BookingAccommodation
         {

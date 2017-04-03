@@ -22,6 +22,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 booking[Attributes.Booking.TourOperatorVersion] = (identifier.BookingVersionTourOperator != null) ? identifier.BookingVersionTourOperator : string.Empty;
                 booking[Attributes.Booking.OnTourUpdatedDate] = (identifier.BookingUpdateDateOnTour != null) ? Convert.ToDateTime(identifier.BookingUpdateDateOnTour) : (DateTime?)null;
                 booking[Attributes.Booking.TourOperatorUpdatedDate] = (identifier.BookingUpdateDateTourOperator != null) ? Convert.ToDateTime(identifier.BookingUpdateDateTourOperator) : (DateTime?)null;
+                booking[Attributes.Booking.SourceApplication] = identifier.SourceApplication != SourceApplication.NotSpecified ? identifier.SourceApplication.ToString() : null;
+                booking[Attributes.Booking.SourceSystem] = identifier.BookingSystem.ToString();
                 trace.Trace("Booking populate identifier - end");
             }
             trace.Trace("Booking Identifier - end");
@@ -192,7 +194,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             trace.Trace("Booking populate participants remarks - end");
             return remarksbuilder.ToString();
         }
-        
+
         public static Entity GetBookingEntityFromPayload(Booking booking, ITracingService trace, IOrganizationService service)
         {
             if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
@@ -202,11 +204,15 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             if (booking.BookingIdentifier.BookingNumber == null || string.IsNullOrWhiteSpace(booking.BookingIdentifier.BookingNumber))
                 throw new InvalidPluginExecutionException("Booking Number should not be null.");
 
-            Entity bookingEntity = new Entity(EntityName.Booking, Attributes.Booking.Name, booking.BookingIdentifier.BookingNumber);
+            var indexCollection = new KeyAttributeCollection();
+            indexCollection.Add(Attributes.Booking.Name, booking.BookingIdentifier.BookingNumber);
+            indexCollection.Add(Attributes.Booking.SourceSystem, booking.BookingIdentifier.BookingSystem.ToString());
+            Entity bookingEntity = new Entity(EntityName.Booking, indexCollection);
 
             PopulateIdentifier(bookingEntity, booking.BookingIdentifier, trace);
             PopulateIdentity(bookingEntity, booking.BookingIdentity, trace);
             PopulateGeneralFields(bookingEntity, booking.BookingGeneral, trace);
+
             bookingEntity[Attributes.Booking.Participants] = PrepareTravelParticipantsInfo(booking.TravelParticipant, trace);
             bookingEntity[Attributes.Booking.ParticipantRemarks] = PrepareTravelParticipantsRemarks(booking.TravelParticipant, trace);
             if (!string.IsNullOrWhiteSpace(booking.DestinationId))
