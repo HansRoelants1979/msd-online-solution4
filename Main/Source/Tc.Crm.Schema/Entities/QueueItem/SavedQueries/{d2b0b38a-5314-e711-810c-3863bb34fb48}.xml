@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>0</isdefault>
+  <returnedtypecode>2029</returnedtypecode>
+  <savedqueryid>{d2b0b38a-5314-e711-810c-3863bb34fb48}</savedqueryid>
+  <layoutxml>
+    <grid name="queueitems" preview="1" icon="1" select="1" jump="title" object="2029">
+      <row id="objectid" name="queueitem" multiobjectidfield="objecttypecode">
+        <cell name="title" width="300" />
+        <cell name="aa.subject" width="200" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="enteredon" width="140" />
+        <cell name="objecttypecode" width="100" />
+        <cell name="queueid" width="150" />
+        <cell name="queueitemid" width="100" ishidden="1" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>0</querytype>
+  <fetchxml>
+    <fetch mapping="logical" distinct="false" output-format="xml-platform" version="1.0">
+      <entity name="queueitem">
+        <attribute name="title" />
+        <attribute name="enteredon" />
+        <attribute name="objecttypecode" />
+        <attribute name="queueid" />
+        <order attribute="enteredon" descending="true" />
+        <filter type="and">
+          <condition value="0" attribute="statecode" operator="eq" />
+          <condition attribute="workerid" operator="null" />
+        </filter>
+        <link-entity name="email" alias="aa" to="objectid" from="activityid">
+          <filter type="and">
+            <condition attribute="regardingobjectid" operator="not-null" />
+          </filter>
+          <attribute name="subject" />
+        </link-entity>
+        <attribute name="objectid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.51</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Items available to work on - Linked" languagecode="1033" />
+  </LocalizedNames>
+</savedquery>

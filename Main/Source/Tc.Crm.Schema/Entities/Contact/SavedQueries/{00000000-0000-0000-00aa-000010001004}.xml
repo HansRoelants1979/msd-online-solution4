@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>0</isdefault>
+  <returnedtypecode>2</returnedtypecode>
+  <savedqueryid>{00000000-0000-0000-00aa-000010001004}</savedqueryid>
+  <queryapi></queryapi>
+  <layoutxml>
+    <grid name="resultset" object="2" jump="fullname" select="1" icon="1" preview="1">
+      <row name="result" id="contactid">
+        <cell name="tc_sourcemarketid" width="100" />
+        <cell name="firstname" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="lastname" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="telephone1" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_telephone1type" width="100" />
+        <cell name="emailaddress1" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_emailaddress1type" width="100" />
+        <cell name="tc_language" width="100" />
+        <cell name="tc_gender" width="100" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>0</querytype>
+  <fetchxml>
+    <fetch version="1.0" output-format="xml-platform" mapping="logical">
+      <entity name="contact">
+        <filter type="and">
+          <condition attribute="statecode" operator="eq" value="0" />
+        </filter>
+        <order attribute="firstname" descending="false" />
+        <order attribute="lastname" descending="false" />
+        <attribute name="telephone1" />
+        <attribute name="emailaddress1" />
+        <attribute name="lastname" />
+        <attribute name="firstname" />
+        <attribute name="tc_gender" />
+        <attribute name="tc_language" />
+        <attribute name="tc_sourcemarketid" />
+        <attribute name="tc_telephone1type" />
+        <attribute name="tc_emailaddress1type" />
+        <attribute name="contactid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>5.0.0.0</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Aktive Kontakte" languagecode="1031" />
+    <LocalizedName description="Active Customers (Limited)" languagecode="1033" />
+    <LocalizedName description="Contacts actifs" languagecode="1036" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description description="Customer view with limited fields displayed (eg. for 3rd Party customer contacts)" languagecode="1033" />
+  </Descriptions>
+</savedquery>

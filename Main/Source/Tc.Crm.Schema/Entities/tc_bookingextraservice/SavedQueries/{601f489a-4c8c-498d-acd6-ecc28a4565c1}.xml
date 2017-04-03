@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>0</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>1</isdefault>
+  <returnedtypecode>10053</returnedtypecode>
+  <savedqueryid>{601f489a-4c8c-498d-acd6-ecc28a4565c1}</savedqueryid>
+  <layoutxml>
+    <grid name="" object="10053" jump="tc_name" select="1" icon="1" preview="0">
+      <row name="tc_bookingextraservice" id="tc_bookingextraserviceid">
+        <cell name="tc_name" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_startdateandtime" width="100" />
+        <cell name="tc_enddateandtime" width="100" />
+        <cell name="tc_extraservicecode" width="100" />
+        <cell name="tc_participants" width="300" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>64</querytype>
+  <fetchxml>
+    <fetch version="1.0" mapping="logical">
+      <entity name="tc_bookingextraservice">
+        <attribute name="tc_bookingextraserviceid" />
+        <attribute name="tc_name" />
+        <filter type="and">
+          <condition attribute="statecode" operator="eq" value="0" />
+        </filter>
+        <order attribute="tc_startdateandtime" descending="false" />
+        <attribute name="tc_startdateandtime" />
+        <attribute name="tc_extraservicecode" />
+        <attribute name="tc_participants" />
+        <attribute name="tc_enddateandtime" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.14</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Booking Extra Service Lookup View" languagecode="1033" />
+  </LocalizedNames>
+</savedquery>

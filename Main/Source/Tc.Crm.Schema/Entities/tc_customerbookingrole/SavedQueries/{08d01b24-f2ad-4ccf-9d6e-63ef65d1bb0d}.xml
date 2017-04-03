@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>0</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>1</isdefault>
+  <returnedtypecode>10029</returnedtypecode>
+  <savedqueryid>{08d01b24-f2ad-4ccf-9d6e-63ef65d1bb0d}</savedqueryid>
+  <layoutxml>
+    <grid name="" object="10029" jump="tc_name" select="1" icon="1" preview="1">
+      <row name="tc_customerbookingrole" id="tc_customerbookingroleid">
+        <cell name="tc_bookingid" width="100" />
+        <cell name="a_0ce21bc1c5dce61181033863bb340dd8.tc_departuredate" width="75" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_0ce21bc1c5dce61181033863bb340dd8.tc_brandid" width="75" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_0ce21bc1c5dce61181033863bb340dd8.tc_destinationgatewayid" width="100" disableSorting="1" />
+        <cell name="a_0ce21bc1c5dce61181033863bb340dd8.tc_duration" width="100" disableSorting="1" />
+        <cell name="a_0ce21bc1c5dce61181033863bb340dd8.tc_sourcemarketid" width="100" disableSorting="1" />
+        <cell name="a_0ce21bc1c5dce61181033863bb340dd8.tc_numberofparticipants" width="50" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_0ce21bc1c5dce61181033863bb340dd8.tc_travelamount" width="100" disableSorting="1" />
+        <cell name="a_0ce21bc1c5dce61181033863bb340dd8.statuscode" width="100" disableSorting="1" />
+        <cell name="a_0ce21bc1c5dce61181033863bb340dd8.tc_bookingdate" width="100" disableSorting="1" />
+        <cell name="createdon" width="125" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>2</querytype>
+  <fetchxml>
+    <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
+      <entity name="tc_customerbookingrole">
+        <attribute name="createdon" />
+        <order attribute="createdon" descending="false" />
+        <attribute name="tc_bookingid" />
+        <link-entity alias="a_0ce21bc1c5dce61181033863bb340dd8" name="tc_booking" from="tc_bookingid" to="tc_bookingid" link-type="outer" visible="false">
+          <attribute name="tc_travelamount" />
+          <attribute name="statuscode" />
+          <attribute name="tc_sourcemarketid" />
+          <attribute name="tc_duration" />
+          <attribute name="tc_destinationgatewayid" />
+          <attribute name="tc_departuredate" />
+          <attribute name="tc_brandid" />
+          <attribute name="tc_bookingdate" />
+          <attribute name="tc_numberofparticipants" />
+        </link-entity>
+        <attribute name="tc_customerbookingroleid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Customer's Bookings" languagecode="1033" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description description="Customer Booking Role Associated View" languagecode="1033" />
+  </Descriptions>
+</savedquery>

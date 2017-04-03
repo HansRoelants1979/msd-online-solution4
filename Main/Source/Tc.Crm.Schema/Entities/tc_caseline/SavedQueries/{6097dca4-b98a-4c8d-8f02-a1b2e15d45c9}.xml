@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>0</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>1</isdefault>
+  <returnedtypecode>10049</returnedtypecode>
+  <savedqueryid>{6097dca4-b98a-4c8d-8f02-a1b2e15d45c9}</savedqueryid>
+  <layoutxml>
+    <grid name="resultset" preview="1" icon="1" select="1" jump="tc_name" object="10049">
+      <row id="tc_caselineid" name="result">
+        <cell name="tc_name" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_caseid" width="100" />
+        <cell name="tc_casetypeid" width="100" />
+        <cell name="tc_categorylevel1id" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_casecategory2id" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="statuscode" width="100" />
+        <cell name="createdon" width="100" />
+        <cell name="statecode" width="100" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>0</querytype>
+  <fetchxml>
+    <fetch mapping="logical" version="1.0">
+      <entity name="tc_caseline">
+        <order descending="false" attribute="createdon" />
+        <filter type="and">
+          <condition value="0" attribute="statecode" operator="eq" />
+        </filter>
+        <attribute name="tc_categorylevel1id" />
+        <attribute name="statuscode" />
+        <attribute name="statecode" />
+        <attribute name="tc_name" />
+        <attribute name="tc_casecategory2id" />
+        <attribute name="tc_casetypeid" />
+        <attribute name="tc_caseid" />
+        <attribute name="createdon" />
+        <attribute name="tc_caselineid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.12</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Active Case Lines" languagecode="1033" />
+  </LocalizedNames>
+</savedquery>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>0</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>1</isdefault>
+  <returnedtypecode>10033</returnedtypecode>
+  <savedqueryid>{cc8d1ad1-dbaa-46e9-9e6b-ddb38035706e}</savedqueryid>
+  <layoutxml>
+    <grid name="" object="10033" jump="tc_name" select="1" icon="1" preview="1">
+      <row name="tc_region" id="tc_regionid">
+        <cell name="tc_name" width="300" />
+        <cell name="tc_regioncode" width="100" />
+        <cell name="tc_countryid" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>2</querytype>
+  <fetchxml>
+    <fetch version="1.0" mapping="logical">
+      <entity name="tc_region">
+        <attribute name="tc_name" />
+        <order attribute="tc_countryid" descending="false" />
+        <filter type="and">
+          <condition attribute="statecode" operator="eq" value="0" />
+        </filter>
+        <attribute name="tc_regioncode" />
+        <attribute name="tc_countryid" />
+        <attribute name="tc_regionid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Region Associated View" languagecode="1033" />
+  </LocalizedNames>
+</savedquery>

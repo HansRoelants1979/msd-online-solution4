@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>0</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>1</isdefault>
+  <returnedtypecode>10074</returnedtypecode>
+  <savedqueryid>{1c7f31b8-e2c0-476b-9e76-fe607651b2d1}</savedqueryid>
+  <layoutxml>
+    <grid name="resultset" object="10074" jump="tc_name" select="1" icon="1" preview="1">
+      <row name="result" id="tc_configurationid">
+        <cell name="tc_name" width="300" />
+        <cell name="tc_value" width="100" />
+        <cell name="tc_description" width="100" disableSorting="1" />
+        <cell name="modifiedby" width="100" />
+        <cell name="modifiedon" width="100" />
+        <cell name="createdon" width="125" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>0</querytype>
+  <fetchxml>
+    <fetch version="1.0" mapping="logical">
+      <entity name="tc_configuration">
+        <attribute name="tc_name" />
+        <attribute name="createdon" />
+        <order attribute="tc_name" descending="false" />
+        <filter type="and">
+          <condition attribute="statecode" operator="eq" value="0" />
+        </filter>
+        <attribute name="tc_value" />
+        <attribute name="modifiedon" />
+        <attribute name="modifiedby" />
+        <attribute name="tc_description" />
+        <attribute name="tc_configurationid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.51</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Active Configurations" languagecode="1033" />
+  </LocalizedNames>
+</savedquery>

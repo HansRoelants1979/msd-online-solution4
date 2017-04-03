@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<systemform>
+  <formid>{8a500bd5-5230-48f1-af4e-7e72f77a7fa0}</formid>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <FormPresentation>1</FormPresentation>
+  <FormActivationState>1</FormActivationState>
+  <form maxWidth="400">
+    <tabs>
+      <tab verticallayout="true" id="{68999a0a-0bba-4f31-8e6d-a3d26667a57f}" IsUserDefined="1">
+        <labels>
+          <label description="" languagecode="1033" />
+        </labels>
+        <columns>
+          <column width="100%">
+            <sections>
+              <section showlabel="false" showbar="false" IsUserDefined="0" id="{d35a7083-263e-4b77-8ac5-7b8d3fce27c7}">
+                <labels>
+                  <label description="ALLGEMEIN" languagecode="1031" />
+                  <label description="GENERAL" languagecode="1033" />
+                  <label description="GÉNÉRAL" languagecode="1036" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{5fa24ebb-1a99-4221-a081-debb0018fc86}">
+                      <labels>
+                        <label description="Name" languagecode="1033" />
+                      </labels>
+                      <control id="tc_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_name" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{d0228378-6b9d-dc55-1587-cb65d5c78123}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Tour Operator Code" languagecode="1033" />
+                      </labels>
+                      <control id="tc_touroperatorcode" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_touroperatorcode" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{28522614-9186-e0b4-b66d-ddce56e7bab7}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Source Market" languagecode="1033" />
+                      </labels>
+                      <control id="tc_countryid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_countryid" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{5daf4e63-e576-415e-bc10-efe07d3b6f2d}">
+                      <labels>
+                        <label description="Owner" languagecode="1033" />
+                        <label description="Propriétaire" languagecode="1036" />
+                        <label description="Besitzer" languagecode="1031" />
+                      </labels>
+                      <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
+    </tabs>
+  </form>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <LocalizedNames>
+    <LocalizedName description="Tour Operator" languagecode="1033" />
+  </LocalizedNames>
+</systemform>

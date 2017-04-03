@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>0</isdefault>
+  <returnedtypecode>2</returnedtypecode>
+  <savedqueryid>{14ea1914-0e2c-4918-8eca-60930324f18f}</savedqueryid>
+  <queryapi>BulkOperation.RetrieveTargetedContactsForMiniCampaign</queryapi>
+  <layoutxml>
+    <grid name="contacts" object="2" jump="lastname" select="1" icon="1" preview="1">
+      <row name="contact" id="contactid">
+        <cell name="fullname" width="300" />
+        <cell name="telephone1" width="125" />
+      </row>
+    </grid>
+  </layoutxml>
+  <columnsetxml>
+    <columnset version="3.0">
+      <column>fullname</column>
+      <column>telephone1</column>
+      <column>contactid</column>
+      <ascend>fullname</ascend>
+    </columnset>
+  </columnsetxml>
+  <querytype>2</querytype>
+  <fetchxml>
+    <fetch version="1.0" output-format="xml-platform" mapping="logical">
+      <entity name="contact">
+        <order attribute="fullname" descending="false" />
+        <attribute name="contactid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>6.0.0.0</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="BulkOperation-Ansicht der Kontakte" languagecode="1031" />
+    <LocalizedName description="Customer BulkOperation View" languagecode="1033" />
+    <LocalizedName description="Vue BulkOperation des contacts" languagecode="1036" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description description="BulkOperation-Ansicht der Kontakte anzeigen" languagecode="1031" />
+    <Description description="Display Customers BulkOperation View" languagecode="1033" />
+    <Description description="Afficher la vue BulkOperation des contacts" languagecode="1036" />
+  </Descriptions>
+</savedquery>

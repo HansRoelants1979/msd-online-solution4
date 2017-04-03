@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<systemform>
+  <formid>{b7062b3a-d74e-438d-b297-334766c5234e}</formid>
+  <IntroducedVersion>1.0.0.51</IntroducedVersion>
+  <FormPresentation>1</FormPresentation>
+  <FormActivationState>1</FormActivationState>
+  <form>
+    <tabs>
+      <tab id="{ffa54179-65a4-45cb-bd70-5ab78f523e20}" name="{ffa54179-65a4-45cb-bd70-5ab78f523e20}" availableforphone="false" verticallayout="true" IsUserDefined="1" locklevel="0" expanded="true" showlabel="false">
+        <labels>
+          <label description="Allgemein" languagecode="1031" />
+          <label description="General" languagecode="1033" />
+          <label description="Général" languagecode="1036" />
+        </labels>
+        <columns>
+          <column width="34%">
+            <sections>
+              <section id="{60dc2e90-8285-41bd-bd50-184204a9fce4}" IsUserDefined="0" showlabel="false" showbar="false">
+                <labels>
+                  <label description="Allgemein" languagecode="1031" />
+                  <label description="General" languagecode="1033" />
+                  <label description="Général" languagecode="1036" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{baba794b-1195-ebd5-61dd-73e28041b4d7}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Begin Time" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_begintime" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="tc_begintime" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{12c694c7-63c9-7cbb-cbc2-81dc6546576b}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Survey Description" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_survey_description" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_survey_description" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{611cd881-7313-b2cc-7001-7820c0757564}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Mode" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_mode" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_mode" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{9185c380-2958-16a2-3846-620d25ee6995}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Customers" languagecode="1033" />
+                        <label description="Clients" languagecode="1036" />
+                        <label description="Kunden" languagecode="1031" />
+                      </labels>
+                      <control disabled="false" id="customers" classid="{CBFB742C-14E7-4a17-96BB-1A13F7F64AA2}" datafieldname="customers" uniqueid="{830923d4-44c3-7c88-556b-e716367d3ea8}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{8c4fb1da-d6d2-4ea2-a676-3560a53ac800}">
+                      <labels>
+                        <label description="Regarding" languagecode="1033" />
+                        <label description="Concernant" languagecode="1036" />
+                        <label description="Bezug" languagecode="1031" />
+                      </labels>
+                      <control id="regardingobjectid" classid="{F3015350-44A2-4aa0-97B5-00166532B5E9}" datafieldname="regardingobjectid" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{69318794-1a88-aab1-131c-140b62e8ce6c}" showlabel="false" auto="false" colspan="1">
+                      <labels>
+                        <label description="Booking" languagecode="1033" />
+                        <label description="Concernant" languagecode="1036" />
+                        <label description="Bezug" languagecode="1031" />
+                      </labels>
+                      <control disabled="false" id="qvBooking" classid="{5C5600E0-1D6E-4205-A272-BE80DA87FD42}" datafieldname="regardingobjectid">
+                        <parameters>
+                          <QuickForms>&lt;QuickFormIds&gt;&lt;QuickFormId entityname="tc_booking"&gt;43fc8d5e-1a0a-4da7-ba12-e878abf7c7fa&lt;/QuickFormId&gt;&lt;/QuickFormIds&gt;</QuickForms>
+                          <ControlMode>Edit</ControlMode>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+          <column width="66%">
+            <sections>
+              <section id="{3a157eb7-3771-b7ed-2727-3d7110cc0643}" name="{ffa54179-65a4-45cb-bd70-5ab78f523e20}_section_4" IsUserDefined="0" locklevel="0" showlabel="false" columns="1" showbar="false" celllabelposition="Left" celllabelalignment="Left" labelwidth="115" layout="varwidth">
+                <labels>
+                  <label description="Section" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{6b943087-20a5-051d-ca11-3031342c25a4}" showlabel="false" auto="false" colspan="1" rowspan="13">
+                      <labels>
+                        <label description="Survey Responses Feedback (Survey Feedback)" languagecode="1033" />
+                      </labels>
+                      <control id="grdResponses" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" uniqueid="{7de8296b-87e8-dedb-4515-9bb5a01206b0}" indicationOfSubgrid="true">
+                        <parameters>
+                          <ViewId>{0B9C86F5-2C0A-E711-8102-3863BB354FF0}</ViewId>
+                          <IsUserView>false</IsUserView>
+                          <RelationshipName>tc_surveyresponse_tc_surveyresponsefeedback</RelationshipName>
+                          <TargetEntityType>tc_surveyresponsefeedback</TargetEntityType>
+                          <AutoExpand>Fixed</AutoExpand>
+                          <EnableQuickFind>false</EnableQuickFind>
+                          <EnableViewPicker>false</EnableViewPicker>
+                          <ViewIds>{FFA2055F-6083-4718-8972-C140DAC90CB8},{0B9C86F5-2C0A-E711-8102-3863BB354FF0}</ViewIds>
+                          <EnableJumpBar>false</EnableJumpBar>
+                          <ChartGridMode>Grid</ChartGridMode>
+                          <VisualizationId />
+                          <IsUserChart>false</IsUserChart>
+                          <EnableChartPicker>false</EnableChartPicker>
+                          <RecordsPerPage>11</RecordsPerPage>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
+      <tab id="{99895aae-d39d-0c03-737b-369a94ad2556}" name="tab_3" IsUserDefined="0" locklevel="0" expanded="true" showlabel="true" visible="false">
+        <labels>
+          <label description="Tab" languagecode="1033" />
+        </labels>
+        <columns>
+          <column width="100%">
+            <sections>
+              <section id="{c8597ddb-e43b-796b-ede3-94235e75691e}" name="tab_3_section_1" IsUserDefined="0" locklevel="0" showlabel="false" columns="1" showbar="false" labelwidth="115" layout="varwidth">
+                <labels>
+                  <label description="Section" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{ae1f93cd-c9bd-4a2b-9606-2bb9fb2f424e}">
+                      <labels>
+                        <label description="Subject" languagecode="1033" />
+                        <label description="Sujet" languagecode="1036" />
+                        <label description="Betreff" languagecode="1031" />
+                      </labels>
+                      <control id="subject" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="subject" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{2a0b2651-b8f6-4997-a81d-f89a702a9451}">
+                      <labels>
+                        <label description="Owner" languagecode="1033" />
+                        <label description="Propriétaire" languagecode="1036" />
+                        <label description="Besitzer" languagecode="1031" />
+                      </labels>
+                      <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{43e0bab1-805c-d395-77e3-1911dd8d652d}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Activity Status" languagecode="1033" />
+                        <label description="Statut d'activité" languagecode="1036" />
+                        <label description="Aktivitätsstatus" languagecode="1031" />
+                      </labels>
+                      <control disabled="false" id="statecode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="statecode" />
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
+    </tabs>
+    <header id="{1b17feaa-9f73-42c8-923a-242d926e135e}" columns="1111" celllabelposition="Top" labelwidth="115">
+      <rows>
+        <row>
+          <cell id="{b66754aa-9ccc-a841-a0cd-6831d1646315}" showlabel="false">
+            <labels>
+              <label description="" languagecode="1033" />
+            </labels>
+          </cell>
+          <cell id="{203843ce-04b1-c2ad-c843-9cb0cadee030}" locklevel="0" showlabel="true">
+            <labels>
+              <label description="Survey Id" languagecode="1033" />
+            </labels>
+            <control disabled="true" id="header_tc_survey_id" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_survey_id" uniqueid="{e109ca1e-e638-95d7-5dd8-3092ed5d83d1}" />
+          </cell>
+          <cell id="{7c3c46de-e767-a450-8a45-7e7aa457504b}" locklevel="0" showlabel="true">
+            <labels>
+              <label description="Response Id" languagecode="1033" />
+            </labels>
+            <control disabled="true" id="header_tc_response_id" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_response_id" uniqueid="{ba0a4613-99ca-2570-449b-468ead0156ee}" />
+          </cell>
+          <cell id="{5a57ec40-e138-0285-d36e-dd01797800d7}" locklevel="0" showlabel="true">
+            <labels>
+              <label description="Owner" languagecode="1033" />
+              <label description="Propriétaire" languagecode="1036" />
+              <label description="Besitzer" languagecode="1031" />
+            </labels>
+            <control disabled="false" id="header_ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+          </cell>
+        </row>
+      </rows>
+    </header>
+    <Navigation>
+      <NavBar>
+        <NavBarByRelationshipItem Show="false" RelationshipName="tc_surveyresponse_tc_surveyresponsefeedback" Sequence="1000" Area="Service" Id="nav_tc_surveyresponse_tc_surveyresponsefeedback">
+          <Titles>
+            <Title LCID="1033" Text="Survey Responses Feedback" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem Show="false" RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navConnections" Sequence="8500" Area="Info" Id="navConnections">
+          <Titles>
+            <Title LCID="1033" Text="Connections" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem Show="false" RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navFeedback" Sequence="9958" Area="Info" Id="navFeedback">
+          <Titles>
+            <Title LCID="1033" Text="Feedback" />
+          </Titles>
+        </NavBarByRelationshipItem>
+      </NavBar>
+      <NavBarAreas>
+        <NavBarArea Id="Info">
+          <Titles>
+            <Title LCID="1033" Text="Common" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Sales">
+          <Titles>
+            <Title LCID="1033" Text="Sales" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Service">
+          <Titles>
+            <Title LCID="1033" Text="Service" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Marketing">
+          <Titles>
+            <Title LCID="1033" Text="Marketing" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="ProcessCenter">
+          <Titles>
+            <Title LCID="1033" Text="Process Sessions" />
+          </Titles>
+        </NavBarArea>
+      </NavBarAreas>
+    </Navigation>
+    <controlDescriptions />
+  </form>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <LocalizedNames>
+    <LocalizedName description="Information" languagecode="1033" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description description="A form for this entity." languagecode="1033" />
+  </Descriptions>
+</systemform>

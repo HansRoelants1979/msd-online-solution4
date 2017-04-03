@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<systemform>
+  <formid>{61a21ee4-7943-4d00-8a41-42097c88e110}</formid>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <FormPresentation>1</FormPresentation>
+  <FormActivationState>1</FormActivationState>
+  <form shownavigationbar="true" showImage="false" maxWidth="1900">
+    <tabs>
+      <tab verticallayout="true" id="{5dbff820-2f54-45c5-bdb7-3edd772a815c}" IsUserDefined="1" name="{5dbff820-2f54-45c5-bdb7-3edd772a815c}" locklevel="0" expanded="true" showlabel="true">
+        <labels>
+          <label description="Allgemein" languagecode="1031" />
+          <label description="Tour Operator Details" languagecode="1033" />
+          <label description="Général" languagecode="1036" />
+        </labels>
+        <columns>
+          <column width="100%">
+            <sections>
+              <section showlabel="false" showbar="false" IsUserDefined="0" id="{1e5810ca-74a6-408e-b21c-ddf3a215caa8}">
+                <labels>
+                  <label description="Allgemein" languagecode="1031" />
+                  <label description="General" languagecode="1033" />
+                  <label description="Général" languagecode="1036" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{a80309b0-efd4-4714-aa27-4fd04b199eef}">
+                      <labels>
+                        <label description="Name" languagecode="1033" />
+                      </labels>
+                      <control id="tc_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_name" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{a6753486-ec41-65a0-7aa9-6689bb94857a}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Tour Operator Code" languagecode="1033" />
+                      </labels>
+                      <control id="tc_touroperatorcode" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_touroperatorcode" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{3c84a60a-b21c-281a-9677-c37d194ea989}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Source Market" languagecode="1033" />
+                      </labels>
+                      <control id="tc_countryid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_countryid" disabled="false" />
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
+    </tabs>
+    <header id="{c84063d5-070f-4a6c-8335-51b474544443}" columns="111">
+      <rows>
+        <row>
+          <cell id="{d5ccdba0-4669-4d39-80ec-8227ee5b64e1}" showlabel="false">
+            <labels>
+              <label description="" languagecode="1033" />
+            </labels>
+          </cell>
+          <cell id="{9603f71e-2b72-471c-aba0-87b95947c4b9}" showlabel="false">
+            <labels>
+              <label description="" languagecode="1033" />
+            </labels>
+          </cell>
+          <cell id="{d957a18e-49e2-815c-73b6-e00a569eb6e9}" showlabel="true" locklevel="0">
+            <labels>
+              <label description="Owner" languagecode="1033" />
+              <label description="Propriétaire" languagecode="1036" />
+              <label description="Besitzer" languagecode="1031" />
+            </labels>
+            <control id="header_ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" disabled="false" />
+          </cell>
+        </row>
+      </rows>
+    </header>
+    <Navigation>
+      <NavBar>
+        <NavBarByRelationshipItem RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navAsyncOperations" Sequence="9500" Area="ProcessCenter" Id="navAsyncOperations" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Background Processes" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_touroperator_tc_booking" Sequence="9601" Area="Info" Id="nav_tc_touroperator_tc_booking" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Bookings" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navProcessSessions" Sequence="9700" Area="ProcessCenter" Id="navProcessSessions" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Process Sessions" />
+          </Titles>
+        </NavBarByRelationshipItem>
+      </NavBar>
+      <NavBarAreas>
+        <NavBarArea Id="Info">
+          <Titles>
+            <Title LCID="1033" Text="General" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Sales">
+          <Titles>
+            <Title LCID="1033" Text="Sales" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Service">
+          <Titles>
+            <Title LCID="1033" Text="Service" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="ProcessCenter">
+          <Titles>
+            <Title LCID="1033" Text="Process Sessions" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Marketing">
+          <Titles>
+            <Title LCID="1033" Text="Marketing" />
+          </Titles>
+        </NavBarArea>
+      </NavBarAreas>
+    </Navigation>
+    <controlDescriptions />
+  </form>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <LocalizedNames>
+    <LocalizedName description="Tour Operator" languagecode="1033" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description description="A form for this entity." languagecode="1033" />
+  </Descriptions>
+</systemform>

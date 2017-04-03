@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<systemform>
+  <formid>{4ed5377d-04f0-4ea9-8a33-d479f6ac795a}</formid>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <FormPresentation>1</FormPresentation>
+  <FormActivationState>1</FormActivationState>
+  <form>
+    <tabs>
+      <tab verticallayout="true" id="{0e40848d-ea25-4a1d-bbc0-fb00527dc3fe}" IsUserDefined="1" name="{0e40848d-ea25-4a1d-bbc0-fb00527dc3fe}" locklevel="0" expanded="true" showlabel="true">
+        <labels>
+          <label description="Location Office Details" languagecode="1033" />
+        </labels>
+        <columns>
+          <column width="34%">
+            <sections>
+              <section showlabel="true" showbar="false" IsUserDefined="0" id="{20fdcc8a-fe42-45d7-9b97-1131dfb6c1a7}" name="{20fdcc8a-fe42-45d7-9b97-1131dfb6c1a7}" columns="1" locklevel="0" labelwidth="145" celllabelalignment="Left" celllabelposition="Left">
+                <labels>
+                  <label description="General" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{3860f813-0855-4cf0-a314-7203badca59e}">
+                      <labels>
+                        <label description="Name" languagecode="1033" />
+                      </labels>
+                      <control id="tc_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_name" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{626a5696-e38f-4f8e-9893-4e173b1ccbb8}" showlabel="true" locklevel="1" visible="false">
+                      <labels>
+                        <label description="Owner" languagecode="1033" />
+                      </labels>
+                      <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" uniqueid="{438cb0dc-a58a-1238-8b6c-5bd836392467}" disabled="false">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{a74e0991-b8c6-cd10-1a7e-65518eb12652}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Primary Telephone Number" languagecode="1033" />
+                      </labels>
+                      <control id="tc_primarytelephonenumber" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_primarytelephonenumber" disabled="false" uniqueid="{179c97a1-076b-2ddc-e48a-00dd138cedc6}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{62123721-7a27-543d-0b2a-53d369151a54}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Primary Email Address" languagecode="1033" />
+                      </labels>
+                      <control id="tc_primaryemailaddress" classid="{ADA2203E-B4CD-49be-9DDF-234642B43B52}" datafieldname="tc_primaryemailaddress" disabled="false" />
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+          <column width="66%">
+            <sections>
+              <section name="{0e40848d-ea25-4a1d-bbc0-fb00527dc3fe}_section_2" showlabel="true" showbar="false" locklevel="0" id="{5487419d-b839-9139-186e-ebd6c2b951d9}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="155" celllabelalignment="Left" celllabelposition="Left">
+                <labels>
+                  <label description="Address" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{478d53ba-ed72-c2dd-9bd7-0650e56a6ee4}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Flat or Unit Number" languagecode="1033" />
+                      </labels>
+                      <control id="tc_address1_flatorunitnumber" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address1_flatorunitnumber" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{2ed13614-8e57-a5bd-2d16-4c11d76bb562}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="House No. or Building" languagecode="1033" />
+                      </labels>
+                      <control id="tc_address1_housenumberorbuilding" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address1_housenumberorbuilding" disabled="false" uniqueid="{d0aaa784-05e2-52ed-e7e9-65bee3d0e3bb}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{5617e6e3-7c7b-b1b7-9256-dd8d6719b6d5}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Street" languagecode="1033" />
+                      </labels>
+                      <control id="tc_address1_street" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address1_street" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{62d76bcb-866d-b066-26a8-cd79940652d1}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Additional Information" languagecode="1033" />
+                      </labels>
+                      <control id="tc_address1_additionalinformation" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address1_additionalinformation" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{94550ca2-84a6-3042-028d-2a0be9a70926}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Town" languagecode="1033" />
+                      </labels>
+                      <control id="tc_address1_town" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address1_town" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{5be17578-756c-771a-c78d-807d42733530}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="County" languagecode="1033" />
+                      </labels>
+                      <control id="tc_address1_county" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address1_county" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{622754e4-bc9a-c183-6d20-b91564e664d2}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Post Code" languagecode="1033" />
+                      </labels>
+                      <control id="tc_address1_postcode" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address1_postcode" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{3e051dc7-edd4-c325-5d26-687b0d8750a1}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Country" languagecode="1033" />
+                      </labels>
+                      <control id="tc_address1_country" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_address1_country" disabled="false" />
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
+    </tabs>
+    <header id="{a49511e5-65b6-47ab-8c59-e4e04aefb634}" columns="111">
+      <rows>
+        <row>
+          <cell id="{b346ac1c-a279-d2da-9309-abec30812e52}" showlabel="false">
+            <labels>
+              <label description="" languagecode="1033" />
+            </labels>
+          </cell>
+          <cell id="{cae1b0a8-17ab-e653-b0c8-172cbab79b9d}" showlabel="true" locklevel="0">
+            <labels>
+              <label description="Queue" languagecode="1033" />
+            </labels>
+            <control id="header_tc_queueid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_queueid" disabled="false" />
+          </cell>
+          <cell id="{438d4e81-c290-15b7-e130-335d79cd226c}" showlabel="true" locklevel="0">
+            <labels>
+              <label description="Manager" languagecode="1033" />
+            </labels>
+            <control id="header_ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" disabled="false" uniqueid="{2c0e3bbe-9684-65d2-3258-4473b312c211}">
+              <parameters>
+                <AutoResolve>true</AutoResolve>
+                <DisableMru>false</DisableMru>
+              </parameters>
+            </control>
+          </cell>
+        </row>
+      </rows>
+    </header>
+    <Navigation>
+      <NavBar></NavBar>
+      <NavBarAreas>
+        <NavBarArea Id="Info">
+          <Titles>
+            <Title LCID="1033" Text="Common" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Sales">
+          <Titles>
+            <Title LCID="1033" Text="Sales" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Service">
+          <Titles>
+            <Title LCID="1033" Text="Service" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Marketing">
+          <Titles>
+            <Title LCID="1033" Text="Marketing" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="ProcessCenter">
+          <Titles>
+            <Title LCID="1033" Text="Process Sessions" />
+          </Titles>
+        </NavBarArea>
+      </NavBarAreas>
+    </Navigation>
+    <controlDescriptions />
+  </form>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <LocalizedNames>
+    <LocalizedName description="Information" languagecode="1033" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description description="A form for this entity." languagecode="1033" />
+  </Descriptions>
+</systemform>

@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workflow WorkflowId="{34abbaae-fe07-e711-8102-3863bb354ff0}" Name="Tc.Case.MandatoryFieldsBasedOnCaseTypeAndCreatedOn" Description="Click to add description">
+  <XamlFileName>/Workflows/TcCaseMandatoryFieldsBasedOnCaseTypeAndCreatedOn-34ABBAAE-FE07-E711-8102-3863BB354FF0.xaml</XamlFileName>
+  <Type>1</Type>
+  <Subprocess>0</Subprocess>
+  <Category>2</Category>
+  <Mode>1</Mode>
+  <Scope>4</Scope>
+  <OnDemand>0</OnDemand>
+  <TriggerOnCreate>0</TriggerOnCreate>
+  <TriggerOnDelete>0</TriggerOnDelete>
+  <AsyncAutodelete>0</AsyncAutodelete>
+  <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+  <StateCode>1</StateCode>
+  <StatusCode>2</StatusCode>
+  <RunAs>1</RunAs>
+  <IsTransacted>1</IsTransacted>
+  <IntroducedVersion>1.0.0.49</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <BusinessProcessType>0</BusinessProcessType>
+  <PrimaryEntity>Incident</PrimaryEntity>
+  <ProcessTriggers>
+    <ProcessTrigger processtriggerid="{fee1d1f7-9a13-e711-810c-3863bb34fb48}">
+      <controltype>1</controltype>
+      <formid>{4a63c8d1-6c1e-48ec-9db4-3e6c7155334c}</formid>
+      <scope>1</scope>
+      <controlname>tc_casetypeid</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{ffe1d1f7-9a13-e711-810c-3863bb34fb48}">
+      <formid>{4a63c8d1-6c1e-48ec-9db4-3e6c7155334c}</formid>
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{00e2d1f7-9a13-e711-810c-3863bb34fb48}">
+      <controltype>1</controltype>
+      <formid>{4a63c8d1-6c1e-48ec-9db4-3e6c7155334c}</formid>
+      <scope>1</scope>
+      <controlname>createdon</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{01e2d1f7-9a13-e711-810c-3863bb34fb48}">
+      <formid>{4a63c8d1-6c1e-48ec-9db4-3e6c7155334c}</formid>
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{02e2d1f7-9a13-e711-810c-3863bb34fb48}">
+      <controltype>1</controltype>
+      <formid>{4a63c8d1-6c1e-48ec-9db4-3e6c7155334c}</formid>
+      <scope>1</scope>
+      <controlname>tc_casetypeid</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{03e2d1f7-9a13-e711-810c-3863bb34fb48}">
+      <formid>{4a63c8d1-6c1e-48ec-9db4-3e6c7155334c}</formid>
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{04e2d1f7-9a13-e711-810c-3863bb34fb48}">
+      <controltype>1</controltype>
+      <formid>{4a63c8d1-6c1e-48ec-9db4-3e6c7155334c}</formid>
+      <scope>1</scope>
+      <controlname>tc_casetypeid</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{05e2d1f7-9a13-e711-810c-3863bb34fb48}">
+      <formid>{4a63c8d1-6c1e-48ec-9db4-3e6c7155334c}</formid>
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+  </ProcessTriggers>
+</Workflow>

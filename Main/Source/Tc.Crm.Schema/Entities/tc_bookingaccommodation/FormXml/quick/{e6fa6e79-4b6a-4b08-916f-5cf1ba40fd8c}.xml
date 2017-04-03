@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<systemform>
+  <formid>{e6fa6e79-4b6a-4b08-916f-5cf1ba40fd8c}</formid>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <FormPresentation>1</FormPresentation>
+  <FormActivationState>1</FormActivationState>
+  <form maxWidth="400">
+    <tabs>
+      <tab verticallayout="true" id="{a3a94ae9-fc5f-43b2-8717-5b7b921fbddf}" IsUserDefined="1">
+        <labels>
+          <label description="" languagecode="1033" />
+        </labels>
+        <columns>
+          <column width="100%">
+            <sections>
+              <section showlabel="true" showbar="true" IsUserDefined="0" id="{9a326cb6-c57f-4e74-bf60-4d4b013579b5}" name="{9a326cb6-c57f-4e74-bf60-4d4b013579b5}" columns="1" locklevel="0" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
+                <labels>
+                  <label description="Accommodation Details" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{f9a296d0-2eb0-4d34-910b-bee47e39b76c}" showlabel="true" locklevel="0" visible="false">
+                      <labels>
+                        <label description="Name" languagecode="1033" />
+                      </labels>
+                      <control id="tc_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_name" uniqueid="{a701123a-4e5d-1a45-19e9-c7dc489577e8}" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{19e005a2-26d7-e45e-d101-83721290ae61}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Room Type" languagecode="1033" />
+                      </labels>
+                      <control id="tc_roomtype" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_roomtype" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{d8ee234a-4bb3-8d0b-da6e-0dc94e8ae37e}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Board Type" languagecode="1033" />
+                      </labels>
+                      <control id="tc_boardtype" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_boardtype" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{58b3d968-d9d8-59d9-eca5-2b44a844d09e}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Number of Rooms" languagecode="1033" />
+                      </labels>
+                      <control id="tc_numberofrooms" classid="{C6D124CA-7EDA-4a60-AEA9-7FB8D318B68F}" datafieldname="tc_numberofrooms" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{75973a4b-b739-44a4-7208-6e1d7948a986}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Start Date and Time" languagecode="1033" />
+                      </labels>
+                      <control id="tc_startdateandtime" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="tc_startdateandtime" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{286b28bc-a20d-2041-10c5-918cc2275395}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="End Date and Time" languagecode="1033" />
+                      </labels>
+                      <control id="tc_enddateandtime" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="tc_enddateandtime" disabled="false" uniqueid="{8b78c04b-9513-16ee-75e1-7481c9e9ab19}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{78c42a56-656b-9cc3-18b0-36945d07d6a1}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Participants" languagecode="1033" />
+                      </labels>
+                      <control id="tc_participants" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_participants" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{cd062de5-f69f-4ba7-bd61-d1965e39ad3b}" showlabel="true" locklevel="1" visible="false">
+                      <labels>
+                        <label description="Owner" languagecode="1033" />
+                      </labels>
+                      <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" uniqueid="{051440c5-ae18-c452-d24a-3132cc587939}" disabled="false">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
+    </tabs>
+  </form>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <LocalizedNames>
+    <LocalizedName description="Information" languagecode="1033" />
+  </LocalizedNames>
+</systemform>

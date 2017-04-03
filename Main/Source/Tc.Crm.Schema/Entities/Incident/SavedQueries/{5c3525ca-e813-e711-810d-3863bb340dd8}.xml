@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>0</isdefault>
+  <returnedtypecode>112</returnedtypecode>
+  <savedqueryid>{5c3525ca-e813-e711-810d-3863bb340dd8}</savedqueryid>
+  <layoutxml>
+    <grid name="resultset" icon="1" preview="1" select="1" jump="title" object="112">
+      <row id="incidentid" name="result">
+        <cell name="title" width="150" />
+        <cell name="description" width="100" disableSorting="1" />
+        <cell name="statecode" width="100" />
+        <cell name="tc_casetypeid" width="100" />
+        <cell name="ownerid" width="100" />
+        <cell name="a_cf39b8fda77b421483a1af5e511c39ca.tc_department" width="100" disableSorting="1" />
+        <cell name="a_cf39b8fda77b421483a1af5e511c39ca.parentsystemuserid" width="100" disableSorting="1" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>0</querytype>
+  <fetchxml>
+    <fetch mapping="logical" output-format="xml-platform" version="1.0" distinct="true">
+      <entity name="incident">
+        <attribute name="title" />
+        <order descending="false" attribute="title" />
+        <filter type="and">
+          <condition value="1" attribute="statecode" operator="eq" />
+        </filter>
+        <link-entity name="incidentresolution" alias="aa" to="incidentid" from="incidentid">
+          <filter type="and">
+            <condition attribute="createdon" operator="today" />
+            <condition value="1" attribute="statecode" operator="eq" />
+          </filter>
+        </link-entity>
+        <attribute name="tc_casetypeid" />
+        <attribute name="statecode" />
+        <attribute name="description" />
+        <attribute name="ownerid" />
+        <link-entity name="systemuser" alias="a_cf39b8fda77b421483a1af5e511c39ca" to="owninguser" from="systemuserid" link-type="outer" visible="false">
+          <attribute name="parentsystemuserid" />
+          <attribute name="tc_department" />
+        </link-entity>
+        <attribute name="incidentid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.51</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Cases Resolved Today" languagecode="1033" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description description="This view displayed Cases resolved today" languagecode="1033" />
+  </Descriptions>
+</savedquery>

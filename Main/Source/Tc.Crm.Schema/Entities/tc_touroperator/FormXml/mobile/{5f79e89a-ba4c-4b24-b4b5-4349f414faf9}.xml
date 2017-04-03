@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<systemform>
+  <formid>{5f79e89a-ba4c-4b24-b4b5-4349f414faf9}</formid>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <FormPresentation>0</FormPresentation>
+  <FormActivationState>1</FormActivationState>
+  <form>
+    <tabs>
+      <tab name="general" verticallayout="true" id="{384fc589-8594-4d70-acb6-5d7061ce0c36}" IsUserDefined="0">
+        <labels>
+          <label description="" languagecode="1033" />
+        </labels>
+        <columns>
+          <column width="100%">
+            <sections>
+              <section name="account information" showlabel="false" showbar="false" id="{b4316624-59bb-4cef-8f96-3c3fe449be82}" IsUserDefined="0">
+                <labels>
+                  <label description="" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{e2d9c127-7c0b-4e11-a098-4009a086cc84}">
+                      <labels>
+                        <label description="Name" languagecode="1033" />
+                      </labels>
+                      <control id="tc_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_name" disabled="false" />
+                    </cell>
+                    <cell id="{a0371123-6bb6-4be4-9205-c6053ed5efd0}">
+                      <labels>
+                        <label description="Status" languagecode="1033" />
+                        <label description="Statut" languagecode="1036" />
+                      </labels>
+                      <control id="statecode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="statecode" disabled="false" />
+                    </cell>
+                    <cell id="{ff22ef8e-3eca-40ef-8573-f0c68c10d081}">
+                      <labels>
+                        <label description="Owner" languagecode="1033" />
+                        <label description="Propriétaire" languagecode="1036" />
+                        <label description="Besitzer" languagecode="1031" />
+                      </labels>
+                      <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" disabled="false" />
+                    </cell>
+                    <cell id="{2C0DC1DC-9FFC-4B88-9784-161255057326}">
+                      <labels>
+                        <label description="Source Market" languagecode="1033" />
+                      </labels>
+                      <control id="tc_countryid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_countryid" disabled="false" />
+                    </cell>
+                    <cell id="{BC03E653-147F-4D24-A4FB-5B0A2F54FA80}">
+                      <labels>
+                        <label description="Tour Operator Code" languagecode="1033" />
+                      </labels>
+                      <control id="tc_touroperatorcode" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_touroperatorcode" disabled="false" />
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
+    </tabs>
+  </form>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <LocalizedNames>
+    <LocalizedName description="Tour Operator" languagecode="1033" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description description="This is the form that is displayed for the CRM for phones express application." languagecode="1033" />
+  </Descriptions>
+</systemform>

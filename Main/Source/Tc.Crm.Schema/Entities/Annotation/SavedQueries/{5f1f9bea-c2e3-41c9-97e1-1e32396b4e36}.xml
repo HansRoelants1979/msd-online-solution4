@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery unmodified="1">
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>1</isdefault>
+  <returnedtypecode>5</returnedtypecode>
+  <savedqueryid>{5f1f9bea-c2e3-41c9-97e1-1e32396b4e36}</savedqueryid>
+  <queryapi></queryapi>
+  <querytype>8192</querytype>
+  <fetchxml>
+    <fetch version="1.0" output-format="xml-platform" mapping="logical">
+      <entity name="annotation">
+        <filter type="and">
+          <filter type="or">
+            <condition attribute="filesize" operator="lt" value="1048576" />
+            <condition attribute="filesize" operator="null" />
+          </filter>
+        </filter>
+        <attribute name="annotationid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>5.0.0.0</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Notizen" languagecode="1031" />
+    <LocalizedName description="Notes" languagecode="1033" />
+    <LocalizedName description="Notes" languagecode="1036" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description description="Notizen, die an von mir heruntergeladene Datensätze angehängt sind" languagecode="1031" />
+    <Description description="Notes attached to records I have downloaded" languagecode="1033" />
+    <Description description="Notes jointes aux enregistrements que j’ai téléchargés" languagecode="1036" />
+  </Descriptions>
+</savedquery>

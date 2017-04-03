@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <isquickfindquery>1</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>1</isdefault>
+  <returnedtypecode>1</returnedtypecode>
+  <savedqueryid>{2d1187c4-23fe-4bb5-9647-43bb1c6ddbd1}</savedqueryid>
+  <queryapi></queryapi>
+  <layoutxml>
+    <grid name="resultset" object="1" jump="name" select="1" icon="1" preview="1">
+      <row name="result" id="accountid">
+        <cell name="name" width="300" />
+        <cell name="tc_address1_postalcode" width="100" />
+        <cell name="tc_address1_town" width="100" />
+        <cell name="emailaddress1" width="100" />
+        <cell name="tc_sourcemarketid" width="100" />
+        <cell name="tc_keyaccount" width="100" />
+        <cell name="tc_address1_flatorunitnumber" width="100" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_address1_housenumberorbuilding" width="100" />
+        <cell name="tc_address1_street" width="100" />
+        <cell name="tc_address1_additionalinformation" width="100" />
+        <cell name="tc_address1_county" width="100" />
+        <cell name="tc_address1_countryid" width="100" />
+        <cell name="telephone1" width="100" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>4</querytype>
+  <fetchxml>
+    <fetch version="1.0" output-format="xml-platform" mapping="logical">
+      <entity name="account">
+        <attribute name="name" />
+        <order attribute="name" descending="false" />
+        <filter type="and">
+          <condition attribute="statecode" operator="eq" value="0" />
+        </filter>
+        <attribute name="telephone1" />
+        <attribute name="tc_address1_street" />
+        <attribute name="tc_address1_housenumberorbuilding" />
+        <attribute name="tc_sourcemarketid" />
+        <attribute name="emailaddress1" />
+        <attribute name="tc_address1_countryid" />
+        <filter type="or" isquickfindfields="1">
+          <condition attribute="telephone1" operator="like" value="{0}" />
+          <condition attribute="tc_sourcemarketid" operator="like" value="{0}" />
+          <condition attribute="tc_address1_town" operator="like" value="{0}" />
+          <condition attribute="tc_address1_street" operator="like" value="{0}" />
+          <condition attribute="tc_address1_postalcode" operator="like" value="{0}" />
+          <condition attribute="tc_address1_housenumberorbuilding" operator="like" value="{0}" />
+          <condition attribute="tc_address1_flatorunitnumber" operator="like" value="{0}" />
+          <condition attribute="tc_address1_county" operator="like" value="{0}" />
+          <condition attribute="tc_address1_countryid" operator="like" value="{0}" />
+          <condition attribute="tc_address1_additionalinformation" operator="like" value="{0}" />
+          <condition attribute="name" operator="like" value="{0}" />
+          <condition attribute="emailaddress1" operator="like" value="{0}" />
+        </filter>
+        <attribute name="tc_address1_postalcode" />
+        <attribute name="tc_address1_flatorunitnumber" />
+        <attribute name="tc_address1_county" />
+        <attribute name="tc_address1_additionalinformation" />
+        <attribute name="tc_address1_town" />
+        <attribute name="tc_keyaccount" />
+        <attribute name="accountid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>5.0.0.0</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Schnellsuche: Aktive Firmen" languagecode="1031" />
+    <LocalizedName description="Quick Find Active Accounts" languagecode="1033" />
+    <LocalizedName description="Recherche rapide Comptes actifs" languagecode="1036" />
+  </LocalizedNames>
+</savedquery>

@@ -1,0 +1,453 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EntityMaps>
+  <EntityMap>
+    <EntitySource>account</EntitySource>
+    <EntityTarget>tc_compensation</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>account</EntitySource>
+    <EntityTarget>tc_customerbookingrole</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>businessunit</EntitySource>
+    <EntityTarget>tc_country</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>contact</EntitySource>
+    <EntityTarget>letter</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>contact</EntitySource>
+    <EntityTarget>tc_compensation</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>contact</EntitySource>
+    <EntityTarget>tc_customerbookingrole</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>incident</EntitySource>
+    <EntityTarget>tc_caseflow</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>incident</EntitySource>
+    <EntityTarget>tc_caseline</EntityTarget>
+    <AttributeMaps>
+      <AttributeMap>
+        <AttributeSource>tc_bookingid</AttributeSource>
+        <AttributeTarget>tc_bookingid</AttributeTarget>
+      </AttributeMap>
+      <AttributeMap>
+        <AttributeSource>tc_casetypeid</AttributeSource>
+        <AttributeTarget>tc_casetypeid</AttributeTarget>
+      </AttributeMap>
+      <AttributeMap>
+        <AttributeSource>tc_mandatoryconditionsmet</AttributeSource>
+        <AttributeTarget>tc_mandatoryconditionsmet</AttributeTarget>
+      </AttributeMap>
+    </AttributeMaps>
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>incident</EntitySource>
+    <EntityTarget>tc_compensation</EntityTarget>
+    <AttributeMaps>
+      <AttributeMap>
+        <AttributeSource>customerid</AttributeSource>
+        <AttributeTarget>tc_customer</AttributeTarget>
+      </AttributeMap>
+      <AttributeMap>
+        <AttributeSource>ownerid</AttributeSource>
+        <AttributeTarget>ownerid</AttributeTarget>
+      </AttributeMap>
+      <AttributeMap>
+        <AttributeSource>tc_bookingid</AttributeSource>
+        <AttributeTarget>tc_bookingid</AttributeTarget>
+      </AttributeMap>
+      <AttributeMap>
+        <AttributeSource>transactioncurrencyid</AttributeSource>
+        <AttributeTarget>transactioncurrencyid</AttributeTarget>
+      </AttributeMap>
+    </AttributeMaps>
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>incident</EntitySource>
+    <EntityTarget>tc_compensationline</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>incident</EntitySource>
+    <EntityTarget>tc_recovery</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>queue</EntitySource>
+    <EntityTarget>tc_locationoffice</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>slakpiinstance</EntitySource>
+    <EntityTarget>incident</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>slakpiinstance</EntitySource>
+    <EntityTarget>tc_assistancerequest</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>slakpiinstance</EntitySource>
+    <EntityTarget>tc_compensationapproval</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>systemuser</EntitySource>
+    <EntityTarget>incident</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>systemuser</EntitySource>
+    <EntityTarget>msdyn_wallsavedqueryusersettings</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>systemuser</EntitySource>
+    <EntityTarget>tc_compensationapproval</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>systemuser</EntitySource>
+    <EntityTarget>tc_compensationline</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_accounttype</EntitySource>
+    <EntityTarget>account</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_bookingaccommodation</EntitySource>
+    <EntityTarget>tc_caseline</EntityTarget>
+    <AttributeMaps>
+      <AttributeMap>
+        <AttributeSource>tc_bookingid</AttributeSource>
+        <AttributeTarget>tc_bookingid</AttributeTarget>
+      </AttributeMap>
+      <AttributeMap>
+        <AttributeSource>tc_name</AttributeSource>
+        <AttributeTarget>tc_name</AttributeTarget>
+      </AttributeMap>
+    </AttributeMaps>
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_bookingextraservice</EntitySource>
+    <EntityTarget>tc_caseline</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_booking</EntitySource>
+    <EntityTarget>incident</EntityTarget>
+    <AttributeMaps>
+      <AttributeMap>
+        <AttributeSource>tc_travelamount</AttributeSource>
+        <AttributeTarget>tc_bookingtravelamount</AttributeTarget>
+      </AttributeMap>
+      <AttributeMap>
+        <AttributeSource>transactioncurrencyid</AttributeSource>
+        <AttributeTarget>transactioncurrencyid</AttributeTarget>
+      </AttributeMap>
+    </AttributeMaps>
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_booking</EntitySource>
+    <EntityTarget>letter</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_booking</EntitySource>
+    <EntityTarget>tc_bookingaccommodation</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_booking</EntitySource>
+    <EntityTarget>tc_bookingextraservice</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_booking</EntitySource>
+    <EntityTarget>tc_bookingtransfer</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_booking</EntitySource>
+    <EntityTarget>tc_bookingtransport</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_booking</EntitySource>
+    <EntityTarget>tc_caseline</EntityTarget>
+    <AttributeMaps>
+      <AttributeMap>
+        <AttributeSource>tc_travelamount</AttributeSource>
+        <AttributeTarget>tc_bookingtravelamount</AttributeTarget>
+      </AttributeMap>
+      <AttributeMap>
+        <AttributeSource>transactioncurrencyid</AttributeSource>
+        <AttributeTarget>transactioncurrencyid</AttributeTarget>
+      </AttributeMap>
+    </AttributeMaps>
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_booking</EntitySource>
+    <EntityTarget>tc_compensation</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_booking</EntitySource>
+    <EntityTarget>tc_customerbookingrole</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_booking</EntitySource>
+    <EntityTarget>tc_recovery</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_bookingtransfer</EntitySource>
+    <EntityTarget>tc_caseline</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_bookingtransport</EntitySource>
+    <EntityTarget>tc_caseline</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_brand</EntitySource>
+    <EntityTarget>incident</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_brand</EntitySource>
+    <EntityTarget>tc_booking</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_brand</EntitySource>
+    <EntityTarget>tc_hotelpromises</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_casecategory</EntitySource>
+    <EntityTarget>tc_caseline</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_casecategory</EntitySource>
+    <EntityTarget>tc_recovery</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_caseline</EntitySource>
+    <EntityTarget>tc_compensation</EntityTarget>
+    <AttributeMaps>
+      <AttributeMap>
+        <AttributeSource>tc_caseid</AttributeSource>
+        <AttributeTarget>tc_caseid</AttributeTarget>
+      </AttributeMap>
+      <AttributeMap>
+        <AttributeSource>tc_name</AttributeSource>
+        <AttributeTarget>tc_name</AttributeTarget>
+      </AttributeMap>
+      <AttributeMap>
+        <AttributeSource>transactioncurrencyid</AttributeSource>
+        <AttributeTarget>transactioncurrencyid</AttributeTarget>
+      </AttributeMap>
+    </AttributeMaps>
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_casetype</EntitySource>
+    <EntityTarget>incident</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_casetype</EntitySource>
+    <EntityTarget>tc_casecategory</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_casetype</EntitySource>
+    <EntityTarget>tc_caseline</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_compensation</EntitySource>
+    <EntityTarget>tc_compensationapproval</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_compensation</EntitySource>
+    <EntityTarget>tc_compensationline</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_compensation</EntitySource>
+    <EntityTarget>tc_recovery</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_country</EntitySource>
+    <EntityTarget>account</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_country</EntitySource>
+    <EntityTarget>contact</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_country</EntitySource>
+    <EntityTarget>incident</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_country</EntitySource>
+    <EntityTarget>tc_booking</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_country</EntitySource>
+    <EntityTarget>tc_brand</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_country</EntitySource>
+    <EntityTarget>tc_compensation</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_country</EntitySource>
+    <EntityTarget>tc_gateway</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_country</EntitySource>
+    <EntityTarget>tc_locationoffice</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_country</EntitySource>
+    <EntityTarget>tc_region</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_country</EntitySource>
+    <EntityTarget>tc_touroperator</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_gateway</EntitySource>
+    <EntityTarget>incident</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_gateway</EntitySource>
+    <EntityTarget>tc_booking</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_gateway</EntitySource>
+    <EntityTarget>tc_bookingtransfer</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_gateway</EntitySource>
+    <EntityTarget>tc_bookingtransport</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_gateway</EntitySource>
+    <EntityTarget>tc_caseline</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_gateway</EntitySource>
+    <EntityTarget>tc_location</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_hotel</EntitySource>
+    <EntityTarget>incident</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_hotel</EntitySource>
+    <EntityTarget>tc_bookingaccommodation</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_hotel</EntitySource>
+    <EntityTarget>tc_caseline</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_hotel</EntitySource>
+    <EntityTarget>tc_hotelpromises</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_location</EntitySource>
+    <EntityTarget>incident</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_locationoffice</EntitySource>
+    <EntityTarget>incident</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_location</EntitySource>
+    <EntityTarget>tc_hotel</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_region</EntitySource>
+    <EntityTarget>incident</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_region</EntitySource>
+    <EntityTarget>tc_booking</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_region</EntitySource>
+    <EntityTarget>tc_location</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_surveyresponse</EntitySource>
+    <EntityTarget>tc_surveyresponsefeedback</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_touroperator</EntitySource>
+    <EntityTarget>tc_booking</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>team</EntitySource>
+    <EntityTarget>team</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>transactioncurrency</EntitySource>
+    <EntityTarget>tc_recovery</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+</EntityMaps>

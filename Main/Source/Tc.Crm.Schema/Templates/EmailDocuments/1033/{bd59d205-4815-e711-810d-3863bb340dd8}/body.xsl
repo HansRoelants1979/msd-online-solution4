@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" ?><xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0"><xsl:output method="text" indent="no"/><xsl:template match="/data"><![CDATA[
+<font size=2>
+</font><p lang=de style="margin:0in;"><font size=2>Wir kümmern
+uns um Ihre Anfrage und werden Ihnen innerhalb von 3 Stunden eine Antwort
+geben. </font></p><font size=2>
+
+</font><p lang=de style="margin:0in;"><font size=2>&#160;</font></p><font size=2>
+
+</font><p lang=de style="margin:0in;"><font size=2>Sollten Sie
+schneller Assistenz/ Hilfe benötigen, rufen Sie uns bitte an 0049 30551655611</font></p><font size=2>
+
+</font><p style="margin:0in;"><font size=2>&#160;</font></p><font size=2>
+
+</font><p style="margin:0in;"><font size=2>Mit freundlichen
+Grüßen,</font></p><font size=2>
+
+</font><p style="margin:0in;"><font size=2>&#160;</font></p><font size=2>
+
+</font><p lang=cs style="margin:0in;"><font size=2>Connected
+Service </font></p><font size=2>
+
+</font><p lang=cs style="margin:0in;"><font size=2>In
+Destination Services (iDS)</font></p><font size=2>
+
+</font><p lang=cs style="margin:0in;"><font size=2>Part of
+Thomas Cook Group plc</font></p><font size=2>
+</font>
+]]></xsl:template></xsl:stylesheet>

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>0</isdefault>
+  <returnedtypecode>10049</returnedtypecode>
+  <savedqueryid>{01a22365-57f7-e611-80ff-3863bb354ff0}</savedqueryid>
+  <layoutxml>
+    <grid name="resultset" object="10049" jump="tc_name" select="1" icon="1" preview="1">
+      <row id="tc_caselineid" name="result">
+        <cell name="tc_categorylevel1id" imageproviderwebresource="$webresource:" imageproviderfunctionname="" width="300" />
+        <cell name="tc_casecategory2id" imageproviderwebresource="$webresource:" imageproviderfunctionname="" width="300" />
+        <cell name="tc_category3id" imageproviderwebresource="$webresource:" imageproviderfunctionname="" width="300" />
+        <cell name="tc_servicetype" imageproviderwebresource="$webresource:" imageproviderfunctionname="" width="200" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>0</querytype>
+  <fetchxml>
+    <fetch distinct="false" mapping="logical" output-format="xml-platform" version="1.0">
+      <entity name="tc_caseline">
+        <attribute name="tc_categorylevel1id" />
+        <attribute name="tc_casecategory2id" />
+        <attribute name="tc_category3id" />
+        <order attribute="tc_categorylevel1id" descending="false" />
+        <filter type="and">
+          <condition attribute="statecode" operator="in">
+            <value>0</value>
+            <value>1</value>
+          </condition>
+        </filter>
+        <attribute name="tc_servicetype" />
+        <attribute name="tc_caselineid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.16</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="All Case Categories" languagecode="1033" />
+  </LocalizedNames>
+</savedquery>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <isquickfindquery>1</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>1</isdefault>
+  <returnedtypecode>9</returnedtypecode>
+  <savedqueryid>{8b0a6284-d7ed-4459-a695-d3a10e770864}</savedqueryid>
+  <queryapi></queryapi>
+  <layoutxml>
+    <grid name="resultset" object="9" jump="name" select="1" preview="0" icon="1">
+      <row name="result" id="teamid">
+        <cell name="name" width="300" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>4</querytype>
+  <fetchxml>
+    <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
+      <entity name="team">
+        <attribute name="name" />
+        <filter type="and">
+          <condition attribute="tc_hotelteam" operator="eq" value="1" />
+          <condition attribute="tc_hotelteamid" operator="null" />
+        </filter>
+        <filter type="or" isquickfindfields="1">
+          <condition attribute="name" operator="like" value="{0}" />
+        </filter>
+        <attribute name="teamid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>5.0.0.0</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Teams: Ansicht für die Schnellsuche" languagecode="1031" />
+    <LocalizedName description="Teams Quick Find View" languagecode="1033" />
+    <LocalizedName description="Vue Recherche rapide Équipes" languagecode="1036" />
+  </LocalizedNames>
+</savedquery>

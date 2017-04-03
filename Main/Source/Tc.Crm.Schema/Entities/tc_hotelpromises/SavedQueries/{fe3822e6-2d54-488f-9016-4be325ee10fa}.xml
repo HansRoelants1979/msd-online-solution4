@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>0</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>1</isdefault>
+  <returnedtypecode>10012</returnedtypecode>
+  <savedqueryid>{fe3822e6-2d54-488f-9016-4be325ee10fa}</savedqueryid>
+  <layoutxml>
+    <grid name="resultset" object="10012" jump="tc_name" select="1" icon="1" preview="1">
+      <row name="result" id="tc_hotelpromisesid">
+        <cell name="tc_hotelid" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_brandid" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_promisetype" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>0</querytype>
+  <fetchxml>
+    <fetch version="1.0" mapping="logical">
+      <entity name="tc_hotelpromises">
+        <order attribute="tc_hotelid" descending="false" />
+        <order attribute="tc_brandid" descending="false" />
+        <filter type="and">
+          <condition attribute="statecode" operator="eq" value="0" />
+        </filter>
+        <attribute name="tc_promisetype" />
+        <attribute name="tc_hotelid" />
+        <attribute name="tc_brandid" />
+        <attribute name="tc_hotelpromisesid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Active Hotel Promises" languagecode="1033" />
+  </LocalizedNames>
+</savedquery>

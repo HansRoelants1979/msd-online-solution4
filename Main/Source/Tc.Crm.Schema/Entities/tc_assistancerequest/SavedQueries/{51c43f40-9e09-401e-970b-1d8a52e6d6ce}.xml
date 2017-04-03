@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>0</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>1</isdefault>
+  <returnedtypecode>10070</returnedtypecode>
+  <savedqueryid>{51c43f40-9e09-401e-970b-1d8a52e6d6ce}</savedqueryid>
+  <layoutxml>
+    <grid name="resultset" preview="1" icon="1" select="1" jump="subject" object="10070">
+      <row id="activityid" name="result">
+        <cell name="subject" width="300" />
+        <cell name="senton" width="100" />
+        <cell name="scheduledend" width="100" />
+        <cell name="statecode" width="100" />
+        <cell name="regardingobjectid" width="100" />
+        <cell name="createdon" width="125" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>0</querytype>
+  <fetchxml>
+    <fetch distinct="true" mapping="logical" version="1.0">
+      <entity name="tc_assistancerequest">
+        <attribute name="subject" />
+        <attribute name="createdon" />
+        <order descending="false" attribute="scheduledend" />
+        <filter type="and">
+          <condition attribute="statecode" operator="in">
+            <value>0</value>
+            <value>3</value>
+          </condition>
+        </filter>
+        <link-entity name="activityparty" alias="aa" to="activityid" from="activityid">
+          <filter type="and">
+            <condition attribute="partyid" operator="eq-userid" />
+          </filter>
+        </link-entity>
+        <attribute name="regardingobjectid" />
+        <attribute name="scheduledend" />
+        <attribute name="senton" />
+        <attribute name="statecode" />
+        <attribute name="activityid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.51</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="My Open Assistance Requests" languagecode="1033" />
+  </LocalizedNames>
+</savedquery>

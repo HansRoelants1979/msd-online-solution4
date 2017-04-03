@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<systemform>
+  <formid>{ed92b7e8-4e36-458a-9a89-273ddf68f03e}</formid>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <FormPresentation>0</FormPresentation>
+  <FormActivationState>1</FormActivationState>
+  <form>
+    <tabs>
+      <tab name="general" verticallayout="true" id="{f88d180c-0acc-41f2-b91d-7dba8d4618f3}" IsUserDefined="0">
+        <labels>
+          <label description="" languagecode="1033" />
+        </labels>
+        <columns>
+          <column width="100%">
+            <sections>
+              <section name="account information" showlabel="false" showbar="false" id="{068f2526-1d7d-40b0-856c-6b9b952850a7}" IsUserDefined="0">
+                <labels>
+                  <label description="" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{da6ab262-2d28-4b64-8b43-de211d93afb8}">
+                      <labels>
+                        <label description="IATA" languagecode="1033" />
+                      </labels>
+                      <control id="tc_iata" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_iata" disabled="false" />
+                    </cell>
+                    <cell id="{c9cdd348-8b0c-44e2-8bc7-95f420056682}">
+                      <labels>
+                        <label description="Status" languagecode="1033" />
+                      </labels>
+                      <control id="statecode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="statecode" disabled="false" />
+                    </cell>
+                    <cell id="{ec932a15-fbcb-4f2a-9c68-894d1dbaf9ed}">
+                      <labels>
+                        <label description="Owner" languagecode="1033" />
+                      </labels>
+                      <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" disabled="false" />
+                    </cell>
+                    <cell id="{474DEDE5-A56C-46F1-9FDB-BC48571D2D94}">
+                      <labels>
+                        <label description="Gateway Name" languagecode="1033" />
+                      </labels>
+                      <control id="tc_gateway" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_gateway" disabled="false" />
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
+    </tabs>
+  </form>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <LocalizedNames>
+    <LocalizedName description="Gateway" languagecode="1033" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description description="This is the form that is displayed for the CRM for phones express application." languagecode="1033" />
+  </Descriptions>
+</systemform>

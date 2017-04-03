@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>0</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>1</isdefault>
+  <returnedtypecode>10044</returnedtypecode>
+  <savedqueryid>{59b73fa9-f79c-4f05-9cf8-f785691e22e2}</savedqueryid>
+  <layoutxml>
+    <grid name="" object="10044" jump="tc_name" select="1" icon="1" preview="1">
+      <row name="tc_hotel" id="tc_hotelid">
+        <cell name="tc_name" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_locationid" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_category" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_masterhotelid" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_sourcemarkethotelid" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_telephonenumber" width="100" />
+        <cell name="tc_primaryemailaddress" width="100" />
+        <cell name="statuscode" width="100" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>2</querytype>
+  <fetchxml>
+    <fetch version="1.0" mapping="logical">
+      <entity name="tc_hotel">
+        <attribute name="tc_name" />
+        <order attribute="tc_name" descending="false" />
+        <filter type="and">
+          <condition attribute="statecode" operator="eq" value="0" />
+        </filter>
+        <attribute name="tc_sourcemarkethotelid" />
+        <attribute name="tc_masterhotelid" />
+        <attribute name="tc_locationid" />
+        <attribute name="tc_category" />
+        <attribute name="tc_telephonenumber" />
+        <attribute name="statuscode" />
+        <attribute name="tc_primaryemailaddress" />
+        <attribute name="tc_hotelid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Hotel Associated View" languagecode="1033" />
+  </LocalizedNames>
+</savedquery>

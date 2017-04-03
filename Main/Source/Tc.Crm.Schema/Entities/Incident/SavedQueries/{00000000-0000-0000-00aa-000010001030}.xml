@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>0</isdefault>
+  <returnedtypecode>112</returnedtypecode>
+  <savedqueryid>{00000000-0000-0000-00aa-000010001030}</savedqueryid>
+  <queryapi></queryapi>
+  <layoutxml>
+    <grid name="resultset" object="112" jump="title" select="1" icon="1" preview="1">
+      <row name="result" id="incidentid">
+        <cell name="ticketnumber" width="150" />
+        <cell name="tc_casetypeid" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="prioritycode" width="100" />
+        <cell name="caseorigincode" width="100" />
+        <cell name="customerid" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="ownerid" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="statuscode" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="createdon" width="100" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>0</querytype>
+  <fetchxml>
+    <fetch version="1.0" output-format="xml-platform" mapping="logical">
+      <entity name="incident">
+        <attribute name="ticketnumber" />
+        <order attribute="createdon" descending="true" />
+        <attribute name="tc_casetypeid" />
+        <attribute name="statuscode" />
+        <attribute name="prioritycode" />
+        <attribute name="ownerid" />
+        <attribute name="caseorigincode" />
+        <attribute name="customerid" />
+        <attribute name="createdon" />
+        <attribute name="incidentid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>5.0.0.0</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Alle Anfragen" languagecode="1031" />
+    <LocalizedName description="All Cases" languagecode="1033" />
+    <LocalizedName description="Tous les incidents" languagecode="1036" />
+  </LocalizedNames>
+</savedquery>

@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workflow WorkflowId="{e656ed68-4352-4d91-8590-ba9e5312ea4c}" Name="Case Flow">
+  <XamlFileName>/Workflows/CaseFlow-E656ED68-4352-4D91-8590-BA9E5312EA4C.xaml</XamlFileName>
+  <Type>1</Type>
+  <Subprocess>0</Subprocess>
+  <Category>4</Category>
+  <Mode>0</Mode>
+  <Scope>4</Scope>
+  <OnDemand>0</OnDemand>
+  <TriggerOnCreate>1</TriggerOnCreate>
+  <TriggerOnDelete>0</TriggerOnDelete>
+  <AsyncAutodelete>0</AsyncAutodelete>
+  <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+  <StateCode>1</StateCode>
+  <StatusCode>2</StatusCode>
+  <processorder>100</processorder>
+  <processroleassignment>&lt;DisplayConditions&gt;&lt;Role Id="{1C61C2C8-8C39-44A2-A3B5-0A8E1CBD10E0}" /&gt;&lt;Role Id="{627090ff-40a3-4053-8790-584edc5be201}" /&gt;&lt;Role Id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" /&gt;&lt;Role Id="{4008F9F4-BF17-4899-9AA9-6B6E85C45AA7}" /&gt;&lt;Role Id="{51803FBB-1EF7-4F61-AFD3-6E8BAF06389E}" /&gt;&lt;Role Id="{AC3F33DF-6477-406F-BBD2-E867C3DEA773}" /&gt;&lt;/DisplayConditions&gt;</processroleassignment>
+  <RunAs>1</RunAs>
+  <UniqueName>tc_caseflow</UniqueName>
+  <IsTransacted>1</IsTransacted>
+  <IntroducedVersion>1.0.0.19</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <BusinessProcessType>0</BusinessProcessType>
+  <PrimaryEntity>Incident</PrimaryEntity>
+  <labels>
+    <steplabels id="{eaca116c-f5d1-4fec-84d5-151bc0c45a5d}">
+      <label languagecode="1033" description="Log Case" />
+    </steplabels>
+    <steplabels id="{379e3092-f93d-492d-8f60-c896a23f8532}">
+      <label languagecode="1033" description="Booking Ref." />
+    </steplabels>
+    <steplabels id="{d7904200-8b74-42d1-a8e3-17d3dc2ecfa7}">
+      <label languagecode="1033" description="Booking No." />
+    </steplabels>
+    <steplabels id="{395756a0-26b8-4a32-a757-2eeb82b6656e}">
+      <label languagecode="1033" description="Booking No." />
+    </steplabels>
+    <steplabels id="{8a2a1687-b51e-41c8-b43c-aae00e521035}">
+      <label languagecode="1033" description="Details (External)" />
+    </steplabels>
+    <steplabels id="{ddbf7e6d-ecb3-41b0-9f6e-ce276d47c0dd}">
+      <label languagecode="1033" description="Case Type" />
+    </steplabels>
+    <steplabels id="{d68cd502-23d6-41cb-a99f-6fd62d7f032f}">
+      <label languagecode="1033" description="Customer" />
+    </steplabels>
+    <steplabels id="{f74a2f8e-5108-495c-b9c9-478a80810bf0}">
+      <label languagecode="1033" description="Origin" />
+    </steplabels>
+    <steplabels id="{0d66c61f-4e64-4162-95f8-abc31c64e3f1}">
+      <label languagecode="1033" description="Categories Captured" />
+    </steplabels>
+    <steplabels id="{f8ae6144-fc89-43b7-b357-dec41ad3f11f}">
+      <label languagecode="1033" description="Method of Communication" />
+    </steplabels>
+    <steplabels id="{d350d55e-049a-44ed-9c60-18d285f9c494}">
+      <label languagecode="1033" description="Alternative Phone" />
+    </steplabels>
+    <steplabels id="{cee72edd-1a75-4828-8257-d244f41df0ec}">
+      <label languagecode="1033" description="Alternative Email" />
+    </steplabels>
+    <steplabels id="{9086584f-337d-41b5-84aa-4fd928c09395}">
+      <label languagecode="1033" description="Offer" />
+    </steplabels>
+    <steplabels id="{1b9ce785-8b0d-4796-ba01-fdb82d265e67}">
+      <label languagecode="1033" description="Offer has been calculated?" />
+    </steplabels>
+    <steplabels id="{537e378e-ca62-4292-a36f-a2a61118e22d}">
+      <label languagecode="1033" description="Offered Amount Decision" />
+    </steplabels>
+    <steplabels id="{a01d5a76-248d-4e79-b83a-8173325c9403}">
+      <label languagecode="1033" description="Compensation added?" />
+    </steplabels>
+    <steplabels id="{fe7aa5e8-eaa3-4b12-bfd1-ec5654176d9f}">
+      <label languagecode="1033" description="Compensation Decision" />
+    </steplabels>
+    <steplabels id="{97e5bc05-03a5-4dac-a116-250c99b864a4}">
+      <label languagecode="1033" description="Escalate to CR" />
+    </steplabels>
+    <steplabels id="{3893f2ab-7daf-480b-8655-b10211671861}">
+      <label languagecode="1033" description="Escalation Notes" />
+    </steplabels>
+    <steplabels id="{a82ecaea-7c4c-465a-aacd-28809c6eb97a}">
+      <label languagecode="1033" description="Escalation Confirmation" />
+    </steplabels>
+    <steplabels id="{74870a26-fe7a-4731-99c0-cf2736aec203}">
+      <label languagecode="1033" description="Resolve" />
+    </steplabels>
+    <steplabels id="{ecd9697d-4039-4a94-8c2a-9eaad245aa6c}">
+      <label languagecode="1033" description="Comeback?" />
+    </steplabels>
+    <steplabels id="{e41c915f-8669-404c-96a9-207336ad2407}">
+      <label languagecode="1033" description="Comeback" />
+    </steplabels>
+    <steplabels id="{190ddb4f-9616-4aad-a535-03311d4cb048}">
+      <label languagecode="1033" description="Comeback Reason" />
+    </steplabels>
+    <steplabels id="{e832f0d8-5e78-46f9-8eac-7906be15438d}">
+      <label languagecode="1033" description="Comeback Result" />
+    </steplabels>
+    <steplabels id="{0f7ad215-1ba8-4341-93c6-700265e9c2e6}">
+      <label languagecode="1033" description="Final Comeback Reason" />
+    </steplabels>
+    <steplabels id="{8a3b1bc6-aefb-4fc8-8fbf-f236c7eedf37}">
+      <label languagecode="1033" description="Final Comeback Result" />
+    </steplabels>
+    <steplabels id="{efda4782-18b3-4186-a303-bd7bcc0c1be9}">
+      <label languagecode="1033" description="Resolve" />
+    </steplabels>
+    <steplabels id="{5292b3b1-d854-4431-8af2-e2a96f39ff8d}">
+      <label languagecode="1033" description="Descripion" />
+    </steplabels>
+    <steplabels id="{c5e2c134-4b51-4ea7-9cd3-998af7da922d}">
+      <label languagecode="1033" description="Resolve" />
+    </steplabels>
+    <steplabels id="{0b707f69-6ee4-4765-8f07-29c75068ee3d}">
+      <label languagecode="1033" description="Descripion" />
+    </steplabels>
+  </labels>
+  <ProcessTriggers>
+    <ProcessTrigger processtriggerid="{22086094-8a15-e711-810d-3863bb340dd8}">
+      <controltype>1</controltype>
+      <methodid>{eaca116c-f5d1-4fec-84d5-151bc0c45a5d}</methodid>
+      <scope>1</scope>
+      <controlname>tc_casetypeid</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{23086094-8a15-e711-810d-3863bb340dd8}">
+      <controltype>1</controltype>
+      <methodid>{eaca116c-f5d1-4fec-84d5-151bc0c45a5d}</methodid>
+      <scope>1</scope>
+      <controlname>tc_casetypeid</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{24086094-8a15-e711-810d-3863bb340dd8}">
+      <controltype>1</controltype>
+      <methodid>{eaca116c-f5d1-4fec-84d5-151bc0c45a5d}</methodid>
+      <scope>1</scope>
+      <controlname>tc_casetypeid</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{25086094-8a15-e711-810d-3863bb340dd8}">
+      <controltype>1</controltype>
+      <methodid>{74870a26-fe7a-4731-99c0-cf2736aec203}</methodid>
+      <scope>1</scope>
+      <controlname>tc_comeback</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+  </ProcessTriggers>
+</Workflow>
