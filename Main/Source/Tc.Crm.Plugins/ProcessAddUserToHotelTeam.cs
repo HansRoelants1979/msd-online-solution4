@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
+using Microsoft.Xrm.Sdk.Messages;
 
 namespace Tc.Crm.Plugins
 {
@@ -129,7 +130,7 @@ namespace Tc.Crm.Plugins
                 var roleCollection = GetSecurityRolesByBusinessUnit(buToProcess);
                 if (roleCollection == null || roleCollection.Entities.Count != (buToProcess.Count*2))
                     throw new InvalidPluginExecutionException("Security Role Tc.Ids.Base, Tc.Ids.Rep was not created for one or more Business Units.");
-                AddUserToNewTeam(buToProcess, roleCollection, users, hotelTeamId, teamName);
+                AddUsersToNewTeam(buToProcess, roleCollection, users, hotelTeamId, teamName);
             }
             TracingService.Trace("ProcessUserTeams - End");
         }
@@ -157,6 +158,120 @@ namespace Tc.Crm.Plugins
             }
             TracingService.Trace("AddUserToNewTeam - End");
         }
+
+        private void AddUsersToNewTeam(Dictionary<Guid, string> buToProcess, EntityCollection roleCollection, EntityReferenceCollection users, Guid hotelTeamId, string teamName)
+        {
+            TracingService.Trace("AddUsersToNewTeam - Start");
+            var teams = new EntityCollection();            
+            foreach (var b in buToProcess)
+            {
+                var team = GetTeam(hotelTeamId, b.Value + " : " + teamName, b.Key);
+
+                if(team != null)
+                    teams.Entities.Add(team);
+            }
+            var teamBuIds = CreateTeams(teams);
+            if(teamBuIds != null && teamBuIds.Count > 0)
+            {
+                AssociateUserRolesToTeam(users, roleCollection, teamBuIds);
+                //AssociateUsersToTeam(users, teamBuIds);
+            }
+            TracingService.Trace("AddUsersToNewTeam - End");
+        }
+
+        private Dictionary<Guid,Guid> CreateTeams(EntityCollection teams)
+        {
+            var teamBuIds = new Dictionary<Guid, Guid>();
+            var requestWithResults = GetMultipleRequest();
+           
+            // Add a CreateRequest for each entity to the request collection.
+            foreach (var entity in teams.Entities)
+            {
+                CreateRequest createRequest = new CreateRequest { Target = entity };
+                requestWithResults.Requests.Add(createRequest);
+            }
+
+            // Execute all the requests in the request collection using a single web method call.
+            ExecuteMultipleResponse responseWithResults = (ExecuteMultipleResponse)Service.Execute(requestWithResults);
+
+            // Display the results returned in the responses.
+            foreach (var responseItem in responseWithResults.Responses)
+            {
+                // A valid response.
+                if (responseItem.Response != null)
+                    teamBuIds.Add(Guid.Parse(responseItem.Response.Results["id"].ToString()),Guid.Parse(requestWithResults.Requests[responseItem.RequestIndex].Parameters[Attributes.Team.BusinessUnitId].ToString()));
+
+                // An error has occurred.
+                else if (responseItem.Fault != null)
+                    throw new InvalidPluginExecutionException(responseItem.Fault.Message);
+            }
+            return teamBuIds;
+        }
+
+        private void AssociateUserRolesToTeam(EntityReferenceCollection users, EntityCollection allRoles, Dictionary<Guid,Guid> teamBuIds)
+        {
+            var requestWithResults = GetMultipleRequest();            
+            foreach (var teamBuId in teamBuIds)
+            {
+                var buRoles = FilterRolesByBusinessUnit(allRoles, teamBuId.Value);
+                var rolesRequest = new AssociateRequest
+                {
+                      Relationship =new Relationship(Relationships.TeamRolesAssociation),
+                      RelatedEntities= buRoles,
+                      Target = new EntityReference(Entities.Team, teamBuId.Key)
+                };
+                requestWithResults.Requests.Add(rolesRequest);
+
+                var userRequest = new AssociateRequest
+                {
+                    Relationship = new Relationship(Relationships.TeamMembershipAssociation),
+                    RelatedEntities = users,
+                    Target = new EntityReference(Entities.Team, teamBuId.Key)
+                };
+                requestWithResults.Requests.Add(userRequest);
+            }
+                        
+            ExecuteMultipleResponse responseWithResults =
+                (ExecuteMultipleResponse)Service.Execute(requestWithResults);
+            
+            foreach (var responseItem in responseWithResults.Responses)
+            {   
+                 if (responseItem.Fault != null)
+                    throw new InvalidPluginExecutionException(responseItem.Fault.Message);
+            }
+            
+        }
+
+
+
+        private ExecuteMultipleRequest GetMultipleRequest()
+        {
+            var requestWithResults = new ExecuteMultipleRequest()
+            {
+                // Assign settings that define execution behavior: continue on error, return responses. 
+                Settings = new ExecuteMultipleSettings()
+                {
+                    ContinueOnError = false,
+                    ReturnResponses = true
+                },
+                // Create an empty organization request collection.
+                Requests = new OrganizationRequestCollection()
+            };
+            return requestWithResults;
+        }
+
+
+        private Entity GetTeam(Guid hotelTeamId, string teamName, Guid businessUnitId)
+        {
+            TracingService.Trace("CreateTeam - Start");
+            var team = new Entity(Entities.Team);
+            team.Attributes.Add(Attributes.Team.Name, teamName);
+            team.Attributes.Add(Attributes.Team.HotelTeam, true);
+            team.Attributes.Add(Attributes.Team.BusinessUnitId, new EntityReference(Entities.BusinessUnit, businessUnitId));
+            team.Attributes.Add(Attributes.Team.HotelTeamId, new EntityReference(Entities.Team, hotelTeamId));
+            return team;
+        }
+
 
         /// <summary>
         /// To filter roles using Business unit Id
@@ -285,19 +400,19 @@ namespace Tc.Crm.Plugins
             var businessUnitCondition = GetBusinessUnitConditions(businessUnits);
             var query = string.Format(@"<fetch distinct='false' output-format='xml - platform' version='1.0' mapping='logical'>
                                         <entity name='role'>
-                                        <attribute name='businessunitid' />
+                                        <attribute name='businessunitid'/>
                                         <attribute name='roleid' />
                                         <filter type='and'>
                                          <filter type='or'>
-                                          <condition attribute='name' operator='eq' value='{0}' />
-                                          <condition attribute='name' operator='eq' value='{1}' />
+                                          <condition attribute='name' operator='eq' value='{0}'/>
+                                          <condition attribute='name' operator='eq' value='{1}'/>
                                          </filter >
-                                         <condition attribute='businessunitid' operator='in' >
+                                         <condition attribute='businessunitid' operator='in'>
                                           {2}
-                                         </condition >
-                                        </filter >
-                                        </entity >
-                                        </fetch > ", General.RoleTcIdBase,General.RoleTcIdRep, businessUnitCondition);
+                                         </condition>
+                                        </filter>
+                                        </entity>
+                                        </fetch> ", General.RoleTcIdBase,General.RoleTcIdRep, businessUnitCondition);
             var fetch = new FetchExpression(query);
             var roleCollection = Service.RetrieveMultiple(fetch);
             TracingService.Trace("GetSecurityRolesByBu - End");
