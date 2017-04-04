@@ -45,10 +45,11 @@ namespace Tc.Crm.Plugins
             {
                 Entity hotel = context.InputParameters["Target"] as Entity;
                 string hotelName = hotel.GetAttributeValue<string>("tc_name");
+                string masterHotelId = hotel.GetAttributeValue<string>("tc_masterhotelid");
 
-                if (!string.IsNullOrEmpty(hotelName))
+                if (!string.IsNullOrEmpty(hotelName) && !string.IsNullOrEmpty(masterHotelId))
                 {
-                    string teamName = string.Format("Hotel Team: {0}", hotelName);
+                    string teamName = string.Format("Hotel Team: {0} - {1}", hotelName, masterHotelId);
                     trace.Trace("Output - Creating Team with Name: {0}", teamName);
                     Entity team = new Entity(Entities.Team);
                     team.Attributes.Add(Attributes.Team.Name, teamName);
@@ -64,6 +65,8 @@ namespace Tc.Crm.Plugins
                         trace.Trace("Output - Update owner of hotel");
                     }
                 }
+                else
+                    throw new InvalidPluginExecutionException("The hotel name and hotel master Id must both be populated");
             }
             
         }
