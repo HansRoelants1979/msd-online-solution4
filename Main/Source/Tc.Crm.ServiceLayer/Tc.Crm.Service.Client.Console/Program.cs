@@ -27,39 +27,110 @@ namespace Tc.Crm.Service.Client.Console
         {
             try
             {
-                #region main
-                System.Console.WriteLine("Select one from the following:");
-                System.Console.WriteLine("1. Generate sample json payload.");
-                System.Console.WriteLine("2. Create booking(you should have json payload available).");
+                System.Console.WriteLine("Enter 1 to process Booking OR 2 to process survey");
+               
                 var option = System.Console.ReadLine();
                 if (option == "1")
                 {
-                    Booking booking = new Booking
+                    ProcessBooking();
+                }
+                else if (option == "2")
+                {
+                    ProcessSurvey();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine("Unhandled Exception:: Message: {0} ", ex.Message);
+                System.Console.WriteLine("Unhandled Exception:: Stack Trace: {0} ", ex.StackTrace.ToString());
+            }
+            System.Console.ReadLine();
+        }
+
+        private static void ProcessSurvey()
+        {
+           
+            while (true)
+            {
+                System.Console.WriteLine("Reading Survey json payload.");
+                var data = File.ReadAllText("survey.json");
+                var api = "api/survey/create";
+
+                //create the token
+                var token = CreateJWTToken();
+
+                //Call
+                HttpClient cons = new HttpClient();
+
+                cons.BaseAddress = new Uri(GetUrl());
+
+                cons.DefaultRequestHeaders.Accept.Clear();
+                cons.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                cons.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                Task<HttpResponseMessage> t = cons.PutAsync(api, new StringContent(data, Encoding.UTF8, "application/json"));
+
+                var response = t.Result;
+
+                Task<string> task = response.Content.ReadAsStringAsync();
+                var content = task.Result;
+
+                System.Console.WriteLine("Response Code: {0}", response.StatusCode.GetHashCode());
+                if (response.StatusCode == HttpStatusCode.Created)
+                    System.Console.WriteLine("Survey has been created", content);            
+                else if (response.StatusCode == HttpStatusCode.BadRequest)
+                    System.Console.WriteLine("Bad Request.");
+                else if (response.StatusCode == HttpStatusCode.InternalServerError)
+                    System.Console.WriteLine("Internal Server Error.");
+                else if (response.StatusCode == HttpStatusCode.Forbidden)
+                    System.Console.WriteLine("Forbidden.");
+
+                if (string.IsNullOrWhiteSpace(content))
+                    System.Console.WriteLine("No content.");
+                else
+                    System.Console.WriteLine("Content:{0}", content);
+
+                System.Console.Write("Do one more test(y/n):");
+                var ans = System.Console.ReadLine();
+                if (ans == "n") break;
+
+            }
+        }
+
+        private static void ProcessBooking()
+        {
+            #region main
+            System.Console.WriteLine("Select one from the following:");
+            System.Console.WriteLine("1. Generate sample json payload.");
+            System.Console.WriteLine("2. Create booking(you should have json payload available).");
+            var option = System.Console.ReadLine();
+            if (option == "1")
+            {
+                Booking booking = new Booking
+                {
+                    #region Booking.bookingidentifier
+                    BookingIdentifier = new BookingIdentifier
                     {
-                        #region Booking.bookingidentifier
-                        BookingIdentifier = new BookingIdentifier
+                        BookingNumber = "BKG00001",
+                        BookingUpdateDateOnTour = "20170202",
+                        BookingUpdateDateTourOperator = "20170202",
+                        BookingVersionOnTour = "v1",
+                        BookingVersionTourOperator = "v1",
+                        SourceMarket = "AX",
+                        SourceSystem = "OnTour"
+                    },
+                    #endregion
+                    #region booking.customer
+                    Customer = new Customer
+                    {
+                        #region booking.customer.additional
+                        Additional = new Additional
                         {
-                            BookingNumber = "BKG00001",
-                            BookingUpdateDateOnTour = "20170202",
-                            BookingUpdateDateTourOperator = "20170202",
-                            BookingVersionOnTour = "v1",
-                            BookingVersionTourOperator = "v1",
-                            SourceMarket = "AX",
-                            SourceSystem = "OnTour"
+                            DateOfDeath = "20170102",
+                            Segment = "deceased"
                         },
-                        #endregion
-                        #region booking.customer
-                        Customer = new Customer
-                        {
-                            #region booking.customer.additional
-                            Additional = new Additional
-                            {
-                                DateOfDeath = "20170102",
-                                Segment = "deceased"
-                            },
-                            #endregion booking.customer.additional
-                            #region booking.customer.address
-                            Address = new Address[] {
+                        #endregion booking.customer.additional
+                        #region booking.customer.address
+                        Address = new Address[] {
                         new Address {
                             AdditionalAddressInfo = "Near to Cricket stadium",
                             Box = "Hmm",
@@ -75,139 +146,139 @@ namespace Tc.Crm.Service.Client.Console
                         }
 
                     },
-                            #endregion booking.customer.address
-                            #region booking.customer.company
-                            Company = new Company
-                            {
-                                CompanyName = "Innovate Me"
-                            },
-                            #endregion booking.customer.company
-                            #region booking.customer.identifier
-                            CustomerIdentifier = new CustomerIdentifier
-                            {
-                                BusinessArea = "Hotel",
-                                CustomerId = "CNTBST0001",
-                                SourceMarket = "AX",
-                                SourceSystem = "OnTour",
-                            },
-                            #endregion booking.customer.identifier
-                            #region booking.customer.email
-                            Email = new Email[] {
+                        #endregion booking.customer.address
+                        #region booking.customer.company
+                        Company = new Company
+                        {
+                            CompanyName = "Innovate Me"
+                        },
+                        #endregion booking.customer.company
+                        #region booking.customer.identifier
+                        CustomerIdentifier = new CustomerIdentifier
+                        {
+                            BusinessArea = "Hotel",
+                            CustomerId = "CNTBST0001",
+                            SourceMarket = "AX",
+                            SourceSystem = "OnTour",
+                        },
+                        #endregion booking.customer.identifier
+                        #region booking.customer.email
+                        Email = new Email[] {
                         new Email {
                             Address = "joe@innovateme.com",
                             EmailType = EmailType.Pri
                         }
                     },
-                            #endregion booking.customer.email
-                            #region booking.customer.general
-                            CustomerGeneral = new CustomerGeneral
-                            {
-                                CustomerStatus = CustomerStatus.A,
-                                CustomerType = CustomerType.B
-                            },
-                            #endregion booking.customer.general
-                            #region booking.customer.identity
-                            CustomerIdentity = new CustomerIdentity
-                            {
-                                AcademicTitle = "Mr",
-                                Birthdate = "19821008",
-                                FirstName = "Barney",
-                                Gender = Gender.Male,
-                                Language = "Bro-English",
-                                LastName = "Stinston",
-                                MiddleName = "bro",
-                                Salutation = "Mr"
-                            },
-                            #endregion booking.customer.identity
-                            #region booking.customer.phone
-                            Phone = new Phone[] {
+                        #endregion booking.customer.email
+                        #region booking.customer.general
+                        CustomerGeneral = new CustomerGeneral
+                        {
+                            CustomerStatus = CustomerStatus.A,
+                            CustomerType = CustomerType.B
+                        },
+                        #endregion booking.customer.general
+                        #region booking.customer.identity
+                        CustomerIdentity = new CustomerIdentity
+                        {
+                            AcademicTitle = "Mr",
+                            Birthdate = "19821008",
+                            FirstName = "Barney",
+                            Gender = Gender.Male,
+                            Language = "Bro-English",
+                            LastName = "Stinston",
+                            MiddleName = "bro",
+                            Salutation = "Mr"
+                        },
+                        #endregion booking.customer.identity
+                        #region booking.customer.phone
+                        Phone = new Phone[] {
                         new Phone
                         {
                             Number = "32323232",
                             PhoneType = PhoneType.H
                         }
                     },
-                            #endregion booking.customer.phone
-                            #region booking.customer.social
-                            Social = new Social[]
-                            {
+                        #endregion booking.customer.phone
+                        #region booking.customer.social
+                        Social = new Social[]
+                        {
                         new Social
                         {
                             SocialType = "I am",
                             Value = "Social"
                         }
-                            },
-
-                            #endregion booking.customer.social
                         },
-                        #endregion booking.customer
-                        #region booking.identity
-                        BookingIdentity = new BookingIdentity
+
+                        #endregion booking.customer.social
+                    },
+                    #endregion booking.customer
+                    #region booking.identity
+                    BookingIdentity = new BookingIdentity
+                    {
+                        #region booking.edentity.booker
+                        Booker = new BookingBooker
                         {
-                            #region booking.edentity.booker
-                            Booker = new BookingBooker
+                            #region booking.edentity.booker.address
+                            Address = new Address
                             {
-                                #region booking.edentity.booker.address
-                                Address = new Address
-                                {
-                                    AdditionalAddressInfo = "ad",
-                                    Box = "2",
-                                    Country = "England",
-                                    County = "Hmm",
-                                    FlatNumberUnit = "2",
-                                    HouseNumberBuilding = "3",
-                                    Number = "1",
-                                    PostalCode = "wa001",
-                                    Street = "hmmmm",
-                                    Town = "t",
-                                    AddressType = AddressType.M,
+                                AdditionalAddressInfo = "ad",
+                                Box = "2",
+                                Country = "England",
+                                County = "Hmm",
+                                FlatNumberUnit = "2",
+                                HouseNumberBuilding = "3",
+                                Number = "1",
+                                PostalCode = "wa001",
+                                Street = "hmmmm",
+                                Town = "t",
+                                AddressType = AddressType.M,
 
-                                },
-                                #endregion booking.edentity.booker.address
-                                Email = "booker@tc.com",
-                                EmergencyNumber = "100",
-                                Mobile = "0856387455",
-                                Phone = "0567865433",
+                            },
+                            #endregion booking.edentity.booker.address
+                            Email = "booker@tc.com",
+                            EmergencyNumber = "100",
+                            Mobile = "0856387455",
+                            Phone = "0567865433",
 
-                            }
-                            #endregion booking.edentity.booker
-                        },
-                        #endregion booking.identity
-                        #region booking.general
-                        BookingGeneral = new BookingGeneral
-                        {
-                            BookingDate = "20170202",
-                            BookingStatus = BookingStatus.Booked,
-                            Brand = "AT",
-                            BrochureCode = "BROCODE1",
-                            Currency = "EUR",
-                            DepartureDate = "20170304",
-                            Destination = "ASW",
-                            Duration = 2,
-                            HasComplaint = false,
-                            IsLateBooking = false,
-                            NumberOfAdults = 1,
-                            NumberOfChildren = 2,
-                            NumberOfInfants = 0,
-                            ReturnDate = "20170324",
-                            ToCode = "CDG",
-                            TravelAmount = 2000
+                        }
+                        #endregion booking.edentity.booker
+                    },
+                    #endregion booking.identity
+                    #region booking.general
+                    BookingGeneral = new BookingGeneral
+                    {
+                        BookingDate = "20170202",
+                        BookingStatus = BookingStatus.Booked,
+                        Brand = "AT",
+                        BrochureCode = "BROCODE1",
+                        Currency = "EUR",
+                        DepartureDate = "20170304",
+                        Destination = "ASW",
+                        Duration = 2,
+                        HasComplaint = false,
+                        IsLateBooking = false,
+                        NumberOfAdults = 1,
+                        NumberOfChildren = 2,
+                        NumberOfInfants = 0,
+                        ReturnDate = "20170324",
+                        ToCode = "CDG",
+                        TravelAmount = 2000
 
-                        },
-                        #endregion booking.general
-                        #region booking.remark
-                        Remark = new Remark[] {
+                    },
+                    #endregion booking.general
+                    #region booking.remark
+                    Remark = new Remark[] {
                     new Remark {
                         Text = "Every room should have good sea view",
                         RemarkType = RemarkType.A
                     }
                 },
-                        #endregion booking.remark
-                        #region booking.services
-                        Services = new BookingServices
-                        {
-                            #region booking.services.accomodation
-                            Accommodation = new Accommodation[] {
+                    #endregion booking.remark
+                    #region booking.services
+                    Services = new BookingServices
+                    {
+                        #region booking.services.accomodation
+                        Accommodation = new Accommodation[] {
                         new Accommodation
                         {
                             AccommodationCode = "ACM0001",
@@ -381,10 +452,10 @@ namespace Tc.Crm.Service.Client.Console
                         }
 
                     },
-                            #endregion booking.services.accomodation
-                            #region booking.services.extraservice
-                            ExtraService = new ExtraService[]
-                            {
+                        #endregion booking.services.accomodation
+                        #region booking.services.extraservice
+                        ExtraService = new ExtraService[]
+                        {
                         new ExtraService {
                             EndDate = "20170324",
                             #region booking.services.extraservice.extraservicecode
@@ -415,11 +486,11 @@ namespace Tc.Crm.Service.Client.Console
                              }
                             #endregion
                         }
-                            },
-                            #endregion booking.services.extraservice
-                            #region booking.services,transport
-                            Transport = new Transport[]
-                                {
+                        },
+                        #endregion booking.services.extraservice
+                        #region booking.services,transport
+                        Transport = new Transport[]
+                            {
                             new Transport {
                                 FlightNumber = "SGP3231",
                                 ArrivalAirport = "ACA",
@@ -452,11 +523,11 @@ namespace Tc.Crm.Service.Client.Console
                                 TransportCode = "TR001",
                                 TransportDescription = "Flight to new york"
                             }
-                              },
-                            #endregion booking.services,transport
-                            #region booking.services.transfer
-                            Transfer = new Transfer[]
-                            {
+                          },
+                        #endregion booking.services,transport
+                        #region booking.services.transfer
+                        Transfer = new Transfer[]
+                        {
                         new Transfer
                         {
 
@@ -488,13 +559,13 @@ namespace Tc.Crm.Service.Client.Console
                                 TransferDescription = "Flight to new york",
                                 Category = "Flight"
                         }
-                            },
-                            #endregion booking.services.transfer
                         },
-                        #endregion booking.services
-                        #region booking.TravelParticipant
-                        TravelParticipant = new TravelParticipant[]
-                        {
+                        #endregion booking.services.transfer
+                    },
+                    #endregion booking.services
+                    #region booking.TravelParticipant
+                    TravelParticipant = new TravelParticipant[]
+                    {
                     new TravelParticipant
                     {
                         Age = "36",
@@ -579,76 +650,68 @@ namespace Tc.Crm.Service.Client.Console
                         #endregion booking.TravelParticipant.remark
                         TravelParticipantIdOnTour = "TP004",
                     }
-                        }
-                    #endregion booking.TravelParticipant
-                    };
-
-                    var bookingJsonData = JsonConvert.SerializeObject(booking);
-
-                    File.WriteAllText("booking.json", bookingJsonData);
-                    System.Console.WriteLine("File has been created with sample json payload for booking.");
-
-
-                }
-
-                else if (option == "2")
-                {
-                    while (true)
-                    {
-                        System.Console.WriteLine("Reading the Json data");
-                        var data = File.ReadAllText("booking.json");
-                        var api = "api/booking/update";
-
-                        //create the token
-                        var token = CreateJWTToken();
-
-                        //Call
-                        HttpClient cons = new HttpClient();
-
-                        cons.BaseAddress = new Uri(GetUrl());
-
-                        cons.DefaultRequestHeaders.Accept.Clear();
-                        cons.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                        cons.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-                        Task<HttpResponseMessage> t = cons.PutAsync(api, new StringContent(data, Encoding.UTF8, "application/json"));
-
-                        var response = t.Result;
-
-                        Task<string> task = response.Content.ReadAsStringAsync();
-                        var content = task.Result;
-
-                        System.Console.WriteLine("Response Code: {0}", response.StatusCode.GetHashCode());
-                        if (response.StatusCode == HttpStatusCode.Created)
-                            System.Console.WriteLine("Booking has been created with GUID::{0}", content);
-                        else if (response.StatusCode == HttpStatusCode.NoContent)
-                            System.Console.WriteLine("Booking has been updated.");
-                        else if (response.StatusCode == HttpStatusCode.BadRequest)
-                            System.Console.WriteLine("Bad Request.");
-                        else if (response.StatusCode == HttpStatusCode.InternalServerError)
-                            System.Console.WriteLine("Internal Server Error.");
-                        else if (response.StatusCode == HttpStatusCode.Forbidden)
-                            System.Console.WriteLine("Forbidden.");
-
-                        if (string.IsNullOrWhiteSpace(content))
-                            System.Console.WriteLine("No content.");
-                        else
-                            System.Console.WriteLine("Content:{0}", content);
-
-                        System.Console.Write("Do one more test(y/n):");
-                        var ans = System.Console.ReadLine();
-                        if (ans == "n") break;
-
                     }
-                }
-                #endregion main
-                
+                        #endregion booking.TravelParticipant
+                };
+
+                var bookingJsonData = JsonConvert.SerializeObject(booking);
+
+                File.WriteAllText("booking.json", bookingJsonData);
+                System.Console.WriteLine("File has been created with sample json payload for booking.");
+
+
             }
-            catch (Exception ex)
+
+            else if (option == "2")
             {
-                System.Console.WriteLine("Unhandled Exception:: Message: {0} ", ex.Message);
-                System.Console.WriteLine("Unhandled Exception:: Stack Trace: {0} ", ex.StackTrace.ToString());
+                while (true)
+                {
+                    System.Console.WriteLine("Reading the Json data");
+                    var data = File.ReadAllText("booking.json");
+                    var api = "api/booking/update";
+
+                    //create the token
+                    var token = CreateJWTToken();
+
+                    //Call
+                    HttpClient cons = new HttpClient();
+
+                    cons.BaseAddress = new Uri(GetUrl());
+
+                    cons.DefaultRequestHeaders.Accept.Clear();
+                    cons.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    cons.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                    Task<HttpResponseMessage> t = cons.PutAsync(api, new StringContent(data, Encoding.UTF8, "application/json"));
+
+                    var response = t.Result;
+
+                    Task<string> task = response.Content.ReadAsStringAsync();
+                    var content = task.Result;
+
+                    System.Console.WriteLine("Response Code: {0}", response.StatusCode.GetHashCode());
+                    if (response.StatusCode == HttpStatusCode.Created)
+                        System.Console.WriteLine("Booking has been created with GUID::{0}", content);
+                    else if (response.StatusCode == HttpStatusCode.NoContent)
+                        System.Console.WriteLine("Booking has been updated.");
+                    else if (response.StatusCode == HttpStatusCode.BadRequest)
+                        System.Console.WriteLine("Bad Request.");
+                    else if (response.StatusCode == HttpStatusCode.InternalServerError)
+                        System.Console.WriteLine("Internal Server Error.");
+                    else if (response.StatusCode == HttpStatusCode.Forbidden)
+                        System.Console.WriteLine("Forbidden.");
+
+                    if (string.IsNullOrWhiteSpace(content))
+                        System.Console.WriteLine("No content.");
+                    else
+                        System.Console.WriteLine("Content:{0}", content);
+
+                    System.Console.Write("Do one more test(y/n):");
+                    var ans = System.Console.ReadLine();
+                    if (ans == "n") break;
+
+                }
             }
-            System.Console.ReadLine();
+            #endregion main
         }
 
         private static string CreateJWTToken()
