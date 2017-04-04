@@ -25,9 +25,8 @@ namespace Tc.Crm.Plugins
         /// </summary>
         public void ProcessDisassociateUserFromHotelTeam()
         {
-            Guid hotelTeamId = Guid.Empty;           
-            EntityReferenceCollection users;
-            users = GetInformationFromContext(ref hotelTeamId);
+            var hotelTeamId = Guid.Empty;
+            var users = GetInformationFromContext(ref hotelTeamId);
 
             if (hotelTeamId == Guid.Empty || users == null || users.Count == 0)
                 return;
@@ -35,7 +34,7 @@ namespace Tc.Crm.Plugins
             if (!IsParentHotelTeam(hotelTeamId))
                 return;
 
-            EntityCollection childTeams = GetChildTeams(hotelTeamId);
+            var childTeams = GetChildTeams(hotelTeamId);
 
             if (childTeams == null || childTeams.Entities.Count == 0)
                 return;
@@ -88,7 +87,7 @@ namespace Tc.Crm.Plugins
         private bool IsParentHotelTeam(Guid teamId)
         {
             TracingService.Trace("CheckHotelTeam - start");
-            bool hotelTeam = false;
+            var hotelTeam = false;
             var team = Service.Retrieve(Entities.Team, teamId, new ColumnSet(Attributes.Team.HotelTeam, Attributes.Team.HotelTeamId));
             if (team != null)
             {

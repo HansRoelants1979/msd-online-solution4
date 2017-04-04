@@ -29,15 +29,15 @@ namespace Tc.Crm.Plugins
         /// </summary>
         public void ProcessAssociateUserToHotelTeam()
         {
-            Guid hotelTeamId = Guid.Empty;
-            string teamName = string.Empty;
-            EntityReferenceCollection users;
-            users = GetInformationFromContext(ref hotelTeamId);
+            var hotelTeamId = Guid.Empty;
+            var teamName = string.Empty;
+            
+            var users = GetInformationFromContext(ref hotelTeamId);
 
             if (hotelTeamId == Guid.Empty || users == null || users.Count == 0)
                 return;
 
-            if (!IsHotelTeam(hotelTeamId,  ref teamName))
+            if (!IsParentHotelTeam(hotelTeamId,  ref teamName))
                 return;
 
             ProcessUserTeams(Context.BusinessUnitId, hotelTeamId, users, teamName);
@@ -84,17 +84,20 @@ namespace Tc.Crm.Plugins
         /// <param name="teamId"></param>
         /// <param name="teamName"></param>
         /// <returns></returns>
-        private bool IsHotelTeam(Guid teamId, ref string teamName)
+        private bool IsParentHotelTeam(Guid teamId, ref string teamName)
         {
             TracingService.Trace("CheckHotelTeam - start");
-            bool hotelTeam = false;
-            var team = Service.Retrieve(Entities.Team, teamId, new ColumnSet(Attributes.Team.HotelTeam, Attributes.Team.Name));
+            var hotelTeam = false;
+            var team = Service.Retrieve(Entities.Team, teamId, new ColumnSet(Attributes.Team.HotelTeam, Attributes.Team.Name, Attributes.Team.HotelTeamId));
             if (team != null)
             {
                 if (team.Attributes.Contains(Attributes.Team.HotelTeam) && team.Attributes[Attributes.Team.HotelTeam] != null)
                 {
-                    hotelTeam = bool.Parse(team.Attributes[Attributes.Team.HotelTeam].ToString());
-                    TracingService.Trace("HotelTeam is " + hotelTeam);
+                    if (!team.Attributes.Contains(Attributes.Team.HotelTeamId) || team.Attributes[Attributes.Team.HotelTeamId] == null)
+                    {
+                        hotelTeam = bool.Parse(team.Attributes[Attributes.Team.HotelTeam].ToString());
+                        TracingService.Trace("HotelTeam is " + hotelTeam);
+                    }
                 }
                 if (team.Attributes.Contains(Attributes.Team.Name) && team.Attributes[Attributes.Team.Name] != null)
                 {
@@ -120,12 +123,12 @@ namespace Tc.Crm.Plugins
             var buCollection = GetBusinessUnits(hotelTeamId);
             if (buCollection == null || buCollection.Entities.Count == 0)
                 return;
-            Dictionary<Guid,string> buToProcess = AddUserToExistingTeam(buCollection, users);
+            var buToProcess = AddUserToExistingTeam(buCollection, users);
             if (buToProcess != null && buToProcess.Count > 0)
             {
                 var roleCollection = GetSecurityRolesByBusinessUnit(buToProcess);
                 if (roleCollection == null || roleCollection.Entities.Count != (buToProcess.Count*2))
-                    throw new InvalidPluginExecutionException("Security Role Tc.Ids.Base was not created for one or more Business Units.");
+                    throw new InvalidPluginExecutionException("Security Role Tc.Ids.Base, Tc.Ids.Rep was not created for one or more Business Units.");
                 AddUserToNewTeam(buToProcess, roleCollection, users, hotelTeamId, teamName);
             }
             TracingService.Trace("ProcessUserTeams - End");
@@ -142,7 +145,7 @@ namespace Tc.Crm.Plugins
         private void AddUserToNewTeam(Dictionary<Guid,string> buToProcess, EntityCollection roleCollection, EntityReferenceCollection users, Guid hotelTeamId, string teamName)
         {
             TracingService.Trace("AddUserToNewTeam - Start");
-            foreach (KeyValuePair<Guid,string> b in buToProcess)
+            foreach (var b in buToProcess)
             {
                 var roles = FilterRolesByBusinessUnit(roleCollection, b.Key);
                 if (roles != null && roles.Count == 2)
@@ -165,9 +168,9 @@ namespace Tc.Crm.Plugins
         {
             TracingService.Trace("FilterRolesByBusinessUnit - Start");
             var rolesOfBusinessUnit = new EntityReferenceCollection();
-            IEnumerable<Entity> roles = from role in securityRoles.Entities
-                                        where ((EntityReference)role.Attributes[Attributes.Role.BusinessUnitId]).Id == businessUnitId
-                                        select role;
+            var roles = from role in securityRoles.Entities
+                        where ((EntityReference)role.Attributes[Attributes.Role.BusinessUnitId]).Id == businessUnitId
+                        select role;
             if (roles != null && roles.Count<Entity>() > 0)
             {
                 foreach (var role in roles)
@@ -189,8 +192,8 @@ namespace Tc.Crm.Plugins
         {
             TracingService.Trace("AddUserToExistingTeam - Start");
             const string aliasTeamId = "team.teamid";
-            List<Guid> processedBusinessUnits = new List<Guid>();
-            Dictionary<Guid, string> businessUnitsToProcess = new Dictionary<Guid, string>();
+            var processedBusinessUnits = new List<Guid>();
+            var businessUnitsToProcess = new Dictionary<Guid, string>();
             for (int i = 0; i < buCollection.Entities.Count; i++)
             {
                 var teamId = Guid.Empty;
@@ -272,7 +275,7 @@ namespace Tc.Crm.Plugins
         }
 
         /// <summary>
-        /// To get Security roles for different Business units using name Tc.Ids.Base and Tc.Ids.Rep
+        /// To get Security roles for different Business units using security role name Tc.Ids.Base and Tc.Ids.Rep
         /// </summary>
         /// <param name="businessUnits"></param>
         /// <returns></returns>
@@ -309,7 +312,7 @@ namespace Tc.Crm.Plugins
         private string GetBusinessUnitConditions(Dictionary<Guid,string> businessUnits)
         {
             var businessUnitCondition = new StringBuilder();
-            foreach(KeyValuePair<Guid,string> b in businessUnits)
+            foreach(var b in businessUnits)
             {
                 businessUnitCondition.Append(string.Format("<value>{0}</value>", b.Key.ToString()));
             }
@@ -328,12 +331,12 @@ namespace Tc.Crm.Plugins
         private Guid CreateTeam(Guid hotelTeamId, string teamName, Guid businessUnitId)
         {
             TracingService.Trace("CreateTeam - Start");
-            Entity team = new Entity(Entities.Team);
+            var team = new Entity(Entities.Team);
             team.Attributes.Add(Attributes.Team.Name, teamName);
             team.Attributes.Add(Attributes.Team.HotelTeam, true);
             team.Attributes.Add(Attributes.Team.BusinessUnitId, new EntityReference(Entities.BusinessUnit, businessUnitId));
             team.Attributes.Add(Attributes.Team.HotelTeamId, new EntityReference(Entities.Team, hotelTeamId));
-            Guid teamId = Service.Create(team);
+            var teamId = Service.Create(team);
             TracingService.Trace("CreateTeam - End");
             return teamId;
         }
