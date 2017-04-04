@@ -1,3 +1,4 @@
+
 //<script src ="scripts/es6promise.js" type ="text/javascript"></script>
 //<script src ="scripts/Tc.Crm.Scripts.Common.js" type ="text/javascript"></script>
 
@@ -162,3 +163,6 @@ Tc.Crm.Scripts.Events.Case = (function () {
         }
     };
 })();
+
+
+
