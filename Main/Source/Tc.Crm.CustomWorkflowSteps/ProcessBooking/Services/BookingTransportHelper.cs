@@ -11,10 +11,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
         {
             if (trace == null) throw new InvalidPluginExecutionException("Tracing Service is null.");
             trace.Trace("Transport populate records - start");
-            string bookingNumber = bookinginfo.BookingIdentifier.BookingNumber;
             var transport = bookinginfo.Services.Transport;
-            if (bookingNumber == null || string.IsNullOrWhiteSpace(bookingNumber))
-                throw new InvalidPluginExecutionException("Booking Number should not be null.");
             EntityCollection entityCollectionTransport = new EntityCollection();
             if (transport != null && transport.Length > 0)
             {
@@ -36,9 +33,11 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
         private static Entity PrepareBookingTransport(Booking bookinginfo, Transport transport, Guid bookingId, ITracingService trace)
         {
             trace.Trace("Transport populate fields - start");
-            string bookingNumber = bookinginfo.BookingIdentifier.BookingNumber;
+            
             var transportEntity = new Entity(EntityName.BookingTransport);
-            transportEntity[Attributes.BookingTransport.Name] = bookingNumber + General.Concatenator + transport.DepartureAirport + General.Concatenator + transport.ArrivalAirport;
+            
+            SetNameFor(transport, bookinginfo, transportEntity);
+
             if (!string.IsNullOrWhiteSpace(transport.TransportCode))
                 transportEntity[Attributes.BookingTransport.TransportCode] = transport.TransportCode;
             if (!string.IsNullOrWhiteSpace(transport.TransportDescription))
@@ -67,5 +66,13 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             trace.Trace("Transport populate fields - end");
             return transportEntity;
         }
+
+        private static void SetNameFor(Transport transport, Booking bookinginfo, Entity transportEntity)
+        {
+            var bookingNumber = bookinginfo.BookingIdentifier.BookingNumber;
+            transportEntity[Attributes.BookingTransport.Name] = $"{transport.TransportCode} - {bookingNumber}";
+        }
+
+       
     }
 }

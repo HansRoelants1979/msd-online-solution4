@@ -40,21 +40,13 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
         private static Entity PrepareBookingTransfer(Booking bookinginfo, Transfer transfer, Guid bookingId, ITracingService trace)
         {
             trace.Trace("Preparing Booking Transfer information - Start");
-            string bookingNumber = bookinginfo.BookingIdentifier.BookingNumber;
             var transferEntity = new Entity(EntityName.BookingTransfer);
 
             if (!string.IsNullOrWhiteSpace(transfer.TransferCode))
                 transferEntity[Attributes.BookingTransfer.TransferCode] = transfer.TransferCode;
-            if (!string.IsNullOrWhiteSpace(transfer.TransferDescription))
-            {
-                transferEntity[Attributes.BookingTransfer.Name] = transfer.TransferDescription;
 
-            }
-            else
-            {
-                transferEntity[Attributes.BookingTransfer.Name] = bookingNumber;
+            SetNameFor(transfer, bookinginfo, transferEntity);
 
-            }
             transferEntity[Attributes.BookingTransfer.Order] = transfer.Order;
             if (!string.IsNullOrWhiteSpace(transfer.StartDate))
                 transferEntity[Attributes.BookingTransfer.StartDateandTime] = DateTime.Parse(transfer.StartDate);
@@ -76,6 +68,12 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             trace.Trace("Preparing Booking Transfer information - End");
 
             return transferEntity;
+        }
+
+        private static void SetNameFor(Transfer transfer, Booking bookinginfo, Entity transferEntity)
+        {
+            var bookingNumber = bookinginfo.BookingIdentifier.BookingNumber;
+            transferEntity[Attributes.BookingTransfer.Name] = $"{transfer.TransferDescription} - {bookingNumber}";
         }
     }
 }

@@ -37,24 +37,16 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             return entityCollectionextraService;
         }
 
-        private static Entity PrepareBookingExtraService(Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models.Booking bookinginfo, ExtraService extraService, Guid bookingId, ITracingService trace)
+        private static Entity PrepareBookingExtraService(Booking bookinginfo, ExtraService extraService, Guid bookingId, ITracingService trace)
         {
             trace.Trace("Preparing Booking Transfer information - Start");
-            string bookingNumber = bookinginfo.BookingIdentifier.BookingNumber;
             var extraServiceEntity = new Entity(EntityName.BookingExtraService);
 
             if (!string.IsNullOrWhiteSpace(extraService.ExtraServiceCode ))
                 extraServiceEntity[Attributes.BookingExtraService.ExtraServiceCode] = extraService.ExtraServiceCode;
-            if (!string.IsNullOrWhiteSpace(extraService.ExtraServiceDescription ))
-            {
-                extraServiceEntity[Attributes.BookingExtraService.Name] = extraService.ExtraServiceDescription;
 
-            }
-            else
-            {
-                extraServiceEntity[Attributes.BookingExtraService.Name] = bookingNumber;
+            SetNameFor(extraService, bookinginfo, extraServiceEntity);
 
-            }
             extraServiceEntity[Attributes.BookingExtraService.Order] = extraService.Order;
             if (!string.IsNullOrWhiteSpace(extraService.StartDate ))
                 extraServiceEntity[Attributes.BookingExtraService.StartDateandTime] = DateTime.Parse(extraService.StartDate);
@@ -72,6 +64,10 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             return extraServiceEntity;
         }
 
-
+        private static void SetNameFor(ExtraService extraService, Booking bookinginfo, Entity extraServiceEntity)
+        {
+            var bookingNumber = bookinginfo.BookingIdentifier.BookingNumber;
+            extraServiceEntity[Attributes.BookingExtraService.Name] = $"{extraService.ExtraServiceDescription} - {bookingNumber}";
+        }
     }
 }

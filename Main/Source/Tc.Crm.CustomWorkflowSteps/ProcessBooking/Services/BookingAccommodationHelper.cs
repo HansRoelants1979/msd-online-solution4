@@ -37,21 +37,13 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
         private static Entity PrepareBookingAccommodation(Booking bookinginfo, Accommodation accommodation, Guid bookingId, ITracingService trace)
         {
             trace.Trace("Preparing Booking Accommodation information - Start");
-            string bookingNumber = bookinginfo.BookingIdentifier.BookingNumber;
             var accommodationEntity = new Entity(EntityName.BookingAccommodation);
-            //BN - HotelId 
+            
             if (accommodation.AccommodationCode != null)
                 accommodationEntity[Attributes.BookingAccommodation.SourceMarketHotelCode] = accommodation.AccommodationCode;
-            if (!string.IsNullOrWhiteSpace(accommodation.GroupAccommodationCode))
-            {
-                accommodationEntity[Attributes.BookingAccommodation.Name] = bookingNumber + General.Concatenator + accommodation.GroupAccommodationCode;
-                accommodationEntity[Attributes.BookingAccommodation.HotelId] = new EntityReference(EntityName.Hotel, new Guid(accommodation.GroupAccommodationCode));
-            }
-            else
-            {
-                accommodationEntity[Attributes.BookingAccommodation.Name] = bookingNumber;
 
-            }
+            SetNameFor(accommodation, bookinginfo, accommodationEntity);
+
             accommodationEntity[Attributes.BookingAccommodation.Order] = accommodation.Order.ToString();
             if (!string.IsNullOrWhiteSpace(accommodation.StartDate))
                 accommodationEntity[Attributes.BookingAccommodation.StartDateandTime] = DateTime.Parse(accommodation.StartDate);
@@ -82,7 +74,11 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             return accommodationEntity;
         }
 
-
+        private static void SetNameFor(Accommodation accommodation, Booking bookinginfo, Entity accommodationEntity)
+        {
+            var bookingNumber = bookinginfo.BookingIdentifier.BookingNumber;
+            accommodationEntity[Attributes.BookingAccommodation.Name] = $"{accommodation.AccommodationDescription} - {bookingNumber}";
+        }
 
     }
 }
