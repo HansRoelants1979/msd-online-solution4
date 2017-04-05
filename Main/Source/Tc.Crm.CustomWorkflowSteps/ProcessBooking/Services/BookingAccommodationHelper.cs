@@ -38,10 +38,11 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
         {
             trace.Trace("Preparing Booking Accommodation information - Start");
             var accommodationEntity = new Entity(EntityName.BookingAccommodation);
-            
+
             if (accommodation.AccommodationCode != null)
                 accommodationEntity[Attributes.BookingAccommodation.SourceMarketHotelCode] = accommodation.AccommodationCode;
-            accommodationEntity[Attributes.BookingAccommodation.HotelId] = new EntityReference(EntityName.Hotel, new Guid(accommodation.GroupAccommodationCode));
+            if (!string.IsNullOrEmpty(accommodation.GroupAccommodationCode))
+                accommodationEntity[Attributes.BookingAccommodation.HotelId] = new EntityReference(EntityName.Hotel, new Guid(accommodation.GroupAccommodationCode));
             SetNameFor(accommodation, bookinginfo, accommodationEntity);
 
             accommodationEntity[Attributes.BookingAccommodation.Order] = accommodation.Order.ToString();
