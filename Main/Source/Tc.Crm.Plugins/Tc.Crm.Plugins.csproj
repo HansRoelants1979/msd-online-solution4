@@ -74,22 +74,24 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddUserToHotelTeam.cs" />
+    <Compile Include="User\BusinessLogic\AssociateUserToTeamService.cs" />
+    <Compile Include="User\BusinessLogic\DeassociateUserFromTeamService.cs" />
+    <Compile Include="User\PostAssociateUserToTeam.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="CreateHotelOwner.cs" />
+    <Compile Include="Hotel\BusinessLogic\HotelOwnerService.cs" />
+    <Compile Include="Hotel\PostCreateHotel.cs" />
     <Compile Include="CreateSharePointDocumentLocation.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="PluginEntryPoint.cs" />
-    <Compile Include="ProcessRemoveUserFromHotelTeam.cs" />
-    <Compile Include="ProcessAddUserToHotelTeam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PluginBase.cs" />
-    <Compile Include="RemoveUserFromHotelTeam.cs" />
+    <Compile Include="User\PostDeassociateUsertFromTeam.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="TCKeyFile.snk" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

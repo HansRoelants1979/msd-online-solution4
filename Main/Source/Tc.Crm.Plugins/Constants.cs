@@ -10,7 +10,7 @@ namespace Tc.Crm.Plugins
     public static class General
     {        
         public const string RoleTcIdBase = "Tc.Ids.Base";
-        public const string RoleTcIdRep = "Tc.Ids.Rep";               
+        public const string RoleTcIdRep = "Tc.Ids.Rep";                
     }
 
     public static class Messages
@@ -34,6 +34,7 @@ namespace Tc.Crm.Plugins
         public const string BusinessUnit = "businessunit";
         public const string Role = "role";
         public const string User = "systemuser";
+        public const string Hotel = "tc_hotel";
     }
 
     public static class Attributes
