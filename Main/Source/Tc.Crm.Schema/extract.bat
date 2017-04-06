@@ -1,1 +1,0 @@
-SolutionPackager.exe /a:extract /p:unmanaged /z:"ThomasCook.zip"
