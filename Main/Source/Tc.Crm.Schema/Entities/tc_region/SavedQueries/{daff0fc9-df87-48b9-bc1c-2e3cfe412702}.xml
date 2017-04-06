@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>0</CanBeDeleted>
+  <isquickfindquery>1</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>1</isdefault>
+  <returnedtypecode>10033</returnedtypecode>
+  <savedqueryid>{daff0fc9-df87-48b9-bc1c-2e3cfe412702}</savedqueryid>
+  <layoutxml>
+    <grid name="resultset" object="10033" jump="tc_name" select="1" icon="1" preview="1">
+      <row name="result" id="tc_regionid">
+        <cell name="tc_name" width="300" />
+        <cell name="tc_regioncode" width="100" />
+        <cell name="tc_countryid" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>4</querytype>
+  <fetchxml>
+    <fetch version="1.0" mapping="logical">
+      <entity name="tc_region">
+        <attribute name="tc_name" />
+        <order attribute="tc_name" descending="false" />
+        <filter type="and">
+          <condition attribute="statecode" operator="eq" value="0" />
+        </filter>
+        <filter type="or" isquickfindfields="1">
+          <condition attribute="tc_regioncode" operator="like" value="{0}" />
+          <condition attribute="tc_name" operator="like" value="{0}" />
+          <condition attribute="tc_countryid" operator="like" value="{0}" />
+        </filter>
+        <attribute name="tc_regioncode" />
+        <attribute name="tc_countryid" />
+        <attribute name="tc_regionid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Quick Find Active Regions" languagecode="1033" />
+  </LocalizedNames>
+</savedquery>

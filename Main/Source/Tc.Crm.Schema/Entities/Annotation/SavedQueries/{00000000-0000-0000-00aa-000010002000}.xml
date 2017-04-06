@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery unmodified="1">
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>1</isdefault>
+  <returnedtypecode>5</returnedtypecode>
+  <savedqueryid>{00000000-0000-0000-00aa-000010002000}</savedqueryid>
+  <queryapi></queryapi>
+  <layoutxml>
+    <grid name="annotations" object="5" jump="" select="1" icon="1" preview="1">
+      <row name="annotation" id="annotationid">
+        <cell name="notetext" width="500" />
+        <cell name="subject" width="300" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>2</querytype>
+  <fetchxml>
+    <fetch distinct="false" mapping="logical">
+      <entity name="annotation">
+        <attribute name="subject" />
+        <attribute name="annotationid" />
+        <attribute name="ownerid" />
+        <attribute name="objecttypecode" />
+        <attribute name="objectid" />
+        <attribute name="modifiedon" />
+        <attribute name="notetext" />
+        <order attribute="notetext" descending="false" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>5.0.0.0</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Zugeordnete Ansicht: Notizen" languagecode="1031" />
+    <LocalizedName description="Notes Associated View" languagecode="1033" />
+    <LocalizedName description="Vue associée Notes" languagecode="1036" />
+  </LocalizedNames>
+</savedquery>

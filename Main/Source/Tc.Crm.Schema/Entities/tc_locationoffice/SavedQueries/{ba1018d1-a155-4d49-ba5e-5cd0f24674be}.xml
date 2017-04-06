@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>0</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>1</isdefault>
+  <returnedtypecode>10007</returnedtypecode>
+  <savedqueryid>{ba1018d1-a155-4d49-ba5e-5cd0f24674be}</savedqueryid>
+  <layoutxml>
+    <grid name="" object="10007" jump="tc_name" select="1" icon="1" preview="1">
+      <row name="tc_locationoffice" id="tc_locationofficeid">
+        <cell name="tc_name" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_primarytelephonenumber" width="100" />
+        <cell name="tc_primaryemailaddress" width="100" />
+        <cell name="tc_address1_flatorunitnumber" width="100" />
+        <cell name="tc_address1_housenumberorbuilding" width="100" />
+        <cell name="tc_address1_street" width="100" />
+        <cell name="tc_address1_additionalinformation" width="100" />
+        <cell name="tc_address1_town" width="100" />
+        <cell name="tc_address1_county" width="100" />
+        <cell name="tc_address1_postcode" width="100" />
+        <cell name="tc_address1_country" width="100" />
+        <cell name="statecode" width="100" />
+        <cell name="ownerid" width="100" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>2</querytype>
+  <fetchxml>
+    <fetch version="1.0" mapping="logical">
+      <entity name="tc_locationoffice">
+        <attribute name="tc_name" />
+        <order attribute="tc_name" descending="false" />
+        <filter type="and">
+          <condition attribute="statecode" operator="eq" value="0" />
+        </filter>
+        <attribute name="tc_address1_town" />
+        <attribute name="tc_address1_street" />
+        <attribute name="statecode" />
+        <attribute name="tc_primarytelephonenumber" />
+        <attribute name="tc_primaryemailaddress" />
+        <attribute name="tc_address1_postcode" />
+        <attribute name="ownerid" />
+        <attribute name="tc_address1_housenumberorbuilding" />
+        <attribute name="tc_address1_flatorunitnumber" />
+        <attribute name="tc_address1_county" />
+        <attribute name="tc_address1_country" />
+        <attribute name="tc_address1_additionalinformation" />
+        <attribute name="tc_locationofficeid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Location Office Associated View" languagecode="1033" />
+  </LocalizedNames>
+</savedquery>

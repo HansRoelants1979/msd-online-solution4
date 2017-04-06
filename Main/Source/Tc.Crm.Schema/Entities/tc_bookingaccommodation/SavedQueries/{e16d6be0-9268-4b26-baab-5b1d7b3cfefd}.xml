@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>0</CanBeDeleted>
+  <isquickfindquery>1</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>1</isdefault>
+  <returnedtypecode>10025</returnedtypecode>
+  <savedqueryid>{e16d6be0-9268-4b26-baab-5b1d7b3cfefd}</savedqueryid>
+  <layoutxml>
+    <grid name="resultset" object="10025" jump="tc_name" select="1" icon="1" preview="1">
+      <row name="result" id="tc_bookingaccommodationid">
+        <cell name="tc_hotelid" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_bookingid" width="100" />
+        <cell name="tc_sourcemarkethotelname" width="100" />
+        <cell name="tc_startdateandtime" width="100" />
+        <cell name="tc_enddateandtime" width="100" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>4</querytype>
+  <fetchxml>
+    <fetch version="1.0" mapping="logical">
+      <entity name="tc_bookingaccommodation">
+        <order attribute="tc_bookingid" descending="false" />
+        <filter type="and">
+          <condition attribute="statecode" operator="eq" value="0" />
+        </filter>
+        <filter type="or" isquickfindfields="1">
+          <condition attribute="tc_sourcemarkethotelname" operator="like" value="{0}" />
+          <condition attribute="tc_sourcemarkethotelcode" operator="like" value="{0}" />
+          <condition attribute="tc_hotelid" operator="like" value="{0}" />
+          <condition attribute="tc_enddateandtime" operator="on" value="{3}" />
+          <condition attribute="tc_bookingid" operator="like" value="{0}" />
+        </filter>
+        <attribute name="tc_startdateandtime" />
+        <attribute name="tc_sourcemarkethotelname" />
+        <attribute name="tc_hotelid" />
+        <attribute name="tc_enddateandtime" />
+        <attribute name="tc_bookingid" />
+        <attribute name="tc_bookingaccommodationid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Quick Find Active Booking Accommodations" languagecode="1033" />
+  </LocalizedNames>
+</savedquery>

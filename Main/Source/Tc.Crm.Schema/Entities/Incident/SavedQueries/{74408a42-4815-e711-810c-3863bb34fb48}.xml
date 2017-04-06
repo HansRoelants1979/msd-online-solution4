@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>0</isdefault>
+  <returnedtypecode>112</returnedtypecode>
+  <savedqueryid>{74408a42-4815-e711-810c-3863bb34fb48}</savedqueryid>
+  <layoutxml>
+    <grid name="resultset" icon="1" preview="1" select="1" jump="title" object="112">
+      <row id="incidentid" name="result">
+        <cell name="tc_casetypeid" width="100" />
+        <cell name="title" width="150" />
+        <cell name="customerid" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="description" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" disableSorting="1" />
+        <cell name="slaid" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="ownerid" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_956e253f274944aeb37dafbc211474a8.failuretime" width="100" disableSorting="1" />
+        <cell name="createdon" width="100" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>0</querytype>
+  <fetchxml>
+    <fetch mapping="logical" output-format="xml-platform" version="1.0" distinct="false">
+      <entity name="incident">
+        <attribute name="title" />
+        <attribute name="tc_casetypeid" />
+        <attribute name="slaid" />
+        <attribute name="ownerid" />
+        <attribute name="description" />
+        <attribute name="customerid" />
+        <attribute name="createdon" />
+        <order descending="false" attribute="title" />
+        <filter type="and">
+          <condition value="0" attribute="statecode" operator="eq" />
+        </filter>
+        <link-entity name="systemuser" alias="ab" to="owninguser" from="systemuserid">
+          <filter type="and">
+            <condition attribute="parentsystemuserid" operator="eq-userid" />
+          </filter>
+        </link-entity>
+        <link-entity name="slakpiinstance" alias="a_956e253f274944aeb37dafbc211474a8" to="resolvebykpiid" from="slakpiinstanceid" link-type="outer" visible="false">
+          <attribute name="failuretime" />
+        </link-entity>
+        <link-entity name="slakpiinstance" alias="ac" to="tc_crresolvebykpiid" from="slakpiinstanceid">
+          <filter type="and">
+            <condition attribute="status" operator="in">
+              <value>1</value>
+              <value>2</value>
+            </condition>
+          </filter>
+        </link-entity>
+        <attribute name="incidentid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.51</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Active Cases Exceeding or Nearing Non-compliance CR SLA Owned by User I Manage" languagecode="1033" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description description="This view displays any open cases exceeding or nearing non-compliance on the SLA KPI owned by users the current user manages " languagecode="1033" />
+  </Descriptions>
+</savedquery>

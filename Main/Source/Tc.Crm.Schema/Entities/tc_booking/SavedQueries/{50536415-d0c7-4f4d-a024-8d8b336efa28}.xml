@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>0</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>1</isdefault>
+  <returnedtypecode>10026</returnedtypecode>
+  <savedqueryid>{50536415-d0c7-4f4d-a024-8d8b336efa28}</savedqueryid>
+  <layoutxml>
+    <grid name="" object="10026" jump="tc_name" select="1" icon="1" preview="0">
+      <row name="tc_booking" id="tc_bookingid">
+        <cell name="tc_name" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_participants" width="100" disableSorting="1" />
+        <cell name="tc_brandid" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_departuredate" width="100" />
+        <cell name="tc_destinationgatewayid" width="100" />
+        <cell name="tc_returndate" width="100" />
+        <cell name="tc_sourcemarketid" width="100" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>64</querytype>
+  <fetchxml>
+    <fetch version="1.0" mapping="logical">
+      <entity name="tc_booking">
+        <attribute name="tc_bookingid" />
+        <attribute name="tc_name" />
+        <filter type="and">
+          <condition attribute="statecode" operator="eq" value="0" />
+        </filter>
+        <order attribute="tc_name" descending="false" />
+        <attribute name="tc_sourcemarketid" />
+        <attribute name="tc_returndate" />
+        <attribute name="tc_participants" />
+        <attribute name="tc_destinationgatewayid" />
+        <attribute name="tc_departuredate" />
+        <attribute name="tc_brandid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Booking Lookup View" languagecode="1033" />
+  </LocalizedNames>
+</savedquery>

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery unmodified="1">
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>1</isdefault>
+  <returnedtypecode>5</returnedtypecode>
+  <savedqueryid>{dddff6ae-2f52-4640-b2bb-2ba59da0777c}</savedqueryid>
+  <queryapi></queryapi>
+  <layoutxml>
+    <grid name="resultset" object="5" jump="" select="1" icon="1" preview="1">
+      <row name="result" id="annotationid">
+        <cell name="subject" width="200" />
+        <cell name="notetext" width="200" />
+        <cell name="filename" width="80" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>1</querytype>
+  <fetchxml>
+    <fetch version="1.0" output-format="xml-platform" mapping="logical">
+      <entity name="annotation">
+        <attribute name="subject" />
+        <attribute name="notetext" />
+        <attribute name="filename" />
+        <attribute name="annotationid" />
+        <order attribute="subject" descending="false" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>5.0.0.0</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Ansicht für die erweiterte Suche: Notizen" languagecode="1031" />
+    <LocalizedName description="Notes Advanced Find View" languagecode="1033" />
+    <LocalizedName description="Vue Recherche avancée Notes" languagecode="1036" />
+  </LocalizedNames>
+</savedquery>

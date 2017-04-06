@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>0</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>1</isdefault>
+  <returnedtypecode>10044</returnedtypecode>
+  <savedqueryid>{b76f9c2b-0eda-44d4-87ae-e19da17432c8}</savedqueryid>
+  <layoutxml>
+    <grid name="resultset" object="10044" jump="tc_name" select="1" icon="1" preview="1">
+      <row name="result" id="tc_hotelid">
+        <cell name="tc_name" width="300" />
+        <cell name="tc_locationid" width="100" />
+        <cell name="tc_category" width="100" />
+        <cell name="tc_sourcemarkethotelid" width="100" />
+        <cell name="tc_masterhotelid" width="100" />
+        <cell name="tc_primaryemailaddress" width="100" />
+        <cell name="tc_telephonenumber" width="100" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>1</querytype>
+  <fetchxml>
+    <fetch version="1.0" mapping="logical">
+      <entity name="tc_hotel">
+        <attribute name="tc_name" />
+        <order attribute="tc_name" descending="false" />
+        <attribute name="tc_telephonenumber" />
+        <attribute name="tc_sourcemarkethotelid" />
+        <attribute name="tc_primaryemailaddress" />
+        <attribute name="tc_masterhotelid" />
+        <attribute name="tc_locationid" />
+        <attribute name="tc_category" />
+        <attribute name="tc_hotelid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Hotel Advanced Find View" languagecode="1033" />
+  </LocalizedNames>
+</savedquery>

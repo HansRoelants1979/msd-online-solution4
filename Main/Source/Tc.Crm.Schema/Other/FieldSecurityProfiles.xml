@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FieldSecurityProfiles>
+  <FieldSecurityProfile name="Tc.Base" fieldsecurityprofileid="{596e68a9-f203-e711-810d-1458d041f8e8}">
+    <FieldPermissions />
+  </FieldSecurityProfile>
+  <FieldSecurityProfile name="Tc.CompensationLine.BACS.processing" description="To access the Invoice Status and Invoice Error Description fields on the Compensation Line&#xA;(WNS &amp; CR Managers)" fieldsecurityprofileid="{e101fdc2-9714-e711-810c-3863bb34fb48}">
+    <FieldPermissions>
+      <FieldPermission>
+        <EntityName>tc_compensationline</EntityName>
+        <AttributeName>tc_invoiceerrordescription</AttributeName>
+        <CanRead>4</CanRead>
+        <CanUpdate>4</CanUpdate>
+        <CanCreate>0</CanCreate>
+      </FieldPermission>
+      <FieldPermission>
+        <EntityName>tc_compensationline</EntityName>
+        <AttributeName>tc_invoicestatus</AttributeName>
+        <CanRead>4</CanRead>
+        <CanUpdate>4</CanUpdate>
+        <CanCreate>0</CanCreate>
+      </FieldPermission>
+    </FieldPermissions>
+  </FieldSecurityProfile>
+  <FieldSecurityProfile name="Tc.SystemMaintenance" fieldsecurityprofileid="{a8c7b94e-f203-e711-810d-1458d041f8e8}">
+    <FieldPermissions>
+      <FieldPermission>
+        <EntityName>queue</EntityName>
+        <AttributeName>tc_sladuration</AttributeName>
+        <CanRead>4</CanRead>
+        <CanUpdate>4</CanUpdate>
+        <CanCreate>0</CanCreate>
+      </FieldPermission>
+    </FieldPermissions>
+  </FieldSecurityProfile>
+</FieldSecurityProfiles>

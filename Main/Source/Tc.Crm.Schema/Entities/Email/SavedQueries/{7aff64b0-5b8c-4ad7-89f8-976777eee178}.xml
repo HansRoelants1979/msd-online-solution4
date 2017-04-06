@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>1</isdefault>
+  <returnedtypecode>4202</returnedtypecode>
+  <savedqueryid>{7aff64b0-5b8c-4ad7-89f8-976777eee178}</savedqueryid>
+  <queryapi></queryapi>
+  <layoutxml>
+    <grid name="resultset" icon="1" preview="1" select="1" jump="subject" object="4202">
+      <row id="activityid" name="result">
+        <cell name="to" width="100" disableSorting="1" />
+        <cell name="from" width="100" disableSorting="1" />
+        <cell name="subject" width="250" />
+        <cell name="regardingobjectid" width="100" />
+        <cell name="a_6d277637522c4af6af2b72fe068c500a.title" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_6d277637522c4af6af2b72fe068c500a.customerid" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="prioritycode" width="140" />
+        <cell name="actualend" width="100" />
+        <cell name="senton" width="100" />
+        <cell name="trackingtoken" width="100" />
+        <cell name="createdon" width="100" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>0</querytype>
+  <fetchxml>
+    <fetch distinct="true" mapping="logical" output-format="xml-platform" version="1.0">
+      <entity name="email">
+        <attribute name="subject" />
+        <attribute name="regardingobjectid" />
+        <attribute name="prioritycode" />
+        <attribute name="actualend" />
+        <attribute name="from" />
+        <order descending="true" attribute="actualend" />
+        <link-entity name="activityparty" alias="aa" to="activityid" from="activityid">
+          <filter type="and">
+            <filter type="or">
+              <condition value="2" attribute="participationtypemask" operator="eq" />
+              <condition value="3" attribute="participationtypemask" operator="eq" />
+            </filter>
+            <condition attribute="partyid" operator="eq-userid" />
+          </filter>
+        </link-entity>
+        <filter type="and">
+          <condition value="4" attribute="statuscode" operator="eq" />
+          <condition value="0" attribute="directioncode" operator="eq" />
+        </filter>
+        <link-entity name="incident" alias="a_6d277637522c4af6af2b72fe068c500a" to="regardingobjectid" from="incidentid" link-type="outer" visible="false">
+          <attribute name="customerid" />
+          <attribute name="title" />
+        </link-entity>
+        <attribute name="trackingtoken" />
+        <attribute name="to" />
+        <attribute name="senton" />
+        <attribute name="createdon" />
+        <attribute name="activityid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>5.0.0.0</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Meine eingegangenen E-Mails" languagecode="1031" />
+    <LocalizedName description="My Received Emails" languagecode="1033" />
+    <LocalizedName description="Mes courriers électroniques reçus" languagecode="1036" />
+  </LocalizedNames>
+</savedquery>

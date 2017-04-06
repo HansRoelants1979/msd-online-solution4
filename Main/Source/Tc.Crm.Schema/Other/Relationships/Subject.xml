@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EntityRelationships>
+  <EntityRelationship Name="subject_incidents">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IntroducedVersion>5.0.0.0</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>Incident</ReferencingEntityName>
+    <ReferencedEntityName>Subject</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>Restrict</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>SubjectId</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Wählen Sie den Betreff für die Anfrage (beispielsweise Kataloganforderung oder Produktbeschwerde) aus, damit die Kundenservicemanager häufige auftretende Anforderungen oder Problembereiche erkennen können. Administratoren können Betreffwerte im Einstellungsbereich unter 'Unternehmensmanagement' konfigurieren." languagecode="1031" />
+        <Description description="Choose the subject for the case, such as catalog request or product complaint, so customer service managers can identify frequent requests or problem areas. Administrators can configure subjects under Business Management in the Settings area." languagecode="1033" />
+        <Description description="Choisissez le sujet de l'incident, comme une demande de catalogue ou une plainte concernant un produit, pour que les responsables du service clientèle puissent identifier les demandes fréquentes ou les sujets problématiques. Les administrateurs peuvent configurer des sujets sous Gestion d'entreprise dans la zone Paramètres." languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
+</EntityRelationships>

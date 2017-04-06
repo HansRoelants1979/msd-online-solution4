@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<systemform>
+  <formid>{73b30fee-9928-4f19-abbe-48911d95ef04}</formid>
+  <IntroducedVersion>1.0.0.14</IntroducedVersion>
+  <FormPresentation>1</FormPresentation>
+  <FormActivationState>1</FormActivationState>
+  <form>
+    <tabs>
+      <tab name="General" id="{1c008dc4-6e5c-8a18-e689-c3a41c398b73}" IsUserDefined="0" locklevel="0" showlabel="true" expanded="true">
+        <labels>
+          <label description="General" languagecode="1033" />
+        </labels>
+        <columns>
+          <column width="34%">
+            <sections>
+              <section name="tab_3_section_1" showlabel="false" showbar="false" locklevel="0" id="{7908763e-7678-0b70-4820-c16b4281eb38}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115">
+                <labels>
+                  <label description="Section" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{d246877c-de7d-90bb-2a04-80d08db94297}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Transfer Code" languagecode="1033" />
+                      </labels>
+                      <control id="tc_transfercode" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_transfercode" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{dd9c9709-44b2-6063-41ca-18b9a83d82ca}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Transfer Type" languagecode="1033" />
+                      </labels>
+                      <control id="tc_transfertype" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_transfertype" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{ccd3399d-9ee3-5d8e-7eb0-46110b562497}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Start Date And Time" languagecode="1033" />
+                      </labels>
+                      <control id="tc_startdateandtime" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="tc_startdateandtime" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{ecd3848b-a057-756a-49cc-7b5840038325}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="End Date And Time" languagecode="1033" />
+                      </labels>
+                      <control id="tc_enddateandtime" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="tc_enddateandtime" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{27bce0b9-a1be-6447-3b92-5b1cb85777e1}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Participants" languagecode="1033" />
+                      </labels>
+                      <control id="tc_participants" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_participants" disabled="false" />
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+          <column width="33%">
+            <sections>
+              <section name="General_section_3" showlabel="false" showbar="false" locklevel="0" id="{ea545c46-864c-15e4-20d0-9bd6c47456d2}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115">
+                <labels>
+                  <label description="Section" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{e2c15d21-716c-9ca2-c098-500516171968}" showlabel="false" rowspan="5" auto="false" colspan="1" locklevel="0">
+                      <labels>
+                        <label description="Note Text" languagecode="1033" />
+                      </labels>
+                      <control id="notescontrol" classid="{06375649-c143-495e-a496-c962e5b4488e}" uniqueid="{c1d1b3a1-9633-c4da-0767-e3b16cbb9669}" disabled="false">
+                        <parameters>
+                          <DefaultTabId>NotesTab</DefaultTabId>
+                          <ShowArticleTab>false</ShowArticleTab>
+                          <SelectDefaultLanguage>00000000-0000-0000-0000-000000000000</SelectDefaultLanguage>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                  <row></row>
+                  <row></row>
+                  <row></row>
+                  <row></row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+          <column width="33%">
+            <sections>
+              <section name="tab_3_section_2" showlabel="false" showbar="false" locklevel="0" id="{c3d3b7a1-a1d6-2710-ca49-4b885228e514}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115">
+                <labels>
+                  <label description="Section" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{cc9c214b-40d2-3808-b069-eba02975dd70}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Arrival Gateway" languagecode="1033" />
+                      </labels>
+                      <control id="tc_arrivalgatewayid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_arrivalgatewayid" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{ac9b62a8-0a54-692e-9681-046a87203769}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Departure Gateway" languagecode="1033" />
+                      </labels>
+                      <control id="tc_departuregatewayid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_departuregatewayid" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{a0a16012-9116-6db5-0627-223e10e9dd3a}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Category" languagecode="1033" />
+                      </labels>
+                      <control id="tc_category" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_category" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{d2939a5d-2915-3518-5d91-e1035a531871}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Order" languagecode="1033" />
+                      </labels>
+                      <control id="tc_order" classid="{C6D124CA-7EDA-4a60-AEA9-7FB8D318B68F}" datafieldname="tc_order" disabled="false" />
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
+      <tab name="tab_3" id="{c1c992a1-926a-d8ab-658b-11c118d7266c}" IsUserDefined="0" locklevel="0" showlabel="false" expanded="true">
+        <labels>
+          <label description="Tab" languagecode="1033" />
+        </labels>
+        <columns>
+          <column width="100%">
+            <sections>
+              <section name="tab_3_section_3" showlabel="false" showbar="false" locklevel="0" id="{66d07c83-1ead-5772-b312-3ea08c6b9b02}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" height="auto">
+                <labels>
+                  <label description="Section" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{252ec3c0-4104-8191-a4c2-6142cbc3c198}" showlabel="true" locklevel="0" auto="true" rowspan="5">
+                      <labels>
+                        <label description="Remark" languagecode="1033" />
+                      </labels>
+                      <control id="tc_remark" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="tc_remark" disabled="true" uniqueid="{38680d0c-d8d6-80a7-67c6-e884caeb8946}" />
+                    </cell>
+                  </row>
+                  <row />
+                  <row />
+                  <row />
+                  <row height="auto" />
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
+      <tab verticallayout="true" id="{2eaf863b-c56a-47e8-b4f8-9de85344317a}" IsUserDefined="1" name="{2eaf863b-c56a-47e8-b4f8-9de85344317a}" expanded="false" locklevel="0" showlabel="true" visible="false">
+        <labels>
+          <label description="Allgemein" languagecode="1031" />
+          <label description="Hidden" languagecode="1033" />
+          <label description="Général" languagecode="1036" />
+        </labels>
+        <columns>
+          <column width="100%">
+            <sections>
+              <section showlabel="false" showbar="false" IsUserDefined="0" id="{b65340ba-5201-45c6-8d28-22f30e87f8f4}">
+                <labels>
+                  <label description="Allgemein" languagecode="1031" />
+                  <label description="General" languagecode="1033" />
+                  <label description="Général" languagecode="1036" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{df2c5ffd-acce-4c26-ad7c-650398ddd54a}">
+                      <labels>
+                        <label description="Name" languagecode="1033" />
+                      </labels>
+                      <control id="tc_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_name" uniqueid="{c811d388-20c6-2171-b301-22594a78d632}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{4bb1b200-de32-432d-9be4-cc62950a4afc}">
+                      <labels>
+                        <label description="Owner" languagecode="1033" />
+                        <label description="Propriétaire" languagecode="1036" />
+                        <label description="Besitzer" languagecode="1031" />
+                      </labels>
+                      <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{ab8074eb-4b34-a728-2c1b-23ba42b9a023}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Status" languagecode="1033" />
+                        <label description="Statut" languagecode="1036" />
+                      </labels>
+                      <control id="statecode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="statecode" disabled="false" uniqueid="{a4d1a213-a669-cabe-e2d1-6dcceb04318b}" />
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
+    </tabs>
+    <Navigation>
+      <NavBar></NavBar>
+      <NavBarAreas>
+        <NavBarArea Id="Info">
+          <Titles>
+            <Title LCID="1033" Text="Common" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Sales">
+          <Titles>
+            <Title LCID="1033" Text="Sales" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Service">
+          <Titles>
+            <Title LCID="1033" Text="Service" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Marketing">
+          <Titles>
+            <Title LCID="1033" Text="Marketing" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="ProcessCenter">
+          <Titles>
+            <Title LCID="1033" Text="Process Sessions" />
+          </Titles>
+        </NavBarArea>
+      </NavBarAreas>
+    </Navigation>
+    <controlDescriptions />
+  </form>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <LocalizedNames>
+    <LocalizedName description="Information" languagecode="1033" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description description="A form for this entity." languagecode="1033" />
+  </Descriptions>
+</systemform>

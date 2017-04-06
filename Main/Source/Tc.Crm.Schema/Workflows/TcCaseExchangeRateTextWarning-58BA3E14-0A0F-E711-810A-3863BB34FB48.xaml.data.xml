@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workflow WorkflowId="{58ba3e14-0a0f-e711-810a-3863bb34fb48}" Name="Tc.Case.ExchangeRateTextWarning" Description="Click to add description">
+  <XamlFileName>/Workflows/TcCaseExchangeRateTextWarning-58BA3E14-0A0F-E711-810A-3863BB34FB48.xaml</XamlFileName>
+  <Type>1</Type>
+  <Subprocess>0</Subprocess>
+  <Category>2</Category>
+  <Mode>1</Mode>
+  <Scope>4</Scope>
+  <OnDemand>0</OnDemand>
+  <TriggerOnCreate>0</TriggerOnCreate>
+  <TriggerOnDelete>0</TriggerOnDelete>
+  <AsyncAutodelete>0</AsyncAutodelete>
+  <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+  <StateCode>1</StateCode>
+  <StatusCode>2</StatusCode>
+  <RunAs>1</RunAs>
+  <IsTransacted>1</IsTransacted>
+  <IntroducedVersion>1.0.0.51</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <BusinessProcessType>0</BusinessProcessType>
+  <PrimaryEntity>tc_compensation</PrimaryEntity>
+  <labels>
+    <steplabels id="{f49e0093-e94b-4287-ad55-1fb7f240e4e6}">
+      <label languagecode="1033" description="Exchange Rate Guidance" />
+    </steplabels>
+    <steplabels id="{153f6964-c4f3-4bb6-a0d3-63a0451ecaad}">
+      <label languagecode="1033" description="To provide guidance on what to type for currency exchange rate (e.g .12 or 0.12).  Click apply to remove contents, or dismiss to accept." />
+    </steplabels>
+  </labels>
+  <ProcessTriggers>
+    <ProcessTrigger processtriggerid="{e0439e2a-0e0f-e711-810a-3863bb34fb48}">
+      <controltype>1</controltype>
+      <scope>1</scope>
+      <controlname>tc_exchangerate</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_compensation</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{e1439e2a-0e0f-e711-810a-3863bb34fb48}">
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_compensation</primaryentitytypecode>
+    </ProcessTrigger>
+  </ProcessTriggers>
+</Workflow>

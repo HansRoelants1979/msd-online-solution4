@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<systemform>
+  <formid>{3a0b2969-21c0-49c7-8590-43bd0688145d}</formid>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <FormPresentation>1</FormPresentation>
+  <FormActivationState>1</FormActivationState>
+  <form maxWidth="400">
+    <tabs>
+      <tab verticallayout="true" id="{b0501ced-1dac-4d68-a54e-5935ecf5423d}" IsUserDefined="1">
+        <labels>
+          <label description="" languagecode="1033" />
+        </labels>
+        <columns>
+          <column width="100%">
+            <sections>
+              <section showlabel="false" showbar="false" IsUserDefined="0" id="{85712354-1f6d-4698-91d4-4ec8ae720527}">
+                <labels>
+                  <label description="GENERAL" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{8c74775b-e5ec-462d-9b74-853bbccfe74f}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Location" languagecode="1033" />
+                      </labels>
+                      <control id="tc_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_name" uniqueid="{bebd7834-d63c-b139-963a-94ce528b2253}" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{52a8ba98-9dc9-4410-75a8-4426d420a2b1}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Location Code" languagecode="1033" />
+                      </labels>
+                      <control id="tc_locationcode" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_locationcode" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{166b2435-ad4b-5593-46cb-0a2020e8920a}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Primary Location (Gateway)" languagecode="1033" />
+                      </labels>
+                      <control id="tc_primarylocationid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_primarylocationid" disabled="false" uniqueid="{c2974692-dc26-bc02-9482-c09c279623e4}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{4E29CB42-F586-45B8-9D57-AF21CEA59536}</DefaultViewId>
+                          <AllowFilterOff>false</AllowFilterOff>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{eb6cb676-8a16-d23c-156e-46216e7e0162}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Region" languagecode="1033" />
+                      </labels>
+                      <control id="tc_regionid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_regionid" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{2c5973cf-00aa-456f-813d-ee417e157594}">
+                      <labels>
+                        <label description="Owner" languagecode="1033" />
+                      </labels>
+                      <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
+    </tabs>
+  </form>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <LocalizedNames>
+    <LocalizedName description="Location" languagecode="1033" />
+  </LocalizedNames>
+</systemform>

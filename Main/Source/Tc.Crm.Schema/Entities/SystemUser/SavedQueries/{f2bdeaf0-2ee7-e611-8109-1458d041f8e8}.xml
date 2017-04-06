@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>0</isdefault>
+  <returnedtypecode>8</returnedtypecode>
+  <savedqueryid>{f2bdeaf0-2ee7-e611-8109-1458d041f8e8}</savedqueryid>
+  <layoutxml>
+    <grid name="resultset" object="8" jump="fullname" select="1" preview="1" icon="1">
+      <row name="result" id="systemuserid">
+        <cell name="fullname" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="domainname" width="300" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>0</querytype>
+  <fetchxml>
+    <fetch version="1.0" output-format="xml-platform" mapping="logical">
+      <entity name="systemuser">
+        <attribute name="fullname" />
+        <order attribute="fullname" descending="false" />
+        <attribute name="domainname" />
+        <attribute name="systemuserid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Reps in Hotel Package" languagecode="1033" />
+  </LocalizedNames>
+</savedquery>

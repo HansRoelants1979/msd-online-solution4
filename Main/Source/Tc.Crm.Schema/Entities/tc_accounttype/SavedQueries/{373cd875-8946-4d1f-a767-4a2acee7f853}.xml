@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>0</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>1</isdefault>
+  <returnedtypecode>10069</returnedtypecode>
+  <savedqueryid>{373cd875-8946-4d1f-a767-4a2acee7f853}</savedqueryid>
+  <layoutxml>
+    <grid name="resultset" object="10069" jump="tc_name" select="1" icon="1" preview="1">
+      <row name="result" id="tc_accounttypeid">
+        <cell name="tc_name" width="300" />
+        <cell name="createdon" width="125" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>1</querytype>
+  <fetchxml>
+    <fetch version="1.0" mapping="logical">
+      <entity name="tc_accounttype">
+        <attribute name="tc_accounttypeid" />
+        <attribute name="tc_name" />
+        <attribute name="createdon" />
+        <order attribute="tc_name" descending="false" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.51</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Account Type Advanced Find View" languagecode="1033" />
+  </LocalizedNames>
+</savedquery>

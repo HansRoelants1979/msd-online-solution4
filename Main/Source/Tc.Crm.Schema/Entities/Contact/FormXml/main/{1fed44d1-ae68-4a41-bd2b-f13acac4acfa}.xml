@@ -1,0 +1,1185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<systemform>
+  <formid>{1fed44d1-ae68-4a41-bd2b-f13acac4acfa}</formid>
+  <IntroducedVersion>5.0.0.0</IntroducedVersion>
+  <FormPresentation>1</FormPresentation>
+  <FormActivationState>1</FormActivationState>
+  <form maxWidth="1900" shownavigationbar="true" showImage="false">
+    <ancestor id="{1fed44d1-ae68-4a41-bd2b-f13acac4acfa}" />
+    <hiddencontrols>
+      <data id="fullname" classid="{5546E6CD-394C-4bee-94A8-4425E17EF6C6}" datafieldname="fullname" />
+      <data id="address1_addressid" classid="{5546E6CD-394C-4bee-94A8-4425E17EF6C6}" datafieldname="address1_addressid" />
+      <data id="address2_addressid" classid="{5546E6CD-394C-4bee-94A8-4425E17EF6C6}" datafieldname="address2_addressid" />
+    </hiddencontrols>
+    <tabs>
+      <tab id="{4a17a0d0-7a21-5988-8711-dd8bc013b909}" name="tab_Customer_CustomerDetails" IsUserDefined="0" locklevel="0" showlabel="true" expanded="true">
+        <labels>
+          <label description="Customer Details" languagecode="1033" />
+        </labels>
+        <columns>
+          <column width="24%">
+            <sections>
+              <section id="{dbec5e24-c7a5-9b85-eb09-28a08ac6758c}" name="tab_5_section_1" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" columns="1" labelwidth="125" celllabelalignment="Left" celllabelposition="Left">
+                <labels>
+                  <label description="Identification" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{71957432-81c7-51c9-12b6-e80516928a73}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Title" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_salutation" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_salutation" uniqueid="{54342b52-5767-b598-dcc0-5b6d55ba48cb}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{5e06b54a-2338-5b14-bb35-5e81563770a3}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="First Name" languagecode="1033" />
+                        <label description="Prénom" languagecode="1036" />
+                        <label description="Vorname" languagecode="1031" />
+                      </labels>
+                      <control disabled="false" id="firstname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="firstname" uniqueid="{394b7ccb-ac32-4c26-c4da-6c9d1e775382}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{47e20dda-3664-0645-6e25-d489756de74d}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Middle Name" languagecode="1033" />
+                        <label description="Deuxième prénom" languagecode="1036" />
+                        <label description="Zweiter Vorname" languagecode="1031" />
+                      </labels>
+                      <control disabled="false" id="middlename" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="middlename" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{e78c2ac4-ddbe-12e0-4718-1cc380d367d8}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Last Name" languagecode="1033" />
+                        <label description="Nom de famille" languagecode="1036" />
+                        <label description="Nachname" languagecode="1031" />
+                      </labels>
+                      <control disabled="false" id="lastname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="lastname" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{687a9ee5-9d9d-1262-4a05-82b3424ee034}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Company Name" languagecode="1033" />
+                        <label description="Nom de la société" languagecode="1036" />
+                        <label description="Firmenname" languagecode="1031" />
+                      </labels>
+                      <control id="parentcustomerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="parentcustomerid" disabled="false" uniqueid="{01a99b3c-8d15-8ba4-5877-4641448323ee}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{b622c727-6463-53ee-b1c5-d3bb84275271}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Academic Title" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_academictitle" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_academictitle" uniqueid="{89bacbd7-8208-b32d-0800-69c0d3503b02}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{24b66bd1-7dac-abb2-0862-aae6b0e43bbe}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Date of Birth" languagecode="1033" />
+                        <label description="Date de naissance" languagecode="1036" />
+                        <label description="Geburtstag" languagecode="1031" />
+                      </labels>
+                      <control disabled="false" id="birthdate" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="birthdate" uniqueid="{e605450b-c5e2-25b5-9a83-72215e47ee91}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{897c865b-7d15-e7b5-47d6-d5ee6d4ac76d}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Calculated Year of Birth" languagecode="1033" />
+                      </labels>
+                      <control disabled="true" id="tc_calculatedyearofbirth" classid="{C6D124CA-7EDA-4a60-AEA9-7FB8D318B68F}" datafieldname="tc_calculatedyearofbirth" uniqueid="{e32d9cc0-d8ac-067b-00a4-e72171078212}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{89a77b8a-63a2-0e32-4b8c-c8badcdb05cc}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Gender" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_gender" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_gender" uniqueid="{8dd679e0-3409-72a2-9d22-dad9399bdb6d}" />
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+          <column width="38%">
+            <sections>
+              <section id="{bea579b8-8901-77b0-1128-351760e68bd4}" name="SOCIAL_PANE_TAB" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Top">
+                <labels>
+                  <label description="SOZIALER BEREICH" languagecode="1031" />
+                  <label description="Social Pane" languagecode="1033" />
+                  <label description="VOLET SOCIAL" languagecode="1036" />
+                </labels>
+                <rows>
+                  <row height="stdwithlabel">
+                    <cell id="{84c8db65-edd1-45ba-deab-b92da28a15be}" locklevel="0" showlabel="false" rowspan="10" auto="false" colspan="1">
+                      <labels>
+                        <label description="Note Text" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="notescontrol" classid="{06375649-c143-495e-a496-c962e5b4488e}" uniqueid="{2a76a210-5537-17d3-89be-62eba70e2706}">
+                        <parameters>
+                          <DefaultTabId>ActivitiesTab</DefaultTabId>
+                          <OrderByActivityWall>descending</OrderByActivityWall>
+                          <SortActivityWall>modifiedon</SortActivityWall>
+                          <ShowArticleTab>false</ShowArticleTab>
+                          <SelectDefaultLanguage>00000000-0000-0000-0000-000000000000</SelectDefaultLanguage>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                </rows>
+              </section>
+            </sections>
+          </column>
+          <column width="38%">
+            <sections>
+              <section id="{8b536601-89e0-8ee5-955c-a00ca4227c30}" name="tab_Customer_CustomerDetails_section_2" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" columns="1" labelwidth="130" celllabelalignment="Left" celllabelposition="Left">
+                <labels>
+                  <label description="Address" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{a22b17e6-451b-07c8-5541-3d04ccea1e87}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Flat or Unit Number" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_address1_flatorunitnumber" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address1_flatorunitnumber" uniqueid="{31ea52aa-4c27-bede-2bed-3a85621138d2}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{0a344a55-8ab9-ebb9-ad0a-93a87ce6dbc2}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="House No. or Building" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_address1_housenumberorbuilding" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address1_housenumberorbuilding" uniqueid="{36bcdae5-34b4-2501-4d49-714d6a4bac77}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{c5ea7831-1210-9054-2611-1765797a4748}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Street" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_address1_street" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address1_street" uniqueid="{3495ce9d-b0b8-d927-c89b-5d6e8abc081c}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{585cd1cb-eb97-383e-a136-38a71ea2911e}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Additional Information" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_address1_additionalinformation" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address1_additionalinformation" uniqueid="{84d1e76a-0301-e881-d7d2-c0b391127bbb}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{e2207eb1-3019-872a-a526-798150cde77c}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Town" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_address1_town" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address1_town" uniqueid="{ba4be6b4-a34e-4b1e-b50e-0010435a0a99}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{98c76a65-15bd-c444-eece-2164d4d487cb}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="County" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_address1_county" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address1_county" uniqueid="{d34d0d6e-8d71-578d-a192-e455bd5937bb}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{47a6e1c3-8950-42a2-d0e2-9dca4d2d07e1}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Postal Code" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_address1_postalcode" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address1_postalcode" uniqueid="{b7552be8-15ec-db0a-14eb-10a2b99c461d}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{4cb93e32-dbc4-79d4-7a10-692a17e633d0}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Country" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_address1_countryid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_address1_countryid" uniqueid="{a3ac8b91-a8bd-7674-9049-54423e4e54b0}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{314A3412-D6BE-4950-BDD7-6EFED38E8C83}</DefaultViewId>
+                          <AllowFilterOff>false</AllowFilterOff>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+              <section id="{5010b170-c4e9-b94b-c26c-0303756b0c32}" name="tab_Customer_Preferences_section_2" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
+                <labels>
+                  <label description="Other Information" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{76e6a49b-991c-1368-93e4-ee4b5d4c48b7}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Segment" languagecode="1033" />
+                      </labels>
+                      <control disabled="true" id="tc_segment" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_segment" uniqueid="{174946b1-c00e-9d28-11b6-7a889361d248}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{71ad2051-014b-c4d1-645d-e172c7b5099e}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Disabled Indicator" languagecode="1033" />
+                      </labels>
+                      <control id="tc_disabledindicator" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_disabledindicator" disabled="false" uniqueid="{60bde009-36d7-e648-b796-86acbb65e874}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{691491cd-d252-3631-1cbe-a3de85c894cc}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Date of Death" languagecode="1033" />
+                      </labels>
+                      <control disabled="true" id="tc_dateofdeath" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="tc_dateofdeath" uniqueid="{e581176c-2d52-8636-c258-9c231ec07397}" />
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
+      <tab id="{5b9ccc1c-d774-00e9-4928-1b14990d6e39}" name="tab_Customer_Preferences" IsUserDefined="0" locklevel="0" showlabel="true" expanded="true">
+        <labels>
+          <label description="Customer Preferences" languagecode="1033" />
+        </labels>
+        <columns>
+          <column width="34%">
+            <sections>
+              <section id="{3d580ca1-8515-9d43-1730-48b59e7e8c13}" name="tab_6_section_1" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" columns="1" labelwidth="155" celllabelalignment="Left" celllabelposition="Left">
+                <labels>
+                  <label description="Contact Preferences" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{7b31916e-0831-d366-e3b0-2b95d2a3663c}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Preferred Method of Contact" languagecode="1033" />
+                        <label description="Mode de communication privilégié" languagecode="1036" />
+                        <label description="Bevorzugte Kontaktmethode" languagecode="1031" />
+                      </labels>
+                      <control disabled="false" id="preferredcontactmethodcode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="preferredcontactmethodcode" uniqueid="{18057392-55d8-038e-ed24-ddd525a5242b}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{8665d1e8-7083-a795-bb8d-67adcaeb2d4b}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Allow Marketing" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_marketing" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_marketing" uniqueid="{259004e3-54e0-edd9-699b-5d1e72d1d786}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{c845aaa4-15be-0bc5-b230-2476664dcdc7}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Do not allow Phone Calls" languagecode="1033" />
+                        <label description="Ne pas autoriser les appels téléphoniques" languagecode="1036" />
+                        <label description="Telefonanrufe nicht zulassen" languagecode="1031" />
+                      </labels>
+                      <control disabled="false" id="donotphone" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="donotphone" uniqueid="{d3b09135-5853-b849-80d2-de3587967958}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{521de05d-4c18-d217-3ca2-bcd598a6a9ea}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Do not allow Bulk Emails" languagecode="1033" />
+                        <label description="Ne pas autoriser l’envoi de messages en nombre" languagecode="1036" />
+                        <label description="Massen-E-Mails nicht zulassen" languagecode="1031" />
+                      </labels>
+                      <control disabled="false" id="donotbulkemail" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="donotbulkemail" uniqueid="{6c9cc5de-8618-a8c5-e235-3cb6455cae1a}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{1b907029-e41d-66e3-934a-7be80ae28d45}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Do not allow SMS" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_donotallowsms" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_donotallowsms" uniqueid="{1b84c819-9ab5-ccc8-3b02-31d5c2ee1b3a}" />
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+          <column width="33%">
+            <sections>
+              <section id="{6a196e8b-6178-3b77-3894-ae1a75032738}" name="tab_Customer_CustomerDetails_section_3" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" columns="111" labelwidth="75" celllabelalignment="Left" celllabelposition="Top">
+                <labels>
+                  <label description="Contact" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{de1a8e56-dad7-4689-26a3-ad125cb6b3e6}" locklevel="0" showlabel="true" colspan="2">
+                      <labels>
+                        <label description="Language" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_language" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_language" uniqueid="{5d5eb141-d58e-75b4-01cc-b473c0ec18e1}" />
+                    </cell>
+                    <cell id="{8d85989d-2088-0a4e-4eb0-aa80d85c883a}" showlabel="false" userspacer="true">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{50de2b85-cdd0-5690-8455-7b61a5adb681}" locklevel="0" showlabel="true" colspan="2">
+                      <labels>
+                        <label description="Telephone" languagecode="1033" />
+                        <label description="Téléphone professionel" languagecode="1036" />
+                        <label description="Telefon (geschäftlich)" languagecode="1031" />
+                      </labels>
+                      <control disabled="false" id="telephone1" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="telephone1" uniqueid="{302b7c97-8dac-0b78-d47a-c92a10a90a56}" />
+                    </cell>
+                    <cell id="{6954a545-8dcb-4b22-53e8-5bd6b2445d0c}" locklevel="0" showlabel="true" colspan="1">
+                      <labels>
+                        <label description="Type" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_telephone1type" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_telephone1type" uniqueid="{a616e2d1-908e-7aca-02d3-89bedac0b496}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{76e69ad5-c252-b880-9516-7349dc988ebe}" locklevel="0" showlabel="true" colspan="2">
+                      <labels>
+                        <label description="Email Address" languagecode="1033" />
+                        <label description="Courrier électronique" languagecode="1036" />
+                        <label description="E-Mail" languagecode="1031" />
+                      </labels>
+                      <control disabled="false" id="emailaddress1" classid="{ADA2203E-B4CD-49be-9DDF-234642B43B52}" datafieldname="emailaddress1" uniqueid="{c7d35db5-9b4c-8373-0ed8-a699cc0d5ad4}" />
+                    </cell>
+                    <cell id="{217d8267-e11b-5c1a-b7d1-27b8352ee3c2}" locklevel="0" showlabel="true" colspan="1">
+                      <labels>
+                        <label description="Type" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_emailaddress1type" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_emailaddress1type" uniqueid="{0567ae05-b637-86a9-2e5c-cda7642d1415}" />
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+          <column width="33%">
+            <sections>
+              <section name="tab_Customer_Preferences_section_3" showlabel="false" showbar="false" locklevel="0" id="{e5b07edc-cc15-3c63-4483-98d4c8b6e7c1}" IsUserDefined="0" layout="varwidth" columns="11" labelwidth="115">
+                <labels>
+                  <label description="Section" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{b892a19b-9d71-b098-8467-2047c162bcba}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                    <cell id="{be0d6473-7a5a-adc0-eae2-b27c2818eea8}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
+      <tab id="{79d1348d-c203-0c5e-d2c9-769435290870}" name="tab_Customer_CaseSummary" IsUserDefined="0" locklevel="0" showlabel="true" expanded="false">
+        <labels>
+          <label description="Case Summary" languagecode="1033" />
+        </labels>
+        <columns>
+          <column width="100%">
+            <sections>
+              <section id="{a655ad95-d058-caca-67ca-8358a98461d4}" name="tab_2_section_1" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" columns="1" labelwidth="115">
+                <labels>
+                  <label description="Section" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{4157042d-6702-a965-d989-e5b5449a1300}" showlabel="false" rowspan="6" auto="false" colspan="1">
+                      <labels>
+                        <label description="Cases (Customer)" languagecode="1033" />
+                        <label description="Incidents" languagecode="1036" />
+                        <label description="Anfragen" languagecode="1031" />
+                      </labels>
+                      <control id="grdCase" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" uniqueid="{187d083a-bd1a-3568-be84-a6522e3b7b30}" indicationOfSubgrid="true">
+                        <parameters>
+                          <ViewId>{ABA8608F-C3DC-E611-8103-3863BB340DD8}</ViewId>
+                          <IsUserView>false</IsUserView>
+                          <RelationshipName>incident_customer_contacts</RelationshipName>
+                          <TargetEntityType>incident</TargetEntityType>
+                          <AutoExpand>Fixed</AutoExpand>
+                          <EnableQuickFind>false</EnableQuickFind>
+                          <EnableViewPicker>false</EnableViewPicker>
+                          <ViewIds>{00000000-0000-0000-00AA-000010001032},{ABA8608F-C3DC-E611-8103-3863BB340DD8},{00000000-0000-0000-00AA-000010001028}</ViewIds>
+                          <EnableJumpBar>false</EnableJumpBar>
+                          <ChartGridMode>Grid</ChartGridMode>
+                          <VisualizationId>{4143B74E-4A07-4D01-9FFE-2CDCAA4208FD}</VisualizationId>
+                          <IsUserChart>false</IsUserChart>
+                          <EnableChartPicker>false</EnableChartPicker>
+                          <RecordsPerPage>4</RecordsPerPage>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
+      <tab id="{c0e637ce-e608-a617-0cc7-484c7285692e}" name="tab_Customer_BookingSummary" IsUserDefined="0" locklevel="0" showlabel="true" expanded="false">
+        <labels>
+          <label description="Booking Summary" languagecode="1033" />
+        </labels>
+        <columns>
+          <column width="100%">
+            <sections>
+              <section id="{3e553248-15d8-bec2-ecd6-374c5c572d64}" name="tab_3_section_1" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" columns="1" labelwidth="115">
+                <labels>
+                  <label description="Section" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{c25d2789-711a-c759-cd43-7e38cbc796e9}" showlabel="false" rowspan="6" auto="false" colspan="1">
+                      <labels>
+                        <label description="Customer Booking Roles (Customer)" languagecode="1033" />
+                        <label description="Anfragen" languagecode="1031" />
+                        <label description="Incidents" languagecode="1036" />
+                      </labels>
+                      <control id="grdBookings" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                        <parameters>
+                          <ViewId>{829D6477-C8DC-E611-8103-3863BB340DD8}</ViewId>
+                          <IsUserView>false</IsUserView>
+                          <RelationshipName>tc_contact_tc_customerbookingrole_Customer</RelationshipName>
+                          <TargetEntityType>tc_customerbookingrole</TargetEntityType>
+                          <AutoExpand>Fixed</AutoExpand>
+                          <EnableQuickFind>false</EnableQuickFind>
+                          <EnableViewPicker>false</EnableViewPicker>
+                          <ViewIds>{44F4BB5C-4DEA-4732-80E9-DE74F47B223F},{829D6477-C8DC-E611-8103-3863BB340DD8}</ViewIds>
+                          <EnableJumpBar>false</EnableJumpBar>
+                          <ChartGridMode>Grid</ChartGridMode>
+                          <VisualizationId />
+                          <IsUserChart>false</IsUserChart>
+                          <EnableChartPicker>false</EnableChartPicker>
+                          <RecordsPerPage>4</RecordsPerPage>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
+      <tab id="{2d3a5767-b4e9-4152-c902-c52bac8b3279}" name="tab_Customer_AdditionalCustomerDetails" IsUserDefined="0" locklevel="0" showlabel="true" expanded="false">
+        <labels>
+          <label description="Additional Customer Details" languagecode="1033" />
+        </labels>
+        <columns>
+          <column width="50%">
+            <sections>
+              <section id="{2de17ae6-cdc4-77d2-237e-8be38b42d2bd}" name="tab_Customer_AdditionalCustomerDetails_section_3" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" columns="11" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
+                <labels>
+                  <label description="Contact" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{e51bd414-1085-1e42-71ed-212883c1a739}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Telephone 2" languagecode="1033" />
+                        <label description="Téléphone personnel" languagecode="1036" />
+                        <label description="Telefon (privat)" languagecode="1031" />
+                      </labels>
+                      <control disabled="false" id="telephone2" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="telephone2" />
+                    </cell>
+                    <cell id="{93e4e227-3ae6-b190-8c2a-459c35d14ba1}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Type" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_telephone2type" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_telephone2type" uniqueid="{79dc57ed-365e-e6db-c34c-e36e4b4a6ab2}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{10d938bd-4431-388d-e422-2247774b619a}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Telephone 3" languagecode="1033" />
+                        <label description="Téléphone 3" languagecode="1036" />
+                        <label description="Telefon 3" languagecode="1031" />
+                      </labels>
+                      <control disabled="false" id="telephone3" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="telephone3" />
+                    </cell>
+                    <cell id="{3e99ed1c-cc41-a15e-a31d-5b807e03c55a}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Type" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_telephone3type" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_telephone3type" uniqueid="{c5924444-8d96-3c50-9c3b-012654643444}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{8e176a7a-4761-8905-1e77-38b868c39e9d}" showlabel="false" userspacer="true">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                    <cell id="{be4e4b16-278c-12ac-1c78-c09c23b25bd6}" showlabel="false" userspacer="true">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{1eb53600-2b3e-a051-0210-99561dcd868b}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Email Address 2" languagecode="1033" />
+                        <label description="Adresse de messagerie 2" languagecode="1036" />
+                        <label description="E-Mail-Adresse 2" languagecode="1031" />
+                      </labels>
+                      <control disabled="false" id="emailaddress2" classid="{ADA2203E-B4CD-49be-9DDF-234642B43B52}" datafieldname="emailaddress2" />
+                    </cell>
+                    <cell id="{01a46803-5c20-c308-573e-c487ccc1bcd6}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Type" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_emailaddress2type" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_emailaddress2type" uniqueid="{115ac726-d391-3c55-1cab-de652a3b3d4b}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{a9e1b88a-e8ba-89b9-50b2-dabe5de4caa1}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Email Address 3" languagecode="1033" />
+                        <label description="Adresse de messagerie 3" languagecode="1036" />
+                        <label description="E-Mail-Adresse 3" languagecode="1031" />
+                      </labels>
+                      <control disabled="false" id="emailaddress3" classid="{ADA2203E-B4CD-49be-9DDF-234642B43B52}" datafieldname="emailaddress3" uniqueid="{8db4e81c-b551-ee60-7680-d71adcb04086}" />
+                    </cell>
+                    <cell id="{113a1e97-9446-8677-bd95-5020b97dd905}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Type" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_emailaddress3type" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_emailaddress3type" uniqueid="{9da7918d-d135-64b5-0d17-108cd66ed507}" />
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+              <section id="{05cbcb78-3ad0-e1d9-c9b5-aa3b3140859b}" name="tab_Customer_AdditionalCustomerDetails_section_4" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
+                <labels>
+                  <label description="Social Handles" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{41c02e62-2543-4a81-169b-aeda99b6c6d2}" showlabel="false" rowspan="6" auto="false" colspan="1">
+                      <labels>
+                        <label description="Social Profiles (Customer)" languagecode="1033" />
+                        <label description="Profils sociaux" languagecode="1036" />
+                        <label description="Social Media-Profile" languagecode="1031" />
+                      </labels>
+                      <control id="grdSocial" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" uniqueid="{43865dbc-b9de-076e-4b55-d3a98289b36a}" indicationOfSubgrid="true">
+                        <parameters>
+                          <ViewId>{72427FCB-0700-E711-8100-3863BB354FF0}</ViewId>
+                          <IsUserView>false</IsUserView>
+                          <RelationshipName>Socialprofile_customer_contacts</RelationshipName>
+                          <TargetEntityType>socialprofile</TargetEntityType>
+                          <AutoExpand>Fixed</AutoExpand>
+                          <EnableQuickFind>false</EnableQuickFind>
+                          <EnableViewPicker>false</EnableViewPicker>
+                          <ViewIds>{783C5D43-07F6-43F6-BF23-DAD084B2B71D},{72427FCB-0700-E711-8100-3863BB354FF0}</ViewIds>
+                          <EnableJumpBar>false</EnableJumpBar>
+                          <ChartGridMode>Grid</ChartGridMode>
+                          <VisualizationId>{83222594-02DD-4F98-AE81-99D94F288A64}</VisualizationId>
+                          <IsUserChart>false</IsUserChart>
+                          <EnableChartPicker>false</EnableChartPicker>
+                          <RecordsPerPage>4</RecordsPerPage>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                </rows>
+              </section>
+            </sections>
+          </column>
+          <column width="50%">
+            <sections>
+              <section id="{0d17ce5e-c557-7b9c-d431-da5e77860c53}" name="tab_5_section_3" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" columns="1" labelwidth="125" celllabelalignment="Left" celllabelposition="Left">
+                <labels>
+                  <label description="Second Address" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{d3882688-0848-be73-61ce-99d2bde09588}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Flat or Unit Number" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_address2_flatorunitnumber" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address2_flatorunitnumber" uniqueid="{bce8b953-823c-4a39-b06c-454eb89b918b}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{505750de-d249-8139-e3be-93d500852b15}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="House Number or Building" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_address2_housenumberorbuilding" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address2_housenumberorbuilding" uniqueid="{6980d1c7-aec1-2507-6443-da2626156219}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{1250a07e-5ed3-016d-d89d-751855111d6b}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Street" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_address2_street" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address2_street" uniqueid="{1915d7c7-3617-5a34-8431-a0399949386e}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{b9eab009-b769-9986-e458-654864ca1e89}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Additional Information" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_address2_additionalinformation" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address2_additionalinformation" uniqueid="{b0d4ea01-1645-44ba-da60-4e4d9b21dd13}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{9a7ece95-eaee-d730-2066-5bac43e583e0}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Town" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_address2_town" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address2_town" uniqueid="{65bc4365-1913-7890-571a-10d2d8c98d69}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{b7ac3b81-58b8-b20b-99ac-e7d2469d0154}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="County" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_address2_county" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address2_county" uniqueid="{6269eaad-a251-9e5d-5a86-dc55bb619084}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{b63a2121-d8bd-4b6b-0e23-7d413a111b03}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Postal Code" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_address2_postalcode" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address2_postalcode" uniqueid="{eb420779-8073-b514-1014-51e4a443be0e}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{88a03532-4a23-9dc6-aa34-2095da094595}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Country" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_address2_countryid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_address2_countryid" uniqueid="{9302c6be-d10b-50a1-b377-174069c417a1}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{314A3412-D6BE-4950-BDD7-6EFED38E8C83}</DefaultViewId>
+                          <AllowFilterOff>false</AllowFilterOff>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
+    </tabs>
+    <header id="{3ff9aa06-4e43-41ce-afa9-22a038af5c19}" columns="111" labelwidth="115" celllabelalignment="Left" celllabelposition="Top">
+      <rows>
+        <row>
+          <cell id="{3003e876-816d-29a2-3866-2ea9420e1409}" locklevel="0" showlabel="true">
+            <labels>
+              <label description="Source Market" languagecode="1033" />
+            </labels>
+            <control disabled="false" id="header_tc_sourcemarketid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_sourcemarketid" uniqueid="{837b01c9-d3da-b402-ac1c-7dae63622e2a}">
+              <parameters>
+                <AutoResolve>true</AutoResolve>
+                <DisableMru>true</DisableMru>
+                <DisableQuickFind>true</DisableQuickFind>
+                <DisableViewPicker>true</DisableViewPicker>
+                <DefaultViewId>{E1046024-A410-E711-8102-3863BB354FF0}</DefaultViewId>
+                <AllowFilterOff>false</AllowFilterOff>
+              </parameters>
+            </control>
+          </cell>
+          <cell id="{24be01cc-16a6-8eea-8916-42d20a1097ae}" locklevel="1" showlabel="true">
+            <labels>
+              <label description="Owner" languagecode="1033" />
+              <label description="Propriétaire" languagecode="1036" />
+              <label description="Besitzer" languagecode="1031" />
+            </labels>
+            <control id="header_ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+          </cell>
+          <cell id="{51d52180-e099-577e-333d-e258d387a96c}" locklevel="0" showlabel="true">
+            <labels>
+              <label description="Status" languagecode="1033" />
+              <label description="Raison du statut" languagecode="1036" />
+              <label description="Statusgrund" languagecode="1031" />
+            </labels>
+            <control disabled="false" id="header_statuscode" classid="{5D68B988-0661-4db2-BC3E-17598AD3BE6C}" datafieldname="statuscode" uniqueid="{4b4665b9-e76b-93c3-a9c6-36879917a531}" />
+          </cell>
+        </row>
+      </rows>
+    </header>
+    <footer id="{f6e192d1-32c2-4ca6-bc09-c691a7fabb44}" columns="111">
+      <rows>
+        <row>
+          <cell id="{e91b1eaa-83e8-4cb3-82e8-a37b31e96dbb}" locklevel="0" showlabel="true">
+            <labels>
+              <label description="Created On" languagecode="1033" />
+              <label description="Créé le" languagecode="1036" />
+              <label description="Erstellt am" languagecode="1031" />
+            </labels>
+            <control disabled="true" id="footer_createdon" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="createdon" />
+          </cell>
+          <cell id="{c3ae7771-2556-458e-cb0b-c3c7ad2a4594}" locklevel="0" showlabel="true">
+            <labels>
+              <label description="Modified On" languagecode="1033" />
+              <label description="Modifié le" languagecode="1036" />
+              <label description="Geändert am" languagecode="1031" />
+            </labels>
+            <control disabled="true" id="footer_modifiedon" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="modifiedon" />
+          </cell>
+          <cell id="{9d36745a-be39-2dd6-d3c5-38e1a7203c1c}" locklevel="0" showlabel="true">
+            <labels>
+              <label description="Modified By" languagecode="1033" />
+              <label description="Modifié par" languagecode="1036" />
+              <label description="Geändert von" languagecode="1031" />
+            </labels>
+            <control disabled="true" id="footer_modifiedby" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="modifiedby" />
+          </cell>
+        </row>
+      </rows>
+    </footer>
+    <clientresources>
+      <internalresources>
+        <clientincludes>
+          <internaljscriptfile src="$webresource:Contact_main_system_library.js" />
+        </clientincludes>
+      </internalresources>
+    </clientresources>
+    <events>
+      <event name="onload" active="true" application="true">
+        <InternalHandlers>
+          <Handler enabled="true" handlerUniqueId="4ea24ebd-795d-434e-af94-6812c3867b54" libraryName="Contact_main_system_library.js" functionName="Mscrm.ContactMainSystemLibraryWebResource.form_onload" />
+        </InternalHandlers>
+      </event>
+      <event name="onsave" application="false" active="false">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Compensation.OnCustomerSave" libraryName="tc_Tc.Crm.Scripts.Events.Compensation.js" handlerUniqueId="{5b817372-6d7e-e9be-8428-4361621ca874}" enabled="true" parameters="" passExecutionContext="false" />
+        </Handlers>
+      </event>
+    </events>
+    <Navigation>
+      <NavBar>
+        <NavBarByRelationshipItem Id="navInvoices" Area="Info" Sequence="10" RelationshipName="invoice_customer_contacts" Show="false">
+          <Privileges>
+            <Privilege Privilege="ReadActivity" Entity="" />
+          </Privileges>
+          <Titles>
+            <Title Text="Invoice" LCID="1033" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem Id="navOpps" Area="Sales" Sequence="10" RelationshipName="opportunity_customer_contacts" Show="false">
+          <Titles>
+            <Title Text="Opportunities" LCID="1033" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem Id="navQuotes" Area="Info" Sequence="11" RelationshipName="quote_customer_contacts" Show="false">
+          <Privileges>
+            <Privilege Privilege="ReadActivity" Entity="" />
+          </Privileges>
+          <Titles>
+            <Title Text="Quote" LCID="1033" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem Id="navContracts" Area="Info" Sequence="12" RelationshipName="contract_customer_contacts" Show="false">
+          <Privileges>
+            <Privilege Privilege="ReadActivity" Entity="" />
+          </Privileges>
+          <Titles>
+            <Title Text="Contract" LCID="1033" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem Id="navRelationships" Area="Info" Sequence="13" RelationshipName="contact_customer_relationship_customer" Show="false">
+          <Privileges>
+            <Privilege Privilege="ReadActivity" Entity="" />
+          </Privileges>
+          <Titles>
+            <Title Text="CustomerRelationship" LCID="1033" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem Id="navAddresses" Area="Info" Sequence="14" RelationshipName="Contact_CustomerAddress" Show="false">
+          <Privileges>
+            <Privilege Privilege="ReadActivity" Entity="" />
+          </Privileges>
+          <Titles>
+            <Title Text="Addresses" LCID="1033" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem Id="navOrders" Area="Info" Sequence="15" RelationshipName="order_customer_contacts" Show="false">
+          <Privileges>
+            <Privilege Privilege="ReadActivity" Entity="" />
+          </Privileges>
+          <Titles>
+            <Title Text="SalesOrder" LCID="1033" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem Id="navSubConts" Area="Info" Sequence="16" RelationshipName="contact_customer_contacts" Show="false">
+          <Privileges>
+            <Privilege Privilege="ReadActivity" Entity="" />
+          </Privileges>
+          <Titles>
+            <Title Text="Contacts" LCID="1033" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem Id="navListsInSFA" Area="Info" Sequence="17" RelationshipName="listcontact_association" Show="false">
+          <Privileges>
+            <Privilege Privilege="ReadActivity" Entity="" />
+          </Privileges>
+          <Titles>
+            <Title Text="List" LCID="1033" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem Id="navEntitlement" Area="Info" Sequence="21" RelationshipName="contact_entitlement_Customer" Show="false">
+          <Titles>
+            <Title Text="Entitlements" LCID="1033" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem Id="navCampaignsInSFA" Area="Marketing" Sequence="22" RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navCampaignsInSFA" Show="false">
+          <Titles>
+            <Title Text="Campaigns" LCID="1033" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem Id="nav_tc_contact_tc_customerbookingrole_Customer" Area="Sales" Sequence="1000" RelationshipName="tc_contact_tc_customerbookingrole_Customer">
+          <Titles>
+            <Title Text="Bookings" LCID="1033" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem Id="navConnections" Area="Info" Sequence="8500" RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navConnections" Show="false">
+          <Titles>
+            <Title Text="Connections" LCID="1033" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem Id="navAudit" Area="Info" Sequence="8501" RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navAudit">
+          <Titles>
+            <Title Text="Audit History" LCID="1033" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem Id="navAsyncOperations" Area="ProcessCenter" Sequence="9500" RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navAsyncOperations" Show="false">
+          <Titles>
+            <Title Text="Workflows" LCID="1033" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem Id="navProcessSessions" Area="ProcessCenter" Sequence="9700" RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navProcessSessions" Show="false">
+          <Titles>
+            <Title Text="Dialog Sessions" LCID="1033" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem Id="navFeedback" Area="Info" Sequence="9958" RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navFeedback" Show="false">
+          <Titles>
+            <Title Text="Feedback" LCID="1033" />
+          </Titles>
+        </NavBarByRelationshipItem>
+      </NavBar>
+      <NavBarAreas>
+        <NavBarArea Id="Info">
+          <Titles>
+            <Title Text="Common" LCID="1033" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Sales">
+          <Titles>
+            <Title Text="Sales" LCID="1033" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Service">
+          <Titles>
+            <Title Text="Service" LCID="1033" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Marketing">
+          <Titles>
+            <Title Text="Marketing" LCID="1033" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="ProcessCenter">
+          <Titles>
+            <Title Text="Process Sessions" LCID="1033" />
+          </Titles>
+        </NavBarArea>
+      </NavBarAreas>
+    </Navigation>
+    <controlDescriptions>
+      <controlDescription forControl="{8dd679e0-3409-72a2-9d22-dad9399bdb6d}">
+        <customControl id="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" formFactor="2">
+          <parameters>
+            <datafieldname>tc_gender</datafieldname>
+          </parameters>
+        </customControl>
+        <customControl formFactor="0" name="MscrmControls.OptionSet.OptionSetControl">
+          <parameters>
+            <value>tc_gender</value>
+          </parameters>
+        </customControl>
+        <customControl formFactor="1" name="MscrmControls.OptionSet.OptionSetControl">
+          <parameters>
+            <value>tc_gender</value>
+          </parameters>
+        </customControl>
+      </controlDescription>
+      <controlDescription forControl="{79dc57ed-365e-e6db-c34c-e36e4b4a6ab2}">
+        <customControl id="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" formFactor="0">
+          <parameters>
+            <datafieldname>tc_telephone2type</datafieldname>
+          </parameters>
+        </customControl>
+        <customControl id="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" formFactor="2">
+          <parameters>
+            <datafieldname>tc_telephone2type</datafieldname>
+          </parameters>
+        </customControl>
+        <customControl formFactor="1" name="MscrmControls.OptionSet.OptionSetControl">
+          <parameters>
+            <value>tc_telephone2type</value>
+          </parameters>
+        </customControl>
+      </controlDescription>
+      <controlDescription forControl="{a616e2d1-908e-7aca-02d3-89bedac0b496}">
+        <customControl id="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" formFactor="0">
+          <parameters>
+            <datafieldname>tc_telephone1type</datafieldname>
+          </parameters>
+        </customControl>
+        <customControl id="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" formFactor="2">
+          <parameters>
+            <datafieldname>tc_telephone1type</datafieldname>
+          </parameters>
+        </customControl>
+        <customControl formFactor="1" name="MscrmControls.OptionSet.OptionSetControl">
+          <parameters>
+            <value>tc_telephone1type</value>
+          </parameters>
+        </customControl>
+      </controlDescription>
+      <controlDescription forControl="{0567ae05-b637-86a9-2e5c-cda7642d1415}">
+        <customControl id="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" formFactor="0">
+          <parameters>
+            <datafieldname>tc_emailaddress1type</datafieldname>
+          </parameters>
+        </customControl>
+        <customControl id="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" formFactor="2">
+          <parameters>
+            <datafieldname>tc_emailaddress1type</datafieldname>
+          </parameters>
+        </customControl>
+        <customControl formFactor="1" name="MscrmControls.OptionSet.OptionSetControl">
+          <parameters>
+            <value>tc_emailaddress1type</value>
+          </parameters>
+        </customControl>
+      </controlDescription>
+      <controlDescription forControl="{259004e3-54e0-edd9-699b-5d1e72d1d786}">
+        <customControl id="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" formFactor="0">
+          <parameters>
+            <datafieldname>tc_marketing</datafieldname>
+          </parameters>
+        </customControl>
+        <customControl id="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" formFactor="2">
+          <parameters>
+            <datafieldname>tc_marketing</datafieldname>
+          </parameters>
+        </customControl>
+        <customControl formFactor="1" name="MscrmControls.FlipSwitch.FlipSwitchControl">
+          <parameters>
+            <value>tc_marketing</value>
+          </parameters>
+        </customControl>
+      </controlDescription>
+      <controlDescription forControl="{d3b09135-5853-b849-80d2-de3587967958}">
+        <customControl id="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" formFactor="0">
+          <parameters>
+            <datafieldname>donotphone</datafieldname>
+          </parameters>
+        </customControl>
+        <customControl id="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" formFactor="2">
+          <parameters>
+            <datafieldname>donotphone</datafieldname>
+          </parameters>
+        </customControl>
+        <customControl formFactor="1" name="MscrmControls.FlipSwitch.FlipSwitchControl">
+          <parameters>
+            <value>donotphone</value>
+          </parameters>
+        </customControl>
+      </controlDescription>
+      <controlDescription forControl="{6c9cc5de-8618-a8c5-e235-3cb6455cae1a}">
+        <customControl id="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" formFactor="0">
+          <parameters>
+            <datafieldname>donotbulkemail</datafieldname>
+          </parameters>
+        </customControl>
+        <customControl id="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" formFactor="2">
+          <parameters>
+            <datafieldname>donotbulkemail</datafieldname>
+          </parameters>
+        </customControl>
+        <customControl formFactor="1" name="MscrmControls.FlipSwitch.FlipSwitchControl">
+          <parameters>
+            <value>donotbulkemail</value>
+          </parameters>
+        </customControl>
+      </controlDescription>
+      <controlDescription forControl="{1b84c819-9ab5-ccc8-3b02-31d5c2ee1b3a}">
+        <customControl id="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" formFactor="0">
+          <parameters>
+            <datafieldname>tc_donotallowsms</datafieldname>
+          </parameters>
+        </customControl>
+        <customControl id="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" formFactor="2">
+          <parameters>
+            <datafieldname>tc_donotallowsms</datafieldname>
+          </parameters>
+        </customControl>
+        <customControl formFactor="1" name="MscrmControls.FlipSwitch.FlipSwitchControl">
+          <parameters>
+            <value>tc_donotallowsms</value>
+          </parameters>
+        </customControl>
+      </controlDescription>
+      <controlDescription forControl="{c5924444-8d96-3c50-9c3b-012654643444}">
+        <customControl id="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" formFactor="0">
+          <parameters>
+            <datafieldname>tc_telephone3type</datafieldname>
+          </parameters>
+        </customControl>
+        <customControl id="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" formFactor="2">
+          <parameters>
+            <datafieldname>tc_telephone3type</datafieldname>
+          </parameters>
+        </customControl>
+        <customControl formFactor="1" name="MscrmControls.OptionSet.OptionSetControl">
+          <parameters>
+            <value>tc_telephone3type</value>
+          </parameters>
+        </customControl>
+      </controlDescription>
+      <controlDescription forControl="{115ac726-d391-3c55-1cab-de652a3b3d4b}">
+        <customControl id="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" formFactor="0">
+          <parameters>
+            <datafieldname>tc_emailaddress2type</datafieldname>
+          </parameters>
+        </customControl>
+        <customControl id="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" formFactor="2">
+          <parameters>
+            <datafieldname>tc_emailaddress2type</datafieldname>
+          </parameters>
+        </customControl>
+        <customControl formFactor="1" name="MscrmControls.OptionSet.OptionSetControl">
+          <parameters>
+            <value>tc_emailaddress2type</value>
+          </parameters>
+        </customControl>
+      </controlDescription>
+      <controlDescription forControl="{9da7918d-d135-64b5-0d17-108cd66ed507}">
+        <customControl id="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" formFactor="0">
+          <parameters>
+            <datafieldname>tc_emailaddress3type</datafieldname>
+          </parameters>
+        </customControl>
+        <customControl id="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" formFactor="2">
+          <parameters>
+            <datafieldname>tc_emailaddress3type</datafieldname>
+          </parameters>
+        </customControl>
+        <customControl formFactor="1" name="MscrmControls.OptionSet.OptionSetControl">
+          <parameters>
+            <value>tc_emailaddress3type</value>
+          </parameters>
+        </customControl>
+      </controlDescription>
+      <controlDescription forControl="{60bde009-36d7-e648-b796-86acbb65e874}">
+        <customControl id="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" formFactor="2">
+          <parameters>
+            <datafieldname>tc_disabledindicator</datafieldname>
+          </parameters>
+        </customControl>
+        <customControl formFactor="0" name="MscrmControls.FlipSwitch.FlipSwitchControl">
+          <parameters>
+            <value>tc_disabledindicator</value>
+          </parameters>
+        </customControl>
+        <customControl formFactor="1" name="MscrmControls.FlipSwitch.FlipSwitchControl">
+          <parameters>
+            <value>tc_disabledindicator</value>
+          </parameters>
+        </customControl>
+      </controlDescription>
+    </controlDescriptions>
+    <formLibraries>
+      <Library name="tc_es6promise.js" libraryUniqueId="{de507201-4eb0-e6e5-94a8-db26e1cd7be2}" />
+      <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{a279a9e3-d067-b144-d47d-326570627703}" />
+      <Library name="tc_Tc.Crm.Scripts.Events.Compensation.js" libraryUniqueId="{cc12861d-7e97-d167-2363-a155d98c8155}" />
+    </formLibraries>
+    <DisplayConditions FallbackForm="true" Order="2">
+      <Everyone />
+    </DisplayConditions>
+  </form>
+  <LocalizedNames>
+    <LocalizedName description="Kontakt" languagecode="1031" />
+    <LocalizedName description="IDS Customer" languagecode="1033" />
+    <LocalizedName description="Contact" languagecode="1036" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description description="Standardmäßiges Kontaktformular aktualisiert." languagecode="1031" />
+    <Description description="Default Customer Form." languagecode="1033" />
+    <Description description="Formulaire de contact par défaut mis à jour." languagecode="1036" />
+  </Descriptions>
+</systemform>

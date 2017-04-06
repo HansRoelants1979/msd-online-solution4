@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>0</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>1</isdefault>
+  <returnedtypecode>10026</returnedtypecode>
+  <savedqueryid>{3c353bd4-91ed-482c-b4b9-89625a2c88a9}</savedqueryid>
+  <layoutxml>
+    <grid name="" object="10026" jump="tc_name" select="1" icon="1" preview="1">
+      <row name="tc_booking" id="tc_bookingid">
+        <cell name="tc_name" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_brandid" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_destinationgatewayid" width="100" />
+        <cell name="tc_departuredate" width="100" />
+        <cell name="tc_returndate" width="100" />
+        <cell name="tc_duration" width="100" />
+        <cell name="tc_numberofparticipants" width="100" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_travelamount" width="100" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>2</querytype>
+  <fetchxml>
+    <fetch version="1.0" mapping="logical">
+      <entity name="tc_booking">
+        <attribute name="tc_name" />
+        <order attribute="tc_name" descending="false" />
+        <filter type="and">
+          <condition attribute="statecode" operator="eq" value="0" />
+        </filter>
+        <attribute name="tc_travelamount" />
+        <attribute name="tc_numberofparticipants" />
+        <attribute name="tc_duration" />
+        <attribute name="tc_destinationgatewayid" />
+        <attribute name="tc_departuredate" />
+        <attribute name="tc_brandid" />
+        <attribute name="tc_returndate" />
+        <attribute name="tc_bookingid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Booking Associated View" languagecode="1033" />
+  </LocalizedNames>
+</savedquery>

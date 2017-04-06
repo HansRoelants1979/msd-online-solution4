@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>0</isdefault>
+  <returnedtypecode>4202</returnedtypecode>
+  <savedqueryid>{34d4a34a-48e1-46fd-a1ef-d98565932981}</savedqueryid>
+  <queryapi></queryapi>
+  <layoutxml>
+    <grid name="resultset" icon="1" preview="1" select="1" jump="subject" object="4202">
+      <row id="activityid" name="result">
+        <cell name="from" width="100" disableSorting="1" />
+        <cell name="to" width="100" disableSorting="1" />
+        <cell name="subject" width="250" />
+        <cell name="regardingobjectid" width="100" />
+        <cell name="a_6d277637522c4af6af2b72fe068c500a.title" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_6d277637522c4af6af2b72fe068c500a.customerid" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="prioritycode" width="140" />
+        <cell name="createdon" width="100" />
+        <cell name="actualend" width="100" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>0</querytype>
+  <fetchxml>
+    <fetch distinct="true" mapping="logical" output-format="xml-platform" version="1.0">
+      <entity name="email">
+        <attribute name="subject" />
+        <attribute name="regardingobjectid" />
+        <attribute name="prioritycode" />
+        <attribute name="actualend" />
+        <attribute name="to" />
+        <order descending="true" attribute="actualend" />
+        <link-entity name="activityparty" alias="aa" to="activityid" from="activityid">
+          <filter type="and">
+            <condition value="1" attribute="participationtypemask" operator="eq" />
+            <condition attribute="partyid" operator="eq-userid" />
+          </filter>
+        </link-entity>
+        <filter type="and">
+          <condition value="3" attribute="statuscode" operator="eq" />
+          <condition value="1" attribute="statecode" operator="eq" />
+          <condition value="1" attribute="directioncode" operator="eq" />
+        </filter>
+        <link-entity name="incident" alias="a_6d277637522c4af6af2b72fe068c500a" to="regardingobjectid" from="incidentid" link-type="outer" visible="false">
+          <attribute name="customerid" />
+          <attribute name="title" />
+        </link-entity>
+        <attribute name="from" />
+        <attribute name="createdon" />
+        <attribute name="activityid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>5.0.0.0</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Meine gesendeten E-Mails" languagecode="1031" />
+    <LocalizedName description="My Sent Emails" languagecode="1033" />
+    <LocalizedName description="Mes courriers électroniques envoyés" languagecode="1036" />
+  </LocalizedNames>
+</savedquery>

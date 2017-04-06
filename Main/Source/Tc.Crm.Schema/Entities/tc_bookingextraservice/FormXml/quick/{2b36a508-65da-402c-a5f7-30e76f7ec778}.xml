@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<systemform>
+  <formid>{2b36a508-65da-402c-a5f7-30e76f7ec778}</formid>
+  <IntroducedVersion>1.0.0.14</IntroducedVersion>
+  <FormPresentation>1</FormPresentation>
+  <FormActivationState>1</FormActivationState>
+  <form>
+    <tabs>
+      <tab verticallayout="true" id="{a0f6a7a2-5364-44df-8a07-7d7ec11507b5}" IsUserDefined="1">
+        <labels>
+          <label description="" languagecode="1033" />
+        </labels>
+        <columns>
+          <column width="100%">
+            <sections>
+              <section showlabel="true" showbar="true" IsUserDefined="0" id="{9c039fc8-7985-4664-b0d0-6d4d145ca6e8}" name="{9c039fc8-7985-4664-b0d0-6d4d145ca6e8}" columns="1" locklevel="0" labelwidth="135" celllabelalignment="Left" celllabelposition="Left">
+                <labels>
+                  <label description="ALLGEMEIN" languagecode="1031" />
+                  <label description="Extra Service Detail" languagecode="1033" />
+                  <label description="GÉNÉRAL" languagecode="1036" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{fcdbbc45-257f-44cc-a667-a75c49d677e8}" showlabel="true" locklevel="0" visible="false">
+                      <labels>
+                        <label description="Name" languagecode="1033" />
+                      </labels>
+                      <control id="tc_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_name" uniqueid="{3e7b5951-7104-7e93-9e20-99c34c041279}" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{0585eb33-3a81-2819-44e7-0b31d2b5adca}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Start Date And Time" languagecode="1033" />
+                      </labels>
+                      <control id="tc_startdateandtime" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="tc_startdateandtime" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{0e4e7201-9c6b-0e30-0573-bd60b7d9788e}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="End Date And Time" languagecode="1033" />
+                      </labels>
+                      <control id="tc_enddateandtime" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="tc_enddateandtime" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{5d37cac5-16bd-3a44-756a-19adeae90ba0}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Participants" languagecode="1033" />
+                      </labels>
+                      <control id="tc_participants" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_participants" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{1b325c88-8a77-ea07-3242-447aea3715bb}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Order" languagecode="1033" />
+                      </labels>
+                      <control id="tc_order" classid="{C6D124CA-7EDA-4a60-AEA9-7FB8D318B68F}" datafieldname="tc_order" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{315b1832-0bad-48c7-ae06-b1942d28f3b4}" showlabel="true" locklevel="1" visible="false">
+                      <labels>
+                        <label description="Owner" languagecode="1033" />
+                        <label description="Propriétaire" languagecode="1036" />
+                        <label description="Besitzer" languagecode="1031" />
+                      </labels>
+                      <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" uniqueid="{a11eeed9-aec0-d4de-4a10-55c89cba1976}" disabled="false">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
+    </tabs>
+  </form>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <LocalizedNames>
+    <LocalizedName description="Information" languagecode="1033" />
+  </LocalizedNames>
+</systemform>

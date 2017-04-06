@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<systemform>
+  <formid>{ff46e7c1-edf6-4368-9e77-c121bd15f2b2}</formid>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <FormPresentation>1</FormPresentation>
+  <FormActivationState>1</FormActivationState>
+  <form maxWidth="1900" showImage="false" shownavigationbar="true">
+    <tabs>
+      <tab id="{3c0d0ee9-9efd-4445-9b06-7a4f5973f4f5}" name="{3c0d0ee9-9efd-4445-9b06-7a4f5973f4f5}" showlabel="true" expanded="true" locklevel="0" IsUserDefined="1" verticallayout="true">
+        <labels>
+          <label description="Gateway Information" languagecode="1033" />
+        </labels>
+        <columns>
+          <column width="100%">
+            <sections>
+              <section id="{4a60abd4-db7a-481c-831a-f26a1f8ebfe5}" showlabel="false" IsUserDefined="0" showbar="false">
+                <labels>
+                  <label description="General" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{416beb71-f800-4e1a-9e87-740c59163a89}">
+                      <labels>
+                        <label description="IATA" languagecode="1033" />
+                      </labels>
+                      <control id="tc_iata" datafieldname="tc_iata" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{6bd6b6da-c54b-7577-8ea9-6b8453b6891e}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Country" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_countryid" datafieldname="tc_countryid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{191004de-af5d-46a5-aa9e-21ed2c15905f}" showlabel="true" locklevel="1" visible="false">
+                      <labels>
+                        <label description="Owner" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="ownerid" datafieldname="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" uniqueid="{110528e8-455a-ce52-9b9c-e4874a3d34a2}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
+    </tabs>
+    <header id="{c9b8e24b-fa6e-4b3c-9d62-7a555926e5ae}" columns="111">
+      <rows>
+        <row>
+          <cell id="{ee8e3e71-5856-4414-b393-5bf31b9be2ad}" showlabel="false">
+            <labels>
+              <label description="" languagecode="1033" />
+            </labels>
+          </cell>
+          <cell id="{69f175d0-cd26-4f66-8e22-f5b28a34d832}" showlabel="false">
+            <labels>
+              <label description="" languagecode="1033" />
+            </labels>
+          </cell>
+          <cell id="{ac9bd6a6-7144-e336-eb53-64156dca08c8}" showlabel="true" locklevel="0">
+            <labels>
+              <label description="Owner" languagecode="1033" />
+            </labels>
+            <control disabled="false" id="header_ownerid" datafieldname="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" />
+          </cell>
+        </row>
+      </rows>
+    </header>
+    <Navigation>
+      <NavBar>
+        <NavBarByRelationshipItem RelationshipName="tc_gateway_tc_locationoffice" Sequence="10000" Area="Info" Id="nav_tc_gateway_tc_locationoffice" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Resort Offices" />
+          </Titles>
+        </NavBarByRelationshipItem>
+      </NavBar>
+      <NavBarAreas>
+        <NavBarArea Id="Info">
+          <Titles>
+            <Title Text="Common" LCID="1033" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Sales">
+          <Titles>
+            <Title Text="Sales" LCID="1033" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Service">
+          <Titles>
+            <Title Text="Service" LCID="1033" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Marketing">
+          <Titles>
+            <Title Text="Marketing" LCID="1033" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="ProcessCenter">
+          <Titles>
+            <Title Text="Process Sessions" LCID="1033" />
+          </Titles>
+        </NavBarArea>
+      </NavBarAreas>
+    </Navigation>
+    <controlDescriptions />
+  </form>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <LocalizedNames>
+    <LocalizedName description="Gateway" languagecode="1033" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description description="A form for this entity." languagecode="1033" />
+  </Descriptions>
+</systemform>

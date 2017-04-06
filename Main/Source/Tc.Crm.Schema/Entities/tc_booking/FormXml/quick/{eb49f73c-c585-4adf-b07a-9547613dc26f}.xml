@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<systemform>
+  <formid>{eb49f73c-c585-4adf-b07a-9547613dc26f}</formid>
+  <IntroducedVersion>1.0.0.48</IntroducedVersion>
+  <FormPresentation>1</FormPresentation>
+  <FormActivationState>1</FormActivationState>
+  <form maxWidth="400">
+    <tabs>
+      <tab id="{8dd50672-4841-4c0d-95b1-7fa27475ce64}" name="tab_1" showlabel="false">
+        <labels>
+          <label description="Tab" languagecode="1033" />
+        </labels>
+        <columns>
+          <column width="100%">
+            <sections>
+              <section id="{e4820fdb-58af-4df6-8843-9962ad129d8d}" name="tab_1_column_1_section_1" columns="1" showlabel="true" showbar="false" IsUserDefined="0" locklevel="0" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
+                <labels>
+                  <label description="ACCOMMODATION" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{63652016-6799-a719-8461-6440277962ad}" showlabel="false" colspan="1" auto="false" rowspan="5">
+                      <labels>
+                        <label description="Booking Accommodations" languagecode="1033" />
+                      </labels>
+                      <control id="Accommodation" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true" uniqueid="{55169a41-1b99-da9a-da63-11e6d27504e0}">
+                        <parameters>
+                          <ViewId>{B9A83A59-5EF4-E611-80FF-3863BB354FF0}</ViewId>
+                          <IsUserView>false</IsUserView>
+                          <RelationshipName>tc_booking_tc_bookingaccommodation</RelationshipName>
+                          <TargetEntityType>tc_bookingaccommodation</TargetEntityType>
+                          <AutoExpand>Fixed</AutoExpand>
+                          <EnableQuickFind>false</EnableQuickFind>
+                          <EnableViewPicker>false</EnableViewPicker>
+                          <ViewIds>{33F63163-4742-4180-BAED-E553A4E372E7},{B9A83A59-5EF4-E611-80FF-3863BB354FF0}</ViewIds>
+                          <EnableJumpBar>false</EnableJumpBar>
+                          <ChartGridMode>All</ChartGridMode>
+                          <VisualizationId />
+                          <IsUserChart>false</IsUserChart>
+                          <EnableChartPicker>true</EnableChartPicker>
+                          <RecordsPerPage>3</RecordsPerPage>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                </rows>
+              </section>
+              <section name="tab_1_section_2" showlabel="true" showbar="false" locklevel="0" id="{679330ed-5830-14a3-3953-5cb83e34e879}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
+                <labels>
+                  <label description="TRANSPORT" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{808ae233-0d73-68ce-d49d-62e39549681b}" showlabel="false" colspan="1" auto="false" rowspan="5">
+                      <labels>
+                        <label description="Booking Transports (Booking)" languagecode="1033" />
+                      </labels>
+                      <control id="Transport" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true" uniqueid="{41329d99-4473-4bb4-1425-da70c8900317}">
+                        <parameters>
+                          <ViewId>{61AEFC08-5EF7-E611-8107-3863BB34FB48}</ViewId>
+                          <IsUserView>false</IsUserView>
+                          <RelationshipName>tc_booking_tc_bookingtransport</RelationshipName>
+                          <TargetEntityType>tc_bookingtransport</TargetEntityType>
+                          <AutoExpand>Fixed</AutoExpand>
+                          <EnableQuickFind>false</EnableQuickFind>
+                          <EnableViewPicker>false</EnableViewPicker>
+                          <ViewIds>{0D969011-23EC-40F4-BB97-A79BE6E58520},{61AEFC08-5EF7-E611-8107-3863BB34FB48}</ViewIds>
+                          <EnableJumpBar>false</EnableJumpBar>
+                          <ChartGridMode>All</ChartGridMode>
+                          <VisualizationId />
+                          <IsUserChart>false</IsUserChart>
+                          <EnableChartPicker>true</EnableChartPicker>
+                          <RecordsPerPage>3</RecordsPerPage>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                </rows>
+              </section>
+              <section name="tab_1_section_3" showlabel="true" showbar="false" locklevel="0" id="{d28a2955-e229-0ca5-5593-b3335b4c1075}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
+                <labels>
+                  <label description="TRANSFER" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{5e979017-0de1-d348-180e-5ca3bb3b0660}" showlabel="false" colspan="1" auto="false" rowspan="5">
+                      <labels>
+                        <label description="Booking Transfers (Booking)" languagecode="1033" />
+                      </labels>
+                      <control id="Transfer" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true" uniqueid="{27c6608e-c8c0-9d62-c0e0-ccb3613223a0}">
+                        <parameters>
+                          <ViewId>{F437E81B-58F7-E611-8107-3863BB34FB48}</ViewId>
+                          <IsUserView>false</IsUserView>
+                          <RelationshipName>tc_booking_tc_bookingtransfer</RelationshipName>
+                          <TargetEntityType>tc_bookingtransfer</TargetEntityType>
+                          <AutoExpand>Fixed</AutoExpand>
+                          <EnableQuickFind>false</EnableQuickFind>
+                          <EnableViewPicker>false</EnableViewPicker>
+                          <ViewIds>{875C27B5-3D3C-4A7C-95AE-78355FF3BC04},{F437E81B-58F7-E611-8107-3863BB34FB48}</ViewIds>
+                          <EnableJumpBar>false</EnableJumpBar>
+                          <ChartGridMode>All</ChartGridMode>
+                          <VisualizationId />
+                          <IsUserChart>false</IsUserChart>
+                          <EnableChartPicker>true</EnableChartPicker>
+                          <RecordsPerPage>3</RecordsPerPage>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                </rows>
+              </section>
+              <section name="tab_1_section_4" showlabel="true" showbar="false" locklevel="0" id="{374a4725-045a-0a14-8cdd-6712d02e1ce7}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
+                <labels>
+                  <label description="EXTRA SERVICES" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{5b14d09e-1235-7024-a927-01764109276a}" showlabel="false" colspan="1" auto="false" rowspan="5">
+                      <labels>
+                        <label description="Booking Extra Services (Booking)" languagecode="1033" />
+                      </labels>
+                      <control id="ExtraService" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true" uniqueid="{b925a160-4dcb-1810-aedc-a8b031879cd1}">
+                        <parameters>
+                          <ViewId>{0F5E66C2-5BF7-E611-8107-3863BB34FB48}</ViewId>
+                          <IsUserView>false</IsUserView>
+                          <RelationshipName>tc_booking_tc_bookingextraservice</RelationshipName>
+                          <TargetEntityType>tc_bookingextraservice</TargetEntityType>
+                          <AutoExpand>Fixed</AutoExpand>
+                          <EnableQuickFind>false</EnableQuickFind>
+                          <EnableViewPicker>false</EnableViewPicker>
+                          <ViewIds>{890F3FAD-5847-483D-867E-7EEA0DCE3347},{0F5E66C2-5BF7-E611-8107-3863BB34FB48}</ViewIds>
+                          <EnableJumpBar>false</EnableJumpBar>
+                          <ChartGridMode>All</ChartGridMode>
+                          <VisualizationId />
+                          <IsUserChart>false</IsUserChart>
+                          <EnableChartPicker>true</EnableChartPicker>
+                          <RecordsPerPage>3</RecordsPerPage>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
+    </tabs>
+    <DisplayConditions Order="1">
+      <Role Id="{627090ff-40a3-4053-8790-584edc5be201}" />
+      <Role Id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
+    </DisplayConditions>
+  </form>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <LocalizedNames>
+    <LocalizedName description="Booking Sub Grids" languagecode="1033" />
+  </LocalizedNames>
+</systemform>

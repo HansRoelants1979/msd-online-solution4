@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>0</isdefault>
+  <returnedtypecode>10053</returnedtypecode>
+  <savedqueryid>{0f5e66c2-5bf7-e611-8107-3863bb34fb48}</savedqueryid>
+  <layoutxml>
+    <grid name="resultset" object="10053" jump="tc_name" select="1" preview="1" icon="1">
+      <row name="result" id="tc_bookingextraserviceid">
+        <cell name="tc_extraservicecode" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_startdateandtime" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_enddateandtime" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_participants" width="300" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>0</querytype>
+  <fetchxml>
+    <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
+      <entity name="tc_bookingextraservice">
+        <attribute name="tc_startdateandtime" />
+        <attribute name="tc_extraservicecode" />
+        <attribute name="tc_enddateandtime" />
+        <attribute name="tc_participants" />
+        <order attribute="tc_startdateandtime" descending="false" />
+        <filter type="and">
+          <condition attribute="statuscode" operator="in">
+            <value>1</value>
+            <value>2</value>
+          </condition>
+        </filter>
+        <attribute name="tc_bookingextraserviceid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.16</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Booking Extra Services from Booking" languagecode="1033" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description description="Shows information of booking related extra services" languagecode="1033" />
+  </Descriptions>
+</savedquery>

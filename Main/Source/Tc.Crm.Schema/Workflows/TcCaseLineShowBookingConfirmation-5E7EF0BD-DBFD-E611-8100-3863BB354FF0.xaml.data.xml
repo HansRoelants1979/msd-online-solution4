@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workflow WorkflowId="{5e7ef0bd-dbfd-e611-8100-3863bb354ff0}" Name="Tc.CaseLine.ShowBookingConfirmation" Description="Ability to confirm that booking details are correct when a booking record is selected.">
+  <XamlFileName>/Workflows/TcCaseLineShowBookingConfirmation-5E7EF0BD-DBFD-E611-8100-3863BB354FF0.xaml</XamlFileName>
+  <Type>1</Type>
+  <Subprocess>0</Subprocess>
+  <Category>2</Category>
+  <Mode>1</Mode>
+  <Scope>4</Scope>
+  <OnDemand>0</OnDemand>
+  <TriggerOnCreate>0</TriggerOnCreate>
+  <TriggerOnDelete>0</TriggerOnDelete>
+  <AsyncAutodelete>0</AsyncAutodelete>
+  <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+  <StateCode>1</StateCode>
+  <StatusCode>2</StatusCode>
+  <RunAs>1</RunAs>
+  <IsTransacted>1</IsTransacted>
+  <IntroducedVersion>1.0.0.31</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <BusinessProcessType>0</BusinessProcessType>
+  <PrimaryEntity>tc_caseline</PrimaryEntity>
+  <ProcessTriggers>
+    <ProcessTrigger processtriggerid="{80d0ed99-4d0a-e711-810a-3863bb340dd8}">
+      <controltype>1</controltype>
+      <formid>{704332b7-6387-4d8f-b6bd-4ff369824e8c}</formid>
+      <scope>1</scope>
+      <controlname>tc_servicetype</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_caseline</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{81d0ed99-4d0a-e711-810a-3863bb340dd8}">
+      <formid>{704332b7-6387-4d8f-b6bd-4ff369824e8c}</formid>
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_caseline</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{82d0ed99-4d0a-e711-810a-3863bb340dd8}">
+      <controltype>1</controltype>
+      <formid>{704332b7-6387-4d8f-b6bd-4ff369824e8c}</formid>
+      <scope>1</scope>
+      <controlname>tc_bookingid</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_caseline</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{83d0ed99-4d0a-e711-810a-3863bb340dd8}">
+      <formid>{704332b7-6387-4d8f-b6bd-4ff369824e8c}</formid>
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_caseline</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{84d0ed99-4d0a-e711-810a-3863bb340dd8}">
+      <controltype>1</controltype>
+      <formid>{704332b7-6387-4d8f-b6bd-4ff369824e8c}</formid>
+      <scope>1</scope>
+      <controlname>tc_servicetype</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_caseline</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{85d0ed99-4d0a-e711-810a-3863bb340dd8}">
+      <formid>{704332b7-6387-4d8f-b6bd-4ff369824e8c}</formid>
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_caseline</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{86d0ed99-4d0a-e711-810a-3863bb340dd8}">
+      <controltype>1</controltype>
+      <formid>{704332b7-6387-4d8f-b6bd-4ff369824e8c}</formid>
+      <scope>1</scope>
+      <controlname>tc_bookingid</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_caseline</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{87d0ed99-4d0a-e711-810a-3863bb340dd8}">
+      <formid>{704332b7-6387-4d8f-b6bd-4ff369824e8c}</formid>
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_caseline</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{88d0ed99-4d0a-e711-810a-3863bb340dd8}">
+      <controltype>1</controltype>
+      <formid>{704332b7-6387-4d8f-b6bd-4ff369824e8c}</formid>
+      <scope>1</scope>
+      <controlname>tc_servicetype</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_caseline</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{89d0ed99-4d0a-e711-810a-3863bb340dd8}">
+      <formid>{704332b7-6387-4d8f-b6bd-4ff369824e8c}</formid>
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_caseline</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{8ad0ed99-4d0a-e711-810a-3863bb340dd8}">
+      <controltype>1</controltype>
+      <formid>{704332b7-6387-4d8f-b6bd-4ff369824e8c}</formid>
+      <scope>1</scope>
+      <controlname>tc_bookingid</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_caseline</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{8bd0ed99-4d0a-e711-810a-3863bb340dd8}">
+      <formid>{704332b7-6387-4d8f-b6bd-4ff369824e8c}</formid>
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_caseline</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{8cd0ed99-4d0a-e711-810a-3863bb340dd8}">
+      <controltype>1</controltype>
+      <formid>{704332b7-6387-4d8f-b6bd-4ff369824e8c}</formid>
+      <scope>1</scope>
+      <controlname>tc_servicetype</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_caseline</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{8dd0ed99-4d0a-e711-810a-3863bb340dd8}">
+      <formid>{704332b7-6387-4d8f-b6bd-4ff369824e8c}</formid>
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_caseline</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{8ed0ed99-4d0a-e711-810a-3863bb340dd8}">
+      <controltype>1</controltype>
+      <formid>{704332b7-6387-4d8f-b6bd-4ff369824e8c}</formid>
+      <scope>1</scope>
+      <controlname>tc_bookingid</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_caseline</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{8fd0ed99-4d0a-e711-810a-3863bb340dd8}">
+      <formid>{704332b7-6387-4d8f-b6bd-4ff369824e8c}</formid>
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_caseline</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{90d0ed99-4d0a-e711-810a-3863bb340dd8}">
+      <controltype>1</controltype>
+      <formid>{704332b7-6387-4d8f-b6bd-4ff369824e8c}</formid>
+      <scope>1</scope>
+      <controlname>tc_servicetype</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_caseline</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{91d0ed99-4d0a-e711-810a-3863bb340dd8}">
+      <formid>{704332b7-6387-4d8f-b6bd-4ff369824e8c}</formid>
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_caseline</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{92d0ed99-4d0a-e711-810a-3863bb340dd8}">
+      <controltype>1</controltype>
+      <formid>{704332b7-6387-4d8f-b6bd-4ff369824e8c}</formid>
+      <scope>1</scope>
+      <controlname>tc_bookingid</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_caseline</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{93d0ed99-4d0a-e711-810a-3863bb340dd8}">
+      <formid>{704332b7-6387-4d8f-b6bd-4ff369824e8c}</formid>
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_caseline</primaryentitytypecode>
+    </ProcessTrigger>
+  </ProcessTriggers>
+</Workflow>

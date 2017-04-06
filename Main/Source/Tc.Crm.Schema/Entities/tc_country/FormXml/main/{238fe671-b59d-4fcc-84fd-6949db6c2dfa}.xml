@@ -1,0 +1,349 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<systemform>
+  <formid>{238fe671-b59d-4fcc-84fd-6949db6c2dfa}</formid>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <FormPresentation>1</FormPresentation>
+  <FormActivationState>1</FormActivationState>
+  <form shownavigationbar="true" showImage="false" maxWidth="1900">
+    <tabs>
+      <tab verticallayout="true" id="{36d044b7-1681-44fb-b701-759652b8d659}" IsUserDefined="1" name="{36d044b7-1681-44fb-b701-759652b8d659}" locklevel="0" expanded="true" showlabel="true">
+        <labels>
+          <label description="Country Information" languagecode="1033" />
+        </labels>
+        <columns>
+          <column width="100%">
+            <sections>
+              <section showlabel="false" showbar="false" IsUserDefined="0" id="{3c6d501c-580a-4601-a23f-a16d1cf6a84c}" name="{3c6d501c-580a-4601-a23f-a16d1cf6a84c}" columns="11" locklevel="0" labelwidth="150" celllabelalignment="Left" celllabelposition="Left">
+                <labels>
+                  <label description="General" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{9b79e318-4a92-484e-845f-c022ac440ce8}">
+                      <labels>
+                        <label description="Country" languagecode="1033" />
+                      </labels>
+                      <control id="tc_iso_code" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_iso_code" />
+                    </cell>
+                    <cell id="{ac4e1777-39e4-4441-2777-21aecc9217bb}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{ddb70baa-eb2a-11e7-2bcc-6a4346a33d24}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="ISO 2 Code" languagecode="1033" />
+                      </labels>
+                      <control id="tc_iso2code" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_iso2code" disabled="false" />
+                    </cell>
+                    <cell id="{73202e17-8ce7-0223-7dab-356a01b20152}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{b972c4bb-ebb8-829c-c51e-40d69cc73119}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Country Name" languagecode="1033" />
+                      </labels>
+                      <control id="tc_countryname" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_countryname" disabled="false" />
+                    </cell>
+                    <cell id="{2d21c356-9482-407b-970a-81ab3eb95c5c}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{babfad8e-e5be-46a7-83db-dc4e94cc0ac9}" showlabel="true" locklevel="1" visible="false">
+                      <labels>
+                        <label description="Owner" languagecode="1033" />
+                      </labels>
+                      <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" uniqueid="{69a815b0-7c51-7d4e-d044-6137e6893166}" disabled="false">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                        </parameters>
+                      </control>
+                    </cell>
+                    <cell id="{ee6000b0-a772-5696-5a69-60a63e3d2928}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{341413c7-e067-4e03-ea9d-d3b8302615d9}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Source Market Business Unit" languagecode="1033" />
+                      </labels>
+                      <control id="tc_sourcemarketbusinessunitid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_sourcemarketbusinessunitid" disabled="false" />
+                    </cell>
+                    <cell id="{5b5b445a-7b71-c961-280d-da0cc769adbd}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{86611350-5422-cb8c-9ae1-0b4376b01d1c}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Source Market Currency" languagecode="1033" />
+                        <label description="Devise" languagecode="1036" />
+                        <label description="Währung" languagecode="1031" />
+                      </labels>
+                      <control id="transactioncurrencyid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="transactioncurrencyid" disabled="false" uniqueid="{80237e3c-267c-679c-4489-c4d26a1c093e}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{CD5625B0-DDA8-4EE2-B13F-B9331E027C8A}</DefaultViewId>
+                          <AllowFilterOff>false</AllowFilterOff>
+                        </parameters>
+                      </control>
+                    </cell>
+                    <cell id="{457136d9-9413-305c-1934-33bdc052297c}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{625451ab-a39d-51d8-7db4-7e897c3b729c}" showlabel="true" locklevel="0" visible="false">
+                      <labels>
+                        <label description="Currency Amount" languagecode="1033" />
+                      </labels>
+                      <control id="tc_currency" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_currency" disabled="false" uniqueid="{a5e92d20-ddce-22d6-3a29-790d56dc0078}" />
+                    </cell>
+                    <cell id="{7d1a11a6-2ab5-2c34-d995-4878d5750e7e}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+              <section name="{36d044b7-1681-44fb-b701-759652b8d659}_section_2" showlabel="false" showbar="false" locklevel="0" id="{60248cd9-6901-8849-26dc-1e5e8ddc8c6e}" IsUserDefined="0" layout="varwidth" columns="11" labelwidth="115" height="auto">
+                <labels>
+                  <label description="Section" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{5b468ebb-a26c-b8a0-94a3-3cd75ead0675}" showlabel="true" colspan="1" auto="true" rowspan="4">
+                      <labels>
+                        <label description="Regions" languagecode="1033" />
+                      </labels>
+                      <control id="Regions_RelatedCountry" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true" uniqueid="{2107a709-bd00-a9b1-da01-27d84db533d4}">
+                        <parameters>
+                          <ViewId>{4D0D5FD5-1BE6-4B33-A9E2-E8E132E9DCE7}</ViewId>
+                          <IsUserView>false</IsUserView>
+                          <RelationshipName>tc_country_tc_region</RelationshipName>
+                          <TargetEntityType>tc_region</TargetEntityType>
+                          <AutoExpand>Auto</AutoExpand>
+                          <EnableQuickFind>false</EnableQuickFind>
+                          <EnableViewPicker>false</EnableViewPicker>
+                          <ViewIds>{4D0D5FD5-1BE6-4B33-A9E2-E8E132E9DCE7}</ViewIds>
+                          <EnableJumpBar>false</EnableJumpBar>
+                          <ChartGridMode>All</ChartGridMode>
+                          <VisualizationId />
+                          <IsUserChart>false</IsUserChart>
+                          <EnableChartPicker>true</EnableChartPicker>
+                          <RecordsPerPage>6</RecordsPerPage>
+                        </parameters>
+                      </control>
+                    </cell>
+                    <cell id="{65eb06d9-c343-003b-c9ad-6dbd17863886}" showlabel="true" colspan="1" rowspan="8" auto="false">
+                      <labels>
+                        <label description="Brands " languagecode="1033" />
+                      </labels>
+                      <control id="Brands_RelatedCountry" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true" uniqueid="{16102638-d428-96dc-ae14-d4e058951b86}">
+                        <parameters>
+                          <ViewId>{7EE913FF-9334-48DD-A3D8-905E075C883A}</ViewId>
+                          <IsUserView>false</IsUserView>
+                          <RelationshipName>tc_country_tc_brand</RelationshipName>
+                          <TargetEntityType>tc_brand</TargetEntityType>
+                          <AutoExpand>Fixed</AutoExpand>
+                          <EnableQuickFind>false</EnableQuickFind>
+                          <EnableViewPicker>false</EnableViewPicker>
+                          <ViewIds>{7EE913FF-9334-48DD-A3D8-905E075C883A}</ViewIds>
+                          <EnableJumpBar>false</EnableJumpBar>
+                          <ChartGridMode>All</ChartGridMode>
+                          <VisualizationId />
+                          <IsUserChart>false</IsUserChart>
+                          <EnableChartPicker>true</EnableChartPicker>
+                          <RecordsPerPage>6</RecordsPerPage>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                  <row />
+                  <row />
+                  <row height="auto" />
+                  <row>
+                    <cell id="{8aa14304-687b-7c48-7365-75a9ed446774}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{b769c001-3b4c-9402-e677-22ea562229d2}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{61dd4351-6de6-7720-5964-cc77d885d6de}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{225e33b3-0d53-1b5c-6277-8cd7d7c33809}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
+    </tabs>
+    <header id="{b0e7cacb-f8b0-4b1e-9b14-284908a4a2bd}" columns="111">
+      <rows>
+        <row>
+          <cell id="{86589325-b157-47d8-8539-42682b4441c5}" showlabel="false">
+            <labels>
+              <label description="" languagecode="1033" />
+            </labels>
+          </cell>
+          <cell id="{d06d8c45-ec77-42a2-92b4-3e9fb0f3f85b}" showlabel="false">
+            <labels>
+              <label description="" languagecode="1033" />
+            </labels>
+          </cell>
+          <cell id="{b4d73e24-dee0-b489-1e10-48ab03de4d17}" showlabel="true" locklevel="0">
+            <labels>
+              <label description="Owner" languagecode="1033" />
+            </labels>
+            <control id="header_ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" disabled="false" />
+          </cell>
+        </row>
+      </rows>
+    </header>
+    <Navigation>
+      <NavBar>
+        <NavBarByRelationshipItem RelationshipName="tc_country_tc_touroperator" Sequence="1000" Area="Sales" Id="nav_tc_country_tc_touroperator">
+          <Titles>
+            <Title LCID="1033" Text="Tour Operators" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_country_tc_region" Sequence="1001" Area="Service" Id="nav_tc_country_tc_region">
+          <Titles>
+            <Title LCID="1033" Text="Regions" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_country_tc_brand" Sequence="1001" Area="Sales" Id="nav_tc_country_tc_brand">
+          <Titles>
+            <Title LCID="1033" Text="Brands" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_country_tc_gateway" Sequence="1002" Area="Service" Id="nav_tc_country_tc_gateway">
+          <Titles>
+            <Title LCID="1033" Text="Gateways" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navAsyncOperations" Sequence="9500" Area="ProcessCenter" Id="navAsyncOperations" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Background Processes" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navProcessSessions" Sequence="9700" Area="ProcessCenter" Id="navProcessSessions" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Process Sessions" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_source_market_contact" Sequence="10003" Area="Info" Id="nav_tc_source_market_contact" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Customers" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_address2_country_contact" Sequence="10004" Area="Info" Id="nav_tc_address2_country_contact" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Customers" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_address1_country_contact" Sequence="10005" Area="Info" Id="nav_tc_address1_country_contact" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Customers" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_address1_country_account" Sequence="10006" Area="Info" Id="nav_tc_address1_country_account" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Accounts" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_locationoffice_Address1_Country" Sequence="10007" Area="Info" Id="nav_tc_locationoffice_Address1_Country" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Location Offices" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_country_tc_booking" Id="nav_tc_country_tc_booking" Show="false" Sequence="10008" Area="Info">
+          <Titles>
+            <Title LCID="1033" Text="Source Market Bookings" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navAudit" Sequence="10011" Area="Info" Id="navAudit">
+          <Titles>
+            <Title LCID="1033" Text="Audit History" />
+          </Titles>
+        </NavBarByRelationshipItem>
+      </NavBar>
+      <NavBarAreas>
+        <NavBarArea Id="Info">
+          <Titles>
+            <Title LCID="1033" Text="Common" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Sales">
+          <Titles>
+            <Title LCID="1033" Text="Sales" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Service">
+          <Titles>
+            <Title LCID="1033" Text="Service" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Marketing">
+          <Titles>
+            <Title LCID="1033" Text="Marketing" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="ProcessCenter">
+          <Titles>
+            <Title LCID="1033" Text="Process Sessions" />
+          </Titles>
+        </NavBarArea>
+      </NavBarAreas>
+    </Navigation>
+    <controlDescriptions />
+  </form>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <LocalizedNames>
+    <LocalizedName description="Countries" languagecode="1033" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description description="Main form - Countries" languagecode="1033" />
+  </Descriptions>
+</systemform>

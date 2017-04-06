@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workflow WorkflowId="{f0dc2ffa-9702-e711-8101-3863bb354ff0}" Name="Tc.Case.AgencyHelpText" Description="Click to add description">
+  <XamlFileName>/Workflows/TcCaseAgencyHelpText-F0DC2FFA-9702-E711-8101-3863BB354FF0.xaml</XamlFileName>
+  <Type>1</Type>
+  <Subprocess>0</Subprocess>
+  <Category>2</Category>
+  <Mode>1</Mode>
+  <Scope>4</Scope>
+  <OnDemand>0</OnDemand>
+  <TriggerOnCreate>0</TriggerOnCreate>
+  <TriggerOnDelete>0</TriggerOnDelete>
+  <AsyncAutodelete>0</AsyncAutodelete>
+  <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+  <StateCode>1</StateCode>
+  <StatusCode>2</StatusCode>
+  <RunAs>1</RunAs>
+  <IsTransacted>1</IsTransacted>
+  <IntroducedVersion>1.0.0.36</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <BusinessProcessType>0</BusinessProcessType>
+  <PrimaryEntity>Incident</PrimaryEntity>
+  <labels>
+    <steplabels id="{d269afa2-5bb4-4c41-93d0-fc8f1e79038b}">
+      <label languagecode="1033" description="3rd Party Agency field" />
+    </steplabels>
+    <steplabels id="{bbbce6cd-50d2-45aa-949a-68964320394d}">
+      <label languagecode="1033" description="Only use this field to record the 3rd Party Agent details i.e. Peter Jones from 'A Great Agency'.&#xA;If you need to create a new 3rd Party Agent please ensure you link the agent to an existing Account record." />
+    </steplabels>
+  </labels>
+  <ProcessTriggers>
+    <ProcessTrigger processtriggerid="{166348ee-fb08-e711-8102-3863bb354ff0}">
+      <controltype>1</controltype>
+      <scope>1</scope>
+      <controlname>tc_3rdpartyagentid</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{176348ee-fb08-e711-8102-3863bb354ff0}">
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+  </ProcessTriggers>
+</Workflow>

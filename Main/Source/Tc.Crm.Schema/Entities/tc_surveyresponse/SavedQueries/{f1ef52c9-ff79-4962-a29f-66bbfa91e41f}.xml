@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>0</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>1</isdefault>
+  <returnedtypecode>10067</returnedtypecode>
+  <savedqueryid>{f1ef52c9-ff79-4962-a29f-66bbfa91e41f}</savedqueryid>
+  <layoutxml>
+    <grid name="resultset" object="10067" jump="subject" select="1" icon="1" preview="1">
+      <row name="result" id="activityid">
+        <cell name="subject" width="300" />
+        <cell name="tc_begintime" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="customers" width="200" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_mode" width="100" />
+        <cell name="regardingobjectid" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_c36f5d832f0ae71181023863bb354ff0.tc_destinationid" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_c36f5d832f0ae71181023863bb354ff0.tc_destinationgatewayid" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>0</querytype>
+  <fetchxml>
+    <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
+      <entity name="tc_surveyresponse">
+        <attribute name="subject" />
+        <order attribute="tc_begintime" descending="false" />
+        <filter type="and">
+          <condition attribute="statecode" operator="not-null" />
+          <condition attribute="statecode" operator="eq" value="0" />
+        </filter>
+        <attribute name="regardingobjectid" />
+        <attribute name="tc_mode" />
+        <attribute name="customers" />
+        <attribute name="tc_begintime" />
+        <link-entity alias="a_c36f5d832f0ae71181023863bb354ff0" name="tc_booking" from="tc_bookingid" to="regardingobjectid" link-type="outer" visible="false">
+          <attribute name="tc_destinationgatewayid" />
+          <attribute name="tc_destinationid" />
+        </link-entity>
+        <attribute name="activityid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.51</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="All Survey Responses" languagecode="1033" />
+  </LocalizedNames>
+</savedquery>

@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>0</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>1</isdefault>
+  <returnedtypecode>10055</returnedtypecode>
+  <savedqueryid>{021269eb-3101-48a8-8976-3fa4b9c2fc92}</savedqueryid>
+  <layoutxml>
+    <grid name="resultset" object="10055" jump="tc_name" select="1" icon="1" preview="1">
+      <row name="result" id="tc_compensationlineid">
+        <cell name="createdon" width="125" />
+        <cell name="tc_name" width="300" />
+        <cell name="tc_amount" width="100" />
+        <cell name="tc_caseid" width="100" />
+        <cell name="tc_bacsamount" width="100" />
+        <cell name="tc_cashamount" width="100" />
+        <cell name="tc_chapsamount" width="100" />
+        <cell name="tc_voucheramount" width="100" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>0</querytype>
+  <fetchxml>
+    <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
+      <entity name="tc_compensationline">
+        <attribute name="tc_name" />
+        <attribute name="createdon" />
+        <attribute name="tc_amount" />
+        <order attribute="createdon" descending="true" />
+        <filter type="and">
+          <condition attribute="statecode" operator="eq" value="0" />
+        </filter>
+        <attribute name="tc_caseid" />
+        <attribute name="tc_voucheramount" />
+        <attribute name="tc_chapsamount" />
+        <attribute name="tc_cashamount" />
+        <attribute name="tc_bacsamount" />
+        <attribute name="tc_compensationlineid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.18</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Active Compensation Lines" languagecode="1033" />
+  </LocalizedNames>
+</savedquery>

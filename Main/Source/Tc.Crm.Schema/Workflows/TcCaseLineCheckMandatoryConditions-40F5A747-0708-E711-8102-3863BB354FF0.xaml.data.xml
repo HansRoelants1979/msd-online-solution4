@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workflow WorkflowId="{40f5a747-0708-e711-8102-3863bb354ff0}" Name="Tc.CaseLine.CheckMandatoryConditions" Description="Click to add description">
+  <XamlFileName>/Workflows/TcCaseLineCheckMandatoryConditions-40F5A747-0708-E711-8102-3863BB354FF0.xaml</XamlFileName>
+  <Type>1</Type>
+  <Subprocess>0</Subprocess>
+  <Category>2</Category>
+  <Mode>1</Mode>
+  <Scope>4</Scope>
+  <OnDemand>0</OnDemand>
+  <TriggerOnCreate>0</TriggerOnCreate>
+  <TriggerOnDelete>0</TriggerOnDelete>
+  <AsyncAutodelete>0</AsyncAutodelete>
+  <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+  <StateCode>1</StateCode>
+  <StatusCode>2</StatusCode>
+  <RunAs>1</RunAs>
+  <IsTransacted>1</IsTransacted>
+  <IntroducedVersion>1.0.0.49</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <BusinessProcessType>0</BusinessProcessType>
+  <PrimaryEntity>tc_caseline</PrimaryEntity>
+  <labels>
+    <steplabels id="{d0bc39b1-c9d1-4a50-8a26-c11df28f05ab}">
+      <label languagecode="1033" description="This record cannot be saved until all mandatory fields have been completed on the Case." />
+    </steplabels>
+  </labels>
+  <ProcessTriggers>
+    <ProcessTrigger processtriggerid="{d8afd664-0708-e711-8102-3863bb354ff0}">
+      <controltype>1</controltype>
+      <scope>1</scope>
+      <controlname>tc_mandatoryconditionsmet</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_caseline</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{d9afd664-0708-e711-8102-3863bb354ff0}">
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_caseline</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{daafd664-0708-e711-8102-3863bb354ff0}">
+      <controltype>1</controltype>
+      <scope>1</scope>
+      <controlname>tc_categorylevel1id</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_caseline</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{dbafd664-0708-e711-8102-3863bb354ff0}">
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_caseline</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{dcafd664-0708-e711-8102-3863bb354ff0}">
+      <controltype>1</controltype>
+      <scope>1</scope>
+      <controlname>tc_casetypeid</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_caseline</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{ddafd664-0708-e711-8102-3863bb354ff0}">
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_caseline</primaryentitytypecode>
+    </ProcessTrigger>
+  </ProcessTriggers>
+</Workflow>

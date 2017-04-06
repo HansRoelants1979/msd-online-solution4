@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>0</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>1</isdefault>
+  <returnedtypecode>10054</returnedtypecode>
+  <savedqueryid>{87d58398-6db0-44b6-b273-88e1b1543f90}</savedqueryid>
+  <layoutxml>
+    <grid name="" object="10054" jump="tc_name" select="1" icon="1" preview="0">
+      <row name="tc_compensation" id="tc_compensationid">
+        <cell name="tc_name" width="300" />
+        <cell name="createdon" width="125" />
+        <cell name="tc_amount" width="100" />
+        <cell name="tc_nonfinancialcompensationtype" width="100" />
+        <cell name="tc_cashcompensationtype" width="100" />
+        <cell name="tc_vouchercompensationtype" width="100" />
+        <cell name="tc_bacscompensationtype" width="100" />
+        <cell name="tc_chapscompensationtype" width="100" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>64</querytype>
+  <fetchxml>
+    <fetch version="1.0" mapping="logical">
+      <entity name="tc_compensation">
+        <attribute name="tc_compensationid" />
+        <attribute name="tc_name" />
+        <attribute name="createdon" />
+        <filter type="and">
+          <condition attribute="statecode" operator="eq" value="0" />
+        </filter>
+        <order attribute="tc_name" descending="false" />
+        <attribute name="tc_vouchercompensationtype" />
+        <attribute name="tc_nonfinancialcompensationtype" />
+        <attribute name="tc_chapscompensationtype" />
+        <attribute name="tc_cashcompensationtype" />
+        <attribute name="tc_bacscompensationtype" />
+        <attribute name="tc_amount" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.18</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Compensation Lookup View" languagecode="1033" />
+  </LocalizedNames>
+</savedquery>

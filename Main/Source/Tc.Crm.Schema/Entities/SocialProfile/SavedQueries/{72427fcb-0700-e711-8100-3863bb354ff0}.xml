@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>0</isdefault>
+  <returnedtypecode>99</returnedtypecode>
+  <savedqueryid>{72427fcb-0700-e711-8100-3863bb354ff0}</savedqueryid>
+  <layoutxml>
+    <grid name="resultset" object="99" jump="profilename" select="1" icon="1" preview="1">
+      <row name="result" id="socialprofileid">
+        <cell name="community" width="200" />
+        <cell name="profilename" width="150" />
+        <cell name="blocked" width="150" />
+        <cell name="influencescore" width="120" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>0</querytype>
+  <fetchxml>
+    <fetch version="1.0" output-format="xml-platform" mapping="logical">
+      <entity name="socialprofile">
+        <order attribute="community" descending="false" />
+        <order attribute="profilelink" descending="false" />
+        <filter type="and">
+          <condition attribute="statecode" operator="eq" value="0" />
+        </filter>
+        <attribute name="community" />
+        <attribute name="profilename" />
+        <attribute name="influencescore" />
+        <attribute name="blocked" />
+        <attribute name="socialprofileid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.34</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Active Social Profiles from Customer" languagecode="1033" />
+  </LocalizedNames>
+</savedquery>

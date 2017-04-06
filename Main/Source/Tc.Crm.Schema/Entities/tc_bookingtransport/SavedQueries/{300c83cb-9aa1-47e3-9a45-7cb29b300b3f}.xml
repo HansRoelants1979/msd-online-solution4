@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>0</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>1</isdefault>
+  <returnedtypecode>10043</returnedtypecode>
+  <savedqueryid>{300c83cb-9aa1-47e3-9a45-7cb29b300b3f}</savedqueryid>
+  <layoutxml>
+    <grid name="" object="10043" jump="tc_name" select="1" icon="1" preview="0">
+      <row name="tc_bookingtransport" id="tc_bookingtransportid">
+        <cell name="tc_name" width="100" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_transportcode" width="100" />
+        <cell name="tc_startdateandtime" width="100" />
+        <cell name="tc_enddateandtime" width="100" />
+        <cell name="tc_flightnumber" width="100" />
+        <cell name="tc_carriercode" width="100" />
+        <cell name="tc_departuregatewayid" width="100" />
+        <cell name="tc_arrivalgatewayid" width="100" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>64</querytype>
+  <fetchxml>
+    <fetch version="1.0" mapping="logical">
+      <entity name="tc_bookingtransport">
+        <attribute name="tc_bookingtransportid" />
+        <attribute name="tc_name" />
+        <filter type="and">
+          <condition attribute="statecode" operator="eq" value="0" />
+        </filter>
+        <order attribute="tc_name" descending="false" />
+        <attribute name="tc_transportcode" />
+        <attribute name="tc_startdateandtime" />
+        <attribute name="tc_flightnumber" />
+        <attribute name="tc_departuregatewayid" />
+        <attribute name="tc_carriercode" />
+        <attribute name="tc_arrivalgatewayid" />
+        <attribute name="tc_enddateandtime" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Booking Transport Lookup View" languagecode="1033" />
+  </LocalizedNames>
+</savedquery>
