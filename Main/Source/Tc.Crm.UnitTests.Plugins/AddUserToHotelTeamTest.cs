@@ -24,7 +24,7 @@ namespace Tc.Crm.UnitTests.Plugins
             cntxt.InputParameters.Add("Target", new EntityReference("team", Guid.NewGuid()));
             cntxt.InputParameters.Add("RelatedEntities", entRefcol);
             cntxt.MessageName = "Associate";
-            context.ExecutePluginWithConfigurations<Crm.Plugins.AddUserToHotelTeam>(cntxt, "IL,UK", "");          
+            //context.ExecutePluginWithConfigurations<Crm.Plugins.AddUserToHotelTeam>(cntxt, "IL,UK", "");          
         }
     }
 }
