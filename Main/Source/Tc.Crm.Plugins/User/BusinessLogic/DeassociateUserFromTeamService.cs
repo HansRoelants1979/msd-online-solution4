@@ -22,7 +22,7 @@ namespace Tc.Crm.Plugins.User.BusinessLogic
         private bool IsContextValid()
         {
             if (!context.MessageName.Equals(Messages.Disassociate, StringComparison.OrdinalIgnoreCase)) return false;
-            if (context.Stage != 40) return false;
+            if (context.Stage != (int)PluginStage.Postoperation) return false;
             if (!context.InputParameters.Contains(InputParameters.Relationship))
                 return false;
             var relationshipName = context.InputParameters[InputParameters.Relationship].ToString();

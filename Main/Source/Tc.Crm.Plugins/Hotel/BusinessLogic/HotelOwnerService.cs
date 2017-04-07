@@ -22,7 +22,7 @@ namespace Tc.Crm.Plugins.Hotel.BusinessLogic
         private bool IsContextValid()
         {
             if (!context.MessageName.Equals("create", StringComparison.OrdinalIgnoreCase)) return false;
-            if (context.Stage != 40) return false;
+            if (context.Stage != (int)PluginStage.Prevalidation) return false;
             if (!context.InputParameters.Contains(InputParameters.Target)
                 || !(context.InputParameters[InputParameters.Target] is Entity))
                 return false;
@@ -43,7 +43,7 @@ namespace Tc.Crm.Plugins.Hotel.BusinessLogic
 
             trace.Trace("Output - Created Team with Id: {0}", teamId);
             AssociateSecurityRole(teamId);
-            AssignHotelToTeam(teamId, targetHotel.Id);
+            targetHotel.Attributes[Attributes.Hotel.Owner] = new EntityReference(Entities.Team, teamId);
             trace.Trace("Output - Update owner of hotel");
 
         }
@@ -73,7 +73,7 @@ namespace Tc.Crm.Plugins.Hotel.BusinessLogic
         }
 
         /// <summary>
-        /// To asscoiate security role to the team created through plugin
+        /// To asscoiate security role Tc.Ids.Base to the team created through plugin
         /// </summary>
         /// <param name="teamId"></param>
         private void AssociateSecurityRole(Guid teamId)
@@ -123,21 +123,6 @@ namespace Tc.Crm.Plugins.Hotel.BusinessLogic
                     }
             };
             return service.RetrieveMultiple(queryForSecurityRole);
-        }
-
-        /// <summary>
-        /// To assign hotel to team created through plugin
-        /// </summary>
-        /// <param name="teamId"></param>
-        /// <param name="hotelId"></param>
-        private void AssignHotelToTeam(Guid teamId, Guid hotelId)
-        {
-            var assignRequest = new AssignRequest
-            {
-                Target = new EntityReference(Entities.Hotel, hotelId),
-                Assignee = new EntityReference(Entities.Team, teamId)
-            };
-            service.Execute(assignRequest);
         }
     }
 }

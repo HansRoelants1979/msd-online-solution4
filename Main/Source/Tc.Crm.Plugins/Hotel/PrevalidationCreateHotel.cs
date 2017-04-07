@@ -7,7 +7,7 @@ using Tc.Crm.Plugins.Hotel.BusinessLogic;
 
 namespace Tc.Crm.Plugins.Hotel
 {
-    public class PostCreateHotel : IPlugin
+    public class PrevalidationCreateHotel : IPlugin
     {
         public void Execute(IServiceProvider serviceProvider)
         {

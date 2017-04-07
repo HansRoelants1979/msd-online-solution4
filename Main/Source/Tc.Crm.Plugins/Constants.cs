@@ -72,4 +72,11 @@ namespace Tc.Crm.Plugins
         public const string TeamRolesAssociation = "teamroles_association";
         public const string TeamMembershipAssociation = "teammembership_association";
     }
+
+    enum PluginStage
+    {
+        Prevalidation = 10,
+        Preoperation = 20,
+        Postoperation = 40
+    }
 }

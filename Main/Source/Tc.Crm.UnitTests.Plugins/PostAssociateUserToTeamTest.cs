@@ -8,7 +8,7 @@ using FakeXrmEasy;
 namespace Tc.Crm.UnitTests.Plugins
 {
     [TestClass]
-    public class AddUserToHotelTeamTest
+    public class PostAssociateUserToTeamTest
     {
 
         [TestMethod]
@@ -24,7 +24,8 @@ namespace Tc.Crm.UnitTests.Plugins
             cntxt.InputParameters.Add("Target", new EntityReference("team", Guid.NewGuid()));
             cntxt.InputParameters.Add("RelatedEntities", entRefcol);
             cntxt.MessageName = "Associate";
-            //context.ExecutePluginWithConfigurations<Crm.Plugins.AddUserToHotelTeam>(cntxt, "IL,UK", "");          
+            cntxt.Stage = 40;
+            context.ExecutePluginWithConfigurations<Crm.Plugins.User.PostAssociateUserToTeam>(cntxt, "IL,UK", "");          
         }
     }
 }
