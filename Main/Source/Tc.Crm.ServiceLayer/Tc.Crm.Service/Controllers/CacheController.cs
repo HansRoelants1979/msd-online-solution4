@@ -41,6 +41,8 @@ namespace Tc.Crm.Service.Controllers
         [HttpPost]
         public HttpResponseMessage Refresh(string[] keys)
         {
+            if(keys == null)
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
             try
             {
                 foreach (var key in keys)
@@ -53,7 +55,7 @@ namespace Tc.Crm.Service.Controllers
                         this.currencyBucket.FillBucket();
                     else if (key.Equals("GATEWAY", StringComparison.OrdinalIgnoreCase))
                         this.gatewayBucket.FillBucket();
-                    else if (key.Equals("SOUREMARKET", StringComparison.OrdinalIgnoreCase))
+                    else if (key.Equals("SOURCEMARKET", StringComparison.OrdinalIgnoreCase))
                         this.sourceMarketBucket.FillBucket();
                     else if (key.Equals("TOUROPERATOR", StringComparison.OrdinalIgnoreCase))
                         this.tourOperatorBucket.FillBucket();

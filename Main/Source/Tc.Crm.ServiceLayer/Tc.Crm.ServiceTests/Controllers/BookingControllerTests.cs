@@ -28,8 +28,15 @@ namespace Tc.Crm.Service.Controllers.Tests
         public void TestSetup()
         {
             context = new XrmFakedContext();
-            bookingService = new BookingService(null,null,null,null,null,null,null);
+            
             crmService = new TestCrmService(context);
+            bookingService = new BookingService(new CacheBuckets.BrandBucket(crmService)
+                                                , new CacheBuckets.CountryBucket(crmService)
+                                                , new CacheBuckets.CurrencyBucket(crmService)
+                                                , new CacheBuckets.GatewayBucket(crmService)
+                                                , new CacheBuckets.SourceMarketBucket(crmService)
+                                                , new CacheBuckets.TourOperatorBucket(crmService)
+                                                , new CacheBuckets.HotelBucket(crmService));
             controller = new BookingController(bookingService, crmService);
             controller.Request = new System.Net.Http.HttpRequestMessage();
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
@@ -37,7 +44,28 @@ namespace Tc.Crm.Service.Controllers.Tests
             {
                 BookingIdentifier = new BookingIdentifier
                 {
-                    BookingNumber = "1234"
+                    BookingNumber = "1234",
+                    SourceMarket = "DE"
+                },
+                BookingGeneral = new BookingGeneral
+                {
+                    ToCode = "TO001",
+                    Destination = "DE"
+                },
+                Services = new BookingServices
+                {
+                    Accommodation = new Accommodation[]
+                    {
+                        new Accommodation {GroupAccommodationCode = "hot001" }
+                    },
+                    Transfer = new Transfer[]
+                    {
+                        new Transfer {ArrivalAirport="HGR",DepartureAirport="SGP" }
+                    },
+                    Transport = new Transport[]
+                    {
+                        new Transport { ArrivalAirport="HGR",DepartureAirport="SGP" }
+                    }
                 }
             };
         }

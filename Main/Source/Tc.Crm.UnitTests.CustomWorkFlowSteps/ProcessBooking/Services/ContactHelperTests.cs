@@ -22,10 +22,10 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(InvalidPluginExecutionException), "Customer payload is null.")]
         public void GetContactEntityForBookingPayload_CustomerIsNull()
         {
-            ContactHelper.GetContactEntityForBookingPayload(null, trace);
+           var customer = ContactHelper.GetContactEntityForBookingPayload(null, trace);
+            Assert.IsNull(customer);
         }
 
         [TestMethod()]
@@ -51,7 +51,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
                 CustomerIdentifier = new CustomerIdentifier
                 {
                     BusinessArea = "Hotel",
-                    SourceMarket = "AX",
+                    SourceMarket = Guid.NewGuid().ToString(),
                     SourceSystem = "On Tour"
                 }
             };
@@ -70,7 +70,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
                 {
                     BusinessArea = "Hotel",
                     CustomerId = "CONT001",
-                    SourceMarket = "AX",
+                    SourceMarket = Guid.NewGuid().ToString(),
                     SourceSystem = "On Tour"
                 },
                 CustomerIdentity = new CustomerIdentity
@@ -90,7 +90,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
                 {
                     BusinessArea = "Hotel",
                     CustomerId = "CONT001",
-                    SourceMarket = "AX",
+                    SourceMarket = Guid.NewGuid().ToString(),
                     SourceSystem = "On Tour"
                 },
                 CustomerIdentity = new CustomerIdentity
@@ -127,7 +127,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
                 {
                     BusinessArea = "Hotel",
                     CustomerId = "CONT001",
-                    SourceMarket = "AX",
+                    SourceMarket = Guid.NewGuid().ToString(),
                     SourceSystem = "On Tour"
                 },
                 CustomerIdentity = new CustomerIdentity
@@ -171,7 +171,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
                 {
                     BusinessArea = "Hotel",
                     CustomerId = "CONT001",
-                    SourceMarket = "AX",
+                    SourceMarket = Guid.NewGuid().ToString(),
                     SourceSystem = "On Tour"
                 },
                 CustomerIdentity = new CustomerIdentity
@@ -212,7 +212,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
                 {
                     BusinessArea = "Hotel",
                     CustomerId = "CONT001",
-                    SourceMarket = "AX",
+                    SourceMarket = Guid.NewGuid().ToString(),
                     SourceSystem = "On Tour"
                 },
                 CustomerIdentity = new CustomerIdentity
@@ -232,8 +232,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
                     {
                         AdditionalAddressInfo = "Tes",
                         AddressType = AddressType.Main,
-                        Country = "England",
-                        County = "Ferro",
+                        Country = Guid.NewGuid().ToString(),
+                        County = "Warrington",
                         FlatNumberUnit="A",
                         HouseNumberBuilding="21",
                         PostalCode = "WA113",
@@ -244,8 +244,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
                     {
                         AdditionalAddressInfo = "Tes",
                         AddressType = AddressType.Main,
-                        Country = "Engl1and1",
-                        County = "Ferro",
+                        Country = Guid.NewGuid().ToString(),
+                        County = "Warrington",
                         FlatNumberUnit="A",
                         HouseNumberBuilding="211",
                         PostalCode = "WA1131",
@@ -262,7 +262,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
             Assert.AreEqual(c.Address[0].Town, contact[Attributes.Contact.Address1_Town].ToString());
             Assert.AreEqual(c.Address[0].PostalCode, contact[Attributes.Contact.Address1_PostalCode].ToString());
             Assert.AreEqual(c.Address[0].County, contact[Attributes.Contact.Address1_County].ToString());
-            Assert.AreEqual(c.Address[0].Country, ((EntityReference)(contact[Attributes.Contact.Address1_CountryId])).KeyAttributes[Attributes.Country.ISO2Code].ToString());
+            Assert.AreEqual(c.Address[0].Country, ((EntityReference)(contact[Attributes.Contact.Address1_CountryId])).Id.ToString());
 
         }
 
@@ -275,7 +275,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
                 {
                     BusinessArea = "Hotel",
                     CustomerId = "CONT001",
-                    SourceMarket = "AX",
+                    SourceMarket = Guid.NewGuid().ToString(),
                     SourceSystem = "On Tour"
                 },
                 CustomerIdentity = new CustomerIdentity
