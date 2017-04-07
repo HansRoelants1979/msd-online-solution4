@@ -51,7 +51,7 @@ namespace Tc.Crm.Plugins.User.BusinessLogic
             if (!isParentHotelTeam)
                 return;
 
-            ProcessUserTeams(context.BusinessUnitId, hotelTeamId, users, teamName);
+            ProcessUserTeams(hotelTeamId, users, teamName);
         }
 
 
@@ -138,12 +138,11 @@ namespace Tc.Crm.Plugins.User.BusinessLogic
 
         /// <summary>
         /// To process Users, teams and roles functionality
-        /// </summary>
-        /// <param name="businessUnitId"></param>
+        /// </summary>      
         /// <param name="hotelTeamId"></param>
         /// <param name="users"></param>
         /// <param name="teamName"></param>
-        private void ProcessUserTeams(Guid businessUnitId, Guid hotelTeamId, EntityReferenceCollection users, string teamName)
+        private void ProcessUserTeams(Guid hotelTeamId, EntityReferenceCollection users, string teamName)
         {
             trace.Trace("ProcessUserTeams - Start");
             var businessUnits = GetBusinessUnits(hotelTeamId);
@@ -317,7 +316,7 @@ namespace Tc.Crm.Plugins.User.BusinessLogic
         {
             trace.Trace("GetSecurityRolesByBu - Start");
             var businessUnitCondition = GetBusinessUnitConditions(businessUnits);
-            var query = string.Format(@"<fetch distinct='false' output-format='xml - platform' version='1.0' mapping='logical'>
+            var query = string.Format(@"<fetch distinct='false' output-format='xml-platform' version='1.0' mapping='logical'>
                                         <entity name='role'>
                                         <attribute name='businessunitid'/>
                                         <attribute name='roleid' />
