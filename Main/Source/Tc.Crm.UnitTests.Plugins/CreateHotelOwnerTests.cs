@@ -25,7 +25,7 @@ namespace Tc.Crm.UnitTests.Plugins
             var context = new XrmFakedContext();
             var target = new Microsoft.Xrm.Sdk.Entity("tc_hotel") { Id = Guid.NewGuid() };
             target["tc_name"] = "Hotel XXX";
-            Assert.ThrowsException<InvalidPluginExecutionException>(() => context.ExecutePluginWithTarget<Crm.Plugins.CreateHotelOwner>(target));
+            Assert.ThrowsException<InvalidPluginExecutionException>(() => context.ExecutePluginWithTarget<Crm.Plugins.Hotel.CreateHotelOwner>(target));
         }
 
         [TestMethod]
