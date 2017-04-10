@@ -12,7 +12,7 @@ namespace Tc.Crm.CustomWorkflowSteps
 
         public const string ContactType = "P";
 
-        public const string Seperator = ",";
+        public const string Separator = ",";
 
         public const string NextLine = "\r\n";
 
@@ -65,7 +65,7 @@ namespace Tc.Crm.CustomWorkflowSteps
 
     public static class Attributes
     {
-        public class Contact
+        public static class Contact
         {
             public const string LastName = "lastname";
             public const string FirstName = "firstname";
@@ -113,7 +113,7 @@ namespace Tc.Crm.CustomWorkflowSteps
 
         }
 
-        public class Account
+        public static class Account
         {
             public const string Name = "name";
             public const string SourceMarketId = "tc_sourcemarketid";
@@ -139,7 +139,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string SourceSystemID = "tc_sourcesystemid";
         }
 
-        public class Annotation
+        public static class Annotation
         {
             public const string AnnotationId = "annotationid";
             public const string NoteText = "notetext";
@@ -147,7 +147,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string Regarding = "objectid";
 
         }
-        public class Booking
+        public static class Booking
         {
             public static string Remarks = "tc_remark";
             public const string AgentFullName = "tc_agentfullname";
@@ -198,7 +198,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string SourceSystem = "tc_sourcesystem";
             public const string SourceApplication = "tc_sourceapplication";
         }
-        public class BookingAccommodation
+        public static class BookingAccommodation
         {
             public const string BoardType = "tc_boardtype";
             public const string BookingAccommodationid = "tc_bookingaccommodationid";
@@ -225,7 +225,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string TransferServiceLevel = "tc_transferserviceleveltype";
             public const string WithTransfer = "tc_withtransfer";
         }
-        public class BookingTransport
+        public static class BookingTransport
         {
             public const string ArrivalGatewayId = "tc_arrivalgatewayid";
             public const string BookingId = "tc_bookingid";
@@ -245,26 +245,26 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string TransportCode = "tc_transportcode";
            
         }
-        public class Brand
+        public static class Brand
         {
             public const string BrandCode = "tc_brandcode";
             public const string BrandId = "tc_brandid";
             public const string SourceMarket = "tc_countryid";
             public const string Name = "tc_name";
         }
-        public class Country
+        public static class Country
         {
             public const string CountryId = "tc_countryid";
             //public const string Country = "tc_iso_code";
             public const string ISO2Code = "tc_iso2code";
         }
 
-        public class Currency
+        public static class Currency
         {
             public const string Name = "currencyname";
         }
 
-        public class CustomerBookingRole
+        public static class CustomerBookingRole
         {
             public const string BookingId = "tc_bookingid";
             public const string Customer = "tc_customer";
@@ -272,14 +272,14 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string CustomerBookingRoleId = "tc_customerbookingroleid";
             public const string Name = "tc_name";
         }
-        public class Gateway
+        public static class Gateway
         {
             public const string CountryId = "tc_countryid";
             public const string GatewayName = "tc_gateway";
             public const string GatewayId = "tc_gatewayid";
             public const string IATA = "tc_iata";
         }
-        public class Hotel
+        public static class Hotel
         {
             public const string AdditionalInformation = "tc_address1_additionalinformation";
             public const string CountryId = "tc_address1_countryid";
@@ -301,7 +301,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string ResortTeam = "tc_teamid";
             public const string TelephoneNumber = "tc_telephonenumber";
         }
-        public class HotelPromises
+        public static class HotelPromises
         {
             public const string BrandId = "tc_brandid";
             public const string HotelId = "tc_hotelid";
@@ -309,7 +309,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string Name = "tc_name";
             public const string PromiseType = "tc_promisetype";
         }
-        public class Location
+        public static class Location
         {
             public const string LocationCode = "tc_locationcode";
             public const string LocationId = "tc_locationid";
@@ -319,7 +319,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string RegionId = "tc_regionid";
             public const string Type = "tc_type";
         }
-        public class LocationOffice
+        public static class LocationOffice
         {
             public const string CityTownLocality = "tc_citytownlocality";
             public const string HouseBuildingNumber = "tc_housebuildingnumber";
@@ -333,14 +333,14 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string StreetLine2 = "tc_streetline2";
             public const string StreetLine3 = "tc_streetline3";
         }
-        public class Region
+        public static class Region
         {
             public const string CountryId = "tc_countryid";
             public const string Name = "tc_name";
             public const string RegionCode = "tc_regioncode";
             public const string RegionId = "tc_regionid";
         }
-        public class Remark
+        public static class Remark
         {
             public const string BookingAccommodationId = "tc_bookingaccommodationid";
             public const string BookingId = "tc_bookingid";
@@ -353,7 +353,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string Type = "tc_type";
         }
 
-        public class SocialProfile
+        public static class SocialProfile
         {
             public const string ProfileName = "profilename";
             public const string Customer = "customerid";
@@ -362,7 +362,7 @@ namespace Tc.Crm.CustomWorkflowSteps
 
         }
 
-        public class BookingTransfer
+        public static class BookingTransfer
         {
             public const string ArrivalGatewayId = "tc_arrivalgatewayid";
             public const string BookingId = "tc_bookingid";
@@ -379,7 +379,7 @@ namespace Tc.Crm.CustomWorkflowSteps
 
         }
 
-        public class BookingExtraService
+        public static class BookingExtraService
         {
             public const string BookingId = "tc_bookingid";
             public const string BookingExtraServiceId = "tc_bookingextraserviceid";
@@ -392,9 +392,7 @@ namespace Tc.Crm.CustomWorkflowSteps
 
         }
 
-
-
-        public class TourOperator
+        public static class TourOperator
         {
             public const string SourceMarketId = "tc_countryid";
             public const string Name = "tc_name";
@@ -402,7 +400,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string TourOperatorId = "tc_touroperatorid";
         }
 
-        public class SurveyResponse
+        public static class SurveyResponse
         {
             public const string ResponseId = "tc_response_id";
             public const string SurveyId = "tc_survey_id";
@@ -416,7 +414,7 @@ namespace Tc.Crm.CustomWorkflowSteps
             public const string Regarding = "regardingobjectid";
         }
 
-        public class SurveyResponseFeedback
+        public static class SurveyResponseFeedback
         {
             public const string Name = "tc_name";
             public const string QuestionId = "tc_question_id";
@@ -429,26 +427,24 @@ namespace Tc.Crm.CustomWorkflowSteps
         }
 
 
-        public class ActivityParty
+        public static class ActivityParty
         {
             public const string PartyId = "partyid";
         }
-
-
     }
 
-    public class Relationships
+    public static class Relationships
     {
         public const string SurveyResponseFeedback = "tc_surveyresponse_tc_surveyresponsefeedback";
     }
 
-    public class AliasName
+    public static class AliasName
     {
         public const string Booking = "booking.";
         public const string Contact = "contact.";
     }
 
-    public class PayloadSurveyFieldMapping
+    public static class PayloadSurveyFieldMapping
     {
         public const int BookingNumber = 251884;
         public const int SourceMarket = 251727;        

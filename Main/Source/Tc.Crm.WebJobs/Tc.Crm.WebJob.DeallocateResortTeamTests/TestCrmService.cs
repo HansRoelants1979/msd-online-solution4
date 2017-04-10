@@ -9,6 +9,8 @@ using Tc.Crm.Common.Models;
 using Tc.Crm.Common.Services;
 using Microsoft.Crm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Messages;
+using Tc.Crm.Common.Constants;
+using Attributes = Tc.Crm.Common.Constants.Attributes;
 
 namespace Tc.Crm.WebJob.DeallocateResortTeamTests
 {
@@ -20,70 +22,174 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
     }
     public class TestCrmService : ICrmService
     {
+
+        #region Properties 
+
         public DataSwitch Switch { get; set; }
         public XrmFakedContext context;
         public IOrganizationService orgService;
-        public List<Guid> validGatewayIds;
+
+        public List<Guid> ValidGatewayIds { get; private set; }
+        public Entity SystemUser { get; private set; }
+        public Entity BusinessUnit1 { get; private set; }
+        public Entity BusinessUnit2 { get; private set; }
+        public Entity SourceMarketCountry1 { get; private set; }
+        public Entity SourceMarketCountry2 { get; private set; }
+        public Entity DefaultTeam1 { get; private set; }
+        public Entity DefaultTeam2 { get; private set; }
+
+        #endregion
 
         public TestCrmService()
         {
             context = new XrmFakedContext();
             orgService = GetOrganizationService();
-            validGatewayIds = new List<Guid>();
+            ValidGatewayIds = new List<Guid>();
             PrepareData();
         }
 
-        public void AddUsersToContext()
-        {
-            var userEntityCollection = new Dictionary<Guid, Entity>();
-            var user1Id = Guid.NewGuid();
-            var user1 = new Entity("systemuser", user1Id);
-            user1["systemuserid"] = user1Id;
-            user1["firstname"] = "Pra";
-            userEntityCollection.Add(user1Id, user1);
+        #region Test helpers
 
-            context.Data.Add("systemuser", userEntityCollection);
+        public void PrepareData()
+        {
+            context.Data.Clear();
+            // initialize entities
+            context.Data.Add(EntityName.Booking, new Dictionary<Guid, Entity>());            
+            context.Data.Add(EntityName.Country, new Dictionary<Guid, Entity>());
+            context.Data.Add(EntityName.BusinessUnit, new Dictionary<Guid, Entity>());
+            context.Data.Add(EntityName.Team, new Dictionary<Guid, Entity>());
+            context.Data.Add(EntityName.CustomerBookingRole, new Dictionary<Guid, Entity>());            
+            context.Data.Add(EntityName.Contact, new Dictionary<Guid, Entity>());
+            context.Data.Add(EntityName.Account, new Dictionary<Guid, Entity>());
+            context.Data.Add(EntityName.Case, new Dictionary<Guid, Entity>());
+            context.Data.Add(EntityName.User, new Dictionary<Guid, Entity>());
+            AddConfiguredGatewaysToContext();
+
+            // add default data
+            var userId = Guid.NewGuid();
+            SystemUser = new Entity(EntityName.User, userId);
+            SystemUser[Attributes.User.UserId] = userId;
+            context.Data[EntityName.User].Add(userId, SystemUser);
+
+            BusinessUnit1 = AddBusinessUnit();
+            BusinessUnit2 = AddBusinessUnit();
+
+            DefaultTeam1 = AddTeam(CreateReference(EntityName.BusinessUnit, Attributes.BusinessUnit.BusinessUnitId, BusinessUnit1.Id), false, true);
+            DefaultTeam2 = AddTeam(CreateReference(EntityName.BusinessUnit, Attributes.Team.BusinessUnitId, BusinessUnit1.Id), false, true);
+
+            SourceMarketCountry1 = AddCountry(CreateReference(EntityName.BusinessUnit, Attributes.Country.BusinessUnitId, BusinessUnit1.Id));
+            SourceMarketCountry2 = AddCountry(CreateReference(EntityName.BusinessUnit, Attributes.Country.BusinessUnitId, BusinessUnit2.Id));
+            
+            
         }
 
-        public void AddResortTeamsToContext()
+        public Entity AddBusinessUnit()
         {
-            var teamEntityCollection = new Dictionary<Guid, Entity>();
-            var resortTeam1Id = Guid.NewGuid();
-            var resortTeam1 = new Entity("team", resortTeam1Id);
-            resortTeam1["teamid"] = resortTeam1Id;
-            resortTeam1["name"] = "Resort Team 1";
+            var id = Guid.NewGuid();
+            var businessUnit = new Entity(EntityName.BusinessUnit, id);
+            businessUnit[Attributes.BusinessUnit.BusinessUnitId] = id;
 
-            var resortTeam2Id = Guid.NewGuid();
-            var resortTeam2 = new Entity("team", resortTeam2Id);
-            resortTeam2["teamid"] = resortTeam1Id;
-            resortTeam2["name"] = "Resort Team 2";
-
-            var resortTeam3Id = Guid.NewGuid();
-            var resortTeam3 = new Entity("team", resortTeam3Id);
-            resortTeam3["teamid"] = resortTeam1Id;
-            resortTeam3["name"] = "Resort Team 3";
-
-            teamEntityCollection.Add(resortTeam1Id, resortTeam1);
-            teamEntityCollection.Add(resortTeam2Id, resortTeam2);
-            teamEntityCollection.Add(resortTeam3Id, resortTeam3);
-
-            context.Data.Add("team", teamEntityCollection);
+            context.Data[EntityName.BusinessUnit].Add(id, businessUnit);
+            return businessUnit;
         }
 
-        public void AddCustomersToContext()
+        public Entity AddGateway()
         {
-            var contactEntityCollection = new Dictionary<Guid, Entity>();
-            var customer1Id = Guid.NewGuid();
-            var customer1 = new Entity("contact", customer1Id);
-            customer1["contactid"] = customer1Id;
-            customer1["lastname"] = "Gogol";
-            customer1["firstname"] = "Nikolai";
-            contactEntityCollection.Add(customer1Id, customer1);
-
-            context.Data.Add("contact", contactEntityCollection);
+            var id = Guid.NewGuid();
+            var gateway = new Entity(EntityName.Gateway, id);
+            gateway[Attributes.Gateway.GatewayId] = id;
+            context.Data[EntityName.Gateway].Add(id, gateway);
+            return gateway;
         }
 
-        public void AddGatewaysToContext()
+        public Entity AddTeam(EntityReference businessUnit, bool isHotelTeam, bool isDefaultTeam = false)
+        {
+            var id = Guid.NewGuid();
+            var team = new Entity(EntityName.Team, id);
+            team[Attributes.Team.TeamId] = id;
+            team[Attributes.Team.BusinessUnitId] = businessUnit;
+            team[Attributes.Team.IsDefaultTeam] = isDefaultTeam;
+            team[Attributes.Team.IsHotelTeam] = isHotelTeam;
+
+            context.Data[EntityName.Team].Add(id, team);
+            return team;
+        }
+
+        public Entity AddCountry(EntityReference businessUnit)
+        {
+            var id = Guid.NewGuid();
+            var country = new Entity(EntityName.Country, id);
+            country[Attributes.Country.CountryId] = id;
+            country[Attributes.Country.BusinessUnitId] = businessUnit;
+
+            context.Data[EntityName.Country].Add(id, country);
+            return country;
+        }
+
+        public Entity AddCase(EntityReference customer, EntityReference owningTeam)
+        {
+            var id = Guid.NewGuid();
+            var _case = new Entity(EntityName.Case, id);
+            _case[Attributes.Case.CaseId] = id;
+            _case[Attributes.Case.CustomerId] = customer;
+            _case[Attributes.Case.Owner] = owningTeam ?? CreateReference(EntityName.User, Attributes.Booking.Owner, SystemUser.Id);
+
+            context.Data[EntityName.Case].Add(id, _case);
+            return _case;
+        }
+
+        public Entity AddContact(EntityReference owningTeam)
+        {
+            var id = Guid.NewGuid();
+
+            var contact = new Entity(EntityName.Contact, id);
+            contact[Attributes.Contact.ContactId] = id;
+            contact[Attributes.Booking.Owner] = owningTeam ?? CreateReference(EntityName.User, Attributes.Booking.Owner, SystemUser.Id);
+
+            context.Data[EntityName.Contact].Add(id, contact);
+            return contact;
+        }
+
+        public Entity AddAccount(EntityReference owningTeam)
+        {
+            var id = Guid.NewGuid();
+            var account = new Entity(EntityName.Account, id);
+            account[Attributes.Account.AccountId] = id;
+            account[Attributes.Booking.Owner] = owningTeam ?? CreateReference(EntityName.User, Attributes.Booking.Owner, SystemUser.Id);
+
+            context.Data[EntityName.Account].Add(id, account);
+            return account;
+        }
+
+        public Entity AddCustomerBookingRole(EntityReference booking, EntityReference customer)
+        {
+            var id = Guid.NewGuid();
+            var role = new Entity(EntityName.CustomerBookingRole, id);
+            role[Attributes.CustomerBookingRole.CustomerBookingRoleId] = id;
+            role[Attributes.CustomerBookingRole.Customer] = customer;
+            role[Attributes.CustomerBookingRole.BookingId] = booking;
+
+            context.Data[EntityName.CustomerBookingRole].Add(id, role);
+            return role;
+        }
+
+        public Entity AddBooking(DateTime returnDate, EntityReference owningTeam, EntityReference gateway, EntityReference sourceMarket)
+        {
+            var id = Guid.NewGuid();
+            var booking = new Entity(EntityName.Booking, id);
+
+            booking[Attributes.Booking.BookingId] = id;
+            booking[Attributes.Booking.ReturnDate] = returnDate;
+            booking[Attributes.Booking.DestinationGatewayId] = gateway;
+            booking[Attributes.Booking.SourceMarketId] = sourceMarket;
+            booking[Attributes.Booking.OwningTeam] = owningTeam;
+            booking[Attributes.Booking.Owner] = owningTeam ?? CreateReference(EntityName.User, Attributes.Booking.Owner, SystemUser.Id);
+
+            context.Data[EntityName.Booking].Add(id, booking);
+            return booking;
+        }
+
+        private void AddConfiguredGatewaysToContext()
         {
             var gatewayEntityCollection = new Dictionary<Guid, Entity>();
 
@@ -93,200 +199,57 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
             for (int i = 0; i < gatewayIds.Length; i++)
             {
                 var gatewayId = new Guid(gatewayIds[i]);
-                var gateway = new Entity("tc_gateway", gatewayId);
-                gateway["tc_gateway"] = "gateway_" + i.ToString();
+                var gateway = new Entity(EntityName.Gateway, gatewayId);
+                gateway[Attributes.Gateway.GatewayId] = gatewayId;
                 gatewayEntityCollection.Add(gatewayId, gateway);
-                validGatewayIds.Add(gatewayId);
+                ValidGatewayIds.Add(gatewayId);
             }
-
-            //invalid gateway
-            var invalidGatewayId = Guid.NewGuid();
-            var invalidGateway = new Entity("tc_gateway", invalidGatewayId);
-            invalidGateway["tc_gateway"] = "invalid gateway";
-            gatewayEntityCollection.Add(invalidGatewayId, invalidGateway);
-
-
-            context.Data.Add("tc_gateway", gatewayEntityCollection);
+            context.Data.Add(EntityName.Gateway, gatewayEntityCollection);
         }
 
-        public void AddBookingsToContext()
+        #endregion
+
+        #region ICrmService
+
+        public IOrganizationService GetOrganizationService()
         {
 
-            var bookingEntityCollection = new Dictionary<Guid, Entity>();
-
-            var booking1Id = Guid.NewGuid();
-            var booking1 = new Entity("tc_booking", booking1Id);
-            booking1["tc_bookingid"] = booking1Id;
-            booking1["tc_name"] = "b1";
-            booking1["tc_departuredate"] = DateTime.Now.Date;
-            booking1["tc_returndate"] = DateTime.Now.Date;
-
-            bookingEntityCollection.Add(booking1Id, booking1);
-
-            context.Data.Add("tc_booking", bookingEntityCollection);
-        }
-
-        public void AddMultipleBookingsToContext()
-        {
-            var bookingEntityCollection = new Dictionary<Guid, Entity>();
-
-            for (int i = 0; i < 10; i++)
-            {
-                var booking1Id = Guid.NewGuid();
-                var booking1 = new Entity("tc_booking", booking1Id);
-                booking1["tc_bookingid"] = booking1Id;
-                booking1["tc_name"] = "BKG00" + i.ToString();
-                booking1["tc_departuredate"] = DateTime.Now.Date;
-                booking1["tc_returndate"] = DateTime.Now.Date;
-
-                bookingEntityCollection.Add(booking1Id, booking1);
-
-            }
-            context.Data.Add("tc_booking", bookingEntityCollection);
-        }
-
-        public void AddHotelsToContext()
-        {
-            var hotelEntityCollection = new Dictionary<Guid, Entity>();
-
-            var jwMariotId = Guid.NewGuid();
-            var jwMariot = new Entity("tc_hotel", jwMariotId);
-
-            hotelEntityCollection.Add(jwMariotId, jwMariot);
-
-            context.Data.Add("tc_hotel", hotelEntityCollection);
-        }
-
-        public void AddAccomodationsToContext()
-        {
-            var accommodationEntityCollection = new Dictionary<Guid, Entity>();
-
-            var accommodation1Id = Guid.NewGuid();
-            var accommodation1 = new Entity("tc_bookingaccommodation", accommodation1Id);
-            accommodation1["tc_bookingaccommodationid"] = accommodation1Id;
-            accommodation1["tc_startdateandtime"] = DateTime.Now.Date;
-            accommodation1["tc_enddateandtime"] = DateTime.Now.Date;
-            accommodation1["tc_bookingid"] = null;
-            accommodationEntityCollection.Add(accommodation1Id, accommodation1);
-
-
-            context.Data.Add("tc_bookingaccommodation", accommodationEntityCollection);
-        }
-
-        public void AddBookingRolesToContext()
-        {
-            var customerBookingRoleEntityCollection = new Dictionary<Guid, Entity>();
-
-            var customerBookingRole1Id = Guid.NewGuid();
-            var customerBookingRole1 = new Entity("tc_customerbookingrole", customerBookingRole1Id);
-            customerBookingRole1["tc_customerbookingroleid"] = customerBookingRole1Id;
-
-            customerBookingRoleEntityCollection.Add(customerBookingRole1Id, customerBookingRole1);
-
-            context.Data.Add("tc_customerbookingrole", customerBookingRoleEntityCollection);
-        }
-
-        public void PrepareData()
-        {
-            context.Data.Clear();
-            AddUsersToContext();
-            AddResortTeamsToContext();
-            AddCustomersToContext();
-            AddGatewaysToContext();
-            AddMultipleBookingsToContext();
-            AddHotelsToContext();
-            AddAccomodationsToContext();
-            AddBookingRolesToContext();
-        }
-
-        public void SetAccommodation(Entity accommodation, int startOffset, int endOffset, Guid bookingId, Guid hotelId)
-        {
-            accommodation["tc_startdateandtime"] = DateTime.Now.Date.AddDays(startOffset);
-            accommodation["tc_enddateandtime"] = DateTime.Now.Date.AddDays(endOffset);
-            accommodation["tc_bookingid"] = new EntityReference("tc_booking", bookingId);
-            accommodation["tc_hotelid"] = new EntityReference("tc_hotel", hotelId);
-        }
-
-        public void AddAccommodation()
-        {
-            var accommodation1Id = Guid.NewGuid();
-            var accommodation1 = new Entity("tc_bookingaccommodation", accommodation1Id);
-            accommodation1["tc_bookingaccommodationid"] = accommodation1Id;
-            context.Data["tc_bookingaccommodation"].Add(accommodation1Id, accommodation1);
-        }
-
-        public void AddHotel()
-        {
-            var tajId = Guid.NewGuid();
-            var taj = new Entity("tc_hotel", tajId);
-            context.Data["tc_hotel"].Add(tajId, taj);
-        }
-
-        public void AddCustomer()
-        {
-            var customer1Id = Guid.NewGuid();
-            var customer1 = new Entity("contact", customer1Id);
-            customer1["contactid"] = customer1Id;
-            customer1["lastname"] = "Purple";
-            customer1["firstname"] = "Nikolai";
-            context.Data["contact"].Add(customer1Id, customer1);
-        }
-
-        public void AddCustomerBookingRole()
-        {
-            var customerBookingRole1Id = Guid.NewGuid();
-            var customerBookingRole1 = new Entity("tc_customerbookingrole", customerBookingRole1Id);
-            customerBookingRole1["tc_customerbookingroleid"] = customerBookingRole1Id;
-
-            context.Data["tc_customerbookingrole"].Add(customerBookingRole1Id, customerBookingRole1);
-        }
-
-        public void AddBooking()
-        {
-            var booking1Id = Guid.NewGuid();
-            var booking1 = new Entity("tc_booking", booking1Id);
-            booking1["tc_bookingid"] = booking1Id;
-            booking1["tc_name"] = "b1";
-            booking1["tc_departuredate"] = DateTime.Now.Date;
-            booking1["tc_returndate"] = DateTime.Now.Date;
-
-            context.Data["tc_booking"].Add(booking1Id, booking1);
-        }
-
-        public void SetBooking(Entity booking, int startOffset, int endOffset, Guid gatewayId, EntityReference owner)
-        {
-            booking["tc_destinationgatewayid"] = new EntityReference("tc_gateway", gatewayId);
-            booking["ownerid"] = owner;
-            booking["tc_departuredate"] = DateTime.Now.Date.AddDays(startOffset);
-            booking["tc_returndate"] = DateTime.Now.Date.AddDays(endOffset);
-        }
-
-        public void SetCustomerBookingRole(Entity customerBookingRole, EntityReference contact, EntityReference booking)
-        {
-            customerBookingRole["tc_customer"] = contact;
-            customerBookingRole["tc_bookingid"] = booking;
+            return context.GetFakedOrganizationService();
         }
 
         public void BulkAssign(Collection<AssignInformation> assignRequests)
         {
             foreach (var ar in assignRequests)
             {
-                if (ar.EntityName == "tc_booking")
-                {
-                    if (ar.RecordOwner.OwnerType == Common.OwnerType.Team)
-                        context.Data["tc_booking"][ar.RecordId]["ownerid"] = new EntityReference("team", ar.RecordOwner.Id);
-                    if (ar.RecordOwner.OwnerType == Common.OwnerType.User)
-                        context.Data["tc_booking"][ar.RecordId]["ownerid"] = new EntityReference("systemuser", ar.RecordOwner.Id);
-                }
-                if (ar.EntityName == "Contact")
-                {
-                    if (ar.RecordOwner.OwnerType == Common.OwnerType.Team)
-                        context.Data["contact"][ar.RecordId]["ownerid"] = new EntityReference("team", ar.RecordOwner.Id);
-                    if (ar.RecordOwner.OwnerType == Common.OwnerType.User)
-                        context.Data["contact"][ar.RecordId]["ownerid"] = new EntityReference("systemuser", ar.RecordOwner.Id);
-                }
+                string owner = ar.RecordOwner.OwnerType == Common.OwnerType.Team ? EntityName.Team : EntityName.User; 
+                context.Data[ar.EntityName][ar.RecordId]["ownerid"] = new EntityReference(owner, ar.RecordOwner.Id);
             }
         }
+
+        public EntityCollection RetrieveMultipleRecordsFetchXml(string query)
+        {
+            switch (Switch)
+            {
+                case DataSwitch.No_Records_Returned:
+                    return null;
+                case DataSwitch.Collection_With_No_Records_Returned:
+                    return new Microsoft.Xrm.Sdk.EntityCollection();
+                case DataSwitch.Returns_Data:
+                    return GetBookings(
+                        context.Data[EntityName.Booking].Values.ToList(),
+                        context.Data[EntityName.Gateway].Values.ToList(),
+                        context.Data[EntityName.CustomerBookingRole].Values.ToList(),
+                        context.Data[EntityName.Contact].Values.ToList(),
+                        context.Data[EntityName.Account].Values.ToList(),
+                        context.Data[EntityName.Case].Values.ToList(),
+                        context.Data[EntityName.Country].Values.ToList(),
+                        context.Data[EntityName.BusinessUnit].Values.ToList(),
+                        context.Data[EntityName.Team].Values.ToList());
+            }
+            return null;
+        }
+
+        #region Not Implemented
 
         public string CreateXml(XmlDocument doc, string cookie, int page, int count)
         {
@@ -303,98 +266,14 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
             throw new NotImplementedException();
         }
 
-        public Microsoft.Xrm.Sdk.IOrganizationService GetOrganizationService()
-        {
-
-            return context.GetFakedOrganizationService();
-        }
-
-        public Microsoft.Xrm.Sdk.EntityCollection GetRecordsUsingQuery(Microsoft.Xrm.Sdk.Query.QueryExpression queryExpression)
+        public EntityCollection GetRecordsUsingQuery(Microsoft.Xrm.Sdk.Query.QueryExpression queryExpression)
         {
             throw new NotImplementedException();
         }
 
-        public Microsoft.Xrm.Sdk.EntityCollection RetrieveMultipleRecords(string entityName, string[] columns, string[] filterKeys, string[] filterValues)
+        public EntityCollection RetrieveMultipleRecords(string entityName, string[] columns, string[] filterKeys, string[] filterValues)
         {
             return null;
-        }
-
-        public Microsoft.Xrm.Sdk.EntityCollection RetrieveMultipleRecordsFetchXml(string query)
-        {
-            if (Switch == DataSwitch.No_Records_Returned)
-                return null;
-            if (Switch == DataSwitch.Collection_With_No_Records_Returned)
-                return new Microsoft.Xrm.Sdk.EntityCollection();
-
-            if (Switch == DataSwitch.Returns_Data)
-            {
-                return GetBookings(context.Data["tc_booking"].Values.ToList<Entity>()
-                                    , context.Data["tc_bookingaccommodation"].Values.ToList<Entity>()
-                                    , context.Data["tc_hotel"].Values.ToList<Entity>()
-                                    , context.Data["tc_customerbookingrole"].Values.ToList<Entity>()
-                                    , context.Data["tc_gateway"].Values.ToList<Entity>()
-                                    , context.Data["contact"].Values.ToList<Entity>());
-            }
-
-            return null;
-        }
-
-        private EntityCollection GetBookings(List<Entity> bookingCollection
-                                                        , List<Entity> accommodations
-                                                        , List<Entity> hotels
-                                                        , List<Entity> customerBookingRoles
-                                                        , List<Entity> gateways
-                                                        , List<Entity> contacts)
-        {
-            var bookings = new List<Entity>();
-            var bookings1 = (from b in bookingCollection
-                             join a in accommodations on b.Id equals ((EntityReference)a["tc_bookingid"]).Id
-                             join h in hotels on ((EntityReference)a["tc_hotelid"]).Id equals h.Id
-                             join cbr in customerBookingRoles on b.Id equals ((EntityReference)cbr["tc_bookingid"]).Id
-                             join g in gateways on ((EntityReference)b["tc_destinationgatewayid"]).Id equals g.Id
-                             join c in contacts on ((EntityReference)cbr["tc_customer"]).Id equals c.Id
-                             where ((DateTime)a["tc_enddateandtime"]).Date == DateTime.Now.Date
-                             && validGatewayIds.Contains(((EntityReference)b["tc_destinationgatewayid"]).Id)
-                             orderby b["tc_name"].ToString() ascending, ((DateTime)a["tc_enddateandtime"]) ascending
-                             select new
-                             {
-                                 BookingId = b.Id,
-                                 Name = b["tc_name"].ToString(),
-                                 OwnerId = ((EntityReference)b["ownerid"]),
-                                 DepartureDate = ((DateTime)b["tc_departuredate"]),
-                                 ReturnDate = ((DateTime)b["tc_returndate"]),
-                                 AccommodationStart = ((DateTime)a["tc_startdateandtime"]),
-                                 AccommodationEnd = ((DateTime)a["tc_enddateandtime"]),
-                                 HotelOwner = ((EntityReference)h["ownerid"]),
-                                 Customer = ((EntityReference)cbr["tc_customer"]),
-                                 CustomerOwner = ((EntityReference)c["ownerid"])
-                             }).ToList();
-
-
-            foreach (var item in bookings1)
-            {
-                var b = new Entity("tc_booking", item.BookingId);
-                b["tc_departuredate"] = item.DepartureDate;
-                b["tc_returndate"] = item.ReturnDate;
-                b["tc_name"] = item.Name;
-                b["tc_bookingid"] = item.BookingId;
-                b["ownerid"] = item.OwnerId;
-                b["accommodation.tc_startdateandtime"] = new AliasedValue("tc_bookingaccommodation", "tc_startdateandtime", item.AccommodationStart);
-                b["accommodation.tc_enddateandtime"] = new AliasedValue("tc_bookingaccommodation", "tc_enddateandtime", item.AccommodationEnd);
-                b["hotel.ownerid"] = new AliasedValue("tc_hotel", "ownerid", item.HotelOwner);
-                b["role.tc_customer"] = new AliasedValue("tc_customerbookingrole", "tc_customer", item.Customer);
-                b["contact.ownerid"] = new AliasedValue("contact", "ownerid", item.CustomerOwner);
-                bookings.Add(b);
-            }
-
-
-            return new EntityCollection(bookings);
-
-        }
-
-        private void ProcessMultipleBookings(Entity booking, EntityCollection accommodations, EntityReference customer)
-        {
-
         }
 
         public void ExecuteBulkAssignRequests(ExecuteMultipleRequest request)
@@ -405,6 +284,97 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
         public string FormatFaultException(AssignRequest assignRequest, OrganizationServiceFault fault)
         {
             throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #endregion
+
+        private EntityCollection GetBookings(
+            List<Entity> bookings,
+            List<Entity> gateways,
+            List<Entity> customerBookingRoles,
+            List<Entity> contacts,
+            List<Entity> accounts,
+            List<Entity> cases,
+            List<Entity> countries,
+            List<Entity> businessUnits,
+            List<Entity> teams)
+        {
+            var result = new List<Entity>();
+
+            // fetch xml filter
+            var filteredData = (from b in bookings
+                                join g in gateways on ((EntityReference)b[Attributes.Booking.DestinationGatewayId]).Id equals g.Id
+                                join team in teams on ((EntityReference)b[Attributes.Booking.OwningTeam]).Id equals team.Id
+                                join country in countries on ((EntityReference)b[Attributes.Booking.SourceMarketId]).Id equals country.Id
+                                join bu in businessUnits on ((EntityReference)country[Attributes.Country.BusinessUnitId]).Id equals bu.Id
+                                join defaultTeam in teams on bu.Id equals ((EntityReference)defaultTeam[Attributes.Team.BusinessUnitId]).Id
+                                join role in customerBookingRoles on b.Id equals ((EntityReference)role[Attributes.CustomerBookingRole.BookingId]).Id into cbr
+                                from role in cbr.DefaultIfEmpty()
+                                join contact in contacts on
+                                    new { Id = role != null ? ((EntityReference)role[Attributes.CustomerBookingRole.Customer]).Id : Guid.Empty }
+                                    equals new { Id = contact.Id } into c
+                                from contact in c.DefaultIfEmpty()
+                                join contactCase in cases on
+                                    new { Id = contact != null ? contact.Id : Guid.Empty }
+                                    equals new { Id = ((EntityReference)contactCase[Attributes.Case.CustomerId]).Id } into cc
+                                from contactCase in cc.DefaultIfEmpty()
+                                join account in accounts on
+                                    new { Id = role != null ? ((EntityReference)role[Attributes.CustomerBookingRole.Customer]).Id : Guid.Empty }
+                                    equals new { Id = account.Id } into a
+                                from account in a.DefaultIfEmpty()
+                                join accountCase in cases on
+                                    new { Id = account != null ? account.Id : Guid.Empty }
+                                    equals
+                                    new { Id = ((EntityReference)accountCase[Attributes.Case.CustomerId]).Id }  into ac
+                                from accountCase in ac.DefaultIfEmpty()
+                                where ((DateTime)b[Attributes.Booking.ReturnDate]).Date == DateTime.Now.Date.AddDays(-2)
+                                && ValidGatewayIds.Contains(((EntityReference)b[Attributes.Booking.DestinationGatewayId]).Id)
+                                && (bool)defaultTeam[Attributes.Team.IsDefaultTeam] == true
+                                && (bool)team[Attributes.Team.IsHotelTeam] == true
+                                orderby b.Id ascending, role.Id ascending
+                             select new
+                             {
+                                 BookingId = b.Id,
+                                 ContactId = contact != null ? contact.Id : Guid.Empty,
+                                 AccountId = account != null ? account.Id : Guid.Empty,
+                                 ContactCaseId = contactCase != null ? contactCase.Id : Guid.Empty,
+                                 AccountCaseId = accountCase != null ? accountCase.Id: Guid.Empty,
+                                 DefaultTeamId = defaultTeam.Id
+                             }).GroupBy(r => new { r.BookingId, r.ContactId, r.AccountId, r.ContactCaseId, r.AccountCaseId, r.DefaultTeamId }).Select(r => r.First());
+
+            foreach (var item in filteredData)
+            {
+                var b = new Entity(EntityName.Booking, item.BookingId);
+                b[Attributes.Booking.BookingId] = item.BookingId;
+                b["defaultTeam.teamid"] = new AliasedValue(EntityName.Team, Attributes.Team.TeamId, item.DefaultTeamId);
+                if (item.ContactId != Guid.Empty)
+                {
+                    b["contact.contactid"] = new AliasedValue(EntityName.Contact, Attributes.Contact.ContactId, item.ContactId);
+                }
+                if (item.AccountId != Guid.Empty)
+                {
+                    b["account.accountid"] = new AliasedValue(EntityName.Account, Attributes.Account.AccountId, item.AccountId);
+                }
+                if (item.ContactCaseId != Guid.Empty)
+                {
+                    b["contactIncident.incidentid"] = new AliasedValue(EntityName.Case, Attributes.Case.CaseId, item.ContactCaseId);
+                }
+                if (item.AccountCaseId != Guid.Empty)
+                {
+                    b["accountIncident.incidentid"] = new AliasedValue(EntityName.Case, Attributes.Case.CaseId, item.AccountCaseId);
+                }
+                result.Add(b);
+            }
+
+            return new EntityCollection(result);
+
+        }
+
+        private EntityReference CreateReference(string entity, string key, Guid id)
+        {
+            return new EntityReference(entity, key, id) { Id = id };
         }
     }
 }

@@ -19,10 +19,10 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam
                 unitycontainer.RegisterType<IConfigurationService, ConfigurationService>(new ContainerControlledLifetimeManager());
                 unitycontainer.RegisterType<ICrmService, CrmService>(new ContainerControlledLifetimeManager());
                 unitycontainer.RegisterType<IDeallocationService, DeallocationService>(new ContainerControlledLifetimeManager());
-                unitycontainer.RegisterType<IDeallocateResortTeamService, DeallocateResortTeamService>(new ContainerControlledLifetimeManager());
+                unitycontainer.RegisterType<IDeallocateBookingService, DeallocateBookingService>(new ContainerControlledLifetimeManager());
 
                 logger = unitycontainer.Resolve<ILogger>();
-                using (var deallocateResortTeamService = unitycontainer.Resolve<IDeallocateResortTeamService>())
+                using (var deallocateResortTeamService = unitycontainer.Resolve<IDeallocateBookingService>())
                 {
                     logger.LogInformation("Tc.Crm.WebJob.DeallocateResortTeam Job Starts");
                     deallocateResortTeamService.Run();

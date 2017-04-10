@@ -681,15 +681,13 @@ namespace Tc.Crm.CustomWorkflowSteps
 
         public static string CreateXml(string xml, string cookie, int page, int count)
         {
-
-            StringReader stringReader = new StringReader(xml);
-            XmlTextReader reader = new XmlTextReader(stringReader);
-
-            // Load document
-            XmlDocument doc = new XmlDocument();
-            doc.Load(reader);
-
-            return CreateXml(doc, cookie, page, count);
+            using (var reader = new XmlTextReader(new StringReader(xml)))
+            {
+                // Load document
+                XmlDocument doc = new XmlDocument();
+                doc.Load(reader);
+                return CreateXml(doc, cookie, page, count);
+            }
         }
 
 

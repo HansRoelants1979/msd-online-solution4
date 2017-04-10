@@ -62,6 +62,9 @@
       <HintPath>..\..\packages\Microsoft.IdentityModel.6.1.7600.16394\lib\net35\Microsoft.IdentityModel.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory, Version=2.22.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.2.22.302111727\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
@@ -108,16 +111,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\CustomerResortTeamRequest.cs" />
-    <Compile Include="Models\BookingDeAllocationRequest.cs" />
-    <Compile Include="Models\BookingDeallocationResortTeamRequest.cs" />
-    <Compile Include="Models\BookingResortTeamRequest.cs" />
-    <Compile Include="Models\BookngDeallocationResponse.cs" />
+    <Compile Include="Models\DeallocationRequest.cs" />
+    <Compile Include="Models\DeallocationExecutionRequest.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\DeallocateResortTeamService.cs" />
+    <Compile Include="Services\DeallocateBookingService.cs" />
     <Compile Include="Services\DeallocationService.cs" />
-    <Compile Include="Services\IDeallocateResortTeamService.cs" />
+    <Compile Include="Services\IDeallocateBookingService.cs" />
     <Compile Include="Services\IDeallocationService.cs" />
   </ItemGroup>
   <ItemGroup>

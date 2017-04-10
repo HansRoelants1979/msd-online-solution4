@@ -3,10 +3,9 @@ using System.Collections.Generic;
 
 namespace Tc.Crm.WebJob.DeallocateResortTeam.Models
 {
-    public class BookingDeallocationRequest
+    public class DeallocationRequest
     {
-        public DateTime AccommodationEndDate { get; set; }
+        public DateTime Date { get; set; }
         public IList<Guid> Destination { get; set; }
-
     }
 }

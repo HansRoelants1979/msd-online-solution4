@@ -44,7 +44,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             trace.Trace("Booking Identity - end");
         }
 
-        private static Attributes.Booking ClearBookerInformation(Entity booking, ITracingService trace)
+        private static void ClearBookerInformation(Entity booking, ITracingService trace)
         {
             trace.Trace("Booking clear identity - start");
             booking[Attributes.Booking.BookerPhone1] = string.Empty;
@@ -52,7 +52,6 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             booking[Attributes.Booking.BookerEmergencyPhone] = string.Empty;
             booking[Attributes.Booking.BookerEmail] = string.Empty;
             trace.Trace("Booking clear identity - end");
-            return null;
         }
 
 
@@ -109,16 +108,16 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 trace.Trace("Processing Travel Participant " + i.ToString() + " information - start");
                 StringBuilder participantBuilder = new StringBuilder();
                 if (!string.IsNullOrWhiteSpace(travelParticipants[i].TravelParticipantIdOnTour))
-                    participantBuilder.Append(travelParticipants[i].TravelParticipantIdOnTour + General.Seperator);
+                    participantBuilder.Append(travelParticipants[i].TravelParticipantIdOnTour + General.Separator);
                 if (!string.IsNullOrWhiteSpace(travelParticipants[i].FirstName))
-                    participantBuilder.Append(travelParticipants[i].FirstName + General.Seperator);
+                    participantBuilder.Append(travelParticipants[i].FirstName + General.Separator);
                 if (!string.IsNullOrWhiteSpace(travelParticipants[i].LastName))
-                    participantBuilder.Append(travelParticipants[i].LastName + General.Seperator);
-                participantBuilder.Append(travelParticipants[i].Age.ToString() + General.Seperator);
+                    participantBuilder.Append(travelParticipants[i].LastName + General.Separator);
+                participantBuilder.Append(travelParticipants[i].Age.ToString() + General.Separator);
                 if (!string.IsNullOrWhiteSpace(travelParticipants[i].Birthdate))
-                    participantBuilder.Append(travelParticipants[i].Birthdate + General.Seperator);
-                participantBuilder.Append(travelParticipants[i].Gender.ToString() + General.Seperator);
-                participantBuilder.Append(travelParticipants[i].Relation.ToString() + General.Seperator);
+                    participantBuilder.Append(travelParticipants[i].Birthdate + General.Separator);
+                participantBuilder.Append(travelParticipants[i].Gender.ToString() + General.Separator);
+                participantBuilder.Append(travelParticipants[i].Relation.ToString() + General.Separator);
                 if (!string.IsNullOrWhiteSpace(travelParticipants[i].Language))
                     participantBuilder.Append(travelParticipants[i].Language);
                 participantsBuilder.AppendLine(participantBuilder.ToString());
@@ -149,7 +148,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                     if (!string.IsNullOrWhiteSpace(Participants[j].FirstName))
                         participantBuilder.Append(Participants[j].FirstName + General.Space);
                     if (!string.IsNullOrWhiteSpace(Participants[j].LastName))
-                        participantBuilder.Append(Participants[j].LastName + General.Seperator);
+                        participantBuilder.Append(Participants[j].LastName + General.Separator);
 
                     participantsBuilder.AppendLine(participantBuilder.ToString());
 
@@ -179,8 +178,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                     StringBuilder remarkbuilder = new StringBuilder();
                     trace.Trace("Processing Remark " + j.ToString() + " information - start");
                     if (!string.IsNullOrWhiteSpace(travelParticipants[i].TravelParticipantIdOnTour))
-                        remarkbuilder.Append(travelParticipants[i].TravelParticipantIdOnTour + General.Seperator);
-                    remarkbuilder.Append(travelParticipants[i].Remark[j].RemarkType.ToString() + General.Seperator);
+                        remarkbuilder.Append(travelParticipants[i].TravelParticipantIdOnTour + General.Separator);
+                    remarkbuilder.Append(travelParticipants[i].Remark[j].RemarkType.ToString() + General.Separator);
                     if (!string.IsNullOrWhiteSpace(travelParticipants[i].Remark[j].Text))
                         remarkbuilder.Append(travelParticipants[i].Remark[j].Text);
 

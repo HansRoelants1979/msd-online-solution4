@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Collections.ObjectModel;
-using Tc.Crm.Common.Constants.Attributes;
 using Tc.Crm.Common.Constants;
+using Attributes = Tc.Crm.Common.Constants.Attributes;
 using Tc.Crm.Common.Services;
 using Tc.Crm.Common;
 using Tc.Crm.Common.Models;
@@ -115,19 +115,19 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                 if (booking == null) continue;
 
                 var response = new BookingAllocationResponse();
-                if (booking.Contains(Booking.BookingId) && booking[Booking.BookingId] != null)
-                    response.BookingId = Guid.Parse(booking.Attributes[Booking.BookingId].ToString());
-                if (booking.Contains(Booking.Name) && booking.Attributes[Booking.Name] != null)
-                    response.BookingNumber = booking.Attributes[Booking.Name].ToString();
+                if (booking.Contains(Attributes.Booking.BookingId) && booking[Attributes.Booking.BookingId] != null)
+                    response.BookingId = Guid.Parse(booking.Attributes[Attributes.Booking.BookingId].ToString());
+                if (booking.Contains(Attributes.Booking.Name) && booking.Attributes[Attributes.Booking.Name] != null)
+                    response.BookingNumber = booking.Attributes[Attributes.Booking.Name].ToString();
                
-                    response.BookingOwner = GetOwner(booking, Booking.Owner, false);               
+                    response.BookingOwner = GetOwner(booking, Attributes.Booking.Owner, false);               
 
-                var fieldStartDate = AliasName.AccommodationAliasName + BookingAccommodation.StartDateandTime;
-                var fieldEndDate = AliasName.AccommodationAliasName + BookingAccommodation.EndDateandTime;
-                var fieldOwner = AliasName.HotelAliasName + Hotel.Owner;
-                var fieldCustomer = AliasName.RoleAliasName + CustomerBookingRole.Customer;
-                var fieldAccountOwner = AliasName.AccountAliasName + Common.Constants.Attributes.Customer.Owner;
-                var fieldContactOwner = AliasName.ContactAliasName + Common.Constants.Attributes.Customer.Owner;
+                var fieldStartDate = AliasName.AccommodationAliasName + Attributes.BookingAccommodation.StartDateandTime;
+                var fieldEndDate = AliasName.AccommodationAliasName + Attributes.BookingAccommodation.EndDateandTime;
+                var fieldOwner = AliasName.HotelAliasName + Attributes.Hotel.Owner;
+                var fieldCustomer = AliasName.RoleAliasName + Attributes.CustomerBookingRole.Customer;
+                var fieldAccountOwner = AliasName.AccountAliasName + Attributes.Customer.Owner;
+                var fieldContactOwner = AliasName.ContactAliasName + Attributes.Customer.Owner;
 
                 if (booking.Contains(fieldStartDate) && booking[fieldStartDate] != null)
                     response.AccommodationStartDate = DateTime.Parse(((AliasedValue)booking[fieldStartDate]).Value.ToString());

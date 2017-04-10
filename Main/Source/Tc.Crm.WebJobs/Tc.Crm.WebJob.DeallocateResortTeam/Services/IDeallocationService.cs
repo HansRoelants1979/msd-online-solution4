@@ -10,14 +10,19 @@ using Tc.Crm.WebJob.DeallocateResortTeam.Models;
 
 namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
 {
-    public interface IDeallocationService:IDisposable
+    public interface IDeallocationService : IDisposable
     {
-        IList<BookingDeallocationResponse> GetBookingDeallocations(BookingDeallocationRequest bookingDeallocationRequest);
-        IList<BookingDeallocationResponse> PrepareBookingDeallocation(EntityCollection bookingCollection);
-        StringBuilder GetDestinationGateways(IList<Guid> destinationGateways);
-        void ProcessBookingDeallocations(IList<BookingDeallocationResortTeamRequest> bookingDeallocationResortTeamRequest);
-        OwnerType GetOwnerType(EntityReference owner);
-        Owner GetOwner(Entity entity, string attributeName, bool isAliasedValue);
+        /// <summary>
+        /// Get bookings, customers and cases to be reassigned to the default team
+        /// </summary>
+        /// <param name="bookingDeallocationRequest"> deallocation request</param>
+        /// <returns>bookings, customers and cases to be assigned to default team</returns>
+        DeallocationExecutionRequest FetchBookingsForDeallocation(DeallocationRequest bookingDeallocationRequest);
 
+        /// <summary>
+        /// Assign bookings, customers and cases to default team
+        /// </summary>
+        /// <param name="request"></param>
+        void DeallocateEntities(DeallocationExecutionRequest request);
     }
 }

@@ -7,9 +7,9 @@ using Tc.Crm.WebJob.DeallocateResortTeam.Models;
 using Tc.Crm.Common;
 using Tc.Crm.Common.Services;
 using Tc.Crm.Common.Constants;
-using Tc.Crm.Common.Constants.Attributes;
 using Tc.Crm.Common.Models;
 using System.Collections.ObjectModel;
+using BookingAttribute = Tc.Crm.Common.Constants.Attributes.Booking;
 
 namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
 {
@@ -24,210 +24,201 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
             this.crmService = crmService;
         }
 
-        public IList<BookingDeallocationResponse> GetBookingDeallocations(BookingDeallocationRequest bookingDeallocationRequest)
+        public DeallocationExecutionRequest FetchBookingsForDeallocation(DeallocationRequest bookingDeallocationRequest)
         {
             //logger.LogInformation("GetBookingAllocations - start");
-            IList<BookingDeallocationResponse> bookingAllocationResponse = null;
-            if (bookingDeallocationRequest != null)
-            {
-                if (bookingDeallocationRequest.Destination != null)
-                {
-                    var destinationGateWays = GetDestinationGateways(bookingDeallocationRequest.Destination);
-                    if (bookingDeallocationRequest.AccommodationEndDate != null)
-                    {
-                        var query = string.Format(@"<fetch distinct='true' mapping='logical' output-format='xml-platform' version='1.0'>
-                                                 <entity name='tc_booking'>
-                                                    <attribute name='tc_bookingid'/>
-                                                    <attribute name='tc_name'/>
-                                                    <attribute name='ownerid'/>
-                                                    <order descending='false' attribute='tc_name'/>
-                                                    <filter type='and'>
-                                                    <condition attribute='tc_destinationgatewayid' operator='in'>
-                                                    {1}
-                                                    </condition>
-                                                    </filter>
-                                                      <link-entity name='tc_bookingaccommodation' alias='accommodation' to='tc_bookingid' from='tc_bookingid'>
-                                                        <attribute name='tc_enddateandtime'/>
-                                                        <order descending='false' attribute='tc_enddateandtime'/>
-                                                        <filter type='and'>
-                                                          <condition attribute='tc_enddateandtime' value='{0}' operator='on'/>
-                                                        </filter>
-                                                        <link-entity name='tc_hotel' alias='hotel' to='tc_hotelid' from='tc_hotelid'>
-                                                            <attribute name='tc_hotelid'/>
-                                                        </link-entity>
-                                                        </link-entity>
-                                                        <link-entity name='tc_customerbookingrole' alias='role' to='tc_bookingid' from='tc_bookingid'>
-                                                            <attribute name='tc_customer'/>
-                                                             <link-entity link-type='outer' name='account' alias='account' from='accountid' to='tc_customer'>
-                                                                <attribute name='ownerid'/>
-                                                             </link-entity>
-                                                             <link-entity link-type='outer' name='contact' alias='contact' from='contactid' to='tc_customer'>
-                                                                <attribute name='ownerid'/>
-                                                             </link-entity>
-                                                        </link-entity>                                                    
-                                                    </entity>
-                                                    </fetch>",
-                                                     new object[] { bookingDeallocationRequest.AccommodationEndDate.ToString("yyyy-MM-dd"),
-                                                     destinationGateWays.ToString() });
 
-                        EntityCollection bookingCollection = crmService.RetrieveMultipleRecordsFetchXml(query);
-                        //logger.LogInformation("GetBookingAllocations - end");
-                        bookingAllocationResponse = PrepareBookingDeallocation(bookingCollection);
-                    }
-                }
-            }
-            return bookingAllocationResponse;
+            // don't process invalid request
+            if (bookingDeallocationRequest == null || bookingDeallocationRequest.Destination == null ||
+                bookingDeallocationRequest.Destination.Count == 0 ||
+                bookingDeallocationRequest.Date == null || bookingDeallocationRequest.Date == DateTime.MinValue || bookingDeallocationRequest.Date == DateTime.MaxValue)
+                return null;
+
+            var destinationGateWays = GetGatewaysFilter(bookingDeallocationRequest.Destination);
+            // will fail in case 2 default teams are set
+            // get ids of bookings, filtered by return date and destination gateway, ordered by booking id, whose owner is hotel team
+            // via customerbookingrole ordered by customer:
+            // - get ids of contacts of booking and ids of their active incidents
+            // - get ids of accounts of booking and ids of their active incidents
+            // via country and business unit get default team id
+            var query = string.Format(
+                @"<fetch distinct='true' mapping='logical' output-format='xml-platform' version='1.0'>
+                    <entity name='tc_booking'>
+                    <attribute name='tc_bookingid' />
+                    <filter type='and'>
+                        <condition attribute='tc_returndate' operator='on' value='{0}' />
+                        <condition attribute='tc_destinationgatewayid' operator='in'>
+                        {1}
+                        </condition>
+                    </filter>
+                    <order attribute='tc_bookingid' />
+                    <link-entity name='team' from='teamid' to='owningteam' link-type='inner'>
+                        <filter type='and'>
+                        <condition attribute='tc_hotelteam' operator='eq' value='1' />
+                        </filter>
+                    </link-entity>
+                    <link-entity name='tc_customerbookingrole' from='tc_bookingid' to='tc_bookingid' link-type='outer'>
+                        <order attribute='tc_customer' />
+                        <link-entity name='contact' from='contactid' to='tc_customer' link-type='outer' alias='contact' visible='true'>
+                            <attribute name='contactid' />
+                            <link-entity name='incident' from='customerid' to='contactid' link-type='outer' alias='contactIncident' visible='true'>
+                                <attribute name='incidentid' />
+                                <filter type='and'>
+                                    <condition attribute='statecode' operator='eq' value='0' />
+                                </filter>
+                            </link-entity>
+                        </link-entity>
+                        <link-entity name='account' from='accountid' to='tc_customer' link-type='outer' alias='account'>
+                            <attribute name='accountid' />
+                            <link-entity name='incident' from='customerid' to='accountid' link-type='outer' alias='accountIncident' visible='true'>
+                                <attribute name='incidentid' />
+                                <filter type='and'>
+                                    <condition attribute='statecode' operator='eq' value='0' />
+                                </filter>
+                            </link-entity>
+                        </link-entity>
+                    </link-entity>
+                    <link-entity name='tc_country' from='tc_countryid' to='tc_sourcemarketid' link-type='inner'>
+                        <link-entity name='businessunit' from='businessunitid' to='tc_sourcemarketbusinessunitid' link-type='inner'>
+                            <link-entity name='team' from='businessunitid' to='businessunitid' link-type='inner' alias='defaultTeam' visible='true'>
+                                <attribute name='teamid' />
+                                <filter>
+                                    <condition attribute='isdefault' operator='eq' value='1' />
+                                </filter>
+                            </link-entity>
+                        </link-entity>
+                    </link-entity>
+                    </entity>
+                </fetch>",
+                new object[] { bookingDeallocationRequest.Date.ToString("yyyy-MM-dd"),
+                destinationGateWays.ToString() });
+
+            EntityCollection bookingCollection = crmService.RetrieveMultipleRecordsFetchXml(query);
+            var result = ConvertCrmResponse(bookingCollection);
+            return result;
         }
 
-        public StringBuilder GetDestinationGateways(IList<Guid> destinationGateways)
+        public void DeallocateEntities(DeallocationExecutionRequest request)
         {
-            //logger.LogInformation("GetDestinationGateways - start");
+            var assignRequests = new Collection<AssignInformation>();
+            // bookings
+            CreateAssignRequests(assignRequests, request.Bookings);
+            // customer
+            CreateAssignRequests(assignRequests, request.Customers);
+            // cases
+            CreateAssignRequests(assignRequests, request.Cases);
+            // assign
+            if (assignRequests.Count > 0)
+                crmService.BulkAssign(assignRequests);
+        }
+
+        private StringBuilder GetGatewaysFilter(IEnumerable<Guid> destinationGateways)
+        {
             StringBuilder gateways = new StringBuilder();
-            if (destinationGateways != null && destinationGateways.Count > 0)
+            foreach (var destinationGateway in destinationGateways)
             {
-                for (int i = 0; i < destinationGateways.Count; i++)
-                {
-                    gateways.Append("<value>" + destinationGateways[i].ToString() + "</value>");
-                }
+                gateways.Append("<value>" + destinationGateway.ToString() + "</value>");
             }
-            //logger.LogInformation("GetDestinationGateways - end");
             return gateways;
         }
 
-
-        public IList<BookingDeallocationResponse> PrepareBookingDeallocation(EntityCollection bookingCollection)
+        /// <summary>
+        /// Covert CRM search results to collections of entities
+        /// Implementation is based on assumption, that there cannot be one customer in 2 on-going bookings
+        /// </summary>
+        /// <param name="collection"></param>
+        /// <returns></returns>
+        private DeallocationExecutionRequest ConvertCrmResponse(EntityCollection collection)
         {
-            //logger.LogInformation("PrepareBookingDeallocation - start");
-            IList<BookingDeallocationResponse> bookingDeallocationResponse = null;
-            if (bookingCollection != null && bookingCollection.Entities.Count > 0)
+            if (collection == null || collection.Entities.Count == 0)
+                return null;
+
+            var result = new DeallocationExecutionRequest
             {
-                bookingDeallocationResponse = new List<BookingDeallocationResponse>();
-                for (int i = 0; i < bookingCollection.Entities.Count; i++)
+                Bookings = new HashSet<Booking>(),
+                Customers = new HashSet<Customer>(),
+                Cases = new HashSet<Case>()
+            };
+
+            var currentBookingId = Guid.Empty;
+            var currentCustomerId = Guid.Empty;
+
+            foreach (var searchRecord in collection.Entities)
+            {
+                // TODO: warn on owner does not existing and don't process record
+                var owner = new Owner {
+                    Id = Guid.Parse(((AliasedValue)searchRecord["defaultTeam.teamid"]).Value.ToString()),
+                    OwnerType = OwnerType.Team
+                };
+
+                var bookingId = Guid.Parse(searchRecord[BookingAttribute.BookingId].ToString());
+                if (currentBookingId != bookingId)
                 {
-                    var booking = bookingCollection.Entities[i];
-                    if (booking != null)
+                    // add booking entity
+                    var booking = new Booking
                     {
-                        var response = new BookingDeallocationResponse();
-                        if (booking.Contains(Booking.BookingId) && booking[Booking.BookingId] != null)
-                            response.BookingId = Guid.Parse(booking[Booking.BookingId].ToString());
+                        Id = bookingId,
+                        Owner = owner
+                    };                    
 
-                        if (booking.Contains(Booking.Name) && booking[Booking.Name] != null)
-                            response.BookingNumber = booking[Booking.Name].ToString();
+                    currentBookingId = bookingId;
+                    currentCustomerId = Guid.Empty;
 
-                        var fieldHotelId = AliasName.HotelAliasName + Hotel.HotelId;
-                        var fieldEndDate = AliasName.AccommodationAliasName + BookingAccommodation.EndDateandTime;
-                        var fieldCustomer = AliasName.RoleAliasName + CustomerBookingRole.Customer;
-                        var fieldAccountOwner = AliasName.AccountAliasName + Common.Constants.Attributes.Customer.Owner;
-                        var fieldContactOwner = AliasName.ContactAliasName + Common.Constants.Attributes.Customer.Owner;
-
-                        if (booking.Contains(fieldHotelId) && booking[fieldHotelId] != null)
-                            response.HotelId = Guid.Parse(((AliasedValue)booking[fieldHotelId]).Value.ToString());
-
-                        if (booking.Contains(fieldEndDate) && booking[fieldEndDate] != null)
-                            response.AccommodationEndDate = DateTime.Parse(((AliasedValue)booking[fieldEndDate]).Value.ToString());
-
-                        if (booking.Contains(fieldCustomer) && booking[fieldCustomer] != null)
+                    result.Bookings.Add(booking);
+                }
+                if (searchRecord.Contains("contact.contactid") || searchRecord.Contains("account.accountid"))
+                {
+                    var isContact = searchRecord.Contains("contact.contactid");
+                    var customerId = Guid.Parse(((AliasedValue)searchRecord[isContact ? "contact.contactid" : "account.accountid"]).Value.ToString());
+                    if (customerId != currentCustomerId)
+                    {
+                        // add customer entity
+                        var customer = new Customer
                         {
-                            EntityReference customer = (EntityReference)((AliasedValue)booking[fieldCustomer]).Value;
-                            CustomerType customerType;
-                            Owner owner;
-
-                            if (customer.LogicalName == EntityName.Contact)
-                                customerType = CustomerType.Contact;
-                            else
-                                customerType = CustomerType.Account;
-
-                            if (booking.Contains(fieldContactOwner) && booking[fieldContactOwner] != null)
-                                owner = GetOwner(booking, fieldContactOwner, true);
-                            else
-                                owner = GetOwner(booking, fieldAccountOwner, true);
-
-                            response.Customer = new Common.Models.Customer() { Id = customer.Id, Name = customer.Name, CustomerType = customerType,Owner=owner };
-                        }
-
-                            response.BookingOwner = GetOwner(booking, Booking.Owner, false);                        
-
-                        bookingDeallocationResponse.Add(response);
+                            Id = customerId,
+                            Owner = owner,
+                            CustomerType = isContact ? CustomerType.Contact : CustomerType.Account
+                        };
+                        currentCustomerId = customerId;
+                        // IMPORTANT: assuming customer can be present in one booking
+                        // TODO: check performance hit for check existance in result.Customers set. Can be added if not big impact so eliminating condition above
+                        // should be also considered for cases
+                        result.Customers.Add(customer);
                     }
-
+                }
+                if (searchRecord.Contains("contactIncident.incidentid") || searchRecord.Contains("accountIncident.incidentid"))
+                {
+                    var isContact = searchRecord.Contains("contactIncident.incidentid");
+                    var incidentId = Guid.Parse(((AliasedValue)searchRecord[isContact ? "contactIncident.incidentid" : "accountIncident.incidentid"]).Value.ToString());
+                    // add case entity
+                    var incident = new Case
+                    {
+                        Id = incidentId,
+                        Owner = owner
+                    };
+                    // IMPORTANT: Same case as for customer. Will fail if customer in second booking
+                    result.Cases.Add(incident);
                 }
             }
-            else
+
+            return result;
+        }
+
+        private void CreateAssignRequests(Collection<AssignInformation> requets, IEnumerable<EntityModel> entities)
+        {
+            foreach (var entity in entities)
             {
-                logger.LogWarning("No booking records found to process in CRM for the schedule.");
-            }
-            //logger.LogInformation("PrepareBookingDeallocation - end");
-            return bookingDeallocationResponse;
-        }
-
-        public OwnerType GetOwnerType(EntityReference owner)
-        {
-            if (owner.LogicalName == EntityName.User)
-                return OwnerType.User;
-            else
-                return OwnerType.Team;
-        }
-
-        public Owner GetOwner(Entity entity, string attributeName, bool isAliasedValue)
-        {
-            if (entity == null) return null;
-            if (!entity.Contains(attributeName)) return null;
-            if (entity[attributeName] == null) return null;
-            EntityReference owner;
-            if (isAliasedValue)
-                owner = (EntityReference)((AliasedValue)entity[attributeName]).Value;
-            else
-                owner = (EntityReference)entity.Attributes[attributeName];
-
-            var ownerType = GetOwnerType(owner);
-
-            return new Owner() { Id = owner.Id, Name = owner.Name, OwnerType = ownerType };
-        }
-
-        public void ProcessBookingDeallocations(IList<BookingDeallocationResortTeamRequest> bookingDeallocationResortTeamRequest)
-        {
-            
-            if (bookingDeallocationResortTeamRequest != null && bookingDeallocationResortTeamRequest.Count > 0)
-            {
-                var assignRequests = new Collection<AssignInformation>();
-
-                for (int i = 0; i < bookingDeallocationResortTeamRequest.Count; i++)
+                requets.Add(new AssignInformation
                 {
-                    if (bookingDeallocationResortTeamRequest[i] == null) continue;
-
-                    var bookingTeamRequest = bookingDeallocationResortTeamRequest[i];
-                    if (bookingTeamRequest.BookingResortTeamRequest != null)
-                    {
-                        var assignBookingRequest = new AssignInformation
-                        {
-                            EntityName = EntityName.Booking,
-                            RecordId = bookingTeamRequest.BookingResortTeamRequest.Id,
-                            RecordName = bookingTeamRequest.BookingResortTeamRequest.Name,
-                            RecordOwner = bookingTeamRequest.BookingResortTeamRequest.Owner
-                        };
-                        assignRequests.Add(assignBookingRequest);
-                    }
-                    if (bookingTeamRequest.CustomerResortTeamRequest != null)
-                    {
-                        var assignCustomerRequest = new AssignInformation
-                        {
-                            EntityName = bookingTeamRequest.CustomerResortTeamRequest.Customer.CustomerType.ToString(),
-                            RecordId = bookingTeamRequest.CustomerResortTeamRequest.Customer.Id,
-                            RecordName = bookingTeamRequest.CustomerResortTeamRequest.Customer.Name,
-                            RecordOwner = bookingTeamRequest.CustomerResortTeamRequest.Owner
-                        };
-                        assignRequests.Add(assignCustomerRequest);
-                    }                 
-                }
-
-                if (assignRequests != null && assignRequests.Count > 0)
-                    crmService.BulkAssign(assignRequests);
+                    EntityName = entity.EntityName,
+                    RecordId = entity.Id,
+                    RecordOwner = entity.Owner
+                });
             }
         }
-        
-
 
         #region IDisposable Support
+
         private bool disposedValue = false; // To detect redundant calls
 
         protected virtual void Dispose(bool disposing)
@@ -274,8 +265,6 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
 
         }
 
-
         #endregion
-
     }
 }
