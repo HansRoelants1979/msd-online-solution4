@@ -30,6 +30,7 @@ namespace Tc.Crm.CustomWorkflowSteps
     }
     public static class EntityName
     {
+        public const string Queue = "queue";
         public const string Account = "account";
         public const string Annotation = "annotation";
         public const string Contact = "contact";
@@ -65,6 +66,10 @@ namespace Tc.Crm.CustomWorkflowSteps
 
     public static class Attributes
     {
+        public static class Role
+        {
+            public const string Name = "name";
+        }
         public static class Contact
         {
             public const string LastName = "lastname";
