@@ -5,7 +5,7 @@ using Tc.Crm.Plugins.User.BusinessLogic;
 
 namespace Tc.Crm.Plugins.User
 {
-    public class PostDeassociateUsertFromTeam : IPlugin
+    public class PostDisassociateUserFromTeam : IPlugin
     {        
         public void Execute(IServiceProvider serviceProvider)
         {

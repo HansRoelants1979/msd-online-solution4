@@ -8,7 +8,7 @@ using FakeXrmEasy;
 namespace Tc.Crm.UnitTests.Plugins
 {
     [TestClass]
-    public class PostDeassociateUsertFromTeamTest
+    public class PostDisassociateUserFromTeamTest
     {
         private XrmFakedPluginExecutionContext GetPluginContext(Guid userId, Guid teamId)
         {
@@ -31,7 +31,7 @@ namespace Tc.Crm.UnitTests.Plugins
         {
             var context = new XrmFakedContext();
             var cntxt = GetPluginContext(Guid.NewGuid(), Guid.NewGuid());
-            context.ExecutePluginWith<Crm.Plugins.User.PostDeassociateUsertFromTeam>(cntxt);
+            context.ExecutePluginWith<Crm.Plugins.User.PostDisassociateUserFromTeam>(cntxt);
         }
 
         [TestMethod]
@@ -45,7 +45,7 @@ namespace Tc.Crm.UnitTests.Plugins
             team["tc_hotelteamid"] = Guid.NewGuid();
             context.Initialize(new List<Entity> { team });
             var cntxt = GetPluginContext(Guid.NewGuid(), teamId);
-            context.ExecutePluginWith<Crm.Plugins.User.PostDeassociateUsertFromTeam>(cntxt);           
+            context.ExecutePluginWith<Crm.Plugins.User.PostDisassociateUserFromTeam>(cntxt);           
         }
 
         
