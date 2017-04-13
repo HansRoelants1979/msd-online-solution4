@@ -26,14 +26,14 @@ namespace Tc.Crm.CustomWorkflowSteps.ExecutingUserInDepartment
             {
                 var SecurityRoleName = string.Empty;
 
-                SecurityRoleName = deptBaseSecurityRoleName.Get<string>(executionContext);
+                SecurityRoleName = DeptBaseSecurityRoleName.Get<string>(executionContext);
                 var UserId = context.UserId;
 
                 if (UserId != null)
                 {
                     var response = RetrieveSecurityRoles.GetSecurityRoles(SecurityRoleName,UserId,service);
                     if (response != false)
-                        Bool.Set(executionContext, response);
+                        IsInRole.Set(executionContext, response);
                 }
             }
 
@@ -51,12 +51,12 @@ namespace Tc.Crm.CustomWorkflowSteps.ExecutingUserInDepartment
             }
 
         }
-        [Input("deptBaseSecurityRoleName")]
-        public InArgument<string> deptBaseSecurityRoleName { get; set; }
+        [Input("DeptBaseSecurityRoleName")]
+        public InArgument<string> DeptBaseSecurityRoleName { get; set; }
 
-        [Output("Bool")]
+        [Output("IsInRole")]
         [Default("false")]
-        public OutArgument<bool>Bool { get; set; }
+        public OutArgument<bool> IsInRole { get; set; }
         
 
 
