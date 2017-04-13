@@ -6,20 +6,29 @@ using System.Xml;
 using System.Collections.ObjectModel;
 using Tc.Crm.Common.Models;
 using Microsoft.Crm.Sdk.Messages;
+using System.Collections.Generic;
 
 namespace Tc.Crm.Common.Services
 {
-    public interface ICrmService : IDisposable
+    public interface ICrmService
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
-        IOrganizationService GetOrganizationService();
-        EntityCollection RetrieveMultipleRecords(string entityName, string[] columns, string[] filterKeys, string[] filterValues);
-        EntityCollection GetRecordsUsingQuery(QueryExpression queryExpression);
+        /// <summary>
+        /// Search CRM with the fetch query
+        /// </summary>
+        /// <param name="query">FetchXml query</param>
+        /// <returns></returns>
         EntityCollection RetrieveMultipleRecordsFetchXml(string query);
+
+        /// <summary>
+        /// Execute assignment requests
+        /// </summary>
+        /// <param name="assignRequests">The requests</param>
         void BulkAssign(Collection<AssignInformation> assignRequests);
-        string CreateXml(string xml, string cookie, int page, int count);
-        string CreateXml(XmlDocument doc, string cookie, int page, int count);
-        void ExecuteBulkAssignRequests(ExecuteMultipleRequest request);
-        string FormatFaultException(AssignRequest assignRequest, OrganizationServiceFault fault);
+
+        /// <summary>
+        /// Execute bulk update of entities
+        /// </summary>
+        /// <param name="entities">The entities</param>
+        void BulkUpdate(IEnumerable<Entity> entities);
     }
 }

@@ -56,7 +56,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                 logger.LogWarning("No booking records found to process in CRM for the schedule.") ;
                 return;
             }
-
+            logger.LogInformation(string.Format("Found {0} Bookings, {1} Customers, {2} Cases to process", request.TotalBookings, request.TotalCustomers, request.TotalCases));
             deallocationService.DeallocateEntities(request);
 
             logger.LogInformation("Finished DeallocateBookings");

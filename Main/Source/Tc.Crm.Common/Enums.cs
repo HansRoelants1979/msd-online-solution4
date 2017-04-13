@@ -18,4 +18,17 @@ namespace Tc.Crm.Common
         Contact,
         Account 
     }
+
+    public enum CaseStatusCode
+    {
+        InProgress = 1,
+        AssignedToLocalSourceMarket = 950000003,
+        EscalatedToLocalSourceMarket = 950000004
+    }
+
+    public enum CaseState
+    {
+        Active = 0,
+        Inactive = 1
+    }
 }

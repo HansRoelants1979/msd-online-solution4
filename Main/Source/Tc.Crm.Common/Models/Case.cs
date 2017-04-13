@@ -15,5 +15,8 @@ namespace Tc.Crm.Common.Models
                 return Constants.EntityName.Case;
             }
         }
+
+        public CaseStatusCode StatusCode { get; set; }
+        public CaseState State { get; set; }
     }
 }

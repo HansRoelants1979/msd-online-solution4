@@ -11,40 +11,37 @@ using Microsoft.Crm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Messages;
 using Tc.Crm.Common.Constants;
 using Attributes = Tc.Crm.Common.Constants.Attributes;
+using System.Reflection;
+using Tc.Crm.Common.Constants.EntityRecords;
 
 namespace Tc.Crm.WebJob.DeallocateResortTeamTests
 {
-    public enum DataSwitch
-    {
-        No_Records_Returned = 0,
-        Collection_With_No_Records_Returned = 1,
-        Returns_Data = 2
-    }
     public class TestCrmService : ICrmService
     {
 
         #region Properties 
 
-        public DataSwitch Switch { get; set; }
-        public XrmFakedContext context;
-        public IOrganizationService orgService;
-
-        public List<Guid> ValidGatewayIds { get; private set; }
+        public XrmFakedContext Context { get; private set; }
+        //private ICrmService Service { get; set; }
+        public Collection<Guid> ValidGatewayIds { get; private set; }
         public Entity SystemUser { get; private set; }
-        public Entity BusinessUnit1 { get; private set; }
-        public Entity BusinessUnit2 { get; private set; }
-        public Entity SourceMarketCountry1 { get; private set; }
-        public Entity SourceMarketCountry2 { get; private set; }
-        public Entity DefaultTeam1 { get; private set; }
-        public Entity DefaultTeam2 { get; private set; }
+        public Entity BusinessUnitUK { get; private set; }
+        public Entity BusinessUnitNonUK { get; private set; }
+        public Entity SourceMarketCountryUK{ get; private set; }
+        public Entity SourceMarketCountryNonUK { get; private set; }
+        public Entity DefaultTeamUK { get; private set; }
+        public Entity DefaultTeamNonUK { get; private set; }
 
         #endregion
 
         public TestCrmService()
         {
-            context = new XrmFakedContext();
-            orgService = GetOrganizationService();
-            ValidGatewayIds = new List<Guid>();
+            // XrmFakedContext does not parses deallocation fetch xml properly
+            // Context = new XrmFakedContext { ProxyTypesAssembly = Assembly.GetExecutingAssembly() };
+            //Service = new CrmService(new TestConfigurationService(), new TestLogger(), Context.GetFakedOrganizationService());
+
+            Context = new XrmFakedContext();
+            ValidGatewayIds = new Collection<Guid>();
             PrepareData();
         }
 
@@ -52,44 +49,43 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
 
         public void PrepareData()
         {
-            context.Data.Clear();
+            Context.Data.Clear();
             // initialize entities
-            context.Data.Add(EntityName.Booking, new Dictionary<Guid, Entity>());            
-            context.Data.Add(EntityName.Country, new Dictionary<Guid, Entity>());
-            context.Data.Add(EntityName.BusinessUnit, new Dictionary<Guid, Entity>());
-            context.Data.Add(EntityName.Team, new Dictionary<Guid, Entity>());
-            context.Data.Add(EntityName.CustomerBookingRole, new Dictionary<Guid, Entity>());            
-            context.Data.Add(EntityName.Contact, new Dictionary<Guid, Entity>());
-            context.Data.Add(EntityName.Account, new Dictionary<Guid, Entity>());
-            context.Data.Add(EntityName.Case, new Dictionary<Guid, Entity>());
-            context.Data.Add(EntityName.User, new Dictionary<Guid, Entity>());
+            Context.Data.Add(EntityName.Booking, new Dictionary<Guid, Entity>());
+            Context.Data.Add(EntityName.Country, new Dictionary<Guid, Entity>());
+            Context.Data.Add(EntityName.BusinessUnit, new Dictionary<Guid, Entity>());
+            Context.Data.Add(EntityName.Team, new Dictionary<Guid, Entity>());
+            Context.Data.Add(EntityName.CustomerBookingRole, new Dictionary<Guid, Entity>());
+            Context.Data.Add(EntityName.Contact, new Dictionary<Guid, Entity>());
+            Context.Data.Add(EntityName.Account, new Dictionary<Guid, Entity>());
+            Context.Data.Add(EntityName.Case, new Dictionary<Guid, Entity>());
+            Context.Data.Add(EntityName.User, new Dictionary<Guid, Entity>());
             AddConfiguredGatewaysToContext();
 
             // add default data
             var userId = Guid.NewGuid();
             SystemUser = new Entity(EntityName.User, userId);
             SystemUser[Attributes.User.UserId] = userId;
-            context.Data[EntityName.User].Add(userId, SystemUser);
+            Context.Data[EntityName.User].Add(userId, SystemUser);
 
-            BusinessUnit1 = AddBusinessUnit();
-            BusinessUnit2 = AddBusinessUnit();
+            BusinessUnitUK = AddBusinessUnit(BusinessUnit.GB);
+            BusinessUnitNonUK = AddBusinessUnit("DE");
 
-            DefaultTeam1 = AddTeam(CreateReference(EntityName.BusinessUnit, Attributes.BusinessUnit.BusinessUnitId, BusinessUnit1.Id), false, true);
-            DefaultTeam2 = AddTeam(CreateReference(EntityName.BusinessUnit, Attributes.Team.BusinessUnitId, BusinessUnit1.Id), false, true);
+            DefaultTeamUK = AddTeam(CreateReference(EntityName.BusinessUnit, Attributes.BusinessUnit.BusinessUnitId, BusinessUnitUK.Id), false, true);
+            DefaultTeamNonUK = AddTeam(CreateReference(EntityName.BusinessUnit, Attributes.Team.BusinessUnitId, BusinessUnitNonUK.Id), false, true);
 
-            SourceMarketCountry1 = AddCountry(CreateReference(EntityName.BusinessUnit, Attributes.Country.BusinessUnitId, BusinessUnit1.Id));
-            SourceMarketCountry2 = AddCountry(CreateReference(EntityName.BusinessUnit, Attributes.Country.BusinessUnitId, BusinessUnit2.Id));
-            
-            
+            SourceMarketCountryUK = AddCountry(CreateReference(EntityName.BusinessUnit, Attributes.Country.BusinessUnitId, BusinessUnitUK.Id));
+            SourceMarketCountryNonUK = AddCountry(CreateReference(EntityName.BusinessUnit, Attributes.Country.BusinessUnitId, BusinessUnitNonUK.Id));
         }
 
-        public Entity AddBusinessUnit()
+        public Entity AddBusinessUnit(string name)
         {
             var id = Guid.NewGuid();
             var businessUnit = new Entity(EntityName.BusinessUnit, id);
             businessUnit[Attributes.BusinessUnit.BusinessUnitId] = id;
+            businessUnit[Attributes.BusinessUnit.Name] = name;
 
-            context.Data[EntityName.BusinessUnit].Add(id, businessUnit);
+            Context.Data[EntityName.BusinessUnit].Add(id, businessUnit);
             return businessUnit;
         }
 
@@ -98,7 +94,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
             var id = Guid.NewGuid();
             var gateway = new Entity(EntityName.Gateway, id);
             gateway[Attributes.Gateway.GatewayId] = id;
-            context.Data[EntityName.Gateway].Add(id, gateway);
+            Context.Data[EntityName.Gateway].Add(id, gateway);
             return gateway;
         }
 
@@ -111,7 +107,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
             team[Attributes.Team.IsDefaultTeam] = isDefaultTeam;
             team[Attributes.Team.IsHotelTeam] = isHotelTeam;
 
-            context.Data[EntityName.Team].Add(id, team);
+            Context.Data[EntityName.Team].Add(id, team);
             return team;
         }
 
@@ -122,7 +118,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
             country[Attributes.Country.CountryId] = id;
             country[Attributes.Country.BusinessUnitId] = businessUnit;
 
-            context.Data[EntityName.Country].Add(id, country);
+            Context.Data[EntityName.Country].Add(id, country);
             return country;
         }
 
@@ -134,7 +130,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
             _case[Attributes.Case.CustomerId] = customer;
             _case[Attributes.Case.Owner] = owningTeam ?? CreateReference(EntityName.User, Attributes.Booking.Owner, SystemUser.Id);
 
-            context.Data[EntityName.Case].Add(id, _case);
+            Context.Data[EntityName.Case].Add(id, _case);
             return _case;
         }
 
@@ -146,7 +142,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
             contact[Attributes.Contact.ContactId] = id;
             contact[Attributes.Booking.Owner] = owningTeam ?? CreateReference(EntityName.User, Attributes.Booking.Owner, SystemUser.Id);
 
-            context.Data[EntityName.Contact].Add(id, contact);
+            Context.Data[EntityName.Contact].Add(id, contact);
             return contact;
         }
 
@@ -157,7 +153,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
             account[Attributes.Account.AccountId] = id;
             account[Attributes.Booking.Owner] = owningTeam ?? CreateReference(EntityName.User, Attributes.Booking.Owner, SystemUser.Id);
 
-            context.Data[EntityName.Account].Add(id, account);
+            Context.Data[EntityName.Account].Add(id, account);
             return account;
         }
 
@@ -169,7 +165,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
             role[Attributes.CustomerBookingRole.Customer] = customer;
             role[Attributes.CustomerBookingRole.BookingId] = booking;
 
-            context.Data[EntityName.CustomerBookingRole].Add(id, role);
+            Context.Data[EntityName.CustomerBookingRole].Add(id, role);
             return role;
         }
 
@@ -185,7 +181,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
             booking[Attributes.Booking.OwningTeam] = owningTeam;
             booking[Attributes.Booking.Owner] = owningTeam ?? CreateReference(EntityName.User, Attributes.Booking.Owner, SystemUser.Id);
 
-            context.Data[EntityName.Booking].Add(id, booking);
+            Context.Data[EntityName.Booking].Add(id, booking);
             return booking;
         }
 
@@ -204,89 +200,50 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
                 gatewayEntityCollection.Add(gatewayId, gateway);
                 ValidGatewayIds.Add(gatewayId);
             }
-            context.Data.Add(EntityName.Gateway, gatewayEntityCollection);
+            Context.Data.Add(EntityName.Gateway, gatewayEntityCollection);
         }
 
         #endregion
 
-        #region ICrmService
-
-        public IOrganizationService GetOrganizationService()
-        {
-
-            return context.GetFakedOrganizationService();
-        }
+        #region ICrmService        
 
         public void BulkAssign(Collection<AssignInformation> assignRequests)
         {
-            foreach (var ar in assignRequests)
+            throw new NotImplementedException();
+        }
+
+        public void BulkUpdate(IEnumerable<Entity> entities)
+        {
+            if (entities == null)
+                throw new ArgumentNullException("BulkUpdate: entities are null");
+            // Service.BulkUpdate(entities);
+            foreach (var entity in entities)
             {
-                string owner = ar.RecordOwner.OwnerType == Common.OwnerType.Team ? EntityName.Team : EntityName.User; 
-                context.Data[ar.EntityName][ar.RecordId]["ownerid"] = new EntityReference(owner, ar.RecordOwner.Id);
+                var owner = (EntityReference)entity[Attributes.Entity.Owner];
+                Context.Data[entity.LogicalName][entity.Id][Attributes.Entity.Owner] = new EntityReference(owner.LogicalName, owner.Id);
+                if (entity.LogicalName == EntityName.Case)
+                {
+                    Context.Data[entity.LogicalName][entity.Id][Attributes.Case.StatusReason] = entity[Attributes.Case.StatusReason];
+                    Context.Data[entity.LogicalName][entity.Id][Attributes.Case.State] = entity[Attributes.Case.State];
+                }
             }
         }
 
         public EntityCollection RetrieveMultipleRecordsFetchXml(string query)
         {
-            switch (Switch)
-            {
-                case DataSwitch.No_Records_Returned:
-                    return null;
-                case DataSwitch.Collection_With_No_Records_Returned:
-                    return new Microsoft.Xrm.Sdk.EntityCollection();
-                case DataSwitch.Returns_Data:
-                    return GetBookings(
-                        context.Data[EntityName.Booking].Values.ToList(),
-                        context.Data[EntityName.Gateway].Values.ToList(),
-                        context.Data[EntityName.CustomerBookingRole].Values.ToList(),
-                        context.Data[EntityName.Contact].Values.ToList(),
-                        context.Data[EntityName.Account].Values.ToList(),
-                        context.Data[EntityName.Case].Values.ToList(),
-                        context.Data[EntityName.Country].Values.ToList(),
-                        context.Data[EntityName.BusinessUnit].Values.ToList(),
-                        context.Data[EntityName.Team].Values.ToList());
-            }
-            return null;
+            //return Service.RetrieveMultipleRecordsFetchXml(query);
+
+            return GetBookings(
+                Context.Data[EntityName.Booking].Values.ToList(),
+                Context.Data[EntityName.Gateway].Values.ToList(),
+                Context.Data[EntityName.CustomerBookingRole].Values.ToList(),
+                Context.Data[EntityName.Contact].Values.ToList(),
+                Context.Data[EntityName.Account].Values.ToList(),
+                Context.Data[EntityName.Case].Values.ToList(),
+                Context.Data[EntityName.Country].Values.ToList(),
+                Context.Data[EntityName.BusinessUnit].Values.ToList(),
+                Context.Data[EntityName.Team].Values.ToList());
         }
-
-        #region Not Implemented
-
-        public string CreateXml(XmlDocument doc, string cookie, int page, int count)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string CreateXml(string xml, string cookie, int page, int count)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
-
-        public EntityCollection GetRecordsUsingQuery(Microsoft.Xrm.Sdk.Query.QueryExpression queryExpression)
-        {
-            throw new NotImplementedException();
-        }
-
-        public EntityCollection RetrieveMultipleRecords(string entityName, string[] columns, string[] filterKeys, string[] filterValues)
-        {
-            return null;
-        }
-
-        public void ExecuteBulkAssignRequests(ExecuteMultipleRequest request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string FormatFaultException(AssignRequest assignRequest, OrganizationServiceFault fault)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
 
         #endregion
 
@@ -306,10 +263,12 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
             // fetch xml filter
             var filteredData = (from b in bookings
                                 join g in gateways on ((EntityReference)b[Attributes.Booking.DestinationGatewayId]).Id equals g.Id
-                                join team in teams on ((EntityReference)b[Attributes.Booking.OwningTeam]).Id equals team.Id
+                                join team in teams on
+                                    new { Id = b[Attributes.Booking.OwningTeam] != null ? ((EntityReference)b[Attributes.Booking.OwningTeam]).Id : Guid.Empty }
+                                    equals new { Id = team.Id }
                                 join country in countries on ((EntityReference)b[Attributes.Booking.SourceMarketId]).Id equals country.Id
-                                join bu in businessUnits on ((EntityReference)country[Attributes.Country.BusinessUnitId]).Id equals bu.Id
-                                join defaultTeam in teams on bu.Id equals ((EntityReference)defaultTeam[Attributes.Team.BusinessUnitId]).Id
+                                join businessUnit in businessUnits on ((EntityReference)country[Attributes.Country.BusinessUnitId]).Id equals businessUnit.Id
+                                join defaultTeam in teams on businessUnit.Id equals ((EntityReference)defaultTeam[Attributes.Team.BusinessUnitId]).Id
                                 join role in customerBookingRoles on b.Id equals ((EntityReference)role[Attributes.CustomerBookingRole.BookingId]).Id into cbr
                                 from role in cbr.DefaultIfEmpty()
                                 join contact in contacts on
@@ -332,8 +291,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
                                 where ((DateTime)b[Attributes.Booking.ReturnDate]).Date == DateTime.Now.Date.AddDays(-2)
                                 && ValidGatewayIds.Contains(((EntityReference)b[Attributes.Booking.DestinationGatewayId]).Id)
                                 && (bool)defaultTeam[Attributes.Team.IsDefaultTeam] == true
-                                && (bool)team[Attributes.Team.IsHotelTeam] == true
-                                orderby b.Id ascending, role.Id ascending
+                                && (bool)team[Attributes.Team.IsHotelTeam] == true                              
                              select new
                              {
                                  BookingId = b.Id,
@@ -341,14 +299,17 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
                                  AccountId = account != null ? account.Id : Guid.Empty,
                                  ContactCaseId = contactCase != null ? contactCase.Id : Guid.Empty,
                                  AccountCaseId = accountCase != null ? accountCase.Id: Guid.Empty,
-                                 DefaultTeamId = defaultTeam.Id
-                             }).GroupBy(r => new { r.BookingId, r.ContactId, r.AccountId, r.ContactCaseId, r.AccountCaseId, r.DefaultTeamId }).Select(r => r.First());
+                                 DefaultTeamId = defaultTeam.Id,
+                                 BusinessUnitName = businessUnit[Attributes.BusinessUnit.Name]
+                             }).GroupBy(r => new { r.BookingId, r.ContactId, r.AccountId, r.ContactCaseId, r.AccountCaseId, r.DefaultTeamId }).
+                             Select(r => r.First()).OrderBy(r => r.BookingId).ThenBy(r => r.ContactId).ThenBy(r => r.AccountId);
 
             foreach (var item in filteredData)
             {
                 var b = new Entity(EntityName.Booking, item.BookingId);
                 b[Attributes.Booking.BookingId] = item.BookingId;
                 b["defaultTeam.teamid"] = new AliasedValue(EntityName.Team, Attributes.Team.TeamId, item.DefaultTeamId);
+                b["businessUnit.name"] = new AliasedValue(EntityName.BusinessUnit, Attributes.BusinessUnit.Name, item.BusinessUnitName);
                 if (item.ContactId != Guid.Empty)
                 {
                     b["contact.contactid"] = new AliasedValue(EntityName.Contact, Attributes.Contact.ContactId, item.ContactId);
@@ -372,7 +333,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
 
         }
 
-        private EntityReference CreateReference(string entity, string key, Guid id)
+        private static EntityReference CreateReference(string entity, string key, Guid id)
         {
             return new EntityReference(entity, key, id) { Id = id };
         }

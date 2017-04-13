@@ -24,14 +24,12 @@ namespace Tc.Crm.WebJob.AllocateResortTeamTests
     public class TestCrmService : ICrmService
     {
         public DataSwitch Switch { get; set; }
-        public XrmFakedContext context;
-        public IOrganizationService orgService;
+        public XrmFakedContext context;        
         public List<Guid> validGatewayIds;
 
         public TestCrmService()
         {
             context = new XrmFakedContext();
-            orgService = GetOrganizationService();
             validGatewayIds = new List<Guid>();
             PrepareData();
         }
@@ -270,12 +268,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeamTests
             }
         }
 
-        public string CreateXml(XmlDocument doc, string cookie, int page, int count)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string CreateXml(string xml, string cookie, int page, int count)
+        public void BulkUpdate(IEnumerable<Entity> entities)
         {
             throw new NotImplementedException();
         }
@@ -283,12 +276,6 @@ namespace Tc.Crm.WebJob.AllocateResortTeamTests
         public void Dispose()
         {
             throw new NotImplementedException();
-        }
-
-        public Microsoft.Xrm.Sdk.IOrganizationService GetOrganizationService()
-        {
-
-            return context.GetFakedOrganizationService();
         }
 
         public Microsoft.Xrm.Sdk.EntityCollection GetRecordsUsingQuery(Microsoft.Xrm.Sdk.Query.QueryExpression queryExpression)

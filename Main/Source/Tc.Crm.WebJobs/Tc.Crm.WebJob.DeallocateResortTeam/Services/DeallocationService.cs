@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using Microsoft.Xrm.Sdk;
 using Tc.Crm.WebJob.DeallocateResortTeam.Models;
 using Tc.Crm.Common;
 using Tc.Crm.Common.Services;
-using Tc.Crm.Common.Constants;
 using Tc.Crm.Common.Models;
-using System.Collections.ObjectModel;
-using BookingAttribute = Tc.Crm.Common.Constants.Attributes.Booking;
+using Attributes = Tc.Crm.Common.Constants.Attributes;
+using EntityRecords = Tc.Crm.Common.Constants.EntityRecords;
 
 namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
 {
@@ -35,12 +35,11 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                 return null;
 
             var destinationGateWays = GetGatewaysFilter(bookingDeallocationRequest.Destination);
-            // will fail in case 2 default teams are set
             // get ids of bookings, filtered by return date and destination gateway, ordered by booking id, whose owner is hotel team
             // via customerbookingrole ordered by customer:
             // - get ids of contacts of booking and ids of their active incidents
             // - get ids of accounts of booking and ids of their active incidents
-            // via country and business unit get default team id
+            // via country to business unit get business unit name and get business unit default team id
             var query = string.Format(
                 @"<fetch distinct='true' mapping='logical' output-format='xml-platform' version='1.0'>
                     <entity name='tc_booking'>
@@ -79,7 +78,8 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                         </link-entity>
                     </link-entity>
                     <link-entity name='tc_country' from='tc_countryid' to='tc_sourcemarketid' link-type='inner'>
-                        <link-entity name='businessunit' from='businessunitid' to='tc_sourcemarketbusinessunitid' link-type='inner'>
+                        <link-entity name='businessunit' from='businessunitid' to='tc_sourcemarketbusinessunitid' link-type='inner' alias='businessUnit' visible='true'>
+                            <attribute name='name' />
                             <link-entity name='team' from='businessunitid' to='businessunitid' link-type='inner' alias='defaultTeam' visible='true'>
                                 <attribute name='teamid' />
                                 <filter>
@@ -100,16 +100,16 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
 
         public void DeallocateEntities(DeallocationExecutionRequest request)
         {
-            var assignRequests = new Collection<AssignInformation>();
+            var requests = new Collection<Entity>();
             // bookings
-            CreateAssignRequests(assignRequests, request.Bookings);
+            CreateUpdateRequests(requests, request.Bookings);
             // customer
-            CreateAssignRequests(assignRequests, request.Customers);
+            CreateUpdateRequests(requests, request.Customers);
             // cases
-            CreateAssignRequests(assignRequests, request.Cases);
+            CreateUpdateRequests(requests, request.Cases);
             // assign
-            if (assignRequests.Count > 0)
-                crmService.BulkAssign(assignRequests);
+            if (requests.Count > 0)
+                crmService.BulkUpdate(requests);
         }
 
         private StringBuilder GetGatewaysFilter(IEnumerable<Guid> destinationGateways)
@@ -145,13 +145,12 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
 
             foreach (var searchRecord in collection.Entities)
             {
-                // TODO: warn on owner does not existing and don't process record
                 var owner = new Owner {
                     Id = Guid.Parse(((AliasedValue)searchRecord["defaultTeam.teamid"]).Value.ToString()),
                     OwnerType = OwnerType.Team
                 };
 
-                var bookingId = Guid.Parse(searchRecord[BookingAttribute.BookingId].ToString());
+                var bookingId = Guid.Parse(searchRecord[Attributes.Booking.BookingId].ToString());
                 if (currentBookingId != bookingId)
                 {
                     // add booking entity
@@ -163,8 +162,8 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
 
                     currentBookingId = bookingId;
                     currentCustomerId = Guid.Empty;
-
-                    result.Bookings.Add(booking);
+                    if (!result.Bookings.Contains(booking))
+                        result.Bookings.Add(booking);
                 }
                 if (searchRecord.Contains("contact.contactid") || searchRecord.Contains("account.accountid"))
                 {
@@ -180,13 +179,12 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                             CustomerType = isContact ? CustomerType.Contact : CustomerType.Account
                         };
                         currentCustomerId = customerId;
-                        // IMPORTANT: assuming customer can be present in one booking
-                        // TODO: check performance hit for check existance in result.Customers set. Can be added if not big impact so eliminating condition above
-                        // should be also considered for cases
-                        result.Customers.Add(customer);
+                        if (!result.Customers.Contains(customer))
+                            result.Customers.Add(customer);
                     }
                 }
-                if (searchRecord.Contains("contactIncident.incidentid") || searchRecord.Contains("accountIncident.incidentid"))
+                // add only non-uk cases
+                if (!EntityRecords.BusinessUnit.GB.Equals(((AliasedValue)searchRecord["businessUnit.name"]).Value.ToString(), StringComparison.InvariantCultureIgnoreCase) && (searchRecord.Contains("contactIncident.incidentid") || searchRecord.Contains("accountIncident.incidentid")))
                 {
                     var isContact = searchRecord.Contains("contactIncident.incidentid");
                     var incidentId = Guid.Parse(((AliasedValue)searchRecord[isContact ? "contactIncident.incidentid" : "accountIncident.incidentid"]).Value.ToString());
@@ -194,26 +192,34 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                     var incident = new Case
                     {
                         Id = incidentId,
-                        Owner = owner
+                        Owner = owner,
+                        StatusCode = CaseStatusCode.AssignedToLocalSourceMarket,
+                        State = CaseState.Active
                     };
-                    // IMPORTANT: Same case as for customer. Will fail if customer in second booking
-                    result.Cases.Add(incident);
+                    if (!result.Cases.Contains(incident))
+                    {
+                        result.Cases.Add(incident);
+                    }
                 }
             }
 
             return result;
         }
 
-        private void CreateAssignRequests(Collection<AssignInformation> requets, IEnumerable<EntityModel> entities)
+        private void CreateUpdateRequests(Collection<Entity> requets, IEnumerable<EntityModel> entities)
         {
             foreach (var entity in entities)
             {
-                requets.Add(new AssignInformation
+                var updateEntity = new Entity(entity.EntityName, entity.Id) { EntityState = EntityState.Changed };
+                // set owner                
+                updateEntity[Attributes.Entity.Owner] =  new EntityReference(entity.Owner.OwnerEntityName, entity.Owner.Id);
+                if (entity is Case)
                 {
-                    EntityName = entity.EntityName,
-                    RecordId = entity.Id,
-                    RecordOwner = entity.Owner
-                });
+                    var _case = (Case)entity;
+                    updateEntity[Attributes.Case.State] = new OptionSetValue((int)_case.State);
+                    updateEntity[Attributes.Case.StatusReason] = new OptionSetValue((int)((Case)entity).StatusCode);
+                }
+                requets.Add(updateEntity);
             }
         }
 

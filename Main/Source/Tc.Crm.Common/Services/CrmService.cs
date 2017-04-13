@@ -11,56 +11,25 @@ using Microsoft.Crm.Sdk.Messages;
 using System.Globalization;
 using Tc.Crm.Common.Constants;
 using Tc.Crm.Common.Models;
+using System.Collections.Generic;
 
 namespace Tc.Crm.Common.Services
 {
-    public class CrmService : ICrmService
-    {
-        IOrganizationService organizationService;
-        IConfigurationService configurationService;
-        ILogger logger;
+    public class CrmService : ICrmService, IDisposable
+    {        
+        private IConfigurationService configurationService;
+        private ILogger logger;
+        private IOrganizationService organizationService;
 
         public CrmService(IConfigurationService configurationService, ILogger logger)
         {
             this.logger = logger;
             this.configurationService = configurationService;
-            this.organizationService = GetOrganizationService();
+            this.organizationService = new CrmServiceClient(configurationService.ConnectionString);
         }
 
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.Common.Services.ILogger.LogInformation(System.String)")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "RetrieveMultipleRecords")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.WebJob.AllocateResortTeam.Services.ILogger.LogInformation(System.String)")]
-        public EntityCollection RetrieveMultipleRecords(string entityName, string[] columns, string[] filterKeys, string[] filterValues)
-        {
-            //logger.LogInformation("RetrieveMultipleRecords - start");
-
-            var query = new QueryExpression(entityName);
-            query.ColumnSet = new ColumnSet(columns);
-
-
-            for (int i = 0; i < filterKeys.Length; i++)
-            {
-                var condExpr = new ConditionExpression();
-                condExpr.AttributeName = filterKeys[i];
-                condExpr.Operator = ConditionOperator.Equal;
-                condExpr.Values.Add(filterValues[i]);
-
-                var fltrExpr = new FilterExpression(LogicalOperator.And);
-                fltrExpr.AddCondition(condExpr);
-
-                query.Criteria.AddFilter(fltrExpr);
-            }
-            //logger.LogInformation("RetrieveMultipleRecords - end");
-            return GetRecordsUsingQuery(query);
-
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "RetrieveMultipleRecordsFetchXml")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.WebJob.AllocateResortTeam.Services.ILogger.LogInformation(System.String)")]
         public EntityCollection RetrieveMultipleRecordsFetchXml(string query)
         {
-            //logger.LogInformation("RetrieveMultipleRecordsFetchXml - start");
             EntityCollection entityCollection = new EntityCollection();
 
             int fetchCount = 10000;
@@ -73,102 +42,10 @@ namespace Tc.Crm.Common.Services
                 FetchExpression fetch = new FetchExpression(xml);
                 EntityCollection returnCollection = organizationService.RetrieveMultiple(fetch);
                 entityCollection.Entities.AddRange(returnCollection.Entities);
-                if (returnCollection.MoreRecords)
-                {
-                    pageNumber++;
-                }
-                else
-                {
+                if (!returnCollection.MoreRecords)
                     break;
-                }
+                pageNumber++;
             }
-            //logger.LogInformation("RetrieveMultipleRecordsFetchXml - end");
-            return entityCollection;
-
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "CreateXml")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.WebJob.AllocateResortTeam.Services.ILogger.LogInformation(System.String)")]
-        public string CreateXml(string xml, string cookie, int page, int count)
-        {
-            //logger.LogInformation("CreateXml - start");
-            StringReader stringReader = new StringReader(xml);
-            XmlTextReader reader = new XmlTextReader(stringReader);
-
-            // Load document
-            XmlDocument doc = new XmlDocument();
-            doc.Load(reader);
-            //logger.LogInformation("CreateXml - end");
-            return CreateXml(doc, cookie, page, count);
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.WebJob.AllocateResortTeam.Services.ILogger.LogInformation(System.String)")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "CreateXml")]
-        public string CreateXml(XmlDocument doc, string cookie, int page, int count)
-        {
-            //logger.LogInformation("CreateXml - start");
-            if (doc == null) throw new ArgumentNullException("doc");
-            XmlAttributeCollection attrs = doc.DocumentElement.Attributes;
-
-            if (cookie != null)
-            {
-                XmlAttribute pagingAttr = doc.CreateAttribute("paging-cookie");
-                pagingAttr.Value = cookie;
-                attrs.Append(pagingAttr);
-            }
-
-            XmlAttribute pageAttr = doc.CreateAttribute("page");
-            pageAttr.Value = System.Convert.ToString(page, CultureInfo.CurrentCulture);
-            attrs.Append(pageAttr);
-
-            XmlAttribute countAttr = doc.CreateAttribute("count");
-            countAttr.Value = System.Convert.ToString(count, CultureInfo.CurrentCulture);
-            attrs.Append(countAttr);
-
-            StringBuilder sb = new StringBuilder(1024);
-            StringWriter stringWriter = new StringWriter(sb, CultureInfo.CurrentCulture);
-
-            XmlTextWriter writer = new XmlTextWriter(stringWriter);
-            doc.WriteTo(writer);
-            writer.Close();
-
-            //logger.LogInformation("CreateXml - end");
-            return sb.ToString();
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.WebJob.AllocateResortTeam.Services.ILogger.LogInformation(System.String)")]
-        public EntityCollection GetRecordsUsingQuery(QueryExpression queryExpr)
-        {
-            //logger.LogInformation("GetRecordsUsingQuery - start");
-            int pageNumber = 1;
-            int recordCount = 1;
-            queryExpr.PageInfo = new PagingInfo();
-            queryExpr.PageInfo.PageNumber = pageNumber;
-            queryExpr.PageInfo.Count = recordCount;
-            queryExpr.PageInfo.PagingCookie = null;
-            EntityCollection entityCollection = null;
-            while (true)
-            {
-                entityCollection = organizationService.RetrieveMultiple(queryExpr);
-
-                // Check for more records, if it returns true.
-                if (entityCollection.MoreRecords)
-                {
-                    // Increment the page number to retrieve the next page.
-                    queryExpr.PageInfo.PageNumber++;
-
-                    // Set the paging cookie to the paging cookie returned from current results.
-                    queryExpr.PageInfo.PagingCookie = entityCollection.PagingCookie;
-                }
-                else
-                {
-                    // If no more records are in the result nodes, exit the loop.
-                    break;
-                }
-
-            }
-            //logger.LogInformation("GetRecordsUsingQuery - end");
             return entityCollection;
         }
 
@@ -215,60 +92,113 @@ namespace Tc.Crm.Common.Services
                 });
                 if (request.Requests.Count == batch)
                 {
-                    ExecuteBulkAssignRequests(request);
+                    ExecuteMultipleRequests(request);
                 }
 
                 if (request.Requests.Count < batch && i == assignRequestCollection.Count - 1)
                 {
-                    ExecuteBulkAssignRequests(request);
+                    ExecuteMultipleRequests(request);
                 }
             }
             //logger.LogInformation("BulkAssign - end");
         }
 
-        public void ExecuteBulkAssignRequests(ExecuteMultipleRequest request)
+        public void BulkUpdate(IEnumerable<Entity> entities)
         {
-            logger.LogInformation("\r\n***Executing " + request.Requests.Count +" requests as a batch***");
+            if (entities == null)
+                throw new ArgumentNullException("entities");
+
+            var batch = configurationService.ExecuteMultipleBatchSize;
+
+            ExecuteMultipleRequest request = new ExecuteMultipleRequest
+            {
+                Settings = new ExecuteMultipleSettings()
+                {
+                    ContinueOnError = true,
+                    ReturnResponses = true
+                },
+                Requests = new OrganizationRequestCollection()
+            };
+
+            foreach(var entity in entities)
+            {
+                request.Requests.Add(new UpdateRequest { Target = entity });
+                if (request.Requests.Count == batch)
+                {
+                    ExecuteMultipleRequests(request);
+                }
+            }
+            if (request.Requests.Count > 0)
+            {
+                ExecuteMultipleRequests(request);
+            }
+        }
+
+        #region Private helpers
+
+        private string CreateXml(string xml, string cookie, int page, int count)
+        {
+            using (var stringReader = new StringReader(xml))
+            using (var reader = new XmlTextReader(stringReader))
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(reader);
+                return CreateXml(doc, cookie, page, count);
+            }
+        }
+
+        private string CreateXml(XmlDocument doc, string cookie, int page, int count)
+        {
+            if (doc == null) throw new ArgumentNullException("doc");
+            XmlAttributeCollection attrs = doc.DocumentElement.Attributes;
+
+            if (cookie != null)
+            {
+                XmlAttribute pagingAttr = doc.CreateAttribute("paging-cookie");
+                pagingAttr.Value = cookie;
+                attrs.Append(pagingAttr);
+            }
+
+            XmlAttribute pageAttr = doc.CreateAttribute("page");
+            pageAttr.Value = Convert.ToString(page, CultureInfo.CurrentCulture);
+            attrs.Append(pageAttr);
+
+            XmlAttribute countAttr = doc.CreateAttribute("count");
+            countAttr.Value = Convert.ToString(count, CultureInfo.CurrentCulture);
+            attrs.Append(countAttr);
+
+            StringBuilder sb = new StringBuilder(1024);
+            using (var writer = new XmlTextWriter(new StringWriter(sb, CultureInfo.CurrentCulture)))
+            {
+                doc.WriteTo(writer);
+            }
+            return sb.ToString();
+        }
+
+        private void ExecuteMultipleRequests(ExecuteMultipleRequest request)
+        {
+            logger.LogInformation("\r\n***Executing " + request.Requests.Count + " update requests as a batch***");
             var response = (ExecuteMultipleResponse)organizationService.Execute(request);
             LogResponses(response.Responses, request.Requests);
             request.Requests.Clear();
         }
 
-
-        public void LogResponses(ExecuteMultipleResponseItemCollection responses, OrganizationRequestCollection requests)
+        private void LogResponses(ExecuteMultipleResponseItemCollection responses, OrganizationRequestCollection requests)
         {
-            for (int i = 0; i < responses.Count; i++)
+            foreach (var response in responses)
             {
-                if (responses[i].Fault != null)
-                {
-
-                    logger.LogError(FormatFaultException(((AssignRequest)requests[i]), responses[i].Fault));
-                }
+                if (response.Fault == null)
+                    logger.LogInformation(requests[response.RequestIndex].FormatSuccessMessage());
                 else
-                {
-                    var assignRequest = (AssignRequest)requests[i];
-                    var message = string.Format("'{0}' of Name: '{1}', Id: '{2}' was successfully assigned to '{3}' of Name: '{4}', Id: '{5}' ",
-                                    new object[] { assignRequest.Target.LogicalName,
-                                                   assignRequest.Target.Name,
-                                                   assignRequest.Target.Id,
-                                                   assignRequest.Assignee.LogicalName,
-                                                   assignRequest.Assignee.Name,
-                                                   assignRequest.Assignee.Id});
-                    logger.LogInformation(message);
-                }
+                    logger.LogError(FormatFaultException(requests[response.RequestIndex], response.Fault));
             }
         }
 
-        public string FormatFaultException(AssignRequest assignRequest, OrganizationServiceFault fault)
+        private static string FormatFaultException(OrganizationRequest request, OrganizationServiceFault fault)
         {
             var message = new StringBuilder();
-            var requestMessage = string.Format("Request failed while assigning '{0}' of Name: '{1}', Id: '{2}' to '{3}' of Name: '{4}', Id: '{5}' due to below exception",
-                                 new object[] { assignRequest.Target.LogicalName,
-                                                assignRequest.Target.Name,
-                                                assignRequest.Target.Id,
-                                                assignRequest.Assignee.LogicalName,
-                                                assignRequest.Assignee.Name,
-                                                assignRequest.Assignee.Id});
+            string requestMessage = request.FormatFaultException();
+
             message.AppendLine(requestMessage);
             if (fault.Message != null)
                 message.AppendLine("Message: " + fault.Message);
@@ -280,27 +210,14 @@ namespace Tc.Crm.Common.Services
                     message.AppendLine("InnerFault Message: " + fault.InnerFault.Message);
                 if (fault.InnerFault.TraceText != null)
                     message.AppendLine("InnerFault TraceText: " + fault.InnerFault.TraceText);
-            }            
+            }
             
             return message.ToString();
         }
-        
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.WebJob.AllocateResortTeam.Services.ILogger.LogInformation(System.String)")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "GetOrganizationService")]
-        public IOrganizationService GetOrganizationService()
-        {
-            //logger.LogInformation("GetOrganizationService - start");
-            if (organizationService != null) return organizationService;
+        #endregion
 
-            var connectionString = configurationService.ConnectionString;
-            CrmServiceClient client = new CrmServiceClient(connectionString);
-            //logger.LogInformation("GetOrganizationService - end");
-            return (IOrganizationService)client;
-        }
-
-       
+        #region IDisposable
 
         public void Dispose()
         {
@@ -321,8 +238,6 @@ namespace Tc.Crm.Common.Services
             disposed = true;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
         void DisposeObject(Object obj)
         {
             if (obj != null)
@@ -334,8 +249,70 @@ namespace Tc.Crm.Common.Services
             }
 
         }
+
+        #endregion
     }
 
+    public static class CrmRequestExtensions
+    {
+        public static string FormatSuccessMessage(this AssignRequest request)
+        {
+            return request != null ? string.Format("'{0}' of Name: '{1}', Id: '{2}' was successfully assigned to '{3}' of Name: '{4}', Id: '{5}' ",
+                request.Target.LogicalName, 
+                request.Target.Name, 
+                request.Target.Id, 
+                request.Assignee.LogicalName, 
+                request.Assignee.Name, 
+                request.Assignee.Id) : null;
+        }
+
+        public static string FormatSuccessMessage(this UpdateRequest request)
+        {
+            return request != null ? string.Format("{0} of ID {1} was successfully updated", request.Target.LogicalName, request.Target.Id) : null;
+        }
+
+        public static string FormatSuccessMessage(this OrganizationRequest request)
+        {
+            if (request is AssignRequest)
+            {
+                return ((AssignRequest)request).FormatSuccessMessage();
+            }
+            if (request is UpdateRequest)
+            {
+                return ((UpdateRequest)request).FormatSuccessMessage();
+            }
+            return null;
+        }
+
+        public static string FormatFaultException(this AssignRequest request)
+        {
+            return request != null ? string.Format("Request failed while assigning '{0}' of Name: '{1}', Id: '{2}' to '{3}' of Name: '{4}', Id: '{5}' due to below exception",
+                request.Target.LogicalName,
+                request.Target.Name,
+                request.Target.Id,
+                request.Assignee.LogicalName,
+                request.Assignee.Name,
+                request.Assignee.Id) : null;
+        }
+
+        public static string FormatFaultException(this UpdateRequest request)
+        {
+            return request != null ? string.Format("Request failed while updating '{0}' of Id: '{1}' due to below exception", request.Target.LogicalName, request.Target.Id) : null;
+        }
+
+        public static string FormatFaultException(this OrganizationRequest request)
+        {
+            if (request is AssignRequest)
+            {
+                return ((AssignRequest)request).FormatFaultException();
+            }
+            if (request is UpdateRequest)
+            {
+                return ((UpdateRequest)request).FormatFaultException();
+            }
+            return null;
+        }
+    }
     
 }
 
