@@ -46,7 +46,7 @@ namespace Tc.Crm.CustomWorkflowSteps.QueueIdentifier.Service
             return new EntityReference(EntityName.Queue, response.Entities[0].Id);
 
         }
-        
+
         public EntityReference GetQueueFor(EntityReference caseId, IOrganizationService service, ITracingService trace)
         {
             if (caseId == null) return null;
@@ -61,8 +61,8 @@ namespace Tc.Crm.CustomWorkflowSteps.QueueIdentifier.Service
                 return null;
             }
 
-            var userRoles = GetRolesFor(caseDetails.Owner,service,trace);
-            if (userRoles == null || userRoles.Count == 0) 
+            var userRoles = GetRolesFor(caseDetails.Owner, caseDetails.OwnerType, service, trace);
+            if (userRoles == null || userRoles.Count == 0)
             {
                 trace.Trace("There are no user roles for the user.");
                 return null;
@@ -75,13 +75,13 @@ namespace Tc.Crm.CustomWorkflowSteps.QueueIdentifier.Service
                 return null;
             }
 
-            var sourceMarket = GetSourceMarketFrom(caseDetails,trace);
+            var sourceMarket = GetSourceMarketFrom(caseDetails, trace);
             if (sourceMarket == Guid.Empty)
             {
                 trace.Trace("Source market could not be determined from the case record.");
                 return null;
             }
-            
+
             var fetchXml = @"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>
                               <entity name='queue'>
                                 <attribute name='queueid' />
@@ -152,14 +152,17 @@ namespace Tc.Crm.CustomWorkflowSteps.QueueIdentifier.Service
             return -1;
         }
 
-        private Collection<string> GetRolesFor(Guid owner, IOrganizationService service, ITracingService trace)
+        private Collection<string> GetRolesFor(Guid owner, string ownerType, IOrganizationService service, ITracingService trace)
         {
             if (owner == Guid.Empty) return null;
             if (service == null) return null;
             if (trace == null) return null;
 
             trace.Trace("GetRolesFor - start");
-            var fetchXml = @"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='true'>
+            var fetchXml = "";
+            if (ownerType.Equals(EntityName.User, StringComparison.OrdinalIgnoreCase))
+            {
+                fetchXml = @"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='true'>
                               <entity name='role'>
                                 <attribute name='name' />
                                 <attribute name='roleid' />
@@ -173,6 +176,24 @@ namespace Tc.Crm.CustomWorkflowSteps.QueueIdentifier.Service
                                 </link-entity>
                               </entity>
                             </fetch>";
+            }
+            else
+            {
+                fetchXml = @"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='true'>
+                              <entity name='role'>
+                                <attribute name='name' />
+                                <attribute name='roleid' />
+                                <order attribute='name' descending='false' />
+                                <link-entity name='teamroles' from='roleid' to='roleid' visible='false' intersect='true'>
+                                  <link-entity name='team' from='teamid' to='teamid' alias='ac'>
+                                    <filter type='and'>
+                                      <condition attribute='teamid' operator='eq' value='{0}' />
+                                    </filter>
+                                  </link-entity>
+                                </link-entity>
+                              </entity>
+                            </fetch>";
+            }
             fetchXml = string.Format(fetchXml, owner.ToString());
             var query = new FetchExpression(fetchXml);
 
@@ -198,7 +219,7 @@ namespace Tc.Crm.CustomWorkflowSteps.QueueIdentifier.Service
 
         private CaseDetail GetCaseDetailsFor(EntityReference caseId, IOrganizationService service, ITracingService trace)
         {
-            if(caseId == null ) return null;
+            if (caseId == null) return null;
             if (service == null) return null;
             if (trace == null) return null;
 
@@ -227,7 +248,7 @@ namespace Tc.Crm.CustomWorkflowSteps.QueueIdentifier.Service
                 trace.Trace("response is null or response.Entities is null or count is null");
                 return null;
             }
-            
+
             if (response.Entities.Count > 1)
             {
                 trace.Trace("Multiple queues exist with the same name.");
@@ -249,6 +270,7 @@ namespace Tc.Crm.CustomWorkflowSteps.QueueIdentifier.Service
             {
                 trace.Trace($"owner: {((EntityReference)(response.Entities[0][Attributes.Booking.Owner])).Id}");
                 caseDetail.Owner = ((EntityReference)(response.Entities[0][Attributes.Booking.Owner])).Id;
+                caseDetail.OwnerType = ((EntityReference)(response.Entities[0][Attributes.Booking.Owner])).LogicalName;
             }
 
 

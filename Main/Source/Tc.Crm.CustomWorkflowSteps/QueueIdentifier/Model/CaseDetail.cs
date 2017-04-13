@@ -12,5 +12,6 @@ namespace Tc.Crm.CustomWorkflowSteps.QueueIdentifier.Model
         public Guid BookingSourceMarket { get; set; }
 
         public Guid Owner { get; set; }
+        public string OwnerType { get; set; }
     }
 }
