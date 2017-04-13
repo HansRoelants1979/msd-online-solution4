@@ -40,7 +40,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
         {
             var contact = ContactHelper.GetContactEntityForBookingPayload(new Models.Customer(), trace);
             Assert.IsNotNull(contact);
-            Assert.AreEqual("", contact[Attributes.Contact.SourceSystemID].ToString());
+            Assert.AreEqual("", contact[Attributes.Contact.SourceSystemId].ToString());
         }
 
         [TestMethod()]
@@ -57,30 +57,10 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
             };
             var contact = ContactHelper.GetContactEntityForBookingPayload(c, trace);
             Assert.IsNotNull(contact);
-            Assert.AreEqual("", contact[Attributes.Contact.SourceSystemID].ToString());
+            Assert.AreEqual("", contact[Attributes.Contact.SourceSystemId].ToString());
         }
 
-        [TestMethod()]
-        [ExpectedException(typeof(InvalidPluginExecutionException), "Last name could not be retrieved from payload.")]
-        public void GetContactEntityForBookingPayload_LastNameIsNull()
-        {
-            Customer c = new Customer
-            {
-                CustomerIdentifier = new CustomerIdentifier
-                {
-                    BusinessArea = "Hotel",
-                    CustomerId = "CONT001",
-                    SourceMarket = Guid.NewGuid().ToString(),
-                    SourceSystem = "On Tour"
-                },
-                CustomerIdentity = new CustomerIdentity
-                {
-                    FirstName = "Joe"
-                }
-            };
-            ContactHelper.GetContactEntityForBookingPayload(c, trace);
-        }
-
+       
         [TestMethod()]
         public void GetContactEntityForBookingPayload_PopulateIdentity()
         {
@@ -194,9 +174,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
             };
             var contact = ContactHelper.GetContactEntityForBookingPayload(c, trace);
 
-            Assert.AreEqual(c.Email[0].Address, contact[Attributes.Contact.EMailAddress1].ToString());
-            Assert.AreEqual(c.Email[1].Address, contact[Attributes.Contact.EMailAddress2].ToString());
-            Assert.AreEqual(c.Email[2].Address, contact[Attributes.Contact.EMailAddress3].ToString());
+            Assert.AreEqual(c.Email[0].Address, contact[Attributes.Contact.EmailAddress1].ToString());
+            Assert.AreEqual(c.Email[1].Address, contact[Attributes.Contact.EmailAddress2].ToString());
+            Assert.AreEqual(c.Email[2].Address, contact[Attributes.Contact.EmailAddress3].ToString());
             Assert.AreEqual(950000000, ((OptionSetValue)(contact[Attributes.Contact.EmailAddress1Type])).Value);
             Assert.AreEqual(950000001, ((OptionSetValue)(contact[Attributes.Contact.EmailAddress2Type])).Value);
             Assert.AreEqual(950000001, ((OptionSetValue)(contact[Attributes.Contact.EmailAddress3Type])).Value);
@@ -256,13 +236,13 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
             };
             var contact = ContactHelper.GetContactEntityForBookingPayload(c, trace);
 
-            Assert.AreEqual(c.Address[0].AdditionalAddressInfo, contact[Attributes.Contact.Address1_AdditionalInformation].ToString());
-            Assert.AreEqual(c.Address[0].FlatNumberUnit, contact[Attributes.Contact.Address1_FlatOrUnitNumber].ToString());
-            Assert.AreEqual(c.Address[0].HouseNumberBuilding, contact[Attributes.Contact.Address1_HouseNumberOrBuilding].ToString());
-            Assert.AreEqual(c.Address[0].Town, contact[Attributes.Contact.Address1_Town].ToString());
-            Assert.AreEqual(c.Address[0].PostalCode, contact[Attributes.Contact.Address1_PostalCode].ToString());
-            Assert.AreEqual(c.Address[0].County, contact[Attributes.Contact.Address1_County].ToString());
-            Assert.AreEqual(c.Address[0].Country, ((EntityReference)(contact[Attributes.Contact.Address1_CountryId])).Id.ToString());
+            Assert.AreEqual(c.Address[0].AdditionalAddressInfo, contact[Attributes.Contact.Address1AdditionalInformation].ToString());
+            Assert.AreEqual(c.Address[0].FlatNumberUnit, contact[Attributes.Contact.Address1FlatOrUnitNumber].ToString());
+            Assert.AreEqual(c.Address[0].HouseNumberBuilding, contact[Attributes.Contact.Address1HouseNumberOrBuilding].ToString());
+            Assert.AreEqual(c.Address[0].Town, contact[Attributes.Contact.Address1Town].ToString());
+            Assert.AreEqual(c.Address[0].PostalCode, contact[Attributes.Contact.Address1PostalCode].ToString());
+            Assert.AreEqual(c.Address[0].County, contact[Attributes.Contact.Address1County].ToString());
+            Assert.AreEqual(c.Address[0].Country, ((EntityReference)(contact[Attributes.Contact.Address1CountryId])).Id.ToString());
 
         }
 

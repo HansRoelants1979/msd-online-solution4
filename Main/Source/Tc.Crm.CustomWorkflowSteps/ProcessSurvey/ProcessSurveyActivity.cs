@@ -23,7 +23,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey
             {
                 var surveyJson = SurveyResponseInfo.Get<string>(executionContext);
                 PayloadSurvey payloadSurvey = new PayloadSurvey(tracingService, service);
-                payloadSurvey.SurveyResponse = JsonHelper.DeSerializeSurveyJson(surveyJson, tracingService);
+                payloadSurvey.SurveyResponse = JsonHelper.DeserializeSurveyJson(surveyJson, tracingService);
                 ProcessSurveyService processSurveyService = new ProcessSurveyService(payloadSurvey);
                 Response.Set(executionContext, processSurveyService.ProcessSurveyResponse());
 

@@ -11,7 +11,7 @@ using Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models;
 
 namespace Tc.Crm.CustomWorkflowSteps
 {
-    public class CommonXrm
+    public static class CommonXrm
     {
 
 
@@ -25,6 +25,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// <param name="service"></param>
         public static void MarkEntityRecordsAsPendingDelete(string entityName, string[] columns, string[] filterKeys, string[] filterValues, IOrganizationService service)
         {
+            if (service == null) return;
             EntityCollection entityCollection = CommonXrm.RetrieveMultipleRecords(entityName, columns, filterKeys, filterValues, service);
             foreach (var item in entityCollection.Entities)
             {
@@ -308,10 +309,10 @@ namespace Tc.Crm.CustomWorkflowSteps
                 case EmailType.NotSpecified:
                     value = 950000002;
                     break;
-                    
+
                 case EmailType.Pri:
                     value = 950000000;
-                    
+
                     break;
                 case EmailType.Pro:
                     value = 950000001;
@@ -340,7 +341,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                     value = 1;
                     break;
             }
-            
+
             return new OptionSetValue(value);
         }
         public static OptionSetValue GetPhoneType(PhoneType phoneType)
@@ -385,7 +386,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                     value = 950000003;
                     break;
             }
-           
+
             return new OptionSetValue(value);
         }
         public static OptionSetValue GetSegment(string text)
@@ -511,6 +512,8 @@ namespace Tc.Crm.CustomWorkflowSteps
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Upsert")]
         public static XrmResponse UpsertEntity(Entity entityRecord, IOrganizationService service)
         {
+            if (entityRecord == null) return null;
+            if (service == null) return null;
 
             XrmResponse xrmResponse = null;
             if (service != null)
@@ -549,6 +552,9 @@ namespace Tc.Crm.CustomWorkflowSteps
 
         public static XrmResponse CreateEntity(Entity entityRecord, IOrganizationService service)
         {
+            if (entityRecord == null) return null;
+            if (service == null) return null;
+
             var id = service.Create(entityRecord);
             return new XrmResponse { Create = true, Id = id.ToString(), EntityName = entityRecord.LogicalName };
         }
@@ -559,50 +565,17 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// <param name="entities"></param>
         /// <param name="service"></param>
         /// <returns></returns>
-        public static List<XrmResponse> BulkCreate(EntityCollection entities, IOrganizationService service)
+        public static void BulkCreate(EntityCollection entities, IOrganizationService service)
         {
-            List<XrmResponse> xrmResponseList = new List<XrmResponse>();
-            if (service != null && entities != null && entities.Entities.Count > 0)
+            if (entities == null || entities.Entities.Count == 0) return;
+            if (service == null) return;
+
+            foreach (var entity in entities.Entities)
             {
-
-                // Add a CreateRequest for each entity to the request collection.
-                foreach (var entity in entities.Entities)
-                {
-                    var createRequest = new CreateRequest { Target = entity };
-                    var response = (CreateResponse)service.Execute(createRequest);
-                    var xrmResponse = new XrmResponse
-                    {
-                        Id = response.id.ToString(),
-                        EntityName = response.ResponseName
-
-                    };
-                    xrmResponseList.Add(xrmResponse);
-                }
-
+                var createRequest = new CreateRequest { Target = entity };
+                service.Execute(createRequest);
             }
 
-            return xrmResponseList;
-        }
-
-
-        /// <summary>
-        /// Call this method for bulk delete
-        /// </summary>
-        /// <param name="entityReferences"></param>
-        /// <param name="service"></param>
-        public static void BulkDelete(DataCollection<EntityReference> entityReferences, IOrganizationService service)
-        {
-            if (service != null && entityReferences != null && entityReferences.Count > 0)
-            {
-
-                // Add a DeleteRequest for each entity to the request collection.
-                foreach (var entityRef in entityReferences)
-                {
-                    var deleteRequest = new DeleteRequest { Target = entityRef };
-                    service.Execute(deleteRequest);
-                }
-
-            }
         }
 
         /// <summary>
@@ -616,22 +589,32 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// <returns></returns>
         public static EntityCollection RetrieveMultipleRecords(string entityName, string[] columns, string[] filterKeys, string[] filterValues, IOrganizationService service)
         {
+            if (string.IsNullOrWhiteSpace(entityName)) return null;
+            if (service == null) return null;
+
             var query = new QueryExpression(entityName);
-            query.ColumnSet = new ColumnSet(columns);
+            if (columns == null || columns.Length == 0)
+                query.ColumnSet = new ColumnSet(true);
+            else
+                query.ColumnSet = new ColumnSet(columns);
 
-            for (int i = 0; i < filterKeys.Length; i++)
+            if (filterKeys != null && filterValues != null)
             {
-                if (filterValues[i] == null) continue;
-                var condExpr = new ConditionExpression();
-                condExpr.AttributeName = filterKeys[i];
-                condExpr.Operator = ConditionOperator.Equal;
-                condExpr.Values.Add(filterValues[i]);
+                for (int i = 0; i < filterKeys.Length; i++)
+                {
+                    if (filterValues[i] == null) continue;
+                    var condExpr = new ConditionExpression();
+                    condExpr.AttributeName = filterKeys[i];
+                    condExpr.Operator = ConditionOperator.Equal;
+                    condExpr.Values.Add(filterValues[i]);
 
-                var fltrExpr = new FilterExpression(LogicalOperator.And);
-                fltrExpr.AddCondition(condExpr);
+                    var fltrExpr = new FilterExpression(LogicalOperator.And);
+                    fltrExpr.AddCondition(condExpr);
 
-                query.Criteria.AddFilter(fltrExpr);
+                    query.Criteria.AddFilter(fltrExpr);
+                }
             }
+
             return GetRecordsUsingQuery(query, service);
 
         }
@@ -651,7 +634,8 @@ namespace Tc.Crm.CustomWorkflowSteps
 
         public static EntityCollection RetrieveMultipleRecordsFetchXml(string query, IOrganizationService service)
         {
-
+            if (string.IsNullOrWhiteSpace(query)) return null;
+            if (service == null) return null;
             EntityCollection entityCollection = new EntityCollection();
 
             int fetchCount = 10000;
@@ -713,13 +697,12 @@ namespace Tc.Crm.CustomWorkflowSteps
             attrs.Append(countAttr);
 
             StringBuilder sb = new StringBuilder(1024);
-            StringWriter stringWriter = new StringWriter(sb, CultureInfo.CurrentCulture);
-
-            XmlTextWriter writer = new XmlTextWriter(stringWriter);
-            doc.WriteTo(writer);
-            writer.Close();
-
-            return sb.ToString();
+            using (var stringWriter = new StringWriter(sb, CultureInfo.CurrentCulture))
+            {
+                XmlTextWriter writer = new XmlTextWriter(stringWriter);
+                doc.WriteTo(writer);
+                return sb.ToString();
+            }
         }
 
 

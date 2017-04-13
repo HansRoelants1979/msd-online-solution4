@@ -6,12 +6,5 @@
         InActive = 1
     };
 
-    public enum RemarkType
-    {
-        Remark,
-        AccomodationRemark,
-        TransportRemark,
-        TransferRemark,
-        ExtraServiceRemark
-    }
+   
 }

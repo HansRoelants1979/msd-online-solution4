@@ -24,8 +24,7 @@ namespace Tc.Crm.CustomWorkflowSteps.RetrieveParentRecord.Services
 
             string SourceId = string.Empty;
             EntityReference ReturnValue = null;
-            string ReturnValuecolName = string.Empty;
-
+            
             #region ParseString
 
             string s = expression;
@@ -66,7 +65,7 @@ namespace Tc.Crm.CustomWorkflowSteps.RetrieveParentRecord.Services
                 if (i == 0)
                 {
                     if (context.PrimaryEntityName != words[i].Substring(words[i].IndexOf(";") + 1))
-                        throw new InvalidPluginExecutionException("First Entity name should be the name of workflow excution entity ");
+                        throw new InvalidPluginExecutionException("First Entity name should be the name of workflow execution entity ");
 
                     request.Target = new EntityReference(context.PrimaryEntityName, context.PrimaryEntityId);
                 }
@@ -105,10 +104,10 @@ namespace Tc.Crm.CustomWorkflowSteps.RetrieveParentRecord.Services
             {
 
                 RetrieveRelationshipRequest retrieveManyToOneRequest = new RetrieveRelationshipRequest { Name = relationshipname };
-                RetrieveRelationshipResponse retrieveManyToOneResponse = (RetrieveRelationshipResponse)service.Execute(retrieveManyToOneRequest);
+                service.Execute(retrieveManyToOneRequest);
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw new InvalidPluginExecutionException("" + relationshipname + " relationship is not present in the CRM system");
             }

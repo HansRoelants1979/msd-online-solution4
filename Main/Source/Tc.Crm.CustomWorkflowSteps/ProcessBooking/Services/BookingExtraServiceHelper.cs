@@ -8,15 +8,15 @@ using Microsoft.Xrm.Sdk;
 
 namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 {
-    class BookingExtraServiceHelper
+    public static class BookingExtraServiceHelper
     {
-        public static EntityCollection GetBookingExtraServicerEntityFromPayload(Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models.Booking bookinginfo, Guid bookingId, ITracingService trace)
+        public static EntityCollection GetBookingExtraServicerEntityFromPayload(Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models.Booking bookingInfo, Guid bookingId, ITracingService trace)
         {
-
+            if (bookingInfo == null) return null;
             if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
             trace.Trace("ExtraService populate records - start");
-            string bookingNumber = bookinginfo.BookingIdentifier.BookingNumber;
-            var extraService = bookinginfo.Services.ExtraService;
+            string bookingNumber = bookingInfo.BookingIdentifier.BookingNumber;
+            var extraService = bookingInfo.Services.ExtraService;
             if (bookingNumber == null || string.IsNullOrWhiteSpace(bookingNumber))
                 throw new InvalidPluginExecutionException("Booking Number should not be null.");
             EntityCollection entityCollectionextraService = new EntityCollection();
@@ -27,7 +27,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 for (int i = 0; i < extraService.Length; i++)
                 {
                     trace.Trace("Processing Booking Transfer " + i.ToString() + " - start");
-                    extraServiceEntity = PrepareBookingExtraService(bookinginfo, extraService[i], bookingId, trace);
+                    extraServiceEntity = PrepareBookingExtraService(bookingInfo, extraService[i], bookingId, trace);
                     entityCollectionextraService.Entities.Add(extraServiceEntity);
                     trace.Trace("Processing Booking accommodation " + i.ToString() + " - end");
                 }
@@ -49,7 +49,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 
             extraServiceEntity[Attributes.BookingExtraService.Order] = extraService.Order;
             if (!string.IsNullOrWhiteSpace(extraService.StartDate ))
-                extraServiceEntity[Attributes.BookingExtraService.StartDateandTime] = DateTime.Parse(extraService.StartDate);
+                extraServiceEntity[Attributes.BookingExtraService.StartDateAndTime] = DateTime.Parse(extraService.StartDate);
             if (!string.IsNullOrWhiteSpace(extraService.EndDate ))
                 extraServiceEntity[Attributes.BookingExtraService.EndDateTime] = DateTime.Parse(extraService.EndDate);
 

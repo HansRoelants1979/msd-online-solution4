@@ -12,8 +12,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// </summary>
         /// <param name="response"></param>
         /// <returns></returns>
-        public static Entity GetResponseEntityFromPayLoad(Response response, ITracingService trace)
+        public static Entity GetResponseEntityFromPayload(Response response, ITracingService trace)
         {
+            if (trace == null) throw new InvalidPluginExecutionException("trace is null.");
             trace.Trace("Processing GetResponseEntityFromPayLoad - start");
             if (response == null) throw new InvalidPluginExecutionException("Response in Json is null");
             var surveyResponse = new Entity(EntityName.SurveyResponse);

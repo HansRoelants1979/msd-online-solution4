@@ -44,7 +44,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                     if (RetrivedEntity.LogicalName == "tc_assistancerequest")
                         AssistanceRequest.Set(executionContext, RetrivedEntity);
                     if (RetrivedEntity.LogicalName == "tc_bookingaccommodation")
-                        Accommdation.Set(executionContext, RetrivedEntity);
+                        Accommodation.Set(executionContext, RetrivedEntity);
                     if (RetrivedEntity.LogicalName == "tc_caseline")
                         CaseLine.Set(executionContext, RetrivedEntity);
                     if (RetrivedEntity.LogicalName == "tc_hotel")
@@ -103,7 +103,7 @@ namespace Tc.Crm.CustomWorkflowSteps
 
         [Output("EntityReference Accommdation")]
         [ReferenceTarget("tc_bookingaccommodation")]
-        public OutArgument<EntityReference> Accommdation { get; set; }
+        public OutArgument<EntityReference> Accommodation { get; set; }
 
         [Output("EntityReference AssistanceRequest")]
         [ReferenceTarget("tc_assistancerequest")]

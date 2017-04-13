@@ -20,15 +20,16 @@ namespace Tc.Crm.CustomWorkflowSteps.QueueIdentifier.Service
 
             trace.Trace("GetQueueBy - start");
             var fetchXml = @"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>
-                              < entity name = 'queue' >
-                                 < attribute name = 'queueid' />
-                                  < filter type = 'and' >
-                                     < condition attribute = 'name' operator= 'eq' value = '{0}' />
-                                       </ filter >
-                                     </ entity >
-                                   </ fetch > ";
-
+                              <entity name = 'queue'>
+                                 <attribute name = 'queueid'/>
+                                  <filter type = 'and'>
+                                     <condition attribute = 'name' operator= 'eq' value = '{0}'/>
+                                       </filter>
+                                     </entity>
+                                   </fetch> ";
+            trace.Trace($"queue name - {queueName}");
             fetchXml = string.Format(fetchXml, queueName);
+            trace.Trace(fetchXml);
             var query = new FetchExpression(fetchXml);
             var response = service.RetrieveMultiple(query);
 
@@ -136,15 +137,15 @@ namespace Tc.Crm.CustomWorkflowSteps.QueueIdentifier.Service
             if (trace == null) return -1;
 
             trace.Trace("GetDepartmentFrom - start");
-            if (userRoles.Contains("Tc.CustomerRelations.Base"))
+            if (userRoles.Contains(QueueName.TcCustomerRelationsBase))
             {
                 trace.Trace("User is from customer relations.");
-                return 1;
+                return Department.CustomerRelations;
             }
-            else if (userRoles.Contains("Tc.Ids.Base"))
+            else if (userRoles.Contains(QueueName.TcIdsBase))
             {
                 trace.Trace("User is from Ids.");
-                return 2;
+                return Department.InDestinationRep;
             }
 
             trace.Trace("Returning -1");
@@ -166,7 +167,7 @@ namespace Tc.Crm.CustomWorkflowSteps.QueueIdentifier.Service
                                 <link-entity name='systemuserroles' from='roleid' to='roleid' visible='false' intersect='true'>
                                   <link-entity name='systemuser' from='systemuserid' to='systemuserid' alias='aa'>
                                     <filter type='and'>
-                                      <condition attribute='systemuserid' operator='eq' value='{DD3A9A52-2DF0-E611-8102-3863BB351D00}' />
+                                      <condition attribute='systemuserid' operator='eq' value='{0}' />
                                     </filter>
                                   </link-entity>
                                 </link-entity>
@@ -204,18 +205,18 @@ namespace Tc.Crm.CustomWorkflowSteps.QueueIdentifier.Service
             trace.Trace("GetCaseDetailsFor - start");
             var fetchXml = @"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>
                               <entity name='incident'>
-                                <attribute name='incidentid' />
-                                <attribute name='tc_sourcemarketid' />
-                                <attribute name='ownerid' />
+                                <attribute name='incidentid'/>
+                                <attribute name='tc_sourcemarketid'/>
+                                <attribute name='ownerid'/>
                                 <filter type='and'>
-                                      <condition attribute='incidentid' operator='eq' value='{0}' />
+                                      <condition attribute='incidentid' operator='eq' value='{0}'/>
                                     </filter>
-                                   < link-entity name='tc_booking' from='tc_bookingid' to='tc_bookingid' visible='false' link-type='outer' alias='a'>
-                                  <attribute name='tc_sourcemarketid' />
+                                   <link-entity name='tc_booking' from='tc_bookingid' to='tc_bookingid' link-type='outer' alias='a'>
+                                  <attribute name='tc_sourcemarketid'/>
                                 </link-entity>
                               </entity>
                             </fetch>";
-            fetchXml = string.Format(fetchXml, caseId);
+            fetchXml = string.Format(fetchXml, caseId.Id);
             var query = new FetchExpression(fetchXml);
 
             trace.Trace("Calling retrieve multiple of service.");
@@ -235,11 +236,20 @@ namespace Tc.Crm.CustomWorkflowSteps.QueueIdentifier.Service
 
             var caseDetail = new CaseDetail();
             if (response.Entities[0].Contains(Attributes.Booking.SourceMarketId) && response.Entities[0][Attributes.Booking.SourceMarketId] != null)
+            {
+                trace.Trace($"case source market: {((EntityReference)(response.Entities[0][Attributes.Booking.SourceMarketId])).Id}");
                 caseDetail.CaseSourceMarket = ((EntityReference)(response.Entities[0][Attributes.Booking.SourceMarketId])).Id;
-            if (response.Entities[0].Contains($"a.{Attributes.Booking.SourceMarketId}") && response.Entities[0][$"a.{Attributes.Booking.SourceMarketId}"] !=null)
+            }
+            if (response.Entities[0].Contains($"a.{Attributes.Booking.SourceMarketId}") && response.Entities[0][$"a.{Attributes.Booking.SourceMarketId}"] != null)
+            {
+                trace.Trace($"booking source market: {((AliasedValue)response.Entities[0][$"a.{Attributes.Booking.SourceMarketId}"]).Value}");
                 caseDetail.BookingSourceMarket = ((EntityReference)((AliasedValue)response.Entities[0][$"a.{Attributes.Booking.SourceMarketId}"]).Value).Id;
+            }
             if (response.Entities[0].Contains(Attributes.Booking.Owner) && response.Entities[0][Attributes.Booking.Owner] != null)
+            {
+                trace.Trace($"owner: {((EntityReference)(response.Entities[0][Attributes.Booking.Owner])).Id}");
                 caseDetail.Owner = ((EntityReference)(response.Entities[0][Attributes.Booking.Owner])).Id;
+            }
 
 
             trace.Trace("GetCaseDetailsFor - end");

@@ -10,6 +10,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
     {
         public static EntityCollection GetSocialProfileEntityFromPayload(Booking bookingInfo,Guid customerId, ITracingService trace)
         {
+            if (bookingInfo == null) return null;
             if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
             trace.Trace("Social Profile populate records - start");
 
@@ -45,7 +46,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 
 
             if (!string.IsNullOrWhiteSpace(socialprofile.Value))
-                socialprofileEntity = new Entity(EntityName.SocialProfile, Attributes.SocialProfile.UniqueProfileID, socialprofile.Value);
+                socialprofileEntity = new Entity(EntityName.SocialProfile, Attributes.SocialProfile.UniqueProfileId, socialprofile.Value);
             socialprofileEntity[Attributes.SocialProfile.ProfileName] = socialprofile.Value;
 
             socialprofileEntity[Attributes.SocialProfile.SocialChannel] = CommonXrm.GetCommunity(socialprofile.SocialType);

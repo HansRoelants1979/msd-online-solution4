@@ -15,18 +15,19 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// </summary>
         /// <param name="BookingResponse"></param>
         /// <returns></returns>
-        public static string SerializeJson(BookingResponse response,ITracingService trace)
+        public static string SerializeJson(BookingResponse response, ITracingService trace)
         {
+            if (trace == null) throw new InvalidPluginExecutionException("trace is null.");
             if (response == null) throw new InvalidPluginExecutionException("Booking response is null;");
             trace.Trace("Processing Serialization of BookingResponse - start");
-            MemoryStream memoryStream = new MemoryStream();
-            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(BookingResponse));
-
-            serializer.WriteObject(memoryStream, response);
-            byte[] json = memoryStream.ToArray();
-            memoryStream.Close();
-            trace.Trace("Processing Serialization of BookingResponse - end");
-            return Encoding.UTF8.GetString(json, 0, json.Length);
+            using (var memoryStream = new MemoryStream())
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(BookingResponse));
+                serializer.WriteObject(memoryStream, response);
+                byte[] json = memoryStream.ToArray();
+                trace.Trace("Processing Serialization of BookingResponse - end");
+                return Encoding.UTF8.GetString(json, 0, json.Length);
+            }
         }
 
 
@@ -35,7 +36,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// </summary>
         /// <param name="json"></param>
         /// <returns></returns>
-        public static Booking DeserializeJson(string json,ITracingService trace)
+        public static Booking DeserializeJson(string json, ITracingService trace)
         {
             if (trace == null) throw new InvalidPluginExecutionException("trace is null.");
             trace.Trace("Processing DeSerialization of json Payload - start");
@@ -59,7 +60,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         /// </summary>
         /// <param name="json"></param>
         /// <returns></returns>
-        public static Survey DeSerializeSurveyJson(string json, ITracingService trace)
+        public static Survey DeserializeSurveyJson(string json, ITracingService trace)
         {
             if (trace == null) throw new InvalidPluginExecutionException("trace is null.");
             trace.Trace("Processing DeSerialization of json survey Payload - start");
@@ -80,16 +81,18 @@ namespace Tc.Crm.CustomWorkflowSteps
 
         public static string SerializeSurveyJson(SurveyReturnResponse response, ITracingService trace)
         {
+            if (trace == null) throw new InvalidPluginExecutionException("trace is null;");
             if (response == null) throw new InvalidPluginExecutionException("SurveyReturnResponse is null;");
             trace.Trace("Processing Serialization of SurveyReturnResponse - start");
-            MemoryStream memoryStream = new MemoryStream();
-            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(SurveyReturnResponse));
+            using (var memoryStream = new MemoryStream())
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(SurveyReturnResponse));
 
-            serializer.WriteObject(memoryStream, response);
-            byte[] json = memoryStream.ToArray();
-            memoryStream.Close();
-            trace.Trace("Processing Serialization of SurveyReturnResponse - end");
-            return Encoding.UTF8.GetString(json, 0, json.Length);
+                serializer.WriteObject(memoryStream, response);
+                byte[] json = memoryStream.ToArray();
+                trace.Trace("Processing Serialization of SurveyReturnResponse - end");
+                return Encoding.UTF8.GetString(json, 0, json.Length);
+            }
         }
     }
 }

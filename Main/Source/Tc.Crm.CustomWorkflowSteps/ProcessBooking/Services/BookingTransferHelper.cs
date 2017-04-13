@@ -8,15 +8,15 @@ using Microsoft.Xrm.Sdk;
 
 namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 {
-    class BookingTransferHelper
+    public static class BookingTransferHelper
     {
-        public static EntityCollection GetBookingTransferEntityFromPayload(Booking bookinginfo, Guid bookingId, ITracingService trace)
+        public static EntityCollection GetBookingTransferEntityFromPayload(Booking bookingInfo, Guid bookingId, ITracingService trace)
         {
-
+            if (bookingInfo == null) return null;
             if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
             trace.Trace("Transfer populate records - start");
-            string bookingNumber = bookinginfo.BookingIdentifier.BookingNumber;
-            var transfer = bookinginfo.Services.Transfer;
+            string bookingNumber = bookingInfo.BookingIdentifier.BookingNumber;
+            var transfer = bookingInfo.Services.Transfer;
             if (bookingNumber == null || string.IsNullOrWhiteSpace(bookingNumber))
                 throw new InvalidPluginExecutionException("Booking Number should not be null.");
             EntityCollection entityCollectiontransfer = new EntityCollection();
@@ -27,7 +27,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 for (int i = 0; i < transfer.Length; i++)
                 {
                     trace.Trace("Processing Booking Transfer " + i.ToString() + " - start");
-                    transferEntity = PrepareBookingTransfer(bookinginfo, transfer[i], bookingId, trace);
+                    transferEntity = PrepareBookingTransfer(bookingInfo, transfer[i], bookingId, trace);
                     entityCollectiontransfer.Entities.Add(transferEntity);
                     trace.Trace("Processing Booking accommodation " + i.ToString() + " - end");
                 }
@@ -49,7 +49,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 
             transferEntity[Attributes.BookingTransfer.Order] = transfer.Order;
             if (!string.IsNullOrWhiteSpace(transfer.StartDate))
-                transferEntity[Attributes.BookingTransfer.StartDateandTime] = DateTime.Parse(transfer.StartDate);
+                transferEntity[Attributes.BookingTransfer.StartDateAndTime] = DateTime.Parse(transfer.StartDate);
             if (!string.IsNullOrWhiteSpace(transfer.EndDate))
                 transferEntity[Attributes.BookingTransfer.EndDateTime] = DateTime.Parse(transfer.EndDate);
 

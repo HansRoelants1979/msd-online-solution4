@@ -128,13 +128,13 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
             var account = AccountHelper.GetAccountEntityForBookingPayload(c, trace);
 
 
-            Assert.AreEqual(c.Address[0].AdditionalAddressInfo, account[Attributes.Account.Address1_AdditionalInformation].ToString());
-            Assert.AreEqual(c.Address[0].FlatNumberUnit, account[Attributes.Account.Address1_FlatOrUnitNumber].ToString());
-            Assert.AreEqual(c.Address[0].HouseNumberBuilding, account[Attributes.Account.Address1_HouseNumberOrBuilding].ToString());
-            Assert.AreEqual(c.Address[0].Town, account[Attributes.Account.Address1_Town].ToString());
-            Assert.AreEqual(c.Address[0].PostalCode, account[Attributes.Account.Address1_PostalCode].ToString());
-            Assert.AreEqual(c.Address[0].County, account[Attributes.Account.Address1_County].ToString());
-            Assert.AreEqual(c.Address[0].Country, ((EntityReference)(account[Attributes.Account.Address1_CountryId])).KeyAttributes[Attributes.Country.ISO2Code].ToString());
+            Assert.AreEqual(c.Address[0].AdditionalAddressInfo, account[Attributes.Account.Address1AdditionalInformation].ToString());
+            Assert.AreEqual(c.Address[0].FlatNumberUnit, account[Attributes.Account.Address1FlatOrUnitNumber].ToString());
+            Assert.AreEqual(c.Address[0].HouseNumberBuilding, account[Attributes.Account.Address1HouseNumberOrBuilding].ToString());
+            Assert.AreEqual(c.Address[0].Town, account[Attributes.Account.Address1Town].ToString());
+            Assert.AreEqual(c.Address[0].PostalCode, account[Attributes.Account.Address1PostalCode].ToString());
+            Assert.AreEqual(c.Address[0].County, account[Attributes.Account.Address1County].ToString());
+            Assert.AreEqual(c.Address[0].Country, ((EntityReference)(account[Attributes.Account.Address1CountryId])).KeyAttributes[Attributes.Country.Iso2Code].ToString());
         }
 
         [TestMethod()]
@@ -181,13 +181,13 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
             var account = AccountHelper.GetAccountEntityForBookingPayload(c, trace);
 
 
-            Assert.AreEqual(c.Address[0].AdditionalAddressInfo, account[Attributes.Account.Address1_AdditionalInformation].ToString());
-            Assert.AreEqual(c.Address[0].FlatNumberUnit, account[Attributes.Account.Address1_FlatOrUnitNumber].ToString());
-            Assert.AreEqual(c.Address[0].HouseNumberBuilding, account[Attributes.Account.Address1_HouseNumberOrBuilding].ToString());
-            Assert.AreEqual(c.Address[0].Town, account[Attributes.Account.Address1_Town].ToString());
-            Assert.AreEqual(c.Address[0].PostalCode, account[Attributes.Account.Address1_PostalCode].ToString());
-            Assert.AreEqual(c.Address[0].County, account[Attributes.Account.Address1_County].ToString());
-            Assert.AreEqual(c.Address[0].Country, ((EntityReference)(account[Attributes.Account.Address1_CountryId])).KeyAttributes[Attributes.Country.ISO2Code].ToString());
+            Assert.AreEqual(c.Address[0].AdditionalAddressInfo, account[Attributes.Account.Address1AdditionalInformation].ToString());
+            Assert.AreEqual(c.Address[0].FlatNumberUnit, account[Attributes.Account.Address1FlatOrUnitNumber].ToString());
+            Assert.AreEqual(c.Address[0].HouseNumberBuilding, account[Attributes.Account.Address1HouseNumberOrBuilding].ToString());
+            Assert.AreEqual(c.Address[0].Town, account[Attributes.Account.Address1Town].ToString());
+            Assert.AreEqual(c.Address[0].PostalCode, account[Attributes.Account.Address1PostalCode].ToString());
+            Assert.AreEqual(c.Address[0].County, account[Attributes.Account.Address1County].ToString());
+            Assert.AreEqual(c.Address[0].Country, ((EntityReference)(account[Attributes.Account.Address1CountryId])).KeyAttributes[Attributes.Country.Iso2Code].ToString());
         }
 
         [TestMethod()]
@@ -211,21 +211,21 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
             var account = AccountHelper.GetAccountEntityForBookingPayload(c, trace);
 
 
-            Assert.AreEqual(true, account.Contains(Attributes.Account.Address1_AdditionalInformation));
-            Assert.AreEqual(true, account.Contains(Attributes.Account.Address1_FlatOrUnitNumber));
-            Assert.AreEqual(true, account.Contains(Attributes.Account.Address1_HouseNumberOrBuilding));
-            Assert.AreEqual(true, account.Contains(Attributes.Account.Address1_Town));
-            Assert.AreEqual(true, account.Contains(Attributes.Account.Address1_PostalCode));
-            Assert.AreEqual(true, account.Contains(Attributes.Account.Address1_County));
-            Assert.AreEqual(true, account.Contains(Attributes.Account.Address1_CountryId));
+            Assert.AreEqual(true, account.Contains(Attributes.Account.Address1AdditionalInformation));
+            Assert.AreEqual(true, account.Contains(Attributes.Account.Address1FlatOrUnitNumber));
+            Assert.AreEqual(true, account.Contains(Attributes.Account.Address1HouseNumberOrBuilding));
+            Assert.AreEqual(true, account.Contains(Attributes.Account.Address1Town));
+            Assert.AreEqual(true, account.Contains(Attributes.Account.Address1PostalCode));
+            Assert.AreEqual(true, account.Contains(Attributes.Account.Address1County));
+            Assert.AreEqual(true, account.Contains(Attributes.Account.Address1CountryId));
 
-            Assert.AreEqual(string.Empty,account[Attributes.Account.Address1_AdditionalInformation]);
-            Assert.AreEqual(string.Empty, account[Attributes.Account.Address1_FlatOrUnitNumber]);
-            Assert.AreEqual(string.Empty, account[Attributes.Account.Address1_HouseNumberOrBuilding]);
-            Assert.AreEqual(string.Empty, account[Attributes.Account.Address1_Town]);
-            Assert.AreEqual(string.Empty, account[Attributes.Account.Address1_PostalCode]);
-            Assert.AreEqual(string.Empty, account[Attributes.Account.Address1_County]);
-            Assert.IsNull(account[Attributes.Account.Address1_CountryId]);
+            Assert.AreEqual(string.Empty,account[Attributes.Account.Address1AdditionalInformation]);
+            Assert.AreEqual(string.Empty, account[Attributes.Account.Address1FlatOrUnitNumber]);
+            Assert.AreEqual(string.Empty, account[Attributes.Account.Address1HouseNumberOrBuilding]);
+            Assert.AreEqual(string.Empty, account[Attributes.Account.Address1Town]);
+            Assert.AreEqual(string.Empty, account[Attributes.Account.Address1PostalCode]);
+            Assert.AreEqual(string.Empty, account[Attributes.Account.Address1County]);
+            Assert.IsNull(account[Attributes.Account.Address1CountryId]);
         }
 
         [TestMethod()]
@@ -249,13 +249,13 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
             var account = AccountHelper.GetAccountEntityForBookingPayload(c, trace);
 
 
-            Assert.AreEqual(false, account.Contains(Attributes.Account.Address1_AdditionalInformation));
-            Assert.AreEqual(false, account.Contains(Attributes.Account.Address1_FlatOrUnitNumber));
-            Assert.AreEqual(false, account.Contains(Attributes.Account.Address1_HouseNumberOrBuilding));
-            Assert.AreEqual(false, account.Contains(Attributes.Account.Address1_Town));
-            Assert.AreEqual(false, account.Contains(Attributes.Account.Address1_PostalCode));
-            Assert.AreEqual(false, account.Contains(Attributes.Account.Address1_County));
-            Assert.AreEqual(false, account.Contains(Attributes.Account.Address1_CountryId));
+            Assert.AreEqual(false, account.Contains(Attributes.Account.Address1AdditionalInformation));
+            Assert.AreEqual(false, account.Contains(Attributes.Account.Address1FlatOrUnitNumber));
+            Assert.AreEqual(false, account.Contains(Attributes.Account.Address1HouseNumberOrBuilding));
+            Assert.AreEqual(false, account.Contains(Attributes.Account.Address1Town));
+            Assert.AreEqual(false, account.Contains(Attributes.Account.Address1PostalCode));
+            Assert.AreEqual(false, account.Contains(Attributes.Account.Address1County));
+            Assert.AreEqual(false, account.Contains(Attributes.Account.Address1CountryId));
         }
 
         [TestMethod()]
@@ -277,21 +277,21 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
         {
             Entity account = new Entity("account");
             AccountHelper.PopulateAddress(account, null, trace);
-            Assert.AreEqual(true, account.Contains(Attributes.Account.Address1_AdditionalInformation));
-            Assert.AreEqual(true, account.Contains(Attributes.Account.Address1_FlatOrUnitNumber));
-            Assert.AreEqual(true, account.Contains(Attributes.Account.Address1_HouseNumberOrBuilding));
-            Assert.AreEqual(true, account.Contains(Attributes.Account.Address1_Town));
-            Assert.AreEqual(true, account.Contains(Attributes.Account.Address1_PostalCode));
-            Assert.AreEqual(true, account.Contains(Attributes.Account.Address1_County));
-            Assert.AreEqual(true, account.Contains(Attributes.Account.Address1_CountryId));
+            Assert.AreEqual(true, account.Contains(Attributes.Account.Address1AdditionalInformation));
+            Assert.AreEqual(true, account.Contains(Attributes.Account.Address1FlatOrUnitNumber));
+            Assert.AreEqual(true, account.Contains(Attributes.Account.Address1HouseNumberOrBuilding));
+            Assert.AreEqual(true, account.Contains(Attributes.Account.Address1Town));
+            Assert.AreEqual(true, account.Contains(Attributes.Account.Address1PostalCode));
+            Assert.AreEqual(true, account.Contains(Attributes.Account.Address1County));
+            Assert.AreEqual(true, account.Contains(Attributes.Account.Address1CountryId));
 
-            Assert.AreEqual(string.Empty, account[Attributes.Account.Address1_AdditionalInformation]);
-            Assert.AreEqual(string.Empty, account[Attributes.Account.Address1_FlatOrUnitNumber]);
-            Assert.AreEqual(string.Empty, account[Attributes.Account.Address1_HouseNumberOrBuilding]);
-            Assert.AreEqual(string.Empty, account[Attributes.Account.Address1_Town]);
-            Assert.AreEqual(string.Empty, account[Attributes.Account.Address1_PostalCode]);
-            Assert.AreEqual(string.Empty, account[Attributes.Account.Address1_County]);
-            Assert.IsNull(account[Attributes.Account.Address1_CountryId]);
+            Assert.AreEqual(string.Empty, account[Attributes.Account.Address1AdditionalInformation]);
+            Assert.AreEqual(string.Empty, account[Attributes.Account.Address1FlatOrUnitNumber]);
+            Assert.AreEqual(string.Empty, account[Attributes.Account.Address1HouseNumberOrBuilding]);
+            Assert.AreEqual(string.Empty, account[Attributes.Account.Address1Town]);
+            Assert.AreEqual(string.Empty, account[Attributes.Account.Address1PostalCode]);
+            Assert.AreEqual(string.Empty, account[Attributes.Account.Address1County]);
+            Assert.IsNull(account[Attributes.Account.Address1CountryId]);
         }
         #endregion Populate Address
 
@@ -319,12 +319,12 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
             var account = AccountHelper.GetAccountEntityForBookingPayload(c, trace);
 
 
-            Assert.AreEqual(c.Email[0].Address, account[Attributes.Account.EMailAddress1].ToString());
-            Assert.AreEqual(c.Email[1].Address, account[Attributes.Account.EMailAddress2].ToString());
-            Assert.AreEqual(c.Email[2].Address, account[Attributes.Account.EMailAddress3].ToString());
-            Assert.AreEqual(950000000, ((OptionSetValue)(account[Attributes.Account.EmailAddress1_Type])).Value);
-            Assert.AreEqual(950000001, ((OptionSetValue)(account[Attributes.Account.EmailAddress2_Type])).Value);
-            Assert.AreEqual(950000001, ((OptionSetValue)(account[Attributes.Account.EmailAddress3_Type])).Value);
+            Assert.AreEqual(c.Email[0].Address, account[Attributes.Account.EmailAddress1].ToString());
+            Assert.AreEqual(c.Email[1].Address, account[Attributes.Account.EmailAddress2].ToString());
+            Assert.AreEqual(c.Email[2].Address, account[Attributes.Account.EmailAddress3].ToString());
+            Assert.AreEqual(950000000, ((OptionSetValue)(account[Attributes.Account.EmailAddress1Type])).Value);
+            Assert.AreEqual(950000001, ((OptionSetValue)(account[Attributes.Account.EmailAddress2Type])).Value);
+            Assert.AreEqual(950000001, ((OptionSetValue)(account[Attributes.Account.EmailAddress3Type])).Value);
 
         }
         #endregion Populate Email
@@ -356,9 +356,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
             Assert.AreEqual(c.Phone[0].Number, account[Attributes.Account.Telephone1].ToString());
             Assert.AreEqual(c.Phone[1].Number, account[Attributes.Account.Telephone2].ToString());
             Assert.AreEqual(c.Phone[2].Number, account[Attributes.Account.Telephone3].ToString());
-            Assert.AreEqual(950000001, ((OptionSetValue)(account[Attributes.Account.Telephone1_Type])).Value);
-            Assert.AreEqual(950000000, ((OptionSetValue)(account[Attributes.Account.Telephone2_Type])).Value);
-            Assert.AreEqual(950000000, ((OptionSetValue)(account[Attributes.Account.Telephone3_Type])).Value);
+            Assert.AreEqual(950000001, ((OptionSetValue)(account[Attributes.Account.Telephone1Type])).Value);
+            Assert.AreEqual(950000000, ((OptionSetValue)(account[Attributes.Account.Telephone2Type])).Value);
+            Assert.AreEqual(950000000, ((OptionSetValue)(account[Attributes.Account.Telephone3Type])).Value);
 
         }
         #endregion

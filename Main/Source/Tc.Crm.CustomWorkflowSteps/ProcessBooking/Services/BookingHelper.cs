@@ -73,10 +73,10 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 booking[Attributes.Booking.BrandId] = (!string.IsNullOrWhiteSpace(general.Brand)) ? new EntityReference(EntityName.Brand, new Guid(general.Brand)) : null;
                 booking[Attributes.Booking.BrochureCode] = (!string.IsNullOrWhiteSpace(general.BrochureCode)) ? general.BrochureCode : string.Empty;
                 booking[Attributes.Booking.IsLateBooking] = general.IsLateBooking;
-                booking[Attributes.Booking.NumberofParticipants] = general.NumberOfParticipants;
-                booking[Attributes.Booking.NumberofAdults] = general.NumberOfAdults;
-                booking[Attributes.Booking.NumberofChildren] = general.NumberOfChildren;
-                booking[Attributes.Booking.NumberofInfants] = general.NumberOfInfants;
+                booking[Attributes.Booking.NumberOfParticipants] = general.NumberOfParticipants;
+                booking[Attributes.Booking.NumberOfAdults] = general.NumberOfAdults;
+                booking[Attributes.Booking.NumberOfChildren] = general.NumberOfChildren;
+                booking[Attributes.Booking.NumberOfInfants] = general.NumberOfInfants;
                 booking[Attributes.Booking.TravelAmount] = new Money(general.TravelAmount);
                 if (!string.IsNullOrWhiteSpace(general.Currency))
                     booking[Attributes.Booking.TransactionCurrencyId] = new EntityReference(EntityName.Currency, new Guid(general.Currency));
@@ -91,7 +91,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
         {
             if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
             if (service == null) return;
-            if (booking == null) throw new InvalidPluginExecutionException("Booking entiy is null.");
+            if (booking == null) throw new InvalidPluginExecutionException("Booking entity is null.");
             trace.Trace("Booking populate service - start");
             trace.Trace("Booking populate service - end");
         }
@@ -194,9 +194,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             return remarksbuilder.ToString();
         }
 
-        public static Entity GetBookingEntityFromPayload(Booking booking, ITracingService trace, IOrganizationService service)
+        public static Entity GetBookingEntityFromPayload(Booking booking, ITracingService trace)
         {
-            if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
+            if (trace == null) throw new InvalidPluginExecutionException("Trace service is null;");
             trace.Trace("Booking populate fields - start");
             if (booking == null) throw new InvalidPluginExecutionException("Booking is null.");
             if (booking.BookingIdentifier == null) throw new InvalidPluginExecutionException("Booking identifier is null.");

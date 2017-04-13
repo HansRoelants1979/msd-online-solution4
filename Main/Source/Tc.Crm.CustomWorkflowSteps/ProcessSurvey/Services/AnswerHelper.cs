@@ -13,8 +13,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// </summary>
         /// <param name="answer"></param>
         /// <returns></returns>
-        public static Entity GetFeedbackEntityFromPayLoad(Answer answer, ITracingService trace)
+        public static Entity GetFeedbackEntityFromPayload(Answer answer, ITracingService trace)
         {
+            if (trace == null) throw new InvalidPluginExecutionException("Trace service is null;");
             trace.Trace("Processing GetFeedbackEntityFromPayLoad - start");
             if (answer == null) throw new InvalidPluginExecutionException("Answer class in json payload is null");
             var feedback = new Entity(EntityName.SurveyResponseFeedback);
@@ -43,6 +44,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// <returns></returns>
         private static string GetValueByFieldType(Answer answer, ITracingService trace)
         {
+            if (trace == null) throw new InvalidPluginExecutionException("Trace service is null;");
             trace.Trace("Processing GetValueByFieldType - start");
             string value = string.Empty;
             switch (answer.FieldType)
@@ -74,6 +76,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// <returns></returns>
         private static string GetOptionValue(Option option, ITracingService trace)
         {
+            if (trace == null) throw new InvalidPluginExecutionException("Trace service is null;");
             trace.Trace("Processing GetOptionValue - start");            
             trace.Trace("Processing GetOptionValue - end");
             return option.DefaultLabel;
@@ -86,6 +89,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// <returns></returns>
         public static string FindBooking(List<Answer> answers, ITracingService trace)
         {
+            if (trace == null) throw new InvalidPluginExecutionException("Trace service is null;");
             trace.Trace("Processing FindBooking - start");
             var bookingNumber = string.Empty;
             if (answers != null && answers.Count > 0)
@@ -111,11 +115,12 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// <returns></returns>
         public static string FindCustomer(List<Answer> answers, ITracingService trace)
         {
+            if (trace == null) throw new InvalidPluginExecutionException("Trace service is null;");
             trace.Trace("Processing FindCustomer - start");
             var customer = string.Empty;
             if (answers != null && answers.Count > 0)
             {
-                var surName = answers.Find(a => a.FieldId == PayloadSurveyFieldMapping.SurName);               
+                var surName = answers.Find(a => a.FieldId == PayloadSurveyFieldMapping.Surname);               
                 if (surName != null && !string.IsNullOrWhiteSpace(surName.LiteralValue))
                 {
                     customer = surName.LiteralValue;

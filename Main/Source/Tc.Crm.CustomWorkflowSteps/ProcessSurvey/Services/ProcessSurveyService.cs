@@ -44,7 +44,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
             for (int i = 0; i < responses.Count; i++)
             {
                 trace.Trace("Processing Response " + i + " - start");
-                var surveyResponse = SurveyResponseHelper.GetResponseEntityFromPayLoad(responses[i], trace);
+                var surveyResponse = SurveyResponseHelper.GetResponseEntityFromPayload(responses[i], trace);
                 if (responses[i].Answers != null && responses[i].Answers.Count > 0)
                 {
                     MapBookingContact(surveyResponse, responses[i].Answers);
@@ -219,7 +219,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
                 for (int i = 0; i < answers.Count; i++)
                 {
                     trace.Trace("Processing Answer " + i + " - start");
-                    var feedback = AnswerHelper.GetFeedbackEntityFromPayLoad(answers[i],trace);                    
+                    var feedback = AnswerHelper.GetFeedbackEntityFromPayload(answers[i],trace);                    
                     feedbackCollection.Entities.Add(feedback);
                     trace.Trace("Processing Answer " + i + " - end");
                 }                

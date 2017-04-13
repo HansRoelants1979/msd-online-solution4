@@ -7,11 +7,12 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 {
     public static class BookingTransportHelper
     {
-        public static EntityCollection GetTransportEntityForBookingPayload(Booking bookinginfo, Guid bookingId, ITracingService trace)
+        public static EntityCollection GetTransportEntityForBookingPayload(Booking bookingInfo, Guid bookingId, ITracingService trace)
         {
+            if (bookingInfo == null) return null;
             if (trace == null) throw new InvalidPluginExecutionException("Tracing Service is null.");
             trace.Trace("Transport populate records - start");
-            var transport = bookinginfo.Services.Transport;
+            var transport = bookingInfo.Services.Transport;
             EntityCollection entityCollectionTransport = new EntityCollection();
             if (transport != null && transport.Length > 0)
             {
@@ -20,7 +21,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 for (int i = 0; i < transport.Length; i++)
                 {
                     trace.Trace("Processing transport record " + i.ToString() + " - start");
-                    transportEntity = PrepareBookingTransport(bookinginfo, transport[i], bookingId, trace);
+                    transportEntity = PrepareBookingTransport(bookingInfo, transport[i], bookingId, trace);
                     entityCollectionTransport.Entities.Add(transportEntity);
                     trace.Trace("Processing transport record " + i.ToString() + " - end");
                 }
@@ -44,9 +45,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 transportEntity[Attributes.BookingTransport.Description] = transport.TransportDescription;
             transportEntity[Attributes.BookingTransport.Order] = transport.Order;
             if (!string.IsNullOrWhiteSpace(transport.StartDate))
-                transportEntity[Attributes.BookingTransport.StartDateandTime] = DateTime.Parse(transport.StartDate);
+                transportEntity[Attributes.BookingTransport.StartDateAndTime] = DateTime.Parse(transport.StartDate);
             if (!string.IsNullOrWhiteSpace(transport.EndDate))
-                transportEntity[Attributes.BookingTransport.EndDateandTime] = DateTime.Parse(transport.EndDate);
+                transportEntity[Attributes.BookingTransport.EndDateAndTime] = DateTime.Parse(transport.EndDate);
             transportEntity[Attributes.BookingTransport.TransferType] = CommonXrm.GetTransferType(transport.TransferType);
             if (!string.IsNullOrWhiteSpace(transport.DepartureAirport))
                 transportEntity[Attributes.BookingTransport.DepartureGatewayId] = new EntityReference(EntityName.Gateway, new Guid(transport.DepartureAirport));
@@ -58,7 +59,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 transportEntity[Attributes.BookingTransport.FlightNumber] = transport.FlightNumber;
             if (!string.IsNullOrWhiteSpace(transport.FlightIdentifier))
                 transportEntity[Attributes.BookingTransport.FlightIdentifier] = transport.FlightIdentifier;
-            transportEntity[Attributes.BookingTransport.NumberofParticipants] = transport.NumberOfParticipants;
+            transportEntity[Attributes.BookingTransport.NumberOfParticipants] = transport.NumberOfParticipants;
             transportEntity[Attributes.BookingTransport.BookingId] = new EntityReference(EntityName.Booking, bookingId);
             transportEntity[Attributes.BookingTransport.Participants] = BookingHelper.PrepareTravelParticipantsInfoForChildRecords(bookinginfo.TravelParticipant, trace, transport.TravelParticipantAssignment);
             transportEntity[Attributes.Booking.Remarks] = RemarksHelper.GetRemarksTextFromPayload(transport.Remark);
