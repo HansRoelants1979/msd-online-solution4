@@ -30,6 +30,7 @@ var Tc = {
                         		var entityUri = "/" + entityName + "s(" + id + ")";
                         		return Sdk.request("GET", entityUri + query, null);
                         	},
+
                         	/**
                              * @function GetByUri                             
                              * @param {string} entityUri - An absolute or relative URI. Relative URI starts with a "/".

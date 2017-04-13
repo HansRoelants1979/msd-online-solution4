@@ -1,3 +1,4 @@
+
 if (typeof (Tc) === "undefined") {
     Tc = {
         __namespace: true
@@ -27,7 +28,9 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
     var CASE_CATEGORY_3_ID = "tc_category3id";
     var CASE_CATEGORY_4_ID = "tc_categorylevel4id";
     var CASE_CATEGORY_ENTITY = "tc_casecategory";
+    var CASE_LINE_ENTITY_NAME = "tc_name";
     var FORM_MODE_CREATE = 1;
+    var FORM_MODE_UPDATE = 2;
     var VIEW_RANDOM_GUID = "{5A8261E7-71F5-4904-B046-EE8001A01CF5}";
 
     ///
@@ -83,6 +86,7 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
     var filterLevel3CaseCategory = function () {
         console.log("Call PreSearch: " + CASE_CATEGORY_3_ID);
         // clean-up case category level 4 selection
+       
         Xrm.Page.getControl(CASE_CATEGORY_4_ID).getAttribute().setValue(null);
         filterCategoryByParentCaseCategory(CASE_CATEGORY_3_ID);
     }
@@ -154,10 +158,42 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
         control.setDefaultView(VIEW_RANDOM_GUID);
     }
 
+    /// Foramting the name of the Case Line Entity.
+
+    var formationTheNameOfTheCaseLineEntity = function () {
+
+        //if (Xrm.Page.ui.getFormType() === FORM_MODE_UPDATE) {
+
+        console.log("formation The Name of The Case Line Entity - Start");
+        if (Xrm.Page.getControl(CASE_CATEGORY_1_ID).getAttribute().getValue() != null) {
+
+            var CaseLineName = Xrm.Page.getControl(CASE_CATEGORY_1_ID).getAttribute().getValue()[0].name;
+            if (Xrm.Page.getControl(CASE_CATEGORY_2_ID).getAttribute().getValue() != null) {
+                CaseLineName = CaseLineName + " > " + Xrm.Page.getControl(CASE_CATEGORY_2_ID).getAttribute().getValue()[0].name;
+
+                if (Xrm.Page.getControl(CASE_CATEGORY_3_ID).getAttribute().getValue() != null) {
+                    CaseLineName = CaseLineName + " > " + Xrm.Page.getControl(CASE_CATEGORY_3_ID).getAttribute().getValue()[0].name;
+                }
+            }
+
+
+            Xrm.Page.getControl(CASE_LINE_ENTITY_NAME).getAttribute().setValue(CaseLineName);
+        }
+
+        console.log("formation The Name of The Case Line Entity - End");
+
+
+        // }
+
+    }
+
     // public methods
     return {
         OnLoad: function () {
             addEventHandlers();
+        },
+        OnCaseLineSave: function () {
+            formationTheNameOfTheCaseLineEntity();
         }
     };
 })();
