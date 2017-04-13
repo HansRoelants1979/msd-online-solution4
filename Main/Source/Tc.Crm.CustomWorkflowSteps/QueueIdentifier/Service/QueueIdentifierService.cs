@@ -75,13 +75,20 @@ namespace Tc.Crm.CustomWorkflowSteps.QueueIdentifier.Service
                 return null;
             }
 
-            var sourceMarket = GetSourceMarketFrom(caseDetails, trace);
+            var sourceMarket = GetSourceMarketFrom(caseDetails, department, trace);
             if (sourceMarket == Guid.Empty)
             {
                 trace.Trace("Source market could not be determined from the case record.");
                 return null;
             }
 
+            trace.Trace("GetQueueFor - end");
+            return FetchQueueBy(department, sourceMarket, trace, service);
+        }
+
+        private EntityReference FetchQueueBy(int department, Guid sourceMarket, ITracingService trace, IOrganizationService service)
+        {
+            trace.Trace("FetchQueueBy - start");
             var fetchXml = @"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>
                               <entity name='queue'>
                                 <attribute name='queueid' />
@@ -105,17 +112,32 @@ namespace Tc.Crm.CustomWorkflowSteps.QueueIdentifier.Service
             if (response.Entities.Count > 1)
                 throw new InvalidPluginExecutionException("Multiple queues exist with the same name.");
 
-            trace.Trace("GetQueueFor - end");
+            trace.Trace("FetchQueueBy - end");
             return new EntityReference(EntityName.Queue, response.Entities[0].Id);
-
         }
 
-        private Guid GetSourceMarketFrom(CaseDetail caseDetails, ITracingService trace)
+        private Guid GetSourceMarketFrom(CaseDetail caseDetails, int department, ITracingService trace)
         {
             if (caseDetails == null) return Guid.Empty;
             if (trace == null) return Guid.Empty;
 
             trace.Trace("GetSourceMarketFrom - start");
+            if (department == Department.InDestinationRep)
+            {
+                if (caseDetails.ContactSourceMarket != Guid.Empty)
+                {
+                    trace.Trace("source market retrieved from contact.");
+                    return caseDetails.ContactSourceMarket;
+                }
+                if (caseDetails.AccountSourceMarket != Guid.Empty)
+                {
+                    trace.Trace("source market retrieved from account.");
+                    return caseDetails.AccountSourceMarket;
+                }
+                trace.Trace("source market is not present in account or contact");
+                return Guid.Empty;
+            }
+
             if (caseDetails.BookingSourceMarket != Guid.Empty)
             {
                 trace.Trace("source market retrieved from booking.");
@@ -226,14 +248,20 @@ namespace Tc.Crm.CustomWorkflowSteps.QueueIdentifier.Service
             trace.Trace("GetCaseDetailsFor - start");
             var fetchXml = @"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>
                               <entity name='incident'>
-                                <attribute name='incidentid'/>
-                                <attribute name='tc_sourcemarketid'/>
-                                <attribute name='ownerid'/>
+                                <attribute name='incidentid' />
+                                <attribute name='tc_sourcemarketid' />
+                                <attribute name='ownerid' />
                                 <filter type='and'>
-                                      <condition attribute='incidentid' operator='eq' value='{0}'/>
-                                    </filter>
-                                   <link-entity name='tc_booking' from='tc_bookingid' to='tc_bookingid' link-type='outer' alias='a'>
-                                  <attribute name='tc_sourcemarketid'/>
+                                  <condition attribute='incidentid' operator='eq' value='{0}' />
+                                </filter>
+                                <link-entity name='tc_booking' from='tc_bookingid' to='tc_bookingid' link-type='outer' alias='b'>
+                                  <attribute name='tc_sourcemarketid' />
+                                </link-entity>
+                                <link-entity name='contact' from='contactid' to='customerid' link-type='outer' alias='c'>
+                                  <attribute name='tc_sourcemarketid' />
+                                </link-entity>
+                                <link-entity name='account' from='accountid' to='customerid' link-type='outer' alias='a'>
+                                  <attribute name='tc_sourcemarketid' />
                                 </link-entity>
                               </entity>
                             </fetch>";
@@ -261,10 +289,20 @@ namespace Tc.Crm.CustomWorkflowSteps.QueueIdentifier.Service
                 trace.Trace($"case source market: {((EntityReference)(response.Entities[0][Attributes.Booking.SourceMarketId])).Id}");
                 caseDetail.CaseSourceMarket = ((EntityReference)(response.Entities[0][Attributes.Booking.SourceMarketId])).Id;
             }
+            if (response.Entities[0].Contains($"b.{Attributes.Booking.SourceMarketId}") && response.Entities[0][$"b.{Attributes.Booking.SourceMarketId}"] != null)
+            {
+                trace.Trace($"booking source market: {((AliasedValue)response.Entities[0][$"b.{Attributes.Booking.SourceMarketId}"]).Value}");
+                caseDetail.BookingSourceMarket = ((EntityReference)((AliasedValue)response.Entities[0][$"b.{Attributes.Booking.SourceMarketId}"]).Value).Id;
+            }
+            if (response.Entities[0].Contains($"c.{Attributes.Booking.SourceMarketId}") && response.Entities[0][$"c.{Attributes.Booking.SourceMarketId}"] != null)
+            {
+                trace.Trace($"booking source market: {((AliasedValue)response.Entities[0][$"c.{Attributes.Booking.SourceMarketId}"]).Value}");
+                caseDetail.ContactSourceMarket = ((EntityReference)((AliasedValue)response.Entities[0][$"c.{Attributes.Booking.SourceMarketId}"]).Value).Id;
+            }
             if (response.Entities[0].Contains($"a.{Attributes.Booking.SourceMarketId}") && response.Entities[0][$"a.{Attributes.Booking.SourceMarketId}"] != null)
             {
                 trace.Trace($"booking source market: {((AliasedValue)response.Entities[0][$"a.{Attributes.Booking.SourceMarketId}"]).Value}");
-                caseDetail.BookingSourceMarket = ((EntityReference)((AliasedValue)response.Entities[0][$"a.{Attributes.Booking.SourceMarketId}"]).Value).Id;
+                caseDetail.AccountSourceMarket = ((EntityReference)((AliasedValue)response.Entities[0][$"a.{Attributes.Booking.SourceMarketId}"]).Value).Id;
             }
             if (response.Entities[0].Contains(Attributes.Booking.Owner) && response.Entities[0][Attributes.Booking.Owner] != null)
             {
