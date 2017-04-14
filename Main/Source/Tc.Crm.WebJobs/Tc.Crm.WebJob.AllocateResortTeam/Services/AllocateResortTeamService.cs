@@ -137,6 +137,11 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
         public bool ValidForProcessing(BookingAllocationResponse bookingResponse, List<Guid> processedCustomers, string responseLog)
         {
             if (bookingResponse == null) return false;
+            if (bookingResponse.ChildHotelTeam == null)
+            {
+                logger.LogWarning(responseLog + "Not processing this record as no child hotel team exists for this combination of sourcemarket businessunit and hotel owner");
+                return false;
+            }
             if (bookingResponse.Customer == null)
             {
                 logger.LogWarning(responseLog+"Not processing this record as no customer exists");
@@ -173,23 +178,28 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
         {
             var information = new StringBuilder();
             if (bookingAllocationResponse != null)
-            {                
+            {
                 information.AppendLine();
                 information.AppendLine();
                 if (bookingAllocationResponse.BookingNumber != null)
-                    information.AppendLine("Processing Booking: " + bookingAllocationResponse.BookingNumber);
+                    information.AppendLine($"Processing Booking: '{ bookingAllocationResponse.BookingNumber}'");
                 if (bookingAllocationResponse.BookingOwner != null)
-                    information.AppendLine("Booking Owner: " + bookingAllocationResponse.BookingOwner.Name + " of Type " + bookingAllocationResponse.BookingOwner.OwnerType.ToString());
+                    information.AppendLine($"Booking Owner: '{ bookingAllocationResponse.BookingOwner.Name }' of Type '{ bookingAllocationResponse.BookingOwner.OwnerType.ToString() }'");
                 if (bookingAllocationResponse.AccommodationStartDate != null)
-                    information.AppendLine("Accommodation Start Date: " + bookingAllocationResponse.AccommodationStartDate.Value.ToString());
+                    information.AppendLine($"Accommodation Start Date: '{ bookingAllocationResponse.AccommodationStartDate.Value.ToString() }'");
                 if (bookingAllocationResponse.Customer != null)
                 {
-                    information.AppendLine("Booking Customer: " + bookingAllocationResponse.Customer.Name + " of type " + bookingAllocationResponse.Customer.CustomerType.ToString());
-                    information.AppendLine("Customer Owner: " + bookingAllocationResponse.Customer.Owner.Name + " of type " + bookingAllocationResponse.Customer.Owner.OwnerType.ToString());
-                }                
+                    information.AppendLine($"Booking Customer: '{ bookingAllocationResponse.Customer.Name }' of Type '{  bookingAllocationResponse.Customer.CustomerType.ToString() }'");
+                    information.AppendLine($"Customer Owner: '{ bookingAllocationResponse.Customer.Owner.Name }' of Type '{ bookingAllocationResponse.Customer.Owner.OwnerType.ToString() }'");
+                }
+                if (bookingAllocationResponse.SourceMarketBusinessUnit != null)
+                    information.AppendLine($"Source Market Business Unit: '{ bookingAllocationResponse.SourceMarketBusinessUnit }'");
+                if (bookingAllocationResponse.HotelName != null)
+                    information.AppendLine($"Hotel Name: '{bookingAllocationResponse.HotelName}'");
                 if (bookingAllocationResponse.HotelOwner != null)
-                    information.AppendLine("Hotel Owner: " + bookingAllocationResponse.HotelOwner.Name + " of Type " + bookingAllocationResponse.HotelOwner.OwnerType.ToString());
-                
+                    information.AppendLine($"Hotel Owner: '{ bookingAllocationResponse.HotelOwner.Name }' of Type '{ bookingAllocationResponse.HotelOwner.OwnerType.ToString() }'");
+                if (bookingAllocationResponse.ChildHotelTeam != null)
+                    information.AppendLine($"Child Hotel Team: '{bookingAllocationResponse.ChildHotelTeam.Name}'");
             }
             return information.ToString();
 
@@ -225,12 +235,11 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
         {
             //logger.LogInformation("PrepareCustomerResortTeamRequest - start");
             if (bookingResponse == null) throw new ArgumentNullException("bookingResponse");
-            if (bookingResponse.Customer == null || bookingResponse.Customer.Id == Guid.Empty) return null;
-            if (bookingResponse.HotelOwner == null) return null;
+            if (bookingResponse.Customer == null || bookingResponse.ChildHotelTeam == null) return null;            
             var customerResortTeamRequest = new CustomerResortTeamRequest
             {
                 Customer = bookingResponse.Customer,
-                Owner = bookingResponse.HotelOwner
+                Owner = bookingResponse.ChildHotelTeam
             };
 
             //logger.LogInformation("PrepareCustomerResortTeamRequest - end");
@@ -241,15 +250,12 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
         {
             //logger.LogInformation("PrepareBookingResortTeamRequest - start");
             if (bookingResponse == null) throw new ArgumentNullException("bookingResponse");
-
-            if (bookingResponse.BookingId == null || bookingResponse.BookingId == Guid.Empty) return null;
-            if (bookingResponse.HotelOwner == null) return null;
-
+            if (bookingResponse.BookingId == null || bookingResponse.ChildHotelTeam == null) return null;
             var bookingResortTeamRequest = new BookingResortTeamRequest
             {
                 Id = bookingResponse.BookingId,
                 Name = bookingResponse.BookingNumber,
-                Owner = bookingResponse.HotelOwner
+                Owner = bookingResponse.ChildHotelTeam
             };
 
             //logger.LogInformation("PrepareBookingResortTeamRequest - end");

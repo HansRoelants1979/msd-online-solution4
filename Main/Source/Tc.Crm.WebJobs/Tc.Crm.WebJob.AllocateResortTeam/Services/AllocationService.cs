@@ -25,7 +25,6 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "GetBookingAllocations")]
         public IList<BookingAllocationResponse> GetBookingAllocations(BookingAllocationRequest bookingAllocationRequest)
         {
-            //logger.LogInformation("GetBookingAllocations - start");
             if (bookingAllocationRequest == null) throw new ArgumentNullException("bookingAllocationRequest");
 
             if (bookingAllocationRequest.Destination == null) throw new ArgumentNullException("bookingAllocationRequest.Destination");
@@ -59,17 +58,31 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                                                         <attribute name='tc_enddateandtime'/>
                                                         <order attribute='tc_startdateandtime' descending='false'/>
                                                             <link-entity name='tc_hotel' alias='hotel' from='tc_hotelid' to='tc_hotelid'>
+                                                                    <attribute name='tc_name'/>                                                                
                                                                 <attribute name='ownerid'/>
+                                                                  <link-entity name='team' alias='hotelteam' from='teamid' to='owningteam'/>
                                                             </link-entity>
                                                     </link-entity>
                                                     <link-entity name='tc_customerbookingrole' alias='role' from='tc_bookingid' to='tc_bookingid'>
                                                         <attribute name='tc_customer'/>
                                                          <link-entity link-type='outer' name='account' alias='account' from='accountid' to='tc_customer'>
                                                             <attribute name='ownerid'/>
+                                                                <link-entity link-type='outer' name='tc_country' alias='accountsourcemarket' from='tc_countryid' to='tc_sourcemarketid'>
+                                                                  <attribute name='tc_sourcemarketbusinessunitid'/>
+                                                                   <filter type='and'>
+                                                                    <condition attribute='tc_sourcemarketbusinessunitid' operator='not-null' />
+                                                                   </filter>
+                                                         </link-entity>
                                                          </link-entity>
                                                          <link-entity link-type='outer' name='contact' alias='contact' from='contactid' to='tc_customer'>
                                                             <attribute name='ownerid'/>
+                                                                <link-entity link-type='outer' name='tc_country' alias='contactsourcemarket' from='tc_countryid' to='tc_sourcemarketid'>
+                                                                  <attribute name='tc_sourcemarketbusinessunitid'/>
+                                                                   <filter type='and'>
+                                                                    <condition attribute='tc_sourcemarketbusinessunitid' operator='not-null' />
+                                                                   </filter>
                                                          </link-entity>
+                                                    </link-entity>
                                                     </link-entity>
                                                  </entity>
                                                  </fetch>",
@@ -78,10 +91,15 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                                                      bookingAllocationRequest.ReturnDate.ToString("yyyy-MM-dd"),
                                                      destinationGateWays.ToString() });
 
-            EntityCollection bookingCollection = crmService.RetrieveMultipleRecordsFetchXml(query);
+            var bookingCollection = crmService.RetrieveMultipleRecordsFetchXml(query);
 
-            //logger.LogInformation("GetBookingAllocations - end");
-            return PrepareBookingAllocation(bookingCollection);
+            var parentHotelTeam = GetHotelTeams(bookingCollection);
+
+            var childTeamCollection = GetChildTeams(parentHotelTeam);
+
+            var childHotelTeam = PrepareChildTeam(childTeamCollection);
+           
+            return PrepareBookingAllocation(bookingCollection, childHotelTeam);
         }
 
         public StringBuilder GetDestinationGateways(IList<Guid> destinationGateways)
@@ -99,12 +117,113 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
             return gateways;
         }
 
-        public IList<BookingAllocationResponse> PrepareBookingAllocation(EntityCollection bookingCollection)
+        public ParentHotelTeam GetHotelTeams(EntityCollection bookingCollection)
         {
-            //logger.LogInformation("PrepareBookingAllocation - start");
+            if (bookingCollection == null || bookingCollection.Entities.Count == 0) return null;
+            var parentTeam = new List<Guid>();
+            var businessUnit = new List<Guid>();            
+            var fieldOwner = AliasName.HotelAliasName + Attributes.Hotel.Owner;           
+            for (int i = 0; i < bookingCollection.Entities.Count; i++)
+            {
+                var booking = bookingCollection.Entities[i];
+                if (booking == null) continue;
+                if (!booking.Attributes.Contains(fieldOwner) || booking.Attributes[fieldOwner] == null) continue;
+                var fieldSourceMarket = GetBusinessUnitField(booking);
+                if (string.IsNullOrWhiteSpace(fieldSourceMarket)) continue;
+                var owner = (EntityReference)((AliasedValue)booking[fieldOwner]).Value;
+                if (!parentTeam.Contains(owner.Id))
+                    parentTeam.Add(owner.Id);                     
+                var bu = (EntityReference)((AliasedValue)booking[fieldSourceMarket]).Value;
+                if (!businessUnit.Contains(bu.Id))
+                    businessUnit.Add(bu.Id);
+            }
+            return new ParentHotelTeam { BusinessUnit = businessUnit, Team = parentTeam };            
+        }
+
+        public string GetBusinessUnitField(Entity booking)
+        {
+            var fieldContactSourceMarketBu = AliasName.ContactSourceMarketAliasName + Attributes.SourceMarket.BusinessUnitId;
+            var fieldAccountSourceMarketBu = AliasName.AccountSourceMarketAliasName + Attributes.SourceMarket.BusinessUnitId;
+            var fieldSourceMarket = string.Empty;
+            if (booking.Attributes.Contains(fieldContactSourceMarketBu) && booking.Attributes[fieldContactSourceMarketBu] != null)
+                fieldSourceMarket = AliasName.ContactSourceMarketAliasName + Attributes.SourceMarket.BusinessUnitId;
+            else if (booking.Attributes.Contains(fieldAccountSourceMarketBu) && booking.Attributes[fieldAccountSourceMarketBu] != null)
+                fieldSourceMarket = AliasName.AccountSourceMarketAliasName + Attributes.SourceMarket.BusinessUnitId;
+            return fieldSourceMarket;
+        }
+
+        public EntityCollection GetChildTeams(ParentHotelTeam parentHotelTeam)
+        {
+            if (parentHotelTeam == null) return null;
+            if (parentHotelTeam.BusinessUnit == null || parentHotelTeam.BusinessUnit.Count == 0) return null;
+            if (parentHotelTeam.Team == null || parentHotelTeam.Team.Count == 0) return null;
+            var parentHotelTeamCondition = GetLookupConditions(parentHotelTeam.Team);
+            var businessUnitCondition = GetLookupConditions(parentHotelTeam.BusinessUnit);
+            var query = $@"<fetch output-format='xml - platform' distinct='false' version='1.0' mapping='logical'>
+                            <entity name='team'>
+                            <attribute name='name'/>
+                            <attribute name='businessunitid'/>
+                            <attribute name='teamid'/>
+                            <attribute name='tc_hotelteamid'/>
+                            <filter type='and'>
+                                <condition attribute='tc_hotelteamid' operator='in'>              
+                                {parentHotelTeamCondition}
+                                </condition>
+                                <condition attribute='businessunitid' operator='in'>
+                                {businessUnitCondition}
+                                </condition>
+                            </filter>
+                            </entity>
+                            </fetch>";
+           var childTeams = crmService.RetrieveMultipleRecordsFetchXml(query);
+           return childTeams;
+        }
+
+        public string GetLookupConditions(IList<Guid> lookups)
+        {           
+            var lookupCondition = new StringBuilder();
+            if (lookups != null || lookups.Count > 0)
+            {
+                for (int i = 0; i < lookups.Count; i++)
+                {
+                    lookupCondition.Append("<value>" + lookups[i].ToString() + "</value>");
+                }
+            }
+            return lookupCondition.ToString();
+        }
+
+        public List<ChildHotelTeam> PrepareChildTeam(EntityCollection childTeamCollection)
+        {
+            if (childTeamCollection == null || childTeamCollection.Entities.Count == 0) return null;
+            var childTeams = new List<ChildHotelTeam>(); 
+            for (int i = 0; i < childTeamCollection.Entities.Count; i++)
+            {
+                var team = childTeamCollection.Entities[i];
+                if (team == null) continue;
+                if (!team.Attributes.Contains(Attributes.Team.BusinessUnitId) || team.Attributes[Attributes.Team.BusinessUnitId] == null) continue;
+                if (!team.Attributes.Contains(Attributes.Team.ParentTeamId) || team.Attributes[Attributes.Team.ParentTeamId] == null) continue;
+                var parentTeam = (EntityReference)team.Attributes[Attributes.Team.ParentTeamId];
+                var businessUnit = (EntityReference)team.Attributes[Attributes.Team.BusinessUnitId];
+                var childTeam = new EntityReference(team.LogicalName,team.Id);
+                if (team.Attributes.Contains(Attributes.Team.Name) && team.Attributes[Attributes.Team.Name] != null)
+                    childTeam.Name = team.Attributes[Attributes.Team.Name].ToString();
+                childTeams.Add(new ChildHotelTeam { ChildTeamId = childTeam.Id, ChildTeamName = childTeam.Name, ParentTeamId = parentTeam.Id, BusinessUnitId = businessUnit.Id });
+            }
+            return childTeams;
+        }
+
+        public IList<BookingAllocationResponse> PrepareBookingAllocation(EntityCollection bookingCollection, List<ChildHotelTeam> childTeam)
+        {
+           
             if (bookingCollection == null || bookingCollection.Entities.Count == 0)
             {
                 logger.LogWarning("No booking records found to process in CRM for the schedule.");
+                return null;
+            }
+
+            if(childTeam == null || childTeam.Count == 0)
+            {
+                logger.LogWarning("No child Teams found to process in CRM for the schedule.");
                 return null;
             }
 
@@ -124,17 +243,36 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
 
                 var fieldStartDate = AliasName.AccommodationAliasName + Attributes.BookingAccommodation.StartDateandTime;
                 var fieldEndDate = AliasName.AccommodationAliasName + Attributes.BookingAccommodation.EndDateandTime;
-                var fieldOwner = AliasName.HotelAliasName + Attributes.Hotel.Owner;
+                var fieldHotelOwner = AliasName.HotelAliasName + Attributes.Hotel.Owner;
+                var fieldHotelName = AliasName.HotelAliasName + Attributes.Hotel.Name;
                 var fieldCustomer = AliasName.RoleAliasName + Attributes.CustomerBookingRole.Customer;
                 var fieldAccountOwner = AliasName.AccountAliasName + Attributes.Customer.Owner;
-                var fieldContactOwner = AliasName.ContactAliasName + Attributes.Customer.Owner;
+                var fieldContactOwner = AliasName.ContactAliasName + Attributes.Customer.Owner;                
 
                 if (booking.Contains(fieldStartDate) && booking[fieldStartDate] != null)
                     response.AccommodationStartDate = DateTime.Parse(((AliasedValue)booking[fieldStartDate]).Value.ToString());
                 if (booking.Contains(fieldEndDate) && booking[fieldEndDate] != null)
                     response.AccommodationEndDate = DateTime.Parse(((AliasedValue)booking[fieldEndDate]).Value.ToString());
+                if (booking.Contains(fieldHotelName) && booking[fieldHotelName] != null)
+                    response.HotelName = ((AliasedValue)booking[fieldHotelName]).Value.ToString();
+
+                var fieldBusinessUnit = GetBusinessUnitField(booking);
+                if (!string.IsNullOrWhiteSpace(fieldBusinessUnit) && booking.Contains(fieldBusinessUnit) && booking[fieldBusinessUnit] != null)
+                {
+                    var hotelOwner = GetOwner(booking, fieldHotelOwner, true);
+                    if (hotelOwner != null)
+                    {
+                        response.HotelOwner = hotelOwner;
+                        var businessUnit = (EntityReference)((AliasedValue)booking[fieldBusinessUnit]).Value;
+                        response.SourceMarketBusinessUnit = businessUnit.Name;
+                        var team = childTeam.Find(t => t.ParentTeamId == hotelOwner.Id && t.BusinessUnitId == businessUnit.Id);
+                        if (team != null && team.ChildTeamId != Guid.Empty)
+                        {
+                            response.ChildHotelTeam = new Owner { Id = team.ChildTeamId, Name = team.ChildTeamName, OwnerType = OwnerType.Team };
+                        }
+                    }
+                }
                  
-                    response.HotelOwner = GetOwner(booking, fieldOwner, true);
                 
                 if (booking.Contains(fieldCustomer) && booking[fieldCustomer] != null)
                 {

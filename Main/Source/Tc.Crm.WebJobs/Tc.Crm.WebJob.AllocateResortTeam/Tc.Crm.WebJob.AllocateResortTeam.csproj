@@ -128,6 +128,8 @@
     <Compile Include="Models\BookingAllocationResortTeamRequest.cs" />
     <Compile Include="Models\BookingAllocationResponse.cs" />
     <Compile Include="Models\CustomerResortTeamRequest.cs" />
+    <Compile Include="Models\ChildHotelTeam.cs" />
+    <Compile Include="Models\ParentHotelTeam.cs" />
     <Compile Include="Services\AllocationService.cs" />
     <Compile Include="Models\BookingResortTeamRequest.cs" />
     <Compile Include="Program.cs" />
@@ -137,7 +139,9 @@
     <Compile Include="Services\IAllocationService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\tcdev-ne - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\tcsit-ne.pubxml" />

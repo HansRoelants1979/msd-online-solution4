@@ -30,6 +30,9 @@ namespace Tc.Crm.Common.Constants
         public const string RoleAliasName = "role.";
         public const string AccountAliasName = "account.";
         public const string ContactAliasName = "contact.";
+        public const string SourceMarketAliasName = "sourcemarket.";
+        public const string ContactSourceMarketAliasName = "contactsourcemarket.";
+        public const string AccountSourceMarketAliasName = "accountsourcemarket.";
     }
    
     namespace EntityRecords
@@ -77,6 +80,7 @@ namespace Tc.Crm.Common.Constants
             public const string IsHotelTeam = "tc_hotelteam";
             public const string IsDefaultTeam = "isdefault";
             public const string BusinessUnitId = "businessunitid";
+            public const string ParentTeamId = "tc_hotelteamid";
         }
 
         public static class Country
@@ -124,6 +128,10 @@ namespace Tc.Crm.Common.Constants
 
         public static class Customer
         {
+            public const string TeamId = "teamid";
+            public const string Name = "name";
+            public const string BusinessUnitId = "businessunitid";
+            public const string ParentTeamId = "tc_hotelteamid";
             public const string Owner = "ownerid";
         }
 
@@ -152,7 +160,14 @@ namespace Tc.Crm.Common.Constants
         {
             public const string UserId = "systemuserid";
         }
+
+        public static class SourceMarket
+        {
+            public const string BusinessUnitId = "tc_sourcemarketbusinessunitid";
+        }
     }
+
+    
 }
 
 
