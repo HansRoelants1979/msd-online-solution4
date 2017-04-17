@@ -19,7 +19,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeamTests
     {
         No_Records_Returned = 0,
         Collection_With_No_Records_Returned = 1,
-        Returns_Data = 2
+        Returns_Data = 2,       
     }
     public class TestCrmService : ICrmService
     {
@@ -53,20 +53,42 @@ namespace Tc.Crm.WebJob.AllocateResortTeamTests
             var resortTeam1 = new Entity("team", resortTeam1Id);
             resortTeam1["teamid"] = resortTeam1Id;
             resortTeam1["name"] = "Resort Team 1";
+            resortTeam1["tc_hotelteamid"] = new EntityReference("team", Guid.NewGuid());
+            resortTeam1["businessunitid"] = new EntityReference("businessunit", Guid.NewGuid());
 
             var resortTeam2Id = Guid.NewGuid();
             var resortTeam2 = new Entity("team", resortTeam2Id);
             resortTeam2["teamid"] = resortTeam1Id;
             resortTeam2["name"] = "Resort Team 2";
+            resortTeam2["tc_hotelteamid"] = new EntityReference("team", resortTeam1Id);
+            resortTeam2["businessunitid"] = new EntityReference("businessunit", Guid.NewGuid());
 
             var resortTeam3Id = Guid.NewGuid();
             var resortTeam3 = new Entity("team", resortTeam3Id);
             resortTeam3["teamid"] = resortTeam1Id;
             resortTeam3["name"] = "Resort Team 3";
+            resortTeam3["tc_hotelteamid"] = new EntityReference("team", resortTeam1Id);
+            resortTeam3["businessunitid"] = new EntityReference("businessunit", Guid.NewGuid());
+
+            var resortTeam4Id = Guid.NewGuid();
+            var resortTeam4 = new Entity("team", resortTeam1Id);
+            resortTeam4["teamid"] = resortTeam4Id;
+            resortTeam4["name"] = "Resort Team 4";
+            resortTeam4["tc_hotelteamid"] = new EntityReference("team", Guid.NewGuid());
+            resortTeam4["businessunitid"] = new EntityReference("businessunit", Guid.NewGuid());
+
+            var resortTeam5Id = Guid.NewGuid();
+            var resortTeam5 = new Entity("team", resortTeam3Id);
+            resortTeam5["teamid"] = resortTeam1Id;
+            resortTeam5["name"] = "Resort Team 3";
+            resortTeam5["tc_hotelteamid"] = new EntityReference("team", resortTeam4Id);
+            resortTeam5["businessunitid"] = new EntityReference("businessunit", Guid.NewGuid());
 
             teamEntityCollection.Add(resortTeam1Id, resortTeam1);
             teamEntityCollection.Add(resortTeam2Id, resortTeam2);
             teamEntityCollection.Add(resortTeam3Id, resortTeam3);
+            teamEntityCollection.Add(resortTeam4Id, resortTeam4);
+            teamEntityCollection.Add(resortTeam5Id, resortTeam5);
 
             context.Data.Add("team", teamEntityCollection);
         }
@@ -75,12 +97,12 @@ namespace Tc.Crm.WebJob.AllocateResortTeamTests
         {
             var contactEntityCollection = new Dictionary<Guid, Entity>();
             var customer1Id = Guid.NewGuid();
+            var sourceMarketId = Guid.NewGuid();
             var customer1 = new Entity("contact", customer1Id);
             customer1["contactid"] = customer1Id;
             customer1["lastname"] = "Gogol";
             customer1["firstname"] = "Nikolai";
             contactEntityCollection.Add(customer1Id, customer1);
-
             context.Data.Add("contact", contactEntityCollection);
         }
 
@@ -177,6 +199,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeamTests
             AddHotelsToContext();
             AddAccomodationsToContext();
             AddBookingRolesToContext();
+            AddSourceMarket();
         }
 
         public void SetAccommodation(Entity accommodation,int startOffset,int endOffset, Guid bookingId, Guid hotelId)
@@ -185,6 +208,11 @@ namespace Tc.Crm.WebJob.AllocateResortTeamTests
             accommodation["tc_enddateandtime"] = DateTime.Now.Date.AddDays(endOffset);
             accommodation["tc_bookingid"] = new EntityReference("tc_booking", bookingId);
             accommodation["tc_hotelid"] = new EntityReference("tc_hotel", hotelId);
+        }
+
+        public void SetSourceMarket(Entity customer1, Guid sourceMarketId)
+        {
+            customer1["tc_sourcemarketid"] = new EntityReference("tc_country", sourceMarketId);
         }
 
         public void AddAccommodation()
@@ -247,6 +275,16 @@ namespace Tc.Crm.WebJob.AllocateResortTeamTests
             customerBookingRole["tc_bookingid"] = booking;
         }
 
+        public void AddSourceMarket()
+        {
+            var countryEntityCollection = new Dictionary<Guid, Entity>();
+            var countryId = Guid.NewGuid();
+            var sourceMarket = new Entity("tc_country", Guid.NewGuid());
+            sourceMarket["tc_sourcemarketbusinessunitid"] = new EntityReference("businessunit", Guid.NewGuid());
+            countryEntityCollection.Add(countryId, sourceMarket);
+            context.Data.Add("tc_country", countryEntityCollection);
+        }
+
         public void BulkAssign(Collection<AssignInformation> assignRequests)
         {
             foreach (var ar in assignRequests)
@@ -297,13 +335,19 @@ namespace Tc.Crm.WebJob.AllocateResortTeamTests
 
             if (Switch == DataSwitch.Returns_Data)
             {
+                if(query.Contains("<entity name='tc_booking'>"))
                 return GetBookings(context.Data["tc_booking"].Values.ToList<Entity>()
                                     , context.Data["tc_bookingaccommodation"].Values.ToList<Entity>()
                                     , context.Data["tc_hotel"].Values.ToList<Entity>()
                                     , context.Data["tc_customerbookingrole"].Values.ToList<Entity>()
                                     , context.Data["tc_gateway"].Values.ToList<Entity>()
-                                    , context.Data["contact"].Values.ToList<Entity>());
+                                    , context.Data["contact"].Values.ToList<Entity>()
+                                    , context.Data["tc_country"].Values.ToList<Entity>());
+                else if (query.Contains("<entity name='team'>"))
+                    return GetChildTeams(context.Data["team"].Values.ToList<Entity>(), context.Data["team"].Values.ToList<Entity>()[0].Id, ((EntityReference)context.Data["tc_country"].Values.ToList<Entity>()[0]["tc_sourcemarketbusinessunitid"]).Id);
             }
+
+           
 
             return null;
         }
@@ -313,7 +357,8 @@ namespace Tc.Crm.WebJob.AllocateResortTeamTests
                                                         , List<Entity> hotels
                                                         , List<Entity> customerBookingRoles
                                                         , List<Entity> gateways
-                                                        , List<Entity> contacts)
+                                                        , List<Entity> contacts
+                                                        , List<Entity> country)
         {
             var bookings = new List<Entity>();
             var bookings1 = (from b in bookingCollection
@@ -322,7 +367,8 @@ namespace Tc.Crm.WebJob.AllocateResortTeamTests
                              join cbr in customerBookingRoles on b.Id equals ((EntityReference)cbr["tc_bookingid"]).Id
                              join g in gateways on ((EntityReference)b["tc_destinationgatewayid"]).Id equals g.Id
                              join c in contacts on ((EntityReference)cbr["tc_customer"]).Id equals c.Id
-                             where ((DateTime)b["tc_departuredate"]) <= DateTime.Now.Date.AddDays(9)
+                             join cntry in country on ((EntityReference)c["tc_sourcemarketid"]).Id equals cntry.Id
+                             where ((DateTime)b["tc_departuredate"]) <= DateTime.Now.Date.AddDays(14)
                              && ((DateTime)b["tc_returndate"]) >= DateTime.Now.Date
                              && validGatewayIds.Contains(((EntityReference)b["tc_destinationgatewayid"]).Id)
                              orderby b["tc_name"].ToString(), ((DateTime)a["tc_startdateandtime"])
@@ -337,7 +383,8 @@ namespace Tc.Crm.WebJob.AllocateResortTeamTests
                                  AccommodationEnd = ((DateTime)a["tc_enddateandtime"]),
                                  HotelOwner = ((EntityReference)h["ownerid"]),
                                  Customer = ((EntityReference)cbr["tc_customer"]),
-                                 CustomerOwner = ((EntityReference)c["ownerid"])
+                                 CustomerOwner = ((EntityReference)c["ownerid"]),
+                                 SourceMarketBusinessUnit = ((EntityReference)cntry["tc_sourcemarketbusinessunitid"])
                              }).ToList();
 
 
@@ -354,12 +401,39 @@ namespace Tc.Crm.WebJob.AllocateResortTeamTests
                 b["hotel.ownerid"] = new AliasedValue("tc_hotel", "ownerid", item.HotelOwner);
                 b["role.tc_customer"] = new AliasedValue("tc_customerbookingrole", "tc_customer", item.Customer);
                 b["contact.ownerid"] = new AliasedValue("contact", "ownerid", item.CustomerOwner);
+                b["contactsourcemarket.tc_sourcemarketbusinessunitid"] = new AliasedValue("tc_country", "tc_sourcemarketbusinessunitid", item.SourceMarketBusinessUnit);
                 bookings.Add(b);
             }
 
             
             return new EntityCollection(bookings);
 
+        }
+
+        private EntityCollection GetChildTeams(List<Entity> teamCollection, Guid parentTeamId, Guid businessUnitId)
+        {
+            var teams = new List<Entity>();
+            var childTeams = (from t in teamCollection
+                              where ((EntityReference)t["tc_hotelteamid"]).Id == parentTeamId && ((EntityReference)t["businessunitid"]).Id == businessUnitId
+                              select new
+                              {
+                                  teamid = t.Id,
+                                  name = t["name"],
+                                  tc_hotelteamid = (EntityReference)t["tc_hotelteamid"],
+                                  businessunitid = (EntityReference)t["businessunitid"]
+                              }).ToList();
+
+
+            foreach (var item in childTeams)
+            {
+                var t = new Entity("team", item.teamid);
+                t["name"] = item.name;
+                t["tc_hotelteamid"] = item.tc_hotelteamid;
+                t["businessunitid"] = item.businessunitid;
+                teams.Add(t);
+            }
+
+            return new EntityCollection(teams);
         }
 
         public void ExecuteBulkAssignRequests(ExecuteMultipleRequest request)
