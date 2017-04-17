@@ -1,4 +1,5 @@
-﻿using Tc.Crm.Service.Models;
+﻿using System.Collections.ObjectModel;
+using Tc.Crm.Service.Models;
 
 namespace Tc.Crm.Service.Services
 {
@@ -6,5 +7,7 @@ namespace Tc.Crm.Service.Services
     {
         BookingUpdateResponse Update(string bookingData,ICrmService crmService);
         void ResolveReferences(Booking booking);
+        Collection<string> Validate(BookingInformation bookingInformation);
+        string GetStringFrom(Collection<string> strings);
     }
 }

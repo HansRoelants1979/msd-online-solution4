@@ -23,6 +23,8 @@ namespace Tc.Crm.Service.Constants
     }
     public static class Messages
     {
+        public const string CustomerIdIsNull = "Customer does not have a customer id.";
+        public const string BookingSystemIsUnknown = "Booking system provided is either null or unknown";
         public const string ResponseNull = "Response is Null.";
         public const string SourceKeyNotPresent = "Source system id of booking record is empty or null.";
         public const string JsonWebTokenParserError = "Error while parsing JSON Web Token.";

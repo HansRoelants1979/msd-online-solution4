@@ -21,8 +21,8 @@ namespace Tc.Crm.Service.Filters
             //presence of errors indicate bad request
             if (request.Errors != null && request.Errors.Count > 0)
             {
-                Trace.TraceWarning("Bad Request: Error while parsing the request object");
-                actionContext.Response = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest)
+                Trace.TraceWarning("Bad Request Header: Error while parsing the request object");
+                actionContext.Response = new HttpResponseMessage(System.Net.HttpStatusCode.Unauthorized)
                 {
                     ReasonPhrase = Constants.Messages.JsonWebTokenParserError
                 };

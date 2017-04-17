@@ -45,7 +45,8 @@ namespace Tc.Crm.Service.Controllers.Tests
                 BookingIdentifier = new BookingIdentifier
                 {
                     BookingNumber = "1234",
-                    SourceMarket = "DE"
+                    SourceMarket = "DE",
+                    BookingSystem = BookingSystem.Nurvis
                 },
                 BookingGeneral = new BookingGeneral
                 {
@@ -85,8 +86,8 @@ namespace Tc.Crm.Service.Controllers.Tests
             Booking booking = new Booking();
             bookingInfo.Booking = booking;
             var response = controller.Update(bookingInfo);
-            Assert.AreEqual(response.StatusCode, HttpStatusCode.BadRequest);
-            Assert.AreEqual(((System.Net.Http.ObjectContent)response.Content).Value, Constants.Messages.SourceKeyNotPresent);
+            Assert.AreEqual( HttpStatusCode.BadRequest, response.StatusCode);
+            Assert.AreEqual(Constants.Messages.SourceKeyNotPresent,((System.Net.Http.ObjectContent)response.Content).Value );
         }
 
         [TestMethod()]
@@ -96,6 +97,7 @@ namespace Tc.Crm.Service.Controllers.Tests
             Booking booking = new Booking();
             bookingInfo.Booking = booking;
             booking.BookingIdentifier = new BookingIdentifier();
+            booking.BookingIdentifier.BookingSystem = BookingSystem.Nurvis;
             var response = controller.Update(bookingInfo);
             Assert.AreEqual(response.StatusCode, HttpStatusCode.BadRequest);
             Assert.AreEqual(((System.Net.Http.ObjectContent)response.Content).Value, Constants.Messages.SourceKeyNotPresent);

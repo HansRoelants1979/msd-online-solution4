@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.Text;
 using Tc.Crm.Service.CacheBuckets;
 using Tc.Crm.Service.Models;
 
@@ -30,6 +32,46 @@ namespace Tc.Crm.Service.Services
             this.tourOperatorBucket = tourOperatorBucket;
             this.hotelBucket = hotelBucket;
         }
+        public Collection<string> Validate(BookingInformation bookingInformation)
+        {
+            var validationMessages = new Collection<string>();
+            if (bookingInformation == null || bookingInformation.Booking == null)
+            {
+                validationMessages.Add(Constants.Messages.BookingDataPassedIsNullOrCouldNotBeParsed);
+                return validationMessages;
+            }
+            var booking = bookingInformation.Booking;
+            if (booking.BookingIdentifier == null || string.IsNullOrWhiteSpace(booking.BookingIdentifier.BookingNumber))
+                validationMessages.Add(Constants.Messages.SourceKeyNotPresent);
+
+            if (booking.BookingIdentifier != null && booking.BookingIdentifier.BookingSystem == BookingSystem.Unknown)
+                validationMessages.Add(Constants.Messages.BookingSystemIsUnknown);
+
+            if (booking.Customer != null && (booking.Customer.CustomerIdentifier == null
+                || string.IsNullOrWhiteSpace(booking.Customer.CustomerIdentifier.CustomerId)))
+                validationMessages.Add(Constants.Messages.CustomerIdIsNull);
+
+            return validationMessages;
+        }
+
+        public string GetStringFrom(Collection<string> strings)
+        {
+            if (strings == null || strings.Count == 0) return null;
+            StringBuilder message = new StringBuilder();
+            for (int i = 0; i < strings.Count; i++)
+            {
+                if (i == strings.Count - 1)
+                    message.Append(strings[i]);
+                else
+                    message.AppendLine(strings[i]);
+            }
+            foreach (var item in strings)
+            {
+
+            }
+            return message.ToString();
+        }
+
         public BookingUpdateResponse Update(string bookingData, ICrmService crmService)
         {
             if (string.IsNullOrWhiteSpace(bookingData)) throw new ArgumentNullException(Constants.Parameters.BookingData);
@@ -55,7 +97,7 @@ namespace Tc.Crm.Service.Services
                 }
             }
 
-            if(booking.Services!=null)
+            if (booking.Services != null)
             {
                 ResolveTransportReferences(booking.Services.Transport);
                 ResolveTransferReferences(booking.Services.Transfer);
@@ -127,7 +169,7 @@ namespace Tc.Crm.Service.Services
                         customer.Owner = sourceMarket.TeamId;
                 }
             }
-           
+
 
         }
         public void ResolveGeneralReferences(BookingGeneral general)

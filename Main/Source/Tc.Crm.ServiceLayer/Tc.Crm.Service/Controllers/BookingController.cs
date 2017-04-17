@@ -29,14 +29,14 @@ namespace Tc.Crm.Service.Controllers
         {
             try
             {
-                if (bookingInfo == null || bookingInfo.Booking == null)
+                var messages = bookingService.Validate(bookingInfo);
+                if (messages != null && messages.Count !=0)
                 {
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.BookingDataPassedIsNullOrCouldNotBeParsed);
+                    var message = bookingService.GetStringFrom(messages);
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, message);
                 }
                 var booking = bookingInfo.Booking;
-                if (booking.BookingIdentifier == null ||
-                    string.IsNullOrWhiteSpace(booking.BookingIdentifier.BookingNumber))
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.SourceKeyNotPresent);
+                
                 bookingService.ResolveReferences(booking);
                 var jsonData = JsonConvert.SerializeObject(booking);
                 var response = bookingService.Update(jsonData, crmService);
