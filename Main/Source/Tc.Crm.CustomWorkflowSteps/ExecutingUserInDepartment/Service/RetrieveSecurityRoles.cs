@@ -17,12 +17,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ExecutingUserInDepartment.Service
                 throw new InvalidPluginExecutionException("trace is null");
             }
 
-            if (securityRoleName == null)
-            {
-                trace.Trace("securityRoleName is null");
-                throw new InvalidPluginExecutionException("securityRoleName is null");
-            }
-
+            
             if (userId == Guid.Empty)
             {
                 trace.Trace("userId is null");
@@ -50,13 +45,21 @@ namespace Tc.Crm.CustomWorkflowSteps.ExecutingUserInDepartment.Service
 
             query.ColumnSet = cols;
 
-            ConditionExpression ce = new ConditionExpression();
+            ConditionExpression Condition1 = new ConditionExpression();
 
-            ce.AttributeName = "systemuserid";
+            Condition1.AttributeName = "systemuserid";
 
-            ce.Operator = ConditionOperator.Equal;
+            Condition1.Operator = ConditionOperator.Equal;
 
-            ce.Values.Add(userId);
+            Condition1.Values.Add(userId);
+
+            ConditionExpression Condition2 = new ConditionExpression();
+
+            Condition2.AttributeName = "name";
+
+            Condition2.Operator = ConditionOperator.Equal;
+
+            Condition2.Values.Add(securityRoleName);
 
             //system roles
 
@@ -84,11 +87,13 @@ namespace Tc.Crm.CustomWorkflowSteps.ExecutingUserInDepartment.Service
 
             linkSystemusers.LinkCriteria = new FilterExpression();
 
-            linkSystemusers.LinkCriteria.Conditions.Add(ce);
+            linkSystemusers.LinkCriteria.Conditions.Add(Condition1);
 
             linkRole.LinkEntities.Add(linkSystemusers);
 
             query.LinkEntities.Add(linkRole);
+
+            query.Criteria.Conditions.Add(Condition2);
 
             EntityCollection collRoles = service.RetrieveMultiple(query);
 

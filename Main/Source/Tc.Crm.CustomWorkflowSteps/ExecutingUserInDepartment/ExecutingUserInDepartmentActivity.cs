@@ -27,6 +27,14 @@ namespace Tc.Crm.CustomWorkflowSteps.ExecutingUserInDepartment
                 var SecurityRoleName = string.Empty;
 
                 SecurityRoleName = DeptBaseSecurityRoleName.Get<string>(executionContext);
+                if (SecurityRoleName == null || SecurityRoleName == "")
+                {
+                    throw new InvalidPluginExecutionException("SecurityRoleName is null");
+                }
+                else
+                {
+                    SecurityRoleName = SecurityRoleName.ToLower();
+                }
                 var UserId = context.UserId;
 
                 if (UserId != Guid.Empty)
@@ -58,6 +66,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ExecutingUserInDepartment
             }
 
         }
+
+        [RequiredArgument]
         [Input("DeptBaseSecurityRoleName")]
         public InArgument<string> DeptBaseSecurityRoleName { get; set; }
 
