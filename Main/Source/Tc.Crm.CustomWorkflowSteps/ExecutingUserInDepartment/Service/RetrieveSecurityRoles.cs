@@ -17,7 +17,12 @@ namespace Tc.Crm.CustomWorkflowSteps.ExecutingUserInDepartment.Service
                 throw new InvalidPluginExecutionException("trace is null");
             }
 
-            
+            if (securityRoleName == null || securityRoleName == "")
+            {
+                trace.Trace("SecurityRoleName is null");
+                throw new InvalidPluginExecutionException("SecurityRoleName is null");
+            }
+
             if (userId == Guid.Empty)
             {
                 trace.Trace("userId is null");
