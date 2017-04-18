@@ -14,13 +14,11 @@
     <ReferencingAttributeName>PreferredEquipmentId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Wählen Sie die bevorzugte Serviceeinrichtung oder das bevorzugte Arbeitsgerät der Firma aus, um eine korrekte Serviceplanung für den Kunden sicherzustellen." languagecode="1031" />
         <Description description="Choose the account's preferred service facility or equipment to make sure services are scheduled correctly for the customer." languagecode="1033" />
-        <Description description="Choisissez l'équipement ou l'installation de service préférée du compte pour vous assurer que les services sont planifiés correctement pour le client." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
-  <EntityRelationship Name="Equipment_Annotation" unmodified="1">
+  <EntityRelationship Name="Equipment_Annotation">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IntroducedVersion>5.0.0.0</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
@@ -34,9 +32,7 @@
     <ReferencingAttributeName>ObjectId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Eindeutiger Bezeichner des Objekts, dem die Notiz zugeordnet ist." languagecode="1031" />
         <Description description="Unique identifier of the object with which the note is associated." languagecode="1033" />
-        <Description description="Identificateur unique de l'objet auquel la note est associée." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -54,9 +50,7 @@
     <ReferencingAttributeName>PreferredEquipmentId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Wählen Sie die bevorzugte Serviceeinrichtung oder das bevorzugte Arbeitsgerät des Kontakts aus, um eine korrekte Serviceplanung für den Kunden sicherzustellen." languagecode="1031" />
         <Description description="Choose the contact's preferred service facility or equipment to make sure services are scheduled correctly for the customer." languagecode="1033" />
-        <Description description="Choisissez l'équipement ou l'installation de service préférée du contact pour vous assurer que les services sont planifiés correctement pour le client." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workflow WorkflowId="{a2c3456b-3fff-e611-810c-1458d041f8e8}" Name="Tc.Case.NotifyOtherPartyonCaseUpdates" Description="Should another party be informed on Case status">
+  <XamlFileName>/Workflows/TcCaseNotifyOtherPartyonCaseUpdates-A2C3456B-3FFF-E611-810C-1458D041F8E8.xaml</XamlFileName>
+  <Type>1</Type>
+  <Subprocess>0</Subprocess>
+  <Category>2</Category>
+  <Mode>1</Mode>
+  <Scope>4</Scope>
+  <OnDemand>0</OnDemand>
+  <TriggerOnCreate>0</TriggerOnCreate>
+  <TriggerOnDelete>0</TriggerOnDelete>
+  <AsyncAutodelete>0</AsyncAutodelete>
+  <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+  <StateCode>1</StateCode>
+  <StatusCode>2</StatusCode>
+  <RunAs>1</RunAs>
+  <IsTransacted>1</IsTransacted>
+  <IntroducedVersion>1.0.0.33</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <BusinessProcessType>0</BusinessProcessType>
+  <PrimaryEntity>Incident</PrimaryEntity>
+  <ProcessTriggers>
+    <ProcessTrigger processtriggerid="{e43c25ee-ef03-e711-810d-1458d041f8e8}">
+      <controltype>1</controltype>
+      <formid>{4a63c8d1-6c1e-48ec-9db4-3e6c7155334c}</formid>
+      <scope>1</scope>
+      <controlname>tc_informanothercustomer</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{e53c25ee-ef03-e711-810d-1458d041f8e8}">
+      <formid>{4a63c8d1-6c1e-48ec-9db4-3e6c7155334c}</formid>
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+  </ProcessTriggers>
+</Workflow>

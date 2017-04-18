@@ -5,10 +5,10 @@
   <isquickfindquery>0</isquickfindquery>
   <isprivate>0</isprivate>
   <isdefault>0</isdefault>
-  <returnedtypecode>10063</returnedtypecode>
+  <returnedtypecode>10041</returnedtypecode>
   <savedqueryid>{1d2061b0-d812-e711-810f-1458d041f8e8}</savedqueryid>
   <layoutxml>
-    <grid name="resultset" object="10063" jump="tc_name" select="1" preview="1" icon="1">
+    <grid name="resultset" object="10041" jump="tc_name" select="1" preview="1" icon="1">
       <row name="result" id="tc_compensationapprovalid">
         <cell name="aa.tc_caseid" width="100" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="aa.ownerid" width="125" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
@@ -34,17 +34,19 @@
         </filter>
         <link-entity name="tc_compensation" from="tc_compensationid" to="tc_compensationid" alias="aa">
           <attribute name="tc_caseid" />
+          <attribute name="ownerid" />
           <link-entity name="incident" from="incidentid" to="tc_caseid" alias="ab">
             <link-entity name="systemuser" from="systemuserid" to="owninguser" alias="ac">
               <filter type="and">
                 <condition attribute="tc_department" operator="eq" value="950000001" />
               </filter>
             </link-entity>
-            <link-entity name="tc_locationoffice" from="tc_locationofficeid" to="tc_resortofficeid" alias="ad">
-              <link-entity name="systemuser" from="systemuserid" to="owninguser" alias="ae" />
+            <link-entity name="tc_gateway" from="tc_gatewayid" to="tc_gateway" alias="ad">
+              <filter type="and">
+                <condition attribute="ownerid" operator="eq-userid" />
+              </filter>
             </link-entity>
           </link-entity>
-          <attribute name="ownerid" />
         </link-entity>
         <attribute name="tc_compensationapprovalid" />
       </entity>
@@ -52,6 +54,6 @@
   </fetchxml>
   <IntroducedVersion>1.0.0.51</IntroducedVersion>
   <LocalizedNames>
-    <LocalizedName description="My Resort's Pending Compensation Approvals" languagecode="1033" />
+    <LocalizedName description="My Gateway's Pending Compensation Approvals" languagecode="1033" />
   </LocalizedNames>
 </savedquery>

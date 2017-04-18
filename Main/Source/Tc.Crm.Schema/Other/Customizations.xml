@@ -70,18 +70,18 @@
         </MobileOfflineProfileItem>
         <MobileOfflineProfileItem MobileOfflineProfileItemId="d6c3de02-aff3-e611-810b-1458d041f8e8" Name="Tc.Ids.Rep.Case">
           <MobileOfflineProfileItemAssociations>
-            <MobileOfflineProfileItemAssociation MobileOfflineProfileItemAssociationId="cff8ec24-bd08-e711-810a-3863bb34fb48" Name="Tc.Ids.Rep.Compensation">
-              <MobileOfflineProfileItemAssociationId>{CFF8EC24-BD08-E711-810A-3863BB34FB48}</MobileOfflineProfileItemAssociationId>
-              <MobileOfflineProfileItemId>{D6C3DE02-AFF3-E611-810B-1458D041F8E8}</MobileOfflineProfileItemId>
-              <Name>Tc.Ids.Rep.Compensation</Name>
-              <RelationshipDisplayName>tc_incident_tc_compensation</RelationshipDisplayName>
-              <ProfileItemAssociationEntityFilter></ProfileItemAssociationEntityFilter>
-            </MobileOfflineProfileItemAssociation>
             <MobileOfflineProfileItemAssociation MobileOfflineProfileItemAssociationId="0674dbad-bc08-e711-810a-3863bb34fb48" Name="Tc.Ids.Rep.CompensationLine">
               <MobileOfflineProfileItemAssociationId>{0674DBAD-BC08-E711-810A-3863BB34FB48}</MobileOfflineProfileItemAssociationId>
               <MobileOfflineProfileItemId>{D6C3DE02-AFF3-E611-810B-1458D041F8E8}</MobileOfflineProfileItemId>
               <Name>Tc.Ids.Rep.CompensationLine</Name>
               <RelationshipDisplayName>tc_incident_tc_compensationline</RelationshipDisplayName>
+              <ProfileItemAssociationEntityFilter></ProfileItemAssociationEntityFilter>
+            </MobileOfflineProfileItemAssociation>
+            <MobileOfflineProfileItemAssociation MobileOfflineProfileItemAssociationId="cff8ec24-bd08-e711-810a-3863bb34fb48" Name="Tc.Ids.Rep.Compensation">
+              <MobileOfflineProfileItemAssociationId>{CFF8EC24-BD08-E711-810A-3863BB34FB48}</MobileOfflineProfileItemAssociationId>
+              <MobileOfflineProfileItemId>{D6C3DE02-AFF3-E611-810B-1458D041F8E8}</MobileOfflineProfileItemId>
+              <Name>Tc.Ids.Rep.Compensation</Name>
+              <RelationshipDisplayName>tc_incident_tc_compensation</RelationshipDisplayName>
               <ProfileItemAssociationEntityFilter></ProfileItemAssociationEntityFilter>
             </MobileOfflineProfileItemAssociation>
             <MobileOfflineProfileItemAssociation MobileOfflineProfileItemAssociationId="4f6ee647-bd08-e711-810a-3863bb34fb48" Name="Tc.Ids.Rep.CaseLine">
@@ -95,9 +95,9 @@
           <MobileOfflineProfileItemId>{D6C3DE02-AFF3-E611-810B-1458D041F8E8}</MobileOfflineProfileItemId>
           <RegardingObjectId>{C7087ACD-B0EF-E611-8106-3863BB340DD8}</RegardingObjectId>
           <Name>Tc.Ids.Rep.Case</Name>
-          <RecordDistributionCriteria>0</RecordDistributionCriteria>
-          <RecordsOwnedByMe>0</RecordsOwnedByMe>
-          <RecordsOwnedByMyTeam>0</RecordsOwnedByMyTeam>
+          <RecordDistributionCriteria>2</RecordDistributionCriteria>
+          <RecordsOwnedByMe>1</RecordsOwnedByMe>
+          <RecordsOwnedByMyTeam>1</RecordsOwnedByMyTeam>
           <RecordsOwnedByMyBusinessUnit>0</RecordsOwnedByMyBusinessUnit>
           <ProfileItemEntityFilter></ProfileItemEntityFilter>
           <EntitySchemaName>Incident</EntitySchemaName>
@@ -152,13 +152,6 @@
         </MobileOfflineProfileItem>
         <MobileOfflineProfileItem MobileOfflineProfileItemId="630fd909-b1ef-e611-8106-3863bb340dd8" Name="Tc.Ids.Rep.Customer">
           <MobileOfflineProfileItemAssociations>
-            <MobileOfflineProfileItemAssociation MobileOfflineProfileItemAssociationId="6873368e-b1ef-e611-8106-3863bb340dd8" Name="Tc.Ids.Rep.Customer.CustomerBookingRole">
-              <MobileOfflineProfileItemAssociationId>{6873368E-B1EF-E611-8106-3863BB340DD8}</MobileOfflineProfileItemAssociationId>
-              <MobileOfflineProfileItemId>{630FD909-B1EF-E611-8106-3863BB340DD8}</MobileOfflineProfileItemId>
-              <Name>Tc.Ids.Rep.Customer.CustomerBookingRole</Name>
-              <RelationshipDisplayName>tc_contact_tc_customerbookingrole_Customer</RelationshipDisplayName>
-              <ProfileItemAssociationEntityFilter></ProfileItemAssociationEntityFilter>
-            </MobileOfflineProfileItemAssociation>
             <MobileOfflineProfileItemAssociation MobileOfflineProfileItemAssociationId="ccd27146-adf3-e611-810b-1458d041f8e8" Name="Tc.Ids.Rep.Case">
               <MobileOfflineProfileItemAssociationId>{CCD27146-ADF3-E611-810B-1458D041F8E8}</MobileOfflineProfileItemAssociationId>
               <MobileOfflineProfileItemId>{630FD909-B1EF-E611-8106-3863BB340DD8}</MobileOfflineProfileItemId>
@@ -171,6 +164,13 @@
               <MobileOfflineProfileItemId>{630FD909-B1EF-E611-8106-3863BB340DD8}</MobileOfflineProfileItemId>
               <Name>Tc.Ids.Rep.User</Name>
               <RelationshipDisplayName>contact_owning_user</RelationshipDisplayName>
+              <ProfileItemAssociationEntityFilter></ProfileItemAssociationEntityFilter>
+            </MobileOfflineProfileItemAssociation>
+            <MobileOfflineProfileItemAssociation MobileOfflineProfileItemAssociationId="6873368e-b1ef-e611-8106-3863bb340dd8" Name="Tc.Ids.Rep.Customer.CustomerBookingRole">
+              <MobileOfflineProfileItemAssociationId>{6873368E-B1EF-E611-8106-3863BB340DD8}</MobileOfflineProfileItemAssociationId>
+              <MobileOfflineProfileItemId>{630FD909-B1EF-E611-8106-3863BB340DD8}</MobileOfflineProfileItemId>
+              <Name>Tc.Ids.Rep.Customer.CustomerBookingRole</Name>
+              <RelationshipDisplayName>tc_contact_tc_customerbookingrole_Customer</RelationshipDisplayName>
               <ProfileItemAssociationEntityFilter></ProfileItemAssociationEntityFilter>
             </MobileOfflineProfileItemAssociation>
           </MobileOfflineProfileItemAssociations>
@@ -339,7 +339,7 @@
     </MobileOfflineProfile>
   </MobileOfflineProfiles>
   <Slas>
-    <Sla SLAId="b13b482d-b20d-e711-810a-3863bb340dd8" Name="Tc.AssistanceRequest.Sla" PrimaryEntityOTC="10070">
+    <Sla SLAId="b13b482d-b20d-e711-810a-3863bb340dd8" Name="Tc.AssistanceRequest.Sla" PrimaryEntityOTC="10040">
       <SLAId>{b13b482d-b20d-e711-810a-3863bb340dd8}</SLAId>
       <ApplicableFrom>createdon</ApplicableFrom>
       <Name>Tc.AssistanceRequest.Sla</Name>
@@ -493,24 +493,23 @@
         </SlaItem>
       </SlaItems>
     </Sla>
-    <Sla SLAId="29629f2a-c008-e711-810a-3863bb340dd8" Name="Tc.CompensationApproval.4HourSla" PrimaryEntityOTC="10063">
-      <SLAId>{29629f2a-c008-e711-810a-3863bb340dd8}</SLAId>
+    <Sla SLAId="dd43e93b-8e18-e711-8110-1458d041f8e8" Name="Tc.CompensationApprovalSla" PrimaryEntityOTC="10041">
+      <SLAId>{dd43e93b-8e18-e711-8110-1458d041f8e8}</SLAId>
       <ApplicableFrom>createdon</ApplicableFrom>
-      <Name>Tc.CompensationApproval.4HourSla</Name>
-      <Description>This 4 hour SLA will run on Created On and regardless of business hours</Description>
+      <Name>Tc.CompensationApprovalSla</Name>
       <AllowPauseResume>0</AllowPauseResume>
       <SLAType>1</SLAType>
       <SlaItems>
-        <SlaItem slaitemid="f1d90015-6118-e711-8110-1458d041f8e8" name="ApprovalSLA">
-          <slaid>29629f2a-c008-e711-810a-3863bb340dd8</slaid>
-          <slaitemid>f1d90015-6118-e711-8110-1458d041f8e8</slaitemid>
-          <relatedfield>tc_approvalslakpiid</relatedfield>
-          <name>ApprovalSLA</name>
+        <SlaItem slaitemid="3d965671-8e18-e711-8110-1458d041f8e8" name="Tc.CompensationApproval.4hrSlaComplete">
+          <slaid>dd43e93b-8e18-e711-8110-1458d041f8e8</slaid>
+          <slaitemid>3d965671-8e18-e711-8110-1458d041f8e8</slaitemid>
+          <relatedfield>tc_compensationapprovalkpi</relatedfield>
+          <name>Tc.CompensationApproval.4hrSlaComplete</name>
           <description></description>
           <applicablewhenxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="tc_compensationapproval" /&gt;&lt;column id="colAttribute" value="tc_approvalstatus"/&gt;&lt;column id="colOperator" value="null"/&gt;&lt;/condition&gt;&lt;/and&gt;</applicablewhenxml>
           <successconditionsxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="tc_compensationapproval" /&gt;&lt;column id="colAttribute" value="tc_approvalstatus"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="950000000&amp;#59;950000001" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</successconditionsxml>
           <sequencenumber>1</sequencenumber>
-          <workflowid>e6f115ac-fa16-4b28-880c-b9315ecfdfea</workflowid>
+          <workflowid>25a3b46b-ced5-432b-a798-3bfdecfd682c</workflowid>
           <failureafter>240</failureafter>
           <warnafter>0</warnafter>
         </SlaItem>
@@ -521,53 +520,37 @@
   <InteractionCentricDashboards>
     <InteractionCentricDashboard unmodified="1">
       <LocalizedNames>
-        <LocalizedName description="Accounts Dashboard" languagecode="1031" />
         <LocalizedName description="Accounts Dashboard" languagecode="1033" />
-        <LocalizedName description="Accounts Dashboard" languagecode="1036" />
       </LocalizedNames>
       <Descriptions>
-        <Description description="Shows an overview of data related to accounts." languagecode="1031" />
         <Description description="Shows an overview of data related to accounts." languagecode="1033" />
-        <Description description="Shows an overview of data related to accounts." languagecode="1036" />
       </Descriptions>
       <FormId>{15915835-b87c-49ec-9ffc-bfac3ac44ef1}</FormId>
     </InteractionCentricDashboard>
     <InteractionCentricDashboard unmodified="1">
       <LocalizedNames>
-        <LocalizedName description="Contacts Dashboard" languagecode="1031" />
         <LocalizedName description="Contacts Dashboard" languagecode="1033" />
-        <LocalizedName description="Contacts Dashboard" languagecode="1036" />
       </LocalizedNames>
       <Descriptions>
-        <Description description="Shows an overview of data related to contacts." languagecode="1031" />
         <Description description="Shows an overview of data related to contacts." languagecode="1033" />
-        <Description description="Shows an overview of data related to contacts." languagecode="1036" />
       </Descriptions>
       <FormId>{70ad8b15-e3f3-4d7d-9e4b-16cb4e51b484}</FormId>
     </InteractionCentricDashboard>
     <InteractionCentricDashboard unmodified="1">
       <LocalizedNames>
-        <LocalizedName description="Cases Dashboard" languagecode="1031" />
         <LocalizedName description="Cases Dashboard" languagecode="1033" />
-        <LocalizedName description="Cases Dashboard" languagecode="1036" />
       </LocalizedNames>
       <Descriptions>
-        <Description description="Shows the Case Entity dashboard." languagecode="1031" />
         <Description description="Shows the Case Entity dashboard." languagecode="1033" />
-        <Description description="Shows the Case Entity dashboard." languagecode="1036" />
       </Descriptions>
       <FormId>{eb3748b8-5f90-4050-a039-8b7d279ad8fe}</FormId>
     </InteractionCentricDashboard>
     <InteractionCentricDashboard unmodified="1">
       <LocalizedNames>
-        <LocalizedName description="Social Profiles Dashboard" languagecode="1031" />
         <LocalizedName description="Social Profiles Dashboard" languagecode="1033" />
-        <LocalizedName description="Social Profiles Dashboard" languagecode="1036" />
       </LocalizedNames>
       <Descriptions>
-        <Description description="Shows an overview of data related to social profiles." languagecode="1031" />
         <Description description="Shows an overview of data related to social profiles." languagecode="1033" />
-        <Description description="Shows an overview of data related to social profiles." languagecode="1036" />
       </Descriptions>
       <FormId>{88599263-c11e-4c33-bf9d-a46fcee7595b}</FormId>
     </InteractionCentricDashboard>
@@ -577,7 +560,5 @@
   <SdkMessageProcessingSteps />
   <Languages>
     <Language>1033</Language>
-    <Language>1036</Language>
-    <Language>1031</Language>
   </Languages>
 </ImportExportXml>

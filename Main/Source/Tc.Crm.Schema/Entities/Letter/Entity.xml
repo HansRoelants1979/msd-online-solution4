@@ -4,6 +4,15 @@
   <ObjectTypeCode>4207</ObjectTypeCode>
   <EntityInfo>
     <entity Name="Letter">
+      <LocalizedNames>
+        <LocalizedName description="Letter" languagecode="1033" />
+      </LocalizedNames>
+      <LocalizedCollectionNames>
+        <LocalizedCollectionName description="Letters" languagecode="1033" />
+      </LocalizedCollectionNames>
+      <Descriptions>
+        <Description description="Activity that tracks the delivery of a letter. The activity can contain the electronic copy of the letter." languagecode="1033" />
+      </Descriptions>
       <attributes>
         <attribute PhysicalName="tc_BookingId">
           <Type>lookup</Type>
@@ -11,6 +20,7 @@
           <LogicalName>tc_bookingid</LogicalName>
           <RequiredLevel>none</RequiredLevel>
           <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
           <ValidForUpdateApi>1</ValidForUpdateApi>
           <ValidForReadApi>1</ValidForReadApi>
           <ValidForCreateApi>1</ValidForCreateApi>

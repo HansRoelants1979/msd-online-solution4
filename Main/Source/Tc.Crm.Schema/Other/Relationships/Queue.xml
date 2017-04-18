@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <EntityRelationships>
-  <EntityRelationship Name="Queue_SyncErrors" unmodified="1">
+  <EntityRelationship Name="Queue_SyncErrors">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IntroducedVersion>8.1.0.0</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
@@ -15,9 +15,7 @@
     <ReferencingAttributeName>RegardingObjectId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Wählen Sie den Datensatz, den der Synchronisierungsfehler betrifft." languagecode="1031" />
         <Description description="Choose the record that the sync error relates to." languagecode="1033" />
-        <Description description="Choisissez l'enregistrement concerné par l'erreur de synchronisation." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -35,13 +33,11 @@
     <ReferencingAttributeName>QueueId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Eindeutiger Bezeichner der Standardwarteschlange für den Benutzer." languagecode="1031" />
         <Description description="Unique identifier of the default queue for the user." languagecode="1033" />
-        <Description description="Identificateur unique de la file d’attente par défaut pour l’utilisateur." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
-  <EntityRelationship Name="queue_team" unmodified="1">
+  <EntityRelationship Name="queue_team">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IntroducedVersion>5.0.0.0</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
@@ -55,9 +51,7 @@
     <ReferencingAttributeName>QueueId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Eindeutiger Bezeichner der Standardwarteschlange für das Team." languagecode="1031" />
         <Description description="Unique identifier of the default queue for the team." languagecode="1033" />
-        <Description description="Identificateur unique de la file d’attente par défaut de l’équipe." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>

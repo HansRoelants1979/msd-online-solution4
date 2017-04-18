@@ -15,9 +15,7 @@
     <ReferencingAttributeName>SLAId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Wählen Sie die Vereinbarung zum Servicelevel (Service Level Agreement, SLA) aus, die Sie auf den Firmendatensatz anwenden möchten." languagecode="1031" />
         <Description description="Choose the service level agreement (SLA) that you want to apply to the Account record." languagecode="1033" />
-        <Description description="Choisissez le contrat de niveau de service (contrat SLA) que vous voulez appliquer à l'enregistrement de compte." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
     <EntityRelationshipRoles>
@@ -47,9 +45,7 @@
     <ReferencingAttributeName>SLAId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Wählen Sie die Vereinbarung zum Servicelevel (Service Level Agreement, SLA) aus, die Sie auf den Anfragedatensatz anwenden möchten." languagecode="1031" />
         <Description description="Choose the service level agreement (SLA) that you want to apply to the case record." languagecode="1033" />
-        <Description description="Choisissez le contrat de niveau de service (contrat SLA) que vous voulez appliquer à l'enregistrement d'incident." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
     <EntityRelationshipRoles>
@@ -80,9 +76,7 @@
     <ReferencingAttributeName>SLAId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Wählen Sie die Vereinbarung zum Servicelevel (Service Level Agreement, SLA) aus, die Sie auf den Kontaktdatensatz anwenden möchten." languagecode="1031" />
         <Description description="Choose the service level agreement (SLA) that you want to apply to the Contact record." languagecode="1033" />
-        <Description description="Choisissez le contrat de niveau de service (contrat SLA) que vous voulez appliquer à l'enregistrement de contact." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
     <EntityRelationshipRoles>
@@ -113,9 +107,7 @@
     <ReferencingAttributeName>SLAId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Wählen Sie die Vereinbarung zum Servicelevel (Service Level Agreement, SLA) aus, die Sie auf den Datensatz anwenden möchten." languagecode="1031" />
         <Description description="Choose the service level agreement (SLA) that you want to apply to the record." languagecode="1033" />
-        <Description description="Choisissez le contrat de niveau de service (contrat SLA) que vous voulez appliquer à l'enregistrement." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -134,13 +126,11 @@
     <ReferencingAttributeName>SLAInvokedId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Die letzte auf diese Anfrage angewendete SLA. Dieses Feld dient nur zur internen Verwendung." languagecode="1031" />
         <Description description="Last SLA that was applied to this case. This field is for internal use only." languagecode="1033" />
-        <Description description="Dernier contrat SLA ayant été appliqué à cet incident. Ce champ est destiné à une utilisation interne uniquement." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
-  <EntityRelationship Name="sla_Annotation" unmodified="1">
+  <EntityRelationship Name="sla_Annotation">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IntroducedVersion>6.1.0.0</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
@@ -154,9 +144,7 @@
     <ReferencingAttributeName>ObjectId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Eindeutiger Bezeichner des Objekts, dem die Notiz zugeordnet ist." languagecode="1031" />
         <Description description="Unique identifier of the object with which the note is associated." languagecode="1033" />
-        <Description description="Identificateur unique de l'objet auquel la note est associée." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -174,9 +162,7 @@
     <ReferencingAttributeName>SLAInvokedId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Die letzte auf diese Anfrage angewendete SLA. Dieses Feld dient nur zur internen Verwendung." languagecode="1031" />
         <Description description="Last SLA that was applied to this case. This field is for internal use only." languagecode="1033" />
-        <Description description="Dernier contrat SLA ayant été appliqué à cet incident. Ce champ est destiné à une utilisation interne uniquement." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -195,9 +181,7 @@
     <ReferencingAttributeName>SLAInvokedId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Die letzte auf diese Anfrage angewendete SLA. Dieses Feld dient nur zur internen Verwendung." languagecode="1031" />
         <Description description="Last SLA that was applied to this case. This field is for internal use only." languagecode="1033" />
-        <Description description="Dernier contrat SLA ayant été appliqué à cet incident. Ce champ est destiné à une utilisation interne uniquement." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -216,16 +200,14 @@
     <ReferencingAttributeName>SLAInvokedId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Nur zur internen Verwendung" languagecode="1031" />
         <Description description="For internal use only." languagecode="1033" />
-        <Description description="Utilisation interne uniquement." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
   <EntityRelationship Name="tc_assistancerequest_sla_slaid">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.51</IntroducedVersion>
+    <IntroducedVersion>1.0.0.46</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_assistancerequest</ReferencingEntityName>
     <ReferencedEntityName>SLA</ReferencedEntityName>
@@ -238,9 +220,7 @@
     <ReferencingAttributeName>SLAId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Wählen Sie die Vereinbarung zum Servicelevel (Service Level Agreement, SLA) aus, die Sie auf den Anfragedatensatz anwenden möchten." languagecode="1031" />
         <Description description="Choose the service level agreement (SLA) that you want to apply to the case record." languagecode="1033" />
-        <Description description="Choisissez le contrat de niveau de service (contrat SLA) que vous voulez appliquer à l'enregistrement d'incident." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
     <EntityRelationshipRoles>
@@ -260,7 +240,7 @@
   <EntityRelationship Name="tc_assistancerequest_sla_slainvokedid">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.51</IntroducedVersion>
+    <IntroducedVersion>1.0.0.46</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_assistancerequest</ReferencingEntityName>
     <ReferencedEntityName>SLA</ReferencedEntityName>
@@ -273,16 +253,14 @@
     <ReferencingAttributeName>SLAInvokedId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Die letzte auf diese Anfrage angewendete SLA. Dieses Feld dient nur zur internen Verwendung." languagecode="1031" />
         <Description description="Last SLA that was applied to this case. This field is for internal use only." languagecode="1033" />
-        <Description description="Dernier contrat SLA ayant été appliqué à cet incident. Ce champ est destiné à une utilisation interne uniquement." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
   <EntityRelationship Name="tc_surveyresponse_sla_slaid">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.51</IntroducedVersion>
+    <IntroducedVersion>1.0.0.46</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_surveyresponse</ReferencingEntityName>
     <ReferencedEntityName>SLA</ReferencedEntityName>
@@ -295,9 +273,7 @@
     <ReferencingAttributeName>SLAId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Wählen Sie die Vereinbarung zum Servicelevel (Service Level Agreement, SLA) aus, die Sie auf den Anfragedatensatz anwenden möchten." languagecode="1031" />
         <Description description="Choose the service level agreement (SLA) that you want to apply to the case record." languagecode="1033" />
-        <Description description="Choisissez le contrat de niveau de service (contrat SLA) que vous voulez appliquer à l'enregistrement d'incident." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
     <EntityRelationshipRoles>
@@ -317,7 +293,7 @@
   <EntityRelationship Name="tc_surveyresponse_sla_slainvokedid">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.51</IntroducedVersion>
+    <IntroducedVersion>1.0.0.46</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_surveyresponse</ReferencingEntityName>
     <ReferencedEntityName>SLA</ReferencedEntityName>
@@ -330,9 +306,7 @@
     <ReferencingAttributeName>SLAInvokedId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Die letzte auf diese Anfrage angewendete SLA. Dieses Feld dient nur zur internen Verwendung." languagecode="1031" />
         <Description description="Last SLA that was applied to this case. This field is for internal use only." languagecode="1033" />
-        <Description description="Dernier contrat SLA ayant été appliqué à cet incident. Ce champ est destiné à une utilisation interne uniquement." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>

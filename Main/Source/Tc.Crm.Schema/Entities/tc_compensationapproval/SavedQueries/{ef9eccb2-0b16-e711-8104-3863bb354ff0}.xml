@@ -5,10 +5,10 @@
   <isquickfindquery>0</isquickfindquery>
   <isprivate>0</isprivate>
   <isdefault>0</isdefault>
-  <returnedtypecode>10063</returnedtypecode>
+  <returnedtypecode>10041</returnedtypecode>
   <savedqueryid>{ef9eccb2-0b16-e711-8104-3863bb354ff0}</savedqueryid>
   <layoutxml>
-    <grid name="resultset" object="10063" jump="tc_name" select="1" preview="1" icon="1">
+    <grid name="resultset" object="10041" jump="tc_name" select="1" preview="1" icon="1">
       <row name="result" id="tc_compensationapprovalid">
         <cell name="aa.tc_caseid" width="100" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="aa.ownerid" width="125" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
@@ -28,6 +28,9 @@
         <attribute name="createdon" />
         <attribute name="statuscode" />
         <attribute name="tc_totalcompensationofferamount" />
+        <attribute name="tc_approvalstatus" />
+        <attribute name="tc_approvedon" />
+        <attribute name="tc_approvedby" />
         <order attribute="tc_totalcompensationofferamount" descending="false" />
         <filter type="and">
           <condition attribute="statecode" operator="eq" value="1" />
@@ -42,20 +45,19 @@
                 <condition attribute="tc_department" operator="eq" value="950000001" />
               </filter>
             </link-entity>
-            <link-entity name="tc_locationoffice" from="tc_locationofficeid" to="tc_resortofficeid" alias="ad">
-              <link-entity name="systemuser" from="systemuserid" to="owninguser" alias="ae"></link-entity>
+            <link-entity name="tc_gateway" from="tc_gatewayid" to="tc_gateway" alias="ad">
+              <filter type="and">
+                <condition attribute="ownerid" operator="eq-userid" />
+              </filter>
             </link-entity>
           </link-entity>
         </link-entity>
-        <attribute name="tc_approvalstatus" />
-        <attribute name="tc_approvedon" />
-        <attribute name="tc_approvedby" />
         <attribute name="tc_compensationapprovalid" />
       </entity>
     </fetch>
   </fetchxml>
   <IntroducedVersion>1.0.0.51</IntroducedVersion>
   <LocalizedNames>
-    <LocalizedName description="My Resort's Completed Compensation Approvals" languagecode="1033" />
+    <LocalizedName description="My Gateway's Completed Compensation Approvals" languagecode="1033" />
   </LocalizedNames>
 </savedquery>

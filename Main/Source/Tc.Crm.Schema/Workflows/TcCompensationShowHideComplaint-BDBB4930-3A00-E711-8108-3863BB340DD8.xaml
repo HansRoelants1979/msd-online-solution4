@@ -1,14 +1,14 @@
-<Activity x:Class="XrmWorkflow00000000000000000000000000000000" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mcwc="clr-namespace:Microsoft.Crm.Workflow.ClientActivities;assembly=Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" xmlns:mxs="clr-namespace:Microsoft.Xrm.Sdk;assembly=Microsoft.Xrm.Sdk, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" xmlns:mxsq="clr-namespace:Microsoft.Xrm.Sdk.Query;assembly=Microsoft.Xrm.Sdk, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" xmlns:mxswa="clr-namespace:Microsoft.Xrm.Sdk.Workflow.Activities;assembly=Microsoft.Xrm.Sdk.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" xmlns:s="clr-namespace:System;assembly=mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" xmlns:srs="clr-namespace:System.Runtime.Serialization;assembly=System.Runtime.Serialization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" xmlns:this="clr-namespace:" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity x:Class="XrmWorkflowbdbb49303a00e71181083863bb340dd8" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mcwc="clr-namespace:Microsoft.Crm.Workflow.ClientActivities;assembly=Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" xmlns:mxs="clr-namespace:Microsoft.Xrm.Sdk;assembly=Microsoft.Xrm.Sdk, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" xmlns:mxsq="clr-namespace:Microsoft.Xrm.Sdk.Query;assembly=Microsoft.Xrm.Sdk, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" xmlns:mxswa="clr-namespace:Microsoft.Xrm.Sdk.Workflow.Activities;assembly=Microsoft.Xrm.Sdk.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" xmlns:s="clr-namespace:System;assembly=mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" xmlns:srs="clr-namespace:System.Runtime.Serialization;assembly=System.Runtime.Serialization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" xmlns:this="clr-namespace:" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="InputEntities" Type="InArgument(scg:IDictionary(x:String, mxs:Entity))" />
     <x:Property Name="CreatedEntities" Type="InArgument(scg:IDictionary(x:String, mxs:Entity))" />
   </x:Members>
-  <this:XrmWorkflow00000000000000000000000000000000.InputEntities>
+  <this:XrmWorkflowbdbb49303a00e71181083863bb340dd8.InputEntities>
     <InArgument x:TypeArguments="scg:IDictionary(x:String, mxs:Entity)" />
-  </this:XrmWorkflow00000000000000000000000000000000.InputEntities>
-  <this:XrmWorkflow00000000000000000000000000000000.CreatedEntities>
+  </this:XrmWorkflowbdbb49303a00e71181083863bb340dd8.InputEntities>
+  <this:XrmWorkflowbdbb49303a00e71181083863bb340dd8.CreatedEntities>
     <InArgument x:TypeArguments="scg:IDictionary(x:String, mxs:Entity)" />
-  </this:XrmWorkflow00000000000000000000000000000000.CreatedEntities>
+  </this:XrmWorkflowbdbb49303a00e71181083863bb340dd8.CreatedEntities>
   <mva:VisualBasic.Settings>Assembly references and imported namespaces for internal implementation</mva:VisualBasic.Settings>
   <mxswa:Workflow>
     <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.ConditionSequence, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="ConditionStep1">
@@ -77,7 +77,7 @@
                     <Sequence DisplayName="SetVisibilityStep1: Show Complaint5">
                       <mcwc:SetVisibility ControlId="tc_compensation5id" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="True" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_SetVisibilityStep1_27: Show Case Line 5 Amount">
+                    <Sequence DisplayName="SetVisibilityStep27: Show Case Line 5 Amount">
                       <mcwc:SetVisibility ControlId="tc_caseline5amount" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="True" />
                     </Sequence>
                   </sco:Collection>
@@ -141,13 +141,13 @@
                     <Sequence DisplayName="SetVisibilityStep5: Show Complaint 4">
                       <mcwc:SetVisibility ControlId="tc_compensation5id" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="True" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_SetVisibilityStep5_28: Show Case Line 4 Amount">
+                    <Sequence DisplayName="SetVisibilityStep28: Show Case Line 4 Amount">
                       <mcwc:SetVisibility ControlId="tc_caseline4amount" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="True" />
                     </Sequence>
                     <Sequence DisplayName="SetVisibilityStep9: Show Compensation 3">
                       <mcwc:SetVisibility ControlId="tc_compensation3id" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="True" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_SetVisibilityStep9_32: Show Case Line 3 Amount">
+                    <Sequence DisplayName="SetVisibilityStep32: Show Case Line 3 Amount">
                       <mcwc:SetVisibility ControlId="tc_caseline3amount" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="True" />
                     </Sequence>
                   </sco:Collection>
@@ -211,13 +211,13 @@
                     <Sequence DisplayName="SetVisibilityStep7: Show Complaint 4">
                       <mcwc:SetVisibility ControlId="tc_compensation4id" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="True" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_SetVisibilityStep7_33: Show Case Line 4 Amount">
+                    <Sequence DisplayName="SetVisibilityStep33: Show Case Line 4 Amount">
                       <mcwc:SetVisibility ControlId="tc_caseline4amount" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="True" />
                     </Sequence>
                     <Sequence DisplayName="SetVisibilityStep8: Hide Compensation 5">
                       <mcwc:SetVisibility ControlId="tc_compensation5id" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="False" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_SetVisibilityStep8_34: Hide Case Line 5 Amount">
+                    <Sequence DisplayName="SetVisibilityStep34: Hide Case Line 5 Amount">
                       <mcwc:SetVisibility ControlId="tc_caseline5amount" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="False" />
                     </Sequence>
                   </sco:Collection>
@@ -281,19 +281,19 @@
                     <Sequence DisplayName="SetVisibilityStep16: Show Complaint 3">
                       <mcwc:SetVisibility ControlId="tc_compensation3id" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="True" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_SetVisibilityStep16_29: Show Case Line 3 Amount">
+                    <Sequence DisplayName="SetVisibilityStep29: Show Case Line 3 Amount">
                       <mcwc:SetVisibility ControlId="tc_caseline3amount" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="True" />
                     </Sequence>
                     <Sequence DisplayName="SetVisibilityStep7944: Show Complaint 4">
                       <mcwc:SetVisibility ControlId="tc_compensation4id" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="True" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_SetVisibilityStep7944_35: Show Case Line 4 Amount">
+                    <Sequence DisplayName="SetVisibilityStep35: Show Case Line 4 Amount">
                       <mcwc:SetVisibility ControlId="tc_caseline4amount" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="True" />
                     </Sequence>
                     <Sequence DisplayName="SetVisibilityStep14: Hide Complaint 5">
                       <mcwc:SetVisibility ControlId="tc_compensation5id" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="False" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_SetVisibilityStep14_36: Hide Case Line 5 Amount">
+                    <Sequence DisplayName="SetVisibilityStep36: Hide Case Line 5 Amount">
                       <mcwc:SetVisibility ControlId="tc_caseline5amount" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="False" />
                     </Sequence>
                     <Sequence DisplayName="SetAttributeValueStep13: Clear Field 5">
@@ -312,20 +312,20 @@
                       <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep13" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" />
                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
                     </Sequence>
-                    <Sequence DisplayName="SetAttributeValueStep_SetAttributeValueStep13_43: Clear Case Line 5 Amount">
+                    <Sequence DisplayName="SetAttributeValueStep43: Clear Case Line 5 Amount">
                       <Sequence.Variables>
-                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep_SetAttributeValueStep13_43_1" />
+                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep43_1" />
                       </Sequence.Variables>
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;tc_compensation&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mxswa:SetEntityProperty Attribute="tc_caseline5amount" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[SetAttributeValueStep_SetAttributeValueStep13_43_1]">
+                      <mxswa:SetEntityProperty Attribute="tc_caseline5amount" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[SetAttributeValueStep43_1]">
                         <mxswa:SetEntityProperty.TargetType>
                           <InArgument x:TypeArguments="s:Type">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:Money" />
                           </InArgument>
                         </mxswa:SetEntityProperty.TargetType>
                       </mxswa:SetEntityProperty>
-                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep_SetAttributeValueStep13_43" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" />
+                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep43" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" />
                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
                     </Sequence>
                   </sco:Collection>
@@ -389,19 +389,19 @@
                     <Sequence DisplayName="SetVisibilityStep17: Show Complaint 2">
                       <mcwc:SetVisibility ControlId="tc_compensation2id" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="True" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_SetVisibilityStep17_30: Show Case Line 2 Amount">
+                    <Sequence DisplayName="SetVisibilityStep30: Show Case Line 2 Amount">
                       <mcwc:SetVisibility ControlId="tc_caseline2amount" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="True" />
                     </Sequence>
                     <Sequence DisplayName="SetVisibilityStep18: Show Complaint 3">
                       <mcwc:SetVisibility ControlId="tc_compensation3id" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="True" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_SetVisibilityStep18_37: Show Case Line 3 Amount">
+                    <Sequence DisplayName="SetVisibilityStep37: Show Case Line 3 Amount">
                       <mcwc:SetVisibility ControlId="tc_caseline3amount" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="True" />
                     </Sequence>
                     <Sequence DisplayName="SetVisibilityStep19: Hide Complaint 4">
                       <mcwc:SetVisibility ControlId="tc_compensation4id" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="False" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_SetVisibilityStep19_38: Hide Case Line 4 Amount">
+                    <Sequence DisplayName="SetVisibilityStep38: Hide Case Line 4 Amount">
                       <mcwc:SetVisibility ControlId="tc_caseline4amount" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="False" />
                     </Sequence>
                     <Sequence DisplayName="SetAttributeValueStep20: Clear Field 4">
@@ -420,20 +420,20 @@
                       <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep20" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" />
                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
                     </Sequence>
-                    <Sequence DisplayName="SetAttributeValueStep_SetAttributeValueStep20_44: Clear Case Line 4 Amount">
+                    <Sequence DisplayName="SetAttributeValueStep44: Clear Case Line 4 Amount">
                       <Sequence.Variables>
-                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep_SetAttributeValueStep20_44_1" />
+                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep44_1" />
                       </Sequence.Variables>
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;tc_compensation&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mxswa:SetEntityProperty Attribute="tc_caseline4amount" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[SetAttributeValueStep_SetAttributeValueStep20_44_1]">
+                      <mxswa:SetEntityProperty Attribute="tc_caseline4amount" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[SetAttributeValueStep44_1]">
                         <mxswa:SetEntityProperty.TargetType>
                           <InArgument x:TypeArguments="s:Type">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:Money" />
                           </InArgument>
                         </mxswa:SetEntityProperty.TargetType>
                       </mxswa:SetEntityProperty>
-                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep_SetAttributeValueStep20_44" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" />
+                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep44" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" />
                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
                     </Sequence>
                   </sco:Collection>
@@ -497,19 +497,19 @@
                     <Sequence DisplayName="SetVisibilityStep22: Show Complaint 1">
                       <mcwc:SetVisibility ControlId="tc_compensation1id" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="True" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_SetVisibilityStep22_31: Show Case Line 1 Amount">
+                    <Sequence DisplayName="SetVisibilityStep31: Show Case Line 1 Amount">
                       <mcwc:SetVisibility ControlId="tc_caseline1amount" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="True" />
                     </Sequence>
                     <Sequence DisplayName="SetVisibilityStep23: Show Complaint 2">
                       <mcwc:SetVisibility ControlId="tc_compensation2id" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="True" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_SetVisibilityStep23_39: Show Case Line 2 Amount">
+                    <Sequence DisplayName="SetVisibilityStep39: Show Case Line 2 Amount">
                       <mcwc:SetVisibility ControlId="tc_caseline2amount" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="True" />
                     </Sequence>
                     <Sequence DisplayName="SetVisibilityStep24: Hide Complaint 3">
                       <mcwc:SetVisibility ControlId="tc_compensation3id" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="False" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_SetVisibilityStep24_40: Hide Case Line 3 Amount">
+                    <Sequence DisplayName="SetVisibilityStep40: Hide Case Line 3 Amount">
                       <mcwc:SetVisibility ControlId="tc_caseline3amount" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="False" />
                     </Sequence>
                     <Sequence DisplayName="SetAttributeValueStep25: Clear Field 3">
@@ -528,20 +528,20 @@
                       <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep25" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" />
                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
                     </Sequence>
-                    <Sequence DisplayName="SetAttributeValueStep_SetAttributeValueStep25_45: Clear Case Line 3 Amount">
+                    <Sequence DisplayName="SetAttributeValueStep45: Clear Case Line 3 Amount">
                       <Sequence.Variables>
-                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep_SetAttributeValueStep25_45_1" />
+                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep45_1" />
                       </Sequence.Variables>
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;tc_compensation&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mxswa:SetEntityProperty Attribute="tc_caseline3amount" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[SetAttributeValueStep_SetAttributeValueStep25_45_1]">
+                      <mxswa:SetEntityProperty Attribute="tc_caseline3amount" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[SetAttributeValueStep45_1]">
                         <mxswa:SetEntityProperty.TargetType>
                           <InArgument x:TypeArguments="s:Type">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:Money" />
                           </InArgument>
                         </mxswa:SetEntityProperty.TargetType>
                       </mxswa:SetEntityProperty>
-                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep_SetAttributeValueStep25_45" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" />
+                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep45" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" />
                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
                     </Sequence>
                   </sco:Collection>
@@ -580,13 +580,13 @@
                     <Sequence DisplayName="SetVisibilityStep27: Show Complaint 1">
                       <mcwc:SetVisibility ControlId="tc_compensation1id" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="True" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_SetVisibilityStep27_41: Show Case Line 1 Amount">
+                    <Sequence DisplayName="SetVisibilityStep41: Show Case Line 1 Amount">
                       <mcwc:SetVisibility ControlId="tc_caseline1amount" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="True" />
                     </Sequence>
                     <Sequence DisplayName="SetVisibilityStep28: Hide Complaint 2">
                       <mcwc:SetVisibility ControlId="tc_compensation2id" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="False" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_SetVisibilityStep28_42: Hide Case Line 2 Amount">
+                    <Sequence DisplayName="SetVisibilityStep42: Hide Case Line 2 Amount">
                       <mcwc:SetVisibility ControlId="tc_caseline2amount" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsVisible="False" />
                     </Sequence>
                     <Sequence DisplayName="SetAttributeValueStep29: Clear Field 2">
@@ -605,20 +605,20 @@
                       <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep29" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" />
                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
                     </Sequence>
-                    <Sequence DisplayName="SetAttributeValueStep_SetAttributeValueStep29_46: Clear Case Line 2 Amount">
+                    <Sequence DisplayName="SetAttributeValueStep46: Clear Case Line 2 Amount">
                       <Sequence.Variables>
-                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep_SetAttributeValueStep29_46_1" />
+                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep46_1" />
                       </Sequence.Variables>
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;tc_compensation&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mxswa:SetEntityProperty Attribute="tc_caseline2amount" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[SetAttributeValueStep_SetAttributeValueStep29_46_1]">
+                      <mxswa:SetEntityProperty Attribute="tc_caseline2amount" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[SetAttributeValueStep46_1]">
                         <mxswa:SetEntityProperty.TargetType>
                           <InArgument x:TypeArguments="s:Type">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:Money" />
                           </InArgument>
                         </mxswa:SetEntityProperty.TargetType>
                       </mxswa:SetEntityProperty>
-                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep_SetAttributeValueStep29_46" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" />
+                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep46" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" />
                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
                     </Sequence>
                   </sco:Collection>
