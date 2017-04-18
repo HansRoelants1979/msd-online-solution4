@@ -12,6 +12,7 @@ using System.Net;
 using System.Web.Http.Hosting;
 using System.Web.Http;
 using Tc.Crm.Service.Models;
+using System.Collections.ObjectModel;
 
 namespace Tc.Crm.Service.Controllers.Tests
 {
@@ -86,8 +87,13 @@ namespace Tc.Crm.Service.Controllers.Tests
             Booking booking = new Booking();
             bookingInfo.Booking = booking;
             var response = controller.Update(bookingInfo);
+            Collection<string> messages = new Collection<string>();
+            messages.Add(Constants.Messages.SourceKeyNotPresent);
+            messages.Add(Constants.Messages.BookingSystemIsUnknown);
+            messages.Add(Constants.Messages.SourceMarketMissing);
+            var expectedMessage = bookingService.GetStringFrom(messages);
             Assert.AreEqual( HttpStatusCode.BadRequest, response.StatusCode);
-            Assert.AreEqual(Constants.Messages.SourceKeyNotPresent,((System.Net.Http.ObjectContent)response.Content).Value );
+            Assert.AreEqual(expectedMessage, ((System.Net.Http.ObjectContent)response.Content).Value );
         }
 
         [TestMethod()]
@@ -98,9 +104,25 @@ namespace Tc.Crm.Service.Controllers.Tests
             bookingInfo.Booking = booking;
             booking.BookingIdentifier = new BookingIdentifier();
             booking.BookingIdentifier.BookingSystem = BookingSystem.Nurvis;
+            booking.BookingIdentifier.SourceMarket = "DE";
             var response = controller.Update(bookingInfo);
             Assert.AreEqual(response.StatusCode, HttpStatusCode.BadRequest);
             Assert.AreEqual(((System.Net.Http.ObjectContent)response.Content).Value, Constants.Messages.SourceKeyNotPresent);
+        }
+
+        [TestMethod()]
+        public void SourceMarketIsNotPresentinCrm()
+        {
+            BookingInformation bookingInfo = new BookingInformation();
+            Booking booking = new Booking();
+            bookingInfo.Booking = booking;
+            booking.BookingIdentifier = new BookingIdentifier();
+            booking.BookingIdentifier.BookingSystem = BookingSystem.Nurvis;
+            booking.BookingIdentifier.BookingNumber = "1234";
+            booking.BookingIdentifier.SourceMarket = "XX";
+            var response = controller.Update(bookingInfo);
+            Assert.AreEqual(response.StatusCode, HttpStatusCode.BadRequest);
+            Assert.AreEqual(((System.Net.Http.ObjectContent)response.Content).Value, Constants.Messages.SourceMarketMissing);
         }
 
         [TestMethod()]

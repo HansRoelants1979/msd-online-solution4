@@ -41,11 +41,22 @@ namespace Tc.Crm.Service.Services
                 return validationMessages;
             }
             var booking = bookingInformation.Booking;
-            if (booking.BookingIdentifier == null || string.IsNullOrWhiteSpace(booking.BookingIdentifier.BookingNumber))
+            if(booking.BookingIdentifier == null)
+            {
                 validationMessages.Add(Constants.Messages.SourceKeyNotPresent);
-
-            if (booking.BookingIdentifier != null && booking.BookingIdentifier.BookingSystem == BookingSystem.Unknown)
                 validationMessages.Add(Constants.Messages.BookingSystemIsUnknown);
+                validationMessages.Add(Constants.Messages.SourceMarketMissing);
+            }
+            else
+            {
+                if (string.IsNullOrWhiteSpace(booking.BookingIdentifier.BookingNumber))
+                    validationMessages.Add(Constants.Messages.SourceKeyNotPresent);
+                if (booking.BookingIdentifier.BookingSystem == BookingSystem.Unknown)
+                    validationMessages.Add(Constants.Messages.BookingSystemIsUnknown);
+                if (string.IsNullOrWhiteSpace(booking.BookingIdentifier.SourceMarket))
+                    validationMessages.Add(Constants.Messages.SourceMarketMissing);
+            }
+            
 
             if (booking.Customer != null && (booking.Customer.CustomerIdentifier == null
                 || string.IsNullOrWhiteSpace(booking.Customer.CustomerIdentifier.CustomerId)))
@@ -94,6 +105,10 @@ namespace Tc.Crm.Service.Services
                     booking.BookingIdentifier.SourceMarket = sourceMarket.Id;
                     if (!string.IsNullOrWhiteSpace(sourceMarket.TeamId))
                         booking.Owner = sourceMarket.TeamId;
+                }
+                else
+                {
+                    booking.BookingIdentifier.SourceMarket = null;
                 }
             }
 

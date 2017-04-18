@@ -23,6 +23,7 @@ namespace Tc.Crm.Service.Constants
     }
     public static class Messages
     {
+        public const string SourceMarketMissing = "Booking record doesn't have a source market.";
         public const string CustomerIdIsNull = "Customer does not have a customer id.";
         public const string BookingSystemIsUnknown = "Booking system provided is either null or unknown";
         public const string ResponseNull = "Response is Null.";
