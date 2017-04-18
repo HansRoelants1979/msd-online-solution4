@@ -8,10 +8,36 @@ using System.Threading.Tasks;
 
 namespace Tc.Crm.CustomWorkflowSteps.ExecutingUserInDepartment.Service
 {
-     class RetrieveSecurityRoles
+     public static class RetrieveSecurityRoles
     {
-        public static bool GetSecurityRoles(string securityRoleName,Guid userId,IOrganizationService service)
+        public static bool GetSecurityRoles(string securityRoleName, Guid userId, IOrganizationService service, ITracingService trace)
         {
+            if (trace == null)
+            {
+                throw new InvalidPluginExecutionException("trace is null");
+            }
+
+            if (securityRoleName == null)
+            {
+                trace.Trace("securityRoleName is null");
+                throw new InvalidPluginExecutionException("securityRoleName is null");
+            }
+
+            if (userId == Guid.Empty)
+            {
+                trace.Trace("userId is null");
+                throw new InvalidPluginExecutionException("userId is null");
+            }
+
+            if (service == null)
+            {
+                trace.Trace("service is null");
+                throw new InvalidPluginExecutionException("service is null");
+            }
+
+           
+
+            trace.Trace("GetSecurityRoles - Start ");
             var response = false;
 
             QueryExpression query = new QueryExpression();
@@ -80,7 +106,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ExecutingUserInDepartment.Service
                 }
 
             }
-
+            
+            trace.Trace("GetSecurityRoles - End ");
 
             return response;
         }

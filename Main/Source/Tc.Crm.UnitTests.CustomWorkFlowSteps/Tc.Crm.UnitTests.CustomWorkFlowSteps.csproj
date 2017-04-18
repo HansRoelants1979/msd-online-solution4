@@ -103,6 +103,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ExecutingUserInDepartment\Services\RetrieveSecurityRolesTests.cs" />
     <Compile Include="ProcessBooking\Services\AccountHelperTests.cs" />
     <Compile Include="ProcessBooking\Services\ContactHelperTests.cs" />
     <Compile Include="TestOrganizationService.cs" />
@@ -118,6 +119,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

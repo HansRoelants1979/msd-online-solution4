@@ -29,11 +29,18 @@ namespace Tc.Crm.CustomWorkflowSteps.ExecutingUserInDepartment
                 SecurityRoleName = DeptBaseSecurityRoleName.Get<string>(executionContext);
                 var UserId = context.UserId;
 
-                if (UserId != null)
+                if (UserId != Guid.Empty)
                 {
-                    var response = RetrieveSecurityRoles.GetSecurityRoles(SecurityRoleName,UserId,service);
+                    trace.Trace("Checking executing User is in role or not");
+                    var response = RetrieveSecurityRoles.GetSecurityRoles(SecurityRoleName,UserId,service,trace);
                     if (response != false)
+                    {
                         IsInRole.Set(executionContext, response);
+                    }
+                    else
+                    {
+                        trace.Trace("Executing User is not in Role");
+                    }
                 }
             }
 

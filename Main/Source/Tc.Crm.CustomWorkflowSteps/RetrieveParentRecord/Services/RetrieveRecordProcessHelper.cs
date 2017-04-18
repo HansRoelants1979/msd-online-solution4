@@ -13,30 +13,30 @@ namespace Tc.Crm.CustomWorkflowSteps.RetrieveParentRecord.Services
 {
     class RetrieveRecordProcessHelper
     {
-        public static EntityReference RetrieveParentRecord(string expression, IOrganizationService service, IWorkflowContext context)
+        public static EntityReference RetrieveParentRecord(string expression, IOrganizationService service, IWorkflowContext context,ITracingService trace)
         {
-            if (expression == null)
-                throw new InvalidPluginExecutionException("Expression is null");
+            
             if (service == null)
                 throw new InvalidPluginExecutionException("service is null");
             if (context == null)
                 throw new InvalidPluginExecutionException("context is null");
 
-            string SourceId = string.Empty;
-            EntityReference ReturnValue = null;
-            
+            string sourceId = string.Empty;
+            EntityReference returnValue = null;
+
             #region ParseString
-
-            string s = expression;
+            trace.Trace("Parsing the string - Start");
             string[] separators = { "||" };
-            string[] words = s.Split(separators, StringSplitOptions.RemoveEmptyEntries);
-
+            string[] words = expression.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+            trace.Trace("Parsing the string - End");
             #endregion ParseString
             #region RetrievParentRecord
+            trace.Trace("RetrievParentRecord - Start");
+
             for (var i = 0; i < words.Length - 1; i++)
             {
 
-                List<Entity> ParentEntityRecords = new List<Entity>();
+                List<Entity> parentEntityRecords = new List<Entity>();
 
                 //the related entity we are going to retrieve
                 QueryExpression query = new QueryExpression();
@@ -71,22 +71,21 @@ namespace Tc.Crm.CustomWorkflowSteps.RetrieveParentRecord.Services
                 }
                 else
                 {
-                    request.Target = new EntityReference(words[i].Substring(words[i].IndexOf(";") + 1), new Guid(SourceId));
+                    request.Target = new EntityReference(words[i].Substring(words[i].IndexOf(";") + 1), new Guid(sourceId));
                 }
 
-                RetrieveResponse r = (RetrieveResponse)service.Execute(request);
+                RetrieveResponse response = (RetrieveResponse)service.Execute(request);
 
                 //query the returned collection for the target entity ids
-                ParentEntityRecords = r.Entity.RelatedEntities[relationship].Entities.Select(e => e).ToList();
-                if (ParentEntityRecords.Count > 0)
+                parentEntityRecords = response.Entity.RelatedEntities[relationship].Entities.Select(e => e).ToList();
+                if (parentEntityRecords.Count > 0)
                 {
-                    SourceId = ParentEntityRecords[0].Id.ToString();
+                    sourceId = parentEntityRecords[0].Id.ToString();
 
 
                     if (i == (words.Length - 2))
                     {
-
-                        ReturnValue = new EntityReference(words[i + 1].Substring(words[i + 1].IndexOf(";") + 1), ParentEntityRecords[0].Id);
+                        returnValue = new EntityReference(words[i + 1].Substring(words[i + 1].IndexOf(";") + 1), parentEntityRecords[0].Id);
                     }
 
 
@@ -94,8 +93,8 @@ namespace Tc.Crm.CustomWorkflowSteps.RetrieveParentRecord.Services
 
             }
 
-
-            return ReturnValue;
+            trace.Trace("RetrievParentRecord - End");
+            return returnValue;
             #endregion RetrievParentRecord
         }
         static void RelationshipExistOrNot(string relationshipname, IOrganizationService service)

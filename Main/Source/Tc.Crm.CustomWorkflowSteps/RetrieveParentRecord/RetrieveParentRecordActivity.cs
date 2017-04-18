@@ -18,7 +18,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         protected override void Execute(CodeActivityContext executionContext)
         {
             //Create the tracing service
-            ITracingService tracingService = executionContext.GetExtension<ITracingService>();
+            ITracingService trace = executionContext.GetExtension<ITracingService>();
 
             //Create the context
             IWorkflowContext context = executionContext.GetExtension<IWorkflowContext>();
@@ -30,7 +30,12 @@ namespace Tc.Crm.CustomWorkflowSteps
                 var expression = string.Empty;
 
                 expression = Expression.Get<string>(executionContext);
-                RetrivedEntity = RetrieveRecordProcessHelper.RetrieveParentRecord(expression, service, context);
+                if (expression == null || expression == "")
+                {
+                    throw new InvalidPluginExecutionException("Expression is null");
+                }
+                trace.Trace("retrieving Parent Record" );
+                RetrivedEntity = RetrieveRecordProcessHelper.RetrieveParentRecord(expression, service, context,trace);
                 if (RetrivedEntity != null)
                 {
                     if (RetrivedEntity.LogicalName == "tc_locationoffice")
@@ -73,6 +78,7 @@ namespace Tc.Crm.CustomWorkflowSteps
         //starting entity should be the entity on which the workflow runs
         //incident||incident_customer_contacts;contact||contact_customer_accounts;account
 
+        [RequiredArgument]
         [Input("String ExpressionSample Eg:incident||incident_customer_contacts;contact||contact_customer_accounts;account;")]
         public InArgument<string> Expression { get; set; }
 
