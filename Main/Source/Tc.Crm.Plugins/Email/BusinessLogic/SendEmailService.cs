@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Tc.Crm.Plugins.Email.BusinessLogic
 {
-    class SendEmailService
+    public class SendEmailService
     {
 
         public IPluginExecutionContext context = null;
@@ -25,26 +25,31 @@ namespace Tc.Crm.Plugins.Email.BusinessLogic
         {
             if (!context.MessageName.Equals("send", StringComparison.OrdinalIgnoreCase)) return false;
             if (context.Stage != (int)PluginStage.Preoperation) return false;
-            if (!context.InputParameters.Contains(InputParameters.Target)
-                || !(context.InputParameters[InputParameters.Target] is Entity))
-                return false;
+            //if (!context.InputParameters.Contains(InputParameters.Target)
+            //    || !(context.InputParameters[InputParameters.Target] is Entity))
+            //    return false;
             return true;
         }
 
 
         public void UpdateEmailBodyWithHeadersandFooters()
         {
+            trace.Trace("Begin - UpdateEmailBodyWithHeadersandFooters");
             if (!IsContextValid()) return;
-
-            var targetEmail = context.InputParameters["Target"] as Entity;
+                   
+            Guid emailId =(Guid) context.InputParameters["EmailId"] ;
+            Entity targetEmail = service.Retrieve("email", emailId, new ColumnSet("description"));
+            trace.Trace("Entity : " +targetEmail.LogicalName.ToString());
             string emailDescription = targetEmail.GetAttributeValue<string>("description");
+            trace.Trace(emailDescription.ToString());
             if (string.IsNullOrEmpty(emailDescription))
                 throw new InvalidPluginExecutionException("the Email description is Empty");
 
             //{!EmailHeaderFooter: mark-up name}
             List<string> footerHeaderNamesList = new List<string>();
             footerHeaderNamesList = getFooterHeaderName(emailDescription, "{!EmailHeaderFooter:", "}");
-            footerHeaderNamesList = footerHeaderNamesList.Distinct().ToList();
+             footerHeaderNamesList = footerHeaderNamesList.Distinct().ToList();
+            trace.Trace("footerHeaderNamesList Count : "+footerHeaderNamesList.Count.ToString());
             if (footerHeaderNamesList != null && footerHeaderNamesList.Count > 0)
             {
                 foreach (var footerHeaderName in footerHeaderNamesList)
@@ -77,20 +82,27 @@ namespace Tc.Crm.Plugins.Email.BusinessLogic
                         EntityCollection emailTempalteHeaderFooterValue = service.RetrieveMultiple(query);
                         if (emailTempalteHeaderFooterValue != null && emailTempalteHeaderFooterValue.Entities.Count > 0)
                         {
-                            string emailTemplateFooterHeaderValue = emailTempalteHeaderFooterValue.Entities[0].Attributes["tc_description"].ToString();
-                            emailDescription = emailDescription.Replace("{!EmailTemplateHeaderFooter:" + footerHeaderName + "}", emailTemplateFooterHeaderValue);
+                            if (!string.IsNullOrWhiteSpace(emailTempalteHeaderFooterValue.Entities[0].Attributes["tc_longvalue"].ToString()))
+                            {
+                                string emailTemplateFooterHeaderValue = emailTempalteHeaderFooterValue.Entities[0].Attributes["tc_longvalue"].ToString();
+                                trace.Trace(emailTemplateFooterHeaderValue);
+                                emailDescription = emailDescription.Replace("{!EmailHeaderFooter:" + footerHeaderName + "}", emailTemplateFooterHeaderValue);
+                            }
                         }
 
                     }
                 }
 
                 if ((!string.IsNullOrWhiteSpace(emailDescription)))
-                {
-                    Entity email = new Entity("email");
-                    email.Attributes["description"] = emailDescription;
-                    //service.Update(email);
+                {                  
+                    targetEmail.Attributes["description"] = emailDescription;
+                    targetEmail.Id = emailId;
+                    trace.Trace("updated email body :" + emailDescription);
+                    service.Update(targetEmail);
                 }
             }
+
+            trace.Trace("End - UpdateEmailBodyWithHeadersandFooters");
         }
 
         public static List<string> getFooterHeaderName(
