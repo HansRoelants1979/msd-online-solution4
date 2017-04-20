@@ -52,7 +52,7 @@ namespace Tc.Crm.CustomWorkflowSteps.QueueIdentifier.Service
             if (caseId == null) return null;
             if (service == null) return null;
             if (trace == null) return null;
-
+            
             trace.Trace("GetQueueFor - start");
             var caseDetails = GetCaseDetailsFor(caseId, service, trace);
             if (caseDetails == null)
@@ -266,6 +266,8 @@ namespace Tc.Crm.CustomWorkflowSteps.QueueIdentifier.Service
                               </entity>
                             </fetch>";
             fetchXml = string.Format(fetchXml, caseId.Id);
+            
+            trace.Trace(fetchXml);
             var query = new FetchExpression(fetchXml);
 
             trace.Trace("Calling retrieve multiple of service.");
@@ -283,6 +285,7 @@ namespace Tc.Crm.CustomWorkflowSteps.QueueIdentifier.Service
                 throw new InvalidPluginExecutionException("Multiple queues exist with the same name.");
             }
 
+            trace.Trace("case record retrieved.");
             var caseDetail = new CaseDetail();
             if (response.Entities[0].Contains(Attributes.Booking.SourceMarketId) && response.Entities[0][Attributes.Booking.SourceMarketId] != null)
             {
@@ -310,7 +313,6 @@ namespace Tc.Crm.CustomWorkflowSteps.QueueIdentifier.Service
                 caseDetail.Owner = ((EntityReference)(response.Entities[0][Attributes.Booking.Owner])).Id;
                 caseDetail.OwnerType = ((EntityReference)(response.Entities[0][Attributes.Booking.Owner])).LogicalName;
             }
-
 
             trace.Trace("GetCaseDetailsFor - end");
             return caseDetail;

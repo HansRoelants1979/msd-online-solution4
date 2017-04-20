@@ -29,6 +29,9 @@ namespace Tc.Crm.CustomWorkflowSteps.QueueIdentifier
                 var response = queueIdentifierService.GetQueueBy(queueName, service, trace);
                 if (response != null)
                     executionContext.SetValue<EntityReference>(Queue, response);
+                else
+                    trace.Trace("response is null");
+
                 return;
             }
 
@@ -37,7 +40,12 @@ namespace Tc.Crm.CustomWorkflowSteps.QueueIdentifier
             {
                 var response = queueIdentifierService.GetQueueFor(caseId, service, trace);
                 if (response != null)
+                {
                     executionContext.SetValue<EntityReference>(Queue, response);
+                }
+                else
+                    trace.Trace("response is null");
+
                 return;
             }
 
@@ -53,5 +61,7 @@ namespace Tc.Crm.CustomWorkflowSteps.QueueIdentifier
         [Output("Queue")]
         [ReferenceTarget("queue")]
         public OutArgument<EntityReference> Queue { get; set; }
+
+        
     }
 }
