@@ -66,7 +66,9 @@ namespace Tc.Crm.Service.Client.Console
 
                 cons.DefaultRequestHeaders.Accept.Clear();
                 cons.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                cons.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                var authHeader = bool.Parse(ConfigurationManager.AppSettings["authHeader"]);
+                if (authHeader)
+                    cons.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 Task<HttpResponseMessage> t = cons.PutAsync(api, new StringContent(data, Encoding.UTF8, "application/json"));
 
                 var response = t.Result;
@@ -118,7 +120,9 @@ namespace Tc.Crm.Service.Client.Console
 
                 cons.DefaultRequestHeaders.Accept.Clear();
                 cons.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                cons.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                var authHeader = bool.Parse(ConfigurationManager.AppSettings["authHeader"]);
+                if (authHeader)
+                    cons.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 Task<HttpResponseMessage> t = cons.PutAsync(api, new StringContent(data, Encoding.UTF8, "application/json"));
 
                 var response = t.Result;
