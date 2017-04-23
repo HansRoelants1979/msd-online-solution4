@@ -38,6 +38,50 @@ Tc.Crm.Scripts.Events.Email = (function () {
             Xrm.Page.getAttribute("from").setValue(null);
         }
     }
+    var getQueueIdFromCrm = function (id) {
+        debugger;
+        var requestXml = '';
+        requestXml += '<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">';
+        requestXml += '  <s:Body>';
+        requestXml += '    <Execute xmlns="http://schemas.microsoft.com/xrm/2011/Contracts/Services" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">';
+        requestXml += '      <request xmlns:a="http://schemas.microsoft.com/xrm/2011/Contracts">';
+        requestXml += '        <a:Parameters xmlns:b="http://schemas.datacontract.org/2004/07/System.Collections.Generic">';
+        requestXml += '          <a:KeyValuePairOfstringanyType>';
+        requestXml += '            <b:key>Case</b:key>';
+        requestXml += '            <b:value i:type="a:EntityReference">';
+        requestXml += '              <a:Id>' + id + '</a:Id>';
+        requestXml += '              <a:KeyAttributes xmlns:c="http://schemas.microsoft.com/xrm/7.1/Contracts" />';
+        requestXml += '              <a:LogicalName>incident</a:LogicalName>';
+        requestXml += '              <a:Name i:nil="true" />';
+        requestXml += '              <a:RowVersion i:nil="true" />';
+        requestXml += '            </b:value>';
+        requestXml += '          </a:KeyValuePairOfstringanyType>';
+        requestXml += '        </a:Parameters>';
+        requestXml += '        <a:RequestId i:nil="true" />';
+        requestXml += '        <a:RequestName>tc_QueueIdentifier</a:RequestName>';
+        requestXml += '      </request>';
+        requestXml += '    </Execute>';
+        requestXml += '  </s:Body>';
+        requestXml += '</s:Envelope>';
+        var req = new XMLHttpRequest();
+        req.open("POST", GetClientUrl(), true)
+        req.setRequestHeader("Accept", "application/xml, text/xml, */*");
+        req.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
+        req.setRequestHeader("SOAPAction", "http://schemas.microsoft.com/xrm/2011/Contracts/Services/IOrganizationService/Execute");
+        req.onreadystatechange = function () {
+            processOnQueueIdReceived(this, req);
+        };
+        req.send(requestXml);
+        
+    }
+    var GetClientUrl = function () {
+        var clientUrl = '';
+        if (typeof Xrm.Page.context == "object") {
+            clientUrl = Xrm.Page.context.getClientUrl();
+        }
+        var ServicePath = "/XRMServices/2011/Organization.svc/web";
+        return clientUrl + ServicePath;
+    }
     var getLookupObject = function (attributeName) {
         return Xrm.Page.getAttribute(attributeName).getValue();
     }
@@ -53,16 +97,11 @@ Tc.Crm.Scripts.Events.Email = (function () {
         if (data.readyState === STATUS_READY) {
             request.onreadystatechange = null;
             if (data.status === HTTP_SUCCESS) {
-                var results = JSON.parse(data.response);
-                if (results == null || results == undefined) {
-                    console.log("results is null.");
-                    return;
-                }
-                if (results[FIELD_QUEUE_ID] == null || results[FIELD_QUEUE_ID] == undefined || results[FIELD_QUEUE_ID] == "") {
-                    console.log('queueid is null');
-                    return;
-                }
-                getQueueName(results['queueid']);
+                if (data == null || data.responseXML == null || data.responseXML.childNodes == null) return;
+                var resultXml = data.responseXML.childNodes[0].innerHTML;
+                if (resultXml == null || resultXml == undefined || resultXml == '') return;
+                var queueId = parseXml(resultXml);
+                getQueueName(queueId);
 
             } else {
                 if (data.response == null || data.response == "" || data.response == undefined)
@@ -107,26 +146,12 @@ Tc.Crm.Scripts.Events.Email = (function () {
         };
         req.send();
     }
-    var getQueueIdFromCrm = function (incidentId) {
-        var parameters = {};
-        var incident = {};
-        incident.incidentid = incidentId;
-        incident[PARAM_ODATA_TYPE] = ENTITY_FQ_INCIDENT;
-        parameters.Case = incident;
-
-        var req = new XMLHttpRequest();
-        req.open("POST", Xrm.Page.context.getClientUrl() + "/api/data/v8.2/tc_QueueIdentifier", true);
-        req = addCommonWebApiHeaders(req);
-        req.onreadystatechange = function () {
-            processOnQueueIdReceived(this, req);
-        };
-        req.send(JSON.stringify(parameters));
-    }
     var addCommonWebApiHeaders = function (request) {
         request.setRequestHeader("OData-MaxVersion", "4.0");
         request.setRequestHeader("OData-Version", "4.0");
         request.setRequestHeader("Accept", "application/json");
         request.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+        return request;
     }
     var setFromFieldForCase = function () {
         try {
@@ -150,6 +175,11 @@ Tc.Crm.Scripts.Events.Email = (function () {
             console.log("unexpected error has occurred in method setFromFieldForCase");
         }
 
+    }
+    var parseXml = function (resultXml) {
+        resultXml = resultXml.substring(resultXml.indexOf('a:Id'), resultXml.indexOf('/a:Id'))
+        resultXml = resultXml.substring(resultXml.indexOf('>') + 1, resultXml.indexOf('<'));
+        return resultXml;
     }
     return {
         OnLoad: function () {
