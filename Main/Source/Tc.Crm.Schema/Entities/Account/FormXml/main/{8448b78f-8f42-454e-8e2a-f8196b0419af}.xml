@@ -13,20 +13,26 @@
     <tabs>
       <tab name="SUMMARY_TAB" id="{3b0b63a9-d379-689a-0ec3-e71eb4c6a841}" IsUserDefined="0" showlabel="true" expanded="true" locklevel="0">
         <labels>
+          <label description="Inhaltsübersicht" languagecode="1031" />
           <label description="Summary" languagecode="1033" />
+          <label description="Résumé" languagecode="1036" />
         </labels>
         <columns>
           <column width="24%">
             <sections>
               <section name="ACCOUNT_INFORMATION" showlabel="true" showbar="false" id="{0eb92e6c-bcb8-0d52-a188-d81543ddb7cd}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelposition="Left" locklevel="0" celllabelalignment="Left">
                 <labels>
+                  <label description="FIRMENINFORMATIONEN" languagecode="1031" />
                   <label description="Identification" languagecode="1033" />
+                  <label description="INFORMATIONS SUR LE COMPTE" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{b0e82a7e-5683-d90c-308a-0d779377ea8a}" showlabel="true">
                       <labels>
                         <label description="Account Name" languagecode="1033" />
+                        <label description="Nom du compte" languagecode="1036" />
+                        <label description="Firmenname" languagecode="1031" />
                       </labels>
                       <control id="name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="name" disabled="false" />
                     </cell>
@@ -66,6 +72,8 @@
                     <cell id="{d83cd08d-7aee-0e8c-cccb-5bee344e3130}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Email" languagecode="1033" />
+                        <label description="Courrier électronique" languagecode="1036" />
+                        <label description="E-Mail" languagecode="1031" />
                       </labels>
                       <control id="emailaddress1" classid="{ADA2203E-B4CD-49be-9DDF-234642B43B52}" datafieldname="emailaddress1" disabled="false" />
                     </cell>
@@ -80,6 +88,8 @@
                     <cell id="{7da6ba54-174a-94c1-6063-4ed380854d4e}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Phone" languagecode="1033" />
+                        <label description="Téléphone principal" languagecode="1036" />
+                        <label description="Telefon 1" languagecode="1031" />
                       </labels>
                       <control id="telephone1" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="telephone1" disabled="false" uniqueid="{0546698b-6da2-6ea4-0c6a-3ba1c5aed94a}" />
                     </cell>
@@ -98,10 +108,12 @@
             <sections>
               <section name="SOCIAL_PANE_TAB" showlabel="false" showbar="false" id="{7a073b7c-5422-2418-3d26-b2a7eb290832}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelposition="Top" locklevel="0" celllabelalignment="Left">
                 <labels>
+                  <label description="SOZIALER BEREICH" languagecode="1031" />
                   <label description="SOCIAL PANE" languagecode="1033" />
+                  <label description="VOLET SOCIAL" languagecode="1036" />
                 </labels>
                 <rows>
-                  <row height="stdwithlabel">
+                  <row>
                     <cell id="{da084e20-0107-8127-aa10-885b5ad187db}" showlabel="false" rowspan="12" auto="false" colspan="1" locklevel="0">
                       <labels>
                         <label description="Note Text" languagecode="1033" />
@@ -136,7 +148,9 @@
             <sections>
               <section name="ADDRESS" showlabel="true" locklevel="0" showbar="false" id="{cc0fe06e-4b5f-4648-A62d-84d1514e1fc5}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="130" celllabelposition="Left" celllabelalignment="Left">
                 <labels>
+                  <label description="ADRESSE" languagecode="1031" />
                   <label description="Address" languagecode="1033" />
+                  <label description="ADRESSE" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
@@ -216,17 +230,11 @@
               </section>
               <section name="SUMMARY_TAB_section_6" showlabel="false" showbar="false" locklevel="0" id="{d4c3ee9c-ba71-5cdb-31be-2aa505750472}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Top">
                 <labels>
+                  <label description="Abschnitt" languagecode="1031" />
                   <label description="Section" languagecode="1033" />
+                  <label description="Section" languagecode="1036" />
                 </labels>
-                <rows>
-                  <row>
-                    <cell id="{a03377a8-3e7e-a435-78a4-30a69985b1e1}" showlabel="false">
-                      <labels>
-                        <label description="" languagecode="1033" />
-                      </labels>
-                    </cell>
-                  </row>
-                </rows>
+                <rows></rows>
               </section>
             </sections>
           </column>
@@ -248,6 +256,8 @@
                     <cell id="{28eb32ec-0690-b392-0b0d-5acd8cb7a093}" showlabel="false" colspan="1" auto="false" rowspan="6">
                       <labels>
                         <label description="Customers" languagecode="1033" />
+                        <label description="Contacts" languagecode="1036" />
+                        <label description="Kontakte" languagecode="1031" />
                       </labels>
                       <control id="tc_Account_3rdPartyCustomers" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true" uniqueid="{c5d0883a-c54e-07ab-7c40-2737d7c24d79}">
                         <parameters>
@@ -296,6 +306,8 @@
                     <cell id="{9baa6b0a-4804-ec40-3eb3-ca406d11a638}" showlabel="false" colspan="1" auto="false" rowspan="6">
                       <labels>
                         <label description="Cases" languagecode="1033" />
+                        <label description="Incidents" languagecode="1036" />
+                        <label description="Anfragen" languagecode="1031" />
                       </labels>
                       <control id="tc_Account_3rdPartyCustomerCases" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
                         <parameters>
@@ -341,42 +353,22 @@
           <cell id="{54b2d0a2-eb77-b3cd-b60a-03ea6944e98e}" showlabel="true" locklevel="1">
             <labels>
               <label description="Owner" languagecode="1033" />
+              <label description="Propriétaire" languagecode="1036" />
+              <label description="Besitzer" languagecode="1031" />
             </labels>
             <control id="header_ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
           </cell>
           <cell id="{724eba69-ba02-06d8-9954-98ba8b45a51e}" showlabel="true" locklevel="0">
             <labels>
               <label description="Status" languagecode="1033" />
+              <label description="Raison du statut" languagecode="1036" />
+              <label description="Statusgrund" languagecode="1031" />
             </labels>
             <control id="header_statuscode" classid="{5D68B988-0661-4db2-BC3E-17598AD3BE6C}" datafieldname="statuscode" disabled="false" uniqueid="{2d6843ce-3b44-ec72-c410-33bc3e6dd420}" />
           </cell>
         </row>
       </rows>
     </header>
-    <footer id="{eb1a4269-5aff-43ae-bcc9-69f75e46c915}" columns="111">
-      <rows>
-        <row>
-          <cell id="{172ea15a-85c5-e175-4955-0b5e36932809}" showlabel="true" locklevel="0">
-            <labels>
-              <label description="Created On" languagecode="1033" />
-            </labels>
-            <control id="footer_createdon" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="createdon" disabled="true" />
-          </cell>
-          <cell id="{c4457891-c6a5-42cb-756b-d77cd7d091b9}" showlabel="true" locklevel="0">
-            <labels>
-              <label description="Modified On" languagecode="1033" />
-            </labels>
-            <control id="footer_modifiedon" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="modifiedon" disabled="true" />
-          </cell>
-          <cell id="{c0e5d1b3-c617-286e-4459-e07d392a6787}" showlabel="true" locklevel="0">
-            <labels>
-              <label description="Modified By" languagecode="1033" />
-            </labels>
-            <control id="footer_modifiedby" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="modifiedby" disabled="true" />
-          </cell>
-        </row>
-      </rows>
-    </footer>
     <clientresources>
       <internalresources>
         <clientincludes>
@@ -386,41 +378,12 @@
     </clientresources>
     <Navigation>
       <NavBar>
-        <NavBarByRelationshipItem RelationshipName="opportunity_customer_accounts" Sequence="10" Area="Sales" Id="navOpps" Show="false">
-          <Titles>
-            <Title LCID="1033" Text="Opportunities" />
-          </Titles>
-        </NavBarByRelationshipItem>
         <NavBarByRelationshipItem RelationshipName="Account_CustomerAddress" Id="navAddresses" Sequence="10" Area="Info" Show="false">
           <Privileges>
             <Privilege Entity="" Privilege="ReadActivity" />
           </Privileges>
           <Titles>
             <Title LCID="1033" Text="Addresses" />
-          </Titles>
-        </NavBarByRelationshipItem>
-        <NavBarByRelationshipItem RelationshipName="quote_customer_accounts" Id="navQuotes" TitleResourceId="Tab_Label_MoreQuotes" Sequence="10" Area="Info" Show="false">
-          <Privileges>
-            <Privilege Entity="" Privilege="ReadActivity" />
-          </Privileges>
-          <Titles>
-            <Title LCID="1033" Text="Quote" />
-          </Titles>
-        </NavBarByRelationshipItem>
-        <NavBarByRelationshipItem RelationshipName="account_customer_relationship_customer" Id="navRelationships" TitleResourceId="Left_Nav_Area_Relationships" Sequence="10" Area="Info" Show="false">
-          <Privileges>
-            <Privilege Entity="" Privilege="ReadActivity" />
-          </Privileges>
-          <Titles>
-            <Title LCID="1033" Text="CustomerRelationship" />
-          </Titles>
-        </NavBarByRelationshipItem>
-        <NavBarByRelationshipItem RelationshipName="invoice_customer_accounts" Id="navInvoices" TitleResourceId="Tab_Label_MoreInvoices" Sequence="10" Area="Info" Show="false">
-          <Privileges>
-            <Privilege Entity="" Privilege="ReadActivity" />
-          </Privileges>
-          <Titles>
-            <Title LCID="1033" Text="Invoice" />
           </Titles>
         </NavBarByRelationshipItem>
         <NavBarByRelationshipItem RelationshipName="account_parent_account" Id="navSubAccts" TitleResourceId="Label_SubAccounts" Sequence="10" Area="Info" Show="false">
@@ -431,12 +394,20 @@
             <Title LCID="1033" Text="Accounts" />
           </Titles>
         </NavBarByRelationshipItem>
-        <NavBarByRelationshipItem RelationshipName="contract_customer_accounts" Id="navContracts" TitleResourceId="Tab_Label_MoreContracts" Sequence="10" Area="Info" Show="false">
+        <NavBarByRelationshipItem RelationshipName="account_customer_relationship_customer" Id="navRelationships" TitleResourceId="Left_Nav_Area_Relationships" Sequence="10" Area="Info" Show="false">
           <Privileges>
             <Privilege Entity="" Privilege="ReadActivity" />
           </Privileges>
           <Titles>
-            <Title LCID="1033" Text="Contract" />
+            <Title LCID="1033" Text="CustomerRelationship" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="quote_customer_accounts" Id="navQuotes" TitleResourceId="Tab_Label_MoreQuotes" Sequence="10" Area="Info" Show="false">
+          <Privileges>
+            <Privilege Entity="" Privilege="ReadActivity" />
+          </Privileges>
+          <Titles>
+            <Title LCID="1033" Text="Quote" />
           </Titles>
         </NavBarByRelationshipItem>
         <NavBarByRelationshipItem RelationshipName="order_customer_accounts" Id="navOrders" TitleResourceId="Tab_Label_MoreOrders" Sequence="10" Area="Info" Show="false">
@@ -445,6 +416,42 @@
           </Privileges>
           <Titles>
             <Title LCID="1033" Text="SalesOrder" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="invoice_customer_accounts" Id="navInvoices" TitleResourceId="Tab_Label_MoreInvoices" Sequence="10" Area="Info" Show="false">
+          <Privileges>
+            <Privilege Entity="" Privilege="ReadActivity" />
+          </Privileges>
+          <Titles>
+            <Title LCID="1033" Text="Invoice" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="contract_customer_accounts" Id="navContracts" TitleResourceId="Tab_Label_MoreContracts" Sequence="10" Area="Info" Show="false">
+          <Privileges>
+            <Privilege Entity="" Privilege="ReadActivity" />
+          </Privileges>
+          <Titles>
+            <Title LCID="1033" Text="Contract" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navCampaignsInSFA" Sequence="20" Area="Marketing" Id="navCampaignsInSFA" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Campaigns" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navProcessSessions" Sequence="9700" Area="ProcessCenter" Id="navProcessSessions" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Dialog Sessions" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navAsyncOperations" Sequence="9500" Area="ProcessCenter" Id="navAsyncOperations" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Workflows" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="opportunity_customer_accounts" Sequence="10" Area="Sales" Id="navOpps" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Opportunities" />
           </Titles>
         </NavBarByRelationshipItem>
         <NavBarByRelationshipItem RelationshipName="listaccount_association" Sequence="10" Area="Marketing" Id="navListsInSFA" Show="false">
@@ -457,11 +464,6 @@
             <Title LCID="1033" Text="Cases" />
           </Titles>
         </NavBarByRelationshipItem>
-        <NavBarByRelationshipItem RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navCampaignsInSFA" Sequence="20" Area="Marketing" Id="navCampaignsInSFA" Show="false">
-          <Titles>
-            <Title LCID="1033" Text="Campaigns" />
-          </Titles>
-        </NavBarByRelationshipItem>
         <NavBarByRelationshipItem RelationshipName="tc_account_tc_customerbookingrole_Customer" Sequence="1000" Area="Sales" Id="nav_tc_account_tc_customerbookingrole_Customer">
           <Titles>
             <Title LCID="1033" Text="Bookings" />
@@ -470,16 +472,6 @@
         <NavBarByRelationshipItem RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navConnections" Sequence="8500" Area="Info" Id="navConnections" Show="false">
           <Titles>
             <Title LCID="1033" Text="Connections" />
-          </Titles>
-        </NavBarByRelationshipItem>
-        <NavBarByRelationshipItem RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navAsyncOperations" Sequence="9500" Area="ProcessCenter" Id="navAsyncOperations" Show="false">
-          <Titles>
-            <Title LCID="1033" Text="Workflows" />
-          </Titles>
-        </NavBarByRelationshipItem>
-        <NavBarByRelationshipItem RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navProcessSessions" Sequence="9700" Area="ProcessCenter" Id="navProcessSessions" Show="false">
-          <Titles>
-            <Title LCID="1033" Text="Dialog Sessions" />
           </Titles>
         </NavBarByRelationshipItem>
         <NavBarByRelationshipItem RelationshipName="account_entitlement_Customer" Sequence="10000" Area="Info" Id="navEntitlement" Show="false">
@@ -516,15 +508,49 @@
         </NavBarArea>
       </NavBarAreas>
     </Navigation>
-    <controlDescriptions />
     <DisplayConditions FallbackForm="true" Order="2">
       <Everyone />
     </DisplayConditions>
+    <footer id="{eb1a4269-5aff-43ae-bcc9-69f75e46c915}" columns="111">
+      <rows>
+        <row>
+          <cell id="{172ea15a-85c5-e175-4955-0b5e36932809}" showlabel="true" locklevel="0">
+            <labels>
+              <label description="Created On" languagecode="1033" />
+              <label description="Créé le" languagecode="1036" />
+              <label description="Erstellt am" languagecode="1031" />
+            </labels>
+            <control id="footer_createdon" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="createdon" disabled="true" />
+          </cell>
+          <cell id="{c4457891-c6a5-42cb-756b-d77cd7d091b9}" showlabel="true" locklevel="0">
+            <labels>
+              <label description="Modified On" languagecode="1033" />
+              <label description="Modifié le" languagecode="1036" />
+              <label description="Geändert am" languagecode="1031" />
+            </labels>
+            <control id="footer_modifiedon" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="modifiedon" disabled="true" />
+          </cell>
+          <cell id="{c0e5d1b3-c617-286e-4459-e07d392a6787}" showlabel="true" locklevel="0">
+            <labels>
+              <label description="Modified By" languagecode="1033" />
+              <label description="Modifié par" languagecode="1036" />
+              <label description="Geändert von" languagecode="1031" />
+            </labels>
+            <control id="footer_modifiedby" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="modifiedby" disabled="true" />
+          </cell>
+        </row>
+      </rows>
+    </footer>
+    <controlDescriptions />
   </form>
   <LocalizedNames>
+    <LocalizedName description="Firma" languagecode="1031" />
     <LocalizedName description="Account" languagecode="1033" />
+    <LocalizedName description="Compte" languagecode="1036" />
   </LocalizedNames>
   <Descriptions>
+    <Description description="Standardmäßiges Firmenformular aktualisiert" languagecode="1031" />
     <Description description="Updated default Account form." languagecode="1033" />
+    <Description description="Formulaire de compte par défaut mis à jour." languagecode="1036" />
   </Descriptions>
 </systemform>

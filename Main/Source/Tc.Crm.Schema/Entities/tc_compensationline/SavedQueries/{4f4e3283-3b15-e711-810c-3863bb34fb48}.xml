@@ -5,34 +5,34 @@
   <isquickfindquery>0</isquickfindquery>
   <isprivate>0</isprivate>
   <isdefault>0</isdefault>
-  <returnedtypecode>10020</returnedtypecode>
+  <returnedtypecode>10055</returnedtypecode>
   <savedqueryid>{4f4e3283-3b15-e711-810c-3863bb34fb48}</savedqueryid>
   <layoutxml>
-    <grid name="resultset" object="10020" jump="tc_name" select="1" preview="1" icon="1">
+    <grid name="resultset" icon="1" preview="1" select="1" jump="tc_name" object="10055">
       <row id="tc_compensationlineid" name="result">
-        <cell name="tc_compensationlinereference" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="tc_amount" width="100" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
-        <cell name="tc_bacsamount" width="100" />
-        <cell name="tc_cashamount" width="100" />
-        <cell name="tc_chapsamount" width="100" />
-        <cell name="tc_voucheramount" width="100" />
+        <cell name="tc_name" imageproviderwebresource="$webresource:" imageproviderfunctionname="" width="150" />
+        <cell name="tc_amount" imageproviderwebresource="$webresource:" imageproviderfunctionname="" width="125" />
+        <cell name="tc_bacsamount" imageproviderwebresource="$webresource:" imageproviderfunctionname="" width="125" />
+        <cell name="tc_cashamount" imageproviderwebresource="$webresource:" imageproviderfunctionname="" width="125" />
+        <cell name="tc_chapsamount" imageproviderwebresource="$webresource:" imageproviderfunctionname="" width="125" />
+        <cell name="tc_voucheramount" imageproviderwebresource="$webresource:" imageproviderfunctionname="" width="125" />
       </row>
     </grid>
   </layoutxml>
   <querytype>0</querytype>
   <fetchxml>
-    <fetch distinct="false" version="1.0" output-format="xml-platform" mapping="logical">
+    <fetch mapping="logical" output-format="xml-platform" version="1.0" distinct="false">
       <entity name="tc_compensationline">
-        <order attribute="tc_compensationlinereference" descending="false" />
+        <order descending="false" attribute="tc_amount" />
         <filter type="and">
           <condition attribute="tc_compensationid" operator="not-null" />
         </filter>
         <attribute name="tc_amount" />
-        <attribute name="tc_compensationlinereference" />
         <attribute name="tc_voucheramount" />
         <attribute name="tc_chapsamount" />
         <attribute name="tc_cashamount" />
         <attribute name="tc_bacsamount" />
+        <attribute name="tc_name" />
         <attribute name="tc_compensationlineid" />
       </entity>
     </fetch>

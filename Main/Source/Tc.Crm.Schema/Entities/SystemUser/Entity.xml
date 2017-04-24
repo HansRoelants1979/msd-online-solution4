@@ -4,50 +4,7 @@
   <ObjectTypeCode>8</ObjectTypeCode>
   <EntityInfo>
     <entity Name="SystemUser">
-      <LocalizedNames>
-        <LocalizedName description="User" languagecode="1033" />
-      </LocalizedNames>
-      <LocalizedCollectionNames>
-        <LocalizedCollectionName description="Users" languagecode="1033" />
-      </LocalizedCollectionNames>
-      <Descriptions>
-        <Description description="Person with access to the Microsoft CRM system and who owns objects in the Microsoft CRM database." languagecode="1033" />
-      </Descriptions>
-      <attributes>
-        <attribute PhysicalName="tc_department">
-          <Type>picklist</Type>
-          <Name>tc_department</Name>
-          <LogicalName>tc_department</LogicalName>
-          <RequiredLevel>none</RequiredLevel>
-          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
-          <ImeMode>auto</ImeMode>
-          <ValidForUpdateApi>1</ValidForUpdateApi>
-          <ValidForReadApi>1</ValidForReadApi>
-          <ValidForCreateApi>1</ValidForCreateApi>
-          <IsCustomField>1</IsCustomField>
-          <IsAuditEnabled>1</IsAuditEnabled>
-          <IsSecured>0</IsSecured>
-          <IntroducedVersion>1.0.0.51</IntroducedVersion>
-          <IsCustomizable>1</IsCustomizable>
-          <IsRenameable>1</IsRenameable>
-          <CanModifySearchSettings>1</CanModifySearchSettings>
-          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
-          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
-          <SourceType>0</SourceType>
-          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
-          <IsSortableEnabled>0</IsSortableEnabled>
-          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
-          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
-          <AppDefaultValue>-1</AppDefaultValue>
-          <OptionSetName>tc_department</OptionSetName>
-          <displaynames>
-            <displayname description="Department" languagecode="1033" />
-          </displaynames>
-          <Descriptions>
-            <Description description="" languagecode="1033" />
-          </Descriptions>
-        </attribute>
-      </attributes>
+      <attributes />
       <EntitySetName>systemusers</EntitySetName>
       <IsDuplicateCheckSupported>0</IsDuplicateCheckSupported>
       <IsBusinessProcessEnabled>1</IsBusinessProcessEnabled>
@@ -107,10 +64,14 @@
       <ShowDisabled>1</ShowDisabled>
       <IntroducedVersion>7.0.0.0</IntroducedVersion>
       <LocalizedNames>
+        <LocalizedName description="Benutzerhierarchie" languagecode="1031" />
         <LocalizedName description="User Hierarchy" languagecode="1033" />
+        <LocalizedName description="Hiérarchie d'utilisateur" languagecode="1036" />
       </LocalizedNames>
       <Descriptions>
+        <Description description="Dies ist die Benutzerhierarchiedefinition." languagecode="1031" />
         <Description description="This is the user hierarchy definition." languagecode="1033" />
+        <Description description="Il s'agit de la définition de la hiérarchie d'utilisateur." languagecode="1036" />
       </Descriptions>
     </HierarchyRule>
   </HierarchyRules>

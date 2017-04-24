@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <EntityRelationships>
-  <EntityRelationship Name="Mailbox_Annotation">
+  <EntityRelationship Name="Mailbox_Annotation" unmodified="1">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IntroducedVersion>6.0.0.0</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
@@ -14,7 +14,9 @@
     <ReferencingAttributeName>ObjectId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Objekts, dem die Notiz zugeordnet ist." languagecode="1031" />
         <Description description="Unique identifier of the object with which the note is associated." languagecode="1033" />
+        <Description description="Identificateur unique de l'objet auquel la note est associée." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -32,14 +34,16 @@
     <ReferencingAttributeName>DefaultMailbox</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Wählen Sie das Postfach aus, das diesem Benutzer zugeordnet ist." languagecode="1031" />
         <Description description="Select the mailbox associated with this user." languagecode="1033" />
+        <Description description="Sélectionnez la boîte aux lettres associée à cet utilisateur." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
   <EntityRelationship Name="tc_assistancerequest_mailbox_sendermailboxid">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.46</IntroducedVersion>
+    <IntroducedVersion>1.0.0.51</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_assistancerequest</ReferencingEntityName>
     <ReferencedEntityName>Mailbox</ReferencedEntityName>
@@ -51,14 +55,16 @@
     <ReferencingAttributeName>SenderMailboxId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des dem Absender der E-Mail-Nachricht zugeordneten Postfachs." languagecode="1031" />
         <Description description="Unique identifier of the mailbox associated with the sender of the email message." languagecode="1033" />
+        <Description description="Identificateur unique de la boîte aux lettres associée à l'expéditeur du message électronique." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
   <EntityRelationship Name="tc_surveyresponse_mailbox_sendermailboxid">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.46</IntroducedVersion>
+    <IntroducedVersion>1.0.0.51</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_surveyresponse</ReferencingEntityName>
     <ReferencedEntityName>Mailbox</ReferencedEntityName>
@@ -70,7 +76,9 @@
     <ReferencingAttributeName>SenderMailboxId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des dem Absender der E-Mail-Nachricht zugeordneten Postfachs." languagecode="1031" />
         <Description description="Unique identifier of the mailbox associated with the sender of the email message." languagecode="1033" />
+        <Description description="Identificateur unique de la boîte aux lettres associée à l'expéditeur du message électronique." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>

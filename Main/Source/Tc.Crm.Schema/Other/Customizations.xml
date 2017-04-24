@@ -70,18 +70,18 @@
         </MobileOfflineProfileItem>
         <MobileOfflineProfileItem MobileOfflineProfileItemId="d6c3de02-aff3-e611-810b-1458d041f8e8" Name="Tc.Ids.Rep.Case">
           <MobileOfflineProfileItemAssociations>
-            <MobileOfflineProfileItemAssociation MobileOfflineProfileItemAssociationId="0674dbad-bc08-e711-810a-3863bb34fb48" Name="Tc.Ids.Rep.CompensationLine">
-              <MobileOfflineProfileItemAssociationId>{0674DBAD-BC08-E711-810A-3863BB34FB48}</MobileOfflineProfileItemAssociationId>
-              <MobileOfflineProfileItemId>{D6C3DE02-AFF3-E611-810B-1458D041F8E8}</MobileOfflineProfileItemId>
-              <Name>Tc.Ids.Rep.CompensationLine</Name>
-              <RelationshipDisplayName>tc_incident_tc_compensationline</RelationshipDisplayName>
-              <ProfileItemAssociationEntityFilter></ProfileItemAssociationEntityFilter>
-            </MobileOfflineProfileItemAssociation>
             <MobileOfflineProfileItemAssociation MobileOfflineProfileItemAssociationId="cff8ec24-bd08-e711-810a-3863bb34fb48" Name="Tc.Ids.Rep.Compensation">
               <MobileOfflineProfileItemAssociationId>{CFF8EC24-BD08-E711-810A-3863BB34FB48}</MobileOfflineProfileItemAssociationId>
               <MobileOfflineProfileItemId>{D6C3DE02-AFF3-E611-810B-1458D041F8E8}</MobileOfflineProfileItemId>
               <Name>Tc.Ids.Rep.Compensation</Name>
               <RelationshipDisplayName>tc_incident_tc_compensation</RelationshipDisplayName>
+              <ProfileItemAssociationEntityFilter></ProfileItemAssociationEntityFilter>
+            </MobileOfflineProfileItemAssociation>
+            <MobileOfflineProfileItemAssociation MobileOfflineProfileItemAssociationId="0674dbad-bc08-e711-810a-3863bb34fb48" Name="Tc.Ids.Rep.CompensationLine">
+              <MobileOfflineProfileItemAssociationId>{0674DBAD-BC08-E711-810A-3863BB34FB48}</MobileOfflineProfileItemAssociationId>
+              <MobileOfflineProfileItemId>{D6C3DE02-AFF3-E611-810B-1458D041F8E8}</MobileOfflineProfileItemId>
+              <Name>Tc.Ids.Rep.CompensationLine</Name>
+              <RelationshipDisplayName>tc_incident_tc_compensationline</RelationshipDisplayName>
               <ProfileItemAssociationEntityFilter></ProfileItemAssociationEntityFilter>
             </MobileOfflineProfileItemAssociation>
             <MobileOfflineProfileItemAssociation MobileOfflineProfileItemAssociationId="4f6ee647-bd08-e711-810a-3863bb34fb48" Name="Tc.Ids.Rep.CaseLine">
@@ -95,9 +95,9 @@
           <MobileOfflineProfileItemId>{D6C3DE02-AFF3-E611-810B-1458D041F8E8}</MobileOfflineProfileItemId>
           <RegardingObjectId>{C7087ACD-B0EF-E611-8106-3863BB340DD8}</RegardingObjectId>
           <Name>Tc.Ids.Rep.Case</Name>
-          <RecordDistributionCriteria>2</RecordDistributionCriteria>
-          <RecordsOwnedByMe>1</RecordsOwnedByMe>
-          <RecordsOwnedByMyTeam>1</RecordsOwnedByMyTeam>
+          <RecordDistributionCriteria>0</RecordDistributionCriteria>
+          <RecordsOwnedByMe>0</RecordsOwnedByMe>
+          <RecordsOwnedByMyTeam>0</RecordsOwnedByMyTeam>
           <RecordsOwnedByMyBusinessUnit>0</RecordsOwnedByMyBusinessUnit>
           <ProfileItemEntityFilter></ProfileItemEntityFilter>
           <EntitySchemaName>Incident</EntitySchemaName>
@@ -150,8 +150,35 @@
           <ProfileItemEntityFilter></ProfileItemEntityFilter>
           <EntitySchemaName>Team</EntitySchemaName>
         </MobileOfflineProfileItem>
+        <MobileOfflineProfileItem MobileOfflineProfileItemId="4bc0f90d-a01b-e711-8110-1458d041f8e8" Name="Tc.Ids.AssistanceRequest">
+          <MobileOfflineProfileItemAssociations>
+            <MobileOfflineProfileItemAssociation MobileOfflineProfileItemAssociationId="0a54005f-a01b-e711-8110-1458d041f8e8" Name="Tc.Ids.Case">
+              <MobileOfflineProfileItemAssociationId>{0A54005F-A01B-E711-8110-1458D041F8E8}</MobileOfflineProfileItemAssociationId>
+              <MobileOfflineProfileItemId>{4BC0F90D-A01B-E711-8110-1458D041F8E8}</MobileOfflineProfileItemId>
+              <Name>Tc.Ids.Case</Name>
+              <RelationshipDisplayName>incident_tc_assistancerequests</RelationshipDisplayName>
+              <ProfileItemAssociationEntityFilter></ProfileItemAssociationEntityFilter>
+            </MobileOfflineProfileItemAssociation>
+          </MobileOfflineProfileItemAssociations>
+          <MobileOfflineProfileItemId>{4BC0F90D-A01B-E711-8110-1458D041F8E8}</MobileOfflineProfileItemId>
+          <RegardingObjectId>{C7087ACD-B0EF-E611-8106-3863BB340DD8}</RegardingObjectId>
+          <Name>Tc.Ids.AssistanceRequest</Name>
+          <RecordDistributionCriteria>2</RecordDistributionCriteria>
+          <RecordsOwnedByMe>1</RecordsOwnedByMe>
+          <RecordsOwnedByMyTeam>0</RecordsOwnedByMyTeam>
+          <RecordsOwnedByMyBusinessUnit>0</RecordsOwnedByMyBusinessUnit>
+          <ProfileItemEntityFilter></ProfileItemEntityFilter>
+          <EntitySchemaName>tc_assistancerequest</EntitySchemaName>
+        </MobileOfflineProfileItem>
         <MobileOfflineProfileItem MobileOfflineProfileItemId="630fd909-b1ef-e611-8106-3863bb340dd8" Name="Tc.Ids.Rep.Customer">
           <MobileOfflineProfileItemAssociations>
+            <MobileOfflineProfileItemAssociation MobileOfflineProfileItemAssociationId="6873368e-b1ef-e611-8106-3863bb340dd8" Name="Tc.Ids.Rep.Customer.CustomerBookingRole">
+              <MobileOfflineProfileItemAssociationId>{6873368E-B1EF-E611-8106-3863BB340DD8}</MobileOfflineProfileItemAssociationId>
+              <MobileOfflineProfileItemId>{630FD909-B1EF-E611-8106-3863BB340DD8}</MobileOfflineProfileItemId>
+              <Name>Tc.Ids.Rep.Customer.CustomerBookingRole</Name>
+              <RelationshipDisplayName>tc_contact_tc_customerbookingrole_Customer</RelationshipDisplayName>
+              <ProfileItemAssociationEntityFilter></ProfileItemAssociationEntityFilter>
+            </MobileOfflineProfileItemAssociation>
             <MobileOfflineProfileItemAssociation MobileOfflineProfileItemAssociationId="ccd27146-adf3-e611-810b-1458d041f8e8" Name="Tc.Ids.Rep.Case">
               <MobileOfflineProfileItemAssociationId>{CCD27146-ADF3-E611-810B-1458D041F8E8}</MobileOfflineProfileItemAssociationId>
               <MobileOfflineProfileItemId>{630FD909-B1EF-E611-8106-3863BB340DD8}</MobileOfflineProfileItemId>
@@ -164,13 +191,6 @@
               <MobileOfflineProfileItemId>{630FD909-B1EF-E611-8106-3863BB340DD8}</MobileOfflineProfileItemId>
               <Name>Tc.Ids.Rep.User</Name>
               <RelationshipDisplayName>contact_owning_user</RelationshipDisplayName>
-              <ProfileItemAssociationEntityFilter></ProfileItemAssociationEntityFilter>
-            </MobileOfflineProfileItemAssociation>
-            <MobileOfflineProfileItemAssociation MobileOfflineProfileItemAssociationId="6873368e-b1ef-e611-8106-3863bb340dd8" Name="Tc.Ids.Rep.Customer.CustomerBookingRole">
-              <MobileOfflineProfileItemAssociationId>{6873368E-B1EF-E611-8106-3863BB340DD8}</MobileOfflineProfileItemAssociationId>
-              <MobileOfflineProfileItemId>{630FD909-B1EF-E611-8106-3863BB340DD8}</MobileOfflineProfileItemId>
-              <Name>Tc.Ids.Rep.Customer.CustomerBookingRole</Name>
-              <RelationshipDisplayName>tc_contact_tc_customerbookingrole_Customer</RelationshipDisplayName>
               <ProfileItemAssociationEntityFilter></ProfileItemAssociationEntityFilter>
             </MobileOfflineProfileItemAssociation>
           </MobileOfflineProfileItemAssociations>
@@ -339,7 +359,7 @@
     </MobileOfflineProfile>
   </MobileOfflineProfiles>
   <Slas>
-    <Sla SLAId="b13b482d-b20d-e711-810a-3863bb340dd8" Name="Tc.AssistanceRequest.Sla" PrimaryEntityOTC="10040">
+    <Sla SLAId="b13b482d-b20d-e711-810a-3863bb340dd8" Name="Tc.AssistanceRequest.Sla" PrimaryEntityOTC="10070">
       <SLAId>{b13b482d-b20d-e711-810a-3863bb340dd8}</SLAId>
       <ApplicableFrom>createdon</ApplicableFrom>
       <Name>Tc.AssistanceRequest.Sla</Name>
@@ -376,7 +396,7 @@
           <name>Tc.Case.SlaItem.24HrPromiseSla</name>
           <description></description>
           <applicablewhenxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_24hourpromise"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="950000000" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_casetypeid"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="&amp;#60;lookup&amp;#62;&amp;#60;value&amp;#32;uiname&amp;#32;&amp;#61;&amp;#32;&amp;#39;Complaint&amp;#39;&amp;#32;uitype&amp;#32;&amp;#61;&amp;#32;&amp;#39;tc_casetype&amp;#39;&amp;#32;&amp;#62;&amp;#38;&amp;#35;123&amp;#59;478C99E9-93E4-E611-8109-1458D041F8E8&amp;#38;&amp;#35;125&amp;#59;&amp;#60;&amp;#47;value&amp;#62;&amp;#60;&amp;#47;lookup&amp;#62;" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</applicablewhenxml>
-          <successconditionsxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="statuscode"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="5&amp;#59;6" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</successconditionsxml>
+          <successconditionsxml>&lt;or&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="statuscode"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="5&amp;#59;6" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_24hourpromise"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="950000002" dataslugs="" /&gt;&lt;/condition&gt;&lt;/or&gt;</successconditionsxml>
           <sequencenumber>1</sequencenumber>
           <workflowid>1cf8a4dd-2d68-4f28-84f9-2edbdcb880bf</workflowid>
           <failureafter>1440</failureafter>
@@ -465,35 +485,35 @@
       <AllowPauseResume>0</AllowPauseResume>
       <SLAType>1</SLAType>
       <SlaItems>
-        <SlaItem slaitemid="f55d7b00-6318-e711-8110-1458d041f8e8" name="Tc.Case.Non3rdPartySupplier">
+        <SlaItem slaitemid="bfc958b1-3619-e711-810c-3863bb34fb48" name="Tc.Case.SLA3rdPartyNo">
           <slaid>c912c3b8-6218-e711-8110-1458d041f8e8</slaid>
-          <slaitemid>f55d7b00-6318-e711-8110-1458d041f8e8</slaitemid>
-          <relatedfield>firstresponsebykpiid</relatedfield>
-          <name>Tc.Case.Non3rdPartySupplier</name>
+          <slaitemid>bfc958b1-3619-e711-810c-3863bb34fb48</slaitemid>
+          <relatedfield>resolvebykpiid</relatedfield>
+          <name>Tc.Case.SLA3rdPartyNo</name>
           <description></description>
           <applicablewhenxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_3rdpartyresponserequired"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="950000001" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_casetypeid"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="&amp;#60;lookup&amp;#62;&amp;#60;value&amp;#32;uiname&amp;#32;&amp;#61;&amp;#32;&amp;#39;Complaint&amp;#39;&amp;#32;uitype&amp;#32;&amp;#61;&amp;#32;&amp;#39;tc_casetype&amp;#39;&amp;#32;&amp;#62;&amp;#38;&amp;#35;123&amp;#59;478C99E9-93E4-E611-8109-1458D041F8E8&amp;#38;&amp;#35;125&amp;#59;&amp;#60;&amp;#47;value&amp;#62;&amp;#60;&amp;#47;lookup&amp;#62;" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</applicablewhenxml>
           <successconditionsxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="statecode"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="2&amp;#59;1" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</successconditionsxml>
           <sequencenumber>1</sequencenumber>
-          <workflowid>7b2e277e-b8ab-44d3-9b04-963e4c5a678f</workflowid>
+          <workflowid>6c0b8350-d7ec-4dec-8a10-3fe54ade741a</workflowid>
           <failureafter>180</failureafter>
           <warnafter>120</warnafter>
         </SlaItem>
-        <SlaItem slaitemid="9bc91f3f-6318-e711-8110-1458d041f8e8" name="Tc.Case.3rdPartySupplierSla">
+        <SlaItem slaitemid="65ce28e7-3619-e711-810c-3863bb34fb48" name="Tc.Case.SLA3rdPartyYes">
           <slaid>c912c3b8-6218-e711-8110-1458d041f8e8</slaid>
-          <slaitemid>9bc91f3f-6318-e711-8110-1458d041f8e8</slaitemid>
-          <relatedfield>firstresponsebykpiid</relatedfield>
-          <name>Tc.Case.3rdPartySupplierSla</name>
+          <slaitemid>65ce28e7-3619-e711-810c-3863bb34fb48</slaitemid>
+          <relatedfield>resolvebykpiid</relatedfield>
+          <name>Tc.Case.SLA3rdPartyYes</name>
           <description></description>
           <applicablewhenxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_3rdpartyresponserequired"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="950000000" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_casetypeid"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="&amp;#60;lookup&amp;#62;&amp;#60;value&amp;#32;uiname&amp;#32;&amp;#61;&amp;#32;&amp;#39;Complaint&amp;#39;&amp;#32;uitype&amp;#32;&amp;#61;&amp;#32;&amp;#39;tc_casetype&amp;#39;&amp;#32;&amp;#62;&amp;#38;&amp;#35;123&amp;#59;478C99E9-93E4-E611-8109-1458D041F8E8&amp;#38;&amp;#35;125&amp;#59;&amp;#60;&amp;#47;value&amp;#62;&amp;#60;&amp;#47;lookup&amp;#62;" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</applicablewhenxml>
           <successconditionsxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="statecode"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="2&amp;#59;1" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</successconditionsxml>
           <sequencenumber>2</sequencenumber>
-          <workflowid>5cf2d0ab-6194-4c8b-81c1-41593201235e</workflowid>
+          <workflowid>dbe15aa6-98cf-461e-8777-811bf9eee8db</workflowid>
           <failureafter>720</failureafter>
           <warnafter>360</warnafter>
         </SlaItem>
       </SlaItems>
     </Sla>
-    <Sla SLAId="dd43e93b-8e18-e711-8110-1458d041f8e8" Name="Tc.CompensationApprovalSla" PrimaryEntityOTC="10041">
+    <Sla SLAId="dd43e93b-8e18-e711-8110-1458d041f8e8" Name="Tc.CompensationApprovalSla" PrimaryEntityOTC="10063">
       <SLAId>{dd43e93b-8e18-e711-8110-1458d041f8e8}</SLAId>
       <ApplicableFrom>createdon</ApplicableFrom>
       <Name>Tc.CompensationApprovalSla</Name>
@@ -506,8 +526,8 @@
           <relatedfield>tc_compensationapprovalkpi</relatedfield>
           <name>Tc.CompensationApproval.4hrSlaComplete</name>
           <description></description>
-          <applicablewhenxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="tc_compensationapproval" /&gt;&lt;column id="colAttribute" value="tc_approvalstatus"/&gt;&lt;column id="colOperator" value="null"/&gt;&lt;/condition&gt;&lt;/and&gt;</applicablewhenxml>
-          <successconditionsxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="tc_compensationapproval" /&gt;&lt;column id="colAttribute" value="tc_approvalstatus"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="950000000&amp;#59;950000001" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</successconditionsxml>
+          <applicablewhenxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="tc_compensationapproval" /&gt;&lt;column id="colAttribute" value="statecode"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="0" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</applicablewhenxml>
+          <successconditionsxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="tc_compensationapproval" /&gt;&lt;column id="colAttribute" value="statecode"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="1" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</successconditionsxml>
           <sequencenumber>1</sequencenumber>
           <workflowid>25a3b46b-ced5-432b-a798-3bfdecfd682c</workflowid>
           <failureafter>240</failureafter>
@@ -520,37 +540,53 @@
   <InteractionCentricDashboards>
     <InteractionCentricDashboard unmodified="1">
       <LocalizedNames>
+        <LocalizedName description="Accounts Dashboard" languagecode="1031" />
         <LocalizedName description="Accounts Dashboard" languagecode="1033" />
+        <LocalizedName description="Accounts Dashboard" languagecode="1036" />
       </LocalizedNames>
       <Descriptions>
+        <Description description="Shows an overview of data related to accounts." languagecode="1031" />
         <Description description="Shows an overview of data related to accounts." languagecode="1033" />
+        <Description description="Shows an overview of data related to accounts." languagecode="1036" />
       </Descriptions>
       <FormId>{15915835-b87c-49ec-9ffc-bfac3ac44ef1}</FormId>
     </InteractionCentricDashboard>
     <InteractionCentricDashboard unmodified="1">
       <LocalizedNames>
+        <LocalizedName description="Contacts Dashboard" languagecode="1031" />
         <LocalizedName description="Contacts Dashboard" languagecode="1033" />
+        <LocalizedName description="Contacts Dashboard" languagecode="1036" />
       </LocalizedNames>
       <Descriptions>
+        <Description description="Shows an overview of data related to contacts." languagecode="1031" />
         <Description description="Shows an overview of data related to contacts." languagecode="1033" />
+        <Description description="Shows an overview of data related to contacts." languagecode="1036" />
       </Descriptions>
       <FormId>{70ad8b15-e3f3-4d7d-9e4b-16cb4e51b484}</FormId>
     </InteractionCentricDashboard>
     <InteractionCentricDashboard unmodified="1">
       <LocalizedNames>
+        <LocalizedName description="Cases Dashboard" languagecode="1031" />
         <LocalizedName description="Cases Dashboard" languagecode="1033" />
+        <LocalizedName description="Cases Dashboard" languagecode="1036" />
       </LocalizedNames>
       <Descriptions>
-        <Description description="Shows the Case Entity dashboard." languagecode="1033" />
+        <Description description="Shows the Case Entity dashboard." languagecode="1031" />
+        <Description description="Shows an overview of data related to cases." languagecode="1033" />
+        <Description description="Shows the Case Entity dashboard." languagecode="1036" />
       </Descriptions>
       <FormId>{eb3748b8-5f90-4050-a039-8b7d279ad8fe}</FormId>
     </InteractionCentricDashboard>
     <InteractionCentricDashboard unmodified="1">
       <LocalizedNames>
+        <LocalizedName description="Social Profiles Dashboard" languagecode="1031" />
         <LocalizedName description="Social Profiles Dashboard" languagecode="1033" />
+        <LocalizedName description="Social Profiles Dashboard" languagecode="1036" />
       </LocalizedNames>
       <Descriptions>
+        <Description description="Shows an overview of data related to social profiles." languagecode="1031" />
         <Description description="Shows an overview of data related to social profiles." languagecode="1033" />
+        <Description description="Shows an overview of data related to social profiles." languagecode="1036" />
       </Descriptions>
       <FormId>{88599263-c11e-4c33-bf9d-a46fcee7595b}</FormId>
     </InteractionCentricDashboard>
@@ -560,5 +596,7 @@
   <SdkMessageProcessingSteps />
   <Languages>
     <Language>1033</Language>
+    <Language>1036</Language>
+    <Language>1031</Language>
   </Languages>
 </ImportExportXml>

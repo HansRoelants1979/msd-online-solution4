@@ -14,11 +14,13 @@
     <ReferencingAttributeName>PrimaryContactId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Wählen Sie den primären Kontakt für die Firma aus, um den schnellen Zugriff auf Kontaktdetails zu ermöglichen." languagecode="1031" />
         <Description description="Choose the primary contact for the account to provide quick access to contact details." languagecode="1033" />
+        <Description description="Choisissez le contact principal pour le compte pour fournir un accès rapide aux détails du contact." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
-  <EntityRelationship Name="Contact_Annotation">
+  <EntityRelationship Name="Contact_Annotation" unmodified="1">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IntroducedVersion>5.0.0.0</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
@@ -32,7 +34,9 @@
     <ReferencingAttributeName>ObjectId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Objekts, dem die Notiz zugeordnet ist." languagecode="1031" />
         <Description description="Unique identifier of the object with which the note is associated." languagecode="1033" />
+        <Description description="Identificateur unique de l'objet auquel la note est associée." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -50,7 +54,9 @@
     <ReferencingAttributeName>PrimaryContactId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Wählen Sie einen primären Kontakt für diese Anfrage aus." languagecode="1031" />
         <Description description="Select a primary contact for this case." languagecode="1033" />
+        <Description description="Sélectionnez un contact principal pour cet incident." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -68,7 +74,9 @@
     <ReferencingAttributeName>ResponsibleContactId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Wählen Sie einen zusätzlichen Kundenkontakt, der auch beim Abschließen der Anfrage helfen kann." languagecode="1031" />
         <Description description="Choose an additional customer contact who can also help resolve the case." languagecode="1033" />
+        <Description description="Choisissez un autre contact client pouvant également vous aider à résoudre l'incident." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -86,7 +94,9 @@
     <ReferencingAttributeName>ParentCustomerId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Wählen Sie die übergeordnete Firma oder den übergeordneten Kontakt für den Kontakt aus, um eine direkte Verknüpfung mit zusätzlichen Details wie Finanzinformationen, Aktivitäten und Verkaufschancen bereitzustellen." languagecode="1031" />
         <Description description="Select the parent account or parent contact for the contact to provide a quick link to additional details, such as financial information, activities, and opportunities." languagecode="1033" />
+        <Description description="Sélectionnez le compte parent ou le contact parent du contact pour fournir un lien rapide vers les détails supplémentaires, comme les informations financières, les activités et les opportunités." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
     <EntityRelationshipRoles>
@@ -116,14 +126,16 @@
     <ReferencingAttributeName>MasterId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Hauptkontakts zum Zusammenführen." languagecode="1031" />
         <Description description="Unique identifier of the master contact for merge." languagecode="1033" />
+        <Description description="Identificateur unique du contact principal pour la fusion." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
   <EntityRelationship Name="contact_tc_assistancerequests">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.46</IntroducedVersion>
+    <IntroducedVersion>1.0.0.51</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_assistancerequest</ReferencingEntityName>
     <ReferencedEntityName>Contact</ReferencedEntityName>
@@ -135,14 +147,16 @@
     <ReferencingAttributeName>RegardingObjectId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Objekts, dem die Aktivität zugeordnet ist." languagecode="1031" />
         <Description description="Unique identifier of the object with which the activity is associated." languagecode="1033" />
+        <Description description="Identificateur unique de l'objet auquel l'activité est associée." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
   <EntityRelationship Name="contact_tc_surveyresponses">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.46</IntroducedVersion>
+    <IntroducedVersion>1.0.0.51</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_surveyresponse</ReferencingEntityName>
     <ReferencedEntityName>Contact</ReferencedEntityName>
@@ -154,7 +168,9 @@
     <ReferencingAttributeName>RegardingObjectId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Objekts, dem die Aktivität zugeordnet ist." languagecode="1031" />
         <Description description="Unique identifier of the object with which the activity is associated." languagecode="1033" />
+        <Description description="Identificateur unique de l'objet auquel l'activité est associée." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -172,7 +188,9 @@
     <ReferencingAttributeName>CustomerId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Wählen Sie das Kundenkonto oder den Kontakt aus, um eine direkte Verknüpfung mit zusätzlichen Kundendetails wie Adresse, Telefonnummer, Aktivitäten und Aufträge bereitzustellen." languagecode="1031" />
         <Description description="Select the customer account or contact to provide a quick link to additional customer details, such as address, phone number, activities, and orders." languagecode="1033" />
+        <Description description="Sélectionnez le compte client ou le contact pour fournir un lien rapide vers les détails supplémentaires du client, comme l'adresse, le numéro de téléphone, les activités et les commandes." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
     <EntityRelationshipRoles>
@@ -202,7 +220,9 @@
     <ReferencingAttributeName>CustomerId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Wählen Sie das Kundenkonto oder den Kontakt aus, um eine direkte Verknüpfung mit zusätzlichen Kundendetails wie Firmeninformationen, Aktivitäten und Verkaufschancen bereitzustellen." languagecode="1031" />
         <Description description="Select the customer account or contact to provide a quick link to additional customer details, such as account information, activities, and opportunities." languagecode="1033" />
+        <Description description="Sélectionnez le compte client ou le contact pour fournir un lien rapide vers les détails supplémentaires du client, comme les informations de compte, les activités et les opportunités." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
     <EntityRelationshipRoles>
@@ -232,7 +252,9 @@
     <ReferencingAttributeName>CustomerId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Wählen Sie das Kundenkonto oder den Kontakt aus, um eine direkte Verknüpfung mit zusätzlichen Kundendetails wie Firmeninformationen, Aktivitäten und Verkaufschancen bereitzustellen." languagecode="1031" />
         <Description description="Select the customer account or contact to provide a quick link to additional customer details, such as account information, activities, and opportunities." languagecode="1033" />
+        <Description description="Sélectionnez le compte client ou le contact pour fournir un lien rapide vers les détails supplémentaires du client, comme les informations de compte, les activités et les opportunités." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
     <EntityRelationshipRoles>
@@ -262,7 +284,9 @@
     <ReferencingAttributeName>CustomerId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Wählen Sie das Kundenkonto oder den Kontakt aus, um eine direkte Verknüpfung mit zusätzlichen Kundendetails wie Firmeninformationen, Aktivitäten und Verkaufschancen bereitzustellen." languagecode="1031" />
         <Description description="Select the customer account or contact to provide a quick link to additional customer details, such as account information, activities, and opportunities." languagecode="1033" />
+        <Description description="Sélectionnez le compte client ou le contact pour fournir un lien rapide vers les détails supplémentaires du client, comme les informations de compte, les activités et les opportunités." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -280,7 +304,9 @@
     <ReferencingAttributeName>CustomerId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Wählen Sie das Kundenkonto oder den Kontakt aus, um eine direkte Verknüpfung mit zusätzlichen Kundendetails wie Adresse, Telefonnummer, Aktivitäten und Aufträge bereitzustellen." languagecode="1031" />
         <Description description="Select the customer account or contact to provide a quick link to additional customer details, such as address, phone number, activities, and orders." languagecode="1033" />
+        <Description description="Sélectionnez le compte client ou le contact pour fournir un lien rapide vers les détails supplémentaires du client, comme l'adresse, le numéro de téléphone, les activités et les commandes." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
     <EntityRelationshipRoles>
@@ -310,7 +336,9 @@
     <ReferencingAttributeName>CustomerId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Wählen Sie das Kundenkonto oder den Kontakt aus, um eine direkte Verknüpfung mit zusätzlichen Kundendetails wie Firmeninformationen, Aktivitäten und Verkaufschancen bereitzustellen." languagecode="1031" />
         <Description description="Select the customer account or contact to provide a quick link to additional customer details, such as account information, activities, and opportunities." languagecode="1033" />
+        <Description description="Sélectionnez le compte client ou le contact pour fournir un lien rapide vers les détails supplémentaires du client, comme les informations de compte, les activités et les opportunités." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
     <EntityRelationshipRoles>
@@ -340,7 +368,9 @@
     <ReferencingAttributeName>CustomerId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Wählen Sie das Kundenkonto oder den Kontakt aus, um eine direkte Verknüpfung mit zusätzlichen Kundendetails wie Firmeninformationen, Aktivitäten und Verkaufschancen bereitzustellen." languagecode="1031" />
         <Description description="Select the customer account or contact to provide a quick link to additional customer details, such as account information, activities, and opportunities." languagecode="1033" />
+        <Description description="Sélectionnez le compte client ou le contact pour fournir un lien rapide vers les détails supplémentaires du client, comme les informations de compte, les activités et les opportunités." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
     <EntityRelationshipRoles>
@@ -356,7 +386,7 @@
       </EntityRelationshipRole>
     </EntityRelationshipRoles>
   </EntityRelationship>
-  <EntityRelationship Name="slakpiinstance_contact">
+  <EntityRelationship Name="slakpiinstance_contact" unmodified="1">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IntroducedVersion>8.1.0.0</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
@@ -371,7 +401,9 @@
     <ReferencingAttributeName>Regarding</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Datensatzes, dem diese KPI-Instanz (Key Performance Indicator) der Vereinbarung zum Servicelevel (Service Level Agreement, SLA) zugeordnet ist." languagecode="1031" />
         <Description description="Unique identifier of the record that this service level agreement (SLA) key performance indicator (KPI) instance is associated with." languagecode="1033" />
+        <Description description="Identificateur unique de l'enregistrement auquel cette instance de l'indicateur de performance clé du contrat de niveau de service (contrat SLA) est associée." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -480,6 +512,43 @@
       </EntityRelationshipRole>
       <EntityRelationshipRole>
         <NavigationPropertyName>tc_contact_tc_compensation_Customer</NavigationPropertyName>
+        <RelationshipRoleType>0</RelationshipRoleType>
+      </EntityRelationshipRole>
+    </EntityRelationshipRoles>
+  </EntityRelationship>
+  <EntityRelationship Name="tc_contact_tc_compensationLine_Customer">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_compensationline</ReferencingEntityName>
+    <ReferencedEntityName>Contact</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>RemoveLink</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <CascadeRollupView>NoCascade</CascadeRollupView>
+    <IsValidForAdvancedFind>1</IsValidForAdvancedFind>
+    <ReferencingAttributeName>tc_Customer</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="" languagecode="1033" />
+      </Descriptions>
+    </RelationshipDescription>
+    <EntityRelationshipRoles>
+      <EntityRelationshipRole>
+        <NavPaneDisplayOption>UseCollectionName</NavPaneDisplayOption>
+        <NavPaneArea>Details</NavPaneArea>
+        <NavPaneOrder>10000</NavPaneOrder>
+        <NavigationPropertyName>tc_Customer_contact</NavigationPropertyName>
+        <CustomLabels>
+          <CustomLabel description="" languagecode="1033" />
+        </CustomLabels>
+        <RelationshipRoleType>1</RelationshipRoleType>
+      </EntityRelationshipRole>
+      <EntityRelationshipRole>
+        <NavigationPropertyName>tc_contact_tc_compensationLine_Customer</NavigationPropertyName>
         <RelationshipRoleType>0</RelationshipRoleType>
       </EntityRelationshipRole>
     </EntityRelationshipRoles>

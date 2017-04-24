@@ -10,24 +10,26 @@
     <forms type="dashboard">
       <form>
         <tabs>
-          <tab id="{ffd204f1-d856-4859-b510-f6071b182ef4}" showlabel="false" verticallayout="true">
+          <tab id="{ffd204f1-d856-4859-b510-f6071b182ef4}" verticallayout="true" showlabel="false">
             <labels>
               <label description="Tab" languagecode="1033" />
             </labels>
             <columns>
               <column width="100%">
                 <sections>
-                  <section id="{cd28631e-250c-4998-bfe2-43d96fa77ad3}" showlabel="false" showbar="false" columns="111">
+                  <section id="{cd28631e-250c-4998-bfe2-43d96fa77ad3}" showlabel="false" columns="111" showbar="false">
                     <labels>
                       <label description="Section" languagecode="1033" />
                     </labels>
                     <rows>
                       <row>
-                        <cell id="{ee1b7b4a-f456-4ede-9676-8137e639c886}" showlabel="false" colspan="1" rowspan="12" auto="false">
+                        <cell id="{ee1b7b4a-f456-4ede-9676-8137e639c886}" showlabel="false" auto="false" rowspan="12" colspan="1">
                           <labels>
                             <label description="Case" languagecode="1033" />
+                            <label description="Incidents" languagecode="1036" />
+                            <label description="Anfragen" languagecode="1031" />
                           </labels>
-                          <control id="Approaching12hrSLA" uniqueid="{c754999c-c01e-a897-c78e-50a85eb77bc2}" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                          <control id="Approaching12hrSLA" indicationOfSubgrid="true" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" uniqueid="{c754999c-c01e-a897-c78e-50a85eb77bc2}">
                             <parameters>
                               <TargetEntityType>incident</TargetEntityType>
                               <ChartGridMode>Chart</ChartGridMode>
@@ -35,45 +37,49 @@
                               <EnableViewPicker>false</EnableViewPicker>
                               <EnableJumpBar>false</EnableJumpBar>
                               <RecordsPerPage>12</RecordsPerPage>
-                              <ViewId>{BCF4E177-EE0E-E711-810A-3863BB340DD8}</ViewId>
+                              <ViewId>{8ADF962C-7719-E711-810D-3863BB340DD8}</ViewId>
                               <IsUserView>false</IsUserView>
-                              <ViewIds>{00000000-0000-0000-00AA-000010001028}</ViewIds>
+                              <ViewIds>{00000000-0000-0000-00AA-000010001028},{8ADF962C-7719-E711-810D-3863BB340DD8}</ViewIds>
                               <AutoExpand>Fixed</AutoExpand>
-                              <VisualizationId>{458DF52A-AC99-E511-80DA-00155DC1B253}</VisualizationId>
+                              <VisualizationId>{6DA947D1-7919-E711-810D-3863BB340DD8}</VisualizationId>
                               <IsUserChart>false</IsUserChart>
                               <EnableChartPicker>false</EnableChartPicker>
                               <RelationshipName />
                             </parameters>
                           </control>
                         </cell>
-                        <cell id="{ad4e6493-593c-b472-6001-c94322d06433}" showlabel="false" colspan="1" rowspan="12" auto="false">
+                        <cell id="{ad4e6493-593c-b472-6001-c94322d06433}" showlabel="false" auto="false" rowspan="12" colspan="1">
                           <labels>
                             <label description="Case" languagecode="1033" />
+                            <label description="Incidents" languagecode="1036" />
+                            <label description="Anfragen" languagecode="1031" />
                           </labels>
-                          <control id="Approaching24HrSLA" uniqueid="{c248274a-8388-da10-71ee-7031b071e1a1}" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                          <control id="Approaching24HrSLA" indicationOfSubgrid="true" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" uniqueid="{c248274a-8388-da10-71ee-7031b071e1a1}">
                             <parameters>
-                              <ViewId>{2E29524D-EE0E-E711-810A-3863BB340DD8}</ViewId>
+                              <ViewId>{3A39665E-7619-E711-810D-3863BB340DD8}</ViewId>
                               <IsUserView>false</IsUserView>
                               <RelationshipName />
                               <TargetEntityType>incident</TargetEntityType>
                               <AutoExpand>Fixed</AutoExpand>
                               <EnableQuickFind>false</EnableQuickFind>
                               <EnableViewPicker>false</EnableViewPicker>
-                              <ViewIds>{00000000-0000-0000-00AA-000010001028}</ViewIds>
+                              <ViewIds>{00000000-0000-0000-00AA-000010001028},{3A39665E-7619-E711-810D-3863BB340DD8}</ViewIds>
                               <EnableJumpBar>false</EnableJumpBar>
                               <ChartGridMode>Chart</ChartGridMode>
-                              <VisualizationId>{458DF52A-AC99-E511-80DA-00155DC1B253}</VisualizationId>
+                              <VisualizationId>{7B68E4D7-7A19-E711-810D-3863BB340DD8}</VisualizationId>
                               <IsUserChart>false</IsUserChart>
                               <EnableChartPicker>false</EnableChartPicker>
                               <RecordsPerPage>12</RecordsPerPage>
                             </parameters>
                           </control>
                         </cell>
-                        <cell id="{de3b6996-049d-41e4-b4af-3fa0898fff22}" showlabel="false" colspan="1" rowspan="12" auto="false">
+                        <cell id="{de3b6996-049d-41e4-b4af-3fa0898fff22}" showlabel="false" auto="false" rowspan="12" colspan="1">
                           <labels>
                             <label description="Case" languagecode="1033" />
+                            <label description="Incidents" languagecode="1036" />
+                            <label description="Anfragen" languagecode="1031" />
                           </labels>
-                          <control id="Componenta5b5bfe" uniqueid="{89b23681-0861-77ea-b67d-da50b33301ee}" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                          <control id="Componenta5b5bfe" indicationOfSubgrid="true" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" uniqueid="{89b23681-0861-77ea-b67d-da50b33301ee}">
                             <parameters>
                               <TargetEntityType>incident</TargetEntityType>
                               <ChartGridMode>Chart</ChartGridMode>
@@ -105,34 +111,36 @@
                       <row />
                       <row />
                       <row>
-                        <cell id="{0c6d548b-5a1a-473d-9f72-129d0252b779}" showlabel="false" colspan="1" rowspan="12" auto="false">
+                        <cell id="{0c6d548b-5a1a-473d-9f72-129d0252b779}" showlabel="false" auto="false" rowspan="12" colspan="1">
                           <labels>
                             <label description="Case" languagecode="1033" />
                           </labels>
-                          <control id="Over12hrSLA" uniqueid="{4b9c2765-507b-3d2a-20a7-53dedea158b1}" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                          <control id="Over12hrSLA" indicationOfSubgrid="true" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" uniqueid="{4b9c2765-507b-3d2a-20a7-53dedea158b1}">
                             <parameters>
-                              <TargetEntityType>incident</TargetEntityType>
+                              <TargetEntityType>tc_compensationapproval</TargetEntityType>
                               <ChartGridMode>Chart</ChartGridMode>
                               <EnableQuickFind>false</EnableQuickFind>
                               <EnableViewPicker>false</EnableViewPicker>
                               <EnableJumpBar>false</EnableJumpBar>
                               <RecordsPerPage>12</RecordsPerPage>
-                              <ViewId>{F56C8213-F00E-E711-810A-3863BB340DD8}</ViewId>
+                              <ViewId>{CC533152-7B19-E711-810D-3863BB340DD8}</ViewId>
                               <IsUserView>false</IsUserView>
-                              <ViewIds>{00000000-0000-0000-00AA-000010001028}</ViewIds>
+                              <ViewIds>{7B11CDFB-C908-E711-810A-3863BB340DD8},{CC533152-7B19-E711-810D-3863BB340DD8}</ViewIds>
                               <AutoExpand>Fixed</AutoExpand>
-                              <VisualizationId>{458DF52A-AC99-E511-80DA-00155DC1B253}</VisualizationId>
+                              <VisualizationId>{BA935894-7C19-E711-810D-3863BB340DD8}</VisualizationId>
                               <IsUserChart>false</IsUserChart>
                               <EnableChartPicker>false</EnableChartPicker>
                               <RelationshipName />
                             </parameters>
                           </control>
                         </cell>
-                        <cell id="{bd70539e-5c6c-4c66-8f9e-aa796d9315ed}" showlabel="false" colspan="1" rowspan="12" auto="false">
+                        <cell id="{bd70539e-5c6c-4c66-8f9e-aa796d9315ed}" showlabel="false" auto="false" rowspan="12" colspan="1">
                           <labels>
                             <label description="Case" languagecode="1033" />
+                            <label description="Incidents" languagecode="1036" />
+                            <label description="Anfragen" languagecode="1031" />
                           </labels>
-                          <control id="CasesOver24hrSLA" uniqueid="{03570e66-583e-dd6e-72ee-42dda9bea2eb}" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                          <control id="CasesOver24hrSLA" indicationOfSubgrid="true" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" uniqueid="{03570e66-583e-dd6e-72ee-42dda9bea2eb}">
                             <parameters>
                               <TargetEntityType>incident</TargetEntityType>
                               <ChartGridMode>Chart</ChartGridMode>
@@ -151,11 +159,13 @@
                             </parameters>
                           </control>
                         </cell>
-                        <cell id="{30f0d9d8-57bf-4f95-959e-aa92ac92cf8c}" showlabel="false" colspan="1" rowspan="12" auto="false">
+                        <cell id="{30f0d9d8-57bf-4f95-959e-aa92ac92cf8c}" showlabel="false" auto="false" rowspan="12" colspan="1">
                           <labels>
                             <label description="Case" languagecode="1033" />
+                            <label description="Incidents" languagecode="1036" />
+                            <label description="Anfragen" languagecode="1031" />
                           </labels>
-                          <control id="FollowUpCases" uniqueid="{7bec2ce1-c2b7-7308-b5b4-b6ab8046e583}" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                          <control id="FollowUpCases" indicationOfSubgrid="true" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" uniqueid="{7bec2ce1-c2b7-7308-b5b4-b6ab8046e583}">
                             <parameters>
                               <TargetEntityType>incident</TargetEntityType>
                               <ChartGridMode>Chart</ChartGridMode>

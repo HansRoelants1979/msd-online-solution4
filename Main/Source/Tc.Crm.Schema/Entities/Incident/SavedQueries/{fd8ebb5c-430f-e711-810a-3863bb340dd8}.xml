@@ -11,14 +11,21 @@
     <grid name="resultset" object="112" jump="title" select="1" icon="1" preview="1">
       <row id="incidentid" name="result">
         <cell name="ticketnumber" width="150" />
-        <cell name="resolveby" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
-        <cell name="tc_latestactivitydate" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
         <cell name="customerid" width="200" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
-        <cell name="tc_casetypeid" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
-        <cell name="createdon" width="150" />
+        <cell name="aa.tc_name" width="100" disableSorting="1" />
+        <cell name="a_03424782c7d54a34bbb5b2df729e0302.tc_language" width="100" disableSorting="1" />
+        <cell name="incidentstagecode" width="100" />
         <cell name="caseorigincode" width="100" />
+        <cell name="tc_casetypeid" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
         <cell name="tc_destinationid" width="100" />
         <cell name="tc_escalatetocustomerrelations" width="100" />
+        <cell name="statecode" width="100" />
+        <cell name="statuscode" width="100" />
+        <cell name="followupby" width="100" />
+        <cell name="tc_latestactivitydate" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
+        <cell name="createdon" width="150" />
+        <cell name="resolveby" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
+        <cell name="ownerid" width="100" />
       </row>
     </grid>
   </layoutxml>
@@ -41,6 +48,11 @@
           <condition attribute="statecode" operator="eq" value="0" />
           <condition attribute="tc_escalatetocustomerrelations" operator="eq" value="1" />
         </filter>
+        <attribute name="statuscode" />
+        <attribute name="statecode" />
+        <attribute name="ownerid" />
+        <attribute name="followupby" />
+        <attribute name="incidentstagecode" />
         <link-entity name="tc_booking" from="tc_bookingid" to="tc_bookingid" alias="aa">
           <filter type="and">
             <filter type="or">
@@ -55,6 +67,10 @@
               </filter>
             </link-entity>
           </link-entity>
+          <attribute name="tc_name" />
+        </link-entity>
+        <link-entity alias="a_03424782c7d54a34bbb5b2df729e0302" name="contact" from="contactid" to="primarycontactid" link-type="outer" visible="false">
+          <attribute name="tc_language" />
         </link-entity>
         <attribute name="incidentid" />
       </entity>

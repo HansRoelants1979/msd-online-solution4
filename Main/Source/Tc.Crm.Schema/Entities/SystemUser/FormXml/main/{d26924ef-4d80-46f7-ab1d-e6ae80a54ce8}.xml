@@ -14,20 +14,26 @@
     <tabs>
       <tab name="SUMMARY_TAB" id="{b4df8366-c804-4b62-a973-97d00cf9898b}" IsUserDefined="0" showlabel="true" expanded="true">
         <labels>
+          <label description="Inhaltsübersicht" languagecode="1031" />
           <label description="Summary" languagecode="1033" />
+          <label description="Résumé" languagecode="1036" />
         </labels>
         <columns>
           <column width="28%">
             <sections>
               <section name="onpremise account information" showlabel="true" showbar="true" id="{861c0ea7-e1bf-41c6-af29-44620286f46a}" IsUserDefined="0" locklevel="0">
                 <labels>
+                  <label description="Firmeninformationen" languagecode="1031" />
                   <label description="Account Information" languagecode="1033" />
+                  <label description="Informations sur le compte" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell auto="false" showlabel="true" locklevel="0" rowspan="1" colspan="1" id="{27a1c94b-2260-453c-902d-ea8c733452b0}">
                       <labels>
                         <label description="User Name" languagecode="1033" />
+                        <label description="Nom d'utilisateur" languagecode="1036" />
+                        <label description="Benutzername" languagecode="1031" />
                       </labels>
                       <control id="domainname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="domainname" disabled="true" />
                     </cell>
@@ -36,6 +42,8 @@
                     <cell id="{658f6715-944b-42a6-aec4-7ebcb66501f5}">
                       <labels>
                         <label description="Application ID" languagecode="1033" />
+                        <label description="ID d'application" languagecode="1036" />
+                        <label description="Anwendungs-ID" languagecode="1031" />
                       </labels>
                       <control id="applicationid" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="applicationid" />
                     </cell>
@@ -44,6 +52,8 @@
                     <cell id="{2f89c8b0-e957-4c99-a61b-0b1a9294394f}">
                       <labels>
                         <label description="Application ID URI" languagecode="1033" />
+                        <label description="URI de l'ID d'application" languagecode="1036" />
+                        <label description="URI der Anwendungs-ID" languagecode="1031" />
                       </labels>
                       <control id="applicationiduri" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="applicationiduri" />
                     </cell>
@@ -52,6 +62,8 @@
                     <cell id="{0673139a-042b-41d9-9958-ab151cb6e059}">
                       <labels>
                         <label description="Azure AD Object ID" languagecode="1033" />
+                        <label description="ID d'objet Azure AD" languagecode="1036" />
+                        <label description="Objekt-ID von Azure AD" languagecode="1031" />
                       </labels>
                       <control id="azureactivedirectoryobjectid" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="azureactivedirectoryobjectid" />
                     </cell>
@@ -60,13 +72,17 @@
               </section>
               <section name="user information" showlabel="true" showbar="true" id="{9386e20c-b937-4b04-a112-eadb556f7d47}" IsUserDefined="0" locklevel="0">
                 <labels>
+                  <label description="Benutzerinformationen" languagecode="1031" />
                   <label description="User Information" languagecode="1033" />
+                  <label description="Informations sur l'utilisateur" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{e0cb0ab8-8532-4a1d-aa24-c926da926f0c}">
                       <labels>
                         <label description="Full Name" languagecode="1033" />
+                        <label description="Nom complet" languagecode="1036" />
+                        <label description="Vollständiger Name" languagecode="1031" />
                       </labels>
                       <control id="fullname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="fullname" />
                     </cell>
@@ -75,6 +91,8 @@
                     <cell id="{8bdbd9da-3986-4a1e-8c4f-3b977f04361b}">
                       <labels>
                         <label description="Primary Email" languagecode="1033" />
+                        <label description="Adresse de messagerie principale" languagecode="1036" />
+                        <label description="Primäre E-Mail-Adresse" languagecode="1031" />
                       </labels>
                       <control id="internalemailaddress" classid="{ADA2203E-B4CD-49be-9DDF-234642B43B52}" datafieldname="internalemailaddress" />
                     </cell>
@@ -92,6 +110,8 @@
           <cell id="{d9bca1fc-3281-4acb-84ed-c87a6c94c0e5}">
             <labels>
               <label description="Status" languagecode="1033" />
+              <label description="Statut" languagecode="1036" />
+              <label description="Status" languagecode="1031" />
             </labels>
             <control id="footer_isdisabled" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="isdisabled" />
           </cell>
@@ -183,9 +203,13 @@
     </DisplayConditions>
   </form>
   <LocalizedNames>
+    <LocalizedName description="Anwendungsbenutzer" languagecode="1031" />
     <LocalizedName description="Application User" languagecode="1033" />
+    <LocalizedName description="Utilisateur de l'application" languagecode="1036" />
   </LocalizedNames>
   <Descriptions>
+    <Description description="Anwendungsbenutzerformular" languagecode="1031" />
     <Description description="Application User Form" languagecode="1033" />
+    <Description description="Formulaire Utilisateur de l'application" languagecode="1036" />
   </Descriptions>
 </systemform>

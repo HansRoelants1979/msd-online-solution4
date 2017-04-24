@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <EntityRelationships>
-  <EntityRelationship Name="tc_transactioncurrency_tc_recovery_Currency">
+  <EntityRelationship Name="tc_transactioncurrency_tc_compensation">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.51</IntroducedVersion>
+    <IntroducedVersion>1.0.0.67</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
-    <ReferencingEntityName>tc_recovery</ReferencingEntityName>
+    <ReferencingEntityName>tc_compensation</ReferencingEntityName>
     <ReferencedEntityName>TransactionCurrency</ReferencedEntityName>
     <CascadeAssign>NoCascade</CascadeAssign>
     <CascadeDelete>RemoveLink</CascadeDelete>
@@ -14,25 +14,58 @@
     <CascadeUnshare>NoCascade</CascadeUnshare>
     <CascadeRollupView>NoCascade</CascadeRollupView>
     <IsValidForAdvancedFind>1</IsValidForAdvancedFind>
-    <ReferencingAttributeName>tc_Currency</ReferencingAttributeName>
+    <ReferencingAttributeName>tc_localcurrencyid</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="" languagecode="1033" />
+        <Description description="Unique identifier for Currency associated with Compensation." languagecode="1033" />
       </Descriptions>
     </RelationshipDescription>
     <EntityRelationshipRoles>
       <EntityRelationshipRole>
-        <NavPaneDisplayOption>UseCollectionName</NavPaneDisplayOption>
-        <NavPaneArea>Details</NavPaneArea>
-        <NavPaneOrder>10000</NavPaneOrder>
-        <NavigationPropertyName>tc_Currency</NavigationPropertyName>
+        <NavPaneDisplayOption>DoNotDisplay</NavPaneDisplayOption>
+        <NavigationPropertyName>tc_localcurrencyid</NavigationPropertyName>
         <CustomLabels>
           <CustomLabel description="" languagecode="1033" />
         </CustomLabels>
         <RelationshipRoleType>1</RelationshipRoleType>
       </EntityRelationshipRole>
       <EntityRelationshipRole>
-        <NavigationPropertyName>tc_transactioncurrency_tc_recovery_Currency</NavigationPropertyName>
+        <NavigationPropertyName>tc_transactioncurrency_tc_compensation</NavigationPropertyName>
+        <RelationshipRoleType>0</RelationshipRoleType>
+      </EntityRelationshipRole>
+    </EntityRelationshipRoles>
+  </EntityRelationship>
+  <EntityRelationship Name="tc_transactioncurrency_tc_compensationline">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>1.0.0.75</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_compensationline</ReferencingEntityName>
+    <ReferencedEntityName>TransactionCurrency</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>RemoveLink</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <CascadeRollupView>NoCascade</CascadeRollupView>
+    <IsValidForAdvancedFind>1</IsValidForAdvancedFind>
+    <ReferencingAttributeName>tc_localcurrencyid</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Unique identifier for Currency associated with Compensation Line." languagecode="1033" />
+      </Descriptions>
+    </RelationshipDescription>
+    <EntityRelationshipRoles>
+      <EntityRelationshipRole>
+        <NavPaneDisplayOption>DoNotDisplay</NavPaneDisplayOption>
+        <NavigationPropertyName>tc_localcurrencyid</NavigationPropertyName>
+        <CustomLabels>
+          <CustomLabel description="" languagecode="1033" />
+        </CustomLabels>
+        <RelationshipRoleType>1</RelationshipRoleType>
+      </EntityRelationshipRole>
+      <EntityRelationshipRole>
+        <NavigationPropertyName>tc_transactioncurrency_tc_compensationline</NavigationPropertyName>
         <RelationshipRoleType>0</RelationshipRoleType>
       </EntityRelationshipRole>
     </EntityRelationshipRoles>
@@ -51,7 +84,9 @@
     <ReferencingAttributeName>TransactionCurrencyId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Wählen Sie die lokale Währung für den Datensatz aus, um sicherzustellen, dass Budgets in der korrekten Währung ausgewiesen werden." languagecode="1031" />
         <Description description="Choose the local currency for the record to make sure budgets are reported in the correct currency." languagecode="1033" />
+        <Description description="Choisissez la devise locale pour l'enregistrement pour vous assurer que les budgets sont validés dans la devise correcte." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -69,7 +104,9 @@
     <ReferencingAttributeName>TransactionCurrencyId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Wählen Sie die lokale Währung für den Datensatz aus, um sicherzustellen, dass Budgets in der korrekten Währung ausgewiesen werden." languagecode="1031" />
         <Description description="Choose the local currency for the record to make sure budgets are reported in the correct currency." languagecode="1033" />
+        <Description description="Choisissez la devise locale pour l'enregistrement pour vous assurer que les budgets sont validés dans la devise correcte." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -87,7 +124,9 @@
     <ReferencingAttributeName>TransactionCurrencyId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Wählen Sie die lokale Währung für den Datensatz aus, um sicherzustellen, dass Budgets in der korrekten Währung ausgewiesen werden." languagecode="1031" />
         <Description description="Choose the local currency for the record to make sure budgets are reported in the correct currency." languagecode="1033" />
+        <Description description="Choisissez la devise locale pour l'enregistrement pour vous assurer que les budgets sont validés dans la devise correcte." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -125,7 +164,9 @@
     <ReferencingAttributeName>TransactionCurrencyId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner der Währung für die Entität." languagecode="1031" />
         <Description description="Unique identifier of the currency associated with the entity." languagecode="1033" />
+        <Description description="Identificateur unique de la devise associée à l’entité." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -144,7 +185,9 @@
     <ReferencingAttributeName>TransactionCurrencyId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner der Währung für die Entität." languagecode="1031" />
         <Description description="Unique identifier of the currency associated with the entity." languagecode="1033" />
+        <Description description="Identificateur unique de la devise associée à l’entité." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -163,7 +206,9 @@
     <ReferencingAttributeName>TransactionCurrencyId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner der Währung für die Entität." languagecode="1031" />
         <Description description="Unique identifier of the currency associated with the entity." languagecode="1033" />
+        <Description description="Identificateur unique de la devise associée à l’entité." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -182,7 +227,9 @@
     <ReferencingAttributeName>TransactionCurrencyId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner der Währung für die Entität." languagecode="1031" />
         <Description description="Unique identifier of the currency associated with the entity." languagecode="1033" />
+        <Description description="Identificateur unique de la devise associée à l’entité." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -201,7 +248,9 @@
     <ReferencingAttributeName>TransactionCurrencyId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner der Währung für die Entität." languagecode="1031" />
         <Description description="Unique identifier of the currency associated with the entity." languagecode="1033" />
+        <Description description="Identificateur unique de la devise associée à l’entité." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -220,7 +269,9 @@
     <ReferencingAttributeName>TransactionCurrencyId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner der Währung für die Entität." languagecode="1031" />
         <Description description="Unique identifier of the currency associated with the entity." languagecode="1033" />
+        <Description description="Identificateur unique de la devise associée à l’entité." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>

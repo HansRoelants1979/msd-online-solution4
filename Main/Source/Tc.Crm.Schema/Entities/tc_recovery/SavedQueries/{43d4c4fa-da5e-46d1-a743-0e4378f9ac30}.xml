@@ -5,13 +5,18 @@
   <isquickfindquery>0</isquickfindquery>
   <isprivate>0</isprivate>
   <isdefault>1</isdefault>
-  <returnedtypecode>10043</returnedtypecode>
+  <returnedtypecode>10077</returnedtypecode>
   <savedqueryid>{43d4c4fa-da5e-46d1-a743-0e4378f9ac30}</savedqueryid>
   <layoutxml>
-    <grid name="" object="10043" jump="tc_name" select="1" icon="1" preview="0">
+    <grid name="" object="10077" jump="tc_name" select="1" icon="1" preview="0">
       <row name="tc_recovery" id="tc_recoveryid">
-        <cell name="tc_name" width="300" />
-        <cell name="createdon" width="125" />
+        <cell name="tc_name" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_caseid" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_bookingid" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_servicetype" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="statuscode" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="createdon" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="createdby" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
       </row>
     </grid>
   </layoutxml>
@@ -25,6 +30,12 @@
         <filter type="and">
           <condition attribute="statecode" operator="eq" value="0" />
         </filter>
+        <order attribute="tc_name" descending="false" />
+        <attribute name="tc_servicetype" />
+        <attribute name="createdby" />
+        <attribute name="tc_caseid" />
+        <attribute name="tc_bookingid" />
+        <attribute name="statuscode" />
       </entity>
     </fetch>
   </fetchxml>

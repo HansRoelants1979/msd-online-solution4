@@ -8,35 +8,41 @@
   <returnedtypecode>2029</returnedtypecode>
   <savedqueryid>{d2b0b38a-5314-e711-810c-3863bb34fb48}</savedqueryid>
   <layoutxml>
-    <grid name="queueitems" preview="1" icon="1" select="1" jump="title" object="2029">
+    <grid name="queueitems" object="2029" jump="title" select="1" icon="1" preview="1">
       <row id="objectid" name="queueitem" multiobjectidfield="objecttypecode">
         <cell name="title" width="300" />
-        <cell name="aa.subject" width="200" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="aa.subject" width="200" imageproviderwebresource="$webresource:" imageproviderfunctionname="" disableSorting="1" />
         <cell name="enteredon" width="140" />
         <cell name="objecttypecode" width="100" />
         <cell name="queueid" width="150" />
+        <cell name="aa.regardingobjectid" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" disableSorting="1" />
+        <cell name="a_cf79ac6ed0e243f8b4514bbf0554999c.title" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" disableSorting="1" />
         <cell name="queueitemid" width="100" ishidden="1" />
       </row>
     </grid>
   </layoutxml>
   <querytype>0</querytype>
   <fetchxml>
-    <fetch mapping="logical" distinct="false" output-format="xml-platform" version="1.0">
+    <fetch version="1.0" output-format="xml-platform" distinct="false" mapping="logical">
       <entity name="queueitem">
         <attribute name="title" />
         <attribute name="enteredon" />
         <attribute name="objecttypecode" />
         <attribute name="queueid" />
-        <order attribute="enteredon" descending="true" />
+        <order descending="true" attribute="enteredon" />
         <filter type="and">
           <condition value="0" attribute="statecode" operator="eq" />
           <condition attribute="workerid" operator="null" />
         </filter>
-        <link-entity name="email" alias="aa" to="objectid" from="activityid">
+        <link-entity name="email" from="activityid" to="objectid" alias="aa">
           <filter type="and">
             <condition attribute="regardingobjectid" operator="not-null" />
           </filter>
           <attribute name="subject" />
+          <attribute name="regardingobjectid" />
+        </link-entity>
+        <link-entity name="incident" from="incidentid" to="objectid" alias="a_cf79ac6ed0e243f8b4514bbf0554999c" link-type="outer" visible="false">
+          <attribute name="title" />
         </link-entity>
         <attribute name="objectid" />
       </entity>

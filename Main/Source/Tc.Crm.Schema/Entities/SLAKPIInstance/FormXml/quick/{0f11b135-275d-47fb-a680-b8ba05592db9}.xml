@@ -19,12 +19,22 @@
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{96c3b7da-4026-bc25-bc6b-e81aedec87ec}" showlabel="false">
+                    <cell id="{ee55d00e-8271-28c7-0e9a-daa894b7841a}" showlabel="true" colspan="1" auto="false" rowspan="2">
                       <labels>
-                        <label description="" languagecode="1033" />
+                        <label description="Approval SLA Timer" languagecode="1033" />
                       </labels>
+                      <control id="ApprovalSLATimer" classid="{9C5CA0A1-AB4D-4781-BE7E-8DFBE867B87E}">
+                        <parameters>
+                          <SuccessConditionName>status</SuccessConditionName>
+                          <SuccessConditionValue>4</SuccessConditionValue>
+                          <FailureConditionName>status</FailureConditionName>
+                          <FailureConditionValue>0</FailureConditionValue>
+                          <FailureTimeField>failuretime</FailureTimeField>
+                        </parameters>
+                      </control>
                     </cell>
                   </row>
+                  <row />
                 </rows>
               </section>
             </sections>

@@ -7,6 +7,11 @@
   </EntityMap>
   <EntityMap>
     <EntitySource>account</EntitySource>
+    <EntityTarget>tc_compensationline</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>account</EntitySource>
     <EntityTarget>tc_customerbookingrole</EntityTarget>
     <AttributeMaps />
   </EntityMap>
@@ -23,6 +28,11 @@
   <EntityMap>
     <EntitySource>contact</EntitySource>
     <EntityTarget>tc_compensation</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>contact</EntitySource>
+    <EntityTarget>tc_compensationline</EntityTarget>
     <AttributeMaps />
   </EntityMap>
   <EntityMap>
@@ -108,6 +118,11 @@
   <EntityMap>
     <EntitySource>systemuser</EntitySource>
     <EntityTarget>incident</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>systemuser</EntitySource>
+    <EntityTarget>mbs_pluginprofile</EntityTarget>
     <AttributeMaps />
   </EntityMap>
   <EntityMap>
@@ -286,8 +301,8 @@
     <AttributeMaps />
   </EntityMap>
   <EntityMap>
-    <EntitySource>tc_compensation</EntitySource>
-    <EntityTarget>tc_caseline</EntityTarget>
+    <EntitySource>tc_compensationline</EntitySource>
+    <EntityTarget>tc_recovery</EntityTarget>
     <AttributeMaps />
   </EntityMap>
   <EntityMap>
@@ -322,6 +337,11 @@
   </EntityMap>
   <EntityMap>
     <EntitySource>tc_country</EntitySource>
+    <EntityTarget>queue</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_country</EntitySource>
     <EntityTarget>tc_booking</EntityTarget>
     <AttributeMaps />
   </EntityMap>
@@ -338,11 +358,6 @@
   <EntityMap>
     <EntitySource>tc_country</EntitySource>
     <EntityTarget>tc_gateway</EntityTarget>
-    <AttributeMaps />
-  </EntityMap>
-  <EntityMap>
-    <EntitySource>tc_country</EntitySource>
-    <EntityTarget>tc_hotel</EntityTarget>
     <AttributeMaps />
   </EntityMap>
   <EntityMap>
@@ -426,16 +441,6 @@
     <AttributeMaps />
   </EntityMap>
   <EntityMap>
-    <EntitySource>tc_location</EntitySource>
-    <EntityTarget>tc_locationoffice</EntityTarget>
-    <AttributeMaps />
-  </EntityMap>
-  <EntityMap>
-    <EntitySource>tc_location</EntitySource>
-    <EntityTarget>team</EntityTarget>
-    <AttributeMaps />
-  </EntityMap>
-  <EntityMap>
     <EntitySource>tc_region</EntitySource>
     <EntityTarget>incident</EntityTarget>
     <AttributeMaps />
@@ -462,17 +467,17 @@
   </EntityMap>
   <EntityMap>
     <EntitySource>team</EntitySource>
-    <EntityTarget>tc_hotel</EntityTarget>
-    <AttributeMaps />
-  </EntityMap>
-  <EntityMap>
-    <EntitySource>team</EntitySource>
     <EntityTarget>team</EntityTarget>
     <AttributeMaps />
   </EntityMap>
   <EntityMap>
     <EntitySource>transactioncurrency</EntitySource>
-    <EntityTarget>tc_recovery</EntityTarget>
+    <EntityTarget>tc_compensation</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>transactioncurrency</EntitySource>
+    <EntityTarget>tc_compensationline</EntityTarget>
     <AttributeMaps />
   </EntityMap>
 </EntityMaps>

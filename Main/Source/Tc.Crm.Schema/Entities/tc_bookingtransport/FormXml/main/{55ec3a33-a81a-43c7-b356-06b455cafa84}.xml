@@ -11,7 +11,7 @@
           <label description="General" languagecode="1033" />
         </labels>
         <columns>
-          <column width="28%">
+          <column width="50%">
             <sections>
               <section name="tab_2_section_1" showlabel="false" showbar="false" locklevel="0" id="{bec1aa9a-1dd6-d725-9728-5cbe62335547}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115">
                 <labels>
@@ -78,36 +78,7 @@
               </section>
             </sections>
           </column>
-          <column width="44%">
-            <sections>
-              <section name="tab_2_section_2" showlabel="false" showbar="false" locklevel="0" id="{141a3445-06aa-5730-acee-a771179b80c0}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115">
-                <labels>
-                  <label description="Section" languagecode="1033" />
-                </labels>
-                <rows>
-                  <row>
-                    <cell id="{bbbcacca-703e-33da-a406-87061be3c5ac}" showlabel="false" rowspan="5" auto="false" colspan="1" locklevel="0">
-                      <labels>
-                        <label description="Note Text" languagecode="1033" />
-                      </labels>
-                      <control id="notescontrol" classid="{06375649-c143-495e-a496-c962e5b4488e}" uniqueid="{97a964dc-2b90-923a-c2b2-697dab113072}" disabled="false">
-                        <parameters>
-                          <DefaultTabId>NotesTab</DefaultTabId>
-                          <ShowArticleTab>false</ShowArticleTab>
-                          <SelectDefaultLanguage>00000000-0000-0000-0000-000000000000</SelectDefaultLanguage>
-                        </parameters>
-                      </control>
-                    </cell>
-                  </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                </rows>
-              </section>
-            </sections>
-          </column>
-          <column width="28%">
+          <column width="50%">
             <sections>
               <section name="tab_2_section_3" showlabel="false" showbar="false" locklevel="0" id="{e9858049-da91-e0bd-b505-622687183c1a}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115">
                 <labels>
@@ -160,30 +131,31 @@
           </column>
         </columns>
       </tab>
-      <tab name="tab_3" id="{491615e1-0d07-1331-557a-4710380d5820}" IsUserDefined="0" locklevel="0" showlabel="false" expanded="true">
+      <tab name="tab_3" id="{95db8eea-36c0-0699-be0b-2b10e0372379}" IsUserDefined="0" locklevel="0" showlabel="false" expanded="true">
         <labels>
           <label description="Tab" languagecode="1033" />
         </labels>
         <columns>
           <column width="100%">
             <sections>
-              <section name="tab_3_section_1" showlabel="false" showbar="false" locklevel="0" id="{d769a1d7-3ab2-3ac7-3e61-7382cda37ca2}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" height="auto">
+              <section name="tab_3_section_1" showlabel="true" showbar="false" locklevel="0" id="{324cc0c3-c2be-90e2-eccb-087aa4cca2d7}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
-                  <label description="Section" languagecode="1033" />
+                  <label description="REMARKS" languagecode="1033" />
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{cdd76b56-5612-23cb-1984-8ed385393570}" showlabel="true" locklevel="0" auto="true" rowspan="5">
+                    <cell id="{254a9c5e-3bd2-6b73-c679-da36709b0317}" showlabel="false" locklevel="0" rowspan="6">
                       <labels>
                         <label description="Remark" languagecode="1033" />
                       </labels>
-                      <control id="tc_remark" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="tc_remark" disabled="true" uniqueid="{d9e073e1-64e8-0918-6897-dab8c3ed5ea7}" />
+                      <control id="tc_remark" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="tc_remark" disabled="false" uniqueid="{a736ba8e-eb6e-5c7c-8ac0-e75625a58eab}" />
                     </cell>
                   </row>
                   <row />
                   <row />
                   <row />
-                  <row height="auto" />
+                  <row />
+                  <row />
                 </rows>
               </section>
             </sections>
@@ -192,14 +164,18 @@
       </tab>
       <tab verticallayout="true" id="{16eb5610-cfc6-4769-8c13-eed269be69c0}" IsUserDefined="1" name="{16eb5610-cfc6-4769-8c13-eed269be69c0}" expanded="false" locklevel="0" showlabel="true" visible="false">
         <labels>
+          <label description="Allgemein" languagecode="1031" />
           <label description="Hidden" languagecode="1033" />
+          <label description="Général" languagecode="1036" />
         </labels>
         <columns>
           <column width="100%">
             <sections>
               <section showlabel="false" showbar="false" IsUserDefined="0" id="{3a6d7119-9536-416d-99cf-41dcab776868}">
                 <labels>
+                  <label description="Allgemein" languagecode="1031" />
                   <label description="General" languagecode="1033" />
+                  <label description="Général" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
@@ -214,6 +190,8 @@
                     <cell id="{fedf9b3e-e8aa-4272-aa41-780b1fa004ec}">
                       <labels>
                         <label description="Owner" languagecode="1033" />
+                        <label description="Propriétaire" languagecode="1036" />
+                        <label description="Besitzer" languagecode="1031" />
                       </labels>
                       <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
                     </cell>
@@ -226,7 +204,13 @@
       </tab>
     </tabs>
     <Navigation>
-      <NavBar></NavBar>
+      <NavBar>
+        <NavBarByRelationshipItem RelationshipName="tc_bookingtransport_tc_caseline" Sequence="1001" Area="Service" Id="nav_tc_bookingtransport_tc_caseline">
+          <Titles>
+            <Title LCID="1033" Text="Case Lines" />
+          </Titles>
+        </NavBarByRelationshipItem>
+      </NavBar>
       <NavBarAreas>
         <NavBarArea Id="Info">
           <Titles>

@@ -5,12 +5,18 @@
   <isquickfindquery>0</isquickfindquery>
   <isprivate>0</isprivate>
   <isdefault>1</isdefault>
-  <returnedtypecode>10020</returnedtypecode>
+  <returnedtypecode>10055</returnedtypecode>
   <savedqueryid>{3838e1d7-63f8-4687-b838-d9405b838ab7}</savedqueryid>
   <layoutxml>
-    <grid name="" object="10020" jump="tc_name" select="1" icon="1" preview="1">
+    <grid name="" object="10055" jump="tc_name" select="1" icon="1" preview="1">
       <row name="tc_compensationline" id="tc_compensationlineid">
         <cell name="tc_name" width="300" />
+        <cell name="tc_amount" width="100" />
+        <cell name="tc_bacsamount" width="100" />
+        <cell name="tc_cashamount" width="100" />
+        <cell name="tc_chapsamount" width="100" />
+        <cell name="tc_voucheramount" width="100" />
+        <cell name="tc_vouchertype" width="100" />
         <cell name="createdon" width="125" />
       </row>
     </grid>
@@ -19,13 +25,19 @@
   <fetchxml>
     <fetch version="1.0" mapping="logical">
       <entity name="tc_compensationline">
-        <attribute name="tc_compensationlineid" />
         <attribute name="tc_name" />
         <attribute name="createdon" />
         <order attribute="tc_name" descending="false" />
         <filter type="and">
           <condition attribute="statecode" operator="eq" value="0" />
         </filter>
+        <attribute name="tc_vouchertype" />
+        <attribute name="tc_voucheramount" />
+        <attribute name="tc_chapsamount" />
+        <attribute name="tc_cashamount" />
+        <attribute name="tc_bacsamount" />
+        <attribute name="tc_amount" />
+        <attribute name="tc_compensationlineid" />
       </entity>
     </fetch>
   </fetchxml>

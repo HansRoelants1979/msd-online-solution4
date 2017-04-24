@@ -6,14 +6,14 @@
   <FormActivationState>1</FormActivationState>
   <form>
     <tabs>
-      <tab verticallayout="true" id="{0e40848d-ea25-4a1d-bbc0-fb00527dc3fe}" IsUserDefined="1" name="{0e40848d-ea25-4a1d-bbc0-fb00527dc3fe}" locklevel="0" expanded="true" showlabel="true">
+      <tab id="{0e40848d-ea25-4a1d-bbc0-fb00527dc3fe}" name="{0e40848d-ea25-4a1d-bbc0-fb00527dc3fe}" showlabel="true" expanded="true" locklevel="0" IsUserDefined="1" verticallayout="true">
         <labels>
           <label description="Location Office Details" languagecode="1033" />
         </labels>
         <columns>
           <column width="34%">
             <sections>
-              <section showlabel="true" showbar="false" IsUserDefined="0" id="{20fdcc8a-fe42-45d7-9b97-1131dfb6c1a7}" name="{20fdcc8a-fe42-45d7-9b97-1131dfb6c1a7}" columns="1" locklevel="0" labelwidth="145" celllabelalignment="Left" celllabelposition="Left">
+              <section id="{20fdcc8a-fe42-45d7-9b97-1131dfb6c1a7}" name="{20fdcc8a-fe42-45d7-9b97-1131dfb6c1a7}" showlabel="true" locklevel="0" IsUserDefined="0" celllabelposition="Left" celllabelalignment="Left" labelwidth="145" columns="1" showbar="false">
                 <labels>
                   <label description="General" languagecode="1033" />
                 </labels>
@@ -23,7 +23,7 @@
                       <labels>
                         <label description="Name" languagecode="1033" />
                       </labels>
-                      <control id="tc_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_name" />
+                      <control id="tc_name" datafieldname="tc_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" />
                     </cell>
                   </row>
                   <row>
@@ -31,7 +31,7 @@
                       <labels>
                         <label description="Owner" languagecode="1033" />
                       </labels>
-                      <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" uniqueid="{438cb0dc-a58a-1238-8b6c-5bd836392467}" disabled="false">
+                      <control disabled="false" id="ownerid" datafieldname="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" uniqueid="{438cb0dc-a58a-1238-8b6c-5bd836392467}">
                         <parameters>
                           <AutoResolve>true</AutoResolve>
                           <DisableMru>false</DisableMru>
@@ -44,7 +44,7 @@
                       <labels>
                         <label description="Primary Telephone Number" languagecode="1033" />
                       </labels>
-                      <control id="tc_primarytelephonenumber" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_primarytelephonenumber" disabled="false" uniqueid="{179c97a1-076b-2ddc-e48a-00dd138cedc6}" />
+                      <control disabled="false" id="tc_primarytelephonenumber" datafieldname="tc_primarytelephonenumber" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" uniqueid="{179c97a1-076b-2ddc-e48a-00dd138cedc6}" />
                     </cell>
                   </row>
                   <row>
@@ -52,7 +52,7 @@
                       <labels>
                         <label description="Primary Email Address" languagecode="1033" />
                       </labels>
-                      <control id="tc_primaryemailaddress" classid="{ADA2203E-B4CD-49be-9DDF-234642B43B52}" datafieldname="tc_primaryemailaddress" disabled="false" />
+                      <control disabled="false" id="tc_primaryemailaddress" datafieldname="tc_primaryemailaddress" classid="{ADA2203E-B4CD-49be-9DDF-234642B43B52}" />
                     </cell>
                   </row>
                 </rows>
@@ -61,7 +61,7 @@
           </column>
           <column width="66%">
             <sections>
-              <section name="{0e40848d-ea25-4a1d-bbc0-fb00527dc3fe}_section_2" showlabel="true" showbar="false" locklevel="0" id="{5487419d-b839-9139-186e-ebd6c2b951d9}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="155" celllabelalignment="Left" celllabelposition="Left">
+              <section id="{5487419d-b839-9139-186e-ebd6c2b951d9}" name="{0e40848d-ea25-4a1d-bbc0-fb00527dc3fe}_section_2" showlabel="true" locklevel="0" IsUserDefined="0" celllabelposition="Left" celllabelalignment="Left" labelwidth="155" columns="1" showbar="false" layout="varwidth">
                 <labels>
                   <label description="Address" languagecode="1033" />
                 </labels>
@@ -71,7 +71,7 @@
                       <labels>
                         <label description="Flat or Unit Number" languagecode="1033" />
                       </labels>
-                      <control id="tc_address1_flatorunitnumber" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address1_flatorunitnumber" disabled="false" />
+                      <control disabled="false" id="tc_address1_flatorunitnumber" datafieldname="tc_address1_flatorunitnumber" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" />
                     </cell>
                   </row>
                   <row>
@@ -79,7 +79,7 @@
                       <labels>
                         <label description="House No. or Building" languagecode="1033" />
                       </labels>
-                      <control id="tc_address1_housenumberorbuilding" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address1_housenumberorbuilding" disabled="false" uniqueid="{d0aaa784-05e2-52ed-e7e9-65bee3d0e3bb}" />
+                      <control disabled="false" id="tc_address1_housenumberorbuilding" datafieldname="tc_address1_housenumberorbuilding" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" uniqueid="{d0aaa784-05e2-52ed-e7e9-65bee3d0e3bb}" />
                     </cell>
                   </row>
                   <row>
@@ -87,7 +87,7 @@
                       <labels>
                         <label description="Street" languagecode="1033" />
                       </labels>
-                      <control id="tc_address1_street" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address1_street" disabled="false" />
+                      <control disabled="false" id="tc_address1_street" datafieldname="tc_address1_street" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" />
                     </cell>
                   </row>
                   <row>
@@ -95,7 +95,7 @@
                       <labels>
                         <label description="Additional Information" languagecode="1033" />
                       </labels>
-                      <control id="tc_address1_additionalinformation" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address1_additionalinformation" disabled="false" />
+                      <control disabled="false" id="tc_address1_additionalinformation" datafieldname="tc_address1_additionalinformation" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" />
                     </cell>
                   </row>
                   <row>
@@ -103,7 +103,7 @@
                       <labels>
                         <label description="Town" languagecode="1033" />
                       </labels>
-                      <control id="tc_address1_town" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address1_town" disabled="false" />
+                      <control disabled="false" id="tc_address1_town" datafieldname="tc_address1_town" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" />
                     </cell>
                   </row>
                   <row>
@@ -111,7 +111,7 @@
                       <labels>
                         <label description="County" languagecode="1033" />
                       </labels>
-                      <control id="tc_address1_county" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address1_county" disabled="false" />
+                      <control disabled="false" id="tc_address1_county" datafieldname="tc_address1_county" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" />
                     </cell>
                   </row>
                   <row>
@@ -119,7 +119,7 @@
                       <labels>
                         <label description="Post Code" languagecode="1033" />
                       </labels>
-                      <control id="tc_address1_postcode" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address1_postcode" disabled="false" />
+                      <control disabled="false" id="tc_address1_postcode" datafieldname="tc_address1_postcode" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" />
                     </cell>
                   </row>
                   <row>
@@ -127,9 +127,58 @@
                       <labels>
                         <label description="Country" languagecode="1033" />
                       </labels>
-                      <control id="tc_address1_country" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_address1_country" disabled="false" />
+                      <control disabled="false" id="tc_address1_country" datafieldname="tc_address1_country" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" />
                     </cell>
                   </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
+      <tab id="{1044db26-7eb2-d5ca-97b9-c30b7aa9be19}" name="tab_2" showlabel="true" expanded="true" locklevel="0" IsUserDefined="0">
+        <labels>
+          <label description="Associated Users" languagecode="1033" />
+        </labels>
+        <columns>
+          <column width="100%">
+            <sections>
+              <section id="{c7c39c57-e784-1bca-62d2-1c6c89c91140}" name="tab_2_section_1" showlabel="false" locklevel="0" IsUserDefined="0" labelwidth="115" columns="1" showbar="false" layout="varwidth" height="auto">
+                <labels>
+                  <label description="Section" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{d280b280-4bd5-44b9-a7b8-d4ebab42231e}" showlabel="false" colspan="1" auto="true" rowspan="4">
+                      <labels>
+                        <label description="Users" languagecode="1033" />
+                        <label description="Utilisateurs" languagecode="1036" />
+                        <label description="Benutzer" languagecode="1031" />
+                      </labels>
+                      <control id="users" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" uniqueid="{5e883338-a909-3515-2ee5-8ed15c1e81b8}" indicationOfSubgrid="true">
+                        <parameters>
+                          <ViewId>{00000000-0000-0000-00AA-000010001019}</ViewId>
+                          <IsUserView>false</IsUserView>
+                          <RelationshipName>tc_systemuser_tc_locationoffice</RelationshipName>
+                          <TargetEntityType>systemuser</TargetEntityType>
+                          <AutoExpand>Auto</AutoExpand>
+                          <EnableQuickFind>false</EnableQuickFind>
+                          <EnableViewPicker>false</EnableViewPicker>
+                          <ViewIds>{00000000-0000-0000-00AA-000010001019}</ViewIds>
+                          <EnableJumpBar>false</EnableJumpBar>
+                          <ChartGridMode>All</ChartGridMode>
+                          <VisualizationId />
+                          <IsUserChart>false</IsUserChart>
+                          <EnableChartPicker>true</EnableChartPicker>
+                          <RecordsPerPage>10</RecordsPerPage>
+                          <RelationshipRoleOrdinal>2</RelationshipRoleOrdinal>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                  <row />
+                  <row />
+                  <row height="auto" />
                 </rows>
               </section>
             </sections>
@@ -149,13 +198,13 @@
             <labels>
               <label description="Queue" languagecode="1033" />
             </labels>
-            <control id="header_tc_queueid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_queueid" disabled="false" />
+            <control disabled="false" id="header_tc_queueid" datafieldname="tc_queueid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" />
           </cell>
           <cell id="{438d4e81-c290-15b7-e130-335d79cd226c}" showlabel="true" locklevel="0">
             <labels>
               <label description="Manager" languagecode="1033" />
             </labels>
-            <control id="header_ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" disabled="false" uniqueid="{2c0e3bbe-9684-65d2-3258-4473b312c211}">
+            <control disabled="false" id="header_ownerid" datafieldname="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" uniqueid="{2c0e3bbe-9684-65d2-3258-4473b312c211}">
               <parameters>
                 <AutoResolve>true</AutoResolve>
                 <DisableMru>false</DisableMru>
@@ -166,31 +215,37 @@
       </rows>
     </header>
     <Navigation>
-      <NavBar></NavBar>
+      <NavBar>
+        <NavBarByRelationshipItem Id="nav_tc_systemuser_tc_locationoffice" Area="Info" Sequence="10001" RelationshipName="tc_systemuser_tc_locationoffice" Show="true">
+          <Titles>
+            <Title Text="Users" LCID="1033" />
+          </Titles>
+        </NavBarByRelationshipItem>
+      </NavBar>
       <NavBarAreas>
         <NavBarArea Id="Info">
           <Titles>
-            <Title LCID="1033" Text="Common" />
+            <Title Text="Common" LCID="1033" />
           </Titles>
         </NavBarArea>
         <NavBarArea Id="Sales">
           <Titles>
-            <Title LCID="1033" Text="Sales" />
+            <Title Text="Sales" LCID="1033" />
           </Titles>
         </NavBarArea>
         <NavBarArea Id="Service">
           <Titles>
-            <Title LCID="1033" Text="Service" />
+            <Title Text="Service" LCID="1033" />
           </Titles>
         </NavBarArea>
         <NavBarArea Id="Marketing">
           <Titles>
-            <Title LCID="1033" Text="Marketing" />
+            <Title Text="Marketing" LCID="1033" />
           </Titles>
         </NavBarArea>
         <NavBarArea Id="ProcessCenter">
           <Titles>
-            <Title LCID="1033" Text="Process Sessions" />
+            <Title Text="Process Sessions" LCID="1033" />
           </Titles>
         </NavBarArea>
       </NavBarAreas>

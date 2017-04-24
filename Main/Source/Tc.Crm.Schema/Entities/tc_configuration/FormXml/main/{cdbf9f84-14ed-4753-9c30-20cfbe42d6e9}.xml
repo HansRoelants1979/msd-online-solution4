@@ -8,14 +8,18 @@
     <tabs>
       <tab verticallayout="true" id="{4e43a366-8cf4-4e31-89ba-a0f9432c99fe}" IsUserDefined="1">
         <labels>
+          <label description="Allgemein" languagecode="1031" />
           <label description="General" languagecode="1033" />
+          <label description="Général" languagecode="1036" />
         </labels>
         <columns>
           <column width="100%">
             <sections>
               <section showlabel="false" showbar="false" IsUserDefined="0" id="{b7dbbff7-c1ff-44ba-908b-8d522b043ec7}">
                 <labels>
+                  <label description="Allgemein" languagecode="1031" />
                   <label description="General" languagecode="1033" />
+                  <label description="Général" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
@@ -40,6 +44,14 @@
                         <label description="Description" languagecode="1033" />
                       </labels>
                       <control id="tc_description" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="tc_description" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{156aca91-d91e-804c-07e0-7b06014dadb8}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Long Value" languagecode="1033" />
+                      </labels>
+                      <control id="tc_longvalue" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="tc_longvalue" disabled="false" uniqueid="{47162475-0a12-3ade-952d-cd211090b258}" />
                     </cell>
                   </row>
                 </rows>
@@ -79,6 +91,7 @@
         </NavBarArea>
       </NavBarAreas>
     </Navigation>
+    <controlDescriptions />
   </form>
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>

@@ -11,15 +11,22 @@
     <grid name="resultset" object="112" jump="title" select="1" icon="1" preview="1">
       <row id="incidentid" name="result">
         <cell name="ticketnumber" width="150" />
-        <cell name="resolveby" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
-        <cell name="tc_latestactivitydate" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
         <cell name="customerid" width="200" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
-        <cell name="tc_casetypeid" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
-        <cell name="createdon" width="150" />
+        <cell name="aa.tc_name" width="100" disableSorting="1" />
+        <cell name="a_03424782c7d54a34bbb5b2df729e0302.tc_language" width="100" disableSorting="1" />
+        <cell name="incidentstagecode" width="100" />
         <cell name="caseorigincode" width="100" />
+        <cell name="tc_casetypeid" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
         <cell name="tc_destinationid" width="100" />
         <cell name="tc_escalatetocustomerrelations" width="100" />
         <cell name="a_cdf05794a0ec49a3b2548ed7aa26cdd5.department" width="100" disableSorting="1" />
+        <cell name="statecode" width="100" />
+        <cell name="statuscode" width="100" />
+        <cell name="followupby" width="100" />
+        <cell name="tc_latestactivitydate" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
+        <cell name="createdon" width="150" />
+        <cell name="resolveby" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
+        <cell name="ownerid" width="100" />
       </row>
     </grid>
   </layoutxml>
@@ -36,12 +43,21 @@
         <attribute name="tc_casetypeid" />
         <attribute name="tc_destinationid" />
         <attribute name="tc_escalatetocustomerrelations" />
+        <attribute name="statuscode" />
+        <attribute name="statecode" />
+        <attribute name="ownerid" />
+        <attribute name="followupby" />
+        <attribute name="incidentstagecode" />
         <order attribute="tc_latestactivitydate" descending="false" />
         <order attribute="createdon" descending="false" />
         <filter type="and">
           <condition attribute="statecode" operator="eq" value="1" />
         </filter>
+        <link-entity name="contact" from="contactid" to="customerid" visible="false" link-type="outer" alias="a_cdf05794a0ec49a3b2548ed7aa26cdd5">
+          <attribute name="department" />
+        </link-entity>
         <link-entity name="tc_booking" from="tc_bookingid" to="tc_bookingid" alias="aa">
+          <attribute name="tc_name" />
           <filter type="and">
             <filter type="or">
               <condition attribute="tc_returndate" operator="last-x-hours" value="1" />
@@ -51,14 +67,20 @@
           <link-entity name="systemuser" from="systemuserid" to="owninguser" alias="ab">
             <link-entity name="systemuser" from="parentsystemuserid" to="systemuserid" alias="ac">
               <filter type="and">
-                <condition attribute="tc_department" operator="eq" value="950000000" />
                 <condition attribute="parentsystemuserid" operator="eq-userid" />
               </filter>
+              <link-entity name="systemuserroles" from="systemuserid" to="systemuserid" visible="false" intersect="true">
+                <link-entity name="role" from="roleid" to="roleid" alias="ad">
+                  <filter type="and">
+                    <condition attribute="name" operator="eq" value="Customer Relations" />
+                  </filter>
+                </link-entity>
+              </link-entity>
             </link-entity>
           </link-entity>
         </link-entity>
-        <link-entity name="contact" from="contactid" to="customerid" visible="false" link-type="outer" alias="a_cdf05794a0ec49a3b2548ed7aa26cdd5">
-          <attribute name="department" />
+        <link-entity name="contact" from="contactid" to="primarycontactid" visible="false" link-type="outer" alias="a_03424782c7d54a34bbb5b2df729e0302">
+          <attribute name="tc_language" />
         </link-entity>
         <attribute name="incidentid" />
       </entity>

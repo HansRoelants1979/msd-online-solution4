@@ -11,12 +11,19 @@
     <grid name="resultset" object="112" jump="title" select="1" icon="1" preview="1">
       <row id="incidentid" name="result">
         <cell name="ticketnumber" width="150" />
-        <cell name="resolveby" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
-        <cell name="tc_latestactivitydate" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
         <cell name="customerid" width="200" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
-        <cell name="tc_casetypeid" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
-        <cell name="createdon" width="150" />
+        <cell name="a_dbfa5a4915eae61181053863bb340dd8.tc_name" width="100" disableSorting="1" />
+        <cell name="a_03424782c7d54a34bbb5b2df729e0302.tc_language" width="100" disableSorting="1" />
         <cell name="caseorigincode" width="100" />
+        <cell name="tc_casetypeid" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
+        <cell name="incidentstagecode" width="100" />
+        <cell name="statecode" width="100" />
+        <cell name="statuscode" width="100" />
+        <cell name="followupby" width="100" />
+        <cell name="tc_latestactivitydate" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
+        <cell name="createdon" width="150" />
+        <cell name="resolveby" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
+        <cell name="ownerid" width="100" />
       </row>
     </grid>
   </layoutxml>
@@ -50,6 +57,17 @@
             <condition attribute="parentsystemuserid" operator="eq-userid" />
           </filter>
         </link-entity>
+        <link-entity alias="a_dbfa5a4915eae61181053863bb340dd8" name="tc_booking" from="tc_bookingid" to="tc_bookingid" link-type="outer" visible="false">
+          <attribute name="tc_name" />
+        </link-entity>
+        <link-entity alias="a_03424782c7d54a34bbb5b2df729e0302" name="contact" from="contactid" to="primarycontactid" link-type="outer" visible="false">
+          <attribute name="tc_language" />
+        </link-entity>
+        <attribute name="statuscode" />
+        <attribute name="statecode" />
+        <attribute name="followupby" />
+        <attribute name="incidentstagecode" />
+        <attribute name="ownerid" />
         <attribute name="incidentid" />
       </entity>
     </fetch>

@@ -11,12 +11,19 @@
     <grid name="resultset" object="112" jump="title" select="1" icon="1" preview="1">
       <row id="incidentid" name="result">
         <cell name="ticketnumber" width="150" />
-        <cell name="resolveby" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
-        <cell name="tc_latestactivitydate" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
         <cell name="customerid" width="200" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
+        <cell name="a_dbfa5a4915eae61181053863bb340dd8.tc_name" width="100" disableSorting="1" />
+        <cell name="a_03424782c7d54a34bbb5b2df729e0302.tc_language" width="100" disableSorting="1" />
+        <cell name="incidentstagecode" width="100" />
         <cell name="tc_casetypeid" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
-        <cell name="createdon" width="150" />
         <cell name="caseorigincode" width="100" />
+        <cell name="followupby" width="100" />
+        <cell name="tc_latestactivitydate" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
+        <cell name="createdon" width="150" />
+        <cell name="resolveby" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
+        <cell name="statecode" width="100" />
+        <cell name="statuscode" width="100" />
+        <cell name="ownerid" width="100" />
       </row>
     </grid>
   </layoutxml>
@@ -31,6 +38,11 @@
         <attribute name="tc_latestactivitydate" />
         <attribute name="resolveby" />
         <attribute name="tc_casetypeid" />
+        <attribute name="statuscode" />
+        <attribute name="statecode" />
+        <attribute name="ownerid" />
+        <attribute name="followupby" />
+        <attribute name="incidentstagecode" />
         <order attribute="tc_latestactivitydate" descending="false" />
         <order attribute="createdon" descending="false" />
         <filter type="and">
@@ -42,8 +54,17 @@
               <condition attribute="actualend" operator="last-x-hours" value="36" />
               <condition attribute="actualend" operator="olderthan-x-hours" value="24" />
             </filter>
-            <condition attribute="statecode" operator="eq" value="1" />
+            <condition attribute="statecode" operator="in">
+              <value>2</value>
+              <value>1</value>
+            </condition>
           </filter>
+        </link-entity>
+        <link-entity name="tc_booking" from="tc_bookingid" to="tc_bookingid" visible="false" link-type="outer" alias="a_dbfa5a4915eae61181053863bb340dd8">
+          <attribute name="tc_name" />
+        </link-entity>
+        <link-entity name="contact" from="contactid" to="primarycontactid" visible="false" link-type="outer" alias="a_03424782c7d54a34bbb5b2df729e0302">
+          <attribute name="tc_language" />
         </link-entity>
         <attribute name="incidentid" />
       </entity>

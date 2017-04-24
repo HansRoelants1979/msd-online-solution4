@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Entity>
   <Name LocalizedName="Country" OriginalName="Country">tc_country</Name>
-  <ObjectTypeCode>10021</ObjectTypeCode>
+  <ObjectTypeCode>10031</ObjectTypeCode>
   <EntityInfo>
     <entity Name="tc_country">
       <LocalizedNames>
@@ -134,10 +134,14 @@
           <MaxValue>100000000000</MaxValue>
           <Accuracy>10</Accuracy>
           <displaynames>
+            <displayname description="Wechselkurs" languagecode="1031" />
             <displayname description="Exchange Rate" languagecode="1033" />
+            <displayname description="Taux de change" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Wechselkurs für die Währung der Entität im Hinblick auf die Basiswährung." languagecode="1031" />
             <Description description="Exchange rate for the currency associated with the entity with respect to the base currency." languagecode="1033" />
+            <Description description="Taux de change pour la devise associée à l'entité, par rapport à la devise de base." languagecode="1036" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="ImportSequenceNumber">
@@ -543,7 +547,7 @@
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
           <optionset Name="tc_country_statecode">
             <OptionSetType>state</OptionSetType>
-            <IntroducedVersion>1.0.0.44</IntroducedVersion>
+            <IntroducedVersion>1.0.0.0</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Status" languagecode="1033" />
@@ -597,7 +601,7 @@
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
           <optionset Name="tc_country_statuscode">
             <OptionSetType>status</OptionSetType>
-            <IntroducedVersion>1.0.0.44</IntroducedVersion>
+            <IntroducedVersion>1.0.0.0</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Status Reason" languagecode="1033" />
@@ -751,10 +755,14 @@
           <AccuracySource>2</AccuracySource>
           <CalculationOf>tc_currency</CalculationOf>
           <displaynames>
+            <displayname description="'Currency' (Basis)" languagecode="1031" />
             <displayname description="Currency (Base)" languagecode="1033" />
+            <displayname description="Currency (de base)" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Wert von 'Currency' in der Basiswährung." languagecode="1031" />
             <Description description="Value of the Currency in base currency." languagecode="1033" />
+            <Description description="Valeur de Currency dans la devise de base." languagecode="1036" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="tc_ISO_Code">
@@ -831,7 +839,6 @@
           <LogicalName>tc_sourcemarketbusinessunitid</LogicalName>
           <RequiredLevel>none</RequiredLevel>
           <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
-          <ImeMode>auto</ImeMode>
           <ValidForUpdateApi>1</ValidForUpdateApi>
           <ValidForReadApi>1</ValidForReadApi>
           <ValidForCreateApi>1</ValidForCreateApi>
@@ -918,10 +925,14 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Währung" languagecode="1031" />
             <displayname description="Local Source Currency" languagecode="1033" />
+            <displayname description="Devise" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Eindeutiger Bezeichner der Währung für die Entität." languagecode="1031" />
             <Description description="Unique identifier of the currency associated with the entity." languagecode="1033" />
+            <Description description="Identificateur unique de la devise associée à l’entité." languagecode="1036" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="UTCConversionTimeZoneCode">
@@ -1040,7 +1051,7 @@
   <RibbonDiffXml />
   <CustomControlDefaultConfigs>
     <CustomControlDefaultConfig>
-      <PrimaryEntityTypeCode>10021</PrimaryEntityTypeCode>
+      <PrimaryEntityTypeCode>10031</PrimaryEntityTypeCode>
       <CustomControlDefaultConfigId>{e9f777b6-cbe3-e611-8104-3863bb340dd8}</CustomControlDefaultConfigId>
       <ControlDescriptionXML>
         <controlDescriptions />

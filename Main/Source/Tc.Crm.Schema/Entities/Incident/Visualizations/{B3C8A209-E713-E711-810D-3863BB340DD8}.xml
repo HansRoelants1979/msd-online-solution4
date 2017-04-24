@@ -6,10 +6,8 @@
       <fetchcollection>
         <fetch aggregate="true" mapping="logical">
           <entity name="incident">
-            <link-entity name="systemuser" from="systemuserid" to="owninguser" link-type="outer">
-              <attribute name="tc_department" alias="_CRMAutoGen_groupby_column_Num_0" groupby="true" />
-            </link-entity>
-            <attribute aggregate="count" name="tc_casetypeid" alias="_CRMAutoGen_aggregate_column_Num_0" />
+            <attribute alias="_CRMAutoGen_groupby_column_Num_0" groupby="true" name="tc_resortofficeid" />
+            <attribute name="tc_casetypeid" alias="_CRMAutoGen_aggregate_column_Num_0" aggregate="countcolumn" />
             <attribute name="tc_casetypeid" alias="_CRMAutoGen_groupby_column_Num_13" groupby="true" />
           </entity>
         </fetch>
@@ -52,7 +50,7 @@
   </presentationdescription>
   <isdefault>0</isdefault>
   <LocalizedNames>
-    <LocalizedName description="Case Type &amp; Department" languagecode="1033" />
+    <LocalizedName description="Case Type &amp; Resort Office" languagecode="1033" />
   </LocalizedNames>
   <IsCustomizable>1</IsCustomizable>
   <IntroducedVersion>1.0.0.51</IntroducedVersion>

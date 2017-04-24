@@ -24,13 +24,17 @@
             <sections>
               <section name="CardHeader" showlabel="false" showbar="false" columns="111" id="{90ea19e8-d856-4af2-af6e-923e9072fdc0}" IsUserDefined="0">
                 <labels>
+                  <label description="Kopfzeile" languagecode="1031" />
                   <label description="Header" languagecode="1033" />
+                  <label description="En-tête" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{7425b8c3-7f5d-452e-b22b-ec4e17afff42}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Status Reason" languagecode="1033" />
+                        <label description="Raison du statut" languagecode="1036" />
+                        <label description="Statusgrund" languagecode="1031" />
                       </labels>
                       <control id="statuscode" classid="{5D68B988-0661-4db2-BC3E-17598AD3BE6C}" datafieldname="statuscode" disabled="false" />
                     </cell>
@@ -50,6 +54,7 @@
               <section name="CardDetails" showlabel="false" showbar="false" columns="1" id="{23b7d5f8-4ff0-4536-9786-b7f03046b94b}" IsUserDefined="0">
                 <labels>
                   <label description="Details" languagecode="1033" />
+                  <label description="Détails" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
@@ -64,19 +69,25 @@
               </section>
               <section name="CardFooter" showlabel="false" columns="1111" showbar="false" id="{43373d3c-6ff2-430c-8339-0250210c7c86}" IsUserDefined="0">
                 <labels>
+                  <label description="Fußzeile" languagecode="1031" />
                   <label description="Footer" languagecode="1033" />
+                  <label description="Pied de page" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{d2c0ce49-a4a7-4fad-80d8-bb8cc3d4f528}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Owner" languagecode="1033" />
+                        <label description="Propriétaire" languagecode="1036" />
+                        <label description="Besitzer" languagecode="1031" />
                       </labels>
                       <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" disabled="false" />
                     </cell>
                     <cell id="{ff146ce1-86ec-4f43-affc-f64a064890a7}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Created On" languagecode="1033" />
+                        <label description="Créé le" languagecode="1036" />
+                        <label description="Erstellt am" languagecode="1031" />
                       </labels>
                       <control id="createdon" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="createdon" disabled="false" />
                     </cell>

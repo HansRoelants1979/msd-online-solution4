@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<savedquery unmodified="1">
+<savedquery>
   <isquickfindquery>0</isquickfindquery>
   <isprivate>0</isprivate>
   <isdefault>1</isdefault>
@@ -11,6 +11,16 @@
       <row name="result" id="incidentid">
         <cell name="title" width="100" />
         <cell name="customerid" width="150" />
+        <cell name="a_dbfa5a4915eae61181053863bb340dd8.tc_name" width="100" disableSorting="1" />
+        <cell name="incidentstagecode" width="100" />
+        <cell name="tc_latestactivitydate" width="100" />
+        <cell name="caseorigincode" width="100" />
+        <cell name="tc_casetypeid" width="100" />
+        <cell name="statecode" width="100" />
+        <cell name="statuscode" width="100" />
+        <cell name="resolveby" width="100" />
+        <cell name="followupby" width="100" />
+        <cell name="ownerid" width="100" />
       </row>
     </grid>
   </layoutxml>
@@ -26,11 +36,25 @@
           <condition attribute="parentcaseid" operator="null" />
         </filter>
         <order attribute="title" descending="false" />
+        <attribute name="tc_casetypeid" />
+        <attribute name="statuscode" />
+        <attribute name="statecode" />
+        <attribute name="resolveby" />
+        <attribute name="ownerid" />
+        <attribute name="caseorigincode" />
+        <attribute name="followupby" />
+        <link-entity alias="a_dbfa5a4915eae61181053863bb340dd8" name="tc_booking" from="tc_bookingid" to="tc_bookingid" link-type="outer" visible="false">
+          <attribute name="tc_name" />
+        </link-entity>
+        <attribute name="tc_latestactivitydate" />
+        <attribute name="incidentstagecode" />
       </entity>
     </fetch>
   </fetchxml>
   <IntroducedVersion>5.0.0.0</IntroducedVersion>
   <LocalizedNames>
+    <LocalizedName description="Suchansicht: Anfrage" languagecode="1031" />
     <LocalizedName description="Case Lookup View" languagecode="1033" />
+    <LocalizedName description="Vue Recherche d'incidents" languagecode="1036" />
   </LocalizedNames>
 </savedquery>

@@ -5,19 +5,20 @@
   <isquickfindquery>0</isquickfindquery>
   <isprivate>0</isprivate>
   <isdefault>1</isdefault>
-  <returnedtypecode>10020</returnedtypecode>
+  <returnedtypecode>10055</returnedtypecode>
   <savedqueryid>{cb2aa37f-ea42-4b21-bd58-44bc63e18db4}</savedqueryid>
   <layoutxml>
-    <grid name="" object="10020" jump="tc_name" select="1" icon="1" preview="0">
+    <grid name="" object="10055" jump="tc_name" select="1" icon="1" preview="0">
       <row name="tc_compensationline" id="tc_compensationlineid">
         <cell name="tc_name" width="75" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="tc_amount" width="100" />
+        <cell name="tc_bacsamount" width="100" />
+        <cell name="tc_cashamount" width="100" />
+        <cell name="tc_chapsamount" width="100" />
+        <cell name="tc_voucheramount" width="100" />
+        <cell name="tc_vouchertype" width="100" />
+        <cell name="tc_paymentstatus" width="100" />
         <cell name="createdon" width="125" />
-        <cell name="tc_compensation1" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="tc_compensation2" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="tc_compensation3" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="tc_compensation4" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="tc_compensation5" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
       </row>
     </grid>
   </layoutxml>
@@ -32,12 +33,13 @@
           <condition attribute="statecode" operator="eq" value="0" />
         </filter>
         <order attribute="createdon" descending="true" />
-        <attribute name="tc_compensation5" />
-        <attribute name="tc_compensation4" />
-        <attribute name="tc_compensation3" />
-        <attribute name="tc_compensation2" />
-        <attribute name="tc_compensation1" />
         <attribute name="tc_amount" />
+        <attribute name="tc_vouchertype" />
+        <attribute name="tc_voucheramount" />
+        <attribute name="tc_paymentstatus" />
+        <attribute name="tc_chapsamount" />
+        <attribute name="tc_cashamount" />
+        <attribute name="tc_bacsamount" />
       </entity>
     </fetch>
   </fetchxml>

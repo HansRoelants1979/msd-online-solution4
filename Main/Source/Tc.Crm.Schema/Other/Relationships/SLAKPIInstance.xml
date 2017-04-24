@@ -14,7 +14,9 @@
     <ReferencingAttributeName>FirstResponseByKPIId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Nur zur internen Verwendung." languagecode="1031" />
         <Description description="For internal use only." languagecode="1033" />
+        <Description description="Utilisation interne uniquement." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -32,7 +34,9 @@
     <ReferencingAttributeName>ResolveByKPIId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Nur zur internen Verwendung." languagecode="1031" />
         <Description description="For internal use only." languagecode="1033" />
+        <Description description="Utilisation interne uniquement." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -174,41 +178,6 @@
       </EntityRelationshipRole>
       <EntityRelationshipRole>
         <NavigationPropertyName>tc_crresolvebykpislakpiinstance_incident</NavigationPropertyName>
-        <RelationshipRoleType>0</RelationshipRoleType>
-      </EntityRelationshipRole>
-    </EntityRelationshipRoles>
-  </EntityRelationship>
-  <EntityRelationship Name="tc_slakpiinstance_incident">
-    <EntityRelationshipType>OneToMany</EntityRelationshipType>
-    <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.16</IntroducedVersion>
-    <IsHierarchical>0</IsHierarchical>
-    <ReferencingEntityName>Incident</ReferencingEntityName>
-    <ReferencedEntityName>SLAKPIInstance</ReferencedEntityName>
-    <CascadeAssign>NoCascade</CascadeAssign>
-    <CascadeDelete>RemoveLink</CascadeDelete>
-    <CascadeReparent>NoCascade</CascadeReparent>
-    <CascadeShare>NoCascade</CascadeShare>
-    <CascadeUnshare>NoCascade</CascadeUnshare>
-    <CascadeRollupView>NoCascade</CascadeRollupView>
-    <IsValidForAdvancedFind>1</IsValidForAdvancedFind>
-    <ReferencingAttributeName>tc_24hrPromiseResolveByKPIId</ReferencingAttributeName>
-    <RelationshipDescription>
-      <Descriptions>
-        <Description description="Unique identifier for SLA KPI Instance associated with Case." languagecode="1033" />
-      </Descriptions>
-    </RelationshipDescription>
-    <EntityRelationshipRoles>
-      <EntityRelationshipRole>
-        <NavPaneDisplayOption>DoNotDisplay</NavPaneDisplayOption>
-        <NavigationPropertyName>tc_24hrPromiseResolveByKPIId</NavigationPropertyName>
-        <CustomLabels>
-          <CustomLabel description="" languagecode="1033" />
-        </CustomLabels>
-        <RelationshipRoleType>1</RelationshipRoleType>
-      </EntityRelationshipRole>
-      <EntityRelationshipRole>
-        <NavigationPropertyName>tc_slakpiinstance_incident</NavigationPropertyName>
         <RelationshipRoleType>0</RelationshipRoleType>
       </EntityRelationshipRole>
     </EntityRelationshipRoles>

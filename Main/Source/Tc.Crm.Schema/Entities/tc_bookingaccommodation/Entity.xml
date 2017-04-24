@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Entity>
   <Name LocalizedName="Booking Accommodation" OriginalName="Booking Accommodation">tc_bookingaccommodation</Name>
-  <ObjectTypeCode>10010</ObjectTypeCode>
+  <ObjectTypeCode>10025</ObjectTypeCode>
   <EntityInfo>
     <entity Name="tc_bookingaccommodation">
       <LocalizedNames>
@@ -511,7 +511,7 @@
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
           <optionset Name="tc_bookingaccommodation_statecode">
             <OptionSetType>state</OptionSetType>
-            <IntroducedVersion>1.0.0.44</IntroducedVersion>
+            <IntroducedVersion>1.0.0.0</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Status" languagecode="1033" />
@@ -565,7 +565,7 @@
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
           <optionset Name="tc_bookingaccommodation_statuscode">
             <OptionSetType>status</OptionSetType>
-            <IntroducedVersion>1.0.0.44</IntroducedVersion>
+            <IntroducedVersion>1.0.0.0</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Status Reason" languagecode="1033" />
@@ -680,7 +680,7 @@
           <Type>lookup</Type>
           <Name>tc_bookingid</Name>
           <LogicalName>tc_bookingid</LogicalName>
-          <RequiredLevel>none</RequiredLevel>
+          <RequiredLevel>required</RequiredLevel>
           <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
           <ImeMode>auto</ImeMode>
           <ValidForUpdateApi>1</ValidForUpdateApi>
@@ -738,40 +738,6 @@
           <Behavior>3</Behavior>
           <displaynames>
             <displayname description="End Date and Time" languagecode="1033" />
-          </displaynames>
-          <Descriptions>
-            <Description description="" languagecode="1033" />
-          </Descriptions>
-        </attribute>
-        <attribute PhysicalName="tc_ExternalServiceCode">
-          <Type>nvarchar</Type>
-          <Name>tc_externalservicecode</Name>
-          <LogicalName>tc_externalservicecode</LogicalName>
-          <RequiredLevel>none</RequiredLevel>
-          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
-          <ImeMode>auto</ImeMode>
-          <ValidForUpdateApi>1</ValidForUpdateApi>
-          <ValidForReadApi>1</ValidForReadApi>
-          <ValidForCreateApi>1</ValidForCreateApi>
-          <IsCustomField>1</IsCustomField>
-          <IsAuditEnabled>1</IsAuditEnabled>
-          <IsSecured>0</IsSecured>
-          <IntroducedVersion>1.0.0.13</IntroducedVersion>
-          <IsCustomizable>1</IsCustomizable>
-          <IsRenameable>1</IsRenameable>
-          <CanModifySearchSettings>1</CanModifySearchSettings>
-          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
-          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
-          <SourceType>0</SourceType>
-          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
-          <IsSortableEnabled>0</IsSortableEnabled>
-          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
-          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
-          <Format>text</Format>
-          <MaxLength>100</MaxLength>
-          <Length>200</Length>
-          <displaynames>
-            <displayname description="External Service Code" languagecode="1033" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -837,7 +803,7 @@
           <AppDefaultValue>0</AppDefaultValue>
           <optionset Name="tc_bookingaccommodation_tc_externaltransfer">
             <OptionSetType>bit</OptionSetType>
-            <IntroducedVersion>1.0.0.44</IntroducedVersion>
+            <IntroducedVersion>1.0.0.0</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="External Transfer" languagecode="1033" />
@@ -892,7 +858,7 @@
           <AppDefaultValue>0</AppDefaultValue>
           <optionset Name="tc_bookingaccommodation_tc_hassharedroom">
             <OptionSetType>bit</OptionSetType>
-            <IntroducedVersion>1.0.0.44</IntroducedVersion>
+            <IntroducedVersion>1.0.0.0</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Has Shared Room" languagecode="1033" />
@@ -980,7 +946,7 @@
           <AppDefaultValue>0</AppDefaultValue>
           <optionset Name="tc_bookingaccommodation_tc_isexternalservice">
             <OptionSetType>bit</OptionSetType>
-            <IntroducedVersion>1.0.0.44</IntroducedVersion>
+            <IntroducedVersion>1.0.0.0</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Is External Service" languagecode="1033" />
@@ -1013,7 +979,7 @@
           <Name>tc_name</Name>
           <LogicalName>tc_name</LogicalName>
           <RequiredLevel>none</RequiredLevel>
-          <DisplayMask>ActivityPointerRegardingName|PrimaryName|ValidForAdvancedFind|ValidForForm|ValidForGrid|RequiredForForm</DisplayMask>
+          <DisplayMask>PrimaryName|ValidForAdvancedFind|ValidForForm|ValidForGrid|RequiredForForm</DisplayMask>
           <ImeMode>auto</ImeMode>
           <ValidForUpdateApi>1</ValidForUpdateApi>
           <ValidForReadApi>1</ValidForReadApi>
@@ -1069,7 +1035,7 @@
           <AppDefaultValue>0</AppDefaultValue>
           <optionset Name="tc_bookingaccommodation_tc_needtourguideassignment">
             <OptionSetType>bit</OptionSetType>
-            <IntroducedVersion>1.0.0.44</IntroducedVersion>
+            <IntroducedVersion>1.0.0.0</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Need Tour Guide Assignment" languagecode="1033" />
@@ -1124,7 +1090,7 @@
           <AppDefaultValue>0</AppDefaultValue>
           <optionset Name="tc_bookingaccommodation_tc_notificationrequired">
             <OptionSetType>bit</OptionSetType>
-            <IntroducedVersion>1.0.0.44</IntroducedVersion>
+            <IntroducedVersion>1.0.0.0</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Notification Required" languagecode="1033" />
@@ -1176,7 +1142,6 @@
           <IsSortableEnabled>0</IsSortableEnabled>
           <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
-          <Format></Format>
           <MinValue>0</MinValue>
           <MaxValue>100</MaxValue>
           <displaynames>
@@ -1210,7 +1175,6 @@
           <IsSortableEnabled>0</IsSortableEnabled>
           <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
-          <Format></Format>
           <MinValue>0</MinValue>
           <MaxValue>100</MaxValue>
           <displaynames>
@@ -1457,40 +1421,6 @@
             <Description description="" languagecode="1033" />
           </Descriptions>
         </attribute>
-        <attribute PhysicalName="tc_TransferServiceLevel">
-          <Type>nvarchar</Type>
-          <Name>tc_transferservicelevel</Name>
-          <LogicalName>tc_transferservicelevel</LogicalName>
-          <RequiredLevel>none</RequiredLevel>
-          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
-          <ImeMode>auto</ImeMode>
-          <ValidForUpdateApi>1</ValidForUpdateApi>
-          <ValidForReadApi>1</ValidForReadApi>
-          <ValidForCreateApi>1</ValidForCreateApi>
-          <IsCustomField>1</IsCustomField>
-          <IsAuditEnabled>1</IsAuditEnabled>
-          <IsSecured>0</IsSecured>
-          <IntroducedVersion>1.0.0.13</IntroducedVersion>
-          <IsCustomizable>1</IsCustomizable>
-          <IsRenameable>1</IsRenameable>
-          <CanModifySearchSettings>1</CanModifySearchSettings>
-          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
-          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
-          <SourceType>0</SourceType>
-          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
-          <IsSortableEnabled>0</IsSortableEnabled>
-          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
-          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
-          <Format>text</Format>
-          <MaxLength>100</MaxLength>
-          <Length>200</Length>
-          <displaynames>
-            <displayname description="Transfer Service Level" languagecode="1033" />
-          </displaynames>
-          <Descriptions>
-            <Description description="" languagecode="1033" />
-          </Descriptions>
-        </attribute>
         <attribute PhysicalName="tc_TransferServiceLevelType">
           <Type>picklist</Type>
           <Name>tc_transferserviceleveltype</Name>
@@ -1551,7 +1481,7 @@
           <AppDefaultValue>0</AppDefaultValue>
           <optionset Name="tc_bookingaccommodation_tc_withtransfer">
             <OptionSetType>bit</OptionSetType>
-            <IntroducedVersion>1.0.0.44</IntroducedVersion>
+            <IntroducedVersion>1.0.0.0</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="With Transfer" languagecode="1033" />
@@ -1662,7 +1592,6 @@
       <IsDocumentRecommendationsEnabled>0</IsDocumentRecommendationsEnabled>
       <IsBPFEntity>0</IsBPFEntity>
       <OwnershipTypeMask>UserOwned</OwnershipTypeMask>
-      <EntityMask>ActivityPointer</EntityMask>
       <IsAuditEnabled>0</IsAuditEnabled>
       <IsActivity>0</IsActivity>
       <ActivityTypeMask></ActivityTypeMask>
@@ -1717,7 +1646,7 @@
   <RibbonDiffXml />
   <CustomControlDefaultConfigs>
     <CustomControlDefaultConfig>
-      <PrimaryEntityTypeCode>10010</PrimaryEntityTypeCode>
+      <PrimaryEntityTypeCode>10025</PrimaryEntityTypeCode>
       <CustomControlDefaultConfigId>{43b499e9-e6db-e611-80fb-3863bb354ff0}</CustomControlDefaultConfigId>
       <ControlDescriptionXML>
         <controlDescriptions />

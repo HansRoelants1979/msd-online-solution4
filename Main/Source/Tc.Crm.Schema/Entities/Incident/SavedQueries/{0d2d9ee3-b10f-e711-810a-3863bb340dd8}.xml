@@ -11,13 +11,21 @@
     <grid name="resultset" object="112" jump="title" select="1" icon="1" preview="1">
       <row id="incidentid" name="result">
         <cell name="ticketnumber" width="150" />
-        <cell name="tc_casetypeid" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="prioritycode" width="100" />
-        <cell name="caseorigincode" width="100" />
         <cell name="customerid" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="ownerid" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_dbfa5a4915eae61181053863bb340dd8.tc_name" width="100" disableSorting="1" />
+        <cell name="a_cdf05794a0ec49a3b2548ed7aa26cdd5.tc_language" width="100" disableSorting="1" />
+        <cell name="incidentstagecode" width="100" />
+        <cell name="caseorigincode" width="100" />
+        <cell name="tc_casetypeid" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="followupby" width="100" />
+        <cell name="statecode" width="100" />
         <cell name="statuscode" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="createdon" width="100" />
+        <cell name="tc_latestactivitydate" width="100" />
+        <cell name="resolveby" width="100" />
+        <cell name="ownerid" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_destinationid" width="100" />
+        <cell name="tc_resortofficeid" width="100" />
       </row>
     </grid>
   </layoutxml>
@@ -28,7 +36,6 @@
         <attribute name="ticketnumber" />
         <attribute name="tc_casetypeid" />
         <attribute name="statuscode" />
-        <attribute name="prioritycode" />
         <attribute name="ownerid" />
         <attribute name="caseorigincode" />
         <attribute name="customerid" />
@@ -38,6 +45,19 @@
           <condition value="2" attribute="statecode" operator="ne" />
           <condition attribute="ownerid" operator="eq-userid" />
         </filter>
+        <attribute name="statecode" />
+        <attribute name="resolveby" />
+        <attribute name="tc_latestactivitydate" />
+        <attribute name="followupby" />
+        <attribute name="incidentstagecode" />
+        <link-entity alias="a_dbfa5a4915eae61181053863bb340dd8" name="tc_booking" from="tc_bookingid" to="tc_bookingid" link-type="outer" visible="false">
+          <attribute name="tc_name" />
+        </link-entity>
+        <link-entity alias="a_cdf05794a0ec49a3b2548ed7aa26cdd5" name="contact" from="contactid" to="customerid" link-type="outer" visible="false">
+          <attribute name="tc_language" />
+        </link-entity>
+        <attribute name="tc_resortofficeid" />
+        <attribute name="tc_destinationid" />
         <attribute name="incidentid" />
       </entity>
     </fetch>

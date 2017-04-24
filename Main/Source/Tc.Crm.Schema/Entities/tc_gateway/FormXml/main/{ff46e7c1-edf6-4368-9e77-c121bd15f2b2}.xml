@@ -27,6 +27,14 @@
                     </cell>
                   </row>
                   <row>
+                    <cell id="{2c6448c6-809b-5e54-12c1-055899e7b715}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Gateway Name" languagecode="1033" />
+                      </labels>
+                      <control id="tc_gateway" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_gateway" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
                     <cell id="{6bd6b6da-c54b-7577-8ea9-6b8453b6891e}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Country" languagecode="1033" />
@@ -78,9 +86,49 @@
     </header>
     <Navigation>
       <NavBar>
-        <NavBarByRelationshipItem RelationshipName="tc_gateway_tc_locationoffice" Sequence="10000" Area="Info" Id="nav_tc_gateway_tc_locationoffice" Show="false">
+        <NavBarByRelationshipItem RelationshipName="tc_arrivalgateway_tc_bookingtransport" Sequence="9601" Area="Info" Id="nav_tc_arrivalgateway_tc_bookingtransport" Show="false">
           <Titles>
-            <Title LCID="1033" Text="Resort Offices" />
+            <Title LCID="1033" Text="Booking Transports" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_departuregateway_tc_bookingtransport" Sequence="10001" Area="Info" Id="nav_tc_departuregateway_tc_bookingtransport" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Booking Transports" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_destinationgateway_tc_booking" Sequence="10002" Area="Info" Id="nav_tc_destinationgateway_tc_booking" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Bookings" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_gateway_tc_caseline_TransportDepartureAirport" Sequence="10004" Area="Info" Id="nav_tc_gateway_tc_caseline_TransportDepartureAirport" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Case Lines" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_gateway_tc_caseline_TransportArrivalAirport" Sequence="10005" Area="Info" Id="nav_tc_gateway_tc_caseline_TransportArrivalAirport" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Case Lines" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_departuregateway_tc_bookingtransfer" Sequence="10006" Area="Info" Id="nav_tc_departuregateway_tc_bookingtransfer" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Booking Transfers" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_arrivalgateway_tc_bookingtransfer" Sequence="10007" Area="Info" Id="nav_tc_arrivalgateway_tc_bookingtransfer" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Booking Transfers" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_gateway_tc_primary_location" Sequence="1000" Area="Service" Id="nav_tc_gateway_tc_primary_location">
+          <Titles>
+            <Title LCID="1033" Text="Locations" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_gateway_tc_locationoffice" Id="nav_tc_gateway_tc_locationoffice" Show="true" Sequence="1001" Area="Service">
+          <Titles>
+            <Title LCID="1033" Text="Location Offices" />
           </Titles>
         </NavBarByRelationshipItem>
       </NavBar>

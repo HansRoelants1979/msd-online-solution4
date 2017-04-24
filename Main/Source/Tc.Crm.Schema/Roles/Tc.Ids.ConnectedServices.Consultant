@@ -2,7 +2,9 @@
 <Role id="{a65769fa-f9f8-e611-8107-3863bb34fb48}" name="Tc.Ids.ConnectedServices.Consultant">
   <IsCustomizable>1</IsCustomizable>
   <RolePrivileges>
+    <RolePrivilege name="prvAppendAccount" level="Deep" />
     <RolePrivilege name="prvAppendActivity" level="Basic" />
+    <RolePrivilege name="prvAppendContact" level="Deep" />
     <RolePrivilege name="prvAppendIncident" level="Local" />
     <RolePrivilege name="prvAppendKnowledgeArticle" level="Deep" />
     <RolePrivilege name="prvAppendKnowledgeArticleViews" level="Deep" />
@@ -10,10 +12,18 @@
     <RolePrivilege name="prvAppendQueue" level="Local" />
     <RolePrivilege name="prvAppendSLA" level="Local" />
     <RolePrivilege name="prvAppendSLAKPIInstance" level="Local" />
+    <RolePrivilege name="prvAppendtc_booking" level="Deep" />
+    <RolePrivilege name="prvAppendtc_bookingaccommodation" level="Deep" />
+    <RolePrivilege name="prvAppendtc_bookingextraservice" level="Deep" />
+    <RolePrivilege name="prvAppendtc_bookingtransfer" level="Deep" />
+    <RolePrivilege name="prvAppendtc_bookingtransport" level="Deep" />
     <RolePrivilege name="prvAppendtc_compensation" level="Basic" />
     <RolePrivilege name="prvAppendtc_compensationapproval" level="Basic" />
     <RolePrivilege name="prvAppendtc_compensationline" level="Basic" />
+    <RolePrivilege name="prvAppendtc_customerbookingrole" level="Deep" />
+    <RolePrivilege name="prvAppendToAccount" level="Deep" />
     <RolePrivilege name="prvAppendToActivity" level="Basic" />
+    <RolePrivilege name="prvAppendToContact" level="Deep" />
     <RolePrivilege name="prvAppendToIncident" level="Local" />
     <RolePrivilege name="prvAppendToKnowledgeArticle" level="Deep" />
     <RolePrivilege name="prvAppendToKnowledgeArticleViews" level="Deep" />
@@ -21,10 +31,18 @@
     <RolePrivilege name="prvAppendToQueue" level="Local" />
     <RolePrivilege name="prvAppendToSLA" level="Local" />
     <RolePrivilege name="prvAppendToSLAKPIInstance" level="Local" />
+    <RolePrivilege name="prvAppendTotc_booking" level="Deep" />
+    <RolePrivilege name="prvAppendTotc_bookingaccommodation" level="Deep" />
+    <RolePrivilege name="prvAppendTotc_bookingextraservice" level="Deep" />
+    <RolePrivilege name="prvAppendTotc_bookingtransfer" level="Deep" />
+    <RolePrivilege name="prvAppendTotc_bookingtransport" level="Deep" />
     <RolePrivilege name="prvAppendTotc_compensation" level="Basic" />
     <RolePrivilege name="prvAppendTotc_compensationapproval" level="Basic" />
     <RolePrivilege name="prvAppendTotc_compensationline" level="Basic" />
+    <RolePrivilege name="prvAppendTotc_customerbookingrole" level="Deep" />
+    <RolePrivilege name="prvAssignAccount" level="Deep" />
     <RolePrivilege name="prvAssignActivity" level="Basic" />
+    <RolePrivilege name="prvAssignContact" level="Deep" />
     <RolePrivilege name="prvAssignIncident" level="Local" />
     <RolePrivilege name="prvAssignKnowledgeArticle" level="Deep" />
     <RolePrivilege name="prvAssignKnowledgeArticleViews" level="Deep" />
@@ -32,7 +50,9 @@
     <RolePrivilege name="prvAssignSLA" level="Basic" />
     <RolePrivilege name="prvAssignSLAKPIInstance" level="Basic" />
     <RolePrivilege name="prvAssigntc_casetype" level="Basic" />
+    <RolePrivilege name="prvCreateAccount" level="Deep" />
     <RolePrivilege name="prvCreateActivity" level="Basic" />
+    <RolePrivilege name="prvCreateContact" level="Deep" />
     <RolePrivilege name="prvCreateIncident" level="Local" />
     <RolePrivilege name="prvCreateQueue" level="Basic" />
     <RolePrivilege name="prvCreateSharePointData" level="Global" />
@@ -40,7 +60,9 @@
     <RolePrivilege name="prvCreateSLAKPIInstance" level="Local" />
     <RolePrivilege name="prvCreatetc_compensation" level="Basic" />
     <RolePrivilege name="prvCreatetc_compensationline" level="Basic" />
+    <RolePrivilege name="prvReadAccount" level="Deep" />
     <RolePrivilege name="prvReadActivity" level="Deep" />
+    <RolePrivilege name="prvReadContact" level="Deep" />
     <RolePrivilege name="prvReadIncident" level="Local" />
     <RolePrivilege name="prvReadKnowledgeArticle" level="Deep" />
     <RolePrivilege name="prvReadKnowledgeArticleViews" level="Deep" />
@@ -55,16 +77,26 @@
     <RolePrivilege name="prvReadSharePointDocument" level="Global" />
     <RolePrivilege name="prvReadSLA" level="Local" />
     <RolePrivilege name="prvReadSLAKPIInstance" level="Local" />
+    <RolePrivilege name="prvReadtc_booking" level="Deep" />
+    <RolePrivilege name="prvReadtc_bookingaccommodation" level="Deep" />
+    <RolePrivilege name="prvReadtc_bookingextraservice" level="Deep" />
+    <RolePrivilege name="prvReadtc_bookingtransfer" level="Deep" />
+    <RolePrivilege name="prvReadtc_bookingtransport" level="Deep" />
+    <RolePrivilege name="prvReadtc_caseline" level="Deep" />
     <RolePrivilege name="prvReadtc_compensation" level="Basic" />
     <RolePrivilege name="prvReadtc_compensationapproval" level="Basic" />
     <RolePrivilege name="prvReadtc_compensationline" level="Basic" />
+    <RolePrivilege name="prvReadtc_customerbookingrole" level="Deep" />
+    <RolePrivilege name="prvShareAccount" level="Deep" />
     <RolePrivilege name="prvShareActivity" level="Basic" />
     <RolePrivilege name="prvShareIncident" level="Local" />
     <RolePrivilege name="prvShareKnowledgeArticle" level="Deep" />
     <RolePrivilege name="prvShareKnowledgeArticleViews" level="Deep" />
     <RolePrivilege name="prvShareSLA" level="Basic" />
     <RolePrivilege name="prvShareSLAKPIInstance" level="Basic" />
+    <RolePrivilege name="prvWriteAccount" level="Deep" />
     <RolePrivilege name="prvWriteActivity" level="Basic" />
+    <RolePrivilege name="prvWriteContact" level="Deep" />
     <RolePrivilege name="prvWriteIncident" level="Local" />
     <RolePrivilege name="prvWriteQueue" level="Local" />
     <RolePrivilege name="prvWriteSharePointData" level="Global" />

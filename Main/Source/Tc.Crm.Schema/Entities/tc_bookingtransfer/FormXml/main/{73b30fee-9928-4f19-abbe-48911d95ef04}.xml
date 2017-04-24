@@ -11,7 +11,7 @@
           <label description="General" languagecode="1033" />
         </labels>
         <columns>
-          <column width="34%">
+          <column width="50%">
             <sections>
               <section name="tab_3_section_1" showlabel="false" showbar="false" locklevel="0" id="{7908763e-7678-0b70-4820-c16b4281eb38}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115">
                 <labels>
@@ -62,36 +62,7 @@
               </section>
             </sections>
           </column>
-          <column width="33%">
-            <sections>
-              <section name="General_section_3" showlabel="false" showbar="false" locklevel="0" id="{ea545c46-864c-15e4-20d0-9bd6c47456d2}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115">
-                <labels>
-                  <label description="Section" languagecode="1033" />
-                </labels>
-                <rows>
-                  <row>
-                    <cell id="{e2c15d21-716c-9ca2-c098-500516171968}" showlabel="false" rowspan="5" auto="false" colspan="1" locklevel="0">
-                      <labels>
-                        <label description="Note Text" languagecode="1033" />
-                      </labels>
-                      <control id="notescontrol" classid="{06375649-c143-495e-a496-c962e5b4488e}" uniqueid="{c1d1b3a1-9633-c4da-0767-e3b16cbb9669}" disabled="false">
-                        <parameters>
-                          <DefaultTabId>NotesTab</DefaultTabId>
-                          <ShowArticleTab>false</ShowArticleTab>
-                          <SelectDefaultLanguage>00000000-0000-0000-0000-000000000000</SelectDefaultLanguage>
-                        </parameters>
-                      </control>
-                    </cell>
-                  </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                </rows>
-              </section>
-            </sections>
-          </column>
-          <column width="33%">
+          <column width="50%">
             <sections>
               <section name="tab_3_section_2" showlabel="false" showbar="false" locklevel="0" id="{c3d3b7a1-a1d6-2710-ca49-4b885228e514}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115">
                 <labels>
@@ -143,13 +114,13 @@
         <columns>
           <column width="100%">
             <sections>
-              <section name="tab_3_section_3" showlabel="false" showbar="false" locklevel="0" id="{66d07c83-1ead-5772-b312-3ea08c6b9b02}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" height="auto">
+              <section name="tab_3_section_3" showlabel="true" showbar="false" locklevel="0" id="{66d07c83-1ead-5772-b312-3ea08c6b9b02}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" height="auto" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
-                  <label description="Section" languagecode="1033" />
+                  <label description="REMARKS" languagecode="1033" />
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{252ec3c0-4104-8191-a4c2-6142cbc3c198}" showlabel="true" locklevel="0" auto="true" rowspan="5">
+                    <cell id="{252ec3c0-4104-8191-a4c2-6142cbc3c198}" showlabel="false" locklevel="0" auto="true" rowspan="5">
                       <labels>
                         <label description="Remark" languagecode="1033" />
                       </labels>
@@ -168,14 +139,18 @@
       </tab>
       <tab verticallayout="true" id="{2eaf863b-c56a-47e8-b4f8-9de85344317a}" IsUserDefined="1" name="{2eaf863b-c56a-47e8-b4f8-9de85344317a}" expanded="false" locklevel="0" showlabel="true" visible="false">
         <labels>
+          <label description="Allgemein" languagecode="1031" />
           <label description="Hidden" languagecode="1033" />
+          <label description="Général" languagecode="1036" />
         </labels>
         <columns>
           <column width="100%">
             <sections>
               <section showlabel="false" showbar="false" IsUserDefined="0" id="{b65340ba-5201-45c6-8d28-22f30e87f8f4}">
                 <labels>
+                  <label description="Allgemein" languagecode="1031" />
                   <label description="General" languagecode="1033" />
+                  <label description="Général" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
@@ -190,6 +165,8 @@
                     <cell id="{4bb1b200-de32-432d-9be4-cc62950a4afc}">
                       <labels>
                         <label description="Owner" languagecode="1033" />
+                        <label description="Propriétaire" languagecode="1036" />
+                        <label description="Besitzer" languagecode="1031" />
                       </labels>
                       <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
                     </cell>
@@ -198,6 +175,7 @@
                     <cell id="{ab8074eb-4b34-a728-2c1b-23ba42b9a023}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Status" languagecode="1033" />
+                        <label description="Statut" languagecode="1036" />
                       </labels>
                       <control id="statecode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="statecode" disabled="false" uniqueid="{a4d1a213-a669-cabe-e2d1-6dcceb04318b}" />
                     </cell>
@@ -209,8 +187,45 @@
         </columns>
       </tab>
     </tabs>
+    <header id="{8f4196b0-aaea-440d-a8d1-0095dae16d2c}" columns="111">
+      <rows>
+        <row>
+          <cell id="{caf50afe-881d-47f3-9dad-f2a4c1b6bdeb}">
+            <labels>
+              <label description="" languagecode="1033" />
+            </labels>
+          </cell>
+          <cell id="{f64ed28f-690e-42ca-8d9c-49f5add0320c}">
+            <labels>
+              <label description="" languagecode="1033" />
+            </labels>
+          </cell>
+          <cell id="{358de6e5-38c9-c9e4-dd8a-ac193d5baa97}" showlabel="true" locklevel="0">
+            <labels>
+              <label description="Booking" languagecode="1033" />
+            </labels>
+            <control id="header_tc_bookingid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_bookingid" disabled="false" uniqueid="{6a1e90d2-b47e-9818-1565-058cdeb32542}">
+              <parameters>
+                <AutoResolve>true</AutoResolve>
+                <DisableMru>false</DisableMru>
+                <DisableQuickFind>false</DisableQuickFind>
+                <DisableViewPicker>false</DisableViewPicker>
+                <DefaultViewId>{50536415-D0C7-4F4D-A024-8D8B336EFA28}</DefaultViewId>
+                <AllowFilterOff>false</AllowFilterOff>
+              </parameters>
+            </control>
+          </cell>
+        </row>
+      </rows>
+    </header>
     <Navigation>
-      <NavBar></NavBar>
+      <NavBar>
+        <NavBarByRelationshipItem RelationshipName="tc_bookingtransfer_tc_caseline" Sequence="1000" Area="Service" Id="nav_tc_bookingtransfer_tc_caseline">
+          <Titles>
+            <Title LCID="1033" Text="Case Lines" />
+          </Titles>
+        </NavBarByRelationshipItem>
+      </NavBar>
       <NavBarAreas>
         <NavBarArea Id="Info">
           <Titles>

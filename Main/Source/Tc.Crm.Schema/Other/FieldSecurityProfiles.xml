@@ -1,7 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FieldSecurityProfiles>
   <FieldSecurityProfile name="Tc.Base" fieldsecurityprofileid="{596e68a9-f203-e711-810d-1458d041f8e8}">
-    <FieldPermissions />
+    <FieldPermissions>
+      <FieldPermission>
+        <EntityName>tc_caseline</EntityName>
+        <AttributeName>tc_categorylevel4id</AttributeName>
+        <CanRead>0</CanRead>
+        <CanUpdate>0</CanUpdate>
+        <CanCreate>4</CanCreate>
+      </FieldPermission>
+      <FieldPermission>
+        <EntityName>incident</EntityName>
+        <AttributeName>tc_tcproductrelated</AttributeName>
+        <CanRead>4</CanRead>
+        <CanUpdate>0</CanUpdate>
+        <CanCreate>4</CanCreate>
+      </FieldPermission>
+    </FieldPermissions>
+  </FieldSecurityProfile>
+  <FieldSecurityProfile name="Tc.Case.HealthandSafety" description="To change the value of tc_tcproductrelated only by H&amp;S team" fieldsecurityprofileid="{f249bb95-f424-e711-8104-3863bb354ff0}">
+    <FieldPermissions>
+      <FieldPermission>
+        <EntityName>incident</EntityName>
+        <AttributeName>tc_tcproductrelated</AttributeName>
+        <CanRead>4</CanRead>
+        <CanUpdate>4</CanUpdate>
+        <CanCreate>4</CanCreate>
+      </FieldPermission>
+      <FieldPermission>
+        <EntityName>tc_caseline</EntityName>
+        <AttributeName>tc_categorylevel4id</AttributeName>
+        <CanRead>4</CanRead>
+        <CanUpdate>4</CanUpdate>
+        <CanCreate>4</CanCreate>
+      </FieldPermission>
+    </FieldPermissions>
   </FieldSecurityProfile>
   <FieldSecurityProfile name="Tc.CompensationLine.BACS.processing" description="To access the Invoice Status and Invoice Error Description fields on the Compensation Line&#xA;(WNS &amp; CR Managers)" fieldsecurityprofileid="{e101fdc2-9714-e711-810c-3863bb34fb48}">
     <FieldPermissions>

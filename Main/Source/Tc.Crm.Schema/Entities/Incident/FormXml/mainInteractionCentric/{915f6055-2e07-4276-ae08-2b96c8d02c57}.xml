@@ -11,20 +11,26 @@
     <tabs>
       <tab name="Summary" id="{fcfdc216-e3c6-4bbe-baba-1d5774ea78f5}" IsUserDefined="0" locklevel="0" showlabel="false" expanded="true">
         <labels>
+          <label description="Zusammenfassung" languagecode="1031" />
           <label description="Summary" languagecode="1033" />
+          <label description="Résumé" languagecode="1036" />
         </labels>
         <columns>
           <column width="24%">
             <sections>
               <section name="General Info" showlabel="true" showbar="false" locklevel="0" id="{84f29dbc-6013-4ba2-9666-64b471d7459f}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
+                  <label description="ALLGEMEINE INFORMATIONEN" languagecode="1031" />
                   <label description="GENERAL INFORMATION" languagecode="1033" />
+                  <label description="INFORMATIONS GÉNÉRALES" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{82bed4a4-41e1-4c3a-ac46-251fdf691b01}" rowspan="1" showlabel="false" locklevel="1">
                       <labels>
                         <label description="Customer" languagecode="1033" />
+                        <label description="Client" languagecode="1036" />
+                        <label description="Kunde" languagecode="1031" />
                       </labels>
                       <control id="customerpane_qfc" classid="{5C5600E0-1D6E-4205-A272-BE80DA87FD42}" datafieldname="customerid" disabled="false">
                         <parameters>
@@ -39,13 +45,17 @@
               </section>
               <section name="Case Details" showlabel="false" showbar="false" locklevel="0" id="{b1105b8a-4c1c-a045-841b-d688c7826cc6}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115">
                 <labels>
+                  <label description="Anfragedetails" languagecode="1031" />
                   <label description="Case Details" languagecode="1033" />
+                  <label description="Détails de l'incident" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{08077e93-1293-40b4-8b48-b8d5dba7b2a9}" showlabel="true" locklevel="0" colspan="1" availableforphone="false">
                       <labels>
                         <label description="Case Title" languagecode="1033" />
+                        <label description="Titre de l'incident" languagecode="1036" />
+                        <label description="Anfragentitel" languagecode="1031" />
                       </labels>
                       <control id="title" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="title" disabled="false" />
                     </cell>
@@ -54,6 +64,8 @@
                     <cell id="{dcade6ea-49d9-4914-9d8c-4dd45d68b56c}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Case Number" languagecode="1033" />
+                        <label description="Numéro de l’incident" languagecode="1036" />
+                        <label description="Anfragenummer" languagecode="1031" />
                       </labels>
                       <control id="ticketnumber" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="ticketnumber" disabled="true" />
                     </cell>
@@ -62,6 +74,8 @@
                     <cell id="{4e749814-cad5-4f86-b462-dccd684f976c}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Subject" languagecode="1033" />
+                        <label description="Sujet" languagecode="1036" />
+                        <label description="Betreff" languagecode="1031" />
                       </labels>
                       <control id="subjectid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="subjectid" disabled="false" />
                     </cell>
@@ -70,6 +84,8 @@
                     <cell id="{2a4476ce-1954-4a74-be83-3fbccc4b50ec}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Customer" languagecode="1033" />
+                        <label description="Client" languagecode="1036" />
+                        <label description="Kunde" languagecode="1031" />
                       </labels>
                       <control id="customerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="customerid" disabled="false" />
                     </cell>
@@ -78,6 +94,8 @@
                     <cell id="{14ccc597-87b9-4758-9c5c-948bdac72713}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Origin" languagecode="1033" />
+                        <label description="Origine " languagecode="1036" />
+                        <label description="Ursprung" languagecode="1031" />
                       </labels>
                       <control id="caseorigincode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="caseorigincode" disabled="false" />
                     </cell>
@@ -86,6 +104,8 @@
                     <cell id="{0bf39219-671e-4e7f-82ca-c50f52ecae89}">
                       <labels>
                         <label description="Product" languagecode="1033" />
+                        <label description="Produit" languagecode="1036" />
+                        <label description="Produkt" languagecode="1031" />
                       </labels>
                       <control id="productid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="productid">
                         <parameters>
@@ -99,6 +119,8 @@
                     <cell id="{7237401a-07fb-424c-a404-1b4833990d78}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Entitlement" languagecode="1033" />
+                        <label description="Droit" languagecode="1036" />
+                        <label description="Anspruch" languagecode="1031" />
                       </labels>
                       <events>
                         <event name="onclick" application="true" active="true">
@@ -138,6 +160,8 @@
                     <cell id="{6420b8f0-0814-4ec4-8305-f32e6160d1f4}" showlabel="true" locklevel="0" rowspan="3" availableforphone="false">
                       <labels>
                         <label description="Description" languagecode="1033" />
+                        <label description="Description" languagecode="1036" />
+                        <label description="Beschreibung" languagecode="1031" />
                       </labels>
                       <control id="description" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="description" disabled="false" />
                     </cell>
@@ -152,13 +176,17 @@
             <sections>
               <section name="Timeline" showlabel="true" showbar="false" locklevel="1" id="{afcc2215-3dc0-43b7-b9dd-125c0a180700}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
+                  <label description="ZEITPLANUNG" languagecode="1031" />
                   <label description="TIMELINE" languagecode="1033" />
+                  <label description="CHRONOLOGIE" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{3fbc9cb7-5064-4cdc-893f-3b123b910837}" colspan="1" rowspan="20" showlabel="false" locklevel="0">
                       <labels>
+                        <label description="Unterhaltungsregisterkarten" languagecode="1031" />
                         <label description="Conversation Tabs" languagecode="1033" />
+                        <label description="Onglets de conversation" languagecode="1036" />
                       </labels>
                       <control id="interactionwallcontrol" classid="{1F179106-FA28-4495-961E-F6BD93C21974}" disabled="false" />
                     </cell>
@@ -190,13 +218,17 @@
             <sections>
               <section name="ref_pan_Related" showlabel="true" showbar="false" locklevel="1" id="{ba8f5162-e954-41b6-a5e5-c020f303711b}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left" rowheight="25" autoexpand="false">
                 <labels>
+                  <label description="VERKNÜPFT" languagecode="1031" />
                   <label description="RELATED" languagecode="1033" />
+                  <label description="ASSOCIATION" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{a4424014-2410-4968-97c8-fcf40cf6ac0a}" colspan="1" showlabel="false">
                       <labels>
                         <label description="Recent cases and Entitlements" languagecode="1033" />
+                        <label description="Incidents récents et droits" languagecode="1036" />
+                        <label description="Aktuelle Anfragen und Berechtigungen" languagecode="1031" />
                       </labels>
                       <control id="case_qfc" classid="{B68B05F0-A46D-43F8-843B-917920AF806A}" datafieldname="customerid" disabled="false">
                         <parameters>
@@ -210,7 +242,9 @@
                   <row>
                     <cell id="{f525bfca-4d7b-4105-bddd-6c7ef188f243}" colspan="1" showlabel="false" auto="false" rowspan="10">
                       <labels>
+                        <label description="Suche in der Wissensdatenbank" languagecode="1031" />
                         <label description="Knowledge Base Search" languagecode="1033" />
+                        <label description="Recherche dans la Base de connaissances" languagecode="1036" />
                       </labels>
                       <control id="case_kbsearchcontrol" classid="{7CCD1494-1F7A-4E3A-8BDE-F32069DAEB9F}">
                         <parameters>
@@ -246,6 +280,8 @@
                     <cell id="{d12b29d9-5a4a-1ec3-967a-126ce7180e3a}" showlabel="true" colspan="1" auto="false" rowspan="12">
                       <labels>
                         <label description="Similar Cases" languagecode="1033" />
+                        <label description="Incidents similaires" languagecode="1036" />
+                        <label description="Ähnliche Anfragen" languagecode="1031" />
                       </labels>
                       <control id="AzureMLSimilarCasesGrid" classid="{02D4264B-47E2-4B4C-AA95-F439F3F4D458}" uniqueid="{7e00766d-e091-4406-2480-8c932c75dd29}">
                         <parameters>
@@ -287,20 +323,26 @@
       </tab>
       <tab name="Details" id="{1d840db5-11ab-4b32-928e-92855404bd66}" IsUserDefined="0" locklevel="0" showlabel="true" expanded="true">
         <labels>
+          <label description="Details" languagecode="1031" />
           <label description="Details" languagecode="1033" />
+          <label description="Détails" languagecode="1036" />
         </labels>
         <columns>
           <column width="34%">
             <sections>
               <section name="Case Details" showlabel="true" showbar="false" locklevel="0" id="{17fb3051-af36-44fb-bac8-594dabd7db33}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
+                  <label description="ANFRAGEDETAILS" languagecode="1031" />
                   <label description="CASE DETAILS" languagecode="1033" />
+                  <label description="DÉTAILS DE L'INCIDENT" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{d4a4caaa-94de-4c1c-8e09-a89cc229eff6}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Case Title" languagecode="1033" />
+                        <label description="Titre de l'incident" languagecode="1036" />
+                        <label description="Anfragentitel" languagecode="1031" />
                       </labels>
                       <control id="title" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="title" disabled="false" />
                     </cell>
@@ -309,6 +351,8 @@
                     <cell id="{54948b68-684d-4090-9a69-3ba60f2071c8}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="ID" languagecode="1033" />
+                        <label description="ID" languagecode="1036" />
+                        <label description="ID" languagecode="1031" />
                       </labels>
                       <control id="ticketnumber" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="ticketnumber" disabled="true" />
                     </cell>
@@ -317,6 +361,8 @@
                     <cell id="{10e3f3db-f7e4-42de-99b3-847ceb14d783}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Customer" languagecode="1033" />
+                        <label description="Client" languagecode="1036" />
+                        <label description="Kunde" languagecode="1031" />
                       </labels>
                       <control id="customerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="customerid" disabled="false" />
                     </cell>
@@ -325,6 +371,8 @@
                     <cell id="{6b0f730e-8289-4730-b116-74ebb2465d94}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Subject" languagecode="1033" />
+                        <label description="Sujet" languagecode="1036" />
+                        <label description="Betreff" languagecode="1031" />
                       </labels>
                       <control id="subjectid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="subjectid" disabled="false" />
                     </cell>
@@ -333,6 +381,8 @@
                     <cell id="{3688e3b6-2b2f-4b77-8b16-a1fd8063b18b}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Origin" languagecode="1033" />
+                        <label description="Origine " languagecode="1036" />
+                        <label description="Ursprung" languagecode="1031" />
                       </labels>
                       <control id="caseorigincode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="caseorigincode" disabled="false" />
                     </cell>
@@ -341,6 +391,8 @@
                     <cell id="{06f2337b-0ba8-4993-8da8-dd0cec675ca7}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Contact" languagecode="1033" />
+                        <label description="Contact" languagecode="1036" />
+                        <label description="Kontakt" languagecode="1031" />
                       </labels>
                       <events>
                         <event name="onclick" application="true" active="true">
@@ -374,6 +426,8 @@
                     <cell id="{0b03f8b1-d0f6-40ed-9593-ad476c8da3c7}">
                       <labels>
                         <label description="Product" languagecode="1033" />
+                        <label description="Produit" languagecode="1036" />
+                        <label description="Produkt" languagecode="1031" />
                       </labels>
                       <control id="productid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="productid">
                         <parameters>
@@ -387,6 +441,8 @@
                     <cell id="{c6a4b5d1-73ee-4ba0-ba39-7e0b078ca491}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Entitlement" languagecode="1033" />
+                        <label description="Droit" languagecode="1036" />
+                        <label description="Anspruch" languagecode="1031" />
                       </labels>
                       <events>
                         <event name="onclick" application="true" active="true">
@@ -426,13 +482,17 @@
               </section>
               <section id="{60d4e9e9-a10e-45e6-b6d5-5a36776cb72e}" columns="1" showlabel="true" showbar="false" IsUserDefined="0" locklevel="0">
                 <labels>
+                  <label description="BESCHREIBUNG" languagecode="1031" />
                   <label description="DESCRIPTION" languagecode="1033" />
+                  <label description="DESCRIPTION" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{eabe87d5-4a33-4fea-9baa-7b5c39a10ebe}" showlabel="false" locklevel="0" rowspan="3">
                       <labels>
                         <label description="Description" languagecode="1033" />
+                        <label description="Description" languagecode="1036" />
+                        <label description="Beschreibung" languagecode="1031" />
                       </labels>
                       <control id="description" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="description" disabled="false" />
                     </cell>
@@ -447,13 +507,17 @@
             <sections>
               <section name="Additional Details" showlabel="true" showbar="false" locklevel="0" id="{53e72326-a866-46f8-b5a5-635836f92145}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
+                  <label description="WEITERE DETAILS" languagecode="1031" />
                   <label description="ADDITIONAL DETAILS" languagecode="1033" />
+                  <label description="DÉTAILS SUPPLÉMENTAIRES" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{7e77552c-352b-42c5-bfba-f64896392b11}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Type" languagecode="1033" />
+                        <label description="Type" languagecode="1036" />
+                        <label description="Typ" languagecode="1031" />
                       </labels>
                       <control id="casetypecode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="casetypecode" disabled="false" />
                     </cell>
@@ -462,6 +526,8 @@
                     <cell id="{e1556de9-7308-4426-9d55-f6ca6846ec46}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Parent Case" languagecode="1033" />
+                        <label description="Incident parent" languagecode="1036" />
+                        <label description="Übergeordnete Anfrage" languagecode="1031" />
                       </labels>
                       <control id="parentcaseid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="parentcaseid" disabled="false" />
                     </cell>
@@ -470,6 +536,8 @@
                     <cell id="{40ed2015-5127-461f-8cda-8f2cc0043cba}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="IsEscalated" languagecode="1033" />
+                        <label description="IsEscalated" languagecode="1036" />
+                        <label description="IsEscalated" languagecode="1031" />
                       </labels>
                       <control id="isescalated" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="isescalated" disabled="false" />
                     </cell>
@@ -478,6 +546,8 @@
                     <cell id="{0ac33529-ebdb-4c86-981a-2706eb8e4e30}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Escalated On" languagecode="1033" />
+                        <label description="Réaffecté le" languagecode="1036" />
+                        <label description="Eskaliert am" languagecode="1031" />
                       </labels>
                       <control id="escalatedon" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="escalatedon" disabled="false" />
                     </cell>
@@ -486,6 +556,8 @@
                     <cell id="{96c8d2c2-6062-4d29-bf28-53d5d13b200c}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Follow Up By" languagecode="1033" />
+                        <label description="Suivi pour le" languagecode="1036" />
+                        <label description="Nachverfolgung bis" languagecode="1031" />
                       </labels>
                       <control id="followupby" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="followupby" disabled="false" />
                     </cell>
@@ -494,6 +566,8 @@
                     <cell id="{7ebd9944-2069-49fc-af94-cbdc27da64ea}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="First Response Sent" languagecode="1033" />
+                        <label description="Première réponse envoyée" languagecode="1036" />
+                        <label description="Erste Antwort gesendet" languagecode="1031" />
                       </labels>
                       <control id="firstresponsesent" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="firstresponsesent" disabled="false" />
                     </cell>
@@ -502,13 +576,17 @@
               </section>
               <section name="Applicable SLA(STANDARD)" showlabel="true" showbar="false" locklevel="0" id="{9bbc079e-f433-4759-be2a-756fec3c0ee4}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
+                  <label description="GÜLTIGE SLA" languagecode="1031" />
                   <label description="APPLICABLE SLA" languagecode="1033" />
+                  <label description="CONTRAT SLA APPLICABLE" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{b9e47c37-e9bd-46d0-837b-e2bf008fe8e5}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="First Response By" languagecode="1033" />
+                        <label description="Première réponse par" languagecode="1036" />
+                        <label description="Erste Antwort bis" languagecode="1031" />
                       </labels>
                       <control id="responseby" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="responseby" disabled="true" />
                     </cell>
@@ -517,6 +595,8 @@
                     <cell id="{52a189d6-1230-4f1d-aa6c-9909b269c2da}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Resolve By" languagecode="1033" />
+                        <label description="Résoudre en fonction de" languagecode="1036" />
+                        <label description="Abschließen bis" languagecode="1031" />
                       </labels>
                       <control id="resolveby" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="resolveby" disabled="true" />
                     </cell>
@@ -529,13 +609,17 @@
             <sections>
               <section name="Social Response" showlabel="true" showbar="false" locklevel="0" id="{2187e4fb-5940-465a-9a37-3ac907a64e5b}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
+                  <label description="SOCIAL MEDIA-DETAILS" languagecode="1031" />
                   <label description="SOCIAL DETAILS" languagecode="1033" />
+                  <label description="DÉTAILS SOCIAUX" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{0fc341d7-3c79-45ae-b943-b588c75e54c2}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Social Profile" languagecode="1033" />
+                        <label description="Profil social" languagecode="1036" />
+                        <label description="Social Media-Profil" languagecode="1031" />
                       </labels>
                       <control id="socialprofileid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="socialprofileid" disabled="true" />
                     </cell>
@@ -544,6 +628,8 @@
                     <cell id="{d518eeba-8636-4318-9995-ed551aebfb63}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Received As" languagecode="1033" />
+                        <label description="Reçu en tant que" languagecode="1036" />
+                        <label description="Erhalten als" languagecode="1031" />
                       </labels>
                       <control id="messagetypecode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="messagetypecode" disabled="true" />
                     </cell>
@@ -552,6 +638,8 @@
                     <cell id="{0801a6d1-caee-4a20-b499-775641cf9b95}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Influence Score" languagecode="1033" />
+                        <label description="Score d'influence" languagecode="1036" />
+                        <label description="Einflusspunktzahl" languagecode="1031" />
                       </labels>
                       <control id="influencescore" classid="{0D2C745A-E5A8-4c8f-BA63-C6D3BB604660}" datafieldname="influencescore" disabled="true" />
                     </cell>
@@ -560,6 +648,8 @@
                     <cell id="{158b372d-5af9-40c7-b9fb-d6e4b43b2f62}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Sentiment Value" languagecode="1033" />
+                        <label description="Valeur de sentiment" languagecode="1036" />
+                        <label description="Stimmungswert" languagecode="1031" />
                       </labels>
                       <control id="sentimentvalue" classid="{0D2C745A-E5A8-4c8f-BA63-C6D3BB604660}" datafieldname="sentimentvalue" disabled="true" />
                     </cell>
@@ -568,6 +658,8 @@
                     <cell id="{ecc0ff6d-95eb-45ed-863e-13e68ce3c1b5}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Blocked Profile" languagecode="1033" />
+                        <label description="Profil bloqué" languagecode="1036" />
+                        <label description="Gesperrtes Profil" languagecode="1031" />
                       </labels>
                       <control id="blockedprofile" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="blockedprofile" disabled="true" />
                     </cell>
@@ -580,7 +672,9 @@
       </tab>
       <tab name="CASERELATIONSHIP_TAB" id="{ffa6d363-c7d5-47da-a342-f5fb409f276c}" IsUserDefined="0" showlabel="true" expanded="false">
         <labels>
+          <label description="Anfragenbeziehungen" languagecode="1031" />
           <label description="Case Relationships" languagecode="1033" />
+          <label description="Relations d'incidents" languagecode="1036" />
         </labels>
         <columns>
           <column width="34%">
@@ -594,6 +688,8 @@
                     <cell id="{a91a4443-7b1c-419c-9a3c-5ddb40ad65e6}" showlabel="true" colspan="1" auto="false" rowspan="7">
                       <labels>
                         <label description="Merged Cases" languagecode="1033" />
+                        <label description="Incidents fusionnés" languagecode="1036" />
+                        <label description="Zusammengeführte Anfragen" languagecode="1031" />
                       </labels>
                       <control id="MergedCasesGrid" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}">
                         <parameters>
@@ -633,6 +729,8 @@
                     <cell id="{41f72320-4f3f-4dd8-a8a3-8201797cee2e}" showlabel="true" colspan="1" auto="false" rowspan="7">
                       <labels>
                         <label description="Child Cases" languagecode="1033" />
+                        <label description="Incidents enfants" languagecode="1036" />
+                        <label description="Untergeordnete Anfragen" languagecode="1031" />
                       </labels>
                       <control id="ChildCasesGrid" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}">
                         <parameters>
@@ -672,6 +770,8 @@
                     <cell id="{7DD3C4A6-E482-4823-A266-5395DD6AE9BB}" showlabel="true" colspan="1" auto="true" rowspan="4">
                       <labels>
                         <label description="Associated Knowledge Records" languagecode="1033" />
+                        <label description="Enregistrements de connaissances associés" languagecode="1036" />
+                        <label description="Zugeordnete Wissensdatensätze" languagecode="1031" />
                       </labels>
                       <control id="Associated_KnowledgeArticles" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
                         <parameters>
@@ -699,15 +799,7 @@
                 <labels>
                   <label description="" languagecode="1033" />
                 </labels>
-                <rows>
-                  <row>
-                    <cell id="{9b88bd03-e54c-48f6-bec4-4ddaeb3c3ca9}">
-                      <labels>
-                        <label description="" languagecode="1033" />
-                      </labels>
-                    </cell>
-                  </row>
-                </rows>
+                <rows></rows>
               </section>
             </sections>
           </column>
@@ -715,19 +807,20 @@
       </tab>
       <tab name=" Enhanced_SLA_Details_Tab" id="{eb2985ab-3730-4c72-9902-f15d0ffd79a6}" IsUserDefined="0" showlabel="true" expanded="true">
         <labels>
+          <label description="SLA" languagecode="1031" />
           <label description="SLA" languagecode="1033" />
+          <label description="Contrat SLA" languagecode="1036" />
         </labels>
         <columns>
           <column width="100%">
             <sections>
               <section name="SLAKPIInstances" showlabel="true" showbar="false" id="{f5464e76-4274-4b80-98f3-632e246643b2}" IsUserDefined="0" layout="varwidth" labelwidth="102" celllabelposition="Left">
                 <labels>
+                  <label description="SLA-KPI-INSTANZEN" languagecode="1031" />
                   <label description="SLA KPI INSTANCES" languagecode="1033" />
+                  <label description="INSTANCES DE L'INDICATEUR DE PERFORMANCE CLÉ DU CONTRAT SLA" languagecode="1036" />
                 </labels>
-                <rows>
-                  <row></row>
-                  <row />
-                </rows>
+                <rows></rows>
               </section>
               <section name=" Enhanced_SLA_Details_Tab_section_2" showlabel="false" showbar="false" locklevel="0" id="{658ccab3-8708-a313-7025-b6a0b51d9da0}" IsUserDefined="0" layout="varwidth" columns="11" labelwidth="115">
                 <labels>
@@ -773,30 +866,41 @@
           <cell id="{657f908a-233e-4ac7-8688-9b659d8ba73a}" showlabel="true">
             <labels>
               <label description="Priority" languagecode="1033" />
+              <label description="Priorité" languagecode="1036" />
+              <label description="Priorität" languagecode="1031" />
             </labels>
             <control id="header_prioritycode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="prioritycode" disabled="false" />
           </cell>
           <cell id="{3f6d4e94-f4db-47b7-9b9b-7a908adfe5b6}" showlabel="true">
             <labels>
               <label description="Created On" languagecode="1033" />
+              <label description="Créé le" languagecode="1036" />
+              <label description="Erstellt am" languagecode="1031" />
             </labels>
             <control id="header_createdon" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="createdon" disabled="true" />
           </cell>
           <cell id="{66807859-dda0-40bb-899d-8824296234b6}">
             <labels>
               <label description="Status" languagecode="1033" />
+              <label description="Statut " languagecode="1036" />
+              <label description="Status" languagecode="1031" />
             </labels>
             <control id="header_statuscode" classid="{5D68B988-0661-4db2-BC3E-17598AD3BE6C}" datafieldname="statuscode" disabled="false" />
           </cell>
           <cell id="{6faa07f6-4a02-4f48-8c3c-91e160884aa6}">
             <labels>
               <label description="Owner" languagecode="1033" />
+              <label description="Propriétaire" languagecode="1036" />
+              <label description="Besitzer" languagecode="1031" />
             </labels>
             <control id="header_ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" disabled="false" />
           </cell>
         </row>
       </rows>
     </header>
+    <DisplayConditions FallbackForm="true" Order="2">
+      <Everyone />
+    </DisplayConditions>
     <events>
       <event name="onload" application="true" active="true">
         <InternalHandlers>
@@ -894,14 +998,15 @@
         </NavBarArea>
       </NavBarAreas>
     </Navigation>
-    <DisplayConditions FallbackForm="true" Order="2">
-      <Everyone />
-    </DisplayConditions>
   </form>
   <LocalizedNames>
+    <LocalizedName description="Anfrage für interaktive Funktionen" languagecode="1031" />
     <LocalizedName description="Case for Interactive experience" languagecode="1033" />
+    <LocalizedName description="Incident pour l'expérience interactive" languagecode="1036" />
   </LocalizedNames>
   <Descriptions>
+    <Description description="Standardanfrageformular für interaktive Funktionen" languagecode="1031" />
     <Description description="Default Interactive experience Case form." languagecode="1033" />
+    <Description description="Formulaire Incident pour l'expérience interactive par défaut." languagecode="1036" />
   </Descriptions>
 </systemform>

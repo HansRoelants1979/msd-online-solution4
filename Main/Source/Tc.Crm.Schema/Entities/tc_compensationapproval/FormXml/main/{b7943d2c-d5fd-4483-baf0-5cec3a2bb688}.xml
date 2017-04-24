@@ -6,16 +6,20 @@
   <FormActivationState>1</FormActivationState>
   <form shownavigationbar="true" showImage="false" maxWidth="1900">
     <tabs>
-      <tab id="{55d11748-b7ce-4783-9f69-4e3789cc9229}" verticallayout="true" IsUserDefined="1">
+      <tab id="{55d11748-b7ce-4783-9f69-4e3789cc9229}" IsUserDefined="1" verticallayout="true">
         <labels>
+          <label description="Allgemein" languagecode="1031" />
           <label description="General" languagecode="1033" />
+          <label description="Général" languagecode="1036" />
         </labels>
         <columns>
           <column width="33%">
             <sections>
-              <section id="{db0e0272-d2d8-472d-94bf-382d3210a3ff}" IsUserDefined="0" showlabel="false" showbar="false">
+              <section id="{db0e0272-d2d8-472d-94bf-382d3210a3ff}" showlabel="false" IsUserDefined="0" showbar="false">
                 <labels>
+                  <label description="Allgemein" languagecode="1031" />
                   <label description="General" languagecode="1033" />
+                  <label description="Général" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
@@ -23,29 +27,20 @@
                       <labels>
                         <label description="Name" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_name" uniqueid="{b897e856-95c1-4e64-281a-8249906b2e56}" />
+                      <control disabled="false" id="tc_name" uniqueid="{b897e856-95c1-4e64-281a-8249906b2e56}" datafieldname="tc_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" />
                     </cell>
                   </row>
                   <row>
-                    <cell id="{0cd632c5-ecab-3ec8-846d-40828dbb0a12}" showlabel="true" locklevel="0">
+                    <cell id="{3b207e01-8d4a-8d26-e993-20d1d84e6936}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Requested By" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="createdby" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="createdby" uniqueid="{b270395c-984b-17d3-5197-60537e281077}">
-                        <parameters>
-                          <AutoResolve>true</AutoResolve>
-                          <DisableMru>false</DisableMru>
-                          <DisableQuickFind>false</DisableQuickFind>
-                          <DisableViewPicker>false</DisableViewPicker>
-                          <DefaultViewId>{E88CA999-0B16-4AE9-B6A9-9EDC840D42D8}</DefaultViewId>
-                          <AllowFilterOff>false</AllowFilterOff>
-                        </parameters>
-                      </control>
+                      <control id="tc_requestedby" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_requestedby" disabled="false" />
                     </cell>
                   </row>
                 </rows>
               </section>
-              <section id="{0559e2b9-9139-9062-bd3e-a4b55de68c80}" name="{55d11748-b7ce-4783-9f69-4e3789cc9229}_section_3" IsUserDefined="0" columns="1" showlabel="false" showbar="false" locklevel="0" layout="varwidth" labelwidth="115">
+              <section id="{0559e2b9-9139-9062-bd3e-a4b55de68c80}" name="{55d11748-b7ce-4783-9f69-4e3789cc9229}_section_3" showlabel="false" locklevel="0" IsUserDefined="0" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" labelwidth="135" showbar="false" columns="1">
                 <labels>
                   <label description="Section" languagecode="1033" />
                 </labels>
@@ -55,7 +50,7 @@
                       <labels>
                         <label description="Offer Amount" languagecode="1033" />
                       </labels>
-                      <control disabled="true" id="tc_totalcompensationofferamount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_totalcompensationofferamount" uniqueid="{a3beabee-43a4-aeb5-dac7-7d8ad1e2de37}" />
+                      <control disabled="true" id="tc_totalcompensationofferamount" uniqueid="{a3beabee-43a4-aeb5-dac7-7d8ad1e2de37}" datafieldname="tc_totalcompensationofferamount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" />
                     </cell>
                   </row>
                   <row>
@@ -63,7 +58,7 @@
                       <labels>
                         <label description="Approval Status" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_approvalstatus" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_approvalstatus" uniqueid="{1d0568b5-aca2-7c1b-2522-2cc4ab63b3e4}" />
+                      <control disabled="false" id="tc_approvalstatus" uniqueid="{1d0568b5-aca2-7c1b-2522-2cc4ab63b3e4}" datafieldname="tc_approvalstatus" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" />
                     </cell>
                   </row>
                   <row>
@@ -71,7 +66,7 @@
                       <labels>
                         <label description="Approved/Rejected By" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_approvedby" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_approvedby" uniqueid="{1c98316e-c075-c53b-a09e-148acd917a88}">
+                      <control disabled="false" id="tc_approvedby" uniqueid="{1c98316e-c075-c53b-a09e-148acd917a88}" datafieldname="tc_approvedby" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}">
                         <parameters>
                           <AutoResolve>true</AutoResolve>
                           <DisableMru>false</DisableMru>
@@ -88,48 +83,31 @@
                       <labels>
                         <label description="Approved/Rejected On" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_approvedon" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="tc_approvedon" uniqueid="{b403d453-4c51-4d93-1d23-76d64c63da87}" />
+                      <control disabled="false" id="tc_approvedon" uniqueid="{b403d453-4c51-4d93-1d23-76d64c63da87}" datafieldname="tc_approvedon" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" />
                     </cell>
                   </row>
                   <row>
-                    <cell id="{01c8abe8-978d-a874-ce91-7912e68d1612}" showlabel="true" locklevel="0">
+                    <cell id="{01c8abe8-978d-a874-ce91-7912e68d1612}" showlabel="true" locklevel="0" rowspan="8">
                       <labels>
                         <label description="Comments" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_comment" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="tc_comment" uniqueid="{4640ab88-7209-0686-119d-ee881eeba90a}" />
+                      <control disabled="false" id="tc_comment" uniqueid="{4640ab88-7209-0686-119d-ee881eeba90a}" datafieldname="tc_comment" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" />
                     </cell>
                   </row>
-                </rows>
-              </section>
-              <section id="{7a056db3-8148-4ecb-9265-c33a6cd8adfd}" height="auto" IsUserDefined="0" showlabel="false" showbar="false">
-                <labels>
-                  <label description="Notes" languagecode="1033" />
-                </labels>
-                <rows>
-                  <row>
-                    <cell id="{74e8b78a-4cff-40fb-a737-bdaab7c9c73c}" showlabel="false" locklevel="0" rowspan="4" auto="false">
-                      <labels>
-                        <label description="Note Text" languagecode="1033" />
-                      </labels>
-                      <control disabled="false" id="notescontrol" classid="{06375649-c143-495e-a496-c962e5b4488e}" uniqueid="{6e984576-7d4a-0a77-eb2a-4c5c4d869164}">
-                        <parameters>
-                          <DefaultTabId>NotesTab</DefaultTabId>
-                          <ShowArticleTab>false</ShowArticleTab>
-                          <SelectDefaultLanguage>00000000-0000-0000-0000-000000000000</SelectDefaultLanguage>
-                        </parameters>
-                      </control>
-                    </cell>
-                  </row>
-                  <row />
-                  <row />
-                  <row />
+                  <row></row>
+                  <row></row>
+                  <row></row>
+                  <row></row>
+                  <row></row>
+                  <row></row>
+                  <row></row>
                 </rows>
               </section>
             </sections>
           </column>
           <column width="66%">
             <sections>
-              <section id="{0b0c6c2c-a930-e5e8-426b-86d45d169917}" name="{55d11748-b7ce-4783-9f69-4e3789cc9229}_section_4" IsUserDefined="0" columns="11" showlabel="false" showbar="false" locklevel="0" layout="varwidth" labelwidth="115">
+              <section id="{0b0c6c2c-a930-e5e8-426b-86d45d169917}" name="{55d11748-b7ce-4783-9f69-4e3789cc9229}_section_4" showlabel="false" locklevel="0" IsUserDefined="0" layout="varwidth" labelwidth="115" showbar="false" columns="11">
                 <labels>
                   <label description="Section" languagecode="1033" />
                 </labels>
@@ -139,9 +117,27 @@
                       <labels>
                         <label description="Approve By" languagecode="1033" />
                       </labels>
-                      <control disabled="true" id="tc_approveby" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="tc_approveby" uniqueid="{522493da-cbbc-c5b1-561a-9e81778e8ddb}" />
+                      <control disabled="true" id="tc_approveby" uniqueid="{522493da-cbbc-c5b1-561a-9e81778e8ddb}" datafieldname="tc_approveby" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" />
                     </cell>
-                    <cell id="{4bd64d56-5192-5c3d-ead4-0dd75dee8985}" showlabel="false">
+                    <cell id="{edadc5e7-75ad-c00d-bd37-d4808b26951e}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{83064d96-7a32-4d7a-ddc8-717192d1e975}" showlabel="false" auto="false" colspan="1">
+                      <labels>
+                        <label description="Approval Timer" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="ApprovalTimer" datafieldname="tc_compensationapprovalkpi" classid="{5C5600E0-1D6E-4205-A272-BE80DA87FD42}">
+                        <parameters>
+                          <QuickForms>&lt;QuickFormIds&gt;&lt;QuickFormId entityname="slakpiinstance"&gt;0f11b135-275d-47fb-a680-b8ba05592db9&lt;/QuickFormId&gt;&lt;/QuickFormIds&gt;</QuickForms>
+                          <ControlMode>Edit</ControlMode>
+                        </parameters>
+                      </control>
+                    </cell>
+                    <cell id="{b68423bc-9935-4083-80a1-18960243a85c}" showlabel="false">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
@@ -152,19 +148,46 @@
                       <labels>
                         <label description="Compensation Lines" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="CompensationLines" classid="{5C5600E0-1D6E-4205-A272-BE80DA87FD42}" datafieldname="tc_compensationid">
+                      <control disabled="false" id="CompensationLines" datafieldname="tc_compensationid" classid="{5C5600E0-1D6E-4205-A272-BE80DA87FD42}">
                         <parameters>
                           <QuickForms>&lt;QuickFormIds&gt;&lt;QuickFormId entityname="tc_compensation"&gt;58ef8e27-a26a-4f89-8159-0e82c863772c&lt;/QuickFormId&gt;&lt;/QuickFormIds&gt;</QuickForms>
                           <ControlMode>Edit</ControlMode>
                         </parameters>
                       </control>
                     </cell>
-                    <cell id="{72561127-a292-464a-d48a-e4ea58ce7b5c}" showlabel="false">
+                    <cell id="{a1b8483a-a4dd-ee3d-91d1-2516e67102d5}" showlabel="false">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
                     </cell>
                   </row>
+                </rows>
+              </section>
+              <section id="{7a056db3-8148-4ecb-9265-c33a6cd8adfd}" height="auto" showlabel="false" IsUserDefined="0" showbar="false">
+                <labels>
+                  <label description="Notizen" languagecode="1031" />
+                  <label description="Notes" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{74e8b78a-4cff-40fb-a737-bdaab7c9c73c}" showlabel="false" locklevel="0" auto="false" rowspan="4">
+                      <labels>
+                        <label description="Notiztext" languagecode="1031" />
+                        <label description="Note Text" languagecode="1033" />
+                        <label description="Texte de la note" languagecode="1036" />
+                      </labels>
+                      <control disabled="false" id="notescontrol" uniqueid="{6e984576-7d4a-0a77-eb2a-4c5c4d869164}" classid="{06375649-c143-495e-a496-c962e5b4488e}">
+                        <parameters>
+                          <DefaultTabId>NotesTab</DefaultTabId>
+                          <ShowArticleTab>false</ShowArticleTab>
+                          <SelectDefaultLanguage>00000000-0000-0000-0000-000000000000</SelectDefaultLanguage>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                  <row></row>
+                  <row></row>
+                  <row></row>
                 </rows>
               </section>
             </sections>
@@ -179,13 +202,24 @@
             <labels>
               <label description="Compensation" languagecode="1033" />
             </labels>
-            <control disabled="false" id="header_tc_compensationid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_compensationid" />
+            <control disabled="true" id="header_tc_compensationid" uniqueid="{3d61c0ba-9402-db82-8e43-e32d2a3b9d38}" datafieldname="tc_compensationid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}">
+              <parameters>
+                <AutoResolve>true</AutoResolve>
+                <DisableMru>false</DisableMru>
+                <DisableQuickFind>false</DisableQuickFind>
+                <DisableViewPicker>false</DisableViewPicker>
+                <DefaultViewId>{87D58398-6DB0-44B6-B273-88E1B1543F90}</DefaultViewId>
+                <AllowFilterOff>false</AllowFilterOff>
+              </parameters>
+            </control>
           </cell>
           <cell id="{32eda88b-e48e-2ee8-582d-86133b431c30}" showlabel="true" locklevel="0">
             <labels>
               <label description="Owner" languagecode="1033" />
+              <label description="Propriétaire" languagecode="1036" />
+              <label description="Besitzer" languagecode="1031" />
             </labels>
-            <control disabled="false" id="header_ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" uniqueid="{15933597-66b1-4298-4334-4a50cbc184d2}">
+            <control disabled="true" id="header_ownerid" uniqueid="{15933597-66b1-4298-4334-4a50cbc184d2}" datafieldname="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}">
               <parameters>
                 <AutoResolve>true</AutoResolve>
                 <DisableMru>false</DisableMru>
@@ -206,20 +240,25 @@
           <cell id="{c8a41553-8729-da54-382c-71872b2832c5}" showlabel="true" locklevel="0">
             <labels>
               <label description="Status" languagecode="1033" />
+              <label description="Statut" languagecode="1036" />
             </labels>
-            <control disabled="true" id="footer_statecode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="statecode" />
+            <control disabled="true" id="footer_statecode" datafieldname="statecode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" />
           </cell>
           <cell id="{8d481e94-ec73-9b15-09d9-74a36ae9003c}" showlabel="true" locklevel="0">
             <labels>
               <label description="Created By" languagecode="1033" />
+              <label description="Créé par" languagecode="1036" />
+              <label description="Erstellt von" languagecode="1031" />
             </labels>
-            <control disabled="true" id="footer_createdby" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="createdby" />
+            <control disabled="true" id="footer_createdby" datafieldname="createdby" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" />
           </cell>
           <cell id="{480d4464-8488-e544-9cad-1848149492e8}" showlabel="true" locklevel="0">
             <labels>
               <label description="Created On" languagecode="1033" />
+              <label description="Créé le" languagecode="1036" />
+              <label description="Erstellt am" languagecode="1031" />
             </labels>
-            <control disabled="true" id="footer_createdon" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="createdon" />
+            <control disabled="true" id="footer_createdon" datafieldname="createdon" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" />
           </cell>
         </row>
       </rows>

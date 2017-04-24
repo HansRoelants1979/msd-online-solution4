@@ -161,43 +161,23 @@
         <columns>
           <column width="100%">
             <sections>
-              <section name="tab_3_section_1" showlabel="false" showbar="false" locklevel="0" id="{cae7927d-3456-4d0e-2795-2a624d30d736}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" height="auto">
+              <section name="tab_3_section_1" showlabel="true" showbar="false" locklevel="0" id="{cae7927d-3456-4d0e-2795-2a624d30d736}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" height="auto" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
-                  <label description="Section" languagecode="1033" />
+                  <label description="REMARKS" languagecode="1033" />
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{4d161ccc-c67e-d914-432a-1d9d1e0e0cac}" showlabel="true" locklevel="0" auto="true" rowspan="5">
+                    <cell id="{4d161ccc-c67e-d914-432a-1d9d1e0e0cac}" showlabel="false" locklevel="0" auto="true" rowspan="5">
                       <labels>
                         <label description="Remark" languagecode="1033" />
                       </labels>
                       <control id="tc_remark" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="tc_remark" disabled="true" uniqueid="{51a8a6e1-8c33-2724-6843-03b82cc85d88}" />
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row height="auto"></row>
-                  <row>
-                    <cell id="{b693a430-0217-78e6-618e-256de53187c6}" showlabel="false" rowspan="5" auto="false" colspan="1" locklevel="0">
-                      <labels>
-                        <label description="Note Text" languagecode="1033" />
-                      </labels>
-                      <control id="notescontrol" classid="{06375649-c143-495e-a496-c962e5b4488e}" uniqueid="{51627ce5-a8ab-8852-5a6d-a158642b29b0}" disabled="false">
-                        <parameters>
-                          <DefaultTabId>NotesTab</DefaultTabId>
-                          <OrderByActivityWall>descending</OrderByActivityWall>
-                          <SortActivityWall>modifiedon</SortActivityWall>
-                          <ShowArticleTab>false</ShowArticleTab>
-                          <SelectDefaultLanguage>00000000-0000-0000-0000-000000000000</SelectDefaultLanguage>
-                        </parameters>
-                      </control>
-                    </cell>
-                  </row>
                   <row />
                   <row />
                   <row />
-                  <row />
+                  <row height="auto" />
                 </rows>
               </section>
             </sections>
@@ -264,7 +244,13 @@
       </rows>
     </header>
     <Navigation>
-      <NavBar></NavBar>
+      <NavBar>
+        <NavBarByRelationshipItem RelationshipName="tc_bookingaccommodation_tc_caseline" Sequence="1000" Area="Service" Id="nav_tc_bookingaccommodation_tc_caseline">
+          <Titles>
+            <Title LCID="1033" Text="Case Lines" />
+          </Titles>
+        </NavBarByRelationshipItem>
+      </NavBar>
       <NavBarAreas>
         <NavBarArea Id="Info">
           <Titles>

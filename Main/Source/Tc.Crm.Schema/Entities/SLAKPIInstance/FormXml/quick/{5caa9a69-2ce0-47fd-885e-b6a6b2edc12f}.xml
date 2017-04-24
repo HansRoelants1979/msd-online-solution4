@@ -13,13 +13,13 @@
         <columns>
           <column width="100%">
             <sections>
-              <section id="{886b0140-35d3-4ba8-85b7-ff573c684767}" name="tab_1_column_1_section_1" columns="1" showlabel="false" showbar="false" IsUserDefined="0" locklevel="0" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
+              <section id="{886b0140-35d3-4ba8-85b7-ff573c684767}" name="tab_1_column_1_section_1" showlabel="false" celllabelposition="Left" celllabelalignment="Left" labelwidth="115" locklevel="0" IsUserDefined="0" showbar="false" columns="1">
                 <labels>
                   <label description="Respond By" languagecode="1033" />
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{d11c9393-9368-b931-29c7-614ad9ae5002}" showlabel="true" colspan="1" auto="false" rowspan="2">
+                    <cell id="{d11c9393-9368-b931-29c7-614ad9ae5002}" showlabel="true" rowspan="2" auto="false" colspan="1">
                       <labels>
                         <label description="Respond By" languagecode="1033" />
                       </labels>
@@ -28,11 +28,19 @@
                           <SuccessConditionName>status</SuccessConditionName>
                           <SuccessConditionValue>4</SuccessConditionValue>
                           <FailureTimeField>failuretime</FailureTimeField>
+                          <FailureConditionName>status</FailureConditionName>
+                          <FailureConditionValue>1</FailureConditionValue>
+                          <WarningConditionName>status</WarningConditionName>
+                          <WarningConditionValue>2</WarningConditionValue>
+                          <CancelConditionName>status</CancelConditionName>
+                          <CancelConditionValue>5</CancelConditionValue>
+                          <PauseConditionName>status</PauseConditionName>
+                          <PauseConditionValue>3</PauseConditionValue>
                         </parameters>
                       </control>
                     </cell>
                   </row>
-                  <row></row>
+                  <row />
                 </rows>
               </section>
             </sections>

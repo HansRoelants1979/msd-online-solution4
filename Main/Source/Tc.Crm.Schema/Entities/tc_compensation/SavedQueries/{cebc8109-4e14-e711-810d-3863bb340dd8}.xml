@@ -5,14 +5,13 @@
   <isquickfindquery>0</isquickfindquery>
   <isprivate>0</isprivate>
   <isdefault>0</isdefault>
-  <returnedtypecode>10019</returnedtypecode>
+  <returnedtypecode>10054</returnedtypecode>
   <savedqueryid>{cebc8109-4e14-e711-810d-3863bb340dd8}</savedqueryid>
   <layoutxml>
-    <grid name="resultset" icon="1" preview="1" select="1" jump="tc_name" object="10019">
+    <grid name="resultset" icon="1" preview="1" select="1" jump="tc_name" object="10054">
       <row id="tc_compensationid" name="result">
         <cell name="tc_name" width="150" />
         <cell name="tc_amount" width="100" />
-        <cell name="a_d443b2130af9e61181073863bb34fb48.tc_department" width="100" disableSorting="1" />
         <cell name="a_d443b2130af9e61181073863bb34fb48.parentsystemuserid" width="100" disableSorting="1" />
         <cell name="tc_amount_base" width="100" />
         <cell name="tc_approvalstatus" width="100" />
@@ -45,7 +44,6 @@
         </filter>
         <link-entity name="systemuser" alias="a_d443b2130af9e61181073863bb34fb48" to="owninguser" from="systemuserid" link-type="outer" visible="false">
           <attribute name="parentsystemuserid" />
-          <attribute name="tc_department" />
         </link-entity>
         <attribute name="tc_compensationid" />
       </entity>

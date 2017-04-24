@@ -14,11 +14,13 @@
     <ReferencingAttributeName>PreferredServiceId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Wählen Sie den von der Firma bevorzugten Service zur Bezugnahme bei der Planung von Serviceaktivitäten aus." languagecode="1031" />
         <Description description="Choose the account's preferred service for reference when you schedule service activities." languagecode="1033" />
+        <Description description="Choisissez le service préféré du compte pour référence lorsque vous planifiez des activités de service." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
-  <EntityRelationship Name="Service_Annotation">
+  <EntityRelationship Name="Service_Annotation" unmodified="1">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IntroducedVersion>5.0.0.0</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
@@ -32,7 +34,9 @@
     <ReferencingAttributeName>ObjectId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Objekts, dem die Notiz zugeordnet ist." languagecode="1031" />
         <Description description="Unique identifier of the object with which the note is associated." languagecode="1033" />
+        <Description description="Identificateur unique de l'objet auquel la note est associée." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -50,14 +54,16 @@
     <ReferencingAttributeName>PreferredServiceId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Wählen Sie den bevorzugten Service des Kontakts aus, um eine korrekte Serviceplanung für den Kunden sicherzustellen." languagecode="1031" />
         <Description description="Choose the contact's preferred service to make sure services are scheduled correctly for the customer." languagecode="1033" />
+        <Description description="Choisissez le service préféré du contact pour vous assurer que les services sont planifiés correctement pour le client." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
   <EntityRelationship Name="tc_assistancerequest_service_serviceid">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.46</IntroducedVersion>
+    <IntroducedVersion>1.0.0.51</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_assistancerequest</ReferencingEntityName>
     <ReferencedEntityName>Service</ReferencedEntityName>
@@ -69,14 +75,16 @@
     <ReferencingAttributeName>ServiceId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner eines zugeordneten Services." languagecode="1031" />
         <Description description="Unique identifier of an associated service." languagecode="1033" />
+        <Description description="Identificateur unique d'un service associé." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
   <EntityRelationship Name="tc_surveyresponse_service_serviceid">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.46</IntroducedVersion>
+    <IntroducedVersion>1.0.0.51</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_surveyresponse</ReferencingEntityName>
     <ReferencedEntityName>Service</ReferencedEntityName>
@@ -88,7 +96,9 @@
     <ReferencingAttributeName>ServiceId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner eines zugeordneten Services." languagecode="1031" />
         <Description description="Unique identifier of an associated service." languagecode="1033" />
+        <Description description="Identificateur unique d'un service associé." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>

@@ -5,24 +5,28 @@
   <isquickfindquery>0</isquickfindquery>
   <isprivate>0</isprivate>
   <isdefault>1</isdefault>
-  <returnedtypecode>10015</returnedtypecode>
+  <returnedtypecode>10037</returnedtypecode>
   <savedqueryid>{26f3a8be-a545-4579-b2d4-7f4b58457e37}</savedqueryid>
   <layoutxml>
-    <grid name="resultset" object="10015" jump="tc_name" select="1" icon="1" preview="1">
+    <grid name="resultset" object="10037" jump="tc_name" select="1" icon="1" preview="1">
       <row id="tc_casecategoryid" name="result">
         <cell name="tc_name" width="300" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_casetypeid" width="100" />
+        <cell name="tc_selectionpath" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
       </row>
     </grid>
   </layoutxml>
   <querytype>0</querytype>
   <fetchxml>
-    <fetch version="1.0" mapping="logical">
+    <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
       <entity name="tc_casecategory">
-        <filter type="and">
-          <condition value="0" operator="eq" attribute="statecode" />
-        </filter>
-        <order attribute="tc_name" descending="false" />
         <attribute name="tc_name" />
+        <order attribute="tc_name" descending="false" />
+        <filter type="and">
+          <condition attribute="statecode" operator="eq" value="0" />
+        </filter>
+        <attribute name="tc_casetypeid" />
+        <attribute name="tc_selectionpath" />
         <attribute name="tc_casecategoryid" />
       </entity>
     </fetch>

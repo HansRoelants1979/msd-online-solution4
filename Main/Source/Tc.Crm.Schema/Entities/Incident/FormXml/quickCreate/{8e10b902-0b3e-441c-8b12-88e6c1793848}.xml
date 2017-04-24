@@ -11,14 +11,18 @@
     <tabs>
       <tab id="{4f4a616e-1065-492f-a7fa-f391e7351957}" name="tab_1" expanded="true" locklevel="0" showlabel="false" IsUserDefined="0">
         <labels>
+          <label description="Anfrage" languagecode="1031" />
           <label description="Case" languagecode="1033" />
+          <label description="Incident" languagecode="1036" />
         </labels>
         <columns>
           <column width="45%">
             <sections>
               <section id="{4a4dca34-82e7-466e-a629-8fdffd0729c1}" name="tab_1_column_1_section_1" locklevel="0" showlabel="true" IsUserDefined="0" celllabelalignment="Left" columns="1" showbar="false" labelwidth="140" celllabelposition="Left">
                 <labels>
+                  <label description="Anfragedetails" languagecode="1031" />
                   <label description="Case Details" languagecode="1033" />
+                  <label description="Détails de l'incident" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
@@ -98,6 +102,8 @@
                     <cell id="{ac7aa3eb-be29-a35c-17e1-3ec713ee2cc6}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Customer" languagecode="1033" />
+                        <label description="Client" languagecode="1036" />
+                        <label description="Kunde" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="customerid" datafieldname="customerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" uniqueid="{7b792ae6-c229-9cc6-3418-0e18dcc78a04}">
                         <parameters>
@@ -111,6 +117,8 @@
                     <cell id="{21b8b3b2-41b5-02a6-26cd-7d0053394998}" locklevel="0" showlabel="true" visible="false" availableforphone="false">
                       <labels>
                         <label description="Subject" languagecode="1033" />
+                        <label description="Sujet" languagecode="1036" />
+                        <label description="Betreff" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="subjectid" datafieldname="subjectid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" uniqueid="{c8e07258-69a7-b026-c2e7-291c98990245}" />
                     </cell>
@@ -119,6 +127,8 @@
                     <cell id="{3e828306-545b-20c9-7aae-73cb466b0b00}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Origin" languagecode="1033" />
+                        <label description="Origine " languagecode="1036" />
+                        <label description="Ursprung" languagecode="1031" />
                       </labels>
                       <control id="caseorigincode" datafieldname="caseorigincode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" uniqueid="{3c70c3e4-d218-59dd-9d20-c3aa736d7860}" />
                     </cell>
@@ -144,6 +154,8 @@
                     <cell id="{05620F33-1720-4545-90C3-F2AFFF4611AD}" locklevel="0" showlabel="true" visible="false" availableforphone="false">
                       <labels>
                         <label description="Resolve By" languagecode="1033" />
+                        <label description="Résoudre en fonction de" languagecode="1036" />
+                        <label description="Abschließen bis" languagecode="1031" />
                       </labels>
                       <control disabled="true" id="resolveby" datafieldname="resolveby" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" uniqueid="{d9d2bda0-a8a4-abea-ee13-ae6bb8d2545d}" />
                     </cell>
@@ -152,6 +164,8 @@
                     <cell id="{4820D236-B50D-4F02-876A-889F60B86D9B}" locklevel="0" showlabel="true" visible="false" availableforphone="false">
                       <labels>
                         <label description="First Response By" languagecode="1033" />
+                        <label description="Première réponse par" languagecode="1036" />
+                        <label description="Erste Antwort bis" languagecode="1031" />
                       </labels>
                       <control disabled="true" id="responseby" datafieldname="responseby" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" uniqueid="{c80985c4-d634-6a5a-2480-4e8deca934a4}" />
                     </cell>
@@ -160,6 +174,8 @@
                     <cell id="{1432B3C0-3FE6-4631-B0D0-5A63F42B1688}" locklevel="1" showlabel="true" visible="false">
                       <labels>
                         <label description="Owner" languagecode="1033" />
+                        <label description="Attribuer aux autres" languagecode="1036" />
+                        <label description="Anderen zuweisen" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="ownerid" datafieldname="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" uniqueid="{9a8b5a89-0a8e-dbd7-d354-a5cd07354990}">
                         <parameters>
@@ -177,29 +193,11 @@
             <sections>
               <section id="{f65d6ded-e8d2-45f7-9033-bc2884b9fc23}" name="tab_1_column_2_section_1" locklevel="0" showlabel="true" IsUserDefined="0" celllabelalignment="Left" columns="1" showbar="false" labelwidth="115" celllabelposition="Left">
                 <labels>
+                  <label description="Andere Details" languagecode="1031" />
                   <label description="Customer Details" languagecode="1033" />
+                  <label description="Autres détails" languagecode="1036" />
                 </labels>
-                <rows>
-                  <row>
-                    <cell id="{7866d8da-a7a1-bc63-b3be-2ed61a5647bb}" showlabel="false">
-                      <labels>
-                        <label description="" languagecode="1033" />
-                      </labels>
-                    </cell>
-                  </row>
-                  <row>
-                    <cell id="{cab0416d-d096-c386-6b96-d693d9b99d57}" showlabel="false">
-                      <labels>
-                        <label description="" languagecode="1033" />
-                      </labels>
-                    </cell>
-                    <cell id="{64925b61-e9cc-c045-d3cc-385e0cbaa51e}" showlabel="false">
-                      <labels>
-                        <label description="" languagecode="1033" />
-                      </labels>
-                    </cell>
-                  </row>
-                </rows>
+                <rows></rows>
               </section>
             </sections>
           </column>
@@ -207,27 +205,24 @@
             <sections>
               <section id="{9500078b-c9a0-4472-915f-22682c920ced}" name="tab_1_column_3_section_1" locklevel="0" showlabel="true" IsUserDefined="0" celllabelalignment="Left" columns="1" showbar="false" labelwidth="150" celllabelposition="Left" visible="false">
                 <labels>
+                  <label description="Beschreibung" languagecode="1031" />
                   <label description="Other Details" languagecode="1033" />
+                  <label description="Description" languagecode="1036" />
                 </labels>
-                <rows>
-                  <row>
-                    <cell id="{18451b26-9777-3cac-c13e-cd783d95bc6c}" showlabel="false">
-                      <labels>
-                        <label description="" languagecode="1033" />
-                      </labels>
-                    </cell>
-                  </row>
-                </rows>
+                <rows></rows>
               </section>
             </sections>
           </column>
         </columns>
       </tab>
     </tabs>
+    <DisplayConditions FallbackForm="true" Order="3">
+      <Everyone />
+    </DisplayConditions>
     <events>
       <event name="onsave" application="true" active="true">
         <InternalHandlers>
-          <Handler passExecutionContext="true" functionName="Mscrm.IncidentMainSystemLibraryWebResource.form_OnSave" libraryName="Incident_main_system_library.js" handlerUniqueId="ed27ea24-dc09-47be-8af3-52721df36d96" enabled="true" />
+          <Handler functionName="Mscrm.IncidentMainSystemLibraryWebResource.form_OnSave" libraryName="Incident_main_system_library.js" handlerUniqueId="ed27ea24-dc09-47be-8af3-52721df36d96" enabled="true" passExecutionContext="true" />
         </InternalHandlers>
       </event>
     </events>
@@ -246,14 +241,15 @@
       </internalresources>
     </clientresources>
     <controlDescriptions />
-    <DisplayConditions FallbackForm="true" Order="3">
-      <Everyone />
-    </DisplayConditions>
   </form>
   <LocalizedNames>
+    <LocalizedName description="Anfrage schnell erfassen" languagecode="1031" />
     <LocalizedName description="DO NOT USE" languagecode="1033" />
+    <LocalizedName description="Création rapide d'un incident" languagecode="1036" />
   </LocalizedNames>
   <Descriptions>
+    <Description description="Standardformular für Schnellerfassung für Anfrage" languagecode="1031" />
     <Description description="Default quick create form for Case" languagecode="1033" />
+    <Description description="Formulaire de création rapide par défaut pour l'incident" languagecode="1036" />
   </Descriptions>
 </systemform>

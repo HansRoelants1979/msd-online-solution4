@@ -5,25 +5,26 @@
   <isquickfindquery>0</isquickfindquery>
   <isprivate>0</isprivate>
   <isdefault>0</isdefault>
-  <returnedtypecode>10041</returnedtypecode>
+  <returnedtypecode>10063</returnedtypecode>
   <savedqueryid>{ef9eccb2-0b16-e711-8104-3863bb354ff0}</savedqueryid>
   <layoutxml>
-    <grid name="resultset" object="10041" jump="tc_name" select="1" preview="1" icon="1">
+    <grid name="resultset" object="10063" jump="tc_name" select="1" preview="1" icon="1">
       <row name="result" id="tc_compensationapprovalid">
         <cell name="aa.tc_caseid" width="100" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="aa.ownerid" width="125" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_requestedby" width="100" />
         <cell name="tc_totalcompensationofferamount" width="100" />
         <cell name="tc_approvalstatus" width="100" />
+        <cell name="tc_comment" width="100" disableSorting="1" />
         <cell name="tc_approvedby" width="100" />
         <cell name="tc_approvedon" width="100" />
-        <cell name="createdon" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="statuscode" width="100" />
+        <cell name="createdon" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
       </row>
     </grid>
   </layoutxml>
   <querytype>0</querytype>
   <fetchxml>
-    <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
+    <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="true">
       <entity name="tc_compensationapproval">
         <attribute name="createdon" />
         <attribute name="statuscode" />
@@ -31,6 +32,8 @@
         <attribute name="tc_approvalstatus" />
         <attribute name="tc_approvedon" />
         <attribute name="tc_approvedby" />
+        <attribute name="tc_requestedby" />
+        <attribute name="tc_comment" />
         <order attribute="tc_totalcompensationofferamount" descending="false" />
         <filter type="and">
           <condition attribute="statecode" operator="eq" value="1" />
@@ -38,17 +41,22 @@
         </filter>
         <link-entity name="tc_compensation" from="tc_compensationid" to="tc_compensationid" alias="aa">
           <attribute name="tc_caseid" />
-          <attribute name="ownerid" />
           <link-entity name="incident" from="incidentid" to="tc_caseid" alias="ab">
             <link-entity name="systemuser" from="systemuserid" to="owninguser" alias="ac">
-              <filter type="and">
-                <condition attribute="tc_department" operator="eq" value="950000001" />
-              </filter>
+              <link-entity name="systemuserroles" from="systemuserid" to="systemuserid" visible="false" intersect="true">
+                <link-entity name="role" from="roleid" to="roleid" alias="ad">
+                  <filter type="and">
+                    <condition attribute="name" operator="eq" value="In Destination Rep" />
+                  </filter>
+                </link-entity>
+              </link-entity>
             </link-entity>
-            <link-entity name="tc_gateway" from="tc_gatewayid" to="tc_gateway" alias="ad">
-              <filter type="and">
-                <condition attribute="ownerid" operator="eq-userid" />
-              </filter>
+            <link-entity name="tc_booking" from="tc_bookingid" to="tc_bookingid" alias="ae">
+              <link-entity name="tc_gateway" from="tc_gatewayid" to="tc_destinationgatewayid" alias="af">
+                <filter type="and">
+                  <condition attribute="ownerid" operator="eq" uiname="Viktor Kanaylo" uitype="systemuser" value="{2EF3CDCE-33F4-E611-8102-3863BB351D00}" />
+                </filter>
+              </link-entity>
             </link-entity>
           </link-entity>
         </link-entity>

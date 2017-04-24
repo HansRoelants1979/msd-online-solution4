@@ -5,25 +5,25 @@
   <isquickfindquery>0</isquickfindquery>
   <isprivate>0</isprivate>
   <isdefault>0</isdefault>
-  <returnedtypecode>10017</returnedtypecode>
+  <returnedtypecode>10049</returnedtypecode>
   <savedqueryid>{01a22365-57f7-e611-80ff-3863bb354ff0}</savedqueryid>
   <layoutxml>
-    <grid name="resultset" object="10017" jump="tc_name" select="1" icon="1" preview="1">
+    <grid name="resultset" object="10049" jump="tc_name" select="1" icon="1" preview="1">
       <row id="tc_caselineid" name="result">
+        <cell name="tc_servicetype" imageproviderwebresource="$webresource:" imageproviderfunctionname="" width="200" />
         <cell name="tc_categorylevel1id" imageproviderwebresource="$webresource:" imageproviderfunctionname="" width="300" />
         <cell name="tc_casecategory2id" imageproviderwebresource="$webresource:" imageproviderfunctionname="" width="300" />
-        <cell name="tc_category3id" imageproviderwebresource="$webresource:" imageproviderfunctionname="" width="300" />
-        <cell name="tc_servicetype" imageproviderwebresource="$webresource:" imageproviderfunctionname="" width="200" />
+        <cell name="tc_category3id" width="100" />
       </row>
     </grid>
   </layoutxml>
   <querytype>0</querytype>
   <fetchxml>
-    <fetch distinct="false" mapping="logical" output-format="xml-platform" version="1.0">
+    <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
       <entity name="tc_caseline">
         <attribute name="tc_categorylevel1id" />
         <attribute name="tc_casecategory2id" />
-        <attribute name="tc_category3id" />
+        <attribute name="tc_servicetype" />
         <order attribute="tc_categorylevel1id" descending="false" />
         <filter type="and">
           <condition attribute="statecode" operator="in">
@@ -31,7 +31,7 @@
             <value>1</value>
           </condition>
         </filter>
-        <attribute name="tc_servicetype" />
+        <attribute name="tc_category3id" />
         <attribute name="tc_caselineid" />
       </entity>
     </fetch>

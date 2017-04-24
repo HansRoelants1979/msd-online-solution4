@@ -5,13 +5,13 @@
   <isquickfindquery>0</isquickfindquery>
   <isprivate>0</isprivate>
   <isdefault>0</isdefault>
-  <returnedtypecode>10041</returnedtypecode>
+  <returnedtypecode>10063</returnedtypecode>
   <savedqueryid>{5b4a2a13-f512-e711-810f-1458d041f8e8}</savedqueryid>
   <layoutxml>
-    <grid name="resultset" object="10041" jump="tc_name" select="1" preview="1" icon="1">
+    <grid name="resultset" object="10063" jump="tc_name" select="1" preview="1" icon="1">
       <row name="result" id="tc_compensationapprovalid">
         <cell name="aa.tc_caseid" width="100" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="aa.ownerid" width="125" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_requestedby" width="100" />
         <cell name="tc_totalcompensationofferamount" width="100" />
         <cell name="createdon" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="tc_approveby" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
@@ -41,8 +41,8 @@
               </filter>
             </link-entity>
           </link-entity>
-          <attribute name="ownerid" />
         </link-entity>
+        <attribute name="tc_requestedby" />
         <attribute name="tc_compensationapprovalid" />
       </entity>
     </fetch>

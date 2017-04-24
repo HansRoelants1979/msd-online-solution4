@@ -5,15 +5,16 @@
   <isquickfindquery>0</isquickfindquery>
   <isprivate>0</isprivate>
   <isdefault>1</isdefault>
-  <returnedtypecode>10010</returnedtypecode>
+  <returnedtypecode>10025</returnedtypecode>
   <savedqueryid>{7ef40e07-9835-41cf-bbb9-28788ac8d909}</savedqueryid>
   <layoutxml>
-    <grid name="" object="10010" jump="tc_name" select="1" icon="1" preview="1">
+    <grid name="" object="10025" jump="tc_name" select="1" icon="1" preview="1">
       <row name="tc_bookingaccommodation" id="tc_bookingaccommodationid">
         <cell name="tc_bookingid" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="tc_boardtype" width="100" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="tc_startdateandtime" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="tc_enddateandtime" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="ownerid" width="100" />
       </row>
     </grid>
   </layoutxml>
@@ -26,6 +27,7 @@
         <attribute name="tc_bookingid" />
         <attribute name="tc_boardtype" />
         <order attribute="tc_startdateandtime" descending="true" />
+        <attribute name="ownerid" />
         <attribute name="tc_bookingaccommodationid" />
       </entity>
     </fetch>

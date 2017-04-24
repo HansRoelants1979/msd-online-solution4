@@ -8,20 +8,26 @@
     <tabs>
       <tab name="SUMMARY_TAB" id="{13c118dd-d4ad-48ee-8087-d35f5b5f2490}" IsUserDefined="0" showlabel="false" expanded="true">
         <labels>
+          <label description="Zusammenfassung" languagecode="1031" />
           <label description="Summary" languagecode="1033" />
+          <label description="Résumé" languagecode="1036" />
         </labels>
         <columns>
           <column width="24%">
             <sections>
               <section name="CONTACT_INFORMATION" showlabel="true" showbar="false" id="{101071f5-50e1-4c8b-9a07-ba8e22941e7f}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelposition="Left">
                 <labels>
+                  <label description="ALLGEMEINE INFORMATIONEN" languagecode="1031" />
                   <label description="GENERAL INFORMATION" languagecode="1033" />
+                  <label description="INFORMATIONS GÉNÉRALES" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{80cd1184-6b57-447e-b4d0-8764cc69fd15}" colspan="1" showlabel="false">
                       <labels>
                         <label description="Company Name" languagecode="1033" />
+                        <label description="Nom de la société" languagecode="1036" />
+                        <label description="Firmenname" languagecode="1031" />
                       </labels>
                       <control id="contactquickform" classid="{5C5600E0-1D6E-4205-A272-BE80DA87FD42}" datafieldname="parentcustomerid" disabled="false">
                         <parameters>
@@ -36,6 +42,8 @@
                     <cell id="{513cdd75-ded3-4ec3-898c-11bf547bcd7c}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="First Name" languagecode="1033" />
+                        <label description="Prénom" languagecode="1036" />
+                        <label description="Vorname" languagecode="1031" />
                       </labels>
                       <control id="firstname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="firstname" disabled="false" />
                     </cell>
@@ -44,6 +52,8 @@
                     <cell id="{67339c7e-8111-4056-b58c-639a6c4d84f4}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Last Name" languagecode="1033" />
+                        <label description="Nom de famille" languagecode="1036" />
+                        <label description="Nachname" languagecode="1031" />
                       </labels>
                       <control id="lastname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="lastname" disabled="false" />
                     </cell>
@@ -52,6 +62,8 @@
                     <cell id="{1303bf7d-8554-4f3c-99b6-33b9642845d5}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Account Name" languagecode="1033" />
+                        <label description="Nom du compte" languagecode="1036" />
+                        <label description="Kontoname" languagecode="1031" />
                       </labels>
                       <control id="parentcustomerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="parentcustomerid" disabled="false" />
                     </cell>
@@ -60,6 +72,8 @@
                     <cell id="{0fd67383-480d-4cd4-a4a5-1cbaf263ae85}" showlabel="true">
                       <labels>
                         <label description="Mobile Phone" languagecode="1033" />
+                        <label description="Téléphone mobile" languagecode="1036" />
+                        <label description="Mobiltelefon" languagecode="1031" />
                       </labels>
                       <control id="mobilephone" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="mobilephone" disabled="false" />
                     </cell>
@@ -68,6 +82,8 @@
                     <cell id="{ef7da3b9-54b4-42f3-9df3-de1f86a930f3}" showlabel="true">
                       <labels>
                         <label description="Fax" languagecode="1033" />
+                        <label description="Télécopie" languagecode="1036" />
+                        <label description="Fax" languagecode="1031" />
                       </labels>
                       <control id="fax" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="fax" disabled="false" />
                     </cell>
@@ -76,6 +92,8 @@
                     <cell id="{546e368a-0ffc-4c1d-bff1-3b44703fc5be}" showlabel="true">
                       <labels>
                         <label description="Contact Method" languagecode="1033" />
+                        <label description="Mode de communication" languagecode="1036" />
+                        <label description="Kontaktmethode" languagecode="1031" />
                       </labels>
                       <control id="preferredcontactmethodcode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="preferredcontactmethodcode" disabled="false" />
                     </cell>
@@ -84,6 +102,8 @@
                     <cell id="{7a7f9e6a-c480-4951-bc2a-237e081b4a5f}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Address" languagecode="1033" />
+                        <label description="Adresse" languagecode="1036" />
+                        <label description="Adresse" languagecode="1031" />
                       </labels>
                       <control id="address1_composite" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="address1_composite" disabled="false" />
                     </cell>
@@ -96,13 +116,17 @@
             <sections>
               <section name="Timeline" showlabel="true" showbar="false" locklevel="1" id="{50082ca6-ba88-4fd6-9692-916c7bd9eed0}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
+                  <label description="ZEITPLANUNG" languagecode="1031" />
                   <label description="TIMELINE" languagecode="1033" />
+                  <label description="CHRONOLOGIE" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{754eb055-3142-4ca6-b929-aa672dcd0a75}" colspan="1" rowspan="20" showlabel="false" locklevel="0">
                       <labels>
+                        <label description="Unterhaltungsregisterkarten" languagecode="1031" />
                         <label description="Conversation Tabs" languagecode="1033" />
+                        <label description="Onglets de conversation" languagecode="1036" />
                       </labels>
                       <control id="interactionwallcontrol" classid="{1F179106-FA28-4495-961E-F6BD93C21974}" disabled="false"></control>
                     </cell>
@@ -134,13 +158,17 @@
             <sections>
               <section name="ref_pan_CUSTOMER_DETAILS_TAB" showlabel="true" showbar="false" id="{62a14c24-6d88-42a6-be2b-5b8d59c29b6d}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelposition="Top">
                 <labels>
+                  <label description="VERKNÜPFT" languagecode="1031" />
                   <label description="RELATED" languagecode="1033" />
+                  <label description="ASSOCIATION" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{13e8bc1a-3a65-4786-b844-d495e1b506b3}" showlabel="true" colspan="1" rowspan="5">
                       <labels>
                         <label description="Recent Opportunities" languagecode="1033" />
+                        <label description="Opportunités récentes" languagecode="1036" />
+                        <label description="Aktuelle Verkaufschancen" languagecode="1031" />
                       </labels>
                       <control id="contactopportunitiesgrid" classid="{02D4264B-47E2-4B4C-AA95-F439F3F4D458}">
                         <parameters>
@@ -171,6 +199,8 @@
                     <cell id="{2e615cba-5311-4288-989e-0bfde553b7ac}" showlabel="true" colspan="1" rowspan="5">
                       <labels>
                         <label description="Recent Cases" languagecode="1033" />
+                        <label description="Incidents récents" languagecode="1036" />
+                        <label description="Aktuelle Anfragen" languagecode="1031" />
                       </labels>
                       <control id="contactcasessgrid" classid="{02D4264B-47E2-4B4C-AA95-F439F3F4D458}">
                         <parameters>
@@ -202,6 +232,8 @@
                     <cell id="{b551f6f7-7c3d-42bc-9b7f-a08e87f92334}" showlabel="true" colspan="1" rowspan="7">
                       <labels>
                         <label description="Entitlements" languagecode="1033" />
+                        <label description="Droits" languagecode="1036" />
+                        <label description="Berechtigungen" languagecode="1031" />
                       </labels>
                       <control id="subgrid_Entitlement" classid="{02D4264B-47E2-4B4C-AA95-F439F3F4D458}">
                         <parameters>
@@ -238,20 +270,26 @@
       </tab>
       <tab name="DETAILS_TAB" id="{3f11f670-7ed1-4efa-b43b-9b2f07531d21}" IsUserDefined="0" expanded="true" showlabel="true">
         <labels>
+          <label description="Details" languagecode="1031" />
           <label description="Details" languagecode="1033" />
+          <label description="Détails" languagecode="1036" />
         </labels>
         <columns>
           <column width="34%">
             <sections>
               <section name="PERSONAL INFORMATION" showlabel="true" showbar="false" id="{748b7f66-a65c-43ac-8eb5-3bde012488d2}" IsUserDefined="0" columns="1" labelwidth="115" celllabelposition="Left">
                 <labels>
+                  <label description="PERSÖNLICH" languagecode="1031" />
                   <label description="PERSONAL" languagecode="1033" />
+                  <label description="PERSONNEL" languagecode="1036" />
                 </labels>
                 <rows>
                   <row height="stdwithlabel">
                     <cell id="{14c3cfa9-0d99-4abe-918f-0073dd6db8ff}" showlabel="true">
                       <labels>
                         <label description="Do not Use" languagecode="1033" />
+                        <label description="Sexe" languagecode="1036" />
+                        <label description="Geschlecht" languagecode="1031" />
                       </labels>
                       <control id="gendercode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="gendercode" disabled="false" />
                     </cell>
@@ -260,6 +298,8 @@
                     <cell id="{7f995b2b-e5b7-4fd6-9192-08e0f960a2ce}" showlabel="true">
                       <labels>
                         <label description="Marital Status" languagecode="1033" />
+                        <label description="État civil" languagecode="1036" />
+                        <label description="Familienstand" languagecode="1031" />
                       </labels>
                       <control id="familystatuscode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="familystatuscode" disabled="false" />
                     </cell>
@@ -268,6 +308,8 @@
                     <cell id="{e8f92320-38ba-413b-bb01-956ed0f72277}" showlabel="true">
                       <labels>
                         <label description="Spouse/Partner Name" languagecode="1033" />
+                        <label description="Nom du (de la) conjoint(e)/partenaire" languagecode="1036" />
+                        <label description="Name des Ehepartners/der Ehepartnerin" languagecode="1031" />
                       </labels>
                       <control id="spousesname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="spousesname" disabled="false" />
                     </cell>
@@ -276,6 +318,8 @@
                     <cell id="{59639742-1fc0-4392-946f-1555732c70ef}" showlabel="true">
                       <labels>
                         <label description="Date of Birth" languagecode="1033" />
+                        <label description="Date de naissance" languagecode="1036" />
+                        <label description="Geburtstag" languagecode="1031" />
                       </labels>
                       <control id="birthdate" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="birthdate" disabled="false" />
                     </cell>
@@ -284,6 +328,8 @@
                     <cell id="{14f90ddb-6d27-4edd-9285-44c86c80b7c8}" showlabel="true">
                       <labels>
                         <label description="Anniversary" languagecode="1033" />
+                        <label description="Date d'anniversaire" languagecode="1036" />
+                        <label description="Jahrestag" languagecode="1031" />
                       </labels>
                       <control id="anniversary" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="anniversary" disabled="false" />
                     </cell>
@@ -292,13 +338,17 @@
               </section>
               <section name="PERSONAL_NOTES_SECTION" showlabel="true" showbar="false" locklevel="0" id="{d7f5280c-18ab-49d3-800f-282eaab40801}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Top">
                 <labels>
+                  <label description="Persönliche Notizen" languagecode="1031" />
                   <label description="PERSONAL NOTES" languagecode="1033" />
+                  <label description="NOTES PERSONNELLES" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{ed2d473e-a5e4-4c08-bf37-d6fd27a1ce48}" showlabel="false" locklevel="0" rowspan="5">
                       <labels>
                         <label description="Description" languagecode="1033" />
+                        <label description="Description" languagecode="1036" />
+                        <label description="Beschreibung" languagecode="1031" />
                       </labels>
                       <control id="description" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="description" disabled="false" />
                     </cell>
@@ -315,13 +365,17 @@
             <sections>
               <section name="marketing information" showlabel="true" showbar="false" locklevel="0" id="{65631b32-444a-42b3-86f6-7d73c0d3a4c1}" IsUserDefined="0" layout="varheight" columns="1" labelwidth="115" celllabelposition="Left">
                 <labels>
+                  <label description="Marketing" languagecode="1031" />
                   <label description="MARKETING" languagecode="1033" />
+                  <label description="MARKETING" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{8c992f19-17f9-49d3-9536-128c30b29d79}">
                       <labels>
                         <label description="Originating Lead" languagecode="1033" />
+                        <label description="Prospect d'origine" languagecode="1036" />
+                        <label description="Ursprungslead" languagecode="1031" />
                       </labels>
                       <control id="originatingleadid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="originatingleadid" />
                     </cell>
@@ -330,6 +384,8 @@
                     <cell auto="false" showlabel="true" locklevel="0" rowspan="1" colspan="1" id="{e1a1c71f-a32f-4c04-a856-151731ef3d89}">
                       <labels>
                         <label description="Last Campaign Date" languagecode="1033" />
+                        <label description="Dernière date de la campagne" languagecode="1036" />
+                        <label description="Letztes Kampagnendatum" languagecode="1031" />
                       </labels>
                       <control id="lastusedincampaign" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="lastusedincampaign" disabled="true" />
                     </cell>
@@ -338,6 +394,8 @@
                     <cell auto="false" showlabel="true" locklevel="0" rowspan="1" colspan="1" id="{e2ac01e4-74eb-4d60-a47f-315248805061}">
                       <labels>
                         <label description="Marketing Materials" languagecode="1033" />
+                        <label description="Documents marketing" languagecode="1036" />
+                        <label description="Marketingmaterialien" languagecode="1031" />
                       </labels>
                       <control id="donotsendmm" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="donotsendmm" disabled="false" />
                     </cell>
@@ -346,13 +404,17 @@
               </section>
               <section name="CONTACT_PREFERENCES" showlabel="true" showbar="false" id="{9c17a290-ee6f-43d9-ab88-3b555178e01a}" IsUserDefined="0" columns="1" labelwidth="115" celllabelposition="Left">
                 <labels>
+                  <label description="KONTAKTVOREINSTELLUNGEN" languagecode="1031" />
                   <label description="CONTACT PREFERENCES" languagecode="1033" />
+                  <label description="PRÉFÉRENCES DE CONTACT" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{531b596e-2854-4adf-b441-b6cfeafc3bf3}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Contact Method" languagecode="1033" />
+                        <label description="Mode de communication" languagecode="1036" />
+                        <label description="Kontaktmethode" languagecode="1031" />
                       </labels>
                       <control id="preferredcontactmethodcode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="preferredcontactmethodcode" disabled="false" />
                     </cell>
@@ -361,6 +423,8 @@
                     <cell id="{a53a5815-3db8-4155-ab1c-2b518377d5ed}">
                       <labels>
                         <label description="Email" languagecode="1033" />
+                        <label description="Courrier électronique" languagecode="1036" />
+                        <label description="E-Mail" languagecode="1031" />
                       </labels>
                       <control id="donotemail" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="donotemail" />
                     </cell>
@@ -369,6 +433,8 @@
                     <cell id="{50ffbb64-cd55-4a62-8191-0722a11c4ff0}">
                       <labels>
                         <label description="Follow Email" languagecode="1033" />
+                        <label description="Suivre le courrier électronique" languagecode="1036" />
+                        <label description="E-Mail folgen" languagecode="1031" />
                       </labels>
                       <control id="followemail" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="followemail" />
                     </cell>
@@ -377,6 +443,8 @@
                     <cell id="{5ef6d4b6-f3cb-4aa0-aa63-7f7b574aeac2}">
                       <labels>
                         <label description="Bulk Email" languagecode="1033" />
+                        <label description="Envoi en nombre" languagecode="1036" />
+                        <label description="Massen-E-Mail" languagecode="1031" />
                       </labels>
                       <control id="donotbulkemail" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="donotbulkemail" />
                     </cell>
@@ -385,6 +453,8 @@
                     <cell id="{04ef153d-a7f4-4bb8-98e2-18b4da7439a4}">
                       <labels>
                         <label description="Phone" languagecode="1033" />
+                        <label description="Téléphone" languagecode="1036" />
+                        <label description="Telefon" languagecode="1031" />
                       </labels>
                       <control id="donotphone" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="donotphone" />
                     </cell>
@@ -393,6 +463,8 @@
                     <cell id="{e4e22136-a015-40ee-ac54-fcf2f210ca64}">
                       <labels>
                         <label description="Fax" languagecode="1033" />
+                        <label description="Télécopie" languagecode="1036" />
+                        <label description="Fax" languagecode="1031" />
                       </labels>
                       <control id="donotfax" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="donotfax" />
                     </cell>
@@ -401,6 +473,8 @@
                     <cell id="{f48849f5-3cd6-4e16-9bb3-922f2bf1a76f}">
                       <labels>
                         <label description="Mail" languagecode="1033" />
+                        <label description="Courrier postal" languagecode="1036" />
+                        <label description="Post" languagecode="1031" />
                       </labels>
                       <control id="donotpostalmail" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="donotpostalmail" />
                     </cell>
@@ -413,13 +487,17 @@
             <sections>
               <section name="billing information" showlabel="true" showbar="false" id="{bafbf773-16e6-4c0a-90db-f07a8c0fa0be}" IsUserDefined="0" columns="1" labelwidth="115" celllabelposition="Left">
                 <labels>
+                  <label description="Fakturierung" languagecode="1031" />
                   <label description="BILLING" languagecode="1033" />
+                  <label description="FACTURATION" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{49b8171d-743e-4ce4-afdb-cd0528f9e078}">
                       <labels>
                         <label description="Currency" languagecode="1033" />
+                        <label description="Devise" languagecode="1036" />
+                        <label description="Währung" languagecode="1031" />
                       </labels>
                       <control id="transactioncurrencyid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="transactioncurrencyid" />
                     </cell>
@@ -428,6 +506,8 @@
                     <cell id="{02aa413f-3b73-47bc-ae5b-cd3dfc3b04db}">
                       <labels>
                         <label description="Credit Limit" languagecode="1033" />
+                        <label description="Limite de crédit" languagecode="1036" />
+                        <label description="Kreditlimit" languagecode="1031" />
                       </labels>
                       <control id="creditlimit" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="creditlimit" />
                     </cell>
@@ -436,6 +516,8 @@
                     <cell id="{7ebd0241-4733-4ccb-9d9b-eb7bd9804b37}">
                       <labels>
                         <label description="Credit Hold" languagecode="1033" />
+                        <label description="Suspension de crédit" languagecode="1036" />
+                        <label description="Kreditsperre" languagecode="1031" />
                       </labels>
                       <control id="creditonhold" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="creditonhold" />
                     </cell>
@@ -444,6 +526,8 @@
                     <cell id="{9d8e8eac-40e9-4fd3-894f-2fdf727a94ef}">
                       <labels>
                         <label description="Payment Terms" languagecode="1033" />
+                        <label description="Conditions de paiement" languagecode="1036" />
+                        <label description="Zahlungsbedingungen" languagecode="1031" />
                       </labels>
                       <control id="paymenttermscode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="paymenttermscode" />
                     </cell>
@@ -452,13 +536,17 @@
               </section>
               <section name="shipping information" showlabel="true" showbar="false" id="{85db9f9a-e8ed-457f-aacf-cebb47baa8d5}" IsUserDefined="0" columns="1" labelwidth="115" celllabelposition="Left">
                 <labels>
+                  <label description="Versand" languagecode="1031" />
                   <label description="SHIPPING" languagecode="1033" />
+                  <label description="EXPÉDITION" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{7cd40ebc-7efb-47bf-b287-23d73dee1264}">
                       <labels>
                         <label description="Shipping Method" languagecode="1033" />
+                        <label description="Mode de livraison" languagecode="1036" />
+                        <label description="Versandmethode" languagecode="1031" />
                       </labels>
                       <control id="address1_shippingmethodcode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="address1_shippingmethodcode" />
                     </cell>
@@ -467,6 +555,8 @@
                     <cell id="{6803fd57-d16f-4975-bbd0-12a8e24721f6}">
                       <labels>
                         <label description="Freight Terms" languagecode="1033" />
+                        <label description="Conditions de transport" languagecode="1036" />
+                        <label description="Lieferbedingungen" languagecode="1031" />
                       </labels>
                       <control id="address1_freighttermscode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="address1_freighttermscode" />
                     </cell>
@@ -484,24 +574,32 @@
           <cell id="{7385d4f6-fa69-4d3e-b86c-604602334023}" showlabel="true">
             <labels>
               <label description="Job Title" languagecode="1033" />
+              <label description="Fonction" languagecode="1036" />
+              <label description="Position" languagecode="1031" />
             </labels>
             <control id="jobtitle" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="jobtitle" disabled="false" />
           </cell>
           <cell id="{3e3f3558-1d2a-40cf-9e66-744f93a851cd}" showlabel="true">
             <labels>
               <label description="Telephone 1" languagecode="1033" />
+              <label description="Téléphone professionel" languagecode="1036" />
+              <label description="Telefon (geschäftlich)" languagecode="1031" />
             </labels>
             <control id="telephone1" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="telephone1" disabled="false" />
           </cell>
           <cell id="{cf440f34-7bd1-4937-b50a-4657cfdf1141}" showlabel="true">
             <labels>
               <label description="Email Address 1" languagecode="1033" />
+              <label description="Courrier électronique" languagecode="1036" />
+              <label description="E-Mail" languagecode="1031" />
             </labels>
             <control id="emailaddress1" classid="{ADA2203E-B4CD-49be-9DDF-234642B43B52}" datafieldname="emailaddress1" disabled="false" />
           </cell>
           <cell id="{feb62a46-38f3-41d0-b39c-28a7f4bd90c3}" showlabel="true" locklevel="1">
             <labels>
               <label description="Owner" languagecode="1033" />
+              <label description="Propriétaire" languagecode="1036" />
+              <label description="Besitzer" languagecode="1031" />
             </labels>
             <control id="header_ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
           </cell>
@@ -610,9 +708,13 @@
     </DisplayConditions>
   </form>
   <LocalizedNames>
+    <LocalizedName description="Kontakt für interaktive Funktionen" languagecode="1031" />
     <LocalizedName description="Contact for Interactive experience" languagecode="1033" />
+    <LocalizedName description="Contact pour l'expérience interactive" languagecode="1036" />
   </LocalizedNames>
   <Descriptions>
+    <Description description="Standardkontaktformular für interaktive Funktionen" languagecode="1031" />
     <Description description="Default Interactive experience Contact form." languagecode="1033" />
+    <Description description="Formulaire Contact pour l'expérience interactive par défaut." languagecode="1036" />
   </Descriptions>
 </systemform>
