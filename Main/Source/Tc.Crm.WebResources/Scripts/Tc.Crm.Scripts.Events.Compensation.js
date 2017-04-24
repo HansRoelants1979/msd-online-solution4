@@ -39,6 +39,26 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
     var CUSTOMER_LANGUAGE_ATTR_NAME = "tc_language";
     var CASE_SOURCEMARKETID_ATTR_NAME = "tc_sourcemarketid";
 
+    var formatValue6DigitsWithHyphen = function (context) {
+        var formatted = false;
+        var attribute = context.getEventSource();
+        var value = attribute.getValue();
+        if (/^\d{6}$/.test(value)) {
+            var formattedValue = value[0] + value[1] + '-' + value[2] + value[3] + '-' + value[4] + value[5];
+            attribute.setValue(formattedValue);
+            formatted = true;
+        }
+        var isValid = formatted || /^\d{2}-\d{2}-\d{2}$/.test(value);
+        attribute.controls.forEach(
+            function (control, i) {
+                if (isValid) {
+                    control.clearNotification();
+                } else {
+                    control.setNotification("Should be 6 digit format nn-nn-nn");
+                }
+            });
+    }
+
     var updateCompensationFields = function () {
         if (Xrm.Page.ui.getFormType() !== FORM_MODE_CREATE) {
             return;
@@ -474,27 +494,22 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
         return id;
     }
 
-    var formatAccountSortCode = function (context) {
-        var attribute = context.getEventSource();
-        var value = attribute.getValue();
-        if (/^\d{6}$/.test(value)) {
-            var formattedValue = value[0] + value[1] + '-' + value[2] + value[3] + '-' + value[4] + value[5];
-            attribute.setValue(formattedValue);
-        }
-    }
-
     return {
         OnLoad: function () {
-            //updateCompensationFields();
+            updateCompensationFields();
         },
         OnCustomerSave: function () {
-            //updateRelatedCompensationsForCustomer();
+            updateRelatedCompensationsForCustomer();
         },
         OnCaseSave: function () {
-            //updateSourceMarketInRelatedCompensationsForCase();
+            updateSourceMarketInRelatedCompensationsForCase();
         },
         OnAccountSortCodeChanged: function (context) {
-            formatAccountSortCode(context);
+            if (context == null) {
+                console.log("Tc.Crm.Scripts.Events.Compensation.OnAccountSortCodeChanged should be configured to pass execution context");
+                return;
+            }
+            formatValue6DigitsWithHyphen(context);
         }
     };
 })();
