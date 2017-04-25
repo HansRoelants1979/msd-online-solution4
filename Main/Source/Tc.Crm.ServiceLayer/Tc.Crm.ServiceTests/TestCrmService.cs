@@ -57,7 +57,7 @@ namespace Tc.Crm.ServiceTests
         public SurveyReturnResponse ExecuteActionForSurveyCreate(string data)
         {
             if (Switch == DataSwitch.Created)
-                return new Tc.Crm.Service.Models.SurveyReturnResponse { Created = true };
+                return new Tc.Crm.Service.Models.SurveyReturnResponse { FailedSurveys=new List<FailedSurvey>() };
         
             else if (Switch == DataSwitch.Response_NULL)
                 throw new InvalidOperationException(Tc.Crm.Service.Constants.Messages.ResponseFromCrmIsNull);

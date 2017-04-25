@@ -579,6 +579,21 @@ namespace Tc.Crm.CustomWorkflowSteps
         }
 
         /// <summary>
+        /// To create record
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="service"></param>
+        public static void CreateRecord(Entity entity, IOrganizationService service)
+        {
+            if (entity == null) return;
+            if (service == null) return;
+            
+            var createRequest = new CreateRequest { Target = entity };
+            service.Execute(createRequest);           
+        }
+
+        
+        /// <summary>
         /// To get records by using filter keys and values
         /// </summary>
         /// <param name="entityName"></param>

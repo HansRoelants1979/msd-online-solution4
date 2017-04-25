@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using Microsoft.Xrm.Sdk;
 using Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Models;
-
+using System.Text;
+using System.ServiceModel;
 
 namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
 {
@@ -26,39 +27,68 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         {
             trace.Trace("Processing Process payload - start");
             if (payloadSurvey == null) throw new InvalidPluginExecutionException("payloadSurvey is null;");
-            ProcessResponses();
+            var failedSurveys = ProcessResponses();
             trace.Trace("Processing Process payload - end");
-            return JsonHelper.SerializeSurveyJson(new SurveyReturnResponse() { Created = true }, trace);
+            return JsonHelper.SerializeSurveyJson(new SurveyReturnResponse() { FailedSurveys= failedSurveys }, trace);
         }
 
         /// <summary>
         /// To process all survey responses
         /// </summary>
-        private void ProcessResponses()
+        private List<FailedSurvey> ProcessResponses()
         {
             trace.Trace("Processing ProcessResponses - start");
             if (payloadSurvey.SurveyResponse == null) throw new InvalidPluginExecutionException("SurveyResponse is null in json payload");
             if (payloadSurvey.SurveyResponse.Responses == null) throw new InvalidPluginExecutionException("Response object in payload json is null");
             List<Response> responses = payloadSurvey.SurveyResponse.Responses;
-            var surveyResponseCollection = new EntityCollection();
+            var failedSurveys = new List<FailedSurvey>();
             for (int i = 0; i < responses.Count; i++)
             {
-                trace.Trace("Processing Response " + i + " - start");
-                var surveyResponse = SurveyResponseHelper.GetResponseEntityFromPayload(responses[i], trace);
-                if (responses[i].Answers != null && responses[i].Answers.Count > 0)
+                try
                 {
-                    MapBookingContact(surveyResponse, responses[i].Answers);
-                    ProcessFeedback(surveyResponse, responses[i].Answers);
+                    trace.Trace("Processing Response " + i + " - start");
+                    var surveyResponse = SurveyResponseHelper.GetResponseEntityFromPayload(responses[i], trace);
+                    if (responses[i].Answers != null && responses[i].Answers.Count > 0)
+                    {
+                        MapBookingContact(surveyResponse, responses[i].Answers);
+                        ProcessFeedback(surveyResponse, responses[i].Answers);
+                    }
+                    CommonXrm.CreateRecord(surveyResponse, payloadSurvey.CrmService);
+                    trace.Trace("Processing Response " + i + " - end");
                 }
-                surveyResponseCollection.Entities.Add(surveyResponse);
-                trace.Trace("Processing Response " + i + " - end");
-            }
-            if (surveyResponseCollection.Entities.Count > 0)
-                CommonXrm.BulkCreate(surveyResponseCollection, payloadSurvey.CrmService);
+                catch (FaultException<OrganizationServiceFault> ex)
+                {
+                    failedSurveys.Add(PrepareFailedSurveys(responses[i].SurveyId, ex.ToString()));
+                }
+                catch (TimeoutException ex)
+                {
+                    failedSurveys.Add(PrepareFailedSurveys(responses[i].SurveyId, ex.ToString()));
+                }
+                catch (Exception ex)
+                {
+                    failedSurveys.Add(PrepareFailedSurveys(responses[i].SurveyId, ex.ToString()));
+                }
+            }           
+                    
             trace.Trace("Processing ProcessResponses - end");
+            return failedSurveys;
         }
 
+        
 
+        /// <summary>
+        /// To prepare failed surveys information
+        /// </summary>
+        /// <param name="survey"></param>
+        /// <param name="failedSurveys"></param>
+        /// <returns></returns>
+        private FailedSurvey PrepareFailedSurveys(long? surveyId, string exception)
+        {
+            if (surveyId != null && surveyId.HasValue)
+                return new FailedSurvey { SurveyId = surveyId.Value.ToString(), Exception = exception };
+            else
+                return new FailedSurvey { Exception = exception };
+        }
 
         /// <summary>
         /// To map booking and contact records
@@ -68,12 +98,19 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         private void MapBookingContact(Entity surveyResponse, List<Answer> answers)
         {
             trace.Trace("Processing MapBookingContact - start");
-            var bookingNumber = AnswerHelper.FindBooking(answers,trace);
+            var bookingNumber = AnswerHelper.FindBookingNumber(answers,trace);
+            var sourceMarket = AnswerHelper.FindSourceMarket(answers, trace);
+            var tourOperator = AnswerHelper.FindTourOperator(answers, trace);
+            var brand = AnswerHelper.FindBrand(answers, trace);
             var contactLastName = AnswerHelper.FindCustomer(answers,trace);
-            if (!string.IsNullOrWhiteSpace(bookingNumber))
-            {
-                FetchBookingContact(bookingNumber, contactLastName, surveyResponse);
-            }
+
+            if (string.IsNullOrWhiteSpace(bookingNumber)) return;
+            if (string.IsNullOrWhiteSpace(sourceMarket)) return;
+            if (string.IsNullOrWhiteSpace(tourOperator)) return;
+            if (string.IsNullOrWhiteSpace(brand)) return;
+
+            FetchBookingContact(bookingNumber, sourceMarket, tourOperator, brand, contactLastName, surveyResponse);
+            
             trace.Trace("Processing MapBookingContact - end");
         }
 
@@ -84,21 +121,27 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// <param name="bookingNumber"></param>
         /// <param name="contactLastName"></param>
         /// <param name="surveyResponse"></param>
-        private void FetchBookingContact(string bookingNumber, string contactLastName, Entity surveyResponse)
+        private void FetchBookingContact(string bookingNumber,string sourceMarket, string tourOperator, string brand,  string contactLastName, Entity surveyResponse)
         {
             trace.Trace("Processing FetchBookingContact - start");
             var contactCondition = PrepareContactCondition(contactLastName);
-            var query = string.Format(@"<fetch output-format='xml-platform' distinct='false' version='1.0' mapping='logical'>
-                                        <entity name='tc_customerbookingrole'>
-                                          <link-entity name='tc_booking' alias='booking' from='tc_bookingid' to='tc_bookingid'>
-                                            <attribute name='tc_bookingid' />                                               
-                                              <filter type = 'and'>
-                                                <condition attribute='tc_name' operator='eq' value='{0}' />
-                                              </filter>
-                                          </link-entity>
-                                        {1}
-                                        </entity>
-                                        </fetch>", bookingNumber, contactCondition);
+            var sourceMarketCondition = PrepareSourceMarketCondition(sourceMarket);
+            var tourOperatorCondition = PrepareTourOperatorCondition(tourOperator);
+            var brandCondition = PrepareBrandCondition(brand);
+            var query = $@"<fetch output-format='xml-platform' distinct='false' version='1.0' mapping='logical'>
+                            <entity name='tc_customerbookingrole'>
+                                <link-entity name='tc_booking' alias='booking' from='tc_bookingid' to='tc_bookingid'>
+                                  <attribute name='tc_bookingid' />                                               
+                                    <filter type = 'and'>
+                                      <condition attribute='tc_name' operator='eq' value='{bookingNumber}' />
+                                    </filter>
+                            {sourceMarketCondition}
+                            {tourOperatorCondition}
+                            {brandCondition}
+                                </link-entity>                           
+                            {contactCondition}
+                            </entity>
+                           </fetch>";
 
             var entColBookingContact = CommonXrm.RetrieveMultipleRecordsFetchXml(query, payloadSurvey.CrmService);
             MapBooking(surveyResponse, entColBookingContact);
@@ -116,15 +159,72 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
             var contactCondition = string.Empty;
             if (!string.IsNullOrWhiteSpace(contactLastName))
             {
-                contactCondition = string.Format(@"<link-entity name='contact' alias='contact' from='contactid' to='tc_customer' link-type='outer'>
-                                                    <attribute name='contactid' />
-                                                        <filter type='and' >
-                                                            <condition attribute='lastname' operator='eq' value='{0}' />
-                                                        </filter>
-                                                   </link-entity>", contactLastName);
+                contactCondition = $@"<link-entity name='contact' alias='contact' from='contactid' to='tc_customer' link-type='outer'>
+                                      <attribute name='contactid'/>
+                                        <filter type='and'>
+                                            <condition attribute='lastname' operator='eq' value='{contactLastName}' />
+                                        </filter>
+                                      </link-entity>";
             }
             return contactCondition;
-        } 
+        }
+
+        /// <summary>
+        /// To prepare link entity for Source Market
+        /// </summary>
+        /// <param name="sourceMarket"></param>
+        /// <returns></returns>
+        private string PrepareSourceMarketCondition(string sourceMarket)
+        {
+            var sourceMarketCondition = string.Empty;
+            if (!string.IsNullOrWhiteSpace(sourceMarket))
+            {
+                sourceMarketCondition = $@"<link-entity name='tc_country' alias='aa' from='tc_countryid' to='tc_sourcemarketid'>
+                                           <filter type='and'>
+                                            <condition attribute='tc_iso2code' operator='eq' value='{sourceMarket}' />
+                                           </filter>
+                                           </link-entity>";
+            }
+            return sourceMarketCondition;
+        }
+
+        /// <summary>
+        /// To prepare link entity for brand 
+        /// </summary>
+        /// <param name="brand"></param>
+        /// <returns></returns>
+        private string PrepareBrandCondition(string brand)
+        {
+            var brandCondition = string.Empty;
+            if (!string.IsNullOrWhiteSpace(brand))
+            {
+                brandCondition = $@"<link-entity name='tc_brand' alias='ab' from='tc_brandid' to='tc_brandid'>
+                                    <filter type='and'>
+                                     <condition attribute='tc_brandcode' operator='eq' value='{brand}' />
+                                    </filter>
+                                    </link-entity>";
+            }
+            return brandCondition;
+        }
+
+        /// <summary>
+        /// To prepare link entity for Tour operator
+        /// </summary>
+        /// <param name="tourOperatorCode"></param>
+        /// <returns></returns>
+        private string PrepareTourOperatorCondition(string tourOperatorCode)
+        {
+            var tourOperatorCondition = string.Empty;
+            if (!string.IsNullOrWhiteSpace(tourOperatorCode))
+            {
+                tourOperatorCondition = $@"<link-entity name='tc_touroperator' alias='ac' from='tc_touroperatorid' to='tc_touroperatorid'>
+                                           <filter type='and'>
+                                            <condition attribute='tc_touroperatorcode' operator= 'eq' value = '{tourOperatorCode}' />
+                                           </filter>
+                                           </link-entity>";
+            }
+            return tourOperatorCondition;
+        }
 
 
         /// <summary>
@@ -156,17 +256,30 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         private void MapContact(Entity surveyResponse, EntityCollection entColBookingContact)
         {
             trace.Trace("Processing MapContact - start");
-            if (entColBookingContact != null && entColBookingContact.Entities.Count == 1)
+            if (entColBookingContact != null && entColBookingContact.Entities.Count > 0)
             {
                 var fieldContact = AliasName.Contact + Attributes.Contact.ContactId;
-                var entity = entColBookingContact.Entities[0];
-                if (entity != null && entity.Attributes.Contains(fieldContact) && entity.Attributes[fieldContact] != null)
+                var previousContactId = Guid.Empty;
+                var currentContactId = Guid.Empty;
+                AliasedValue contact = null;
+                for (int i = 0; i < entColBookingContact.Entities.Count; i++)
                 {
-                    var contact = (AliasedValue)entity.Attributes[fieldContact];
-                    var customer = GetPartyList(contact);
-                    if (customer != null && customer.Entities.Count > 0)
-                        surveyResponse[Attributes.SurveyResponse.CustomerId] = customer;
+                    var entity = entColBookingContact.Entities[i];
+                    if (entity != null && entity.Attributes.Contains(fieldContact) && entity.Attributes[fieldContact] != null)
+                    {
+                        contact = (AliasedValue)entity.Attributes[fieldContact];
+                        currentContactId = Guid.Parse(contact.Value.ToString());
+
+                        if(previousContactId == Guid.Empty)
+                            previousContactId = Guid.Parse(contact.Value.ToString());
+
+                        if (previousContactId != currentContactId)
+                            return;
+                    }
                 }
+                var customer = GetPartyList(contact);
+                if (customer != null && customer.Entities.Count > 0)
+                    surveyResponse[Attributes.SurveyResponse.CustomerId] = customer;
             }
             trace.Trace("Processing MapContact - end");
         }

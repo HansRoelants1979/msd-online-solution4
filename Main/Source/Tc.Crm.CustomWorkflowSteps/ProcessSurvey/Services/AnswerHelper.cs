@@ -83,29 +83,107 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         }
                       
         /// <summary>
-        /// To find booking from survey payload
+        /// To find booking number from survey payload
         /// </summary>
         /// <param name="answers"></param>
         /// <returns></returns>
-        public static string FindBooking(List<Answer> answers, ITracingService trace)
+        public static string FindBookingNumber(List<Answer> answers, ITracingService trace)
         {
             if (trace == null) throw new InvalidPluginExecutionException("Trace service is null;");
-            trace.Trace("Processing FindBooking - start");
+            trace.Trace("Processing FindBookingNumber - start");
             var bookingNumber = string.Empty;
             if (answers != null && answers.Count > 0)
             {
-                var booking = answers.Find(a => a.FieldId == PayloadSurveyFieldMapping.BookingNumber);
-                var sourceMarket = answers.Find(a => a.FieldId == PayloadSurveyFieldMapping.SourceMarket);
+                var booking = answers.Find(a => a.FieldId == PayloadSurveyFieldMapping.BookingNumber);              
                 if (booking != null && !string.IsNullOrWhiteSpace(booking.LiteralValue))
                 {
-                    if (sourceMarket != null && !string.IsNullOrWhiteSpace(sourceMarket.LiteralValue))
-                    {
-                        bookingNumber = booking.LiteralValue + sourceMarket.LiteralValue;
-                    }
+                    bookingNumber = booking.LiteralValue;                    
                 }
             }
-            trace.Trace("Processing FindBooking - end");
+            trace.Trace("Processing FindBookingNumber - end");
             return bookingNumber;
+        }
+
+        /// <summary>
+        /// To find source market from survey payload
+        /// </summary>
+        /// <param name="answers"></param>
+        /// <param name="trace"></param>
+        /// <returns></returns>
+        public static string FindSourceMarket(List<Answer> answers, ITracingService trace)
+        {
+            if (trace == null) throw new InvalidPluginExecutionException("Trace service is null;");
+            trace.Trace("Processing FindSourceMarket - start");
+            var sourceMarketName = string.Empty;
+            if (answers != null && answers.Count > 0)
+            {  
+                var sourceMarket = answers.Find(a => a.FieldId == PayloadSurveyFieldMapping.SourceMarket);
+                if (sourceMarket != null && !string.IsNullOrWhiteSpace(sourceMarket.LiteralValue))
+                {
+                    sourceMarketName = sourceMarket.LiteralValue;
+                }
+            }
+            trace.Trace("Processing FindSourceMarket - end");
+            return sourceMarketName;
+        }
+
+        /// <summary>
+        /// To find tour operator from survey payload
+        /// </summary>
+        /// <param name="answers"></param>
+        /// <param name="trace"></param>
+        /// <returns></returns>
+        public static string FindTourOperator(List<Answer> answers, ITracingService trace)
+        {
+            if (trace == null) throw new InvalidPluginExecutionException("Trace service is null;");
+            trace.Trace("Processing FindTourOperator - start");
+            var tourOperatorCode = string.Empty;
+            if (answers != null && answers.Count > 0)
+            {
+                var tourOperator = answers.Find(a => a.FieldId == PayloadSurveyFieldMapping.TourOperatorCode);
+                if (tourOperator != null && !string.IsNullOrWhiteSpace(tourOperator.LiteralValue))
+                {
+                    tourOperatorCode = tourOperator.LiteralValue;
+                }
+            }
+            tourOperatorCode = ReplaceTourOperator(tourOperatorCode);
+            trace.Trace("Processing FindTourOperator - end");
+            return tourOperatorCode;
+        }
+
+        /// <summary>
+        /// To replace tour operator code to 'TCUK' if the value is 'UKI1'
+        /// </summary>
+        /// <param name="tourOperatorCode"></param>
+        /// <returns></returns>
+        private static string ReplaceTourOperator(string tourOperatorCode)
+        {
+            if (tourOperatorCode == General.TourOperatorCodeToReplace)
+                tourOperatorCode = General.ReplacedTourOperatorCode;
+            return tourOperatorCode;
+        }
+
+        /// <summary>
+        /// To find brand from survey payload
+        /// </summary>
+        /// <param name="answers"></param>
+        /// <param name="trace"></param>
+        /// <returns></returns>
+        public static string FindBrand(List<Answer> answers, ITracingService trace)
+        {
+            if (trace == null) throw new InvalidPluginExecutionException("Trace service is null;");
+            trace.Trace("Processing FindBrand - start");
+            var brandName = string.Empty;
+            if (answers != null && answers.Count > 0)
+            {
+                var brand = answers.Find(a => a.FieldId == PayloadSurveyFieldMapping.Brand);
+                if (brand != null && !string.IsNullOrWhiteSpace(brand.LiteralValue))
+                {
+                    brandName = brand.LiteralValue;
+                }
+            }
+            trace.Trace("Processing FindBrand - end");
+            return brandName;
         }
 
         /// <summary>

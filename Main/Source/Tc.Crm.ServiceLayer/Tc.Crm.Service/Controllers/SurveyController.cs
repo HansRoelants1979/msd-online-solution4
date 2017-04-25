@@ -41,8 +41,8 @@ namespace Tc.Crm.Service.Controllers
                 }
                 var jsonData = JsonConvert.SerializeObject(survey);
                 var response = surveyService.ProcessSurvey(jsonData, crmService);
-                if (response.Created == true)
-                    return Request.CreateResponse(HttpStatusCode.Created);
+                if (response != Constants.General.Error)               
+                    return Request.CreateResponse(HttpStatusCode.Created, (!string.IsNullOrWhiteSpace(response)) ? Constants.Messages.FailedSurveys + response : string.Empty);
                 else
                     return Request.CreateResponse(HttpStatusCode.GatewayTimeout, Constants.Messages.FailedtoCreateSurvey);                
 

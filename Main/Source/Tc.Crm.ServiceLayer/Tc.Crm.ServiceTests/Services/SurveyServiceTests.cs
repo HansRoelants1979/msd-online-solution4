@@ -48,16 +48,16 @@ namespace Tc.Crm.ServiceTests.Services
         public void ResponseIsNull()
         {
             crmService.Switch = DataSwitch.Response_NULL;
-            SurveyReturnResponse resp = surveyService.ProcessSurvey("some data", crmService);
-            Assert.AreEqual(resp.Created, false);
+            var resp = surveyService.ProcessSurvey("some data", crmService);
+            Assert.AreEqual(resp == "ERROR", true);
         }
 
         [TestMethod()]
         public void OnSuccess()
         {
             crmService.Switch = DataSwitch.Created;
-            SurveyReturnResponse resp = surveyService.ProcessSurvey("{}", crmService);
-            Assert.AreEqual(resp.Created, true);
+            var resp = surveyService.ProcessSurvey("{}", crmService);
+            Assert.AreEqual(string.IsNullOrWhiteSpace(resp), true);
         }
     }
 }

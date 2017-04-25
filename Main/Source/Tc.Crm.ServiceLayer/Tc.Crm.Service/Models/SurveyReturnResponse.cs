@@ -7,6 +7,12 @@ namespace Tc.Crm.Service.Models
 {
     public class SurveyReturnResponse
     {
-        public bool Created { get; set; }
+        public List<FailedSurvey> FailedSurveys { get; set; }
+    }
+
+    public class FailedSurvey
+    {
+        public string SurveyId { get; set; }
+        public string Exception { get; set; }
     }
 }

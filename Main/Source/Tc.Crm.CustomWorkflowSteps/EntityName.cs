@@ -27,6 +27,10 @@ namespace Tc.Crm.CustomWorkflowSteps
         public const string Concatenator = " - ";
 
         public const string Space = " ";
+
+        public const string TourOperatorCodeToReplace = "UKI1";
+
+        public const string ReplacedTourOperatorCode = "TCUK";
         
     }
     public static class Department
@@ -92,6 +96,8 @@ namespace Tc.Crm.CustomWorkflowSteps
         public const int SourceMarket = 251727;        
         public const int Forename = 251886;
         public const int Surname = 251887;
+        public const int TourOperatorCode = 251883;
+        public const int Brand = 251882;
     }
 
 }

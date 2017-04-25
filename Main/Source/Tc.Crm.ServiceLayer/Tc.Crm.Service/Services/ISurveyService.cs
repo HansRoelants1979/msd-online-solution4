@@ -4,6 +4,8 @@ namespace Tc.Crm.Service.Services
 {
     public interface ISurveyService
     {
-        SurveyReturnResponse ProcessSurvey(string surveyData, ICrmService crmService);
+        string ProcessSurvey(string surveyData, ICrmService crmService);
+
+        string ProcessResponse(SurveyReturnResponse response);
     }
 }
