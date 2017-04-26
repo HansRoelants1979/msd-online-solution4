@@ -7,7 +7,7 @@ using Tc.Crm.Plugins.Email.BusinessLogic;
 
 namespace Tc.Crm.Plugins.Email
 {
-    public class PreoperationSendEmail : IPlugin
+    public class PreoperationUpdateEmailBody : IPlugin
     {
         public void Execute(IServiceProvider serviceProvider)
         {
@@ -19,7 +19,7 @@ namespace Tc.Crm.Plugins.Email
             try
             {
                 trace.Trace("Begin - SendEmail");
-                SendEmailService sendEmailService = new SendEmailService(context, trace, service);
+                UpdateEmailBodyService sendEmailService = new UpdateEmailBodyService(context, trace, service);
                 sendEmailService.UpdateEmailBodyWithHeadersandFooters();
                 trace.Trace("End - SendEmail");
 
