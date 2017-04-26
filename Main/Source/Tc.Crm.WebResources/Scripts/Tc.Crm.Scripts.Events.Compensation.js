@@ -30,6 +30,7 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
     var CONTACT_ENTITY = "contact";
     var BOOKING_ENTITY = "tc_booking";
     var COMPENSATION_ENTITY = "tc_compensation";
+    var CASE_LINE_ENTITY = "tc_caseline";
 
     var COMPENSATION_SOURCEMARKETID_FIELDNAME = "tc_SourceMarketId";
 
@@ -38,6 +39,32 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
     var COMPENSATION_LANGUAGE_ATTR_NAME = "tc_language";
     var CUSTOMER_LANGUAGE_ATTR_NAME = "tc_language";
     var CASE_SOURCEMARKETID_ATTR_NAME = "tc_sourcemarketid";
+
+    var COMPENSATION1_ATTR_NAME = "tc_compensation1id";
+    var COMPENSATION2_ATTR_NAME = "tc_compensation2id";
+    var COMPENSATION3_ATTR_NAME = "tc_compensation3id";
+    var COMPENSATION4_ATTR_NAME = "tc_compensation4id";
+    var COMPENSATION5_ATTR_NAME = "tc_compensation5id";
+
+    var SEVERITYCAT1_ATTR_NAME = "tc_cat1severity";
+    var SEVERITYCAT2_ATTR_NAME = "tc_cat2severity";
+    var SEVERITYCAT3_ATTR_NAME = "tc_cat3severity";
+    var SEVERITYCAT4_ATTR_NAME = "tc_cat4severity";
+    var SEVERITYCAT5_ATTR_NAME = "tc_cat5severity";
+
+    var IMPACTCAT1_ATTR_NAME = "tc_cat1impact";
+    var IMPACTCAT2_ATTR_NAME = "tc_cat2impact";
+    var IMPACTCAT3_ATTR_NAME = "tc_cat3impact";
+    var IMPACTCAT4_ATTR_NAME = "tc_cat4impact";
+    var IMPACTCAT5_ATTR_NAME = "tc_cat5impact";
+
+    var DAYSAFFECTEDCAT1_ATTR_NAME = "tc_cat1_daysaffected";
+    var DAYSAFFECTEDCAT2_ATTR_NAME = "tc_cat2_daysaffected";
+    var DAYSAFFECTEDCAT3_ATTR_NAME = "tc_cat3_daysaffected";
+    var DAYSAFFECTEDCAT4_ATTR_NAME = "tc_cat4_daysaffected";
+    var DAYSAFFECTEDCAT5_ATTR_NAME = "tc_cat5_daysaffected";
+
+    
 
     var formatValue6DigitsWithHyphen = function (context) {
         var formatted = false;
@@ -492,6 +519,34 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
         }
 
         return id;
+    }
+
+    var compensationCalculation = function () {
+        if (Xrm.Page.ui.getFormType() === FORM_MODE_CREATE) {
+            Xrm.Utility.alertDialog("Please save the record to calculate the proposed compensation.");
+            console.warn("Please save the record to calculate the proposed compensation.");
+            return;
+        }
+
+    }
+
+    function getMatrixValues()
+    {
+        
+        return;
+    }
+
+    function retrieveCompensationLine(caseLineId)
+    {
+        var entityName = COMPENSATION_LINE_ENTITY;
+        var query = "?$select=tc_categorylevel1id,tc_casecategory2id,tc_category3id";
+        if (Xrm.Page.context.client.getClient() === CLIENT_MODE_MOBILE && Xrm.Page.context.client.getClientState() === CLIENT_STATE_OFFLINE) {
+            // phones and tablets in offline mode
+            return Xrm.Mobile.offline.retrieveRecord(entityName, caseLineId, query);
+        }
+        else {
+            return Tc.Crm.Scripts.Common.GetById(entityName, caseLineId, query);
+        }
     }
 
     return {
