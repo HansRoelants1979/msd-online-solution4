@@ -65,7 +65,7 @@ namespace Tc.Crm.ServiceTests.Controllers
             controller.Request = new System.Net.Http.HttpRequestMessage();
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
             var response = controller.Create(survey);
-            Assert.AreEqual(response.StatusCode, HttpStatusCode.Created);
+            Assert.AreEqual(response.StatusCode, HttpStatusCode.OK);
         }
 
         [TestMethod()]
