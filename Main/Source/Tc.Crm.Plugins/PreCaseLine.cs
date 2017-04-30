@@ -8,7 +8,7 @@ using System.Linq;
 namespace Tc.Crm.Plugins
 {
     // (balamurali-s) PluginBase class is not used due to the limitations in the FakeXrmEasy unit test framework.
-     
+
 
     public class PreCaseLine : IPlugin
     {
@@ -70,7 +70,7 @@ namespace Tc.Crm.Plugins
                 {
                     tracingService.Trace("No post update image has been configured.");
                     return;
-                }               
+                }
 
                 // Verify that the target entity represents Case Line entity
                 if (caseLineEntity.LogicalName != "tc_caseline")
@@ -84,17 +84,19 @@ namespace Tc.Crm.Plugins
                     switch (pluginExecutionContext.MessageName)
                     {
                         case "Create":
-                            if (!caseLineEntity.Attributes.Contains("tc_caseid") || caseLineEntity.Attributes["tc_caseid"] == null|| !caseLineEntity.Attributes.Contains("tc_servicetype"))
+                            if (!caseLineEntity.Contains("tc_caseid") || caseLineEntity["tc_caseid"] == null ||
+                                !caseLineEntity.Contains("tc_servicetype"))
                             {
                                 tracingService.Trace("No Case / Service Type / Case Line Name is specified.");
                                 return;
                             }
                             incidentEntityReference = caseLineEntity["tc_caseid"] as EntityReference;
-                            caseLineServiceType = caseLineEntity.Attributes["tc_servicetype"] as OptionSetValue;
+                            caseLineServiceType = caseLineEntity["tc_servicetype"] as OptionSetValue;
                             break;
                         case "Update":
                             var caseLinePostImage = (Entity)pluginExecutionContext.PostEntityImages["PostImage"];
-                            if (!caseLinePostImage.Attributes.Contains("tc_caseid") || caseLinePostImage.Attributes["tc_caseid"] == null || !caseLinePostImage.Attributes.Contains("tc_servicetype"))
+                            if (!caseLinePostImage.Contains("tc_caseid") || caseLinePostImage["tc_caseid"] == null ||
+                                !caseLinePostImage.Contains("tc_servicetype"))
                             {
                                 tracingService.Trace("No Case / Service Type / Case Line Name is specified.");
                                 return;
@@ -106,7 +108,7 @@ namespace Tc.Crm.Plugins
                             tracingService.Trace("Plug-in is not registered for Create/ Update");
                             return;
                     }
-                    
+
                     if (caseLineServiceType == null || caseLineServiceType.Value != 950000000) // CaseLine.ServiceType != 'Accommodation'
                     {
                         tracingService.Trace(string.Format("Case Line Service Type is not equal to 'Accommodation': {0} ({1}) \n", caseLineEntity.ToEntityReference().Name,
@@ -115,9 +117,9 @@ namespace Tc.Crm.Plugins
                     }
 
                     Entity incident = null;
-                    if (!ValidateIncident(orgService,tracingService, incidentEntityReference, caseLineEntity.ToEntityReference(), ref incident) ||
+                    if (!ValidateIncident(orgService, tracingService, incidentEntityReference, caseLineEntity.ToEntityReference(), ref incident) ||
                         !ValidateBookingAccommodation(orgService, tracingService, incident))
-                        return;                            
+                        return;
 
                     //Set 24 Hours Promise on the case
                     incident.Attributes["tc_24hourpromise"] = new OptionSetValue(950000000); // CaseLine.24hourpromise != 'Yes'
@@ -176,7 +178,7 @@ namespace Tc.Crm.Plugins
 
             //Get the booking details of the case.
             incident = orgService.RetrieveMultiple(new FetchExpression(incidentQuery.ToString())).Entities.FirstOrDefault();
-            
+
             if (incident == null)
             {
                 tracingService.Trace(string.Format("No Case associated with Case Line: {0} ({1}) \n\n Query Used: {2}\n", caseLineEntityReference.Name,
@@ -185,7 +187,8 @@ namespace Tc.Crm.Plugins
                 return false;
             }
 
-            if (!(bool)incident.Attributes["tc_bookingreference"] || (incident.Attributes["tc_24hourpromise"] as OptionSetValue).Value != 950000001)
+            if (!incident.Contains("tc_bookingreference") || !(bool)incident["tc_bookingreference"] ||
+                !incident.Contains("tc_24hourpromise") || (incident["tc_24hourpromise"] as OptionSetValue).Value != 950000001)
             {
                 tracingService.Trace(string.Format("Case's Booking Reference field is not set to 'Yes' or 24 Hours Promise field is not equal to 'No': {0} ({1}) \n\n Query Used: {2}\n", caseLineEntityReference.Name,
                                             caseLineEntityReference.Id,
@@ -193,7 +196,7 @@ namespace Tc.Crm.Plugins
                 return false;
             }
 
-            var bookingEntityReference = incident.Attributes["tc_bookingid"] as EntityReference;
+            var bookingEntityReference = incident.Contains("tc_bookingid") ? incident["tc_bookingid"] as EntityReference : null;
             if (bookingEntityReference == null)
             {
                 tracingService.Trace(string.Format("No Booking associated with Case: {0} ({1}) \n\n Query Used: {2}\n", incident.ToEntityReference().Name,
@@ -202,7 +205,7 @@ namespace Tc.Crm.Plugins
                 return false;
             }
 
-            var bookingBrandEntityReference = (incident.Attributes["Booking.tc_brandid"] as AliasedValue).Value as EntityReference;
+            var bookingBrandEntityReference = incident.Contains("Booking.tc_brandid") ? (incident["Booking.tc_brandid"] as AliasedValue).Value as EntityReference : null;
             if (bookingBrandEntityReference == null)
             {
                 tracingService.Trace(string.Format("No Brand associated with Booking: {0} ({1}) \n\n Query Used: {2}\n", bookingEntityReference.Name,
@@ -257,7 +260,7 @@ namespace Tc.Crm.Plugins
                 return false;
             }
 
-            var hotelPromiseType = (bookingAccommodation["HotelPromises.tc_promisetype"] as AliasedValue).Value as OptionSetValue;
+            var hotelPromiseType = bookingAccommodation.Contains("HotelPromises.tc_promisetype") ? (bookingAccommodation["HotelPromises.tc_promisetype"] as AliasedValue).Value as OptionSetValue : null;
             if (hotelPromiseType == null || hotelPromiseType.Value != 950000000) // CaseLine.ServiceType != '24 Hours'
             {
                 tracingService.Trace(string.Format("No Hotel Promise Type set or not equal to '24 Hours': {0} ({1}) \n\n Query Used: {2}\n", bookingAccommodation.ToEntityReference().Name,
@@ -266,7 +269,7 @@ namespace Tc.Crm.Plugins
                 return false;
             }
 
-            var bookingAccommodationStartDateTime = bookingAccommodation.Attributes.Contains("tc_startdateandtime") ? (DateTime)bookingAccommodation.Attributes["tc_startdateandtime"] : DateTime.MinValue;
+            var bookingAccommodationStartDateTime = bookingAccommodation.Contains("tc_startdateandtime") ? (DateTime)bookingAccommodation["tc_startdateandtime"] : DateTime.MinValue;
 
             //Add a day to booking accommodation start date for calculation for 24 Hours promise business logic
             bookingAccommodationStartDateTime = bookingAccommodationStartDateTime.AddDays(1);
