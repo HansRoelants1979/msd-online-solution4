@@ -149,8 +149,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             account[Attributes.Account.Address1Town] = (!string.IsNullOrWhiteSpace(address.Town)) ? address.Town : string.Empty;
             account[Attributes.Account.Address1PostalCode] = (!string.IsNullOrWhiteSpace(address.PostalCode)) ? address.PostalCode : string.Empty;
             account[Attributes.Account.Address1CountryId] = (!string.IsNullOrWhiteSpace(address.Country)) ? new EntityReference(EntityName.Country
-                                                                                                           , Attributes.Country.Iso2Code
-                                                                                                           , address.Country)
+                                                                                                           , new Guid(address.Country))
                                                                                                            : null;
             account[Attributes.Account.Address1County] = (!string.IsNullOrWhiteSpace(address.County)) ? address.County : string.Empty;
             trace.Trace("Account populate address - end");
@@ -181,19 +180,16 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                                               , Attributes.Account.SourceSystemId
                                               , customer.CustomerIdentifier.CustomerId) : new Entity(EntityName.Account);
 
-            if (customer.Company == null || string.IsNullOrWhiteSpace(customer.Company.CompanyName))
-                throw new InvalidPluginExecutionException("Account name could not be retrieved from payload.");
+            if (customer.Company != null && !string.IsNullOrWhiteSpace(customer.Company.CompanyName))
+                account[Attributes.Account.Name] = customer.Company.CompanyName;
 
-            account[Attributes.Account.Name] = customer.Company.CompanyName;
             PopulateAddress(account, customer.Address, trace);
             PopulatePhone(account, customer.Phone, trace);
             PopulateEmail(account, customer.Email, trace);
 
 
             account[Attributes.Account.SourceMarketId] = (!string.IsNullOrWhiteSpace(customer.CustomerIdentifier.SourceMarket)) ?
-                                                                new EntityReference(EntityName.Country
-                                                                , Attributes.Country.Iso2Code
-                                                                , customer.CustomerIdentifier.SourceMarket) :
+                                                                new EntityReference(EntityName.Country,new Guid(customer.CustomerIdentifier.SourceMarket)) :
                                                                 null;
 
             account[Attributes.Account.SourceSystemId] = (!string.IsNullOrWhiteSpace(customer.CustomerIdentifier.CustomerId)) ? customer.CustomerIdentifier.CustomerId : string.Empty;

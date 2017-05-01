@@ -20,8 +20,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 booking[Attributes.Booking.Name] = identifier.BookingNumber;
                 booking[Attributes.Booking.OnTourVersion] = (identifier.BookingVersionOnTour != null) ? identifier.BookingVersionOnTour : string.Empty;
                 booking[Attributes.Booking.TourOperatorVersion] = (identifier.BookingVersionTourOperator != null) ? identifier.BookingVersionTourOperator : string.Empty;
-                booking[Attributes.Booking.OnTourUpdatedDate] = (identifier.BookingUpdateDateOnTour != null) ? Convert.ToDateTime(identifier.BookingUpdateDateOnTour) : (DateTime?)null;
-                booking[Attributes.Booking.TourOperatorUpdatedDate] = (identifier.BookingUpdateDateTourOperator != null) ? Convert.ToDateTime(identifier.BookingUpdateDateTourOperator) : (DateTime?)null;
+                booking[Attributes.Booking.OnTourUpdatedDate] = !string.IsNullOrWhiteSpace(identifier.BookingUpdateDateOnTour) ? Convert.ToDateTime(identifier.BookingUpdateDateOnTour) : (DateTime?)null;
+                booking[Attributes.Booking.TourOperatorUpdatedDate] = !string.IsNullOrWhiteSpace(identifier.BookingUpdateDateTourOperator) ? Convert.ToDateTime(identifier.BookingUpdateDateTourOperator) : (DateTime?)null;
                 booking[Attributes.Booking.SourceApplication] = identifier.SourceApplication != SourceApplication.NotSpecified ? identifier.SourceApplication.ToString() : null;
                 booking[Attributes.Booking.SourceSystem] = identifier.BookingSystem.ToString();
                 trace.Trace("Booking populate identifier - end");
@@ -138,6 +138,12 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             {
                 var Participants = travelParticipants.Where(item => item.TravelParticipantIdOnTour == travelParticipantsAssignment[i].TravelParticipantId)
                                            .Select(item => item).ToArray();
+                if (Participants == null || Participants.Length == 0)
+                {
+                    trace.Trace("Possible mismatch in travel participant id");
+                    continue;
+                }
+                
 
                 trace.Trace("Processing " + Participants.Length.ToString() + " Travel Participants information - start");
                 for (int j = 0; j < Participants.Length; j++)
