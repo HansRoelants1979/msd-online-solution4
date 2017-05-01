@@ -42,7 +42,6 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(InvalidPluginExecutionException), "Customer Id could not be retrieved from payload.")]
         public void GetAccountEntityForBookingPayload_CustomerIdIsNull()
         {
             Customer c = new Customer
@@ -58,7 +57,6 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(InvalidPluginExecutionException), "Account name could not be retrieved from payload.")]
         public void GetAccountEntityForBookingPayload_CompanyNameIsNull()
         {
             Customer c = new Customer
@@ -114,7 +112,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
                     {
                         AdditionalAddressInfo = "Tes",
                         AddressType = AddressType.Main,
-                        Country = "England",
+                        Country = Guid.NewGuid().ToString(),
                         County = "Ferro",
                         FlatNumberUnit="A",
                         HouseNumberBuilding="21",
@@ -133,7 +131,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
             Assert.AreEqual(c.Address[0].Town, account[Attributes.Account.Address1Town].ToString());
             Assert.AreEqual(c.Address[0].PostalCode, account[Attributes.Account.Address1PostalCode].ToString());
             Assert.AreEqual(c.Address[0].County, account[Attributes.Account.Address1County].ToString());
-            Assert.AreEqual(c.Address[0].Country, ((EntityReference)(account[Attributes.Account.Address1CountryId])).KeyAttributes[Attributes.Country.Iso2Code].ToString());
+            Assert.AreEqual(c.Address[0].Country, ((EntityReference)(account[Attributes.Account.Address1CountryId])).Id.ToString());
         }
 
         [TestMethod()]
