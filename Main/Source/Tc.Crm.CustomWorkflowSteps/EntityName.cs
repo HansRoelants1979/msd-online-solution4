@@ -126,9 +126,11 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string Address1HouseNumberOrBuilding = "tc_address1_housenumberorbuilding";
         public const string Address1Town = "tc_address1_town";
         public const string Address1CountryId = "tc_address1_countryid";
+        public const string Address1Street = "tc_address1_street";
         public const string Address1PostalCode = "tc_address1_postalcode";
         public const string Address2AdditionalInformation = "tc_address2_additionalinformation";
         public const string Address2CountryId = "tc_address2_countryid";
+        public const string Address2Street = "tc_address2_street";
         public const string Address2County = "tc_address2_county";
         public const string Address2FlatOrUnitNumber = "tc_address2_flatorunitnumber";
         public const string Address2HouseNumberOrBuilding = "tc_address2_housenumberorbuilding";
@@ -167,6 +169,7 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string Address1CountryId = "tc_address1_countryid";
         public const string Address1County = "tc_address1_county";
         public const string Address1PostalCode = "tc_address1_postalcode";
+        public const string Address1Street = "tc_address1_street";
         public const string Telephone1Type = "tc_telephone1_type";
         public const string Telephone2Type = "tc_telephone2_type";
         public const string Telephone3Type = "tc_telephone3_type";

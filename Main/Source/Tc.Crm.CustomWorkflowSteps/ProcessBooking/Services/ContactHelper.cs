@@ -216,6 +216,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 
             contact[Attributes.Contact.Address1County] = (!string.IsNullOrWhiteSpace(address1.County )) ? address1.County :string.Empty ;
             contact[Attributes.Contact.Address1PostalCode] = (!string.IsNullOrWhiteSpace(address1.PostalCode )) ? address1.PostalCode : string.Empty;
+            contact[Attributes.Contact.Address1Street] = (!string.IsNullOrWhiteSpace(address1.Street)) ? address1.Street : string.Empty;
 
             trace.Trace("Address 2");
             if (address2 == null) return;
@@ -226,8 +227,10 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             contact[Attributes.Contact.Address2CountryId] = (!string.IsNullOrWhiteSpace(address2.Country)) ?
                                                                              new EntityReference(EntityName.Country,
                                                                              new Guid(address2.Country)) : null;
-            contact[Attributes.Contact.Address2County] = (!string.IsNullOrWhiteSpace(address2.County )) ? address2.Country:string.Empty;
+            contact[Attributes.Contact.Address2County] = (!string.IsNullOrWhiteSpace(address2.County )) ? address2.County:string.Empty;
             contact[Attributes.Contact.Address2PostalCode] = (!string.IsNullOrWhiteSpace(address2.PostalCode )) ? address2.PostalCode :string.Empty;
+            contact[Attributes.Contact.Address2Street] = (!string.IsNullOrWhiteSpace(address2.Street)) ? address2.Street : string.Empty;
+
             trace.Trace("Contact populate address - end");
         }
 
@@ -247,6 +250,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             contact[Attributes.Contact.Address1CountryId] = null;
             contact[Attributes.Contact.Address1County] = string.Empty;
             contact[Attributes.Contact.Address1PostalCode] = string.Empty;
+            contact[Attributes.Contact.Address1Street] = string.Empty;
             return null;
         }
 
@@ -259,6 +263,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             contact[Attributes.Contact.Address2CountryId] = null;
             contact[Attributes.Contact.Address2County] = string.Empty;
             contact[Attributes.Contact.Address2PostalCode] = string.Empty;
+            contact[Attributes.Contact.Address2Street] = string.Empty;
             return null;
         }
     }

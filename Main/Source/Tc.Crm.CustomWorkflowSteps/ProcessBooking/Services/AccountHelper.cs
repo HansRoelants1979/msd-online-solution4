@@ -152,6 +152,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                                                                                                            , new Guid(address.Country))
                                                                                                            : null;
             account[Attributes.Account.Address1County] = (!string.IsNullOrWhiteSpace(address.County)) ? address.County : string.Empty;
+            account[Attributes.Account.Address1Street] = (!string.IsNullOrWhiteSpace(address.Street)) ? address.Street : string.Empty;
             trace.Trace("Account populate address - end");
 
         }
