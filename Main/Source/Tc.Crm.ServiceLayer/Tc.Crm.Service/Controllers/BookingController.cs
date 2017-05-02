@@ -39,6 +39,8 @@ namespace Tc.Crm.Service.Controllers
                 bookingService.ResolveReferences(booking);
                 if(string.IsNullOrWhiteSpace(booking.BookingIdentifier.SourceMarket))
                     return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.SourceMarketMissing);
+                if(string.IsNullOrWhiteSpace(booking.BookingGeneral.Currency))
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.CurrencyResolutionError);
                 var jsonData = JsonConvert.SerializeObject(booking);
                 var response = bookingService.Update(jsonData, crmService);
                 if (response.Created)

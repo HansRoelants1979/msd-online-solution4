@@ -22,9 +22,30 @@ namespace Tc.Crm.Service.Constants
     {
         public const char Dot = '.';
     }
+    public static class SourceMarketIsoCode
+    {
+        public const string UK = "GB";
+        public const string Germany = "DE";
+        public const string France = "FR";
+        public const string Belgium = "BE";
+        public const string CzechRepublic = "CZ";
+        public const string Poland = "PL";
+        public const string Netherlands = "NL";
+        public const string Hungary = "HU";
+
+    }
+    public static class CurrencyCode
+    {
+        public const string Euro = "EUR";
+        public const string Pound = "GBP";
+        public const string HungarianForint = "HUF";
+        public const string CzechKoruna = "CZK";
+        public const string PolishZłoty = "PLN";
+    }
     public static class Messages
     {
         public const string SourceMarketMissing = "Booking record doesn't have a source market.";
+        public const string CurrencyResolutionError = "Currency could not be resolved.";
         public const string CustomerIdIsNull = "Customer does not have a customer id.";
         public const string BookingSystemIsUnknown = "Booking system provided is either null or unknown";
         public const string ResponseNull = "Response is Null.";

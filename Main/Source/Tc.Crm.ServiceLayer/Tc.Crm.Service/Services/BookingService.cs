@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Text;
 using Tc.Crm.Service.CacheBuckets;
+using Tc.Crm.Service.Constants;
 using Tc.Crm.Service.Models;
 
 namespace Tc.Crm.Service.Services
@@ -96,6 +98,7 @@ namespace Tc.Crm.Service.Services
         public void ResolveReferences(Booking booking)
         {
             ResolveCustomerReferences(booking.Customer);
+            ResolveCurrency(booking);
             ResolveGeneralReferences(booking.BookingGeneral);
             if (booking.BookingIdentifier != null)
             {
@@ -191,9 +194,41 @@ namespace Tc.Crm.Service.Services
         {
             if (general == null) return;
             general.Brand = brandBucket.GetBy(general.Brand);
-            general.Currency = currencyBucket.GetBy(general.Currency);
             general.Destination = gatewayBucket.GetBy(general.Destination);
             general.ToCode = tourOperatorBucket.GetBy(general.ToCode);
+        }
+        public void ResolveCurrency(Booking booking)
+        {
+            if (booking == null) return;
+            if (booking.BookingGeneral == null) return;
+
+            if(string.IsNullOrWhiteSpace(booking.BookingGeneral.Currency))
+            {
+                Trace.TraceWarning("Currency is empty, deriving currency from source market.");
+                var sourceMarket = booking.BookingIdentifier != null ? booking.BookingIdentifier.SourceMarket : null;
+                if (string.IsNullOrWhiteSpace(sourceMarket))
+                {
+                    Trace.TraceWarning("Source market is empty");
+                    return;
+                }
+                switch (sourceMarket)
+                {
+                    case SourceMarketIsoCode.UK: booking.BookingGeneral.Currency = currencyBucket.GetBy(CurrencyCode.Pound);break;
+                    case SourceMarketIsoCode.France:
+                    case SourceMarketIsoCode.Belgium:
+                    case SourceMarketIsoCode.Germany:
+                    case SourceMarketIsoCode.Netherlands: booking.BookingGeneral.Currency = currencyBucket.GetBy(CurrencyCode.Euro); break;
+                    case SourceMarketIsoCode.CzechRepublic: booking.BookingGeneral.Currency = currencyBucket.GetBy(CurrencyCode.CzechKoruna); break;
+                    case SourceMarketIsoCode.Hungary: booking.BookingGeneral.Currency = currencyBucket.GetBy(CurrencyCode.HungarianForint); break;
+                    case SourceMarketIsoCode.Poland: booking.BookingGeneral.Currency = currencyBucket.GetBy(CurrencyCode.PolishZłoty); break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                booking.BookingGeneral.Currency = currencyBucket.GetBy(booking.BookingGeneral.Currency);
+            }
         }
     }
 }
