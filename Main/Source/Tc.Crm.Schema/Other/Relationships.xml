@@ -34,6 +34,7 @@
   <EntityRelationship Name="business_unit_slakpiinstance" unmodified="1" />
   <EntityRelationship Name="business_unit_system_users" />
   <EntityRelationship Name="business_unit_tc_accounttype" />
+  <EntityRelationship Name="business_unit_tc_alternativeemail" />
   <EntityRelationship Name="business_unit_tc_booking" />
   <EntityRelationship Name="business_unit_tc_bookingaccommodation" />
   <EntityRelationship Name="business_unit_tc_bookingextraservice" />
@@ -158,6 +159,8 @@
   <EntityRelationship Name="lk_systemuserbase_modifiedby" />
   <EntityRelationship Name="lk_tc_accounttype_createdby" />
   <EntityRelationship Name="lk_tc_accounttype_modifiedby" />
+  <EntityRelationship Name="lk_tc_alternativeemail_createdby" />
+  <EntityRelationship Name="lk_tc_alternativeemail_modifiedby" />
   <EntityRelationship Name="lk_tc_booking_createdby" />
   <EntityRelationship Name="lk_tc_booking_modifiedby" />
   <EntityRelationship Name="lk_tc_bookingaccommodation_createdby" />
@@ -184,6 +187,10 @@
   <EntityRelationship Name="lk_tc_compensation_modifiedby" />
   <EntityRelationship Name="lk_tc_compensationapproval_createdby" />
   <EntityRelationship Name="lk_tc_compensationapproval_modifiedby" />
+  <EntityRelationship Name="lk_tc_compensationcalculationline_createdby" />
+  <EntityRelationship Name="lk_tc_compensationcalculationline_modifiedby" />
+  <EntityRelationship Name="lk_tc_compensationcalculationmatrix_createdby" />
+  <EntityRelationship Name="lk_tc_compensationcalculationmatrix_modifiedby" />
   <EntityRelationship Name="lk_tc_compensationline_createdby" />
   <EntityRelationship Name="lk_tc_compensationline_modifiedby" />
   <EntityRelationship Name="lk_tc_configuration_createdby" />
@@ -232,6 +239,8 @@
   <EntityRelationship Name="OrderClose_Annotation" unmodified="1" />
   <EntityRelationship Name="organization_system_users" />
   <EntityRelationship Name="organization_tc_caseflow" />
+  <EntityRelationship Name="organization_tc_compensationcalculationline" />
+  <EntityRelationship Name="organization_tc_compensationcalculationmatrix" />
   <EntityRelationship Name="organization_tc_configuration" />
   <EntityRelationship Name="organization_teams" unmodified="1" />
   <EntityRelationship Name="owner_accounts" />
@@ -239,6 +248,7 @@
   <EntityRelationship Name="owner_contacts" />
   <EntityRelationship Name="owner_incidents" />
   <EntityRelationship Name="owner_tc_accounttype" />
+  <EntityRelationship Name="owner_tc_alternativeemail" />
   <EntityRelationship Name="owner_tc_booking" />
   <EntityRelationship Name="owner_tc_bookingaccommodation" />
   <EntityRelationship Name="owner_tc_bookingextraservice" />
@@ -266,6 +276,8 @@
   <EntityRelationship Name="popat_powerattachmentprocessqueueemail_Annotations" />
   <EntityRelationship Name="popat_powerattachmentprocessqueuenotes_Annotations" />
   <EntityRelationship Name="position_users" />
+  <EntityRelationship Name="posms_powersmsconfiguration_Annotations" />
+  <EntityRelationship Name="posms_smsmessage_Annotations" />
   <EntityRelationship Name="price_level_accounts" />
   <EntityRelationship Name="price_level_contacts" />
   <EntityRelationship Name="Product_Annotation" unmodified="1" />
@@ -377,12 +389,16 @@
   <EntityRelationship Name="tc_casecategory_tc_recovery" />
   <EntityRelationship Name="tc_casecategory2_tc_recovery" />
   <EntityRelationship Name="tc_casecategory3_tc_recovery" />
+  <EntityRelationship Name="tc_casecategory4_subcategory_tc_caseline" />
   <EntityRelationship Name="tc_casecategory4_tc_caseline" />
   <EntityRelationship Name="tc_caseline_tc_compensation_1" />
   <EntityRelationship Name="tc_caseline_tc_compensation_2" />
   <EntityRelationship Name="tc_caseline_tc_compensation_3" />
   <EntityRelationship Name="tc_caseline_tc_compensation_4" />
-  <EntityRelationship Name="tc_caseline_tc_compensation_5" />
+  <EntityRelationship Name="tc_caseline_tc_compensationline_caseline1" />
+  <EntityRelationship Name="tc_caseline_tc_compensationline_caseline2" />
+  <EntityRelationship Name="tc_caseline_tc_compensationline_caseline3" />
+  <EntityRelationship Name="tc_caseline_tc_compensationline_caseline4" />
   <EntityRelationship Name="tc_compensation_tc_compensationline" />
   <EntityRelationship Name="tc_compensationapproval_Annotations" />
   <EntityRelationship Name="tc_compensationapproval_SLAKPIInstances" />
@@ -413,6 +429,8 @@
   <EntityRelationship Name="tc_hotel_tc_caseline_AccommodationPropertyName" />
   <EntityRelationship Name="tc_hotel_tc_hotelpromises" />
   <EntityRelationship Name="tc_hotel_tc_surveyresponses" />
+  <EntityRelationship Name="tc_incident_alternativeemaillookup" />
+  <EntityRelationship Name="tc_incident_OtherCustomerEmail" />
   <EntityRelationship Name="tc_incident_tc_caseline" />
   <EntityRelationship Name="tc_incident_tc_compensation" />
   <EntityRelationship Name="tc_incident_tc_compensationline" />
@@ -445,15 +463,20 @@
   <EntityRelationship Name="tc_systemuser_tc_locationoffice" />
   <EntityRelationship Name="tc_tc_booking_letter" />
   <EntityRelationship Name="tc_tc_booking_tc_caseline_bookingid" />
+  <EntityRelationship Name="tc_tc_booking_tc_compensationline" />
   <EntityRelationship Name="tc_tc_brand_incident" />
   <EntityRelationship Name="tc_tc_casecategory_tc_casecategory" />
   <EntityRelationship Name="tc_tc_casecategory_tc_caseline" />
+  <EntityRelationship Name="tc_tc_casecategory_tc_compensationcalculationmatrix_Category1" />
+  <EntityRelationship Name="tc_tc_casecategory_tc_compensationcalculationmatrix_category2" />
+  <EntityRelationship Name="tc_tc_casecategory_tc_compensationcalculationmatrix_category3" />
   <EntityRelationship Name="tc_tc_casecategory2_tc_caseline" />
   <EntityRelationship Name="tc_tc_casetype_incident" />
   <EntityRelationship Name="tc_tc_casetype_tc_casecategory" />
   <EntityRelationship Name="tc_tc_casetype_tc_caseline" />
   <EntityRelationship Name="tc_tc_compensation_tc_compensationapproval" />
   <EntityRelationship Name="tc_tc_compensation_tc_recovery" />
+  <EntityRelationship Name="tc_tc_compensationcalculationmatrix_tc_compensationcalculationline_compensationmatrix" />
   <EntityRelationship Name="tc_tc_compensationline_tc_recovery" />
   <EntityRelationship Name="tc_tc_country_account" />
   <EntityRelationship Name="tc_tc_country_incident" />
@@ -471,6 +494,7 @@
   <EntityRelationship Name="team_contacts" />
   <EntityRelationship Name="team_incidents" />
   <EntityRelationship Name="team_tc_accounttype" />
+  <EntityRelationship Name="team_tc_alternativeemail" />
   <EntityRelationship Name="team_tc_booking" />
   <EntityRelationship Name="team_tc_bookingaccommodation" />
   <EntityRelationship Name="team_tc_bookingextraservice" />
@@ -511,6 +535,7 @@
   <EntityRelationship Name="user_accounts" />
   <EntityRelationship Name="user_parent_user" />
   <EntityRelationship Name="user_tc_accounttype" />
+  <EntityRelationship Name="user_tc_alternativeemail" />
   <EntityRelationship Name="user_tc_booking" />
   <EntityRelationship Name="user_tc_bookingaccommodation" />
   <EntityRelationship Name="user_tc_bookingextraservice" />

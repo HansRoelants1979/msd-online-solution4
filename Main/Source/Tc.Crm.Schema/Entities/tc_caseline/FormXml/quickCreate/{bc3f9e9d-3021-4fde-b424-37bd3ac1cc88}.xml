@@ -37,11 +37,11 @@
                     </cell>
                   </row>
                   <row>
-                    <cell id="{1506bba8-3e77-8471-3bc2-da4873724da9}" showlabel="true" locklevel="1">
+                    <cell id="{1506bba8-3e77-8471-3bc2-da4873724da9}" showlabel="true" locklevel="1" visible="false">
                       <labels>
                         <label description="Category Level 2" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_casecategory2id" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_casecategory2id" uniqueid="{bee7ce47-a807-1bd4-3980-7b1ad1c04ebc}">
+                      <control id="tc_casecategory2id" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_casecategory2id" uniqueid="{bee7ce47-a807-1bd4-3980-7b1ad1c04ebc}">
                         <parameters>
                           <AutoResolve>true</AutoResolve>
                           <DisableMru>false</DisableMru>
@@ -50,12 +50,13 @@
                           <DefaultViewId>{F500C63E-33A9-40BE-855D-298CA74B508C}</DefaultViewId>
                           <AllowFilterOff>false</AllowFilterOff>
                           <DependentAttributeType>tc_casecategory</DependentAttributeType>
+                          <AvailableViewIds>{F500C63E-33A9-40BE-855D-298CA74B508C}</AvailableViewIds>
                         </parameters>
                       </control>
                     </cell>
                   </row>
                   <row>
-                    <cell id="{5568be8c-873a-533a-135d-9e0d12c4e991}" showlabel="true" locklevel="1">
+                    <cell id="{5568be8c-873a-533a-135d-9e0d12c4e991}" showlabel="true" locklevel="1" visible="false">
                       <labels>
                         <label description="Category Level 3" languagecode="1033" />
                       </labels>
@@ -68,12 +69,13 @@
                           <DefaultViewId>{F500C63E-33A9-40BE-855D-298CA74B508C}</DefaultViewId>
                           <DependentAttributeType>tc_casecategory</DependentAttributeType>
                           <AllowFilterOff>false</AllowFilterOff>
+                          <AvailableViewIds>{F500C63E-33A9-40BE-855D-298CA74B508C}</AvailableViewIds>
                         </parameters>
                       </control>
                     </cell>
                   </row>
                   <row>
-                    <cell id="{86ebee3b-2b31-1c39-3821-ee93ed3d37b5}" showlabel="true" locklevel="1">
+                    <cell id="{86ebee3b-2b31-1c39-3821-ee93ed3d37b5}" showlabel="true" locklevel="1" visible="false">
                       <labels>
                         <label description="Category Level 4" languagecode="1033" />
                       </labels>
@@ -87,6 +89,24 @@
                           <FilterRelationshipName>tc_tc_casetype_tc_casecategory</FilterRelationshipName>
                           <DependentAttributeName>tc_caseline.tc_casetypeid</DependentAttributeName>
                           <DependentAttributeType>tc_casetype</DependentAttributeType>
+                          <AllowFilterOff>false</AllowFilterOff>
+                          <AvailableViewIds>{F500C63E-33A9-40BE-855D-298CA74B508C}</AvailableViewIds>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{1090408b-85ba-9668-8ae0-30bd11800ac1}" showlabel="true" locklevel="0" visible="false">
+                      <labels>
+                        <label description="Category Level 4 Sub-Category" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_categorylevel4subcategoryid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_categorylevel4subcategoryid" uniqueid="{63a0e83a-d8a9-6370-5a6d-d376adcb4a22}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{F500C63E-33A9-40BE-855D-298CA74B508C}</DefaultViewId>
                           <AllowFilterOff>false</AllowFilterOff>
                         </parameters>
                       </control>
@@ -102,7 +122,7 @@
                   </row>
                   <row />
                   <row />
-                  <row />
+                  <row></row>
                   <row>
                     <cell id="{d71d5bc1-45d9-b496-3971-c823472d1407}" showlabel="true" locklevel="0" visible="false">
                       <labels>
@@ -241,7 +261,7 @@
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{9ab1bba5-eda5-34b9-4ad8-da413c3bb46c}" showlabel="true" visible="false" locklevel="1">
+                    <cell id="{9ab1bba5-eda5-34b9-4ad8-da413c3bb46c}" showlabel="true" locklevel="1" visible="false">
                       <labels>
                         <label description="Case Type" languagecode="1033" />
                       </labels>
@@ -287,7 +307,7 @@
                       <labels>
                         <label description="Mandatory Conditions Met" languagecode="1033" />
                       </labels>
-                      <control id="tc_mandatoryconditionsmet" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="tc_mandatoryconditionsmet" disabled="false" uniqueid="{e28ea995-6ba3-9498-9537-b2805d5e77b9}" />
+                      <control disabled="false" id="tc_mandatoryconditionsmet" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="tc_mandatoryconditionsmet" uniqueid="{e28ea995-6ba3-9498-9537-b2805d5e77b9}" />
                     </cell>
                   </row>
                 </rows>
@@ -314,9 +334,9 @@
           <Handler handlerUniqueId="{3302c2ee-6db5-87d4-8313-aa8a5ac7c1a3}" functionName="Tc.Crm.Scripts.Events.CaseLine.OnLoad" libraryName="tc_Tc.Crm.Scripts.Events.CaseLine.js" enabled="true" passExecutionContext="false" parameters="" />
         </Handlers>
       </event>
-      <event name="onsave" application="false" active="false">
+      <event name="onsave" active="false" application="false">
         <Handlers>
-          <Handler functionName="Tc.Crm.Scripts.Events.CaseLine.OnCaseLineSave" libraryName="tc_Tc.Crm.Scripts.Events.CaseLine.js" handlerUniqueId="{8a7543a8-9e65-ad35-83bd-80de73424783}" enabled="true" parameters="" passExecutionContext="false" />
+          <Handler handlerUniqueId="{8a7543a8-9e65-ad35-83bd-80de73424783}" functionName="Tc.Crm.Scripts.Events.CaseLine.OnCaseLineSave" libraryName="tc_Tc.Crm.Scripts.Events.CaseLine.js" enabled="true" passExecutionContext="false" parameters="" />
         </Handlers>
       </event>
     </events>

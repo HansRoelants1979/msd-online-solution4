@@ -72,6 +72,25 @@
                       <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep5" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_caseline" />
                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
                     </Sequence>
+                    <Sequence DisplayName="SetVisibilityStep_SetAttributeValueStep5_6: Hide Level 4 Sub-Category if 3 No Data">
+                      <mcwc:SetVisibility ControlId="tc_categorylevel4subcategoryid" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_caseline" IsVisible="False" />
+                    </Sequence>
+                    <Sequence DisplayName="SetAttributeValueStep_SetAttributeValueStep5_6_7: Clear Level 4 Sub-Category if 3 No Data">
+                      <Sequence.Variables>
+                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep_SetAttributeValueStep5_6_7_1" />
+                      </Sequence.Variables>
+                      <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;tc_caseline&quot;)]" />
+                      <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
+                      <mxswa:SetEntityProperty Attribute="tc_categorylevel4subcategoryid" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_caseline" Value="[SetAttributeValueStep_SetAttributeValueStep5_6_7_1]">
+                        <mxswa:SetEntityProperty.TargetType>
+                          <InArgument x:TypeArguments="s:Type">
+                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:EntityReference" />
+                          </InArgument>
+                        </mxswa:SetEntityProperty.TargetType>
+                      </mxswa:SetEntityProperty>
+                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep_SetAttributeValueStep5_6_7" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_caseline" />
+                      <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
+                    </Sequence>
                   </sco:Collection>
                 </mxswa:ActivityReference.Properties>
               </mxswa:ActivityReference>
@@ -130,6 +149,9 @@
                     <Sequence DisplayName="SetVisibilityStep1: Show Level 4 For an Incident">
                       <mcwc:SetVisibility ControlId="tc_categorylevel4id" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_caseline" IsVisible="True" />
                     </Sequence>
+                    <Sequence DisplayName="SetVisibilityStep_SetVisibilityStep1_8: Show Level 4 Sub-Category For an Incident">
+                      <mcwc:SetVisibility ControlId="tc_categorylevel4subcategoryid" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_caseline" IsVisible="True" />
+                    </Sequence>
                   </sco:Collection>
                 </mxswa:ActivityReference.Properties>
               </mxswa:ActivityReference>
@@ -158,6 +180,9 @@
                   <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
                     <Sequence DisplayName="SetVisibilityStep5: Hide Level 4 If NOT an Incident">
                       <mcwc:SetVisibility ControlId="tc_categorylevel4id" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_caseline" IsVisible="False" />
+                    </Sequence>
+                    <Sequence DisplayName="SetVisibilityStep_SetVisibilityStep5_9: Hide Level 4 Sub-Category For an Incident">
+                      <mcwc:SetVisibility ControlId="tc_categorylevel4subcategoryid" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_caseline" IsVisible="False" />
                     </Sequence>
                   </sco:Collection>
                 </mxswa:ActivityReference.Properties>

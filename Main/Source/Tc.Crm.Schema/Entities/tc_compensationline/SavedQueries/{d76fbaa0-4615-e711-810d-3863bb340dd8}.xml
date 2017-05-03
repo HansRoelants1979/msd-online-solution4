@@ -8,27 +8,25 @@
   <returnedtypecode>10055</returnedtypecode>
   <savedqueryid>{d76fbaa0-4615-e711-810d-3863bb340dd8}</savedqueryid>
   <layoutxml>
-    <grid name="resultset" object="10055" jump="tc_name" select="1" preview="1" icon="1">
-      <row name="result" id="tc_compensationlineid">
+    <grid name="resultset" icon="1" preview="1" select="1" jump="tc_name" object="10055">
+      <row id="tc_compensationlineid" name="result">
         <cell name="createdon" width="100" />
-        <cell name="tc_compensationlinereference" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="a_1c9d9e580ff9e61181073863bb34fb48.primarycontactid" width="300" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_1c9d9e580ff9e61181073863bb34fb48.primarycontactid" width="300" imageproviderwebresource="$webresource:" imageproviderfunctionname="" disableSorting="1" />
         <cell name="a_1c9d9e580ff9e61181073863bb34fb48.tc_sourcemarketid" width="100" disableSorting="1" />
         <cell name="tc_voucheramount" width="100" />
-        <cell name="tc_vouchertype" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_vouchertype" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
       </row>
     </grid>
   </layoutxml>
   <querytype>0</querytype>
   <fetchxml>
-    <fetch version="1.0" output-format="xml-platform" mapping="logical">
+    <fetch mapping="logical" output-format="xml-platform" version="1.0">
       <entity name="tc_compensationline">
-        <order attribute="createdon" descending="false" />
+        <order descending="false" attribute="createdon" />
         <attribute name="createdon" />
-        <attribute name="tc_compensationlinereference" />
         <attribute name="tc_vouchertype" />
         <attribute name="tc_voucheramount" />
-        <link-entity alias="a_1c9d9e580ff9e61181073863bb34fb48" name="incident" from="incidentid" to="tc_caseid" link-type="outer" visible="false">
+        <link-entity name="incident" visible="false" link-type="outer" to="tc_caseid" from="incidentid" alias="a_1c9d9e580ff9e61181073863bb34fb48">
           <attribute name="tc_sourcemarketid" />
           <attribute name="primarycontactid" />
         </link-entity>

@@ -256,8 +256,8 @@ Tc.Crm.Scripts.Events.Case = (function () {
         OnLoad: function () {
 
         },
-        OnCaseSave: function () {
-
+        OnSave: function () {
+            Tc.Crm.Scripts.Library.Compensation.UpdateCaseCompensationsSourceMarket();
         },
         OnCaseFieldChange: function () {
             GetTheSourceMarketCurrency();

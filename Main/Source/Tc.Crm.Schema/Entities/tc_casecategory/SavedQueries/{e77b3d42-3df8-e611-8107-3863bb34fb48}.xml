@@ -11,6 +11,7 @@
     <grid name="resultset" object="10037" jump="tc_name" select="1" preview="1" icon="1">
       <row name="result" id="tc_casecategoryid">
         <cell name="tc_name" width="300" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_casetypeid" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
       </row>
     </grid>
   </layoutxml>
@@ -23,12 +24,13 @@
         <filter type="and">
           <condition attribute="tc_casetypeid" operator="eq" uiname="Complaint" uitype="tc_casetype" value="{478C99E9-93E4-E611-8109-1458D041F8E8}" />
         </filter>
+        <attribute name="tc_casetypeid" />
         <attribute name="tc_casecategoryid" />
       </entity>
     </fetch>
   </fetchxml>
   <IntroducedVersion>1.0.0.17</IntroducedVersion>
   <LocalizedNames>
-    <LocalizedName description="Level 1 Case Categories" languagecode="1033" />
+    <LocalizedName description="Level 1 Complaint Case Categories" languagecode="1033" />
   </LocalizedNames>
 </savedquery>

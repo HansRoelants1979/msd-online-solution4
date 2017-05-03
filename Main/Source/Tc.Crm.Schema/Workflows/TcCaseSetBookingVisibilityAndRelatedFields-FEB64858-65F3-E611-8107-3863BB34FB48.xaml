@@ -100,20 +100,20 @@
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
                       <mcwc:SetFieldRequiredLevel ControlId="tc_sourcemarketid" ControlType="standard" DisplayName="SetFieldRequiredLevelStep17" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="None" />
                     </Sequence>
-                    <Sequence DisplayName="SetAttributeValueStep_SetFieldRequiredLevelStep17_31: Source market clear">
+                    <Sequence DisplayName="SetAttributeValueStep31: Source market clear">
                       <Sequence.Variables>
-                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep_SetFieldRequiredLevelStep17_31_1" />
+                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep31_1" />
                       </Sequence.Variables>
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;incident&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mxswa:SetEntityProperty Attribute="tc_sourcemarketid" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" Value="[SetAttributeValueStep_SetFieldRequiredLevelStep17_31_1]">
+                      <mxswa:SetEntityProperty Attribute="tc_sourcemarketid" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" Value="[SetAttributeValueStep31_1]">
                         <mxswa:SetEntityProperty.TargetType>
                           <InArgument x:TypeArguments="s:Type">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:EntityReference" />
                           </InArgument>
                         </mxswa:SetEntityProperty.TargetType>
                       </mxswa:SetEntityProperty>
-                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep_SetFieldRequiredLevelStep17_31" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" />
+                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep31" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" />
                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
                     </Sequence>
                     <Sequence DisplayName="SetVisibilityStep12: Hide Brand">
@@ -124,92 +124,92 @@
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
                       <mcwc:SetFieldRequiredLevel ControlId="tc_brandid" ControlType="standard" DisplayName="SetFieldRequiredLevelStep18" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="None" />
                     </Sequence>
-                    <Sequence DisplayName="SetAttributeValueStep_SetFieldRequiredLevelStep18_32: Brand clear">
+                    <Sequence DisplayName="SetAttributeValueStep32: Brand clear">
                       <Sequence.Variables>
-                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep_SetFieldRequiredLevelStep18_32_1" />
+                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep32_1" />
                       </Sequence.Variables>
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;incident&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mxswa:SetEntityProperty Attribute="tc_brandid" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" Value="[SetAttributeValueStep_SetFieldRequiredLevelStep18_32_1]">
+                      <mxswa:SetEntityProperty Attribute="tc_brandid" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" Value="[SetAttributeValueStep32_1]">
                         <mxswa:SetEntityProperty.TargetType>
                           <InArgument x:TypeArguments="s:Type">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:EntityReference" />
                           </InArgument>
                         </mxswa:SetEntityProperty.TargetType>
                       </mxswa:SetEntityProperty>
-                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep_SetFieldRequiredLevelStep18_32" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" />
+                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep32" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" />
                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_SetFieldRequiredLevelStep18_19: Destination not visible">
+                    <Sequence DisplayName="SetVisibilityStep19: Destination not visible">
                       <mcwc:SetVisibility ControlId="tc_destinationid" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="False" />
                     </Sequence>
-                    <Sequence DisplayName="SetFieldRequiredLevelStep_SetFieldRequiredLevelStep18_19_20: Destination not mandatory">
+                    <Sequence DisplayName="SetFieldRequiredLevelStep20: Destination not mandatory">
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;incident&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mcwc:SetFieldRequiredLevel ControlId="tc_destinationid" ControlType="standard" DisplayName="SetFieldRequiredLevelStep_SetFieldRequiredLevelStep18_19_20" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="None" />
+                      <mcwc:SetFieldRequiredLevel ControlId="tc_destinationid" ControlType="standard" DisplayName="SetFieldRequiredLevelStep20" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="None" />
                     </Sequence>
-                    <Sequence DisplayName="SetAttributeValueStep_SetFieldRequiredLevelStep18_19_20_33: Destination clear">
+                    <Sequence DisplayName="SetAttributeValueStep33: Destination clear">
                       <Sequence.Variables>
-                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep_SetFieldRequiredLevelStep18_19_20_33_1" />
+                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep33_1" />
                       </Sequence.Variables>
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;incident&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mxswa:SetEntityProperty Attribute="tc_destinationid" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" Value="[SetAttributeValueStep_SetFieldRequiredLevelStep18_19_20_33_1]">
+                      <mxswa:SetEntityProperty Attribute="tc_destinationid" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" Value="[SetAttributeValueStep33_1]">
                         <mxswa:SetEntityProperty.TargetType>
                           <InArgument x:TypeArguments="s:Type">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:EntityReference" />
                           </InArgument>
                         </mxswa:SetEntityProperty.TargetType>
                       </mxswa:SetEntityProperty>
-                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep_SetFieldRequiredLevelStep18_19_20_33" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" />
+                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep33" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" />
                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_SetFieldRequiredLevelStep18_19_20_21: Location not visible">
+                    <Sequence DisplayName="SetVisibilityStep21: Location not visible">
                       <mcwc:SetVisibility ControlId="tc_locationid" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="False" />
                     </Sequence>
-                    <Sequence DisplayName="SetFieldRequiredLevelStep_SetFieldRequiredLevelStep18_19_20_21_22: Location not mandatory">
+                    <Sequence DisplayName="SetFieldRequiredLevelStep22: Location not mandatory">
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;incident&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mcwc:SetFieldRequiredLevel ControlId="tc_locationid" ControlType="standard" DisplayName="SetFieldRequiredLevelStep_SetFieldRequiredLevelStep18_19_20_21_22" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="None" />
+                      <mcwc:SetFieldRequiredLevel ControlId="tc_locationid" ControlType="standard" DisplayName="SetFieldRequiredLevelStep22" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="None" />
                     </Sequence>
-                    <Sequence DisplayName="SetAttributeValueStep_SetFieldRequiredLevelStep18_19_20_21_22_34: Location clear">
+                    <Sequence DisplayName="SetAttributeValueStep34: Location clear">
                       <Sequence.Variables>
-                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep_SetFieldRequiredLevelStep18_19_20_21_22_34_1" />
+                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep34_1" />
                       </Sequence.Variables>
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;incident&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mxswa:SetEntityProperty Attribute="tc_locationid" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" Value="[SetAttributeValueStep_SetFieldRequiredLevelStep18_19_20_21_22_34_1]">
+                      <mxswa:SetEntityProperty Attribute="tc_locationid" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" Value="[SetAttributeValueStep34_1]">
                         <mxswa:SetEntityProperty.TargetType>
                           <InArgument x:TypeArguments="s:Type">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:EntityReference" />
                           </InArgument>
                         </mxswa:SetEntityProperty.TargetType>
                       </mxswa:SetEntityProperty>
-                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep_SetFieldRequiredLevelStep18_19_20_21_22_34" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" />
+                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep34" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" />
                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_SetFieldRequiredLevelStep18_19_20_21_22_23: Gateway not visible">
+                    <Sequence DisplayName="SetVisibilityStep23: Gateway not visible">
                       <mcwc:SetVisibility ControlId="tc_gateway" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="False" />
                     </Sequence>
-                    <Sequence DisplayName="SetFieldRequiredLevelStep_SetFieldRequiredLevelStep18_19_20_21_22_23_24: Gateway not mandatory">
+                    <Sequence DisplayName="SetFieldRequiredLevelStep24: Gateway not mandatory">
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;incident&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mcwc:SetFieldRequiredLevel ControlId="tc_gateway" ControlType="standard" DisplayName="SetFieldRequiredLevelStep_SetFieldRequiredLevelStep18_19_20_21_22_23_24" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="None" />
+                      <mcwc:SetFieldRequiredLevel ControlId="tc_gateway" ControlType="standard" DisplayName="SetFieldRequiredLevelStep24" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="None" />
                     </Sequence>
-                    <Sequence DisplayName="SetAttributeValueStep_SetFieldRequiredLevelStep18_19_20_21_22_23_24_35: Gateway clear">
+                    <Sequence DisplayName="SetAttributeValueStep35: Gateway clear">
                       <Sequence.Variables>
-                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep_SetFieldRequiredLevelStep18_19_20_21_22_23_24_35_1" />
+                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep35_1" />
                       </Sequence.Variables>
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;incident&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mxswa:SetEntityProperty Attribute="tc_gateway" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" Value="[SetAttributeValueStep_SetFieldRequiredLevelStep18_19_20_21_22_23_24_35_1]">
+                      <mxswa:SetEntityProperty Attribute="tc_gateway" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" Value="[SetAttributeValueStep35_1]">
                         <mxswa:SetEntityProperty.TargetType>
                           <InArgument x:TypeArguments="s:Type">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:EntityReference" />
                           </InArgument>
                         </mxswa:SetEntityProperty.TargetType>
                       </mxswa:SetEntityProperty>
-                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep_SetFieldRequiredLevelStep18_19_20_21_22_23_24_35" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" />
+                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep35" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" />
                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
                     </Sequence>
                   </sco:Collection>
@@ -286,29 +286,29 @@
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
                       <mcwc:SetFieldRequiredLevel ControlId="tc_brandid" ControlType="standard" DisplayName="SetFieldRequiredLevelStep14" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="Required" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_SetFieldRequiredLevelStep14_25: Destination visible">
+                    <Sequence DisplayName="SetVisibilityStep25: Destination visible">
                       <mcwc:SetVisibility ControlId="tc_destinationid" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="True" />
                     </Sequence>
-                    <Sequence DisplayName="SetFieldRequiredLevelStep_SetFieldRequiredLevelStep14_25_26: Destination mandatory">
+                    <Sequence DisplayName="SetFieldRequiredLevelStep26: Destination mandatory">
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;incident&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mcwc:SetFieldRequiredLevel ControlId="tc_destinationid" ControlType="standard" DisplayName="SetFieldRequiredLevelStep_SetFieldRequiredLevelStep14_25_26" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="Required" />
+                      <mcwc:SetFieldRequiredLevel ControlId="tc_destinationid" ControlType="standard" DisplayName="SetFieldRequiredLevelStep26" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="Required" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_SetFieldRequiredLevelStep14_25_26_27: Location visible">
+                    <Sequence DisplayName="SetVisibilityStep27: Location visible">
                       <mcwc:SetVisibility ControlId="tc_locationid" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="True" />
                     </Sequence>
-                    <Sequence DisplayName="SetFieldRequiredLevelStep_SetFieldRequiredLevelStep14_25_26_27_28: Location mandatory">
+                    <Sequence DisplayName="SetFieldRequiredLevelStep28: Location mandatory">
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;incident&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mcwc:SetFieldRequiredLevel ControlId="tc_locationid" ControlType="standard" DisplayName="SetFieldRequiredLevelStep_SetFieldRequiredLevelStep14_25_26_27_28" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="Required" />
+                      <mcwc:SetFieldRequiredLevel ControlId="tc_locationid" ControlType="standard" DisplayName="SetFieldRequiredLevelStep28" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="Required" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_SetFieldRequiredLevelStep14_25_26_27_28_29: Gateway visible">
+                    <Sequence DisplayName="SetVisibilityStep29: Gateway visible">
                       <mcwc:SetVisibility ControlId="tc_gateway" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="True" />
                     </Sequence>
-                    <Sequence DisplayName="SetFieldRequiredLevelStep_SetFieldRequiredLevelStep14_25_26_27_28_29_30: Gateway mandatory">
+                    <Sequence DisplayName="SetFieldRequiredLevelStep30: Gateway mandatory">
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;incident&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mcwc:SetFieldRequiredLevel ControlId="tc_gateway" ControlType="standard" DisplayName="SetFieldRequiredLevelStep_SetFieldRequiredLevelStep14_25_26_27_28_29_30" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="Required" />
+                      <mcwc:SetFieldRequiredLevel ControlId="tc_gateway" ControlType="standard" DisplayName="SetFieldRequiredLevelStep30" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="Required" />
                     </Sequence>
                   </sco:Collection>
                 </mxswa:ActivityReference.Properties>

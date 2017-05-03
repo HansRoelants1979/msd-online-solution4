@@ -8,7 +8,7 @@
     <Descriptions>
       <Description description="Version control&#xA;&#xA;1.0.0.51 etc etc" languagecode="1033" />
     </Descriptions>
-    <Version>1.0.0.83</Version>
+    <Version>1.0.0.90</Version>
     <Managed>0</Managed>
     <Publisher>
       <UniqueName>thomascook</UniqueName>
@@ -104,6 +104,7 @@
       <RootComponent type="1" schemaName="syncerror" behavior="2" />
       <RootComponent type="1" schemaName="systemuser" behavior="0" />
       <RootComponent type="1" schemaName="tc_accounttype" behavior="0" />
+      <RootComponent type="1" schemaName="tc_alternativeemail" behavior="0" />
       <RootComponent type="1" schemaName="tc_assistancerequest" behavior="0" />
       <RootComponent type="1" schemaName="tc_booking" behavior="0" />
       <RootComponent type="1" schemaName="tc_bookingaccommodation" behavior="0" />
@@ -117,6 +118,8 @@
       <RootComponent type="1" schemaName="tc_casetype" behavior="0" />
       <RootComponent type="1" schemaName="tc_compensation" behavior="0" />
       <RootComponent type="1" schemaName="tc_compensationapproval" behavior="0" />
+      <RootComponent type="1" schemaName="tc_compensationcalculationline" behavior="0" />
+      <RootComponent type="1" schemaName="tc_compensationcalculationmatrix" behavior="0" />
       <RootComponent type="1" schemaName="tc_compensationline" behavior="0" />
       <RootComponent type="1" schemaName="tc_configuration" behavior="0" />
       <RootComponent type="1" schemaName="tc_country" behavior="0" />
@@ -141,15 +144,18 @@
       <RootComponent type="9" schemaName="tc_bacsaccounttype" behavior="0" />
       <RootComponent type="9" schemaName="tc_boardtype" behavior="0" />
       <RootComponent type="9" schemaName="tc_bookingservicetype" behavior="0" />
+      <RootComponent type="9" schemaName="tc_buildingworkgrade" behavior="0" />
       <RootComponent type="9" schemaName="tc_casetype" behavior="0" />
       <RootComponent type="9" schemaName="tc_cashcurrencies" behavior="0" />
       <RootComponent type="9" schemaName="tc_comebackreason" behavior="0" />
       <RootComponent type="9" schemaName="tc_comebackresult" behavior="0" />
       <RootComponent type="9" schemaName="tc_compensationcostcover" behavior="0" />
+      <RootComponent type="9" schemaName="tc_compensationseverityimpact" behavior="0" />
       <RootComponent type="9" schemaName="tc_compensationtcconfirmation" behavior="0" />
       <RootComponent type="9" schemaName="tc_compensation_paymentofferstatus" behavior="0" />
       <RootComponent type="9" schemaName="tc_countries" behavior="0" />
       <RootComponent type="9" schemaName="tc_customerbookingrole" behavior="0" />
+      <RootComponent type="9" schemaName="tc_customerrelationslevel" behavior="0" />
       <RootComponent type="9" schemaName="tc_customersegment" behavior="0" />
       <RootComponent type="9" schemaName="tc_department" behavior="0" />
       <RootComponent type="9" schemaName="tc_emailaddresstype" behavior="0" />
@@ -163,6 +169,8 @@
       <RootComponent type="9" schemaName="tc_languages" behavior="0" />
       <RootComponent type="9" schemaName="tc_methodofcommunication" behavior="0" />
       <RootComponent type="9" schemaName="tc_nonfinancialcompensationsubtype" behavior="0" />
+      <RootComponent type="9" schemaName="tc_originatingbusinessarea" behavior="0" />
+      <RootComponent type="9" schemaName="tc_producttype" behavior="0" />
       <RootComponent type="9" schemaName="tc_salutation" behavior="0" />
       <RootComponent type="9" schemaName="tc_servicetype" behavior="0" />
       <RootComponent type="9" schemaName="tc_sladuration" behavior="0" />
@@ -182,6 +190,7 @@
       <RootComponent type="20" id="{a2518d2f-f9f8-e611-8107-3863bb34fb48}" behavior="0" />
       <RootComponent type="20" id="{a65769fa-f9f8-e611-8107-3863bb34fb48}" behavior="0" />
       <RootComponent type="20" id="{a87c699e-f8f8-e611-8107-3863bb34fb48}" behavior="0" />
+      <RootComponent type="20" id="{ad31700e-a129-e711-810e-3863bb34fb48}" behavior="0" />
       <RootComponent type="20" id="{d14317c4-18f8-e611-80ff-3863bb354ff0}" behavior="0" />
       <RootComponent type="20" id="{e478dc35-f9f8-e611-8107-3863bb34fb48}" behavior="0" />
       <RootComponent type="20" id="{ef5563ee-f9f8-e611-8107-3863bb34fb48}" behavior="0" />
@@ -190,7 +199,6 @@
       <RootComponent type="20" id="{f9c784c3-f9f8-e611-8107-3863bb34fb48}" behavior="0" />
       <RootComponent type="20" id="{fcaf7d02-b305-e711-8109-3863bb34fb48}" behavior="0" />
       <RootComponent type="29" id="{02716d34-92a4-45ab-8b4a-272d2c3d5795}" behavior="0" />
-      <RootComponent type="29" id="{03927aff-0908-e711-8102-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{04905e75-1615-e711-810d-3863bb340dd8}" behavior="0" />
       <RootComponent type="29" id="{06570f2d-e7fc-e611-8108-3863bb340dd8}" behavior="0" />
       <RootComponent type="29" id="{0685119b-1144-4e16-aafc-4ac62fa8d32f}" behavior="0" />
@@ -200,14 +208,18 @@
       <RootComponent type="29" id="{12188303-944a-4742-9af4-b2b596ae6525}" behavior="0" />
       <RootComponent type="29" id="{12ea1b1d-8cfa-e611-8108-3863bb340dd8}" behavior="0" />
       <RootComponent type="29" id="{1336abb9-d089-42a7-96e9-deb96e7b72a2}" behavior="0" />
+      <RootComponent type="29" id="{13564182-332f-e711-8106-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{14bf974d-9f1f-e711-8104-3863bb354ff0}" behavior="0" />
+      <RootComponent type="29" id="{14cf8cd6-e48a-4818-ae28-3764552e745a}" behavior="0" />
       <RootComponent type="29" id="{15756657-8d02-e711-810d-1458d041f8e8}" behavior="0" />
-      <RootComponent type="29" id="{16d348bc-9f1f-e711-8104-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{1833f08e-e803-e711-8109-3863bb34fb48}" behavior="0" />
+      <RootComponent type="29" id="{1956e81b-83fe-445a-8d94-a5cb40a17587}" behavior="0" />
       <RootComponent type="29" id="{19cb9d14-e903-e711-8109-3863bb34fb48}" behavior="0" />
       <RootComponent type="29" id="{19da8481-1307-42f1-a311-fcf9c74f47a8}" behavior="0" />
+      <RootComponent type="29" id="{1a77693a-6c04-4477-a757-c749889f3f61}" behavior="0" />
       <RootComponent type="29" id="{1c936574-a9fa-e611-8108-3863bb340dd8}" behavior="0" />
       <RootComponent type="29" id="{1cf8a4dd-2d68-4f28-84f9-2edbdcb880bf}" behavior="0" />
+      <RootComponent type="29" id="{1e712b61-9ccd-4ab0-8c12-e6a075dd6ae3}" behavior="0" />
       <RootComponent type="29" id="{1f965f52-0a37-479d-ade5-c4fca8781310}" behavior="0" />
       <RootComponent type="29" id="{1fc0a632-5f03-4233-aff1-13938cf09668}" behavior="0" />
       <RootComponent type="29" id="{20fcdb60-74dd-41cc-8694-038078ba01bc}" behavior="0" />
@@ -219,7 +231,7 @@
       <RootComponent type="29" id="{28acd24b-0125-e711-8104-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{2992e799-9110-e711-810e-1458d041f8e8}" behavior="0" />
       <RootComponent type="29" id="{2b7cfcc6-9c1e-e711-8110-1458d041f8e8}" behavior="0" />
-      <RootComponent type="29" id="{2baf48db-8b08-e711-8102-3863bb354ff0}" behavior="0" />
+      <RootComponent type="29" id="{2dc45a40-508a-44ca-a1f4-37a9b3169c3a}" behavior="0" />
       <RootComponent type="29" id="{2e1ba5f7-b98a-4a3a-8275-e61921ce4784}" behavior="0" />
       <RootComponent type="29" id="{2f39e6b8-cd08-e711-8102-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{30b48b7a-8d81-4f5f-950e-ec50676aaf98}" behavior="0" />
@@ -229,6 +241,8 @@
       <RootComponent type="29" id="{36199960-8d11-e711-810f-1458d041f8e8}" behavior="0" />
       <RootComponent type="29" id="{36eb26df-d7af-4a5d-9c1e-2b63622aadb4}" behavior="0" />
       <RootComponent type="29" id="{3992cd00-2415-e711-810d-3863bb340dd8}" behavior="0" />
+      <RootComponent type="29" id="{3c186b42-152c-e711-810f-3863bb340dd8}" behavior="0" />
+      <RootComponent type="29" id="{3fa6d9e0-112c-e711-8112-1458d041f8e8}" behavior="0" />
       <RootComponent type="29" id="{40f5a747-0708-e711-8102-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{41433206-9f1f-e711-8104-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{42e77957-277f-4d84-824e-8b89fc585952}" behavior="0" />
@@ -261,7 +275,6 @@
       <RootComponent type="29" id="{6fa03874-fa08-e711-8102-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{71d50574-2192-4395-8dcb-512552d8ad6c}" behavior="0" />
       <RootComponent type="29" id="{720f687d-9772-46fd-a008-8bbb37f8d40f}" behavior="0" />
-      <RootComponent type="29" id="{73b55f62-581f-471e-a623-5f35adc04ce3}" behavior="0" />
       <RootComponent type="29" id="{74cab45f-4700-e711-8108-3863bb34fb48}" behavior="0" />
       <RootComponent type="29" id="{75ae6fcf-e5f8-e611-810b-1458d041f8e8}" behavior="0" />
       <RootComponent type="29" id="{7657a5df-a31f-e711-8104-3863bb354ff0}" behavior="0" />
@@ -278,6 +291,7 @@
       <RootComponent type="29" id="{95f2a4d8-2800-e711-8108-3863bb340dd8}" behavior="0" />
       <RootComponent type="29" id="{99cdf643-a229-4b61-9aa1-02849011d679}" behavior="0" />
       <RootComponent type="29" id="{9a6527b8-defc-e611-8108-3863bb340dd8}" behavior="0" />
+      <RootComponent type="29" id="{9ba41f33-4d12-4f44-bb82-14dad2936d4b}" behavior="0" />
       <RootComponent type="29" id="{9c659960-85a6-4cb2-b114-269d7df0d443}" behavior="0" />
       <RootComponent type="29" id="{a1d73372-181d-4396-92ec-4e12f155e5b4}" behavior="0" />
       <RootComponent type="29" id="{a2371728-d807-e711-8102-3863bb354ff0}" behavior="0" />
@@ -290,14 +304,15 @@
       <RootComponent type="29" id="{a9274ecd-570d-e711-810a-3863bb34fb48}" behavior="0" />
       <RootComponent type="29" id="{ac50bd00-6284-4c4e-8b82-a3028abeb3f6}" behavior="0" />
       <RootComponent type="29" id="{ad8c6e01-2419-e711-8104-3863bb354ff0}" behavior="0" />
+      <RootComponent type="29" id="{add0abd6-0ec4-40f3-8a2a-512f8516e9ea}" behavior="0" />
       <RootComponent type="29" id="{af9db957-a126-e711-8111-1458d041f8e8}" behavior="0" />
       <RootComponent type="29" id="{b5fb8d18-d66a-4b9f-a21f-f155cc164aea}" behavior="0" />
       <RootComponent type="29" id="{b6834a0a-83c7-4fbb-94ed-2e04f315ea4c}" behavior="0" />
       <RootComponent type="29" id="{ba1d2273-ac1f-e711-8104-3863bb354ff0}" behavior="0" />
-      <RootComponent type="29" id="{bdbb4930-3a00-e711-8108-3863bb340dd8}" behavior="0" />
       <RootComponent type="29" id="{c2ab6021-226c-4613-9477-9d98eae2e8a0}" behavior="0" />
       <RootComponent type="29" id="{c34d9cf9-90d0-4ef0-be4e-e1ee0c3d9670}" behavior="0" />
       <RootComponent type="29" id="{c5515fb3-9d1f-e711-8104-3863bb354ff0}" behavior="0" />
+      <RootComponent type="29" id="{cc56eb5b-edf8-e611-810b-1458d041f8e8}" behavior="0" />
       <RootComponent type="29" id="{d3950ebe-2206-423e-832f-abca15260ca3}" behavior="0" />
       <RootComponent type="29" id="{d4841656-e630-4eb3-aa4b-054ddb56e865}" behavior="0" />
       <RootComponent type="29" id="{d67ee786-9bfd-e611-810c-1458d041f8e8}" behavior="0" />
@@ -326,6 +341,7 @@
       <RootComponent type="29" id="{f0dc2ffa-9702-e711-8101-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{f1852251-e803-e711-8109-3863bb34fb48}" behavior="0" />
       <RootComponent type="29" id="{f6706c2f-9a09-e711-810a-3863bb340dd8}" behavior="0" />
+      <RootComponent type="29" id="{f78bceef-f028-4eb1-949e-da4acacc4668}" behavior="0" />
       <RootComponent type="29" id="{f7a78559-b816-e711-810c-3863bb34fb48}" behavior="0" />
       <RootComponent type="29" id="{f946b341-3ea8-4cfd-8163-9620d74a80cd}" behavior="0" />
       <RootComponent type="29" id="{fcae3925-e201-e711-8101-3863bb354ff0}" behavior="0" />
@@ -426,6 +442,7 @@
       <RootComponent type="36" id="{faa63c14-ca12-e711-810b-3863bb34fb48}" behavior="0" />
       <RootComponent type="36" id="{fb601699-2315-e711-8104-3863bb354ff0}" behavior="0" />
       <RootComponent type="36" id="{fba6e845-ca12-e711-810b-3863bb34fb48}" behavior="0" />
+      <RootComponent type="39" id="{7a7a5a31-552b-e711-8112-1458d041f8e8}" behavior="0" />
       <RootComponent type="60" id="{03f2a13e-f6df-4428-8b3b-1ed3b97842ae}" behavior="0" />
       <RootComponent type="60" id="{0619ad6c-95d6-462f-ac3d-d27eac8a4840}" behavior="0" />
       <RootComponent type="60" id="{0b60b9eb-4b06-45c0-a557-d899cecea65e}" behavior="0" />
@@ -492,7 +509,9 @@
       <RootComponent type="60" id="{9aca58e8-6630-461f-8d7d-6bf1d43d6676}" behavior="0" />
       <RootComponent type="60" id="{9d0bc1e4-713f-42e6-a107-9e662730f9e7}" behavior="0" />
       <RootComponent type="60" id="{a758a67a-3a15-e711-810d-3863bb340dd8}" behavior="0" />
+      <RootComponent type="60" id="{aa5e448a-b707-4364-8059-52eefb03c5db}" behavior="0" />
       <RootComponent type="60" id="{b028db32-3619-48a5-ac51-cf3f947b0ef3}" behavior="0" />
+      <RootComponent type="60" id="{b192a953-ef67-4d7b-896a-d878bfa51ceb}" behavior="0" />
       <RootComponent type="60" id="{b7062b3a-d74e-438d-b297-334766c5234e}" behavior="0" />
       <RootComponent type="60" id="{b7943d2c-d5fd-4483-baf0-5cec3a2bb688}" behavior="0" />
       <RootComponent type="60" id="{bc3f9e9d-3021-4fde-b424-37bd3ac1cc88}" behavior="0" />
@@ -511,6 +530,7 @@
       <RootComponent type="60" id="{d6784cb8-bc33-4fcc-a9a9-3dc5b46ea9c6}" />
       <RootComponent type="60" id="{dc9bae21-7ec6-4ef4-8483-e9090c14e1f6}" behavior="0" />
       <RootComponent type="60" id="{de9e32bd-1a1d-48e6-9c18-0fb705453a13}" behavior="0" />
+      <RootComponent type="60" id="{dea6b7c1-1aae-45d5-a60b-01f0961fc432}" behavior="0" />
       <RootComponent type="60" id="{e5f3114d-0bc1-4f30-a88c-85f890a39afe}" behavior="0" />
       <RootComponent type="60" id="{e6fa6e79-4b6a-4b08-916f-5cf1ba40fd8c}" behavior="0" />
       <RootComponent type="60" id="{e88e7197-2565-400d-94ff-acb8cbbf2a98}" behavior="0" />
@@ -537,6 +557,9 @@
       <RootComponent type="61" schemaName="popat_/PowerAttachmentsHTML" behavior="0" />
       <RootComponent type="61" schemaName="tc_AccountTypeicon16" behavior="0" />
       <RootComponent type="61" schemaName="tc_AccountTypeicon32" behavior="0" />
+      <RootComponent type="61" schemaName="tc_AlternativeEmail16" behavior="0" />
+      <RootComponent type="61" schemaName="tc_AlternativeEmail16px" behavior="0" />
+      <RootComponent type="61" schemaName="tc_AlternativeEmail32px" behavior="0" />
       <RootComponent type="61" schemaName="tc_assistancerequesticon16" behavior="0" />
       <RootComponent type="61" schemaName="tc_assistancerequesticon32" behavior="0" />
       <RootComponent type="61" schemaName="tc_BookingAccommodationIcon16" behavior="0" />
@@ -561,10 +584,15 @@
       <RootComponent type="61" schemaName="tc_CaseTypes32" behavior="0" />
       <RootComponent type="61" schemaName="tc_CompensationApprovalIcon16" behavior="0" />
       <RootComponent type="61" schemaName="tc_CompensationApprovalIcon32" behavior="0" />
+      <RootComponent type="61" schemaName="tc_CompensationCalcLineIcon16" behavior="0" />
+      <RootComponent type="61" schemaName="tc_CompensationCalcLineIcon32" behavior="0" />
       <RootComponent type="61" schemaName="tc_CompensationIcon16" behavior="0" />
       <RootComponent type="61" schemaName="tc_CompensationIcon32" behavior="0" />
       <RootComponent type="61" schemaName="tc_CompensationLineIcon16" behavior="0" />
       <RootComponent type="61" schemaName="tc_CompensationLineIcon32" behavior="0" />
+      <RootComponent type="61" schemaName="tc_CompensationLineSignature" behavior="0" />
+      <RootComponent type="61" schemaName="tc_CompensationMatrixIcon16" behavior="0" />
+      <RootComponent type="61" schemaName="tc_CompensationMatrixIcon32" behavior="0" />
       <RootComponent type="61" schemaName="tc_CompensationSignature" behavior="0" />
       <RootComponent type="61" schemaName="tc_ConfigurationIcon16" behavior="0" />
       <RootComponent type="61" schemaName="tc_ConfigurationIcon32" behavior="0" />
@@ -588,6 +616,7 @@
       <RootComponent type="61" schemaName="tc_LocationOfficeIcon32" behavior="0" />
       <RootComponent type="61" schemaName="tc_LocationPyramidIcon16" behavior="0" />
       <RootComponent type="61" schemaName="tc_LocationPyramidIcon32" behavior="0" />
+      <RootComponent type="61" schemaName="tc_OfflineResource" behavior="0" />
       <RootComponent type="61" schemaName="tc_ParticipantIcon16" behavior="0" />
       <RootComponent type="61" schemaName="tc_ParticipantIcon32" behavior="0" />
       <RootComponent type="61" schemaName="tc_recoveryicon16" behavior="0" />
@@ -607,13 +636,16 @@
       <RootComponent type="61" schemaName="tc_Tc.Crm.Scripts.Events.Case.js" behavior="0" />
       <RootComponent type="61" schemaName="tc_Tc.Crm.Scripts.Events.CaseLine.js" behavior="0" />
       <RootComponent type="61" schemaName="tc_Tc.Crm.Scripts.Events.Compensation.js" behavior="0" />
+      <RootComponent type="61" schemaName="tc_Tc.Crm.Scripts.Events.Contact.js" behavior="0" />
       <RootComponent type="61" schemaName="tc_Tc.Crm.Scripts.Events.Email.js" behavior="0" />
+      <RootComponent type="61" schemaName="tc_Tc.Crm.Scripts.Library.Compensation.js" behavior="0" />
       <RootComponent type="61" schemaName="tc_TestScript" behavior="0" />
       <RootComponent type="61" schemaName="tc_TestScriptPlzIgnore" behavior="0" />
       <RootComponent type="61" schemaName="tc_TestScriptPlzIgnore1" behavior="0" />
       <RootComponent type="61" schemaName="tc_ThomasCookStripLogoDevelopment" behavior="0" />
       <RootComponent type="61" schemaName="tc_ThomasCookStripLogoProduction" behavior="0" />
       <RootComponent type="61" schemaName="tc_ThomasCookStripLogoSIT" behavior="0" />
+      <RootComponent type="61" schemaName="tc_ThomasCookStripLogoStaging" behavior="0" />
       <RootComponent type="61" schemaName="tc_ThomasCookStripLogoTraining" behavior="0" />
       <RootComponent type="61" schemaName="tc_ThomasCookStripLogoUAT" behavior="0" />
       <RootComponent type="61" schemaName="tc_TourOperatorIcon16" behavior="0" />
@@ -642,11 +674,11 @@
     <MissingDependencies>
       <MissingDependency>
         <Required key="0" type="1" schemaName="msdyn_wallsavedqueryusersettings" displayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
-        <Dependent key="1" type="2" schemaName="msdyn_useridyominame" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
+        <Dependent key="1" type="2" schemaName="msdyn_useridname" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
       </MissingDependency>
       <MissingDependency>
         <Required key="0" type="1" schemaName="msdyn_wallsavedqueryusersettings" displayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
-        <Dependent key="2" type="2" schemaName="msdyn_useridname" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
+        <Dependent key="2" type="2" schemaName="msdyn_useridyominame" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
       </MissingDependency>
       <MissingDependency>
         <Required key="0" type="1" schemaName="msdyn_wallsavedqueryusersettings" displayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
@@ -657,11 +689,11 @@
         <Dependent key="3" type="10" schemaName="msdyn_systemuser_wallsavedqueryusersettings_userid" displayName="msdyn_systemuser_wallsavedqueryusersettings_userid" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="4" type="1" schemaName="msdyn_postruleconfig" displayName="Post Rule Configuration" solution="ActivityFeedsCore (8.2.0.0)" />
+        <Required key="4" type="1" schemaName="msdyn_postconfig" displayName="Post Configuration" solution="ActivityFeedsCore (8.2.0.0)" />
         <Dependent key="5" type="62" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="6" type="1" schemaName="msdyn_postconfig" displayName="Post Configuration" solution="ActivityFeedsCore (8.2.0.0)" />
+        <Required key="6" type="1" schemaName="msdyn_postruleconfig" displayName="Post Rule Configuration" solution="ActivityFeedsCore (8.2.0.0)" />
         <Dependent key="5" type="62" />
       </MissingDependency>
       <MissingDependency>
@@ -682,11 +714,11 @@
       </MissingDependency>
       <MissingDependency>
         <Required key="3" type="10" schemaName="msdyn_systemuser_wallsavedqueryusersettings_userid" displayName="msdyn_systemuser_wallsavedqueryusersettings_userid" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
-        <Dependent key="2" type="2" schemaName="msdyn_useridname" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
+        <Dependent key="1" type="2" schemaName="msdyn_useridname" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
       </MissingDependency>
       <MissingDependency>
         <Required key="3" type="10" schemaName="msdyn_systemuser_wallsavedqueryusersettings_userid" displayName="msdyn_systemuser_wallsavedqueryusersettings_userid" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
-        <Dependent key="1" type="2" schemaName="msdyn_useridyominame" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
+        <Dependent key="2" type="2" schemaName="msdyn_useridyominame" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
       </MissingDependency>
       <MissingDependency>
         <Required key="9" type="61" schemaName="popat_/PowerAttachmentsHTML" displayName="popat_/PowerAttachmentsHTML" solution="PowerAttachment (1.2.2.2013)" />

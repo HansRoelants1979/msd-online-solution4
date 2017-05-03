@@ -87,6 +87,9 @@
                     <Sequence DisplayName="SetVisibilityStep4: Hide Level 4">
                       <mcwc:SetVisibility ControlId="tc_categorylevel4id" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_caseline" IsVisible="False" />
                     </Sequence>
+                    <Sequence DisplayName="SetVisibilityStep_SetVisibilityStep4_8: Hide Level 4 Sub-Category">
+                      <mcwc:SetVisibility ControlId="tc_categorylevel4subcategoryid" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_caseline" IsVisible="False" />
+                    </Sequence>
                     <Sequence DisplayName="SetAttributeValueStep5: Clear Level 2">
                       <Sequence.Variables>
                         <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep5_1" />
@@ -133,6 +136,22 @@
                         </mxswa:SetEntityProperty.TargetType>
                       </mxswa:SetEntityProperty>
                       <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep7" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_caseline" />
+                      <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
+                    </Sequence>
+                    <Sequence DisplayName="SetAttributeValueStep_SetAttributeValueStep7_9: Clear Level 4 Sub-Category">
+                      <Sequence.Variables>
+                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep_SetAttributeValueStep7_9_1" />
+                      </Sequence.Variables>
+                      <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;tc_caseline&quot;)]" />
+                      <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
+                      <mxswa:SetEntityProperty Attribute="tc_categorylevel4subcategoryid" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_caseline" Value="[SetAttributeValueStep_SetAttributeValueStep7_9_1]">
+                        <mxswa:SetEntityProperty.TargetType>
+                          <InArgument x:TypeArguments="s:Type">
+                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:EntityReference" />
+                          </InArgument>
+                        </mxswa:SetEntityProperty.TargetType>
+                      </mxswa:SetEntityProperty>
+                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep_SetAttributeValueStep7_9" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_caseline" />
                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
                     </Sequence>
                   </sco:Collection>

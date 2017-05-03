@@ -141,6 +141,11 @@
     <AttributeMaps />
   </EntityMap>
   <EntityMap>
+    <EntitySource>tc_alternativeemail</EntitySource>
+    <EntityTarget>incident</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
     <EntitySource>tc_bookingaccommodation</EntitySource>
     <EntityTarget>tc_caseline</EntityTarget>
     <AttributeMaps>
@@ -219,6 +224,11 @@
   </EntityMap>
   <EntityMap>
     <EntitySource>tc_booking</EntitySource>
+    <EntityTarget>tc_compensationline</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_booking</EntitySource>
     <EntityTarget>tc_customerbookingrole</EntityTarget>
     <AttributeMaps />
   </EntityMap>
@@ -259,6 +269,11 @@
   </EntityMap>
   <EntityMap>
     <EntitySource>tc_casecategory</EntitySource>
+    <EntityTarget>tc_compensationcalculationmatrix</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_casecategory</EntitySource>
     <EntityTarget>tc_recovery</EntityTarget>
     <AttributeMaps />
   </EntityMap>
@@ -281,6 +296,11 @@
     </AttributeMaps>
   </EntityMap>
   <EntityMap>
+    <EntitySource>tc_caseline</EntitySource>
+    <EntityTarget>tc_compensationline</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
     <EntitySource>tc_casetype</EntitySource>
     <EntityTarget>incident</EntityTarget>
     <AttributeMaps />
@@ -293,6 +313,11 @@
   <EntityMap>
     <EntitySource>tc_casetype</EntitySource>
     <EntityTarget>tc_caseline</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_compensationcalculationmatrix</EntitySource>
+    <EntityTarget>tc_compensationcalculationline</EntityTarget>
     <AttributeMaps />
   </EntityMap>
   <EntityMap>

@@ -46,6 +46,14 @@
                     </cell>
                   </row>
                   <row>
+                    <cell id="{0d387268-7911-3c10-15e5-de180539c5c8}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="3rd Party Involved" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_3rdpartyinvolved" classid="{B0C6723A-8503-4fd7-BB28-C8A06AC933C2}" datafieldname="tc_3rdpartyinvolved" uniqueid="{70237cba-26ac-8e81-ba28-76e081946e8c}" />
+                    </cell>
+                  </row>
+                  <row>
                     <cell id="{06acb155-c513-2546-841a-1c356b89a81c}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="3rd Party Agent" languagecode="1033" />
@@ -67,7 +75,7 @@
                   <row>
                     <cell id="{76d17ce6-ce11-da3c-aeee-e2886e506221}" locklevel="0" showlabel="true">
                       <labels>
-                        <label description="Origin" languagecode="1033" />
+                        <label description="Source Type" languagecode="1033" />
                         <label description="Origine " languagecode="1036" />
                         <label description="Ursprung" languagecode="1031" />
                       </labels>
@@ -94,15 +102,23 @@
                   <row>
                     <cell id="{17c46a1d-51b9-aee0-89d9-6aeeb519bbd4}" locklevel="0" showlabel="true">
                       <labels>
-                        <label description="3rd Party Response?" languagecode="1033" />
+                        <label description="12hr SLA?" languagecode="1033" />
                       </labels>
                       <control disabled="false" id="tc_3rdpartyresponserequired" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_3rdpartyresponserequired" uniqueid="{c4da5b94-69bd-12d2-7c7e-db41a70d3984}" />
                     </cell>
                   </row>
                   <row>
+                    <cell id="{b3650450-6eb8-a1c3-d044-dddc0179284a}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Holiday Stopped?" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_istheholidaystoppingshorterthanplanned" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_istheholidaystoppingshorterthanplanned" uniqueid="{a1e9d19d-1344-db55-2460-adc91009adbc}" />
+                    </cell>
+                  </row>
+                  <row>
                     <cell id="{818c4e0d-7926-d9ae-4624-625870ecb31d}" locklevel="0" showlabel="true">
                       <labels>
-                        <label description="Resort Office" languagecode="1033" />
+                        <label description="Office Location" languagecode="1033" />
                       </labels>
                       <control disabled="false" id="tc_resortofficeid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_resortofficeid" uniqueid="{213012e3-8247-60c1-1db5-c8b68ee11dd1}">
                         <parameters>
@@ -118,7 +134,7 @@
                     </cell>
                   </row>
                   <row>
-                    <cell id="{85a78135-8e0c-5527-e350-b1ab40441112}" locklevel="0" showlabel="true">
+                    <cell id="{85a78135-8e0c-5527-e350-b1ab40441112}" locklevel="0" showlabel="true" visible="false">
                       <labels>
                         <label description="Date Reported" languagecode="1033" />
                       </labels>
@@ -126,11 +142,11 @@
                     </cell>
                   </row>
                   <row>
-                    <cell id="{b3650450-6eb8-a1c3-d044-dddc0179284a}" locklevel="0" showlabel="true">
+                    <cell id="{b0827bea-0996-8a88-0d82-49e71570db74}" locklevel="0" showlabel="true">
                       <labels>
-                        <label description="Holiday Shortened?" languagecode="1033" />
+                        <label description="Product Type" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_istheholidaystoppingshorterthanplanned" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_istheholidaystoppingshorterthanplanned" uniqueid="{a1e9d19d-1344-db55-2460-adc91009adbc}" />
+                      <control disabled="false" id="tc_producttype" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_producttype" />
                     </cell>
                   </row>
                   <row>
@@ -144,27 +160,19 @@
                     </cell>
                   </row>
                   <row>
-                    <cell id="{20da48d1-e686-29ae-cd7d-d7118861c5c9}" locklevel="0" showlabel="true" visible="false">
-                      <labels>
-                        <label description="Mandatory Conditions Met" languagecode="1033" />
-                      </labels>
-                      <control disabled="false" id="tc_mandatoryconditionsmet" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="tc_mandatoryconditionsmet" uniqueid="{ae2e4bb7-14d1-9b28-98ce-3ab96de4361a}" />
-                    </cell>
-                  </row>
-                  <row>
-                    <cell id="{523d0516-ab18-4b53-bc37-6ae50ebe9b31}" locklevel="0" showlabel="true">
-                      <labels>
-                        <label description="TC Product Related" languagecode="1033" />
-                      </labels>
-                      <control disabled="false" id="tc_tcproductrelated" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_tcproductrelated" uniqueid="{b680ca4e-aeb2-ab91-6847-08475114b842}" />
-                    </cell>
-                  </row>
-                  <row>
-                    <cell id="{125c11d1-2cec-7ba8-53cb-9e4a19c3b3b6}" showlabel="true" locklevel="0" visible="false">
+                    <cell id="{125c11d1-2cec-7ba8-53cb-9e4a19c3b3b6}" locklevel="0" showlabel="true" visible="false">
                       <labels>
                         <label description="MatsSoft Reference" languagecode="1033" />
                       </labels>
-                      <control id="tc_matssoftreference" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_matssoftreference" disabled="false" uniqueid="{dc149864-b67c-4be2-c8ac-8a8a5d49b276}" />
+                      <control disabled="false" id="tc_matssoftreference" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_matssoftreference" uniqueid="{dc149864-b67c-4be2-c8ac-8a8a5d49b276}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{d5234ae5-abbd-0a1d-e38c-070cee7c19ba}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Mandatory Conditions Met" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_mandatoryconditionsmet" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="tc_mandatoryconditionsmet" />
                     </cell>
                   </row>
                 </rows>
@@ -179,18 +187,18 @@
                   <row>
                     <cell id="{2D8C61A2-7CFC-4DD8-A8AF-2CB82760E559}" locklevel="0" showlabel="true" rowspan="6">
                       <labels>
-                        <label description="Details (External)" languagecode="1033" />
+                        <label description="Summary" languagecode="1033" />
                         <label description="Description" languagecode="1036" />
                         <label description="Beschreibung" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="description" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="description" uniqueid="{ab9722b3-e85a-b8b1-ca2b-42edb503a259}" />
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                   <row>
                     <cell id="{8446993c-9242-365b-6647-43927787e941}" locklevel="0" showlabel="true" rowspan="6">
                       <labels>
@@ -199,11 +207,11 @@
                       <control disabled="false" id="tc_expectedresolution" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="tc_expectedresolution" uniqueid="{d455da44-ccc8-0ea1-38e5-008b7bdd7467}" />
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
             </sections>
@@ -218,7 +226,7 @@
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{423a4d0c-b9d2-492f-b070-e446e4ea16c7}" colspan="2" rowspan="25" showlabel="false" locklevel="0">
+                    <cell id="{423a4d0c-b9d2-492f-b070-e446e4ea16c7}" locklevel="0" showlabel="false" rowspan="25" colspan="2">
                       <labels>
                         <label description="Unterhaltungsregisterkarten" languagecode="1031" />
                         <label description="Conversation Tabs" languagecode="1033" />
@@ -245,30 +253,30 @@
                       </control>
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
             </sections>
@@ -397,15 +405,24 @@
                       <labels>
                         <label description="Alt. Phone" languagecode="1033" />
                       </labels>
-                      <control id="tc_alternativephone" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_alternativephone" uniqueid="{10bd431a-6c19-4791-ea54-eb0264a11cd0}" />
+                      <control disabled="false" id="tc_alternativephone" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_alternativephone" uniqueid="{10bd431a-6c19-4791-ea54-eb0264a11cd0}" />
                     </cell>
                   </row>
                   <row>
-                    <cell id="{6396c9ed-b750-4732-40e6-c3c8c8b0183a}" locklevel="0" showlabel="true" visible="false" colspan="1">
+                    <cell id="{8855e8ba-7602-e011-2008-11e30e1b89cd}" locklevel="0" showlabel="true" visible="false">
                       <labels>
                         <label description="Alt. Email" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_alternativeemail" classid="{ADA2203E-B4CD-49be-9DDF-234642B43B52}" datafieldname="tc_alternativeemail" uniqueid="{d8b6aed2-8a62-4a07-229c-6568a5a20ee5}" />
+                      <control disabled="false" id="tc_alternativeemaillookup" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_alternativeemaillookup" uniqueid="{e430a646-485d-77ea-c5a8-5ede4915b991}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{AFF6F75F-B88A-41CC-9850-26CCE4BFA70F}</DefaultViewId>
+                          <AllowFilterOff>false</AllowFilterOff>
+                        </parameters>
+                      </control>
                     </cell>
                   </row>
                   <row>
@@ -417,30 +434,11 @@
                     </cell>
                   </row>
                   <row>
-                    <cell id="{db50ab19-7013-dab5-1ad1-5d70ce0a5465}" locklevel="0" showlabel="true" visible="false">
+                    <cell id="{2d8c338b-3e81-a405-1043-1602a89eb980}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Other Customer" languagecode="1033" />
-                        <label description="Contact responsable" languagecode="1036" />
-                        <label description="Verantwortlicher Kontakt" languagecode="1031" />
                       </labels>
-                      <control disabled="false" id="responsiblecontactid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="responsiblecontactid" uniqueid="{4a417496-23be-d3c0-4261-b5b0ad43b480}">
-                        <parameters>
-                          <AutoResolve>true</AutoResolve>
-                          <DisableMru>false</DisableMru>
-                          <DisableQuickFind>false</DisableQuickFind>
-                          <DisableViewPicker>false</DisableViewPicker>
-                          <DefaultViewId>{A2D479C5-53E3-4C69-ADDD-802327E67A0D}</DefaultViewId>
-                          <AllowFilterOff>false</AllowFilterOff>
-                        </parameters>
-                      </control>
-                    </cell>
-                  </row>
-                  <row>
-                    <cell id="{b4d0c023-98a8-bb62-cd6c-e3b927d03274}" locklevel="0" showlabel="true" visible="false">
-                      <labels>
-                        <label description="Other Comm. Method" languagecode="1033" />
-                      </labels>
-                      <control disabled="false" id="tc_otherpartypreferredmethodofcontact" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_otherpartypreferredmethodofcontact" uniqueid="{7129e94d-e478-0b94-9505-27ac2732be4e}" />
+                      <control disabled="false" id="tc_othercustomer" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_othercustomer" />
                     </cell>
                   </row>
                   <row>
@@ -452,11 +450,28 @@
                     </cell>
                   </row>
                   <row>
-                    <cell id="{d21b5a79-0e7b-e98e-a090-900973a0971e}" locklevel="0" showlabel="true" visible="false">
+                    <cell id="{a87bddd7-109e-c7b7-154b-6eec07730962}" locklevel="0" showlabel="true" visible="false">
                       <labels>
-                        <label description="Email" languagecode="1033" />
+                        <label description="Other Customer Email" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_otherpartyemail" classid="{ADA2203E-B4CD-49be-9DDF-234642B43B52}" datafieldname="tc_otherpartyemail" uniqueid="{1a17a17b-3a7c-48c3-e741-61427186d41b}" />
+                      <control disabled="false" id="tc_othercustomeremail" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_othercustomeremail" uniqueid="{820b3129-e9b0-8d30-002b-0eecd4075c19}">
+                        <parameters>
+                          <AutoResolve>false</AutoResolve>
+                          <DisableMru>true</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>true</DisableViewPicker>
+                          <DefaultViewId>{AFF6F75F-B88A-41CC-9850-26CCE4BFA70F}</DefaultViewId>
+                          <AllowFilterOff>false</AllowFilterOff>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{523d0516-ab18-4b53-bc37-6ae50ebe9b31}" locklevel="0" showlabel="true" visible="false">
+                      <labels>
+                        <label description="TC Product Related" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_tcproductrelated" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_tcproductrelated" uniqueid="{b680ca4e-aeb2-ab91-6847-08475114b842}" />
                     </cell>
                   </row>
                 </rows>
@@ -465,7 +480,7 @@
           </column>
         </columns>
       </tab>
-      <tab id="{9c5799d7-ad8b-8db9-ca47-d925368330da}" name="booking_details" IsUserDefined="0" locklevel="0" expanded="true" showlabel="true">
+      <tab id="{9c5799d7-ad8b-8db9-ca47-d925368330da}" name="booking_details" IsUserDefined="0" locklevel="0" expanded="false" showlabel="true">
         <labels>
           <label description="Booking Details" languagecode="1033" />
         </labels>
@@ -537,6 +552,25 @@
                         <label description="Hotel Rating" languagecode="1033" />
                       </labels>
                       <control disabled="false" id="tc_hotelrating" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_hotelrating" uniqueid="{ed95404d-c9a5-d550-3d6a-d2eb3acb48b8}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{48733aa2-1b01-49bc-1bb7-a50b5aac7773}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Source Market Currency" languagecode="1033" />
+                        <label description="Devise" languagecode="1036" />
+                        <label description="Währung" languagecode="1031" />
+                      </labels>
+                      <control disabled="false" id="transactioncurrencyid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="transactioncurrencyid" uniqueid="{4ae6817d-1a78-d796-9e11-ec9aa086e8b8}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{CD5625B0-DDA8-4EE2-B13F-B9331E027C8A}</DefaultViewId>
+                          <AllowFilterOff>false</AllowFilterOff>
+                        </parameters>
+                      </control>
                     </cell>
                   </row>
                 </rows>
@@ -767,10 +801,10 @@
                           <AutoExpand>Fixed</AutoExpand>
                           <EnableQuickFind>false</EnableQuickFind>
                           <EnableViewPicker>false</EnableViewPicker>
-                          <ViewIds>{6097DCA4-B98A-4C8D-8F02-A1B2E15D45C9}</ViewIds>
+                          <ViewIds>{6097DCA4-B98A-4C8D-8F02-A1B2E15D45C9},{01A22365-57F7-E611-80FF-3863BB354FF0}</ViewIds>
                           <EnableJumpBar>false</EnableJumpBar>
                           <ChartGridMode>All</ChartGridMode>
-                          <VisualizationId />
+                          <VisualizationId>{437545B1-051E-E711-810D-3863BB340DD8}</VisualizationId>
                           <IsUserChart>false</IsUserChart>
                           <EnableChartPicker>true</EnableChartPicker>
                           <RecordsPerPage>3</RecordsPerPage>
@@ -778,10 +812,10 @@
                       </control>
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
             </sections>
@@ -801,37 +835,12 @@
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{48733aa2-1b01-49bc-1bb7-a50b5aac7773}" locklevel="0" showlabel="true">
-                      <labels>
-                        <label description="Source Market Currency" languagecode="1033" />
-                        <label description="Devise" languagecode="1036" />
-                        <label description="Währung" languagecode="1031" />
-                      </labels>
-                      <control disabled="false" id="transactioncurrencyid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="transactioncurrencyid" uniqueid="{4ae6817d-1a78-d796-9e11-ec9aa086e8b8}">
-                        <parameters>
-                          <AutoResolve>true</AutoResolve>
-                          <DisableMru>false</DisableMru>
-                          <DisableQuickFind>false</DisableQuickFind>
-                          <DisableViewPicker>false</DisableViewPicker>
-                          <DefaultViewId>{CD5625B0-DDA8-4EE2-B13F-B9331E027C8A}</DefaultViewId>
-                          <AllowFilterOff>false</AllowFilterOff>
-                        </parameters>
-                      </control>
-                    </cell>
-                    <cell id="{0e7c86e6-4a73-3a05-d22d-31734cae54b7}" locklevel="0" showlabel="true">
-                      <labels>
-                        <label description="Override Offer Notification" languagecode="1033" />
-                      </labels>
-                      <control disabled="false" id="tc_overrideoffernotification" classid="{B0C6723A-8503-4fd7-BB28-C8A06AC933C2}" datafieldname="tc_overrideoffernotification" uniqueid="{c96ebdc0-363a-4e54-9289-d92c2ed0e1d8}" />
-                    </cell>
-                  </row>
-                  <row>
-                    <cell id="{60a6ec96-e0c1-643b-846a-157bc21c6274}" showlabel="false" userspacer="true">
+                    <cell id="{9a58ab0b-2726-1623-48a0-b4944c2d7958}" showlabel="false">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
                     </cell>
-                    <cell id="{385d24b5-cb8d-ee6b-7472-73a50b069d6a}" showlabel="false" userspacer="true">
+                    <cell id="{65ecd644-40e8-d11c-5788-92960dc3b6b4}" showlabel="false">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
@@ -862,10 +871,10 @@
                       </control>
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
             </sections>
@@ -909,11 +918,11 @@
                       </control>
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
             </sections>
@@ -950,15 +959,15 @@
                       </control>
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row height="auto"></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row height="auto" />
                 </rows>
               </section>
             </sections>
@@ -1122,9 +1131,9 @@
                       </control>
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
             </sections>
@@ -1163,13 +1172,13 @@
         <columns>
           <column width="34%">
             <sections>
-              <section name="Solutions" showlabel="false" showbar="false" id="{d2609a6b-8ee5-4731-9895-97c00b502e7c}" IsUserDefined="0" layout="varwidth" labelwidth="102" celllabelposition="Left">
+              <section id="{d2609a6b-8ee5-4731-9895-97c00b502e7c}" name="Solutions" IsUserDefined="0" showlabel="false" showbar="false" labelwidth="102" celllabelposition="Left" layout="varwidth">
                 <labels>
                   <label description="" languagecode="1033" />
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{75bc5581-dde6-d9e8-a877-5a28e96246ee}" showlabel="true" colspan="1" auto="false" rowspan="7">
+                    <cell id="{75bc5581-dde6-d9e8-a877-5a28e96246ee}" showlabel="true" rowspan="7" colspan="1" auto="false">
                       <labels>
                         <label description="SIMILAR CASES" languagecode="1033" />
                         <label description="INCIDENTS SIMILAIRES" languagecode="1036" />
@@ -1192,15 +1201,15 @@
                       </control>
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
-              <section name="Research" showlabel="false" showbar="false" id="{e6031605-b0d3-42e6-a666-ae358e9e0a0e}" IsUserDefined="0" layout="varwidth" labelwidth="102" celllabelposition="Left" visible="false">
+              <section id="{e6031605-b0d3-42e6-a666-ae358e9e0a0e}" name="Research" IsUserDefined="0" showlabel="false" showbar="false" labelwidth="102" celllabelposition="Left" visible="false" layout="varwidth">
                 <labels>
                   <label description="Recherche" languagecode="1031" />
                   <label description="RESEARCH" languagecode="1033" />
@@ -1208,7 +1217,7 @@
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{a5be55d1-d0e1-d9e8-a877-5a28e00006ee}" showlabel="false" colspan="1" auto="false" rowspan="1" locklevel="1">
+                    <cell id="{a5be55d1-d0e1-d9e8-a877-5a28e00006ee}" locklevel="1" showlabel="false" rowspan="1" colspan="1" auto="false">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
@@ -1226,13 +1235,13 @@
           </column>
           <column width="33%">
             <sections>
-              <section name="MergedCases" showlabel="false" showbar="false" id="{f344f3e4-c7c1-43ff-8514-6405d7b8fa35}" IsUserDefined="0" layout="varwidth" labelwidth="102" celllabelposition="Left">
+              <section id="{f344f3e4-c7c1-43ff-8514-6405d7b8fa35}" name="MergedCases" IsUserDefined="0" showlabel="false" showbar="false" labelwidth="102" celllabelposition="Left" layout="varwidth">
                 <labels>
                   <label description="" languagecode="1033" />
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{db20c8bd-b402-4323-83ac-514921ab7ca5}" showlabel="true" colspan="1" auto="false" rowspan="7">
+                    <cell id="{db20c8bd-b402-4323-83ac-514921ab7ca5}" showlabel="true" rowspan="7" colspan="1" auto="false">
                       <labels>
                         <label description="MERGED CASES" languagecode="1033" />
                         <label description="INCIDENTS FUSIONNÉS" languagecode="1036" />
@@ -1255,25 +1264,25 @@
                       </control>
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
             </sections>
           </column>
           <column width="33%">
             <sections>
-              <section name="ChildCases" showlabel="false" showbar="false" id="{b1f997ea-9b7b-4a2d-9a33-eb3cb14e08f7}" IsUserDefined="0" layout="varwidth" labelwidth="102" celllabelposition="Left">
+              <section id="{b1f997ea-9b7b-4a2d-9a33-eb3cb14e08f7}" name="ChildCases" IsUserDefined="0" showlabel="false" showbar="false" labelwidth="102" celllabelposition="Left" layout="varwidth">
                 <labels>
                   <label description="" languagecode="1033" />
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{363a5e29-8bfe-492f-8a8f-d0e1c114f2f9}" showlabel="true" colspan="1" auto="false" rowspan="7">
+                    <cell id="{363a5e29-8bfe-492f-8a8f-d0e1c114f2f9}" showlabel="true" rowspan="7" colspan="1" auto="false">
                       <labels>
                         <label description="CHILD CASES" languagecode="1033" />
                         <label description="INCIDENTS ENFANTS" languagecode="1036" />
@@ -1296,12 +1305,12 @@
                       </control>
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
             </sections>
@@ -1317,13 +1326,13 @@
         <columns>
           <column width="100%">
             <sections>
-              <section name="Articles" showlabel="false" showbar="false" id="{59fe9aa7-81a3-41f7-8007-c3d865a30ab9}" IsUserDefined="0" layout="varwidth" labelwidth="102" celllabelposition="Left">
+              <section id="{59fe9aa7-81a3-41f7-8007-c3d865a30ab9}" name="Articles" IsUserDefined="0" showlabel="false" showbar="false" labelwidth="102" celllabelposition="Left" layout="varwidth">
                 <labels>
                   <label description="" languagecode="1033" />
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{d9842a79-9570-417e-9d7c-817d09bf3e7d}" showlabel="true" colspan="2" auto="false" rowspan="7">
+                    <cell id="{d9842a79-9570-417e-9d7c-817d09bf3e7d}" showlabel="true" rowspan="7" colspan="2" auto="false">
                       <labels>
                         <label description="ASSOCIATED KNOWLEDGE RECORDS" languagecode="1033" />
                         <label description="ENREGISTREMENTS DE CONNAISSANCES ASSOCIÉS" languagecode="1036" />
@@ -1346,21 +1355,21 @@
                       </control>
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
-              <section name="KnowledgeArticles" showlabel="false" showbar="false" id="{16857335-f376-4a20-92ce-6b91a46c5a5c}" IsUserDefined="0" layout="varwidth" labelwidth="102" celllabelposition="Left">
+              <section id="{16857335-f376-4a20-92ce-6b91a46c5a5c}" name="KnowledgeArticles" IsUserDefined="0" showlabel="false" showbar="false" labelwidth="102" celllabelposition="Left" layout="varwidth">
                 <labels>
                   <label description="" languagecode="1033" />
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{5da7be3a-8fac-486b-aa24-c8fb1092cda3}" showlabel="true" colspan="2" auto="false" rowspan="7">
+                    <cell id="{5da7be3a-8fac-486b-aa24-c8fb1092cda3}" showlabel="true" rowspan="7" colspan="2" auto="false">
                       <labels>
                         <label description="ASSOCIATED KNOWLEDGE RECORDS" languagecode="1033" />
                         <label description="ENREGISTREMENTS DE CONNAISSANCES ASSOCIÉS" languagecode="1036" />
@@ -1383,12 +1392,12 @@
                       </control>
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
             </sections>
@@ -1404,13 +1413,13 @@
         <columns>
           <column width="34%">
             <sections>
-              <section name="parentcaseandtype" showlabel="false" showbar="false" id="{07de2e7a-2f94-472e-bbab-f41a8ae8b7b9}" IsUserDefined="0" layout="varwidth" labelwidth="102" celllabelposition="Left">
+              <section id="{07de2e7a-2f94-472e-bbab-f41a8ae8b7b9}" name="parentcaseandtype" IsUserDefined="0" showlabel="false" showbar="false" labelwidth="102" celllabelposition="Left" layout="varwidth">
                 <labels>
                   <label description="" languagecode="1033" />
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{b03cc760-ab70-463c-ba03-6ec64efff698}" showlabel="true" locklevel="0">
+                    <cell id="{b03cc760-ab70-463c-ba03-6ec64efff698}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Type" languagecode="1033" />
                         <label description="Type" languagecode="1036" />
@@ -1420,7 +1429,7 @@
                     </cell>
                   </row>
                   <row>
-                    <cell id="{622a5065-a78e-4caf-ad1a-9ccafe579e93}" showlabel="true" locklevel="0">
+                    <cell id="{622a5065-a78e-4caf-ad1a-9ccafe579e93}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Parent Case" languagecode="1033" />
                         <label description="Incident parent" languagecode="1036" />
@@ -1439,13 +1448,13 @@
           </column>
           <column width="33%">
             <sections>
-              <section name="escalations" showlabel="false" showbar="false" id="{7de777d6-09a9-41ab-81c1-160fa8b43f0f}" IsUserDefined="0" layout="varwidth" labelwidth="102" celllabelposition="Left">
+              <section id="{7de777d6-09a9-41ab-81c1-160fa8b43f0f}" name="escalations" IsUserDefined="0" showlabel="false" showbar="false" labelwidth="102" celllabelposition="Left" layout="varwidth">
                 <labels>
                   <label description="" languagecode="1033" />
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{e6273a33-39c6-43d2-93d3-70ed6ff36171}" showlabel="true" locklevel="0">
+                    <cell id="{e6273a33-39c6-43d2-93d3-70ed6ff36171}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Escalated" languagecode="1033" />
                         <label description="Réaffecté" languagecode="1036" />
@@ -1455,7 +1464,7 @@
                     </cell>
                   </row>
                   <row>
-                    <cell id="{09c5bc1b-4992-4b9b-9077-b6cc1c73fbb3}" showlabel="true" locklevel="0">
+                    <cell id="{09c5bc1b-4992-4b9b-9077-b6cc1c73fbb3}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Escalated On" languagecode="1033" />
                         <label description="Réaffecté le" languagecode="1036" />
@@ -1470,13 +1479,13 @@
           </column>
           <column width="33%">
             <sections>
-              <section name="responses" showlabel="false" showbar="false" id="{5d2b7d89-424e-4b9f-ad7f-76aae92eea18}" IsUserDefined="0" layout="varwidth" labelwidth="102" celllabelposition="Left">
+              <section id="{5d2b7d89-424e-4b9f-ad7f-76aae92eea18}" name="responses" IsUserDefined="0" showlabel="false" showbar="false" labelwidth="102" celllabelposition="Left" layout="varwidth">
                 <labels>
                   <label description="" languagecode="1033" />
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{420032d6-21a9-4ca2-95f9-dcf3b9684d78}" showlabel="true" locklevel="0">
+                    <cell id="{420032d6-21a9-4ca2-95f9-dcf3b9684d78}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Follow Up By" languagecode="1033" />
                         <label description="Suivi pour le" languagecode="1036" />
@@ -1486,7 +1495,7 @@
                     </cell>
                   </row>
                   <row>
-                    <cell id="{c5fdfac4-9406-4ad1-b114-f409eec9e514}" showlabel="true" locklevel="0">
+                    <cell id="{c5fdfac4-9406-4ad1-b114-f409eec9e514}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="First Response Sent" languagecode="1033" />
                         <label description="Première réponse envoyée" languagecode="1036" />
@@ -1510,13 +1519,13 @@
         <columns>
           <column width="34%">
             <sections>
-              <section name="social" showlabel="false" showbar="false" id="{6ef467d9-a025-420c-bb36-9b2d4a9642d9}" IsUserDefined="0" layout="varwidth" labelwidth="102" celllabelposition="Left">
+              <section id="{6ef467d9-a025-420c-bb36-9b2d4a9642d9}" name="social" IsUserDefined="0" showlabel="false" showbar="false" labelwidth="102" celllabelposition="Left" layout="varwidth">
                 <labels>
                   <label description="" languagecode="1033" />
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{acb2c742-73f1-4545-970a-870272bf1eb9}" showlabel="true" locklevel="0">
+                    <cell id="{acb2c742-73f1-4545-970a-870272bf1eb9}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Social Profile" languagecode="1033" />
                         <label description="Profil social" languagecode="1036" />
@@ -1526,7 +1535,7 @@
                     </cell>
                   </row>
                   <row>
-                    <cell id="{0b018f6d-2937-4c0b-93f0-ae5f02280e2e}" showlabel="true" locklevel="0">
+                    <cell id="{0b018f6d-2937-4c0b-93f0-ae5f02280e2e}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Received As" languagecode="1033" />
                         <label description="Reçu en tant que" languagecode="1036" />
@@ -1541,13 +1550,13 @@
           </column>
           <column width="33%">
             <sections>
-              <section name="scores" showlabel="false" showbar="false" id="{ec17cdd5-a6e6-4ff6-bc99-1eb782e55ecf}" IsUserDefined="0" layout="varwidth" labelwidth="102" celllabelposition="Left">
+              <section id="{ec17cdd5-a6e6-4ff6-bc99-1eb782e55ecf}" name="scores" IsUserDefined="0" showlabel="false" showbar="false" labelwidth="102" celllabelposition="Left" layout="varwidth">
                 <labels>
                   <label description="" languagecode="1033" />
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{10B6F366-35D9-4213-A88E-0B1B518E29DD}" showlabel="true" locklevel="0">
+                    <cell id="{10B6F366-35D9-4213-A88E-0B1B518E29DD}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Influence Score" languagecode="1033" />
                         <label description="Score d'influence" languagecode="1036" />
@@ -1557,7 +1566,7 @@
                     </cell>
                   </row>
                   <row>
-                    <cell id="{13650be6-418b-4440-949a-2179f20ed339}" showlabel="true" locklevel="0">
+                    <cell id="{13650be6-418b-4440-949a-2179f20ed339}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Sentiment Score" languagecode="1033" />
                         <label description="Score de sentiment" languagecode="1036" />
@@ -1572,13 +1581,13 @@
           </column>
           <column width="33%">
             <sections>
-              <section name="social3" showlabel="false" showbar="false" id="{5b9659ae-d657-4886-98a8-4b87bd53e651}" IsUserDefined="0" layout="varwidth" labelwidth="102" celllabelposition="Left">
+              <section id="{5b9659ae-d657-4886-98a8-4b87bd53e651}" name="social3" IsUserDefined="0" showlabel="false" showbar="false" labelwidth="102" celllabelposition="Left" layout="varwidth">
                 <labels>
                   <label description="" languagecode="1033" />
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{e7695773-b77d-4285-b57a-339cadbc233e}" showlabel="true" locklevel="0">
+                    <cell id="{e7695773-b77d-4285-b57a-339cadbc233e}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Blocked Profile" languagecode="1033" />
                         <label description="Profil bloqué" languagecode="1036" />
@@ -1602,7 +1611,7 @@
         <columns>
           <column width="50%">
             <sections>
-              <section name="kb article" labelwidth="160" showlabel="true" showbar="true" locklevel="1" id="{9404c284-21bf-4194-a6d7-cdc9291b9f19}" IsUserDefined="0">
+              <section id="{9404c284-21bf-4194-a6d7-cdc9291b9f19}" name="kb article" IsUserDefined="0" locklevel="1" showlabel="true" showbar="true" labelwidth="160">
                 <labels>
                   <label description="ARTIKEL" languagecode="1031" />
                   <label description="ARTICLES" languagecode="1033" />
@@ -1610,7 +1619,7 @@
                 </labels>
                 <rows>
                   <row>
-                    <cell colspan="2" id="{44424fb9-0507-4f9f-b42f-3d76f7c4d30d}">
+                    <cell id="{44424fb9-0507-4f9f-b42f-3d76f7c4d30d}" colspan="2">
                       <labels>
                         <label description="Knowledge Base Article" languagecode="1033" />
                         <label description="Article de la Base de connaissances" languagecode="1036" />
@@ -1627,7 +1636,7 @@
                     </cell>
                   </row>
                   <row>
-                    <cell colspan="2" showlabel="false" rowspan="3" id="{e8536a7b-ab85-42bf-a772-ef53b8854268}">
+                    <cell id="{e8536a7b-ab85-42bf-a772-ef53b8854268}" showlabel="false" rowspan="3" colspan="2">
                       <labels>
                         <label description="Anzeige für Wissensdatenbank" languagecode="1031" />
                         <label description="KB Viewer" languagecode="1033" />
@@ -1636,15 +1645,15 @@
                       <control id="kbviewer" classid="{a62b6fa9-169e-406c-b1aa-eab828cb6026}" />
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
                 </rows>
               </section>
             </sections>
           </column>
           <column width="50%">
             <sections>
-              <section name="contract and product information" showlabel="true" showbar="true" id="{4f1cbb62-1166-4db3-a0d7-1844cea74945}" IsUserDefined="0" locklevel="0">
+              <section id="{4f1cbb62-1166-4db3-a0d7-1844cea74945}" name="contract and product information" IsUserDefined="0" locklevel="0" showlabel="true" showbar="true">
                 <labels>
                   <label description="VERTRAG" languagecode="1031" />
                   <label description="CONTRACT" languagecode="1033" />
@@ -1717,23 +1726,23 @@
                     </cell>
                   </row>
                   <row>
-                    <cell auto="false" showlabel="true" locklevel="0" rowspan="1" id="{7d716e7b-bccd-4984-afce-02c47a9753c4}">
+                    <cell id="{7d716e7b-bccd-4984-afce-02c47a9753c4}" locklevel="0" showlabel="true" rowspan="1" auto="false">
                       <labels>
                         <label description="Serial Number" languagecode="1033" />
                         <label description="Numéro de série" languagecode="1036" />
                         <label description="Seriennummer" languagecode="1031" />
                       </labels>
-                      <control id="productserialnumber" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="productserialnumber" disabled="false" />
+                      <control disabled="false" id="productserialnumber" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="productserialnumber" />
                     </cell>
                   </row>
                   <row>
-                    <cell auto="false" showlabel="true" locklevel="0" rowspan="1" colspan="1" id="{b5aed07b-ae04-485a-a45a-17b5261fa8a7}">
+                    <cell id="{b5aed07b-ae04-485a-a45a-17b5261fa8a7}" locklevel="0" showlabel="true" rowspan="1" colspan="1" auto="false">
                       <labels>
                         <label description="Service Level" languagecode="1033" />
                         <label description="Niveau de service" languagecode="1036" />
                         <label description="Servicelevel" languagecode="1031" />
                       </labels>
-                      <control id="contractservicelevelcode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="contractservicelevelcode" disabled="false" />
+                      <control disabled="false" id="contractservicelevelcode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="contractservicelevelcode" />
                     </cell>
                   </row>
                 </rows>
@@ -1991,7 +2000,7 @@
         </columns>
       </tab>
     </tabs>
-    <header id="{CF9CD80E-17E4-438D-9705-5575B9BDF2D1}" celllabelposition="Top" columns="1111" labelwidth="115">
+    <header id="{CF9CD80E-17E4-438D-9705-5575B9BDF2D1}" columns="1111" labelwidth="115" celllabelposition="Top">
       <rows>
         <row>
           <cell id="{34cb4ab8-ae00-2570-5a21-9babb7e32e4d}" showlabel="false">
@@ -2033,135 +2042,6 @@
         </row>
       </rows>
     </header>
-    <events>
-      <event name="onload" application="true" active="true">
-        <InternalHandlers>
-          <Handler functionName="Mscrm.Form_onload" libraryName="Incident_main_system_library.js" handlerUniqueId="76e18454-eeba-47c3-8a9d-6d701c77fbcc" enabled="true">
-            <dependencies>
-              <dependency id="contractid" />
-              <dependency id="contractdetailid" />
-            </dependencies>
-          </Handler>
-        </InternalHandlers>
-      </event>
-      <event name="onchange" application="true" active="true" attribute="customerid">
-        <InternalHandlers>
-          <Handler functionName="Mscrm.customerid_onchange" libraryName="Incident_main_system_library.js" handlerUniqueId="5349bfe7-817f-4c54-ae0f-f65df037361b" enabled="true">
-            <dependencies>
-              <dependency id="contractid" />
-              <dependency id="contractdetailid" />
-            </dependencies>
-          </Handler>
-        </InternalHandlers>
-      </event>
-      <event name="onchange" application="true" active="true" attribute="contractid">
-        <InternalHandlers>
-          <Handler functionName="Mscrm.contractid_onchange" libraryName="Incident_main_system_library.js" handlerUniqueId="1ff26f3d-f9f4-470b-a379-bc74ce466a53" enabled="true">
-            <dependencies>
-              <dependency id="contractdetailid" />
-            </dependencies>
-          </Handler>
-        </InternalHandlers>
-      </event>
-      <event name="onchange" application="true" active="true" attribute="contractdetailid">
-        <InternalHandlers>
-          <Handler functionName="Mscrm.contractdetailid_onchange" libraryName="Incident_main_system_library.js" handlerUniqueId="fde679b3-af20-4b24-ab99-13f7de54fbb1" enabled="true">
-            <dependencies>
-              <dependency id="contractid" />
-            </dependencies>
-          </Handler>
-        </InternalHandlers>
-      </event>
-      <event name="onchange" application="true" active="true" attribute="kbarticleid">
-        <InternalHandlers>
-          <Handler functionName="Mscrm.kbarticleid_onchange" libraryName="Incident_main_system_library.js" handlerUniqueId="1d4f95de-79c3-44e4-a782-469a8fc6132d" enabled="true" />
-        </InternalHandlers>
-      </event>
-      <event name="onchange" application="true" active="true" attribute="productid">
-        <InternalHandlers>
-          <Handler functionName="Mscrm.productid_onchange" libraryName="Incident_main_system_library.js" handlerUniqueId="97cabf35-d106-4f20-b656-97aebe91927c" enabled="true">
-            <dependencies>
-              <dependency id="entitlementid" />
-            </dependencies>
-          </Handler>
-        </InternalHandlers>
-      </event>
-      <event name="onchange" application="true" active="true" attribute="primarycontactid">
-        <InternalHandlers>
-          <Handler functionName="Mscrm.primarycontactid_onchange" libraryName="Incident_main_system_library.js" handlerUniqueId="e44c699a-b67f-40e1-8074-26a51241f017" enabled="true">
-            <dependencies>
-              <dependency id="entitlementid" />
-            </dependencies>
-          </Handler>
-        </InternalHandlers>
-      </event>
-      <event name="onsave" application="false" active="false">
-        <Handlers>
-          <Handler functionName="Tc.Crm.Scripts.Events.Compensation.OnCaseSave" libraryName="tc_Tc.Crm.Scripts.Events.Compensation.js" handlerUniqueId="{a9adb55a-ba75-3e28-11b3-6ae08b2c16b0}" enabled="true" passExecutionContext="false" parameters="" />
-        </Handlers>
-      </event>
-      <event name="onchange" application="false" active="false" attribute="tc_bookingid">
-        <Handlers>
-          <Handler handlerUniqueId="{5ec7c30e-899c-87ad-ae60-3452ec186609}" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChange" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" enabled="true" passExecutionContext="false" parameters="" />
-        </Handlers>
-      </event>
-      <event name="onchange" application="false" active="false" attribute="tc_sourcemarketid">
-        <Handlers>
-          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChange" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{74b19cdc-100d-b0e2-7428-31162cd46cb3}" enabled="true" passExecutionContext="false" parameters="" />
-          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{587b1366-ba63-3174-0d3c-28620295eb64}" enabled="true" passExecutionContext="false" parameters="" />
-        </Handlers>
-      </event>
-      <event name="onchange" application="false" active="false" attribute="tc_istheholidaystoppingshorterthanplanned">
-        <Handlers>
-          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{3942ea0a-d219-3d6d-8cb8-9b6ae1588645}" enabled="true" passExecutionContext="false" parameters="" />
-        </Handlers>
-      </event>
-      <event name="onchange" application="false" active="false" attribute="tc_resortofficeid">
-        <Handlers>
-          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{5403271b-d7d1-e185-cc94-dc970a3a9e96}" enabled="true" passExecutionContext="false" parameters="" />
-        </Handlers>
-      </event>
-      <event name="onchange" application="false" active="false" attribute="tc_datereported">
-        <Handlers>
-          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{433c86c0-7c34-64a7-38cc-ae8093b598a9}" enabled="true" passExecutionContext="false" parameters="" />
-        </Handlers>
-      </event>
-      <event name="onchange" application="false" active="false" attribute="caseorigincode">
-        <Handlers>
-          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{47303225-0c03-21ca-91d5-9a775cc2e09e}" enabled="true" passExecutionContext="false" parameters="" />
-        </Handlers>
-      </event>
-      <event name="onchange" application="false" active="false" attribute="tc_3rdpartyresponserequired">
-        <Handlers>
-          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{7563d984-8a51-6484-ed3d-6216376093ab}" enabled="true" passExecutionContext="false" parameters="" />
-        </Handlers>
-      </event>
-      <event name="onchange" application="false" active="false" attribute="tc_preferredmethodofcommunication">
-        <Handlers>
-          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{d194a90a-029e-b704-0622-e3e2bec37965}" enabled="true" passExecutionContext="false" parameters="" />
-        </Handlers>
-      </event>
-      <event name="onchange" application="false" active="false" attribute="tc_brandid">
-        <Handlers>
-          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" libraryName="tc_es6promise.js" handlerUniqueId="{ce23a62c-1d0a-79b7-87a3-d7e71373532d}" enabled="true" passExecutionContext="false" parameters="" />
-        </Handlers>
-      </event>
-      <event name="onchange" application="false" active="false" attribute="tc_destinationid">
-        <Handlers>
-          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{d5eab6bc-d980-0411-4091-774d4b1b8bee}" enabled="true" passExecutionContext="false" parameters="" />
-        </Handlers>
-      </event>
-      <event name="onchange" application="false" active="false" attribute="tc_locationid">
-        <Handlers>
-          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{882e8317-6600-b262-1ad1-b3636538d2e6}" enabled="true" passExecutionContext="false" parameters="" />
-        </Handlers>
-      </event>
-      <event name="onchange" application="false" active="false" attribute="tc_gateway">
-        <Handlers>
-          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{794e2d18-27cd-979a-3dbd-269743dc4074}" enabled="true" passExecutionContext="false" parameters="" />
-        </Handlers>
-      </event>
-    </events>
     <clientresources>
       <internalresources>
         <clientincludes>
@@ -2259,24 +2139,21 @@
       </NavBarAreas>
     </Navigation>
     <hiddencontrols>
-      <data id="FirstResponseSLAStatus" datafieldname="firstresponseslastatus" classid="{5546E6CD-394C-4bee-94A8-4425E17EF6C6}" />
-      <data id="ResolveBySLAStatus" datafieldname="resolvebyslastatus" classid="{5546E6CD-394C-4bee-94A8-4425E17EF6C6}" />
+      <data id="FirstResponseSLAStatus" classid="{5546E6CD-394C-4bee-94A8-4425E17EF6C6}" datafieldname="firstresponseslastatus" />
+      <data id="ResolveBySLAStatus" classid="{5546E6CD-394C-4bee-94A8-4425E17EF6C6}" datafieldname="resolvebyslastatus" />
     </hiddencontrols>
     <footer id="{397975c2-0e09-4bbf-9714-8ea6ebddd37c}" columns="1111" labelwidth="115" celllabelposition="Left" celllabelalignment="Left">
       <rows>
         <row>
-          <cell id="{e6c709d7-61ce-c458-74bb-7da058e5d0d3}" showlabel="false">
+          <cell id="{77b60a36-3e5e-e505-194c-236a60d8daed}" showlabel="false">
             <labels>
               <label description="" languagecode="1033" />
             </labels>
           </cell>
-          <cell id="{adc64375-c934-a283-35d6-a1680c097542}" locklevel="0" showlabel="true">
+          <cell id="{d58aa0c7-7b99-c13b-3ce6-cb4036962c92}" showlabel="false">
             <labels>
-              <label description="Case Stage" languagecode="1033" />
-              <label description="Étape de l'incident" languagecode="1036" />
-              <label description="Anfragephase" languagecode="1031" />
+              <label description="" languagecode="1033" />
             </labels>
-            <control id="footer_incidentstagecode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="incidentstagecode" />
           </cell>
           <cell id="{5247cd19-cbc1-eb9b-3eb9-854277ce2c38}" locklevel="0" showlabel="true">
             <labels>
@@ -2310,40 +2187,6 @@
         <customControl formFactor="1" name="MscrmControls.FlipSwitch.FlipSwitchControl">
           <parameters>
             <value>tc_bookingreference</value>
-          </parameters>
-        </customControl>
-      </controlDescription>
-      <controlDescription forControl="{13a57231-cb1a-c305-76e6-27021dee2ca1}">
-        <customControl id="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" formFactor="2">
-          <parameters>
-            <datafieldname>tc_preferredmethodofcommunication</datafieldname>
-          </parameters>
-        </customControl>
-        <customControl formFactor="0" name="MscrmControls.OptionSet.OptionSetControl">
-          <parameters>
-            <value>tc_preferredmethodofcommunication</value>
-          </parameters>
-        </customControl>
-        <customControl formFactor="1" name="MscrmControls.OptionSet.OptionSetControl">
-          <parameters>
-            <value>tc_preferredmethodofcommunication</value>
-          </parameters>
-        </customControl>
-      </controlDescription>
-      <controlDescription forControl="{7129e94d-e478-0b94-9505-27ac2732be4e}">
-        <customControl id="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" formFactor="2">
-          <parameters>
-            <datafieldname>tc_otherpartypreferredmethodofcontact</datafieldname>
-          </parameters>
-        </customControl>
-        <customControl formFactor="0" name="MscrmControls.OptionSet.OptionSetControl">
-          <parameters>
-            <value>tc_otherpartypreferredmethodofcontact</value>
-          </parameters>
-        </customControl>
-        <customControl formFactor="1" name="MscrmControls.OptionSet.OptionSetControl">
-          <parameters>
-            <value>tc_otherpartypreferredmethodofcontact</value>
           </parameters>
         </customControl>
       </controlDescription>
@@ -2433,6 +2276,23 @@
           </parameters>
         </customControl>
       </controlDescription>
+      <controlDescription forControl="{13a57231-cb1a-c305-76e6-27021dee2ca1}">
+        <customControl id="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" formFactor="2">
+          <parameters>
+            <datafieldname>tc_preferredmethodofcommunication</datafieldname>
+          </parameters>
+        </customControl>
+        <customControl formFactor="0" name="MscrmControls.OptionSet.OptionSetControl">
+          <parameters>
+            <value>tc_preferredmethodofcommunication</value>
+          </parameters>
+        </customControl>
+        <customControl formFactor="1" name="MscrmControls.OptionSet.OptionSetControl">
+          <parameters>
+            <value>tc_preferredmethodofcommunication</value>
+          </parameters>
+        </customControl>
+      </controlDescription>
       <controlDescription forControl="{21489d12-e7a0-08c4-d22e-46e922a3a4bb}">
         <customControl id="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" formFactor="0">
           <parameters>
@@ -2443,10 +2303,10 @@
             <AutoExpand>Fixed</AutoExpand>
             <EnableQuickFind>false</EnableQuickFind>
             <EnableViewPicker>false</EnableViewPicker>
-            <ViewIds>{6097DCA4-B98A-4C8D-8F02-A1B2E15D45C9}</ViewIds>
+            <ViewIds>{6097DCA4-B98A-4C8D-8F02-A1B2E15D45C9},{01A22365-57F7-E611-80FF-3863BB354FF0}</ViewIds>
             <EnableJumpBar>false</EnableJumpBar>
             <ChartGridMode>All</ChartGridMode>
-            <VisualizationId />
+            <VisualizationId>{437545B1-051E-E711-810D-3863BB340DD8}</VisualizationId>
             <IsUserChart>false</IsUserChart>
             <EnableChartPicker>true</EnableChartPicker>
             <RecordsPerPage>3</RecordsPerPage>
@@ -2461,10 +2321,10 @@
             <AutoExpand>Fixed</AutoExpand>
             <EnableQuickFind>false</EnableQuickFind>
             <EnableViewPicker>false</EnableViewPicker>
-            <ViewIds>{6097DCA4-B98A-4C8D-8F02-A1B2E15D45C9}</ViewIds>
+            <ViewIds>{6097DCA4-B98A-4C8D-8F02-A1B2E15D45C9},{01A22365-57F7-E611-80FF-3863BB354FF0}</ViewIds>
             <EnableJumpBar>false</EnableJumpBar>
             <ChartGridMode>All</ChartGridMode>
-            <VisualizationId />
+            <VisualizationId>{437545B1-051E-E711-810D-3863BB340DD8}</VisualizationId>
             <IsUserChart>false</IsUserChart>
             <EnableChartPicker>true</EnableChartPicker>
             <RecordsPerPage>3</RecordsPerPage>
@@ -2479,10 +2339,10 @@
             <AutoExpand>Fixed</AutoExpand>
             <EnableQuickFind>false</EnableQuickFind>
             <EnableViewPicker>false</EnableViewPicker>
-            <ViewIds>{6097DCA4-B98A-4C8D-8F02-A1B2E15D45C9}</ViewIds>
+            <ViewIds>{6097DCA4-B98A-4C8D-8F02-A1B2E15D45C9},{01A22365-57F7-E611-80FF-3863BB354FF0}</ViewIds>
             <EnableJumpBar>false</EnableJumpBar>
             <ChartGridMode>All</ChartGridMode>
-            <VisualizationId />
+            <VisualizationId>{437545B1-051E-E711-810D-3863BB340DD8}</VisualizationId>
             <IsUserChart>false</IsUserChart>
             <EnableChartPicker>true</EnableChartPicker>
             <RecordsPerPage>3</RecordsPerPage>
@@ -2497,7 +2357,7 @@
               <RelationshipName>tc_incident_tc_caseline</RelationshipName>
               <TargetEntityType>tc_caseline</TargetEntityType>
               <EnableViewPicker>false</EnableViewPicker>
-              <FilteredViewIds>{6097DCA4-B98A-4C8D-8F02-A1B2E15D45C9}</FilteredViewIds>
+              <FilteredViewIds>{6097DCA4-B98A-4C8D-8F02-A1B2E15D45C9},{01A22365-57F7-E611-80FF-3863BB354FF0}</FilteredViewIds>
             </data-set>
             <EnableGroupBy type="Enum" static="true">yes</EnableGroupBy>
           </parameters>
@@ -2510,9 +2370,138 @@
     <formLibraries>
       <Library name="tc_es6promise.js" libraryUniqueId="{c1e872a4-e748-135c-6e5b-4060deb5ac72}" />
       <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{4cb4eb92-a591-b261-303b-ebbe8265e177}" />
-      <Library name="tc_Tc.Crm.Scripts.Events.Compensation.js" libraryUniqueId="{3dc1b027-2a3d-02ab-ca43-7c741d8969bd}" />
+      <Library name="tc_Tc.Crm.Scripts.Library.Compensation.js" libraryUniqueId="{ce191c43-a58c-ee31-b5ac-3a5c0810aa53}" />
       <Library name="tc_Tc.Crm.Scripts.Events.Case.js" libraryUniqueId="{b1c93c95-9273-87a7-5c8d-a3553b5ebe64}" />
     </formLibraries>
+    <events>
+      <event name="onload" application="true" active="true">
+        <InternalHandlers>
+          <Handler functionName="Mscrm.Form_onload" libraryName="Incident_main_system_library.js" handlerUniqueId="76e18454-eeba-47c3-8a9d-6d701c77fbcc" enabled="true">
+            <dependencies>
+              <dependency id="contractid" />
+              <dependency id="contractdetailid" />
+            </dependencies>
+          </Handler>
+        </InternalHandlers>
+      </event>
+      <event name="onchange" application="true" active="true" attribute="customerid">
+        <InternalHandlers>
+          <Handler functionName="Mscrm.customerid_onchange" libraryName="Incident_main_system_library.js" handlerUniqueId="5349bfe7-817f-4c54-ae0f-f65df037361b" enabled="true">
+            <dependencies>
+              <dependency id="contractid" />
+              <dependency id="contractdetailid" />
+            </dependencies>
+          </Handler>
+        </InternalHandlers>
+      </event>
+      <event name="onchange" application="true" active="true" attribute="contractid">
+        <InternalHandlers>
+          <Handler functionName="Mscrm.contractid_onchange" libraryName="Incident_main_system_library.js" handlerUniqueId="1ff26f3d-f9f4-470b-a379-bc74ce466a53" enabled="true">
+            <dependencies>
+              <dependency id="contractdetailid" />
+            </dependencies>
+          </Handler>
+        </InternalHandlers>
+      </event>
+      <event name="onchange" application="true" active="true" attribute="contractdetailid">
+        <InternalHandlers>
+          <Handler functionName="Mscrm.contractdetailid_onchange" libraryName="Incident_main_system_library.js" handlerUniqueId="fde679b3-af20-4b24-ab99-13f7de54fbb1" enabled="true">
+            <dependencies>
+              <dependency id="contractid" />
+            </dependencies>
+          </Handler>
+        </InternalHandlers>
+      </event>
+      <event name="onchange" application="true" active="true" attribute="kbarticleid">
+        <InternalHandlers>
+          <Handler functionName="Mscrm.kbarticleid_onchange" libraryName="Incident_main_system_library.js" handlerUniqueId="1d4f95de-79c3-44e4-a782-469a8fc6132d" enabled="true" />
+        </InternalHandlers>
+      </event>
+      <event name="onchange" application="true" active="true" attribute="productid">
+        <InternalHandlers>
+          <Handler functionName="Mscrm.productid_onchange" libraryName="Incident_main_system_library.js" handlerUniqueId="97cabf35-d106-4f20-b656-97aebe91927c" enabled="true">
+            <dependencies>
+              <dependency id="entitlementid" />
+            </dependencies>
+          </Handler>
+        </InternalHandlers>
+      </event>
+      <event name="onchange" application="true" active="true" attribute="primarycontactid">
+        <InternalHandlers>
+          <Handler functionName="Mscrm.primarycontactid_onchange" libraryName="Incident_main_system_library.js" handlerUniqueId="e44c699a-b67f-40e1-8074-26a51241f017" enabled="true">
+            <dependencies>
+              <dependency id="entitlementid" />
+            </dependencies>
+          </Handler>
+        </InternalHandlers>
+      </event>
+      <event name="onsave" application="false" active="false">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{e27b5c77-2ac1-01d7-4cca-18a47475ae0e}" enabled="true" passExecutionContext="false" parameters="" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_bookingid">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChange" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{5ec7c30e-899c-87ad-ae60-3452ec186609}" enabled="true" passExecutionContext="false" parameters="" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_sourcemarketid">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChange" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{74b19cdc-100d-b0e2-7428-31162cd46cb3}" enabled="true" passExecutionContext="false" parameters="" />
+          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{587b1366-ba63-3174-0d3c-28620295eb64}" enabled="true" passExecutionContext="false" parameters="" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_istheholidaystoppingshorterthanplanned">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{3942ea0a-d219-3d6d-8cb8-9b6ae1588645}" enabled="true" passExecutionContext="false" parameters="" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_resortofficeid">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{5403271b-d7d1-e185-cc94-dc970a3a9e96}" enabled="true" passExecutionContext="false" parameters="" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_datereported">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{433c86c0-7c34-64a7-38cc-ae8093b598a9}" enabled="true" passExecutionContext="false" parameters="" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="caseorigincode">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{47303225-0c03-21ca-91d5-9a775cc2e09e}" enabled="true" passExecutionContext="false" parameters="" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_3rdpartyresponserequired">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{7563d984-8a51-6484-ed3d-6216376093ab}" enabled="true" passExecutionContext="false" parameters="" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_preferredmethodofcommunication">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{d194a90a-029e-b704-0622-e3e2bec37965}" enabled="true" passExecutionContext="false" parameters="" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_brandid">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" libraryName="tc_es6promise.js" handlerUniqueId="{ce23a62c-1d0a-79b7-87a3-d7e71373532d}" enabled="true" passExecutionContext="false" parameters="" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_destinationid">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{d5eab6bc-d980-0411-4091-774d4b1b8bee}" enabled="true" passExecutionContext="false" parameters="" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_locationid">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{882e8317-6600-b262-1ad1-b3636538d2e6}" enabled="true" passExecutionContext="false" parameters="" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_gateway">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{794e2d18-27cd-979a-3dbd-269743dc4074}" enabled="true" passExecutionContext="false" parameters="" />
+        </Handlers>
+      </event>
+    </events>
     <DisplayConditions FallbackForm="true" Order="2">
       <Everyone />
     </DisplayConditions>

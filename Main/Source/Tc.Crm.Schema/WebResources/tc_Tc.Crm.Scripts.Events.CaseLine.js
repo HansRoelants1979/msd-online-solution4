@@ -1,3 +1,4 @@
+
 if (typeof (Tc) === "undefined") {
     Tc = {
         __namespace: true
@@ -18,14 +19,12 @@ if (typeof (Tc.Crm.Scripts.Events) === "undefined") {
         __namespace: true
     };
 }
-Tc.Crm.Scripts.Events.CaseLine = (function () {
+Tc.Crm.Scripts.Events.CaseLine = ( function () {
     "use strict";
-    var CASE_TYPE_CONTROL_REG = "header_tc_casetypeid";
-    var CASE_TYPE_CONTROL_QUICK_CREATE = "tc_casetypeid";
+    var CASE_TYPE_ID = "tc_casetypeid";
     var CASE_CATEGORY_1_ID = "tc_categorylevel1id";
     var CASE_CATEGORY_2_ID = "tc_casecategory2id";
     var CASE_CATEGORY_3_ID = "tc_category3id";
-    var CASE_CATEGORY_4_ID = "tc_categorylevel4id";
     var CASE_CATEGORY_ENTITY = "tc_casecategory";
     var CASE_LINE_ENTITY_NAME = "tc_name";
     var FORM_MODE_CREATE = 1;
@@ -43,8 +42,6 @@ Tc.Crm.Scripts.Events.CaseLine = (function () {
         Xrm.Page.getControl(CASE_CATEGORY_2_ID).addPreSearch(filterLevel2CaseCategory);
         // filter level 3 case categories by selected level 2
         Xrm.Page.getControl(CASE_CATEGORY_3_ID).addPreSearch(filterLevel3CaseCategory);
-        // filter level 4 case categories by selected level 3
-        Xrm.Page.getControl(CASE_CATEGORY_4_ID).addPreSearch(filterLevel4CaseCategory);
     }
 
     ///
@@ -52,66 +49,57 @@ Tc.Crm.Scripts.Events.CaseLine = (function () {
     /// Show only active level 1 case categories
     ///
     var filterCategoryByComplainCaseType = function () {
-        console.log("Call PreSearch:" + CASE_CATEGORY_1_ID);
+        console.log("Call PreSearch: " + CASE_CATEGORY_1_ID);
         // clean-up selection of level 2 and level 3
-        Xrm.Page.getControl(CASE_CATEGORY_2_ID).getAttribute().setValue(null);
-        Xrm.Page.getControl(CASE_CATEGORY_3_ID).getAttribute().setValue(null);
-        Xrm.Page.getControl(CASE_CATEGORY_4_ID).getAttribute().setValue(null);
+        Xrm.Page.getAttribute(CASE_CATEGORY_2_ID).setValue(null);
+        Xrm.Page.getAttribute(CASE_CATEGORY_3_ID).setValue(null);
         // add filter for lookup view by case type of case line
-        // get the proper control: in header for main form, field in case of quick create
-        var caseTypeControl = Xrm.Page.getControl(CASE_TYPE_CONTROL_REG);
-        if (Xrm.Page.ui.getFormType() === FORM_MODE_CREATE) {
-            caseTypeControl = Xrm.Page.getControl(CASE_TYPE_CONTROL_QUICK_CREATE);
-        }
-        var caseTypeComplainId = caseTypeControl.getAttribute().getValue()[0].id;
+        var caseTypeComplainId = Xrm.Page.getAttribute(CASE_TYPE_ID).getValue()[0].id;
         var filter = "<filter type='and'><condition attribute='statecode' operator='eq' value='0' /><condition attribute='tc_casetypeid' operator='eq' value='" + caseTypeComplainId + "'/></filter>";
         Xrm.Page.getControl(CASE_CATEGORY_1_ID).addCustomFilter(filter, CASE_CATEGORY_ENTITY);
     }
 
+    ///
+    /// PreSearch method for case category level 2
+    ///
     var filterLevel2CaseCategory = function () {
-        console.log("Call PreSearch:" + CASE_CATEGORY_2_ID);
+        console.log("Call PreSearch: " + CASE_CATEGORY_2_ID);
         // clean-up case category level 3, 4 selection
-        Xrm.Page.getControl(CASE_CATEGORY_3_ID).getAttribute().setValue(null);
-        Xrm.Page.getControl(CASE_CATEGORY_4_ID).getAttribute().setValue(null);
+        Xrm.Page.getAttribute(CASE_CATEGORY_3_ID).setValue(null);
         filterCategoryByParentCaseCategory(CASE_CATEGORY_2_ID);
-    }
-    var filterLevel3CaseCategory = function () {
-        console.log("Call PreSearch:" + CASE_CATEGORY_3_ID);
-        // clean-up case category level 4 selection
-        Xrm.Page.getControl(CASE_CATEGORY_4_ID).getAttribute().setValue(null);
-        filterCategoryByParentCaseCategory(CASE_CATEGORY_3_ID);
-    }
-    var filterLevel4CaseCategory = function () {
-        console.log("Call PreSearch:" + CASE_CATEGORY_4_ID);
-        filterCategoryByParentCaseCategory(CASE_CATEGORY_4_ID);
     }
 
     ///
-    /// PreSearch method for case category level 2 and 3 look up.
+    /// PreSearch method for case category level 3
+    ///
+    var filterLevel3CaseCategory = function () {
+        console.log("Call PreSearch: " + CASE_CATEGORY_3_ID);
+        filterCategoryByParentCaseCategory(CASE_CATEGORY_3_ID);
+    }
+
+    ///
     /// Filter search result to show only active records related to selected parent case category.
     ///
     var filterCategoryByParentCaseCategory = function (controlId) {
         var parentControlId = '';
-        switch (controlId) {
+        switch (controlId)
+        {
             case CASE_CATEGORY_2_ID:
                 parentControlId = CASE_CATEGORY_1_ID;
                 break
             case CASE_CATEGORY_3_ID:
                 parentControlId = CASE_CATEGORY_2_ID;
                 break
-            case CASE_CATEGORY_4_ID:
-                parentControlId = CASE_CATEGORY_3_ID;
-                break
             default:
                 console.warn("Call PreSearch for not supported field");
                 return;
         }
         // get selected value of parent control
-        var parentCaseCategory = Xrm.Page.getControl(parentControlId).getAttribute().getValue();
+        var parentCaseCategory = Xrm.Page.getAttribute(parentControlId).getValue();
         if (parentCaseCategory == null) {
             console.warn("Parent control value is null.");
             return;
-        }
+        }        
         var parentCaseCategoryId = parentCaseCategory[0].id;
         // filter by parent case category id
         var fetchXml =
@@ -151,35 +139,33 @@ Tc.Crm.Scripts.Events.CaseLine = (function () {
 
         //if (Xrm.Page.ui.getFormType() === FORM_MODE_UPDATE) {
 
-            console.log("formation The Name of The Case Line Entity - Start");
-            if (Xrm.Page.getControl(CASE_CATEGORY_1_ID).getAttribute().getValue() != null) {
+        console.log("formation The Name of The Case Line Entity - Start");
+        if (Xrm.Page.getControl(CASE_CATEGORY_1_ID).getAttribute().getValue() != null) {
 
-                var CaseLineName = Xrm.Page.getControl(CASE_CATEGORY_1_ID).getAttribute().getValue()[0].name ;
-                if (Xrm.Page.getControl(CASE_CATEGORY_2_ID).getAttribute().getValue() != null) {
-                    CaseLineName = CaseLineName +  " > " + Xrm.Page.getControl(CASE_CATEGORY_2_ID).getAttribute().getValue()[0].name ;
+            var CaseLineName = Xrm.Page.getControl(CASE_CATEGORY_1_ID).getAttribute().getValue()[0].name;
+            if (Xrm.Page.getControl(CASE_CATEGORY_2_ID).getAttribute().getValue() != null) {
+                CaseLineName = CaseLineName + " > " + Xrm.Page.getControl(CASE_CATEGORY_2_ID).getAttribute().getValue()[0].name;
 
-                    if (Xrm.Page.getControl(CASE_CATEGORY_3_ID).getAttribute().getValue() != null) {
-                        CaseLineName = CaseLineName + " > " + Xrm.Page.getControl(CASE_CATEGORY_3_ID).getAttribute().getValue()[0].name;
-                    }
+                if (Xrm.Page.getControl(CASE_CATEGORY_3_ID).getAttribute().getValue() != null) {
+                    CaseLineName = CaseLineName + " > " + Xrm.Page.getControl(CASE_CATEGORY_3_ID).getAttribute().getValue()[0].name;
                 }
-
-
-                Xrm.Page.getControl(CASE_LINE_ENTITY_NAME).getAttribute().setValue(CaseLineName);
             }
 
-            console.log("formation The Name of The Case Line Entity - End");
+
+            Xrm.Page.getControl(CASE_LINE_ENTITY_NAME).getAttribute().setValue(CaseLineName);
+        }
+
+        console.log("formation The Name of The Case Line Entity - End");
 
 
-       // }
+        // }
 
     }
-
 
     // public methods
     return {
         OnLoad: function () {
             addEventHandlers();
-            
         },
         OnCaseLineSave: function () {
             formationTheNameOfTheCaseLineEntity();

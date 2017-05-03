@@ -56,9 +56,9 @@
         <link-entity name="contact" from="contactid" to="primarycontactid" visible="false" link-type="outer" alias="a_03424782c7d54a34bbb5b2df729e0302">
           <attribute name="tc_language" />
         </link-entity>
-        <link-entity name="systemuser" from="systemuserid" to="owninguser" alias="ab">
+        <link-entity name="tc_locationoffice" from="tc_locationofficeid" to="tc_resortofficeid" alias="ab">
           <filter type="and">
-            <condition attribute="parentsystemuserid" operator="eq-userid" />
+            <condition attribute="ownerid" operator="eq-userid" />
           </filter>
         </link-entity>
         <attribute name="incidentid" />

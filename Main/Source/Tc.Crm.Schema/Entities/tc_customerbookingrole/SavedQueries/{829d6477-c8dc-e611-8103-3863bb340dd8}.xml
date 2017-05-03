@@ -11,16 +11,14 @@
     <grid name="resultset" object="10029" jump="tc_name" select="1" icon="1" preview="1">
       <row name="result" id="tc_customerbookingroleid">
         <cell name="tc_bookingid" width="100" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="a_0ce21bc1c5dce61181033863bb340dd8.tc_departuredate" width="75" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="a_0ce21bc1c5dce61181033863bb340dd8.tc_duration" width="75" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="a_0ce21bc1c5dce61181033863bb340dd8.tc_destinationgatewayid" width="100" disableSorting="1" />
-        <cell name="a_0ce21bc1c5dce61181033863bb340dd8.tc_brandid" width="100" disableSorting="1" />
-        <cell name="a_0ce21bc1c5dce61181033863bb340dd8.tc_sourcemarketid" width="100" disableSorting="1" />
-        <cell name="a_0ce21bc1c5dce61181033863bb340dd8.tc_numberofparticipants" width="50" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="a_0ce21bc1c5dce61181033863bb340dd8.tc_travelamount" width="75" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="a_0ce21bc1c5dce61181033863bb340dd8.tc_bookingdate" width="100" disableSorting="1" />
-        <cell name="a_0ce21bc1c5dce61181033863bb340dd8.statuscode" width="100" disableSorting="1" />
-        <cell name="createdon" width="100" />
+        <cell name="a_0ce21bc1c5dce61181033863bb340dd8.tc_brandid" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_0ce21bc1c5dce61181033863bb340dd8.tc_sourcemarketid" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_0ce21bc1c5dce61181033863bb340dd8.tc_departuredate" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_0ce21bc1c5dce61181033863bb340dd8.tc_duration" width="125" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_0ce21bc1c5dce61181033863bb340dd8.tc_travelamount" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_0ce21bc1c5dce61181033863bb340dd8.tc_numberofparticipants" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_0ce21bc1c5dce61181033863bb340dd8.tc_bookingdate" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_0ce21bc1c5dce61181033863bb340dd8.tc_remark" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
       </row>
     </grid>
   </layoutxml>
@@ -29,18 +27,16 @@
     <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
       <entity name="tc_customerbookingrole">
         <attribute name="tc_bookingid" />
-        <attribute name="createdon" />
-        <order attribute="createdon" descending="false" />
+        <order attribute="tc_bookingid" descending="false" />
         <link-entity name="tc_booking" from="tc_bookingid" to="tc_bookingid" visible="false" link-type="outer" alias="a_0ce21bc1c5dce61181033863bb340dd8">
-          <attribute name="statuscode" />
           <attribute name="tc_departuredate" />
           <attribute name="tc_brandid" />
           <attribute name="tc_sourcemarketid" />
           <attribute name="tc_travelamount" />
           <attribute name="tc_numberofparticipants" />
           <attribute name="tc_duration" />
-          <attribute name="tc_destinationgatewayid" />
           <attribute name="tc_bookingdate" />
+          <attribute name="tc_remark" />
         </link-entity>
         <attribute name="tc_customerbookingroleid" />
       </entity>

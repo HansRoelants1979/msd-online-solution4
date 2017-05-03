@@ -31,7 +31,19 @@
                       <labels>
                         <label description="Brand" languagecode="1033" />
                       </labels>
-                      <control id="tc_brandid" datafieldname="tc_brandid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" />
+                      <control id="tc_brandid" datafieldname="tc_brandid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" uniqueid="{b2a10e60-0145-d356-d256-baec0379bb78}" disabled="false">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{C03006D9-CF42-410C-8091-E33E7E0E84E9}</DefaultViewId>
+                          <FilterRelationshipName>tc_country_tc_brand</FilterRelationshipName>
+                          <DependentAttributeName>tc_booking.tc_sourcemarketid</DependentAttributeName>
+                          <DependentAttributeType>tc_country</DependentAttributeType>
+                          <AllowFilterOff>true</AllowFilterOff>
+                        </parameters>
+                      </control>
                     </cell>
                   </row>
                   <row>
@@ -47,7 +59,17 @@
                       <labels>
                         <label description="Destination Gateway" languagecode="1033" />
                       </labels>
-                      <control id="tc_destinationgatewayid" datafieldname="tc_destinationgatewayid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" />
+                      <control id="tc_destinationgatewayid" datafieldname="tc_destinationgatewayid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" uniqueid="{95ba5bbb-a089-ed76-73b4-8c0e0163a450}" disabled="false">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{4E29CB42-F586-45B8-9D57-AF21CEA59536}</DefaultViewId>
+                          <DependentAttributeType>tc_country</DependentAttributeType>
+                          <AllowFilterOff>false</AllowFilterOff>
+                        </parameters>
+                      </control>
                     </cell>
                   </row>
                   <row>

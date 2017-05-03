@@ -25,7 +25,7 @@
   </layoutxml>
   <querytype>0</querytype>
   <fetchxml>
-    <fetch mapping="logical" output-format="xml-platform" version="1.0" distinct="false">
+    <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
       <entity name="tc_compensation">
         <attribute name="tc_name" />
         <attribute name="tc_voucheramount" />
@@ -39,10 +39,10 @@
         <order descending="false" attribute="tc_name" />
         <filter type="and">
           <condition attribute="tc_amount" operator="not-null" />
-          <condition value="950000000" attribute="tc_approvalstatus" operator="eq" />
-          <condition value="950000000" attribute="tc_paymentstatus" operator="eq" />
+          <condition attribute="tc_paymentstatus" operator="eq" value="950000000" />
+          <condition attribute="tc_offerstatus" operator="eq" value="950000000" />
         </filter>
-        <link-entity name="systemuser" alias="a_d443b2130af9e61181073863bb34fb48" to="owninguser" from="systemuserid" link-type="outer" visible="false">
+        <link-entity name="systemuser" from="systemuserid" to="owninguser" visible="false" link-type="outer" alias="a_d443b2130af9e61181073863bb34fb48">
           <attribute name="parentsystemuserid" />
         </link-entity>
         <attribute name="tc_compensationid" />

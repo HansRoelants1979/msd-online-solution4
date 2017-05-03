@@ -12,7 +12,7 @@
       <data id="address2_addressid" datafieldname="address2_addressid" classid="{5546E6CD-394C-4bee-94A8-4425E17EF6C6}" />
     </hiddencontrols>
     <tabs>
-      <tab id="{4a17a0d0-7a21-5988-8711-dd8bc013b909}" name="tab_Customer_CustomerDetails" IsUserDefined="0" locklevel="0" showlabel="true" expanded="true">
+      <tab id="{4a17a0d0-7a21-5988-8711-dd8bc013b909}" name="tab_Customer_CustomerDetails" IsUserDefined="0" locklevel="0" showlabel="true" expanded="false">
         <labels>
           <label description="Customer Details" languagecode="1033" />
         </labels>
@@ -111,6 +111,34 @@
                       <control disabled="false" id="tc_gender" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_gender" uniqueid="{8dd679e0-3409-72a2-9d22-dad9399bdb6d}" />
                     </cell>
                   </row>
+                  <row>
+                    <cell id="{38e4c360-39bd-15ca-92cb-9e5c818336be}" showlabel="false" colspan="1" auto="false" rowspan="6">
+                      <labels>
+                        <label description="OfflineResource" languagecode="1033" />
+                      </labels>
+                      <control id="WebResource_OfflineResource" classid="{9FDF5F91-88B1-47f4-AD53-C11EFC01A01D}">
+                        <parameters>
+                          <Url>tc_OfflineResource</Url>
+                          <PassParameters>false</PassParameters>
+                          <Security>false</Security>
+                          <Scrolling>auto</Scrolling>
+                          <Border>true</Border>
+                          <ShowOnMobileClient>true</ShowOnMobileClient>
+                          <WebResourceId>{2EF33376-1F2C-E711-8112-1458D041F8E8}</WebResourceId>
+                        </parameters>
+                      </control>
+                      <events>
+                        <event name="onload" application="false">
+                          <dependencies />
+                        </event>
+                      </events>
+                    </cell>
+                  </row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
             </sections>
@@ -394,7 +422,20 @@
                 <labels>
                   <label description="Section" languagecode="1033" />
                 </labels>
-                <rows></rows>
+                <rows>
+                  <row>
+                    <cell id="{fc3c9146-c4e4-4d51-9590-ed8c1154328c}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                    <cell id="{fab4f4b6-3410-417c-99fc-61ff0618e7ad}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                  </row>
+                </rows>
               </section>
             </sections>
           </column>
@@ -770,34 +811,28 @@
       </event>
       <event name="onsave" application="false" active="false">
         <Handlers>
-          <Handler functionName="Tc.Crm.Scripts.Events.Compensation.OnCustomerSave" libraryName="tc_Tc.Crm.Scripts.Events.Compensation.js" handlerUniqueId="{5b817372-6d7e-e9be-8428-4361621ca874}" enabled="true" parameters="" passExecutionContext="false" />
+          <Handler functionName="Tc.Crm.Scripts.Events.Contact.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Contact.js" handlerUniqueId="{b8c499ea-7a34-a205-8166-92e98a0b00b8}" enabled="true" parameters="" passExecutionContext="false" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_language">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Library.Compensation.UpdateCustomerCompensationsLanguage" libraryName="tc_Tc.Crm.Scripts.Library.Compensation.js" handlerUniqueId="{4756b7e7-dd29-2cec-2b72-e06e8509888d}" enabled="true" parameters="" passExecutionContext="false" />
         </Handlers>
       </event>
     </events>
     <Navigation>
       <NavBar>
-        <NavBarByRelationshipItem Id="navAddresses" Area="Info" Sequence="14" RelationshipName="Contact_CustomerAddress" Show="false">
+        <NavBarByRelationshipItem RelationshipName="invoice_customer_contacts" Id="navInvoices" Sequence="10" Area="Info" Show="false">
           <Privileges>
             <Privilege Entity="" Privilege="ReadActivity" />
           </Privileges>
           <Titles>
-            <Title LCID="1033" Text="Addresses" />
+            <Title LCID="1033" Text="Invoice" />
           </Titles>
         </NavBarByRelationshipItem>
-        <NavBarByRelationshipItem Id="navSubConts" Area="Info" Sequence="16" RelationshipName="contact_customer_contacts" Show="false">
-          <Privileges>
-            <Privilege Entity="" Privilege="ReadActivity" />
-          </Privileges>
+        <NavBarByRelationshipItem Id="navOpps" Area="Sales" Sequence="10" RelationshipName="opportunity_customer_contacts" Show="false">
           <Titles>
-            <Title LCID="1033" Text="Contacts" />
-          </Titles>
-        </NavBarByRelationshipItem>
-        <NavBarByRelationshipItem Id="navRelationships" Area="Info" Sequence="13" RelationshipName="contact_customer_relationship_customer" Show="false">
-          <Privileges>
-            <Privilege Entity="" Privilege="ReadActivity" />
-          </Privileges>
-          <Titles>
-            <Title LCID="1033" Text="CustomerRelationship" />
+            <Title Text="Opportunities" LCID="1033" />
           </Titles>
         </NavBarByRelationshipItem>
         <NavBarByRelationshipItem Id="navQuotes" Area="Info" Sequence="11" RelationshipName="quote_customer_contacts" Show="false">
@@ -808,22 +843,6 @@
             <Title LCID="1033" Text="Quote" />
           </Titles>
         </NavBarByRelationshipItem>
-        <NavBarByRelationshipItem Id="navOrders" Area="Info" Sequence="15" RelationshipName="order_customer_contacts" Show="false">
-          <Privileges>
-            <Privilege Entity="" Privilege="ReadActivity" />
-          </Privileges>
-          <Titles>
-            <Title LCID="1033" Text="SalesOrder" />
-          </Titles>
-        </NavBarByRelationshipItem>
-        <NavBarByRelationshipItem RelationshipName="invoice_customer_contacts" Id="navInvoices" Sequence="10" Area="Info" Show="false">
-          <Privileges>
-            <Privilege Entity="" Privilege="ReadActivity" />
-          </Privileges>
-          <Titles>
-            <Title LCID="1033" Text="Invoice" />
-          </Titles>
-        </NavBarByRelationshipItem>
         <NavBarByRelationshipItem Id="navContracts" Area="Info" Sequence="12" RelationshipName="contract_customer_contacts" Show="false">
           <Privileges>
             <Privilege Entity="" Privilege="ReadActivity" />
@@ -832,9 +851,36 @@
             <Title LCID="1033" Text="Contract" />
           </Titles>
         </NavBarByRelationshipItem>
-        <NavBarByRelationshipItem Id="navCampaignsInSFA" Area="Marketing" Sequence="22" RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navCampaignsInSFA" Show="false">
+        <NavBarByRelationshipItem Id="navRelationships" Area="Info" Sequence="13" RelationshipName="contact_customer_relationship_customer" Show="false">
+          <Privileges>
+            <Privilege Entity="" Privilege="ReadActivity" />
+          </Privileges>
           <Titles>
-            <Title LCID="1033" Text="Campaigns" />
+            <Title LCID="1033" Text="CustomerRelationship" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem Id="navAddresses" Area="Info" Sequence="14" RelationshipName="Contact_CustomerAddress" Show="false">
+          <Privileges>
+            <Privilege Entity="" Privilege="ReadActivity" />
+          </Privileges>
+          <Titles>
+            <Title LCID="1033" Text="Addresses" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem Id="navOrders" Area="Info" Sequence="15" RelationshipName="order_customer_contacts" Show="false">
+          <Privileges>
+            <Privilege Entity="" Privilege="ReadActivity" />
+          </Privileges>
+          <Titles>
+            <Title LCID="1033" Text="SalesOrder" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem Id="navSubConts" Area="Info" Sequence="16" RelationshipName="contact_customer_contacts" Show="false">
+          <Privileges>
+            <Privilege Entity="" Privilege="ReadActivity" />
+          </Privileges>
+          <Titles>
+            <Title LCID="1033" Text="Contacts" />
           </Titles>
         </NavBarByRelationshipItem>
         <NavBarByRelationshipItem Id="navListsInSFA" Area="Info" Sequence="17" RelationshipName="listcontact_association" Show="false">
@@ -845,24 +891,14 @@
             <Title LCID="1033" Text="List" />
           </Titles>
         </NavBarByRelationshipItem>
-        <NavBarByRelationshipItem RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navProcessSessions" Sequence="9700" Area="ProcessCenter" Id="navProcessSessions" Show="false">
-          <Titles>
-            <Title LCID="1033" Text="Dialog Sessions" />
-          </Titles>
-        </NavBarByRelationshipItem>
-        <NavBarByRelationshipItem RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navAsyncOperations" Sequence="9500" Area="ProcessCenter" Id="navAsyncOperations" Show="false">
-          <Titles>
-            <Title LCID="1033" Text="Workflows" />
-          </Titles>
-        </NavBarByRelationshipItem>
-        <NavBarByRelationshipItem Id="navOpps" Area="Sales" Sequence="10" RelationshipName="opportunity_customer_contacts" Show="false">
-          <Titles>
-            <Title Text="Opportunities" LCID="1033" />
-          </Titles>
-        </NavBarByRelationshipItem>
         <NavBarByRelationshipItem Id="navEntitlement" Area="Info" Sequence="21" RelationshipName="contact_entitlement_Customer" Show="false">
           <Titles>
             <Title Text="Entitlements" LCID="1033" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem Id="navCampaignsInSFA" Area="Marketing" Sequence="22" RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navCampaignsInSFA" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Campaigns" />
           </Titles>
         </NavBarByRelationshipItem>
         <NavBarByRelationshipItem Id="nav_tc_contact_tc_customerbookingrole_Customer" Area="Sales" Sequence="1000" RelationshipName="tc_contact_tc_customerbookingrole_Customer">
@@ -878,6 +914,16 @@
         <NavBarByRelationshipItem Id="navAudit" Area="Info" Sequence="8501" RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navAudit">
           <Titles>
             <Title Text="Audit History" LCID="1033" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navAsyncOperations" Sequence="9500" Area="ProcessCenter" Id="navAsyncOperations" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Workflows" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navProcessSessions" Sequence="9700" Area="ProcessCenter" Id="navProcessSessions" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Dialog Sessions" />
           </Titles>
         </NavBarByRelationshipItem>
         <NavBarByRelationshipItem Id="navFeedback" Area="Info" Sequence="9958" RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navFeedback" Show="false">
@@ -914,9 +960,6 @@
         </NavBarArea>
       </NavBarAreas>
     </Navigation>
-    <DisplayConditions FallbackForm="true" Order="2">
-      <Everyone />
-    </DisplayConditions>
     <footer id="{f6e192d1-32c2-4ca6-bc09-c691a7fabb44}" columns="111">
       <rows>
         <row>
@@ -1139,8 +1182,12 @@
     <formLibraries>
       <Library name="tc_es6promise.js" libraryUniqueId="{de507201-4eb0-e6e5-94a8-db26e1cd7be2}" />
       <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{a279a9e3-d067-b144-d47d-326570627703}" />
-      <Library name="tc_Tc.Crm.Scripts.Events.Compensation.js" libraryUniqueId="{cc12861d-7e97-d167-2363-a155d98c8155}" />
+      <Library name="tc_Tc.Crm.Scripts.Library.Compensation.js" libraryUniqueId="{516b1310-73bd-6d8c-dae9-0e189bcc3574}" />
+      <Library name="tc_Tc.Crm.Scripts.Events.Contact.js" libraryUniqueId="{50424d57-7883-ebc4-c90e-d02256d54ade}" />
     </formLibraries>
+    <DisplayConditions FallbackForm="true" Order="2">
+      <Everyone />
+    </DisplayConditions>
   </form>
   <LocalizedNames>
     <LocalizedName description="Kontakt" languagecode="1031" />

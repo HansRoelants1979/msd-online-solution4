@@ -10,6 +10,13 @@
         <CanCreate>4</CanCreate>
       </FieldPermission>
       <FieldPermission>
+        <EntityName>tc_caseline</EntityName>
+        <AttributeName>tc_categorylevel4subcategoryid</AttributeName>
+        <CanRead>0</CanRead>
+        <CanUpdate>0</CanUpdate>
+        <CanCreate>4</CanCreate>
+      </FieldPermission>
+      <FieldPermission>
         <EntityName>incident</EntityName>
         <AttributeName>tc_tcproductrelated</AttributeName>
         <CanRead>4</CanRead>
@@ -20,6 +27,13 @@
   </FieldSecurityProfile>
   <FieldSecurityProfile name="Tc.Case.HealthandSafety" description="To change the value of tc_tcproductrelated only by H&amp;S team" fieldsecurityprofileid="{f249bb95-f424-e711-8104-3863bb354ff0}">
     <FieldPermissions>
+      <FieldPermission>
+        <EntityName>tc_caseline</EntityName>
+        <AttributeName>tc_categorylevel4subcategoryid</AttributeName>
+        <CanRead>4</CanRead>
+        <CanUpdate>4</CanUpdate>
+        <CanCreate>4</CanCreate>
+      </FieldPermission>
       <FieldPermission>
         <EntityName>incident</EntityName>
         <AttributeName>tc_tcproductrelated</AttributeName>
@@ -50,6 +64,27 @@
         <AttributeName>tc_invoicestatus</AttributeName>
         <CanRead>4</CanRead>
         <CanUpdate>4</CanUpdate>
+        <CanCreate>0</CanCreate>
+      </FieldPermission>
+      <FieldPermission>
+        <EntityName>tc_compensationline</EntityName>
+        <AttributeName>tc_bacsaccountnumber</AttributeName>
+        <CanRead>4</CanRead>
+        <CanUpdate>0</CanUpdate>
+        <CanCreate>0</CanCreate>
+      </FieldPermission>
+      <FieldPermission>
+        <EntityName>tc_compensationline</EntityName>
+        <AttributeName>tc_bacsaccountsortcode</AttributeName>
+        <CanRead>4</CanRead>
+        <CanUpdate>0</CanUpdate>
+        <CanCreate>0</CanCreate>
+      </FieldPermission>
+      <FieldPermission>
+        <EntityName>tc_compensationline</EntityName>
+        <AttributeName>tc_bacsbuildingsocietyrolenumber</AttributeName>
+        <CanRead>4</CanRead>
+        <CanUpdate>0</CanUpdate>
         <CanCreate>0</CanCreate>
       </FieldPermission>
     </FieldPermissions>

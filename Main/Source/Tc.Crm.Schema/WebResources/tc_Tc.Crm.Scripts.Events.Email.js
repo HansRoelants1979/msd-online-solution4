@@ -39,7 +39,6 @@ Tc.Crm.Scripts.Events.Email = (function () {
         }
     }
     var getQueueIdFromCrm = function (id) {
-        debugger;
         var requestXml = '';
         requestXml += '<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">';
         requestXml += '  <s:Body>';

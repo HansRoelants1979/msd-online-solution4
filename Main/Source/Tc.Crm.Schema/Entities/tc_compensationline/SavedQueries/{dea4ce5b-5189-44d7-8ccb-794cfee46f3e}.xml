@@ -8,38 +8,39 @@
   <returnedtypecode>10055</returnedtypecode>
   <savedqueryid>{dea4ce5b-5189-44d7-8ccb-794cfee46f3e}</savedqueryid>
   <layoutxml>
-    <grid name="resultset" object="10055" jump="tc_name" select="1" icon="1" preview="1">
-      <row name="result" id="tc_compensationlineid">
+    <grid name="resultset" preview="1" icon="1" select="1" jump="tc_name" object="10055">
+      <row id="tc_compensationlineid" name="result">
         <cell name="createdon" width="125" />
-        <cell name="tc_compensationlinereference" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="tc_bacsaccountname" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="tc_bacsaccountnumber" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="tc_bacsaccountsortcode" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="tc_bacsaccounttype" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_bacsaccountname" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
+        <cell name="tc_bacsaccountnumber" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
+        <cell name="tc_bacsaccountsortcode" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
+        <cell name="tc_bacsaccounttype" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
         <cell name="tc_bacsamount" width="100" />
-        <cell name="tc_bacsbuildingsocietyrolenumber" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="tc_name" width="300" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_bacsbuildingsocietyrolenumber" width="200" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
+        <cell name="tc_name" width="300" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
+        <cell name="tc_caseid" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
       </row>
     </grid>
   </layoutxml>
   <querytype>0</querytype>
   <fetchxml>
-    <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
+    <fetch distinct="false" mapping="logical" output-format="xml-platform" version="1.0">
       <entity name="tc_compensationline">
         <attribute name="tc_name" />
         <attribute name="createdon" />
-        <order attribute="createdon" descending="true" />
-        <filter type="and">
-          <condition attribute="tc_bacsamount" operator="gt" value="0" />
-          <condition attribute="tc_invoicestatus" operator="eq" value="950000000" />
-        </filter>
         <attribute name="tc_bacsbuildingsocietyrolenumber" />
         <attribute name="tc_bacsamount" />
         <attribute name="tc_bacsaccounttype" />
         <attribute name="tc_bacsaccountsortcode" />
         <attribute name="tc_bacsaccountnumber" />
         <attribute name="tc_bacsaccountname" />
-        <attribute name="tc_compensationlinereference" />
+        <attribute name="tc_caseid" />
+        <order descending="true" attribute="createdon" />
+        <filter type="and">
+          <condition value="0" attribute="tc_bacsamount" operator="gt" />
+          <condition value="950000000" attribute="tc_invoicestatus" operator="eq" />
+          <condition value="Accepted" attribute="tc_customerpaymentmethoddecision" operator="eq" />
+        </filter>
         <attribute name="tc_compensationlineid" />
       </entity>
     </fetch>
