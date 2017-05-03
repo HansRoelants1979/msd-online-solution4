@@ -39,13 +39,14 @@ namespace Tc.Crm.Plugins.Email.BusinessLogic
             if (!IsContextValid()) return;
             Guid emailId = Guid.Empty;
             string emailDescription = string.Empty;
-            Entity targetEmail = null;
+            Entity targetEmail = null;           
             targetEmail = (Entity)context.InputParameters["Target"];
             if (targetEmail.Id != Guid.Empty)
-                emailId = targetEmail.Id;
+                emailId = targetEmail.Id;            
+            if ((bool)targetEmail["directioncode"] == false)
+                return;
             targetEmail["description"] = GetEmailDescription(targetEmail["description"].ToString());
             trace.Trace("End - UpdateEmailBodyWithHeadersandFooters");
-
         }
 
         public static List<string> getFooterHeaderName(
@@ -75,7 +76,6 @@ namespace Tc.Crm.Plugins.Email.BusinessLogic
             emailDescription = body;
             List<string> footerHeaderNamesList = new List<string>();
             footerHeaderNamesList = getFooterHeaderName(emailDescription, "{!EmailHeaderFooter:", "}");
-
             footerHeaderNamesList = footerHeaderNamesList.Distinct().ToList();
             trace.Trace("footerHeaderNamesList Count : " + footerHeaderNamesList.Count.ToString());
             if (footerHeaderNamesList == null || footerHeaderNamesList.Count == 0)
@@ -85,7 +85,7 @@ namespace Tc.Crm.Plugins.Email.BusinessLogic
             {
                 if (string.IsNullOrWhiteSpace(footerHeaderName))
                     continue;
-                var query = GetQueryFor(footerHeaderName);
+                var query = GetQuery(footerHeaderName);
 
                 EntityCollection emailTempalteHeaderFooterValue = service.RetrieveMultiple(query);
                 if (emailTempalteHeaderFooterValue == null || emailTempalteHeaderFooterValue.Entities.Count == 0)
@@ -101,7 +101,7 @@ namespace Tc.Crm.Plugins.Email.BusinessLogic
                 return body;
             return emailDescription;
         }
-        private QueryExpression GetQueryFor(string footerHeaderName)
+        private QueryExpression GetQuery(string footerHeaderName)
         {
             QueryExpression query = new QueryExpression
             {
