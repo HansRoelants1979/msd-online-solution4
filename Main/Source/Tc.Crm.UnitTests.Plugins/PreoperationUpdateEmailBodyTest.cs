@@ -36,21 +36,36 @@ namespace Tc.Crm.UnitTests.Plugins
             Assert.ThrowsException<InvalidPluginExecutionException>(() => context.ExecutePluginWith<Crm.Plugins.Email.PreoperationUpdateEmailBody>(pluginContext));
         }
 
-        //[TestMethod]
-        //public void EmailWithDescription()
-        //{
-        //    var context = new XrmFakedContext();
-        //    var target = new Microsoft.Xrm.Sdk.Entity("email") { Id = Guid.NewGuid() };
-        //    var pluginContext = new XrmFakedPluginExecutionContext();
-        //    pluginContext.Stage = 20;
-        //    pluginContext.MessageName = "create";
-        //    pluginContext.InputParameters = new ParameterCollection();
-        //    pluginContext.InputParameters.Add("Target", target);
-        //    target["description"] = "{!EmailHeaderFooter:Test Footer1}";
-        //    var emailDescription = string.Empty;
-        //    var fakedPlugin = context.ExecutePluginWith<Crm.Plugins.Email.PreoperationUpdateEmailBody>(pluginContext);
-         
-        //}
+        [TestMethod]
+        public void EmailWithNoDirectionCode()
+        {
+            var context = new XrmFakedContext();
+            var target = new Microsoft.Xrm.Sdk.Entity("email") { Id = Guid.NewGuid() };
+            var pluginContext = new XrmFakedPluginExecutionContext();
+            pluginContext.Stage = 20;
+            pluginContext.MessageName = "create";
+            pluginContext.InputParameters = new ParameterCollection();
+            pluginContext.InputParameters.Add("Target", target);
+            target["description"] = "{!EmailHeaderFooter:Test Footer1}";
+            Assert.ThrowsException<InvalidPluginExecutionException>(() => context.ExecutePluginWith<Crm.Plugins.Email.PreoperationUpdateEmailBody>(pluginContext));
+        }
+
+        [TestMethod]
+        public void EmailWithDescription()
+        {
+            var context = new XrmFakedContext();
+            var target = new Microsoft.Xrm.Sdk.Entity("email") { Id = Guid.NewGuid() };
+            var pluginContext = new XrmFakedPluginExecutionContext();
+            pluginContext.Stage = 20;
+            pluginContext.MessageName = "create";
+            pluginContext.InputParameters = new ParameterCollection();
+            pluginContext.InputParameters.Add("Target", target);
+            target["description"] = "{!EmailHeaderFooter:Test Footer1}";
+            target["directioncode"] = true;
+            var emailDescription = string.Empty;
+            var fakedPlugin = context.ExecutePluginWith<Crm.Plugins.Email.PreoperationUpdateEmailBody>(pluginContext);
+
+        }
 
         //[TestMethod]
         //public void EmailWithNoFooterHeaderNameDescription()
