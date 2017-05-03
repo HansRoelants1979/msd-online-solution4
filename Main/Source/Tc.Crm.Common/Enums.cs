@@ -31,4 +31,11 @@ namespace Tc.Crm.Common
         Active = 0,
         Inactive = 1
     }
+
+    public enum ResortTeamRequestType
+    {
+        BookingRequest = 0,
+        CustomerRequest = 1,
+        Both=2
+    }
 }
