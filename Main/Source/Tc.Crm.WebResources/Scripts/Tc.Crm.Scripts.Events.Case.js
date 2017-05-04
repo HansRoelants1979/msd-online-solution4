@@ -214,7 +214,8 @@ Tc.Crm.Scripts.Events.Case = (function () {
                             Xrm.Page.getControl("tc_istheholidaystoppingshorterthanplanned").getAttribute().getValue() != null &&
                             Xrm.Page.getControl("tc_3rdpartyresponserequired").getAttribute().getValue() != null &&
                             Xrm.Page.getControl("tc_preferredmethodofcommunication").getAttribute().getValue() != null &&
-                            Xrm.Page.getControl("caseorigincode").getAttribute().getValue() != null
+                            Xrm.Page.getControl("caseorigincode").getAttribute().getValue() != null &&
+                            Xrm.Page.getControl("description").getAttribute().getValue() != null
                             ) {
                             Xrm.Page.getControl("tc_mandatoryconditionsmet").getAttribute().setValue(true);
                             Xrm.Page.data.entity.save();
@@ -238,9 +239,10 @@ Tc.Crm.Scripts.Events.Case = (function () {
                             Xrm.Page.getControl("tc_brandid").getAttribute().getValue() != null &&
                             Xrm.Page.getControl("tc_destinationid").getAttribute().getValue() != null &&
                             Xrm.Page.getControl("tc_locationid").getAttribute().getValue() != null &&
-                            Xrm.Page.getControl("tc_gateway").getAttribute().getValue() != null
+                            Xrm.Page.getControl("tc_gateway").getAttribute().getValue() != null &&
+                            Xrm.Page.getControl("description").getAttribute().getValue() != null &&
+                            Xrm.Page.getControl("tc_departuredate").getAttribute().getValue() != null
                             ) {
-
                             Xrm.Page.getControl("tc_mandatoryconditionsmet").getAttribute().setValue(true);
                             Xrm.Page.data.entity.save();
                         }
