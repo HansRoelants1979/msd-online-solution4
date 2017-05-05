@@ -16,6 +16,7 @@ namespace Tc.Crm.Service
         {
             // Web API configuration and services
             var container = new UnityContainer();
+            container.RegisterType<IJwtTokenService, JwtTokenService>();
             container.RegisterType<IBookingService, BookingService>();
             container.RegisterType<ISurveyService, SurveyService>();
             container.RegisterType<ICrmService, CrmService>(new ContainerControlledLifetimeManager());

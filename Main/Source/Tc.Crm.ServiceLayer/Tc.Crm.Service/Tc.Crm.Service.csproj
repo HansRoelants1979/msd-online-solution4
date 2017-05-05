@@ -211,6 +211,7 @@
     <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\CacheController.cs" />
     <Compile Include="Controllers\SurveyController.cs" />
+    <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Filters\ApiAuthenticationFilter.cs" />
     <Compile Include="Filters\BasicAuthenticationIdentity.cs" />
     <Compile Include="Filters\GenericAuthenticationFilter.cs" />
@@ -239,6 +240,7 @@
     <Compile Include="Models\SourceMarket.cs" />
     <Compile Include="Models\Survey.cs" />
     <Compile Include="Models\SurveyReturnResponse.cs" />
+    <Compile Include="Models\Token.cs" />
     <Compile Include="Models\TourOperator.cs" />
     <Compile Include="Models\UpdateResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -250,8 +252,10 @@
     <Compile Include="Services\IConfigurationService.cs" />
     <Compile Include="Services\ICrmService.cs" />
     <Compile Include="Services\ISurveyService.cs" />
+    <Compile Include="Services\IJwtTokenService.cs" />
     <Compile Include="Services\JsonWebTokenHelper.cs" />
     <Compile Include="Services\SurveyService.cs" />
+    <Compile Include="Services\JwtTokenService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
