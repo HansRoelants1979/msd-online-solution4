@@ -36,8 +36,8 @@ namespace Tc.Crm.Service.Controllers
             this.hotelBucket = hotelBucket;
         }
 
-        [Route("api/v1/booking/cache/refresh")]
-        [Route("api/booking/cache/refresh")]
+        [Route("api/v1/cache/refresh")]
+        [Route("api/cache/refresh")]
         [HttpPost]
         public HttpResponseMessage Refresh(string[] keys)
         {
