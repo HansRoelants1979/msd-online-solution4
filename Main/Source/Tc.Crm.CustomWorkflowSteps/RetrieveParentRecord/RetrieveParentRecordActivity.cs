@@ -84,9 +84,7 @@ namespace Tc.Crm.CustomWorkflowSteps
 
         //entity reference - string
         //optionset - string
-
-
-
+        
         [Output("EntityReference OfficeLocation")]
         [ReferenceTarget("tc_locationoffice")]
         public OutArgument<EntityReference> OfficeLocation { get; set; }

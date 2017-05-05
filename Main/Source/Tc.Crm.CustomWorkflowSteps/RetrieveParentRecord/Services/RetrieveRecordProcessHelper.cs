@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 namespace Tc.Crm.CustomWorkflowSteps.RetrieveParentRecord.Services
 {
-    class RetrieveRecordProcessHelper
+    public static class RetrieveRecordProcessHelper
     {
         public static EntityReference RetrieveParentRecord(string expression, IOrganizationService service, IWorkflowContext context,ITracingService trace)
         {
