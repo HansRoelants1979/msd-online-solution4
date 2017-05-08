@@ -27,7 +27,7 @@ namespace Tc.Crm.Service.Client.Console
         {
             try
             {
-                System.Console.WriteLine("Enter 1 to process Booking OR 2 to process survey");
+                System.Console.WriteLine("Enter 1 to process Booking OR 2 to process survey OR 3 to cache.");
 
                 var option = System.Console.ReadLine();
                 if (option == "1")
@@ -38,6 +38,10 @@ namespace Tc.Crm.Service.Client.Console
                 {
                     ProcessSurvey();
                 }
+                else if(option == "3")
+                {
+                    Cache();
+                }
             }
             catch (Exception ex)
             {
@@ -46,7 +50,67 @@ namespace Tc.Crm.Service.Client.Console
             }
             System.Console.ReadLine();
         }
+        private static void Cache()
+        {
 
+            System.Console.WriteLine("Processing Booking.");
+
+
+            while (true)
+            {
+                System.Console.WriteLine("Reading the Json data");
+                var name = "BRAND";
+               
+                var data = $"[\"{name.ToUpper()}\"]";
+                var api = "api/cache/refresh";
+
+                //create the token
+                var token = CreateJWTToken();
+                var pl = new Payload
+                {
+                    Bucket = "BRAND",
+                    JWTToken = token
+                };
+                data = JsonConvert.SerializeObject(pl);
+                //Call
+                HttpClient cons = new HttpClient();
+
+                cons.BaseAddress = new Uri(GetUrl());
+
+                cons.DefaultRequestHeaders.Accept.Clear();
+                cons.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                Task<HttpResponseMessage> t = cons.PostAsync(api, new StringContent(data, Encoding.UTF8, "application/json"));
+
+                var response = t.Result;
+
+                Task<string> task = response.Content.ReadAsStringAsync();
+                var content = task.Result;
+
+                System.Console.WriteLine("Response Code: {0}", response.StatusCode.GetHashCode());
+                if (response.StatusCode == HttpStatusCode.Created)
+                    System.Console.WriteLine("Booking has been created with GUID::{0}", content);
+                else if (response.StatusCode == HttpStatusCode.NoContent)
+                    System.Console.WriteLine("Booking has been updated.");
+                else if (response.StatusCode == HttpStatusCode.BadRequest)
+                    System.Console.WriteLine("Bad Request.");
+                else if (response.StatusCode == HttpStatusCode.InternalServerError)
+                    System.Console.WriteLine("Internal Server Error.");
+                else if (response.StatusCode == HttpStatusCode.Forbidden)
+                    System.Console.WriteLine("Forbidden.");
+
+                if (string.IsNullOrWhiteSpace(content))
+                    System.Console.WriteLine("No content.");
+                else
+                    System.Console.WriteLine("Content:{0}", content);
+
+                System.Console.Write("Do one more test(y/n):");
+                var ans = System.Console.ReadLine();
+                if (ans == "n") break;
+
+            }
+
+
+        }
         private static void ProcessSurvey()
         {
 
@@ -160,9 +224,6 @@ namespace Tc.Crm.Service.Client.Console
         {
             var payload = new Dictionary<string, object>()
             {
-                {"iss", "TC"},
-                {"aud", "CRM"},
-                {"sub", "anonymous"},
                 {"iat", GetIssuedAtTime().ToString()},
                 {"nbf", GetNotBeforeTime().ToString()},
                 {"exp", GetExpiry().ToString()},
