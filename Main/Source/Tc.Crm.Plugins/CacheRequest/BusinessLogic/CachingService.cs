@@ -56,8 +56,8 @@ namespace Tc.Crm.Plugins.CacheRequest.BusinessLogic
             trace.Trace("Start - SendCacheRequest");
             if (!IsContextValidForExecute(context, trace)) return;
             var cachingServiceParameters = GetCachingServiceParameters(trace, service);
-            var token = CreateJWTToken(cachingServiceParameters, trace);
-            var requestData = GetRequestDataFrom(context, trace);
+            var token = CreateJWTToken(cachingServiceParameters, context, trace, service);
+            var requestData = GetRequestDataFrom(token, context, trace);
             SendRequest(requestData, token, cachingServiceParameters, trace, context, service);
             trace.Trace("End - SendCacheRequest");
         }
@@ -88,7 +88,6 @@ namespace Tc.Crm.Plugins.CacheRequest.BusinessLogic
                 client.BaseAddress = new Uri(url);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 Task<HttpResponseMessage> t = client.PostAsync(api, new StringContent(requestData, Encoding.UTF8, "application/json"));
 
                 var response = t.Result;
@@ -101,9 +100,10 @@ namespace Tc.Crm.Plugins.CacheRequest.BusinessLogic
                 }
                 else
                 {
-                    trace.Trace("Failed response from service.");
+                    trace.Trace(response.StatusCode.ToString());
                     HandleError(response, context, service);
                     UpdateStatus(false, context, service);
+                    throw new InvalidPluginExecutionException($"Fallied to refresh cache. Status code is {response.StatusCode.ToString()}");
                 }
             }
             catch (Exception ex)
@@ -111,6 +111,7 @@ namespace Tc.Crm.Plugins.CacheRequest.BusinessLogic
                 trace.Trace("Failure: unexpected error");
                 HandleError(ex, context, service);
                 UpdateStatus(false, context, service);
+                throw new InvalidPluginExecutionException("Fallied to refresh cache. Unexpected Error.");
             }
         }
 
@@ -143,7 +144,7 @@ namespace Tc.Crm.Plugins.CacheRequest.BusinessLogic
             }
             var errorNote = new Entity(Entities.Annotation);
             errorNote[Attributes.Annotation.Subject] = "Cache Job Failed";
-            errorNote[Attributes.Annotation.NoteText] = content;
+            errorNote[Attributes.Annotation.NoteText] = $"Status Code:{response.StatusCode.ToString()}:: Content:{content}";
             errorNote[Attributes.Annotation.ObjectId] = new EntityReference(Entities.CacheRequest, context.PrimaryEntityId);
             service.Create(errorNote);
         }
@@ -163,7 +164,7 @@ namespace Tc.Crm.Plugins.CacheRequest.BusinessLogic
             service.Create(errorNote);
         }
 
-        private string GetRequestDataFrom(IPluginExecutionContext context, ITracingService trace)
+        private string GetRequestDataFrom(string token, IPluginExecutionContext context, ITracingService trace)
         {
             if (context == null) throw new InvalidPluginExecutionException("context is null.");
             if (trace == null) throw new InvalidPluginExecutionException("trace is null.");
@@ -172,38 +173,30 @@ namespace Tc.Crm.Plugins.CacheRequest.BusinessLogic
             var target = context.InputParameters[InputParameters.Target] as Entity;
             var name = target[Attributes.CacheRequest.Name].ToString();
             trace.Trace("End - GetRequestDataFrom");
-            return $"[\"{name.ToUpper()}\"]";
-        }
 
-        private string SerializeJson(Token token, ITracingService trace)
-        {
-            if (trace == null) throw new InvalidPluginExecutionException("trace is null.");
-            if (token == null) throw new InvalidPluginExecutionException("token is null;");
-            trace.Trace("Processing Serialization of BookingResponse - start");
-            using (var memoryStream = new MemoryStream())
+            var payload = new Payload
             {
-                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Token));
-                serializer.WriteObject(memoryStream, token);
-                byte[] json = memoryStream.ToArray();
-                trace.Trace("Processing Serialization of BookingResponse - end");
-                return Encoding.UTF8.GetString(json, 0, json.Length);
-            }
+                Bucket = name.ToUpper(),
+                JWTToken = token
+            };
+
+            return JsonHelper<Payload>.SerializeJson(payload);
         }
 
-        private string CreateJWTToken(Dictionary<string, string> cachingServiceParameters, ITracingService trace)
+        private string CreateJWTToken(Dictionary<string, string> cachingServiceParameters, IPluginExecutionContext context, ITracingService trace, IOrganizationService service)
         {
-            
+
             if (cachingServiceParameters == null) throw new InvalidPluginExecutionException("caching parameters is null.");
             if (trace == null) throw new InvalidPluginExecutionException("trace is null.");
             trace.Trace("Start - CreateJWTToken");
 
             Token token = new Model.Token();
-            token.IssuedAtTime = GetIssuedAtTime(cachingServiceParameters,trace).ToString();
-            token.NotBeforeTime = GetNotBeforeTime(cachingServiceParameters,trace).ToString();
-            token.Expiry = GetExpiry(cachingServiceParameters,trace).ToString();
+            token.IssuedAtTime = GetIssuedAtTime(cachingServiceParameters, trace).ToString();
+            token.NotBeforeTime = GetNotBeforeTime(cachingServiceParameters, trace).ToString();
+            token.Expiry = GetExpiry(cachingServiceParameters, trace).ToString();
             token.PrivateKey = cachingServiceParameters[CachingParameter.PrivateKey];
 
-            var requestData = SerializeJson(token, trace);
+            var requestData = JsonHelper<Token>.SerializeJson(token);
 
             var url = cachingServiceParameters[CachingParameter.ServiceUrl];
             var api = cachingServiceParameters[CachingParameter.TokenApi]; ;
@@ -223,7 +216,12 @@ namespace Tc.Crm.Plugins.CacheRequest.BusinessLogic
                     trace.Trace("Success: Token Api");
                     Task<string> task = response.Content.ReadAsStringAsync();
                     var content = task.Result;
-                    return content;
+                    if (string.IsNullOrWhiteSpace(content))
+                    {
+                        HandleError(response, context, service);
+                        throw new InvalidPluginExecutionException("token retrieved is null.");
+                    }
+                    return content.Trim('"');
                 }
                 throw new InvalidPluginExecutionException("Unable to retrieve token");
             }
@@ -234,7 +232,7 @@ namespace Tc.Crm.Plugins.CacheRequest.BusinessLogic
             }
         }
 
-        private double GetExpiry(Dictionary<string, string> cachingServiceParameters,ITracingService trace)
+        private double GetExpiry(Dictionary<string, string> cachingServiceParameters, ITracingService trace)
         {
             if (cachingServiceParameters == null) throw new InvalidPluginExecutionException("caching parameters is null.");
 
@@ -253,7 +251,7 @@ namespace Tc.Crm.Plugins.CacheRequest.BusinessLogic
             }
         }
 
-        private double GetIssuedAtTime(Dictionary<string, string> cachingServiceParameters,ITracingService trace)
+        private double GetIssuedAtTime(Dictionary<string, string> cachingServiceParameters, ITracingService trace)
         {
             if (cachingServiceParameters == null) throw new InvalidPluginExecutionException("caching parameters is null.");
 
@@ -272,7 +270,7 @@ namespace Tc.Crm.Plugins.CacheRequest.BusinessLogic
             }
         }
 
-        private double GetNotBeforeTime(Dictionary<string, string> cachingServiceParameters,ITracingService trace)
+        private double GetNotBeforeTime(Dictionary<string, string> cachingServiceParameters, ITracingService trace)
         {
             if (cachingServiceParameters == null) throw new InvalidPluginExecutionException("caching parameters is null.");
             if (!cachingServiceParameters.ContainsKey(CachingParameter.NotBeforeTimeFromNow))
