@@ -29,15 +29,15 @@ namespace Tc.Crm.Service.Services.Tests
             helper = new JsonWebTokenHelper(configurationService);
         }
 
-        [TestMethod()]
-        public void RequestObjectIsNull()
-        {
+        //[TestMethod()]
+        //public void RequestObjectIsNull()
+        //{
 
-            var tokenRequest = helper.GetRequestObject(null);
-            Assert.IsNotNull(tokenRequest.Errors);
-            Assert.AreEqual(2, tokenRequest.Errors.Count);
-            Assert.AreEqual(Constants.Messages.JsonWebTokenParserError, tokenRequest.Errors[1].Message);
-        }
+        //    var tokenRequest = helper.GetRequestObject(null);
+        //    Assert.IsNotNull(tokenRequest.Errors);
+        //    Assert.AreEqual(2, tokenRequest.Errors.Count);
+        //    Assert.AreEqual(Constants.Messages.JsonWebTokenParserError, tokenRequest.Errors[1].Message);
+        //}
 
         [TestMethod()]
         public void TokenNotSeparatedBy3Parts()

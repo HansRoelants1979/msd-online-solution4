@@ -12,6 +12,21 @@ namespace Tc.Crm.ServiceTests
     public class TestConfigurationService : IConfigurationService
     {
         public bool CorrectSignaure;
+
+        public string GetCachingPublicKey()
+        {
+            if (CorrectSignaure)
+            {
+                var fileName = ConfigurationManager.AppSettings["privateKeyFileName"];
+                return File.ReadAllText(fileName);
+            }
+            else
+            {
+                var fileName = ConfigurationManager.AppSettings["privateKeyFileNameWrong"];
+                return File.ReadAllText(fileName);
+            }
+        }
+
         public string GetIssuedAtTimeExpiryInSeconds()
         {
             return ConfigurationManager.AppSettings[Service.Constants.Configuration.AppSettings.IssuedAtTimeExpiryInSeconds];
