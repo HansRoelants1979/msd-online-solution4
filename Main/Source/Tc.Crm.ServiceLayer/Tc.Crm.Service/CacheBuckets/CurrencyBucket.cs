@@ -12,7 +12,7 @@ namespace Tc.Crm.Service.CacheBuckets
         public CurrencyBucket(ICrmService crmService)
         {
             this.crmService = crmService;
-            FillBucket();
+            //FillBucket();
         }
 
         public Dictionary<string, string> Items { get; set; }

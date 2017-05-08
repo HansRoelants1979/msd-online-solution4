@@ -1,67 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Tc.Crm.Service.CacheBuckets;
+using Tc.Crm.Service.Models;
+using Tc.Crm.Service.Services;
 
 namespace Tc.Crm.Service.Controllers
 {
     public class CacheController : ApiController
     {
-        BrandBucket brandBucket;
-        CountryBucket countryBucket;
-        CurrencyBucket currencyBucket;
-        GatewayBucket gatewayBucket;
-        SourceMarketBucket sourceMarketBucket;
-        TourOperatorBucket tourOperatorBucket;
-        HotelBucket hotelBucket;
+        ICachingService cachingService;
+        IConfigurationService configurationService;
 
-        public CacheController(BrandBucket brandBucket
-                                , CountryBucket countryBucket
-                                , CurrencyBucket currencyBucket
-                                , GatewayBucket gatewayBucket
-                                , SourceMarketBucket sourceMarketBucket
-                                , TourOperatorBucket tourOperatorBucket
-                                , HotelBucket hotelBucket)
+        public CacheController(ICachingService cachingService,IConfigurationService configurationService)
         {
-            this.brandBucket = brandBucket;
-            this.countryBucket = countryBucket;
-            this.currencyBucket = currencyBucket;
-            this.gatewayBucket = gatewayBucket;
-            this.sourceMarketBucket = sourceMarketBucket;
-            this.tourOperatorBucket = tourOperatorBucket;
-            this.hotelBucket = hotelBucket;
+            this.cachingService = cachingService;
+            this.configurationService = configurationService;
         }
 
         [Route("api/v1/cache/refresh")]
         [Route("api/cache/refresh")]
         [HttpPost]
-        public HttpResponseMessage Refresh(string[] keys)
+        public HttpResponseMessage Refresh(Payload payload)
         {
-            if(keys == null)
+            if(payload == null)
                 return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            Trace.TraceInformation($"{payload.Bucket},{payload.JWTToken}");
+            HttpResponseMessage response = ValidateMessage(payload);
+            if (response != null) return response;
+
             try
             {
-                foreach (var key in keys)
-                {
-                    if (key.Equals("BRAND", StringComparison.OrdinalIgnoreCase))
-                        this.brandBucket.FillBucket();
-                    else if (key.Equals("COUNTRY", StringComparison.OrdinalIgnoreCase))
-                        this.countryBucket.FillBucket();
-                    else if (key.Equals("CURRENCY", StringComparison.OrdinalIgnoreCase))
-                        this.currencyBucket.FillBucket();
-                    else if (key.Equals("GATEWAY", StringComparison.OrdinalIgnoreCase))
-                        this.gatewayBucket.FillBucket();
-                    else if (key.Equals("SOURCEMARKET", StringComparison.OrdinalIgnoreCase))
-                        this.sourceMarketBucket.FillBucket();
-                    else if (key.Equals("TOUROPERATOR", StringComparison.OrdinalIgnoreCase))
-                        this.tourOperatorBucket.FillBucket();
-                    else if (key.Equals("HOTEL", StringComparison.OrdinalIgnoreCase))
-                        this.hotelBucket.FillBucket();
-                }
+                if(string.IsNullOrWhiteSpace(payload.Bucket))
+                    return new HttpResponseMessage(HttpStatusCode.BadRequest);
+                cachingService.Cache(payload.Bucket);
 
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
@@ -71,6 +44,44 @@ namespace Tc.Crm.Service.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
+        }
+
+        private HttpResponseMessage ValidateMessage(Payload payload)
+        {
+            JsonWebTokenHelper helper = new JsonWebTokenHelper(this.configurationService);
+            helper.ContextApi = Api.Caching;
+            var request = helper.GetRequestObject(payload);
+            if (request.Errors != null && request.Errors.Count > 0)
+            {
+                Trace.TraceWarning("Bad Request Header: Error while parsing the request object");
+                return new HttpResponseMessage(System.Net.HttpStatusCode.Unauthorized)
+                {
+                    ReasonPhrase = Constants.Messages.JsonWebTokenParserError
+                };
+            }
+            //check token validation flags
+            if (!request.HeaderAlgorithmValid
+                || !request.HeaderTypeValid
+                || !request.IssuedAtTimeValid
+                || !request.NotBeforetimeValid
+                || !request.SignatureValid
+                || !request.ExpiryValid)
+            {
+                Trace.TraceWarning("Bad Request: One or more information is missing in the token or signature didn't match.");
+                Trace.TraceWarning("Type:{0},Algorithm:{1},IatValid:{2},NbfValid:{3},SignValid:{4},Expiry:{5}"
+                                     , request.HeaderTypeValid
+                                     , request.HeaderAlgorithmValid
+                                     , request.IssuedAtTimeValid
+                                     , request.NotBeforetimeValid
+                                     , request.SignatureValid
+                                     , request.ExpiryValid);
+                return new HttpResponseMessage(System.Net.HttpStatusCode.Forbidden)
+                {
+                    ReasonPhrase = Constants.Messages.JsonWebTokenExpiredOrNoMatch
+                };
+
+            }
+            return null;
         }
     }
 }

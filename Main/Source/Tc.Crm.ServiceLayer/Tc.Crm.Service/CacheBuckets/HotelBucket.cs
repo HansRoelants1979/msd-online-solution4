@@ -13,7 +13,7 @@ namespace Tc.Crm.Service.CacheBuckets
         public HotelBucket(ICrmService crmService)
         {
             this.crmService = crmService;
-            FillBucket();
+            //FillBucket();
         }
 
         public Dictionary<string, Hotel> Items { get; set; }

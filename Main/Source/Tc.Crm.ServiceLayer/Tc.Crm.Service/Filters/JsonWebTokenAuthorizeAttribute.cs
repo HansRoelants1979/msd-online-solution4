@@ -16,7 +16,10 @@ namespace Tc.Crm.Service.Filters
         {
             //guard clause
             if (actionContext == null) throw new ArgumentNullException(Constants.Parameters.ActionContext);
+            var api = GetApi(actionContext.Request.RequestUri.LocalPath);
             JsonWebTokenHelper helper = new JsonWebTokenHelper(new ConfigurationService());
+            helper.ContextApi = api;
+
             var request = helper.GetRequestObject(actionContext.Request);
             //presence of errors indicate bad request
             if (request.Errors != null && request.Errors.Count > 0)
@@ -50,6 +53,16 @@ namespace Tc.Crm.Service.Filters
                 };
                 return;
             }
+        }
+
+        private Api GetApi(string localPath)
+        {
+            if (localPath.Contains("cache"))
+                return Api.Caching;
+            else if (localPath.Contains("booking"))
+                return Api.Booking;
+            else
+                return Api.Survey;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Tc.Crm.Service.CacheBuckets
         public SourceMarketBucket(ICrmService crmService)
         {
             this.crmService = crmService;
-            FillBucket();
+            //FillBucket();
         }
 
         public Dictionary<string, SourceMarket> Items { get; set; }

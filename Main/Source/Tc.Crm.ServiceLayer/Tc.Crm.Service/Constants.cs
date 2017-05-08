@@ -101,6 +101,7 @@ namespace Tc.Crm.Service.Constants.Configuration
         public const string RedirectToHttps = "redirectToHttps";
         public const string IssuedAtTimeExpiryInSeconds = "issuedAtTimeExpiryInSeconds";
         public const string PublicKeyFileName = "publicKeyFileName";
+        public const string HclPublicKeyFileName = "hclPublicKeyFileName";
         public const string CrmUserName = "crmUserName";
         public const string CrmPassword = "crmPassword";
         public const string CrmOrgUniqueName = "crmOrgUniqueName";

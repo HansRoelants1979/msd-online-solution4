@@ -9,6 +9,7 @@ namespace Tc.Crm.Service.Services
     public interface IConfigurationService
     {
         string GetPublicKey();
+        string GetCachingPublicKey();
         string GetIssuedAtTimeExpiryInSeconds();
     }
 }

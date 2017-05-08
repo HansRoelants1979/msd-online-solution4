@@ -19,6 +19,7 @@ namespace Tc.Crm.Service
             container.RegisterType<IJwtTokenService, JwtTokenService>();
             container.RegisterType<IBookingService, BookingService>();
             container.RegisterType<ISurveyService, SurveyService>();
+            container.RegisterType<ICachingService, CachingService>();
             container.RegisterType<ICrmService, CrmService>(new ContainerControlledLifetimeManager());
             container.RegisterType<IBucket, BrandBucket>(new ContainerControlledLifetimeManager());
             container.RegisterType<IBucket, CountryBucket>(new ContainerControlledLifetimeManager());
@@ -27,6 +28,8 @@ namespace Tc.Crm.Service
             container.RegisterType<IBucket, TourOperatorBucket>(new ContainerControlledLifetimeManager());
             container.RegisterType<ISourceMarketBucket, SourceMarketBucket>(new ContainerControlledLifetimeManager());
             container.RegisterType<IHotelBucket, HotelBucket>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IConfigurationService, ConfigurationService>();
+
             config.DependencyResolver = new UnityResolver(container);
             
             // Web API routes

@@ -21,6 +21,8 @@ namespace Tc.Crm.Service.Services
         private readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
         private IConfigurationService configurationService;
 
+        public Api ContextApi { get; set; }
+
         public JsonWebTokenHelper(IConfigurationService configurationService)
         {
             this.configurationService = configurationService;
@@ -66,6 +68,40 @@ namespace Tc.Crm.Service.Services
             return jsonWebTokenRequest;
         }
 
+
+        public JsonWebTokenRequest GetRequestObject(Payload payload)
+        {
+            var jsonWebTokenRequest = new JsonWebTokenRequest();
+            try
+            {
+                if (payload == null || string.IsNullOrWhiteSpace(payload.JWTToken))
+                    throw new ArgumentNullException("request");
+
+                Trace.TraceInformation("requst is not null");
+                //parse json web token parts
+                jsonWebTokenRequest.Token = payload.JWTToken;
+                Trace.TraceInformation("token: {0}", jsonWebTokenRequest.Token);
+                jsonWebTokenRequest.Header = DecodeHeaderToObject<JsonWebTokenHeader>(jsonWebTokenRequest.Token);
+                Trace.TraceInformation("algo: {0},type:{1}", jsonWebTokenRequest.Header.Algorithm, jsonWebTokenRequest.Header.TokenType);
+                jsonWebTokenRequest.Payload = DecodePayloadToObject<JsonWebTokenPayload>(jsonWebTokenRequest.Token);
+                Trace.TraceInformation("iat: {0},nbf:{1},exp:{2}", jsonWebTokenRequest.Payload.IssuedAtTime, jsonWebTokenRequest.Payload.NotBefore, jsonWebTokenRequest.Payload.Expiry);
+
+
+                //validate the parts
+                ValidateHeader(jsonWebTokenRequest);
+                ValidatePayload(jsonWebTokenRequest);
+                ValidateSignature(jsonWebTokenRequest);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError("Unexpected error in GetRequestObject::Message:{0}||Trace:{1}", ex.Message, ex.StackTrace);
+                jsonWebTokenRequest.Errors.Add(new JsonWebTokenRequestError(ex.Message, ex.StackTrace));
+                jsonWebTokenRequest.Errors.Add(new JsonWebTokenRequestError(Constants.Messages.JsonWebTokenParserError));
+            }
+
+            return jsonWebTokenRequest;
+        }
+
         /// <summary>
         /// Validates the signature
         /// </summary>
@@ -85,7 +121,11 @@ namespace Tc.Crm.Service.Services
 
                 using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
                 {
-                    var publicKeyXml = configurationService.GetPublicKey();
+                    var publicKeyXml = string.Empty;
+                    if(ContextApi == Api.Caching)
+                        publicKeyXml = configurationService.GetCachingPublicKey();
+                    else
+                        publicKeyXml  = configurationService.GetPublicKey();
                     rsa.FromXmlString(publicKeyXml);
 
                     using (SHA256 sha256 = SHA256.Create())
@@ -124,9 +164,19 @@ namespace Tc.Crm.Service.Services
             //guard clause
             if (request == null) throw new ArgumentNullException(Constants.Parameters.Request);
             if (request.Headers == null) throw new ArgumentNullException(Constants.Parameters.RequestHeaders);
-            if (request.Headers.Authorization == null) throw new ArgumentNullException(Constants.Parameters.RequestHeadersAuthorization);
 
-            return request.Headers.Authorization.Parameter;
+            if (this.ContextApi == Api.Caching)
+            {
+                if (!request.Headers.Contains("JWT")) throw new ArgumentNullException(Constants.Parameters.RequestHeadersAuthorization);
+                IEnumerable<string> headerValues = request.Headers.GetValues("JWT");
+                return headerValues.FirstOrDefault();
+            }
+            else
+            {
+                if (request.Headers.Authorization == null) throw new ArgumentNullException(Constants.Parameters.RequestHeadersAuthorization);
+                return request.Headers.Authorization.Parameter;
+            }
+            
         }
 
         /// <summary>
@@ -311,6 +361,7 @@ namespace Tc.Crm.Service.Services
             }
 
             var header = parts[0];
+            Trace.TraceInformation($"header:{header}");
             var headerJson = Encoding.UTF8.GetString(JsonWebToken.Base64UrlDecode(header));
 
             return JsonConvert.DeserializeObject<T>(headerJson);
