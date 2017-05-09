@@ -17,7 +17,9 @@ namespace Tc.Crm.Plugins.CacheRequest
             IPluginExecutionContext context = (IPluginExecutionContext)serviceProvider.GetService(typeof(IPluginExecutionContext));
             IOrganizationServiceFactory factory = (IOrganizationServiceFactory)serviceProvider.GetService(typeof(IOrganizationServiceFactory));
             IOrganizationService service = factory.CreateOrganizationService(context.UserId);
-            var cachingService = new CachingService();
+            ICachingApiService cachingApiService = new CachingApiService();
+
+            var cachingService = new CachingService(cachingApiService);
             try
             {
                 cachingService.SendCacheRequest(context, trace, service);
