@@ -35,7 +35,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ExecutingUserInDepartment
                 {
                     SecurityRoleName = SecurityRoleName.ToLower();
                 }
-                var UserId = context.UserId;
+                var UserId = context.InitiatingUserId;
 
                 if (UserId != Guid.Empty)
                 {
