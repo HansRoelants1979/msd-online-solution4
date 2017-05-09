@@ -1,13 +1,13 @@
-﻿using Microsoft.Xrm.Sdk;
+﻿using JWT;
+using JWT.Algorithms;
+using JWT.Serializers;
+using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 using Tc.Crm.Plugins.CacheRequest.Model;
@@ -49,36 +49,38 @@ namespace Tc.Crm.Plugins.CacheRequest.BusinessLogic
 
         public void SendCacheRequest(IPluginExecutionContext context, ITracingService trace, IOrganizationService service)
         {
-            if (context == null) throw new InvalidPluginExecutionException("context is null.");
-            if (trace == null) throw new InvalidPluginExecutionException("trace is null.");
-            if (service == null) throw new InvalidPluginExecutionException("organization service is null.");
+            if (service == null) throw new InvalidPluginExecutionException(ValidationMessages.OrganizationServiceIsNull);
+            if (context == null) throw new InvalidPluginExecutionException(ValidationMessages.ContextIsNull);
+            if (trace == null) throw new InvalidPluginExecutionException(ValidationMessages.TraceIsNull);
 
             trace.Trace("Start - SendCacheRequest");
-            if (!IsContextValidForExecute(context, trace)) return;
+            if (!IsContextValidForExecute(context, trace)) throw new InvalidPluginExecutionException("Either name provided in cache request is invalid or this plugin has fired out of context.");
             var cachingServiceParameters = GetCachingServiceParameters(trace, service);
-            var token = CreateJWTToken(cachingServiceParameters, context, trace, service);
+            var token = CreateJWTToken(cachingServiceParameters, trace, service);
             var requestData = GetRequestDataFrom(token, context, trace);
-            SendRequest(requestData, token, cachingServiceParameters, trace, context, service);
+            SendRequest(requestData, cachingServiceParameters, trace, context, service);
             trace.Trace("End - SendCacheRequest");
         }
 
         private void SendRequest(string requestData
-                                , string token
                                 , Dictionary<string, string> cachingServiceParameters
                                 , ITracingService trace
                                 , IPluginExecutionContext context
                                 , IOrganizationService service)
         {
-            if (cachingServiceParameters == null) throw new InvalidPluginExecutionException("caching parameters is null.");
-            if (context == null) throw new InvalidPluginExecutionException("context is null.");
-            if (trace == null) throw new InvalidPluginExecutionException("trace is null.");
-            if (service == null) throw new InvalidPluginExecutionException("organization service is null.");
-            if (string.IsNullOrWhiteSpace(token)) throw new InvalidPluginExecutionException("token is null or empty");
-            if (string.IsNullOrWhiteSpace(requestData)) throw new InvalidPluginExecutionException("request data is null or empty");
-            if (!cachingServiceParameters.ContainsKey(CachingParameter.ServiceUrl))
-                throw new InvalidPluginExecutionException("Service Url has not been specified in configuration.");
-            if (!cachingServiceParameters.ContainsKey(CachingParameter.Api))
-                throw new InvalidPluginExecutionException("API has not been specified in configuration.");
+            if (service == null) throw new InvalidPluginExecutionException(ValidationMessages.OrganizationServiceIsNull);
+            if (context == null) throw new InvalidPluginExecutionException(ValidationMessages.ContextIsNull);
+            if (trace == null) throw new InvalidPluginExecutionException(ValidationMessages.TraceIsNull);
+            if (cachingServiceParameters == null) throw new InvalidPluginExecutionException(ValidationMessages.CachingParameterIsNull);
+
+            if (string.IsNullOrWhiteSpace(requestData)) throw new InvalidPluginExecutionException(ValidationMessages.RequestDataIsEmpty);
+
+            if (!cachingServiceParameters.ContainsKey(CachingParameter.ServiceUrl) || cachingServiceParameters[CachingParameter.ServiceUrl] == null)
+                throw new InvalidPluginExecutionException(ValidationMessages.CachingServiceUrlIsNullOrEmpty);
+
+            if (!cachingServiceParameters.ContainsKey(CachingParameter.Api) || cachingServiceParameters[CachingParameter.Api] == null)
+                throw new InvalidPluginExecutionException(ValidationMessages.CachingApiIsNullOrEmpty);
+
             trace.Trace("Start - SendRequest");
             try
             {
@@ -111,22 +113,22 @@ namespace Tc.Crm.Plugins.CacheRequest.BusinessLogic
                 trace.Trace("Failure: unexpected error");
                 HandleError(ex, context, service);
                 UpdateStatus(false, context, service);
-                throw new InvalidPluginExecutionException("Fallied to refresh cache. Unexpected Error.");
+                throw;
             }
         }
 
         public void UpdateStatus(bool success, IPluginExecutionContext context, IOrganizationService service)
         {
-            if (context == null) throw new InvalidPluginExecutionException("context is null.");
-            if (service == null) throw new InvalidPluginExecutionException("organization service is null.");
+            if (service == null) throw new InvalidPluginExecutionException(ValidationMessages.OrganizationServiceIsNull);
+            if (context == null) throw new InvalidPluginExecutionException(ValidationMessages.ContextIsNull);
 
             var cacheRequest = new Entity(Entities.CacheRequest);
             cacheRequest.Id = context.PrimaryEntityId;
-            cacheRequest[Attributes.CacheRequest.StateCode] = new OptionSetValue(1);
+            cacheRequest[Attributes.CacheRequest.StateCode] = new OptionSetValue(OptionSetValues.CacheRequest.StatecodeInactive);
             if (success)
-                cacheRequest[Attributes.CacheRequest.StatusCode] = new OptionSetValue(2);
+                cacheRequest[Attributes.CacheRequest.StatusCode] = new OptionSetValue(OptionSetValues.CacheRequest.StatuscodeSucceeded);
             else
-                cacheRequest[Attributes.CacheRequest.StatusCode] = new OptionSetValue(950000000);
+                cacheRequest[Attributes.CacheRequest.StatusCode] = new OptionSetValue(OptionSetValues.CacheRequest.StatuscodeFailed);
             service.Update(cacheRequest);
         }
 
@@ -149,25 +151,26 @@ namespace Tc.Crm.Plugins.CacheRequest.BusinessLogic
             service.Create(errorNote);
         }
 
-        public void HandleError(Exception ex, IPluginExecutionContext context, IOrganizationService service)
+        public void HandleError(Exception exception, IPluginExecutionContext context, IOrganizationService service)
         {
-            if (context == null) throw new InvalidPluginExecutionException("context is null.");
-            if (service == null) throw new InvalidPluginExecutionException("organization service is null.");
+            if (service == null) throw new InvalidPluginExecutionException(ValidationMessages.OrganizationServiceIsNull);
+            if (context == null) throw new InvalidPluginExecutionException(ValidationMessages.ContextIsNull);
 
             var errorNote = new Entity(Entities.Annotation);
-            errorNote[Attributes.Annotation.Subject] = $"Caching Job Failed";
-            if (ex == null)
-                errorNote[Attributes.Annotation.NoteText] = "Unexpected error has occurred.";
+            errorNote[Attributes.Annotation.Subject] = ValidationMessages.CachingErrorNoteSubject;
+            if (exception == null)
+                errorNote[Attributes.Annotation.NoteText] = ValidationMessages.UnexpectedError;
             else
-                errorNote[Attributes.Annotation.NoteText] = $"{ ex.Message} :: Stack Trace :{ex.StackTrace.ToString()}";
+                errorNote[Attributes.Annotation.NoteText] = $"{ exception.Message} :: Stack Trace :{exception.StackTrace.ToString()}";
             errorNote[Attributes.Annotation.ObjectId] = new EntityReference(Entities.CacheRequest, context.PrimaryEntityId);
             service.Create(errorNote);
         }
 
         private string GetRequestDataFrom(string token, IPluginExecutionContext context, ITracingService trace)
         {
-            if (context == null) throw new InvalidPluginExecutionException("context is null.");
-            if (trace == null) throw new InvalidPluginExecutionException("trace is null.");
+            if (trace == null) throw new InvalidPluginExecutionException(ValidationMessages.TraceIsNull);
+            if (context == null) throw new InvalidPluginExecutionException(ValidationMessages.ContextIsNull);
+            if (string.IsNullOrWhiteSpace(token)) throw new InvalidPluginExecutionException(ValidationMessages.TokenIsNull);
 
             trace.Trace("Start - GetRequestDataFrom");
             var target = context.InputParameters[InputParameters.Target] as Entity;
@@ -183,61 +186,40 @@ namespace Tc.Crm.Plugins.CacheRequest.BusinessLogic
             return JsonHelper<Payload>.SerializeJson(payload);
         }
 
-        private string CreateJWTToken(Dictionary<string, string> cachingServiceParameters, IPluginExecutionContext context, ITracingService trace, IOrganizationService service)
+        private string CreateJWTToken(Dictionary<string, string> cachingServiceParameters, ITracingService trace, IOrganizationService service)
         {
+            if (trace == null) throw new InvalidPluginExecutionException(ValidationMessages.TraceIsNull);
+            if (cachingServiceParameters == null) throw new InvalidPluginExecutionException(ValidationMessages.CachingParameterIsNull);
+            if (service == null) throw new InvalidPluginExecutionException(ValidationMessages.OrganizationServiceIsNull);
 
-            if (cachingServiceParameters == null) throw new InvalidPluginExecutionException("caching parameters is null.");
-            if (trace == null) throw new InvalidPluginExecutionException("trace is null.");
             trace.Trace("Start - CreateJWTToken");
 
-            Token token = new Model.Token();
-            token.IssuedAtTime = GetIssuedAtTime(cachingServiceParameters, trace).ToString();
-            token.NotBeforeTime = GetNotBeforeTime(cachingServiceParameters, trace).ToString();
-            token.Expiry = GetExpiry(cachingServiceParameters, trace).ToString();
-            token.PrivateKey = cachingServiceParameters[CachingParameter.PrivateKey];
+            var secretKey = cachingServiceParameters[CachingParameter.SecretKey];
+            if (string.IsNullOrWhiteSpace(secretKey))
+                throw new InvalidPluginExecutionException(ValidationMessages.CachingSecretKeyIsNullOrEmpty);
 
-            var requestData = JsonHelper<Token>.SerializeJson(token);
-
-            var url = cachingServiceParameters[CachingParameter.ServiceUrl];
-            var api = cachingServiceParameters[CachingParameter.TokenApi]; ;
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(url);
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-            Task<HttpResponseMessage> t = client.PostAsync(api, new StringContent(requestData, Encoding.UTF8, "application/json"));
-
-            try
+            var payload = new Dictionary<string, object>()
             {
+                {JwtPayloadParameters.IssuedAtTime, GetIssuedAtTime(cachingServiceParameters,trace).ToString()},
+                {JwtPayloadParameters.NotBeforeTime, GetNotBeforeTime(cachingServiceParameters,trace).ToString()},
+                {JwtPayloadParameters.Expiry, GetExpiry(cachingServiceParameters,trace).ToString()}
+            };
 
-                var response = t.Result;
+            IJwtAlgorithm algorithm = new HMACSHA256Algorithm();
+            IJsonSerializer serializer = new JsonNetSerializer();
+            IBase64UrlEncoder urlEncoder = new JwtBase64UrlEncoder();
+            IJwtEncoder encoder = new JwtEncoder(algorithm, serializer, urlEncoder);
 
-                if (response.StatusCode == HttpStatusCode.OK)
-                {
-                    trace.Trace("Success: Token Api");
-                    Task<string> task = response.Content.ReadAsStringAsync();
-                    var content = task.Result;
-                    if (string.IsNullOrWhiteSpace(content))
-                    {
-                        HandleError(response, context, service);
-                        throw new InvalidPluginExecutionException("token retrieved is null.");
-                    }
-                    return content.Trim('"');
-                }
-                throw new InvalidPluginExecutionException("Unable to retrieve token");
-            }
-            catch (Exception ex)
-            {
-                trace.Trace($"{ex.Message}::{ex.StackTrace.ToString()}");
-                throw new InvalidPluginExecutionException("Unable to retrieve token");
-            }
+            return encoder.Encode(payload, secretKey);
         }
 
         private double GetExpiry(Dictionary<string, string> cachingServiceParameters, ITracingService trace)
         {
-            if (cachingServiceParameters == null) throw new InvalidPluginExecutionException("caching parameters is null.");
+            if (trace == null) throw new InvalidPluginExecutionException(ValidationMessages.TraceIsNull);
+            if (cachingServiceParameters == null) throw new InvalidPluginExecutionException(ValidationMessages.CachingParameterIsNull);
 
             if (!cachingServiceParameters.ContainsKey(CachingParameter.ExpirySecondsFromNow))
-                throw new InvalidPluginExecutionException("ExpirySecondsFromNow has not been specified in configuration.");
+                throw new InvalidPluginExecutionException(ValidationMessages.ExpirySecondsFromNowNotSpecified);
 
             try
             {
@@ -247,16 +229,17 @@ namespace Tc.Crm.Plugins.CacheRequest.BusinessLogic
             catch (FormatException ex)
             {
                 trace.Trace($"{ex.Message}::{ex.StackTrace.ToString()}");
-                throw new InvalidPluginExecutionException("ExpirySecondsFromNow has an incorrect format.");
+                throw new InvalidPluginExecutionException(ValidationMessages.ExpirySecondsFromNowIncorrectFormat);
             }
         }
 
         private double GetIssuedAtTime(Dictionary<string, string> cachingServiceParameters, ITracingService trace)
         {
-            if (cachingServiceParameters == null) throw new InvalidPluginExecutionException("caching parameters is null.");
+            if (trace == null) throw new InvalidPluginExecutionException(ValidationMessages.TraceIsNull);
+            if (cachingServiceParameters == null) throw new InvalidPluginExecutionException(ValidationMessages.CachingParameterIsNull);
 
             if (!cachingServiceParameters.ContainsKey(CachingParameter.IssuedAtTimeFromNow))
-                throw new InvalidPluginExecutionException("IssuedAtTimeFromNow has not been specified in configuration.");
+                throw new InvalidPluginExecutionException(ValidationMessages.IssuedAtTimeFromNowNotSpecified);
 
             try
             {
@@ -266,15 +249,17 @@ namespace Tc.Crm.Plugins.CacheRequest.BusinessLogic
             catch (FormatException ex)
             {
                 trace.Trace($"{ex.Message}::{ex.StackTrace.ToString()}");
-                throw new InvalidPluginExecutionException("IssuedAtTimeFromNow has an incorrect format.");
+                throw new InvalidPluginExecutionException(ValidationMessages.IssuedAtTimeFromNowIncorrectFormat);
             }
         }
 
         private double GetNotBeforeTime(Dictionary<string, string> cachingServiceParameters, ITracingService trace)
         {
-            if (cachingServiceParameters == null) throw new InvalidPluginExecutionException("caching parameters is null.");
+            if (cachingServiceParameters == null) throw new InvalidPluginExecutionException(ValidationMessages.CachingParameterIsNull);
+            if (trace == null) throw new InvalidPluginExecutionException(ValidationMessages.TraceIsNull);
+
             if (!cachingServiceParameters.ContainsKey(CachingParameter.NotBeforeTimeFromNow))
-                throw new InvalidPluginExecutionException("NotBeforeTimeFromNow has not been specified in configuration.");
+                throw new InvalidPluginExecutionException(ValidationMessages.IssuedAtTimeFromNowNotSpecified);
 
             try
             {
@@ -284,14 +269,14 @@ namespace Tc.Crm.Plugins.CacheRequest.BusinessLogic
             catch (FormatException ex)
             {
                 trace.Trace($"{ex.Message}::{ex.StackTrace.ToString()}");
-                throw new InvalidPluginExecutionException("NotBeforeTimeFromNow has an incorrect format.");
+                throw new InvalidPluginExecutionException(ValidationMessages.NotBeforeTimeFromNowIncorrectFormart);
             }
         }
 
         private Dictionary<string, string> GetCachingServiceParameters(ITracingService trace, IOrganizationService service)
         {
-            if (service == null) throw new InvalidPluginExecutionException("organization service is null.");
-            if (trace == null) throw new InvalidPluginExecutionException("trace is null.");
+            if (service == null) throw new InvalidPluginExecutionException(ValidationMessages.OrganizationServiceIsNull);
+            if (trace == null) throw new InvalidPluginExecutionException(ValidationMessages.TraceIsNull);
 
             trace.Trace("Start - GetCachingServiceParameters");
             var fetchXml = @"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>
@@ -308,8 +293,8 @@ namespace Tc.Crm.Plugins.CacheRequest.BusinessLogic
             var query = new FetchExpression(fetchXml);
             var response = service.RetrieveMultiple(query);
 
-            if (response == null) throw new InvalidPluginExecutionException("Configuration values for caching is missing.");
-            if (response.Entities == null || response.Entities.Count < 5) throw new InvalidPluginExecutionException("Configuration values for caching is missing.");
+            if (response == null) throw new InvalidPluginExecutionException(ValidationMessages.ConfigurationValuesForCachingInCrmMissing);
+            if (response.Entities == null || response.Entities.Count == 0) throw new InvalidPluginExecutionException(ValidationMessages.ConfigurationValuesForCachingInCrmMissing);
 
             var parameters = new Dictionary<string, string>();
             foreach (var e in response.Entities)
@@ -318,8 +303,9 @@ namespace Tc.Crm.Plugins.CacheRequest.BusinessLogic
                 var value = e.Contains(Attributes.ConfigurationKeys.Value) ? e[Attributes.ConfigurationKeys.Value].ToString() : null;
                 var longValue = e.Contains(Attributes.ConfigurationKeys.LongValue) ? e[Attributes.ConfigurationKeys.LongValue].ToString() : null;
                 trace.Trace($"{key}:{value}:{longValue}");
+
                 if (string.IsNullOrWhiteSpace(key) || (string.IsNullOrWhiteSpace(value) && string.IsNullOrWhiteSpace(longValue)))
-                    throw new InvalidPluginExecutionException("Issue while retrieving configuration records.");
+                    throw new InvalidPluginExecutionException(ValidationMessages.ConfigurationHasNoValueForKey);
 
                 if (!string.IsNullOrWhiteSpace(value))
                     parameters.Add(key, value);
@@ -330,11 +316,11 @@ namespace Tc.Crm.Plugins.CacheRequest.BusinessLogic
 
             if (!parameters.ContainsKey(CachingParameter.ServiceUrl) ||
                 !parameters.ContainsKey(CachingParameter.Api) ||
-                !parameters.ContainsKey(CachingParameter.PrivateKey) ||
+                !parameters.ContainsKey(CachingParameter.SecretKey) ||
                 !parameters.ContainsKey(CachingParameter.IssuedAtTimeFromNow) ||
                 !parameters.ContainsKey(CachingParameter.ExpirySecondsFromNow) ||
                 !parameters.ContainsKey(CachingParameter.NotBeforeTimeFromNow))
-                throw new InvalidPluginExecutionException("Issue while retrieving configuration records.");
+                throw new InvalidPluginExecutionException(ValidationMessages.CachingKeysMissingInCrm);
 
             trace.Trace("End - GetCachingServiceParameters");
             return parameters;

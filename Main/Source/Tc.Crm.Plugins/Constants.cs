@@ -4,6 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+namespace Tc.Crm.Plugins.OptionSetValues
+{
+    public static class CacheRequest
+    {
+        public const int StatecodeInactive = 1;
+        public const int StatuscodeSucceeded = 2;
+        public const int StatuscodeFailed = 950000000;
+    }
+
+}
 namespace Tc.Crm.Plugins.Attributes
 {
     public static class CacheRequest
@@ -55,18 +65,41 @@ namespace Tc.Crm.Plugins
 {
     public static class CachingParameter
     {
-        public const string PrivateKey = "Tc.Caching.PrivateKey";
+        public const string SecretKey = "Tc.Caching.SecretKey";
         public const string ServiceUrl = "Tc.Caching.ServiceUrl";
         public const string Api = "Tc.Caching.Api";
         public const string IssuedAtTimeFromNow = "Tc.Caching.Payload.IatSecondsFromNow";
         public const string NotBeforeTimeFromNow = "Tc.Caching.Payload.NbfSecondsFromNow";
         public const string ExpirySecondsFromNow = "Tc.Caching.Payload.ExpirySecondsFromNow";
-        public const string TokenApi = "Tc.Caching.Token.Api";
     }
     public static class General
     {
         public const string RoleTcIdBase = "Tc.Ids.Base";
         public const string RoleTcIdRep = "Tc.Ids.Rep";
+    }
+
+    public static class ValidationMessages{
+        public const string ContextIsNull = "Context is null.";
+        public const string TraceIsNull = "Trace is null.";
+        public const string OrganizationServiceIsNull = "Organization service is null.";
+        public const string ContextInvalidOrNameInvalid = "Either name provided in cache request is invalid or this plugin has fired out of context.";
+        public const string CachingParameterIsNull = "Caching parametrer is null.";
+        public const string ExpirySecondsFromNowNotSpecified = "Expiry seconds from now not specified in the configuration.";
+        public const string ExpirySecondsFromNowIncorrectFormat = "Expiry seconds from now has incorrect format.";
+        public const string IssuedAtTimeFromNowNotSpecified = "Issued at time has not been specified in the configuration.";
+        public const string IssuedAtTimeFromNowIncorrectFormat = "Issued at time from now has an incorrect format.";
+        public const string NotBeforeTimeFromNowNotSpecified = "Not before time from now has not been specified in the configuration.";
+        public const string NotBeforeTimeFromNowIncorrectFormart = "Not before time from now has an incorrect format.";
+        public const string ConfigurationValuesForCachingInCrmMissing = "Configuration values for caching is missing in CRM.";
+        public const string ConfigurationHasNoValueForKey = "Configuration has no value for a specific key.";
+        public const string CachingKeysMissingInCrm = "One or more caching keys are missing in the configuration entity in CRM.";
+        public const string CachingSecretKeyIsNullOrEmpty = "Caching secret key is null or empty.";
+        public const string TokenIsNull = "Token is null";
+        public const string CachingErrorNoteSubject = "Caching Job has Failed.";
+        public const string UnexpectedError = "An unexpected error has occurred.";
+        public const string CachingServiceUrlIsNullOrEmpty = "Caching service url is null or empty.";
+        public const string CachingApiIsNullOrEmpty = "Caching api is null or empty.";
+        public const string RequestDataIsEmpty = "Request data is null or empty.";
     }
 
     public static class Messages

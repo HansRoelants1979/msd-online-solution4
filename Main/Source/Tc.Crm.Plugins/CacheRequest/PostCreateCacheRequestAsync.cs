@@ -26,19 +26,19 @@ namespace Tc.Crm.Plugins.CacheRequest
             {
                 cachingService.HandleError(ex,context,service);
                 cachingService.UpdateStatus(false, context, service);
-                throw new InvalidPluginExecutionException(ex.ToString());
+                throw new InvalidPluginExecutionException($"Message:{ex.Message}:: Stack Trace:{ex.StackTrace.ToString()}");
             }
             catch (TimeoutException ex)
             {
                 cachingService.HandleError(ex, context, service);
                 cachingService.UpdateStatus(false, context, service);
-                throw new InvalidPluginExecutionException(ex.ToString());
+                throw new InvalidPluginExecutionException($"Message:{ex.Message}:: Stack Trace:{ex.StackTrace.ToString()}");
             }
             catch (Exception ex)
             {
                 cachingService.HandleError(ex, context, service);
                 cachingService.UpdateStatus(false, context, service);
-                throw new InvalidPluginExecutionException(ex.ToString());
+                throw new InvalidPluginExecutionException($"Message:{ex.Message}:: Stack Trace:{ex.StackTrace.ToString()}");
             }
         }
     }
