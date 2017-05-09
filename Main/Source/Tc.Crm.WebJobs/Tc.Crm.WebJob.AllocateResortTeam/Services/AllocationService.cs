@@ -117,11 +117,10 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
             return gateways;
         }
 
-        public ParentHotelTeam GetHotelTeams(EntityCollection bookingCollection)
+        public List<ParentHotelTeam> GetHotelTeams(EntityCollection bookingCollection)
         {
             if (bookingCollection == null || bookingCollection.Entities.Count == 0) return null;
-            var parentTeam = new List<Guid>();
-            var businessUnit = new List<Guid>();            
+            var parentHotelTeams = new List<ParentHotelTeam>();            
             var fieldOwner = AliasName.HotelAliasName + Attributes.Hotel.Owner;           
             for (int i = 0; i < bookingCollection.Entities.Count; i++)
             {
@@ -130,14 +129,12 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                 if (!booking.Attributes.Contains(fieldOwner) || booking.Attributes[fieldOwner] == null) continue;
                 var fieldSourceMarket = GetBusinessUnitField(booking);
                 if (string.IsNullOrWhiteSpace(fieldSourceMarket)) continue;
-                var owner = (EntityReference)((AliasedValue)booking[fieldOwner]).Value;
-                if (!parentTeam.Contains(owner.Id))
-                    parentTeam.Add(owner.Id);                     
+                var owner = (EntityReference)((AliasedValue)booking[fieldOwner]).Value;               
                 var bu = (EntityReference)((AliasedValue)booking[fieldSourceMarket]).Value;
-                if (!businessUnit.Contains(bu.Id))
-                    businessUnit.Add(bu.Id);
+                if (parentHotelTeams.Find(p => p.TeamId == owner.Id && p.BusinessUnitId == bu.Id) == null)
+                    parentHotelTeams.Add(new ParentHotelTeam() { TeamId = owner.Id, BusinessUnitId = bu.Id });
             }
-            return new ParentHotelTeam { BusinessUnit = businessUnit, Team = parentTeam };            
+            return parentHotelTeams;            
         }
 
         public string GetBusinessUnitField(Entity booking)
@@ -152,27 +149,21 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
             return fieldSourceMarket;
         }
 
-        public EntityCollection GetChildTeams(ParentHotelTeam parentHotelTeam)
+        public EntityCollection GetChildTeams(List<ParentHotelTeam> parentHotelTeams)
         {
-            if (parentHotelTeam == null) return null;
-            if (parentHotelTeam.BusinessUnit == null || parentHotelTeam.BusinessUnit.Count == 0) return null;
-            if (parentHotelTeam.Team == null || parentHotelTeam.Team.Count == 0) return null;
-            var parentHotelTeamCondition = GetLookupConditions(parentHotelTeam.Team);
-            var businessUnitCondition = GetLookupConditions(parentHotelTeam.BusinessUnit);
+            if (parentHotelTeams == null || parentHotelTeams.Count == 0) return null;         
+            var parentHotelTeamCondition = GetParentTeamCondition(parentHotelTeams);            
             var query = $@"<fetch output-format='xml - platform' distinct='false' version='1.0' mapping='logical'>
                             <entity name='team'>
                             <attribute name='name'/>
                             <attribute name='businessunitid'/>
                             <attribute name='teamid'/>
                             <attribute name='tc_hotelteamid'/>
-                            <filter type='and'>
-                                <condition attribute='tc_hotelteamid' operator='in'>              
-                                {parentHotelTeamCondition}
-                                </condition>
-                                <condition attribute='businessunitid' operator='in'>
-                                {businessUnitCondition}
-                                </condition>
-                            </filter>
+                             <filter type='and'>
+                              <filter type='or'>
+                                {parentHotelTeamCondition} 
+                              </filter>                              
+                             </filter>
                             </entity>
                             </fetch>";
            var childTeams = crmService.RetrieveMultipleRecordsFetchXml(query);
@@ -190,6 +181,22 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                 }
             }
             return lookupCondition.ToString();
+        }
+
+        public string GetParentTeamCondition(List<ParentHotelTeam> parentHotelTeams)
+        {
+            var parentTeamCondition = new StringBuilder();
+            if (parentHotelTeams != null && parentHotelTeams.Count > 0)
+            {
+                for (int i = 0; i < parentHotelTeams.Count; i++)
+                {
+                    parentTeamCondition.Append($@"<filter type='and'>
+                                                    <condition attribute='tc_hotelteamid' operator= 'eq'  value = '{parentHotelTeams[i].TeamId}' />
+                                                    <condition attribute='businessunitid' operator= 'eq'  value = '{parentHotelTeams[i].BusinessUnitId}' />
+                                                  </filter>");
+                }
+            }
+            return parentTeamCondition.ToString();
         }
 
         public List<ChildHotelTeam> PrepareChildTeam(EntityCollection childTeamCollection)

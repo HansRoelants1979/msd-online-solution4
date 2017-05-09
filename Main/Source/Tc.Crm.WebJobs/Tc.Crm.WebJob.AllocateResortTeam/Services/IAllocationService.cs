@@ -16,9 +16,11 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
         void ProcessBookingAllocations(IList<BookingAllocationResortTeamRequest> bookingAllocationResortTeamRequest);
         OwnerType GetOwnerType(EntityReference owner);
         Owner GetOwner(Entity entity, string attribute, bool isAliasedValue);
-        ParentHotelTeam GetHotelTeams(EntityCollection bookingCollection);
-        EntityCollection GetChildTeams(ParentHotelTeam parentHotelTeam);
+        List<ParentHotelTeam> GetHotelTeams(EntityCollection bookingCollection);
+        EntityCollection GetChildTeams(List<ParentHotelTeam> parentHotelTeams);
         string GetLookupConditions(IList<Guid> lookups);
         List<ChildHotelTeam> PrepareChildTeam(EntityCollection childTeams);
+        string GetParentTeamCondition(List<ParentHotelTeam> parentHotelTeams);
+        string GetBusinessUnitField(Entity booking);
     }
 }

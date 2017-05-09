@@ -23,5 +23,9 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
         bool IsBookingAllocated(BookingAllocationResponse bookingResponse);
         bool IsCustomerAllocated(BookingAllocationResponse bookingResponse);
         string AllocateToChildHotelTeam(BookingAllocationResponse bookingResponse, IList<BookingAllocationResortTeamRequest> bookingAllocationResortTeamRequest, bool differentBooking, bool sameBookingDifferentCustomer, bool bookingAllocated, bool customerAllocated);
+        BookingAllocationResortTeamRequest GetResortTeamRequest(BookingAllocationResponse bookingResponse);
+        BookingAllocationResortTeamRequest GetBookingResortTeamRequest(BookingAllocationResponse bookingResponse);
+        BookingAllocationResortTeamRequest GetCustomerResortTeamRequest(BookingAllocationResponse bookingResponse);
+
     }
 }

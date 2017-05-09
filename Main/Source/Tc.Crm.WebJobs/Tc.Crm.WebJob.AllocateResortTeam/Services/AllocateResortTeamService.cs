@@ -257,28 +257,43 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
 
             if (resortTeamRequestType == ResortTeamRequestType.Both)
             {
-                bookingAllocationResortTeamRequests.Add(new BookingAllocationResortTeamRequest()
-                {
-                    BookingResortTeamRequest = PrepareBookingResortTeamRequest(bookingResponse),
-                    CustomerResortTeamRequest = PrepareCustomerResortTeamRequest(bookingResponse)
-                });
+                bookingAllocationResortTeamRequests.Add(GetResortTeamRequest(bookingResponse));
             }
             else if (resortTeamRequestType == ResortTeamRequestType.BookingRequest)
             {
-                bookingAllocationResortTeamRequests.Add(new BookingAllocationResortTeamRequest()
-                {
-                    BookingResortTeamRequest = PrepareBookingResortTeamRequest(bookingResponse)
-                });
+                bookingAllocationResortTeamRequests.Add(GetBookingResortTeamRequest(bookingResponse));
             }
             else if (resortTeamRequestType == ResortTeamRequestType.CustomerRequest)
             {
-                bookingAllocationResortTeamRequests.Add(new BookingAllocationResortTeamRequest()
-                {
-                    CustomerResortTeamRequest = PrepareCustomerResortTeamRequest(bookingResponse)
-                });
+                bookingAllocationResortTeamRequests.Add(GetCustomerResortTeamRequest(bookingResponse));
             }
         }
-        
+
+        public BookingAllocationResortTeamRequest GetResortTeamRequest(BookingAllocationResponse bookingResponse)
+        {
+            return new BookingAllocationResortTeamRequest()
+            {
+                BookingResortTeamRequest = PrepareBookingResortTeamRequest(bookingResponse),
+                CustomerResortTeamRequest = PrepareCustomerResortTeamRequest(bookingResponse)
+            };
+        }
+
+        public BookingAllocationResortTeamRequest GetBookingResortTeamRequest(BookingAllocationResponse bookingResponse)
+        {
+            return new BookingAllocationResortTeamRequest()
+            {
+                BookingResortTeamRequest = PrepareBookingResortTeamRequest(bookingResponse)                
+            };
+        }
+
+        public BookingAllocationResortTeamRequest GetCustomerResortTeamRequest(BookingAllocationResponse bookingResponse)
+        {
+            return new BookingAllocationResortTeamRequest()
+            { 
+                CustomerResortTeamRequest = PrepareCustomerResortTeamRequest(bookingResponse)
+            };
+        }
+
         public CustomerResortTeamRequest PrepareCustomerResortTeamRequest(BookingAllocationResponse bookingResponse)
         {
             //logger.LogInformation("PrepareCustomerResortTeamRequest - start");
