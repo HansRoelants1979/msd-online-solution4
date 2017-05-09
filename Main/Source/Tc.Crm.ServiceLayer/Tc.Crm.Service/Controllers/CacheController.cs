@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Tc.Crm.Service.Filters;
 using Tc.Crm.Service.Models;
 using Tc.Crm.Service.Services;
 
@@ -21,6 +22,7 @@ namespace Tc.Crm.Service.Controllers
 
         [Route("api/v1/cache/refresh")]
         [Route("api/cache/refresh")]
+        [RequireHttps]
         [HttpPost]
         public HttpResponseMessage Refresh(Payload payload)
         {
@@ -49,7 +51,6 @@ namespace Tc.Crm.Service.Controllers
         private HttpResponseMessage ValidateMessage(Payload payload)
         {
             JsonWebTokenHelper helper = new JsonWebTokenHelper(this.configurationService);
-            helper.ContextApi = Api.Caching;
             var request = helper.GetRequestObject(payload);
             if (request.Errors != null && request.Errors.Count > 0)
             {

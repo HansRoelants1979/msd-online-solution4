@@ -6,12 +6,9 @@ using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
-using System.Web;
 using Tc.Crm.Service.Models;
 using System.Security.Cryptography;
 using System.Diagnostics;
-using System.IO;
-using System.Net;
 using System.Globalization;
 
 namespace Tc.Crm.Service.Services
@@ -20,8 +17,6 @@ namespace Tc.Crm.Service.Services
     {
         private readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
         private IConfigurationService configurationService;
-
-        public Api ContextApi { get; set; }
 
         public JsonWebTokenHelper(IConfigurationService configurationService)
         {
@@ -88,9 +83,9 @@ namespace Tc.Crm.Service.Services
 
 
                 //validate the parts
-                ValidateHeader(jsonWebTokenRequest);
+                ValidateHeaderForHMAC(jsonWebTokenRequest);
                 ValidatePayload(jsonWebTokenRequest);
-                ValidateSignature(jsonWebTokenRequest);
+                ValidateSignatureUsingHMAC(jsonWebTokenRequest);
             }
             catch (Exception ex)
             {
@@ -100,6 +95,89 @@ namespace Tc.Crm.Service.Services
             }
 
             return jsonWebTokenRequest;
+        }
+
+        private void ValidateSignatureUsingHMAC(JsonWebTokenRequest jsonWebTokenRequest)
+        {
+            try
+            {
+                //guard clause
+                if (jsonWebTokenRequest == null) throw new ArgumentNullException(Constants.Parameters.JsonWebTokenRequest);
+                if (jsonWebTokenRequest.Token == null) throw new ArgumentNullException(Constants.Parameters.JsonWebTokenRequestToken);
+
+                var tokenParts = jsonWebTokenRequest.Token.Split(Constants.Delimiters.Dot);
+
+                //get the decoded signature from the request
+                var crypto = JsonWebToken.Base64UrlDecode(tokenParts[2]);
+                var decodedCrypto = Convert.ToBase64String(crypto);
+
+                //Recreating the signature from the JWT request header and payload
+                var header = tokenParts[0];
+                var payload = tokenParts[1];
+                var bytesToSign = Encoding.UTF8.GetBytes(string.Concat(header, Constants.Delimiters.Dot, payload));
+                byte[] signatureData;
+                var key = configurationService.GetSecretKey();
+                using (var sha = new HMACSHA256(Encoding.UTF8.GetBytes(key)))
+                {
+                    signatureData = sha.ComputeHash(bytesToSign);
+                }
+                var decodedSignature = Convert.ToBase64String(signatureData);
+
+                //compare signatures
+                if (decodedCrypto == decodedSignature)
+                    jsonWebTokenRequest.SignatureValid = true;
+                else
+                    jsonWebTokenRequest.SignatureValid = false;
+            }
+            catch (Exception ex)
+            {
+                jsonWebTokenRequest.Errors.Add(new JsonWebTokenRequestError(ex.Message, ex.StackTrace));
+                jsonWebTokenRequest.Errors.Add(new JsonWebTokenRequestError(Constants.Messages.SignatureValidationUnhandledError));
+            }
+        }
+
+        private void ValidateHeaderForHMAC(JsonWebTokenRequest request)
+        {
+            //guard clause
+            if (request == null) throw new ArgumentNullException(Constants.Parameters.Request);
+            if (request.Header == null) throw new ArgumentNullException(Constants.Parameters.RequestHeader);
+            if (string.IsNullOrWhiteSpace(request.Header.Algorithm))
+                throw new ArgumentNullException(Constants.Parameters.RequestHeaderAlgorithm);
+            if (string.IsNullOrWhiteSpace(request.Header.TokenType))
+                throw new ArgumentNullException(Constants.Parameters.RequestHeaderType);
+
+            try
+            {
+                if (!request.Header.Algorithm.Equals(Constants.JsonWebTokenContent.AlgorithmHS256
+                                                        , StringComparison.OrdinalIgnoreCase))
+                {
+                    request.HeaderAlgorithmValid = false;
+                }
+                else
+                {
+                    request.HeaderAlgorithmValid = true;
+                }
+
+                if (!request.Header.TokenType.Equals(Constants.JsonWebTokenContent.TypeJwt
+                                                , StringComparison.OrdinalIgnoreCase))
+                {
+                    request.HeaderTypeValid = false;
+                }
+                else
+                {
+                    request.HeaderTypeValid = true;
+                }
+            }
+            catch (NullReferenceException ex)
+            {
+                request.Errors.Add(new JsonWebTokenRequestError(ex.Message, ex.StackTrace));
+                request.Errors.Add(new JsonWebTokenRequestError(Constants.Messages.HeaderValidationUnhandledError));
+            }
+            catch (Exception ex)
+            {
+                request.Errors.Add(new JsonWebTokenRequestError(ex.Message, ex.StackTrace));
+                request.Errors.Add(new JsonWebTokenRequestError(Constants.Messages.HeaderValidationUnhandledError));
+            }
         }
 
         /// <summary>
@@ -121,11 +199,7 @@ namespace Tc.Crm.Service.Services
 
                 using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
                 {
-                    var publicKeyXml = string.Empty;
-                    if(ContextApi == Api.Caching)
-                        publicKeyXml = configurationService.GetCachingPublicKey();
-                    else
-                        publicKeyXml  = configurationService.GetPublicKey();
+                    var publicKeyXml = configurationService.GetPublicKey();
                     rsa.FromXmlString(publicKeyXml);
 
                     using (SHA256 sha256 = SHA256.Create())
@@ -136,7 +210,7 @@ namespace Tc.Crm.Service.Services
                         rsaDeformatter.SetHashAlgorithm("SHA256");
                         if (!rsaDeformatter.VerifySignature(hash, JsonWebToken.Base64UrlDecode(tokenParts[2])))
                         {
-                            Trace.TraceWarning("public key:{0}, token signature:{1}", publicKeyXml,tokenParts[2]);
+                            Trace.TraceWarning("public key:{0}, token signature:{1}", publicKeyXml, tokenParts[2]);
                             jsonWebTokenRequest.SignatureValid = false;
                         }
                         else
@@ -161,22 +235,11 @@ namespace Tc.Crm.Service.Services
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly")]
         public string GetToken(HttpRequestMessage request)
         {
-            //guard clause
             if (request == null) throw new ArgumentNullException(Constants.Parameters.Request);
             if (request.Headers == null) throw new ArgumentNullException(Constants.Parameters.RequestHeaders);
+            if (request.Headers.Authorization == null) throw new ArgumentNullException(Constants.Parameters.RequestHeadersAuthorization);
 
-            if (this.ContextApi == Api.Caching)
-            {
-                if (!request.Headers.Contains("JWT")) throw new ArgumentNullException(Constants.Parameters.RequestHeadersAuthorization);
-                IEnumerable<string> headerValues = request.Headers.GetValues("JWT");
-                return headerValues.FirstOrDefault();
-            }
-            else
-            {
-                if (request.Headers.Authorization == null) throw new ArgumentNullException(Constants.Parameters.RequestHeadersAuthorization);
-                return request.Headers.Authorization.Parameter;
-            }
-            
+            return request.Headers.Authorization.Parameter;
         }
 
         /// <summary>

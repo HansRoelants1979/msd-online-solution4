@@ -13,19 +13,7 @@ namespace Tc.Crm.ServiceTests
     {
         public bool CorrectSignaure;
 
-        public string GetCachingPublicKey()
-        {
-            if (CorrectSignaure)
-            {
-                var fileName = ConfigurationManager.AppSettings["privateKeyFileName"];
-                return File.ReadAllText(fileName);
-            }
-            else
-            {
-                var fileName = ConfigurationManager.AppSettings["privateKeyFileNameWrong"];
-                return File.ReadAllText(fileName);
-            }
-        }
+        
 
         public string GetIssuedAtTimeExpiryInSeconds()
         {
@@ -44,6 +32,11 @@ namespace Tc.Crm.ServiceTests
                 var fileName = ConfigurationManager.AppSettings["privateKeyFileNameWrong"];
                 return File.ReadAllText(fileName);
             }
+        }
+
+        public string GetSecretKey()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -19,19 +19,15 @@ namespace Tc.Crm.Service.Services
                 return webClient.DownloadString(path);
             }
         }
-        public string GetCachingPublicKey()
+        public string GetSecretKey()
         {
-            var fileName = ConfigurationManager.AppSettings[Constants.Configuration.AppSettings.HclPublicKeyFileName];
-            var path = HttpContext.Current.Server.MapPath(@"~/" + fileName);
-
-            using (var webClient = new WebClient())
-            {
-                return webClient.DownloadString(path);
-            }
+            return ConfigurationManager.AppSettings[Constants.Configuration.AppSettings.JsonWebTokenSecret];
         }
         public string GetIssuedAtTimeExpiryInSeconds()
         {
             return ConfigurationManager.AppSettings[Constants.Configuration.AppSettings.IssuedAtTimeExpiryInSeconds];
         }
+
+       
     }
 }
