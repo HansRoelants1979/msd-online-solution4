@@ -36,7 +36,7 @@ namespace Tc.Crm.ServiceTests
 
         public string GetSecretKey()
         {
-            throw new NotImplementedException();
+            return ConfigurationManager.AppSettings[Service.Constants.Configuration.AppSettings.JsonWebTokenSecret];
         }
     }
 }
