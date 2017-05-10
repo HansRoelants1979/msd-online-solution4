@@ -53,25 +53,24 @@ namespace Tc.Crm.Service.Client.Console
         private static void Cache()
         {
 
-            System.Console.WriteLine("Processing Booking.");
+            System.Console.WriteLine("Cache Interface");
 
 
             while (true)
             {
-                System.Console.WriteLine("Reading the Json data");
-                var name = "BRAND";
+                System.Console.WriteLine("Enter the bucket name:");
+                var name = System.Console.ReadLine();
                
-                var data = $"[\"{name.ToUpper()}\"]";
                 var api = "api/cache/refresh";
 
                 //create the token
-                var token = CreateJWTToken();
+                var token = CreateJWTTokenWithHmac();
                 var pl = new Payload
                 {
-                    Bucket = "BRAND",
+                    Bucket = name,
                     JWTToken = token
                 };
-                data = JsonConvert.SerializeObject(pl);
+                var data = JsonConvert.SerializeObject(pl);
                 //Call
                 HttpClient cons = new HttpClient();
 
@@ -111,6 +110,7 @@ namespace Tc.Crm.Service.Client.Console
 
 
         }
+
         private static void ProcessSurvey()
         {
 
@@ -242,9 +242,26 @@ namespace Tc.Crm.Service.Client.Console
 
         }
 
+        private static string CreateJWTTokenWithHmac()
+        {
+            byte[] secretKey = Encoding.UTF8.GetBytes(GetJwtKey());
 
+            var payload = new Dictionary<string, object>()
+            {
+                {"iat", GetIssuedAtTime().ToString()},
+                {"nbf", GetNotBeforeTime().ToString()},
+                {"exp", GetExpiry().ToString()}
+            };
+
+            return JWT.JsonWebToken.Encode(payload, secretKey, JwtHashAlgorithm.HS256);
+
+        }
 
         private static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+        private static string GetJwtKey()
+        {
+            return ConfigurationManager.AppSettings["jwtkey"];
+        }
         private static double GetExpiry()
         {
             var sec = Int32.Parse(ConfigurationManager.AppSettings["expiryFromNow"]);
