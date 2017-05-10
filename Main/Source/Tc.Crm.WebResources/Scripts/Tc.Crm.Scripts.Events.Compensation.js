@@ -127,7 +127,6 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
     }
 
     var caseRetrieved = function (caseResponse) {
-        debugger;
         getConfigurationValue(Configuration.LimitContinental).then(function (response) {
                 var limit = JSON.parse(response.response);
                 if (limit.value.length === 0 || limit.value[0].tc_value === null) {
@@ -231,7 +230,6 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
     var setCompensationAmountLimit = function () {
         var country = Xrm.Page.getAttribute(Attributes.SourceMarket).getValue()[0].id;        
         getSourceMarketIso2Code(formatEntityId(country)).then(function (response) {
-                debugger;
                 var iso2Code = JSON.parse(response.response);
                 var isUkMarket = iso2Code.tc_iso2code.toUpperCase() === SOURCE_MARKET_UK;
                 if (isUkMarket) {
@@ -247,7 +245,7 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
     }
 
     // Calculate compensation
-    var calculateCompensation = function() {
+    var calculateCompensation = function () {
         var promises = [];
         var names = [];
         addCaseLineToCalculation(promises, names, Attributes.CaseLine1);
@@ -269,7 +267,10 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
                     }
                     totalAmount = totalAmount + caseLineOffer.tc_offeredamount;
                 }
-
+                totalAmountAttr.controls.forEach(
+                    function (control, j) {
+                        control.clearNotification();
+                    });
                 totalAmountAttr.setValue(totalAmount);
                 setCompensationAmountLimit();
             },
