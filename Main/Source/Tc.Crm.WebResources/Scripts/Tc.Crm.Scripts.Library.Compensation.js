@@ -26,10 +26,10 @@ Tc.Crm.Scripts.Library.Compensation = (function () {
 
     var SOURCE_MARKET_ENTITY = "tc_country";
     var SOURCE_MARKET_ENTITY_PLURAL = "tc_countries";
-    var CASE_ENTITY = "incident";
-    var CONTACT_ENTITY = "contact";
-    var BOOKING_ENTITY = "tc_booking";
-    var COMPENSATION_ENTITY = "tc_compensation";
+    var CASE_ENTITY_SET_NAME = "incidents";
+    var CONTACT_ENTITY_SET_NAME = "contacts";
+    var BOOKING_ENTITY_SET_NAME = "tc_bookings";
+    var COMPENSATION_ENTITY_SET_NAME = "tc_compensations";
 
     var COMPENSATION_SOURCEMARKETID_FIELDNAME = "tc_SourceMarketId";
 
@@ -49,13 +49,13 @@ Tc.Crm.Scripts.Library.Compensation = (function () {
 
     function getBooking(bookingId) {
         var query = "?$select=_tc_sourcemarketid_value&$expand=tc_SourceMarketId($select=tc_iso_code,tc_countryid)";
-        return Tc.Crm.Scripts.Common.GetById(BOOKING_ENTITY, bookingId, query);
+        return Tc.Crm.Scripts.Common.GetById(BOOKING_ENTITY_SET_NAME, bookingId, query);
         // TODO: offline mode
     }
      
     function getCustomer(customerId) {
         var query = "?$select=tc_language,contactid,fullname";
-        return Tc.Crm.Scripts.Common.GetById(CONTACT_ENTITY, customerId, query);
+        return Tc.Crm.Scripts.Common.GetById(CONTACT_ENTITY_SET_NAME, customerId, query);
         // TODO: offline mode
     }
 
@@ -63,11 +63,11 @@ Tc.Crm.Scripts.Library.Compensation = (function () {
         if (IsMobileOfflineMode()) {
             // phones and tablets in offline mode
             var query = "?$filter=customerid eq " + customerId + " &$select=incidentid";
-            return Xrm.Mobile.offline.retrieveMultipleRecords(CASE_ENTITY, query);
+            return Xrm.Mobile.offline.retrieveMultipleRecords(CASE_ENTITY_SET_NAME, query);
         }
         else {
             var query = "?$filter=_customerid_value eq " + customerId + " &$select=incidentid";
-            return Tc.Crm.Scripts.Common.Get(CASE_ENTITY, query);
+            return Tc.Crm.Scripts.Common.Get(CASE_ENTITY_SET_NAME, query);
         }
     }
 
@@ -75,11 +75,11 @@ Tc.Crm.Scripts.Library.Compensation = (function () {
         if (IsMobileOfflineMode()) {
             // phones and tablets in offline mode
             var query = "?$select=tc_sourcemarketid,customerid,tc_bookingreference,tc_bookingid&$expand=tc_sourcemarketid($select=tc_iso_code,tc_countryid),customerid_contact($select=tc_language,contactid,fullname)";
-            return Xrm.Mobile.offline.retrieveRecord(CASE_ENTITY, caseId, query);
+            return Xrm.Mobile.offline.retrieveRecord(CASE_ENTITY_SET_NAME, caseId, query);
         }
         else {
             var query = "?$select=_tc_sourcemarketid_value,_customerid_value,tc_bookingreference,_tc_bookingid_value&$expand=tc_sourcemarketid($select=tc_iso_code,tc_countryid),customerid_contact($select=tc_language,contactid,fullname)";
-            return Tc.Crm.Scripts.Common.GetById(CASE_ENTITY, caseId, query);
+            return Tc.Crm.Scripts.Common.GetById(CASE_ENTITY_SET_NAME, caseId, query);
         }
     }
 
@@ -87,11 +87,11 @@ Tc.Crm.Scripts.Library.Compensation = (function () {
         if (IsMobileOfflineMode()) {
             // phones and tablets in offline mode
             var query = "?$filter=tc_caseid eq " + caseId + " &$select=tc_compensationid";
-            return Xrm.Mobile.offline.retrieveMultipleRecords(COMPENSATION_ENTITY, query);
+            return Xrm.Mobile.offline.retrieveMultipleRecords(COMPENSATION_ENTITY_SET_NAME, query);
         }
         else {
             var query = "?$filter=_tc_caseid_value eq " + caseId + " &$select=tc_compensationid";
-            return Tc.Crm.Scripts.Common.Get(COMPENSATION_ENTITY, query);
+            return Tc.Crm.Scripts.Common.Get(COMPENSATION_ENTITY_SET_NAME, query);
         }
     }
 
@@ -133,7 +133,6 @@ Tc.Crm.Scripts.Library.Compensation = (function () {
     }
 
     function updateCompensations(compensationsReceivedPromise, compensationFields) {
-        debugger;
         compensationsReceivedPromise.then(
             function (compensationsResponse) {
                 var compensations = getPromiseResponse(compensationsResponse, "Compensation");
@@ -142,7 +141,7 @@ Tc.Crm.Scripts.Library.Compensation = (function () {
                         //TODO
                     }
                     else {
-                        return Tc.Crm.Scripts.Common.Update(COMPENSATION_ENTITY, compensation.tc_compensationid, compensationFields).then(
+                        return Tc.Crm.Scripts.Common.Update(COMPENSATION_ENTITY_SET_NAME, compensation.tc_compensationid, compensationFields).then(
                             function (response) { },
                             function (error) {
                                 Xrm.Utility.alertDialog("Error updating compensation");
@@ -180,7 +179,6 @@ Tc.Crm.Scripts.Library.Compensation = (function () {
     }
 
     function initSourceMarket(caseResponse) {
-        debugger;
         var incident = JSON.parse(caseResponse.response);
         var bookingUsed = incident.tc_bookingreference;
         if (bookingUsed) {
@@ -208,7 +206,6 @@ Tc.Crm.Scripts.Library.Compensation = (function () {
     /// Public implementation
 
     var updateCustomerCompensationsLanguage = function () {
-        debugger;
         if (Xrm.Page.ui.getFormType() === FORM_MODE_CREATE)
             return;
         var attrLanguage = Xrm.Page.getAttribute(CUSTOMER_LANGUAGE_ATTR_NAME);
@@ -232,7 +229,6 @@ Tc.Crm.Scripts.Library.Compensation = (function () {
     }
 
     var updateCaseCompensationsSourceMarket = function () {
-        debugger;
         if (Xrm.Page.ui.getFormType() === FORM_MODE_CREATE)
             return;
         var attribute = Xrm.Page.getAttribute(CASE_SOURCEMARKETID_ATTR_NAME);
@@ -246,7 +242,6 @@ Tc.Crm.Scripts.Library.Compensation = (function () {
     }
 
     var setDefaultsOnCreate = function () {
-        debugger;
         if (Xrm.Page.ui.getFormType() !== FORM_MODE_CREATE)
             return;
         var caseIdAttr = Xrm.Page.getAttribute(COMPENSATION_CASEID_ATTR_NAME);

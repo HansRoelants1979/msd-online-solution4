@@ -11,23 +11,23 @@ var Tc = {
                         {
                         	/**
                              * @function Get                             
-                             * @param {string} entityName - Name of the entity.
+                             * @param {string} entityName - Entity set name as per /api/data/v8.2/EntityDefinitions.
                              * @param {string} query - Query to Select, Expand so on.
                              * @returns {Promise} - A Promise that returns either the request object or an error object.
                              */
                         	Get: function (entityName, query) {
-                        		var entityUri = "/" + entityName + "s";
+                        		var entityUri = "/" + entityName;
                         		return Sdk.request("GET", entityUri + query, null);
                         	},
                         	/**
                              * @function Get                             
-                             * @param {string} entityName - Name of the entity.
+                             * @param {string} entityName - Entity set name as per /api/data/v8.2/EntityDefinitions.
                              * @param {string} id - GUID of the Record.
                              * @param {string} query - Query to Select, Expand so on.
                              * @returns {Promise} - A Promise that returns either the request object or an error object.
                              */
                         	GetById: function (entityName, id, query) {
-                        		var entityUri = "/" + entityName + "s(" + id + ")";
+                        		var entityUri = "/" + entityName + "(" + id + ")";
                         		return Sdk.request("GET", entityUri + query, null);
                         	},
 
@@ -42,56 +42,56 @@ var Tc = {
                         	},
                         	/**
                              * @function Create                             
-                             * @param {string} entityName - Name of the entity to Create.
+                             * @param {string} entityName - Entity set name as per /api/data/v8.2/EntityDefinitions.
                              * @param {object} data - An object representing an entity, required for Create action.
                              * @returns {Promise} - A Promise that returns either the request object or an error object.
                              */
                         	Create: function (entityName, object) {
-                        		var entitySetName = "/" + entityName + "s";
+                        		var entitySetName = "/" + entityName;
                         		return Sdk.request("POST", entitySetName, object);
                         	},
                         	/**
                              * @function Update                             
-                             * @param {string} entityName - Name of the entity to Update.
+                             * @param {string} entityName - Entity set name as per /api/data/v8.2/EntityDefinitions.
                              * @param {string} id - GUID of the Record to Update.
                              * @param {object} data - An object representing an entity, required for Update action.
                              * @returns {Promise} - A Promise that returns either the request object or an error object.
                              */
                         	Update: function (entityName, id, object) {
-                        		var entityUri = "/" + entityName + "s(" + id + ")";
+                        		var entityUri = "/" + entityName + "(" + id + ")";
                         		return Sdk.request("PATCH", entityUri, object);
                         	},
                         	/**
                             * @function UpdateSingleAttribute                             
-                            * @param {string} entityName - Name of the entity.
+                            * @param {string} entityName - Entity set name as per /api/data/v8.2/EntityDefinitions.
                             * @param {string} id - GUID of the Record to Update.
                             * @param {string} attribute - Attribute to Update.
                             * @param {string} value - Attribute Value to Update.
                             * @returns {Promise} - A Promise that returns either the request object or an error object.
                             */
                         	UpdateSingleAttribute: function (entityName, id, attribute, value) {
-                        		var entityUri = "/" + entityName + "s(" + id + ")";
+                        		var entityUri = "/" + entityName + "(" + id + ")";
                         		return Sdk.request("PUT", entityUri + "/" + attribute, value);
                         	},
                         	/**
                             * @function Upsert                             
-                            * @param {string} entityName - Name of the entity.
+                            * @param {string} entityName - Entity set name as per /api/data/v8.2/EntityDefinitions.
                             * @param {string} id - GUID of the Record to Create / Update.
                             * @param {object} data - An object representing an entity, required to Create / Update action.
                             * @returns {Promise} - A Promise that returns either the request object or an error object.
                             */
                         	Upsert: function (entityName, id, object) {
-                        		var entityUri = "/" + entityName + "s(" + id + ")";
+                        		var entityUri = "/" + entityName + "(" + id + ")";
                         		return Sdk.request("PATCH", entityUri, object);
                         	},
                         	/**
                              * @function Delete                             
-                             * @param {string} entityName - Name of the entity to Delete.
+                             * @param {string} entityName - Entity set name as per /api/data/v8.2/EntityDefinitions.
                              * @param {string} id - GUID of the Record to Delete.
                              * @returns {Promise} - A Promise that returns either the request object or an error object.
                              */
                         	Delete: function (entityName, id) {
-                        		var entityUri = "/" + entityName + "s(" + id + ")";
+                        		var entityUri = "/" + entityName + "(" + id + ")";
                         		return Sdk.request("DELETE", entityUri, null);
                         	}
 

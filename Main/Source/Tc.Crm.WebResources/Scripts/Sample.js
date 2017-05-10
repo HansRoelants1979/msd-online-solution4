@@ -5,7 +5,7 @@ function Sample()
     contact.firstname = "Test";
     contact.lastname = "Promiseq";
 
-    var entityName = "contact";
+    var entityName = "contacts";
     var guid = 'C337C189-34D9-E611-8229-C4446BDC3CC1';
     
     var deleteData = document.getElementsByName("removesampledata")[0].checked;

@@ -1,7 +1,4 @@
-﻿//<script src ="scripts/es6promise.js" type ="text/javascript"></script>
-//<script src ="scripts/Tc.Crm.Scripts.Common.js" type ="text/javascript"></script>
-
-if (typeof (Tc) === "undefined") {
+﻿if (typeof (Tc) === "undefined") {
     Tc = {
         __namespace: true
     };
@@ -184,7 +181,7 @@ Tc.Crm.Scripts.Events.Case = (function () {
     function getBooking(bookingId) {
 
         var query = "?$select=_tc_sourcemarketid_value";
-        var entityName = "tc_booking";
+        var entityName = "tc_bookings";
         var id = bookingId;
         return Tc.Crm.Scripts.Common.GetById(entityName, id, query);
 
@@ -192,14 +189,14 @@ Tc.Crm.Scripts.Events.Case = (function () {
 
     function getSourceMarketCurrency(sourcMarketId) {
         var query = "?$select=_transactioncurrencyid_value";        
-        var entityName = "tc_countrie";
+        var entityName = "tc_countries";
         return Tc.Crm.Scripts.Common.GetById(entityName, sourcMarketId, query);
     }
 
 
     function getSourceMarketCurrencyname(Currencyid) {
         var query = "?$select=currencyname";
-        var entityName = "transactioncurrencie";
+        var entityName = "transactioncurrencies";
         return Tc.Crm.Scripts.Common.GetById(entityName, Currencyid, query);
     }
     function MandatoryMetConditions() {
