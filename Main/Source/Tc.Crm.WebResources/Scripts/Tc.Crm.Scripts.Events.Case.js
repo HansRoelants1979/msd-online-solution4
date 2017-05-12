@@ -58,15 +58,12 @@ Tc.Crm.Scripts.Events.Case = (function () {
                             }
 
                             else {
-                                alert("Source Market is not associated with Booking");
+                                Xrm.Utility.alertDialog("Source Market is not associated with Booking");
                                 throw new Error("Source Market is not associated with Booking");
                             }
 
-
                         }).catch(function (err) {
-
-                            throw new Error("Source Market is not associated with Booking");                        
-
+                            throw new Error("Source Market is not associated with Booking");                    
                         });
 
                     var SourceMarketCurrency = SourceMarketReceivedPromise.then(
@@ -79,10 +76,9 @@ Tc.Crm.Scripts.Events.Case = (function () {
                            return getSourceMarketCurrencyname(Currencyid);
                        }
                        else {
-                           alert("Currency is not associated with SourceMarket");
+                           Xrm.Utility.alertDialog("Currency is not associated with SourceMarket");
                            throw new Error("Currency is not associated with SourceMarket");
-                       }
-                       
+                       }                      
 
                    }).catch(function (err) {
                        throw new Error("Source Market is not associated with Booking");
@@ -102,11 +98,8 @@ Tc.Crm.Scripts.Events.Case = (function () {
                            Xrm.Page.getControl(CASE_SOURCE_MARKET_CURRENCY).getAttribute().setValue(currencyReference);
                        }
 
-
                    }).catch(function (err) {
-
                        throw new Error("Currency  is not associated with Source Market");
-
                    });
 
                 }
@@ -133,16 +126,13 @@ Tc.Crm.Scripts.Events.Case = (function () {
                             }
 
                             else {
-                                alert("Currency is not associated with SourceMarket");
+                                Xrm.Utility.alertDialog("Currency is not associated with SourceMarket");
                                 throw new Error("Currency is not associated with SourceMarket");
                             }
-
-                            alert("success");
+                            
                         }).catch(function (err) {
 
-                            throw new Error("Currency  is not associated with Source Market");
-
-                            
+                            throw new Error("Currency  is not associated with Source Market");                            
                         });
 
 
