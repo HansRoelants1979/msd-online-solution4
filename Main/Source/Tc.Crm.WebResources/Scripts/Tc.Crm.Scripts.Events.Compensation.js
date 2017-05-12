@@ -246,6 +246,7 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
 
     // Calculate compensation
     var calculateCompensation = function () {
+        if (IsMobileOfflineMode()) return;
         var promises = [];
         var names = [];
         addCaseLineToCalculation(promises, names, Attributes.CaseLine1);

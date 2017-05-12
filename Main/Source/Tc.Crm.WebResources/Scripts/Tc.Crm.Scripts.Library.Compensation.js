@@ -206,6 +206,7 @@ Tc.Crm.Scripts.Library.Compensation = (function () {
     /// Public implementation
 
     var updateCustomerCompensationsLanguage = function () {
+        if (IsMobileOfflineMode()) return;
         if (Xrm.Page.ui.getFormType() === FORM_MODE_CREATE)
             return;
         var attrLanguage = Xrm.Page.getAttribute(CUSTOMER_LANGUAGE_ATTR_NAME);
@@ -229,6 +230,7 @@ Tc.Crm.Scripts.Library.Compensation = (function () {
     }
 
     var updateCaseCompensationsSourceMarket = function () {
+        if (IsMobileOfflineMode()) return;
         if (Xrm.Page.ui.getFormType() === FORM_MODE_CREATE)
             return;
         var attribute = Xrm.Page.getAttribute(CASE_SOURCEMARKETID_ATTR_NAME);
@@ -242,6 +244,7 @@ Tc.Crm.Scripts.Library.Compensation = (function () {
     }
 
     var setDefaultsOnCreate = function () {
+        if (IsMobileOfflineMode()) return;
         if (Xrm.Page.ui.getFormType() !== FORM_MODE_CREATE)
             return;
         var caseIdAttr = Xrm.Page.getAttribute(COMPENSATION_CASEID_ATTR_NAME);
@@ -263,7 +266,7 @@ Tc.Crm.Scripts.Library.Compensation = (function () {
 
     // public
     return {
-        SetDefaultsOnCreate: function () {
+        SetDefaultsOnCreate: function () {            
             setDefaultsOnCreate();
         },
         UpdateCustomerCompensationsLanguage: function () {

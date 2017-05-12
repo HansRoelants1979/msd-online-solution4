@@ -91,13 +91,22 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
         RoomType: "tab_CompensationCalculator_RoomType"
     }
 
-    var CASE_CATEGORY_ENTITY = "tc_casecategory";
-    
-    var COMPENSATION_MATRIX_ENTITY_SET_NAME = "tc_compensationcalculationmatrixes";
-    var COMPENSATION_CALCULATION_LINE_ENTITY_SET_NAME = "tc_compensationcalculationlines";
-    var CONFIGURATION_ENTITY_SET_NAME = "tc_configurations";
-    var CASE_ENTITY_SET_NAME = "incidents";
-    var BOOKING_ENTITY_SET_NAME = "tc_bookings";
+    var EntityNames = {
+        CaseCategory: "tc_casecategory",
+        Case: "incident",
+        Booking: "tc_booking",
+        Configuration: "tc_configuration",
+        CompensationCalculationMatrix: "tc_compensationcalculationmatrix",
+        CompensationCalculationMatrixLine: "tc_compensationcalculationline"
+    }
+
+    var EntitySetNames = {
+        Case: "incidents",
+        Booking: "tc_bookings",
+        Configuration: "tc_configurations",
+        CompensationCalculationMatrix: "tc_compensationcalculationmatrixes",
+        CompensationCalculationMatrixLine: "tc_compensationcalculationlines"
+    }
 
     var isUkMarket = null;
     var isBuildingWork = false;
@@ -131,9 +140,10 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
         Xrm.Page.getAttribute(Attributes.CaseCategory3).setValue(null);
         Xrm.Page.getAttribute(Attributes.CaseCategory3).fireOnChange();
         // add filter for lookup view by case type of case line
-        var caseTypeComplainId = Xrm.Page.getAttribute(Attributes.CaseType).getValue()[0].id;
-        var filter = "<filter type='and'><condition attribute='statecode' operator='eq' value='0' /><condition attribute='tc_casetypeid' operator='eq' value='" + caseTypeComplainId + "'/></filter>";
-        Xrm.Page.getControl(Attributes.CaseCategory1).addCustomFilter(filter, CASE_CATEGORY_ENTITY);
+        var caseTypeComplainId = Xrm.Page.getAttribute(Attributes.CaseType).getValue();
+        if (caseTypeComplainId == null) return;
+        var filter = "<filter type='and'><condition attribute='statecode' operator='eq' value='0' /><condition attribute='tc_casetypeid' operator='eq' value='" + caseTypeComplainId[0].id + "'/></filter>";
+        Xrm.Page.getControl(Attributes.CaseCategory1).addCustomFilter(filter, EntityNames.CaseCategory);
     }
 
     ///
@@ -207,7 +217,7 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
         // set id to default view id, so results are filtered out
         var viewDisplayName = "Related Case Categories Lookup View";
         var control = Xrm.Page.getControl(controlId);
-        control.addCustomView(VIEW_RANDOM_GUID, CASE_CATEGORY_ENTITY, viewDisplayName, fetchXml, layoutXml, false);
+        control.addCustomView(VIEW_RANDOM_GUID, EntityNames.CaseCategory, viewDisplayName, fetchXml, layoutXml, false);
         control.setDefaultView(VIEW_RANDOM_GUID);
     }
 
@@ -266,13 +276,13 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
         return id !== null ? id.replace("{", "").replace("}", "") : null;
     }
 
-    function IsMobileOfflineMode() {
-        return Xrm.Page.context.client.getClient() === CLIENT_MODE_MOBILE && Xrm.Page.context.client.getClientState() === CLIENT_STATE_OFFLINE
+    function IsOfflineMode() {
+        return Xrm.Page.context.client.getClientState() === CLIENT_STATE_OFFLINE
     }
 
     function getPromiseResponse(promiseResponse, entity) {
-        if (IsMobileOfflineMode()) {
-            return promiseResponse.values;
+        if (IsOfflineMode()) {
+            return promiseResponse.values != null ? promiseResponse.values : promiseResponse;
         }
         else {
             if (promiseResponse.response === null || promiseResponse.response === undefined) {
@@ -292,34 +302,35 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
     }
 
     function getCase(caseId) {
-        if (IsMobileOfflineMode()) {
-            // TODO
+        if (IsOfflineMode()) {
+            var query = "?$select=tc_sourcemarketid,tc_bookingreference,tc_bookingid,tc_producttype,tc_bookingtravelamount,tc_durationofstay&$expand=tc_sourcemarketid($select=tc_iso2code,tc_countryid)";            
+            return Xrm.Mobile.offline.retrieveRecord(EntityNames.Case, caseId, query);
         }
         else {
             var query = "?$select=_tc_sourcemarketid_value,tc_bookingreference,_tc_bookingid_value,tc_producttype,tc_bookingtravelamount,tc_durationofstay&$expand=tc_sourcemarketid($select=tc_iso2code,tc_countryid)";
-            return Tc.Crm.Scripts.Common.GetById(CASE_ENTITY_SET_NAME, caseId, query);
+            return Tc.Crm.Scripts.Common.GetById(EntitySetNames.Case, caseId, query);
         }
     }
 
     function getBooking(bookingId) {
-        if (IsMobileOfflineMode()) {
-            // TODO
+        if (IsOfflineMode()) {
+            var query = "?$select=tc_sourcemarketid,tc_travelamount,tc_duration&$expand=tc_SourceMarketId($select=tc_iso2code,tc_countryid)";
+            return Xrm.Mobile.offline.retrieveRecord(EntityNames.Booking, bookingId, query);
+            
         } else {
             var query = "?$select=_tc_sourcemarketid_value,tc_travelamount,tc_duration&$expand=tc_SourceMarketId($select=tc_iso2code,tc_countryid)";
-            return Tc.Crm.Scripts.Common.GetById(BOOKING_ENTITY_SET_NAME, bookingId, query);
+            return Tc.Crm.Scripts.Common.GetById(EntitySetNames.Booking, bookingId, query);
         }        
     }
 
     var getConfigurationValue = function (configName) {
-        if (IsMobileOfflineMode()) {
-            // TODO: offline query
-            var query = "?$filter=tc_name eq " + configName + " &$select=tc_value";
-            return Xrm.Mobile.offline.retrieveMultipleRecords(CONFIGURATION_ENTITY_SET_NAME, query);
+        if (IsOfflineMode()) {
+            var query = "?$filter=tc_name eq '" + configName + "' &$select=tc_value";
+            return Xrm.Mobile.offline.retrieveMultipleRecords(EntityNames.Configuration, query);
         }
         else {
-            // TODO: add source market to filter
             var query = "?$filter=tc_name eq '" + configName + "' &$select=tc_value";
-            return Tc.Crm.Scripts.Common.Get(CONFIGURATION_ENTITY_SET_NAME, query);
+            return Tc.Crm.Scripts.Common.Get(EntitySetNames.Configuration, query);
         }
     }
 
@@ -328,12 +339,13 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
         var category1Id = Xrm.Page.getAttribute(Attributes.CaseCategory1).getValue()[0].id;
         var category2Id = Xrm.Page.getAttribute(Attributes.CaseCategory2).getValue()[0].id;
         var category3Id = Xrm.Page.getAttribute(Attributes.CaseCategory3).getValue()[0].id;
-        if (IsMobileOfflineMode()) {
-            // TODO:
+        if (IsOfflineMode()) {
+            var query = "?$filter=tc_sourcemarket eq " + (isUkMarket ? SourceMarket.UK : SourceMarket.Continental) + " and tc_category1 eq " + formatEntityId(category1Id) + " and tc_category2 eq " + formatEntityId(category2Id) + " and tc_category3 eq " + formatEntityId(category3Id) + "&$select=tc_compensationcalculationmatrixid";
+            return Tc.Crm.Scripts.Common.retrieveMultipleRecords(EntityNames.CompensationCalculationMatrix, query);
         }
         else {
             var query = "?$filter=tc_sourcemarket eq " + (isUkMarket ? SourceMarket.UK : SourceMarket.Continental) + " and _tc_category1_value eq " + formatEntityId(category1Id) + " and _tc_category2_value eq " + formatEntityId(category2Id) + " and _tc_category3_value eq " + formatEntityId(category3Id) + "&$select=tc_compensationcalculationmatrixid";
-            return Tc.Crm.Scripts.Common.Get(COMPENSATION_MATRIX_ENTITY_SET_NAME, query);
+            return Tc.Crm.Scripts.Common.Get(EntitySetNames.CompensationCalculationMatrix, query);
         }
     }
     
@@ -342,23 +354,24 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
     // search by building work for uk building
     // search for impact for contitental
     var getImpactAndRange = function (matrixId) {
-        if (IsMobileOfflineMode()) {
-            // TODO: offline query
+        var query = !IsOfflineMode() ? "?$filter=_tc_compensationmatrix_value eq " + matrixId : "?$filter=tc_compensationmatrix eq " + matrixId;
+        if (isUkMarket) {
+            if (!isBuildingWork) {
+                query = query + " and tc_impactlevel eq " + impact + " and tc_impactseverity eq " + severity;
+            } else {
+                query = query + " and tc_buildingworkgrade eq " + buildingWorkValue;
+            }
+        } else {
+            query = query + " and tc_impactlevel eq " + impact;
+        }
+
+        query = query + "&$select=tc_impactpercentage,tc_rangepercentage";
+
+        if (IsOfflineMode()) {
+            return Tc.Crm.Scripts.Common.retrieveMultipleRecords(EntityNames.CompensationCalculationMatrixLine, query);
         }
         else {
-            var query = "?$filter=_tc_compensationmatrix_value eq " + matrixId;
-            if (isUkMarket){
-                if (!isBuildingWork) {
-                    query = query + " and tc_impactlevel eq " + impact + " and tc_impactseverity eq " + severity;
-                } else {
-                    query = query + " and tc_buildingworkgrade eq " + buildingWorkValue;
-                }
-            } else {
-                query = query + " and tc_impactlevel eq " + impact;
-            }
-            
-            query = query + "&$select=tc_impactpercentage,tc_rangepercentage";
-            return Tc.Crm.Scripts.Common.Get(COMPENSATION_CALCULATION_LINE_ENTITY_SET_NAME, query);
+            return Tc.Crm.Scripts.Common.Get(EntitySetNames.CompensationCalculationMatrixLine, query);
         }
     }
 
@@ -439,7 +452,7 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
         getMatrixId().then(
             function (matrixResponse) {
                 // parse from response, if null - show message as no calculation should be done
-                var matrix = JSON.parse(matrixResponse.response);
+                var matrix = getPromiseResponse(matrixResponse, "Compensation Calculation Matrix");
                 if (matrix.value.length === 0) {
                     addNotificationNoAutomaticCalculation();
                     return;
@@ -447,30 +460,30 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
                 // search compensation matrix line for severity/impact or building work
                 var matrixId = matrix.value[0].tc_compensationcalculationmatrixid;
                 Promise.all([getImpactAndRange(matrixId), getConfigurationValue(Configuration.Adjustment), getConfigurationValue(Configuration.MaximumTotalLimitToBePaid)]).then(function (allResponses) {
-                    var matrixLine = JSON.parse(allResponses[0].response); // parse matrix
+                    var matrixLine = getPromiseResponse(allResponses[0], "Compensation Calculation Matrix Line"); // parse matrix
                     if (matrixLine.value.length === 0) {
                         Xrm.Utility.alertDialog("No compensation matrix line impact+severity or building work is present in configuration. Contact System configurator");
                         return;
                     }
-                    var adjustment = JSON.parse(allResponses[1].response); // parse adjustment
+                    var adjustment = getPromiseResponse(allResponses[1], "Configuration"); // parse adjustment
                     if (adjustment.value.length === 0 || adjustment.value[0].tc_value === null) {
-                        Xrm.Utility.alertDialog("No value in configuration for " + ADJUSTMENT_CONFIG_NAME + ". Contact System configurator");
+                        Xrm.Utility.alertDialog("No value in configuration for " + Configuration.Adjustment + ". Contact System configurator");
                         return;
                     }
-                    var maximumTotalLimitToBePaid = JSON.parse(allResponses[2].response); // parse maximumTotalLimitToBePaid                        
+                    var maximumTotalLimitToBePaid = getPromiseResponse(allResponses[2], "Configuration"); // parse maximumTotalLimitToBePaid                        
                     if (maximumTotalLimitToBePaid.value.length === 0 || maximumTotalLimitToBePaid.value[0].tc_value === null) {
-                        Xrm.Utility.alertDialog("No value in configuration for " + MAXIMUM_TOTAL_LIMIT_TO_BE_PAID_CONFIG_NAME + ". Contact System configurator");
+                        Xrm.Utility.alertDialog("No value in configuration for " + Configuration.MaximumTotalLimitToBePaid + ". Contact System configurator");
                         return;
                     }
                     calculateDefaultFormulaUk(matrixLine.value[0].tc_impactpercentage, matrixLine.value[0].tc_rangepercentage, parseFloat(adjustment.value[0].tc_value), parseFloat(maximumTotalLimitToBePaid.value[0].tc_value));
                 },
                 function (error) {
-                    Xrm.Utility.alertDialog("Error getting compensation matrix values or retrieving configuration");
+                    Xrm.Utility.alertDialog("Error getting compensation matrix values or retrieving configuration. Please retry");
                     console.warn("Error getting compensation matrix values or retrieving configuration");
                 });
             },
             function (error) {
-                Xrm.Utility.alertDialog("Error getting compensation matrix");
+                Xrm.Utility.alertDialog("Error getting compensation matrix. Please retry");
                 console.warn("Error getting compensation matrix");
             }
         );
@@ -508,13 +521,13 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
                         Xrm.Page.getControl(Attributes.OfferedAmount).setFocus();
                     },
                     function (error) {
-                        Xrm.Utility.alertDialog("Error getting compensation matrix values or retrieving configuration");
+                        Xrm.Utility.alertDialog("Error getting compensation matrix values or retrieving configuration. Please retry");
                         console.warn("Error getting compensation matrix values or retrieving configuration");
                     }
                 );
             },
             function (error) {
-                Xrm.Utility.alertDialog("Error getting compensation matrix");
+                Xrm.Utility.alertDialog("Error getting compensation matrix. Please retry");
                 console.warn("Error getting compensation matrix");
             }
         );
@@ -598,6 +611,7 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
     // Get source market from case or booking
     // Populate product type, booking value and duration on create
     var loadSourceMarketAndSetDefaults = function () {
+        if (IsOfflineMode()) return;
         var caseIdAttr = Xrm.Page.getAttribute(Attributes.Case);
         var value = caseIdAttr.getValue();
         if (value == null || value.length == 0) return;
@@ -607,13 +621,14 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
         caseReceivedPromise.then(
             caseRetrieved,
             function (error) {
-                Xrm.Utility.alertDialog("Problem getting case");
+                Xrm.Utility.alertDialog("Problem getting case. Please retry");
             }
         );
     }
 
     // Calculation compensation for case line
     var calculateCompensation = function () {
+        if (IsOfflineMode()) return;
         Xrm.Page.getAttribute(Attributes.OfferedAmount).controls.forEach(
             function (control, i) {
                 control.clearNotification();
@@ -635,15 +650,15 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
 
         // Get source market
     var caseRetrieved = function (caseResponse) {
-        var incident = JSON.parse(caseResponse.response);
+        var incident = getPromiseResponse(caseResponse, "Case");
         var isCreate = (Xrm.Page.ui.getFormType() === FORM_MODE_CREATE) || (Xrm.Page.ui.getFormType() === FORM_MODE_QUICK_CREATE);
-        var bookingUsed = incident.tc_bookingreference;
+        var bookingUsed = !IsOfflineMode() ? incident.tc_bookingreference : incident.tc_bookingreference === "true";
         if (bookingUsed) {
             var bookingId = incident._tc_bookingid_value;
             // Get source market from booking
-            getBooking(bookingId).then(
+            getBooking(bookingId).then(            
                 function (bookingResponse) {
-                    var booking = JSON.parse(bookingResponse.response);
+                    var booking = getPromiseResponse(bookingResponse, "Booking");
                     isUkMarket = booking.tc_SourceMarketId.tc_iso2code.toUpperCase() === SOURCE_MARKET_UK;
                     // compensation calculator field based on market
                     showHideCompensationCalculator();
@@ -656,10 +671,9 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
                     }
                 },
                 function (error) {
-                    Xrm.Utility.alertDialog("Problem getting booking");
+                    Xrm.Utility.alertDialog("Problem getting booking. Please retry");
                     console.warn("Problem getting booking");
-            }
-            );
+            });
         }
         else {
             // Set source market from case
@@ -678,6 +692,7 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
 
         // Configure visibility of compensation calculator tab\button and sections
     var showHideCompensationCalculator = function () {
+        if (IsOfflineMode()) return;
         // show-hide calculation button
         Xrm.Page.ui.refreshRibbon();
         // hide tab if category level 3 is not selected
