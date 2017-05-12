@@ -238,7 +238,9 @@ Tc.Crm.Scripts.Events.Case = (function () {
                             Xrm.Page.getControl("tc_locationid").getAttribute().getValue() != null &&
                             Xrm.Page.getControl("tc_gateway").getAttribute().getValue() != null &&
                             Xrm.Page.getControl("description").getAttribute().getValue() != null &&
-                            Xrm.Page.getControl("tc_departuredate").getAttribute().getValue() != null
+                            Xrm.Page.getControl("tc_departuredate").getAttribute().getValue() != null &&
+                            Xrm.Page.getControl("tc_bookingtravelamount").getAttribute().getValue() != null &&
+                            Xrm.Page.getControl("tc_durationofstay").getAttribute().getValue() != null
                             ) {
                             Xrm.Page.getControl("tc_mandatoryconditionsmet").getAttribute().setValue(true);
                             Xrm.Page.data.entity.save();

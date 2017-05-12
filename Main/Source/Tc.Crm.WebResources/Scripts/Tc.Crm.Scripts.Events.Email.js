@@ -245,7 +245,7 @@ Tc.Crm.Scripts.Events.Email = (function () {
     var getIncident = function (incidentId) {
         debugger;
         var query = "?$select=tc_preferredmethodofcommunication,_tc_alternativeemaillookup_value,tc_informanothercustomer,tc_OtherCustomerEmail&$expand=tc_alternativeemaillookup($select=tc_name,emailaddress),tc_OtherCustomerEmail($select=tc_name,emailaddress)";
-        var entityName = "incident";
+        var entityName = "incidents";
         var id = incidentId;
         return Tc.Crm.Scripts.Common.GetById(entityName, id, query);
 
