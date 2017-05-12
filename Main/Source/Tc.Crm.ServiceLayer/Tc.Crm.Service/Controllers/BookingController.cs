@@ -33,14 +33,29 @@ namespace Tc.Crm.Service.Controllers
                 if (messages != null && messages.Count !=0)
                 {
                     var message = bookingService.GetStringFrom(messages);
+                    Trace.TraceWarning(message);
                     return Request.CreateResponse(HttpStatusCode.BadRequest, message);
                 }
                 var booking = bookingInfo.Booking;
                 bookingService.ResolveReferences(booking);
-                if(string.IsNullOrWhiteSpace(booking.BookingIdentifier.SourceMarket))
+                if (string.IsNullOrWhiteSpace(booking.BookingIdentifier.SourceMarket))
+                {
+                    Trace.TraceWarning(Constants.Messages.SourceMarketMissing);
                     return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.SourceMarketMissing);
-                if(string.IsNullOrWhiteSpace(booking.BookingGeneral.Currency))
+                }
+                if (string.IsNullOrWhiteSpace(booking.BookingGeneral.Currency))
+                {
+                    Trace.TraceWarning(Constants.Messages.CurrencyResolutionError);
                     return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.CurrencyResolutionError);
+                }
+                if (booking.Customer!= null && booking.Customer.CustomerIdentifier != null)
+                {
+                    if (string.IsNullOrWhiteSpace(booking.Customer.CustomerIdentifier.SourceMarket))
+                    {
+                        Trace.TraceWarning(Constants.Messages.CustomerSourceMarketMissing);
+                        return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.CustomerSourceMarketMissing);
+                    }
+                }
                 var jsonData = JsonConvert.SerializeObject(booking);
                 var response = bookingService.Update(jsonData, crmService);
                 if (response.Created)
