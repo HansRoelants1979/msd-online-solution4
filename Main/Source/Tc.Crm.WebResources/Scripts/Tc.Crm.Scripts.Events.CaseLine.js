@@ -26,6 +26,7 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
     var FORM_MODE_QUICK_CREATE = 5;
 
     var VIEW_RANDOM_GUID = "{5A8261E7-71F5-4904-B046-EE8001A01CF5}";
+    var CASE_TYPE_COMPLAIN = "{478C99E9-93E4-E611-8109-1458D041F8E8}";
 
     var CLIENT_MODE_MOBILE = "Mobile";
     var CLIENT_STATE_OFFLINE = "Offline";
@@ -690,19 +691,31 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
         }
     }
 
-        // Configure visibility of compensation calculator tab\button and sections
-    var showHideCompensationCalculator = function () {
-        if (IsOfflineMode()) return;
-        // show-hide calculation button
-        Xrm.Page.ui.refreshRibbon();
-        // hide tab if category level 3 is not selected
+    var shouldShowCompensationCalculator = function () {
+        if (IsOfflineMode()) return false;
         var tab = Xrm.Page.ui.tabs.get(TabsAndSections.CompensationCalculator);
-        if (tab == null) return;
+        if (tab == null) return false;
+        var caseTypeId = Xrm.Page.getAttribute(Attributes.CaseType).getValue();
+        if (caseTypeId == null || caseTypeId[0].id !== CASE_TYPE_COMPLAIN) {
+            return false;
+        }
         var attr = Xrm.Page.getAttribute(Attributes.CaseCategory3).getValue();
         if (attr == null || attr.length == 0) {
+            return false;
+        }
+        return true;
+    }
+        // Configure visibility of compensation calculator tab\button and sections
+    var showHideCompensationCalculator = function () {
+        var tab = Xrm.Page.ui.tabs.get(TabsAndSections.CompensationCalculator);
+        if (tab == null) return;
+        var showCalculator = shouldShowCompensationCalculator();
+        // show-hide calculation button
+        Xrm.Page.ui.refreshRibbon();
+        if (!showCalculator) {
             tab.setVisible(false);
             return;
-    }
+        }
         // show tab        
         tab.setVisible(true);
         // show building work
@@ -718,11 +731,14 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
         OnLoad: function () {
             addEventHandlers();
             loadSourceMarketAndSetDefaults();
+            showHideCompensationCalculator();
         },
         OnCaseLineSave: function () {
             formationTheNameOfTheCaseLineEntity();
         },
-        OnCompensationCalculate: calculateCompensation,
+        OnCompensationCalculate: function () {
+            calculateCompensation();
+        },
         OnCaseCategoryLevel3Change: function () {
             var attr = Xrm.Page.getAttribute(Attributes.ProposedCompensation);
             if (attr != null) attr.setValue(null);
@@ -731,6 +747,7 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
             attr = Xrm.Page.getAttribute(Attributes.OfferedAmount);
             if (attr != null) attr.setValue(null);
             showHideCompensationCalculator();
-        }
+        },
+        ShowCompensationCalculator: shouldShowCompensationCalculator
     };
 })();

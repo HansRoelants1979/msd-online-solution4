@@ -20,7 +20,10 @@ if (typeof (Tc.Crm.Scripts.Events) === "undefined") {
 }
 Tc.Crm.Scripts.Events.Compensation = (function () {
     "use strict";
+    
+    var isComplainCaseType = false;
 
+    var CASE_TYPE_COMPLAIN = "478C99E9-93E4-E611-8109-1458D041F8E8";
     var CLIENT_MODE_MOBILE = "Mobile";
     var CLIENT_STATE_OFFLINE = "Offline";
 
@@ -122,6 +125,15 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
         }
         else {
             var query = "?$select=tc_bookingreference,_tc_bookingid_value,tc_bookingtravelamount,tc_durationofstay";
+            return Tc.Crm.Scripts.Common.GetById(CASE_ENTITY_SET_NAME, caseId, query);
+        }
+    }
+
+    function getCaseType(caseId) {
+        if (IsMobileOfflineMode()) {
+        }
+        else {
+            var query = "?$select=_tc_casetypeid_value";
             return Tc.Crm.Scripts.Common.GetById(CASE_ENTITY_SET_NAME, caseId, query);
         }
     }
@@ -247,6 +259,7 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
     // Calculate compensation
     var calculateCompensation = function () {
         if (IsMobileOfflineMode()) return;
+        if (!isComplainCaseType) return;
         var promises = [];
         var names = [];
         addCaseLineToCalculation(promises, names, Attributes.CaseLine1);
@@ -281,11 +294,29 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
             });
     }
 
+    var initCaseType = function () {
+        if (IsMobileOfflineMode()) return;
+        var caseIdAttr = Xrm.Page.getAttribute(Attributes.Case);
+        if (caseIdAttr == null || caseIdAttr.getValue() == null) return;
+        var caseId = formatEntityId(caseIdAttr.getValue()[0].id);
+        var caseReceivedPromise = getCaseType(caseId);
+        caseReceivedPromise.then(
+            function (caseResponse) {
+                var incident = JSON.parse(caseResponse.response);
+                var caseType = incident._tc_casetypeid_value;
+                isComplainCaseType = caseType.toUpperCase() === CASE_TYPE_COMPLAIN;                
+            },
+            function (error) {
+                Xrm.Utility.alertDialog("Problem getting case");
+            });
+    }
+
 
     // public
     return {
         OnLoad: function () {
             Tc.Crm.Scripts.Library.Compensation.SetDefaultsOnCreate();
+            initCaseType();
         },
         OnAccountSortCodeChanged: function (context) {
             if (context === null) {
