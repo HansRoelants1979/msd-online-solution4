@@ -8,23 +8,27 @@
   <returnedtypecode>10049</returnedtypecode>
   <savedqueryid>{01a22365-57f7-e611-80ff-3863bb354ff0}</savedqueryid>
   <layoutxml>
-    <grid name="resultset" object="10049" jump="tc_name" select="1" icon="1" preview="1">
+    <grid name="resultset" preview="1" icon="1" select="1" jump="tc_name" object="10049">
       <row id="tc_caselineid" name="result">
-        <cell name="tc_servicetype" imageproviderwebresource="$webresource:" imageproviderfunctionname="" width="200" />
-        <cell name="tc_categorylevel1id" imageproviderwebresource="$webresource:" imageproviderfunctionname="" width="300" />
-        <cell name="tc_casecategory2id" imageproviderwebresource="$webresource:" imageproviderfunctionname="" width="300" />
+        <cell name="tc_servicetype" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_offeredamount" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_notifysupplier" width="100" />
+        <cell name="tc_categorylevel1id" width="300" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_casecategory2id" width="300" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="tc_category3id" width="300" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_impact" width="100" />
+        <cell name="tc_severity" width="100" />
       </row>
     </grid>
   </layoutxml>
   <querytype>0</querytype>
   <fetchxml>
-    <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
+    <fetch distinct="false" mapping="logical" output-format="xml-platform" version="1.0">
       <entity name="tc_caseline">
         <attribute name="tc_categorylevel1id" />
         <attribute name="tc_casecategory2id" />
         <attribute name="tc_servicetype" />
-        <order attribute="tc_categorylevel1id" descending="false" />
+        <order descending="false" attribute="tc_categorylevel1id" />
         <filter type="and">
           <condition attribute="statecode" operator="in">
             <value>0</value>
@@ -32,6 +36,10 @@
           </condition>
         </filter>
         <attribute name="tc_category3id" />
+        <attribute name="tc_offeredamount" />
+        <attribute name="tc_severity" />
+        <attribute name="tc_impact" />
+        <attribute name="tc_notifysupplier" />
         <attribute name="tc_caselineid" />
       </entity>
     </fetch>

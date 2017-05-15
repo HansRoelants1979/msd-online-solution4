@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>0</isdefault>
+  <returnedtypecode>112</returnedtypecode>
+  <savedqueryid>{3a39665e-7619-e711-810d-3863bb340dd8}</savedqueryid>
+  <layoutxml>
+    <grid name="resultset" preview="1" icon="1" select="1" jump="title" object="112">
+      <row id="incidentid" name="result">
+        <cell name="ticketnumber" width="150" />
+        <cell name="customerid" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_dbfa5a4915eae61181053863bb340dd8.tc_name" width="100" disableSorting="1" />
+        <cell name="a_03424782c7d54a34bbb5b2df729e0302.tc_language" width="100" disableSorting="1" />
+        <cell name="incidentstagecode" width="100" />
+        <cell name="caseorigincode" width="100" />
+        <cell name="tc_casetypeid" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="statecode" width="100" />
+        <cell name="statuscode" width="100" />
+        <cell name="resolveby" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_latestactivitydate" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="createdon" width="150" />
+        <cell name="followupby" width="100" />
+        <cell name="ownerid" width="100" />
+        <cell name="aa.status" width="100" disableSorting="1" />
+        <cell name="aa.failuretime" width="100" disableSorting="1" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>0</querytype>
+  <fetchxml>
+    <fetch distinct="false" mapping="logical" output-format="xml-platform" version="1.0">
+      <entity name="incident">
+        <attribute name="ticketnumber" />
+        <attribute name="customerid" />
+        <attribute name="createdon" />
+        <attribute name="caseorigincode" />
+        <attribute name="tc_latestactivitydate" />
+        <attribute name="resolveby" />
+        <attribute name="tc_casetypeid" />
+        <attribute name="statuscode" />
+        <attribute name="statecode" />
+        <attribute name="ownerid" />
+        <attribute name="followupby" />
+        <attribute name="incidentstagecode" />
+        <order descending="false" attribute="tc_latestactivitydate" />
+        <order descending="false" attribute="createdon" />
+        <filter type="and">
+          <condition value="0" attribute="statecode" operator="eq" />
+          <condition attribute="ownerid" operator="eq-userid" />
+        </filter>
+        <link-entity name="tc_booking" alias="a_dbfa5a4915eae61181053863bb340dd8" to="tc_bookingid" from="tc_bookingid" link-type="outer" visible="false">
+          <attribute name="tc_name" />
+        </link-entity>
+        <link-entity name="contact" alias="a_03424782c7d54a34bbb5b2df729e0302" to="primarycontactid" from="contactid" link-type="outer" visible="false">
+          <attribute name="tc_language" />
+        </link-entity>
+        <link-entity name="slakpiinstance" alias="aa" to="tc_24hrpromisekpiresolvebyid" from="slakpiinstanceid">
+          <attribute name="status" />
+          <filter type="and">
+            <condition attribute="status" operator="in">
+              <value>0</value>
+              <value>2</value>
+              <value>1</value>
+            </condition>
+          </filter>
+          <attribute name="failuretime" />
+        </link-entity>
+        <attribute name="incidentid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.66</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="My Cases Currently Assigned 24hr SLA" languagecode="1033" />
+  </LocalizedNames>
+</savedquery>

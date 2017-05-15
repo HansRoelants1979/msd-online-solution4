@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>0</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>1</isdefault>
+  <returnedtypecode>10090</returnedtypecode>
+  <savedqueryid>{8410b4af-1e8b-4d1b-acfb-4aa89a518d15}</savedqueryid>
+  <layoutxml>
+    <grid name="resultset" object="10090" jump="tc_name" select="1" icon="1" preview="1">
+      <row name="result" id="tc_compensationcalculationmatrixid">
+        <cell name="tc_name" width="25" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_category1" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_category2" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_category3" width="300" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_sourcemarket" width="100" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>1</querytype>
+  <fetchxml>
+    <fetch version="1.0" mapping="logical">
+      <entity name="tc_compensationcalculationmatrix">
+        <attribute name="tc_name" />
+        <order attribute="tc_name" descending="false" />
+        <attribute name="tc_sourcemarket" />
+        <attribute name="tc_category3" />
+        <attribute name="tc_category2" />
+        <attribute name="tc_category1" />
+        <attribute name="tc_compensationcalculationmatrixid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.83</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Compensation Calculation Matrix Advanced Find View" languagecode="1033" />
+  </LocalizedNames>
+</savedquery>

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SdkMessageProcessingStep Name="Tc.Crm.Plugins.PreCaseLine: Update of tc_caseline" SdkMessageProcessingStepId="{dc08eed8-c024-e711-810d-3863bb340dd8}">
+  <PluginTypeName>Tc.Crm.Plugins.PreCaseLine, Tc.Crm.Plugins, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9d1841d22f62ace3</PluginTypeName>
+  <PrimaryEntity>tc_caseline</PrimaryEntity>
+  <AsyncAutoDelete>0</AsyncAutoDelete>
+  <Description>Tc.Crm.Plugins.PreCaseLine: Update of tc_caseline</Description>
+  <FilteringAttributes>tc_caseid,tc_servicetype</FilteringAttributes>
+  <InvocationSource>1</InvocationSource>
+  <Mode>0</Mode>
+  <Rank>1</Rank>
+  <SdkMessageId>{20bebb1b-ea3e-db11-86a7-000a3a5473e8}</SdkMessageId>
+  <EventHandlerTypeCode>4602</EventHandlerTypeCode>
+  <Stage>40</Stage>
+  <IsCustomizable>1</IsCustomizable>
+  <IsHidden>0</IsHidden>
+  <SupportedDeployment>0</SupportedDeployment>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <SdkMessageProcessingStepImages>
+    <SdkMessageProcessingStepImage Name="PostImage">
+      <SdkMessageProcessingStepImageId>{e97ed1dc-fa24-e711-810d-3863bb340dd8}</SdkMessageProcessingStepImageId>
+      <Attributes>tc_caseid,tc_name,tc_servicetype</Attributes>
+      <EntityAlias>PostImage</EntityAlias>
+      <ImageType>1</ImageType>
+      <MessagePropertyName>Target</MessagePropertyName>
+      <IsCustomizable>1</IsCustomizable>
+    </SdkMessageProcessingStepImage>
+  </SdkMessageProcessingStepImages>
+</SdkMessageProcessingStep>

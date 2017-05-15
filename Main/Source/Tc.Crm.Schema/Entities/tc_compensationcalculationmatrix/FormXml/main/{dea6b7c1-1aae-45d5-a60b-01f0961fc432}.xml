@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<systemform>
+  <formid>{dea6b7c1-1aae-45d5-a60b-01f0961fc432}</formid>
+  <IntroducedVersion>1.0.0.83</IntroducedVersion>
+  <FormPresentation>1</FormPresentation>
+  <FormActivationState>1</FormActivationState>
+  <form>
+    <tabs>
+      <tab verticallayout="true" id="{e3106642-950d-4d1c-921a-6bb034a3deb5}" IsUserDefined="1">
+        <labels>
+          <label description="Allgemein" languagecode="1031" />
+          <label description="General" languagecode="1033" />
+          <label description="Général" languagecode="1036" />
+        </labels>
+        <columns>
+          <column width="100%">
+            <sections>
+              <section showlabel="false" showbar="false" IsUserDefined="0" id="{cc122b32-d78a-4ee4-bee7-18df2a2aed6f}">
+                <labels>
+                  <label description="Allgemein" languagecode="1031" />
+                  <label description="General" languagecode="1033" />
+                  <label description="Général" languagecode="1036" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{c242ed3c-dc3b-1231-7be1-06bb7e9abeb7}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+              <section name="{e3106642-950d-4d1c-921a-6bb034a3deb5}_section_2" showlabel="true" showbar="false" locklevel="0" id="{7e251d19-cd9c-8b6e-edae-4835151b5ce1}" IsUserDefined="0" layout="varwidth" columns="111" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
+                <labels>
+                  <label description="Compensaiton Matrix" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{d6c6189e-6dd3-2e24-a899-1ca0e0c46921}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Category 1" languagecode="1033" />
+                      </labels>
+                      <control id="tc_category1" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_category1" disabled="false" />
+                    </cell>
+                    <cell id="{db335389-c7e4-919c-03c5-1b8cd0845726}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Category 2" languagecode="1033" />
+                      </labels>
+                      <control id="tc_category2" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_category2" disabled="false" />
+                    </cell>
+                    <cell id="{748db974-6436-b29b-d8cb-e391dee8b491}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Category 3" languagecode="1033" />
+                      </labels>
+                      <control id="tc_category3" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_category3" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{02620b82-addc-8589-e48c-b9127c8b50e4}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Source Market" languagecode="1033" />
+                      </labels>
+                      <control id="tc_sourcemarket" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_sourcemarket" disabled="false" />
+                    </cell>
+                    <cell id="{0050be91-9103-377e-9ab2-65b290e917e4}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                    <cell id="{c95e0114-9dec-1051-b659-4d299e56464c}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{24d1462a-da6e-8584-14dc-831365d58888}" showlabel="false" userspacer="true">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                    <cell id="{da7a7e12-7a07-8972-2389-3a9e3d7839b2}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                    <cell id="{e31d3b79-8b56-1ead-6261-37c03daeaa3e}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{3adbd712-c6d0-4e49-36e5-73199a5a6e22}" showlabel="true" colspan="3" auto="false" rowspan="6">
+                      <labels>
+                        <label description="Compensation Calculation Lines" languagecode="1033" />
+                      </labels>
+                      <control id="Lines" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true" uniqueid="{0e76511e-c654-1385-3ad3-72c86d35bd13}">
+                        <parameters>
+                          <ViewId>{C76CA449-C7B1-4926-B122-6959855C0123}</ViewId>
+                          <IsUserView>false</IsUserView>
+                          <RelationshipName>tc_tc_compensationcalculationmatrix_tc_compensationcalculationline_compensationmatrix</RelationshipName>
+                          <TargetEntityType>tc_compensationcalculationline</TargetEntityType>
+                          <AutoExpand>Fixed</AutoExpand>
+                          <EnableQuickFind>false</EnableQuickFind>
+                          <EnableViewPicker>false</EnableViewPicker>
+                          <ViewIds>{C76CA449-C7B1-4926-B122-6959855C0123}</ViewIds>
+                          <EnableJumpBar>false</EnableJumpBar>
+                          <ChartGridMode>Grid</ChartGridMode>
+                          <VisualizationId />
+                          <IsUserChart>false</IsUserChart>
+                          <EnableChartPicker>false</EnableChartPicker>
+                          <RecordsPerPage>4</RecordsPerPage>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
+      <tab name="tab_2" id="{91459747-3968-0144-ab62-b936747724e8}" IsUserDefined="0" locklevel="0" showlabel="true" expanded="true" visible="false">
+        <labels>
+          <label description="Hide" languagecode="1033" />
+        </labels>
+        <columns>
+          <column width="100%">
+            <sections>
+              <section name="tab_2_section_1" showlabel="false" showbar="false" locklevel="0" id="{185c41db-5e6c-3c4a-9831-b13c21471301}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115">
+                <labels>
+                  <label description="Section" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{f9b6eedb-10fd-4c56-96ce-5eb70ec4ab5b}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Name" languagecode="1033" />
+                      </labels>
+                      <control id="tc_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_name" uniqueid="{328d3cb3-3dad-5bbc-4dc3-17114036683b}" disabled="false" />
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
+    </tabs>
+    <Navigation>
+      <NavBar></NavBar>
+      <NavBarAreas>
+        <NavBarArea Id="Info">
+          <Titles>
+            <Title LCID="1033" Text="Common" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Sales">
+          <Titles>
+            <Title LCID="1033" Text="Sales" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Service">
+          <Titles>
+            <Title LCID="1033" Text="Service" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Marketing">
+          <Titles>
+            <Title LCID="1033" Text="Marketing" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="ProcessCenter">
+          <Titles>
+            <Title LCID="1033" Text="Process Sessions" />
+          </Titles>
+        </NavBarArea>
+      </NavBarAreas>
+    </Navigation>
+    <controlDescriptions />
+  </form>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <LocalizedNames>
+    <LocalizedName description="Information" languagecode="1033" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description description="A form for this entity." languagecode="1033" />
+  </Descriptions>
+</systemform>

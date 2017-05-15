@@ -11,7 +11,14 @@
     <grid name="resultset" object="10055" jump="tc_name" select="1" icon="1" preview="1">
       <row name="result" id="tc_compensationlineid">
         <cell name="tc_name" width="300" />
-        <cell name="createdon" width="125" />
+        <cell name="tc_amount" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_caseid" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_bacsamount" width="100" />
+        <cell name="tc_chapsamount" width="100" />
+        <cell name="tc_cashamount" width="100" />
+        <cell name="tc_voucheramount" width="100" />
+        <cell name="tc_customerpaymentmethoddecision" width="300" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="createdon" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
       </row>
     </grid>
   </layoutxml>
@@ -19,7 +26,6 @@
   <fetchxml>
     <fetch version="1.0" mapping="logical">
       <entity name="tc_compensationline">
-        <attribute name="tc_compensationlineid" />
         <attribute name="tc_name" />
         <attribute name="createdon" />
         <order attribute="tc_name" descending="false" />
@@ -29,6 +35,14 @@
         <filter type="or" isquickfindfields="1">
           <condition attribute="tc_name" operator="like" value="{0}" />
         </filter>
+        <attribute name="tc_amount" />
+        <attribute name="tc_caseid" />
+        <attribute name="tc_voucheramount" />
+        <attribute name="tc_customerpaymentmethoddecision" />
+        <attribute name="tc_chapsamount" />
+        <attribute name="tc_cashamount" />
+        <attribute name="tc_bacsamount" />
+        <attribute name="tc_compensationlineid" />
       </entity>
     </fetch>
   </fetchxml>

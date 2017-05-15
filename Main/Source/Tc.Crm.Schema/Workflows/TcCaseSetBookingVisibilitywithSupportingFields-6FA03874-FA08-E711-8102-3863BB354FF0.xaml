@@ -36,6 +36,16 @@
           <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep4_5" />
           <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep4_6" />
           <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep4_7" />
+          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep5_condition" />
+          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep5_1" />
+          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep5_2" />
+          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep5_3" />
+          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep5_4" />
+          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep5_5" />
+          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep5_6" />
+          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep5_7" />
+          <Variable x:TypeArguments="x:Boolean" Default="False" Name="True" />
+          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep6_1" />
         </sco:Collection>
         <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
           <mxswa:GetEntityProperty Attribute="tc_bookingreference" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" Value="[ConditionBranchStep2_1]">
@@ -327,10 +337,10 @@
                       <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep35" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" />
                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
                     </Sequence>
-                    <Sequence DisplayName="SetFieldRequiredLevelStep_SetAttributeValueStep35_64: Departure Date Optional">
+                    <Sequence DisplayName="SetFieldRequiredLevelStep64: Departure Date Optional">
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;incident&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mcwc:SetFieldRequiredLevel ControlId="tc_departuredate" ControlType="standard" DisplayName="SetFieldRequiredLevelStep_SetAttributeValueStep35_64" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="None" />
+                      <mcwc:SetFieldRequiredLevel ControlId="tc_departuredate" ControlType="standard" DisplayName="SetFieldRequiredLevelStep64" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="None" />
                     </Sequence>
                   </sco:Collection>
                 </mxswa:ActivityReference.Properties>
@@ -422,6 +432,19 @@
                 <mxswa:ActivityReference.Properties>
                   <sco:Collection x:TypeArguments="Variable" x:Key="Variables" />
                   <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
+                    <Sequence DisplayName="SetFieldRequiredLevelStep92: Set Duration of Stay Mandatory">
+                      <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;incident&quot;)]" />
+                      <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
+                      <mcwc:SetFieldRequiredLevel ControlId="tc_durationofstay" ControlType="standard" DisplayName="SetFieldRequiredLevelStep92" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="Required" />
+                    </Sequence>
+                    <Sequence DisplayName="SetVisibilityStep90: Show Booking Value">
+                      <mcwc:SetVisibility ControlId="tc_bookingtravelamount" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="True" />
+                    </Sequence>
+                    <Sequence DisplayName="SetFieldRequiredLevelStep91: Set Booking Value Mandatory">
+                      <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;incident&quot;)]" />
+                      <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
+                      <mcwc:SetFieldRequiredLevel ControlId="tc_bookingtravelamount" ControlType="standard" DisplayName="SetFieldRequiredLevelStep91" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="Required" />
+                    </Sequence>
                     <Sequence DisplayName="SetVisibilityStep11: Show Source Market">
                       <mcwc:SetVisibility ControlId="tc_sourcemarketid" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="True" />
                     </Sequence>
@@ -483,10 +506,10 @@
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
                       <mcwc:SetFieldRequiredLevel ControlId="tc_locationid" ControlType="standard" DisplayName="SetFieldRequiredLevelStep45" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="Required" />
                     </Sequence>
-                    <Sequence DisplayName="SetFieldRequiredLevelStep_SetFieldRequiredLevelStep45_63: Departure Date Mandatory">
+                    <Sequence DisplayName="SetFieldRequiredLevelStep63: Departure Date Mandatory">
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;incident&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mcwc:SetFieldRequiredLevel ControlId="tc_departuredate" ControlType="standard" DisplayName="SetFieldRequiredLevelStep_SetFieldRequiredLevelStep45_63" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="Required" />
+                      <mcwc:SetFieldRequiredLevel ControlId="tc_departuredate" ControlType="standard" DisplayName="SetFieldRequiredLevelStep63" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="Required" />
                     </Sequence>
                   </sco:Collection>
                 </mxswa:ActivityReference.Properties>
@@ -578,63 +601,217 @@
                 <mxswa:ActivityReference.Properties>
                   <sco:Collection x:TypeArguments="Variable" x:Key="Variables" />
                   <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
-                    <Sequence DisplayName="SetVisibilityStep49: Show Source Market">
-                      <mcwc:SetVisibility ControlId="tc_sourcemarketid" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="True" />
+                    <Sequence DisplayName="SetVisibilityStep49: Hide Source Market">
+                      <mcwc:SetVisibility ControlId="tc_sourcemarketid" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="False" />
                     </Sequence>
-                    <Sequence DisplayName="SetFieldRequiredLevelStep50: Set Source Market Mandatory">
+                    <Sequence DisplayName="SetFieldRequiredLevelStep50: Set Source Market Not Mandatory">
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;incident&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mcwc:SetFieldRequiredLevel ControlId="tc_sourcemarketid" ControlType="standard" DisplayName="SetFieldRequiredLevelStep50" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="Required" />
+                      <mcwc:SetFieldRequiredLevel ControlId="tc_sourcemarketid" ControlType="standard" DisplayName="SetFieldRequiredLevelStep50" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="None" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep51: Show Brand">
-                      <mcwc:SetVisibility ControlId="tc_brandid" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="True" />
+                    <Sequence DisplayName="SetVisibilityStep51: Hide Brand">
+                      <mcwc:SetVisibility ControlId="tc_brandid" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="False" />
                     </Sequence>
-                    <Sequence DisplayName="SetFieldRequiredLevelStep52: Set Brand Mandatory">
+                    <Sequence DisplayName="SetFieldRequiredLevelStep52: Set Brand Not Mandatory">
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;incident&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mcwc:SetFieldRequiredLevel ControlId="tc_brandid" ControlType="standard" DisplayName="SetFieldRequiredLevelStep52" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="Required" />
+                      <mcwc:SetFieldRequiredLevel ControlId="tc_brandid" ControlType="standard" DisplayName="SetFieldRequiredLevelStep52" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="None" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep53: Show Destination">
-                      <mcwc:SetVisibility ControlId="tc_destinationid" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="True" />
+                    <Sequence DisplayName="SetVisibilityStep53: Hide Destination">
+                      <mcwc:SetVisibility ControlId="tc_destinationid" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="False" />
                     </Sequence>
-                    <Sequence DisplayName="SetFieldRequiredLevelStep54: Set Destination Mandatory">
+                    <Sequence DisplayName="SetFieldRequiredLevelStep54: Set Destination not Mandatory">
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;incident&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mcwc:SetFieldRequiredLevel ControlId="tc_destinationid" ControlType="standard" DisplayName="SetFieldRequiredLevelStep54" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="Required" />
+                      <mcwc:SetFieldRequiredLevel ControlId="tc_destinationid" ControlType="standard" DisplayName="SetFieldRequiredLevelStep54" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="None" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep55: Show Gateway">
-                      <mcwc:SetVisibility ControlId="tc_gateway" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="True" />
+                    <Sequence DisplayName="SetVisibilityStep55: Hide Gateway">
+                      <mcwc:SetVisibility ControlId="tc_gateway" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="False" />
                     </Sequence>
-                    <Sequence DisplayName="SetFieldRequiredLevelStep56: Set Gateway Mandatory">
+                    <Sequence DisplayName="SetFieldRequiredLevelStep56: Set Gateway Not Mandatory">
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;incident&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mcwc:SetFieldRequiredLevel ControlId="tc_gateway" ControlType="standard" DisplayName="SetFieldRequiredLevelStep56" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="Required" />
+                      <mcwc:SetFieldRequiredLevel ControlId="tc_gateway" ControlType="standard" DisplayName="SetFieldRequiredLevelStep56" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="None" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep57: Show Flight Number">
-                      <mcwc:SetVisibility ControlId="tc_flightnumber" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="True" />
+                    <Sequence DisplayName="SetVisibilityStep57: Hide Flight Number">
+                      <mcwc:SetVisibility ControlId="tc_flightnumber" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="False" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep58: Show Accommodation">
-                      <mcwc:SetVisibility ControlId="tc_accommodation" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="True" />
+                    <Sequence DisplayName="SetVisibilityStep58: Hide Accommodation">
+                      <mcwc:SetVisibility ControlId="tc_accommodation" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="False" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep59: Show Participants Impacted">
-                      <mcwc:SetVisibility ControlId="tc_participantsimpacted" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="True" />
+                    <Sequence DisplayName="SetVisibilityStep59: Hide Participants Impacted">
+                      <mcwc:SetVisibility ControlId="tc_participantsimpacted" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="False" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep60: Show Arrival Date">
-                      <mcwc:SetVisibility ControlId="tc_arrivaldate" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="True" />
+                    <Sequence DisplayName="SetVisibilityStep60: Hide Arrival Date">
+                      <mcwc:SetVisibility ControlId="tc_arrivaldate" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="False" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep61: Show Departure Date">
-                      <mcwc:SetVisibility ControlId="tc_departuredate" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="True" />
+                    <Sequence DisplayName="SetVisibilityStep61: Hide Departure Date">
+                      <mcwc:SetVisibility ControlId="tc_departuredate" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="False" />
                     </Sequence>
-                    <Sequence DisplayName="SetFieldRequiredLevelStep_SetVisibilityStep61_62: Departure Date Mandatory">
+                    <Sequence DisplayName="SetFieldRequiredLevelStep62: Departure Date Not Mandatory">
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;incident&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mcwc:SetFieldRequiredLevel ControlId="tc_departuredate" ControlType="standard" DisplayName="SetFieldRequiredLevelStep_SetVisibilityStep61_62" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="Required" />
+                      <mcwc:SetFieldRequiredLevel ControlId="tc_departuredate" ControlType="standard" DisplayName="SetFieldRequiredLevelStep62" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="None" />
                     </Sequence>
                   </sco:Collection>
                 </mxswa:ActivityReference.Properties>
               </mxswa:ActivityReference>
               <x:Null x:Key="Else" />
               <x:String x:Key="Description">Incident - Show Booking Detail</x:String>
+            </mxswa:ActivityReference.Properties>
+          </mxswa:ActivityReference>
+          <mxswa:GetEntityProperty Attribute="tc_casetypeid" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" Value="[ConditionBranchStep5_2]">
+            <mxswa:GetEntityProperty.TargetType>
+              <InArgument x:TypeArguments="s:Type">
+                <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
+                  <x:Null />
+                </mxswa:ReferenceLiteral>
+              </InArgument>
+            </mxswa:GetEntityProperty.TargetType>
+          </mxswa:GetEntityProperty>
+          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+            <mxswa:ActivityReference.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.Guid, "8f3df81c-ae25-e711-810d-3863bb340dd8", "UniqueIdentifier" }]</InArgument>
+              <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:Guid" />
+              </InArgument>
+              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep5_4]</OutArgument>
+            </mxswa:ActivityReference.Arguments>
+          </mxswa:ActivityReference>
+          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+            <mxswa:ActivityReference.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.EntityReference, "tc_casetype", "Enquiry", ConditionBranchStep5_4, "Lookup" }]</InArgument>
+              <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
+                  <x:Null />
+                </mxswa:ReferenceLiteral>
+              </InArgument>
+              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep5_3]</OutArgument>
+            </mxswa:ActivityReference.Arguments>
+          </mxswa:ActivityReference>
+          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateCondition">
+            <mxswa:ActivityReference.Arguments>
+              <InArgument x:TypeArguments="mxsq:ConditionOperator" x:Key="ConditionOperator">Equal</InArgument>
+              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep5_3 }]</InArgument>
+              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep5_2]</InArgument>
+              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep5_1]</OutArgument>
+            </mxswa:ActivityReference.Arguments>
+          </mxswa:ActivityReference>
+          <mxswa:GetEntityProperty Attribute="tc_bookingreference" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" Value="[ConditionBranchStep5_6]">
+            <mxswa:GetEntityProperty.TargetType>
+              <InArgument x:TypeArguments="s:Type">
+                <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
+                  <x:Null />
+                </mxswa:ReferenceLiteral>
+              </InArgument>
+            </mxswa:GetEntityProperty.TargetType>
+          </mxswa:GetEntityProperty>
+          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+            <mxswa:ActivityReference.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.Boolean, "0" }]</InArgument>
+              <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
+              </InArgument>
+              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep5_7]</OutArgument>
+            </mxswa:ActivityReference.Arguments>
+          </mxswa:ActivityReference>
+          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateCondition">
+            <mxswa:ActivityReference.Arguments>
+              <InArgument x:TypeArguments="mxsq:ConditionOperator" x:Key="ConditionOperator">Equal</InArgument>
+              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep5_7 }]</InArgument>
+              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep5_6]</InArgument>
+              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep5_5]</OutArgument>
+            </mxswa:ActivityReference.Arguments>
+          </mxswa:ActivityReference>
+          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateLogicalCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateLogicalCondition">
+            <mxswa:ActivityReference.Arguments>
+              <InArgument x:TypeArguments="mxsq:LogicalOperator" x:Key="LogicalOperator">And</InArgument>
+              <InArgument x:TypeArguments="x:Boolean" x:Key="LeftOperand">[ConditionBranchStep5_1]</InArgument>
+              <InArgument x:TypeArguments="x:Boolean" x:Key="RightOperand">[ConditionBranchStep5_5]</InArgument>
+              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep5_condition]</OutArgument>
+            </mxswa:ActivityReference.Arguments>
+          </mxswa:ActivityReference>
+          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.ConditionBranch, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="ConditionBranchStep5">
+            <mxswa:ActivityReference.Arguments>
+              <InArgument x:TypeArguments="x:Boolean" x:Key="Condition">[ConditionBranchStep5_condition]</InArgument>
+            </mxswa:ActivityReference.Arguments>
+            <mxswa:ActivityReference.Properties>
+              <mxswa:ActivityReference x:Key="Then" AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.Composite, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="ConditionBranchStep5">
+                <mxswa:ActivityReference.Properties>
+                  <sco:Collection x:TypeArguments="Variable" x:Key="Variables" />
+                  <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
+                    <Sequence DisplayName="SetVisibilityStep70: Show Booking Reference">
+                      <mcwc:SetVisibility ControlId="tc_bookingreferencefreetext" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="True" />
+                    </Sequence>
+                    <Sequence DisplayName="SetFieldRequiredLevelStep71: Manual Booking reference not Mandatory">
+                      <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;incident&quot;)]" />
+                      <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
+                      <mcwc:SetFieldRequiredLevel ControlId="tc_bookingreferencefreetext" ControlType="standard" DisplayName="SetFieldRequiredLevelStep71" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="None" />
+                    </Sequence>
+                    <Sequence DisplayName="SetVisibilityStep72: Hide Source Market">
+                      <mcwc:SetVisibility ControlId="tc_sourcemarketid" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="False" />
+                    </Sequence>
+                    <Sequence DisplayName="SetVisibilityStep81: Show Summary">
+                      <mcwc:SetVisibility ControlId="description" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="True" />
+                    </Sequence>
+                    <Sequence DisplayName="SetFieldRequiredLevelStep82: Summary Mandatory">
+                      <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;incident&quot;)]" />
+                      <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
+                      <mcwc:SetFieldRequiredLevel ControlId="description" ControlType="standard" DisplayName="SetFieldRequiredLevelStep82" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="Required" />
+                    </Sequence>
+                  </sco:Collection>
+                </mxswa:ActivityReference.Properties>
+              </mxswa:ActivityReference>
+              <x:Null x:Key="Else" />
+              <x:String x:Key="Description">Condition Enquiry -No Booking Reference</x:String>
+            </mxswa:ActivityReference.Properties>
+          </mxswa:ActivityReference>
+          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+            <mxswa:ActivityReference.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.Boolean, "true" }]</InArgument>
+              <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
+              </InArgument>
+              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep6_1]</OutArgument>
+            </mxswa:ActivityReference.Arguments>
+          </mxswa:ActivityReference>
+          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.ConditionBranch, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="ConditionBranchStep6">
+            <mxswa:ActivityReference.Arguments>
+              <InArgument x:TypeArguments="x:Boolean" x:Key="Condition">[True]</InArgument>
+            </mxswa:ActivityReference.Arguments>
+            <mxswa:ActivityReference.Properties>
+              <mxswa:ActivityReference x:Key="Then" AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.Composite, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="ConditionBranchStep6">
+                <mxswa:ActivityReference.Properties>
+                  <sco:Collection x:TypeArguments="Variable" x:Key="Variables" />
+                  <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
+                    <Sequence DisplayName="SetVisibilityStep73: Show Booking Reference">
+                      <mcwc:SetVisibility ControlId="tc_bookingreferencefreetext" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="True" />
+                    </Sequence>
+                    <Sequence DisplayName="SetFieldRequiredLevelStep74: Manual Booking reference not Mandatory">
+                      <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;incident&quot;)]" />
+                      <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
+                      <mcwc:SetFieldRequiredLevel ControlId="tc_bookingreferencefreetext" ControlType="standard" DisplayName="SetFieldRequiredLevelStep74" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="None" />
+                    </Sequence>
+                    <Sequence DisplayName="SetVisibilityStep75: Hide Source Market">
+                      <mcwc:SetVisibility ControlId="tc_sourcemarketid" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="False" />
+                    </Sequence>
+                    <Sequence DisplayName="SetVisibilityStep83: Show Summary">
+                      <mcwc:SetVisibility ControlId="description" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="True" />
+                    </Sequence>
+                    <Sequence DisplayName="SetFieldRequiredLevelStep84: Summary Mandatory">
+                      <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;incident&quot;)]" />
+                      <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
+                      <mcwc:SetFieldRequiredLevel ControlId="description" ControlType="standard" DisplayName="SetFieldRequiredLevelStep84" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="Required" />
+                    </Sequence>
+                  </sco:Collection>
+                </mxswa:ActivityReference.Properties>
+              </mxswa:ActivityReference>
+              <x:Null x:Key="Else" />
+              <x:String x:Key="Description"></x:String>
             </mxswa:ActivityReference.Properties>
           </mxswa:ActivityReference>
         </sco:Collection>

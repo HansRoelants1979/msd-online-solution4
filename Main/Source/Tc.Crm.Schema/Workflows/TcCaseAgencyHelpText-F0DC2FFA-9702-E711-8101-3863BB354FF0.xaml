@@ -47,14 +47,14 @@
                 <mxswa:ActivityReference.Properties>
                   <sco:Collection x:TypeArguments="Variable" x:Key="Variables" />
                   <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
-                    <Sequence DisplayName="SetMessageStep1: New Recommendation">
+                    <Sequence DisplayName="SetMessageStep1: Display warning to user">
                       <mcwc:SetMessage ControlId="tc_3rdpartyagentid" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" Level="RECOMMENDATION">
                         <mcwc:SetMessage.Activities>
                           <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.ActionComposite, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="ActionStep5: Action step">
                             <mxswa:ActivityReference.Properties>
                               <sco:Collection x:TypeArguments="Variable" x:Key="Variables" />
                               <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
-                                <Sequence DisplayName="SetAttributeValueStep1: New Action">
+                                <Sequence DisplayName="SetAttributeValueStep1: Clear Value">
                                   <Sequence.Variables>
                                     <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep1_1" />
                                   </Sequence.Variables>
@@ -72,12 +72,12 @@
                                 </Sequence>
                               </sco:Collection>
                               <sco:Collection x:TypeArguments="mcwo:StepLabel" x:Key="StepLabels">
-                                <mcwo:StepLabel Description="Only use this field to record the 3rd Party Agent details i.e. Peter Jones from 'A Great Agency'.&#xA;If you need to create a new 3rd Party Agent please ensure you link the agent to an existing Account record." LabelId="bbbce6cd-50d2-45aa-949a-68964320394d" LanguageCode="1033" />
+                                <mcwo:StepLabel Description="Only use this field to record the 3rd Party Agent details i.e. Peter Jones from 'A Great Agency'.&#xA;If you need to create a new 3rd Party Agent please ensure you link the agent to an existing Account record." LabelId="3b441426-a867-4811-af7a-ee5be2648b96" LanguageCode="1033" />
                               </sco:Collection>
                               <x:Null x:Key="ActionId" />
                               <x:Int32 x:Key="ActionType">4</x:Int32>
-                              <s:Guid x:Key="ProcessId">2a5c41b3-781d-4a52-bb78-d7b16dab82ae</s:Guid>
-                              <x:String x:Key="UniqueName">id_ab059fbd557349dab8cd11480fcdcfedActionStep</x:String>
+                              <s:Guid x:Key="ProcessId">8e8b40bd-c3e2-46ba-a8a9-5bd7e28eaf17</s:Guid>
+                              <x:String x:Key="UniqueName">id_69943febed004b9a805d96018beb987aActionStep</x:String>
                               <x:Null x:Key="TriggerEvents" />
                               <x:Null x:Key="ActionControl" />
                             </mxswa:ActivityReference.Properties>

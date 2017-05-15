@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workflow WorkflowId="{ed5bdced-191e-e711-8110-1458d041f8e8}" Name="Tc.Letter.UpdateCategoryAsLetter" Description="Updating Category to display a column in a view for Letter printing">
+  <XamlFileName>/Workflows/TcLetterUpdateCategoryAsLetter-ED5BDCED-191E-E711-8110-1458D041F8E8.xaml</XamlFileName>
+  <Type>1</Type>
+  <Subprocess>0</Subprocess>
+  <Category>2</Category>
+  <Mode>1</Mode>
+  <Scope>4</Scope>
+  <OnDemand>0</OnDemand>
+  <TriggerOnCreate>0</TriggerOnCreate>
+  <TriggerOnDelete>0</TriggerOnDelete>
+  <AsyncAutodelete>0</AsyncAutodelete>
+  <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+  <StateCode>1</StateCode>
+  <StatusCode>2</StatusCode>
+  <RunAs>1</RunAs>
+  <IsTransacted>1</IsTransacted>
+  <IntroducedVersion>1.0.0.70</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <BusinessProcessType>0</BusinessProcessType>
+  <PrimaryEntity>Letter</PrimaryEntity>
+  <ProcessTriggers>
+    <ProcessTrigger processtriggerid="{6bff70b1-f328-e711-8112-1458d041f8e8}">
+      <controltype>1</controltype>
+      <scope>1</scope>
+      <controlname>description</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Letter</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{6cff70b1-f328-e711-8112-1458d041f8e8}">
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Letter</primaryentitytypecode>
+    </ProcessTrigger>
+  </ProcessTriggers>
+</Workflow>

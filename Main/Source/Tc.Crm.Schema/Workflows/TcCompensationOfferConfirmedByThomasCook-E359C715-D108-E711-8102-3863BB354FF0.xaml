@@ -24,7 +24,7 @@
           <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep3_1" />
         </sco:Collection>
         <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
-          <mxswa:GetEntityProperty Attribute="tc_thomascookofferconfirmation" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[ConditionBranchStep2_1]">
+          <mxswa:GetEntityProperty Attribute="tc_offerstatus" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[ConditionBranchStep2_1]">
             <mxswa:GetEntityProperty.TargetType>
               <InArgument x:TypeArguments="s:Type">
                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
@@ -63,12 +63,6 @@
                     <Sequence DisplayName="SetDisplayModeStep1: Lock Amount">
                       <mcwc:SetDisplayMode ControlId="tc_amount" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsReadOnly="True" />
                     </Sequence>
-                    <Sequence DisplayName="SetDisplayModeStep3: Lock Acknowledge">
-                      <mcwc:SetDisplayMode ControlId="tc_customerofferacknowledgement" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsReadOnly="True" />
-                    </Sequence>
-                    <Sequence DisplayName="SetDisplayModeStep4: Lock Offer Status">
-                      <mcwc:SetDisplayMode ControlId="tc_offerstatus" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsReadOnly="True" />
-                    </Sequence>
                   </sco:Collection>
                 </mxswa:ActivityReference.Properties>
               </mxswa:ActivityReference>
@@ -97,12 +91,6 @@
                   <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
                     <Sequence DisplayName="SetDisplayModeStep5: Unlock Amount">
                       <mcwc:SetDisplayMode ControlId="tc_amount" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsReadOnly="False" />
-                    </Sequence>
-                    <Sequence DisplayName="SetDisplayModeStep7: Unlock Acknowledge">
-                      <mcwc:SetDisplayMode ControlId="tc_customerofferacknowledgement" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsReadOnly="False" />
-                    </Sequence>
-                    <Sequence DisplayName="SetDisplayModeStep6: Unlock Offer Status">
-                      <mcwc:SetDisplayMode ControlId="tc_offerstatus" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsReadOnly="False" />
                     </Sequence>
                   </sco:Collection>
                 </mxswa:ActivityReference.Properties>

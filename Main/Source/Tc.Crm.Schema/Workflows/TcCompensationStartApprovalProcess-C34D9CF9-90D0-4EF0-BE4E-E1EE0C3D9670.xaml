@@ -68,7 +68,7 @@
                     <Sequence DisplayName="StopWorkflowStep3">
                       <Sequence.Variables>
                         <Variable x:TypeArguments="x:Object" Name="StopWorkflowStep3_1" />
-                        <Variable x:TypeArguments="x:String" Default="24131ae5-98c7-4a5d-8266-14627a68243e" Name="stepLabelLabelId" />
+                        <Variable x:TypeArguments="x:String" Default="8cd21cbb-763f-4b19-aecd-686cc80b437b" Name="stepLabelLabelId" />
                         <Variable x:TypeArguments="x:String" Name="stepLabelDescription">
                           <Variable.Default>
                             <Literal x:TypeArguments="x:String" Value="" />
@@ -393,6 +393,39 @@
                       <mxswa:CreateEntity EntityId="{x:Null}" DisplayName="CreateStep5" Entity="[CreatedEntities(&quot;CreateStep5_localParameter#Temp&quot;)]" EntityName="tc_compensationapproval" />
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;CreateStep5_localParameter&quot;)]" Value="[CreatedEntities(&quot;CreateStep5_localParameter#Temp&quot;)]" />
                     </Sequence>
+                    <Sequence DisplayName="AssignStep9">
+                      <Sequence.Variables>
+                        <Variable x:TypeArguments="x:Object" Name="AssignStep9_1" />
+                        <Variable x:TypeArguments="x:Object" Name="AssignStep9_2" />
+                        <Variable x:TypeArguments="x:Object" Name="AssignStep9_3" />
+                      </Sequence.Variables>
+                      <mxswa:GetEntityProperty Attribute="ownerid" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[AssignStep9_2]">
+                        <mxswa:GetEntityProperty.TargetType>
+                          <InArgument x:TypeArguments="s:Type">
+                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:EntityReference" />
+                          </InArgument>
+                        </mxswa:GetEntityProperty.TargetType>
+                      </mxswa:GetEntityProperty>
+                      <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                        <mxswa:ActivityReference.Arguments>
+                          <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
+                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { AssignStep9_2 }]</InArgument>
+                          <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:EntityReference" />
+                          </InArgument>
+                          <OutArgument x:TypeArguments="x:Object" x:Key="Result">[AssignStep9_1]</OutArgument>
+                        </mxswa:ActivityReference.Arguments>
+                      </mxswa:ActivityReference>
+                      <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                        <mxswa:ActivityReference.Arguments>
+                          <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.EntityReference, AssignStep9_1, "Owner" }]</InArgument>
+                          <x:Null x:Key="TargetType" />
+                          <OutArgument x:TypeArguments="x:Object" x:Key="Result">[AssignStep9_3]</OutArgument>
+                        </mxswa:ActivityReference.Arguments>
+                      </mxswa:ActivityReference>
+                      <mxswa:AssignEntity DisplayName="AssignStep9" Entity="[CreatedEntities(&quot;CreateStep5_localParameter&quot;)]" EntityId="[CreatedEntities(&quot;CreateStep5_localParameter&quot;).Id]" EntityName="tc_compensationapproval" Owner="[DirectCast(AssignStep9_3, Microsoft.Xrm.Sdk.EntityReference)]" />
+                    </Sequence>
                     <Sequence DisplayName="UpdateStep8">
                       <Sequence.Variables>
                         <Variable x:TypeArguments="x:Object" Name="UpdateStep8_1" />
@@ -422,7 +455,7 @@
                     <Sequence DisplayName="StopWorkflowStep7">
                       <Sequence.Variables>
                         <Variable x:TypeArguments="x:Object" Name="StopWorkflowStep7_1" />
-                        <Variable x:TypeArguments="x:String" Default="b34cf65c-c295-4b9e-9bc5-de06828238db" Name="stepLabelLabelId" />
+                        <Variable x:TypeArguments="x:String" Default="d6577f6e-be95-46d8-a3c6-0d4d355f649a" Name="stepLabelLabelId" />
                         <Variable x:TypeArguments="x:String" Name="stepLabelDescription">
                           <Variable.Default>
                             <Literal x:TypeArguments="x:String" Value="" />

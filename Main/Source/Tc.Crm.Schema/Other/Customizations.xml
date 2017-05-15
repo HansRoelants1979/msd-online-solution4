@@ -84,6 +84,13 @@
               <RelationshipDisplayName>tc_incident_tc_compensationline</RelationshipDisplayName>
               <ProfileItemAssociationEntityFilter></ProfileItemAssociationEntityFilter>
             </MobileOfflineProfileItemAssociation>
+            <MobileOfflineProfileItemAssociation MobileOfflineProfileItemAssociationId="97e68c0b-c436-e711-8104-e0071b66a0a1" Name="Tc.IDS.AssistanceRequest">
+              <MobileOfflineProfileItemAssociationId>{97E68C0B-C436-E711-8104-E0071B66A0A1}</MobileOfflineProfileItemAssociationId>
+              <MobileOfflineProfileItemId>{D6C3DE02-AFF3-E611-810B-1458D041F8E8}</MobileOfflineProfileItemId>
+              <Name>Tc.IDS.AssistanceRequest</Name>
+              <RelationshipDisplayName>incident_tc_assistancerequests</RelationshipDisplayName>
+              <ProfileItemAssociationEntityFilter></ProfileItemAssociationEntityFilter>
+            </MobileOfflineProfileItemAssociation>
             <MobileOfflineProfileItemAssociation MobileOfflineProfileItemAssociationId="4f6ee647-bd08-e711-810a-3863bb34fb48" Name="Tc.Ids.Rep.CaseLine">
               <MobileOfflineProfileItemAssociationId>{4F6EE647-BD08-E711-810A-3863BB34FB48}</MobileOfflineProfileItemAssociationId>
               <MobileOfflineProfileItemId>{D6C3DE02-AFF3-E611-810B-1458D041F8E8}</MobileOfflineProfileItemId>
@@ -95,8 +102,8 @@
           <MobileOfflineProfileItemId>{D6C3DE02-AFF3-E611-810B-1458D041F8E8}</MobileOfflineProfileItemId>
           <RegardingObjectId>{C7087ACD-B0EF-E611-8106-3863BB340DD8}</RegardingObjectId>
           <Name>Tc.Ids.Rep.Case</Name>
-          <RecordDistributionCriteria>0</RecordDistributionCriteria>
-          <RecordsOwnedByMe>0</RecordsOwnedByMe>
+          <RecordDistributionCriteria>2</RecordDistributionCriteria>
+          <RecordsOwnedByMe>1</RecordsOwnedByMe>
           <RecordsOwnedByMyTeam>0</RecordsOwnedByMyTeam>
           <RecordsOwnedByMyBusinessUnit>0</RecordsOwnedByMyBusinessUnit>
           <ProfileItemEntityFilter></ProfileItemEntityFilter>
@@ -629,8 +636,8 @@
           <successconditionsxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="statecode"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="2&amp;#59;1" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</successconditionsxml>
           <sequencenumber>3</sequencenumber>
           <workflowid>f78bceef-f028-4eb1-949e-da4acacc4668</workflowid>
-          <failureafter>60</failureafter>
-          <warnafter>30</warnafter>
+          <failureafter>20160</failureafter>
+          <warnafter>10080</warnafter>
         </SlaItem>
       </SlaItems>
     </Sla>

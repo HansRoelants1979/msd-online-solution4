@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workflow WorkflowId="{f2da76d1-232c-e711-810e-3863bb34fb48}" Name="Set Name as Other Email" Description="Click to add description">
+  <XamlFileName>/Workflows/SetNameasOtherEmail-F2DA76D1-232C-E711-810E-3863BB34FB48.xaml</XamlFileName>
+  <Type>1</Type>
+  <Subprocess>0</Subprocess>
+  <Category>2</Category>
+  <Mode>1</Mode>
+  <Scope>4</Scope>
+  <OnDemand>0</OnDemand>
+  <TriggerOnCreate>0</TriggerOnCreate>
+  <TriggerOnDelete>0</TriggerOnDelete>
+  <AsyncAutodelete>0</AsyncAutodelete>
+  <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+  <StateCode>1</StateCode>
+  <StatusCode>2</StatusCode>
+  <RunAs>1</RunAs>
+  <IsTransacted>1</IsTransacted>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <BusinessProcessType>0</BusinessProcessType>
+  <PrimaryEntity>tc_alternativeemail</PrimaryEntity>
+  <ProcessTriggers>
+    <ProcessTrigger processtriggerid="{39f07397-6231-e711-8112-1458d041f8e8}">
+      <controltype>1</controltype>
+      <formid>{aa5e448a-b707-4364-8059-52eefb03c5db}</formid>
+      <scope>1</scope>
+      <controlname>emailaddress</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_alternativeemail</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{3af07397-6231-e711-8112-1458d041f8e8}">
+      <formid>{aa5e448a-b707-4364-8059-52eefb03c5db}</formid>
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_alternativeemail</primaryentitytypecode>
+    </ProcessTrigger>
+  </ProcessTriggers>
+</Workflow>

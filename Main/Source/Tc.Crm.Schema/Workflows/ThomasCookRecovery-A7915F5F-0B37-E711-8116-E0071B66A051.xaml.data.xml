@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workflow WorkflowId="{a7915f5f-0b37-e711-8116-e0071b66a051}" Name="Thomas Cook Recovery" Description="If Thomas Cook equal no do not show options, if yes show options on recovery form">
+  <XamlFileName>/Workflows/ThomasCookRecovery-A7915F5F-0B37-E711-8116-E0071B66A051.xaml</XamlFileName>
+  <Type>1</Type>
+  <Subprocess>0</Subprocess>
+  <Category>2</Category>
+  <Mode>1</Mode>
+  <Scope>4</Scope>
+  <OnDemand>0</OnDemand>
+  <TriggerOnCreate>0</TriggerOnCreate>
+  <TriggerOnDelete>0</TriggerOnDelete>
+  <AsyncAutodelete>0</AsyncAutodelete>
+  <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+  <StateCode>1</StateCode>
+  <StatusCode>2</StatusCode>
+  <RunAs>1</RunAs>
+  <IsTransacted>1</IsTransacted>
+  <IntroducedVersion>1.0.0.98</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <BusinessProcessType>0</BusinessProcessType>
+  <PrimaryEntity>tc_recovery</PrimaryEntity>
+  <ProcessTriggers>
+    <ProcessTrigger processtriggerid="{0ba16c58-1237-e711-8116-e0071b66a051}">
+      <controltype>1</controltype>
+      <scope>1</scope>
+      <controlname>tc_thomascook</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_recovery</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{0ca16c58-1237-e711-8116-e0071b66a051}">
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_recovery</primaryentitytypecode>
+    </ProcessTrigger>
+  </ProcessTriggers>
+</Workflow>

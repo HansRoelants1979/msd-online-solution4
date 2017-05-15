@@ -6,35 +6,43 @@
   <FormActivationState>1</FormActivationState>
   <form maxWidth="1900">
     <tabs>
-      <tab id="{b95e9ebc-bba8-4349-8d55-d4704c3bafb5}" name="tab_1" expanded="true" locklevel="0" showlabel="false">
+      <tab id="{b95e9ebc-bba8-4349-8d55-d4704c3bafb5}" name="tab_1" showlabel="false" locklevel="0" expanded="true">
         <labels>
           <label description="Tab" languagecode="1033" />
         </labels>
         <columns>
           <column width="33%">
             <sections>
-              <section id="{707d3b49-11a9-4734-a559-f75a0ee8bc4d}" name="tab_1_column_1_section_1" locklevel="0" showlabel="true" celllabelposition="Left" celllabelalignment="Left" labelwidth="115" IsUserDefined="0" showbar="false" columns="1">
+              <section id="{707d3b49-11a9-4734-a559-f75a0ee8bc4d}" name="tab_1_column_1_section_1" showlabel="true" locklevel="0" columns="1" showbar="false" IsUserDefined="0" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
-                  <label description="Case Details" languagecode="1033" />
+                  <label description="CASE DETAILS" languagecode="1033" />
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{ac747569-6c2e-745a-3a65-61c2d6965e50}" locklevel="0" showlabel="true">
+                    <cell id="{39bec54e-7043-99eb-a10c-a5c56b8eb7b2}" showlabel="true" locklevel="0">
                       <labels>
-                        <label description="Booking Reference Found?" languagecode="1033" />
+                        <label description="Type" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_bookingreference" uniqueid="{7192d762-c3a2-e4c7-470e-ee10333c8b59}" datafieldname="tc_bookingreference" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" />
+                      <control disabled="false" id="tc_casetypeid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_casetypeid" />
                     </cell>
                   </row>
                   <row>
-                    <cell id="{5eea8808-76d2-438a-c346-b69e53289a80}" locklevel="0" showlabel="true">
+                    <cell id="{ac747569-6c2e-745a-3a65-61c2d6965e50}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Booking Reference?" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_bookingreference" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="tc_bookingreference" uniqueid="{7192d762-c3a2-e4c7-470e-ee10333c8b59}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{5eea8808-76d2-438a-c346-b69e53289a80}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Booking Reference" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_bookingid" uniqueid="{d8d84c47-7cc5-6325-1c45-8d381ed5150d}" datafieldname="tc_bookingid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}">
+                      <control disabled="false" id="tc_bookingid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_bookingid" uniqueid="{d8d84c47-7cc5-6325-1c45-8d381ed5150d}">
                         <parameters>
                           <AutoResolve>true</AutoResolve>
-                          <DisableMru>false</DisableMru>
+                          <DisableMru>true</DisableMru>
                           <DisableQuickFind>false</DisableQuickFind>
                           <DisableViewPicker>false</DisableViewPicker>
                           <DefaultViewId>{50536415-D0C7-4F4D-A024-8D8B336EFA28}</DefaultViewId>
@@ -44,19 +52,19 @@
                     </cell>
                   </row>
                   <row>
-                    <cell id="{3db18bcb-1300-a31a-5412-4aa3d1c09426}" locklevel="0" showlabel="true">
+                    <cell id="{3db18bcb-1300-a31a-5412-4aa3d1c09426}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Booking Reference" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_bookingreferencefreetext" uniqueid="{7117cc33-0832-22d8-22e6-c23411992d5e}" datafieldname="tc_bookingreferencefreetext" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" />
+                      <control disabled="false" id="tc_bookingreferencefreetext" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_bookingreferencefreetext" uniqueid="{7117cc33-0832-22d8-22e6-c23411992d5e}" />
                     </cell>
                   </row>
                   <row>
-                    <cell id="{cc6559a4-688e-26de-015a-0b034eb14138}" locklevel="0" showlabel="true">
+                    <cell id="{cc6559a4-688e-26de-015a-0b034eb14138}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Source Market" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_sourcemarketid" uniqueid="{0a86dee0-7578-91c7-9592-c9e4872364e1}" datafieldname="tc_sourcemarketid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}">
+                      <control disabled="false" id="tc_sourcemarketid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_sourcemarketid" uniqueid="{0a86dee0-7578-91c7-9592-c9e4872364e1}">
                         <parameters>
                           <AutoResolve>true</AutoResolve>
                           <DisableMru>true</DisableMru>
@@ -70,14 +78,14 @@
                     </cell>
                   </row>
                   <row>
-                    <cell id="{7ed010a1-8bed-7bc4-1053-71466bada05e}" locklevel="0" showlabel="true" visible="false">
+                    <cell id="{7ed010a1-8bed-7bc4-1053-71466bada05e}" showlabel="true" locklevel="0" visible="false">
                       <labels>
                         <label description="Brand" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_brandid" uniqueid="{0bcb3812-2c8c-9eb8-3ec3-5cd184ab6b7e}" datafieldname="tc_brandid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}">
+                      <control disabled="false" id="tc_brandid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_brandid" uniqueid="{0bcb3812-2c8c-9eb8-3ec3-5cd184ab6b7e}">
                         <parameters>
                           <AutoResolve>true</AutoResolve>
-                          <DisableMru>false</DisableMru>
+                          <DisableMru>true</DisableMru>
                           <DisableQuickFind>false</DisableQuickFind>
                           <DisableViewPicker>false</DisableViewPicker>
                           <DefaultViewId>{C03006D9-CF42-410C-8091-E33E7E0E84E9}</DefaultViewId>
@@ -90,14 +98,14 @@
                     </cell>
                   </row>
                   <row>
-                    <cell id="{d2eaa3e0-ec54-a77d-3ada-1d7120e16aa6}" locklevel="0" showlabel="true" visible="false">
+                    <cell id="{d2eaa3e0-ec54-a77d-3ada-1d7120e16aa6}" showlabel="true" locklevel="0" visible="false">
                       <labels>
                         <label description="Destination" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_destinationid" uniqueid="{907ea358-a53d-6818-8ca9-d7b52b7b1c67}" datafieldname="tc_destinationid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}">
+                      <control disabled="false" id="tc_destinationid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_destinationid" uniqueid="{907ea358-a53d-6818-8ca9-d7b52b7b1c67}">
                         <parameters>
                           <AutoResolve>true</AutoResolve>
-                          <DisableMru>false</DisableMru>
+                          <DisableMru>true</DisableMru>
                           <DisableQuickFind>false</DisableQuickFind>
                           <DisableViewPicker>false</DisableViewPicker>
                           <DefaultViewId>{9B55AE0B-D7FC-4A09-A9B3-146004A33911}</DefaultViewId>
@@ -107,14 +115,14 @@
                     </cell>
                   </row>
                   <row>
-                    <cell id="{071d1975-59ee-8b53-6e5c-c76d8000d972}" locklevel="0" showlabel="true" visible="false">
+                    <cell id="{071d1975-59ee-8b53-6e5c-c76d8000d972}" showlabel="true" locklevel="0" visible="false">
                       <labels>
                         <label description="Location" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_locationid" uniqueid="{a65b1766-e76a-6564-55a1-1edaade50700}" datafieldname="tc_locationid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}">
+                      <control disabled="false" id="tc_locationid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_locationid" uniqueid="{a65b1766-e76a-6564-55a1-1edaade50700}">
                         <parameters>
                           <AutoResolve>true</AutoResolve>
-                          <DisableMru>false</DisableMru>
+                          <DisableMru>true</DisableMru>
                           <DisableQuickFind>false</DisableQuickFind>
                           <DisableViewPicker>false</DisableViewPicker>
                           <DefaultViewId>{2F2E31CD-FDF3-4B96-B4B5-FCF728D67FB7}</DefaultViewId>
@@ -127,14 +135,14 @@
                     </cell>
                   </row>
                   <row>
-                    <cell id="{e472932d-55d2-51b8-ad28-e3c6b3377cda}" locklevel="0" showlabel="true" visible="false">
+                    <cell id="{e472932d-55d2-51b8-ad28-e3c6b3377cda}" showlabel="true" locklevel="0" visible="false">
                       <labels>
                         <label description="Gateway" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_gateway" uniqueid="{0db81eaa-a8e4-70ad-a848-065247c4edca}" datafieldname="tc_gateway" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}">
+                      <control disabled="false" id="tc_gateway" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_gateway" uniqueid="{0db81eaa-a8e4-70ad-a848-065247c4edca}">
                         <parameters>
                           <AutoResolve>true</AutoResolve>
-                          <DisableMru>false</DisableMru>
+                          <DisableMru>true</DisableMru>
                           <DisableQuickFind>false</DisableQuickFind>
                           <DisableViewPicker>false</DisableViewPicker>
                           <DefaultViewId>{4E29CB42-F586-45B8-9D57-AF21CEA59536}</DefaultViewId>
@@ -143,15 +151,23 @@
                       </control>
                     </cell>
                   </row>
+                  <row>
+                    <cell id="{91a95b8b-737b-bd25-55ed-6b708c846225}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Departure Date" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_departuredate" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="tc_departuredate" />
+                    </cell>
+                  </row>
                 </rows>
               </section>
             </sections>
           </column>
           <column width="33%">
             <sections>
-              <section id="{5544f04f-7d45-49f2-9b42-538ec21f8b28}" name="tab_1_column_2_section_1" locklevel="0" showlabel="true" celllabelposition="Left" celllabelalignment="Left" labelwidth="115" IsUserDefined="0" showbar="false" columns="1">
+              <section id="{5544f04f-7d45-49f2-9b42-538ec21f8b28}" name="tab_1_column_2_section_1" showlabel="true" locklevel="0" columns="1" showbar="false" IsUserDefined="0" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
-                  <label description="Other details" languagecode="1033" />
+                  <label description="OTHER DETAILS" languagecode="1033" />
                 </labels>
                 <rows>
                   <row>
@@ -161,15 +177,14 @@
                         <label description="Origine " languagecode="1036" />
                         <label description="Ursprung" languagecode="1031" />
                       </labels>
-                      <control id="caseorigincode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="caseorigincode" disabled="false" />
+                      <control disabled="false" id="caseorigincode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="caseorigincode" />
                     </cell>
                   </row>
                   <row>
-                    <cell id="{39bec54e-7043-99eb-a10c-a5c56b8eb7b2}" showlabel="true" locklevel="0">
+                    <cell id="{ba1007b6-d012-000e-b932-6748054732cb}" showlabel="false" userspacer="true">
                       <labels>
-                        <label description="Type" languagecode="1033" />
+                        <label description="" languagecode="1033" />
                       </labels>
-                      <control id="tc_casetypeid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_casetypeid" disabled="false" />
                     </cell>
                   </row>
                   <row>
@@ -179,47 +194,52 @@
                         <label description="Description" languagecode="1036" />
                         <label description="Beschreibung" languagecode="1031" />
                       </labels>
-                      <control id="description" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="description" disabled="false" />
+                      <control disabled="false" id="description" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="description" />
                     </cell>
                   </row>
                   <row>
-                    <cell id="{e37ca949-7048-b963-e0b2-01002626588c}" showlabel="true" locklevel="0">
+                    <cell id="{e37ca949-7048-b963-e0b2-01002626588c}" showlabel="true" locklevel="1" visible="false">
                       <labels>
                         <label description="Owner" languagecode="1033" />
                         <label description="Propriétaire" languagecode="1036" />
                         <label description="Besitzer" languagecode="1031" />
                       </labels>
-                      <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" disabled="false" />
+                      <control disabled="false" id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" uniqueid="{047a270d-52b0-25be-2549-e5d850cc7e71}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                        </parameters>
+                      </control>
                     </cell>
                   </row>
                   <row>
-                    <cell id="{230daa7e-4cd7-c34a-7078-34b17627e0d8}" showlabel="true" locklevel="0">
+                    <cell id="{230daa7e-4cd7-c34a-7078-34b17627e0d8}" showlabel="true" locklevel="0" visible="false">
                       <labels>
                         <label description="First Response By" languagecode="1033" />
                         <label description="Première réponse par" languagecode="1036" />
                         <label description="Erste Antwort bis" languagecode="1031" />
                       </labels>
-                      <control id="responseby" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="responseby" disabled="false" />
+                      <control disabled="false" id="responseby" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="responseby" uniqueid="{c2b3cd1e-0c89-23c2-854e-eee72b020b30}" />
                     </cell>
                   </row>
                   <row>
-                    <cell id="{9d82b2d6-58a6-300d-d38c-1870d5885315}" showlabel="true" locklevel="0">
+                    <cell id="{9d82b2d6-58a6-300d-d38c-1870d5885315}" showlabel="true" locklevel="0" visible="false">
                       <labels>
                         <label description="Subject" languagecode="1033" />
                         <label description="Sujet" languagecode="1036" />
                         <label description="Betreff" languagecode="1031" />
                       </labels>
-                      <control id="subjectid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="subjectid" disabled="false" />
+                      <control disabled="false" id="subjectid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="subjectid" uniqueid="{aeac8ad2-2920-cd3c-e352-e25acc50da51}" />
                     </cell>
                   </row>
                   <row>
-                    <cell id="{1ec50404-e021-0e1b-4045-6b7d45334160}" showlabel="true" locklevel="0">
+                    <cell id="{1ec50404-e021-0e1b-4045-6b7d45334160}" showlabel="true" locklevel="0" visible="false">
                       <labels>
                         <label description="Resolve By" languagecode="1033" />
                         <label description="Résoudre en fonction de" languagecode="1036" />
                         <label description="Abschließen bis" languagecode="1031" />
                       </labels>
-                      <control id="resolveby" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="resolveby" disabled="false" />
+                      <control disabled="false" id="resolveby" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="resolveby" uniqueid="{8674a466-8a9a-6798-5764-7746d6b225c2}" />
                     </cell>
                   </row>
                 </rows>
@@ -228,9 +248,9 @@
           </column>
           <column width="33%">
             <sections>
-              <section id="{0aa0925e-5a4c-4834-8858-5286967d1567}" name="tab_1_column_3_section_1" locklevel="0" showlabel="true" celllabelposition="Left" celllabelalignment="Left" labelwidth="115" IsUserDefined="0" showbar="false" columns="1">
+              <section id="{0aa0925e-5a4c-4834-8858-5286967d1567}" name="tab_1_column_3_section_1" showlabel="true" locklevel="0" columns="1" showbar="false" IsUserDefined="0" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
-                  <label description="Customer details" languagecode="1033" />
+                  <label description="CUSTOMER DETAILS" languagecode="1033" />
                 </labels>
                 <rows>
                   <row>
@@ -240,23 +260,20 @@
                         <label description="Client" languagecode="1036" />
                         <label description="Kunde" languagecode="1031" />
                       </labels>
-                      <control id="customerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="customerid" disabled="false" />
+                      <control disabled="false" id="customerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="customerid" uniqueid="{52cc0035-c659-a337-e3d1-1c6d0d4d125e}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>true</DisableMru>
+                        </parameters>
+                      </control>
                     </cell>
                   </row>
                   <row>
-                    <cell id="{7ecd4713-7ac1-ac5c-6171-0964671a8eb1}" showlabel="true" locklevel="0">
+                    <cell id="{15623791-9cac-44dd-e3ba-2c92ed97aad0}" showlabel="true" locklevel="0">
                       <labels>
-                        <label description="3rd Party Involved" languagecode="1033" />
+                        <label description="No Customer?" languagecode="1033" />
                       </labels>
-                      <control id="tc_3rdpartyinvolved" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="tc_3rdpartyinvolved" disabled="false" />
-                    </cell>
-                  </row>
-                  <row>
-                    <cell id="{3c2763e2-822a-64c4-6b9d-206822e17dab}" showlabel="true" locklevel="0">
-                      <labels>
-                        <label description="3rd Party Agent" languagecode="1033" />
-                      </labels>
-                      <control id="tc_3rdpartyagentid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_3rdpartyagentid" disabled="false" />
+                      <control disabled="false" id="tc_customerenquiry" classid="{B0C6723A-8503-4fd7-BB28-C8A06AC933C2}" datafieldname="tc_customerenquiry" uniqueid="{442e951e-7c8d-4536-d0d7-d2a591695a74}" />
                     </cell>
                   </row>
                   <row>
@@ -264,17 +281,26 @@
                       <labels>
                         <label description="Comm. Method" languagecode="1033" />
                       </labels>
-                      <control id="tc_preferredmethodofcommunication" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_preferredmethodofcommunication" disabled="false" uniqueid="{418154c4-2685-6a99-0801-7185b9c40c6d}" />
+                      <control disabled="false" id="tc_preferredmethodofcommunication" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_preferredmethodofcommunication" uniqueid="{418154c4-2685-6a99-0801-7185b9c40c6d}" />
                     </cell>
                   </row>
                   <row>
-                    <cell id="{38690a1a-8c2a-38eb-9626-cd39e2b83467}" showlabel="true" locklevel="0">
+                    <cell id="{38690a1a-8c2a-38eb-9626-cd39e2b83467}" showlabel="true" locklevel="0" visible="false">
                       <labels>
                         <label description="Currency" languagecode="1033" />
                         <label description="Devise" languagecode="1036" />
                         <label description="Währung" languagecode="1031" />
                       </labels>
-                      <control id="transactioncurrencyid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="transactioncurrencyid" disabled="false" />
+                      <control disabled="false" id="transactioncurrencyid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="transactioncurrencyid" uniqueid="{7b030ea8-d175-d49e-e663-7a87e589e552}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{CD5625B0-DDA8-4EE2-B13F-B9331E027C8A}</DefaultViewId>
+                          <AllowFilterOff>false</AllowFilterOff>
+                        </parameters>
+                      </control>
                     </cell>
                   </row>
                 </rows>
@@ -291,14 +317,14 @@
       <Library name="tc_Tc.Crm.Scripts.Events.Case.js" libraryUniqueId="{ec964a7a-1161-d363-6610-556dbdbba7aa}" />
     </formLibraries>
     <events>
-      <event name="onchange" application="false" active="false" attribute="tc_bookingid">
+      <event name="onchange" attribute="tc_bookingid" active="false" application="false">
         <Handlers>
-          <Handler handlerUniqueId="{23ad11ac-b9d0-ada3-2c27-8651922917ba}" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChange" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" enabled="true" passExecutionContext="false" parameters="" />
+          <Handler parameters="" passExecutionContext="false" enabled="true" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChange" handlerUniqueId="{23ad11ac-b9d0-ada3-2c27-8651922917ba}" />
         </Handlers>
       </event>
-      <event name="onchange" application="false" active="false" attribute="tc_sourcemarketid">
+      <event name="onchange" attribute="tc_sourcemarketid" active="false" application="false">
         <Handlers>
-          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChange" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{0b7cc25a-e78c-a0b8-d709-d08d3c335232}" enabled="true" parameters="" passExecutionContext="false" />
+          <Handler parameters="" passExecutionContext="false" enabled="true" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChange" handlerUniqueId="{0b7cc25a-e78c-a0b8-d709-d08d3c335232}" />
         </Handlers>
       </event>
     </events>

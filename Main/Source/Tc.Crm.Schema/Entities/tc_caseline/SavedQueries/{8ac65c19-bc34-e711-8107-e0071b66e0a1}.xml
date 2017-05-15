@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>0</isdefault>
+  <returnedtypecode>10049</returnedtypecode>
+  <savedqueryid>{8ac65c19-bc34-e711-8107-e0071b66e0a1}</savedqueryid>
+  <layoutxml>
+    <grid name="resultset" icon="1" preview="1" select="1" jump="tc_name" object="10049">
+      <row id="tc_caselineid" name="result">
+        <cell name="tc_caseid" width="100" />
+        <cell name="aa.tc_hotelid" width="200" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_category3id" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>0</querytype>
+  <fetchxml>
+    <fetch mapping="logical" output-format="xml-platform" version="1.0" distinct="false">
+      <entity name="tc_caseline">
+        <order descending="false" attribute="tc_caseid" />
+        <attribute name="tc_caseid" />
+        <link-entity name="tc_bookingaccommodation" alias="aa" to="tc_bookingaccommodationid" from="tc_bookingaccommodationid">
+          <link-entity name="tc_hotel" alias="ab" to="tc_hotelid" from="tc_hotelid">
+            <link-entity name="team" alias="ac" to="owningteam" from="teamid">
+              <filter type="and">
+                <condition attribute="administratorid" operator="eq-userid" />
+              </filter>
+            </link-entity>
+          </link-entity>
+          <attribute name="tc_hotelid" />
+        </link-entity>
+        <attribute name="tc_category3id" />
+        <attribute name="tc_caselineid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.94</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Cases by Hotel" languagecode="1033" />
+  </LocalizedNames>
+</savedquery>

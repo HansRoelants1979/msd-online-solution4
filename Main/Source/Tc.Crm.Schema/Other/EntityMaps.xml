@@ -61,6 +61,14 @@
         <AttributeSource>tc_mandatoryconditionsmet</AttributeSource>
         <AttributeTarget>tc_mandatoryconditionsmet</AttributeTarget>
       </AttributeMap>
+      <AttributeMap>
+        <AttributeSource>tc_producttype</AttributeSource>
+        <AttributeTarget>tc_producttype</AttributeTarget>
+      </AttributeMap>
+      <AttributeMap>
+        <AttributeSource>transactioncurrencyid</AttributeSource>
+        <AttributeTarget>transactioncurrencyid</AttributeTarget>
+      </AttributeMap>
     </AttributeMaps>
   </EntityMap>
   <EntityMap>
@@ -298,6 +306,11 @@
   <EntityMap>
     <EntitySource>tc_caseline</EntitySource>
     <EntityTarget>tc_compensationline</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_caseline</EntitySource>
+    <EntityTarget>tc_recovery</EntityTarget>
     <AttributeMaps />
   </EntityMap>
   <EntityMap>

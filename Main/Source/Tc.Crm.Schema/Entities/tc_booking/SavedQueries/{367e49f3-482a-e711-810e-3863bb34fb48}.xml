@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>0</isdefault>
+  <returnedtypecode>10026</returnedtypecode>
+  <savedqueryid>{367e49f3-482a-e711-810e-3863bb34fb48}</savedqueryid>
+  <layoutxml>
+    <grid name="resultset" object="10026" jump="tc_name" select="1" preview="1" icon="1">
+      <row name="result" id="tc_bookingid">
+        <cell name="tc_name" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_bookingdate" width="100" />
+        <cell name="tc_departuredate" width="100" />
+        <cell name="tc_returndate" width="100" />
+        <cell name="ownerid" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_destinationgatewayid" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_sourcemarketid" width="100" />
+        <cell name="tc_touroperatorid" width="100" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>0</querytype>
+  <fetchxml>
+    <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
+      <entity name="tc_booking">
+        <attribute name="tc_name" />
+        <attribute name="tc_returndate" />
+        <attribute name="ownerid" />
+        <attribute name="tc_departuredate" />
+        <attribute name="tc_bookingdate" />
+        <order attribute="tc_departuredate" descending="false" />
+        <order attribute="tc_returndate" descending="false" />
+        <filter type="and">
+          <condition attribute="tc_departuredate" operator="last-x-days" value="30" />
+          <condition attribute="tc_returndate" operator="next-x-days" value="30" />
+        </filter>
+        <link-entity name="systemuser" from="systemuserid" to="owninguser" alias="aa"></link-entity>
+        <attribute name="tc_touroperatorid" />
+        <attribute name="tc_sourcemarketid" />
+        <attribute name="tc_destinationgatewayid" />
+        <attribute name="tc_bookingid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.85</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Bookings not allocated to hotel team" languagecode="1033" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description description="To show bookings where bookings in resort (today &gt;= departure date &amp; today &lt;= return date) are not owned by a 'Hotel Team'" languagecode="1033" />
+  </Descriptions>
+</savedquery>

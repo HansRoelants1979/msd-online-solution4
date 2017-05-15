@@ -1,6 +1,3 @@
-//<script src ="scripts/es6promise.js" type ="text/javascript"></script>
-//<script src ="scripts/Tc.Crm.Scripts.Common.js" type ="text/javascript"></script>
-
 if (typeof (Tc) === "undefined") {
     Tc = {
         __namespace: true
@@ -37,7 +34,7 @@ Tc.Crm.Scripts.Events.Case = (function () {
 
     var GetTheSourceMarketCurrency = function () {
 
-        
+
         console.log("Get The Source Market Currency - Start");
         if (Xrm.Page.getControl(CASE_TYPE_CONTROL_BOOKINGREF).getAttribute().getValue() == true) {
 
@@ -48,8 +45,7 @@ Tc.Crm.Scripts.Events.Case = (function () {
                 var BookingId = Xrm.Page.getControl(CASE_BOOKING_NUMBER).getAttribute().getValue()[0].id;
                 if (BookingId != null) {
 
-                    BookingId = BookingId.replace("{", "").replace("}", "");
-                    debugger;
+                    BookingId = BookingId.replace("{", "").replace("}", "");                
 
                     var SourceMarketReceivedPromise = getBooking(BookingId).then(
                         function (bookingResponse) {
@@ -60,16 +56,13 @@ Tc.Crm.Scripts.Events.Case = (function () {
                                 return getSourceMarketCurrency(sourceMarketId);
                             }
 
-                            else {
-                                alert("Source Market is not associated with Booking");
+                            else {                                
+                                Xrm.Utility.alertDialog("Source Market is not associated with Booking");
                                 throw new Error("Source Market is not associated with Booking");
                             }
 
-
                         }).catch(function (err) {
-
-                            throw new Error("Source Market is not associated with Booking");                        
-
+                            throw new Error("Source Market is not associated with Booking");
                         });
 
                     var SourceMarketCurrency = SourceMarketReceivedPromise.then(
@@ -82,10 +75,10 @@ Tc.Crm.Scripts.Events.Case = (function () {
                            return getSourceMarketCurrencyname(Currencyid);
                        }
                        else {
-                           alert("Currency is not associated with SourceMarket");
+                           Xrm.Utility.alertDialog("Currency is not associated with SourceMarket");
                            throw new Error("Currency is not associated with SourceMarket");
                        }
-                       
+
 
                    }).catch(function (err) {
                        throw new Error("Source Market is not associated with Booking");
@@ -107,9 +100,7 @@ Tc.Crm.Scripts.Events.Case = (function () {
 
 
                    }).catch(function (err) {
-
                        throw new Error("Currency  is not associated with Source Market");
-
                    });
 
                 }
@@ -136,16 +127,12 @@ Tc.Crm.Scripts.Events.Case = (function () {
                             }
 
                             else {
-                                alert("Currency is not associated with SourceMarket");
+                                Xrm.Utility.alertDialog("Currency is not associated with SourceMarket");                               
                                 throw new Error("Currency is not associated with SourceMarket");
                             }
-
-                            alert("success");
-                        }).catch(function (err) {
-
-                            throw new Error("Currency  is not associated with Source Market");
-
                             
+                        }).catch(function (err) {
+                            throw new Error("Currency  is not associated with Source Market");
                         });
 
 
@@ -167,7 +154,6 @@ Tc.Crm.Scripts.Events.Case = (function () {
                        }).catch(function (err) {
 
                            throw new Error("Currency  is not associated with Source Market");
-
                            //Exception Handling functionality, we can get exception message by using [err.message]
 
                        });
@@ -184,27 +170,26 @@ Tc.Crm.Scripts.Events.Case = (function () {
     function getBooking(bookingId) {
 
         var query = "?$select=_tc_sourcemarketid_value";
-        var entityName = "tc_booking";
+        var entityName = "tc_bookings";
         var id = bookingId;
         return Tc.Crm.Scripts.Common.GetById(entityName, id, query);
 
     }
 
     function getSourceMarketCurrency(sourcMarketId) {
-        var query = "?$select=_transactioncurrencyid_value";        
-        var entityName = "tc_countrie";
+        var query = "?$select=_transactioncurrencyid_value";
+        var entityName = "tc_countries";
         return Tc.Crm.Scripts.Common.GetById(entityName, sourcMarketId, query);
     }
 
 
     function getSourceMarketCurrencyname(Currencyid) {
         var query = "?$select=currencyname";
-        var entityName = "transactioncurrencie";
+        var entityName = "transactioncurrencies";
         return Tc.Crm.Scripts.Common.GetById(entityName, Currencyid, query);
     }
-    function MandatoryMetConditions() {
-        debugger;
-     
+    function MandatoryMetConditions() {       
+
         if (Xrm.Page.getControl("tc_bookingreference").getAttribute().getValue() == true) {
             if (Xrm.Page.getControl("tc_mandatoryconditionsmet").getAttribute().getValue() == false) {
                 if (Xrm.Page.getControl("tc_casetypeid").getAttribute().getValue() != null) {
@@ -214,7 +199,8 @@ Tc.Crm.Scripts.Events.Case = (function () {
                             Xrm.Page.getControl("tc_istheholidaystoppingshorterthanplanned").getAttribute().getValue() != null &&
                             Xrm.Page.getControl("tc_3rdpartyresponserequired").getAttribute().getValue() != null &&
                             Xrm.Page.getControl("tc_preferredmethodofcommunication").getAttribute().getValue() != null &&
-                            Xrm.Page.getControl("caseorigincode").getAttribute().getValue() != null
+                            Xrm.Page.getControl("caseorigincode").getAttribute().getValue() != null &&
+                            Xrm.Page.getControl("description").getAttribute().getValue() != null
                             ) {
                             Xrm.Page.getControl("tc_mandatoryconditionsmet").getAttribute().setValue(true);
                             Xrm.Page.data.entity.save();
@@ -238,9 +224,10 @@ Tc.Crm.Scripts.Events.Case = (function () {
                             Xrm.Page.getControl("tc_brandid").getAttribute().getValue() != null &&
                             Xrm.Page.getControl("tc_destinationid").getAttribute().getValue() != null &&
                             Xrm.Page.getControl("tc_locationid").getAttribute().getValue() != null &&
-                            Xrm.Page.getControl("tc_gateway").getAttribute().getValue() != null
+                            Xrm.Page.getControl("tc_gateway").getAttribute().getValue() != null &&
+                            Xrm.Page.getControl("description").getAttribute().getValue() != null &&
+                            Xrm.Page.getControl("tc_departuredate").getAttribute().getValue() != null
                             ) {
-
                             Xrm.Page.getControl("tc_mandatoryconditionsmet").getAttribute().setValue(true);
                             Xrm.Page.data.entity.save();
                         }

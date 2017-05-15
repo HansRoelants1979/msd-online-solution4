@@ -23,7 +23,6 @@
   <fetchxml>
     <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
       <entity name="tc_bookingtransfer">
-        <attribute name="tc_transfertype" />
         <attribute name="tc_startdateandtime" />
         <attribute name="tc_enddateandtime" />
         <attribute name="tc_departuregatewayid" />
@@ -36,6 +35,7 @@
             <value>2</value>
           </condition>
         </filter>
+        <attribute name="tc_transfertype" />
         <attribute name="tc_bookingtransferid" />
       </entity>
     </fetch>

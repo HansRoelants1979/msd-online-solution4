@@ -8,15 +8,15 @@
   <returnedtypecode>112</returnedtypecode>
   <savedqueryid>{ebdc0ca5-9610-e711-810a-3863bb34fb48}</savedqueryid>
   <layoutxml>
-    <grid name="resultset" object="112" jump="title" select="1" icon="1" preview="1">
-      <row name="result" id="incidentid">
+    <grid name="resultset" preview="1" icon="1" select="1" jump="title" object="112">
+      <row id="incidentid" name="result">
         <cell name="ticketnumber" width="150" />
-        <cell name="tc_casetypeid" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_casetypeid" width="125" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
         <cell name="prioritycode" width="100" />
         <cell name="caseorigincode" width="100" />
-        <cell name="customerid" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="ownerid" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="statuscode" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="customerid" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
+        <cell name="ownerid" width="125" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
+        <cell name="statuscode" width="125" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
         <cell name="createdon" width="100" />
         <cell name="a_cdf05794a0ec49a3b2548ed7aa26cdd5.tc_language" width="100" disableSorting="1" />
         <cell name="ab.businessunitid" width="100" disableSorting="1" />
@@ -25,7 +25,7 @@
   </layoutxml>
   <querytype>0</querytype>
   <fetchxml>
-    <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
+    <fetch distinct="true" mapping="logical" output-format="xml-platform" version="1.0">
       <entity name="incident">
         <attribute name="ticketnumber" />
         <attribute name="tc_casetypeid" />
@@ -35,16 +35,19 @@
         <attribute name="caseorigincode" />
         <attribute name="customerid" />
         <attribute name="createdon" />
-        <order attribute="createdon" descending="true" />
-        <link-entity name="contact" from="contactid" to="customerid" visible="false" link-type="outer" alias="a_cdf05794a0ec49a3b2548ed7aa26cdd5">
+        <order descending="true" attribute="createdon" />
+        <link-entity name="contact" alias="a_cdf05794a0ec49a3b2548ed7aa26cdd5" link-type="outer" visible="false" to="customerid" from="contactid">
           <attribute name="tc_language" />
         </link-entity>
-        <link-entity name="systemuser" from="systemuserid" to="owninguser" alias="ab">
-          <filter type="and">
-            <condition attribute="parentsystemuserid" operator="eq-userid" />
-            <condition attribute="businessunitid" operator="eq-businessid" />
-          </filter>
+        <link-entity name="systemuser" alias="ab" to="owninguser" from="systemuserid">
           <attribute name="businessunitid" />
+          <link-entity name="teammembership" visible="false" to="systemuserid" from="systemuserid" intersect="true">
+            <link-entity name="team" alias="aa" to="teamid" from="teamid">
+              <filter type="and">
+                <condition attribute="administratorid" operator="eq-userid" />
+              </filter>
+            </link-entity>
+          </link-entity>
         </link-entity>
         <attribute name="incidentid" />
       </entity>
@@ -52,6 +55,6 @@
   </fetchxml>
   <IntroducedVersion>1.0.0.51</IntroducedVersion>
   <LocalizedNames>
-    <LocalizedName description="My Cases By Team" languagecode="1033" />
+    <LocalizedName description="My Teams Cases" languagecode="1033" />
   </LocalizedNames>
 </savedquery>

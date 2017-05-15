@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<systemform>
+  <formid>{3a03e16e-19ed-47ee-aff0-4967d68133b9}</formid>
+  <IntroducedVersion>1.0.0.65</IntroducedVersion>
+  <FormPresentation>1</FormPresentation>
+  <FormActivationState>1</FormActivationState>
+  <form maxWidth="400">
+    <tabs>
+      <tab id="{b12dbeaf-de92-45cd-adbc-c5158bf8f806}" name="tab_1" showlabel="false">
+        <labels>
+          <label description="Tab" languagecode="1033" />
+        </labels>
+        <columns>
+          <column width="100%">
+            <sections>
+              <section id="{b7e578b2-c9f8-4061-a3a2-8c40955acffc}" name="tab_1_column_1_section_1" columns="1" showlabel="false" showbar="false" IsUserDefined="0">
+                <labels>
+                  <label description="section" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{a268863e-8976-4e5b-3c51-ea44b75dba08}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Cash Amount" languagecode="1033" />
+                      </labels>
+                      <control id="tc_cashamount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_cashamount" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{a156e891-5982-a94d-ec7e-1037b1c80640}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Voucher Amount" languagecode="1033" />
+                      </labels>
+                      <control id="tc_voucheramount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_voucheramount" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{be82c9ea-9e41-6e0d-aee5-ea1087b04621}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="BACS Amount" languagecode="1033" />
+                      </labels>
+                      <control id="tc_bacsamount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_bacsamount" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{e33c2900-5b56-2381-1084-70abb87e2434}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="CHAPS Amount" languagecode="1033" />
+                      </labels>
+                      <control id="tc_chapsamount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_chapsamount" disabled="false" />
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
+    </tabs>
+    <DisplayConditions Order="1">
+      <Role Id="{627090ff-40a3-4053-8790-584edc5be201}" />
+      <Role Id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
+    </DisplayConditions>
+  </form>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <LocalizedNames>
+    <LocalizedName description="Method of Payment" languagecode="1033" />
+  </LocalizedNames>
+</systemform>

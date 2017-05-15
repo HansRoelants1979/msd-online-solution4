@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>0</isdefault>
+  <returnedtypecode>10049</returnedtypecode>
+  <savedqueryid>{e2408eef-6d35-e711-8102-e0071b66a0a1}</savedqueryid>
+  <layoutxml>
+    <grid name="resultset" object="10049" jump="tc_name" select="1" preview="1" icon="1">
+      <row name="result" id="tc_caselineid">
+        <cell name="aa.ticketnumber" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_category3id" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="aa.casetypecode" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="aa.customerid" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="aa.caseorigincode" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="aa.statuscode" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="aa.tc_originatingbusinessarea" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="aa.createdby" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="aa.createdon" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>0</querytype>
+  <fetchxml>
+    <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="true">
+      <entity name="tc_caseline">
+        <link-entity name="systemuser" from="systemuserid" to="owninguser" alias="ad">
+          <link-entity name="teammembership" from="systemuserid" to="systemuserid" visible="false" intersect="true">
+            <link-entity name="team" from="teamid" to="teamid" alias="ae">
+              <filter type="and">
+                <condition attribute="administratorid" operator="eq-userid" />
+              </filter>
+            </link-entity>
+          </link-entity>
+        </link-entity>
+        <order attribute="tc_category3id" descending="false" />
+        <attribute name="tc_category3id" />
+        <link-entity name="incident" from="incidentid" to="tc_caseid" alias="aa">
+          <link-entity name="tc_caseline" from="tc_caseid" to="incidentid" alias="ab">
+            <link-entity name="tc_casecategory" from="tc_casecategoryid" to="tc_category3id" alias="ac" />
+          </link-entity>
+          <attribute name="statuscode" />
+          <attribute name="caseorigincode" />
+          <attribute name="tc_originatingbusinessarea" />
+          <attribute name="customerid" />
+          <attribute name="createdon" />
+          <attribute name="createdby" />
+          <attribute name="casetypecode" />
+          <attribute name="ticketnumber" />
+        </link-entity>
+        <attribute name="tc_caselineid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.95</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="My Teams Cases by Category Level 3" languagecode="1033" />
+  </LocalizedNames>
+</savedquery>

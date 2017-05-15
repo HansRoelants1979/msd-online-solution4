@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workflow WorkflowId="{e7188b50-7f32-e711-8106-3863bb354ff0}" Name="Tc.Compensation.CheckOfferAmount" Description="Click to add description">
+  <XamlFileName>/Workflows/TcCompensationCheckOfferAmount-E7188B50-7F32-E711-8106-3863BB354FF0.xaml</XamlFileName>
+  <Type>1</Type>
+  <Subprocess>0</Subprocess>
+  <Category>2</Category>
+  <Mode>1</Mode>
+  <Scope>4</Scope>
+  <OnDemand>0</OnDemand>
+  <TriggerOnCreate>0</TriggerOnCreate>
+  <TriggerOnDelete>0</TriggerOnDelete>
+  <AsyncAutodelete>0</AsyncAutodelete>
+  <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+  <StateCode>1</StateCode>
+  <StatusCode>2</StatusCode>
+  <RunAs>1</RunAs>
+  <IsTransacted>1</IsTransacted>
+  <IntroducedVersion>1.0.0.93</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <BusinessProcessType>0</BusinessProcessType>
+  <PrimaryEntity>tc_compensation</PrimaryEntity>
+  <labels>
+    <steplabels id="{2e0d21e9-92bf-44ce-aa57-29736cf3384b}">
+      <label languagecode="1033" description="The entered amount cannot be greater than the Total Offer Amount." />
+    </steplabels>
+    <steplabels id="{b675702d-2638-4492-aaed-d9c25fdb3805}">
+      <label languagecode="1033" description="The entered amount cannot be greater than the Total Offer Amount." />
+    </steplabels>
+    <steplabels id="{45b0e04b-d41b-4991-91bd-e8cf5a63ea29}">
+      <label languagecode="1033" description="The entered amount cannot be greater than the Total Offer Amount." />
+    </steplabels>
+  </labels>
+  <ProcessTriggers>
+    <ProcessTrigger processtriggerid="{02198b50-7f32-e711-8106-3863bb354ff0}">
+      <controltype>1</controltype>
+      <scope>1</scope>
+      <controlname>tc_cashamount</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_compensation</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{03198b50-7f32-e711-8106-3863bb354ff0}">
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_compensation</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{04198b50-7f32-e711-8106-3863bb354ff0}">
+      <controltype>1</controltype>
+      <scope>1</scope>
+      <controlname>tc_amount</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_compensation</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{05198b50-7f32-e711-8106-3863bb354ff0}">
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_compensation</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{06198b50-7f32-e711-8106-3863bb354ff0}">
+      <controltype>1</controltype>
+      <scope>1</scope>
+      <controlname>tc_voucheramount</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_compensation</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{07198b50-7f32-e711-8106-3863bb354ff0}">
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_compensation</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{08198b50-7f32-e711-8106-3863bb354ff0}">
+      <controltype>1</controltype>
+      <scope>1</scope>
+      <controlname>tc_amount</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_compensation</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{09198b50-7f32-e711-8106-3863bb354ff0}">
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_compensation</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{0a198b50-7f32-e711-8106-3863bb354ff0}">
+      <controltype>1</controltype>
+      <scope>1</scope>
+      <controlname>tc_bacsamount</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_compensation</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{0b198b50-7f32-e711-8106-3863bb354ff0}">
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_compensation</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{0c198b50-7f32-e711-8106-3863bb354ff0}">
+      <controltype>1</controltype>
+      <scope>1</scope>
+      <controlname>tc_amount</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_compensation</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{0d198b50-7f32-e711-8106-3863bb354ff0}">
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_compensation</primaryentitytypecode>
+    </ProcessTrigger>
+  </ProcessTriggers>
+</Workflow>

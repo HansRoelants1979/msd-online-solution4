@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workflow WorkflowId="{6a3bbce0-cb30-e711-8106-3863bb354ff0}" Name="Tc.Case.SetBookingVisibilityAndRelatedfields" Description="Click to add description">
+  <XamlFileName>/Workflows/TcCaseSetBookingVisibilityAndRelatedfields-6A3BBCE0-CB30-E711-8106-3863BB354FF0.xaml</XamlFileName>
+  <Type>1</Type>
+  <Subprocess>0</Subprocess>
+  <Category>2</Category>
+  <Mode>1</Mode>
+  <Scope>4</Scope>
+  <OnDemand>0</OnDemand>
+  <TriggerOnCreate>0</TriggerOnCreate>
+  <TriggerOnDelete>0</TriggerOnDelete>
+  <AsyncAutodelete>0</AsyncAutodelete>
+  <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+  <StateCode>1</StateCode>
+  <StatusCode>2</StatusCode>
+  <RunAs>1</RunAs>
+  <IsTransacted>1</IsTransacted>
+  <IntroducedVersion>1.0.0.91</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <BusinessProcessType>0</BusinessProcessType>
+  <PrimaryEntity>Incident</PrimaryEntity>
+  <ProcessTriggers>
+    <ProcessTrigger processtriggerid="{30a134aa-3b36-e711-8104-e0071b66a0a1}">
+      <controltype>1</controltype>
+      <scope>1</scope>
+      <controlname>tc_casetypeid</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{31a134aa-3b36-e711-8104-e0071b66a0a1}">
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{32a134aa-3b36-e711-8104-e0071b66a0a1}">
+      <controltype>1</controltype>
+      <scope>1</scope>
+      <controlname>tc_bookingreference</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{33a134aa-3b36-e711-8104-e0071b66a0a1}">
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{34a134aa-3b36-e711-8104-e0071b66a0a1}">
+      <controltype>1</controltype>
+      <scope>1</scope>
+      <controlname>tc_casetypeid</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{35a134aa-3b36-e711-8104-e0071b66a0a1}">
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{36a134aa-3b36-e711-8104-e0071b66a0a1}">
+      <controltype>1</controltype>
+      <scope>1</scope>
+      <controlname>tc_bookingreference</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{37a134aa-3b36-e711-8104-e0071b66a0a1}">
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{38a134aa-3b36-e711-8104-e0071b66a0a1}">
+      <controltype>1</controltype>
+      <scope>1</scope>
+      <controlname>tc_casetypeid</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{39a134aa-3b36-e711-8104-e0071b66a0a1}">
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{3aa134aa-3b36-e711-8104-e0071b66a0a1}">
+      <controltype>1</controltype>
+      <scope>1</scope>
+      <controlname>tc_bookingreference</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{3ba134aa-3b36-e711-8104-e0071b66a0a1}">
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+  </ProcessTriggers>
+</Workflow>

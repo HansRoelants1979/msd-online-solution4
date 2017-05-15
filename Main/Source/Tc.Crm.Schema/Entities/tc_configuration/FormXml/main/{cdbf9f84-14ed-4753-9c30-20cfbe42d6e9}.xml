@@ -4,9 +4,9 @@
   <IntroducedVersion>1.0.0.51</IntroducedVersion>
   <FormPresentation>1</FormPresentation>
   <FormActivationState>1</FormActivationState>
-  <form shownavigationbar="true" showImage="false" maxWidth="1900">
+  <form maxWidth="1900" showImage="false" shownavigationbar="true">
     <tabs>
-      <tab verticallayout="true" id="{4e43a366-8cf4-4e31-89ba-a0f9432c99fe}" IsUserDefined="1">
+      <tab id="{4e43a366-8cf4-4e31-89ba-a0f9432c99fe}" IsUserDefined="1" verticallayout="true">
         <labels>
           <label description="Allgemein" languagecode="1031" />
           <label description="General" languagecode="1033" />
@@ -15,7 +15,7 @@
         <columns>
           <column width="100%">
             <sections>
-              <section showlabel="false" showbar="false" IsUserDefined="0" id="{b7dbbff7-c1ff-44ba-908b-8d522b043ec7}">
+              <section id="{b7dbbff7-c1ff-44ba-908b-8d522b043ec7}" IsUserDefined="0" showbar="false" showlabel="false" height="auto">
                 <labels>
                   <label description="Allgemein" languagecode="1031" />
                   <label description="General" languagecode="1033" />
@@ -27,7 +27,15 @@
                       <labels>
                         <label description="Name" languagecode="1033" />
                       </labels>
-                      <control id="tc_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_name" />
+                      <control id="tc_name" datafieldname="tc_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{b6610393-559b-b243-17d3-8765d9927aee}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Group" languagecode="1033" />
+                      </labels>
+                      <control id="tc_group" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_group" disabled="false" />
                     </cell>
                   </row>
                   <row>
@@ -35,7 +43,7 @@
                       <labels>
                         <label description="Value" languagecode="1033" />
                       </labels>
-                      <control id="tc_value" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_value" disabled="false" />
+                      <control disabled="false" id="tc_value" datafieldname="tc_value" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" />
                     </cell>
                   </row>
                   <row>
@@ -43,17 +51,26 @@
                       <labels>
                         <label description="Description" languagecode="1033" />
                       </labels>
-                      <control id="tc_description" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="tc_description" disabled="false" />
+                      <control disabled="false" id="tc_description" datafieldname="tc_description" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" />
                     </cell>
                   </row>
                   <row>
-                    <cell id="{156aca91-d91e-804c-07e0-7b06014dadb8}" showlabel="true" locklevel="0">
+                    <cell id="{156aca91-d91e-804c-07e0-7b06014dadb8}" showlabel="true" locklevel="0" auto="true" rowspan="10">
                       <labels>
                         <label description="Long Value" languagecode="1033" />
                       </labels>
-                      <control id="tc_longvalue" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="tc_longvalue" disabled="false" uniqueid="{47162475-0a12-3ade-952d-cd211090b258}" />
+                      <control disabled="false" id="tc_longvalue" datafieldname="tc_longvalue" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" uniqueid="{47162475-0a12-3ade-952d-cd211090b258}" />
                     </cell>
                   </row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row height="auto" />
                 </rows>
               </section>
             </sections>
@@ -66,27 +83,27 @@
       <NavBarAreas>
         <NavBarArea Id="Info">
           <Titles>
-            <Title LCID="1033" Text="Common" />
+            <Title Text="Common" LCID="1033" />
           </Titles>
         </NavBarArea>
         <NavBarArea Id="Sales">
           <Titles>
-            <Title LCID="1033" Text="Sales" />
+            <Title Text="Sales" LCID="1033" />
           </Titles>
         </NavBarArea>
         <NavBarArea Id="Service">
           <Titles>
-            <Title LCID="1033" Text="Service" />
+            <Title Text="Service" LCID="1033" />
           </Titles>
         </NavBarArea>
         <NavBarArea Id="Marketing">
           <Titles>
-            <Title LCID="1033" Text="Marketing" />
+            <Title Text="Marketing" LCID="1033" />
           </Titles>
         </NavBarArea>
         <NavBarArea Id="ProcessCenter">
           <Titles>
-            <Title LCID="1033" Text="Process Sessions" />
+            <Title Text="Process Sessions" LCID="1033" />
           </Titles>
         </NavBarArea>
       </NavBarAreas>

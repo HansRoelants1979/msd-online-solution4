@@ -1,0 +1,1486 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Entity>
+  <Name LocalizedName="Task" OriginalName="Task">Task</Name>
+  <ObjectTypeCode>4212</ObjectTypeCode>
+  <EntityInfo>
+    <entity Name="Task">
+      <attributes>
+        <attribute PhysicalName="ActivityId" unmodified="1">
+          <Type>primarykey</Type>
+          <Name>activityid</Name>
+          <LogicalName>activityid</LogicalName>
+          <RequiredLevel>systemrequired</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|RequiredForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>0</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <displaynames>
+            <displayname description="Aufgabe" languagecode="1031" />
+            <displayname description="Task" languagecode="1033" />
+            <displayname description="Tâche" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Eindeutiger Bezeichner der Aufgabe." languagecode="1031" />
+            <Description description="Unique identifier of the task." languagecode="1033" />
+            <Description description="Identificateur unique de la tâche." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="ActivityTypeCode" unmodified="1">
+          <Type>picklist</Type>
+          <Name>activitytypecode</Name>
+          <LogicalName>activitytypecode</LogicalName>
+          <RequiredLevel>systemrequired</RequiredLevel>
+          <DisplayMask>ObjectTypeCode|ValidForAdvancedFind|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForReadApi>1</ValidForReadApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <AppDefaultValue>4212</AppDefaultValue>
+          <OptionSetName>activitypointer_activitytypecode</OptionSetName>
+          <displaynames>
+            <displayname description="Aktivitätstyp" languagecode="1031" />
+            <displayname description="Activity Type" languagecode="1033" />
+            <displayname description="Type d'activité" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Aktivitätstyp" languagecode="1031" />
+            <Description description="Type of activity." languagecode="1033" />
+            <Description description="Type d'activité." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="ActualDurationMinutes" unmodified="1">
+          <Type>int</Type>
+          <Name>actualdurationminutes</Name>
+          <LogicalName>actualdurationminutes</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>disabled</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <Format>duration</Format>
+          <MinValue>0</MinValue>
+          <MaxValue>2147483647</MaxValue>
+          <displaynames>
+            <displayname description="Dauer" languagecode="1031" />
+            <displayname description="Duration" languagecode="1033" />
+            <displayname description="Durée" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Geben Sie die Anzahl der Minuten an, die für die Aufgabe aufgewendet wurden. Die Dauer wird bei der Berichterstellung verwendet." languagecode="1031" />
+            <Description description="Type the number of minutes spent on the task. The duration is used in reporting." languagecode="1033" />
+            <Description description="Tapez le nombre de minutes passées sur la tâche. La durée est utilisée dans les rapports." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="ActualEnd" unmodified="1">
+          <Type>datetime</Type>
+          <Name>actualend</Name>
+          <LogicalName>actualend</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>inactive</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <Format>date</Format>
+          <displaynames>
+            <displayname description="Tatsächliches Ende" languagecode="1031" />
+            <displayname description="Actual End" languagecode="1033" />
+            <displayname description="Fin réelle" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Geben Sie den tatsächlichen Endzeitpunkt (Datum und Uhrzeit) für die Aufgabe ein. Standardmäßig wird angezeigt, wann die Aktivität abgeschlossen oder storniert wurde." languagecode="1031" />
+            <Description description="Enter the actual end date and time of the task. By default, it displays when the activity was completed or canceled." languagecode="1033" />
+            <Description description="Entrez la date et l'heure de fin réelles de la tâche. Par défaut, elles sont affichées lorsque l'activité a été terminée ou annulée." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="ActualStart" unmodified="1">
+          <Type>datetime</Type>
+          <Name>actualstart</Name>
+          <LogicalName>actualstart</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>inactive</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <Format>date</Format>
+          <displaynames>
+            <displayname description="Tatsächlicher Beginn" languagecode="1031" />
+            <displayname description="Actual Start" languagecode="1033" />
+            <displayname description="Début réel" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Geben Sie den tatsächlichen Startzeitpunkt (Datum und Uhrzeit) für die Aufgabe ein. Standardmäßig wird angezeigt, wann die Aufgabe erstellt wurde." languagecode="1031" />
+            <Description description="Enter the actual start date and time for the task. By default, it displays when the task was created." languagecode="1033" />
+            <Description description="Tapez la date et l'heure de début réelles de la tâche. Par défaut, elles sont affichées lorsque la tâche a été créée." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="Category" unmodified="1">
+          <Type>nvarchar</Type>
+          <Name>category</Name>
+          <LogicalName>category</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <Format>text</Format>
+          <MaxLength>250</MaxLength>
+          <Length>500</Length>
+          <displaynames>
+            <displayname description="Kategorie" languagecode="1031" />
+            <displayname description="Category" languagecode="1033" />
+            <displayname description="Catégorie" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Geben Sie eine Kategorie ein, um die den Aufgabentyp (wie Lead-Generierung oder Nachbereitung) anzugeben und die Aufgabe mit einer Geschäftsgruppe oder Funktion zu verknüpfen." languagecode="1031" />
+            <Description description="Type a category to identify the task type, such as lead gathering or customer follow up, to tie the task to a business group or function." languagecode="1033" />
+            <Description description="Tapez une catégorie pour identifier le type de tâche, comme le rassemblement de prospects ou le suivi de clients, pour lier la tâche à un groupe professionnel ou à une fonction." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="CreatedBy" unmodified="1">
+          <Type>lookup</Type>
+          <Name>createdby</Name>
+          <LogicalName>createdby</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForReadApi>1</ValidForReadApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>0</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <LookupStyle>single</LookupStyle>
+          <LookupTypes>
+            <LookupType id="00000000-0000-0000-0000-000000000000">8</LookupType>
+          </LookupTypes>
+          <displaynames>
+            <displayname description="Erstellt von" languagecode="1031" />
+            <displayname description="Created By" languagecode="1033" />
+            <displayname description="Créé par" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Zeigt, wer den Datensatz erstellt hat." languagecode="1031" />
+            <Description description="Shows who created the record." languagecode="1033" />
+            <Description description="Affiche le créateur de l'enregistrement." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="CreatedOn" unmodified="1">
+          <Type>datetime</Type>
+          <Name>createdon</Name>
+          <LogicalName>createdon</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>inactive</ImeMode>
+          <ValidForReadApi>1</ValidForReadApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>0</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <Format>datetime</Format>
+          <displaynames>
+            <displayname description="Erstellt am" languagecode="1031" />
+            <displayname description="Created On" languagecode="1033" />
+            <displayname description="Créé le" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Zeigt Datum und Uhrzeit der Datensatzerstellung gemäß der Zeitzone, die in den Optionen von Microsoft Dynamics 365 ausgewählt wurde." languagecode="1031" />
+            <Description description="Shows the date and time when the record was created. The date and time are displayed in the time zone selected in Microsoft Dynamics 365 options." languagecode="1033" />
+            <Description description="Affiche la date et l'heure de la création de l'enregistrement. Celles-ci sont affichées dans le fuseau horaire sélectionné dans les options de Microsoft Dynamics 365." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="CreatedOnBehalfBy" unmodified="1">
+          <Type>lookup</Type>
+          <Name>createdonbehalfby</Name>
+          <LogicalName>createdonbehalfby</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForReadApi>1</ValidForReadApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>0</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <LookupStyle>single</LookupStyle>
+          <LookupTypes>
+            <LookupType id="00000000-0000-0000-0000-000000000000">8</LookupType>
+          </LookupTypes>
+          <displaynames>
+            <displayname description="Erstellt von (Stellvertreter)" languagecode="1031" />
+            <displayname description="Created By (Delegate)" languagecode="1033" />
+            <displayname description="Créé par (délégué)" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Zeigt, wer den Datensatz im Auftrag eines anderen Benutzers erstellt hat." languagecode="1031" />
+            <Description description="Shows who created the record on behalf of another user." languagecode="1033" />
+            <Description description="Affiche l'utilisateur qui a créé l'enregistrement pour un autre utilisateur." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="CrmTaskAssignedUniqueId" unmodified="1">
+          <Type>uniqueidentifier</Type>
+          <Name>crmtaskassigneduniqueid</Name>
+          <LogicalName>crmtaskassigneduniqueid</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>7.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <displaynames>
+            <displayname description="Eindeutige ID der zugewiesenen Aufgabe" languagecode="1031" />
+            <displayname description="Assigned Task Unique Id" languagecode="1033" />
+            <displayname description="Identificateur unique de la tâche attribuée" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Eindeutige ID der zugewiesenen Aufgabe" languagecode="1031" />
+            <Description description="Assigned Task Unique Id" languagecode="1033" />
+            <Description description="Identificateur unique de la tâche attribuée" languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="Description" unmodified="1">
+          <Type>ntext</Type>
+          <Name>description</Name>
+          <LogicalName>description</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <Format></Format>
+          <MaxLength>2000</MaxLength>
+          <displaynames>
+            <displayname description="Beschreibung" languagecode="1031" />
+            <displayname description="Description" languagecode="1033" />
+            <displayname description="Description" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Geben Sie zusätzliche Informationen ein, um den Zweck der Aufgabe zu beschreiben." languagecode="1031" />
+            <Description description="Type additional information to describe the task." languagecode="1033" />
+            <Description description="Entrez des informations supplémentaires pour décrire la tâche." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="ImportSequenceNumber" unmodified="1">
+          <Type>int</Type>
+          <Name>importsequencenumber</Name>
+          <LogicalName>importsequencenumber</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind</DisplayMask>
+          <ImeMode>disabled</ImeMode>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <Format></Format>
+          <MinValue>-2147483648</MinValue>
+          <MaxValue>2147483647</MaxValue>
+          <displaynames>
+            <displayname description="Importsequenznummer" languagecode="1031" />
+            <displayname description="Import Sequence Number" languagecode="1033" />
+            <displayname description="Numéro séquentiel d'importation" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Eindeutiger Bezeichner des Datenimports oder der Datenmigration, von dem/der dieser Datensatz erstellt wurde." languagecode="1031" />
+            <Description description="Unique identifier of the data import or data migration that created this record." languagecode="1033" />
+            <Description description="Identificateur unique de l'importation ou de la migration de données ayant généré cet enregistrement." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="IsBilled" unmodified="1">
+          <Type>bit</Type>
+          <Name>isbilled</Name>
+          <LogicalName>isbilled</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <AppDefaultValue>0</AppDefaultValue>
+          <optionset Name="task_isbilled">
+            <OptionSetType>bit</OptionSetType>
+            <IntroducedVersion>5.0.0.0</IntroducedVersion>
+            <displaynames>
+              <displayname description="Ist abgerechnet" languagecode="1031" />
+              <displayname description="Is Billed" languagecode="1033" />
+              <displayname description="Est facturé" languagecode="1036" />
+            </displaynames>
+            <Descriptions>
+              <Description description="Informationen, durch die angegeben wird, ob die Aufgabe als Teil des Abschlusses einer Anfrage abgerechnet wurde." languagecode="1031" />
+              <Description description="Information which specifies whether the task was billed as part of resolving a case." languagecode="1033" />
+              <Description description="Information indiquant si la tâche a été facturée dans le cadre de la résolution d'un incident." languagecode="1036" />
+            </Descriptions>
+            <options>
+              <option value="0">
+                <labels>
+                  <label description="Nein" languagecode="1031" />
+                  <label description="No" languagecode="1033" />
+                  <label description="Non" languagecode="1036" />
+                </labels>
+              </option>
+              <option value="1">
+                <labels>
+                  <label description="Ja" languagecode="1031" />
+                  <label description="Yes" languagecode="1033" />
+                  <label description="Oui" languagecode="1036" />
+                </labels>
+              </option>
+            </options>
+          </optionset>
+          <displaynames>
+            <displayname description="Ist abgerechnet" languagecode="1031" />
+            <displayname description="Is Billed" languagecode="1033" />
+            <displayname description="Est facturé" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Informationen, durch die angegeben wird, ob die Aufgabe als Teil des Abschlusses einer Anfrage abgerechnet wurde." languagecode="1031" />
+            <Description description="Information which specifies whether the task was billed as part of resolving a case." languagecode="1033" />
+            <Description description="Information indiquant si la tâche a été facturée dans le cadre de la résolution d'un incident." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="IsRegularActivity" unmodified="1">
+          <Type>bit</Type>
+          <Name>isregularactivity</Name>
+          <LogicalName>isregularactivity</LogicalName>
+          <RequiredLevel>systemrequired</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForReadApi>1</ValidForReadApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <AppDefaultValue>0</AppDefaultValue>
+          <OptionSetName>activitypointer_isregularactivity</OptionSetName>
+          <displaynames>
+            <displayname description="Ist reguläre Aktivität" languagecode="1031" />
+            <displayname description="Is Regular Activity" languagecode="1033" />
+            <displayname description="Est une activité régulière" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Informationen darüber, ob die Aktivität ein regulärer Aktivitäts- oder Ereignistyp ist." languagecode="1031" />
+            <Description description="Information regarding whether the activity is a regular activity type or event type." languagecode="1033" />
+            <Description description="Information indiquant si l’activité est régulière ou de type événement." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="IsWorkflowCreated" unmodified="1">
+          <Type>bit</Type>
+          <Name>isworkflowcreated</Name>
+          <LogicalName>isworkflowcreated</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <AppDefaultValue>0</AppDefaultValue>
+          <optionset Name="task_isworkflowcreated">
+            <OptionSetType>bit</OptionSetType>
+            <IntroducedVersion>5.0.0.0</IntroducedVersion>
+            <displaynames>
+              <displayname description="Ist durch Workflow erstellt" languagecode="1031" />
+              <displayname description="Is Workflow Created" languagecode="1033" />
+              <displayname description="Est créé(e) par le workflow" languagecode="1036" />
+            </displaynames>
+            <Descriptions>
+              <Description description="Informationen, durch die angegeben wird, ob die Aufgabe aus einer Workflowregel erstellt wurde." languagecode="1031" />
+              <Description description="Information which specifies if the task was created from a workflow rule." languagecode="1033" />
+              <Description description="Information indiquant si la tâche a été créée à partir d'une règle de workflow." languagecode="1036" />
+            </Descriptions>
+            <options>
+              <option value="0">
+                <labels>
+                  <label description="Nein" languagecode="1031" />
+                  <label description="No" languagecode="1033" />
+                  <label description="Non" languagecode="1036" />
+                </labels>
+              </option>
+              <option value="1">
+                <labels>
+                  <label description="Ja" languagecode="1031" />
+                  <label description="Yes" languagecode="1033" />
+                  <label description="Oui" languagecode="1036" />
+                </labels>
+              </option>
+            </options>
+          </optionset>
+          <displaynames>
+            <displayname description="Ist durch Workflow erstellt" languagecode="1031" />
+            <displayname description="Is Workflow Created" languagecode="1033" />
+            <displayname description="Est créé(e) par le workflow" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Informationen, durch die angegeben wird, ob die Aufgabe aus einer Workflowregel erstellt wurde." languagecode="1031" />
+            <Description description="Information which specifies if the task was created from a workflow rule." languagecode="1033" />
+            <Description description="Information indiquant si la tâche a été créée à partir d'une règle de workflow." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="LastOnHoldTime" unmodified="1">
+          <Type>datetime</Type>
+          <Name>lastonholdtime</Name>
+          <LogicalName>lastonholdtime</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>inactive</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>8.1.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <Format>datetime</Format>
+          <displaynames>
+            <displayname description="Letzte Zeit der Zurückstellung" languagecode="1031" />
+            <displayname description="Last On Hold Time" languagecode="1033" />
+            <displayname description="Dernière durée de suspension" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Enthält den Datums- und Zeitstempel der letzten Zurückstellungszeit." languagecode="1031" />
+            <Description description="Contains the date and time stamp of the last on hold time." languagecode="1033" />
+            <Description description="Contient l'horodatage de la dernière durée de suspension." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="ModifiedBy" unmodified="1">
+          <Type>lookup</Type>
+          <Name>modifiedby</Name>
+          <LogicalName>modifiedby</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForReadApi>1</ValidForReadApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>0</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <LookupStyle>single</LookupStyle>
+          <LookupTypes>
+            <LookupType id="00000000-0000-0000-0000-000000000000">8</LookupType>
+          </LookupTypes>
+          <displaynames>
+            <displayname description="Geändert von" languagecode="1031" />
+            <displayname description="Modified By" languagecode="1033" />
+            <displayname description="Modifié par" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Zeigt, wer den Datensatz zuletzt aktualisiert hat." languagecode="1031" />
+            <Description description="Shows who last updated the record." languagecode="1033" />
+            <Description description="Affiche la personne à l'origine de la dernière mise à jour de l'enregistrement." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="ModifiedOn" unmodified="1">
+          <Type>datetime</Type>
+          <Name>modifiedon</Name>
+          <LogicalName>modifiedon</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>inactive</ImeMode>
+          <ValidForReadApi>1</ValidForReadApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>0</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <Format>datetime</Format>
+          <displaynames>
+            <displayname description="Geändert am" languagecode="1031" />
+            <displayname description="Modified On" languagecode="1033" />
+            <displayname description="Modifié le" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Datum und Uhrzeit der letzten Datensatzaktualisierung gemäß der Zeitzone, die in den Optionen von Microsoft Dynamics 365 ausgewählt wurde." languagecode="1031" />
+            <Description description="Shows the date and time when the record was last updated. The date and time are displayed in the time zone selected in Microsoft Dynamics 365 options." languagecode="1033" />
+            <Description description="Affiche la date et l'heure de la dernière mise à jour de l'enregistrement. La date et l'heure sont affichées selon le fuseau horaire sélectionné dans les options de Microsoft Dynamics 365." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="ModifiedOnBehalfBy" unmodified="1">
+          <Type>lookup</Type>
+          <Name>modifiedonbehalfby</Name>
+          <LogicalName>modifiedonbehalfby</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForReadApi>1</ValidForReadApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>0</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <LookupStyle>single</LookupStyle>
+          <LookupTypes>
+            <LookupType id="00000000-0000-0000-0000-000000000000">8</LookupType>
+          </LookupTypes>
+          <displaynames>
+            <displayname description="Geändert von (Stellvertreter)" languagecode="1031" />
+            <displayname description="Modified By (Delegate)" languagecode="1033" />
+            <displayname description="Modifié par (délégué)" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Zeigt, wer den Datensatz im Auftrag eines anderen Benutzers zuletzt aktualisiert hat." languagecode="1031" />
+            <Description description="Shows who last updated the record on behalf of another user." languagecode="1033" />
+            <Description description="Affiche la personne à l'origine de la dernière mise à jour de l'enregistrement à la place d'un autre utilisateur." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="OnHoldTime" unmodified="1">
+          <Type>int</Type>
+          <Name>onholdtime</Name>
+          <LogicalName>onholdtime</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>disabled</ImeMode>
+          <ValidForReadApi>1</ValidForReadApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>8.1.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <Format></Format>
+          <MinValue>-2147483648</MinValue>
+          <MaxValue>2147483647</MaxValue>
+          <displaynames>
+            <displayname description="Zeit der Zurückstellung (Minuten)" languagecode="1031" />
+            <displayname description="On Hold Time (Minutes)" languagecode="1033" />
+            <displayname description="Durée de la suspension (minutes)" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Die Dauer der Zurückstellung des Datensatzes in Minuten." languagecode="1031" />
+            <Description description="Shows how long, in minutes, that the record was on hold." languagecode="1033" />
+            <Description description="Affiche la durée, en minutes, de la suspension de l'enregistrement." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="OverriddenCreatedOn" unmodified="1">
+          <Type>datetime</Type>
+          <Name>overriddencreatedon</Name>
+          <LogicalName>overriddencreatedon</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForGrid</DisplayMask>
+          <ImeMode>inactive</ImeMode>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <Format>date</Format>
+          <displaynames>
+            <displayname description="Datensatz erstellt am" languagecode="1031" />
+            <displayname description="Record Created On" languagecode="1033" />
+            <displayname description="Enregistrement créé le" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Datum und Uhrzeit der Migration des Datensatzes." languagecode="1031" />
+            <Description description="Date and time that the record was migrated." languagecode="1033" />
+            <Description description="Date et heure de la migration de l'enregistrement." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="OwnerId" unmodified="1">
+          <Type>owner</Type>
+          <Name>ownerid</Name>
+          <LogicalName>ownerid</LogicalName>
+          <RequiredLevel>systemrequired</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid|RequiredForForm</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <LookupStyle>single</LookupStyle>
+          <LookupTypes>
+            <LookupType id="00000000-0000-0000-0000-000000000000">8</LookupType>
+            <LookupType id="00000000-0000-0000-0000-000000000000">9</LookupType>
+          </LookupTypes>
+          <displaynames>
+            <displayname description="Besitzer" languagecode="1031" />
+            <displayname description="Owner" languagecode="1033" />
+            <displayname description="Propriétaire" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Geben Sie den Benutzer oder das Team ein, der bzw. das mit der Verwaltung des Datensatzes betraut ist. Dieses Feld wird aktualisiert, wenn der Datensatz einem anderen Benutzer zugewiesen wird." languagecode="1031" />
+            <Description description="Enter the user or team who is assigned to manage the record. This field is updated every time the record is assigned to a different user." languagecode="1033" />
+            <Description description="Entrez l'utilisateur ou l'équipe affectée à la gestion de l'enregistrement. Ce champ est mis à jour à chaque fois que l'enregistrement est attribué à un utilisateur différent." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="OwningBusinessUnit" unmodified="1">
+          <Type>lookup</Type>
+          <Name>owningbusinessunit</Name>
+          <LogicalName>owningbusinessunit</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <ImeMode>auto</ImeMode>
+          <ValidForReadApi>1</ValidForReadApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>0</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <LookupStyle>single</LookupStyle>
+          <LookupTypes>
+            <LookupType id="00000000-0000-0000-0000-000000000000">10</LookupType>
+          </LookupTypes>
+          <displaynames>
+            <displayname description="Besitzer (Unternehmenseinheit)" languagecode="1031" />
+            <displayname description="Owning Business Unit" languagecode="1033" />
+            <displayname description="Division propriétaire" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Zeigt die Unternehmenseinheit des Datensatzbesitzers." languagecode="1031" />
+            <Description description="Shows the record owner's business unit." languagecode="1033" />
+            <Description description="Affiche la division à laquelle le propriétaire des enregistrements appartient." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="OwningTeam" unmodified="1">
+          <Type>lookup</Type>
+          <Name>owningteam</Name>
+          <LogicalName>owningteam</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForReadApi>1</ValidForReadApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>0</IsAuditEnabled>
+          <IsLogical>1</IsLogical>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <LookupStyle>single</LookupStyle>
+          <LookupTypes>
+            <LookupType id="00000000-0000-0000-0000-000000000000">9</LookupType>
+          </LookupTypes>
+          <displaynames>
+            <displayname description="Besitzer (Team)" languagecode="1031" />
+            <displayname description="Owning Team" languagecode="1033" />
+            <displayname description="Équipe propriétaire" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Eindeutiger Bezeichner des Teams, das im Besitz der Aufgabe ist." languagecode="1031" />
+            <Description description="Unique identifier of the team that owns the task." languagecode="1033" />
+            <Description description="Identificateur unique de l’équipe propriétaire de la tâche." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="OwningUser" unmodified="1">
+          <Type>lookup</Type>
+          <Name>owninguser</Name>
+          <LogicalName>owninguser</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForReadApi>1</ValidForReadApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>0</IsAuditEnabled>
+          <IsLogical>1</IsLogical>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <LookupStyle>single</LookupStyle>
+          <LookupTypes>
+            <LookupType id="00000000-0000-0000-0000-000000000000">8</LookupType>
+          </LookupTypes>
+          <displaynames>
+            <displayname description="Besitzer (Benutzer)" languagecode="1031" />
+            <displayname description="Owning User" languagecode="1033" />
+            <displayname description="Utilisateur propriétaire" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Eindeutiger Bezeichner des Benutzers, der im Besitz der Aufgabe ist." languagecode="1031" />
+            <Description description="Unique identifier of the user that owns the task." languagecode="1033" />
+            <Description description="Identificateur unique de l’utilisateur propriétaire de la tâche." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="PercentComplete" unmodified="1">
+          <Type>int</Type>
+          <Name>percentcomplete</Name>
+          <LogicalName>percentcomplete</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>disabled</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <Format></Format>
+          <MinValue>0</MinValue>
+          <MaxValue>100</MaxValue>
+          <displaynames>
+            <displayname description="Prozent abgeschlossen" languagecode="1031" />
+            <displayname description="Percent Complete" languagecode="1033" />
+            <displayname description="Pourcentage achevé" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Geben Sie für die Aufgabe den Fertigstellungswert in Prozent ein, um Aufgaben bis zu deren Abschluss zu verfolgen." languagecode="1031" />
+            <Description description="Type the percentage complete value for the task to track tasks to completion." languagecode="1033" />
+            <Description description="Tapez la valeur de pourcentage réalisé pour la tâche pour suivre les tâches jusqu'à la fin." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="PriorityCode" unmodified="1">
+          <Type>picklist</Type>
+          <Name>prioritycode</Name>
+          <LogicalName>prioritycode</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <AppDefaultValue>1</AppDefaultValue>
+          <optionset Name="task_prioritycode">
+            <OptionSetType>picklist</OptionSetType>
+            <IntroducedVersion>5.0.0.0</IntroducedVersion>
+            <displaynames>
+              <displayname description="Priorität" languagecode="1031" />
+              <displayname description="Priority" languagecode="1033" />
+              <displayname description="Priorité" languagecode="1036" />
+            </displaynames>
+            <Descriptions>
+              <Description description="Priorität der Aufgabe." languagecode="1031" />
+              <Description description="Priority of the task." languagecode="1033" />
+              <Description description="Priorité de la tâche." languagecode="1036" />
+            </Descriptions>
+            <options>
+              <option value="0">
+                <labels>
+                  <label description="Niedrig" languagecode="1031" />
+                  <label description="Low" languagecode="1033" />
+                  <label description="Faible" languagecode="1036" />
+                </labels>
+              </option>
+              <option value="1">
+                <labels>
+                  <label description="Normal" languagecode="1031" />
+                  <label description="Normal" languagecode="1033" />
+                  <label description="Normale" languagecode="1036" />
+                </labels>
+              </option>
+              <option value="2">
+                <labels>
+                  <label description="Hoch" languagecode="1031" />
+                  <label description="High" languagecode="1033" />
+                  <label description="Haute" languagecode="1036" />
+                </labels>
+              </option>
+            </options>
+          </optionset>
+          <displaynames>
+            <displayname description="Priorität" languagecode="1031" />
+            <displayname description="Priority" languagecode="1033" />
+            <displayname description="Priorité" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Wählen Sie die Priorität aus, damit bevorzugte Kunden oder kritische Probleme schnell behandelt werden." languagecode="1031" />
+            <Description description="Select the priority so that preferred customers or critical issues are handled quickly." languagecode="1033" />
+            <Description description="Sélectionnez la priorité afin que les clients préférés ou les problèmes critiques soient traités rapidement." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="RegardingObjectId" unmodified="1">
+          <Type>lookup</Type>
+          <Name>regardingobjectid</Name>
+          <LogicalName>regardingobjectid</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <LookupStyle>single</LookupStyle>
+          <displaynames>
+            <displayname description="Bezug" languagecode="1031" />
+            <displayname description="Regarding" languagecode="1033" />
+            <displayname description="Concernant" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Wählen Sie den Datensatz aus, den die Aufgabe betrifft." languagecode="1031" />
+            <Description description="Choose the record that the task relates to." languagecode="1033" />
+            <Description description="Choisissez l'enregistrement concerné par la tâche." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="ScheduledDurationMinutes" unmodified="1">
+          <Type>int</Type>
+          <Name>scheduleddurationminutes</Name>
+          <LogicalName>scheduleddurationminutes</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForGrid</DisplayMask>
+          <ImeMode>disabled</ImeMode>
+          <ValidForReadApi>1</ValidForReadApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <Format>duration</Format>
+          <MinValue>0</MinValue>
+          <MaxValue>2147483647</MaxValue>
+          <displaynames>
+            <displayname description="Geplante Dauer" languagecode="1031" />
+            <displayname description="Scheduled Duration" languagecode="1033" />
+            <displayname description="Durée planifiée" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Geplante Dauer der Aufgabe (in Minuten)." languagecode="1031" />
+            <Description description="Scheduled duration of the task, specified in minutes." languagecode="1033" />
+            <Description description="Durée planifiée de la tâche, en minutes." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="ScheduledEnd" unmodified="1">
+          <Type>datetime</Type>
+          <Name>scheduledend</Name>
+          <LogicalName>scheduledend</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>inactive</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <Format>datetime</Format>
+          <displaynames>
+            <displayname description="Fälligkeitsdatum" languagecode="1031" />
+            <displayname description="Due Date" languagecode="1033" />
+            <displayname description="Date d’échéance" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Geben Sie die erwartete Fälligkeit (Datum und Uhrzeit) ein." languagecode="1031" />
+            <Description description="Enter the expected due date and time." languagecode="1033" />
+            <Description description="Entrez la date et l'heure d'échéance prévues." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="ScheduledStart" unmodified="1">
+          <Type>datetime</Type>
+          <Name>scheduledstart</Name>
+          <LogicalName>scheduledstart</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>inactive</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <Format>datetime</Format>
+          <displaynames>
+            <displayname description="Startdatum" languagecode="1031" />
+            <displayname description="Start Date" languagecode="1033" />
+            <displayname description="Date de début" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Geben Sie die erwartete Fälligkeit (Datum und Uhrzeit) ein." languagecode="1031" />
+            <Description description="Enter the expected due date and time." languagecode="1033" />
+            <Description description="Entrez la date et l'heure d'échéance prévues." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="ServiceId" unmodified="1">
+          <Type>lookup</Type>
+          <Name>serviceid</Name>
+          <LogicalName>serviceid</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <LookupStyle>single</LookupStyle>
+          <LookupTypes />
+          <displaynames>
+            <displayname description="Service" languagecode="1031" />
+            <displayname description="Service" languagecode="1033" />
+            <displayname description="Service" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Wählen Sie den Service aus, der dieser Aktivität zugeordnet ist." languagecode="1031" />
+            <Description description="Choose the service that is associated with this activity." languagecode="1033" />
+            <Description description="Choisissez le service associé à l'activité." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="SLAId" unmodified="1">
+          <Type>lookup</Type>
+          <Name>slaid</Name>
+          <LogicalName>slaid</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>8.1.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <LookupStyle>single</LookupStyle>
+          <LookupTypes>
+            <LookupType id="00000000-0000-0000-0000-000000000000">9750</LookupType>
+          </LookupTypes>
+          <displaynames>
+            <displayname description="SLA" languagecode="1031" />
+            <displayname description="SLA" languagecode="1033" />
+            <displayname description="Contrat SLA" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Wählen Sie die Vereinbarung zum Servicelevel (Service Level Agreement, SLA) aus, die Sie auf den Aufgabendatensatz anwenden möchten." languagecode="1031" />
+            <Description description="Choose the service level agreement (SLA) that you want to apply to the Task record." languagecode="1033" />
+            <Description description="Choisissez le contrat de niveau de service (contrat SLA) que vous voulez appliquer à l'enregistrement Tâche." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="SLAInvokedId" unmodified="1">
+          <Type>lookup</Type>
+          <Name>slainvokedid</Name>
+          <LogicalName>slainvokedid</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <ImeMode>auto</ImeMode>
+          <ValidForReadApi>1</ValidForReadApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>8.1.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <LookupStyle>single</LookupStyle>
+          <LookupTypes>
+            <LookupType id="00000000-0000-0000-0000-000000000000">9750</LookupType>
+          </LookupTypes>
+          <displaynames>
+            <displayname description="Letzte angewendete SLA" languagecode="1031" />
+            <displayname description="Last SLA applied" languagecode="1033" />
+            <displayname description="Dernier contrat SLA appliqué" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Die letzte auf diese Aufgabe angewendete SLA. Dieses Feld dient nur zur internen Verwendung." languagecode="1031" />
+            <Description description="Last SLA that was applied to this Task. This field is for internal use only." languagecode="1033" />
+            <Description description="Dernier contrat SLA ayant été appliqué à cette tâche. Ce champ est destiné à une utilisation interne uniquement." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="SortDate" unmodified="1">
+          <Type>datetime</Type>
+          <Name>sortdate</Name>
+          <LogicalName>sortdate</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>inactive</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>8.2.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <Format>datetime</Format>
+          <displaynames>
+            <displayname description="Sortierdatum" languagecode="1031" />
+            <displayname description="Sort Date" languagecode="1033" />
+            <displayname description="Date de tri" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Zeigt Datum und Uhrzeit an, nach dem bzw. der die Aktivitäten sortiert werden." languagecode="1031" />
+            <Description description="Shows the date and time by which the activities are sorted." languagecode="1033" />
+            <Description description="Affiche la date et l'heure de tri des activités." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="StateCode" unmodified="1">
+          <Type>state</Type>
+          <Name>statecode</Name>
+          <LogicalName>statecode</LogicalName>
+          <RequiredLevel>systemrequired</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <optionset Name="task_statecode">
+            <OptionSetType>state</OptionSetType>
+            <IntroducedVersion>5.0.0.0</IntroducedVersion>
+            <displaynames>
+              <displayname description="Aktivitätsstatus" languagecode="1031" />
+              <displayname description="Activity Status" languagecode="1033" />
+              <displayname description="Statut d'activité" languagecode="1036" />
+            </displaynames>
+            <Descriptions>
+              <Description description="Status der Aufgabe." languagecode="1031" />
+              <Description description="Status of the task." languagecode="1033" />
+              <Description description="Statut de la tâche." languagecode="1036" />
+            </Descriptions>
+            <states>
+              <state value="0" defaultstatus="2" invariantname="Open">
+                <labels>
+                  <label description="Offen" languagecode="1031" />
+                  <label description="Open" languagecode="1033" />
+                  <label description="Ouvert" languagecode="1036" />
+                </labels>
+              </state>
+              <state value="1" defaultstatus="5" invariantname="Completed">
+                <labels>
+                  <label description="Abgeschlossen" languagecode="1031" />
+                  <label description="Completed" languagecode="1033" />
+                  <label description="Terminé" languagecode="1036" />
+                </labels>
+              </state>
+              <state value="2" defaultstatus="6" invariantname="Canceled">
+                <labels>
+                  <label description="Storniert" languagecode="1031" />
+                  <label description="Canceled" languagecode="1033" />
+                  <label description="Annulé" languagecode="1036" />
+                </labels>
+              </state>
+            </states>
+          </optionset>
+          <displaynames>
+            <displayname description="Aktivitätsstatus" languagecode="1031" />
+            <displayname description="Activity Status" languagecode="1033" />
+            <displayname description="Statut d'activité" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Gibt Aufschluss über den Status der Aufgabe (offen, abgeschlossen oder storniert). Abgeschlossene und stornierte Aufgaben sind schreibgeschützt und können nicht bearbeitet werden." languagecode="1031" />
+            <Description description="Shows whether the task is open, completed, or canceled. Completed and canceled tasks are read-only and can't be edited." languagecode="1033" />
+            <Description description="Indique si la tâche est ouverte, terminée ou annulée. Les tâches terminées et annulées sont en lecture seule et ne peuvent pas être modifiées." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="StatusCode" unmodified="1">
+          <Type>status</Type>
+          <Name>statuscode</Name>
+          <LogicalName>statuscode</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <optionset Name="task_statuscode">
+            <OptionSetType>status</OptionSetType>
+            <IntroducedVersion>5.0.0.0</IntroducedVersion>
+            <displaynames>
+              <displayname description="Statusgrund" languagecode="1031" />
+              <displayname description="Status Reason" languagecode="1033" />
+              <displayname description="Raison du statut" languagecode="1036" />
+            </displaynames>
+            <Descriptions>
+              <Description description="Grund für den Status der Aufgabe." languagecode="1031" />
+              <Description description="Reason for the status of the task." languagecode="1033" />
+              <Description description="Raison du statut de l'activité de tâche." languagecode="1036" />
+            </Descriptions>
+            <statuses>
+              <status value="2" state="0">
+                <labels>
+                  <label description="Nicht gestartet" languagecode="1031" />
+                  <label description="Not Started" languagecode="1033" />
+                  <label description="Non commencé" languagecode="1036" />
+                </labels>
+              </status>
+              <status value="3" state="0">
+                <labels>
+                  <label description="In Bearbeitung" languagecode="1031" />
+                  <label description="In Progress" languagecode="1033" />
+                  <label description="En cours" languagecode="1036" />
+                </labels>
+              </status>
+              <status value="4" state="0">
+                <labels>
+                  <label description="Wartet auf jemand anderen" languagecode="1031" />
+                  <label description="Waiting on someone else" languagecode="1033" />
+                  <label description="Attente après quelqu'un" languagecode="1036" />
+                </labels>
+              </status>
+              <status value="5" state="1">
+                <labels>
+                  <label description="Abgeschlossen" languagecode="1031" />
+                  <label description="Completed" languagecode="1033" />
+                  <label description="Terminé" languagecode="1036" />
+                </labels>
+              </status>
+              <status value="6" state="2">
+                <labels>
+                  <label description="Storniert" languagecode="1031" />
+                  <label description="Canceled" languagecode="1033" />
+                  <label description="Annulé" languagecode="1036" />
+                </labels>
+              </status>
+              <status value="7" state="0">
+                <labels>
+                  <label description="Zurückgestellt" languagecode="1031" />
+                  <label description="Deferred" languagecode="1033" />
+                  <label description="Différé" languagecode="1036" />
+                </labels>
+              </status>
+            </statuses>
+          </optionset>
+          <displaynames>
+            <displayname description="Statusgrund" languagecode="1031" />
+            <displayname description="Status Reason" languagecode="1033" />
+            <displayname description="Raison du statut" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Wählen Sie den Status der Aufgabe aus." languagecode="1031" />
+            <Description description="Select the task's status." languagecode="1033" />
+            <Description description="Sélectionnez le statut de la tâche." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="Subcategory" unmodified="1">
+          <Type>nvarchar</Type>
+          <Name>subcategory</Name>
+          <LogicalName>subcategory</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <Format>text</Format>
+          <MaxLength>250</MaxLength>
+          <Length>500</Length>
+          <displaynames>
+            <displayname description="Unterkategorie" languagecode="1031" />
+            <displayname description="Sub-Category" languagecode="1033" />
+            <displayname description="Sous-catégorie" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Geben Sie eine Unterkategorie ein, um den Aufgabentyp anzugeben und die Aktivität mit einem bestimmten Produkt, einer Vertriebsregion, einer Geschäftsgruppe oder einer anderen Funktion zu verknüpfen." languagecode="1031" />
+            <Description description="Type a subcategory to identify the task type and relate the activity to a specific product, sales region, business group, or other function." languagecode="1033" />
+            <Description description="Tapez une sous-catégorie pour identifier le type de la tâche et associer l'activité à un produit, une région de vente, un groupe professionnel ou une fonction spécifique." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="Subject" unmodified="1">
+          <Type>nvarchar</Type>
+          <Name>subject</Name>
+          <LogicalName>subject</LogicalName>
+          <RequiredLevel>required</RequiredLevel>
+          <DisplayMask>QueueItemTitle|PrimaryName|ValidForAdvancedFind|ValidForForm|ValidForGrid|RequiredForForm|RequiredForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <Format>text</Format>
+          <MaxLength>200</MaxLength>
+          <Length>400</Length>
+          <displaynames>
+            <displayname description="Betreff" languagecode="1031" />
+            <displayname description="Subject" languagecode="1033" />
+            <displayname description="Sujet" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Geben Sie eine kurze Beschreibung des Ziels oder primären Themas der Aufgabe ein." languagecode="1031" />
+            <Description description="Type a short description about the objective or primary topic of the task." languagecode="1033" />
+            <Description description="Tapez une courte description de l'objectif ou du sujet principal de la tâche." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="TimeZoneRuleVersionNumber" unmodified="1">
+          <Type>int</Type>
+          <Name>timezoneruleversionnumber</Name>
+          <LogicalName>timezoneruleversionnumber</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <ImeMode>disabled</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>0</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <Format></Format>
+          <MinValue>-1</MinValue>
+          <MaxValue>2147483647</MaxValue>
+          <displaynames>
+            <displayname description="Versionsnummer der Zeitzonenregel" languagecode="1031" />
+            <displayname description="Time Zone Rule Version Number" languagecode="1033" />
+            <displayname description="Numéro de version de la règle du fuseau horaire" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Nur zur internen Verwendung." languagecode="1031" />
+            <Description description="For internal use only." languagecode="1033" />
+            <Description description="Utilisation interne uniquement." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="TraversedPath" unmodified="1">
+          <Type>nvarchar</Type>
+          <Name>traversedpath</Name>
+          <LogicalName>traversedpath</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>7.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <Format>text</Format>
+          <MaxLength>1250</MaxLength>
+          <Length>2500</Length>
+          <displaynames>
+            <displayname description="Zurückgelegter Pfad" languagecode="1031" />
+            <displayname description="Traversed Path" languagecode="1033" />
+            <displayname description="Chemin d'accès traversé" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Nur zur internen Verwendung." languagecode="1031" />
+            <Description description="For internal use only." languagecode="1033" />
+            <Description description="Utilisation interne uniquement." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="UTCConversionTimeZoneCode" unmodified="1">
+          <Type>int</Type>
+          <Name>utcconversiontimezonecode</Name>
+          <LogicalName>utcconversiontimezonecode</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <ImeMode>disabled</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>0</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <Format></Format>
+          <MinValue>-1</MinValue>
+          <MaxValue>2147483647</MaxValue>
+          <displaynames>
+            <displayname description="Zeitzonencode für die UTC-Konvertierung" languagecode="1031" />
+            <displayname description="UTC Conversion Time Zone Code" languagecode="1033" />
+            <displayname description="Code de fuseau horaire pour la conversion UTC" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Zeitzonencode, der bei Erstellung des Datensatzes verwendet wurde." languagecode="1031" />
+            <Description description="Time zone code that was in use when the record was created." languagecode="1033" />
+            <Description description="Code de fuseau horaire utilisé à la création de l’enregistrement." languagecode="1036" />
+          </Descriptions>
+        </attribute>
+      </attributes>
+      <EntitySetName>tasks</EntitySetName>
+      <IsDuplicateCheckSupported>1</IsDuplicateCheckSupported>
+      <IsBusinessProcessEnabled>1</IsBusinessProcessEnabled>
+      <IsRequiredOffline>0</IsRequiredOffline>
+      <IsInteractionCentricEnabled>1</IsInteractionCentricEnabled>
+      <IsCollaboration>1</IsCollaboration>
+      <AutoRouteToOwnerQueue>0</AutoRouteToOwnerQueue>
+      <IsConnectionsEnabled>1</IsConnectionsEnabled>
+      <IsDocumentManagementEnabled>0</IsDocumentManagementEnabled>
+      <IsOneNoteIntegrationEnabled>0</IsOneNoteIntegrationEnabled>
+      <IsKnowledgeManagementEnabled>0</IsKnowledgeManagementEnabled>
+      <IsSLAEnabled>0</IsSLAEnabled>
+      <IsDocumentRecommendationsEnabled>0</IsDocumentRecommendationsEnabled>
+      <IsBPFEntity>0</IsBPFEntity>
+      <OwnershipTypeMask>UserOwned</OwnershipTypeMask>
+      <IsAuditEnabled>0</IsAuditEnabled>
+      <IsActivity>1</IsActivity>
+      <ActivityTypeMask>CommunicationActivity</ActivityTypeMask>
+      <IsActivityParty>0</IsActivityParty>
+      <IsReplicated>1</IsReplicated>
+      <IsReplicationUserFiltered>1</IsReplicationUserFiltered>
+      <IsMailMergeEnabled>0</IsMailMergeEnabled>
+      <IsVisibleInMobile>1</IsVisibleInMobile>
+      <IsVisibleInMobileClient>1</IsVisibleInMobileClient>
+      <IsReadOnlyInMobileClient>0</IsReadOnlyInMobileClient>
+      <IsOfflineInMobileClient>1</IsOfflineInMobileClient>
+      <DaysSinceRecordLastModified>10</DaysSinceRecordLastModified>
+      <MobileOfflineFilters>
+		&lt;fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false"&gt;
+			&lt;entity name="task"&gt;
+				&lt;filter type="and"&gt;
+					&lt;condition attribute="modifiedon" operator="last-x-days" value="10"/&gt;
+				&lt;/filter&gt;
+			&lt;/entity&gt;
+		&lt;/fetch&gt;
+	</MobileOfflineFilters>
+      <IsMapiGridEnabled>0</IsMapiGridEnabled>
+      <IsReadingPaneEnabled>1</IsReadingPaneEnabled>
+      <IsQuickCreateEnabled>0</IsQuickCreateEnabled>
+      <SyncToExternalSearchIndex>1</SyncToExternalSearchIndex>
+      <IntroducedVersion>5.0.0.0</IntroducedVersion>
+      <EnforceStateTransitions>0</EnforceStateTransitions>
+      <EntityHelpUrlEnabled>0</EntityHelpUrlEnabled>
+      <ChangeTrackingEnabled>1</ChangeTrackingEnabled>
+      <IsEnabledForExternalChannels>0</IsEnabledForExternalChannels>
+      <HasRelatedNotes>True</HasRelatedNotes>
+    </entity>
+  </EntityInfo>
+  <FormXml />
+  <RibbonDiffXml />
+</Entity>

@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>0</isdefault>
+  <returnedtypecode>10055</returnedtypecode>
+  <savedqueryid>{178b2d33-ce1e-e711-810d-3863bb340dd8}</savedqueryid>
+  <layoutxml>
+    <grid name="resultset" object="10055" jump="tc_name" select="1" preview="1" icon="1">
+      <row name="result" id="tc_compensationlineid">
+        <cell name="tc_name" width="150" />
+        <cell name="a_af93e89fd41ae71181043863bb354ff0.tc_salutation" width="100" disableSorting="1" />
+        <cell name="a_af93e89fd41ae71181043863bb354ff0.firstname" width="100" disableSorting="1" />
+        <cell name="a_af93e89fd41ae71181043863bb354ff0.lastname" width="100" disableSorting="1" />
+        <cell name="a_af93e89fd41ae71181043863bb354ff0.tc_address1_flatorunitnumber" width="100" disableSorting="1" />
+        <cell name="a_af93e89fd41ae71181043863bb354ff0.tc_address1_housenumberorbuilding" width="100" disableSorting="1" />
+        <cell name="a_af93e89fd41ae71181043863bb354ff0.tc_address1_street" width="100" disableSorting="1" />
+        <cell name="a_af93e89fd41ae71181043863bb354ff0.tc_address1_town" width="100" disableSorting="1" />
+        <cell name="a_af93e89fd41ae71181043863bb354ff0.tc_address1_countryid" width="100" disableSorting="1" />
+        <cell name="a_af93e89fd41ae71181043863bb354ff0.tc_address1_postalcode" width="100" disableSorting="1" />
+        <cell name="tc_voucherfirstname" width="100" />
+        <cell name="tc_voucherlastname" width="100" />
+        <cell name="createdon" width="100" />
+        <cell name="a_1c9d9e580ff9e61181073863bb34fb48.ticketnumber" width="100" disableSorting="1" />
+        <cell name="a_1c9d9e580ff9e61181073863bb34fb48.tc_bookingreferencefreetext" width="100" disableSorting="1" />
+        <cell name="tc_vouchermessage" width="100" disableSorting="1" />
+        <cell name="a_f7c6aeda0bf9e61181073863bb34fb48.firstname" width="100" disableSorting="1" />
+        <cell name="a_f7c6aeda0bf9e61181073863bb34fb48.lastname" width="100" disableSorting="1" />
+        <cell name="a_af93e89fd41ae71181043863bb354ff0.emailaddress1" width="100" disableSorting="1" />
+        <cell name="a_af93e89fd41ae71181043863bb354ff0.telephone1" width="100" disableSorting="1" />
+        <cell name="tc_voucherboardtype" width="100" />
+        <cell name="a_1c9d9e580ff9e61181073863bb34fb48.tc_brandid" width="100" disableSorting="1" />
+        <cell name="tc_voucheramount" width="100" />
+        <cell name="tc_expirydateofvoucher" width="100" />
+        <cell name="tc_voucherbooking" width="100" />
+        <cell name="tc_voucherroutingcode" width="100" />
+        <cell name="tc_voucherdate" width="100" />
+        <cell name="tc_voucherissuenumber" width="100" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>0</querytype>
+  <fetchxml>
+    <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
+      <entity name="tc_compensationline">
+        <attribute name="tc_name" />
+        <attribute name="tc_voucherlastname" />
+        <attribute name="tc_voucherfirstname" />
+        <attribute name="createdon" />
+        <attribute name="tc_vouchermessage" />
+        <attribute name="tc_voucherroutingcode" />
+        <attribute name="tc_voucherissuenumber" />
+        <attribute name="tc_voucherdate" />
+        <attribute name="tc_voucherbooking" />
+        <attribute name="tc_voucheramount" />
+        <order attribute="tc_name" descending="false" />
+        <filter type="and">
+          <condition attribute="tc_vouchertype" operator="eq" value="950000001" />
+          <filter type="or">
+            <filter type="and">
+              <condition attribute="tc_voucherdate" operator="last-x-days" value="3" />
+              <condition attribute="tc_voucherdate" operator="olderthan-x-hours" value="24" />
+            </filter>
+            <condition attribute="tc_voucherdate" operator="yesterday" />
+          </filter>
+        </filter>
+        <link-entity name="systemuser" from="systemuserid" to="modifiedby" visible="false" link-type="outer" alias="a_f7c6aeda0bf9e61181073863bb34fb48">
+          <attribute name="lastname" />
+          <attribute name="firstname" />
+        </link-entity>
+        <link-entity name="incident" from="incidentid" to="tc_caseid" alias="a_1c9d9e580ff9e61181073863bb34fb48">
+          <attribute name="tc_bookingreferencefreetext" />
+          <attribute name="ticketnumber" />
+          <attribute name="tc_brandid" />
+          <filter type="and">
+            <condition attribute="tc_bookingreferencefreetext" operator="not-null" />
+          </filter>
+        </link-entity>
+        <attribute name="tc_voucherboardtype" />
+        <attribute name="tc_expirydateofvoucher" />
+        <link-entity name="contact" from="contactid" to="tc_customer" visible="false" link-type="outer" alias="a_af93e89fd41ae71181043863bb354ff0">
+          <attribute name="tc_salutation" />
+          <attribute name="lastname" />
+          <attribute name="firstname" />
+          <attribute name="tc_address1_town" />
+          <attribute name="tc_address1_street" />
+          <attribute name="tc_address1_postalcode" />
+          <attribute name="tc_address1_housenumberorbuilding" />
+          <attribute name="tc_address1_flatorunitnumber" />
+          <attribute name="tc_address1_countryid" />
+          <attribute name="emailaddress1" />
+          <attribute name="telephone1" />
+        </link-entity>
+        <attribute name="tc_compensationlineid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.71</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Voucher DMS information for Manual bookings (Last 3 Days)" languagecode="1033" />
+  </LocalizedNames>
+</savedquery>

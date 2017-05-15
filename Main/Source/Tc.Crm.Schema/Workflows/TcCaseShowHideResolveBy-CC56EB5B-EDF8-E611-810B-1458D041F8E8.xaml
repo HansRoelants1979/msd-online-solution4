@@ -171,6 +171,9 @@
                     <Sequence DisplayName="SetVisibilityStep3: Show Resolve By">
                       <mcwc:SetVisibility ControlId="resolveby" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="True" />
                     </Sequence>
+                    <Sequence DisplayName="SetDisplayModeStep_SetVisibilityStep3_7: UnLock Resolve By">
+                      <mcwc:SetDisplayMode ControlId="resolveby" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsReadOnly="False" />
+                    </Sequence>
                   </sco:Collection>
                 </mxswa:ActivityReference.Properties>
               </mxswa:ActivityReference>

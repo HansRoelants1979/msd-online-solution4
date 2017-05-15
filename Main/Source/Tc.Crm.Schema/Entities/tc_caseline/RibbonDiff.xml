@@ -1,14 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RibbonDiffXml>
-  <CustomActions />
+  <CustomActions>
+    <CustomAction Id="tc.tc_caseline.CalculateCompensation.Button.CustomAction" Location="Mscrm.Form.tc_caseline.MainTab.Save.Controls._children" Sequence="38">
+      <CommandUIDefinition>
+        <Button Alt="$LocLabels:tc.tc_caseline.CalculateCompensation.Button.Alt" Command="tc.tc_caseline.CalculateCompensation.Command" Id="tc.tc_caseline.CalculateCompensation.Button" LabelText="$LocLabels:tc.tc_caseline.CalculateCompensation.Button.LabelText" Sequence="38" TemplateAlias="o1" ToolTipTitle="$LocLabels:tc.tc_caseline.CalculateCompensation.Button.ToolTipTitle" />
+      </CommandUIDefinition>
+    </CustomAction>
+  </CustomActions>
   <Templates>
     <RibbonTemplates Id="Mscrm.Templates"></RibbonTemplates>
   </Templates>
-  <CommandDefinitions />
+  <CommandDefinitions>
+    <CommandDefinition Id="tc.tc_caseline.CalculateCompensation.Command">
+      <EnableRules>
+        <EnableRule Id="tc.tc_caseline.EnableRule.EnableRule" />
+      </EnableRules>
+      <DisplayRules />
+      <Actions>
+        <JavaScriptFunction FunctionName="Tc.Crm.Scripts.Events.CaseLine.OnCompensationCalculate" Library="$webresource:tc_Tc.Crm.Scripts.Events.CaseLine.js" />
+      </Actions>
+    </CommandDefinition>
+  </CommandDefinitions>
   <RuleDefinitions>
     <TabDisplayRules />
     <DisplayRules />
-    <EnableRules />
+    <EnableRules>
+      <EnableRule Id="tc.tc_caseline.EnableRule.EnableRule">
+        <CustomRule FunctionName="Tc.Crm.Scripts.Events.CaseLine.ShowCompensationCalculator" Library="$webresource:tc_Tc.Crm.Scripts.Events.CaseLine.js" Default="false" InvertResult="false" />
+      </EnableRule>
+    </EnableRules>
   </RuleDefinitions>
-  <LocLabels />
+  <LocLabels>
+    <LocLabel Id="tc.tc_caseline.CalculateCompensation.Button.Alt">
+      <Titles>
+        <Title description="Calculate complensation for case line" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+    <LocLabel Id="tc.tc_caseline.CalculateCompensation.Button.LabelText">
+      <Titles>
+        <Title description="Calculate Compensation" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+    <LocLabel Id="tc.tc_caseline.CalculateCompensation.Button.ToolTipTitle">
+      <Titles>
+        <Title description="Calculate complensation for case line" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+  </LocLabels>
 </RibbonDiffXml>

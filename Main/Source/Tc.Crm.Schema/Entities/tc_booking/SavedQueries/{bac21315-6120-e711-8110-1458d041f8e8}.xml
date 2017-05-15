@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>0</isdefault>
+  <returnedtypecode>10026</returnedtypecode>
+  <savedqueryid>{bac21315-6120-e711-8110-1458d041f8e8}</savedqueryid>
+  <layoutxml>
+    <grid name="resultset" object="10026" jump="tc_name" select="1" preview="1" icon="1">
+      <row name="result" id="tc_bookingid">
+        <cell name="tc_name" width="150" />
+        <cell name="tc_destinationid" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_destinationgatewayid" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_returndate" width="100" />
+        <cell name="tc_sourcemarketid" width="100" />
+        <cell name="ownerid" width="300" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>0</querytype>
+  <fetchxml>
+    <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
+      <entity name="tc_booking">
+        <attribute name="tc_name" />
+        <attribute name="tc_sourcemarketid" />
+        <attribute name="tc_returndate" />
+        <attribute name="ownerid" />
+        <attribute name="tc_destinationgatewayid" />
+        <order attribute="tc_destinationid" descending="false" />
+        <order attribute="tc_returndate" descending="false" />
+        <filter type="and">
+          <condition attribute="tc_destinationgatewayid" operator="in">
+            <value uiname="ACA" uitype="tc_gateway">{72BEDD93-2E19-E711-810A-3863BB34DA28}</value>
+            <value uiname="ASW" uitype="tc_gateway">{AABCDD93-2E19-E711-810A-3863BB34DA28}</value>
+            <value uiname="CAI" uitype="tc_gateway">{A4BBDD93-2E19-E711-810A-3863BB34DA28}</value>
+            <value uiname="CUN" uitype="tc_gateway">{0CBEDD93-2E19-E711-810A-3863BB34DA28}</value>
+            <value uiname="HRG" uitype="tc_gateway">{FCBEDD93-2E19-E711-810A-3863BB34DA28}</value>
+            <value uiname="LPA" uitype="tc_gateway">{12BFDD93-2E19-E711-810A-3863BB34DA28}</value>
+            <value uiname="MEX" uitype="tc_gateway">{7EBFDD93-2E19-E711-810A-3863BB34DA28}</value>
+            <value uiname="RMF" uitype="tc_gateway">{84BEDD93-2E19-E711-810A-3863BB34DA28}</value>
+            <value uiname="SSH" uitype="tc_gateway">{FABADD93-2E19-E711-810A-3863BB34DA28}</value>
+            <value uiname="TCP" uitype="tc_gateway">{3EBEDD93-2E19-E711-810A-3863BB34DA28}</value>
+          </condition>
+          <condition attribute="tc_returndate" operator="olderthan-x-days" value="2" />
+        </filter>
+        <link-entity name="team" from="teamid" to="owningteam" alias="aa">
+          <filter type="and">
+            <condition attribute="tc_hotelteam" operator="eq" value="1" />
+          </filter>
+        </link-entity>
+        <attribute name="tc_destinationid" />
+        <attribute name="tc_bookingid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.76</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Old Bookings in Destination (Manual Intervention)" languagecode="1033" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description description="List of bookings which had to be dealocated to default business unit team:&#xA;- Those in destinations ACA,ASW,CAI,CUN,HRG,LPA,MEX,RMF,SSH,TCP&#xA;- whose owner is hotel team&#xA;- return date is more than 2 days" languagecode="1033" />
+  </Descriptions>
+</savedquery>

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workflow WorkflowId="{af9db957-a126-e711-8111-1458d041f8e8}" Name="Tc.Letter.SetRoutingCode" Description="Click to add description">
+  <XamlFileName>/Workflows/TcLetterSetRoutingCode-AF9DB957-A126-E711-8111-1458D041F8E8.xaml</XamlFileName>
+  <Type>1</Type>
+  <Subprocess>0</Subprocess>
+  <Category>2</Category>
+  <Mode>1</Mode>
+  <Scope>4</Scope>
+  <OnDemand>0</OnDemand>
+  <TriggerOnCreate>0</TriggerOnCreate>
+  <TriggerOnDelete>0</TriggerOnDelete>
+  <AsyncAutodelete>0</AsyncAutodelete>
+  <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+  <StateCode>0</StateCode>
+  <StatusCode>1</StatusCode>
+  <RunAs>1</RunAs>
+  <IsTransacted>1</IsTransacted>
+  <IntroducedVersion>1.0.0.82</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <BusinessProcessType>0</BusinessProcessType>
+  <PrimaryEntity>Letter</PrimaryEntity>
+  <ProcessTriggers>
+    <ProcessTrigger processtriggerid="{e512ea69-a126-e711-8111-1458d041f8e8}">
+      <controltype>1</controltype>
+      <scope>1</scope>
+      <controlname>description</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Letter</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{e612ea69-a126-e711-8111-1458d041f8e8}">
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Letter</primaryentitytypecode>
+    </ProcessTrigger>
+  </ProcessTriggers>
+</Workflow>

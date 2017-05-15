@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>0</isdefault>
+  <returnedtypecode>10054</returnedtypecode>
+  <savedqueryid>{985b6aed-7c35-e711-8102-e0071b66a0a1}</savedqueryid>
+  <layoutxml>
+    <grid name="resultset" object="10054" jump="tc_name" select="1" preview="1" icon="1">
+      <row name="result" id="tc_compensationid">
+        <cell name="tc_name" width="150" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>0</querytype>
+  <fetchxml>
+    <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="true">
+      <entity name="tc_compensation">
+        <attribute name="tc_name" />
+        <order attribute="tc_name" descending="false" />
+        <link-entity name="incident" from="incidentid" to="tc_caseid" alias="aa">
+          <link-entity name="tc_compensation" from="tc_caseid" to="incidentid" alias="ab">
+            <filter type="and">
+              <condition attribute="tc_amount" operator="not-null" />
+            </filter>
+          </link-entity>
+          <link-entity name="tc_locationoffice" from="tc_locationofficeid" to="tc_resortofficeid" alias="ac">
+            <filter type="and">
+              <condition attribute="ownerid" operator="eq-userid" />
+            </filter>
+          </link-entity>
+        </link-entity>
+        <attribute name="tc_compensationid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.95</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Resort Office Compensation" languagecode="1033" />
+  </LocalizedNames>
+</savedquery>

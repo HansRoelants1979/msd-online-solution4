@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workflow WorkflowId="{b04c6c77-5d32-e711-8106-3863bb354ff0}" Name="Tc.Case.PreventEnquiryCustomer" Description="Click to add description">
+  <XamlFileName>/Workflows/TcCasePreventEnquiryCustomer-B04C6C77-5D32-E711-8106-3863BB354FF0.xaml</XamlFileName>
+  <Type>1</Type>
+  <Subprocess>0</Subprocess>
+  <Category>2</Category>
+  <Mode>1</Mode>
+  <Scope>4</Scope>
+  <OnDemand>0</OnDemand>
+  <TriggerOnCreate>0</TriggerOnCreate>
+  <TriggerOnDelete>0</TriggerOnDelete>
+  <AsyncAutodelete>0</AsyncAutodelete>
+  <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+  <StateCode>1</StateCode>
+  <StatusCode>2</StatusCode>
+  <RunAs>1</RunAs>
+  <IsTransacted>1</IsTransacted>
+  <IntroducedVersion>1.0.0.93</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <BusinessProcessType>0</BusinessProcessType>
+  <PrimaryEntity>Incident</PrimaryEntity>
+  <labels>
+    <steplabels id="{f979aa40-2884-4cc2-a017-85e16c40c717}">
+      <label languagecode="1033" description="This customer cannot be used on a Complaint or Incident." />
+    </steplabels>
+  </labels>
+  <ProcessTriggers>
+    <ProcessTrigger processtriggerid="{be4c6c77-5d32-e711-8106-3863bb354ff0}">
+      <controltype>1</controltype>
+      <scope>1</scope>
+      <controlname>tc_casetypeid</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{bf4c6c77-5d32-e711-8106-3863bb354ff0}">
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{c04c6c77-5d32-e711-8106-3863bb354ff0}">
+      <controltype>1</controltype>
+      <scope>1</scope>
+      <controlname>customerid</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{c14c6c77-5d32-e711-8106-3863bb354ff0}">
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+  </ProcessTriggers>
+</Workflow>

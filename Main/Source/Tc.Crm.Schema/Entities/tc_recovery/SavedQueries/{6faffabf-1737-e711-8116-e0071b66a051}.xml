@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>0</isdefault>
+  <returnedtypecode>10077</returnedtypecode>
+  <savedqueryid>{6faffabf-1737-e711-8116-e0071b66a051}</savedqueryid>
+  <layoutxml>
+    <grid name="resultset" object="10077" jump="tc_name" select="1" preview="1" icon="1">
+      <row name="result" id="tc_recoveryid">
+        <cell name="tc_name" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_1780b3ec7b14e71181043863bb354ff0.customerid" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_96c736447b14e71181043863bb354ff0.tc_name" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_1780b3ec7b14e71181043863bb354ff0.ticketnumber" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_1780b3ec7b14e71181043863bb354ff0.statecode" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_1780b3ec7b14e71181043863bb354ff0.tc_sourcemarketid" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_1780b3ec7b14e71181043863bb354ff0.tc_gateway" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_1780b3ec7b14e71181043863bb354ff0.tc_arrivaldate" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_1780b3ec7b14e71181043863bb354ff0.tc_brandid" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_96c736447b14e71181043863bb354ff0.tc_travelamount" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_1780b3ec7b14e71181043863bb354ff0.tc_bookingtravelamount" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_5b386c256514e71181043863bb354ff0.tc_amount" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_5b386c256514e71181043863bb354ff0.transactioncurrencyid" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_commentsontotalrecovery" width="200" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_categorylevel1id" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_categorylevel2id" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_categorylevel3id" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_recoverableamount" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_nonrecoverableamount" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="transactioncurrencyid" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_writtenoffamount" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_writeoffreason" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_suppliercontacted" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_212aee6a1c19e711810c3863bb34fb48.tc_bacsamount" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_212aee6a1c19e711810c3863bb34fb48.tc_chapsamount" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_212aee6a1c19e711810c3863bb34fb48.tc_cashamount" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_212aee6a1c19e711810c3863bb34fb48.tc_voucheramount" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>0</querytype>
+  <fetchxml>
+    <fetch version="1.0" output-format="xml-platform" mapping="logical">
+      <entity name="tc_recovery">
+        <attribute name="tc_commentsontotalrecovery" />
+        <link-entity alias="a_5b386c256514e71181043863bb354ff0" name="tc_compensation" from="tc_compensationid" to="tc_compensationid" link-type="outer" visible="false">
+          <attribute name="tc_amount" />
+          <attribute name="transactioncurrencyid" />
+        </link-entity>
+        <order attribute="tc_writtenoffamount" descending="false" />
+        <attribute name="tc_writtenoffamount" />
+        <attribute name="tc_writeoffreason" />
+        <attribute name="tc_suppliercontacted" />
+        <attribute name="tc_recoverableamount" />
+        <attribute name="tc_nonrecoverableamount" />
+        <attribute name="transactioncurrencyid" />
+        <attribute name="tc_categorylevel3id" />
+        <attribute name="tc_categorylevel2id" />
+        <attribute name="tc_categorylevel1id" />
+        <link-entity alias="a_212aee6a1c19e711810c3863bb34fb48" name="tc_compensationline" from="tc_compensationlineid" to="tc_compensationlineid" link-type="outer" visible="false">
+          <attribute name="tc_voucheramount" />
+          <attribute name="tc_chapsamount" />
+          <attribute name="tc_cashamount" />
+          <attribute name="tc_bacsamount" />
+        </link-entity>
+        <attribute name="tc_name" />
+        <link-entity alias="a_96c736447b14e71181043863bb354ff0" name="tc_booking" from="tc_bookingid" to="tc_bookingid" link-type="outer" visible="false">
+          <attribute name="tc_name" />
+          <attribute name="tc_travelamount" />
+        </link-entity>
+        <link-entity alias="a_1780b3ec7b14e71181043863bb354ff0" name="incident" from="incidentid" to="tc_caseid" link-type="outer" visible="false">
+          <attribute name="customerid" />
+          <attribute name="statecode" />
+          <attribute name="tc_sourcemarketid" />
+          <attribute name="tc_gateway" />
+          <attribute name="ticketnumber" />
+          <attribute name="tc_brandid" />
+          <attribute name="tc_arrivaldate" />
+          <attribute name="tc_bookingtravelamount" />
+        </link-entity>
+        <attribute name="tc_recoveryid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.98</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Recovery Export" languagecode="1033" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description description="View for Recoveries Export" languagecode="1033" />
+  </Descriptions>
+</savedquery>

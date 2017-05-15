@@ -171,6 +171,11 @@
                       <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep42" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" />
                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
                     </Sequence>
+                    <Sequence DisplayName="SetFieldRequiredLevelStep_SetAttributeValueStep42_36: BS Role Number">
+                      <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;tc_compensation&quot;)]" />
+                      <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
+                      <mcwc:SetFieldRequiredLevel ControlId="tc_bacsbuildingsocietyrolenumber" ControlType="standard" DisplayName="SetFieldRequiredLevelStep_SetAttributeValueStep42_36" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" RequiredLevel="None" />
+                    </Sequence>
                   </sco:Collection>
                 </mxswa:ActivityReference.Properties>
               </mxswa:ActivityReference>

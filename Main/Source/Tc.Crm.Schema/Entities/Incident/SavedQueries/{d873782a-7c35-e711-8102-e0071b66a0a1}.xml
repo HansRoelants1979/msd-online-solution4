@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>0</isdefault>
+  <returnedtypecode>112</returnedtypecode>
+  <savedqueryid>{d873782a-7c35-e711-8102-e0071b66a0a1}</savedqueryid>
+  <layoutxml>
+    <grid name="resultset" object="112" jump="title" select="1" preview="1" icon="1">
+      <row name="result" id="incidentid">
+        <cell name="title" width="150" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>0</querytype>
+  <fetchxml>
+    <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
+      <entity name="incident">
+        <attribute name="title" />
+        <order attribute="title" descending="false" />
+        <link-entity name="tc_locationoffice" from="tc_locationofficeid" to="tc_resortofficeid" alias="aa">
+          <filter type="and">
+            <condition attribute="ownerid" operator="eq-userid" />
+          </filter>
+        </link-entity>
+        <attribute name="incidentid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.95</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Resort Office Cases" languagecode="1033" />
+  </LocalizedNames>
+</savedquery>

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workflow WorkflowId="{ba1d2273-ac1f-e711-8104-3863bb354ff0}" Name="Tc.Compensation.BACS.BS_Bank.Control" Description="Click to add description">
+  <XamlFileName>/Workflows/TcCompensationBACSBS_BankControl-BA1D2273-AC1F-E711-8104-3863BB354FF0.xaml</XamlFileName>
+  <Type>1</Type>
+  <Subprocess>0</Subprocess>
+  <Category>2</Category>
+  <Mode>1</Mode>
+  <Scope>4</Scope>
+  <OnDemand>0</OnDemand>
+  <TriggerOnCreate>0</TriggerOnCreate>
+  <TriggerOnDelete>0</TriggerOnDelete>
+  <AsyncAutodelete>0</AsyncAutodelete>
+  <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+  <StateCode>1</StateCode>
+  <StatusCode>2</StatusCode>
+  <RunAs>1</RunAs>
+  <IsTransacted>1</IsTransacted>
+  <IntroducedVersion>1.0.0.74</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <BusinessProcessType>0</BusinessProcessType>
+  <PrimaryEntity>tc_compensation</PrimaryEntity>
+  <ProcessTriggers>
+    <ProcessTrigger processtriggerid="{7e6a4f12-3536-e711-8124-e0071b659e11}">
+      <controltype>1</controltype>
+      <scope>1</scope>
+      <controlname>tc_bacsaccounttype</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_compensation</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{7f6a4f12-3536-e711-8124-e0071b659e11}">
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_compensation</primaryentitytypecode>
+    </ProcessTrigger>
+  </ProcessTriggers>
+</Workflow>

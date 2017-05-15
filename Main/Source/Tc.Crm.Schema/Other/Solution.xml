@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ImportExportXml version="8.2.0001.0176" SolutionPackageVersion="8.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ImportExportXml version="8.2.0001.0178" SolutionPackageVersion="8.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SolutionManifest>
     <UniqueName>ThomasCook</UniqueName>
     <LocalizedNames>
       <LocalizedName description="Thomas Cook" languagecode="1033" />
     </LocalizedNames>
     <Descriptions>
-      <Description description="Version control&#xA;&#xA;1.0.0.51 etc etc" languagecode="1033" />
+      <Description description="Version control&#xA;&#xA;1.0.0.51 etc etc&#xA;&#xA;1.0.0.98: replaced transfer type field in booking transfer with a one that uses global optionset" languagecode="1033" />
     </Descriptions>
-    <Version>1.0.0.90</Version>
+    <Version>1.0.0.98</Version>
     <Managed>0</Managed>
     <Publisher>
       <UniqueName>thomascook</UniqueName>
@@ -103,6 +103,7 @@
       <RootComponent type="1" schemaName="socialprofile" behavior="1" />
       <RootComponent type="1" schemaName="syncerror" behavior="2" />
       <RootComponent type="1" schemaName="systemuser" behavior="0" />
+      <RootComponent type="1" schemaName="task" behavior="1" />
       <RootComponent type="1" schemaName="tc_accounttype" behavior="0" />
       <RootComponent type="1" schemaName="tc_alternativeemail" behavior="0" />
       <RootComponent type="1" schemaName="tc_assistancerequest" behavior="0" />
@@ -112,6 +113,7 @@
       <RootComponent type="1" schemaName="tc_bookingtransfer" behavior="0" />
       <RootComponent type="1" schemaName="tc_bookingtransport" behavior="0" />
       <RootComponent type="1" schemaName="tc_brand" behavior="0" />
+      <RootComponent type="1" schemaName="tc_cacherequest" behavior="0" />
       <RootComponent type="1" schemaName="tc_casecategory" behavior="0" />
       <RootComponent type="1" schemaName="tc_caseflow" behavior="0" />
       <RootComponent type="1" schemaName="tc_caseline" behavior="0" />
@@ -162,9 +164,11 @@
       <RootComponent type="9" schemaName="tc_externalservicecodetype" behavior="0" />
       <RootComponent type="9" schemaName="tc_flightlength" behavior="0" />
       <RootComponent type="9" schemaName="tc_gender" behavior="0" />
+      <RootComponent type="9" schemaName="tc_highmediumlow" behavior="0" />
       <RootComponent type="9" schemaName="tc_hotelcategory" behavior="0" />
       <RootComponent type="9" schemaName="tc_hotelcomplextype" behavior="0" />
       <RootComponent type="9" schemaName="tc_hotelpromisetype" behavior="0" />
+      <RootComponent type="9" schemaName="tc_incidentinvestigationstatus" behavior="0" />
       <RootComponent type="9" schemaName="tc_invoicestatusvalues" behavior="0" />
       <RootComponent type="9" schemaName="tc_languages" behavior="0" />
       <RootComponent type="9" schemaName="tc_methodofcommunication" behavior="0" />
@@ -198,28 +202,36 @@
       <RootComponent type="20" id="{f6627159-76fa-e611-8108-3863bb34fb48}" behavior="0" />
       <RootComponent type="20" id="{f9c784c3-f9f8-e611-8107-3863bb34fb48}" behavior="0" />
       <RootComponent type="20" id="{fcaf7d02-b305-e711-8109-3863bb34fb48}" behavior="0" />
+      <RootComponent type="29" id="{0264a030-ca91-4a2a-9baf-4e3b992050a6}" behavior="0" />
       <RootComponent type="29" id="{02716d34-92a4-45ab-8b4a-272d2c3d5795}" behavior="0" />
       <RootComponent type="29" id="{04905e75-1615-e711-810d-3863bb340dd8}" behavior="0" />
       <RootComponent type="29" id="{06570f2d-e7fc-e611-8108-3863bb340dd8}" behavior="0" />
       <RootComponent type="29" id="{0685119b-1144-4e16-aafc-4ac62fa8d32f}" behavior="0" />
       <RootComponent type="29" id="{07946764-9c05-e711-810d-1458d041f8e8}" behavior="0" />
+      <RootComponent type="29" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" behavior="0" />
       <RootComponent type="29" id="{095568ae-7ac9-445d-ab0a-eb3059a96044}" behavior="0" />
+      <RootComponent type="29" id="{0cf8019d-a405-e711-8109-3863bb34fb48}" behavior="0" />
+      <RootComponent type="29" id="{0f76c79b-bf22-40d2-b679-2777ff4870c6}" behavior="0" />
       <RootComponent type="29" id="{0f86ac3b-b2fd-e611-8100-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{12188303-944a-4742-9af4-b2b596ae6525}" behavior="0" />
       <RootComponent type="29" id="{12ea1b1d-8cfa-e611-8108-3863bb340dd8}" behavior="0" />
       <RootComponent type="29" id="{1336abb9-d089-42a7-96e9-deb96e7b72a2}" behavior="0" />
       <RootComponent type="29" id="{13564182-332f-e711-8106-3863bb354ff0}" behavior="0" />
+      <RootComponent type="29" id="{1455eeed-cf99-423e-88f0-ee258e3b88e3}" behavior="0" />
       <RootComponent type="29" id="{14bf974d-9f1f-e711-8104-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{14cf8cd6-e48a-4818-ae28-3764552e745a}" behavior="0" />
+      <RootComponent type="29" id="{155ddf6e-54a1-4466-a716-bc7836f8fe78}" behavior="0" />
       <RootComponent type="29" id="{15756657-8d02-e711-810d-1458d041f8e8}" behavior="0" />
       <RootComponent type="29" id="{1833f08e-e803-e711-8109-3863bb34fb48}" behavior="0" />
       <RootComponent type="29" id="{1956e81b-83fe-445a-8d94-a5cb40a17587}" behavior="0" />
       <RootComponent type="29" id="{19cb9d14-e903-e711-8109-3863bb34fb48}" behavior="0" />
       <RootComponent type="29" id="{19da8481-1307-42f1-a311-fcf9c74f47a8}" behavior="0" />
+      <RootComponent type="29" id="{19f0bb08-342a-4d87-b976-274e3cfa10f2}" behavior="0" />
       <RootComponent type="29" id="{1a77693a-6c04-4477-a757-c749889f3f61}" behavior="0" />
       <RootComponent type="29" id="{1c936574-a9fa-e611-8108-3863bb340dd8}" behavior="0" />
       <RootComponent type="29" id="{1cf8a4dd-2d68-4f28-84f9-2edbdcb880bf}" behavior="0" />
       <RootComponent type="29" id="{1e712b61-9ccd-4ab0-8c12-e6a075dd6ae3}" behavior="0" />
+      <RootComponent type="29" id="{1f4c4c53-4836-e711-8104-e0071b66a0a1}" behavior="0" />
       <RootComponent type="29" id="{1f965f52-0a37-479d-ade5-c4fca8781310}" behavior="0" />
       <RootComponent type="29" id="{1fc0a632-5f03-4233-aff1-13938cf09668}" behavior="0" />
       <RootComponent type="29" id="{20fcdb60-74dd-41cc-8694-038078ba01bc}" behavior="0" />
@@ -228,21 +240,26 @@
       <RootComponent type="29" id="{250b2a34-030c-e711-810a-3863bb34fb48}" behavior="0" />
       <RootComponent type="29" id="{25a3b46b-ced5-432b-a798-3bfdecfd682c}" behavior="0" />
       <RootComponent type="29" id="{26557269-4574-4ed7-828f-b5c608d9c8d8}" behavior="0" />
+      <RootComponent type="29" id="{2699b8c5-b315-441e-b633-50dcf49709a6}" behavior="0" />
+      <RootComponent type="29" id="{2719910c-d695-4b6f-a52e-4cae3517c3d8}" behavior="0" />
       <RootComponent type="29" id="{28acd24b-0125-e711-8104-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{2992e799-9110-e711-810e-1458d041f8e8}" behavior="0" />
       <RootComponent type="29" id="{2b7cfcc6-9c1e-e711-8110-1458d041f8e8}" behavior="0" />
-      <RootComponent type="29" id="{2dc45a40-508a-44ca-a1f4-37a9b3169c3a}" behavior="0" />
+      <RootComponent type="29" id="{2ca981aa-7e8d-4f8d-a937-462b906ec985}" behavior="0" />
       <RootComponent type="29" id="{2e1ba5f7-b98a-4a3a-8275-e61921ce4784}" behavior="0" />
       <RootComponent type="29" id="{2f39e6b8-cd08-e711-8102-3863bb354ff0}" behavior="0" />
+      <RootComponent type="29" id="{2fa1c464-b972-43d1-9743-16dc361cfd8e}" behavior="0" />
       <RootComponent type="29" id="{30b48b7a-8d81-4f5f-950e-ec50676aaf98}" behavior="0" />
+      <RootComponent type="29" id="{312dfd37-a14a-4562-8bb6-5ea8eafef342}" behavior="0" />
       <RootComponent type="29" id="{31533632-44b8-4ce7-8177-b947acb27127}" behavior="0" />
+      <RootComponent type="29" id="{333d6394-d053-4d51-a896-75bc59192e66}" behavior="0" />
       <RootComponent type="29" id="{33cacc76-520a-e711-8102-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{34abbaae-fe07-e711-8102-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{36199960-8d11-e711-810f-1458d041f8e8}" behavior="0" />
       <RootComponent type="29" id="{36eb26df-d7af-4a5d-9c1e-2b63622aadb4}" behavior="0" />
       <RootComponent type="29" id="{3992cd00-2415-e711-810d-3863bb340dd8}" behavior="0" />
+      <RootComponent type="29" id="{3a00e83f-0c0c-44b1-8c39-bddea14e9dd6}" behavior="0" />
       <RootComponent type="29" id="{3c186b42-152c-e711-810f-3863bb340dd8}" behavior="0" />
-      <RootComponent type="29" id="{3fa6d9e0-112c-e711-8112-1458d041f8e8}" behavior="0" />
       <RootComponent type="29" id="{40f5a747-0708-e711-8102-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{41433206-9f1f-e711-8104-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{42e77957-277f-4d84-824e-8b89fc585952}" behavior="0" />
@@ -255,9 +272,12 @@
       <RootComponent type="29" id="{494dcb46-8561-4a64-b987-f8cb9052f849}" behavior="0" />
       <RootComponent type="29" id="{4d4154be-9313-481d-b1a1-3d2e92afcaea}" behavior="0" />
       <RootComponent type="29" id="{5001b066-8cfa-e611-8108-3863bb340dd8}" behavior="0" />
+      <RootComponent type="29" id="{5080a736-3236-e711-8104-e0071b66a0a1}" behavior="0" />
+      <RootComponent type="29" id="{5153da2f-48a8-43ec-aaf0-9c76f1943c4e}" behavior="0" />
       <RootComponent type="29" id="{5420fbc7-f806-4cbc-9dc1-22bbec2ecc19}" behavior="0" />
       <RootComponent type="29" id="{542bfd6c-aa05-e711-8109-3863bb34fb48}" behavior="0" />
       <RootComponent type="29" id="{58ba3e14-0a0f-e711-810a-3863bb34fb48}" behavior="0" />
+      <RootComponent type="29" id="{59502393-3aa6-4c92-ba13-f773e1ab25b8}" behavior="0" />
       <RootComponent type="29" id="{5ac98458-bdd1-4e4f-afc3-909f3905973c}" behavior="0" />
       <RootComponent type="29" id="{5e3810cc-075d-4b5f-9669-fce0b15c2609}" behavior="0" />
       <RootComponent type="29" id="{5e3f8ddc-3693-4d47-98b6-97e9544f7d3e}" behavior="0" />
@@ -266,27 +286,33 @@
       <RootComponent type="29" id="{6122109e-c337-458f-a337-d9f1b84d4402}" behavior="0" />
       <RootComponent type="29" id="{6254d909-3320-e711-810d-3863bb340dd8}" behavior="0" />
       <RootComponent type="29" id="{6258e741-1f1e-e711-8110-1458d041f8e8}" behavior="0" />
+      <RootComponent type="29" id="{6574da5b-807a-4fec-9635-33dc5d681780}" behavior="0" />
       <RootComponent type="29" id="{65d69e6d-4700-e711-8108-3863bb34fb48}" behavior="0" />
       <RootComponent type="29" id="{66877c88-9f1f-e711-8104-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{67584797-72a4-415b-b5f5-4b603831d682}" behavior="0" />
+      <RootComponent type="29" id="{6a3bbce0-cb30-e711-8106-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{6a7ac9d1-9778-4067-8754-5f66b0f29bf7}" behavior="0" />
+      <RootComponent type="29" id="{6a7cf8bb-dc5a-4d82-8ab4-1e042a798113}" behavior="0" />
       <RootComponent type="29" id="{6c0b8350-d7ec-4dec-8a10-3fe54ade741a}" behavior="0" />
       <RootComponent type="29" id="{6da56062-520a-e711-810a-3863bb340dd8}" behavior="0" />
       <RootComponent type="29" id="{6fa03874-fa08-e711-8102-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{71d50574-2192-4395-8dcb-512552d8ad6c}" behavior="0" />
       <RootComponent type="29" id="{720f687d-9772-46fd-a008-8bbb37f8d40f}" behavior="0" />
+      <RootComponent type="29" id="{748bbe7d-9411-479c-b130-4cd8be82b2fb}" behavior="0" />
       <RootComponent type="29" id="{74cab45f-4700-e711-8108-3863bb34fb48}" behavior="0" />
+      <RootComponent type="29" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" behavior="0" />
       <RootComponent type="29" id="{75ae6fcf-e5f8-e611-810b-1458d041f8e8}" behavior="0" />
-      <RootComponent type="29" id="{7657a5df-a31f-e711-8104-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{783f9c10-a4fe-484b-ac70-0fe6eacb0a73}" behavior="0" />
       <RootComponent type="29" id="{78f837c6-8c2e-4c23-8b91-c69d63d42005}" behavior="0" />
       <RootComponent type="29" id="{7b10c326-807c-4f01-a3d0-4264dec1f418}" behavior="0" />
       <RootComponent type="29" id="{7bf73d13-8bfa-e611-8108-3863bb340dd8}" behavior="0" />
       <RootComponent type="29" id="{7f6eca77-fb37-4355-8ffc-b532cda3ca7c}" behavior="0" />
+      <RootComponent type="29" id="{825f713d-fa9a-40dc-b308-d3c0df405009}" behavior="0" />
       <RootComponent type="29" id="{89a1d87f-ad5c-4cd8-a459-4ca2f0194aec}" behavior="0" />
       <RootComponent type="29" id="{8c84028a-b2fd-e611-8100-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{8d7dcf0d-4e8d-4b27-9d90-7e54a826078d}" behavior="0" />
       <RootComponent type="29" id="{918ef2bb-a6fa-e611-8108-3863bb340dd8}" behavior="0" />
+      <RootComponent type="29" id="{92d984a6-1724-494d-a087-15c21d710f34}" behavior="0" />
       <RootComponent type="29" id="{94b7e66b-330a-e711-810a-3863bb340dd8}" behavior="0" />
       <RootComponent type="29" id="{95f2a4d8-2800-e711-8108-3863bb340dd8}" behavior="0" />
       <RootComponent type="29" id="{99cdf643-a229-4b61-9aa1-02849011d679}" behavior="0" />
@@ -299,27 +325,44 @@
       <RootComponent type="29" id="{a422fdd9-e803-e711-8109-3863bb34fb48}" behavior="0" />
       <RootComponent type="29" id="{a620ecb5-84a1-4624-8e1e-03f5d8a21750}" behavior="0" />
       <RootComponent type="29" id="{a68f4c83-c569-4834-b9a1-abf1c452d5ce}" behavior="0" />
+      <RootComponent type="29" id="{a7877e0a-9a76-458a-901e-02560a4678bb}" behavior="0" />
+      <RootComponent type="29" id="{a7915f5f-0b37-e711-8116-e0071b66a051}" behavior="0" />
+      <RootComponent type="29" id="{a7d508f5-9831-e711-8112-1458d041f8e8}" behavior="0" />
       <RootComponent type="29" id="{a7dd9f77-4ef4-4065-8143-2083eec3de12}" behavior="0" />
       <RootComponent type="29" id="{a926be58-7b29-4d76-b1d5-9908d9770820}" behavior="0" />
-      <RootComponent type="29" id="{a9274ecd-570d-e711-810a-3863bb34fb48}" behavior="0" />
       <RootComponent type="29" id="{ac50bd00-6284-4c4e-8b82-a3028abeb3f6}" behavior="0" />
       <RootComponent type="29" id="{ad8c6e01-2419-e711-8104-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{add0abd6-0ec4-40f3-8a2a-512f8516e9ea}" behavior="0" />
       <RootComponent type="29" id="{af9db957-a126-e711-8111-1458d041f8e8}" behavior="0" />
+      <RootComponent type="29" id="{b04c6c77-5d32-e711-8106-3863bb354ff0}" behavior="0" />
+      <RootComponent type="29" id="{b3c59c51-8321-4c27-bce8-a9bed9a58956}" behavior="0" />
+      <RootComponent type="29" id="{b5d5f0fa-c43a-485b-a79d-caa3eec476e9}" behavior="0" />
       <RootComponent type="29" id="{b5fb8d18-d66a-4b9f-a21f-f155cc164aea}" behavior="0" />
       <RootComponent type="29" id="{b6834a0a-83c7-4fbb-94ed-2e04f315ea4c}" behavior="0" />
+      <RootComponent type="29" id="{b7158425-f57c-4603-ad60-a2e06ae56317}" behavior="0" />
+      <RootComponent type="29" id="{b9e1b4dd-5b46-4a79-932e-94ff4d406302}" behavior="0" />
       <RootComponent type="29" id="{ba1d2273-ac1f-e711-8104-3863bb354ff0}" behavior="0" />
+      <RootComponent type="29" id="{c0431790-94c2-453f-abc5-0422069e18e8}" behavior="0" />
       <RootComponent type="29" id="{c2ab6021-226c-4613-9477-9d98eae2e8a0}" behavior="0" />
+      <RootComponent type="29" id="{c2f28b15-fd2b-4c1f-98d2-357ae429f270}" behavior="0" />
       <RootComponent type="29" id="{c34d9cf9-90d0-4ef0-be4e-e1ee0c3d9670}" behavior="0" />
       <RootComponent type="29" id="{c5515fb3-9d1f-e711-8104-3863bb354ff0}" behavior="0" />
+      <RootComponent type="29" id="{c93edb17-fd6b-450d-a362-526335fb5d0d}" behavior="0" />
+      <RootComponent type="29" id="{cc287dce-e0da-4d1f-8b42-a64cf338a5d7}" behavior="0" />
       <RootComponent type="29" id="{cc56eb5b-edf8-e611-810b-1458d041f8e8}" behavior="0" />
+      <RootComponent type="29" id="{cfce0f81-6441-45cc-8e8b-6ec0b24ca4ad}" behavior="0" />
+      <RootComponent type="29" id="{cfdf1d00-0437-e711-8104-e0071b66a0a1}" behavior="0" />
+      <RootComponent type="29" id="{d0b3534f-4730-e711-810e-3863bb34fb48}" behavior="0" />
       <RootComponent type="29" id="{d3950ebe-2206-423e-832f-abca15260ca3}" behavior="0" />
       <RootComponent type="29" id="{d4841656-e630-4eb3-aa4b-054ddb56e865}" behavior="0" />
+      <RootComponent type="29" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" behavior="0" />
       <RootComponent type="29" id="{d67ee786-9bfd-e611-810c-1458d041f8e8}" behavior="0" />
       <RootComponent type="29" id="{d7418219-1a43-4e64-a6be-b9b87e6ddb25}" behavior="0" />
       <RootComponent type="29" id="{d7ca63de-5c4e-4a6b-9834-9483dc841e21}" behavior="0" />
       <RootComponent type="29" id="{d8566e03-3c44-47a1-a90b-a981c49debc8}" behavior="0" />
+      <RootComponent type="29" id="{d8d14053-12cb-4f55-9183-bb912ce55dc2}" behavior="0" />
       <RootComponent type="29" id="{d96dbcb4-278f-4cd3-ae45-1ec316fd0a28}" behavior="0" />
+      <RootComponent type="29" id="{d9748b3a-258b-4fd6-9b48-b96ba086fb8e}" behavior="0" />
       <RootComponent type="29" id="{db3240e8-b5fd-e611-8100-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{dbe15aa6-98cf-461e-8777-811bf9eee8db}" behavior="0" />
       <RootComponent type="29" id="{dc13dabe-9e16-4824-8a30-3082d9b47fec}" behavior="0" />
@@ -327,6 +370,7 @@
       <RootComponent type="29" id="{dd3ff42a-9414-e711-810c-3863bb34fb48}" behavior="0" />
       <RootComponent type="29" id="{dfb1b8e3-b0fa-e611-8108-3863bb340dd8}" behavior="0" />
       <RootComponent type="29" id="{e09877b9-d168-49e0-8158-b7c8a1991f30}" behavior="0" />
+      <RootComponent type="29" id="{e0c6a48b-eede-4711-a7a0-fb234f359108}" behavior="0" />
       <RootComponent type="29" id="{e27daef1-d5c8-4e3b-b2e0-76cd65054e48}" behavior="0" />
       <RootComponent type="29" id="{e2e08252-9f08-e711-810a-3863bb34fb48}" behavior="0" />
       <RootComponent type="29" id="{e359c715-d108-e711-8102-3863bb354ff0}" behavior="0" />
@@ -334,20 +378,24 @@
       <RootComponent type="29" id="{e456c8d1-4b6e-4d1f-b746-520f32a4cfc9}" behavior="0" />
       <RootComponent type="29" id="{e64bda7f-a5fa-e611-8108-3863bb340dd8}" behavior="0" />
       <RootComponent type="29" id="{e656ed68-4352-4d91-8590-ba9e5312ea4c}" behavior="0" />
+      <RootComponent type="29" id="{e7188b50-7f32-e711-8106-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{eb6a3cae-9a0a-4a05-9a09-40433863b431}" behavior="0" />
+      <RootComponent type="29" id="{ec193d5d-003d-48b5-8bcf-6f0d8d0f54c6}" behavior="0" />
       <RootComponent type="29" id="{ed094fcc-1d79-4584-a15e-ba86935a44a5}" behavior="0" />
       <RootComponent type="29" id="{ed5bdced-191e-e711-8110-1458d041f8e8}" behavior="0" />
+      <RootComponent type="29" id="{efb7ef4b-9c89-4a3d-aee6-54cc05d3ee52}" behavior="0" />
       <RootComponent type="29" id="{f0a4f4fc-480a-e711-810a-3863bb340dd8}" behavior="0" />
       <RootComponent type="29" id="{f0dc2ffa-9702-e711-8101-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{f1852251-e803-e711-8109-3863bb34fb48}" behavior="0" />
       <RootComponent type="29" id="{f6706c2f-9a09-e711-810a-3863bb340dd8}" behavior="0" />
+      <RootComponent type="29" id="{f761928e-1237-e711-8116-e0071b66a051}" behavior="0" />
       <RootComponent type="29" id="{f78bceef-f028-4eb1-949e-da4acacc4668}" behavior="0" />
       <RootComponent type="29" id="{f7a78559-b816-e711-810c-3863bb34fb48}" behavior="0" />
       <RootComponent type="29" id="{f946b341-3ea8-4cfd-8163-9620d74a80cd}" behavior="0" />
       <RootComponent type="29" id="{fcae3925-e201-e711-8101-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{fdb7564e-0ffe-4acc-980b-ce625ee8db5d}" behavior="0" />
-      <RootComponent type="29" id="{feb64858-65f3-e611-8107-3863bb34fb48}" behavior="0" />
       <RootComponent type="29" id="{fed249cc-5162-4ad0-8338-8ba2fcc07000}" behavior="0" />
+      <RootComponent type="29" id="{ff41c716-0ae0-4da1-b819-d554c4456f9f}" behavior="0" />
       <RootComponent type="29" id="{fff3b387-c408-e711-810a-3863bb340dd8}" behavior="0" />
       <RootComponent type="36" id="{0046fc6a-3f0e-e711-8102-3863bb354ff0}" behavior="0" />
       <RootComponent type="36" id="{013b6893-360e-e711-8102-3863bb354ff0}" behavior="0" />
@@ -407,6 +455,7 @@
       <RootComponent type="36" id="{9cfdf861-d012-e711-810b-3863bb34fb48}" behavior="0" />
       <RootComponent type="36" id="{9f7f78f4-fd0e-e711-810e-1458d041f8e8}" behavior="0" />
       <RootComponent type="36" id="{a47260bd-fd0e-e711-810e-1458d041f8e8}" behavior="0" />
+      <RootComponent type="36" id="{ade8acd5-a230-e711-8112-1458d041f8e8}" behavior="0" />
       <RootComponent type="36" id="{aecd3463-6c14-e711-8110-1458d041f8e8}" behavior="0" />
       <RootComponent type="36" id="{afda596b-cc12-e711-810b-3863bb34fb48}" behavior="0" />
       <RootComponent type="36" id="{b0ec01bf-cf12-e711-810b-3863bb34fb48}" behavior="0" />
@@ -424,6 +473,7 @@
       <RootComponent type="36" id="{c94af707-2a0e-e711-8102-3863bb354ff0}" behavior="0" />
       <RootComponent type="36" id="{cc681f1b-d212-e711-810b-3863bb34fb48}" behavior="0" />
       <RootComponent type="36" id="{ceadf70e-fe0e-e711-810e-1458d041f8e8}" behavior="0" />
+      <RootComponent type="36" id="{d4e14c89-ae30-e711-8112-1458d041f8e8}" behavior="0" />
       <RootComponent type="36" id="{db1ca522-270e-e711-8102-3863bb354ff0}" behavior="0" />
       <RootComponent type="36" id="{dc5124d7-6c14-e711-8110-1458d041f8e8}" behavior="0" />
       <RootComponent type="36" id="{dd587fb8-cf12-e711-810b-3863bb34fb48}" behavior="0" />
@@ -449,13 +499,17 @@
       <RootComponent type="60" id="{0d1e47ff-12b2-4f53-9090-bee951b98cb4}" />
       <RootComponent type="60" id="{0ea91742-bb28-430a-b92e-076f181381b7}" behavior="0" />
       <RootComponent type="60" id="{0f11b135-275d-47fb-a680-b8ba05592db9}" behavior="0" />
+      <RootComponent type="60" id="{12cce8a2-9335-e711-8102-e0071b66a0a1}" behavior="0" />
       <RootComponent type="60" id="{14d6fd80-3319-e711-8104-3863bb354ff0}" behavior="0" />
       <RootComponent type="60" id="{15915835-b87c-49ec-9ffc-bfac3ac44ef1}" behavior="0" />
+      <RootComponent type="60" id="{16654191-19ad-48ca-9e46-c4b4fbdad76f}" />
       <RootComponent type="60" id="{187197f1-ab1d-44e2-a2bb-e93bef4aed66}" behavior="0" />
       <RootComponent type="60" id="{19b14c51-3d43-4d56-ab34-49c540bf468c}" behavior="0" />
       <RootComponent type="60" id="{1c5b35af-5f0d-4e31-a5cd-25c149792427}" behavior="0" />
       <RootComponent type="60" id="{1f849572-4d3f-42a5-b8ae-b8bf0b32b4a2}" behavior="0" />
+      <RootComponent type="60" id="{1fac7e2e-0b1c-4b6c-ab92-8af0f92dbdbc}" />
       <RootComponent type="60" id="{1fed44d1-ae68-4a41-bd2b-f13acac4acfa}" behavior="0" />
+      <RootComponent type="60" id="{20bf94ae-4adb-4b3a-be9a-3fe6bf878834}" behavior="0" />
       <RootComponent type="60" id="{21f5dd7a-c813-e711-810d-3863bb340dd8}" behavior="0" />
       <RootComponent type="60" id="{238fe671-b59d-4fcc-84fd-6949db6c2dfa}" behavior="0" />
       <RootComponent type="60" id="{27216331-e27b-4216-b50f-628419db3d32}" behavior="0" />
@@ -463,8 +517,11 @@
       <RootComponent type="60" id="{2b36a508-65da-402c-a5f7-30e76f7ec778}" behavior="0" />
       <RootComponent type="60" id="{2d8c0f94-9310-e711-810a-3863bb34fb48}" behavior="0" />
       <RootComponent type="60" id="{3190c04d-f37d-47ed-8e53-92f7c6f773db}" behavior="0" />
+      <RootComponent type="60" id="{33ab18eb-9335-e711-8102-e0071b66a0a1}" behavior="0" />
+      <RootComponent type="60" id="{3423bc24-e745-42e4-88f1-c65289f58abb}" behavior="0" />
       <RootComponent type="60" id="{3a03e16e-19ed-47ee-aff0-4967d68133b9}" behavior="0" />
       <RootComponent type="60" id="{3a0b2969-21c0-49c7-8590-43bd0688145d}" behavior="0" />
+      <RootComponent type="60" id="{3ba95cd3-f668-4a13-a416-2a47a1da402b}" behavior="0" />
       <RootComponent type="60" id="{3ee48486-c00b-4f99-ab2e-21cf96d80407}" behavior="0" />
       <RootComponent type="60" id="{403592e8-03fe-4a60-994e-3110531dad0c}" behavior="0" />
       <RootComponent type="60" id="{43fc8d5e-1a0a-4da7-ba12-e878abf7c7fa}" behavior="0" />
@@ -478,10 +535,10 @@
       <RootComponent type="60" id="{58ef8e27-a26a-4f89-8159-0e82c863772c}" behavior="0" />
       <RootComponent type="60" id="{5998bdf9-b8aa-416c-9d3e-7b7bcd3390d7}" behavior="0" />
       <RootComponent type="60" id="{5caa9a69-2ce0-47fd-885e-b6a6b2edc12f}" behavior="0" />
+      <RootComponent type="60" id="{5e9725e4-5449-4363-8c1c-5ae71767af34}" />
       <RootComponent type="60" id="{5f79e89a-ba4c-4b24-b4b5-4349f414faf9}" behavior="0" />
       <RootComponent type="60" id="{61a21ee4-7943-4d00-8a41-42097c88e110}" behavior="0" />
       <RootComponent type="60" id="{661157fe-2fc9-4eaa-835f-5bfa2f7b64f7}" behavior="0" />
-      <RootComponent type="60" id="{6a494d16-060f-e711-810a-3863bb340dd8}" behavior="0" />
       <RootComponent type="60" id="{6a59d3e6-ce8b-4d2f-8019-5ec48a74b241}" behavior="0" />
       <RootComponent type="60" id="{6dc0e3fa-4915-e711-810c-3863bb34fb48}" behavior="0" />
       <RootComponent type="60" id="{6ed25386-e3ec-4e2b-bc5e-6a2a7803c8f3}" />
@@ -495,14 +552,17 @@
       <RootComponent type="60" id="{7f30adfe-f124-e711-8104-3863bb354ff0}" behavior="0" />
       <RootComponent type="60" id="{81497873-7e70-4d2e-81fd-7a99b4a791bb}" behavior="0" />
       <RootComponent type="60" id="{814ce71e-6be2-4470-99bd-399aca0c5994}" behavior="0" />
+      <RootComponent type="60" id="{81a89014-442c-44ad-9725-4077426a7fee}" />
       <RootComponent type="60" id="{831d3152-9e4a-4b6c-9150-1799123ba510}" behavior="0" />
       <RootComponent type="60" id="{8448b78f-8f42-454e-8e2a-f8196b0419af}" behavior="0" />
       <RootComponent type="60" id="{84de63cd-e724-483d-be24-57064d3d1e89}" behavior="0" />
+      <RootComponent type="60" id="{84e1ab1d-9235-e711-8102-e0071b66a0a1}" behavior="0" />
       <RootComponent type="60" id="{87d1e1b3-b60f-e711-810a-3863bb340dd8}" behavior="0" />
       <RootComponent type="60" id="{88599263-c11e-4c33-bf9d-a46fcee7595b}" behavior="0" />
       <RootComponent type="60" id="{888a26c3-7014-e711-8110-1458d041f8e8}" behavior="0" />
       <RootComponent type="60" id="{8a500bd5-5230-48f1-af4e-7e72f77a7fa0}" behavior="0" />
       <RootComponent type="60" id="{8e10b902-0b3e-441c-8b12-88e6c1793848}" behavior="0" />
+      <RootComponent type="60" id="{8e867ca8-1fd7-4904-b4f5-d407fea0ca99}" />
       <RootComponent type="60" id="{915f6055-2e07-4276-ae08-2b96c8d02c57}" behavior="0" />
       <RootComponent type="60" id="{93c134e1-cfda-4630-bf1d-e86a4c7a9a6e}" behavior="0" />
       <RootComponent type="60" id="{95be2005-6b14-e711-8110-1458d041f8e8}" behavior="0" />
@@ -515,6 +575,7 @@
       <RootComponent type="60" id="{b7062b3a-d74e-438d-b297-334766c5234e}" behavior="0" />
       <RootComponent type="60" id="{b7943d2c-d5fd-4483-baf0-5cec3a2bb688}" behavior="0" />
       <RootComponent type="60" id="{bc3f9e9d-3021-4fde-b424-37bd3ac1cc88}" behavior="0" />
+      <RootComponent type="60" id="{bec074ec-0734-e711-8114-e0071b66a051}" behavior="0" />
       <RootComponent type="60" id="{c2cd9e55-d4b4-4b55-9951-16ead79643e5}" behavior="0" />
       <RootComponent type="60" id="{c49ccb7d-ed78-401c-8797-d8719e678f49}" behavior="0" />
       <RootComponent type="60" id="{c4bc3e8c-71a3-41f6-9a2a-5a4f147d92e8}" behavior="0" />
@@ -538,11 +599,12 @@
       <RootComponent type="60" id="{eb3748b8-5f90-4050-a039-8b7d279ad8fe}" behavior="0" />
       <RootComponent type="60" id="{eb49f73c-c585-4adf-b07a-9547613dc26f}" behavior="0" />
       <RootComponent type="60" id="{ec641943-514b-4cd4-b965-cb4c61c6d40c}" behavior="0" />
+      <RootComponent type="60" id="{ecd565f4-ff33-e711-8114-e0071b66a051}" behavior="0" />
       <RootComponent type="60" id="{ed92b7e8-4e36-458a-9a89-273ddf68f03e}" behavior="0" />
       <RootComponent type="60" id="{ef28f965-ef13-e711-810d-3863bb340dd8}" behavior="0" />
       <RootComponent type="60" id="{efd07c8e-c7b7-44d2-885c-7862747ff7b0}" behavior="0" />
       <RootComponent type="60" id="{f2b8a98b-7418-4821-9066-ce182141887d}" behavior="0" />
-      <RootComponent type="60" id="{f34046fa-8810-e711-810a-3863bb34fb48}" behavior="0" />
+      <RootComponent type="60" id="{fcf83436-d034-e711-8122-e0071b659e11}" behavior="0" />
       <RootComponent type="60" id="{fdd6d28a-6a67-4bf3-802c-37eb1a472ae2}" />
       <RootComponent type="60" id="{ff46e7c1-edf6-4368-9e77-c121bd15f2b2}" behavior="0" />
       <RootComponent type="61" schemaName="new_Incident_origincode_icon100000000.png" behavior="0" />
@@ -616,7 +678,6 @@
       <RootComponent type="61" schemaName="tc_LocationOfficeIcon32" behavior="0" />
       <RootComponent type="61" schemaName="tc_LocationPyramidIcon16" behavior="0" />
       <RootComponent type="61" schemaName="tc_LocationPyramidIcon32" behavior="0" />
-      <RootComponent type="61" schemaName="tc_OfflineResource" behavior="0" />
       <RootComponent type="61" schemaName="tc_ParticipantIcon16" behavior="0" />
       <RootComponent type="61" schemaName="tc_ParticipantIcon32" behavior="0" />
       <RootComponent type="61" schemaName="tc_recoveryicon16" behavior="0" />
@@ -657,6 +718,7 @@
       <RootComponent type="70" id="{f249bb95-f424-e711-8104-3863bb354ff0}" behavior="0" />
       <RootComponent type="91" schemaName="Tc.Crm.CustomWorkflowSteps, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9d1841d22f62ace3" behavior="0" />
       <RootComponent type="91" schemaName="Tc.Crm.Plugins, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9d1841d22f62ace3" behavior="0" />
+      <RootComponent type="92" id="{01d37b1e-f030-e711-810e-3863bb34fb48}" behavior="0" />
       <RootComponent type="92" id="{0d3d37f8-641b-e711-8104-3863bb354ff0}" behavior="0" />
       <RootComponent type="92" id="{23af20ed-6219-e711-810c-3863bb34fb48}" behavior="0" />
       <RootComponent type="92" id="{65da0fa8-c024-e711-810d-3863bb340dd8}" behavior="0" />
@@ -674,39 +736,163 @@
     <MissingDependencies>
       <MissingDependency>
         <Required key="0" type="1" schemaName="msdyn_wallsavedqueryusersettings" displayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
-        <Dependent key="1" type="2" schemaName="msdyn_useridname" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
+        <Dependent key="1" type="2" schemaName="msdyn_useridyominame" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
       </MissingDependency>
       <MissingDependency>
         <Required key="0" type="1" schemaName="msdyn_wallsavedqueryusersettings" displayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
-        <Dependent key="2" type="2" schemaName="msdyn_useridyominame" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
+        <Dependent key="2" type="2" schemaName="msdyn_useridname" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="0" type="1" schemaName="msdyn_wallsavedqueryusersettings" displayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
+        <Dependent key="3" type="10" schemaName="msdyn_systemuser_wallsavedqueryusersettings_userid" displayName="msdyn_systemuser_wallsavedqueryusersettings_userid" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
       </MissingDependency>
       <MissingDependency>
         <Required key="0" type="1" schemaName="msdyn_wallsavedqueryusersettings" displayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
         <Dependent key="0" type="1" schemaName="msdyn_wallsavedqueryusersettings" displayName="Filter" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="0" type="1" schemaName="msdyn_wallsavedqueryusersettings" displayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
+        <Required key="4" type="1" schemaName="msdyn_postruleconfig" displayName="Post Rule Configuration" solution="ActivityFeedsCore (8.2.0.0)" />
+        <Dependent key="5" type="62" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="6" type="1" schemaName="msdyn_postconfig" displayName="Post Configuration" solution="ActivityFeedsCore (8.2.0.0)" />
+        <Dependent key="5" type="62" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="7" type="1" schemaName="poan_powerautonumber" displayName="PowerAutoNumber" solution="PowerAutoNumber (1.2.14.2016)" />
+        <Dependent key="5" type="62" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="8" type="1" schemaName="posms_smsmessage" displayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="9" type="29" displayName="Tc.Case.SMS.InformCustomerCaseCreated" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="8" type="1" schemaName="posms_smsmessage" displayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="10" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="8" type="1" schemaName="posms_smsmessage" displayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="11" type="29" displayName="Tc.Case.SMS.InformAnotherCustomerCaseCreated" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="12" type="2" schemaName="activityid" displayName="Activity" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
+        <Dependent key="11" type="29" displayName="Tc.Case.SMS.InformAnotherCustomerCaseCreated" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="13" type="2" schemaName="posms_phonenumber" displayName="Phone Number" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="11" type="29" displayName="Tc.Case.SMS.InformAnotherCustomerCaseCreated" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="14" type="2" schemaName="statuscode" displayName="Status Reason" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="11" type="29" displayName="Tc.Case.SMS.InformAnotherCustomerCaseCreated" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="15" type="2" schemaName="prioritycode" displayName="Priority" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="11" type="29" displayName="Tc.Case.SMS.InformAnotherCustomerCaseCreated" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="16" type="2" schemaName="regardingobjectid" displayName="Regarding" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
+        <Dependent key="11" type="29" displayName="Tc.Case.SMS.InformAnotherCustomerCaseCreated" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="17" type="2" schemaName="deliveryprioritycode" displayName="Delivery Priority" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="11" type="29" displayName="Tc.Case.SMS.InformAnotherCustomerCaseCreated" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="18" type="2" schemaName="leftvoicemail" displayName="Left Voice Mail" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="11" type="29" displayName="Tc.Case.SMS.InformAnotherCustomerCaseCreated" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="19" type="2" schemaName="subject" displayName="SMS (legacy)" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="11" type="29" displayName="Tc.Case.SMS.InformAnotherCustomerCaseCreated" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="20" type="2" schemaName="posms_smsmessagelarge" displayName="SMS Message" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="11" type="29" displayName="Tc.Case.SMS.InformAnotherCustomerCaseCreated" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="20" type="2" schemaName="posms_smsmessagelarge" displayName="SMS Message" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="10" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="19" type="2" schemaName="subject" displayName="SMS (legacy)" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="10" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="17" type="2" schemaName="deliveryprioritycode" displayName="Delivery Priority" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="10" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="18" type="2" schemaName="leftvoicemail" displayName="Left Voice Mail" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="10" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="15" type="2" schemaName="prioritycode" displayName="Priority" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="10" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="16" type="2" schemaName="regardingobjectid" displayName="Regarding" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
+        <Dependent key="10" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="21" type="2" schemaName="transactioncurrencyid" displayName="Currency" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
+        <Dependent key="10" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="13" type="2" schemaName="posms_phonenumber" displayName="Phone Number" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="10" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="14" type="2" schemaName="statuscode" displayName="Status Reason" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="10" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="12" type="2" schemaName="activityid" displayName="Activity" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
+        <Dependent key="10" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="12" type="2" schemaName="activityid" displayName="Activity" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
+        <Dependent key="9" type="29" displayName="Tc.Case.SMS.InformCustomerCaseCreated" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="14" type="2" schemaName="statuscode" displayName="Status Reason" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="9" type="29" displayName="Tc.Case.SMS.InformCustomerCaseCreated" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="13" type="2" schemaName="posms_phonenumber" displayName="Phone Number" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="9" type="29" displayName="Tc.Case.SMS.InformCustomerCaseCreated" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="19" type="2" schemaName="subject" displayName="SMS (legacy)" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="9" type="29" displayName="Tc.Case.SMS.InformCustomerCaseCreated" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="20" type="2" schemaName="posms_smsmessagelarge" displayName="SMS Message" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="9" type="29" displayName="Tc.Case.SMS.InformCustomerCaseCreated" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="17" type="2" schemaName="deliveryprioritycode" displayName="Delivery Priority" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="9" type="29" displayName="Tc.Case.SMS.InformCustomerCaseCreated" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="18" type="2" schemaName="leftvoicemail" displayName="Left Voice Mail" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="9" type="29" displayName="Tc.Case.SMS.InformCustomerCaseCreated" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="16" type="2" schemaName="regardingobjectid" displayName="Regarding" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
+        <Dependent key="9" type="29" displayName="Tc.Case.SMS.InformCustomerCaseCreated" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="15" type="2" schemaName="prioritycode" displayName="Priority" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="9" type="29" displayName="Tc.Case.SMS.InformCustomerCaseCreated" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="22" type="2" schemaName="msdyn_userid" displayName="User Id" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
+        <Dependent key="22" type="2" schemaName="msdyn_userid" displayName="User Id" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="22" type="2" schemaName="msdyn_userid" displayName="User Id" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
         <Dependent key="3" type="10" schemaName="msdyn_systemuser_wallsavedqueryusersettings_userid" displayName="msdyn_systemuser_wallsavedqueryusersettings_userid" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required key="4" type="1" schemaName="msdyn_postconfig" displayName="Post Configuration" solution="ActivityFeedsCore (8.2.0.0)" />
-        <Dependent key="5" type="62" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required key="6" type="1" schemaName="msdyn_postruleconfig" displayName="Post Rule Configuration" solution="ActivityFeedsCore (8.2.0.0)" />
-        <Dependent key="5" type="62" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required key="7" type="1" schemaName="poan_powerautonumber" displayName="PowerAutoNumber" solution="PowerAutoNumber (1.2.10.2015)" />
-        <Dependent key="5" type="62" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required key="8" type="2" schemaName="msdyn_userid" displayName="User Id" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
-        <Dependent key="3" type="10" schemaName="msdyn_systemuser_wallsavedqueryusersettings_userid" displayName="msdyn_systemuser_wallsavedqueryusersettings_userid" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required key="8" type="2" schemaName="msdyn_userid" displayName="User Id" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
-        <Dependent key="8" type="2" schemaName="msdyn_userid" displayName="User Id" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
       </MissingDependency>
       <MissingDependency>
         <Required key="3" type="10" schemaName="msdyn_systemuser_wallsavedqueryusersettings_userid" displayName="msdyn_systemuser_wallsavedqueryusersettings_userid" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
@@ -714,15 +900,15 @@
       </MissingDependency>
       <MissingDependency>
         <Required key="3" type="10" schemaName="msdyn_systemuser_wallsavedqueryusersettings_userid" displayName="msdyn_systemuser_wallsavedqueryusersettings_userid" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
-        <Dependent key="1" type="2" schemaName="msdyn_useridname" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
+        <Dependent key="2" type="2" schemaName="msdyn_useridname" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
       </MissingDependency>
       <MissingDependency>
         <Required key="3" type="10" schemaName="msdyn_systemuser_wallsavedqueryusersettings_userid" displayName="msdyn_systemuser_wallsavedqueryusersettings_userid" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
-        <Dependent key="2" type="2" schemaName="msdyn_useridyominame" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
+        <Dependent key="1" type="2" schemaName="msdyn_useridyominame" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="9" type="61" schemaName="popat_/PowerAttachmentsHTML" displayName="popat_/PowerAttachmentsHTML" solution="PowerAttachment (1.2.2.2013)" />
-        <Dependent key="9" type="61" schemaName="popat_/PowerAttachmentsHTML" displayName="popat_/PowerAttachmentsHTML" />
+        <Required key="23" type="61" schemaName="popat_/PowerAttachmentsHTML" displayName="popat_/PowerAttachmentsHTML" solution="PowerAttachment (1.2.2.2013)" />
+        <Dependent key="23" type="61" schemaName="popat_/PowerAttachmentsHTML" displayName="popat_/PowerAttachmentsHTML" />
       </MissingDependency>
     </MissingDependencies>
   </SolutionManifest>

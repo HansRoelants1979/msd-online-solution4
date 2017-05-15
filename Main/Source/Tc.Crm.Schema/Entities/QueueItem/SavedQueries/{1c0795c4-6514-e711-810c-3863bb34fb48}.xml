@@ -8,27 +8,27 @@
   <returnedtypecode>2029</returnedtypecode>
   <savedqueryid>{1c0795c4-6514-e711-810c-3863bb34fb48}</savedqueryid>
   <layoutxml>
-    <grid name="resultset" icon="1" preview="1" select="1" jump="title" object="2029">
+    <grid name="resultset" object="2029" jump="title" select="1" preview="1" icon="1">
       <row id="objectid" name="result" multiobjectidfield="objecttypecode">
-        <cell name="queueitemid" width="150" ishidden="1" />
-        <cell name="title" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="enteredon" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="queueitemid" ishidden="1" width="150" />
+        <cell name="title" width="200" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
+        <cell name="enteredon" width="125" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
       </row>
     </grid>
   </layoutxml>
   <querytype>0</querytype>
   <fetchxml>
-    <fetch mapping="logical" output-format="xml-platform" version="1.0" distinct="false">
+    <fetch distinct="false" version="1.0" output-format="xml-platform" mapping="logical">
       <entity name="queueitem">
         <attribute name="title" />
         <attribute name="queueitemid" />
-        <order descending="false" attribute="title" />
+        <order attribute="title" descending="false" />
         <filter type="and">
           <condition value="0" attribute="statecode" operator="eq" />
         </filter>
-        <link-entity name="queue" alias="aa" to="queueid" from="queueid">
+        <link-entity name="queue" from="queueid" to="queueid" alias="aa">
           <filter type="and">
-            <condition value="{CB9DE311-3203-E711-810D-1458D041F8E8}" attribute="queueid" uitype="queue" uiname="Triage" operator="eq" />
+            <condition value="{CB9DE311-3203-E711-810D-1458D041F8E8}" attribute="queueid" operator="eq" uiname="Triage" uitype="queue" />
           </filter>
         </link-entity>
         <attribute name="enteredon" />

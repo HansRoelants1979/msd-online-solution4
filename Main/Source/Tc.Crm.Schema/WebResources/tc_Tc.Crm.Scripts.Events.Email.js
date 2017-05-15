@@ -71,7 +71,7 @@ Tc.Crm.Scripts.Events.Email = (function () {
             processOnQueueIdReceived(this, req);
         };
         req.send(requestXml);
-        
+
     }
     var GetClientUrl = function () {
         var clientUrl = '';
@@ -91,7 +91,7 @@ Tc.Crm.Scripts.Events.Email = (function () {
     var getLookupId = function (lookupObj) {
         if (lookupObj == null) return null;
         return lookupObj[0].id;
-    }
+    }    
     var processOnQueueIdReceived = function (data, request) {
         if (data.readyState === STATUS_READY) {
             request.onreadystatechange = null;
@@ -152,7 +152,7 @@ Tc.Crm.Scripts.Events.Email = (function () {
         request.setRequestHeader("Content-Type", "application/json; charset=utf-8");
         return request;
     }
-    var setFromFieldForCase = function () {
+    var setFromandToFieldForCase = function () {
         try {
 
             console.log("setFromFieldForCase invoked.");
@@ -170,20 +170,90 @@ Tc.Crm.Scripts.Events.Email = (function () {
             console.log(incidentId);
 
             getQueueIdFromCrm(incidentId);
+            setToFieldForCase(incidentId);
         } catch (e) {
             console.log("unexpected error has occurred in method setFromFieldForCase");
         }
 
+    }
+    var setToFieldForCase = function (incidentId) {
+
+        try {
+            var communicationMethod;
+            var alternativeEmailObject;
+            var alternativeCustomerObject;
+            var informanOtherCustomer;
+            //var alternateEmail = [];
+            if (incidentId != null) {
+                incidentId = incidentId.replace("{", "").replace("}", "");
+                debugger;
+                var IncidentReceivedPromise = getIncident(incidentId).then(
+                      function (incidentResponse) {
+                          debugger;
+                          var incident = JSON.parse(incidentResponse.response);
+                          communicationMethod = incident.tc_preferredmethodofcommunication;
+                          alternativeEmailObject = incident.tc_alternativeemaillookup;
+                          alternativeCustomerObject = incident.tc_OtherCustomerEmail;
+                          informanOtherCustomer = incident.tc_informanothercustomer;
+                          if (communicationMethod = 950000001 && alternativeEmailObject != null) {
+                              var to = Xrm.Page.getAttribute("to");
+                              if (to == null || to == undefined) {
+                                  console.log("unable to locate to on the email form.");
+                                  return;
+                              }
+                              var alternateEmailLookup = new Array();
+                              alternateEmailLookup[0] = new Object();
+                              alternateEmailLookup[0].id = alternativeEmailObject.tc_alternativeemailid;
+                              alternateEmailLookup[0].name = alternativeEmailObject.tc_name;
+                              alternateEmailLookup[0].entityType = "tc_alternativeemail";
+                              to.setValue(alternateEmailLookup);
+                          }
+                          if (informanOtherCustomer == true && alternativeCustomerObject != null) {
+                              var cc = Xrm.Page.getAttribute("cc");
+                              if (cc == null || cc == undefined) {
+                                  console.log("unable to locate to on the email form.");
+                                  return;
+                              }
+                              var otherCustomerEmailLookup = new Array();
+                              otherCustomerEmailLookup[0] = new Object();
+                              otherCustomerEmailLookup[0].id = alternativeCustomerObject.tc_alternativeemailid;
+                              otherCustomerEmailLookup[0].name = alternativeCustomerObject.tc_name;
+                              otherCustomerEmailLookup[0].entityType = "tc_alternativeemail";
+                              cc.setValue(otherCustomerEmailLookup);
+                          }
+
+                      }).catch(function (err) {
+                          debugger;
+                          alert(err.message);
+                          throw new Error("Unexpected error while retrieving the Incident");
+                      });
+
+
+            }
+        }
+        catch (e) {
+            alert(e);
+            console.log("unexpected error has occurred in method setToFieldForCase");
+
+        }
     }
     var parseXml = function (resultXml) {
         resultXml = resultXml.substring(resultXml.indexOf('a:Id'), resultXml.indexOf('/a:Id'))
         resultXml = resultXml.substring(resultXml.indexOf('>') + 1, resultXml.indexOf('<'));
         return resultXml;
     }
+    var getIncident = function (incidentId) {
+        debugger;
+        var query = "?$select=tc_preferredmethodofcommunication,_tc_alternativeemaillookup_value,tc_informanothercustomer,tc_OtherCustomerEmail&$expand=tc_alternativeemaillookup($select=tc_name,emailaddress),tc_OtherCustomerEmail($select=tc_name,emailaddress)";
+        var entityName = "incidents";
+        var id = incidentId;
+        return Tc.Crm.Scripts.Common.GetById(entityName, id, query);
+
+    }
     return {
         OnLoad: function () {
             clearEmailFrom();
-            setFromFieldForCase();
+            setFromandToFieldForCase();
         }
     };
 })();

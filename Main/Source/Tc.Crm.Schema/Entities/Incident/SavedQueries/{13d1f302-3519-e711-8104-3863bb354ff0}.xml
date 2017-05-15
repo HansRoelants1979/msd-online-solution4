@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>0</isdefault>
+  <returnedtypecode>112</returnedtypecode>
+  <savedqueryid>{13d1f302-3519-e711-8104-3863bb354ff0}</savedqueryid>
+  <layoutxml>
+    <grid name="resultset" object="112" jump="title" select="1" icon="1" preview="1">
+      <row id="incidentid" name="result">
+        <cell name="ticketnumber" width="150" />
+        <cell name="customerid" width="200" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
+        <cell name="ab.tc_name" width="100" disableSorting="1" />
+        <cell name="a_03424782c7d54a34bbb5b2df729e0302.tc_language" width="100" disableSorting="1" />
+        <cell name="incidentstagecode" width="100" />
+        <cell name="caseorigincode" width="100" />
+        <cell name="tc_casetypeid" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
+        <cell name="tc_resortofficeid" width="100" />
+        <cell name="tc_destinationid" width="100" />
+        <cell name="statecode" width="100" />
+        <cell name="statuscode" width="100" />
+        <cell name="followupby" width="100" />
+        <cell name="tc_latestactivitydate" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
+        <cell name="createdon" width="150" />
+        <cell name="resolveby" width="150" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
+        <cell name="ownerid" width="100" />
+      </row>
+    </grid>
+  </layoutxml>
+  <querytype>0</querytype>
+  <fetchxml>
+    <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
+      <entity name="incident">
+        <attribute name="ticketnumber" />
+        <attribute name="customerid" />
+        <attribute name="createdon" />
+        <attribute name="caseorigincode" />
+        <attribute name="tc_latestactivitydate" />
+        <attribute name="resolveby" />
+        <attribute name="tc_casetypeid" />
+        <attribute name="tc_resortofficeid" />
+        <attribute name="statuscode" />
+        <attribute name="statecode" />
+        <attribute name="ownerid" />
+        <attribute name="followupby" />
+        <attribute name="incidentstagecode" />
+        <order attribute="tc_latestactivitydate" descending="false" />
+        <order attribute="createdon" descending="false" />
+        <filter type="and">
+          <condition attribute="statecode" operator="eq" value="0" />
+        </filter>
+        <link-entity name="contact" from="contactid" to="primarycontactid" visible="false" link-type="outer" alias="a_03424782c7d54a34bbb5b2df729e0302">
+          <attribute name="tc_language" />
+        </link-entity>
+        <link-entity name="tc_booking" from="tc_bookingid" to="tc_bookingid" alias="ab">
+          <link-entity name="tc_region" from="tc_regionid" to="tc_destinationid" alias="aa">
+            <filter type="and">
+              <condition attribute="ownerid" operator="eq-userid" />
+            </filter>
+          </link-entity>
+          <attribute name="tc_name" />
+        </link-entity>
+        <attribute name="tc_destinationid" />
+        <attribute name="incidentid" />
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>1.0.0.65</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="My Cases for Destination (Manager)" languagecode="1033" />
+  </LocalizedNames>
+</savedquery>

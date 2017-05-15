@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<systemform>
+  <formid>{aa5e448a-b707-4364-8059-52eefb03c5db}</formid>
+  <IntroducedVersion>1.0.0.86</IntroducedVersion>
+  <FormPresentation>1</FormPresentation>
+  <FormActivationState>1</FormActivationState>
+  <form>
+    <tabs>
+      <tab verticallayout="true" id="{b89f407a-5040-4369-8ca1-66ec8e32312d}" IsUserDefined="1">
+        <labels>
+          <label description="Allgemein" languagecode="1031" />
+          <label description="General" languagecode="1033" />
+          <label description="Général" languagecode="1036" />
+        </labels>
+        <columns>
+          <column width="100%">
+            <sections>
+              <section showlabel="false" showbar="false" IsUserDefined="0" id="{d68156f4-431f-4edf-b83e-f74e713bc4e6}">
+                <labels>
+                  <label description="Allgemein" languagecode="1031" />
+                  <label description="General" languagecode="1033" />
+                  <label description="Général" languagecode="1036" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{7e8d0a89-6e0e-4b77-95dd-96f840d9d872}" showlabel="true" locklevel="0" visible="false">
+                      <labels>
+                        <label description="Name" languagecode="1033" />
+                      </labels>
+                      <control id="tc_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_name" uniqueid="{69584315-5b8a-b03b-5e5a-8ab8111aa53a}" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{354188a9-d20d-0589-da0c-32ecde2b210d}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Email Address" languagecode="1033" />
+                        <label description="Adresse de messagerie" languagecode="1036" />
+                        <label description="E-Mail-Adresse" languagecode="1031" />
+                      </labels>
+                      <control id="emailaddress" classid="{ADA2203E-B4CD-49be-9DDF-234642B43B52}" datafieldname="emailaddress" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{98aefd16-6d3b-4461-a81e-8fa870fd247f}">
+                      <labels>
+                        <label description="Owner" languagecode="1033" />
+                        <label description="Propriétaire" languagecode="1036" />
+                        <label description="Besitzer" languagecode="1031" />
+                      </labels>
+                      <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
+    </tabs>
+    <Navigation>
+      <NavBar></NavBar>
+      <NavBarAreas>
+        <NavBarArea Id="Info">
+          <Titles>
+            <Title LCID="1033" Text="Common" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Sales">
+          <Titles>
+            <Title LCID="1033" Text="Sales" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Service">
+          <Titles>
+            <Title LCID="1033" Text="Service" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Marketing">
+          <Titles>
+            <Title LCID="1033" Text="Marketing" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="ProcessCenter">
+          <Titles>
+            <Title LCID="1033" Text="Process Sessions" />
+          </Titles>
+        </NavBarArea>
+      </NavBarAreas>
+    </Navigation>
+    <controlDescriptions />
+  </form>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <LocalizedNames>
+    <LocalizedName description="Information" languagecode="1033" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description description="A form for this entity." languagecode="1033" />
+  </Descriptions>
+</systemform>
