@@ -54,6 +54,10 @@ namespace Tc.Crm.CustomWorkflowSteps
                         CaseLine.Set(executionContext, RetrivedEntity);
                     if (RetrivedEntity.LogicalName == "tc_hotel")
                         Hotel.Set(executionContext, RetrivedEntity);
+                    if (RetrivedEntity.LogicalName == "tc_country")
+                        Country.Set(executionContext, RetrivedEntity);
+                    if (RetrivedEntity.LogicalName == "businessunit")
+                        BusinessUnit.Set(executionContext, RetrivedEntity);
                 }
 
 
@@ -116,6 +120,14 @@ namespace Tc.Crm.CustomWorkflowSteps
         [Output("EntityReference Hotel")]
         [ReferenceTarget("tc_hotel")]
         public OutArgument<EntityReference> Hotel { get; set; }
+
+        [Output("EntityReference Country")]
+        [ReferenceTarget("tc_country")]
+        public OutArgument<EntityReference> Country { get; set; }
+
+        [Output("EntityReference BusinessUnit")]
+        [ReferenceTarget("businessunit")]
+        public OutArgument<EntityReference> BusinessUnit { get; set; }
 
 
     }
