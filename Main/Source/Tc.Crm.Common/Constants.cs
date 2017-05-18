@@ -33,6 +33,11 @@ namespace Tc.Crm.Common.Constants
         public const string SourceMarketAliasName = "sourcemarket.";
         public const string ContactSourceMarketAliasName = "contactsourcemarket.";
         public const string AccountSourceMarketAliasName = "accountsourcemarket.";
+        public const string TeamAliasName = "team.";
+        public const string UserAliasName = "systemuser.";
+        public const string ContactCaseAliasName = "contactincident.";
+        public const string AccountCaseAliasName = "accountincident.";
+        public const string BusinessUnitAliasName = "businessunit.";
     }
    
     namespace EntityRecords
@@ -45,7 +50,7 @@ namespace Tc.Crm.Common.Constants
 
     namespace Attributes
     {
-        public static class Entity
+        public static class CommonAttribute
         {
             public const string Owner = "ownerid";
         }

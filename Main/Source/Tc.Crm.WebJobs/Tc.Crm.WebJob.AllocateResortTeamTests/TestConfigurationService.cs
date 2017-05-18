@@ -66,5 +66,21 @@ namespace Tc.Crm.WebJob.AllocateResortTeamTests
                 return 50;
             }
         }
+
+        public string TeamRolesToAssignCase
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string UserRolesToAssignCase
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }

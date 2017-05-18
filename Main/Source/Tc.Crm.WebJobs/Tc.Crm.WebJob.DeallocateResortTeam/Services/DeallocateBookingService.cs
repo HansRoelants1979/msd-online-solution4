@@ -48,7 +48,9 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                 new DeallocationRequest
                 {
                     Date = DateTime.Now.Date.AddDays(-2),
-                    Destination = destinationGateways
+                    Destination = destinationGateways,
+                    UserRolesToAssignCase = configurationService.UserRolesToAssignCase,
+                    TeamRolesToAssignCase = configurationService.TeamRolesToAssignCase
                 });
 
             if (request == null || request.TotalItems == 0)

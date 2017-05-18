@@ -84,5 +84,29 @@ namespace Tc.Crm.Common.Services
                 throw new NotImplementedException();
             }
         }
+
+        public string UserRolesToAssignCase
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["UserRolesToAssignCase"].ToString();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string TeamRolesToAssignCase
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["TeamRolesToAssignCase"].ToString();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }

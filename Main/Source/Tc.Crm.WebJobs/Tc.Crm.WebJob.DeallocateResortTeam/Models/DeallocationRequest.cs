@@ -7,5 +7,8 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Models
     {
         public DateTime Date { get; set; }
         public IList<Guid> Destination { get; set; }
+        public string UserRolesToAssignCase { get; set; }
+        public string TeamRolesToAssignCase { get; set; }
     }
+    
 }

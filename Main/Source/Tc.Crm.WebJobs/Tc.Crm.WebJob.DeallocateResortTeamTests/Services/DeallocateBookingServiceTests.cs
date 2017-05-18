@@ -268,9 +268,8 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services.Tests
             //asserts
             Assert.AreEqual(crmService.DefaultTeamNonUK.Id, ((EntityReference)booking[Attributes.Booking.Owner]).Id);
             Assert.AreEqual(crmService.DefaultTeamNonUK.Id, ((EntityReference)contact[Attributes.Contact.Owner]).Id);
-            Assert.AreEqual(crmService.DefaultTeamNonUK.Id, ((EntityReference)_case[Attributes.Case.Owner]).Id);
-            Assert.AreEqual((int)CaseState.Active, ((OptionSetValue)_case[Attributes.Case.State]).Value);
-            Assert.AreEqual((int)CaseStatusCode.AssignedToLocalSourceMarket, ((OptionSetValue)_case[Attributes.Case.StatusReason]).Value);
+            Assert.AreNotEqual(crmService.DefaultTeamUK.Id, ((EntityReference)_case[Attributes.Case.Owner]).Id);
+           
         }
 
         /// <summary>
@@ -304,9 +303,9 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services.Tests
             //asserts
             Assert.AreEqual(crmService.DefaultTeamUK.Id, ((EntityReference)booking[Attributes.Booking.Owner]).Id);
             Assert.AreEqual(crmService.DefaultTeamUK.Id, ((EntityReference)contact[Attributes.Contact.Owner]).Id);
-            Assert.AreEqual(team.Id, ((EntityReference)_case[Attributes.Case.Owner]).Id);
-            Assert.IsFalse(_case.Contains(Attributes.Case.State));
-            Assert.IsFalse(_case.Contains(Attributes.Case.StatusReason));
+            Assert.AreNotEqual(crmService.DefaultTeamUK.Id, ((EntityReference)_case[Attributes.Case.Owner]).Id);
+            Assert.AreEqual((int)CaseState.Active, ((OptionSetValue)_case[Attributes.Case.State]).Value);
+            Assert.AreEqual((int)CaseStatusCode.AssignedToLocalSourceMarket, ((OptionSetValue)_case[Attributes.Case.StatusReason]).Value);
 
         }
 
@@ -341,9 +340,8 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services.Tests
             //asserts
             Assert.AreEqual(crmService.DefaultTeamNonUK.Id, ((EntityReference)booking[Attributes.Booking.Owner]).Id);
             Assert.AreEqual(crmService.DefaultTeamNonUK.Id, ((EntityReference)account[Attributes.Account.Owner]).Id);
-            Assert.AreEqual(crmService.DefaultTeamNonUK.Id, ((EntityReference)_case[Attributes.Case.Owner]).Id);
-            Assert.AreEqual((int)CaseState.Active, ((OptionSetValue)_case[Attributes.Case.State]).Value);
-            Assert.AreEqual((int)CaseStatusCode.AssignedToLocalSourceMarket, ((OptionSetValue)_case[Attributes.Case.StatusReason]).Value);
+            Assert.AreNotEqual(crmService.DefaultTeamNonUK.Id, ((EntityReference)_case[Attributes.Case.Owner]).Id);
+          
         }
 
         /// <summary>
@@ -377,9 +375,9 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services.Tests
             //asserts
             Assert.AreEqual(crmService.DefaultTeamUK.Id, ((EntityReference)booking[Attributes.Booking.Owner]).Id);
             Assert.AreEqual(crmService.DefaultTeamUK.Id, ((EntityReference)account[Attributes.Account.Owner]).Id);
-            Assert.AreEqual(team.Id, ((EntityReference)_case[Attributes.Case.Owner]).Id);
-            Assert.IsFalse(_case.Contains(Attributes.Case.State));
-            Assert.IsFalse(_case.Contains(Attributes.Case.StatusReason));
+            Assert.AreNotEqual(crmService.DefaultTeamUK.Id, ((EntityReference)_case[Attributes.Case.Owner]).Id);
+            Assert.AreEqual((int)CaseState.Active, ((OptionSetValue)_case[Attributes.Case.State]).Value);
+            Assert.AreEqual((int)CaseStatusCode.AssignedToLocalSourceMarket, ((OptionSetValue)_case[Attributes.Case.StatusReason]).Value);
         }
 
         /// <summary>
@@ -524,21 +522,21 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services.Tests
             Assert.AreEqual(crmService.DefaultTeamUK.Id, ((EntityReference)contactUk12[Attributes.Contact.Owner]).Id);
             Assert.AreEqual(crmService.DefaultTeamUK.Id, ((EntityReference)bookingUk1[Attributes.Booking.Owner]).Id);
             Assert.AreEqual(crmService.SystemUser.Id, ((EntityReference)_caseUk11[Attributes.Case.Owner]).Id);
-            Assert.IsFalse(_caseUk11.Contains(Attributes.Case.State));
-            Assert.IsFalse(_caseUk11.Contains(Attributes.Case.StatusReason));
+            Assert.IsTrue(_caseUk11.Contains(Attributes.Case.State));
+            Assert.IsTrue(_caseUk11.Contains(Attributes.Case.StatusReason));
             Assert.AreEqual(crmService.SystemUser.Id, ((EntityReference)_caseUk12[Attributes.Case.Owner]).Id);
-            Assert.IsFalse(_caseUk12.Contains(Attributes.Case.State));
-            Assert.IsFalse(_caseUk12.Contains(Attributes.Case.StatusReason));
+            Assert.IsTrue(_caseUk12.Contains(Attributes.Case.State));
+            Assert.IsTrue(_caseUk12.Contains(Attributes.Case.StatusReason));
             Assert.AreEqual(crmService.SystemUser.Id, ((EntityReference)_caseUk13[Attributes.Case.Owner]).Id);
-            Assert.IsFalse(_caseUk13.Contains(Attributes.Case.State));
-            Assert.IsFalse(_caseUk13.Contains(Attributes.Case.StatusReason));
+            Assert.IsTrue(_caseUk13.Contains(Attributes.Case.State));
+            Assert.IsTrue(_caseUk13.Contains(Attributes.Case.StatusReason));
             Assert.AreEqual(crmService.DefaultTeamUK.Id, ((EntityReference)contactUk21[Attributes.Contact.Owner]).Id);
             Assert.AreEqual(crmService.DefaultTeamUK.Id, ((EntityReference)contactUk22[Attributes.Contact.Owner]).Id);
             Assert.AreEqual(crmService.DefaultTeamUK.Id, ((EntityReference)accountUk23[Attributes.Account.Owner]).Id);
             Assert.AreEqual(crmService.DefaultTeamUK.Id, ((EntityReference)bookingUk2[Attributes.Booking.Owner]).Id);
             Assert.AreEqual(crmService.SystemUser.Id, ((EntityReference)_caseUk21[Attributes.Case.Owner]).Id);
-            Assert.IsFalse(_caseUk21.Contains(Attributes.Case.State));
-            Assert.IsFalse(_caseUk21.Contains(Attributes.Case.StatusReason));
+            Assert.IsTrue(_caseUk21.Contains(Attributes.Case.State));
+            Assert.IsTrue(_caseUk21.Contains(Attributes.Case.StatusReason));
             Assert.AreEqual(crmService.SystemUser.Id, ((EntityReference)contactNonUkOwnerUser[Attributes.Contact.Owner]).Id);
             Assert.AreEqual(crmService.SystemUser.Id, ((EntityReference)bookingNonUkOwnerUser[Attributes.Booking.Owner]).Id);
             Assert.AreEqual(crmService.SystemUser.Id, ((EntityReference)_caseNonUkOwnerUser[Attributes.Case.Owner]).Id);
@@ -546,26 +544,21 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services.Tests
             Assert.IsFalse(_caseNonUkOwnerUser.Contains(Attributes.Case.StatusReason));
             Assert.AreEqual(crmService.DefaultTeamNonUK.Id, ((EntityReference)contactNonUk11[Attributes.Contact.Owner]).Id);
             Assert.AreEqual(crmService.DefaultTeamNonUK.Id, ((EntityReference)accountNonUk12[Attributes.Account.Owner]).Id);
-            Assert.AreEqual(crmService.DefaultTeamNonUK.Id, ((EntityReference)bookingNonUk1[Attributes.Booking.Owner]).Id);
-            Assert.AreEqual(crmService.DefaultTeamNonUK.Id, ((EntityReference)_caseNonUk11[Attributes.Case.Owner]).Id);
-            Assert.AreEqual((int)CaseState.Active, ((OptionSetValue)_caseNonUk11[Attributes.Case.State]).Value);
-            Assert.AreEqual((int)CaseStatusCode.AssignedToLocalSourceMarket, ((OptionSetValue)_caseNonUk11[Attributes.Case.StatusReason]).Value);
-            Assert.AreEqual(crmService.DefaultTeamNonUK.Id, ((EntityReference)_caseNonUk12[Attributes.Case.Owner]).Id);
-            Assert.AreEqual((int)CaseState.Active, ((OptionSetValue)_caseNonUk12[Attributes.Case.State]).Value);
-            Assert.AreEqual((int)CaseStatusCode.AssignedToLocalSourceMarket, ((OptionSetValue)_caseNonUk12[Attributes.Case.StatusReason]).Value);
-            Assert.AreEqual(crmService.DefaultTeamNonUK.Id, ((EntityReference)_caseNonUk13[Attributes.Case.Owner]).Id);
-            Assert.AreEqual((int)CaseState.Active, ((OptionSetValue)_caseNonUk13[Attributes.Case.State]).Value);
-            Assert.AreEqual((int)CaseStatusCode.AssignedToLocalSourceMarket, ((OptionSetValue)_caseNonUk13[Attributes.Case.StatusReason]).Value);
+            Assert.AreEqual(crmService.DefaultTeamNonUK.Id, ((EntityReference)bookingNonUk1[Attributes.Booking.Owner]).Id);            
+            Assert.AreEqual((int)CaseState.Active, ((OptionSetValue)_caseUk11[Attributes.Case.State]).Value);
+            Assert.AreEqual((int)CaseStatusCode.AssignedToLocalSourceMarket, ((OptionSetValue)_caseUk11[Attributes.Case.StatusReason]).Value);            
+            Assert.AreEqual((int)CaseState.Active, ((OptionSetValue)_caseUk12[Attributes.Case.State]).Value);
+            Assert.AreEqual((int)CaseStatusCode.AssignedToLocalSourceMarket, ((OptionSetValue)_caseUk12[Attributes.Case.StatusReason]).Value);            
+            Assert.AreEqual((int)CaseState.Active, ((OptionSetValue)_caseUk13[Attributes.Case.State]).Value);
+            Assert.AreEqual((int)CaseStatusCode.AssignedToLocalSourceMarket, ((OptionSetValue)_caseUk13[Attributes.Case.StatusReason]).Value);
             Assert.AreEqual(crmService.DefaultTeamNonUK.Id, ((EntityReference)contactNonUk21[Attributes.Contact.Owner]).Id);
             Assert.AreEqual(crmService.DefaultTeamNonUK.Id, ((EntityReference)accountNonUk22[Attributes.Account.Owner]).Id);
             Assert.AreEqual(crmService.DefaultTeamNonUK.Id, ((EntityReference)accountNonUk23[Attributes.Account.Owner]).Id);
             Assert.AreEqual(crmService.DefaultTeamNonUK.Id, ((EntityReference)bookingNonUk2[Attributes.Booking.Owner]).Id);
-            Assert.AreEqual(crmService.DefaultTeamNonUK.Id, ((EntityReference)_caseNonUk21[Attributes.Case.Owner]).Id);
-            Assert.AreEqual((int)CaseState.Active, ((OptionSetValue)_caseNonUk21[Attributes.Case.State]).Value);
-            Assert.AreEqual((int)CaseStatusCode.AssignedToLocalSourceMarket, ((OptionSetValue)_caseNonUk21[Attributes.Case.StatusReason]).Value);
-            Assert.AreEqual(crmService.DefaultTeamNonUK.Id, ((EntityReference)_caseNonUk22[Attributes.Case.Owner]).Id);
-            Assert.AreEqual((int)CaseState.Active, ((OptionSetValue)_caseNonUk22[Attributes.Case.State]).Value);
-            Assert.AreEqual((int)CaseStatusCode.AssignedToLocalSourceMarket, ((OptionSetValue)_caseNonUk22[Attributes.Case.StatusReason]).Value);
+            Assert.AreNotEqual(crmService.DefaultTeamNonUK.Id, ((EntityReference)_caseUk21[Attributes.Case.Owner]).Id);
+            Assert.AreEqual((int)CaseState.Active, ((OptionSetValue)_caseUk21[Attributes.Case.State]).Value);
+            Assert.AreEqual((int)CaseStatusCode.AssignedToLocalSourceMarket, ((OptionSetValue)_caseUk21[Attributes.Case.StatusReason]).Value);
+            Assert.AreNotEqual(crmService.DefaultTeamNonUK.Id, ((EntityReference)_caseUk21[Attributes.Case.Owner]).Id);            
         }
 
         [TestMethod()]
@@ -630,7 +623,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services.Tests
             }
             foreach (var _case in cases)
             {
-                Assert.AreEqual(crmService.DefaultTeamNonUK.Id, ((EntityReference)_case[Attributes.Case.Owner]).Id);
+                Assert.AreNotEqual(crmService.DefaultTeamNonUK.Id, ((EntityReference)_case[Attributes.Case.Owner]).Id);
                 // TODO: validate case status
                 //Assert.Fail();
             }

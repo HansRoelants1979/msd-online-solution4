@@ -219,8 +219,11 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
             // Service.BulkUpdate(entities);
             foreach (var entity in entities)
             {
-                var owner = (EntityReference)entity[Attributes.Entity.Owner];
-                Context.Data[entity.LogicalName][entity.Id][Attributes.Entity.Owner] = new EntityReference(owner.LogicalName, owner.Id);
+                if (entity.Attributes.Contains(Attributes.CommonAttribute.Owner))
+                {
+                    var owner = (EntityReference)entity[Attributes.CommonAttribute.Owner];
+                    Context.Data[entity.LogicalName][entity.Id][Attributes.CommonAttribute.Owner] = new EntityReference(owner.LogicalName, owner.Id);
+                }
                 if (entity.LogicalName == EntityName.Case)
                 {
                     Context.Data[entity.LogicalName][entity.Id][Attributes.Case.StatusReason] = entity[Attributes.Case.StatusReason];
@@ -232,17 +235,30 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
         public EntityCollection RetrieveMultipleRecordsFetchXml(string query)
         {
             //return Service.RetrieveMultipleRecordsFetchXml(query);
-
-            return GetBookings(
-                Context.Data[EntityName.Booking].Values.ToList(),
-                Context.Data[EntityName.Gateway].Values.ToList(),
-                Context.Data[EntityName.CustomerBookingRole].Values.ToList(),
-                Context.Data[EntityName.Contact].Values.ToList(),
-                Context.Data[EntityName.Account].Values.ToList(),
-                Context.Data[EntityName.Case].Values.ToList(),
-                Context.Data[EntityName.Country].Values.ToList(),
-                Context.Data[EntityName.BusinessUnit].Values.ToList(),
-                Context.Data[EntityName.Team].Values.ToList());
+            var role = new Entity("role");
+            if (query.Contains("<condition attribute='teamid' operator='in'>"))
+            {
+                role.Attributes["team.teamid"] = new AliasedValue(EntityName.Team,Attributes.Team.TeamId, DefaultTeamUK.Id);
+                return new EntityCollection(new List<Entity>() { role });
+            }
+            else if (query.Contains("<condition attribute='systemuserid' operator='in'>"))
+            {
+                role.Attributes["systemuser.systemuserid"] = new AliasedValue(EntityName.User, Attributes.User.UserId, SystemUser.Id);
+                return new EntityCollection(new List<Entity>() { role });
+            }
+            else
+            {
+                return GetBookings(
+               Context.Data[EntityName.Booking].Values.ToList(),
+               Context.Data[EntityName.Gateway].Values.ToList(),
+               Context.Data[EntityName.CustomerBookingRole].Values.ToList(),
+               Context.Data[EntityName.Contact].Values.ToList(),
+               Context.Data[EntityName.Account].Values.ToList(),
+               Context.Data[EntityName.Case].Values.ToList(),
+               Context.Data[EntityName.Country].Values.ToList(),
+               Context.Data[EntityName.BusinessUnit].Values.ToList(),
+               Context.Data[EntityName.Team].Values.ToList());
+            }
         }
 
         #endregion
@@ -301,6 +317,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
                                  AccountCaseId = accountCase != null ? accountCase.Id: Guid.Empty,
                                  DefaultTeamId = defaultTeam.Id,
                                  BusinessUnitName = businessUnit[Attributes.BusinessUnit.Name]
+                               
                              }).GroupBy(r => new { r.BookingId, r.ContactId, r.AccountId, r.ContactCaseId, r.AccountCaseId, r.DefaultTeamId }).
                              Select(r => r.First()).OrderBy(r => r.BookingId).ThenBy(r => r.ContactId).ThenBy(r => r.AccountId);
 
@@ -308,8 +325,8 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
             {
                 var b = new Entity(EntityName.Booking, item.BookingId);
                 b[Attributes.Booking.BookingId] = item.BookingId;
-                b["defaultTeam.teamid"] = new AliasedValue(EntityName.Team, Attributes.Team.TeamId, item.DefaultTeamId);
-                b["businessUnit.name"] = new AliasedValue(EntityName.BusinessUnit, Attributes.BusinessUnit.Name, item.BusinessUnitName);
+                b["team.teamid"] = new AliasedValue(EntityName.Team, Attributes.Team.TeamId, item.DefaultTeamId);
+                b["businessunit.name"] = new AliasedValue(EntityName.BusinessUnit, Attributes.BusinessUnit.Name, item.BusinessUnitName);
                 if (item.ContactId != Guid.Empty)
                 {
                     b["contact.contactid"] = new AliasedValue(EntityName.Contact, Attributes.Contact.ContactId, item.ContactId);
@@ -320,11 +337,13 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
                 }
                 if (item.ContactCaseId != Guid.Empty)
                 {
-                    b["contactIncident.incidentid"] = new AliasedValue(EntityName.Case, Attributes.Case.CaseId, item.ContactCaseId);
+                    b["contactincident.incidentid"] = new AliasedValue(EntityName.Case, Attributes.Case.CaseId, item.ContactCaseId);
+                    b["contactincident.ownerid"] = new AliasedValue(EntityName.User, Attributes.User.UserId, new EntityReference(EntityName.User, SystemUser.Id));
                 }
                 if (item.AccountCaseId != Guid.Empty)
                 {
-                    b["accountIncident.incidentid"] = new AliasedValue(EntityName.Case, Attributes.Case.CaseId, item.AccountCaseId);
+                    b["accountincident.incidentid"] = new AliasedValue(EntityName.Case, Attributes.Case.CaseId, item.AccountCaseId);
+                    b["accountincident.ownerid"] = new AliasedValue(EntityName.User, Attributes.User.UserId, new EntityReference(EntityName.User, SystemUser.Id));
                 }
                 result.Add(b);
             }

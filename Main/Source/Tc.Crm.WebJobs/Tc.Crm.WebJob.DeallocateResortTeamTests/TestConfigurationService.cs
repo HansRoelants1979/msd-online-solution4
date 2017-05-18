@@ -66,5 +66,21 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
                 return 50;
             }
         }
+
+        public string TeamRolesToAssignCase
+        {
+            get
+            {
+                return "Tc.CustomerRelations.Base";
+            }
+        }
+
+        public string UserRolesToAssignCase
+        {
+            get
+            {
+                return "Tc.CustomerRelations.Agent";
+            }
+        }
     }
 }
