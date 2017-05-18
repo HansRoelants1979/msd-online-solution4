@@ -36,7 +36,6 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
         MaximumTotalLimitToBePaid: "Tc.Compensation.MaximumTotalLimitToBePaid"
     }
 
-
     var SOURCE_MARKET_UK = "GB";
 
     var SourceMarket = {
@@ -287,50 +286,47 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
         }
         else {
             if (promiseResponse.response === null || promiseResponse.response === undefined) {
-                Xrm.Utility.alertDialog(entity + " information can't be retrieved");
                 console.warn(entity + " information can't be retrieved");
-                return [];
+                return null;
             }
             try {
                 return JSON.parse(promiseResponse.response);
             }
             catch (e) {
-                Xrm.Utility.alertDialog(entity + " information can't be parsed");
                 console.warn(entity + " information can't be parsed");
-                return [];
+                return null;
             }
         }
     }
 
+    // get related case data
     function getCase(caseId) {
         if (IsOfflineMode()) {
-            var query = "?$select=tc_sourcemarketid,tc_bookingreference,tc_bookingid,tc_producttype,tc_bookingtravelamount,tc_durationofstay&$expand=tc_sourcemarketid($select=tc_iso2code,tc_countryid)";            
+            var query = "?$select=tc_bookingreference,tc_bookingid,tc_producttype,tc_bookingtravelamount,tc_durationofstay&$expand=tc_sourcemarketid($select=tc_iso2code)";            
             return Xrm.Mobile.offline.retrieveRecord(EntityNames.Case, caseId, query);
         }
         else {
-            var query = "?$select=_tc_sourcemarketid_value,tc_bookingreference,_tc_bookingid_value,tc_producttype,tc_bookingtravelamount,tc_durationofstay&$expand=tc_sourcemarketid($select=tc_iso2code,tc_countryid)";
+            var query = "?$select=tc_bookingreference,_tc_bookingid_value,tc_producttype,tc_bookingtravelamount,tc_durationofstay&$expand=tc_sourcemarketid($select=tc_iso2code)";
             return Tc.Crm.Scripts.Common.GetById(EntitySetNames.Case, caseId, query);
         }
     }
 
+    // get related booking data
     function getBooking(bookingId) {
+        var query = "?$select=tc_travelamount,tc_duration&$expand=tc_SourceMarketId($select=tc_iso2code)";
         if (IsOfflineMode()) {
-            var query = "?$select=tc_sourcemarketid,tc_travelamount,tc_duration&$expand=tc_SourceMarketId($select=tc_iso2code,tc_countryid)";
             return Xrm.Mobile.offline.retrieveRecord(EntityNames.Booking, bookingId, query);
-            
         } else {
-            var query = "?$select=_tc_sourcemarketid_value,tc_travelamount,tc_duration&$expand=tc_SourceMarketId($select=tc_iso2code,tc_countryid)";
             return Tc.Crm.Scripts.Common.GetById(EntitySetNames.Booking, bookingId, query);
-        }        
+        }
     }
 
+    // retrieve configuration value
     var getConfigurationValue = function (configName) {
+        var query = "?$filter=tc_name eq '" + configName + "' &$select=tc_value";
         if (IsOfflineMode()) {
-            var query = "?$filter=tc_name eq '" + configName + "' &$select=tc_value";
             return Xrm.Mobile.offline.retrieveMultipleRecords(EntityNames.Configuration, query);
-        }
-        else {
-            var query = "?$filter=tc_name eq '" + configName + "' &$select=tc_value";
+        } else {
             return Tc.Crm.Scripts.Common.Get(EntitySetNames.Configuration, query);
         }
     }
@@ -342,9 +338,8 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
         var category3Id = Xrm.Page.getAttribute(Attributes.CaseCategory3).getValue()[0].id;
         if (IsOfflineMode()) {
             var query = "?$filter=tc_sourcemarket eq " + (isUkMarket ? SourceMarket.UK : SourceMarket.Continental) + " and tc_category1 eq " + formatEntityId(category1Id) + " and tc_category2 eq " + formatEntityId(category2Id) + " and tc_category3 eq " + formatEntityId(category3Id) + "&$select=tc_compensationcalculationmatrixid";
-            return Tc.Crm.Scripts.Common.retrieveMultipleRecords(EntityNames.CompensationCalculationMatrix, query);
-        }
-        else {
+            return Xrm.Mobile.offline.retrieveMultipleRecords(EntityNames.CompensationCalculationMatrix, query);
+        } else {
             var query = "?$filter=tc_sourcemarket eq " + (isUkMarket ? SourceMarket.UK : SourceMarket.Continental) + " and _tc_category1_value eq " + formatEntityId(category1Id) + " and _tc_category2_value eq " + formatEntityId(category2Id) + " and _tc_category3_value eq " + formatEntityId(category3Id) + "&$select=tc_compensationcalculationmatrixid";
             return Tc.Crm.Scripts.Common.Get(EntitySetNames.CompensationCalculationMatrix, query);
         }
@@ -369,12 +364,100 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
         query = query + "&$select=tc_impactpercentage,tc_rangepercentage";
 
         if (IsOfflineMode()) {
-            return Tc.Crm.Scripts.Common.retrieveMultipleRecords(EntityNames.CompensationCalculationMatrixLine, query);
-        }
-        else {
+            return Xrm.Mobile.offline.retrieveMultipleRecords(EntityNames.CompensationCalculationMatrixLine, query);
+        } else {
             return Tc.Crm.Scripts.Common.Get(EntitySetNames.CompensationCalculationMatrixLine, query);
         }
     }
+
+    // parse case request response basing on offline\online
+    function parseCase(caseResponse) {
+        if (caseResponse == null) return null;
+        var result = {
+            productType: caseResponse.tc_producttype,
+            travelAmount: caseResponse.tc_bookingtravelamount,
+            durationOfStay: caseResponse.tc_durationofstay,
+            bookingId: caseResponse._tc_bookingid_value
+        };
+        if (!IsOfflineMode()) {
+            result.hasBookingReference = caseResponse.tc_bookingreference;
+            result.sourceMarketIso2Code = caseResponse.tc_sourcemarketid != null ? caseResponse.tc_sourcemarketid.tc_iso2code : null;
+        } else {
+            result.hasBookingReference = caseResponse.tc_bookingreference.toLowerCase() === "true";
+            result.sourceMarketIso2Code = caseResponse.tc_sourcemarketid != null && caseResponse.tc_sourcemarketid.length > 0 ? caseResponse.tc_sourcemarketid[0].tc_iso2code : null;
+        }
+        return result;
+    }
+
+    // parse booking request response basing on offline\online
+    function parseBooking(bookingResponse) {
+        if (bookingResponse == null) return null;
+        var result = {
+            travelAmount: bookingResponse.tc_travelamount,
+            duration: bookingResponse.tc_duration
+        };
+        if (!IsOfflineMode()) {
+            result.sourceMarketIso2Code = bookingResponse.tc_SourceMarketId != null ? bookingResponse.tc_SourceMarketId.tc_iso2code : null;
+        } else {
+            result.sourceMarketIso2Code = bookingResponse.tc_SourceMarketId != null && bookingResponse.tc_SourceMarketId.length > 0 ? bookingResponse.tc_SourceMarketId[0].tc_iso2code : null;
+        }
+        return result;
+    }
+
+    // parse matrix request response basing on offline\online
+    function parseMatrix(matrixResponse) {
+        if (matrixResponse == null) return null;
+        var result = null;
+        if (!IsOfflineMode()) {
+            if (matrixResponse.value != null && matrixResponse.value.length > 0 && matrixResponse.value[0] != null) {
+                result = matrixResponse.value[0].tc_compensationcalculationmatrixid;
+            }
+        } else {
+            if (matrixResponse.length > 0 && matrixResponse[0] != null) {
+                result = matrixResponse[0].tc_compensationcalculationmatrixid;
+            }
+        }
+        return result;
+    }
+
+    // parse compensation line request response basing on offline\online
+    function parseCompensationLine(lineResponse) {
+        if (lineResponse == null) return null;
+        var result = null;
+        if (!IsOfflineMode()) {
+            if (lineResponse.value != null && lineResponse.value.length > 0 && lineResponse.value[0] != null) {
+                result = {
+                    impactPercentage: lineResponse.value[0].tc_impactpercentage,
+                    rangePercentage: lineResponse.value[0].tc_rangepercentage
+                }
+            }
+        } else {
+            if (lineResponse.length > 0 && lineResponse[0] != null) {
+                result = {
+                    impactPercentage: parseFloat(lineResponse[0].tc_impactpercentage),
+                    rangePercentage: parseFloat(lineResponse[0].tc_rangepercentage)
+                }
+            }
+        }
+        return result;
+    }
+
+    // parse configuration request response basing on offline\online
+    function parseConfigurationValue(configurationResponse) {
+        if (configurationResponse == null) return null;
+        var result = null;
+        if (!IsOfflineMode()) {
+            if (configurationResponse.value != null && configurationResponse.value.length > 0 && configurationResponse.value[0] != null) {
+                result = parseFloat(configurationResponse.value[0].tc_value);
+            }
+        } else {
+            if (configurationResponse.length > 0) {
+                result = parseFloat(configurationResponse[0].tc_value);
+            }
+        }
+        return result;
+    }
+    
 
     // Calculate wrong room cost compensation
     var calculateWrongRoomCost = function () {
@@ -411,7 +494,7 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
         var accommodationCost = bookingValue * accommodationPercentage / 100;
         // % Holiday = Days Affected / Total Days
         var daysAffected = Xrm.Page.getAttribute(Attributes.AffectedDays).getValue();
-        var totalDays = Xrm.Page.getAttribute(Attributes.TotalDays).getValue();
+        var totalDays = Xrm.Page.getAttribute(Attributes.TotalDays).getValue();        
         var holidayPercentage = daysAffected / totalDays;
         // Value for % Holidays = Accommodation Costs * % Holiday
         var holidayPercentageValue = accommodationCost * holidayPercentage;
@@ -453,38 +536,39 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
         getMatrixId().then(
             function (matrixResponse) {
                 // parse from response, if null - show message as no calculation should be done
-                var matrix = getPromiseResponse(matrixResponse, "Compensation Calculation Matrix");
-                if (matrix.value.length === 0) {
+                var response = getPromiseResponse(matrixResponse, "Compensation Calculation Matrix");
+                var matrixId = parseMatrix(response);
+                if (matrixId == null) {
                     addNotificationNoAutomaticCalculation();
                     return;
                 }
                 // search compensation matrix line for severity/impact or building work
-                var matrixId = matrix.value[0].tc_compensationcalculationmatrixid;
                 Promise.all([getImpactAndRange(matrixId), getConfigurationValue(Configuration.Adjustment), getConfigurationValue(Configuration.MaximumTotalLimitToBePaid)]).then(function (allResponses) {
-                    var matrixLine = getPromiseResponse(allResponses[0], "Compensation Calculation Matrix Line"); // parse matrix
-                    if (matrixLine.value.length === 0) {
+                    response = getPromiseResponse(allResponses[0], "Compensation Calculation Matrix Line"); // parse matrix
+                    var matrixLine = parseCompensationLine(response);
+                    if (matrixLine == null) {
                         Xrm.Utility.alertDialog("No compensation matrix line impact+severity or building work is present in configuration. Contact System configurator");
                         return;
-                    }
-                    var adjustment = getPromiseResponse(allResponses[1], "Configuration"); // parse adjustment
-                    if (adjustment.value.length === 0 || adjustment.value[0].tc_value === null) {
+                    }                    
+                    response = getPromiseResponse(allResponses[1], "Configuration"); // parse adjustment
+                    var adjustment = parseConfigurationValue(response);
+                    if (adjustment == null) {
                         Xrm.Utility.alertDialog("No value in configuration for " + Configuration.Adjustment + ". Contact System configurator");
                         return;
                     }
-                    var maximumTotalLimitToBePaid = getPromiseResponse(allResponses[2], "Configuration"); // parse maximumTotalLimitToBePaid                        
-                    if (maximumTotalLimitToBePaid.value.length === 0 || maximumTotalLimitToBePaid.value[0].tc_value === null) {
+                    response = getPromiseResponse(allResponses[2], "Configuration"); // parse maximumTotalLimitToBePaid                        
+                    var maximumTotalLimitToBePaid = parseConfigurationValue(response);
+                    if (maximumTotalLimitToBePaid == null) {
                         Xrm.Utility.alertDialog("No value in configuration for " + Configuration.MaximumTotalLimitToBePaid + ". Contact System configurator");
                         return;
                     }
-                    calculateDefaultFormulaUk(matrixLine.value[0].tc_impactpercentage, matrixLine.value[0].tc_rangepercentage, parseFloat(adjustment.value[0].tc_value), parseFloat(maximumTotalLimitToBePaid.value[0].tc_value));
+                    calculateDefaultFormulaUk(matrixLine.impactPercentage, matrixLine.rangePercentage, adjustment, maximumTotalLimitToBePaid);
                 },
                 function (error) {
-                    Xrm.Utility.alertDialog("Error getting compensation matrix values or retrieving configuration. Please retry");
                     console.warn("Error getting compensation matrix values or retrieving configuration");
                 });
             },
             function (error) {
-                Xrm.Utility.alertDialog("Error getting compensation matrix. Please retry");
                 console.warn("Error getting compensation matrix");
             }
         );
@@ -494,47 +578,45 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
     var calculateCompensationContinental = function () {
         // get configuration entry
         getMatrixId().then(
-            function (response) {
-                // parse from response, if null - show message according as no calculation should be done
-                var matrix = JSON.parse(response.response); 
-                if (matrix.value.length === 0) {
+            function (matrixResponse) {
+                // parse from response, if null - show message as no calculation should be done
+                var response = getPromiseResponse(matrixResponse, "Compensation Calculation Matrix");
+                var matrixId = parseMatrix(response);
+                if (matrixId == null) {
                     addNotificationNoAutomaticCalculation();
                     return;
                 }
-                var matrixId = matrix.value[0].tc_compensationcalculationmatrixid;
                 // search compensation matrix line for impact
                 getImpactAndRange(matrixId).then(
-                    function (matrixResponse) {
-                        var matrixLine = JSON.parse(matrixResponse.response); // parse matrix
-                        if (matrixLine.value.length === 0) {
+                    function (caseLineResponse) {
+                        response = getPromiseResponse(caseLineResponse, "Compensation Calculation Matrix Line"); // parse matrix
+                        var matrixLine = parseCompensationLine(response);
+                        if (matrixLine == null) {
                             Xrm.Utility.alertDialog("No compensation matrix line impact+severity or building work is present in configuration. Contact System configurator");
                             return;
                         }
-                        var impact = matrixLine.value[0].tc_impactpercentage;
                         // Proposed Compensation = (Travel Amount / Total Days) * Days Affected * Impact %
                         var travelAmount = Xrm.Page.getAttribute(Attributes.TotalBookingValue).getValue();
                         var totalDays = Xrm.Page.getAttribute(Attributes.TotalDays).getValue();
                         var daysAffected = Xrm.Page.getAttribute(Attributes.AffectedDays).getValue();
-                        var value = travelAmount * daysAffected / totalDays * impact / 100;
+                        var value = travelAmount * daysAffected / totalDays * matrixLine.impactPercentage / 100;
 
                         Xrm.Page.getAttribute(Attributes.ProposedCompensation).setValue(value);
                         Xrm.Page.getAttribute(Attributes.MaxProposedCompensation).setValue(value);
                         Xrm.Page.getControl(Attributes.OfferedAmount).setFocus();
                     },
                     function (error) {
-                        Xrm.Utility.alertDialog("Error getting compensation matrix values or retrieving configuration. Please retry");
                         console.warn("Error getting compensation matrix values or retrieving configuration");
                     }
                 );
             },
             function (error) {
-                Xrm.Utility.alertDialog("Error getting compensation matrix. Please retry");
                 console.warn("Error getting compensation matrix");
             }
         );
     }
     
-    // Validate mandatory field. Execute action on fild if needed
+    // Validate mandatory field. Execute action on field if needed
     var validateMandatoryField = function (attribute, errorMessage, setter) {
         var attribute = Xrm.Page.getAttribute(attribute);
         if (attribute == null) return false;
@@ -612,9 +694,7 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
     // Get source market from case or booking
     // Populate product type, booking value and duration on create
     var loadSourceMarketAndSetDefaults = function () {
-        if (IsOfflineMode()) return;
-        var caseIdAttr = Xrm.Page.getAttribute(Attributes.Case);
-        var value = caseIdAttr.getValue();
+        var value = Xrm.Page.getAttribute(Attributes.Case).getValue();
         if (value == null || value.length == 0) return;
 
         var caseId = formatEntityId(value[0].id);
@@ -622,14 +702,14 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
         caseReceivedPromise.then(
             caseRetrieved,
             function (error) {
-                Xrm.Utility.alertDialog("Problem getting case. Please retry");
+                console.warn("Problem getting case.");
             }
         );
     }
 
     // Calculation compensation for case line
     var calculateCompensation = function () {
-        if (IsOfflineMode()) return;
+        // clear validation errors, if any
         Xrm.Page.getAttribute(Attributes.OfferedAmount).controls.forEach(
             function (control, i) {
                 control.clearNotification();
@@ -651,54 +731,54 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
 
         // Get source market
     var caseRetrieved = function (caseResponse) {
-        var incident = getPromiseResponse(caseResponse, "Case");
+        var parsedResponse = getPromiseResponse(caseResponse, "Case");
+        var incident = parseCase(parsedResponse);
+        if (incident == null) return;
         var isCreate = (Xrm.Page.ui.getFormType() === FORM_MODE_CREATE) || (Xrm.Page.ui.getFormType() === FORM_MODE_QUICK_CREATE);
-        var bookingUsed = !IsOfflineMode() ? incident.tc_bookingreference : incident.tc_bookingreference === "true";
-        if (bookingUsed) {
-            var bookingId = incident._tc_bookingid_value;
+        if (incident.hasBookingReference) {
             // Get source market from booking
-            getBooking(bookingId).then(            
+            getBooking(incident.bookingId).then(
                 function (bookingResponse) {
-                    var booking = getPromiseResponse(bookingResponse, "Booking");
-                    isUkMarket = booking.tc_SourceMarketId.tc_iso2code.toUpperCase() === SOURCE_MARKET_UK;
-                    // compensation calculator field based on market
+                    parsedResponse = getPromiseResponse(bookingResponse, "Booking");
+                    var booking = parseBooking(parsedResponse);
+                    if (booking == null) return;
+                    if (booking.sourceMarketIso2Code != null) {
+                        isUkMarket = booking.sourceMarketIso2Code.toUpperCase() === SOURCE_MARKET_UK;
+                    }
                     showHideCompensationCalculator();
                     // set defaults on create                    
                     if (isCreate) {
-                        var productType = incident.tc_producttype;
-                        var duration = booking.tc_duration;
-                        var travelAmount = booking.tc_travelamount;
-                        setDefaultsOnCreate(productType, travelAmount, duration);
+                        setDefaultsOnCreate(incident.productType, booking.travelAmount, booking.duration);
                     }
                 },
                 function (error) {
-                    Xrm.Utility.alertDialog("Problem getting booking. Please retry");
                     console.warn("Problem getting booking");
-            });
+                });
         }
         else {
-            // Set source market from case
-            isUkMarket = incident.tc_sourcemarketid.tc_iso2code.toUpperCase() === SOURCE_MARKET_UK;
-            // compensation calculator field based on market
+            if (incident.sourceMarketIso2Code != null) {
+                isUkMarket = incident.sourceMarketIso2Code.toUpperCase() === SOURCE_MARKET_UK;
+            }
             showHideCompensationCalculator();
-            // set defaults on create                    
+            // set defaults on create
             if (isCreate) {
-                var productType = incident.tc_producttype;
-                var duration = incident.tc_durationofstay;
-                var travelAmount = incident.tc_bookingtravelamount;
-                setDefaultsOnCreate(productType, travelAmount, duration);
+                setDefaultsOnCreate(incident.productType, incident.travelAmount, incident.durationOfStay);
             }
         }
     }
 
     var shouldShowCompensationCalculator = function () {
-        if (IsOfflineMode()) return false;
+        // don't show if source market is not initialized
+        if (isUkMarket == null) return false;
+        // don't proceed if tab is not on the form
         var tab = Xrm.Page.ui.tabs.get(TabsAndSections.CompensationCalculator);
         if (tab == null) return false;
+        // only for case type complain
         var caseTypeId = Xrm.Page.getAttribute(Attributes.CaseType).getValue();
         if (caseTypeId == null || caseTypeId[0].id !== CASE_TYPE_COMPLAIN) {
             return false;
         }
+        // when case category 3 is selected
         var attr = Xrm.Page.getAttribute(Attributes.CaseCategory3).getValue();
         if (attr == null || attr.length == 0) {
             return false;
@@ -731,7 +811,6 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
         OnLoad: function () {
             addEventHandlers();
             loadSourceMarketAndSetDefaults();
-            showHideCompensationCalculator();
         },
         OnCaseLineSave: function () {
             formationTheNameOfTheCaseLineEntity();
