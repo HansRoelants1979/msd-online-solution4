@@ -21,259 +21,189 @@ if (typeof (Tc.Crm.Scripts.Library) === "undefined") {
 Tc.Crm.Scripts.Library.Compensation = (function () {
     "use strict";
     var FORM_MODE_CREATE = 1;
-    var CLIENT_MODE_MOBILE = "Mobile";
+    var FORM_MODE_QUICK_CREATE = 5;
     var CLIENT_STATE_OFFLINE = "Offline";
 
-    var SOURCE_MARKET_ENTITY = "tc_country";
-    var SOURCE_MARKET_ENTITY_PLURAL = "tc_countries";
-    var CASE_ENTITY_SET_NAME = "incidents";
-    var CONTACT_ENTITY_SET_NAME = "contacts";
-    var BOOKING_ENTITY_SET_NAME = "tc_bookings";
-    var COMPENSATION_ENTITY_SET_NAME = "tc_compensations";
+    var EntityNames = {
+        Country: "tc_country",
+        Case: "incident",
+        Booking: "tc_booking",
+        Compensation: "tc_compensation"
+    }
 
-    var COMPENSATION_SOURCEMARKETID_FIELDNAME = "tc_SourceMarketId";
+    var EntitySetNames = {
+        Country: "tc_countries",
+        Case: "incidents",
+        Booking: "tc_bookings",
+        Compensation: "tc_compensations"
+    }    
 
     var COMPENSATION_CASEID_ATTR_NAME = "tc_caseid";
     var COMPENSATION_SOURCEMARKETID_ATTR_NAME = "tc_sourcemarketid";
     var COMPENSATION_LANGUAGE_ATTR_NAME = "tc_language";
-    var CUSTOMER_LANGUAGE_ATTR_NAME = "tc_language";
-    var CASE_SOURCEMARKETID_ATTR_NAME = "tc_sourcemarketid";
 
     function formatEntityId(id) {
         return id !== null ? id.replace("{", "").replace("}", "") : null;
     }
 
-    function IsMobileOfflineMode() {
-        return Xrm.Page.context.client.getClient() === CLIENT_MODE_MOBILE && Xrm.Page.context.client.getClientState() === CLIENT_STATE_OFFLINE
-    }
-
-    function getBooking(bookingId) {
-        var query = "?$select=_tc_sourcemarketid_value&$expand=tc_SourceMarketId($select=tc_iso_code,tc_countryid)";
-        return Tc.Crm.Scripts.Common.GetById(BOOKING_ENTITY_SET_NAME, bookingId, query);
-        // TODO: offline mode
-    }
-     
-    function getCustomer(customerId) {
-        var query = "?$select=tc_language,contactid,fullname";
-        return Tc.Crm.Scripts.Common.GetById(CONTACT_ENTITY_SET_NAME, customerId, query);
-        // TODO: offline mode
-    }
-
-    function getCustomerCases(customerId) {
-        if (IsMobileOfflineMode()) {
-            // phones and tablets in offline mode
-            var query = "?$filter=customerid eq " + customerId + " &$select=incidentid";
-            return Xrm.Mobile.offline.retrieveMultipleRecords(CASE_ENTITY_SET_NAME, query);
-        }
-        else {
-            var query = "?$filter=_customerid_value eq " + customerId + " &$select=incidentid";
-            return Tc.Crm.Scripts.Common.Get(CASE_ENTITY_SET_NAME, query);
-        }
-    }
-
-    function getCase(caseId) {
-        if (IsMobileOfflineMode()) {
-            // phones and tablets in offline mode
-            var query = "?$select=tc_sourcemarketid,customerid,tc_bookingreference,tc_bookingid&$expand=tc_sourcemarketid($select=tc_iso_code,tc_countryid),customerid_contact($select=tc_language,contactid,fullname)";
-            return Xrm.Mobile.offline.retrieveRecord(CASE_ENTITY_SET_NAME, caseId, query);
-        }
-        else {
-            var query = "?$select=_tc_sourcemarketid_value,_customerid_value,tc_bookingreference,_tc_bookingid_value&$expand=tc_sourcemarketid($select=tc_iso_code,tc_countryid),customerid_contact($select=tc_language,contactid,fullname)";
-            return Tc.Crm.Scripts.Common.GetById(CASE_ENTITY_SET_NAME, caseId, query);
-        }
-    }
-
-    function getCaseCompensations(caseId) {
-        if (IsMobileOfflineMode()) {
-            // phones and tablets in offline mode
-            var query = "?$filter=tc_caseid eq " + caseId + " &$select=tc_compensationid";
-            return Xrm.Mobile.offline.retrieveMultipleRecords(COMPENSATION_ENTITY_SET_NAME, query);
-        }
-        else {
-            var query = "?$filter=_tc_caseid_value eq " + caseId + " &$select=tc_compensationid";
-            return Tc.Crm.Scripts.Common.Get(COMPENSATION_ENTITY_SET_NAME, query);
-        }
-    }
-
-    function setSourceMarket(sourceMarket) {
-        var sourceMarketReference = [1];
-        sourceMarketReference[0] = {};
-        sourceMarketReference[0].id = sourceMarket.tc_countryid;
-        sourceMarketReference[0].entityType = SOURCE_MARKET_ENTITY;
-        sourceMarketReference[0].name = sourceMarket.tc_iso_code;
-
-        if (Xrm.Page.getAttribute(COMPENSATION_SOURCEMARKETID_ATTR_NAME) === null) {
-            Xrm.Utility.alertDialog("Unable to find source market");
-            console.warn("Unable to find source market");
-            return;
-        }
-
-        Xrm.Page.getAttribute(COMPENSATION_SOURCEMARKETID_ATTR_NAME).setValue(sourceMarketReference);
-    }
-
     function getPromiseResponse(promiseResponse, entity) {
-        if (IsMobileOfflineMode()) {
-            return promiseResponse.values;
+        if (IsOfflineMode()) {
+            return promiseResponse.values != null ? promiseResponse.values : promiseResponse;
         }
         else {
             if (promiseResponse.response === null || promiseResponse.response === undefined) {
-                Xrm.Utility.alertDialog(entity + " information can't be retrieved");
                 console.warn(entity + " information can't be retrieved");
-                return [];
+                return null;
             }
             try {
-                return JSON.parse(promiseResponse.response).value;
+                var result = JSON.parse(promiseResponse.response);
+                return result.values != null ? result.values : result;
             }
             catch (e) {
-                Xrm.Utility.alertDialog(entity + " information can't be parsed");
                 console.warn(entity + " information can't be parsed");
-                return [];
+                return null;
             }
         }
     }
 
-    function updateCompensations(compensationsReceivedPromise, compensationFields) {
-        compensationsReceivedPromise.then(
-            function (compensationsResponse) {
-                var compensations = getPromiseResponse(compensationsResponse, "Compensation");
-                compensations.forEach(function (compensation) {
-                    if (IsMobileOfflineMode()) {
-                        //TODO
-                    }
-                    else {
-                        return Tc.Crm.Scripts.Common.Update(COMPENSATION_ENTITY_SET_NAME, compensation.tc_compensationid, compensationFields).then(
-                            function (response) { },
-                            function (error) {
-                                Xrm.Utility.alertDialog("Error updating compensation");
-                                console.warn("Error updating compensation");
-                            });
-                    }
-                });
-            },
-            function (error) {
-                Xrm.Utility.alertDialog("Error getting compensations");
-                console.warn("Error getting compensations");
-            }
-        )
+    function IsOfflineMode() {
+        return Xrm.Page.context.client.getClientState() === CLIENT_STATE_OFFLINE;
     }
 
-    function initLanguage(caseResponse) {
-        var incident = JSON.parse(caseResponse.response);
-        var customerId = incident._customerid_value !== null ? incident._customerid_value :incident.customerid;
-        getCustomer(customerId).then(
-            function (customerResponse) {
-                var customer = JSON.parse(customerResponse.response);
-                var language = customer.tc_language;
-                var attribute = Xrm.Page.getAttribute(COMPENSATION_LANGUAGE_ATTR_NAME);
-                attribute.setValue(language);
-            },
-            function (error) {
-                if (error && error.message && error.message.toUpperCase().indexOf("DOES NOT EXIST") > -1) {
-                    // Customer is account, do nothing in that situation
-                    return;
+    function getBooking(bookingId) {
+        // 1 random value in select to don't return all
+        var query = "?$select=tc_duration&$expand=tc_SourceMarketId($select=tc_iso_code,tc_countryid)";
+        if (!IsOfflineMode()) {            
+            return Tc.Crm.Scripts.Common.GetById(EntitySetNames.Booking, bookingId, query);
+        } else {
+            return Xrm.Mobile.offline.retrieveRecord(EntityNames.Booking, bookingId, query);
+        }        
+    }
+ 
+    function getCase(caseId) {
+        if (!IsOfflineMode()) {
+            var query = "?$select=tc_bookingreference,_tc_bookingid_value&$expand=tc_sourcemarketid($select=tc_countryid,tc_iso_code),customerid_contact($select=tc_language)";
+            return Tc.Crm.Scripts.Common.GetById(EntitySetNames.Case, caseId, query);
+        }
+        else {
+            var query = "?$select=tc_bookingreference,tc_bookingid&$expand=tc_sourcemarketid($select=tc_iso_code,tc_countryid),customerid_contact($select=tc_language)";
+            return Xrm.Mobile.offline.retrieveRecord(EntityNames.Case, caseId, query);
+        }
+    }
+
+    function parseCase(response) {
+        if (response == null) return null;
+        var result = {
+            bookingId: response._tc_bookingid_value
+        };
+        if (!IsOfflineMode()) {
+            result.hasBookingReference = response.tc_bookingreference;
+            result.language = response.customerid_contact != null ? response.customerid_contact.tc_language : null;
+            result.sourceMarket = response.tc_sourcemarketid != null ? {
+                id: response.tc_sourcemarketid.tc_countryid,
+                name: response.tc_sourcemarketid.tc_iso_code
+            } : null;
+        } else {
+            result.hasBookingReference = response.tc_bookingreference.toLowerCase() === "true";
+            result.language = response.customerid_contact != null && response.customerid_contact[0] != null ? response.customerid_contact[0].tc_language : null;
+            result.sourceMarket = response.tc_sourcemarketid != null && response.tc_sourcemarketid[0] != null? {
+                id: response.tc_sourcemarketid[0].tc_countryid,
+                name: response.tc_sourcemarketid[0].tc_iso_code
+            } : null;
+        }
+        return result;
+    }
+
+    function parseBooking(response) {
+        if (response == null) return null;
+        var result = null;
+        if (!IsOfflineMode()) {
+            if (response.tc_SourceMarketId != null) {
+                result = {
+                    sourceMarket: {
+                        id: response.tc_SourceMarketId.tc_countryid,
+                        name: response.tc_SourceMarketId.tc_iso_code
+                    }
                 }
-                Xrm.Utility.alertDialog("Unable to get the customer");
-                console.warn("Unable to get the customer");
             }
-        );
+        } else {
+            if (response.tc_SourceMarketId != null && response.tc_SourceMarketId[0] != null) {
+                result = {
+                    sourceMarket: {
+                        id: response.tc_SourceMarketId[0].tc_countryid,
+                        name: response.tc_SourceMarketId[0].tc_iso_code
+                    }
+                }
+            }
+        }
+        return result;
     }
 
-    function initSourceMarket(caseResponse) {
-        var incident = JSON.parse(caseResponse.response);
-        var bookingUsed = incident.tc_bookingreference;
-        if (bookingUsed) {
-            var bookingId = incident._tc_bookingid_value;
+    function setSourceMarket(sourceMarket) {
+        if (sourceMarket == null) return;
+        var sourceMarketReference = [1];
+        sourceMarketReference[0] = {
+            id: sourceMarket.id,
+            name: sourceMarket.name,
+            entityType: EntityNames.Country            
+        };
+        var attr = Xrm.Page.getAttribute(COMPENSATION_SOURCEMARKETID_ATTR_NAME);
+        if (attr != null) {
+            attr.setValue(sourceMarketReference);
+        }
+    }
+
+    function initSourceMarket(incident) {
+        if (incident == null) return;
+        if (incident.hasBookingReference) {
             // Get source market from booking
-            getBooking(bookingId).then(
+            getBooking(incident.bookingId).then(
                 function (bookingResponse) {
-                    var booking = JSON.parse(bookingResponse.response);
-                    var sourceMarket = booking.tc_SourceMarketId;
-                    setSourceMarket(sourceMarket);
+                    var parsedResponse = getPromiseResponse(bookingResponse);
+                    var booking = parseBooking(parsedResponse);
+                    if (booking == null) return;
+                    setSourceMarket(booking.sourceMarket);
                 },
                 function (error) {
-                    Xrm.Utility.alertDialog("Problem getting booking");
                     console.warn("Problem getting booking");
                 }
             );
         }
         else {
             // Set source market from case
-            var sourceMarket = incident.tc_sourcemarketid;
-            setSourceMarket(sourceMarket);
+            setSourceMarket(incident.sourceMarket);
         }
     }
 
-    /// Public implementation
-
-    var updateCustomerCompensationsLanguage = function () {
-        if (IsMobileOfflineMode()) return;
-        if (Xrm.Page.ui.getFormType() === FORM_MODE_CREATE)
-            return;
-        var attrLanguage = Xrm.Page.getAttribute(CUSTOMER_LANGUAGE_ATTR_NAME);
-        if (attrLanguage === null || !attrLanguage.getIsDirty())
-            return;
-        var language = attrLanguage.getValue();
-        var customerId = formatEntityId(Xrm.Page.data.entity.getId());
-        getCustomerCases(customerId).then(
-            function (casesResponse) {
-                var cases = getPromiseResponse(casesResponse, "Case");
-                cases.forEach(function (incident) {
-                    var caseCompensationsPromise = getCaseCompensations(incident.incidentid);
-                    updateCompensations(caseCompensationsPromise, { tc_language: language });
-                });
-            },
-            function (error) {
-                Xrm.Utility.alertDialog("Error getting customer cases");
-                console.warn("Error getting customer cases");
-            }
-        );
-    }
-
-    var updateCaseCompensationsSourceMarket = function () {
-        if (IsMobileOfflineMode()) return;
-        if (Xrm.Page.ui.getFormType() === FORM_MODE_CREATE)
-            return;
-        var attribute = Xrm.Page.getAttribute(CASE_SOURCEMARKETID_ATTR_NAME);
-        if (attribute === null || !attribute.getIsDirty())
-            return;
-        var caseId = formatEntityId(Xrm.Page.data.entity.getId());
-        var sourceMarketId = formatEntityId(attribute.getValue()[0].id);
-        var compensation = {};
-        compensation[COMPENSATION_SOURCEMARKETID_FIELDNAME + "@odata.bind"] = "/" + SOURCE_MARKET_ENTITY_PLURAL + "(" + sourceMarketId + ")";
-        updateCompensations(getCaseCompensations(caseId), compensation);
-    }
-
+    // set language and source market of compensation on create
     var setDefaultsOnCreate = function () {
-        if (IsMobileOfflineMode()) return;
-        if (Xrm.Page.ui.getFormType() !== FORM_MODE_CREATE)
-            return;
+        var isCreate = Xrm.Page.ui.getFormType() === FORM_MODE_CREATE || Xrm.Page.ui.getFormType() === FORM_MODE_QUICK_CREATE;
+        if (!isCreate) return;
         var caseIdAttr = Xrm.Page.getAttribute(COMPENSATION_CASEID_ATTR_NAME);
+        if (caseIdAttr == null || caseIdAttr.getValue() == null || caseIdAttr.getValue()[0] == null) return;
         var caseId = formatEntityId(caseIdAttr.getValue()[0].id);
-        var caseReceivedPromise = getCase(caseId);
-        // set language
-        caseReceivedPromise.then(
-            initLanguage,
+        var caseReceivedPromise = getCase(caseId);        
+        caseReceivedPromise.then(function (response) {
+                var parsedResponse = getPromiseResponse(response);
+                var incident = parseCase(parsedResponse);
+                if (incident == null) return;
+                // set language                
+                var attribute = Xrm.Page.getAttribute(COMPENSATION_LANGUAGE_ATTR_NAME);
+                if (attribute != null) {
+                    attribute.setValue(incident.language);
+                    attribute.fireOnChange();
+                }
+                // set  source market from booking or case
+                initSourceMarket(incident);
+            },
             function (error) {
                 console.warn("Unable to get the case");
             }
-        );
-        // set  source market from booking or case
-        caseReceivedPromise.then(
-            initSourceMarket,
-            function (error) {}
-        );
+        );        
     }
 
     // public
     return {
-        SetDefaultsOnCreate: function () {            
-            setDefaultsOnCreate();
-        },
-        UpdateCustomerCompensationsLanguage: function () {
-            updateCustomerCompensationsLanguage();
-        },
-        UpdateCaseCompensationsSourceMarket: function () {
-            updateCaseCompensationsSourceMarket();
-        }
+        SetDefaultsOnCreate: setDefaultsOnCreate
     };
 })();

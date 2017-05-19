@@ -22,9 +22,7 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
     "use strict";
     
     var isComplainCaseType = null;
-
     var CASE_TYPE_COMPLAIN = "478C99E9-93E4-E611-8109-1458D041F8E8";
-    var CLIENT_MODE_MOBILE = "Mobile";
     var CLIENT_STATE_OFFLINE = "Offline";
 
     var SOURCE_MARKET_UK = "GB";

@@ -22,6 +22,8 @@ if (typeof (Tc.Crm.Scripts.Events) === "undefined") {
 Tc.Crm.Scripts.Events.Case = (function () {
     "use strict";
 
+    var CLIENT_STATE_OFFLINE = "Offline";
+
     var CASE_TYPE_CONTROL_BOOKINGREF = "tc_bookingreference";
     var CASE_BOOKING_NUMBER = "tc_bookingid";
     var CASE_SOURCE_MARKET_ID = "tc_sourcemarketid";
@@ -190,8 +192,6 @@ Tc.Crm.Scripts.Events.Case = (function () {
         return Tc.Crm.Scripts.Common.GetById(entityName, Currencyid, query);
     }
     function MandatoryMetConditions() {
-        debugger;
-     
         if (Xrm.Page.getControl("tc_bookingreference").getAttribute().getValue() == true) {
             if (Xrm.Page.getControl("tc_mandatoryconditionsmet").getAttribute().getValue() == false) {
                 if (Xrm.Page.getControl("tc_casetypeid").getAttribute().getValue() != null) {
@@ -248,13 +248,20 @@ Tc.Crm.Scripts.Events.Case = (function () {
 
         },
         OnSave: function () {
-            Tc.Crm.Scripts.Library.Compensation.UpdateCaseCompensationsSourceMarket();
+            if (Xrm.Page.context.client.getClientState() !== CLIENT_STATE_OFFLINE) {
+                Tc.Crm.Scripts.Library.Case.UpdateRelatedCompensationsSourceMarket();
+            }
         },
         OnCaseFieldChange: function () {
             GetTheSourceMarketCurrency();
         },
         OnCaseFieldChangeMandatoryMetConditions: function () {
             MandatoryMetConditions();
+        },
+        OnChangeSourceMarket: function () {
+            if (Xrm.Page.context.client.getClientState() === CLIENT_STATE_OFFLINE) {
+                Tc.Crm.Scripts.Library.Case.UpdateRelatedCompensationsSourceMarket();
+            }
         }
     };
 })();

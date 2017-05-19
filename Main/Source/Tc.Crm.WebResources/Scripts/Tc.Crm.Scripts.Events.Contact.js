@@ -21,12 +21,20 @@ if (typeof (Tc.Crm.Scripts.Events) === "undefined") {
 }
 Tc.Crm.Scripts.Events.Contact = ( function () {
     "use strict";
-    // private stuff
+
+    var CLIENT_STATE_OFFLINE = "Offline";
 
     // public methods
     return {
         OnSave: function () {
-            Tc.Crm.Scripts.Library.Compensation.UpdateCustomerCompensationsLanguage();
+            if (Xrm.Page.context.client.getClientState() !== CLIENT_STATE_OFFLINE) {
+                Tc.Crm.Scripts.Library.Contact.UpdateCustomerCompensationsLanguage();
+            }
+        },
+        OnChangeLanguage: function () {
+            if (Xrm.Page.context.client.getClientState() === CLIENT_STATE_OFFLINE) {
+                Tc.Crm.Scripts.Library.Contact.UpdateCustomerCompensationsLanguage();
+            }
         }
     };
 })();
