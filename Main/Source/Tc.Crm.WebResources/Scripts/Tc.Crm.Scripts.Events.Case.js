@@ -240,12 +240,18 @@ Tc.Crm.Scripts.Events.Case = (function () {
             }
         }
     }
+    function validateCasePhoneNum(ExecutionContext, telephone1, telephone2) {
+        Tc.Crm.Scripts.Events.Contact.ValidatePhoneNum(ExecutionContext, telephone1, telephone2);
+    }
 
 
     // public methods
     return {
-        OnLoad: function () {
-
+        OnLoad: function (executioncontext, telephone1, telephone2) {
+            validateCasePhoneNum(executioncontext, telephone1, telephone2);
+        },
+        OnCaseTelephoneFieldChange: function (executioncontext, telephone1, telephone2) {
+            validateCasePhoneNum(executioncontext, telephone1, telephone2);
         },
         OnSave: function () {
             if (Xrm.Page.context.client.getClientState() !== CLIENT_STATE_OFFLINE) {
