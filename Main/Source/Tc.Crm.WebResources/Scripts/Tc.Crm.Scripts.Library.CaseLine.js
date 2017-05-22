@@ -366,6 +366,9 @@ Tc.Crm.Scripts.Library.CaseLine = (function () {
         // % Holiday = Days Affected / Total Days
         var daysAffected = Xrm.Page.getAttribute(Attributes.AffectedDays).getValue();
         var totalDays = Xrm.Page.getAttribute(Attributes.TotalDays).getValue();
+        if (totalDays === 0) {
+            Xrm.Utility.alertDialog("Cannot calculate compensation for 0 days duration of holiday");
+        }
         var holidayPercentage = daysAffected / totalDays;
         // Value for % Holidays = Accommodation Costs * % Holiday
         var holidayPercentageValue = accommodationCost * holidayPercentage;
@@ -469,6 +472,9 @@ Tc.Crm.Scripts.Library.CaseLine = (function () {
                         // Proposed Compensation = (Travel Amount / Total Days) * Days Affected * Impact %
                         var travelAmount = Xrm.Page.getAttribute(Attributes.TotalBookingValue).getValue();
                         var totalDays = Xrm.Page.getAttribute(Attributes.TotalDays).getValue();
+                        if (totalDays === 0) {
+                            Xrm.Utility.alertDialog("Cannot calculate compensation for 0 days duration of holiday");
+                        }
                         var daysAffected = Xrm.Page.getAttribute(Attributes.AffectedDays).getValue();
                         var value = travelAmount * daysAffected / totalDays * matrixLine.impactPercentage / 100;
 

@@ -272,6 +272,9 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
     }
 
     var setContinentalCompensationAmountLimit = function (bookingValue, duration, maxLimit) {
+        if (duration === 0) {
+            Xrm.Utility.alertDialog("Cannot calculate compensation amount limit for 0 days duration of holiday");
+        }
         var limit = bookingValue / duration * maxLimit / 100;
         Xrm.Page.getAttribute(Attributes.CompensationAmountLimit).setValue(limit);
     }
