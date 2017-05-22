@@ -12,7 +12,6 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Models
     public class Response
     {
 
-
         [DataMember(Name = "id")]
         public long Id { get; set; }
 
@@ -90,6 +89,73 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Models
 
         [DataMember(Name = "answers")]
         public List<Answer> Answers { get; set; }
+
+        [DataMember(Name = "contact")]
+        public Contact Contact { get; set; }
+
+        [DataMember(Name = "ani")]
+        public string Ani { get; set; }
+
+        [DataMember(Name = "assignedUserEmail")]
+        public string AssignedUserEmail { get; set; }
+
+        [DataMember(Name = "assignedUserId")]
+        public long? AssignedUserId { get; set; }
+
+        [DataMember(Name = "assignedUserName")]
+        public string AssignedUserName { get; set; }
+
+        [DataMember(Name = "employeeCode")]
+        public string EmployeeCode { get; set; }
+
+        [DataMember(Name = "externalCallRecordingId")]
+        public string ExternalCallRecordingId { get; set; }
+
+        [DataMember(Name = "externalId")]
+        public string ExternalId { get; set; }
+
+        [DataMember(Name = "incidentManagementState")]
+        public string IncidentManagementState { get; set; }
+
+        [DataMember(Name = "lastModTime")]
+        public string LastModTime { get; set; }
+
+        [DataMember(Name = "loyaltyNumber")]
+        public string LoyaltyNumber { get; set; }
+
+        [DataMember(Name = "surveyGatewayDnis")]
+        public string SurveyGatewayDnis { get; set; }
+
+        [DataMember(Name = "tagsString")]
+        public string TagsString { get; set; }
+
+        [DataMember(Name = "url")]
+        public string Url { get; set; }
+
+    }
+
+    [DataContract(Name = "contact")]
+    public class Contact
+    {        
+        [DataMember(Name = "name")]
+        public Name Name { get; set; }
+
+        [DataMember(Name = "email")]
+        public string Email { get; set; }
+
+        [DataMember(Name = "phone")]
+        public string Phone { get; set; }       
+    }
+
+
+    [DataContract(Name = "name")]
+    public class Name
+    {
+        [DataMember(Name = "firstName")]
+        public string FirstName { get; set; }
+
+        [DataMember(Name = "lastName")]
+        public string LastName { get; set; }
     }
 
     [DataContract(Name = "answers")]

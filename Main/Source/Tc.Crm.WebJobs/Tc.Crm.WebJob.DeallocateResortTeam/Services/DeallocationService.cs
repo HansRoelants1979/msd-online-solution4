@@ -314,7 +314,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                         StatusCode = CaseStatusCode.AssignedToLocalSourceMarket,
                         State = CaseState.Active
                     };
-                    if (!customerRelationUsers.Contains(caseOwner.Id) && customerRelationTeams.Contains(owner.Id))
+                    if (!customerRelationUsers.Contains(caseOwner.Id) && customerRelationTeams.Contains(owner.Id) && caseOwner.Id != owner.Id)
                         incident.Owner = owner;
                     if (!result.Cases.Contains(incident))
                     {

@@ -23,7 +23,7 @@ namespace Tc.Crm.ServiceTests.Controllers
         ISurveyService surveyService;
         SurveyController controller;
         ICrmService crmService;
-        IList<SurveyResponse> survey;
+        IList<Response> survey;
 
         [TestInitialize()]
         public void TestSetup()
@@ -34,8 +34,8 @@ namespace Tc.Crm.ServiceTests.Controllers
             controller = new SurveyController(surveyService, crmService);
             controller.Request = new System.Net.Http.HttpRequestMessage();
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-            survey = new List<SurveyResponse>();
-            survey.Add(new SurveyResponse() { Id = 123, CookieUID = "123", Mode = "WEB" });
+            survey = new List<Response>();
+            survey.Add(new Response() { Id = 123, CookieUID = "123", Mode = "WEB" });
         }
 
         [TestMethod()]
@@ -49,7 +49,7 @@ namespace Tc.Crm.ServiceTests.Controllers
         [TestMethod()]
         public void SurveyResponseCountIsZero()
         {
-            var response = controller.Create(new List<SurveyResponse>());
+            var response = controller.Create(new List<Response>());
             Assert.AreEqual(response.StatusCode, HttpStatusCode.BadRequest);
             Assert.AreEqual(((System.Net.Http.ObjectContent)response.Content).Value, Service.Constants.Messages.SurveyDataPassedIsNullOrCouldNotBeParsed);
         }
@@ -113,8 +113,8 @@ namespace Tc.Crm.ServiceTests.Controllers
             controller = new SurveyController(surveyService, null);
             controller.Request = new System.Net.Http.HttpRequestMessage();
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-            survey = new List<SurveyResponse>();
-            survey.Add(new SurveyResponse() { Id = 123, CookieUID = "123", Mode = "WEB" });
+            survey = new List<Response>();
+            survey.Add(new Response() { Id = 123, CookieUID = "123", Mode = "WEB" });
             var response = controller.Create(survey);
             Assert.AreEqual(response.StatusCode, HttpStatusCode.InternalServerError);
         }

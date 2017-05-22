@@ -50,7 +50,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
                     var surveyResponse = SurveyResponseHelper.GetResponseEntityFromPayload(responses[i], trace);
                     if (responses[i].Answers != null && responses[i].Answers.Count > 0)
                     {
-                        MapBookingContact(surveyResponse, responses[i].Answers);
+                        MapBookingContact(surveyResponse, responses[i]);
                         ProcessFeedback(surveyResponse, responses[i].Answers);
                     }
                     CommonXrm.CreateRecord(surveyResponse, payloadSurvey.CrmService);
@@ -95,21 +95,21 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// </summary>
         /// <param name="surveyResponse"></param>
         /// <param name="answers"></param>
-        private void MapBookingContact(Entity surveyResponse, List<Answer> answers)
+        private void MapBookingContact(Entity surveyResponse, Response response)
         {
             trace.Trace("Processing MapBookingContact - start");
-            var bookingNumber = AnswerHelper.FindBookingNumber(answers,trace);
-            var sourceMarket = AnswerHelper.FindSourceMarket(answers, trace);
-            var tourOperator = AnswerHelper.FindTourOperator(answers, trace);
-            var brand = AnswerHelper.FindBrand(answers, trace);
-            var contactLastName = AnswerHelper.FindCustomer(answers,trace);
+            var bookingNumber = AnswerHelper.GetBookingNumber(response.Answers,trace);
+            var sourceMarket = AnswerHelper.GetSourceMarket(response.Answers, trace);
+            var tourOperator = AnswerHelper.GetTourOperator(response.Answers, trace);
+            var brand = AnswerHelper.GetBrand(response.Answers, trace);
+            var lastName = ContactHelper.GetLastName(response.Contact,trace);           
 
             if (string.IsNullOrWhiteSpace(bookingNumber)) return;
             if (string.IsNullOrWhiteSpace(sourceMarket)) return;
             if (string.IsNullOrWhiteSpace(tourOperator)) return;
             if (string.IsNullOrWhiteSpace(brand)) return;
 
-            FetchBookingContact(bookingNumber, sourceMarket, tourOperator, brand, contactLastName, surveyResponse);
+            FetchBookingContact(bookingNumber, sourceMarket, tourOperator, brand, lastName, surveyResponse);
             
             trace.Trace("Processing MapBookingContact - end");
         }
@@ -119,12 +119,16 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// To fetch booking, contact
         /// </summary>
         /// <param name="bookingNumber"></param>
-        /// <param name="contactLastName"></param>
+        /// <param name="sourceMarket"></param>
+        /// <param name="tourOperator"></param>
+        /// <param name="brand"></param>
+        /// <param name="lastName"></param>
+        /// <param name="email"></param>
         /// <param name="surveyResponse"></param>
-        private void FetchBookingContact(string bookingNumber,string sourceMarket, string tourOperator, string brand,  string contactLastName, Entity surveyResponse)
+        private void FetchBookingContact(string bookingNumber,string sourceMarket, string tourOperator, string brand,  string lastName, Entity surveyResponse)
         {
             trace.Trace("Processing FetchBookingContact - start");
-            var contactCondition = PrepareContactCondition(contactLastName);
+            var contactCondition = PrepareContactCondition(lastName);
             var sourceMarketCondition = PrepareSourceMarketCondition(sourceMarket);
             var tourOperatorCondition = PrepareTourOperatorCondition(tourOperator);
             var brandCondition = PrepareBrandCondition(brand);
@@ -150,20 +154,21 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         }
 
         /// <summary>
-        /// To prepare link entity for contact when contact name is not empty
+        ///  To prepare link entity for contact when contact last name and email is not empty
         /// </summary>
-        /// <param name="contactLastName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="email"></param>
         /// <returns></returns>
-        private string PrepareContactCondition(string contactLastName)
+        private string PrepareContactCondition(string lastName)
         {
             var contactCondition = string.Empty;
-            if (!string.IsNullOrWhiteSpace(contactLastName))
+            if (!string.IsNullOrWhiteSpace(lastName))
             {
                 contactCondition = $@"<link-entity name='contact' alias='contact' from='contactid' to='tc_customer' link-type='outer'>
                                       <attribute name='contactid'/>
                                         <filter type='and'>
-                                            <condition attribute='lastname' operator='eq' value='{contactLastName}' />
-                                        </filter>
+                                            <condition attribute='lastname' operator='eq' value='{lastName}' />
+                                         </filter>
                                       </link-entity>";
             }
             return contactCondition;

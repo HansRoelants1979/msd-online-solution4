@@ -27,7 +27,7 @@ namespace Tc.Crm.Service.Controllers
         [Route("api/survey/create")]
         [HttpPut]
         [JsonWebTokenAuthorize]
-        public HttpResponseMessage Create(IList<SurveyResponse> survey)
+        public HttpResponseMessage Create(IList<Response> survey)
         {
             try
             {

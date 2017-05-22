@@ -87,7 +87,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// </summary>
         /// <param name="answers"></param>
         /// <returns></returns>
-        public static string FindBookingNumber(List<Answer> answers, ITracingService trace)
+        public static string GetBookingNumber(List<Answer> answers, ITracingService trace)
         {
             if (trace == null) throw new InvalidPluginExecutionException("Trace service is null;");
             trace.Trace("Processing FindBookingNumber - start");
@@ -110,7 +110,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// <param name="answers"></param>
         /// <param name="trace"></param>
         /// <returns></returns>
-        public static string FindSourceMarket(List<Answer> answers, ITracingService trace)
+        public static string GetSourceMarket(List<Answer> answers, ITracingService trace)
         {
             if (trace == null) throw new InvalidPluginExecutionException("Trace service is null;");
             trace.Trace("Processing FindSourceMarket - start");
@@ -133,7 +133,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// <param name="answers"></param>
         /// <param name="trace"></param>
         /// <returns></returns>
-        public static string FindTourOperator(List<Answer> answers, ITracingService trace)
+        public static string GetTourOperator(List<Answer> answers, ITracingService trace)
         {
             if (trace == null) throw new InvalidPluginExecutionException("Trace service is null;");
             trace.Trace("Processing FindTourOperator - start");
@@ -169,7 +169,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// <param name="answers"></param>
         /// <param name="trace"></param>
         /// <returns></returns>
-        public static string FindBrand(List<Answer> answers, ITracingService trace)
+        public static string GetBrand(List<Answer> answers, ITracingService trace)
         {
             if (trace == null) throw new InvalidPluginExecutionException("Trace service is null;");
             trace.Trace("Processing FindBrand - start");
@@ -184,28 +184,6 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
             }
             trace.Trace("Processing FindBrand - end");
             return brandName;
-        }
-
-        /// <summary>
-        /// To find customer from survey payload
-        /// </summary>
-        /// <param name="answers"></param>
-        /// <returns></returns>
-        public static string FindCustomer(List<Answer> answers, ITracingService trace)
-        {
-            if (trace == null) throw new InvalidPluginExecutionException("Trace service is null;");
-            trace.Trace("Processing FindCustomer - start");
-            var customer = string.Empty;
-            if (answers != null && answers.Count > 0)
-            {
-                var surName = answers.Find(a => a.FieldId == PayloadSurveyFieldMapping.Surname);               
-                if (surName != null && !string.IsNullOrWhiteSpace(surName.LiteralValue))
-                {
-                    customer = surName.LiteralValue;
-                }                
-            }
-            trace.Trace("Processing FindCustomer - end");
-            return customer;
-        }
+        }        
     }
 }
