@@ -174,10 +174,7 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
         },
         OnCaseCategoryLevel3Change: function () {
             Tc.Crm.Scripts.Library.CaseLine.ClearCompensationCalculatorValues();
-            Tc.Crm.Scripts.Library.CaseLine.ShowHideCompensationCalculator();
-        },
-        ShowCompensationCalculator: function () {
-            return Tc.Crm.Scripts.Library.CaseLine.ShouldShowCompensationCalculator();
+            Tc.Crm.Scripts.Library.CaseLine.ShowHideCompensationCalculator(true);
         }
     };
 })();

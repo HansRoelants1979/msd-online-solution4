@@ -526,20 +526,7 @@ Tc.Crm.Scripts.Library.CaseLine = (function () {
             validateMandatoryField(Attributes.TotalBookingValue, "Please enter total booking value") &&
             validateMandatoryField(Attributes.TotalDays, "Please enter total days") &&
             validateMandatoryField(Attributes.AffectedDays, "Please enter affected days") &&
-            validateMandatoryField(Attributes.ProductType, "Please enter total product type") &&
-            validateMandatoryField(Attributes.Severity, "Please enter severity", function (value) {
-                // set secerity for further calculation
-                switch (value) {
-                    case Level.High:
-                        severity = Level.H;
-                        break;
-                    case Level.Medium:
-                        severity = Level.M;
-                        break;
-                    case Level.Low:
-                        severity = Level.L;
-                }
-            }) &&
+            validateMandatoryField(Attributes.ProductType, "Please enter product type") &&
             validateMandatoryField(Attributes.Impact, "Please enter impact", function (value) {
                 // set impact for further calculation
                 switch (value) {
@@ -551,6 +538,19 @@ Tc.Crm.Scripts.Library.CaseLine = (function () {
                         break;
                     case Level.Low:
                         impact = Level.L;
+                }
+            }) &&
+            validateMandatoryField(Attributes.Severity, "Please enter severity", function (value) {
+                // set secerity for further calculation
+                switch (value) {
+                    case Level.High:
+                        severity = Level.H;
+                        break;
+                    case Level.Medium:
+                        severity = Level.M;
+                        break;
+                    case Level.Low:
+                        severity = Level.L;
                 }
             }) &&
             validateMandatoryField(Attributes.Comments, "Please enter comments");
@@ -622,7 +622,7 @@ Tc.Crm.Scripts.Library.CaseLine = (function () {
                     if (booking.sourceMarketIso2Code != null) {
                         isUkMarket = booking.sourceMarketIso2Code.toUpperCase() === SOURCE_MARKET_UK;
                     }
-                    showHideCompensationCalculator();
+                    showHideCompensationCalculator(false);
                     // set defaults on create                    
                     if (isCreate) {
                         setDefaultsOnCreate(incident.productType, booking.travelAmount, booking.duration);
@@ -636,7 +636,7 @@ Tc.Crm.Scripts.Library.CaseLine = (function () {
             if (incident.sourceMarketIso2Code != null) {
                 isUkMarket = incident.sourceMarketIso2Code.toUpperCase() === SOURCE_MARKET_UK;
             }
-            showHideCompensationCalculator();
+            showHideCompensationCalculator(false);
             // set defaults on create
             if (isCreate) {
                 setDefaultsOnCreate(incident.productType, incident.travelAmount, incident.durationOfStay);
@@ -663,7 +663,7 @@ Tc.Crm.Scripts.Library.CaseLine = (function () {
         return true;
     }
     // Configure visibility of compensation calculator tab\button and sections
-    var showHideCompensationCalculator = function () {
+    var showHideCompensationCalculator = function (triggerCalculation) {
         var tab = Xrm.Page.ui.tabs.get(TabsAndSections.CompensationCalculator);
         if (tab == null) return;
         var showCalculator = shouldShowCompensationCalculator();
@@ -681,6 +681,9 @@ Tc.Crm.Scripts.Library.CaseLine = (function () {
         // show wrong room type
         var isWrongRoomType = isWrongRoomTypeCaseLine();
         tab.sections.get(TabsAndSections.RoomType).setVisible(isWrongRoomType);
+        if (triggerCalculation) {
+            calculateCompensation();
+        }
     }
 
     // public
@@ -688,7 +691,6 @@ Tc.Crm.Scripts.Library.CaseLine = (function () {
         LoadSourceMarketAndSetDefaults: loadSourceMarketAndSetDefaults,
         CalculateCompensation: calculateCompensation,
         ShowHideCompensationCalculator: showHideCompensationCalculator,
-        ShouldShowCompensationCalculator: shouldShowCompensationCalculator,
         ClearCompensationCalculatorValues: function () {
             var attr = Xrm.Page.getAttribute(Attributes.ProposedCompensation);
             if (attr != null) attr.setValue(null);
