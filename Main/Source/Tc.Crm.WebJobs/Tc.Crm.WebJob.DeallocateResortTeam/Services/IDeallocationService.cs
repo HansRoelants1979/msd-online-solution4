@@ -38,5 +38,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
 
         void CreateUpdateRequests(Collection<Entity> requets, IEnumerable<EntityModel> entities);
         DeallocationExecutionRequest ConvertCrmResponse(EntityCollection collection, Collection<Guid> customerRelationUsers, Collection<Guid> customerRelationTeams);
+
+        string GetNameConditions(string[] names);
     }
 }

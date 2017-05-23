@@ -139,16 +139,19 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
         }
 
       
-        public Collection<Guid> GetUsersBySecurityRole(Dictionary<Guid,OwnerType> caseOwnersandDefaultTeams, string securityRole)
+        public Collection<Guid> GetUsersBySecurityRole(Dictionary<Guid,OwnerType> caseOwnersandDefaultTeams, string securityRoles)
         {
             var customerRelationUsers = new Collection<Guid>();
             if (caseOwnersandDefaultTeams == null || caseOwnersandDefaultTeams.Count == 0) return customerRelationUsers;
             var userCondition = GetLookupConditions(caseOwnersandDefaultTeams.Where(u => u.Value == OwnerType.User).ToDictionary(u => u.Key, u => u.Value).Keys);
-            if(string.IsNullOrWhiteSpace(userCondition)) return customerRelationUsers;
+            var nameCondition = GetNameConditions(securityRoles.Split(','));
+            if(string.IsNullOrWhiteSpace(userCondition) || string.IsNullOrWhiteSpace(nameCondition)) return customerRelationUsers;
             var query = $@"<fetch mapping='logical' output-format='xml-platform' version='1.0'>
                             <entity name='role'>
                             <filter type='and'>
-                                <condition attribute='name' value='{securityRole}' operator='eq'/>
+                             <filter type='or'>
+                                {nameCondition}
+                             </filter>
                             </filter>
                             <link-entity name='systemuserroles' intersect='true' visible='false' to='roleid' from='roleid'>
                                 <link-entity name='systemuser' to='systemuserid' from='systemuserid' alias='systemuser'>
@@ -231,6 +234,16 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                 values.Append("<value>" + guid.ToString() + "</value>");
             }
             return values.ToString();
+        }
+
+        public string GetNameConditions(string[] names)
+        {
+            StringBuilder conditions = new StringBuilder();
+            foreach (var name in names)
+            {
+                conditions.Append("<condition attribute='name' value='"+name+"' operator= 'eq' />");
+            }
+            return conditions.ToString();
         }
 
         /// <summary>
