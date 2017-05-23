@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Microsoft.Xrm.Sdk;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

@@ -1,14 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tc.Crm.WebJob.AllocateResortTeam.Services;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Tc.Crm.Common.Services;
 using Tc.Crm.WebJob.AllocateResortTeamTests;
 using Microsoft.Xrm.Sdk;
-using FakeXrmEasy;
 
 namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
 {

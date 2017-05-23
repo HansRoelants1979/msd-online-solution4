@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Tc.Crm.Service.BusinessServices.Custom
+﻿namespace Tc.Crm.Service.BusinessServices.Custom
 {
     public class CustomUserService : IUserService
     {

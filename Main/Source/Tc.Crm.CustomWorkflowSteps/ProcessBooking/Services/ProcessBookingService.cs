@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.Xrm.Sdk;
 using Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models;
 

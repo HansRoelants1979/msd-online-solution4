@@ -1,11 +1,7 @@
 ﻿using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Tc.Crm.CustomWorkflowSteps.QueueIdentifier.Model;
 
 namespace Tc.Crm.CustomWorkflowSteps.QueueIdentifier.Service

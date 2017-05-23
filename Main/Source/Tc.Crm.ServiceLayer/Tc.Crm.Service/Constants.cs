@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Tc.Crm.Service.Constants
+﻿namespace Tc.Crm.Service.Constants
 {
 
     public static class General

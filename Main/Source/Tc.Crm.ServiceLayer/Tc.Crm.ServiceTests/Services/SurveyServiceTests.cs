@@ -1,9 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tc.Crm.Service.Services;
 using System;
-using Tc.Crm.Service.Models;
 using FakeXrmEasy;
-using Tc.Crm.ServiceTests;
 
 
 namespace Tc.Crm.ServiceTests.Services

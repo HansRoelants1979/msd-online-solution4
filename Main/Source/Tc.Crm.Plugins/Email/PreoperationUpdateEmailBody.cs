@@ -1,6 +1,4 @@
-﻿using Microsoft.Crm.Sdk.Messages;
-using Microsoft.Xrm.Sdk;
-using Microsoft.Xrm.Sdk.Query;
+﻿using Microsoft.Xrm.Sdk;
 using System;
 using System.ServiceModel;
 using Tc.Crm.Plugins.Email.BusinessLogic;

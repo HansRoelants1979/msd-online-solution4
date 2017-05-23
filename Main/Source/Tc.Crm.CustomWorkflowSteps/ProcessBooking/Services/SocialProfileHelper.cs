@@ -1,8 +1,6 @@
 ﻿using Microsoft.Xrm.Sdk;
 using System;
 using Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models;
-using System.Collections.Generic;
-using Tc.Crm.CustomWorkflowSteps;
 
 namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 {

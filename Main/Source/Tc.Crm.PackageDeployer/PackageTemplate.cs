@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Uii.Common.Entities;
-using Microsoft.Xrm.Tooling.PackageDeployment;
 using Microsoft.Xrm.Tooling.PackageDeployment.CrmPackageExtentionBase;
 
 namespace Tc.Crm.PackageDeployer

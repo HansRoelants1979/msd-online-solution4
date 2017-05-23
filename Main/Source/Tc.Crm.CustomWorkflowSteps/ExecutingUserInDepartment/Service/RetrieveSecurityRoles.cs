@@ -1,14 +1,10 @@
 ﻿using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Tc.Crm.CustomWorkflowSteps.ExecutingUserInDepartment.Service
 {
-     public static class RetrieveSecurityRoles
+    public static class RetrieveSecurityRoles
     {
         public static bool GetSecurityRoles(string securityRoleName, Guid userId, IOrganizationService service, ITracingService trace)
         {

@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Activities;
-using System.Linq;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Workflow;
 using System.ServiceModel;
-using Microsoft.Xrm.Sdk.Query;
-using Microsoft.Xrm.Sdk.Messages;
-using System.Collections.Generic;
 using Tc.Crm.CustomWorkflowSteps.RetrieveParentRecord.Services;
 
 

@@ -4,14 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Xml;
 using Tc.Crm.Common.Models;
 using Tc.Crm.Common.Services;
-using Microsoft.Crm.Sdk.Messages;
-using Microsoft.Xrm.Sdk.Messages;
 using Tc.Crm.Common.Constants;
 using Attributes = Tc.Crm.Common.Constants.Attributes;
-using System.Reflection;
 using Tc.Crm.Common.Constants.EntityRecords;
 
 namespace Tc.Crm.WebJob.DeallocateResortTeamTests

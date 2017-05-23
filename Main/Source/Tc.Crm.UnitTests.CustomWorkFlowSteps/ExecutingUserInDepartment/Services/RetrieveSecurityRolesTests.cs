@@ -1,15 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tc.Crm.UnitTests.CustomWorkFlowSteps;
 using Microsoft.Xrm.Sdk;
 using Tc.Crm.CustomWorkflowSteps.ExecutingUserInDepartment.Service;
 using Tc.Crm.CustomWorkflowSteps.ExecutingUserInDepartment;
 using FakeXrmEasy;
 using System.Reflection;
+using System.Collections.Generic;
 
 namespace Tc.Crm.UnitTests.CustomWorkFlowSteps.ExecutingUserInDepartment.Services
 {

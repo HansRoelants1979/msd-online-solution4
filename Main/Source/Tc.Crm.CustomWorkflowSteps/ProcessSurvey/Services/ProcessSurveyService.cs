@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Microsoft.Xrm.Sdk;
 using Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Models;
-using System.Text;
 using System.ServiceModel;
 
 namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services

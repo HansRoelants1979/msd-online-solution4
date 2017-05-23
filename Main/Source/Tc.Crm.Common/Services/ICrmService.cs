@@ -1,11 +1,6 @@
 ﻿using Microsoft.Xrm.Sdk;
-using Microsoft.Xrm.Sdk.Query;
-using Microsoft.Xrm.Sdk.Messages;
-using System;
-using System.Xml;
 using System.Collections.ObjectModel;
 using Tc.Crm.Common.Models;
-using Microsoft.Crm.Sdk.Messages;
 using System.Collections.Generic;
 
 namespace Tc.Crm.Common.Services

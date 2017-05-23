@@ -1,12 +1,9 @@
 ﻿using Microsoft.Xrm.Sdk;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 using Tc.Crm.Common;
 using Tc.Crm.Common.Models;
-using System.Collections.ObjectModel;
 using Tc.Crm.WebJob.DeallocateResortTeam.Models;
 
 namespace Tc.Crm.WebJob.DeallocateResortTeam.Services

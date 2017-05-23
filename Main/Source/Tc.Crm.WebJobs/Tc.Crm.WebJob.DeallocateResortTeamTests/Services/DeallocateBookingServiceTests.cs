@@ -1,17 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tc.Crm.WebJob.DeallocateResortTeam.Services;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Tc.Crm.WebJob.DeallocateResortTeamTests;
 using Tc.Crm.Common.Services;
 using Microsoft.Xrm.Sdk;
 using Tc.Crm.Common.Constants;
 using Attributes = Tc.Crm.Common.Constants.Attributes;
 using Tc.Crm.Common;
-using Microsoft.Xrm.Sdk.Messages;
 
 namespace Tc.Crm.WebJob.DeallocateResortTeam.Services.Tests
 {

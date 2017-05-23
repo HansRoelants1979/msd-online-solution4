@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Text;
 using Microsoft.Xrm.Sdk;
 using Tc.Crm.WebJob.DeallocateResortTeam.Models;
@@ -11,7 +10,7 @@ using Tc.Crm.Common.Models;
 using Attributes = Tc.Crm.Common.Constants.Attributes;
 using EntityRecords = Tc.Crm.Common.Constants.EntityRecords;
 using Tc.Crm.Common.Constants;
-
+using System.Linq;
 
 namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
 {

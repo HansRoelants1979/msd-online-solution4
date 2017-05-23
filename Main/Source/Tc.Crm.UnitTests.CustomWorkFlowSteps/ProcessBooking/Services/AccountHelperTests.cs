@@ -1,13 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Tc.Crm.UnitTests.CustomWorkFlowSteps;
 using Microsoft.Xrm.Sdk;
 using Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models;
+using System;
 
 namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
 {

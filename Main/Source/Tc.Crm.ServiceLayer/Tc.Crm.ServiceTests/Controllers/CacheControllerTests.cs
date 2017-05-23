@@ -1,10 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tc.Crm.Service.Controllers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FakeXrmEasy;
 using Tc.Crm.ServiceTests;
 using Tc.Crm.Service.Services;
@@ -13,6 +7,8 @@ using JWT;
 using JWT.Algorithms;
 using JWT.Serializers;
 using System.Net;
+using System;
+using System.Collections.Generic;
 
 namespace Tc.Crm.Service.Controllers.Tests
 {
