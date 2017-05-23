@@ -9,6 +9,7 @@ using Microsoft.Xrm.Sdk.Query;
 using System.Xml;
 using System.IO;
 using System.Text;
+using Microsoft.Crm.Sdk.Messages;
 
 namespace Tc.Crm.Service.Services
 {
@@ -352,6 +353,22 @@ namespace Tc.Crm.Service.Services
             writer.Close();
 
             return sb.ToString();
+        }
+
+        public bool PingCRM()
+        {
+            try
+            {
+                WhoAmIRequest who = new WhoAmIRequest();
+                var response = (WhoAmIResponse)orgService.Execute(who);
+                var orgId = response.OrganizationId;
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

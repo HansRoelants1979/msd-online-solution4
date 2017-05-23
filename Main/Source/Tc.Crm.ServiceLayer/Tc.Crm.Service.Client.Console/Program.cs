@@ -1,33 +1,28 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 using System.Net;
-using Newtonsoft.Json;
-using Tc.Crm.Service.Models;
-using JWT;
 using System.Security.Cryptography;
 using System.IO;
-using System.Security.Cryptography.X509Certificates;
+using Tc.Crm.Service.Models;
+using JWT;
+using Newtonsoft.Json;
 
 namespace Tc.Crm.Service.Client.Console
 {
     class Program
     {
-
-
-
         static string Url = string.Empty;
         static void Main(string[] args)
         {
             try
             {
-                System.Console.WriteLine("Enter 1 to process Booking OR 2 to process survey OR 3 to cache.");
+                System.Console.WriteLine("Enter 1 to process Booking OR 2 to process survey OR 3 to cache or 4 to ping CRM.");
 
                 var option = System.Console.ReadLine();
                 if (option == "1")
@@ -41,6 +36,10 @@ namespace Tc.Crm.Service.Client.Console
                 else if(option == "3")
                 {
                     Cache();
+                }
+                else if (option == "4")
+                {
+                    PingCRM();
                 }
             }
             catch (Exception ex)
@@ -218,6 +217,30 @@ namespace Tc.Crm.Service.Client.Console
             }
 
 
+        }
+
+        private static void PingCRM()
+        {
+            System.Console.WriteLine("Pinging CRM...");
+
+            while (true)
+            {
+                var api = "api/healthcheck";
+
+                //Call
+                HttpClient client = new HttpClient();
+
+                client.BaseAddress = new Uri(GetUrl());
+
+                Task<HttpResponseMessage> t = client.PostAsync(api, null);
+
+                var response = t.Result;
+                System.Console.WriteLine("Response Code: {0} ({1})", response.StatusCode.GetHashCode(), response.StatusCode.ToString());
+
+                System.Console.Write("Do one more test(y/n):");
+                var ans = System.Console.ReadLine();
+                if (ans == "n") break;
+            }
         }
 
         private static string CreateJWTToken()

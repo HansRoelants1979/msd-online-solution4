@@ -1,16 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xrm.Sdk;
-using Microsoft.Xrm.Sdk.Messages;
 using Tc.Crm.Service.Services;
 using FakeXrmEasy;
-using Microsoft.Xrm.Sdk.Query;
-using Newtonsoft.Json;
 using Tc.Crm.Service.Models;
 using System.Collections.ObjectModel;
+using System.Net;
 
 namespace Tc.Crm.ServiceTests
 {
@@ -118,6 +112,14 @@ namespace Tc.Crm.ServiceTests
             Collection<Hotel> countries = new Collection<Hotel>();
             countries.Add(new Hotel { Code = "hot001", Id = "273ABA3A-6B88-40B7-AF4E-E8215BB009FB", DestinationId = "7A93B49A-48B4-44C3-A0FA-A04F2872D811" });
             return countries;
+        }
+
+        public bool PingCRM()
+        {
+            if (Switch == DataSwitch.Response_Failed)
+                return false;
+            else
+                return true;
         }
     }
 }
