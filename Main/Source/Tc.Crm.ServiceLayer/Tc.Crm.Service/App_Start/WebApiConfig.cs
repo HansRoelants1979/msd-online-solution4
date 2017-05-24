@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Converters;
 using System.Web.Http;
 using Tc.Crm.Service.CacheBuckets;
+using Tc.Crm.Service.MessageHandlers;
 using Tc.Crm.Service.Resolver;
 using Tc.Crm.Service.Services;
 
@@ -14,6 +15,7 @@ namespace Tc.Crm.Service
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0")]
         public static void Register(HttpConfiguration config)
         {
+            config.MessageHandlers.Add(new BookingMessageHandler());
             // Web API configuration and services
             var container = new UnityContainer();
             container.RegisterType<IBookingService, BookingService>();
