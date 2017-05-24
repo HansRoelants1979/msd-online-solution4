@@ -113,7 +113,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                     participantBuilder.Append(travelParticipants[i].FirstName + General.Separator);
                 if (!string.IsNullOrWhiteSpace(travelParticipants[i].LastName))
                     participantBuilder.Append(travelParticipants[i].LastName + General.Separator);
-                participantBuilder.Append(travelParticipants[i].Age.ToString() + General.Separator);
+                if (!string.IsNullOrWhiteSpace(travelParticipants[i].Age))
+                    participantBuilder.Append(travelParticipants[i].Age.ToString() + General.Separator);
                 if (!string.IsNullOrWhiteSpace(travelParticipants[i].Birthdate))
                     participantBuilder.Append(travelParticipants[i].Birthdate + General.Separator);
                 participantBuilder.Append(travelParticipants[i].Gender.ToString() + General.Separator);
@@ -143,7 +144,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                     trace.Trace("Possible mismatch in travel participant id");
                     continue;
                 }
-                
+
 
                 trace.Trace("Processing " + Participants.Length.ToString() + " Travel Participants information - start");
                 for (int j = 0; j < Participants.Length; j++)
