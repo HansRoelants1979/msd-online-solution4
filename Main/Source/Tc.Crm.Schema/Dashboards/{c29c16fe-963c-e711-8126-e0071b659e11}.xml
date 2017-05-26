@@ -1,0 +1,233 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard>
+  <LocalizedNames>
+    <LocalizedName description="CS Triage" languagecode="1033" />
+  </LocalizedNames>
+  <FormId>{c29c16fe-963c-e711-8126-e0071b659e11}</FormId>
+  <IsCustomizable>1</IsCustomizable>
+  <IsDefault>0</IsDefault>
+  <FormXml>
+    <forms type="dashboard">
+      <form>
+        <tabs>
+          <tab showlabel="false" verticallayout="true" id="{cf4f1424-a178-4ca0-a129-621eaf13dec5}">
+            <labels>
+              <label description="Tab" languagecode="1033" />
+            </labels>
+            <columns>
+              <column width="100%">
+                <sections>
+                  <section showlabel="false" showbar="false" columns="1111" id="{ca239df0-c7f7-4c3d-9f58-a2ba018778b1}">
+                    <labels>
+                      <label description="Section" languagecode="1033" />
+                    </labels>
+                    <rows>
+                      <row>
+                        <cell colspan="2" rowspan="12" showlabel="false" id="{664825ef-6346-4f00-9aff-248d1b4c65af}" auto="false">
+                          <labels>
+                            <label description="Cases" languagecode="1033" />
+                            <label description="Incidents" languagecode="1036" />
+                            <label description="Anfragen" languagecode="1031" />
+                          </labels>
+                          <control id="Component708758c" uniqueid="{2cad6d5a-e8d6-bbce-1e24-131a777145d9}" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                            <parameters>
+                              <TargetEntityType>incident</TargetEntityType>
+                              <ChartGridMode>Grid</ChartGridMode>
+                              <EnableQuickFind>true</EnableQuickFind>
+                              <EnableViewPicker>true</EnableViewPicker>
+                              <EnableJumpBar>true</EnableJumpBar>
+                              <RecordsPerPage>8</RecordsPerPage>
+                              <ViewId>{00000000-0000-0000-00AA-000010001028}</ViewId>
+                              <IsUserView>false</IsUserView>
+                              <ViewIds>{3C551F70-CB34-E711-8122-E0071B659E11},{2D1257D3-E93E-E711-8126-E0071B659E11},{00000000-0000-0000-00AA-000010001028},{BC6512FD-913F-E711-8106-E0071B66A0A1}</ViewIds>
+                              <AutoExpand>Fixed</AutoExpand>
+                              <VisualizationId>{5B2EA729-2E15-E711-8110-1458D041F8E8}</VisualizationId>
+                              <IsUserChart>false</IsUserChart>
+                              <EnableChartPicker>false</EnableChartPicker>
+                              <RelationshipName />
+                            </parameters>
+                          </control>
+                        </cell>
+                        <cell colspan="2" rowspan="12" showlabel="false" id="{743c3479-32f8-46e1-b1a2-fb877fa3c747}" auto="false">
+                          <labels>
+                            <label description="Queue Items" languagecode="1033" />
+                            <label description="Éléments de file d'attente" languagecode="1036" />
+                            <label description="Warteschlangenelemente" languagecode="1031" />
+                          </labels>
+                          <control id="Componentd712586" uniqueid="{8a36ce77-b931-700e-42b9-80b93672d355}" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                            <parameters>
+                              <TargetEntityType>queueitem</TargetEntityType>
+                              <ChartGridMode>Grid</ChartGridMode>
+                              <EnableQuickFind>true</EnableQuickFind>
+                              <EnableViewPicker>true</EnableViewPicker>
+                              <EnableJumpBar>true</EnableJumpBar>
+                              <RecordsPerPage>8</RecordsPerPage>
+                              <ViewId>{81484ACC-C30C-4869-B40C-2D1154FC1E5F}</ViewId>
+                              <IsUserView>false</IsUserView>
+                              <ViewIds />
+                              <AutoExpand>Fixed</AutoExpand>
+                              <VisualizationId />
+                              <IsUserChart>false</IsUserChart>
+                              <EnableChartPicker>false</EnableChartPicker>
+                              <RelationshipName />
+                            </parameters>
+                          </control>
+                        </cell>
+                      </row>
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row>
+                        <cell colspan="1" rowspan="12" showlabel="false" id="{df4d716a-d6e6-4828-919a-35bbac3d722c}" auto="false">
+                          <labels>
+                            <label description="Cases" languagecode="1033" />
+                            <label description="Incidents" languagecode="1036" />
+                            <label description="Anfragen" languagecode="1031" />
+                          </labels>
+                          <control id="Component7e636a4" uniqueid="{d16496dd-d57e-5099-4e1a-b98db6c646e4}" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                            <parameters>
+                              <TargetEntityType>incident</TargetEntityType>
+                              <ChartGridMode>Chart</ChartGridMode>
+                              <EnableQuickFind>false</EnableQuickFind>
+                              <EnableViewPicker>false</EnableViewPicker>
+                              <EnableJumpBar>false</EnableJumpBar>
+                              <RecordsPerPage>10</RecordsPerPage>
+                              <ViewId>{3A39665E-7619-E711-810D-3863BB340DD8}</ViewId>
+                              <IsUserView>false</IsUserView>
+                              <ViewIds />
+                              <AutoExpand>Fixed</AutoExpand>
+                              <VisualizationId>{5E8569C1-D13B-E711-810A-E0071B66E0A1}</VisualizationId>
+                              <IsUserChart>false</IsUserChart>
+                              <EnableChartPicker>false</EnableChartPicker>
+                              <RelationshipName />
+                            </parameters>
+                          </control>
+                        </cell>
+                        <cell colspan="1" rowspan="12" showlabel="false" id="{9530648a-d69f-4957-a040-ac59fe4d0ac2}" auto="false">
+                          <labels>
+                            <label description="Cases" languagecode="1033" />
+                            <label description="Incidents" languagecode="1036" />
+                            <label description="Anfragen" languagecode="1031" />
+                          </labels>
+                          <control id="Componentf1b2958" uniqueid="{9395e621-4646-bb5d-3b6c-db5610ed25a6}" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                            <parameters>
+                              <TargetEntityType>incident</TargetEntityType>
+                              <ChartGridMode>Chart</ChartGridMode>
+                              <EnableQuickFind>false</EnableQuickFind>
+                              <EnableViewPicker>false</EnableViewPicker>
+                              <EnableJumpBar>false</EnableJumpBar>
+                              <RecordsPerPage>10</RecordsPerPage>
+                              <ViewId>{8ADF962C-7719-E711-810D-3863BB340DD8}</ViewId>
+                              <IsUserView>false</IsUserView>
+                              <ViewIds />
+                              <AutoExpand>Fixed</AutoExpand>
+                              <VisualizationId>{6DA947D1-7919-E711-810D-3863BB340DD8}</VisualizationId>
+                              <IsUserChart>false</IsUserChart>
+                              <EnableChartPicker>false</EnableChartPicker>
+                              <RelationshipName />
+                            </parameters>
+                          </control>
+                        </cell>
+                        <cell colspan="2" rowspan="12" showlabel="false" id="{cae119eb-d54d-4706-923a-b783bacd0697}" auto="false">
+                          <labels>
+                            <label description="Email Messages" languagecode="1033" />
+                            <label description="Messages électroniques" languagecode="1036" />
+                            <label description="E-Mail-Nachrichten" languagecode="1031" />
+                          </labels>
+                          <control id="Componentc50ae99" uniqueid="{050e1975-5d63-dd33-821a-eb466e37d889}" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                            <parameters>
+                              <TargetEntityType>email</TargetEntityType>
+                              <ChartGridMode>Grid</ChartGridMode>
+                              <EnableQuickFind>true</EnableQuickFind>
+                              <EnableViewPicker>true</EnableViewPicker>
+                              <EnableJumpBar>true</EnableJumpBar>
+                              <RecordsPerPage>8</RecordsPerPage>
+                              <ViewId>{7AFF64B0-5B8C-4AD7-89F8-976777EEE178}</ViewId>
+                              <IsUserView>false</IsUserView>
+                              <ViewIds />
+                              <AutoExpand>Fixed</AutoExpand>
+                              <VisualizationId />
+                              <IsUserChart>false</IsUserChart>
+                              <EnableChartPicker>false</EnableChartPicker>
+                              <RelationshipName />
+                            </parameters>
+                          </control>
+                        </cell>
+                      </row>
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row>
+                        <cell id="{2e48c1d3-5205-56bd-219e-63c9ea8cc6c3}" showlabel="false" colspan="4" auto="false" rowspan="12">
+                          <labels>
+                            <label description="Cases" languagecode="1033" />
+                            <label description="Incidents" languagecode="1036" />
+                            <label description="Anfragen" languagecode="1031" />
+                          </labels>
+                          <control id="Component3457140" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                            <parameters>
+                              <ViewId>{7B1990AC-F93E-E711-8126-E0071B659E11}</ViewId>
+                              <IsUserView>false</IsUserView>
+                              <RelationshipName />
+                              <TargetEntityType>incident</TargetEntityType>
+                              <AutoExpand>Fixed</AutoExpand>
+                              <EnableQuickFind>true</EnableQuickFind>
+                              <EnableViewPicker>true</EnableViewPicker>
+                              <ViewIds />
+                              <EnableJumpBar>true</EnableJumpBar>
+                              <ChartGridMode>Grid</ChartGridMode>
+                              <VisualizationId />
+                              <IsUserChart>false</IsUserChart>
+                              <EnableChartPicker>false</EnableChartPicker>
+                              <RecordsPerPage>8</RecordsPerPage>
+                            </parameters>
+                          </control>
+                        </cell>
+                      </row>
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                    </rows>
+                  </section>
+                </sections>
+              </column>
+            </columns>
+          </tab>
+        </tabs>
+        <controlDescriptions />
+        <DisplayConditions FallbackForm="true">
+          <Role Id="{627090ff-40a3-4053-8790-584edc5be201}" />
+          <Role Id="{A65769FA-F9F8-E611-8107-3863BB34FB48}" />
+          <Role Id="{EF5563EE-F9F8-E611-8107-3863BB34FB48}" />
+          <Role Id="{5C0F71F4-F9F8-E611-8107-3863BB34FB48}" />
+        </DisplayConditions>
+      </form>
+    </forms>
+  </FormXml>
+  <IntroducedVersion>1.0.0.102</IntroducedVersion>
+  <IsTabletEnabled>0</IsTabletEnabled>
+</Dashboard>

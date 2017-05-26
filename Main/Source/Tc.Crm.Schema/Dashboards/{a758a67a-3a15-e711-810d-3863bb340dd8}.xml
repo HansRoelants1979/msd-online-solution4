@@ -99,10 +99,10 @@
                               <EnableQuickFind>false</EnableQuickFind>
                               <EnableViewPicker>false</EnableViewPicker>
                               <EnableJumpBar>false</EnableJumpBar>
-                              <RecordsPerPage>10</RecordsPerPage>
+                              <RecordsPerPage>12</RecordsPerPage>
                               <ViewId>{ECE3919B-F512-E711-8103-3863BB354FF0}</ViewId>
                               <IsUserView>false</IsUserView>
-                              <ViewIds />
+                              <ViewIds>{00000000-0000-0000-00AA-000010001028}</ViewIds>
                               <AutoExpand>Fixed</AutoExpand>
                               <VisualizationId>{64EC75B6-D413-E711-810C-3863BB34FB48}</VisualizationId>
                               <IsUserChart>false</IsUserChart>
@@ -111,10 +111,30 @@
                             </parameters>
                           </control>
                         </cell>
-                        <cell colspan="2" rowspan="12" showlabel="false" ispreviewcell="true" id="{2068c91d-fb44-4a55-b36d-42ec32ab17b4}">
+                        <cell colspan="2" rowspan="12" showlabel="false" id="{2068c91d-fb44-4a55-b36d-42ec32ab17b4}" auto="false">
                           <labels>
-                            <label description="" languagecode="1033" />
+                            <label description="Cases" languagecode="1033" />
+                            <label description="Incidents" languagecode="1036" />
+                            <label description="Anfragen" languagecode="1031" />
                           </labels>
+                          <control id="Componentaecfd2b" uniqueid="{37ee21db-cc47-b58c-72e4-4993eb43aa71}" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                            <parameters>
+                              <TargetEntityType>incident</TargetEntityType>
+                              <ChartGridMode>Chart</ChartGridMode>
+                              <EnableQuickFind>false</EnableQuickFind>
+                              <EnableViewPicker>false</EnableViewPicker>
+                              <EnableJumpBar>false</EnableJumpBar>
+                              <RecordsPerPage>10</RecordsPerPage>
+                              <ViewId>{0D2D9EE3-B10F-E711-810A-3863BB340DD8}</ViewId>
+                              <IsUserView>false</IsUserView>
+                              <ViewIds />
+                              <AutoExpand>Fixed</AutoExpand>
+                              <VisualizationId>{458DF52A-AC99-E511-80DA-00155DC1B253}</VisualizationId>
+                              <IsUserChart>false</IsUserChart>
+                              <EnableChartPicker>false</EnableChartPicker>
+                              <RelationshipName />
+                            </parameters>
+                          </control>
                         </cell>
                       </row>
                       <row />
@@ -138,12 +158,14 @@
         <controlDescriptions />
         <DisplayConditions FallbackForm="true">
           <Role Id="{627090ff-40a3-4053-8790-584edc5be201}" />
-          <Role Id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
           <Role Id="{F21E987F-F8F8-E611-8107-3863BB34FB48}" />
+          <Role Id="{FCAF7D02-B305-E711-8109-3863BB34FB48}" />
+          <Role Id="{F9C784C3-F9F8-E611-8107-3863BB34FB48}" />
+          <Role Id="{834BA58B-F8F8-E611-8107-3863BB34FB48}" />
         </DisplayConditions>
       </form>
     </forms>
   </FormXml>
   <IntroducedVersion>1.0.0.51</IntroducedVersion>
-  <IsTabletEnabled>1</IsTabletEnabled>
+  <IsTabletEnabled>0</IsTabletEnabled>
 </Dashboard>

@@ -110,13 +110,13 @@
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{558d1a64-6949-0cac-4d30-cc4ee48e331b}" locklevel="0" showlabel="true" colspan="1">
+                    <cell id="{558d1a64-6949-0cac-4d30-cc4ee48e331b}" locklevel="0" showlabel="true" colspan="1" availableforphone="false">
                       <labels>
                         <label description="Currency" languagecode="1033" />
                         <label description="Devise" languagecode="1036" />
                         <label description="Währung" languagecode="1031" />
                       </labels>
-                      <control disabled="false" id="transactioncurrencyid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="transactioncurrencyid" uniqueid="{e1ab7ecb-8d30-0a3a-deec-b9cdcc60d149}">
+                      <control disabled="true" id="transactioncurrencyid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="transactioncurrencyid" uniqueid="{e1ab7ecb-8d30-0a3a-deec-b9cdcc60d149}">
                         <parameters>
                           <AutoResolve>true</AutoResolve>
                           <DisableMru>false</DisableMru>
@@ -145,11 +145,11 @@
                       <labels>
                         <label description="Compensation Amount Limit" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_compensationamountlimit" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_compensationamountlimit" uniqueid="{4ac01ac7-b5cb-3e66-427b-2e8be3b36bc8}" />
+                      <control disabled="true" id="tc_compensationamountlimit" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_compensationamountlimit" uniqueid="{4ac01ac7-b5cb-3e66-427b-2e8be3b36bc8}" />
                     </cell>
                   </row>
                   <row>
-                    <cell id="{11cc949a-bd1a-acc2-c7d1-1257a54c7688}" locklevel="0" showlabel="true" visible="false">
+                    <cell id="{11cc949a-bd1a-acc2-c7d1-1257a54c7688}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Send Compensation Offer" languagecode="1033" />
                       </labels>
@@ -314,7 +314,7 @@
                       </labels>
                       <control disabled="false" id="tc_chapscompensationtype" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_chapscompensationtype" uniqueid="{8d08d5a0-9dc4-e2e3-9d04-5695d042c35d}" />
                     </cell>
-                    <cell id="{d4808c6a-1003-89d5-6742-97810d2ed457}" showlabel="false">
+                    <cell id="{9671b8d0-b65c-9a3d-db62-4a09107ad740}" showlabel="false">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
@@ -344,11 +344,20 @@
                       </labels>
                       <control disabled="false" id="tc_nonfinancialcompensationsubtype" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_nonfinancialcompensationsubtype" uniqueid="{7915626a-179a-47a6-c661-a09d260b6506}" />
                     </cell>
-                    <cell id="{2b04d4e0-aa05-be91-23cb-015e4dee5245}" locklevel="0" showlabel="true">
+                    <cell id="{820e38a5-6d47-952b-410b-e99058269392}" showlabel="true" locklevel="0">
                       <labels>
-                        <label description="Other" languagecode="1033" />
+                        <label description="Local Currency" languagecode="1033" />
                       </labels>
-                      <control id="tc_nonfinancialcompensationsubtypeother" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_nonfinancialcompensationsubtypeother" uniqueid="{2969b813-e02d-6b2a-b4c7-8da1c3019740}" />
+                      <control id="tc_nonfinancialcurrency" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_nonfinancialcurrency" disabled="false" uniqueid="{ab950e1d-4d15-6b3a-7ce6-cb2cdac74dc5}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{CD5625B0-DDA8-4EE2-B13F-B9331E027C8A}</DefaultViewId>
+                          <AllowFilterOff>false</AllowFilterOff>
+                        </parameters>
+                      </control>
                     </cell>
                   </row>
                   <row>
@@ -358,7 +367,35 @@
                       </labels>
                       <control id="tc_costcoveredby" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_costcoveredby" uniqueid="{25337349-210c-ad93-6874-9b7a180a2653}" />
                     </cell>
-                    <cell id="{8e96d10a-6058-63d1-9a20-57497a83d4be}" showlabel="false" userspacer="true">
+                    <cell id="{99451d84-b252-88c2-40c3-6bb08927e7b2}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Exchange Rate" languagecode="1033" />
+                      </labels>
+                      <control id="tc_nonfinancialexchangerate" classid="{C3EFE0C3-0EC6-42be-8349-CBD9079DFD8E}" datafieldname="tc_nonfinancialexchangerate" disabled="false" uniqueid="{2d818b85-1b69-9e34-283d-2126323b0389}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{6289cc3c-d7b5-9ada-e762-c5d899cd0cca}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Amount" languagecode="1033" />
+                      </labels>
+                      <control id="tc_nonfinancialamount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_nonfinancialamount" disabled="false" uniqueid="{57a72b3e-c3b2-cd05-96b9-522d12e29810}" />
+                    </cell>
+                    <cell id="{de3d0224-5990-86ce-7e2d-ab04de91d94d}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Local Non-Financial Amount" languagecode="1033" />
+                      </labels>
+                      <control id="tc_localnonfinancialamount" classid="{C3EFE0C3-0EC6-42be-8349-CBD9079DFD8E}" datafieldname="tc_localnonfinancialamount" disabled="false" uniqueid="{79a51e79-da6a-67c3-7035-21802a45d160}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{2b04d4e0-aa05-be91-23cb-015e4dee5245}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Other" languagecode="1033" />
+                      </labels>
+                      <control id="tc_nonfinancialcompensationsubtypeother" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_nonfinancialcompensationsubtypeother" uniqueid="{2969b813-e02d-6b2a-b4c7-8da1c3019740}" disabled="false" />
+                    </cell>
+                    <cell id="{e3506090-3a44-c377-8476-653e2282ca1c}" showlabel="false" userspacer="true">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
@@ -374,7 +411,7 @@
                   <row>
                     <cell id="{0809871d-bb76-8c6d-aec8-530594a607dc}" locklevel="0" showlabel="true">
                       <labels>
-                        <label description="Cash Amount" languagecode="1033" />
+                        <label description="Amount" languagecode="1033" />
                       </labels>
                       <control disabled="false" id="tc_cashamount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_cashamount" uniqueid="{11202767-bcde-67d2-d4bb-162b1d4d9970}" />
                     </cell>
@@ -430,15 +467,28 @@
                   <row>
                     <cell id="{a6e0bba1-4cde-ba0b-0a09-2e685b6242e2}" locklevel="0" showlabel="true">
                       <labels>
-                        <label description="Voucher Amount" languagecode="1033" />
+                        <label description="Amount" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_voucheramount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_voucheramount" />
+                      <control disabled="false" id="tc_voucheramount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_voucheramount" uniqueid="{2822a71b-c29c-0abe-e8c4-6a310ae935b9}" />
                     </cell>
-                    <cell id="{9bcc3e9b-ce74-d3dc-2e99-e538733549d7}" locklevel="0" showlabel="true">
+                    <cell id="{55c98844-d8ca-9dbd-e168-28e4704d73ec}" showlabel="true" locklevel="0">
                       <labels>
-                        <label description="Voucher Type" languagecode="1033" />
+                        <label description="Recipient First Name" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_vouchertype" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_vouchertype" />
+                      <control id="tc_voucherrecipientfirstname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_voucherrecipientfirstname" disabled="false" uniqueid="{dbd2ba55-c410-4a86-73cc-dda74c5a0a76}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{d70d5c9b-aee9-847e-13a6-4d469d0e413b}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                    <cell id="{7e09cc7e-8519-c439-52e5-762e84bb51ee}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Recipient Last Name" languagecode="1033" />
+                      </labels>
+                      <control id="tc_voucherrecipientlastname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_voucherrecipientlastname" disabled="false" uniqueid="{03d839ca-9ed5-e1ed-51c6-92eb24c39636}" />
                     </cell>
                   </row>
                 </rows>
@@ -497,7 +547,7 @@
                     </cell>
                     <cell id="{75aeeb9c-7cb9-161c-9b5c-a6e49a1b1033}" locklevel="0" showlabel="true">
                       <labels>
-                        <label description="BACS Amount" languagecode="1033" />
+                        <label description="Amount" languagecode="1033" />
                       </labels>
                       <control disabled="false" id="tc_bacsamount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_bacsamount" uniqueid="{9eea21ad-deba-9181-da2a-8abd385160d7}" />
                     </cell>
@@ -596,7 +646,7 @@
                   </row>
                 </rows>
               </section>
-              <section id="{e1ed277a-b0e3-b205-3803-7878dc292a2d}" name="tab_8_section_5" IsUserDefined="0" locklevel="0" showlabel="true" columns="11" showbar="false" labelwidth="145" celllabelposition="Left" celllabelalignment="Left" layout="varwidth">
+              <section id="{e1ed277a-b0e3-b205-3803-7878dc292a2d}" name="tab_8_section_5" IsUserDefined="0" locklevel="0" showlabel="true" columns="11" showbar="false" labelwidth="155" celllabelposition="Left" celllabelalignment="Left" layout="varwidth">
                 <labels>
                   <label description="COMPENSATION DETAILS" languagecode="1033" />
                 </labels>
@@ -604,7 +654,7 @@
                   <row>
                     <cell id="{be6d8223-c5e5-b786-ab23-d6a86c07e6b9}" locklevel="0" showlabel="true">
                       <labels>
-                        <label description="Amount" languagecode="1033" />
+                        <label description="Total Offered Amount" languagecode="1033" />
                       </labels>
                       <control disabled="true" id="tc_amount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_amount" uniqueid="{7a4d8614-06a7-8444-50e8-85b78e9a7471}" />
                     </cell>
@@ -616,11 +666,28 @@
                     </cell>
                   </row>
                   <row>
-                    <cell id="{4794bdb9-1ab9-0395-567d-a4b5cd2e2a22}" locklevel="0" showlabel="true">
+                    <cell id="{c2e1371c-c06c-65b7-45a1-819c920e03a7}" showlabel="true" locklevel="0">
                       <labels>
-                        <label description="Cash Amount" languagecode="1033" />
+                        <label description="Local Cash Amount" languagecode="1033" />
                       </labels>
-                      <control disabled="true" id="tc_cashamount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_cashamount" uniqueid="{e68b2d96-0201-c24c-5029-3811dae367ee}" />
+                      <control id="tc_localcashamount_decimal" classid="{C3EFE0C3-0EC6-42be-8349-CBD9079DFD8E}" datafieldname="tc_localcashamount_decimal" disabled="true" uniqueid="{e8154c18-a964-3b76-e15d-deed991a66e9}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{4d4889d4-de56-a35c-11c8-b33c80d29d4d}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Local Currency" languagecode="1033" />
+                      </labels>
+                      <control id="tc_localcurrencyid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_localcurrencyid" disabled="true" uniqueid="{54d8a0be-8882-2318-3da4-ed5ba651a149}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{CD5625B0-DDA8-4EE2-B13F-B9331E027C8A}</DefaultViewId>
+                          <AllowFilterOff>false</AllowFilterOff>
+                        </parameters>
+                      </control>
                     </cell>
                   </row>
                   <row>
@@ -648,21 +715,62 @@
                     </cell>
                   </row>
                   <row>
-                    <cell id="{e0a15896-b05c-1140-845c-cd0064109332}" locklevel="0" showlabel="true">
+                    <cell id="{10553811-5b76-3c95-bae9-0b413ab94442}" showlabel="true" locklevel="0">
                       <labels>
-                        <label description="Compensation Sub-Type" languagecode="1033" />
+                        <label description="Non-Financial Amount" languagecode="1033" />
                       </labels>
-                      <control disabled="true" id="tc_nonfinancialcompensationsubtype" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_nonfinancialcompensationsubtype" uniqueid="{c6ba66da-9eda-1762-a75e-c709193d912a}" />
+                      <control id="tc_localnonfinancialamount" classid="{C3EFE0C3-0EC6-42be-8349-CBD9079DFD8E}" datafieldname="tc_localnonfinancialamount" disabled="true" uniqueid="{46b66649-9994-1399-1c53-baac8c1485ce}" />
                     </cell>
-                  </row>
-                  <row>
                     <cell id="{6b651946-90d9-3b72-a4db-648726c4cced}" locklevel="0" showlabel="true" visible="false">
                       <labels>
                         <label description="Compensation Email Text" languagecode="1033" />
                       </labels>
                       <control id="tc_compensationemailtext" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_compensationemailtext" uniqueid="{43a772a5-d998-6044-37d6-53b263918e53}" />
                     </cell>
-                    <cell id="{de81c894-aec0-50b4-ca25-8b3b21d45e7c}" showlabel="false">
+                  </row>
+                  <row>
+                    <cell id="{715045ba-31ba-a60d-c066-72c893759c05}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Non-Financial Currency" languagecode="1033" />
+                      </labels>
+                      <control id="tc_nonfinancialcurrency" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_nonfinancialcurrency" disabled="true" uniqueid="{de793e08-b8c5-6150-d635-8e0de18a9721}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{CD5625B0-DDA8-4EE2-B13F-B9331E027C8A}</DefaultViewId>
+                          <AllowFilterOff>false</AllowFilterOff>
+                        </parameters>
+                      </control>
+                    </cell>
+                    <cell id="{77963b10-8b99-c12d-7048-392358e71bdb}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{e0a15896-b05c-1140-845c-cd0064109332}" locklevel="0" showlabel="true">
+                      <labels>
+                        <label description="Non Financial Sub-Type" languagecode="1033" />
+                      </labels>
+                      <control disabled="true" id="tc_nonfinancialcompensationsubtype" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_nonfinancialcompensationsubtype" uniqueid="{c6ba66da-9eda-1762-a75e-c709193d912a}" />
+                    </cell>
+                    <cell id="{763d9363-7124-ead4-26d9-9e4353d76c21}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{ee111777-802c-3be8-9c47-aa950818c21d}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Non-Financial Other" languagecode="1033" />
+                      </labels>
+                      <control id="tc_nonfinancialcompensationsubtypeother" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_nonfinancialcompensationsubtypeother" disabled="true" uniqueid="{602b9cc1-8b6d-37ec-b3b3-3d2c0971dc0e}" />
+                    </cell>
+                    <cell id="{a6425159-772c-64a0-9111-bd11e8ec77cb}" showlabel="false">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
@@ -721,7 +829,7 @@
                       <labels>
                         <label description="Is Full and Final Statement" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_isfullandfinalstatement" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="tc_isfullandfinalstatement" />
+                      <control disabled="false" id="tc_isfullandfinalstatement" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="tc_isfullandfinalstatement" uniqueid="{56b2e76e-7317-282d-1be1-c52560cd2267}" />
                     </cell>
                   </row>
                   <row>
@@ -935,7 +1043,7 @@
               <label description="" languagecode="1033" />
             </labels>
           </cell>
-          <cell id="{714623bc-8627-e271-51c4-eaba3b6503e9}" showlabel="false">
+          <cell id="{e808dd68-b609-1acd-d2a8-ee014e6142a5}" showlabel="false">
             <labels>
               <label description="" languagecode="1033" />
             </labels>

@@ -182,20 +182,20 @@
                   <row>
                     <cell id="{21dbb018-6a86-a856-7070-e7d9160ccd36}" showlabel="true" colspan="1" rowspan="6" auto="false">
                       <labels>
-                        <label description="TEAMS" languagecode="1033" />
+                        <label description="Teams" languagecode="1033" />
                         <label description="Équipes" languagecode="1036" />
                         <label description="TEAMS" languagecode="1031" />
                       </labels>
-                      <control id="TeamsSubGrid" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}">
+                      <control id="TeamsSubGrid" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" uniqueid="{d052378d-aca6-486b-36a8-264277bb4adb}" indicationOfSubgrid="true">
                         <parameters>
-                          <ViewId>{00000000-0000-0000-00AA-000010001205}</ViewId>
+                          <ViewId>{E0F07489-1D16-E711-810C-3863BB34FB48}</ViewId>
                           <IsUserView>false</IsUserView>
                           <RelationshipName>teammembership_association</RelationshipName>
                           <TargetEntityType>team</TargetEntityType>
                           <AutoExpand>Fixed</AutoExpand>
                           <EnableQuickFind>false</EnableQuickFind>
                           <EnableViewPicker>false</EnableViewPicker>
-                          <ViewIds>{00000000-0000-0000-00AA-000010001024},{00000000-0000-0000-00AA-000010001205}</ViewIds>
+                          <ViewIds>{E0F07489-1D16-E711-810C-3863BB34FB48}</ViewIds>
                           <EnableJumpBar>false</EnableJumpBar>
                           <ChartGridMode>Grid</ChartGridMode>
                           <VisualizationId />
@@ -636,26 +636,34 @@
         </clientvariables>
       </internalresources>
     </clientresources>
-    <events>
-      <event name="onchange" active="true" application="true" attribute="domainname">
-        <InternalHandlers>
-          <Handler enabled="true" handlerUniqueId="d3b227fb-f3b5-4106-ab55-1cbd9edd1946" libraryName="SystemUser_main_system_library.js" functionName="Mscrm.domainname_onchange">
-            <dependencies>
-              <dependency id="domainname" />
-            </dependencies>
-          </Handler>
-        </InternalHandlers>
-      </event>
-      <event name="onload" active="true" application="true">
-        <InternalHandlers>
-          <Handler enabled="true" handlerUniqueId="de67cc7a-a007-412e-a011-fcc38a62ca01" libraryName="SystemUser_main_system_library.js" functionName="Mscrm.Form_onload">
-            <dependencies />
-          </Handler>
-        </InternalHandlers>
-      </event>
-    </events>
     <Navigation>
-      <NavBar></NavBar>
+      <NavBar>
+        <NavBarByRelationshipItem RelationshipName="tc_LastAssignee" Sequence="10000" Area="Info" Id="nav_tc_LastAssignee" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Cases" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_systemuser_tc_compensationline_CaseCreatedBy" Sequence="10000" Area="Info" Id="nav_tc_systemuser_tc_compensationline_CaseCreatedBy" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Compensation Lines" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_systemuser_incident_OriginalResolutionBy" Sequence="10000" Area="Info" Id="nav_tc_systemuser_incident_OriginalResolutionBy" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Cases" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_systemuser_tc_compensationapproval_ApprovedBy" Sequence="10000" Area="Info" Id="nav_tc_systemuser_tc_compensationapproval_ApprovedBy" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Compensation Approvals" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_systemuser_tc_compensationapproval_RequestedBy" Sequence="10000" Area="Info" Id="nav_tc_systemuser_tc_compensationapproval_RequestedBy" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Compensation Approvals" />
+          </Titles>
+        </NavBarByRelationshipItem>
+      </NavBar>
       <NavBarAreas>
         <NavBarArea Id="Info">
           <Titles>
@@ -684,6 +692,25 @@
         </NavBarArea>
       </NavBarAreas>
     </Navigation>
+    <events>
+      <event name="onchange" active="true" application="true" attribute="domainname">
+        <InternalHandlers>
+          <Handler enabled="true" handlerUniqueId="d3b227fb-f3b5-4106-ab55-1cbd9edd1946" libraryName="SystemUser_main_system_library.js" functionName="Mscrm.domainname_onchange">
+            <dependencies>
+              <dependency id="domainname" />
+            </dependencies>
+          </Handler>
+        </InternalHandlers>
+      </event>
+      <event name="onload" active="true" application="true">
+        <InternalHandlers>
+          <Handler enabled="true" handlerUniqueId="de67cc7a-a007-412e-a011-fcc38a62ca01" libraryName="SystemUser_main_system_library.js" functionName="Mscrm.Form_onload">
+            <dependencies />
+          </Handler>
+        </InternalHandlers>
+      </event>
+    </events>
+    <controlDescriptions />
     <DisplayConditions FallbackForm="true" Order="2">
       <Everyone />
     </DisplayConditions>

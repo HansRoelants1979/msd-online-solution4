@@ -23,15 +23,16 @@
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{c242ed3c-dc3b-1231-7be1-06bb7e9abeb7}" showlabel="false">
+                    <cell id="{f9b6eedb-10fd-4c56-96ce-5eb70ec4ab5b}" showlabel="true" locklevel="0">
                       <labels>
-                        <label description="" languagecode="1033" />
+                        <label description="Name" languagecode="1033" />
                       </labels>
+                      <control id="tc_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_name" uniqueid="{328d3cb3-3dad-5bbc-4dc3-17114036683b}" disabled="true" />
                     </cell>
                   </row>
                 </rows>
               </section>
-              <section name="{e3106642-950d-4d1c-921a-6bb034a3deb5}_section_2" showlabel="true" showbar="false" locklevel="0" id="{7e251d19-cd9c-8b6e-edae-4835151b5ce1}" IsUserDefined="0" layout="varwidth" columns="111" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
+              <section name="{e3106642-950d-4d1c-921a-6bb034a3deb5}_section_2" showlabel="true" showbar="false" locklevel="0" id="{7e251d19-cd9c-8b6e-edae-4835151b5ce1}" IsUserDefined="0" layout="varwidth" columns="111" labelwidth="115" celllabelalignment="Left" celllabelposition="Left" height="auto">
                 <labels>
                   <label description="Compensaiton Matrix" languagecode="1033" />
                 </labels>
@@ -47,13 +48,37 @@
                       <labels>
                         <label description="Category 2" languagecode="1033" />
                       </labels>
-                      <control id="tc_category2" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_category2" disabled="false" />
+                      <control id="tc_category2" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_category2" disabled="false" uniqueid="{5775a60b-368c-c8a7-7aa2-358242483571}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{F500C63E-33A9-40BE-855D-298CA74B508C}</DefaultViewId>
+                          <FilterRelationshipName>tc_tc_casecategory_tc_casecategory</FilterRelationshipName>
+                          <DependentAttributeName>tc_compensationcalculationmatrix.tc_category1</DependentAttributeName>
+                          <DependentAttributeType>tc_casecategory</DependentAttributeType>
+                          <AllowFilterOff>true</AllowFilterOff>
+                        </parameters>
+                      </control>
                     </cell>
                     <cell id="{748db974-6436-b29b-d8cb-e391dee8b491}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Category 3" languagecode="1033" />
                       </labels>
-                      <control id="tc_category3" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_category3" disabled="false" />
+                      <control id="tc_category3" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_category3" disabled="false" uniqueid="{349e177a-4ad1-b69a-44c1-02076e9a2c69}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{F500C63E-33A9-40BE-855D-298CA74B508C}</DefaultViewId>
+                          <FilterRelationshipName>tc_tc_casecategory_tc_casecategory</FilterRelationshipName>
+                          <DependentAttributeName>tc_compensationcalculationmatrix.tc_category2</DependentAttributeName>
+                          <DependentAttributeType>tc_casecategory</DependentAttributeType>
+                          <AllowFilterOff>true</AllowFilterOff>
+                        </parameters>
+                      </control>
                     </cell>
                   </row>
                   <row>
@@ -62,23 +87,6 @@
                         <label description="Source Market" languagecode="1033" />
                       </labels>
                       <control id="tc_sourcemarket" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_sourcemarket" disabled="false" />
-                    </cell>
-                    <cell id="{0050be91-9103-377e-9ab2-65b290e917e4}" showlabel="false">
-                      <labels>
-                        <label description="" languagecode="1033" />
-                      </labels>
-                    </cell>
-                    <cell id="{c95e0114-9dec-1051-b659-4d299e56464c}" showlabel="false">
-                      <labels>
-                        <label description="" languagecode="1033" />
-                      </labels>
-                    </cell>
-                  </row>
-                  <row>
-                    <cell id="{24d1462a-da6e-8584-14dc-831365d58888}" showlabel="false" userspacer="true">
-                      <labels>
-                        <label description="" languagecode="1033" />
-                      </labels>
                     </cell>
                     <cell id="{da7a7e12-7a07-8972-2389-3a9e3d7839b2}" showlabel="false">
                       <labels>
@@ -92,7 +100,24 @@
                     </cell>
                   </row>
                   <row>
-                    <cell id="{3adbd712-c6d0-4e49-36e5-73199a5a6e22}" showlabel="true" colspan="3" auto="false" rowspan="6">
+                    <cell id="{24d1462a-da6e-8584-14dc-831365d58888}" showlabel="false" userspacer="true">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                    <cell id="{7a05043e-5772-6e60-23c0-a0dbba20d058}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                    <cell id="{1833de20-d814-e93b-cd1e-00cc53cd2126}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{3adbd712-c6d0-4e49-36e5-73199a5a6e22}" showlabel="true" colspan="3" auto="true" rowspan="4">
                       <labels>
                         <label description="Compensation Calculation Lines" languagecode="1033" />
                       </labels>
@@ -102,7 +127,7 @@
                           <IsUserView>false</IsUserView>
                           <RelationshipName>tc_tc_compensationcalculationmatrix_tc_compensationcalculationline_compensationmatrix</RelationshipName>
                           <TargetEntityType>tc_compensationcalculationline</TargetEntityType>
-                          <AutoExpand>Fixed</AutoExpand>
+                          <AutoExpand>Auto</AutoExpand>
                           <EnableQuickFind>false</EnableQuickFind>
                           <EnableViewPicker>false</EnableViewPicker>
                           <ViewIds>{C76CA449-C7B1-4926-B122-6959855C0123}</ViewIds>
@@ -111,16 +136,14 @@
                           <VisualizationId />
                           <IsUserChart>false</IsUserChart>
                           <EnableChartPicker>false</EnableChartPicker>
-                          <RecordsPerPage>4</RecordsPerPage>
+                          <RecordsPerPage>10</RecordsPerPage>
                         </parameters>
                       </control>
                     </cell>
                   </row>
                   <row />
                   <row />
-                  <row />
-                  <row />
-                  <row />
+                  <row height="auto" />
                 </rows>
               </section>
             </sections>
@@ -140,11 +163,10 @@
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{f9b6eedb-10fd-4c56-96ce-5eb70ec4ab5b}" showlabel="true" locklevel="0">
+                    <cell id="{93e47980-a3c2-2d3b-ab72-281129aae55a}" showlabel="false">
                       <labels>
-                        <label description="Name" languagecode="1033" />
+                        <label description="" languagecode="1033" />
                       </labels>
-                      <control id="tc_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_name" uniqueid="{328d3cb3-3dad-5bbc-4dc3-17114036683b}" disabled="false" />
                     </cell>
                   </row>
                 </rows>

@@ -5,14 +5,14 @@
       <FieldPermission>
         <EntityName>tc_caseline</EntityName>
         <AttributeName>tc_categorylevel4id</AttributeName>
-        <CanRead>0</CanRead>
+        <CanRead>4</CanRead>
         <CanUpdate>0</CanUpdate>
         <CanCreate>4</CanCreate>
       </FieldPermission>
       <FieldPermission>
         <EntityName>tc_caseline</EntityName>
         <AttributeName>tc_categorylevel4subcategoryid</AttributeName>
-        <CanRead>0</CanRead>
+        <CanRead>4</CanRead>
         <CanUpdate>0</CanUpdate>
         <CanCreate>4</CanCreate>
       </FieldPermission>
@@ -22,6 +22,34 @@
         <CanRead>4</CanRead>
         <CanUpdate>0</CanUpdate>
         <CanCreate>4</CanCreate>
+      </FieldPermission>
+      <FieldPermission>
+        <EntityName>incident</EntityName>
+        <AttributeName>tc_incidentinvestigationstatus</AttributeName>
+        <CanRead>4</CanRead>
+        <CanUpdate>0</CanUpdate>
+        <CanCreate>0</CanCreate>
+      </FieldPermission>
+      <FieldPermission>
+        <EntityName>tc_compensationline</EntityName>
+        <AttributeName>tc_invoicestatus</AttributeName>
+        <CanRead>4</CanRead>
+        <CanUpdate>0</CanUpdate>
+        <CanCreate>0</CanCreate>
+      </FieldPermission>
+      <FieldPermission>
+        <EntityName>tc_compensationline</EntityName>
+        <AttributeName>tc_reasonforvouchercancellation</AttributeName>
+        <CanRead>4</CanRead>
+        <CanUpdate>0</CanUpdate>
+        <CanCreate>0</CanCreate>
+      </FieldPermission>
+      <FieldPermission>
+        <EntityName>queue</EntityName>
+        <AttributeName>tc_sladuration</AttributeName>
+        <CanRead>4</CanRead>
+        <CanUpdate>0</CanUpdate>
+        <CanCreate>0</CanCreate>
       </FieldPermission>
     </FieldPermissions>
   </FieldSecurityProfile>

@@ -10,7 +10,6 @@
   <layoutxml>
     <grid name="resultset" object="4207" jump="subject" select="1" preview="1" icon="1">
       <row name="result" id="activityid">
-        <cell name="category" width="100" />
         <cell name="a_7fd280778009e711810a3863bb340dd8.tc_salutation" width="100" disableSorting="1" />
         <cell name="a_7fd280778009e711810a3863bb340dd8.firstname" width="100" disableSorting="1" />
         <cell name="a_7fd280778009e711810a3863bb340dd8.lastname" width="100" disableSorting="1" />
@@ -51,10 +50,9 @@
         <attribute name="tc_printedon" />
         <attribute name="tc_name" />
         <attribute name="tc_issuedon" />
-        <attribute name="category" />
         <attribute name="subcategory" />
         <attribute name="tc_routingcode" />
-        <order attribute="category" descending="false" />
+        <order attribute="tc_issuedon" descending="false" />
         <filter type="and">
           <condition attribute="statuscode" operator="eq" value="950000000" />
           <condition attribute="tc_printedon" operator="null" />
@@ -81,11 +79,14 @@
           <attribute name="lastname" />
           <attribute name="firstname" />
         </link-entity>
-        <link-entity name="incident" from="incidentid" to="regardingobjectid" visible="false" link-type="outer" alias="a_955366688cdb459ca5b8d380fa498614">
+        <link-entity name="incident" from="incidentid" to="regardingobjectid" alias="a_955366688cdb459ca5b8d380fa498614">
           <attribute name="ticketnumber" />
           <attribute name="tc_bookingid" />
           <attribute name="tc_bookingreferencefreetext" />
           <attribute name="tc_brandid" />
+          <filter type="and">
+            <condition attribute="tc_bookingreferencefreetext" operator="not-null" />
+          </filter>
         </link-entity>
         <attribute name="activityid" />
       </entity>

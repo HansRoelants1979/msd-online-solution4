@@ -35,20 +35,23 @@
     <steplabels id="{395756a0-26b8-4a32-a757-2eeb82b6656e}">
       <label languagecode="1033" description="Booking No." />
     </steplabels>
-    <steplabels id="{8a2a1687-b51e-41c8-b43c-aae00e521035}">
-      <label languagecode="1033" description="Summary" />
-    </steplabels>
     <steplabels id="{ddbf7e6d-ecb3-41b0-9f6e-ce276d47c0dd}">
       <label languagecode="1033" description="Case Type" />
     </steplabels>
     <steplabels id="{d68cd502-23d6-41cb-a99f-6fd62d7f032f}">
       <label languagecode="1033" description="Customer" />
     </steplabels>
+    <steplabels id="{8a2a1687-b51e-41c8-b43c-aae00e521035}">
+      <label languagecode="1033" description="Summary" />
+    </steplabels>
     <steplabels id="{f74a2f8e-5108-495c-b9c9-478a80810bf0}">
       <label languagecode="1033" description="Source Type" />
     </steplabels>
     <steplabels id="{f8ae6144-fc89-43b7-b357-dec41ad3f11f}">
       <label languagecode="1033" description="Method of Communication" />
+    </steplabels>
+    <steplabels id="{b1764036-7e8b-4d93-89a7-fae5a7a4a740}">
+      <label languagecode="1033" description="Send Comms Manually" />
     </steplabels>
     <steplabels id="{d350d55e-049a-44ed-9c60-18d285f9c494}">
       <label languagecode="1033" description="Alternative Phone" />
@@ -58,9 +61,6 @@
     </steplabels>
     <steplabels id="{0d66c61f-4e64-4162-95f8-abc31c64e3f1}">
       <label languagecode="1033" description="Categories Captured" />
-    </steplabels>
-    <steplabels id="{c473c773-0c1c-4b67-b904-6239c453da83}">
-      <label languagecode="1033" description="Close Case" />
     </steplabels>
     <steplabels id="{9086584f-337d-41b5-84aa-4fd928c09395}">
       <label languagecode="1033" description="Offer" />
@@ -113,15 +113,18 @@
     <steplabels id="{fbc9917b-cdcd-486a-8eba-6172cc3d76a1}">
       <label languagecode="1033" description="Investigation Status" />
     </steplabels>
+    <steplabels id="{cc557140-d152-4a05-ac4b-a4f4035bcbe9}">
+      <label languagecode="1033" description="Close Case" />
+    </steplabels>
     <steplabels id="{c5e2c134-4b51-4ea7-9cd3-998af7da922d}">
       <label languagecode="1033" description="Resolve" />
     </steplabels>
-    <steplabels id="{0b707f69-6ee4-4765-8f07-29c75068ee3d}">
-      <label languagecode="1033" description="Descripion" />
+    <steplabels id="{8ca2c707-0044-4cc6-99a5-48ed860b4338}">
+      <label languagecode="1033" description="Close Case" />
     </steplabels>
   </labels>
   <ProcessTriggers>
-    <ProcessTrigger processtriggerid="{bab23f2f-3134-e711-8114-e0071b66a051}">
+    <ProcessTrigger processtriggerid="{f43dec0e-6541-e711-810b-e0071b66e0a1}">
       <controltype>1</controltype>
       <methodid>{eaca116c-f5d1-4fec-84d5-151bc0c45a5d}</methodid>
       <scope>1</scope>
@@ -131,7 +134,7 @@
       <iscustomizable>1</iscustomizable>
       <primaryentitytypecode>Incident</primaryentitytypecode>
     </ProcessTrigger>
-    <ProcessTrigger processtriggerid="{bbb23f2f-3134-e711-8114-e0071b66a051}">
+    <ProcessTrigger processtriggerid="{f53dec0e-6541-e711-810b-e0071b66e0a1}">
       <controltype>1</controltype>
       <methodid>{eaca116c-f5d1-4fec-84d5-151bc0c45a5d}</methodid>
       <scope>1</scope>
@@ -141,7 +144,7 @@
       <iscustomizable>1</iscustomizable>
       <primaryentitytypecode>Incident</primaryentitytypecode>
     </ProcessTrigger>
-    <ProcessTrigger processtriggerid="{bcb23f2f-3134-e711-8114-e0071b66a051}">
+    <ProcessTrigger processtriggerid="{f63dec0e-6541-e711-810b-e0071b66e0a1}">
       <controltype>1</controltype>
       <methodid>{eaca116c-f5d1-4fec-84d5-151bc0c45a5d}</methodid>
       <scope>1</scope>
@@ -151,7 +154,17 @@
       <iscustomizable>1</iscustomizable>
       <primaryentitytypecode>Incident</primaryentitytypecode>
     </ProcessTrigger>
-    <ProcessTrigger processtriggerid="{bdb23f2f-3134-e711-8114-e0071b66a051}">
+    <ProcessTrigger processtriggerid="{f73dec0e-6541-e711-810b-e0071b66e0a1}">
+      <controltype>1</controltype>
+      <methodid>{eaca116c-f5d1-4fec-84d5-151bc0c45a5d}</methodid>
+      <scope>1</scope>
+      <controlname>tc_casetypeid</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{f83dec0e-6541-e711-810b-e0071b66e0a1}">
       <controltype>1</controltype>
       <methodid>{74870a26-fe7a-4731-99c0-cf2736aec203}</methodid>
       <scope>1</scope>

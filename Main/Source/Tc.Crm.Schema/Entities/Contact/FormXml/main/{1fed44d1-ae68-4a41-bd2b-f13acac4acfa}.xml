@@ -140,15 +140,15 @@
                       </control>
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
             </sections>
@@ -426,7 +426,7 @@
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{4157042d-6702-a965-d989-e5b5449a1300}" showlabel="false" rowspan="6" auto="false" colspan="1">
+                    <cell id="{4157042d-6702-a965-d989-e5b5449a1300}" showlabel="false" rowspan="8" auto="false" colspan="1">
                       <labels>
                         <label description="Cases (Customer)" languagecode="1033" />
                         <label description="Incidents" languagecode="1036" />
@@ -441,29 +441,31 @@
                           <AutoExpand>Fixed</AutoExpand>
                           <EnableQuickFind>false</EnableQuickFind>
                           <EnableViewPicker>false</EnableViewPicker>
-                          <ViewIds>{00000000-0000-0000-00AA-000010001032},{ABA8608F-C3DC-E611-8103-3863BB340DD8},{00000000-0000-0000-00AA-000010001028}</ViewIds>
+                          <ViewIds>{ABA8608F-C3DC-E611-8103-3863BB340DD8},{00000000-0000-0000-00AA-000010001028}</ViewIds>
                           <EnableJumpBar>false</EnableJumpBar>
                           <ChartGridMode>Grid</ChartGridMode>
                           <VisualizationId>{4143B74E-4A07-4D01-9FFE-2CDCAA4208FD}</VisualizationId>
                           <IsUserChart>false</IsUserChart>
                           <EnableChartPicker>false</EnableChartPicker>
-                          <RecordsPerPage>4</RecordsPerPage>
+                          <RecordsPerPage>6</RecordsPerPage>
                         </parameters>
                       </control>
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
             </sections>
           </column>
         </columns>
       </tab>
-      <tab id="{c0e637ce-e608-a617-0cc7-484c7285692e}" name="tab_Customer_BookingSummary" IsUserDefined="0" locklevel="0" showlabel="true" expanded="false">
+      <tab id="{c0e637ce-e608-a617-0cc7-484c7285692e}" name="tab_Customer_BookingSummary" IsUserDefined="0" locklevel="0" showlabel="true" expanded="true">
         <labels>
           <label description="Booking Summary" languagecode="1033" />
         </labels>
@@ -482,7 +484,7 @@
                         <label description="Anfragen" languagecode="1031" />
                         <label description="Incidents" languagecode="1036" />
                       </labels>
-                      <control id="grdBookings" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                      <control id="grdBookings" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true" uniqueid="{6d755b82-d30d-0981-300c-de14d3dc0993}">
                         <parameters>
                           <ViewId>{829D6477-C8DC-E611-8103-3863BB340DD8}</ViewId>
                           <IsUserView>false</IsUserView>
@@ -502,11 +504,11 @@
                       </control>
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
             </sections>
@@ -635,11 +637,11 @@
                       </control>
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
             </sections>
@@ -780,15 +782,23 @@
         <InternalHandlers>
           <Handler functionName="Mscrm.ContactMainSystemLibraryWebResource.form_onload" libraryName="Contact_main_system_library.js" handlerUniqueId="4ea24ebd-795d-434e-af94-6812c3867b54" enabled="true" />
         </InternalHandlers>
+        <Handlers>
+          <Handler handlerUniqueId="{515656b3-0ca5-9e1b-2e14-6008cb2c2800}" functionName="Tc.Crm.Scripts.Events.Contact.OnLoad" libraryName="tc_Tc.Crm.Scripts.Events.Contact.js" enabled="true" passExecutionContext="true" parameters="&quot;telephone1&quot;,&quot;telephone2&quot;" />
+        </Handlers>
       </event>
       <event name="onsave" application="false" active="false">
         <Handlers>
           <Handler functionName="Tc.Crm.Scripts.Events.Contact.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Contact.js" handlerUniqueId="{b8c499ea-7a34-a205-8166-92e98a0b00b8}" enabled="true" parameters="" passExecutionContext="false" />
         </Handlers>
       </event>
+      <event name="onchange" application="false" active="false" attribute="telephone1">
+        <Handlers>
+          <Handler handlerUniqueId="{5c10987e-372a-90bc-0cd8-54ce60860edd}" functionName="Tc.Crm.Scripts.Events.Contact.OnContactTelephoneFieldChange" libraryName="tc_Tc.Crm.Scripts.Events.Contact.js" enabled="true" passExecutionContext="true" parameters="&quot;telephone1&quot;,&quot;telephone2&quot;" />
+        </Handlers>
+      </event>
       <event name="onchange" application="false" active="false" attribute="tc_language">
         <Handlers>
-          <Handler functionName="Tc.Crm.Scripts.Library.Compensation.UpdateCustomerCompensationsLanguage" libraryName="tc_Tc.Crm.Scripts.Library.Compensation.js" handlerUniqueId="{4756b7e7-dd29-2cec-2b72-e06e8509888d}" enabled="true" parameters="" passExecutionContext="false" />
+          <Handler functionName="Tc.Crm.Scripts.Events.Contact.OnChangeLanguage" libraryName="tc_Tc.Crm.Scripts.Events.Contact.js" handlerUniqueId="{58c1e5a5-4967-27dc-de36-5667a20b00da}" enabled="true" parameters="" passExecutionContext="false" />
         </Handlers>
       </event>
     </events>
@@ -1154,7 +1164,7 @@
     <formLibraries>
       <Library name="tc_es6promise.js" libraryUniqueId="{de507201-4eb0-e6e5-94a8-db26e1cd7be2}" />
       <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{a279a9e3-d067-b144-d47d-326570627703}" />
-      <Library name="tc_Tc.Crm.Scripts.Library.Compensation.js" libraryUniqueId="{516b1310-73bd-6d8c-dae9-0e189bcc3574}" />
+      <Library name="tc_Tc.Crm.Scripts.Library.Contact.js" libraryUniqueId="{b745c3ae-599b-ad85-50cb-a2a382cc813a}" />
       <Library name="tc_Tc.Crm.Scripts.Events.Contact.js" libraryUniqueId="{50424d57-7883-ebc4-c90e-d02256d54ade}" />
     </formLibraries>
     <DisplayConditions FallbackForm="true" Order="2">

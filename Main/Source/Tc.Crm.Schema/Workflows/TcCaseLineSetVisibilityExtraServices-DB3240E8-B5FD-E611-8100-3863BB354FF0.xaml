@@ -141,25 +141,6 @@
                       <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep14" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_caseline" />
                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep16: Hide Passengers Impacted">
-                      <mcwc:SetVisibility ControlId="tc_extraservicepassengersimpacted" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_caseline" IsVisible="False" />
-                    </Sequence>
-                    <Sequence DisplayName="SetAttributeValueStep17: Clear Passengers Impacted">
-                      <Sequence.Variables>
-                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep17_1" />
-                      </Sequence.Variables>
-                      <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;tc_caseline&quot;)]" />
-                      <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mxswa:SetEntityProperty Attribute="tc_extraservicepassengersimpacted" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_caseline" Value="[SetAttributeValueStep17_1]">
-                        <mxswa:SetEntityProperty.TargetType>
-                          <InArgument x:TypeArguments="s:Type">
-                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
-                          </InArgument>
-                        </mxswa:SetEntityProperty.TargetType>
-                      </mxswa:SetEntityProperty>
-                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep17" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_caseline" />
-                      <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
-                    </Sequence>
                   </sco:Collection>
                 </mxswa:ActivityReference.Properties>
               </mxswa:ActivityReference>
@@ -205,9 +186,6 @@
                     <Sequence DisplayName="SetVisibilityStep12: Show Participants">
                       <mcwc:SetVisibility ControlId="tc_extraserviceparticipants" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_caseline" IsVisible="True" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep15: Show Passengers Impacted">
-                      <mcwc:SetVisibility ControlId="tc_extraservicepassengersimpacted" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_caseline" IsVisible="True" />
-                    </Sequence>
                   </sco:Collection>
                 </mxswa:ActivityReference.Properties>
               </mxswa:ActivityReference>
@@ -251,20 +229,17 @@
                 <mxswa:ActivityReference.Properties>
                   <sco:Collection x:TypeArguments="Variable" x:Key="Variables" />
                   <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
-                    <Sequence DisplayName="SetVisibilityStep_ConditionBranchStep2_16_17_24: Show Extra Services">
+                    <Sequence DisplayName="SetVisibilityStep24: Show Extra Services">
                       <mcwc:SetVisibility ControlId="tc_bookingextraservicedescription" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_caseline" IsVisible="True" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_ConditionBranchStep2_16_17_24_25: Show Extra Services Start Time &amp; Date">
+                    <Sequence DisplayName="SetVisibilityStep25: Show Extra Services Start Time &amp; Date">
                       <mcwc:SetVisibility ControlId="tc_extraservicestartdatetime" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_caseline" IsVisible="True" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_ConditionBranchStep2_16_17_24_25_26: Show Extra Services End Time &amp; Date">
+                    <Sequence DisplayName="SetVisibilityStep26: Show Extra Services End Time &amp; Date">
                       <mcwc:SetVisibility ControlId="tc_extraserviceenddatetime" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_caseline" IsVisible="True" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_ConditionBranchStep2_16_17_24_25_26_27: Show Participants">
+                    <Sequence DisplayName="SetVisibilityStep27: Show Participants">
                       <mcwc:SetVisibility ControlId="tc_extraserviceparticipants" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_caseline" IsVisible="True" />
-                    </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_ConditionBranchStep2_16_17_24_25_26_27_28: Show Passengers Impacted">
-                      <mcwc:SetVisibility ControlId="tc_extraservicepassengersimpacted" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_caseline" IsVisible="True" />
                     </Sequence>
                   </sco:Collection>
                 </mxswa:ActivityReference.Properties>
@@ -292,99 +267,80 @@
                 <mxswa:ActivityReference.Properties>
                   <sco:Collection x:TypeArguments="Variable" x:Key="Variables" />
                   <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
-                    <Sequence DisplayName="SetVisibilityStep_ConditionBranchStep2_16_17_18: Hide Extra Services">
+                    <Sequence DisplayName="SetVisibilityStep18: Hide Extra Services">
                       <mcwc:SetVisibility ControlId="tc_bookingextraservicedescription" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_caseline" IsVisible="False" />
                     </Sequence>
-                    <Sequence DisplayName="SetAttributeValueStep_ConditionBranchStep2_16_17_18_19: Clear Extra Services Description">
+                    <Sequence DisplayName="SetAttributeValueStep19: Clear Extra Services Description">
                       <Sequence.Variables>
-                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep_ConditionBranchStep2_16_17_18_19_1" />
+                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep19_1" />
                       </Sequence.Variables>
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;tc_caseline&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mxswa:SetEntityProperty Attribute="tc_bookingextraservicedescription" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_caseline" Value="[SetAttributeValueStep_ConditionBranchStep2_16_17_18_19_1]">
+                      <mxswa:SetEntityProperty Attribute="tc_bookingextraservicedescription" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_caseline" Value="[SetAttributeValueStep19_1]">
                         <mxswa:SetEntityProperty.TargetType>
                           <InArgument x:TypeArguments="s:Type">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
                           </InArgument>
                         </mxswa:SetEntityProperty.TargetType>
                       </mxswa:SetEntityProperty>
-                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep_ConditionBranchStep2_16_17_18_19" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_caseline" />
+                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep19" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_caseline" />
                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_ConditionBranchStep2_16_17_18_19_20: Hide Start Time &amp; Date">
+                    <Sequence DisplayName="SetVisibilityStep20: Hide Start Time &amp; Date">
                       <mcwc:SetVisibility ControlId="tc_extraservicestartdatetime" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_caseline" IsVisible="False" />
                     </Sequence>
-                    <Sequence DisplayName="SetAttributeValueStep_ConditionBranchStep2_16_17_18_19_20_21: Clear Start Time &amp; Date">
+                    <Sequence DisplayName="SetAttributeValueStep21: Clear Start Time &amp; Date">
                       <Sequence.Variables>
-                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep_ConditionBranchStep2_16_17_18_19_20_21_1" />
+                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep21_1" />
                       </Sequence.Variables>
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;tc_caseline&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mxswa:SetEntityProperty Attribute="tc_extraservicestartdatetime" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_caseline" Value="[SetAttributeValueStep_ConditionBranchStep2_16_17_18_19_20_21_1]">
+                      <mxswa:SetEntityProperty Attribute="tc_extraservicestartdatetime" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_caseline" Value="[SetAttributeValueStep21_1]">
                         <mxswa:SetEntityProperty.TargetType>
                           <InArgument x:TypeArguments="s:Type">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
                           </InArgument>
                         </mxswa:SetEntityProperty.TargetType>
                       </mxswa:SetEntityProperty>
-                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep_ConditionBranchStep2_16_17_18_19_20_21" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_caseline" />
+                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep21" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_caseline" />
                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_ConditionBranchStep2_16_17_18_19_20_21_22: Hide Extra Services End Time &amp; Date">
+                    <Sequence DisplayName="SetVisibilityStep22: Hide Extra Services End Time &amp; Date">
                       <mcwc:SetVisibility ControlId="tc_extraserviceenddatetime" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_caseline" IsVisible="False" />
                     </Sequence>
-                    <Sequence DisplayName="SetAttributeValueStep_ConditionBranchStep2_16_17_18_19_20_21_22_23: Clear End Time &amp; Date">
+                    <Sequence DisplayName="SetAttributeValueStep23: Clear End Time &amp; Date">
                       <Sequence.Variables>
-                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep_ConditionBranchStep2_16_17_18_19_20_21_22_23_1" />
+                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep23_1" />
                       </Sequence.Variables>
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;tc_caseline&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mxswa:SetEntityProperty Attribute="tc_extraserviceenddatetime" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_caseline" Value="[SetAttributeValueStep_ConditionBranchStep2_16_17_18_19_20_21_22_23_1]">
+                      <mxswa:SetEntityProperty Attribute="tc_extraserviceenddatetime" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_caseline" Value="[SetAttributeValueStep23_1]">
                         <mxswa:SetEntityProperty.TargetType>
                           <InArgument x:TypeArguments="s:Type">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
                           </InArgument>
                         </mxswa:SetEntityProperty.TargetType>
                       </mxswa:SetEntityProperty>
-                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep_ConditionBranchStep2_16_17_18_19_20_21_22_23" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_caseline" />
+                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep23" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_caseline" />
                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_ConditionBranchStep2_16_17_18_19_20_21_22_23_29: Hide Participants">
+                    <Sequence DisplayName="SetVisibilityStep29: Hide Participants">
                       <mcwc:SetVisibility ControlId="tc_extraserviceparticipants" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_caseline" IsVisible="False" />
                     </Sequence>
-                    <Sequence DisplayName="SetAttributeValueStep_ConditionBranchStep2_16_17_18_19_20_21_22_23_29_30: Clear Participants">
+                    <Sequence DisplayName="SetAttributeValueStep30: Clear Participants">
                       <Sequence.Variables>
-                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep_ConditionBranchStep2_16_17_18_19_20_21_22_23_29_30_1" />
+                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep30_1" />
                       </Sequence.Variables>
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;tc_caseline&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mxswa:SetEntityProperty Attribute="tc_extraserviceparticipants" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_caseline" Value="[SetAttributeValueStep_ConditionBranchStep2_16_17_18_19_20_21_22_23_29_30_1]">
+                      <mxswa:SetEntityProperty Attribute="tc_extraserviceparticipants" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_caseline" Value="[SetAttributeValueStep30_1]">
                         <mxswa:SetEntityProperty.TargetType>
                           <InArgument x:TypeArguments="s:Type">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
                           </InArgument>
                         </mxswa:SetEntityProperty.TargetType>
                       </mxswa:SetEntityProperty>
-                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep_ConditionBranchStep2_16_17_18_19_20_21_22_23_29_30" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_caseline" />
-                      <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
-                    </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_ConditionBranchStep2_16_17_18_19_20_21_22_23_29_30_31: Hide Passengers Impacted">
-                      <mcwc:SetVisibility ControlId="tc_extraservicepassengersimpacted" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_caseline" IsVisible="False" />
-                    </Sequence>
-                    <Sequence DisplayName="SetAttributeValueStep_ConditionBranchStep2_16_17_18_19_20_21_22_23_29_30_31_32: Clear Passengers Impacted">
-                      <Sequence.Variables>
-                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep_ConditionBranchStep2_16_17_18_19_20_21_22_23_29_30_31_32_1" />
-                      </Sequence.Variables>
-                      <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;tc_caseline&quot;)]" />
-                      <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mxswa:SetEntityProperty Attribute="tc_extraservicepassengersimpacted" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_caseline" Value="[SetAttributeValueStep_ConditionBranchStep2_16_17_18_19_20_21_22_23_29_30_31_32_1]">
-                        <mxswa:SetEntityProperty.TargetType>
-                          <InArgument x:TypeArguments="s:Type">
-                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
-                          </InArgument>
-                        </mxswa:SetEntityProperty.TargetType>
-                      </mxswa:SetEntityProperty>
-                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep_ConditionBranchStep2_16_17_18_19_20_21_22_23_29_30_31_32" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_caseline" />
+                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep30" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_caseline" />
                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
                     </Sequence>
                   </sco:Collection>

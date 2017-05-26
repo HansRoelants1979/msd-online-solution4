@@ -4,7 +4,7 @@
   <IntroducedVersion>1.0.0.51</IntroducedVersion>
   <FormPresentation>1</FormPresentation>
   <FormActivationState>1</FormActivationState>
-  <form>
+  <form shownavigationbar="true" showImage="false" maxWidth="1900">
     <tabs>
       <tab id="{ffa54179-65a4-45cb-bd70-5ab78f523e20}" name="{ffa54179-65a4-45cb-bd70-5ab78f523e20}" availableforphone="false" verticallayout="true" IsUserDefined="1" locklevel="0" expanded="true" showlabel="false">
         <labels>
@@ -117,18 +117,18 @@
                       </control>
                     </cell>
                   </row>
-                  <row />
-                  <row />
-                  <row />
-                  <row />
-                  <row />
-                  <row />
-                  <row />
-                  <row />
-                  <row />
-                  <row />
-                  <row />
-                  <row />
+                  <row></row>
+                  <row></row>
+                  <row></row>
+                  <row></row>
+                  <row></row>
+                  <row></row>
+                  <row></row>
+                  <row></row>
+                  <row></row>
+                  <row></row>
+                  <row></row>
+                  <row></row>
                 </rows>
               </section>
             </sections>
@@ -175,6 +175,52 @@
                         <label description="Aktivitätsstatus" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="statecode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="statecode" />
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
+      <tab name="Hidden Attributes" id="{01a3ad0c-8ba0-ec70-50c0-40b883609da6}" IsUserDefined="0" locklevel="0" showlabel="true" visible="false" expanded="false">
+        <labels>
+          <label description="Hidden Attributes" languagecode="1033" />
+        </labels>
+        <columns>
+          <column width="100%">
+            <sections>
+              <section name="Hidden Section" showlabel="false" showbar="false" locklevel="0" id="{169ac3d5-1675-8da9-dea7-6c2e0392282d}" IsUserDefined="0" layout="varwidth" columns="11" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
+                <labels>
+                  <label description="Section" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{04c505a8-d8d1-081a-87c4-b87b58196bc9}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Customer First Name" languagecode="1033" />
+                      </labels>
+                      <control id="tc_customerfirstname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_customerfirstname" disabled="false" />
+                    </cell>
+                    <cell id="{0d866d8d-0abb-2503-cec4-91442905ecd5}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Customer Last Name" languagecode="1033" />
+                      </labels>
+                      <control id="tc_customerlastname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_customerlastname" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{1c76da7d-3451-d904-985c-70dceabd75a8}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Customer Email" languagecode="1033" />
+                      </labels>
+                      <control id="tc_customeremail" classid="{ADA2203E-B4CD-49be-9DDF-234642B43B52}" datafieldname="tc_customeremail" disabled="false" />
+                    </cell>
+                    <cell id="{7966580e-3b86-04e4-b145-138e543b5721}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Customer Phone" languagecode="1033" />
+                      </labels>
+                      <control id="tc_customerphone" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_customerphone" disabled="false" />
                     </cell>
                   </row>
                 </rows>
@@ -262,6 +308,11 @@
       </NavBarAreas>
     </Navigation>
     <controlDescriptions />
+    <formLibraries>
+      <Library name="tc_es6promise.js" libraryUniqueId="{728783cd-9939-3413-c784-e4b0a4e9ba73}" />
+      <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{365a70de-e7e3-8d57-b4d1-2ded7c524106}" />
+      <Library name="tc_Tc.Crm.Scripts.Events.SurveyResponse.js" libraryUniqueId="{24898716-4053-9d7e-a26b-7d35d868c940}" />
+    </formLibraries>
   </form>
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>

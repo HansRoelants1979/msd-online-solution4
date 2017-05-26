@@ -8,8 +8,30 @@
   <SiteMap />
   <EntityMaps />
   <EntityRelationships />
-  <OrganizationSettings />
+  <OrganizationSettings>
+    <email>
+      <trackingprefix>#;CRM:;</trackingprefix>
+      <trackingtokenidbase>0</trackingtokenidbase>
+      <trackingtokeniddigits>4</trackingtokeniddigits>
+      <maximumtrackingnumber>999999</maximumtrackingnumber>
+      <ignoreinternalemail>False</ignoreinternalemail>
+      <rendersecureiframeforemail>False</rendersecureiframeforemail>
+      <allowunresolvedpartiesonemailsend>True</allowunresolvedpartiesonemailsend>
+    </email>
+    <autoNumbering>
+      <campaignprefix>CMP</campaignprefix>
+      <contractprefix>CNR</contractprefix>
+      <caseprefix>CA</caseprefix>
+      <kbprefix>KBA</kbprefix>
+      <kaprefix>KA</kaprefix>
+      <categoryprefix>CAT</categoryprefix>
+      <orderprefix>ORD</orderprefix>
+      <invoiceprefix>INV</invoiceprefix>
+      <uniquespecifierlength>4</uniquespecifierlength>
+    </autoNumbering>
+  </OrganizationSettings>
   <optionsets />
+  <Reports />
   <ChannelPropertyGroups>
     <ChannelPropertyGroup>
       <ChannelPropertyGroupId>{ca4742c4-cf0f-e711-810e-1458d041f8e8}</ChannelPropertyGroupId>
@@ -96,6 +118,13 @@
               <MobileOfflineProfileItemId>{D6C3DE02-AFF3-E611-810B-1458D041F8E8}</MobileOfflineProfileItemId>
               <Name>Tc.Ids.Rep.CaseLine</Name>
               <RelationshipDisplayName>tc_incident_tc_caseline</RelationshipDisplayName>
+              <ProfileItemAssociationEntityFilter></ProfileItemAssociationEntityFilter>
+            </MobileOfflineProfileItemAssociation>
+            <MobileOfflineProfileItemAssociation MobileOfflineProfileItemAssociationId="677fe3b2-a13b-e711-8117-e0071b66a051" Name="Tc.Ids.Rep.Email">
+              <MobileOfflineProfileItemAssociationId>{677FE3B2-A13B-E711-8117-E0071B66A051}</MobileOfflineProfileItemAssociationId>
+              <MobileOfflineProfileItemId>{D6C3DE02-AFF3-E611-810B-1458D041F8E8}</MobileOfflineProfileItemId>
+              <Name>Tc.Ids.Rep.Email</Name>
+              <RelationshipDisplayName>Incident_Emails</RelationshipDisplayName>
               <ProfileItemAssociationEntityFilter></ProfileItemAssociationEntityFilter>
             </MobileOfflineProfileItemAssociation>
           </MobileOfflineProfileItemAssociations>
@@ -467,6 +496,30 @@
           <ProfileItemEntityFilter></ProfileItemEntityFilter>
           <EntitySchemaName>tc_compensationcalculationline</EntitySchemaName>
         </MobileOfflineProfileItem>
+        <MobileOfflineProfileItem MobileOfflineProfileItemId="b2300aa5-a13b-e711-8117-e0071b66a051" Name="Tc.Ids.Rep.Configuration">
+          <MobileOfflineProfileItemAssociations />
+          <MobileOfflineProfileItemId>{B2300AA5-A13B-E711-8117-E0071B66A051}</MobileOfflineProfileItemId>
+          <RegardingObjectId>{C7087ACD-B0EF-E611-8106-3863BB340DD8}</RegardingObjectId>
+          <Name>Tc.Ids.Rep.Configuration</Name>
+          <RecordDistributionCriteria>1</RecordDistributionCriteria>
+          <RecordsOwnedByMe>0</RecordsOwnedByMe>
+          <RecordsOwnedByMyTeam>0</RecordsOwnedByMyTeam>
+          <RecordsOwnedByMyBusinessUnit>0</RecordsOwnedByMyBusinessUnit>
+          <ProfileItemEntityFilter></ProfileItemEntityFilter>
+          <EntitySchemaName>tc_configuration</EntitySchemaName>
+        </MobileOfflineProfileItem>
+        <MobileOfflineProfileItem MobileOfflineProfileItemId="b6148bcd-a13b-e711-8117-e0071b66a051" Name="Tc.Ids.Rep.Email">
+          <MobileOfflineProfileItemAssociations />
+          <MobileOfflineProfileItemId>{B6148BCD-A13B-E711-8117-E0071B66A051}</MobileOfflineProfileItemId>
+          <RegardingObjectId>{C7087ACD-B0EF-E611-8106-3863BB340DD8}</RegardingObjectId>
+          <Name>Tc.Ids.Rep.Email</Name>
+          <RecordDistributionCriteria>0</RecordDistributionCriteria>
+          <RecordsOwnedByMe>0</RecordsOwnedByMe>
+          <RecordsOwnedByMyTeam>0</RecordsOwnedByMyTeam>
+          <RecordsOwnedByMyBusinessUnit>0</RecordsOwnedByMyBusinessUnit>
+          <ProfileItemEntityFilter></ProfileItemEntityFilter>
+          <EntitySchemaName>Email</EntitySchemaName>
+        </MobileOfflineProfileItem>
       </MobileOfflineProfileItems>
       <MobileOfflineProfileId>{c7087acd-b0ef-e611-8106-3863bb340dd8}</MobileOfflineProfileId>
       <Name>Tc.Ids.Rep</Name>
@@ -606,7 +659,7 @@
           <relatedfield>resolvebykpiid</relatedfield>
           <name>Tc.Case.SLA3rdPartyNo</name>
           <description></description>
-          <applicablewhenxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_3rdpartyresponserequired"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="950000001" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_casetypeid"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="&amp;#60;lookup&amp;#62;&amp;#60;value&amp;#32;uiname&amp;#32;&amp;#61;&amp;#32;&amp;#39;Complaint&amp;#39;&amp;#32;uitype&amp;#32;&amp;#61;&amp;#32;&amp;#39;tc_casetype&amp;#39;&amp;#32;&amp;#62;&amp;#38;&amp;#35;123&amp;#59;478C99E9-93E4-E611-8109-1458D041F8E8&amp;#38;&amp;#35;125&amp;#59;&amp;#60;&amp;#47;value&amp;#62;&amp;#60;&amp;#47;lookup&amp;#62;" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_originatingbusinessarea"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="950000002&amp;#59;950000001" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</applicablewhenxml>
+          <applicablewhenxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_3rdpartyresponserequired"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="950000001" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_casetypeid"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="&amp;#60;lookup&amp;#62;&amp;#60;value&amp;#32;uiname&amp;#32;&amp;#61;&amp;#32;&amp;#39;Complaint&amp;#39;&amp;#32;uitype&amp;#32;&amp;#61;&amp;#32;&amp;#39;tc_casetype&amp;#39;&amp;#32;&amp;#62;&amp;#38;&amp;#35;123&amp;#59;478C99E9-93E4-E611-8109-1458D041F8E8&amp;#38;&amp;#35;125&amp;#59;&amp;#60;&amp;#47;value&amp;#62;&amp;#60;&amp;#47;lookup&amp;#62;" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_originatingbusinessarea"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="950000002&amp;#59;950000001" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_24hourpromise"/&gt;&lt;column id="colOperator" value="ne"/&gt;&lt;column id="colStaticValue" value="950000000" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</applicablewhenxml>
           <successconditionsxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="statecode"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="2&amp;#59;1" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</successconditionsxml>
           <sequencenumber>1</sequencenumber>
           <workflowid>6c0b8350-d7ec-4dec-8a10-3fe54ade741a</workflowid>
@@ -619,7 +672,7 @@
           <relatedfield>resolvebykpiid</relatedfield>
           <name>Tc.Case.SLA3rdPartyYes</name>
           <description></description>
-          <applicablewhenxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_3rdpartyresponserequired"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="950000000" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_casetypeid"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="&amp;#60;lookup&amp;#62;&amp;#60;value&amp;#32;uiname&amp;#32;&amp;#61;&amp;#32;&amp;#39;Complaint&amp;#39;&amp;#32;uitype&amp;#32;&amp;#61;&amp;#32;&amp;#39;tc_casetype&amp;#39;&amp;#32;&amp;#62;&amp;#38;&amp;#35;123&amp;#59;478C99E9-93E4-E611-8109-1458D041F8E8&amp;#38;&amp;#35;125&amp;#59;&amp;#60;&amp;#47;value&amp;#62;&amp;#60;&amp;#47;lookup&amp;#62;" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_originatingbusinessarea"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="950000002&amp;#59;950000001" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</applicablewhenxml>
+          <applicablewhenxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_3rdpartyresponserequired"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="950000000" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_casetypeid"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="&amp;#60;lookup&amp;#62;&amp;#60;value&amp;#32;uiname&amp;#32;&amp;#61;&amp;#32;&amp;#39;Complaint&amp;#39;&amp;#32;uitype&amp;#32;&amp;#61;&amp;#32;&amp;#39;tc_casetype&amp;#39;&amp;#32;&amp;#62;&amp;#38;&amp;#35;123&amp;#59;478C99E9-93E4-E611-8109-1458D041F8E8&amp;#38;&amp;#35;125&amp;#59;&amp;#60;&amp;#47;value&amp;#62;&amp;#60;&amp;#47;lookup&amp;#62;" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_originatingbusinessarea"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="950000002&amp;#59;950000001" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_24hourpromise"/&gt;&lt;column id="colOperator" value="ne"/&gt;&lt;column id="colStaticValue" value="950000000" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</applicablewhenxml>
           <successconditionsxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="statecode"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="2&amp;#59;1" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</successconditionsxml>
           <sequencenumber>2</sequencenumber>
           <workflowid>dbe15aa6-98cf-461e-8777-811bf9eee8db</workflowid>
@@ -721,7 +774,6 @@
   </InteractionCentricDashboards>
   <WebResources />
   <SolutionPluginAssemblies />
-  <SdkMessageProcessingSteps />
   <Languages>
     <Language>1033</Language>
     <Language>1036</Language>

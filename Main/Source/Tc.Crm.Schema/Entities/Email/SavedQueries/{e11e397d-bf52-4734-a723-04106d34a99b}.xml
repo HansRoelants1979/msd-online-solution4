@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedquery unmodified="1">
+  <isquickfindquery>0</isquickfindquery>
+  <isprivate>0</isprivate>
+  <isdefault>1</isdefault>
+  <returnedtypecode>4202</returnedtypecode>
+  <savedqueryid>{e11e397d-bf52-4734-a723-04106d34a99b}</savedqueryid>
+  <queryapi></queryapi>
+  <querytype>8192</querytype>
+  <fetchxml>
+    <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="true">
+      <entity name="email">
+        <attribute name="activityid" />
+        <filter type="and">
+          <condition attribute="modifiedon" operator="last-x-days" value="180" />
+        </filter>
+        <link-entity name="activityparty" from="activityid" to="activityid" alias="aa">
+          <filter type="and">
+            <condition attribute="participationtypemask" operator="in">
+              <value>9</value>
+              <value>8</value>
+              <value>1</value>
+              <value>2</value>
+              <value>3</value>
+              <value>4</value>
+            </condition>
+            <condition attribute="partyid" operator="eq-userid" />
+          </filter>
+        </link-entity>
+      </entity>
+    </fetch>
+  </fetchxml>
+  <IntroducedVersion>5.0.0.0</IntroducedVersion>
+  <LocalizedNames>
+    <LocalizedName description="Aktuelle E-Mails, an denen ich beteiligt bin" languagecode="1031" />
+    <LocalizedName description="Recent Email Messages in which I am a Participant" languagecode="1033" />
+    <LocalizedName description="Messages électroniques récents auxquels j’ai participé" languagecode="1036" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description description="Kürzlich geänderte E-Mails, an denen ich beteiligt bin" languagecode="1031" />
+    <Description description="Recently changed email messages where I am a participant" languagecode="1033" />
+    <Description description="Messages électroniques modifiés récemment auxquels j’ai participé" languagecode="1036" />
+  </Descriptions>
+</savedquery>

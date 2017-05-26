@@ -79,9 +79,6 @@
                 <mxswa:ActivityReference.Properties>
                   <sco:Collection x:TypeArguments="Variable" x:Key="Variables" />
                   <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
-                    <Sequence DisplayName="SetVisibilityStep_ConditionBranchStep2_38: Show 3rd Party">
-                      <mcwc:SetVisibility ControlId="tc_3rdpartyagentid" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="True" />
-                    </Sequence>
                     <Sequence DisplayName="SetVisibilityStep1: Display Date Reported">
                       <mcwc:SetVisibility ControlId="tc_datereported" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="True" />
                     </Sequence>
@@ -161,14 +158,16 @@
                 <mxswa:ActivityReference.Properties>
                   <sco:Collection x:TypeArguments="Variable" x:Key="Variables" />
                   <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
-                    <Sequence DisplayName="SetVisibilityStep_ConditionBranchStep3_39: Show 3rd Party">
-                      <mcwc:SetVisibility ControlId="tc_3rdpartyagentid" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="False" />
-                    </Sequence>
                     <Sequence DisplayName="SetVisibilityStep17: Show Resolve By">
                       <mcwc:SetVisibility ControlId="resolveby" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="True" />
                     </Sequence>
                     <Sequence DisplayName="SetVisibilityStep5: Hide Date Reported">
                       <mcwc:SetVisibility ControlId="tc_datereported" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="False" />
+                    </Sequence>
+                    <Sequence DisplayName="SetFieldRequiredLevelStep_SetVisibilityStep5_37: Date Reported Non-Mandatory">
+                      <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;incident&quot;)]" />
+                      <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
+                      <mcwc:SetFieldRequiredLevel ControlId="tc_datereported" ControlType="standard" DisplayName="SetFieldRequiredLevelStep_SetVisibilityStep5_37" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="None" />
                     </Sequence>
                     <Sequence DisplayName="SetAttributeValueStep6: Clear value">
                       <Sequence.Variables>
@@ -262,7 +261,7 @@
                       <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep29" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" />
                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep39: Hide 3rd Party Response">
+                    <Sequence DisplayName="SetVisibilityStep39396: Hide 3rd Party Response">
                       <mcwc:SetVisibility ControlId="tc_3rdpartyresponserequired" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="False" />
                     </Sequence>
                     <Sequence DisplayName="SetAttributeValueStep40: Clear 3rd Party Response">
@@ -339,9 +338,6 @@
                 <mxswa:ActivityReference.Properties>
                   <sco:Collection x:TypeArguments="Variable" x:Key="Variables" />
                   <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
-                    <Sequence DisplayName="SetVisibilityStep_ConditionBranchStep4_40: Show 3rd Party">
-                      <mcwc:SetVisibility ControlId="tc_3rdpartyagentid" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="False" />
-                    </Sequence>
                     <Sequence DisplayName="SetVisibilityStep19: Hide Resolve By">
                       <mcwc:SetVisibility ControlId="resolveby" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="False" />
                     </Sequence>

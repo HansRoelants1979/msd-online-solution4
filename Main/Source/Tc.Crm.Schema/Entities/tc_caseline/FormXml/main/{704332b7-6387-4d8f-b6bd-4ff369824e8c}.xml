@@ -271,27 +271,11 @@
                   <row />
                   <row />
                   <row>
-                    <cell id="{2106b783-6727-d0d4-8a20-89db3465e18c}" showlabel="true" locklevel="0" visible="false">
+                    <cell id="{584d3928-5dca-5786-a876-e0dc6cc45dae}" showlabel="true" locklevel="0" visible="false">
                       <labels>
-                        <label description="Mandatory Conditions Met" languagecode="1033" />
+                        <label description="Total Passengers Impacted" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_mandatoryconditionsmet" uniqueid="{01dac076-07c3-d430-3a0b-3b1a4d7ab86b}" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="tc_mandatoryconditionsmet" />
-                    </cell>
-                  </row>
-                  <row>
-                    <cell id="{ca671720-1b58-4665-a2da-aa738ee692c8}" showlabel="true" locklevel="0" visible="false">
-                      <labels>
-                        <label description="Name" languagecode="1033" />
-                      </labels>
-                      <control disabled="false" id="tc_name" uniqueid="{8ad81254-4266-d864-e447-7b9eceb87576}" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_name" />
-                    </cell>
-                  </row>
-                  <row>
-                    <cell id="{b177c2e8-d74e-9c53-9ec7-d4994277b936}" showlabel="true" locklevel="0" visible="false">
-                      <labels>
-                        <label description="IsLocked" languagecode="1033" />
-                      </labels>
-                      <control disabled="false" id="tc_islocked" uniqueid="{3edca17e-2db8-52d8-20da-8ec528d25ed5}" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="tc_islocked" />
+                      <control id="tc_totalpassengersimpacted" classid="{C6D124CA-7EDA-4a60-AEA9-7FB8D318B68F}" datafieldname="tc_totalpassengersimpacted" disabled="false" uniqueid="{598ab99b-5db4-2c24-3b47-a41c28047a32}" />
                     </cell>
                   </row>
                 </rows>
@@ -380,7 +364,7 @@
                       <labels>
                         <label description="Do you wish to notify Supplier?" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_notifysupplier" uniqueid="{b25795a9-52da-2672-1c9c-88c56636d6e8}" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="tc_notifysupplier" />
+                      <control disabled="false" id="tc_notifysupplier" uniqueid="{b25795a9-52da-2672-1c9c-88c56636d6e8}" classid="{B0C6723A-8503-4fd7-BB28-C8A06AC933C2}" datafieldname="tc_notifysupplier" />
                     </cell>
                   </row>
                   <row>
@@ -480,14 +464,6 @@
                       <control disabled="false" id="tc_accommodationpassengers" uniqueid="{3a4bc9b4-9301-13d7-50e6-ca8690611916}" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_accommodationpassengers" />
                     </cell>
                   </row>
-                  <row>
-                    <cell id="{8078299d-a123-60c4-5ce9-333177a60905}" showlabel="true" locklevel="0" visible="false">
-                      <labels>
-                        <label description="Passengers Impacted" languagecode="1033" />
-                      </labels>
-                      <control disabled="false" id="tc_accommodationpassengersimpacted" uniqueid="{3acba4d6-730e-d07c-0134-366944a5bea4}" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_accommodationpassengersimpacted" />
-                    </cell>
-                  </row>
                 </rows>
               </section>
               <section id="{b0213e26-cd3b-444c-718c-2c3a94b8a602}" name="{db553bb7-2361-4984-8c81-6a8e0ecfede2}_section_5" showlabel="true" locklevel="0" IsUserDefined="0" celllabelposition="Left" celllabelalignment="Left" labelwidth="115" columns="1" showbar="true" visible="false" layout="varwidth">
@@ -553,14 +529,6 @@
                       <control id="tc_transportflightnumber" uniqueid="{92c80bc4-c4c6-e051-06b5-a74603c04c67}" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_transportflightnumber" />
                     </cell>
                   </row>
-                  <row>
-                    <cell id="{d883717c-3249-b6a7-3ea0-5ac0b819cca1}" showlabel="true" locklevel="0" visible="false">
-                      <labels>
-                        <label description="Passengers Impacted" languagecode="1033" />
-                      </labels>
-                      <control disabled="false" id="tc_transportpassengersimpacted" uniqueid="{671a2d26-8768-b185-68ee-ce0360b5115c}" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_transportpassengersimpacted" />
-                    </cell>
-                  </row>
                 </rows>
               </section>
               <section id="{5a6673d3-d1cd-c976-707a-e619633baaaa}" name="{db553bb7-2361-4984-8c81-6a8e0ecfede2}_section_7" showlabel="true" locklevel="0" IsUserDefined="0" celllabelposition="Left" celllabelalignment="Left" labelwidth="115" columns="1" showbar="true" visible="false" layout="varwidth">
@@ -600,14 +568,6 @@
                       <control disabled="false" id="tc_bookingtransferpassengersassigned" uniqueid="{013600e4-cd92-98a5-4b6e-395059a9c08c}" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_bookingtransferpassengersassigned" />
                     </cell>
                   </row>
-                  <row>
-                    <cell id="{de2d5a95-b06b-14ae-4b52-cd4bce178cc7}" showlabel="true" locklevel="0" visible="false">
-                      <labels>
-                        <label description="Passengers Impacted" languagecode="1033" />
-                      </labels>
-                      <control disabled="false" id="tc_bookingtransferpassengersimpacted" uniqueid="{275b99eb-e116-d75e-ca26-b44d27030e5b}" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_bookingtransferpassengersimpacted" />
-                    </cell>
-                  </row>
                 </rows>
               </section>
               <section id="{20a39acd-61d7-3e55-27ca-bca45538e252}" name="{db553bb7-2361-4984-8c81-6a8e0ecfede2}_section_8" showlabel="true" locklevel="0" IsUserDefined="0" celllabelposition="Left" celllabelalignment="Left" labelwidth="115" columns="1" showbar="true" visible="false" layout="varwidth">
@@ -621,6 +581,14 @@
                         <label description="Service Description" languagecode="1033" />
                       </labels>
                       <control disabled="false" id="tc_bookingextraservicedescription" uniqueid="{462255c7-9cb3-ed57-b356-8c513d6b7d5d}" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="tc_bookingextraservicedescription" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{64ea8652-da36-7cd5-143b-2bed6d6ae8a8}" showlabel="true" locklevel="0" visible="false">
+                      <labels>
+                        <label description="Start Date &amp; Time" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_extraservicestartdatetime" uniqueid="{424134e8-3d61-95e8-e79b-5b6287221d11}" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="tc_extraservicestartdatetime" />
                     </cell>
                   </row>
                   <row>
@@ -639,22 +607,6 @@
                       <control disabled="false" id="tc_extraserviceparticipants" uniqueid="{169c6e45-2e76-3101-6d7e-bc4ade83aa46}" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_extraserviceparticipants" />
                     </cell>
                   </row>
-                  <row>
-                    <cell id="{64ea8652-da36-7cd5-143b-2bed6d6ae8a8}" showlabel="true" locklevel="0" visible="false">
-                      <labels>
-                        <label description="Start Date &amp; Time" languagecode="1033" />
-                      </labels>
-                      <control disabled="false" id="tc_extraservicestartdatetime" uniqueid="{424134e8-3d61-95e8-e79b-5b6287221d11}" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="tc_extraservicestartdatetime" />
-                    </cell>
-                  </row>
-                  <row>
-                    <cell id="{ec64586b-9216-2669-e128-6ca7903e8ad7}" showlabel="true" locklevel="0" visible="false">
-                      <labels>
-                        <label description="Passengers Impacted" languagecode="1033" />
-                      </labels>
-                      <control disabled="false" id="tc_extraservicepassengersimpacted" uniqueid="{cb321d9b-8287-639d-344e-513a7b642a63}" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_extraservicepassengersimpacted" />
-                    </cell>
-                  </row>
                 </rows>
               </section>
             </sections>
@@ -668,9 +620,9 @@
         <columns>
           <column width="50%">
             <sections>
-              <section id="{4d5ad3c1-bae6-6a13-4503-e300671b0418}" name="tab_2_section_1" showlabel="false" locklevel="0" IsUserDefined="0" labelwidth="115" columns="1" showbar="false" layout="varwidth">
+              <section id="{4d5ad3c1-bae6-6a13-4503-e300671b0418}" name="tab_2_section_1" showlabel="true" locklevel="0" IsUserDefined="0" labelwidth="115" columns="1" showbar="true" layout="varwidth" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
-                  <label description="Section" languagecode="1033" />
+                  <label description="CALCULATOR" languagecode="1033" />
                 </labels>
                 <rows>
                   <row>
@@ -678,7 +630,7 @@
                       <labels>
                         <label description="Total Booking Value" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_totalbookingvalue" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_totalbookingvalue" />
+                      <control disabled="false" id="tc_totalbookingvalue" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_totalbookingvalue" uniqueid="{c1cbda5c-83a2-547a-2131-c28953386d50}" />
                     </cell>
                   </row>
                   <row>
@@ -686,7 +638,7 @@
                       <labels>
                         <label description="Duration of Stay" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_durationofstay" classid="{C6D124CA-7EDA-4a60-AEA9-7FB8D318B68F}" datafieldname="tc_durationofstay" />
+                      <control disabled="false" id="tc_durationofstay" classid="{C6D124CA-7EDA-4a60-AEA9-7FB8D318B68F}" datafieldname="tc_durationofstay" uniqueid="{2bc4b72c-bb82-9c6d-8c9a-68c6a9234964}" />
                     </cell>
                   </row>
                   <row>
@@ -694,7 +646,7 @@
                       <labels>
                         <label description="Days Affected" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_numberdaysaffected" classid="{C6D124CA-7EDA-4a60-AEA9-7FB8D318B68F}" datafieldname="tc_numberdaysaffected" />
+                      <control disabled="false" id="tc_numberdaysaffected" classid="{C6D124CA-7EDA-4a60-AEA9-7FB8D318B68F}" datafieldname="tc_numberdaysaffected" uniqueid="{113e878c-74a6-5141-860a-3d86a6c358ce}" />
                     </cell>
                   </row>
                   <row>
@@ -702,7 +654,7 @@
                       <labels>
                         <label description="Product Type" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_producttype" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_producttype" />
+                      <control disabled="false" id="tc_producttype" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_producttype" uniqueid="{8625bcea-8e92-5e19-b81b-ee36084175b7}" />
                     </cell>
                   </row>
                   <row>
@@ -710,7 +662,7 @@
                       <labels>
                         <label description="Impact" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_impact" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_impact" />
+                      <control disabled="false" id="tc_impact" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_impact" uniqueid="{214cc2aa-08c1-8b16-8e3b-13b65b34cc5a}" />
                     </cell>
                   </row>
                   <row>
@@ -723,7 +675,7 @@
                   </row>
                 </rows>
               </section>
-              <section id="{32d3a890-6a11-852a-ad3e-051d655a332b}" name="tab_CompensationCalculator_BuildingWork" showlabel="true" locklevel="0" IsUserDefined="0" celllabelposition="Left" celllabelalignment="Left" labelwidth="115" columns="1" showbar="true" layout="varwidth">
+              <section id="{32d3a890-6a11-852a-ad3e-051d655a332b}" name="tab_CompensationCalculator_BuildingWork" showlabel="true" locklevel="0" IsUserDefined="0" celllabelposition="Top" celllabelalignment="Left" labelwidth="130" columns="1" showbar="true" layout="varwidth">
                 <labels>
                   <label description="BUILDING WORK" languagecode="1033" />
                 </labels>
@@ -733,12 +685,12 @@
                       <labels>
                         <label description="Building Work Grade" languagecode="1033" />
                       </labels>
-                      <control id="tc_buildingworkgrade" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_buildingworkgrade" />
+                      <control id="tc_buildingworkgrade" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_buildingworkgrade" uniqueid="{d5990d72-2b06-becc-3bb6-164c1647a5ce}" disabled="false" />
                     </cell>
                   </row>
                 </rows>
               </section>
-              <section id="{46e8a15d-ac04-27c7-3576-9dc0c5129067}" name="tab_CompensationCalculator_RoomType" showlabel="true" locklevel="0" IsUserDefined="0" celllabelposition="Left" celllabelalignment="Left" labelwidth="115" columns="1" showbar="true" layout="varwidth">
+              <section id="{46e8a15d-ac04-27c7-3576-9dc0c5129067}" name="tab_CompensationCalculator_RoomType" showlabel="true" locklevel="0" IsUserDefined="0" celllabelposition="Top" celllabelalignment="Left" labelwidth="130" columns="1" showbar="true" layout="varwidth">
                 <labels>
                   <label description="ROOM TYPE" languagecode="1033" />
                 </labels>
@@ -748,12 +700,62 @@
                       <labels>
                         <label description="Cost - Wrong Room Type" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_costwrongroomtype" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_costwrongroomtype" />
+                      <control disabled="false" id="tc_costwrongroomtype" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_costwrongroomtype" uniqueid="{4dcda91b-85b0-085b-a2d4-0e157bd2e602}" />
                     </cell>
                   </row>
                 </rows>
               </section>
-              <section id="{622ae855-6993-7eb8-236e-45a9abd38323}" name="tab_2_section_4" showlabel="true" locklevel="0" IsUserDefined="0" celllabelposition="Left" celllabelalignment="Left" labelwidth="115" columns="1" showbar="true" layout="varwidth">
+              <section id="{2d9313e9-a36c-e3de-9ee9-78dc22808dc1}" name="tab_2_section_2" showlabel="true" locklevel="0" IsUserDefined="0" labelwidth="150" columns="1" showbar="true" layout="varwidth" celllabelalignment="Left" celllabelposition="Top">
+                <labels>
+                  <label description="COMMENTS" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{408c6aa1-5b2d-2a78-dcd5-8563ca728db6}" showlabel="true" locklevel="0" rowspan="8">
+                      <labels>
+                        <label description="Impact &amp; Severity" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_impactseveritycomments" uniqueid="{b7d88912-6cab-754d-8134-d672a8e1165b}" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="tc_impactseveritycomments" />
+                    </cell>
+                  </row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row>
+                    <cell id="{2106b783-6727-d0d4-8a20-89db3465e18c}" showlabel="true" locklevel="0" visible="false">
+                      <labels>
+                        <label description="Mandatory Conditions Met" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_mandatoryconditionsmet" uniqueid="{01dac076-07c3-d430-3a0b-3b1a4d7ab86b}" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="tc_mandatoryconditionsmet" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{b177c2e8-d74e-9c53-9ec7-d4994277b936}" showlabel="true" locklevel="0" visible="false">
+                      <labels>
+                        <label description="IsLocked" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_islocked" uniqueid="{3edca17e-2db8-52d8-20da-8ec528d25ed5}" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="tc_islocked" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{ca671720-1b58-4665-a2da-aa738ee692c8}" showlabel="true" locklevel="0" visible="false">
+                      <labels>
+                        <label description="Name" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_name" uniqueid="{8ad81254-4266-d864-e447-7b9eceb87576}" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_name" />
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+          <column width="50%">
+            <sections>
+              <section id="{622ae855-6993-7eb8-236e-45a9abd38323}" name="tab_2_section_4" showlabel="true" locklevel="0" IsUserDefined="0" celllabelposition="Top" celllabelalignment="Left" labelwidth="150" columns="1" showbar="true" layout="varwidth">
                 <labels>
                   <label description="AMOUNTS" languagecode="1033" />
                 </labels>
@@ -761,7 +763,7 @@
                   <row>
                     <cell id="{00b8dea1-e92d-b98b-7dba-8742e3b5b42b}" showlabel="true" locklevel="0">
                       <labels>
-                        <label description="Proposed Compensation Value" languagecode="1033" />
+                        <label description="Recommended Min Compensation Value" languagecode="1033" />
                       </labels>
                       <control disabled="true" id="tc_proposedcompensationvalue" uniqueid="{eda322d8-6533-dd56-464d-09dee9d75115}" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_proposedcompensationvalue" />
                     </cell>
@@ -769,7 +771,7 @@
                   <row>
                     <cell id="{c95d4b8a-e210-7339-3895-657743b232cb}" showlabel="true" locklevel="0">
                       <labels>
-                        <label description="Proposed Max Compensation Value" languagecode="1033" />
+                        <label description="Recommended Max Compensation Value" languagecode="1033" />
                       </labels>
                       <control disabled="true" id="tc_proposedmaxcompensationvalue" uniqueid="{041573e1-6e78-bde2-730d-e575dcc848ba}" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_proposedmaxcompensationvalue" />
                     </cell>
@@ -784,30 +786,23 @@
                   </row>
                 </rows>
               </section>
-            </sections>
-          </column>
-          <column width="50%">
-            <sections>
-              <section id="{2d9313e9-a36c-e3de-9ee9-78dc22808dc1}" name="tab_2_section_2" showlabel="false" locklevel="0" IsUserDefined="0" labelwidth="115" columns="1" showbar="false" layout="varwidth">
+              <section name="tab_compensationCalculator_section_6" showlabel="false" showbar="false" locklevel="0" id="{055e07b2-5b84-b2ec-1541-2dd613b6586c}" IsUserDefined="0" layout="varwidth" columns="11" labelwidth="115">
                 <labels>
                   <label description="Section" languagecode="1033" />
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{408c6aa1-5b2d-2a78-dcd5-8563ca728db6}" showlabel="true" locklevel="0" rowspan="8">
+                    <cell id="{a954b131-4b6b-a889-7e8c-63a848accb57}" showlabel="false">
                       <labels>
-                        <label description="Impact &amp; Severity Comments" languagecode="1033" />
+                        <label description="" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_impactseveritycomments" uniqueid="{b7d88912-6cab-754d-8134-d672a8e1165b}" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="tc_impactseveritycomments" />
+                    </cell>
+                    <cell id="{ceda8b45-d87a-724e-de6d-d8b3955dade4}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
                     </cell>
                   </row>
-                  <row />
-                  <row />
-                  <row />
-                  <row />
-                  <row />
-                  <row />
-                  <row />
                 </rows>
               </section>
             </sections>
@@ -883,7 +878,7 @@
               </parameters>
             </control>
           </cell>
-          <cell id="{46bd4d2d-0e01-77e7-82e9-855b581e670b}" showlabel="false">
+          <cell id="{2ed71d09-c63a-37ae-c989-5ab49d8d6c78}" showlabel="false">
             <labels>
               <label description="" languagecode="1033" />
             </labels>
@@ -891,6 +886,27 @@
         </row>
       </rows>
     </header>
+    <footer id="{35a2e284-a8ec-4127-81d5-7af74480194e}" columns="111">
+      <rows>
+        <row>
+          <cell id="{2276c5c3-1081-a963-a5a9-761771aba08e}" showlabel="false">
+            <labels>
+              <label description="" languagecode="1033" />
+            </labels>
+          </cell>
+          <cell id="{44c6d2d3-6b07-4a8f-b10b-2e5eb213a3de}" showlabel="false">
+            <labels>
+              <label description="" languagecode="1033" />
+            </labels>
+          </cell>
+          <cell id="{17b849db-2fa5-45b7-aee8-e022fc4097a2}" showlabel="false">
+            <labels>
+              <label description="" languagecode="1033" />
+            </labels>
+          </cell>
+        </row>
+      </rows>
+    </footer>
     <Navigation>
       <NavBar>
         <NavBarByRelationshipItem Id="nav_tc_caseline_tc_compensation_1" Area="Info" Sequence="10000" RelationshipName="tc_caseline_tc_compensation_1" Show="false">
@@ -1015,6 +1031,7 @@
     <formLibraries>
       <Library name="tc_es6promise.js" libraryUniqueId="{944351ac-ce4c-a89c-d786-1b97cdbbe8ac}" />
       <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{5ca03ab9-19b4-6bd3-80a4-d55c96016666}" />
+      <Library name="tc_Tc.Crm.Scripts.Library.CaseLine.js" libraryUniqueId="{78582764-86a1-872b-09b1-1d276463ae66}" />
       <Library name="tc_Tc.Crm.Scripts.Events.CaseLine.js" libraryUniqueId="{0e5de6a3-ccaa-1984-1448-32a1e9171583}" />
     </formLibraries>
     <events>
@@ -1031,6 +1048,51 @@
       <event name="onchange" application="false" active="false" attribute="tc_category3id">
         <Handlers>
           <Handler functionName="Tc.Crm.Scripts.Events.CaseLine.OnCaseCategoryLevel3Change" libraryName="tc_Tc.Crm.Scripts.Events.CaseLine.js" handlerUniqueId="{b08542c3-4219-924e-e6d5-4b0222c3e3ba}" enabled="true" parameters="" passExecutionContext="false" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_totalbookingvalue">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.CaseLine.OnCompensationCalculate" libraryName="tc_Tc.Crm.Scripts.Events.CaseLine.js" handlerUniqueId="{ee63c94d-a990-d0e9-7488-ac0585b78503}" enabled="true" parameters="" passExecutionContext="false" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_durationofstay">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.CaseLine.OnCompensationCalculate" libraryName="tc_Tc.Crm.Scripts.Events.CaseLine.js" handlerUniqueId="{21e6a401-5a5b-15a9-0e9c-4963e107b313}" enabled="true" parameters="" passExecutionContext="false" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_numberdaysaffected">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.CaseLine.OnCompensationCalculate" libraryName="tc_Tc.Crm.Scripts.Events.CaseLine.js" handlerUniqueId="{ba009805-8482-5c3e-7761-2e1562a01539}" enabled="true" parameters="" passExecutionContext="false" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_producttype">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.CaseLine.OnCompensationCalculate" libraryName="tc_Tc.Crm.Scripts.Events.CaseLine.js" handlerUniqueId="{96920b52-b16d-5268-2225-c209e3a3b237}" enabled="true" parameters="" passExecutionContext="false" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_impact">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.CaseLine.OnCompensationCalculate" libraryName="tc_Tc.Crm.Scripts.Events.CaseLine.js" handlerUniqueId="{7b708738-a890-e3ac-4547-d7b4dd45a1a9}" enabled="true" parameters="" passExecutionContext="false" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_severity">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.CaseLine.OnCompensationCalculate" libraryName="tc_Tc.Crm.Scripts.Events.CaseLine.js" handlerUniqueId="{1a81ca10-4422-1caa-1251-c8d61582eb0e}" enabled="true" parameters="" passExecutionContext="false" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_buildingworkgrade">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.CaseLine.OnCompensationCalculate" libraryName="tc_Tc.Crm.Scripts.Events.CaseLine.js" handlerUniqueId="{c634490c-de8c-c8b0-7656-b3de0318adce}" enabled="true" parameters="" passExecutionContext="false" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_costwrongroomtype">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.CaseLine.OnCompensationCalculate" libraryName="tc_Tc.Crm.Scripts.Events.CaseLine.js" handlerUniqueId="{63799d2c-eb3e-0020-9138-08d998b1aca4}" enabled="true" parameters="" passExecutionContext="false" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_impactseveritycomments">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.CaseLine.OnCompensationCalculate" libraryName="tc_Tc.Crm.Scripts.Events.CaseLine.js" handlerUniqueId="{ed96913c-8a00-630a-61a3-80193dedee74}" enabled="true" parameters="" passExecutionContext="false" />
         </Handlers>
       </event>
     </events>

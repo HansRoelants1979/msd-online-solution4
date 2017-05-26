@@ -1,14 +1,59 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RibbonDiffXml>
-  <CustomActions />
+  <CustomActions>
+    <HideCustomAction HideActionId="tc.Mscrm.Form.tc_surveyresponse.Convert.Case.Hide" Location="Mscrm.Form.tc_surveyresponse.Convert.Case" />
+    <HideCustomAction HideActionId="tc.Mscrm.Form.tc_surveyresponse.Convert.Opportunity.Hide" Location="Mscrm.Form.tc_surveyresponse.Convert.Opportunity" />
+    <CustomAction Id="tc.tc_surveyresponse.Button.ConvertToComplaint.CustomAction" Location="Mscrm.Form.tc_surveyresponse.MainTab.Convert.Controls._children" Sequence="20">
+      <CommandUIDefinition>
+        <Button Alt="$LocLabels:tc.tc_surveyresponse.Button.ConvertToComplaint.Alt" Command="tc.tc_surveyresponse.Command.ConvertToComplaint" Id="tc.tc_surveyresponse.Button.ConvertToComplaint" Image32by32="/_imgs/ribbon/ConvertCase_32.png" Image16by16="/_imgs/ribbon/ConvertCase_16.png" LabelText="$LocLabels:tc.tc_surveyresponse.Button.ConvertToComplaint.LabelText" Sequence="20" TemplateAlias="o1" ToolTipTitle="$LocLabels:tc.tc_surveyresponse.Button.ConvertToComplaint.ToolTipTitle" ToolTipDescription="$LocLabels:tc.tc_surveyresponse.Button.ConvertToComplaint.ToolTipDescription" />
+      </CommandUIDefinition>
+    </CustomAction>
+  </CustomActions>
   <Templates>
     <RibbonTemplates Id="Mscrm.Templates"></RibbonTemplates>
   </Templates>
-  <CommandDefinitions />
+  <CommandDefinitions>
+    <CommandDefinition Id="tc.tc_surveyresponse.Command.ConvertToComplaint">
+      <EnableRules />
+      <DisplayRules>
+        <DisplayRule Id="tc.tc_surveyresponse.DisplayRule1.ConvertToComplaint" />
+      </DisplayRules>
+      <Actions>
+        <JavaScriptFunction FunctionName="Tc.Crm.Scripts.Events.SurveyResponse.ConvertToComplaint" Library="$webresource:tc_Tc.Crm.Scripts.Events.SurveyResponse.js" />
+        <JavaScriptFunction FunctionName="isNaN" Library="$webresource:tc_Tc.Crm.Scripts.Common.js" />
+        <JavaScriptFunction FunctionName="isNaN" Library="$webresource:tc_es6promise.js" />
+      </Actions>
+    </CommandDefinition>
+  </CommandDefinitions>
   <RuleDefinitions>
     <TabDisplayRules />
-    <DisplayRules />
+    <DisplayRules>
+      <DisplayRule Id="tc.tc_surveyresponse.DisplayRule1.ConvertToComplaint">
+        <FormStateRule State="Existing" Default="false" InvertResult="false" />
+      </DisplayRule>
+    </DisplayRules>
     <EnableRules />
   </RuleDefinitions>
-  <LocLabels />
+  <LocLabels>
+    <LocLabel Id="tc.tc_surveyresponse.Button.ConvertToComplaint.Alt">
+      <Titles>
+        <Title description="Convert To Complaint" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+    <LocLabel Id="tc.tc_surveyresponse.Button.ConvertToComplaint.LabelText">
+      <Titles>
+        <Title description="Convert To Complaint" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+    <LocLabel Id="tc.tc_surveyresponse.Button.ConvertToComplaint.ToolTipDescription">
+      <Titles>
+        <Title description="To create a Case for Survey Response" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+    <LocLabel Id="tc.tc_surveyresponse.Button.ConvertToComplaint.ToolTipTitle">
+      <Titles>
+        <Title description="To create a Case" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+  </LocLabels>
 </RibbonDiffXml>

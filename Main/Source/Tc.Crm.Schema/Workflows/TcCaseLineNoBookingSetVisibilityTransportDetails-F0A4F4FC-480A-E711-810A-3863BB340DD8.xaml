@@ -103,9 +103,6 @@
                     <Sequence DisplayName="SetVisibilityStep5: Show Filight Number">
                       <mcwc:SetVisibility ControlId="tc_transportflightnumber" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_caseline" IsVisible="True" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep6: Show Passengers Impacted">
-                      <mcwc:SetVisibility ControlId="tc_transportpassengersimpacted" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_caseline" IsVisible="True" />
-                    </Sequence>
                   </sco:Collection>
                 </mxswa:ActivityReference.Properties>
               </mxswa:ActivityReference>
@@ -225,25 +222,6 @@
                         </mxswa:SetEntityProperty.TargetType>
                       </mxswa:SetEntityProperty>
                       <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep17" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_caseline" />
-                      <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
-                    </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep18: Hide Passengers Impacted">
-                      <mcwc:SetVisibility ControlId="tc_transportpassengersimpacted" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_caseline" IsVisible="False" />
-                    </Sequence>
-                    <Sequence DisplayName="SetAttributeValueStep19: Clear Passengers Impacted">
-                      <Sequence.Variables>
-                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep19_1" />
-                      </Sequence.Variables>
-                      <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;tc_caseline&quot;)]" />
-                      <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mxswa:SetEntityProperty Attribute="tc_transportpassengersimpacted" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_caseline" Value="[SetAttributeValueStep19_1]">
-                        <mxswa:SetEntityProperty.TargetType>
-                          <InArgument x:TypeArguments="s:Type">
-                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
-                          </InArgument>
-                        </mxswa:SetEntityProperty.TargetType>
-                      </mxswa:SetEntityProperty>
-                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep19" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_caseline" />
                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
                     </Sequence>
                   </sco:Collection>

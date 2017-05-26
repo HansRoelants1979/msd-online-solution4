@@ -179,24 +179,24 @@
                       <control disabled="false" id="description" uniqueid="{ab9722b3-e85a-b8b1-ca2b-42edb503a259}" datafieldname="description" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" />
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                   <row>
                     <cell id="{8446993c-9242-365b-6647-43927787e941}" showlabel="true" locklevel="0" rowspan="6">
                       <labels>
-                        <label description="Expected Resolution" languagecode="1033" />
+                        <label description="Customer Expectation" languagecode="1033" />
                       </labels>
                       <control disabled="false" id="tc_expectedresolution" uniqueid="{d455da44-ccc8-0ea1-38e5-008b7bdd7467}" datafieldname="tc_expectedresolution" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" />
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
             </sections>
@@ -238,30 +238,30 @@
                       </control>
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
             </sections>
@@ -329,7 +329,7 @@
                   <row>
                     <cell id="{eafbc418-2de0-485f-9f9a-590f97e0389d}" showlabel="false" locklevel="1" colspan="1" auto="false">
                       <labels>
-                        <label description="Contact" languagecode="1033" />
+                        <label description="Kunde" languagecode="1033" />
                         <label description="Client" languagecode="1036" />
                         <label description="Kunde" languagecode="1031" />
                       </labels>
@@ -356,6 +356,14 @@
                         <label description="Comm. Method" languagecode="1033" />
                       </labels>
                       <control disabled="false" id="tc_preferredmethodofcommunication" uniqueid="{13a57231-cb1a-c305-76e6-27021dee2ca1}" datafieldname="tc_preferredmethodofcommunication" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{4ba24198-1581-1397-2d6c-265c86d74bec}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Send Comms Manually" languagecode="1033" />
+                      </labels>
+                      <control id="tc_sendemails" classid="{B0C6723A-8503-4fd7-BB28-C8A06AC933C2}" datafieldname="tc_sendemails" disabled="false" uniqueid="{0b0c3d33-ca95-1985-3ad8-8dcbe747e505}" />
                     </cell>
                   </row>
                   <row>
@@ -439,7 +447,7 @@
           </column>
         </columns>
       </tab>
-      <tab id="{9c5799d7-ad8b-8db9-ca47-d925368330da}" name="booking_details" showlabel="true" locklevel="0" IsUserDefined="0" expanded="true">
+      <tab id="{9c5799d7-ad8b-8db9-ca47-d925368330da}" name="booking_details" showlabel="true" locklevel="0" IsUserDefined="0" expanded="false">
         <labels>
           <label description="Booking Details" languagecode="1033" />
         </labels>
@@ -633,6 +641,8 @@
                           <DefaultViewId>{4E29CB42-F586-45B8-9D57-AF21CEA59536}</DefaultViewId>
                           <AllowFilterOff>false</AllowFilterOff>
                           <DependentAttributeType>tc_location</DependentAttributeType>
+                          <FilterRelationshipName>tc_gateway_tc_primary_location</FilterRelationshipName>
+                          <DependentAttributeName>incident.tc_locationid</DependentAttributeName>
                         </parameters>
                       </control>
                     </cell>
@@ -682,14 +692,6 @@
                     </cell>
                   </row>
                   <row>
-                    <cell id="{5839396e-63b5-7089-8101-477559082c91}" showlabel="true" locklevel="0" visible="false">
-                      <labels>
-                        <label description="Arrival Date" languagecode="1033" />
-                      </labels>
-                      <control disabled="false" id="tc_arrivaldate" uniqueid="{12651743-5a23-2627-dc14-050874a5a1cd}" datafieldname="tc_arrivaldate" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" />
-                    </cell>
-                  </row>
-                  <row>
                     <cell id="{bc0632a7-68b3-9805-23dd-66c03bc3b885}" showlabel="true" locklevel="0" visible="false">
                       <labels>
                         <label description="Booking Travel Amount" languagecode="1033" />
@@ -703,6 +705,14 @@
                         <label description="Departure Date" languagecode="1033" />
                       </labels>
                       <control disabled="false" id="tc_departuredate" uniqueid="{49604071-659d-721a-ac6d-c1451d47e821}" datafieldname="tc_departuredate" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{5839396e-63b5-7089-8101-477559082c91}" showlabel="true" locklevel="0" visible="false">
+                      <labels>
+                        <label description="Arrival Date" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_arrivaldate" uniqueid="{12651743-5a23-2627-dc14-050874a5a1cd}" datafieldname="tc_arrivaldate" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" />
                     </cell>
                   </row>
                   <row>
@@ -780,10 +790,10 @@
                       </control>
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
             </sections>
@@ -839,10 +849,10 @@
                       </control>
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
             </sections>
@@ -886,11 +896,11 @@
                       </control>
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
             </sections>
@@ -927,15 +937,15 @@
                       </control>
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row height="auto"></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row height="auto" />
                 </rows>
               </section>
             </sections>
@@ -1093,12 +1103,12 @@
                       </control>
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
               <section id="{e6031605-b0d3-42e6-a666-ae358e9e0a0e}" name="Research" showlabel="false" IsUserDefined="0" celllabelposition="Left" labelwidth="102" showbar="false" visible="false" layout="varwidth">
@@ -1156,12 +1166,12 @@
                       </control>
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
             </sections>
@@ -1197,12 +1207,62 @@
                       </control>
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
+      <tab name="tab_11" id="{982eb9d0-4328-ec17-7b9d-42cb4a3686c4}" IsUserDefined="0" locklevel="0" showlabel="true" expanded="false">
+        <labels>
+          <label description="Linked KB Artilcles" languagecode="1033" />
+        </labels>
+        <columns>
+          <column width="100%">
+            <sections>
+              <section name="tab_11_section_1" showlabel="false" showbar="false" locklevel="0" id="{b73d045d-7bd2-95aa-7308-62d568508c73}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115">
+                <labels>
+                  <label description="Section" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{95a3e647-c59e-5618-6306-23778d2d416d}" showlabel="false" colspan="1" auto="false" rowspan="6">
+                      <labels>
+                        <label description="Knowledge Article Incidents (Incident)" languagecode="1033" />
+                        <label description="Incidents de l'article de la Base de connaissances" languagecode="1036" />
+                        <label description="Wissensartikelvorfälle" languagecode="1031" />
+                      </labels>
+                      <control id="sgdArticles" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                        <parameters>
+                          <ViewId>{4CE7D553-9BBA-4D8F-B209-899AF9D3937C}</ViewId>
+                          <IsUserView>false</IsUserView>
+                          <RelationshipName>knowledgearticle_incidents</RelationshipName>
+                          <TargetEntityType>knowledgearticleincident</TargetEntityType>
+                          <AutoExpand>Fixed</AutoExpand>
+                          <EnableQuickFind>false</EnableQuickFind>
+                          <EnableViewPicker>false</EnableViewPicker>
+                          <ViewIds />
+                          <EnableJumpBar>false</EnableJumpBar>
+                          <ChartGridMode>All</ChartGridMode>
+                          <VisualizationId />
+                          <IsUserChart>false</IsUserChart>
+                          <EnableChartPicker>true</EnableChartPicker>
+                          <RecordsPerPage>4</RecordsPerPage>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
             </sections>
@@ -1252,15 +1312,15 @@
                       <control id="kbviewer" classid="{a62b6fa9-169e-406c-b1aa-eab828cb6026}" />
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
                 </rows>
               </section>
             </sections>
           </column>
           <column width="50%">
             <sections>
-              <section id="{4f1cbb62-1166-4db3-a0d7-1844cea74945}" name="contract and product information" showlabel="true" locklevel="0" IsUserDefined="0" showbar="true">
+              <section id="{4f1cbb62-1166-4db3-a0d7-1844cea74945}" name="contract and product information" showlabel="true" locklevel="0" IsUserDefined="0" showbar="true" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left" visible="false">
                 <labels>
                   <label description="VERTRAG" languagecode="1031" />
                   <label description="CONTRACT" languagecode="1033" />
@@ -1482,6 +1542,14 @@
                         <label description="SLA Start Time &amp; Date" languagecode="1033" />
                       </labels>
                       <control id="tc_slastarttimedate" uniqueid="{c3a993e9-1589-1417-71c0-251835e7d8a5}" datafieldname="tc_slastarttimedate" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{7e246589-e9d3-1413-7d51-3896ab3b414b}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Originating Business Area" languagecode="1033" />
+                      </labels>
+                      <control id="tc_originatingbusinessarea" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_originatingbusinessarea" disabled="false" />
                     </cell>
                   </row>
                   <row>
@@ -1906,7 +1974,8 @@
     <formLibraries>
       <Library name="tc_es6promise.js" libraryUniqueId="{c1e872a4-e748-135c-6e5b-4060deb5ac72}" />
       <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{4cb4eb92-a591-b261-303b-ebbe8265e177}" />
-      <Library name="tc_Tc.Crm.Scripts.Library.Compensation.js" libraryUniqueId="{ce191c43-a58c-ee31-b5ac-3a5c0810aa53}" />
+      <Library name="tc_Tc.Crm.Scripts.Events.Contact.js" libraryUniqueId="{dc670e3a-aa36-bbd0-94b6-ed787dc8315b}" />
+      <Library name="tc_Tc.Crm.Scripts.Library.Case.js" libraryUniqueId="{0016cbec-ca20-4e7d-4406-8651a2cccbae}" />
       <Library name="tc_Tc.Crm.Scripts.Events.Case.js" libraryUniqueId="{b1c93c95-9273-87a7-5c8d-a3553b5ebe64}" />
     </formLibraries>
     <events>
@@ -1919,6 +1988,9 @@
             </dependencies>
           </Handler>
         </InternalHandlers>
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnLoad" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{8035b284-093e-3158-2605-119b8d85a6a0}" enabled="true" parameters="&quot;telephone1&quot;,&quot;telephone2&quot;" passExecutionContext="true" />
+        </Handlers>
       </event>
       <event name="onchange" active="true" application="true" attribute="customerid">
         <InternalHandlers>
@@ -1985,6 +2057,7 @@
         <Handlers>
           <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{74b19cdc-100d-b0e2-7428-31162cd46cb3}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChange" parameters="" />
           <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{587b1366-ba63-3174-0d3c-28620295eb64}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" parameters="" />
+          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnChangeSourceMarket" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{5b5ed509-3eb0-c292-71bc-33dbd024708d}" enabled="true" parameters="" passExecutionContext="false" />
         </Handlers>
       </event>
       <event name="onchange" active="false" application="false" attribute="tc_istheholidaystoppingshorterthanplanned">
@@ -2055,6 +2128,16 @@
       <event name="onchange" application="false" active="false" attribute="tc_durationofstay">
         <Handlers>
           <Handler functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{113b4827-2687-c5a8-06da-547aeda3e707}" enabled="true" parameters="" passExecutionContext="false" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_alternativephone">
+        <Handlers>
+          <Handler handlerUniqueId="{23161098-820a-4463-097a-b06812b30cec}" functionName="Tc.Crm.Scripts.Events.Case.OnCaseTelephoneFieldChange" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" enabled="true" passExecutionContext="true" parameters="&quot;tc_alternativephone&quot;,&quot;tc_otherpartyphone&quot;" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_otherpartyphone">
+        <Handlers>
+          <Handler handlerUniqueId="{b47d4ab4-b2c0-21cc-78ad-065aa4e3e160}" functionName="Tc.Crm.Scripts.Events.Case.OnCaseTelephoneFieldChange" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" enabled="true" passExecutionContext="true" parameters="&quot;tc_alternativephone&quot;,&quot;tc_otherpartyphone&quot;" />
         </Handlers>
       </event>
     </events>

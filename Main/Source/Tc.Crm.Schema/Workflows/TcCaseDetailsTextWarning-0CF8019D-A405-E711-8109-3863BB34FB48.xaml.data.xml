@@ -21,14 +21,14 @@
   <PrimaryEntity>Incident</PrimaryEntity>
   <labels>
     <steplabels id="{aecfda70-3f71-4c42-999a-d89e383fc2fa}">
-      <label languagecode="1033" description="Details entered here will be sent to customer" />
+      <label languagecode="1033" description="Explanation" />
     </steplabels>
-    <steplabels id="{4c356a08-3398-49c0-b7fa-7a4f168c1178}">
-      <label languagecode="1033" description="The details you enter here will be sent as a summary to the customer. Click 'Apply' to re-enter the details." />
+    <steplabels id="{abfa3f87-5df9-49ce-b857-bbfd9701a5bc}">
+      <label languagecode="1033" description="Case details to be captured in the Customer Language and will be used in customer notifications (not applicable to CR)." />
     </steplabels>
   </labels>
   <ProcessTriggers>
-    <ProcessTrigger processtriggerid="{e0666b95-1f37-e711-8104-e0071b66a0a1}">
+    <ProcessTrigger processtriggerid="{6c9bd1c5-3241-e711-810b-e0071b66e0a1}">
       <controltype>1</controltype>
       <scope>1</scope>
       <controlname>description</controlname>
@@ -37,7 +37,23 @@
       <iscustomizable>1</iscustomizable>
       <primaryentitytypecode>Incident</primaryentitytypecode>
     </ProcessTrigger>
-    <ProcessTrigger processtriggerid="{e1666b95-1f37-e711-8104-e0071b66a0a1}">
+    <ProcessTrigger processtriggerid="{6d9bd1c5-3241-e711-810b-e0071b66e0a1}">
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{6e9bd1c5-3241-e711-810b-e0071b66e0a1}">
+      <controltype>1</controltype>
+      <scope>1</scope>
+      <controlname>tc_casetypeid</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{6f9bd1c5-3241-e711-810b-e0071b66e0a1}">
       <scope>1</scope>
       <event>load</event>
       <pipelinestage>0</pipelinestage>

@@ -11,10 +11,13 @@
     <grid name="resultset" object="112" jump="title" select="1" icon="1" preview="1">
       <row name="result" id="incidentid">
         <cell name="ticketnumber" width="150" />
-        <cell name="a_cdf05794a0ec49a3b2548ed7aa26cdd5.fullname" width="300" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_casetypeid" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="createdon" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="a_956e253f274944aeb37dafbc211474a8.succeededon" width="200" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="statuscode" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="tc_24hourpromise" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_3rdpartyresponserequired" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_bookingid" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_bookingreferencefreetext" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
       </row>
     </grid>
   </layoutxml>
@@ -23,15 +26,14 @@
     <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
       <entity name="incident">
         <attribute name="ticketnumber" />
-        <order attribute="createdon" descending="false" />
+        <order attribute="createdon" descending="true" />
         <attribute name="createdon" />
-        <link-entity alias="a_cdf05794a0ec49a3b2548ed7aa26cdd5" name="contact" from="contactid" to="customerid" link-type="outer" visible="false">
-          <attribute name="fullname" />
-        </link-entity>
         <attribute name="tc_24hourpromise" />
-        <link-entity alias="a_956e253f274944aeb37dafbc211474a8" name="slakpiinstance" from="slakpiinstanceid" to="resolvebykpiid" link-type="outer" visible="false">
-          <attribute name="succeededon" />
-        </link-entity>
+        <attribute name="tc_casetypeid" />
+        <attribute name="statuscode" />
+        <attribute name="tc_3rdpartyresponserequired" />
+        <attribute name="tc_bookingreferencefreetext" />
+        <attribute name="tc_bookingid" />
         <attribute name="incidentid" />
       </entity>
     </fetch>

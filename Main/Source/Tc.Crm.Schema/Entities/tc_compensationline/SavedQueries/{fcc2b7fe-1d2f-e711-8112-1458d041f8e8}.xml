@@ -16,6 +16,7 @@
         <cell name="tc_cashamount" width="100" />
         <cell name="tc_bacsamount" width="100" />
         <cell name="tc_chapsamount" width="100" />
+        <cell name="tc_nonfinancialamount" width="100" />
         <cell name="tc_voucheramount" width="100" />
         <cell name="createdon" width="125" />
         <cell name="tc_customerpaymentmethoddecision" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
@@ -46,6 +47,7 @@
             <condition attribute="ownerid" operator="eq-userid" />
           </filter>
         </link-entity>
+        <attribute name="tc_nonfinancialamount" />
         <attribute name="tc_compensationlineid" />
       </entity>
     </fetch>

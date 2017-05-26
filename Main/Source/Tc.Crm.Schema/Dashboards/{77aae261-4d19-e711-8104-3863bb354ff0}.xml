@@ -86,22 +86,22 @@
                           <labels>
                             <label description="Recovery" languagecode="1033" />
                           </labels>
-                          <control id="Component7677498" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                          <control id="Component7677498" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true" uniqueid="{ec65660a-c188-67e6-9ee8-76ab0b270d86}">
                             <parameters>
-                              <ViewId>{1E41192A-237F-4BD2-82B7-9849FE0299AE}</ViewId>
+                              <ViewId>{AE154B1C-EA3F-E711-8118-E0071B66A051}</ViewId>
                               <IsUserView>false</IsUserView>
                               <RelationshipName />
                               <TargetEntityType>tc_recovery</TargetEntityType>
                               <AutoExpand>Fixed</AutoExpand>
                               <EnableQuickFind>false</EnableQuickFind>
                               <EnableViewPicker>false</EnableViewPicker>
-                              <ViewIds />
+                              <ViewIds>{1E41192A-237F-4BD2-82B7-9849FE0299AE},{AE154B1C-EA3F-E711-8118-E0071B66A051}</ViewIds>
                               <EnableJumpBar>false</EnableJumpBar>
                               <ChartGridMode>Chart</ChartGridMode>
                               <VisualizationId>{B9068272-7C26-E711-8111-1458D041F8E8}</VisualizationId>
                               <IsUserChart>false</IsUserChart>
                               <EnableChartPicker>false</EnableChartPicker>
-                              <RecordsPerPage>8</RecordsPerPage>
+                              <RecordsPerPage>12</RecordsPerPage>
                             </parameters>
                           </control>
                         </cell>
@@ -125,6 +125,11 @@
           </tab>
         </tabs>
         <controlDescriptions />
+        <DisplayConditions FallbackForm="true">
+          <Role Id="{627090ff-40a3-4053-8790-584edc5be201}" />
+          <Role Id="{EF5563EE-F9F8-E611-8107-3863BB34FB48}" />
+          <Role Id="{5C0F71F4-F9F8-E611-8107-3863BB34FB48}" />
+        </DisplayConditions>
       </form>
     </forms>
   </FormXml>

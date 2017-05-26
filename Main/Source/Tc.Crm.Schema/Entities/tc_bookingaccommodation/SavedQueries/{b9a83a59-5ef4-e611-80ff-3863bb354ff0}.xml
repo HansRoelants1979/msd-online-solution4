@@ -11,7 +11,9 @@
     <grid name="resultset" object="10025" jump="tc_name" select="1" preview="1" icon="1">
       <row name="result" id="tc_bookingaccommodationid">
         <cell name="tc_hotelid" width="100" />
+        <cell name="tc_sourcemarkethotelname" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="tc_roomtype" width="100" />
+        <cell name="tc_boardtype" width="100" />
         <cell name="tc_startdateandtime" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="tc_enddateandtime" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="tc_participants" width="300" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
@@ -37,6 +39,8 @@
             <value>1</value>
           </condition>
         </filter>
+        <attribute name="tc_sourcemarkethotelname" />
+        <attribute name="tc_boardtype" />
         <attribute name="tc_bookingaccommodationid" />
       </entity>
     </fetch>

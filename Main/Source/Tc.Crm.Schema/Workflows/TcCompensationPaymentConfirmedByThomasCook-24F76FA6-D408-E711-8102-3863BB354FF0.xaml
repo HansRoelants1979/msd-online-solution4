@@ -117,6 +117,18 @@
                     <Sequence DisplayName="SetDisplayModeStep44: Lock CHAPS Amount">
                       <mcwc:SetDisplayMode ControlId="tc_chapsamount" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsReadOnly="True" />
                     </Sequence>
+                    <Sequence DisplayName="SetDisplayModeStep39: Lock Non-Financial Amount">
+                      <mcwc:SetDisplayMode ControlId="tc_nonfinancialamount" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsReadOnly="True" />
+                    </Sequence>
+                    <Sequence DisplayName="SetDisplayModeStep41: Lock Non-Financial Currency">
+                      <mcwc:SetDisplayMode ControlId="tc_nonfinancialcurrency" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsReadOnly="True" />
+                    </Sequence>
+                    <Sequence DisplayName="SetDisplayModeStep_SetDisplayModeStep41_43: Lock Non-Financial Exchange Rate">
+                      <mcwc:SetDisplayMode ControlId="tc_nonfinancialexchangerate" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsReadOnly="True" />
+                    </Sequence>
+                    <Sequence DisplayName="SetDisplayModeStep_SetDisplayModeStep41_43_44: Lock Non-Financial Local Amount">
+                      <mcwc:SetDisplayMode ControlId="tc_localnonfinancialamount" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsReadOnly="True" />
+                    </Sequence>
                   </sco:Collection>
                 </mxswa:ActivityReference.Properties>
               </mxswa:ActivityReference>
@@ -188,7 +200,7 @@
                     <Sequence DisplayName="SetDisplayModeStep38: Unlock BACS Account Type">
                       <mcwc:SetDisplayMode ControlId="tc_bacsaccounttype" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsReadOnly="False" />
                     </Sequence>
-                    <Sequence DisplayName="SetDisplayModeStep39: Unlock BACS Amount">
+                    <Sequence DisplayName="SetDisplayModeStep39282: Unlock BACS Amount">
                       <mcwc:SetDisplayMode ControlId="tc_bacsamount" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsReadOnly="False" />
                     </Sequence>
                     <Sequence DisplayName="SetDisplayModeStep40: Unlock BACS BS Role">
@@ -199,6 +211,18 @@
                     </Sequence>
                     <Sequence DisplayName="SetDisplayModeStep45: Unlock CHAPS Amount">
                       <mcwc:SetDisplayMode ControlId="tc_chapsamount" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsReadOnly="False" />
+                    </Sequence>
+                    <Sequence DisplayName="SetDisplayModeStep40178: Unlock Non-Financial Amount">
+                      <mcwc:SetDisplayMode ControlId="tc_nonfinancialamount" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsReadOnly="False" />
+                    </Sequence>
+                    <Sequence DisplayName="SetDisplayModeStep42203: Unlock Non-Financial Currency">
+                      <mcwc:SetDisplayMode ControlId="tc_nonfinancialcurrency" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsReadOnly="False" />
+                    </Sequence>
+                    <Sequence DisplayName="SetDisplayModeStep_SetDisplayModeStep42203_45: Unlock Non-Financial Exchange Rate">
+                      <mcwc:SetDisplayMode ControlId="tc_nonfinancialexchangerate" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsReadOnly="False" />
+                    </Sequence>
+                    <Sequence DisplayName="SetDisplayModeStep_SetDisplayModeStep42203_45_46: Unlock Non-Financial Local Amount">
+                      <mcwc:SetDisplayMode ControlId="tc_localnonfinancialamount" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" IsReadOnly="False" />
                     </Sequence>
                   </sco:Collection>
                 </mxswa:ActivityReference.Properties>

@@ -20,8 +20,8 @@
         <cell name="a_af93e89fd41ae71181043863bb354ff0.tc_address1_town" width="100" disableSorting="1" />
         <cell name="a_af93e89fd41ae71181043863bb354ff0.tc_address1_countryid" width="100" disableSorting="1" />
         <cell name="a_af93e89fd41ae71181043863bb354ff0.tc_address1_postalcode" width="100" disableSorting="1" />
-        <cell name="tc_voucherfirstname" width="100" />
-        <cell name="tc_voucherlastname" width="100" />
+        <cell name="tc_voucherrecipientfirstname" width="100" />
+        <cell name="tc_voucherrecipientlastname" width="100" />
         <cell name="createdon" width="100" />
         <cell name="a_1c9d9e580ff9e61181073863bb34fb48.ticketnumber" width="100" disableSorting="1" />
         <cell name="a_1c9d9e580ff9e61181073863bb34fb48.tc_bookingid" width="100" disableSorting="1" />
@@ -46,8 +46,6 @@
     <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
       <entity name="tc_compensationline">
         <attribute name="tc_name" />
-        <attribute name="tc_voucherlastname" />
-        <attribute name="tc_voucherfirstname" />
         <attribute name="createdon" />
         <attribute name="tc_vouchermessage" />
         <attribute name="tc_voucherroutingcode" />
@@ -56,9 +54,10 @@
         <attribute name="tc_voucherbrand" />
         <attribute name="tc_voucherbooking" />
         <attribute name="tc_voucheramount" />
+        <attribute name="tc_voucherboardtype" />
+        <attribute name="tc_expirydateofvoucher" />
         <order attribute="tc_name" descending="false" />
         <filter type="and">
-          <condition attribute="tc_vouchertype" operator="eq" value="950000001" />
           <filter type="or">
             <filter type="and">
               <condition attribute="tc_voucherdate" operator="last-x-days" value="3" />
@@ -72,15 +71,15 @@
           <attribute name="ticketnumber" />
           <filter type="and">
             <condition attribute="tc_bookingid" operator="not-null" />
+            <condition attribute="tc_alternativeemaillookup" operator="null" />
+            <condition attribute="tc_othercustomeremail" operator="null" />
           </filter>
         </link-entity>
         <link-entity name="systemuser" from="systemuserid" to="modifiedby" visible="false" link-type="outer" alias="a_f7c6aeda0bf9e61181073863bb34fb48">
           <attribute name="lastname" />
           <attribute name="firstname" />
         </link-entity>
-        <attribute name="tc_voucherboardtype" />
-        <attribute name="tc_expirydateofvoucher" />
-        <link-entity name="contact" from="contactid" to="tc_customer" visible="false" link-type="outer" alias="a_af93e89fd41ae71181043863bb354ff0">
+        <link-entity name="contact" from="contactid" to="tc_customer" alias="a_af93e89fd41ae71181043863bb354ff0">
           <attribute name="tc_salutation" />
           <attribute name="lastname" />
           <attribute name="firstname" />
@@ -92,7 +91,12 @@
           <attribute name="tc_address1_countryid" />
           <attribute name="emailaddress1" />
           <attribute name="telephone1" />
+          <filter type="and">
+            <condition attribute="emailaddress1" operator="null" />
+          </filter>
         </link-entity>
+        <attribute name="tc_voucherrecipientlastname" />
+        <attribute name="tc_voucherrecipientfirstname" />
         <attribute name="tc_compensationlineid" />
       </entity>
     </fetch>

@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <EntityRelationships>
   <EntityRelationship Name="Account_Annotation" unmodified="1" />
+  <EntityRelationship Name="Account_Email_EmailSender" unmodified="1" />
+  <EntityRelationship Name="Account_Email_SendersAccount" unmodified="1" />
+  <EntityRelationship Name="Account_Emails" />
   <EntityRelationship Name="account_master_account" />
   <EntityRelationship Name="account_originating_lead" />
   <EntityRelationship Name="account_parent_account" />
@@ -8,28 +11,34 @@
   <EntityRelationship Name="account_tc_assistancerequests" />
   <EntityRelationship Name="account_tc_surveyresponses" />
   <EntityRelationship Name="activity_pointer_activity_mime_attachment" unmodified="1" />
+  <EntityRelationship Name="activity_pointer_email" unmodified="1" />
   <EntityRelationship Name="activity_pointer_tc_assistancerequest" />
   <EntityRelationship Name="activity_pointer_tc_surveyresponse" />
   <EntityRelationship Name="annotation_owning_user" unmodified="1" />
   <EntityRelationship Name="appointment_activity_mime_attachment" unmodified="1" />
   <EntityRelationship Name="Appointment_Annotation" unmodified="1" />
+  <EntityRelationship Name="AsyncOperation_Emails" />
   <EntityRelationship Name="attachment_activity_mime_attachments" unmodified="1" />
   <EntityRelationship Name="bookableresource_Annotations" unmodified="1" />
   <EntityRelationship Name="bookableresourcebooking_Annotations" unmodified="1" />
+  <EntityRelationship Name="bookableresourcebooking_Emails" unmodified="1" />
   <EntityRelationship Name="bookableresourcebooking_tc_assistancerequests" />
   <EntityRelationship Name="bookableresourcebooking_tc_surveyresponses" />
   <EntityRelationship Name="bookableresourcebookingheader_Annotations" unmodified="1" />
+  <EntityRelationship Name="bookableresourcebookingheader_Emails" unmodified="1" />
   <EntityRelationship Name="bookableresourcebookingheader_tc_assistancerequests" />
   <EntityRelationship Name="bookableresourcebookingheader_tc_surveyresponses" />
   <EntityRelationship Name="bookableresourcecategoryassn_Annotations" unmodified="1" />
   <EntityRelationship Name="bookableresourcecharacteristic_Annotations" unmodified="1" />
   <EntityRelationship Name="bookableresourcegroup_Annotations" unmodified="1" />
   <EntityRelationship Name="bpf_incident_tc_caseflow" />
+  <EntityRelationship Name="BulkOperation_Email" />
   <EntityRelationship Name="bulkoperation_tc_assistancerequests" />
   <EntityRelationship Name="bulkoperation_tc_surveyresponses" />
   <EntityRelationship Name="business_unit_accounts" />
   <EntityRelationship Name="business_unit_annotations" unmodified="1" />
   <EntityRelationship Name="business_unit_contacts" />
+  <EntityRelationship Name="business_unit_email_activities" unmodified="1" />
   <EntityRelationship Name="business_unit_incidents" />
   <EntityRelationship Name="business_unit_slakpiinstance" unmodified="1" />
   <EntityRelationship Name="business_unit_system_users" />
@@ -62,9 +71,11 @@
   <EntityRelationship Name="Calendar_Annotation" unmodified="1" />
   <EntityRelationship Name="calendar_system_users" />
   <EntityRelationship Name="Campaign_Annotation" unmodified="1" />
+  <EntityRelationship Name="Campaign_Emails" />
   <EntityRelationship Name="campaign_tc_assistancerequests" />
   <EntityRelationship Name="campaign_tc_surveyresponses" />
   <EntityRelationship Name="CampaignActivity_Annotation" unmodified="1" />
+  <EntityRelationship Name="CampaignActivity_Emails" />
   <EntityRelationship Name="campaignactivity_tc_assistancerequests" />
   <EntityRelationship Name="campaignactivity_tc_surveyresponses" />
   <EntityRelationship Name="CampaignResponse_Annotation" unmodified="1" />
@@ -76,6 +87,8 @@
   <EntityRelationship Name="contact_as_responsible_contact" />
   <EntityRelationship Name="contact_customer_accounts" />
   <EntityRelationship Name="contact_customer_contacts" />
+  <EntityRelationship Name="Contact_Email_EmailSender" unmodified="1" />
+  <EntityRelationship Name="Contact_Emails" />
   <EntityRelationship Name="contact_master_contact" />
   <EntityRelationship Name="contact_originating_lead" />
   <EntityRelationship Name="contact_owning_user" />
@@ -85,6 +98,7 @@
   <EntityRelationship Name="contract_cases" />
   <EntityRelationship Name="contract_customer_contacts" />
   <EntityRelationship Name="contract_detail_cases" />
+  <EntityRelationship Name="Contract_Emails" />
   <EntityRelationship Name="contract_tc_assistancerequests" />
   <EntityRelationship Name="contract_tc_surveyresponses" />
   <EntityRelationship Name="ContractDetail_Annotation" unmodified="1" />
@@ -92,23 +106,30 @@
   <EntityRelationship Name="DuplicateRule_Annotation" unmodified="1" />
   <EntityRelationship Name="email_activity_mime_attachment" unmodified="1" />
   <EntityRelationship Name="Email_Annotation" />
+  <EntityRelationship Name="email_email_parentactivityid" unmodified="1" />
+  <EntityRelationship Name="Email_EmailTemplate" unmodified="1" />
+  <EntityRelationship Name="email_sendermailboxid_mailbox" unmodified="1" />
   <EntityRelationship Name="EmailServerProfile_Annotation" unmodified="1" />
   <EntityRelationship Name="entitlement_Annotations" unmodified="1" />
   <EntityRelationship Name="entitlement_cases" />
+  <EntityRelationship Name="entitlement_Emails" unmodified="1" />
   <EntityRelationship Name="entitlement_tc_assistancerequests" />
   <EntityRelationship Name="entitlement_tc_surveyresponses" />
   <EntityRelationship Name="entitlementchannel_Annotations" unmodified="1" />
   <EntityRelationship Name="entitlementtemplate_Annotations" unmodified="1" />
+  <EntityRelationship Name="entitlementtemplate_Emails" unmodified="1" />
   <EntityRelationship Name="entitlementtemplate_tc_assistancerequests" />
   <EntityRelationship Name="entitlementtemplate_tc_surveyresponses" />
   <EntityRelationship Name="equipment_accounts" />
   <EntityRelationship Name="Equipment_Annotation" unmodified="1" />
   <EntityRelationship Name="equipment_contacts" />
+  <EntityRelationship Name="Equipment_Email_EmailSender" unmodified="1" />
   <EntityRelationship Name="Fax_Annotation" unmodified="1" />
   <EntityRelationship Name="Goal_Annotation" unmodified="1" />
   <EntityRelationship Name="Incident_Annotation" unmodified="1" />
   <EntityRelationship Name="incident_customer_accounts" />
   <EntityRelationship Name="incident_customer_contacts" />
+  <EntityRelationship Name="Incident_Emails" />
   <EntityRelationship Name="incident_existingcase" />
   <EntityRelationship Name="incident_master_incident" />
   <EntityRelationship Name="incident_parent_incident" />
@@ -119,19 +140,24 @@
   <EntityRelationship Name="interactionforemail_tc_surveyresponses" />
   <EntityRelationship Name="Invoice_Annotation" unmodified="1" />
   <EntityRelationship Name="invoice_customer_contacts" />
+  <EntityRelationship Name="Invoice_Emails" />
   <EntityRelationship Name="invoice_tc_assistancerequests" />
   <EntityRelationship Name="invoice_tc_surveyresponses" />
   <EntityRelationship Name="KbArticle_Annotation" unmodified="1" />
   <EntityRelationship Name="kbarticle_incidents" />
   <EntityRelationship Name="knowledgearticle_Annotations" unmodified="1" />
+  <EntityRelationship Name="KnowledgeArticle_Emails" unmodified="1" />
   <EntityRelationship Name="knowledgearticle_tc_assistancerequests" />
   <EntityRelationship Name="knowledgearticle_tc_surveyresponses" />
   <EntityRelationship Name="KnowledgeBaseRecord_Annotations" unmodified="1" />
+  <EntityRelationship Name="KnowledgeBaseRecord_Emails" unmodified="1" />
   <EntityRelationship Name="KnowledgeBaseRecord_Incident" unmodified="1" />
   <EntityRelationship Name="knowledgebaserecord_tc_assistancerequests" />
   <EntityRelationship Name="knowledgebaserecord_tc_surveyresponses" />
   <EntityRelationship Name="Lead_Annotation" unmodified="1" />
   <EntityRelationship Name="lead_customer_contacts" />
+  <EntityRelationship Name="Lead_Email_EmailSender" unmodified="1" />
+  <EntityRelationship Name="Lead_Emails" />
   <EntityRelationship Name="lead_tc_assistancerequests" />
   <EntityRelationship Name="lead_tc_surveyresponses" />
   <EntityRelationship Name="Letter_Annotation" unmodified="1" />
@@ -144,6 +170,8 @@
   <EntityRelationship Name="lk_annotationbase_modifiedby" unmodified="1" />
   <EntityRelationship Name="lk_contactbase_createdby" />
   <EntityRelationship Name="lk_contactbase_modifiedby" />
+  <EntityRelationship Name="lk_email_createdby" unmodified="1" />
+  <EntityRelationship Name="lk_email_modifiedby" unmodified="1" />
   <EntityRelationship Name="lk_externalparty_account_createdby" />
   <EntityRelationship Name="lk_externalparty_account_modifiedby" />
   <EntityRelationship Name="lk_externalparty_contact_createdby" />
@@ -226,14 +254,17 @@
   <EntityRelationship Name="manualsla_account" />
   <EntityRelationship Name="manualsla_cases" />
   <EntityRelationship Name="manualsla_contact" />
+  <EntityRelationship Name="manualsla_email" unmodified="1" />
   <EntityRelationship Name="manualsla_tc_compensationapproval" />
   <EntityRelationship Name="MobileOfflineProfile_SystemUser" />
   <EntityRelationship Name="msdyn_postalbum_Annotations" />
+  <EntityRelationship Name="msdyn_postalbum_Emails" />
   <EntityRelationship Name="msdyn_postalbum_tc_assistancerequests" />
   <EntityRelationship Name="msdyn_postalbum_tc_surveyresponses" />
   <EntityRelationship Name="msdyn_systemuser_wallsavedqueryusersettings_userid" />
   <EntityRelationship Name="Opportunity_Annotation" unmodified="1" />
   <EntityRelationship Name="opportunity_customer_contacts" />
+  <EntityRelationship Name="Opportunity_Emails" />
   <EntityRelationship Name="opportunity_tc_assistancerequests" />
   <EntityRelationship Name="opportunity_tc_surveyresponses" />
   <EntityRelationship Name="OpportunityClose_Annotation" unmodified="1" />
@@ -276,6 +307,7 @@
   <EntityRelationship Name="owner_tc_surveyresponsefeedback" />
   <EntityRelationship Name="owner_tc_touroperator" />
   <EntityRelationship Name="PhoneCall_Annotation" unmodified="1" />
+  <EntityRelationship Name="popat_email_popat_powerattachment_Email" />
   <EntityRelationship Name="popat_powerattachmentprocessqueueemail_Annotations" />
   <EntityRelationship Name="popat_powerattachmentprocessqueuenotes_Annotations" />
   <EntityRelationship Name="position_users" />
@@ -287,11 +319,13 @@
   <EntityRelationship Name="product_incidents" />
   <EntityRelationship Name="profilerule_Annotations" unmodified="1" />
   <EntityRelationship Name="profileruleitem_Annotations" unmodified="1" />
+  <EntityRelationship Name="Queue_Email_EmailSender" unmodified="1" />
   <EntityRelationship Name="Queue_SyncErrors" unmodified="1" />
   <EntityRelationship Name="queue_system_user" />
   <EntityRelationship Name="queue_team" unmodified="1" />
   <EntityRelationship Name="Quote_Annotation" unmodified="1" />
   <EntityRelationship Name="quote_customer_contacts" />
+  <EntityRelationship Name="Quote_Emails" />
   <EntityRelationship Name="quote_tc_assistancerequests" />
   <EntityRelationship Name="quote_tc_surveyresponses" />
   <EntityRelationship Name="QuoteClose_Annotation" unmodified="1" />
@@ -300,11 +334,13 @@
   <EntityRelationship Name="routingrule_Annotation" unmodified="1" />
   <EntityRelationship Name="routingruleitem_Annotation" unmodified="1" />
   <EntityRelationship Name="SalesOrder_Annotation" unmodified="1" />
+  <EntityRelationship Name="SalesOrder_Emails" />
   <EntityRelationship Name="salesorder_tc_assistancerequests" />
   <EntityRelationship Name="salesorder_tc_surveyresponses" />
   <EntityRelationship Name="service_accounts" />
   <EntityRelationship Name="Service_Annotation" unmodified="1" />
   <EntityRelationship Name="service_contacts" />
+  <EntityRelationship Name="service_emails" unmodified="1" />
   <EntityRelationship Name="ServiceAppointment_Annotation" unmodified="1" />
   <EntityRelationship Name="SharePointDocument_Annotation" unmodified="1" />
   <EntityRelationship Name="site_system_users" />
@@ -312,6 +348,7 @@
   <EntityRelationship Name="sla_Annotation" unmodified="1" />
   <EntityRelationship Name="sla_cases" />
   <EntityRelationship Name="sla_contact" />
+  <EntityRelationship Name="sla_email" unmodified="1" />
   <EntityRelationship Name="sla_tc_compensationapproval" />
   <EntityRelationship Name="slakpiinstance_account" unmodified="1" />
   <EntityRelationship Name="slakpiinstance_activitypointer" unmodified="1" />
@@ -340,6 +377,7 @@
   <EntityRelationship Name="system_user_contacts" />
   <EntityRelationship Name="system_user_incidents" />
   <EntityRelationship Name="systemuser_defaultmailbox_mailbox" />
+  <EntityRelationship Name="SystemUser_Email_EmailSender" unmodified="1" />
   <EntityRelationship Name="Task_Annotation" unmodified="1" />
   <EntityRelationship Name="tc__casecategory3_tc_caseline" />
   <EntityRelationship Name="tc_24hrpromiseresolveslakpiinstance" />
@@ -367,6 +405,7 @@
   <EntityRelationship Name="tc_assistancerequest_team_owningteam" />
   <EntityRelationship Name="tc_booking_Annotations" />
   <EntityRelationship Name="tc_booking_case" />
+  <EntityRelationship Name="tc_booking_Emails" />
   <EntityRelationship Name="tc_booking_tc_assistancerequests" />
   <EntityRelationship Name="tc_booking_tc_bookingaccommodation" />
   <EntityRelationship Name="tc_booking_tc_bookingextraservice" />
@@ -375,8 +414,10 @@
   <EntityRelationship Name="tc_booking_tc_compensation" />
   <EntityRelationship Name="tc_booking_tc_customerbookingrole" />
   <EntityRelationship Name="tc_booking_tc_recovery" />
+  <EntityRelationship Name="tc_booking_tc_surveyresponse" />
   <EntityRelationship Name="tc_booking_tc_surveyresponses" />
   <EntityRelationship Name="tc_bookingaccommodation_Annotations" />
+  <EntityRelationship Name="tc_bookingaccommodation_Emails" />
   <EntityRelationship Name="tc_bookingaccommodation_tc_assistancerequests" />
   <EntityRelationship Name="tc_bookingaccommodation_tc_caseline" />
   <EntityRelationship Name="tc_bookingaccommodation_tc_surveyresponses" />
@@ -427,6 +468,7 @@
   <EntityRelationship Name="tc_gateway_tc_caseline_TransportDepartureAirport" />
   <EntityRelationship Name="tc_gateway_tc_locationoffice" />
   <EntityRelationship Name="tc_gateway_tc_primary_location" />
+  <EntityRelationship Name="tc_hotel_Emails" />
   <EntityRelationship Name="tc_hotel_incident_accommodation" />
   <EntityRelationship Name="tc_hotel_tc_assistancerequests" />
   <EntityRelationship Name="tc_hotel_tc_bookingaccommodation" />
@@ -464,6 +506,7 @@
   <EntityRelationship Name="tc_systemuser_tc_compensationapproval_ApprovedBy" />
   <EntityRelationship Name="tc_systemuser_tc_compensationapproval_RequestedBy" />
   <EntityRelationship Name="tc_systemuser_tc_compensationline_CaseCreatedBy" />
+  <EntityRelationship Name="tc_systemuser_tc_hotel" />
   <EntityRelationship Name="tc_systemuser_tc_locationoffice" />
   <EntityRelationship Name="tc_tc_booking_letter" />
   <EntityRelationship Name="tc_tc_booking_tc_caseline_bookingid" />
@@ -493,10 +536,13 @@
   <EntityRelationship Name="tc_touroperator_tc_booking" />
   <EntityRelationship Name="tc_touroperator_tc_brand" />
   <EntityRelationship Name="tc_transactioncurrency_tc_compensation" />
+  <EntityRelationship Name="tc_transactioncurrency_tc_compensation_NonFinancialCurrency" />
   <EntityRelationship Name="tc_transactioncurrency_tc_compensationline" />
+  <EntityRelationship Name="tc_transactioncurrency_tc_compensationline_NonFinancialCurrency" />
   <EntityRelationship Name="team_accounts" />
   <EntityRelationship Name="team_annotations" unmodified="1" />
   <EntityRelationship Name="team_contacts" />
+  <EntityRelationship Name="team_email" unmodified="1" />
   <EntityRelationship Name="team_incidents" />
   <EntityRelationship Name="team_tc_accounttype" />
   <EntityRelationship Name="team_tc_alternativeemail" />
@@ -538,6 +584,7 @@
   <EntityRelationship Name="TransactionCurrency_tc_country" />
   <EntityRelationship Name="TransactionCurrency_tc_recovery" />
   <EntityRelationship Name="user_accounts" />
+  <EntityRelationship Name="user_email" unmodified="1" />
   <EntityRelationship Name="user_parent_user" />
   <EntityRelationship Name="user_tc_accounttype" />
   <EntityRelationship Name="user_tc_alternativeemail" />

@@ -91,7 +91,7 @@ Tc.Crm.Scripts.Events.Email = (function () {
     var getLookupId = function (lookupObj) {
         if (lookupObj == null) return null;
         return lookupObj[0].id;
-    }    
+    }
     var processOnQueueIdReceived = function (data, request) {
         if (data.readyState === STATUS_READY) {
             request.onreadystatechange = null;

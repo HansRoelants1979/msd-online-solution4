@@ -27,9 +27,32 @@
                           <labels>
                             <label description="Compensation Approvals" languagecode="1033" />
                           </labels>
-                          <control id="Component8928493" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                          <control id="Component8928493" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true" uniqueid="{7baba604-0520-3442-ea59-00a477415102}">
                             <parameters>
-                              <ViewId>{1D2061B0-D812-E711-810F-1458D041F8E8}</ViewId>
+                              <ViewId>{B6A824AD-F612-E711-810F-1458D041F8E8}</ViewId>
+                              <IsUserView>false</IsUserView>
+                              <RelationshipName />
+                              <TargetEntityType>tc_compensationapproval</TargetEntityType>
+                              <AutoExpand>Fixed</AutoExpand>
+                              <EnableQuickFind>true</EnableQuickFind>
+                              <EnableViewPicker>true</EnableViewPicker>
+                              <ViewIds />
+                              <EnableJumpBar>true</EnableJumpBar>
+                              <ChartGridMode>Grid</ChartGridMode>
+                              <VisualizationId>{BA935894-7C19-E711-810D-3863BB340DD8}</VisualizationId>
+                              <IsUserChart>false</IsUserChart>
+                              <EnableChartPicker>false</EnableChartPicker>
+                              <RecordsPerPage>8</RecordsPerPage>
+                            </parameters>
+                          </control>
+                        </cell>
+                        <cell id="{1332e5ad-01e0-bc32-42ad-7e45ae2aa88a}" showlabel="false" colspan="2" auto="false" rowspan="12">
+                          <labels>
+                            <label description="Compensation Approvals" languagecode="1033" />
+                          </labels>
+                          <control id="Component2411710" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                            <parameters>
+                              <ViewId>{EF9ECCB2-0B16-E711-8104-3863BB354FF0}</ViewId>
                               <IsUserView>false</IsUserView>
                               <RelationshipName />
                               <TargetEntityType>tc_compensationapproval</TargetEntityType>
@@ -46,6 +69,19 @@
                             </parameters>
                           </control>
                         </cell>
+                      </row>
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row>
                         <cell id="{8cbee20c-6ddb-14bb-e996-5b3b82bbe0d9}" showlabel="false" rowspan="12" auto="false" colspan="2">
                           <labels>
                             <label description="Compensation" languagecode="1033" />
@@ -69,39 +105,26 @@
                             </parameters>
                           </control>
                         </cell>
-                      </row>
-                      <row />
-                      <row />
-                      <row />
-                      <row />
-                      <row />
-                      <row />
-                      <row />
-                      <row />
-                      <row />
-                      <row />
-                      <row />
-                      <row>
-                        <cell id="{0423619b-8356-8a62-e958-1c1c6ca97b09}" showlabel="false" colspan="4" auto="false" rowspan="12">
+                        <cell id="{0423619b-8356-8a62-e958-1c1c6ca97b09}" showlabel="false" colspan="2" auto="false" rowspan="12">
                           <labels>
                             <label description="Recovery" languagecode="1033" />
                           </labels>
-                          <control id="Component136751" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                          <control id="Component136751" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true" uniqueid="{cad20142-8cb0-abce-1193-d9b40a7be410}">
                             <parameters>
-                              <ViewId>{1E41192A-237F-4BD2-82B7-9849FE0299AE}</ViewId>
+                              <ViewId>{46EB6C68-5940-E711-8118-E0071B66A051}</ViewId>
                               <IsUserView>false</IsUserView>
                               <RelationshipName />
                               <TargetEntityType>tc_recovery</TargetEntityType>
                               <AutoExpand>Fixed</AutoExpand>
                               <EnableQuickFind>false</EnableQuickFind>
                               <EnableViewPicker>false</EnableViewPicker>
-                              <ViewIds />
+                              <ViewIds>{1E41192A-237F-4BD2-82B7-9849FE0299AE},{46EB6C68-5940-E711-8118-E0071B66A051}</ViewIds>
                               <EnableJumpBar>false</EnableJumpBar>
                               <ChartGridMode>Chart</ChartGridMode>
                               <VisualizationId>{B9068272-7C26-E711-8111-1458D041F8E8}</VisualizationId>
                               <IsUserChart>false</IsUserChart>
                               <EnableChartPicker>false</EnableChartPicker>
-                              <RecordsPerPage>8</RecordsPerPage>
+                              <RecordsPerPage>12</RecordsPerPage>
                             </parameters>
                           </control>
                         </cell>
@@ -125,9 +148,14 @@
           </tab>
         </tabs>
         <controlDescriptions />
+        <DisplayConditions FallbackForm="true">
+          <Role Id="{627090ff-40a3-4053-8790-584edc5be201}" />
+          <Role Id="{A2518D2F-F9F8-E611-8107-3863BB34FB48}" />
+          <Role Id="{E478DC35-F9F8-E611-8107-3863BB34FB48}" />
+        </DisplayConditions>
       </form>
     </forms>
   </FormXml>
   <IntroducedVersion>1.0.0.65</IntroducedVersion>
-  <IsTabletEnabled>1</IsTabletEnabled>
+  <IsTabletEnabled>0</IsTabletEnabled>
 </Dashboard>

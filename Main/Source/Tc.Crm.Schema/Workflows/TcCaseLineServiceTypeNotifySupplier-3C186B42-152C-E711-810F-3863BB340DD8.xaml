@@ -89,13 +89,13 @@
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
                       <mcwc:SetFieldRequiredLevel ControlId="emailaddress" ControlType="standard" DisplayName="SetFieldRequiredLevelStep10" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_caseline" RequiredLevel="None" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_SetFieldRequiredLevelStep10_7: Show Confirm Supplier Notification">
+                    <Sequence DisplayName="SetVisibilityStep7: Show Confirm Supplier Notification">
                       <mcwc:SetVisibility ControlId="tc_confirmsuppliernotification" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_caseline" IsVisible="True" />
                     </Sequence>
-                    <Sequence DisplayName="SetFieldRequiredLevelStep_SetFieldRequiredLevelStep10_7_9: Confirm Supplier Notification Not Mandatory">
+                    <Sequence DisplayName="SetFieldRequiredLevelStep9: Confirm Supplier Notification Not Mandatory">
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;tc_caseline&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mcwc:SetFieldRequiredLevel ControlId="tc_confirmsuppliernotification" ControlType="standard" DisplayName="SetFieldRequiredLevelStep_SetFieldRequiredLevelStep10_7_9" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_caseline" RequiredLevel="None" />
+                      <mcwc:SetFieldRequiredLevel ControlId="tc_confirmsuppliernotification" ControlType="standard" DisplayName="SetFieldRequiredLevelStep9" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_caseline" RequiredLevel="None" />
                     </Sequence>
                   </sco:Collection>
                 </mxswa:ActivityReference.Properties>
@@ -129,7 +129,7 @@
                     <Sequence DisplayName="SetVisibilityStep17: Do Not Show Email Address">
                       <mcwc:SetVisibility ControlId="emailaddress" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_caseline" IsVisible="False" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_SetVisibilityStep17_8: Do Not Show Confirm Supplier Notification">
+                    <Sequence DisplayName="SetVisibilityStep8: Do Not Show Confirm Supplier Notification">
                       <mcwc:SetVisibility ControlId="tc_confirmsuppliernotification" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_caseline" IsVisible="False" />
                     </Sequence>
                   </sco:Collection>

@@ -974,7 +974,7 @@
                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[AssignOutputArgumentStep32_2]</OutArgument>
                                         </mxswa:ActivityReference.Arguments>
                                       </mxswa:ActivityReference>
-                                      <mxswa:GetEntityProperty Attribute="tc_amount_base" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[AssignOutputArgumentStep32_4]">
+                                      <mxswa:GetEntityProperty Attribute="tc_nonfinancialamount" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[AssignOutputArgumentStep32_4]">
                                         <mxswa:GetEntityProperty.TargetType>
                                           <InArgument x:TypeArguments="s:Type">
                                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
@@ -1021,7 +1021,7 @@
                                       <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
                                         <mxswa:ActivityReference.Arguments>
                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "&amp;lt;br/&amp;gt; ", "String" }]</InArgument>
+                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters" xml:space="preserve">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "&amp;lt;br/&amp;gt;  ", "String" }]</InArgument>
                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
                                           </InArgument>
@@ -1162,7 +1162,7 @@
                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[AssignOutputArgumentStep125_2]</OutArgument>
                                         </mxswa:ActivityReference.Arguments>
                                       </mxswa:ActivityReference>
-                                      <mxswa:GetEntityProperty Attribute="tc_amount" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[AssignOutputArgumentStep125_4]">
+                                      <mxswa:GetEntityProperty Attribute="tc_nonfinancialamount" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[AssignOutputArgumentStep125_4]">
                                         <mxswa:GetEntityProperty.TargetType>
                                           <InArgument x:TypeArguments="s:Type">
                                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
@@ -1209,7 +1209,7 @@
                                       <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
                                         <mxswa:ActivityReference.Arguments>
                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, " &amp;lt;br/&amp;gt;", "String" }]</InArgument>
+                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, " &amp;lt;br/&amp;gt; ", "String" }]</InArgument>
                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
                                           </InArgument>
@@ -1754,7 +1754,7 @@
                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[AssignOutputArgumentStep106_2]</OutArgument>
                                         </mxswa:ActivityReference.Arguments>
                                       </mxswa:ActivityReference>
-                                      <mxswa:GetEntityProperty Attribute="tc_amount" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[AssignOutputArgumentStep106_4]">
+                                      <mxswa:GetEntityProperty Attribute="tc_nonfinancialamount" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[AssignOutputArgumentStep106_4]">
                                         <mxswa:GetEntityProperty.TargetType>
                                           <InArgument x:TypeArguments="s:Type">
                                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
@@ -1801,7 +1801,7 @@
                                       <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
                                         <mxswa:ActivityReference.Arguments>
                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters" xml:space="preserve">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "&amp;lt;br/&amp;gt;  ", "String" }]</InArgument>
+                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters" xml:space="preserve">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "&amp;lt;br/&amp;gt;   ", "String" }]</InArgument>
                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
                                           </InArgument>
@@ -1942,7 +1942,7 @@
                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[AssignOutputArgumentStep131_2]</OutArgument>
                                         </mxswa:ActivityReference.Arguments>
                                       </mxswa:ActivityReference>
-                                      <mxswa:GetEntityProperty Attribute="tc_amount" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[AssignOutputArgumentStep131_4]">
+                                      <mxswa:GetEntityProperty Attribute="tc_nonfinancialamount" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[AssignOutputArgumentStep131_4]">
                                         <mxswa:GetEntityProperty.TargetType>
                                           <InArgument x:TypeArguments="s:Type">
                                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
@@ -1989,7 +1989,7 @@
                                       <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
                                         <mxswa:ActivityReference.Arguments>
                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters" xml:space="preserve">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "  &amp;lt;br/&amp;gt;", "String" }]</InArgument>
+                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters" xml:space="preserve">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "  &amp;lt;br/&amp;gt; ", "String" }]</InArgument>
                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
                                           </InArgument>
@@ -2508,7 +2508,7 @@
                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[AssignOutputArgumentStep109_2]</OutArgument>
                                         </mxswa:ActivityReference.Arguments>
                                       </mxswa:ActivityReference>
-                                      <mxswa:GetEntityProperty Attribute="tc_amount" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[AssignOutputArgumentStep109_4]">
+                                      <mxswa:GetEntityProperty Attribute="tc_nonfinancialamount" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[AssignOutputArgumentStep109_4]">
                                         <mxswa:GetEntityProperty.TargetType>
                                           <InArgument x:TypeArguments="s:Type">
                                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
@@ -2555,7 +2555,7 @@
                                       <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
                                         <mxswa:ActivityReference.Arguments>
                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "&amp;lt;br/&amp;gt; ", "String" }]</InArgument>
+                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters" xml:space="preserve">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "&amp;lt;br/&amp;gt;  ", "String" }]</InArgument>
                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
                                           </InArgument>
@@ -2696,7 +2696,7 @@
                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[AssignOutputArgumentStep134_2]</OutArgument>
                                         </mxswa:ActivityReference.Arguments>
                                       </mxswa:ActivityReference>
-                                      <mxswa:GetEntityProperty Attribute="tc_amount" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[AssignOutputArgumentStep134_4]">
+                                      <mxswa:GetEntityProperty Attribute="tc_nonfinancialamount" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[AssignOutputArgumentStep134_4]">
                                         <mxswa:GetEntityProperty.TargetType>
                                           <InArgument x:TypeArguments="s:Type">
                                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
@@ -2743,7 +2743,7 @@
                                       <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
                                         <mxswa:ActivityReference.Arguments>
                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "&amp;lt;br/&amp;gt; ", "String" }]</InArgument>
+                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters" xml:space="preserve">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "&amp;lt;br/&amp;gt;  ", "String" }]</InArgument>
                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
                                           </InArgument>
@@ -3262,7 +3262,7 @@
                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[AssignOutputArgumentStep112_2]</OutArgument>
                                         </mxswa:ActivityReference.Arguments>
                                       </mxswa:ActivityReference>
-                                      <mxswa:GetEntityProperty Attribute="tc_amount" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[AssignOutputArgumentStep112_4]">
+                                      <mxswa:GetEntityProperty Attribute="tc_nonfinancialamount" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[AssignOutputArgumentStep112_4]">
                                         <mxswa:GetEntityProperty.TargetType>
                                           <InArgument x:TypeArguments="s:Type">
                                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
@@ -3282,7 +3282,7 @@
                                       <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
                                         <mxswa:ActivityReference.Arguments>
                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters" xml:space="preserve">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "  voor  ", "String" }]</InArgument>
+                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters" xml:space="preserve">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, " voor  ", "String" }]</InArgument>
                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
                                           </InArgument>
@@ -3309,7 +3309,7 @@
                                       <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
                                         <mxswa:ActivityReference.Arguments>
                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "&amp;lt;br/&amp;gt; ", "String" }]</InArgument>
+                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters" xml:space="preserve">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "&amp;lt;br/&amp;gt;  ", "String" }]</InArgument>
                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
                                           </InArgument>
@@ -3450,7 +3450,7 @@
                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[AssignOutputArgumentStep137_2]</OutArgument>
                                         </mxswa:ActivityReference.Arguments>
                                       </mxswa:ActivityReference>
-                                      <mxswa:GetEntityProperty Attribute="tc_amount" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[AssignOutputArgumentStep137_4]">
+                                      <mxswa:GetEntityProperty Attribute="tc_nonfinancialamount" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[AssignOutputArgumentStep137_4]">
                                         <mxswa:GetEntityProperty.TargetType>
                                           <InArgument x:TypeArguments="s:Type">
                                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
@@ -3497,7 +3497,7 @@
                                       <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
                                         <mxswa:ActivityReference.Arguments>
                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters" xml:space="preserve">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "&amp;lt;br/&amp;gt;  ", "String" }]</InArgument>
+                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters" xml:space="preserve">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "&amp;lt;br/&amp;gt;   ", "String" }]</InArgument>
                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
                                           </InArgument>
@@ -4016,7 +4016,7 @@
                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[AssignOutputArgumentStep115_2]</OutArgument>
                                         </mxswa:ActivityReference.Arguments>
                                       </mxswa:ActivityReference>
-                                      <mxswa:GetEntityProperty Attribute="tc_amount" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[AssignOutputArgumentStep115_4]">
+                                      <mxswa:GetEntityProperty Attribute="tc_nonfinancialamount" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[AssignOutputArgumentStep115_4]">
                                         <mxswa:GetEntityProperty.TargetType>
                                           <InArgument x:TypeArguments="s:Type">
                                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
@@ -4063,7 +4063,7 @@
                                       <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
                                         <mxswa:ActivityReference.Arguments>
                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "&amp;lt;br/&amp;gt; ", "String" }]</InArgument>
+                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters" xml:space="preserve">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "&amp;lt;br/&amp;gt;  ", "String" }]</InArgument>
                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
                                           </InArgument>
@@ -4204,7 +4204,7 @@
                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[AssignOutputArgumentStep140_2]</OutArgument>
                                         </mxswa:ActivityReference.Arguments>
                                       </mxswa:ActivityReference>
-                                      <mxswa:GetEntityProperty Attribute="tc_amount" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[AssignOutputArgumentStep140_4]">
+                                      <mxswa:GetEntityProperty Attribute="tc_nonfinancialamount" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[AssignOutputArgumentStep140_4]">
                                         <mxswa:GetEntityProperty.TargetType>
                                           <InArgument x:TypeArguments="s:Type">
                                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
@@ -4251,7 +4251,7 @@
                                       <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
                                         <mxswa:ActivityReference.Arguments>
                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters" xml:space="preserve">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "&amp;lt;br/&amp;gt;  ", "String" }]</InArgument>
+                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters" xml:space="preserve">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "&amp;lt;br/&amp;gt;   ", "String" }]</InArgument>
                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
                                           </InArgument>
@@ -4729,7 +4729,7 @@
                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[AssignOutputArgumentStep118_2]</OutArgument>
                                         </mxswa:ActivityReference.Arguments>
                                       </mxswa:ActivityReference>
-                                      <mxswa:GetEntityProperty Attribute="tc_amount" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[AssignOutputArgumentStep118_4]">
+                                      <mxswa:GetEntityProperty Attribute="tc_nonfinancialamount" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[AssignOutputArgumentStep118_4]">
                                         <mxswa:GetEntityProperty.TargetType>
                                           <InArgument x:TypeArguments="s:Type">
                                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
@@ -4776,7 +4776,7 @@
                                       <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
                                         <mxswa:ActivityReference.Arguments>
                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "&amp;lt;br/&amp;gt; ", "String" }]</InArgument>
+                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters" xml:space="preserve">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "&amp;lt;br/&amp;gt;  ", "String" }]</InArgument>
                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
                                           </InArgument>
@@ -4917,7 +4917,7 @@
                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[AssignOutputArgumentStep143_2]</OutArgument>
                                         </mxswa:ActivityReference.Arguments>
                                       </mxswa:ActivityReference>
-                                      <mxswa:GetEntityProperty Attribute="tc_amount" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[AssignOutputArgumentStep143_4]">
+                                      <mxswa:GetEntityProperty Attribute="tc_nonfinancialamount" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[AssignOutputArgumentStep143_4]">
                                         <mxswa:GetEntityProperty.TargetType>
                                           <InArgument x:TypeArguments="s:Type">
                                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
@@ -4964,7 +4964,7 @@
                                       <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
                                         <mxswa:ActivityReference.Arguments>
                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "&amp;lt;br/&amp;gt; ", "String" }]</InArgument>
+                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters" xml:space="preserve">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "&amp;lt;br/&amp;gt;  ", "String" }]</InArgument>
                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
                                           </InArgument>
@@ -5654,7 +5654,7 @@
                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[AssignOutputArgumentStep121_2]</OutArgument>
                                         </mxswa:ActivityReference.Arguments>
                                       </mxswa:ActivityReference>
-                                      <mxswa:GetEntityProperty Attribute="tc_amount" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[AssignOutputArgumentStep121_4]">
+                                      <mxswa:GetEntityProperty Attribute="tc_nonfinancialamount" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[AssignOutputArgumentStep121_4]">
                                         <mxswa:GetEntityProperty.TargetType>
                                           <InArgument x:TypeArguments="s:Type">
                                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
@@ -5701,7 +5701,7 @@
                                       <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
                                         <mxswa:ActivityReference.Arguments>
                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, " &amp;lt;br/&amp;gt;", "String" }]</InArgument>
+                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, " &amp;lt;br/&amp;gt; ", "String" }]</InArgument>
                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
                                           </InArgument>
@@ -5842,7 +5842,7 @@
                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[AssignOutputArgumentStep146_2]</OutArgument>
                                         </mxswa:ActivityReference.Arguments>
                                       </mxswa:ActivityReference>
-                                      <mxswa:GetEntityProperty Attribute="tc_amount" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[AssignOutputArgumentStep146_4]">
+                                      <mxswa:GetEntityProperty Attribute="tc_nonfinancialamount" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensation" Value="[AssignOutputArgumentStep146_4]">
                                         <mxswa:GetEntityProperty.TargetType>
                                           <InArgument x:TypeArguments="s:Type">
                                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
@@ -5889,7 +5889,7 @@
                                       <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
                                         <mxswa:ActivityReference.Arguments>
                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters" xml:space="preserve">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "  &amp;lt;br/&amp;gt;", "String" }]</InArgument>
+                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters" xml:space="preserve">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "  &amp;lt;br/&amp;gt; ", "String" }]</InArgument>
                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
                                           </InArgument>

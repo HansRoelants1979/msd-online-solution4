@@ -10,11 +10,11 @@
   <layoutxml>
     <grid name="resultset" object="10043" jump="tc_name" select="1" preview="1" icon="1">
       <row name="result" id="tc_bookingtransportid">
-        <cell name="tc_flightnumber" width="100" />
-        <cell name="tc_startdateandtime" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="tc_departuregatewayid" width="75" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="tc_enddateandtime" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="tc_arrivalgatewayid" width="75" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_startdateandtime" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_enddateandtime" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_transportcode" width="100" />
         <cell name="tc_participants" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
       </row>
     </grid>
@@ -24,7 +24,6 @@
     <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
       <entity name="tc_bookingtransport">
         <attribute name="tc_startdateandtime" />
-        <attribute name="tc_flightnumber" />
         <attribute name="tc_enddateandtime" />
         <attribute name="tc_departuregatewayid" />
         <attribute name="tc_arrivalgatewayid" />
@@ -36,6 +35,7 @@
             <value>2</value>
           </condition>
         </filter>
+        <attribute name="tc_transportcode" />
         <attribute name="tc_bookingtransportid" />
       </entity>
     </fetch>

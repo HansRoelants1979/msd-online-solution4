@@ -40,7 +40,7 @@
               <link-entity name="systemuserroles" from="systemuserid" to="systemuserid" visible="false" intersect="true">
                 <link-entity name="role" from="roleid" to="roleid" alias="ad">
                   <filter type="and">
-                    <condition attribute="name" operator="eq" value="In Destination Rep" />
+                    <condition attribute="name" operator="eq" value="Tc.Ids.Rep" />
                   </filter>
                 </link-entity>
               </link-entity>
@@ -65,6 +65,6 @@
   </fetchxml>
   <IntroducedVersion>1.0.0.51</IntroducedVersion>
   <LocalizedNames>
-    <LocalizedName description="My Gateway's Overdue Compensation Approvals" languagecode="1033" />
+    <LocalizedName description="My Destinations Overdue Compensation Approvals" languagecode="1033" />
   </LocalizedNames>
 </savedquery>

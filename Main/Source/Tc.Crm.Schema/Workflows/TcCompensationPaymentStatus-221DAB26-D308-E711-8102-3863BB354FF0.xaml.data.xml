@@ -20,7 +20,7 @@
   <BusinessProcessType>0</BusinessProcessType>
   <PrimaryEntity>tc_compensation</PrimaryEntity>
   <ProcessTriggers>
-    <ProcessTrigger processtriggerid="{3c966182-8014-e711-8104-3863bb354ff0}">
+    <ProcessTrigger processtriggerid="{51058b71-5641-e711-8126-e0071b659e11}">
       <controltype>1</controltype>
       <scope>1</scope>
       <controlname>tc_paymentstatus</controlname>
@@ -29,7 +29,23 @@
       <iscustomizable>1</iscustomizable>
       <primaryentitytypecode>tc_compensation</primaryentitytypecode>
     </ProcessTrigger>
-    <ProcessTrigger processtriggerid="{3d966182-8014-e711-8104-3863bb354ff0}">
+    <ProcessTrigger processtriggerid="{52058b71-5641-e711-8126-e0071b659e11}">
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_compensation</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{53058b71-5641-e711-8126-e0071b659e11}">
+      <controltype>1</controltype>
+      <scope>1</scope>
+      <controlname>tc_paymentstatus</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_compensation</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{54058b71-5641-e711-8126-e0071b659e11}">
       <scope>1</scope>
       <event>load</event>
       <pipelinestage>0</pipelinestage>

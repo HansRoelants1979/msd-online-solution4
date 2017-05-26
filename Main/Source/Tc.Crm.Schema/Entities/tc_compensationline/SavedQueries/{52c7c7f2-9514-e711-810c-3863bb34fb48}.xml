@@ -25,7 +25,7 @@
   </layoutxml>
   <querytype>0</querytype>
   <fetchxml>
-    <fetch distinct="false" mapping="logical" output-format="xml-platform" version="1.0">
+    <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
       <entity name="tc_compensationline">
         <attribute name="tc_name" />
         <attribute name="createdon" />
@@ -39,8 +39,8 @@
         <attribute name="tc_caseid" />
         <order descending="true" attribute="createdon" />
         <filter type="and">
-          <condition value="950000002" attribute="tc_invoicestatus" operator="eq" />
-          <condition value="Accepted" attribute="tc_customerpaymentmethoddecision" operator="eq" />
+          <condition attribute="tc_invoicestatus" operator="eq" value="950000002" />
+          <condition attribute="tc_paymentstatus" operator="eq" value="950000000" />
         </filter>
         <attribute name="tc_compensationlineid" />
       </entity>

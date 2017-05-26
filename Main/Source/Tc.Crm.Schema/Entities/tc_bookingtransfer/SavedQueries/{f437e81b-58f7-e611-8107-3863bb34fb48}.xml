@@ -10,11 +10,11 @@
   <layoutxml>
     <grid name="resultset" object="10051" jump="tc_name" select="1" preview="1" icon="1">
       <row name="result" id="tc_bookingtransferid">
+        <cell name="tc_transfercode" width="100" />
+        <cell name="tc_category" width="100" />
         <cell name="tc_transfertype" width="100" />
         <cell name="tc_startdateandtime" width="100" />
         <cell name="tc_enddateandtime" width="100" />
-        <cell name="tc_departuregatewayid" width="100" />
-        <cell name="tc_arrivalgatewayid" width="100" />
         <cell name="tc_participants" width="300" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
       </row>
     </grid>
@@ -25,8 +25,6 @@
       <entity name="tc_bookingtransfer">
         <attribute name="tc_startdateandtime" />
         <attribute name="tc_enddateandtime" />
-        <attribute name="tc_departuregatewayid" />
-        <attribute name="tc_arrivalgatewayid" />
         <attribute name="tc_participants" />
         <order attribute="tc_startdateandtime" descending="false" />
         <filter type="and">
@@ -36,6 +34,8 @@
           </condition>
         </filter>
         <attribute name="tc_transfertype" />
+        <attribute name="tc_transfercode" />
+        <attribute name="tc_category" />
         <attribute name="tc_bookingtransferid" />
       </entity>
     </fetch>

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workflow WorkflowId="{b1bcc68a-5c41-e711-8126-e0071b659e11}" Name="Tc.Case.ExchangeRateTextWarning" Description="Click to add description">
+  <XamlFileName>/Workflows/TcCaseExchangeRateTextWarning-B1BCC68A-5C41-E711-8126-E0071B659E11.xaml</XamlFileName>
+  <Type>1</Type>
+  <Subprocess>0</Subprocess>
+  <Category>2</Category>
+  <Mode>1</Mode>
+  <Scope>4</Scope>
+  <OnDemand>0</OnDemand>
+  <TriggerOnCreate>0</TriggerOnCreate>
+  <TriggerOnDelete>0</TriggerOnDelete>
+  <AsyncAutodelete>0</AsyncAutodelete>
+  <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+  <StateCode>1</StateCode>
+  <StatusCode>2</StatusCode>
+  <RunAs>1</RunAs>
+  <IsTransacted>1</IsTransacted>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <BusinessProcessType>0</BusinessProcessType>
+  <PrimaryEntity>tc_compensation</PrimaryEntity>
+  <labels>
+    <steplabels id="{9db16771-097c-4ed1-8d5a-361c6ecd06a7}">
+      <label languagecode="1033" description="Exchange Rate Guidance" />
+    </steplabels>
+    <steplabels id="{eb57d439-131c-4938-9e4b-6a9eb8da1cf9}">
+      <label languagecode="1033" description="To provide guidance on what to type for currency exchange rate (e.g. 0.783).  Click apply to remove contents, or dismiss to accept." />
+    </steplabels>
+  </labels>
+  <ProcessTriggers>
+    <ProcessTrigger processtriggerid="{e59b0e98-5c41-e711-8126-e0071b659e11}">
+      <controltype>1</controltype>
+      <formid>{9d0bc1e4-713f-42e6-a107-9e662730f9e7}</formid>
+      <scope>1</scope>
+      <controlname>tc_nonfinancialexchangerate</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_compensation</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{e69b0e98-5c41-e711-8126-e0071b659e11}">
+      <formid>{9d0bc1e4-713f-42e6-a107-9e662730f9e7}</formid>
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_compensation</primaryentitytypecode>
+    </ProcessTrigger>
+  </ProcessTriggers>
+</Workflow>

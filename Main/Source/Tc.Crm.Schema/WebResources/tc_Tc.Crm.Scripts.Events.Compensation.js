@@ -21,18 +21,27 @@ if (typeof (Tc.Crm.Scripts.Events) === "undefined") {
 Tc.Crm.Scripts.Events.Compensation = (function () {
     "use strict";
     
-    var isComplainCaseType = false;
-
+    var isComplainCaseType = null;
     var CASE_TYPE_COMPLAIN = "478C99E9-93E4-E611-8109-1458D041F8E8";
-    var CLIENT_MODE_MOBILE = "Mobile";
     var CLIENT_STATE_OFFLINE = "Offline";
 
     var SOURCE_MARKET_UK = "GB";
 
-    var CASE_LINE_ENTITY_SET_NAME = "tc_caselines";
-    var CONFIGURATION_ENTITY_SET_NAME = "tc_configurations";
-    var COUNTRY_ENTITY_SET_NAME = "tc_countries";
-    var CASE_ENTITY_SET_NAME = "incidents";
+    var EntitySetNames = {
+        CaseLine: "tc_caselines",
+        Configuration: "tc_configurations",
+        Country: "tc_countries",
+        Booking: "tc_bookings",
+        Case: "incidents"
+    }
+
+    var EntityNames = {
+        CaseLine: "tc_caseline",
+        Configuration: "tc_configuration",
+        Country: "tc_country",
+        Booking: "tc_booking",
+        Case: "incident"
+    }
 
     var Attributes = {
         Case: "tc_caseid",
@@ -54,29 +63,27 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
         return id !== null ? id.replace("{", "").replace("}", "") : null;
         }
 
-    function IsMobileOfflineMode() {
-        return Xrm.Page.context.client.getClient() === CLIENT_MODE_MOBILE && Xrm.Page.context.client.getClientState() === CLIENT_STATE_OFFLINE
-        }
+    function IsOfflineMode() {
+        return Xrm.Page.context.client.getClientState() === CLIENT_STATE_OFFLINE
+    }
 
     function getPromiseResponse(promiseResponse, entity) {
-        if (IsMobileOfflineMode()) {
-            return promiseResponse.values;
+        if (IsOfflineMode()) {
+            return promiseResponse.values != null ? promiseResponse.values : promiseResponse;
         }
         else {
             if (promiseResponse.response === null || promiseResponse.response === undefined) {
-                Xrm.Utility.alertDialog(entity + " information can't be retrieved");
                 console.warn(entity + " information can't be retrieved");
-                return [];
-                }
+                return null;
+            }
             try {
                 return JSON.parse(promiseResponse.response);
             }
             catch (e) {
-                Xrm.Utility.alertDialog(entity + " information can't be parsed");
                 console.warn(entity + " information can't be parsed");
-                return [];
-                }
-                }
+                return null;
+            }
+        }
     }
 
     var formatValue6DigitsWithHyphen = function (context) {
@@ -100,166 +107,234 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
     }
 
     var addCaseLineToCalculation = function (promises, names, caseLine) {
-        var value = Xrm.Page.getAttribute(caseLine).getValue();
-        if (value != null && value.length > 0 && value[0] != null)
-        {
-            var id = formatEntityId(value[0].id);
-            var promise = getCaseLine(id);
-            promises.push(promise);
-            names.push(value[0].name);
-        }
+        var attr = Xrm.Page.getAttribute(caseLine);
+        if (attr == null) return;
+        var value = attr.getValue();
+        if (value == null || value.length == 0 || value[0] == null) return;
+
+        var id = formatEntityId(value[0].id);
+        var promise = getCaseLine(id);
+        promises.push(promise);
+        names.push(value[0].name);
     }
 
     var getConfigurationValue = function (configName) {
-        if (IsMobileOfflineMode()) {
-            // TODO: offline query
+        if (IsOfflineMode()) {
+            var query = "?$filter=tc_name eq '" + configName + "' &$select=tc_value";
+            return Xrm.Mobile.offline.retrieveMultipleRecords(EntityNames.Configuration, query);
         }
         else {
             var query = "?$filter=tc_name eq '" + configName + "' &$select=tc_value";
-            return Tc.Crm.Scripts.Common.Get(CONFIGURATION_ENTITY_SET_NAME, query);
+            return Tc.Crm.Scripts.Common.Get(EntitySetNames.Configuration, query);
         }
     }
 
     function getCase(caseId) {
-        if (IsMobileOfflineMode()) {
+        if (IsOfflineMode()) {
+            var query = "?$select=tc_bookingreference,tc_bookingid,tc_bookingtravelamount,tc_durationofstay";
+            return Xrm.Mobile.offline.retrieveRecord(EntityNames.Case, caseId, query);
         }
         else {
             var query = "?$select=tc_bookingreference,_tc_bookingid_value,tc_bookingtravelamount,tc_durationofstay";
-            return Tc.Crm.Scripts.Common.GetById(CASE_ENTITY_SET_NAME, caseId, query);
+            return Tc.Crm.Scripts.Common.GetById(EntitySetNames.Case, caseId, query);
         }
     }
 
     function getCaseType(caseId) {
-        if (IsMobileOfflineMode()) {
+        if (IsOfflineMode()) {
+            var query = "?$select=tc_casetypeid";
+            return Xrm.Mobile.offline.retrieveRecord(EntityNames.Case, caseId, query);
         }
         else {
             var query = "?$select=_tc_casetypeid_value";
-            return Tc.Crm.Scripts.Common.GetById(CASE_ENTITY_SET_NAME, caseId, query);
+            return Tc.Crm.Scripts.Common.GetById(EntitySetNames.Case, caseId, query);
         }
+    }
+
+    function getCaseLine(caseLineId) {
+        var query = "?$select=tc_offeredamount";
+        if (IsOfflineMode()) {
+            return Xrm.Mobile.offline.retrieveRecord(EntityNames.CaseLine, caseLineId, query);
+        }
+        else {
+            return Tc.Crm.Scripts.Common.GetById(EntitySetNames.CaseLine, caseLineId, query);
+        }
+    }
+
+    function getBooking(bookingId) {
+        var query = "?$select=tc_duration,tc_travelamount";
+        if (IsOfflineMode()) {
+            return Xrm.Mobile.offline.retrieveRecord(EntityNames.Booking, bookingId, query);
+        } else {            
+            return Tc.Crm.Scripts.Common.GetById(EntitySetNames.Booking, bookingId, query);
+        }
+    }
+
+    var getSourceMarketIso2Code = function (countryId) {
+        var query = "?$select=tc_iso2code";
+        if (IsOfflineMode()) {
+            return Xrm.Mobile.offline.retrieveRecord(EntityNames.Country, countryId, query);
+        }
+        else {            
+            return Tc.Crm.Scripts.Common.GetById(EntitySetNames.Country, countryId, query);
+        }
+    }
+
+    function parseConfigurationValue(configurationResponse) {
+        if (configurationResponse == null) return null;
+        var result = null;
+        if (!IsOfflineMode()) {
+            if (configurationResponse.value != null && configurationResponse.value.length > 0 && configurationResponse.value[0] != null && configurationResponse.value[0].tc_value != null) {
+                result = parseFloat(configurationResponse.value[0].tc_value);
+            }
+        } else {
+            if (configurationResponse.length > 0 && configurationResponse[0] != null && configurationResponse[0].tc_value != null) {
+                result = parseFloat(configurationResponse[0].tc_value);
+            }
+        }
+        return result;
+    }
+
+    function parseCase(caseResponse) {
+        if (caseResponse == null) return null;
+        var result = {
+            travelAmount: caseResponse.tc_bookingtravelamount,
+            durationOfStay: caseResponse.tc_durationofstay,
+            bookingId: caseResponse._tc_bookingid_value
+        };
+        if (!IsOfflineMode()) {
+            result.hasBookingReference = caseResponse.tc_bookingreference;
+        } else {
+            result.hasBookingReference = caseResponse.tc_bookingreference.toLowerCase() === "true";
+        }
+        return result;
+    }
+
+    function parseCaseType(caseResponse) {
+        if (caseResponse == null) return null;
+        return caseResponse._tc_casetypeid_value;
+    }
+
+    function parseBooking(bookingResponse) {
+        if (bookingResponse == null) return null;
+        var result = {
+            travelAmount: bookingResponse.tc_travelamount,
+            duration: bookingResponse.tc_duration
+        };
+        return result;
+    }
+
+    function parseCaseLine(caseLineResponse) {
+        if (caseLineResponse == null || caseLineResponse.tc_offeredamount == null) return null;
+        return !IsOfflineMode() ? caseLineResponse.tc_offeredamount : parseFloat(caseLineResponse.tc_offeredamount);
+    }
+
+    function parseSourceMarketIso2Code(countryResponse) {
+        if (countryResponse == null) return null;
+        return countryResponse.tc_iso2code;
     }
 
     var caseRetrieved = function (caseResponse) {
         getConfigurationValue(Configuration.LimitContinental).then(function (response) {
-                var limit = JSON.parse(response.response);
-                if (limit.value.length === 0 || limit.value[0].tc_value === null) {
+            var parsedResponse = getPromiseResponse(response, "Configuration");
+            var limit = parseConfigurationValue(parsedResponse);
+                if (limit == null) {
                     Xrm.Utility.alertDialog("No value in configuration for " + Configuration.LimitContinental + ". Contact System configuration");
                     return;
                 }
-                var limitValue = parseFloat(limit.value[0].tc_value);
-                var incident = JSON.parse(caseResponse.response);
-                var bookingUsed = incident.tc_bookingreference;
-                if (bookingUsed) {
-                    var bookingId = incident._tc_bookingid_value;
-                    getBooking(bookingId).then(
+                parsedResponse = getPromiseResponse(caseResponse, "Case");
+                var incident = parseCase(parsedResponse);
+                if (incident == null) return;
+                if (incident.hasBookingReference) {
+                    getBooking(incident.bookingId).then(
                         function (bookingResponse) {
-                            var booking = JSON.parse(bookingResponse.response);
-                            var value = booking.tc_travelamount;
-                            var duration = incident.tc_duration;
-                            setContinentalCompensationAmountLimit(value, duration, limitValue);
+                            parsedResponse = getPromiseResponse(bookingResponse, "Booking");
+                            var booking = parseBooking(parsedResponse);
+                            if (booking == null) return;
+                            var value = booking.travelAmount;
+                            var duration = booking.duration;
+                            setContinentalCompensationAmountLimit(value, duration, limit);
                         },
                         function (error) {
-                            Xrm.Utility.alertDialog("Problem getting booking");
                             console.warn("Problem getting booking");
                         }
                     );
                 }
                 else {
-                    var value = incident.tc_bookingtravelamount;
-                    var duration = incident.tc_durationofstay;
-                    setContinentalCompensationAmountLimit(value, duration, limitValue);
-                }
-                
+                    var value = incident.travelAmount;
+                    var duration = incident.durationOfStay;
+                    setContinentalCompensationAmountLimit(value, duration, limit);
+                }                
             },
             function (error) {
+                console.warn("Problem getting configuration value");
             });
     }
 
-
-    function getCaseLine(caseLineId) {
-        if (IsMobileOfflineMode()) {
-            // phones and tablets in offline mode
-        }
-        else {
-            var query = "?$select=tc_offeredamount";
-            return Tc.Crm.Scripts.Common.GetById(CASE_LINE_ENTITY_SET_NAME, caseLineId, query);
-        }
-    }
-
-    function getBooking(bookingId) {
-        if (IsMobileOfflineMode()) {
-            // TODO:
-        } else {
-            var query = "?$select=tc_duration,tc_travelamount";
-            return Tc.Crm.Scripts.Common.GetById(BOOKING_ENTITY_SET_NAME, bookingId, query);
-        }
-    }
-
-    var getSourceMarketIso2Code = function (countryId) {
-        if (IsMobileOfflineMode()) {
-            // phones and tablets in offline mode
-        }
-        else {
-            var query = "?$select=tc_iso2code";
-            return Tc.Crm.Scripts.Common.GetById(COUNTRY_ENTITY_SET_NAME, countryId, query);
-        }
-    }
-
     var setContinentalCompensationAmountLimit = function (bookingValue, duration, maxLimit) {
+        if (duration === 0) {
+            Xrm.Utility.alertDialog("Cannot calculate compensation amount limit for 0 days duration of holiday");
+        }
         var limit = bookingValue / duration * maxLimit / 100;
         Xrm.Page.getAttribute(Attributes.CompensationAmountLimit).setValue(limit);
     }
 
     var setCompensationAmountLimitUk = function () {
         getConfigurationValue(Configuration.LimitUk).then(function (response) {
-                var limit = JSON.parse(response.response); 
-                if (limit.value.length === 0 || limit.value[0].tc_value === null) {
+            var parsedResponse = getPromiseResponse(response, "Configuration");
+            var limit = parseConfigurationValue(parsedResponse);
+                if (limit == null) {
                     Xrm.Utility.alertDialog("No value in configuration for " + Configuration.LimitUk + "Contact System configurator");
                     return;
-                }
-                var limitValue = parseFloat(limit.value[0].tc_value);
-                Xrm.Page.getAttribute(Attributes.CompensationAmountLimit).setValue(limitValue);
+                }                
+                Xrm.Page.getAttribute(Attributes.CompensationAmountLimit).setValue(limit);
             },
             function (error) {
-                Xrm.Utility.alertDialog("Problem getting configuration value");
                 console.warn("Problem getting configuration value");
             });
     }
 
     var setCompensationAmountLimitContinental = function () {
         var caseIdAttr = Xrm.Page.getAttribute(Attributes.Case);
-        var caseId = formatEntityId(caseIdAttr.getValue()[0].id);
+        if (caseIdAttr == null) return;
+        var value = caseIdAttr.getValue();
+        if (value == null || value.length == 0 || value[0] == null) return;
+        var caseId = formatEntityId(value[0].id);
         var caseReceivedPromise = getCase(caseId);
         caseReceivedPromise.then(
             caseRetrieved,
             function (error) {
-                Xrm.Utility.alertDialog("Problem getting case");
+                console.warn("Problem getting case");
             }
         );
     }
 
-
     // Set compensation amount limit based on source market
     var setCompensationAmountLimit = function () {
-        var country = Xrm.Page.getAttribute(Attributes.SourceMarket).getValue()[0].id;        
-        getSourceMarketIso2Code(formatEntityId(country)).then(function (response) {
-                var iso2Code = JSON.parse(response.response);
-                var isUkMarket = iso2Code.tc_iso2code.toUpperCase() === SOURCE_MARKET_UK;
-                if (isUkMarket) {
-                    setCompensationAmountLimitUk();
-                } else {
-                    setCompensationAmountLimitContinental();
+        var country = Xrm.Page.getAttribute(Attributes.SourceMarket);
+        if (country == null) return;
+        var value = country.getValue();
+        if (value == null || value.length == 0 || value[0] == null) return;
+        getSourceMarketIso2Code(formatEntityId(value[0].id)).then(function (response) {
+                var parsedResponse = getPromiseResponse(response);
+                var iso2Code = parseSourceMarketIso2Code(parsedResponse);
+                if (iso2Code != null) {
+                    var isUkMarket = iso2Code.toUpperCase() === SOURCE_MARKET_UK;
+                    if (isUkMarket) {
+                        setCompensationAmountLimitUk();
+                    } else {
+                        setCompensationAmountLimitContinental();
+                    }
                 }
             },
             function (error) {
-                Xrm.Utility.alertDialog("Problem getting source market");
-                console.warn("Problem getting source market:" + error);
+                console.warn("Problem getting source market");
             });
     }
 
     // Calculate compensation
     var calculateCompensation = function () {
-        if (IsMobileOfflineMode()) return;
-        if (!isComplainCaseType) return;
+        if (isComplainCaseType == null || !isComplainCaseType) return;
         var promises = [];
         var names = [];
         addCaseLineToCalculation(promises, names, Attributes.CaseLine1);
@@ -271,15 +346,16 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
                 var totalAmount = 0;
                 var totalAmountAttr = Xrm.Page.getAttribute(Attributes.Amount);
                 for (var i = 0; i < response.length; i++) {
-                    var caseLineOffer = JSON.parse(response[i].response);
-                    if (caseLineOffer == null || caseLineOffer.tc_offeredamount === null) {
+                    var parsedResponse = getPromiseResponse(response[i]);
+                    var caseLineOffer = parseCaseLine(parsedResponse);
+                    if (caseLineOffer == null) {
                         totalAmountAttr.controls.forEach(
                             function (control, j) {
                                 control.setNotification("Offered amount for case line " + names[i] + " is not set");
                             });
                         return;
                     }
-                    totalAmount = totalAmount + caseLineOffer.tc_offeredamount;
+                    totalAmount = totalAmount + caseLineOffer;
                 }
                 totalAmountAttr.controls.forEach(
                     function (control, j) {
@@ -289,33 +365,36 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
                 setCompensationAmountLimit();
             },
             function (error) {
-                Xrm.Utility.alertDialog("Problem getting case lines");
-                console.warn("Problem getting case lines:" + error);
+                console.warn("Problem getting case lines");
             });
     }
 
+    // retrieve case type on load
     var initCaseType = function () {
-        if (IsMobileOfflineMode()) return;
         var caseIdAttr = Xrm.Page.getAttribute(Attributes.Case);
-        if (caseIdAttr == null || caseIdAttr.getValue() == null) return;
+        if (caseIdAttr == null) return;
+        var value = caseIdAttr.getValue();
+        if (value == null | value.length == 0) return;
         var caseId = formatEntityId(caseIdAttr.getValue()[0].id);
         var caseReceivedPromise = getCaseType(caseId);
         caseReceivedPromise.then(
             function (caseResponse) {
-                var incident = JSON.parse(caseResponse.response);
-                var caseType = incident._tc_casetypeid_value;
-                isComplainCaseType = caseType.toUpperCase() === CASE_TYPE_COMPLAIN;                
+                var parsedResponse = getPromiseResponse(caseResponse);
+                var caseType = parseCaseType(parsedResponse);
+                if (caseType != null) {
+                    isComplainCaseType = caseType.toUpperCase() === CASE_TYPE_COMPLAIN;
+                }
             },
             function (error) {
-                Xrm.Utility.alertDialog("Problem getting case");
+                console.warn("Problem getting case");              
             });
     }
-
 
     // public
     return {
         OnLoad: function () {
             Tc.Crm.Scripts.Library.Compensation.SetDefaultsOnCreate();
+            // init case type for compensation calculation
             initCaseType();
         },
         OnAccountSortCodeChanged: function (context) {
