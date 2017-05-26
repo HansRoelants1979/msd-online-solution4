@@ -48,7 +48,7 @@ Tc.Crm.Scripts.Events.Case = (function () {
                 if (BookingId != null) {
 
                     BookingId = BookingId.replace("{", "").replace("}", "");
-                    debugger;
+                    
 
                     var SourceMarketReceivedPromise = getBooking(BookingId).then(
                         function (bookingResponse) {

@@ -29,11 +29,11 @@ Tc.Crm.Scripts.Events.Account = (function () {
     return {
 
         OnLoad: function (executioncontext, telephone1, telephone2) {
-            debugger;
+            
             validateAccountPhoneNum(executioncontext, telephone1, telephone2);
         },
         OnAccountTelephoneFieldChange: function (executioncontext, telephone1, telephone2) {
-            debugger;
+           
             validateAccountPhoneNum(executioncontext, telephone1, telephone2);
         }
 
