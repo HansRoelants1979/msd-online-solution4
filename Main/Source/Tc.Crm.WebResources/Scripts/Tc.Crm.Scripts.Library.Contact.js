@@ -48,6 +48,7 @@ Tc.Crm.Scripts.Library.Contact = (function () {
     }
 
     function getPromiseResponse(promiseResponse, entity) {
+        if (promiseResponse == null) return null;
         if (IsOfflineMode()) {
             return promiseResponse.values != null ? promiseResponse.values : promiseResponse;
         }
@@ -94,6 +95,7 @@ Tc.Crm.Scripts.Library.Contact = (function () {
         compensationsReceivedPromise.then(
             function (compensationsResponse) {
                 var compensations = getPromiseResponse(compensationsResponse, "Compensation");
+                if (compensations == null) return;
                 compensations.forEach(function (compensation) {
                     if (IsOfflineMode()) {
                         Xrm.Mobile.offline.updateRecord(EntityNames.Compensation, compensation.tc_compensationid, compensationFields).then(
@@ -129,6 +131,7 @@ Tc.Crm.Scripts.Library.Contact = (function () {
         getCustomerCases(customerId).then(
             function (casesResponse) {
                 var cases = getPromiseResponse(casesResponse, "Case");
+                if (cases == null) return;
                 cases.forEach(function (incident) {
                     var caseCompensationsPromise = getCaseCompensations(incident.incidentid);
                     updateCompensations(caseCompensationsPromise, { tc_language: language });

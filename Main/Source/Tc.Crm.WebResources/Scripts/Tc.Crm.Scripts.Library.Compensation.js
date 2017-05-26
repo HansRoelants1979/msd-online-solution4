@@ -47,6 +47,7 @@ Tc.Crm.Scripts.Library.Compensation = (function () {
     }
 
     function getPromiseResponse(promiseResponse, entity) {
+        if (promiseResponse == null) return null;
         if (IsOfflineMode()) {
             return promiseResponse.values != null ? promiseResponse.values : promiseResponse;
         }
@@ -150,6 +151,7 @@ Tc.Crm.Scripts.Library.Compensation = (function () {
         var attr = Xrm.Page.getAttribute(COMPENSATION_SOURCEMARKETID_ATTR_NAME);
         if (attr != null) {
             attr.setValue(sourceMarketReference);
+            attr.fireOnChange();
         }
     }
 

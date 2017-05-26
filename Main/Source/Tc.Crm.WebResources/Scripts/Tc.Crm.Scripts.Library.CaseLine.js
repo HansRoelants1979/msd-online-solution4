@@ -124,11 +124,11 @@ Tc.Crm.Scripts.Library.CaseLine = (function () {
         var category3Id = categoryAttr != null && categoryAttr.length > 0 ? categoryAttr[0].id.toLowerCase() : null;
         return isUkMarket != null && isUkMarket &&
         // Accommodation	General Standards	Accom-Building/Refurbishment Work Property
-        (category1Id === "{2505f04f-f3f2-e611-8107-3863bb34fa70}" && category2Id === "{6705f04f-f3f2-e611-8107-3863bb34fa70}" && category3Id === "{9906f04f-f3f2-e611-8107-3863bb34fa70}") ||
+        ((category1Id === "{2505f04f-f3f2-e611-8107-3863bb34fa70}" && category2Id === "{6705f04f-f3f2-e611-8107-3863bb34fa70}" && category3Id === "{9906f04f-f3f2-e611-8107-3863bb34fa70}") ||
         // Pre- Departure Services	Notification - Other	Pre Dept-Notification Building Work
         (category1Id === "{3905f04f-f3f2-e611-8107-3863bb34fa70}" && category2Id === "{c305f04f-f3f2-e611-8107-3863bb34fa70}" && category3Id === "{7f07f04f-f3f2-e611-8107-3863bb34fa70}") ||
         // Resort	Local Building Work	Resort-Pre Dept Local Building Work
-        (category1Id === "{3b05f04f-f3f2-e611-8107-3863bb34fa70}" && category2Id === "{cd05f04f-f3f2-e611-8107-3863bb34fa70}" && category3Id === "{9907f04f-f3f2-e611-8107-3863bb34fa70}");
+        (category1Id === "{3b05f04f-f3f2-e611-8107-3863bb34fa70}" && category2Id === "{cd05f04f-f3f2-e611-8107-3863bb34fa70}" && category3Id === "{9907f04f-f3f2-e611-8107-3863bb34fa70}"));
     }
 
     // Check if case line falls into wrong room type complensation calculation
@@ -153,6 +153,7 @@ Tc.Crm.Scripts.Library.CaseLine = (function () {
     }
 
     function getPromiseResponse(promiseResponse, entity) {
+        if (promiseResponse == null) return null;
         if (IsOfflineMode()) {
             return promiseResponse.values != null ? promiseResponse.values : promiseResponse;
         }
@@ -362,23 +363,22 @@ Tc.Crm.Scripts.Library.CaseLine = (function () {
                 accommodationPercentage = AccommodationPercentage.FlightOnly;
                 break;
         }
-        var accommodationCost = bookingValue * accommodationPercentage / 100;
+        var accommodationCost = bookingValue * (accommodationPercentage / 100);
         // % Holiday = Days Affected / Total Days
         var daysAffected = Xrm.Page.getAttribute(Attributes.AffectedDays).getValue();
         var totalDays = Xrm.Page.getAttribute(Attributes.TotalDays).getValue();
         if (totalDays === 0) {
             Xrm.Utility.alertDialog("Cannot calculate compensation for 0 days duration of holiday");
+            return;
         }
         var holidayPercentage = daysAffected / totalDays;
         // Value for % Holidays = Accommodation Costs * % Holiday
         var holidayPercentageValue = accommodationCost * holidayPercentage;
         // Compensation Value = Value for % Holidays * Impact %
-        var compensationValue = holidayPercentageValue * impact / 100;
+        var compensationValue = holidayPercentageValue * (impact / 100);
         // Range Value = Value for % Holidays * Range %
-        var rangeValue = holidayPercentageValue * range / 100;
-        //var adjustment = -14.29; // TODO: get from configuration
-        //var maximumTotalLimitToBePaid = 40; // TODO: get from configuration
-        var limitCompensation = accommodationCost * maximumTotalLimitToBePaid / 100;
+        var rangeValue = holidayPercentageValue * (range / 100);
+        var limitCompensation = accommodationCost * (maximumTotalLimitToBePaid / 100);
         // Proposed Compensation = MIN (Compensation Value + (Compensation Value * Adjustment), Limit Compensation)
         var proposedCompensation = Math.min(compensationValue * (1 + adjustment / 100), limitCompensation);
         // Maximum Compensation = MIN ((Compensation Value + Range Value) + ((Compensation Value + Range Value) * Adjustment), Limit Compensation)
@@ -418,6 +418,10 @@ Tc.Crm.Scripts.Library.CaseLine = (function () {
                 }
                 // search compensation matrix line for severity/impact or building work
                 Promise.all([getImpactAndRange(matrixId), getConfigurationValue(Configuration.Adjustment), getConfigurationValue(Configuration.MaximumTotalLimitToBePaid)]).then(function (allResponses) {
+                    if (allResponses == null || allResponses.length < 3) {
+                        console.warn("Error getting compensation matrix values or retrieving configuration");
+                        return;
+                    }
                     response = getPromiseResponse(allResponses[0], "Compensation Calculation Matrix Line"); // parse matrix
                     var matrixLine = parseCompensationLine(response);
                     if (matrixLine == null) {
@@ -474,9 +478,10 @@ Tc.Crm.Scripts.Library.CaseLine = (function () {
                         var totalDays = Xrm.Page.getAttribute(Attributes.TotalDays).getValue();
                         if (totalDays === 0) {
                             Xrm.Utility.alertDialog("Cannot calculate compensation for 0 days duration of holiday");
+                            return;
                         }
                         var daysAffected = Xrm.Page.getAttribute(Attributes.AffectedDays).getValue();
-                        var value = travelAmount * daysAffected / totalDays * matrixLine.impactPercentage / 100;
+                        var value = travelAmount * daysAffected / totalDays * (matrixLine.impactPercentage / 100);
 
                         Xrm.Page.getAttribute(Attributes.ProposedCompensation).setValue(value);
                         Xrm.Page.getAttribute(Attributes.MaxProposedCompensation).setValue(value);
@@ -571,7 +576,9 @@ Tc.Crm.Scripts.Library.CaseLine = (function () {
     // Get source market from case or booking
     // Populate product type, booking value and duration on create
     var loadSourceMarketAndSetDefaults = function () {
-        var value = Xrm.Page.getAttribute(Attributes.Case).getValue();
+        var attr = Xrm.Page.getAttribute(Attributes.Case);
+        if (attr == null) return;
+        var value = attr.getValue();
         if (value == null || value.length == 0) return;
 
         var caseId = formatEntityId(value[0].id);
@@ -586,6 +593,13 @@ Tc.Crm.Scripts.Library.CaseLine = (function () {
 
     // Calculation compensation for case line
     var calculateCompensation = function () {
+        // don't do calculations if fields are not on the form
+        var attr = Xrm.Page.getAttribute(Attributes.ProposedCompensation);
+        if (attr == null) return;
+        attr = Xrm.Page.getAttribute(Attributes.MaxProposedCompensation);
+        if (attr == null) return;
+        attr = Xrm.Page.getAttribute(Attributes.OfferedAmount);
+        if (attr == null) return;
         // clear validation errors, if any
         Xrm.Page.getAttribute(Attributes.OfferedAmount).controls.forEach(
             function (control, i) {
@@ -601,9 +615,18 @@ Tc.Crm.Scripts.Library.CaseLine = (function () {
     }
 
     var setDefaultsOnCreate = function (productType, travelAmount, duration) {
-        Xrm.Page.getAttribute(Attributes.ProductType).setValue(productType);
-        Xrm.Page.getAttribute(Attributes.TotalBookingValue).setValue(travelAmount);
-        Xrm.Page.getAttribute(Attributes.TotalDays).setValue(duration);
+        var attr = Xrm.Page.getAttribute(Attributes.ProductType);
+        if (attr !== null) {
+            attr.setValue(productType);
+        }
+        attr = Xrm.Page.getAttribute(Attributes.TotalBookingValue);
+        if (attr !== null) {
+            attr.setValue(travelAmount);
+        }
+        attr = Xrm.Page.getAttribute(Attributes.TotalDays);
+        if (attr != null) {
+            attr.setValue(duration);
+        }
     }
 
     // Get source market
@@ -677,10 +700,16 @@ Tc.Crm.Scripts.Library.CaseLine = (function () {
         tab.setVisible(true);
         // show building work
         var isBuildingWork = isBuildingWorkCaseLine();
-        tab.sections.get(TabsAndSections.BuildingWork).setVisible(isBuildingWork);
+        var tabSection = tab.sections.get(TabsAndSections.BuildingWork);
+        if (tabSection != null) {
+            tabSection.setVisible(isBuildingWork);
+        }
         // show wrong room type
         var isWrongRoomType = isWrongRoomTypeCaseLine();
-        tab.sections.get(TabsAndSections.RoomType).setVisible(isWrongRoomType);
+        tabSection = tab.sections.get(TabsAndSections.RoomType);
+        if (tabSection != null) {
+            tabSection.setVisible(isWrongRoomType);
+        }
         if (triggerCalculation) {
             calculateCompensation();
         }

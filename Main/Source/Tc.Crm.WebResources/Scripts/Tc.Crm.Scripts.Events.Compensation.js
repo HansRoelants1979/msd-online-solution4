@@ -68,6 +68,7 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
     }
 
     function getPromiseResponse(promiseResponse, entity) {
+        if (promiseResponse == null) return null;
         if (IsOfflineMode()) {
             return promiseResponse.values != null ? promiseResponse.values : promiseResponse;
         }
@@ -274,9 +275,13 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
     var setContinentalCompensationAmountLimit = function (bookingValue, duration, maxLimit) {
         if (duration === 0) {
             Xrm.Utility.alertDialog("Cannot calculate compensation amount limit for 0 days duration of holiday");
+            return;
         }
-        var limit = bookingValue / duration * maxLimit / 100;
-        Xrm.Page.getAttribute(Attributes.CompensationAmountLimit).setValue(limit);
+        var limit = bookingValue / duration * (maxLimit / 100);
+        var attr = Xrm.Page.getAttribute(Attributes.CompensationAmountLimit);
+        if (attr != null) {
+            attr.setValue(limit);
+        }
     }
 
     var setCompensationAmountLimitUk = function () {
@@ -286,8 +291,11 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
                 if (limit == null) {
                     Xrm.Utility.alertDialog("No value in configuration for " + Configuration.LimitUk + "Contact System configurator");
                     return;
-                }                
-                Xrm.Page.getAttribute(Attributes.CompensationAmountLimit).setValue(limit);
+                }
+                var attr = Xrm.Page.getAttribute(Attributes.CompensationAmountLimit);
+                if (attr != null) {
+                    attr.setValue(limit);
+                }
             },
             function (error) {
                 console.warn("Problem getting configuration value");
@@ -343,8 +351,13 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
         addCaseLineToCalculation(promises, names, Attributes.CaseLine4);
         Promise.all(promises).then(
             function (response) {
+                if (response == null) {
+                    console.warn("Problem getting case lines");
+                    return;
+                }
                 var totalAmount = 0;
                 var totalAmountAttr = Xrm.Page.getAttribute(Attributes.Amount);
+                if (totalAmountAttr == null) return;
                 for (var i = 0; i < response.length; i++) {
                     var parsedResponse = getPromiseResponse(response[i]);
                     var caseLineOffer = parseCaseLine(parsedResponse);
