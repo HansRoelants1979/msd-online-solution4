@@ -168,8 +168,6 @@ Tc.Crm.Scripts.Events.Case = (function () {
 
         console.log("Get The Source Market Currency - End");
     }
-
-
     function getBooking(bookingId) {
 
         var query = "?$select=_tc_sourcemarketid_value";
@@ -178,14 +176,11 @@ Tc.Crm.Scripts.Events.Case = (function () {
         return Tc.Crm.Scripts.Common.GetById(entityName, id, query);
 
     }
-
     function getSourceMarketCurrency(sourcMarketId) {
         var query = "?$select=_transactioncurrencyid_value";        
         var entityName = "tc_countries";
         return Tc.Crm.Scripts.Common.GetById(entityName, sourcMarketId, query);
     }
-
-
     function getSourceMarketCurrencyname(Currencyid) {
         var query = "?$select=currencyname";
         var entityName = "transactioncurrencies";
@@ -243,8 +238,42 @@ Tc.Crm.Scripts.Events.Case = (function () {
     function validateCasePhoneNum(ExecutionContext, telephone1, telephone2) {
         Tc.Crm.Scripts.Events.Contact.ValidatePhoneNum(ExecutionContext, telephone1, telephone2);
     }
+    function validateCaseAssociatedCustomerPhoneNum()
+    {
+        var Customer = Xrm.Page.getAttribute("customerid").getValue();
+        if (Customer = null)
+            return;
+        var CustomerId = Customer[0].id;
+        if (CustomerId = null || CustomerId == "" )
+            return;
+        CustomerId = CustomerId.replace("{", "").replace("}", "");
+        var entityType = Customer[0].entityType;
+        if (entityType = null || entityType == "" )
+            return;       
+        
+        var ValidateCustomerPhoneNum = getCustomerTelephoneNum(CustomerId, entityType).then(
+                        function (customerPhoneNumResponse) {
+                            var customer = JSON.parse(customerPhoneNumResponse.response);
+                            var telephoneNum = customer.telephone1;
+                            if (telephoneNum == null || telephoneNum == "")
+                                return;
+                            var regex = /^\+(?:[0-9] ?){9,14}[0-9]$/;
+                            if (regex.test(telephoneNum) == false) {
+                                Xrm.Utility.alertDialog("Customer's telephone number is not valid");
+                            }
+                                                        
+                        }).catch(function (err) {
+                            throw new Error("Error in retrieving Customer's PhoneNumber");                            
+                        });          
+    }
+    function getCustomerTelephoneNum(customerId,entityType) {
 
+        var query = "?$select=telephone1";
+        var entityName = entityType;
+        var id = customerId;
+        return Tc.Crm.Scripts.Common.GetById(entityName, id, query);
 
+    }
     // public methods
     return {
         OnLoad: function (executioncontext, telephone1, telephone2) {
