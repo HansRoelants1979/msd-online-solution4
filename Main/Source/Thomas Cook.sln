@@ -22,20 +22,20 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CustomWorkflowSteps", "CustomWorkflowSteps", "{B081A2B4-AA52-4F17-B43C-DEC8D0980541}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tc.Crm.Data", "Tc.Crm.Data", "{70F3E084-CE1A-4FBC-A483-39265BB49456}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configuration", "{9710F8AC-3254-49F7-93EC-8AC0EAAC8C7A}"
+	ProjectSection(SolutionItems) = preProject
+		Tc.Crm.Data\Tc.Crm.Data.CaseCategory.zip = Tc.Crm.Data\Tc.Crm.Data.CaseCategory.zip
+		Tc.Crm.Data\Tc.Crm.Data.CompensationCalculationLine.zip = Tc.Crm.Data\Tc.Crm.Data.CompensationCalculationLine.zip
+		Tc.Crm.Data\Tc.Crm.Data.CompensationCalculationMatrix.zip = Tc.Crm.Data\Tc.Crm.Data.CompensationCalculationMatrix.zip
+		Tc.Crm.Data\Tc.Crm.Data.Configuration.zip = Tc.Crm.Data\Tc.Crm.Data.Configuration.zip
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Schema", "Schema", "{17FDEE31-B2C7-4720-89E5-4930CA148B8C}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dev", "Dev", "{5EDB2AA6-1740-47E5-B35F-FB46DAFB286D}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "System Test", "System Test", "{32A61134-F2B5-469C-B5F4-E88F01A3E32A}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UAT", "UAT", "{300757CC-CBF3-41C7-AC18-0137DFD9FA9A}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Production", "Production", "{FDEC70F0-00C7-4756-A909-ED74A3A428EB}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dev", "Dev", "{C3B09F20-CCE4-4DD1-8A1D-43367B9398EC}"
+	ProjectSection(SolutionItems) = preProject
+		Tc.Crm.Data\Schema\Tc.Crm.Data.Schema.CaseCategory.xml = Tc.Crm.Data\Schema\Tc.Crm.Data.Schema.CaseCategory.xml
+		Tc.Crm.Data\Schema\Tc.Crm.Data.Schema.CompensationCalculationLine.xml = Tc.Crm.Data\Schema\Tc.Crm.Data.Schema.CompensationCalculationLine.xml
+		Tc.Crm.Data\Schema\Tc.Crm.Data.Schema.CompensationCalculationMatrix.xml = Tc.Crm.Data\Schema\Tc.Crm.Data.Schema.CompensationCalculationMatrix.xml
+		Tc.Crm.Data\Schema\Tc.Crm.Data.Schema.Configuration.xml = Tc.Crm.Data\Schema\Tc.Crm.Data.Schema.Configuration.xml
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tc.Crm.UnitTests.CustomWorkFlowSteps", "Tc.Crm.UnitTests.CustomWorkFlowSteps\Tc.Crm.UnitTests.CustomWorkFlowSteps.csproj", "{64EAF413-6A2A-4A83-9211-BCC18D2297AE}"
 EndProject
@@ -230,13 +230,7 @@ Global
 		{7C6D8FA0-4FC0-4A54-BA41-BDE74B695763} = {0C0139D5-1C87-4AA8-AD12-B91CE4526419}
 		{EE30D865-AE6A-4493-91D5-701A8D979EB4} = {0C0139D5-1C87-4AA8-AD12-B91CE4526419}
 		{B081A2B4-AA52-4F17-B43C-DEC8D0980541} = {0C0139D5-1C87-4AA8-AD12-B91CE4526419}
-		{9710F8AC-3254-49F7-93EC-8AC0EAAC8C7A} = {70F3E084-CE1A-4FBC-A483-39265BB49456}
 		{17FDEE31-B2C7-4720-89E5-4930CA148B8C} = {70F3E084-CE1A-4FBC-A483-39265BB49456}
-		{5EDB2AA6-1740-47E5-B35F-FB46DAFB286D} = {9710F8AC-3254-49F7-93EC-8AC0EAAC8C7A}
-		{32A61134-F2B5-469C-B5F4-E88F01A3E32A} = {9710F8AC-3254-49F7-93EC-8AC0EAAC8C7A}
-		{300757CC-CBF3-41C7-AC18-0137DFD9FA9A} = {9710F8AC-3254-49F7-93EC-8AC0EAAC8C7A}
-		{FDEC70F0-00C7-4756-A909-ED74A3A428EB} = {9710F8AC-3254-49F7-93EC-8AC0EAAC8C7A}
-		{C3B09F20-CCE4-4DD1-8A1D-43367B9398EC} = {17FDEE31-B2C7-4720-89E5-4930CA148B8C}
 		{64EAF413-6A2A-4A83-9211-BCC18D2297AE} = {B081A2B4-AA52-4F17-B43C-DEC8D0980541}
 		{170C0103-3F94-4896-9062-6314167F596A} = {5397BFB2-5A5D-40E8-A062-8F43EEAB8685}
 		{5E016BA7-1FF5-419F-B2DB-F741DD00BB2D} = {C91228F0-139F-46AF-B023-C54F9C9870A5}

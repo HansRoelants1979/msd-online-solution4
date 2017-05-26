@@ -1,0 +1,14 @@
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <entity name="tc_compensationcalculationmatrix" displayname="Compensation Calculation Matrix" etc="10090" primaryidfield="tc_compensationcalculationmatrixid" primarynamefield="tc_name" disableplugins="false">
+    <fields>
+      <field displayname="Category 1" name="tc_category1" type="entityreference" lookupType="tc_casecategory" customfield="true" />
+      <field displayname="Category 2" name="tc_category2" type="entityreference" lookupType="tc_casecategory" customfield="true" />
+      <field displayname="Category 3" name="tc_category3" type="entityreference" lookupType="tc_casecategory" customfield="true" />
+      <field updateCompare="true" displayname="Compensation Calculation Matrix" name="tc_compensationcalculationmatrixid" type="guid" primaryKey="true" />
+      <field displayname="Name" name="tc_name" type="string" customfield="true" />
+      <field displayname="Source Market" name="tc_sourcemarket" type="optionsetvalue" customfield="true" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+    </fields>
+  </entity>
+</entities>
