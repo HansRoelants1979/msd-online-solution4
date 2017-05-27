@@ -280,7 +280,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "OT")]
         [EnumMember]
         Outbound,
-        [EnumMember(Value = "Transfer Between Hotels")]
+        [EnumMember(Value = "Transfer between hotels")]
         TransferBetweenHotels
     }
     [DataContract(Name = "CustomerStatus")]

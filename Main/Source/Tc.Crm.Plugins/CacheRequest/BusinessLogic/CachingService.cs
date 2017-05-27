@@ -306,8 +306,7 @@ namespace Tc.Crm.Plugins.CacheRequest.BusinessLogic
                 if (string.IsNullOrWhiteSpace(key))
                     throw new InvalidPluginExecutionException(ValidationMessages.ConfigurationHasNoValueForKey);
 
-                if (!string.IsNullOrWhiteSpace(value))
-                    parameters.Add(key, value);
+                parameters.Add(key, value);
 
             }
 
