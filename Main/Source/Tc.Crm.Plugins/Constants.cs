@@ -66,7 +66,8 @@ namespace Tc.Crm.Plugins
     public static class CachingParameter
     {
         public const string SecretKey = "Tc.Caching.SecretKey";
-        public const string ServiceUrl = "Tc.Caching.ServiceUrl";
+        public const string ServiceUrl1 = "Tc.Caching.ServiceUrl.Server1";
+        public const string ServiceUrl2 = "Tc.Caching.ServiceUrl.Server2";
         public const string Api = "Tc.Caching.Api";
         public const string IssuedAtTimeFromNow = "Tc.Caching.Payload.IatSecondsFromNow";
         public const string NotBeforeTimeFromNow = "Tc.Caching.Payload.NbfSecondsFromNow";

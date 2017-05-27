@@ -64,12 +64,20 @@ namespace Tc.Crm.Plugins.CacheRequest.BusinessLogic
             var cachingServiceParameters = GetCachingServiceParameters(trace, service);
             var token = CreateJWTToken(cachingServiceParameters, trace, service);
             var requestData = GetRequestDataFrom(token, context, trace);
-            SendRequest(requestData, cachingServiceParameters, trace, context, service);
+
+            var api = cachingServiceParameters != null && cachingServiceParameters.ContainsKey(CachingParameter.Api) ? cachingServiceParameters[CachingParameter.Api] : null;
+            var serviceUrl1 = cachingServiceParameters != null && cachingServiceParameters.ContainsKey(CachingParameter.ServiceUrl1) ? cachingServiceParameters[CachingParameter.ServiceUrl1] : null;
+            var serviceUrl2 = cachingServiceParameters != null && cachingServiceParameters.ContainsKey(CachingParameter.ServiceUrl2) ? cachingServiceParameters[CachingParameter.ServiceUrl1] : null;
+
+            SendRequest(requestData, serviceUrl1, api, trace, context, service);
+            SendRequest(requestData, serviceUrl2, api, trace, context, service);
+
             trace.Trace("End - SendCacheRequest");
         }
 
         private void SendRequest(string requestData
-                                , Dictionary<string, string> cachingServiceParameters
+                                , string url
+                                , string api
                                 , ITracingService trace
                                 , IPluginExecutionContext context
                                 , IOrganizationService service)
@@ -77,14 +85,15 @@ namespace Tc.Crm.Plugins.CacheRequest.BusinessLogic
             if (service == null) throw new InvalidPluginExecutionException(ValidationMessages.OrganizationServiceIsNull);
             if (context == null) throw new InvalidPluginExecutionException(ValidationMessages.ContextIsNull);
             if (trace == null) throw new InvalidPluginExecutionException(ValidationMessages.TraceIsNull);
-            if (cachingServiceParameters == null) throw new InvalidPluginExecutionException(ValidationMessages.CachingParameterIsNull);
+            if (string.IsNullOrWhiteSpace(url)) throw new InvalidPluginExecutionException(ValidationMessages.CachingServiceUrlIsNullOrEmpty);
+            if (string.IsNullOrWhiteSpace(api)) throw new InvalidPluginExecutionException(ValidationMessages.CachingApiIsNullOrEmpty);
 
             if (string.IsNullOrWhiteSpace(requestData)) throw new InvalidPluginExecutionException(ValidationMessages.RequestDataIsEmpty);
 
             trace.Trace("Start - SendRequest");
             try
             {
-                var response = this.cachingApiService.SendRequest(requestData,cachingServiceParameters,trace);
+                var response = this.cachingApiService.SendRequest(requestData, url, api, trace);
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
                     trace.Trace("Success");
@@ -290,22 +299,20 @@ namespace Tc.Crm.Plugins.CacheRequest.BusinessLogic
             var parameters = new Dictionary<string, string>();
             foreach (var e in response.Entities)
             {
-                var key = e.Contains(Attributes.ConfigurationKeys.Name) ? e[Attributes.ConfigurationKeys.Name].ToString() : null;
-                var value = e.Contains(Attributes.ConfigurationKeys.Value) ? e[Attributes.ConfigurationKeys.Value].ToString() : null;
-                var longValue = e.Contains(Attributes.ConfigurationKeys.LongValue) ? e[Attributes.ConfigurationKeys.LongValue].ToString() : null;
-                trace.Trace($"{key}:{value}:{longValue}");
+                var key = e.Contains(Attributes.ConfigurationKeys.Name) && e[Attributes.ConfigurationKeys.Name] != null ? e[Attributes.ConfigurationKeys.Name].ToString() : null;
+                var value = e.Contains(Attributes.ConfigurationKeys.Value) && e[Attributes.ConfigurationKeys.Value] != null ? e[Attributes.ConfigurationKeys.Value].ToString() : null;
+                trace.Trace($"{key}:{value}");
 
-                if (string.IsNullOrWhiteSpace(key) || (string.IsNullOrWhiteSpace(value) && string.IsNullOrWhiteSpace(longValue)))
+                if (string.IsNullOrWhiteSpace(key))
                     throw new InvalidPluginExecutionException(ValidationMessages.ConfigurationHasNoValueForKey);
 
                 if (!string.IsNullOrWhiteSpace(value))
                     parameters.Add(key, value);
 
-                if (!string.IsNullOrWhiteSpace(longValue))
-                    parameters.Add(key, longValue);
             }
 
-            if (!parameters.ContainsKey(CachingParameter.ServiceUrl) ||
+            if (!parameters.ContainsKey(CachingParameter.ServiceUrl1) ||
+                !parameters.ContainsKey(CachingParameter.ServiceUrl2) ||
                 !parameters.ContainsKey(CachingParameter.Api) ||
                 !parameters.ContainsKey(CachingParameter.SecretKey) ||
                 !parameters.ContainsKey(CachingParameter.IssuedAtTimeFromNow) ||

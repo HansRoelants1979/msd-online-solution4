@@ -6,6 +6,6 @@ namespace Tc.Crm.Plugins.CacheRequest.BusinessLogic
 {
     public interface ICachingApiService
     {
-        HttpResponseMessage SendRequest(string requestData, Dictionary<string, string> cachingServiceParameters, ITracingService trace);
+        HttpResponseMessage SendRequest(string requestData, string url, string api, ITracingService trace);
     }
 }
