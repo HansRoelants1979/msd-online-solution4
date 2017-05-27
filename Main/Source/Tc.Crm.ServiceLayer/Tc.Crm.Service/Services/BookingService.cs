@@ -33,6 +33,21 @@ namespace Tc.Crm.Service.Services
             this.sourceMarketBucket = sourceMarketBucket;
             this.tourOperatorBucket = tourOperatorBucket;
             this.hotelBucket = hotelBucket;
+
+            if (this.brandBucket.Items == null || this.brandBucket.Items.Count == 0)
+                this.brandBucket.FillBucket();
+            if (this.countryBucket.Items == null || this.countryBucket.Items.Count == 0)
+                this.countryBucket.FillBucket();
+            if (this.currencyBucket.Items == null || this.currencyBucket.Items.Count == 0)
+                this.currencyBucket.FillBucket();
+            if (this.gatewayBucket.Items == null || this.gatewayBucket.Items.Count == 0)
+                this.gatewayBucket.FillBucket();
+            if (this.sourceMarketBucket.Items == null || this.sourceMarketBucket.Items.Count == 0)
+                this.sourceMarketBucket.FillBucket();
+            if (this.tourOperatorBucket.Items == null || this.tourOperatorBucket.Items.Count == 0)
+                this.tourOperatorBucket.FillBucket();
+            if (this.hotelBucket.Items == null || this.hotelBucket.Items.Count == 0)
+                this.hotelBucket.FillBucket();
         }
         public Collection<string> Validate(BookingInformation bookingInformation)
         {
