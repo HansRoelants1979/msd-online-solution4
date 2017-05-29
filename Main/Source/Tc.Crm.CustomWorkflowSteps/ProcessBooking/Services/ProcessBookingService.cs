@@ -84,6 +84,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 xrmResponse = CommonXrm.UpsertEntity(contact, crmService);
 
                 if (xrmResponse.Create)
+                    payloadBooking.DeleteBookingRole = true;
+                else
                     payloadBooking.DeleteBookingRole = false;
 
                 payloadBooking.CustomerId = xrmResponse.Id;
@@ -132,6 +134,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 var account = AccountHelper.GetAccountEntityForBookingPayload(customer, trace);
                 xrmResponse = CommonXrm.UpsertEntity(account, crmService);
                 if (xrmResponse.Create)
+                    payloadBooking.DeleteBookingRole = true;
+                else
                     payloadBooking.DeleteBookingRole = false;
 
                 payloadBooking.CustomerId = xrmResponse.Id;
@@ -278,8 +282,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 trace.Trace("Delete Booking Roles information - start");
                 ProcessRecordsToDelete(EntityName.CustomerBookingRole,
                     new string[] { Attributes.CustomerBookingRole.CustomerBookingRoleId },
-                    new string[] { Attributes.CustomerBookingRole.BookingId, Attributes.CustomerBookingRole.Customer },
-                    new string[] { payloadBooking.BookingId, payloadBooking.CustomerId });
+                    new string[] { Attributes.CustomerBookingRole.BookingId },
+                    new string[] { payloadBooking.BookingId });
                 trace.Trace("Delete Booking Roles information - end");
             }
             trace.Trace("Booking Roles information - start");
