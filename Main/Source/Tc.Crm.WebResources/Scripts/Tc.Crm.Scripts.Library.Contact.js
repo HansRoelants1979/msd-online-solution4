@@ -21,6 +21,7 @@ if (typeof (Tc.Crm.Scripts.Library) === "undefined") {
 Tc.Crm.Scripts.Library.Contact = (function () {
     "use strict";
     var FORM_MODE_CREATE = 1;
+    var FORM_MODE_UPDATE = 2;
     var FORM_MODE_QUICK_CREATE = 5;
     var CLIENT_STATE_OFFLINE = "Offline";
 
@@ -142,9 +143,34 @@ Tc.Crm.Scripts.Library.Contact = (function () {
             }
         );
     }
+    var getNotificationForPhoneNumber = function(telephoneFieldName) {
+        var phone = Xrm.Page.data.entity.attributes.get(telephoneFieldName);
+        if (phone == null) return;
+        var phoneValue = phone.getValue();
+        if (phoneValue == null || phoneValue == "") return;
 
+        var regex = /^\+(?:[0-9] ?){9,14}[0-9]$/;
+        if (regex.test(phoneValue)) {
+            if (Xrm.Page.ui.getFormType() == FORM_MODE_CREATE) {
+                Xrm.Page.getControl(telephoneFieldName).clearNotification();
+            }
+            if (Xrm.Page.ui.getFormType() == FORM_MODE_UPDATE) {
+                Xrm.Page.ui.clearFormNotification("TelNumNotification");
+            }
+        }
+        else {
+            if (Xrm.Page.ui.getFormType() == FORM_MODE_CREATE) {
+                Xrm.Page.getControl(telephoneFieldName).setNotification("telephone number is not valid");
+            }
+            if (Xrm.Page.ui.getFormType() == FORM_MODE_UPDATE) {
+                Xrm.Page.getControl(telephoneFieldName).clearNotification();
+                Xrm.Page.ui.setFormNotification("telephone number is not valid", "WARNING", "TelNumNotification");
+            }
+        }
+    }
     // public
     return {
-        UpdateCustomerCompensationsLanguage: updateCustomerCompensationsLanguage
+        UpdateCustomerCompensationsLanguage: updateCustomerCompensationsLanguage,
+        GetNotificationForPhoneNumber: getNotificationForPhoneNumber
     };
 })();

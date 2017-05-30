@@ -34,6 +34,11 @@ Tc.Crm.Scripts.Events.Case = (function () {
     var FORM_MODE_CREATE = 1;
     var FORM_MODE_UPDATE = 2;
 
+    function OnLoad() {
+        Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("tc_alternativephone");
+        Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("tc_otherpartyphone");
+        validateCaseAssociatedCustomerPhoneNum();
+    }
     var GetTheSourceMarketCurrency = function () {
 
         
@@ -234,37 +239,43 @@ Tc.Crm.Scripts.Events.Case = (function () {
                 }
             }
         }
-    }
-    function validateCasePhoneNum(ExecutionContext, telephone1, telephone2) {
-        Tc.Crm.Scripts.Events.Contact.ValidatePhoneNum(ExecutionContext, telephone1, telephone2);
-    }
-    function validateCaseAssociatedCustomerPhoneNum()
-    {
+    }    
+    function validateCaseAssociatedCustomerPhoneNum() {
         var Customer = Xrm.Page.getAttribute("customerid").getValue();
-        if (Customer = null)
+        if (Customer == null)
             return;
         var CustomerId = Customer[0].id;
-        if (CustomerId = null || CustomerId == "" )
+        if (CustomerId == null || CustomerId == "")
             return;
         CustomerId = CustomerId.replace("{", "").replace("}", "");
         var entityType = Customer[0].entityType;
-        if (entityType = null || entityType == "" )
-            return;       
-        
+        if (entityType == null || entityType == "")
+            return;
+
         var ValidateCustomerPhoneNum = getCustomerTelephoneNum(CustomerId, entityType).then(
                         function (customerPhoneNumResponse) {
                             var customer = JSON.parse(customerPhoneNumResponse.response);
                             var telephoneNum = customer.telephone1;
-                            if (telephoneNum == null || telephoneNum == "")
+                            if (telephoneNum == null || telephoneNum == "") {
+                                Xrm.Page.ui.clearFormNotification("TelNumNotification2");
+                                Xrm.Page.ui.setFormNotification("Customer's telephone number is not Present", "WARNING", "TelNumNotification1");
                                 return;
+                            }
+
                             var regex = /^\+(?:[0-9] ?){9,14}[0-9]$/;
                             if (regex.test(telephoneNum) == false) {
-                                Xrm.Utility.alertDialog("Customer's telephone number is not valid");
+                                Xrm.Page.ui.clearFormNotification("TelNumNotification1");
+                                Xrm.Page.ui.setFormNotification("Customer's telephone number is not valid", "WARNING", "TelNumNotification2");
                             }
-                                                        
+                            else {
+                                Xrm.Page.ui.clearFormNotification("TelNumNotification2");
+                                Xrm.Page.ui.clearFormNotification("TelNumNotification1");
+                            }
+
                         }).catch(function (err) {
-                            throw new Error("Error in retrieving Customer's PhoneNumber");                            
-                        });          
+
+                            throw new Error("Error in retrieving Customer's PhoneNumber");
+                        });
     }
     function getCustomerTelephoneNum(customerId,entityType) {
 
@@ -274,13 +285,23 @@ Tc.Crm.Scripts.Events.Case = (function () {
         return Tc.Crm.Scripts.Common.GetById(entityName, id, query);
 
     }
+    var onChangeTelephone1 = function () {
+
+        Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("tc_alternativephone");
+    }
+    var onChangeTelephone2 = function () {
+        Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("tc_otherpartyphone");
+    }
     // public methods
     return {
-        OnLoad: function (executioncontext, telephone1, telephone2) {
-            validateCasePhoneNum(executioncontext, telephone1, telephone2);
+        OnLoad: function () {
+            OnLoad();
         },
-        OnCaseTelephoneFieldChange: function (executioncontext, telephone1, telephone2) {
-            validateCasePhoneNum(executioncontext, telephone1, telephone2);
+        OnChangeTelephone1: function () {
+            onChangeTelephone1();
+        },
+        OnChangeTelephone2: function () {
+            onChangeTelephone2();
         },
         OnSave: function () {
             if (Xrm.Page.context.client.getClientState() !== CLIENT_STATE_OFFLINE) {
@@ -292,6 +313,9 @@ Tc.Crm.Scripts.Events.Case = (function () {
         },
         OnCaseFieldChangeMandatoryMetConditions: function () {
             MandatoryMetConditions();
+        },
+        OnChangeCustomer: function () {
+            validateCaseAssociatedCustomerPhoneNum();
         },
         OnChangeSourceMarket: function () {
             if (Xrm.Page.context.client.getClientState() === CLIENT_STATE_OFFLINE) {
