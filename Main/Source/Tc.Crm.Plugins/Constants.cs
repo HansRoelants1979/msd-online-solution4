@@ -60,6 +60,16 @@ namespace Tc.Crm.Plugins.Attributes
         public const string BusinessUnitId = "businessunitid";
         public const string Name = "name";
     }
+
+    public static class SurveyResponse
+    {
+        public const string Regarding = "regardingobjectid";
+    }
+
+    public static class Case
+    {
+        public const string SurveyId = "tc_surveyid";
+    }
 }
 namespace Tc.Crm.Plugins
 {
@@ -136,6 +146,8 @@ namespace Tc.Crm.Plugins
         public const string User = "systemuser";
         public const string Hotel = "tc_hotel";
         public const string CacheRequest = "tc_cacherequest";
+        public const string SurveyResponse = "tc_surveyresponse";
+        public const string Case = "incident";
     }
 
     public static class Relationships

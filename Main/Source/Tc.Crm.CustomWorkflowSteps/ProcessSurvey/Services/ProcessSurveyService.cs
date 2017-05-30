@@ -246,7 +246,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
                 if (entity != null && entity.Attributes.Contains(fieldBooking) && entity.Attributes[fieldBooking] != null)
                 {
                     var booking = (AliasedValue)entity.Attributes[fieldBooking];
-                    surveyResponse[Attributes.SurveyResponse.Regarding] = new EntityReference(booking.EntityLogicalName, Guid.Parse(booking.Value.ToString()));
+                    surveyResponse[Attributes.SurveyResponse.BookingId] = new EntityReference(booking.EntityLogicalName, Guid.Parse(booking.Value.ToString()));
                 }
             }
             trace.Trace("Processing MapBooking - end");

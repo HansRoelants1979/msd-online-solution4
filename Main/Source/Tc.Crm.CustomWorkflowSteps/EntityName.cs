@@ -452,6 +452,10 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string BookingId = "tc_bookingid";
         public const string CustomerId = "customers";
         public const string Regarding = "regardingobjectid";
+        public const string CustomerFirstName = "tc_customerfirstname";
+        public const string CustomerLastName = "tc_customerlastname";
+        public const string CustomerPhone = "tc_customerphone";
+        public const string CustomerEmail = "tc_customeremail";
     }
 
     public static class SurveyResponseFeedback

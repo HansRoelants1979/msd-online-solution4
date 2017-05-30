@@ -37,6 +37,22 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
             if (!string.IsNullOrWhiteSpace(response.BeginTime))
                 surveyResponse[Attributes.SurveyResponse.BeginTime] = DateTime.Parse(response.BeginTime);
 
+            var customerFirstName = ContactHelper.GetFirstName(response.Contact, trace);
+            if (!string.IsNullOrWhiteSpace(customerFirstName))
+                surveyResponse[Attributes.SurveyResponse.CustomerFirstName] = customerFirstName;
+
+            var customerLastName = ContactHelper.GetLastName(response.Contact, trace);
+            if (!string.IsNullOrWhiteSpace(customerLastName))
+                surveyResponse[Attributes.SurveyResponse.CustomerLastName] = customerLastName;
+
+            var customerEmail = ContactHelper.GetEmail(response.Contact, trace);
+            if (!string.IsNullOrWhiteSpace(customerEmail))
+                surveyResponse[Attributes.SurveyResponse.CustomerEmail] = customerEmail;
+
+            var customerPhone = ContactHelper.GetPhone(response.Contact, trace);
+            if (!string.IsNullOrWhiteSpace(customerPhone))
+                surveyResponse[Attributes.SurveyResponse.CustomerPhone] = customerPhone;
+
             surveyResponse[Attributes.SurveyResponse.ActivityAdditionalParams] = PrepareAdditionalParameters(response, trace);
             trace.Trace("Processing GetResponseEntityFromPayLoad - end");
             return surveyResponse;
