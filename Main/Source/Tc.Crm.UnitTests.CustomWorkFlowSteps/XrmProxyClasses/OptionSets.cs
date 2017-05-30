@@ -18338,7 +18338,7 @@ namespace CrmEarlyBound
 	
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("CrmSvcUtil", "8.2.1.8676")]
-	public enum tc_CustomerBookingRole
+	public enum tc_bookingrole
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]

@@ -106,7 +106,7 @@
         {
             public const string BookingId = "tc_bookingid";
             public const string Customer = "tc_customer";
-            public const string Role = "tc_customerbookingrole";
+            public const string Role = "tc_bookingrole";
             public const string CustomerBookingRoleId = "tc_customerbookingroleid";
             public const string Name = "tc_name";
         }

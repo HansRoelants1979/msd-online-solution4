@@ -315,7 +315,7 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
 	    var customerBookingRole = {};
 	    customerBookingRole["tc_Customer_contact@odata.bind"] = "/contacts(" + customerId + ")";
 	    customerBookingRole["tc_BookingId@odata.bind"] = "/tc_bookings(" + bookingId + ")";
-	    //customerBookingRole["tc_customerbookingrole"] = 950000002;
+	    customerBookingRole["tc_bookingrole"] = 950000002;
 	    Tc.Crm.Scripts.Common.Create("tc_customerbookingroles", customerBookingRole).then(function (request)
 	    {	       
 	        customerRetrieved = true;
