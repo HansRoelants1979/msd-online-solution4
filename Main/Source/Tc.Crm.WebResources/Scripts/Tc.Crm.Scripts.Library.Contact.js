@@ -160,11 +160,11 @@ Tc.Crm.Scripts.Library.Contact = (function () {
         }
         else {
             if (Xrm.Page.ui.getFormType() == FORM_MODE_CREATE) {
-                Xrm.Page.getControl(telephoneFieldName).setNotification("telephone number is not valid");
+                Xrm.Page.getControl(telephoneFieldName).setNotification("The telephone number does not match the required format. The number should start with a + followed by the country dialing code and contain no spaces or other special characters i.e. +44 for UK.");
             }
             if (Xrm.Page.ui.getFormType() == FORM_MODE_UPDATE) {
                 Xrm.Page.getControl(telephoneFieldName).clearNotification();
-                Xrm.Page.ui.setFormNotification("telephone number is not valid", "WARNING", "TelNumNotification");
+                Xrm.Page.ui.setFormNotification("The telephone number does not match the required format. The number should start with a + followed by the country dialing code and contain no spaces or other special characters i.e. +44 for UK.", "WARNING", "TelNumNotification");
             }
         }
     }

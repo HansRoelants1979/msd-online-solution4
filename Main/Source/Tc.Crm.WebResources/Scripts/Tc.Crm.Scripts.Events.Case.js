@@ -265,7 +265,7 @@ Tc.Crm.Scripts.Events.Case = (function () {
                             var regex = /^\+(?:[0-9] ?){9,14}[0-9]$/;
                             if (regex.test(telephoneNum) == false) {
                                 Xrm.Page.ui.clearFormNotification("TelNumNotification1");
-                                Xrm.Page.ui.setFormNotification("Customer's telephone number is not valid", "WARNING", "TelNumNotification2");
+                                Xrm.Page.ui.setFormNotification("The Customer's telephone number does not match the required format. The number should start with a + followed by the country dialing code and contain no spaces or other special characters i.e. +44 for UK.", "WARNING", "TelNumNotification2");
                             }
                             else {
                                 Xrm.Page.ui.clearFormNotification("TelNumNotification2");

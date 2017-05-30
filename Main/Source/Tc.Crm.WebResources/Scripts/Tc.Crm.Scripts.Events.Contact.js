@@ -38,7 +38,9 @@ Tc.Crm.Scripts.Events.Contact = (function () {
     var onChangeTelephone2 = function () {
         Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("telephone2");
     }
-    
+    var onChangeTelephone3 = function () {
+        Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("telephone3");
+    }
     return {
        
         OnLoad: function () {
@@ -49,6 +51,9 @@ Tc.Crm.Scripts.Events.Contact = (function () {
         },
         OnChangeTelephone2: function () {
             onChangeTelephone2();
+        },
+        OnChangeTelephone3: function () {
+            onChangeTelephone3();
         },
         OnSave: function () {
             if (Xrm.Page.context.client.getClientState() !== CLIENT_STATE_OFFLINE) {
