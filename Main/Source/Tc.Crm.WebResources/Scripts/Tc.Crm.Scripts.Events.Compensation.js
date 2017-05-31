@@ -24,6 +24,8 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
     var isComplainCaseType = null;
     var CASE_TYPE_COMPLAIN = "478C99E9-93E4-E611-8109-1458D041F8E8";
     var CLIENT_STATE_OFFLINE = "Offline";
+    var FORM_MODE_CREATE = 1;
+    var FORM_MODE_UPDATE = 2;
 
     var SOURCE_MARKET_UK = "GB";
 
@@ -402,6 +404,32 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
                 console.warn("Problem getting case");              
             });
     }
+    var validateBacsAccountNumber = function () {
+        debugger;
+        var bacsAccountNumber = Xrm.Page.data.entity.attributes.get("tc_bacsaccountnumber");
+        if (bacsAccountNumber == null) return;
+        var bacsAccountNumberValue = bacsAccountNumber.getValue();
+        if (bacsAccountNumberValue == null || bacsAccountNumberValue == "") return;
+
+        var regex = new RegExp("^([0-9]){8}$");
+        if (regex.test(bacsAccountNumberValue)) {
+            if (Xrm.Page.ui.getFormType() == FORM_MODE_CREATE) {
+                Xrm.Page.getControl("tc_bacsaccountnumber").clearNotification();
+            }
+            if (Xrm.Page.ui.getFormType() == FORM_MODE_UPDATE) {
+                Xrm.Page.ui.clearFormNotification("TelNumNotification");
+            }
+        }
+        else {
+            if (Xrm.Page.ui.getFormType() == FORM_MODE_CREATE) {
+                Xrm.Page.getControl("tc_bacsaccountnumber").setNotification("The BACS Account number does not match the required format. The number should contain 8 digits and no spaces or other special characters i.e. 01234567.");
+            }
+            if (Xrm.Page.ui.getFormType() == FORM_MODE_UPDATE) {
+                Xrm.Page.getControl("tc_bacsaccountnumber").clearNotification();
+                Xrm.Page.ui.setFormNotification("The BACS Account number does not match the required format. The number should contain 8 digits and no spaces or other special characters i.e. 01234567.", "WARNING", "TelNumNotification");
+            }
+        }
+    }
 
     // public
     return {
@@ -409,6 +437,9 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
             Tc.Crm.Scripts.Library.Compensation.SetDefaultsOnCreate();
             // init case type for compensation calculation
             initCaseType();
+        },
+        OnChangeBacsAccountNumber: function () {
+            validateBacsAccountNumber();
         },
         OnAccountSortCodeChanged: function (context) {
             if (context === null) {
