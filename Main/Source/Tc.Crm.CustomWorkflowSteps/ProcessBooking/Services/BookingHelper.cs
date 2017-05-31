@@ -143,6 +143,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 if (Participants == null || Participants.Length == 0)
                 {
                     trace.Trace("Possible mismatch in travel participant id");
+                    trace.Trace($"Participant with id {travelParticipantsAssignment[i].TravelParticipantId} has not been defined in booking. ");
                     continue;
                 }
 
