@@ -23,13 +23,8 @@ namespace Tc.Crm.Plugins.Hotel
             IPluginExecutionContext context = (IPluginExecutionContext)serviceProvider.GetService(typeof(IPluginExecutionContext));
             IOrganizationServiceFactory factory = (IOrganizationServiceFactory)serviceProvider.GetService(typeof(IOrganizationServiceFactory));
             IOrganizationService orgService = factory.CreateOrganizationService(context.UserId);
-
             try
             {
-                if (context.InputParameters.Contains(InputParameters.Relationship))
-                {
-                    trace.Trace(((Relationship)context.InputParameters[InputParameters.Relationship]).SchemaName);
-                }
                 var isValidContext = IsContextValid(context);
                 if (isValidContext)
                 {
