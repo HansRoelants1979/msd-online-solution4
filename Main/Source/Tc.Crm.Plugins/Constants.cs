@@ -46,6 +46,9 @@ namespace Tc.Crm.Plugins.Attributes
     public static class Hotel
     {
         public const string Owner = "ownerid";
+        public const string Name = "tc_name";
+        public const string MasterHotelId = "tc_masterhotelid";
+        public const string OwningTeam = "owningteam";
     }
 
     public static class Role
@@ -154,6 +157,7 @@ namespace Tc.Crm.Plugins
     {
         public const string TeamRolesAssociation = "teamroles_association";
         public const string TeamMembershipAssociation = "teammembership_association";
+        public const string UserHotels = "tc_systemuser_tc_hotel";
     }
 
     public static class JwtPayloadParameters
@@ -162,7 +166,7 @@ namespace Tc.Crm.Plugins
         public const string NotBeforeTime = "nbf";
         public const string Expiry = "exp";
     }
-    enum PluginStage
+    public enum PluginStage
     {
         Prevalidation = 10,
         Preoperation = 20,
