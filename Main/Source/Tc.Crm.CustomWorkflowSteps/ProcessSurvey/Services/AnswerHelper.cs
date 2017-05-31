@@ -58,6 +58,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
                 case FieldType.BOOLEAN:
                 case FieldType.COMMENT:
                     value = answer.LiteralValue;
+                    if (answer.FieldId == PayloadSurveyFieldMapping.TourOperatorCode)
+                        value = ReplaceTourOperator(value);
                     break;
                 case FieldType.RATING:
                 case FieldType.MULTIPLE_CHOICE:
@@ -157,7 +159,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// <returns></returns>
         private static string ReplaceTourOperator(string tourOperatorCode)
         {
-            if (tourOperatorCode == General.TourOperatorCodeToReplace)
+            if (string.Equals(tourOperatorCode, General.TourOperatorCodeToReplace, StringComparison.OrdinalIgnoreCase))
                 tourOperatorCode = General.ReplacedTourOperatorCode;
             return tourOperatorCode;
         }
