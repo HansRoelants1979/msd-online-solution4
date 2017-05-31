@@ -132,6 +132,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
         public static string PrepareTravelParticipantsInfoForChildRecords(TravelParticipant[] travelParticipants, ITracingService trace, TravelParticipantAssignment[] travelParticipantsAssignment)
         {
             if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
+            if (travelParticipantsAssignment == null || travelParticipantsAssignment.Length == 0) return string.Empty;
             trace.Trace("Travel Participants information - start");
             if (travelParticipants == null || travelParticipants.Length == 0) return null;
             StringBuilder participantsBuilder = new StringBuilder();
@@ -165,6 +166,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             }
             trace.Trace("Processing " + travelParticipants.Length.ToString() + " Travel Participants information - end");
             trace.Trace("Travel Participants information - end");
+            if (participantsBuilder.Length == 0) return null;
             return participantsBuilder.ToString().Remove(participantsBuilder.Length - 3);
         }
 
