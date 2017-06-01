@@ -417,7 +417,7 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
                 Xrm.Page.getControl("tc_bacsaccountnumber").clearNotification();
             }
             if (Xrm.Page.ui.getFormType() == FORM_MODE_UPDATE) {
-                Xrm.Page.ui.clearFormNotification("TelNumNotification");
+                Xrm.Page.ui.clearFormNotification("BacsAccountNumberNotification");
             }
         }
         else {
@@ -426,7 +426,7 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
             }
             if (Xrm.Page.ui.getFormType() == FORM_MODE_UPDATE) {
                 Xrm.Page.getControl("tc_bacsaccountnumber").clearNotification();
-                Xrm.Page.ui.setFormNotification("The BACS Account number does not match the required format. The number should contain 8 digits and no spaces or other special characters i.e. 01234567.", "WARNING", "TelNumNotification");
+                Xrm.Page.ui.setFormNotification("The BACS Account number does not match the required format. The number should contain 8 digits and no spaces or other special characters i.e. 01234567.", "WARNING", "BacsAccountNumberNotification");
             }
         }
     }
