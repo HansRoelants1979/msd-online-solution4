@@ -38,6 +38,7 @@ Tc.Crm.Scripts.Events.Case = (function () {
         Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("tc_alternativephone");
         Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("tc_otherpartyphone");
         validateCaseAssociatedCustomerPhoneNum();
+        preFilterLocationOfficeLookup();        
     }
     var GetTheSourceMarketCurrency = function () {
 
@@ -292,6 +293,98 @@ Tc.Crm.Scripts.Events.Case = (function () {
     var onChangeTelephone2 = function () {
         Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("tc_otherpartyphone");
     }
+
+    var preFilterLocationOfficeLookup = function ()
+    {
+        if (!Xrm.Page.getAttribute("tc_resortofficeid")) return;
+        Xrm.Page.getControl("tc_resortofficeid").addPreSearch(function ()
+        {
+            filterLocationOfficeBasedOnSelectedGateway();
+        });
+    }
+
+    var filterLocationOfficeBasedOnSelectedGateway = function()
+    {
+        if (!Xrm.Page.getAttribute("tc_resortofficeid")) return;
+        if (Xrm.Page.getAttribute("tc_gateway") && Xrm.Page.getAttribute("tc_gateway").getValue() && Xrm.Page.getAttribute("tc_gateway").getValue().length > 0)
+        {
+            var gatewayId = Xrm.Page.getAttribute("tc_gateway").getValue()[0].id;
+            addCustomFilterForLocationOffice(gatewayId);
+        }
+        else
+        {
+            getGateWayFromBooking();
+        }
+    }
+
+    var getGateWayFromBooking = function()
+    {
+        var gatewayId = "{00000000-0000-0000-0000-000000000000}";
+        if (Xrm.Page.getAttribute("tc_bookingid") && Xrm.Page.getAttribute("tc_bookingid").getValue() && Xrm.Page.getAttribute("tc_bookingid").getValue().length > 0)
+        {
+            var bookingId = Xrm.Page.getAttribute("tc_bookingid").getValue()[0].id;
+            var query = "?$select=_tc_destinationgatewayid_value";
+            Tc.Crm.Scripts.Common.GetById("tc_bookings", formatEntityId(bookingId), query).then(function (request)
+            {
+                var booking = JSON.parse(request.response);
+                if (booking && booking._tc_destinationgatewayid_value)
+                {
+                    gatewayId = booking._tc_destinationgatewayid_value;
+                    addCustomFilterForLocationOffice(gatewayId);
+                }
+                
+            }).catch(function (err) {
+                console.log("ERROR: " + err.message);
+            });
+        }
+    }
+
+    var addCustomFilterForLocationOffice = function(gatewayId)
+    {
+        var fetchXml = "<fetch distinct='true' mapping='logical' output-format='xml-platform' version='1.0'>" +
+                        "<entity name='tc_locationoffice'>" +
+                        "<attribute name='tc_locationofficeid'/>" +
+                        "<attribute name='tc_name'/>" +
+                        "<attribute name='tc_address1_flatorunitnumber'/>" +
+                        "<attribute name='tc_address1_housenumberorbuilding'/>" +
+                        "<attribute name='tc_address1_street'/>" +
+                        "<attribute name='tc_address1_town'/>" +
+                        "<attribute name='tc_address1_postcode'/>" +
+                        "<attribute name='tc_address1_county'/>" +
+                        "<attribute name='tc_address1_country'/>" +
+                        "<attribute name='tc_address1_additionalinformation'/>" +
+                        "<order descending='false' attribute='tc_name'/>" +
+                        "<link-entity name='tc_gateway_tc_locationoffice' intersect='true' visible='false' to='tc_locationofficeid' from='tc_locationofficeid'>" +
+                            "<link-entity name='tc_gateway' to='tc_gatewayid' from='tc_gatewayid' alias='aa'>" +
+                                "<filter type='and'>" +
+                                    "<condition attribute='tc_gatewayid' value='" + gatewayId + "' operator='eq'/>" +
+                                "</filter>" +
+                            "</link-entity>" +
+                       "</link-entity>" +
+                       "</entity>" +
+                       "</fetch>";
+
+        var layoutXml = "<grid name='resultset' object='1' jump='tc_locationofficeid' select='1' icon='1' preview='1'>" +
+                        "<row name='result' id='tc_locationofficeid'>" +
+                        "<cell name='tc_name' width='90' />" +
+                        "<cell name='tc_address1_flatorunitnumber' width='90' />" +
+                        "<cell name='tc_address1_housenumberorbuilding' width='90' />" +
+                        "<cell name='tc_address1_street' width='100' />" +
+                        "<cell name='tc_address1_town' width='100' />" +
+                        "<cell name='tc_address1_postcode' width='90' />" +
+                        "<cell name='tc_address1_county' width='100' />" +
+                        "<cell name='tc_address1_country' width='100' />" +
+                        "<cell name='tc_address1_additionalinformation' width='130' />" +
+                        "</row>" +
+                        "</grid>";
+        
+        Xrm.Page.getControl("tc_resortofficeid").addCustomView("{6fd72744-3676-41d4-8003-ae4cde9ac282}", "tc_locationoffice", "Associated Offices Of Gateway", fetchXml, layoutXml, true);
+    }
+
+    var formatEntityId = function (id) {
+        return id !== null ? id.replace("{", "").replace("}", "") : null;
+    }
+
     // public methods
     return {
         OnLoad: function () {
