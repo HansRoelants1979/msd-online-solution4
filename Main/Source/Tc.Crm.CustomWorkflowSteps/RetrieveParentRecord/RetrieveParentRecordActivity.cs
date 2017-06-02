@@ -54,6 +54,14 @@ namespace Tc.Crm.CustomWorkflowSteps
                         Country.Set(executionContext, RetrivedEntity);
                     if (RetrivedEntity.LogicalName == "businessunit")
                         BusinessUnit.Set(executionContext, RetrivedEntity);
+                    if (RetrivedEntity.LogicalName == "tc_recovery")
+                        Recovery.Set(executionContext, RetrivedEntity);
+                    if (RetrivedEntity.LogicalName == "tc_bookingtransfer")
+                        Bookingtransfer.Set(executionContext, RetrivedEntity);
+                    if (RetrivedEntity.LogicalName == "tc_bookingtransport")
+                        Bookingtransport.Set(executionContext, RetrivedEntity);
+                    if (RetrivedEntity.LogicalName == "tc_bookingextraservice")
+                        Bookingextraservice.Set(executionContext, RetrivedEntity);
                 }
 
 
@@ -124,6 +132,22 @@ namespace Tc.Crm.CustomWorkflowSteps
         [Output("EntityReference BusinessUnit")]
         [ReferenceTarget("businessunit")]
         public OutArgument<EntityReference> BusinessUnit { get; set; }
+
+        [Output("EntityReference Recovery")]
+        [ReferenceTarget("tc_recovery")]
+        public OutArgument<EntityReference> Recovery { get; set; }
+
+        [Output("EntityReference Bookingtransfer")]
+        [ReferenceTarget("tc_bookingtransfer")]
+        public OutArgument<EntityReference> Bookingtransfer { get; set; }
+
+        [Output("EntityReference Bookingtransport")]
+        [ReferenceTarget("tc_bookingtransport")]
+        public OutArgument<EntityReference> Bookingtransport { get; set; }
+
+        [Output("EntityReference Bookingextraservice")]
+        [ReferenceTarget("tc_bookingextraservice")]
+        public OutArgument<EntityReference> Bookingextraservice { get; set; }
 
 
     }
