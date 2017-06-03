@@ -21,7 +21,7 @@ namespace Tc.Crm.Service.Services.Tests
         public void TestSetup()
         {
             configurationService = new TestConfigurationService();
-            helper = new JsonWebTokenHelper(configurationService);
+            helper = new JsonWebTokenHelper(configurationService,Api.Booking);
         }
 
         //[TestMethod()]

@@ -16,8 +16,16 @@ namespace Tc.Crm.Service.Services.Tests
         public void TestSetup()
         {
             context = new XrmFakedContext();
-            bookingService = new BookingService(null, null, null, null, null, null,null);
             crmService = new TestCrmService(context);
+            bookingService = new BookingService(
+                                                new CacheBuckets.BrandBucket(crmService)
+                                                , new CacheBuckets.CountryBucket(crmService)
+                                                , new CacheBuckets.CurrencyBucket(crmService)
+                                                , new CacheBuckets.GatewayBucket(crmService)
+                                                , new CacheBuckets.SourceMarketBucket(crmService)
+                                                , new CacheBuckets.TourOperatorBucket(crmService)
+                                                , new CacheBuckets.HotelBucket(crmService));
+            
         }
 
         [TestMethod()]

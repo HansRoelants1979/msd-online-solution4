@@ -48,9 +48,9 @@ namespace Tc.Crm.Service.Controllers
 
         }
 
-        private HttpResponseMessage ValidateMessage(Payload payload)
+        private HttpResponseMessage ValidateMessage(Payload payload )
         {
-            JsonWebTokenHelper helper = new JsonWebTokenHelper(this.configurationService);
+            JsonWebTokenHelper helper = new JsonWebTokenHelper(this.configurationService,Api.Caching);
             var request = helper.GetRequestObject(payload);
             if (request.Errors != null && request.Errors.Count > 0)
             {

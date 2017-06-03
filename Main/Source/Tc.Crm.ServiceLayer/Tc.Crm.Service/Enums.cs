@@ -7,6 +7,7 @@ namespace Tc.Crm.Service
 {
     public enum Api
     {
+        Nothing,
         Booking,
         Survey,
         Caching

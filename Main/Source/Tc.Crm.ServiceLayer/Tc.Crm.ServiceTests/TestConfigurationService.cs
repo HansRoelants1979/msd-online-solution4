@@ -1,5 +1,8 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Configuration;
 using System.IO;
+using Tc.Crm.Service;
 using Tc.Crm.Service.Services;
 
 namespace Tc.Crm.ServiceTests
@@ -15,18 +18,23 @@ namespace Tc.Crm.ServiceTests
             return ConfigurationManager.AppSettings[Service.Constants.Configuration.AppSettings.IssuedAtTimeExpiryInSeconds];
         }
 
-        public string GetPublicKey()
+        public string GetPublicKey(string fileName)
         {
             if (CorrectSignaure)
             {
-                var fileName = ConfigurationManager.AppSettings["privateKeyFileName"];
+                fileName = ConfigurationManager.AppSettings["privateKeyFileName"];
                 return File.ReadAllText(fileName);
             }
             else
             {
-                var fileName = ConfigurationManager.AppSettings["privateKeyFileNameWrong"];
+                fileName = ConfigurationManager.AppSettings["privateKeyFileNameWrong"];
                 return File.ReadAllText(fileName);
             }
+        }
+
+        public Collection<string> GetPublicKeyFileNames(Api contextApi)
+        {
+            return new Collection<string> { "Tc.PublicKey.xml" };
         }
 
         public string GetSecretKey()
