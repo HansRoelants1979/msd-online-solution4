@@ -59,11 +59,6 @@ namespace Tc.Crm.Service.Services
             }
         }
 
-        public override void ValidatePayload(JsonWebTokenRequest request)
-        {
-            base.ValidatePayload(request);
-        }
-
         public override void ValidateSignature(JsonWebTokenRequest jsonWebTokenRequest)
         {
             try
@@ -103,9 +98,6 @@ namespace Tc.Crm.Service.Services
             }
         }
 
-        public override string GetToken(System.Net.Http.HttpRequestMessage request)
-        {
-            return base.GetToken(request);
-        }
+        
     }
 }

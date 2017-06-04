@@ -15,16 +15,6 @@ namespace Tc.Crm.Service.Services
             this.ConfigurationService = configurationService;
         }
 
-        public override void ValidateHeader(JsonWebTokenRequest request)
-        {
-            base.ValidateHeader(request);
-        }
-
-        public override void ValidatePayload(JsonWebTokenRequest request)
-        {
-            base.ValidatePayload(request);
-        }
-
         public override void ValidateSignature(JsonWebTokenRequest jsonWebTokenRequest)
         {
             var fileNames = ConfigurationService.GetPublicKeyFileNames(Api.Booking);
@@ -42,10 +32,6 @@ namespace Tc.Crm.Service.Services
                     return;
             }
         }
-
-        public override string GetToken(HttpRequestMessage request)
-        {
-            return base.GetToken(request);  
-        }
+        
     }
 }

@@ -196,7 +196,7 @@ namespace Tc.Crm.Service.Services
             }
         }
 
-        public virtual string GetToken(HttpRequestMessage request)
+        public string GetToken(HttpRequestMessage request)
         {
             if (request == null) throw new ArgumentNullException(Constants.Parameters.Request);
             if (request.Headers == null) throw new ArgumentNullException(Constants.Parameters.RequestHeaders);
