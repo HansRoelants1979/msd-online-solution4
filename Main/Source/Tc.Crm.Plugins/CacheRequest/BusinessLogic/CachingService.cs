@@ -21,7 +21,7 @@ namespace Tc.Crm.Plugins.CacheRequest.BusinessLogic
         {
             this.cachingApiService = cachingApiService;
         }
-
+        public string SecretKey { get; set; }
         private static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
 
         private bool IsContextValidForExecute(IPluginExecutionContext context, ITracingService trace)
@@ -194,8 +194,7 @@ namespace Tc.Crm.Plugins.CacheRequest.BusinessLogic
 
             trace.Trace("Start - CreateJWTToken");
 
-            var secretKey = cachingServiceParameters[CachingParameter.SecretKey];
-            if (string.IsNullOrWhiteSpace(secretKey))
+            if (string.IsNullOrWhiteSpace(this.SecretKey))
                 throw new InvalidPluginExecutionException(ValidationMessages.CachingSecretKeyIsNullOrEmpty);
 
             var payload = new Dictionary<string, object>()
@@ -210,7 +209,7 @@ namespace Tc.Crm.Plugins.CacheRequest.BusinessLogic
             IBase64UrlEncoder urlEncoder = new JwtBase64UrlEncoder();
             IJwtEncoder encoder = new JwtEncoder(algorithm, serializer, urlEncoder);
 
-            return encoder.Encode(payload, secretKey);
+            return encoder.Encode(payload, this.SecretKey);
         }
 
         private double GetExpiry(Dictionary<string, string> cachingServiceParameters, ITracingService trace)
@@ -313,7 +312,6 @@ namespace Tc.Crm.Plugins.CacheRequest.BusinessLogic
             if (!parameters.ContainsKey(CachingParameter.ServiceUrl1) ||
                 !parameters.ContainsKey(CachingParameter.ServiceUrl2) ||
                 !parameters.ContainsKey(CachingParameter.Api) ||
-                !parameters.ContainsKey(CachingParameter.SecretKey) ||
                 !parameters.ContainsKey(CachingParameter.IssuedAtTimeFromNow) ||
                 !parameters.ContainsKey(CachingParameter.ExpirySecondsFromNow) ||
                 !parameters.ContainsKey(CachingParameter.NotBeforeTimeFromNow))
