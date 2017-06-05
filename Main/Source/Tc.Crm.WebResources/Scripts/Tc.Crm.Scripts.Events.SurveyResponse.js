@@ -385,7 +385,7 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
 
 	var showCustomerInformationMissingMessage = function ()
 	{   
-	    alert('We do not have enough Customer data to create the Case, please create the Customer manually before proceeding');
+	    Xrm.Utility.alertDialog('We do not have enough Customer data to create the Case, please create the Customer manually before proceeding');
 	    return false;
 	}
 
