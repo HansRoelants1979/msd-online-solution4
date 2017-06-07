@@ -225,23 +225,6 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                 information.AppendLine();
                 if (bookingAllocationResponse.BookingNumber != null)
                     information.AppendLine($"Processing Booking: '{ bookingAllocationResponse.BookingNumber}'");
-                if (bookingAllocationResponse.BookingOwner != null)
-                    information.AppendLine($"Booking Owner: '{ bookingAllocationResponse.BookingOwner.Name }' of Type '{ bookingAllocationResponse.BookingOwner.OwnerType.ToString() }'");
-                if (bookingAllocationResponse.AccommodationStartDate != null)
-                    information.AppendLine($"Accommodation Start Date: '{ bookingAllocationResponse.AccommodationStartDate.Value.ToString() }'");
-                if (bookingAllocationResponse.Customer != null)
-                {
-                    information.AppendLine($"Booking Customer: '{ bookingAllocationResponse.Customer.Name }' of Type '{  bookingAllocationResponse.Customer.CustomerType.ToString() }'");
-                    information.AppendLine($"Customer Owner: '{ bookingAllocationResponse.Customer.Owner.Name }' of Type '{ bookingAllocationResponse.Customer.Owner.OwnerType.ToString() }'");
-                }
-                if (bookingAllocationResponse.SourceMarketBusinessUnit != null)
-                    information.AppendLine($"Customer Source Market Business Unit: '{ bookingAllocationResponse.SourceMarketBusinessUnit }'");
-                if (bookingAllocationResponse.HotelName != null)
-                    information.AppendLine($"Hotel Name: '{bookingAllocationResponse.HotelName}'");
-                if (bookingAllocationResponse.HotelOwner != null)
-                    information.AppendLine($"Hotel Owner: '{ bookingAllocationResponse.HotelOwner.Name }' of Type '{ bookingAllocationResponse.HotelOwner.OwnerType.ToString() }'");
-                if (bookingAllocationResponse.ChildHotelTeam != null)
-                    information.AppendLine($"Child Hotel Team: '{bookingAllocationResponse.ChildHotelTeam.Name}'");
             }
             return information.ToString();
 
