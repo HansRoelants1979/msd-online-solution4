@@ -63,11 +63,13 @@ namespace Tc.Crm.Plugins.Hotel.BusinessLogic
         /// </summary>
         public void RemoveUserFromHotelTeams()
         {
-            trace.Trace("Begin - RemoveUserFromHotelTeams");
-            // get user and hotel
-            var userReference = (EntityReference)context.InputParameters[InputParameters.Target];
+            trace.Trace("Begin - RemoveUserFromHotelTeams");            
+            var targetReference = (EntityReference)context.InputParameters[InputParameters.Target];            
             var relatedEntities = context.InputParameters[InputParameters.RelatedEntities] as EntityReferenceCollection;
-            var hotelReference = relatedEntities[0];
+            // get user and hotel
+            var isUserTarget = string.Equals(Entities.User, targetReference.LogicalName, StringComparison.InvariantCultureIgnoreCase);
+            var userReference = isUserTarget ? targetReference : relatedEntities[0];
+            var hotelReference = isUserTarget ? relatedEntities[0] : targetReference;
             var hotel = service.Retrieve(Entities.Hotel, hotelReference.Id, new ColumnSet(new string[] { Attributes.Hotel.Name, Attributes.Hotel.MasterHotelId, Attributes.Hotel.OwningTeam }));
             trace.Trace("Removing user from teams of hotel: {0}", hotel.GetAttributeValue<string>(Attributes.Hotel.Name));
             var owningTeam = hotel.GetAttributeValue<EntityReference>(Attributes.Hotel.OwningTeam);
