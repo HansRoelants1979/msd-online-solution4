@@ -18,7 +18,7 @@ namespace Tc.Crm.Service.Services
        
         public override void ValidateSignature(JsonWebTokenRequest jsonWebTokenRequest)
         {
-            var fileNames = ConfigurationService.GetPublicKeyFileNames(Api.Booking);
+            var fileNames = ConfigurationService.GetPublicKeyFileNames(Api.Survey);
             if (fileNames == null || fileNames.Count == 0)
             {
                 Trace.TraceWarning("Public key file name not present in config.");
