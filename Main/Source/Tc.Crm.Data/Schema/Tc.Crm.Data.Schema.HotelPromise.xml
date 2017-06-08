@@ -1,0 +1,11 @@
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <entity name="tc_hotelpromises" displayname="Hotel Promises" etc="10012" primaryidfield="tc_hotelpromisesid" primarynamefield="tc_name" disableplugins="false">
+    <fields>
+      <field displayname="Brand" name="tc_brandid" type="entityreference" lookupType="tc_brand" customfield="true" />
+      <field displayname="Hotel" name="tc_hotelid" type="entityreference" lookupType="tc_hotel" customfield="true" />
+      <field updateCompare="true" displayname="Hotel Promises" name="tc_hotelpromisesid" type="guid" primaryKey="true" />
+      <field displayname="Name" name="tc_name" type="string" customfield="true" />
+      <field displayname="Promise Type" name="tc_promisetype" type="optionsetvalue" customfield="true" />
+    </fields>
+  </entity>
+</entities>

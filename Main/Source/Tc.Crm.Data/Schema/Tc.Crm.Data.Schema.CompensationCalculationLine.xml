@@ -1,15 +1,15 @@
 <entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <entity name="tc_compensationcalculationline" displayname="Compensation Calculation Line" etc="10091" primaryidfield="tc_compensationcalculationlineid" primarynamefield="tc_name" disableplugins="false">
     <fields>
-      <field displayname="Status" name="statecode" type="state" />
-      <field displayname="Status Reason" name="statuscode" type="status" />
-      <field displayname="Range Percentage" name="tc_rangepercentage" type="decimal" customfield="true" />
-      <field displayname="Impact Percentage" name="tc_impactpercentage" type="decimal" customfield="true" />
-      <field displayname="Building Work Grade" name="tc_buildingworkgrade" type="optionsetvalue" customfield="true" />
+      <field updateCompare="true" displayname="Compensation Calculation Line" name="tc_compensationcalculationlineid" type="guid" primaryKey="true" />
+      <field displayname="Compensation Matrix" name="tc_compensationmatrix" type="entityreference" lookupType="tc_compensationcalculationmatrix" customfield="true" />
       <field displayname="Impact Level" name="tc_impactlevel" type="optionsetvalue" customfield="true" />
       <field displayname="Impact Severity" name="tc_impactseverity" type="optionsetvalue" customfield="true" />
-      <field displayname="Compensation Matrix" name="tc_compensationmatrix" type="entityreference" lookupType="tc_compensationcalculationmatrix" customfield="true" />
-      <field updateCompare="true" displayname="Compensation Calculation Line" name="tc_compensationcalculationlineid" type="guid" primaryKey="true" />
+      <field displayname="Building Work Grade" name="tc_buildingworkgrade" type="optionsetvalue" customfield="true" />
+      <field displayname="Impact Percentage" name="tc_impactpercentage" type="decimal" customfield="true" />
+      <field displayname="Range Percentage" name="tc_rangepercentage" type="decimal" customfield="true" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
     </fields>
   </entity>
 </entities>

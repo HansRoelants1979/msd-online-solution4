@@ -1,0 +1,10 @@
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <entity name="tc_region" displayname="Region" etc="10033" primaryidfield="tc_regionid" primarynamefield="tc_name" disableplugins="false">
+    <fields>
+      <field displayname="Country" name="tc_countryid" type="entityreference" lookupType="tc_country" customfield="true" />
+      <field displayname="Name" name="tc_name" type="string" customfield="true" />
+      <field displayname="Region" name="tc_regionid" type="guid" primaryKey="true" />
+      <field displayname="Region Code" name="tc_regioncode" type="string" customfield="true" />
+    </fields>
+  </entity>
+</entities>

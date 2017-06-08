@@ -3,12 +3,7 @@
     <fields>
       <field updateCompare="true" displayname="Case Category" name="tc_casecategoryid" type="guid" primaryKey="true" />
       <field displayname="Case Type" name="tc_casetypeid" type="entityreference" lookupType="tc_casetype" customfield="true" />
-      <field displayname="Health &amp; Safety Category" name="tc_healthsafetycategory" type="bool" customfield="true" />
-      <field displayname="Health &amp; Safety Child Protection Category" name="tc_healthsafetychildprotectioncategory" type="bool" customfield="true" />
       <field displayname="Name" name="tc_name" type="string" customfield="true" />
-      <field displayname="Selection Path" name="tc_selectionpath" type="string" customfield="true" />
-      <field displayname="Status" name="statecode" type="state" />
-      <field displayname="Status Reason" name="statuscode" type="status" />
     </fields>
     <relationships>
       <relationship name="tc_tc_casecategory_tc_casecategory" manyToMany="true" isreflexive="true" relatedEntityName="tc_tc_casecategory_tc_casecategory" m2mTargetEntity="tc_casecategory" m2mTargetEntityPrimaryKey="tc_casecategoryid" />

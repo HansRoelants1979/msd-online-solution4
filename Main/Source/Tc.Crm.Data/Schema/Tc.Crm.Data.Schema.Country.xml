@@ -1,0 +1,10 @@
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <entity name="tc_country" displayname="Country" etc="10031" primaryidfield="tc_countryid" primarynamefield="tc_iso_code" disableplugins="false">
+    <fields>
+      <field displayname="Country" name="tc_iso_code" type="string" customfield="true" />
+      <field updateCompare="true" displayname="Country" name="tc_countryid" type="guid" primaryKey="true" />
+      <field displayname="Country Name" name="tc_countryname" type="optionsetvalue" customfield="true" />
+      <field displayname="ISO 2 Code" name="tc_iso2code" type="string" customfield="true" />
+    </fields>
+  </entity>
+</entities>

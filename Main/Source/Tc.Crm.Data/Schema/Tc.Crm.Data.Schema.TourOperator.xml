@@ -1,0 +1,13 @@
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <entity name="tc_touroperator" displayname="Tour Operator" etc="10041" primaryidfield="tc_touroperatorid" primarynamefield="tc_name" disableplugins="false">
+    <fields>
+      <field displayname="Name" name="tc_name" type="string" customfield="true" />
+      <field displayname="Source Market" name="tc_countryid" type="entityreference" lookupType="tc_country" customfield="true" />
+      <field updateCompare="true" displayname="Tour Operator" name="tc_touroperatorid" type="guid" primaryKey="true" />
+      <field displayname="Tour Operator Code" name="tc_touroperatorcode" type="string" customfield="true" />
+    </fields>
+    <relationships>
+      <relationship name="tc_touroperator_tc_brand" manyToMany="true" isreflexive="false" relatedEntityName="tc_touroperator_tc_brand" m2mTargetEntity="tc_brand" m2mTargetEntityPrimaryKey="tc_brandid" />
+    </relationships>
+  </entity>
+</entities>

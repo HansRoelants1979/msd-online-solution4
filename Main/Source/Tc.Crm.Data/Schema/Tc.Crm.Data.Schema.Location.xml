@@ -1,0 +1,11 @@
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <entity name="tc_location" displayname="Location" etc="10008" primaryidfield="tc_locationid" primarynamefield="tc_name" disableplugins="false">
+    <fields>
+      <field updateCompare="true" displayname="Location" name="tc_locationid" type="guid" primaryKey="true" />
+      <field displayname="Location Code" name="tc_locationcode" type="string" customfield="true" />
+      <field displayname="Name" name="tc_name" type="string" customfield="true" />
+      <field displayname="Primary Location" name="tc_primarylocationid" type="entityreference" lookupType="tc_gateway" customfield="true" />
+      <field displayname="Region" name="tc_regionid" type="entityreference" lookupType="tc_region" customfield="true" />
+    </fields>
+  </entity>
+</entities>

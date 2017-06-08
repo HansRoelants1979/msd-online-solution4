@@ -1,0 +1,10 @@
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <entity name="tc_brand" displayname="Brand" etc="10035" primaryidfield="tc_brandid" primarynamefield="tc_name" disableplugins="false">
+    <fields>
+      <field displayname="Brand Code" name="tc_brandcode" type="string" customfield="true" />
+      <field updateCompare="true" displayname="Brand" name="tc_brandid" type="guid" primaryKey="true" />
+      <field displayname="Name" name="tc_name" type="string" customfield="true" />
+      <field displayname="Source Market" name="tc_countryid" type="entityreference" lookupType="tc_country" customfield="true" />
+    </fields>
+  </entity>
+</entities>

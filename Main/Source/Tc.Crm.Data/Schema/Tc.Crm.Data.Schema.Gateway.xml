@@ -1,0 +1,14 @@
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <entity name="tc_gateway" displayname="Gateway" etc="10032" primaryidfield="tc_gatewayid" primarynamefield="tc_iata" disableplugins="false">
+    <fields>
+      <field displayname="Country" name="tc_countryid" type="entityreference" lookupType="tc_country" customfield="true" />
+      <field updateCompare="true" displayname="Gateway" name="tc_gatewayid" type="guid" primaryKey="true" />
+      <field displayname="Gateway Name" name="tc_gateway" type="string" customfield="true" />
+      <field displayname="IATA" name="tc_iata" type="string" customfield="true" />
+    </fields>
+    <relationships>
+      <relationship name="tc_gateway_tc_locationoffice" manyToMany="true" isreflexive="false" relatedEntityName="tc_gateway_tc_locationoffice" m2mTargetEntity="tc_locationoffice" m2mTargetEntityPrimaryKey="tc_locationofficeid" />
+      <relationship name="tc_gateway_tc_otherlocations" manyToMany="true" isreflexive="false" relatedEntityName="tc_gateway_tc_otherlocations" m2mTargetEntity="tc_location" m2mTargetEntityPrimaryKey="tc_locationid" />
+    </relationships>
+  </entity>
+</entities>
