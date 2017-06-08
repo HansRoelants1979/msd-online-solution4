@@ -21,6 +21,7 @@ if (typeof (Tc.Crm.Scripts.Library) === "undefined") {
 Tc.Crm.Scripts.Library.Contact = (function () {
     "use strict";
     var FORM_MODE_CREATE = 1;
+    var FORM_MODE_UPDATE = 2;
     var FORM_MODE_QUICK_CREATE = 5;
     var CLIENT_STATE_OFFLINE = "Offline";
 
@@ -29,7 +30,7 @@ Tc.Crm.Scripts.Library.Contact = (function () {
 
     var EntityNames = {
         Contact: "contact",
-        Case: "incident",        
+        Case: "incident",
         Compensation: "tc_compensation"
     }
 
@@ -48,6 +49,7 @@ Tc.Crm.Scripts.Library.Contact = (function () {
     }
 
     function getPromiseResponse(promiseResponse, entity) {
+        if (promiseResponse == null) return null;
         if (IsOfflineMode()) {
             return promiseResponse.values != null ? promiseResponse.values : promiseResponse;
         }
@@ -94,6 +96,7 @@ Tc.Crm.Scripts.Library.Contact = (function () {
         compensationsReceivedPromise.then(
             function (compensationsResponse) {
                 var compensations = getPromiseResponse(compensationsResponse, "Compensation");
+                if (compensations == null) return;
                 compensations.forEach(function (compensation) {
                     if (IsOfflineMode()) {
                         Xrm.Mobile.offline.updateRecord(EntityNames.Compensation, compensation.tc_compensationid, compensationFields).then(
@@ -129,6 +132,7 @@ Tc.Crm.Scripts.Library.Contact = (function () {
         getCustomerCases(customerId).then(
             function (casesResponse) {
                 var cases = getPromiseResponse(casesResponse, "Case");
+                if (cases == null) return;
                 cases.forEach(function (incident) {
                     var caseCompensationsPromise = getCaseCompensations(incident.incidentid);
                     updateCompensations(caseCompensationsPromise, { tc_language: language });
@@ -139,9 +143,35 @@ Tc.Crm.Scripts.Library.Contact = (function () {
             }
         );
     }
+    var getNotificationForPhoneNumber = function (telephoneFieldName) {
+        var phone = Xrm.Page.data.entity.attributes.get(telephoneFieldName);
+        if (phone == null) return;
+        var phoneValue = phone.getValue();
+        if (phoneValue == null || phoneValue == "") return;
+
+        var regex = /^\+(?:[0-9] ?){9,14}[0-9]$/;
+        if (regex.test(phoneValue)) {
+            if (Xrm.Page.ui.getFormType() == FORM_MODE_CREATE) {
+                Xrm.Page.getControl(telephoneFieldName).clearNotification();
+            }
+            if (Xrm.Page.ui.getFormType() == FORM_MODE_UPDATE) {
+                Xrm.Page.ui.clearFormNotification("TelNumNotification");
+            }
+        }
+        else {
+            if (Xrm.Page.ui.getFormType() == FORM_MODE_CREATE) {
+                Xrm.Page.getControl(telephoneFieldName).setNotification("The telephone number does not match the required format. The number should start with a + followed by the country dialing code and contain no spaces or other special characters i.e. +44 for UK.");
+            }
+            if (Xrm.Page.ui.getFormType() == FORM_MODE_UPDATE) {
+                Xrm.Page.getControl(telephoneFieldName).clearNotification();
+                Xrm.Page.ui.setFormNotification("The telephone number does not match the required format. The number should start with a + followed by the country dialing code and contain no spaces or other special characters i.e. +44 for UK.", "WARNING", "TelNumNotification");
+            }
+        }
+    }
 
     // public
     return {
-        UpdateCustomerCompensationsLanguage: updateCustomerCompensationsLanguage
+        UpdateCustomerCompensationsLanguage: updateCustomerCompensationsLanguage,
+        GetNotificationForPhoneNumber: getNotificationForPhoneNumber
     };
 })();

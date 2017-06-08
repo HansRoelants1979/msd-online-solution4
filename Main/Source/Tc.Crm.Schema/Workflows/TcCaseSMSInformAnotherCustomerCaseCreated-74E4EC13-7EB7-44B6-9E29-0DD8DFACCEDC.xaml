@@ -200,6 +200,8 @@
                                         <Variable x:TypeArguments="x:Object" Name="CreateStep8_11" />
                                         <Variable x:TypeArguments="x:Object" Name="CreateStep8_12" />
                                         <Variable x:TypeArguments="x:Object" Name="CreateStep8_13" />
+                                        <Variable x:TypeArguments="x:Object" Name="CreateStep8_14" />
+                                        <Variable x:TypeArguments="x:Object" Name="CreateStep8_15" />
                                       </Sequence.Variables>
                                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;CreateStep8_localParameter#Temp&quot;)]" Value="[New Entity(&quot;posms_smsmessage&quot;)]" />
                                       <mxswa:GetEntityProperty Attribute="tc_otherpartyphone" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" Value="[CreateStep8_2]">
@@ -321,37 +323,27 @@
                                           </InArgument>
                                         </mxswa:SetEntityProperty.TargetType>
                                       </mxswa:SetEntityProperty>
+                                      <mxswa:GetEntityProperty Attribute="ownerid" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" Value="[CreateStep8_12]">
+                                        <mxswa:GetEntityProperty.TargetType>
+                                          <InArgument x:TypeArguments="s:Type">
+                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:EntityReference" />
+                                          </InArgument>
+                                        </mxswa:GetEntityProperty.TargetType>
+                                      </mxswa:GetEntityProperty>
                                       <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
                                         <mxswa:ActivityReference.Arguments>
-                                          <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.OptionSetValue, "1", "Picklist" }]</InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
+                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep8_12 }]</InArgument>
                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
+                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:EntityReference" />
                                           </InArgument>
                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep8_11]</OutArgument>
                                         </mxswa:ActivityReference.Arguments>
                                       </mxswa:ActivityReference>
-                                      <mxswa:SetEntityProperty Attribute="deliveryprioritycode" Entity="[CreatedEntities(&quot;CreateStep8_localParameter#Temp&quot;)]" EntityName="posms_smsmessage" Value="[CreateStep8_11]">
+                                      <mxswa:SetEntityProperty Attribute="ownerid" Entity="[CreatedEntities(&quot;CreateStep8_localParameter#Temp&quot;)]" EntityName="posms_smsmessage" Value="[CreateStep8_11]">
                                         <mxswa:SetEntityProperty.TargetType>
                                           <InArgument x:TypeArguments="s:Type">
-                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
-                                          </InArgument>
-                                        </mxswa:SetEntityProperty.TargetType>
-                                      </mxswa:SetEntityProperty>
-                                      <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
-                                        <mxswa:ActivityReference.Arguments>
-                                          <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.Boolean, "False" }]</InArgument>
-                                          <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
-                                          </InArgument>
-                                          <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep8_12]</OutArgument>
-                                        </mxswa:ActivityReference.Arguments>
-                                      </mxswa:ActivityReference>
-                                      <mxswa:SetEntityProperty Attribute="leftvoicemail" Entity="[CreatedEntities(&quot;CreateStep8_localParameter#Temp&quot;)]" EntityName="posms_smsmessage" Value="[CreateStep8_12]">
-                                        <mxswa:SetEntityProperty.TargetType>
-                                          <InArgument x:TypeArguments="s:Type">
-                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
+                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:EntityReference" />
                                           </InArgument>
                                         </mxswa:SetEntityProperty.TargetType>
                                       </mxswa:SetEntityProperty>
@@ -365,7 +357,41 @@
                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep8_13]</OutArgument>
                                         </mxswa:ActivityReference.Arguments>
                                       </mxswa:ActivityReference>
-                                      <mxswa:SetEntityProperty Attribute="prioritycode" Entity="[CreatedEntities(&quot;CreateStep8_localParameter#Temp&quot;)]" EntityName="posms_smsmessage" Value="[CreateStep8_13]">
+                                      <mxswa:SetEntityProperty Attribute="deliveryprioritycode" Entity="[CreatedEntities(&quot;CreateStep8_localParameter#Temp&quot;)]" EntityName="posms_smsmessage" Value="[CreateStep8_13]">
+                                        <mxswa:SetEntityProperty.TargetType>
+                                          <InArgument x:TypeArguments="s:Type">
+                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
+                                          </InArgument>
+                                        </mxswa:SetEntityProperty.TargetType>
+                                      </mxswa:SetEntityProperty>
+                                      <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                                        <mxswa:ActivityReference.Arguments>
+                                          <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.Boolean, "False" }]</InArgument>
+                                          <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
+                                          </InArgument>
+                                          <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep8_14]</OutArgument>
+                                        </mxswa:ActivityReference.Arguments>
+                                      </mxswa:ActivityReference>
+                                      <mxswa:SetEntityProperty Attribute="leftvoicemail" Entity="[CreatedEntities(&quot;CreateStep8_localParameter#Temp&quot;)]" EntityName="posms_smsmessage" Value="[CreateStep8_14]">
+                                        <mxswa:SetEntityProperty.TargetType>
+                                          <InArgument x:TypeArguments="s:Type">
+                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
+                                          </InArgument>
+                                        </mxswa:SetEntityProperty.TargetType>
+                                      </mxswa:SetEntityProperty>
+                                      <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                                        <mxswa:ActivityReference.Arguments>
+                                          <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.OptionSetValue, "1", "Picklist" }]</InArgument>
+                                          <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
+                                          </InArgument>
+                                          <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep8_15]</OutArgument>
+                                        </mxswa:ActivityReference.Arguments>
+                                      </mxswa:ActivityReference>
+                                      <mxswa:SetEntityProperty Attribute="prioritycode" Entity="[CreatedEntities(&quot;CreateStep8_localParameter#Temp&quot;)]" EntityName="posms_smsmessage" Value="[CreateStep8_15]">
                                         <mxswa:SetEntityProperty.TargetType>
                                           <InArgument x:TypeArguments="s:Type">
                                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />

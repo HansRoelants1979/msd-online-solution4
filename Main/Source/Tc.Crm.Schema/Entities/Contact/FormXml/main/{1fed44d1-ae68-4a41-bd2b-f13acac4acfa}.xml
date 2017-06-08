@@ -396,12 +396,12 @@
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{8684ecc5-7330-9295-857a-db787db91886}" showlabel="false">
+                    <cell id="{519bdfaf-c70c-403a-b895-6d8155e8abe6}">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
                     </cell>
-                    <cell id="{27b21d1c-a46e-3ebb-30e2-bcc61223d342}" showlabel="false">
+                    <cell id="{a83effdc-eb54-4803-997f-2effe47bc526}">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
@@ -465,7 +465,7 @@
           </column>
         </columns>
       </tab>
-      <tab id="{c0e637ce-e608-a617-0cc7-484c7285692e}" name="tab_Customer_BookingSummary" IsUserDefined="0" locklevel="0" showlabel="true" expanded="true">
+      <tab id="{c0e637ce-e608-a617-0cc7-484c7285692e}" name="tab_Customer_BookingSummary" IsUserDefined="0" locklevel="0" showlabel="true" expanded="false">
         <labels>
           <label description="Booking Summary" languagecode="1033" />
         </labels>
@@ -534,7 +534,7 @@
                         <label description="Téléphone personnel" languagecode="1036" />
                         <label description="Telefon (privat)" languagecode="1031" />
                       </labels>
-                      <control disabled="false" id="telephone2" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="telephone2" />
+                      <control disabled="false" id="telephone2" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="telephone2" uniqueid="{0e1d1dce-6474-6017-04b5-c87c6ea6a8ed}" />
                     </cell>
                     <cell id="{93e4e227-3ae6-b190-8c2a-459c35d14ba1}" locklevel="0" showlabel="true">
                       <labels>
@@ -550,7 +550,7 @@
                         <label description="Téléphone 3" languagecode="1036" />
                         <label description="Telefon 3" languagecode="1031" />
                       </labels>
-                      <control disabled="false" id="telephone3" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="telephone3" />
+                      <control disabled="false" id="telephone3" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="telephone3" uniqueid="{e3580176-3c43-1317-305d-a84865713b16}" />
                     </cell>
                     <cell id="{3e99ed1c-cc41-a15e-a31d-5b807e03c55a}" locklevel="0" showlabel="true">
                       <labels>
@@ -605,13 +605,13 @@
                   </row>
                 </rows>
               </section>
-              <section id="{05cbcb78-3ad0-e1d9-c9b5-aa3b3140859b}" name="tab_Customer_AdditionalCustomerDetails_section_4" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
+              <section id="{05cbcb78-3ad0-e1d9-c9b5-aa3b3140859b}" name="tab_Customer_AdditionalCustomerDetails_section_4" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left" availableforphone="false">
                 <labels>
                   <label description="Social Handles" languagecode="1033" />
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{41c02e62-2543-4a81-169b-aeda99b6c6d2}" showlabel="false" rowspan="6" auto="false" colspan="1">
+                    <cell id="{41c02e62-2543-4a81-169b-aeda99b6c6d2}" showlabel="false" rowspan="6" auto="false" colspan="1" availableforphone="false">
                       <labels>
                         <label description="Social Profiles (Customer)" languagecode="1033" />
                         <label description="Profils sociaux" languagecode="1036" />
@@ -783,7 +783,7 @@
           <Handler functionName="Mscrm.ContactMainSystemLibraryWebResource.form_onload" libraryName="Contact_main_system_library.js" handlerUniqueId="4ea24ebd-795d-434e-af94-6812c3867b54" enabled="true" />
         </InternalHandlers>
         <Handlers>
-          <Handler handlerUniqueId="{515656b3-0ca5-9e1b-2e14-6008cb2c2800}" functionName="Tc.Crm.Scripts.Events.Contact.OnLoad" libraryName="tc_Tc.Crm.Scripts.Events.Contact.js" enabled="true" passExecutionContext="true" parameters="&quot;telephone1&quot;,&quot;telephone2&quot;" />
+          <Handler handlerUniqueId="{515656b3-0ca5-9e1b-2e14-6008cb2c2800}" functionName="Tc.Crm.Scripts.Events.Contact.OnLoad" libraryName="tc_Tc.Crm.Scripts.Events.Contact.js" enabled="true" passExecutionContext="false" parameters="" />
         </Handlers>
       </event>
       <event name="onsave" application="false" active="false">
@@ -793,12 +793,22 @@
       </event>
       <event name="onchange" application="false" active="false" attribute="telephone1">
         <Handlers>
-          <Handler handlerUniqueId="{5c10987e-372a-90bc-0cd8-54ce60860edd}" functionName="Tc.Crm.Scripts.Events.Contact.OnContactTelephoneFieldChange" libraryName="tc_Tc.Crm.Scripts.Events.Contact.js" enabled="true" passExecutionContext="true" parameters="&quot;telephone1&quot;,&quot;telephone2&quot;" />
+          <Handler handlerUniqueId="{5c10987e-372a-90bc-0cd8-54ce60860edd}" functionName="Tc.Crm.Scripts.Events.Contact.OnChangeTelephone1" libraryName="tc_Tc.Crm.Scripts.Events.Contact.js" enabled="true" passExecutionContext="false" parameters="" />
         </Handlers>
       </event>
       <event name="onchange" application="false" active="false" attribute="tc_language">
         <Handlers>
           <Handler functionName="Tc.Crm.Scripts.Events.Contact.OnChangeLanguage" libraryName="tc_Tc.Crm.Scripts.Events.Contact.js" handlerUniqueId="{58c1e5a5-4967-27dc-de36-5667a20b00da}" enabled="true" parameters="" passExecutionContext="false" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="telephone2">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Contact.OnChangeTelephone2" libraryName="tc_Tc.Crm.Scripts.Events.Contact.js" handlerUniqueId="{d1e47b47-01c8-6e21-8600-b601874409a4}" enabled="true" parameters="" passExecutionContext="false" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="telephone3">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Contact.OnChangeTelephone3" libraryName="tc_Tc.Crm.Scripts.Events.Contact.js" handlerUniqueId="{0dbb64b9-d505-0259-6792-c5d84b9d9b75}" enabled="true" parameters="" passExecutionContext="false" />
         </Handlers>
       </event>
     </events>
@@ -812,17 +822,17 @@
             <Title LCID="1033" Text="Invoice" />
           </Titles>
         </NavBarByRelationshipItem>
-        <NavBarByRelationshipItem Id="navOpps" Area="Sales" Sequence="10" RelationshipName="opportunity_customer_contacts" Show="false">
-          <Titles>
-            <Title Text="Opportunities" LCID="1033" />
-          </Titles>
-        </NavBarByRelationshipItem>
         <NavBarByRelationshipItem Id="navQuotes" Area="Info" Sequence="11" RelationshipName="quote_customer_contacts" Show="false">
           <Privileges>
             <Privilege Entity="" Privilege="ReadActivity" />
           </Privileges>
           <Titles>
             <Title LCID="1033" Text="Quote" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem Id="navOpps" Area="Sales" Sequence="11" RelationshipName="opportunity_customer_contacts" Show="false">
+          <Titles>
+            <Title Text="Opportunities" LCID="1033" />
           </Titles>
         </NavBarByRelationshipItem>
         <NavBarByRelationshipItem Id="navContracts" Area="Info" Sequence="12" RelationshipName="contract_customer_contacts" Show="false">
@@ -898,6 +908,11 @@
             <Title Text="Audit History" LCID="1033" />
           </Titles>
         </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="Socialprofile_customer_contacts" Sequence="8502" Area="Info" Id="navSocialprofile" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Social Profiles" />
+          </Titles>
+        </NavBarByRelationshipItem>
         <NavBarByRelationshipItem RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navAsyncOperations" Sequence="9500" Area="ProcessCenter" Id="navAsyncOperations" Show="false">
           <Titles>
             <Title LCID="1033" Text="Workflows" />
@@ -911,6 +926,16 @@
         <NavBarByRelationshipItem Id="navFeedback" Area="Info" Sequence="9958" RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navFeedback" Show="false">
           <Titles>
             <Title Text="Feedback" LCID="1033" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_contact_tc_compensation_Customer" Sequence="10001" Area="Info" Id="nav_tc_contact_tc_compensation_Customer">
+          <Titles>
+            <Title LCID="1033" Text="Compensation" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_contact_tc_compensationLine_Customer" Sequence="10002" Area="Info" Id="nav_tc_contact_tc_compensationLine_Customer">
+          <Titles>
+            <Title LCID="1033" Text="Compensation Lines" />
           </Titles>
         </NavBarByRelationshipItem>
       </NavBar>
@@ -974,14 +999,14 @@
     </footer>
     <controlDescriptions>
       <controlDescription forControl="{8dd679e0-3409-72a2-9d22-dad9399bdb6d}">
-        <customControl id="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" formFactor="2">
+        <customControl id="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" formFactor="0">
           <parameters>
             <datafieldname>tc_gender</datafieldname>
           </parameters>
         </customControl>
-        <customControl formFactor="0" name="MscrmControls.OptionSet.OptionSetControl">
+        <customControl id="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" formFactor="2">
           <parameters>
-            <value>tc_gender</value>
+            <datafieldname>tc_gender</datafieldname>
           </parameters>
         </customControl>
         <customControl formFactor="1" name="MscrmControls.OptionSet.OptionSetControl">

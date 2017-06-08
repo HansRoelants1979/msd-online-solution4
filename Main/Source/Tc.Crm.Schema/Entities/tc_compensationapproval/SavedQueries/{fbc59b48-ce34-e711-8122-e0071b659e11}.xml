@@ -31,7 +31,7 @@
         <order descending="false" attribute="tc_approveby" />
         <filter type="and">
           <condition attribute="statecode" operator="eq" value="0" />
-          <condition attribute="tc_approvalstatus" operator="null" />
+          <condition attribute="statuscode" operator="eq" value="1" />
         </filter>
         <link-entity name="tc_compensation" from="tc_compensationid" to="tc_compensationid" alias="aa">
           <attribute name="tc_caseid" />

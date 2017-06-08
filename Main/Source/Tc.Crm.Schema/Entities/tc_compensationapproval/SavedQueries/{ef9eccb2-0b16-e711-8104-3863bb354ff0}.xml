@@ -54,7 +54,7 @@
             <link-entity name="tc_booking" from="tc_bookingid" to="tc_bookingid" alias="ae">
               <link-entity name="tc_gateway" from="tc_gatewayid" to="tc_destinationgatewayid" alias="af">
                 <filter type="and">
-                  <condition attribute="ownerid" operator="eq" uiname="Viktor Kanaylo" uitype="systemuser" value="{2EF3CDCE-33F4-E611-8102-3863BB351D00}" />
+                  <condition attribute="ownerid" operator="eq-userid" />
                 </filter>
               </link-entity>
             </link-entity>

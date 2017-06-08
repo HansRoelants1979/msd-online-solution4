@@ -237,6 +237,19 @@
       </tab>
     </tabs>
     <controlDescriptions />
+    <formLibraries>
+      <Library name="tc_es6promise.js" libraryUniqueId="{58eb68c9-a910-e003-bc44-d4a1056112e0}" />
+      <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{33014114-066e-6a96-292e-c376244dead4}" />
+      <Library name="tc_Tc.Crm.Scripts.Library.Contact.js" libraryUniqueId="{32bec7db-58cd-e9cc-74dc-783cd3a0c5e8}" />
+      <Library name="tc_Tc.Crm.Scripts.Events.Contact.js" libraryUniqueId="{088d8207-b7ed-ec16-d814-ddc8bdb7e54e}" />
+    </formLibraries>
+    <events>
+      <event name="onchange" application="false" active="false" attribute="telephone1">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Contact.OnChangeTelephone1" libraryName="tc_es6promise.js" handlerUniqueId="{c0e1d1b5-053b-4611-2108-6006603bb406}" enabled="true" parameters="" passExecutionContext="false" />
+        </Handlers>
+      </event>
+    </events>
     <DisplayConditions FallbackForm="true" Order="2">
       <Everyone />
     </DisplayConditions>

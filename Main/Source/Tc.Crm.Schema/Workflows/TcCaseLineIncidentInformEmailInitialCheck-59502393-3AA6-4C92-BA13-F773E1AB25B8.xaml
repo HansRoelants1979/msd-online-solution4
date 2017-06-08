@@ -1,0 +1,338 @@
+<Activity x:Class="XrmWorkflow595023933aa64c92ba13f773e1ab25b8" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" xmlns:mxs="clr-namespace:Microsoft.Xrm.Sdk;assembly=Microsoft.Xrm.Sdk, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" xmlns:mxsq="clr-namespace:Microsoft.Xrm.Sdk.Query;assembly=Microsoft.Xrm.Sdk, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" xmlns:mxswa="clr-namespace:Microsoft.Xrm.Sdk.Workflow.Activities;assembly=Microsoft.Xrm.Sdk.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" xmlns:s="clr-namespace:System;assembly=mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" xmlns:srs="clr-namespace:System.Runtime.Serialization;assembly=System.Runtime.Serialization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" xmlns:this="clr-namespace:" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="InputEntities" Type="InArgument(scg:IDictionary(x:String, mxs:Entity))" />
+    <x:Property Name="CreatedEntities" Type="InArgument(scg:IDictionary(x:String, mxs:Entity))" />
+  </x:Members>
+  <this:XrmWorkflow595023933aa64c92ba13f773e1ab25b8.InputEntities>
+    <InArgument x:TypeArguments="scg:IDictionary(x:String, mxs:Entity)" />
+  </this:XrmWorkflow595023933aa64c92ba13f773e1ab25b8.InputEntities>
+  <this:XrmWorkflow595023933aa64c92ba13f773e1ab25b8.CreatedEntities>
+    <InArgument x:TypeArguments="scg:IDictionary(x:String, mxs:Entity)" />
+  </this:XrmWorkflow595023933aa64c92ba13f773e1ab25b8.CreatedEntities>
+  <mva:VisualBasic.Settings>Assembly references and imported namespaces for internal implementation</mva:VisualBasic.Settings>
+  <mxswa:Workflow>
+    <mxswa:Workflow.Variables>
+      <Variable x:TypeArguments="mxs:EntityReference" Default="[New EntityReference()]" Name="CustomActivityStep66OfficeLocation_localParameter" />
+      <Variable x:TypeArguments="mxs:EntityReference" Default="[New EntityReference()]" Name="CustomActivityStep66Account_localParameter" />
+      <Variable x:TypeArguments="mxs:EntityReference" Default="[New EntityReference()]" Name="CustomActivityStep66Contact_localParameter" />
+      <Variable x:TypeArguments="mxs:EntityReference" Default="[New EntityReference()]" Name="CustomActivityStep66Case_localParameter" />
+      <Variable x:TypeArguments="mxs:EntityReference" Default="[New EntityReference()]" Name="CustomActivityStep66CaseLine_localParameter" />
+      <Variable x:TypeArguments="mxs:EntityReference" Default="[New EntityReference()]" Name="CustomActivityStep66Accommodation_localParameter" />
+      <Variable x:TypeArguments="mxs:EntityReference" Default="[New EntityReference()]" Name="CustomActivityStep66AssistanceRequest_localParameter" />
+      <Variable x:TypeArguments="mxs:EntityReference" Default="[New EntityReference()]" Name="CustomActivityStep66Hotel_localParameter" />
+      <Variable x:TypeArguments="mxs:EntityReference" Default="[New EntityReference()]" Name="CustomActivityStep66Country_localParameter" />
+      <Variable x:TypeArguments="mxs:EntityReference" Default="[New EntityReference()]" Name="CustomActivityStep66BusinessUnit_localParameter" />
+    </mxswa:Workflow.Variables>
+    <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.Composite, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="StageStep72: INCIDENT">
+      <mxswa:ActivityReference.Properties>
+        <sco:Collection x:TypeArguments="Variable" x:Key="Variables" />
+        <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
+          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.ConditionSequence, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="ConditionStep73: Stop if NOT an Incident">
+            <mxswa:ActivityReference.Arguments>
+              <InArgument x:TypeArguments="x:Boolean" x:Key="Wait">False</InArgument>
+            </mxswa:ActivityReference.Arguments>
+            <mxswa:ActivityReference.Properties>
+              <sco:Collection x:TypeArguments="Variable" x:Key="Variables">
+                <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep74_condition" />
+                <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep74_1" />
+                <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep74_2" />
+                <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep74_3" />
+              </sco:Collection>
+              <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
+                <mxswa:GetEntityProperty Attribute="tc_casetypeid" Entity="[InputEntities(&quot;related_tc_caseid#incident&quot;)]" EntityName="incident" Value="[ConditionBranchStep74_1]">
+                  <mxswa:GetEntityProperty.TargetType>
+                    <InArgument x:TypeArguments="s:Type">
+                      <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
+                        <x:Null />
+                      </mxswa:ReferenceLiteral>
+                    </InArgument>
+                  </mxswa:GetEntityProperty.TargetType>
+                </mxswa:GetEntityProperty>
+                <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                  <mxswa:ActivityReference.Arguments>
+                    <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                    <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.Guid, "d264c3f0-93e4-e611-8109-1458d041f8e8", "UniqueIdentifier" }]</InArgument>
+                    <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                      <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:Guid" />
+                    </InArgument>
+                    <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep74_3]</OutArgument>
+                  </mxswa:ActivityReference.Arguments>
+                </mxswa:ActivityReference>
+                <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                  <mxswa:ActivityReference.Arguments>
+                    <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                    <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.EntityReference, "tc_casetype", "Incident", ConditionBranchStep74_3, "Lookup" }]</InArgument>
+                    <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                      <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
+                        <x:Null />
+                      </mxswa:ReferenceLiteral>
+                    </InArgument>
+                    <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep74_2]</OutArgument>
+                  </mxswa:ActivityReference.Arguments>
+                </mxswa:ActivityReference>
+                <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateCondition">
+                  <mxswa:ActivityReference.Arguments>
+                    <InArgument x:TypeArguments="mxsq:ConditionOperator" x:Key="ConditionOperator">NotEqual</InArgument>
+                    <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep74_2 }]</InArgument>
+                    <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep74_1]</InArgument>
+                    <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep74_condition]</OutArgument>
+                  </mxswa:ActivityReference.Arguments>
+                </mxswa:ActivityReference>
+                <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.ConditionBranch, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="ConditionBranchStep74">
+                  <mxswa:ActivityReference.Arguments>
+                    <InArgument x:TypeArguments="x:Boolean" x:Key="Condition">[ConditionBranchStep74_condition]</InArgument>
+                  </mxswa:ActivityReference.Arguments>
+                  <mxswa:ActivityReference.Properties>
+                    <mxswa:ActivityReference x:Key="Then" AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.Composite, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="ConditionBranchStep74">
+                      <mxswa:ActivityReference.Properties>
+                        <sco:Collection x:TypeArguments="Variable" x:Key="Variables" />
+                        <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
+                          <Sequence DisplayName="StopWorkflowStep75: Cancel">
+                            <Sequence.Variables>
+                              <Variable x:TypeArguments="x:Object" Name="StopWorkflowStep75_1" />
+                              <Variable x:TypeArguments="x:String" Default="8d817157-4379-46d6-85f7-6c82d03023d2" Name="stepLabelLabelId" />
+                              <Variable x:TypeArguments="x:String" Default="Not an Incident" Name="stepLabelDescription" />
+                              <Variable x:TypeArguments="x:Int32" Default="1033" Name="stepLabelLanguageCode" />
+                            </Sequence.Variables>
+                            <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                              <mxswa:ActivityReference.Arguments>
+                                <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                                <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "Not an Incident", "String" }]</InArgument>
+                                <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                                  <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
+                                </InArgument>
+                                <OutArgument x:TypeArguments="x:Object" x:Key="Result">[StopWorkflowStep75_1]</OutArgument>
+                              </mxswa:ActivityReference.Arguments>
+                            </mxswa:ActivityReference>
+                            <TerminateWorkflow DisplayName="StopWorkflowStep75: Cancel" Exception="[New Microsoft.Xrm.Sdk.InvalidPluginExecutionException(Microsoft.Xrm.Sdk.OperationStatus.Canceled)]" Reason="[DirectCast(StopWorkflowStep75_1, System.String)]" />
+                          </Sequence>
+                        </sco:Collection>
+                      </mxswa:ActivityReference.Properties>
+                    </mxswa:ActivityReference>
+                    <x:Null x:Key="Else" />
+                    <x:Null x:Key="Description" />
+                  </mxswa:ActivityReference.Properties>
+                </mxswa:ActivityReference>
+              </sco:Collection>
+              <x:Boolean x:Key="ContainsElseBranch">False</x:Boolean>
+            </mxswa:ActivityReference.Properties>
+          </mxswa:ActivityReference>
+          <Persist />
+        </sco:Collection>
+      </mxswa:ActivityReference.Properties>
+    </mxswa:ActivityReference>
+    <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.Composite, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="StageStep47: RESORT OFFICE">
+      <mxswa:ActivityReference.Properties>
+        <sco:Collection x:TypeArguments="Variable" x:Key="Variables" />
+        <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
+          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.Composite, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="CustomActivityStep66: CaseLine to Resort Office">
+            <mxswa:ActivityReference.Properties>
+              <sco:Collection x:TypeArguments="Variable" x:Key="Variables">
+                <Variable x:TypeArguments="x:Object" Name="CustomActivityStep66_1" />
+                <Variable x:TypeArguments="x:Object" Name="CustomActivityStep66_1_converted" />
+              </sco:Collection>
+              <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
+                <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                  <mxswa:ActivityReference.Arguments>
+                    <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                    <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "tc_caseline||tc_incident_tc_caseline;incident||tc_tc_locationoffice_incident;tc_locationoffice", "String" }]</InArgument>
+                    <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                      <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
+                    </InArgument>
+                    <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CustomActivityStep66_1]</OutArgument>
+                  </mxswa:ActivityReference.Arguments>
+                </mxswa:ActivityReference>
+                <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.ConvertCrmXrmTypes, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="ConvertCrmXrmTypes">
+                  <mxswa:ActivityReference.Arguments>
+                    <InArgument x:TypeArguments="x:Object" x:Key="Value">[CustomActivityStep66_1]</InArgument>
+                    <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                      <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
+                    </InArgument>
+                    <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CustomActivityStep66_1_converted]</OutArgument>
+                  </mxswa:ActivityReference.Arguments>
+                </mxswa:ActivityReference>
+                <mxswa:ActivityReference AssemblyQualifiedName="Tc.Crm.CustomWorkflowSteps.RetrieveParentRecordActivity, Tc.Crm.CustomWorkflowSteps, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9d1841d22f62ace3" DisplayName="CustomActivityStep66: CaseLine to Resort Office">
+                  <mxswa:ActivityReference.Arguments>
+                    <InArgument x:TypeArguments="x:String" x:Key="Expression">[DirectCast(CustomActivityStep66_1_converted, System.String)]</InArgument>
+                    <OutArgument x:TypeArguments="mxs:EntityReference" x:Key="OfficeLocation">[CustomActivityStep66OfficeLocation_localParameter]</OutArgument>
+                    <OutArgument x:TypeArguments="mxs:EntityReference" x:Key="Account">[CustomActivityStep66Account_localParameter]</OutArgument>
+                    <OutArgument x:TypeArguments="mxs:EntityReference" x:Key="Contact">[CustomActivityStep66Contact_localParameter]</OutArgument>
+                    <OutArgument x:TypeArguments="mxs:EntityReference" x:Key="Case">[CustomActivityStep66Case_localParameter]</OutArgument>
+                    <OutArgument x:TypeArguments="mxs:EntityReference" x:Key="CaseLine">[CustomActivityStep66CaseLine_localParameter]</OutArgument>
+                    <OutArgument x:TypeArguments="mxs:EntityReference" x:Key="Accommodation">[CustomActivityStep66Accommodation_localParameter]</OutArgument>
+                    <OutArgument x:TypeArguments="mxs:EntityReference" x:Key="AssistanceRequest">[CustomActivityStep66AssistanceRequest_localParameter]</OutArgument>
+                    <OutArgument x:TypeArguments="mxs:EntityReference" x:Key="Hotel">[CustomActivityStep66Hotel_localParameter]</OutArgument>
+                    <OutArgument x:TypeArguments="mxs:EntityReference" x:Key="Country">[CustomActivityStep66Country_localParameter]</OutArgument>
+                    <OutArgument x:TypeArguments="mxs:EntityReference" x:Key="BusinessUnit">[CustomActivityStep66BusinessUnit_localParameter]</OutArgument>
+                  </mxswa:ActivityReference.Arguments>
+                </mxswa:ActivityReference>
+                <If Condition="[Microsoft.VisualBasic.IsNothing(CustomActivityStep66OfficeLocation_localParameter)]">
+                  <If.Then>
+                    <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;CustomActivityStep66OfficeLocation_entity&quot;)]" Value="[New Entity()]" />
+                  </If.Then>
+                  <If.Else>
+                    <mxswa:RetrieveEntity Attributes="{x:Null}" Entity="[CreatedEntities(&quot;CustomActivityStep66OfficeLocation_entity&quot;)]" EntityId="[DirectCast(CustomActivityStep66OfficeLocation_localParameter.Id, System.Guid)]" EntityName="tc_locationoffice" ThrowIfNotExists="False" />
+                  </If.Else>
+                </If>
+                <If Condition="[Microsoft.VisualBasic.IsNothing(CustomActivityStep66Account_localParameter)]">
+                  <If.Then>
+                    <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;CustomActivityStep66Account_entity&quot;)]" Value="[New Entity()]" />
+                  </If.Then>
+                  <If.Else>
+                    <mxswa:RetrieveEntity Attributes="{x:Null}" Entity="[CreatedEntities(&quot;CustomActivityStep66Account_entity&quot;)]" EntityId="[DirectCast(CustomActivityStep66Account_localParameter.Id, System.Guid)]" EntityName="account" ThrowIfNotExists="False" />
+                  </If.Else>
+                </If>
+                <If Condition="[Microsoft.VisualBasic.IsNothing(CustomActivityStep66Contact_localParameter)]">
+                  <If.Then>
+                    <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;CustomActivityStep66Contact_entity&quot;)]" Value="[New Entity()]" />
+                  </If.Then>
+                  <If.Else>
+                    <mxswa:RetrieveEntity Attributes="{x:Null}" Entity="[CreatedEntities(&quot;CustomActivityStep66Contact_entity&quot;)]" EntityId="[DirectCast(CustomActivityStep66Contact_localParameter.Id, System.Guid)]" EntityName="contact" ThrowIfNotExists="False" />
+                  </If.Else>
+                </If>
+                <If Condition="[Microsoft.VisualBasic.IsNothing(CustomActivityStep66Case_localParameter)]">
+                  <If.Then>
+                    <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;CustomActivityStep66Case_entity&quot;)]" Value="[New Entity()]" />
+                  </If.Then>
+                  <If.Else>
+                    <mxswa:RetrieveEntity Attributes="{x:Null}" Entity="[CreatedEntities(&quot;CustomActivityStep66Case_entity&quot;)]" EntityId="[DirectCast(CustomActivityStep66Case_localParameter.Id, System.Guid)]" EntityName="incident" ThrowIfNotExists="False" />
+                  </If.Else>
+                </If>
+                <If Condition="[Microsoft.VisualBasic.IsNothing(CustomActivityStep66CaseLine_localParameter)]">
+                  <If.Then>
+                    <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;CustomActivityStep66CaseLine_entity&quot;)]" Value="[New Entity()]" />
+                  </If.Then>
+                  <If.Else>
+                    <mxswa:RetrieveEntity Attributes="{x:Null}" Entity="[CreatedEntities(&quot;CustomActivityStep66CaseLine_entity&quot;)]" EntityId="[DirectCast(CustomActivityStep66CaseLine_localParameter.Id, System.Guid)]" EntityName="tc_caseline" ThrowIfNotExists="False" />
+                  </If.Else>
+                </If>
+                <If Condition="[Microsoft.VisualBasic.IsNothing(CustomActivityStep66Accommodation_localParameter)]">
+                  <If.Then>
+                    <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;CustomActivityStep66Accommodation_entity&quot;)]" Value="[New Entity()]" />
+                  </If.Then>
+                  <If.Else>
+                    <mxswa:RetrieveEntity Attributes="{x:Null}" Entity="[CreatedEntities(&quot;CustomActivityStep66Accommodation_entity&quot;)]" EntityId="[DirectCast(CustomActivityStep66Accommodation_localParameter.Id, System.Guid)]" EntityName="tc_bookingaccommodation" ThrowIfNotExists="False" />
+                  </If.Else>
+                </If>
+                <If Condition="[Microsoft.VisualBasic.IsNothing(CustomActivityStep66AssistanceRequest_localParameter)]">
+                  <If.Then>
+                    <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;CustomActivityStep66AssistanceRequest_entity&quot;)]" Value="[New Entity()]" />
+                  </If.Then>
+                  <If.Else>
+                    <mxswa:RetrieveEntity Attributes="{x:Null}" Entity="[CreatedEntities(&quot;CustomActivityStep66AssistanceRequest_entity&quot;)]" EntityId="[DirectCast(CustomActivityStep66AssistanceRequest_localParameter.Id, System.Guid)]" EntityName="tc_assistancerequest" ThrowIfNotExists="False" />
+                  </If.Else>
+                </If>
+                <If Condition="[Microsoft.VisualBasic.IsNothing(CustomActivityStep66Hotel_localParameter)]">
+                  <If.Then>
+                    <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;CustomActivityStep66Hotel_entity&quot;)]" Value="[New Entity()]" />
+                  </If.Then>
+                  <If.Else>
+                    <mxswa:RetrieveEntity Attributes="{x:Null}" Entity="[CreatedEntities(&quot;CustomActivityStep66Hotel_entity&quot;)]" EntityId="[DirectCast(CustomActivityStep66Hotel_localParameter.Id, System.Guid)]" EntityName="tc_hotel" ThrowIfNotExists="False" />
+                  </If.Else>
+                </If>
+                <If Condition="[Microsoft.VisualBasic.IsNothing(CustomActivityStep66Country_localParameter)]">
+                  <If.Then>
+                    <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;CustomActivityStep66Country_entity&quot;)]" Value="[New Entity()]" />
+                  </If.Then>
+                  <If.Else>
+                    <mxswa:RetrieveEntity Attributes="{x:Null}" Entity="[CreatedEntities(&quot;CustomActivityStep66Country_entity&quot;)]" EntityId="[DirectCast(CustomActivityStep66Country_localParameter.Id, System.Guid)]" EntityName="tc_country" ThrowIfNotExists="False" />
+                  </If.Else>
+                </If>
+                <If Condition="[Microsoft.VisualBasic.IsNothing(CustomActivityStep66BusinessUnit_localParameter)]">
+                  <If.Then>
+                    <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;CustomActivityStep66BusinessUnit_entity&quot;)]" Value="[New Entity()]" />
+                  </If.Then>
+                  <If.Else>
+                    <mxswa:RetrieveEntity Attributes="{x:Null}" Entity="[CreatedEntities(&quot;CustomActivityStep66BusinessUnit_entity&quot;)]" EntityId="[DirectCast(CustomActivityStep66BusinessUnit_localParameter.Id, System.Guid)]" EntityName="businessunit" ThrowIfNotExists="False" />
+                  </If.Else>
+                </If>
+              </sco:Collection>
+            </mxswa:ActivityReference.Properties>
+          </mxswa:ActivityReference>
+          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.ConditionSequence, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="ConditionStep67: Check eMail address exists on Resort Office">
+            <mxswa:ActivityReference.Arguments>
+              <InArgument x:TypeArguments="x:Boolean" x:Key="Wait">False</InArgument>
+            </mxswa:ActivityReference.Arguments>
+            <mxswa:ActivityReference.Properties>
+              <sco:Collection x:TypeArguments="Variable" x:Key="Variables">
+                <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep68_condition" />
+                <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep68_1" />
+              </sco:Collection>
+              <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
+                <mxswa:GetEntityProperty Attribute="tc_primaryemailaddress" Entity="[CreatedEntities(&quot;CustomActivityStep66OfficeLocation_entity&quot;)]" EntityName="tc_locationoffice" Value="[ConditionBranchStep68_1]">
+                  <mxswa:GetEntityProperty.TargetType>
+                    <InArgument x:TypeArguments="s:Type">
+                      <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
+                        <x:Null />
+                      </mxswa:ReferenceLiteral>
+                    </InArgument>
+                  </mxswa:GetEntityProperty.TargetType>
+                </mxswa:GetEntityProperty>
+                <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateCondition">
+                  <mxswa:ActivityReference.Arguments>
+                    <InArgument x:TypeArguments="mxsq:ConditionOperator" x:Key="ConditionOperator">Null</InArgument>
+                    <x:Null x:Key="Parameters" />
+                    <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep68_1]</InArgument>
+                    <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep68_condition]</OutArgument>
+                  </mxswa:ActivityReference.Arguments>
+                </mxswa:ActivityReference>
+                <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.ConditionBranch, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="ConditionBranchStep68">
+                  <mxswa:ActivityReference.Arguments>
+                    <InArgument x:TypeArguments="x:Boolean" x:Key="Condition">[ConditionBranchStep68_condition]</InArgument>
+                  </mxswa:ActivityReference.Arguments>
+                  <mxswa:ActivityReference.Properties>
+                    <mxswa:ActivityReference x:Key="Then" AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.Composite, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="ConditionBranchStep68">
+                      <mxswa:ActivityReference.Properties>
+                        <sco:Collection x:TypeArguments="Variable" x:Key="Variables" />
+                        <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
+                          <Sequence DisplayName="StopWorkflowStep76: Cancel if not.">
+                            <Sequence.Variables>
+                              <Variable x:TypeArguments="x:Object" Name="StopWorkflowStep76_1" />
+                              <Variable x:TypeArguments="x:String" Default="ea56c29d-0906-4ed9-9358-69c97911007d" Name="stepLabelLabelId" />
+                              <Variable x:TypeArguments="x:String" Default="No Email in Resort Office" Name="stepLabelDescription" />
+                              <Variable x:TypeArguments="x:Int32" Default="1033" Name="stepLabelLanguageCode" />
+                            </Sequence.Variables>
+                            <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                              <mxswa:ActivityReference.Arguments>
+                                <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                                <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "No Email in Resort Office", "String" }]</InArgument>
+                                <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                                  <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
+                                </InArgument>
+                                <OutArgument x:TypeArguments="x:Object" x:Key="Result">[StopWorkflowStep76_1]</OutArgument>
+                              </mxswa:ActivityReference.Arguments>
+                            </mxswa:ActivityReference>
+                            <TerminateWorkflow DisplayName="StopWorkflowStep76: Cancel if not." Exception="[New Microsoft.Xrm.Sdk.InvalidPluginExecutionException(Microsoft.Xrm.Sdk.OperationStatus.Canceled)]" Reason="[DirectCast(StopWorkflowStep76_1, System.String)]" />
+                          </Sequence>
+                        </sco:Collection>
+                      </mxswa:ActivityReference.Properties>
+                    </mxswa:ActivityReference>
+                    <x:Null x:Key="Else" />
+                    <x:Null x:Key="Description" />
+                  </mxswa:ActivityReference.Properties>
+                </mxswa:ActivityReference>
+              </sco:Collection>
+              <x:Boolean x:Key="ContainsElseBranch">False</x:Boolean>
+            </mxswa:ActivityReference.Properties>
+          </mxswa:ActivityReference>
+          <Persist />
+        </sco:Collection>
+      </mxswa:ActivityReference.Properties>
+    </mxswa:ActivityReference>
+    <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.Composite, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="StageStep77: OK TO EMAIL">
+      <mxswa:ActivityReference.Properties>
+        <sco:Collection x:TypeArguments="Variable" x:Key="Variables" />
+        <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
+          <Sequence DisplayName="ChildWorkflowStep78: Run Process to Inform Source Market">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Default="[New Dictionary(Of System.String, System.Object)]" Name="ChildWorkflowStep78_1" />
+            </Sequence.Variables>
+            <mxswa:StartChildWorkflow DisplayName="ChildWorkflowStep78: Run Process to Inform Source Market" EntityId="[InputEntities(&quot;primaryEntity&quot;).Id]" EntityName="tc_caseline" InputParameters="[ChildWorkflowStep78_1]" WorkflowId="b7a1d492-4a57-41ac-a14c-4383ad2afe83" />
+          </Sequence>
+          <Persist />
+          <Persist />
+        </sco:Collection>
+      </mxswa:ActivityReference.Properties>
+    </mxswa:ActivityReference>
+  </mxswa:Workflow>
+</Activity>

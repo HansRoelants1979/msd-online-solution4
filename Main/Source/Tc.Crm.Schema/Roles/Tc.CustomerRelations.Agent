@@ -2,17 +2,22 @@
 <Role id="{f21e987f-f8f8-e611-8107-3863bb34fb48}" name="Tc.CustomerRelations.Agent">
   <IsCustomizable>1</IsCustomizable>
   <RolePrivileges>
+    <RolePrivilege name="prvAppendQueue" level="Basic" />
     <RolePrivilege name="prvAppendtc_compensation" level="Local" />
     <RolePrivilege name="prvAppendtc_compensationapproval" level="Basic" />
     <RolePrivilege name="prvAppendtc_compensationline" level="Local" />
+    <RolePrivilege name="prvAppendToQueue" level="Basic" />
     <RolePrivilege name="prvAppendTotc_compensation" level="Local" />
     <RolePrivilege name="prvAppendTotc_compensationline" level="Local" />
+    <RolePrivilege name="prvAssignQueue" level="Basic" />
+    <RolePrivilege name="prvCreateQueue" level="Basic" />
     <RolePrivilege name="prvCreateSharePointData" level="Global" />
     <RolePrivilege name="prvCreatetc_compensation" level="Local" />
     <RolePrivilege name="prvCreatetc_compensationline" level="Local" />
     <RolePrivilege name="prvExportToExcel" level="Global" />
     <RolePrivilege name="prvReadPluginAssembly" level="Global" />
     <RolePrivilege name="prvReadPluginType" level="Global" />
+    <RolePrivilege name="prvReadQueue" level="Basic" />
     <RolePrivilege name="prvReadSdkMessage" level="Global" />
     <RolePrivilege name="prvReadSdkMessageProcessingStep" level="Global" />
     <RolePrivilege name="prvReadSdkMessageProcessingStepImage" level="Global" />
@@ -22,6 +27,7 @@
     <RolePrivilege name="prvReadtc_compensation" level="Local" />
     <RolePrivilege name="prvReadtc_compensationapproval" level="Local" />
     <RolePrivilege name="prvReadtc_compensationline" level="Deep" />
+    <RolePrivilege name="prvWriteQueue" level="Basic" />
     <RolePrivilege name="prvWriteSharePointData" level="Global" />
     <RolePrivilege name="prvWritetc_compensation" level="Local" />
     <RolePrivilege name="prvWritetc_compensationline" level="Local" />

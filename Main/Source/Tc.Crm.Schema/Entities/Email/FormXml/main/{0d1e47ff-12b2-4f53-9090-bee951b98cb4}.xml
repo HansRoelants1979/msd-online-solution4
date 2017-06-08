@@ -213,7 +213,7 @@
                   <row />
                   <row />
                   <row />
-                  <row height="auto" />
+                  <row />
                 </rows>
               </section>
               <section name="emailengagementactions" showlabel="false" showbar="true" locklevel="1" id="{29F94F00-EC82-4E0E-94F1-5D25F707DA88}" height="auto" IsUserDefined="0" layout="varheight" columns="11" labelid="{12cace50-4e0b-49ea-2bf8-0e61791a04f2}" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
@@ -256,20 +256,7 @@
                   <label description="Section" languagecode="1033" />
                   <label description="Section" languagecode="1036" />
                 </labels>
-                <rows>
-                  <row>
-                    <cell id="{e8f25e59-bf80-4a4e-ba62-09468ad8329c}" showlabel="false">
-                      <labels>
-                        <label description="" languagecode="1033" />
-                      </labels>
-                    </cell>
-                    <cell id="{ce482f0f-0963-49fa-a578-fefd91dd301e}" showlabel="false">
-                      <labels>
-                        <label description="" languagecode="1033" />
-                      </labels>
-                    </cell>
-                  </row>
-                </rows>
+                <rows></rows>
               </section>
             </sections>
           </column>
@@ -416,6 +403,9 @@
         </row>
       </rows>
     </header>
+    <DisplayConditions FallbackForm="true" Order="2">
+      <Everyone />
+    </DisplayConditions>
     <events>
       <event name="onload" application="true" active="true">
         <InternalHandlers>
@@ -473,9 +463,6 @@
       <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{d864835a-9468-c5b4-e0ab-0db901b9dc19}" />
       <Library name="tc_Tc.Crm.Scripts.Events.Email.js" libraryUniqueId="{de846c27-d798-0052-8870-56b64ac83084}" />
     </formLibraries>
-    <DisplayConditions FallbackForm="true" Order="2">
-      <Everyone />
-    </DisplayConditions>
   </form>
   <LocalizedNames>
     <LocalizedName description="E-Mail" languagecode="1031" />

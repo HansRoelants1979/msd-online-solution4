@@ -211,7 +211,7 @@
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{423a4d0c-b9d2-492f-b070-e446e4ea16c7}" showlabel="false" locklevel="0" rowspan="25" colspan="2">
+                    <cell id="{423a4d0c-b9d2-492f-b070-e446e4ea16c7}" colspan="2" rowspan="25" showlabel="false" locklevel="0">
                       <labels>
                         <label description="Unterhaltungsregisterkarten" languagecode="1031" />
                         <label description="Conversation Tabs" languagecode="1033" />
@@ -700,19 +700,19 @@
                     </cell>
                   </row>
                   <row>
-                    <cell id="{cb85a4ad-ac9e-6511-6140-d8154c032ce4}" showlabel="true" locklevel="0" visible="false">
-                      <labels>
-                        <label description="Departure Date" languagecode="1033" />
-                      </labels>
-                      <control disabled="false" id="tc_departuredate" uniqueid="{49604071-659d-721a-ac6d-c1451d47e821}" datafieldname="tc_departuredate" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" />
-                    </cell>
-                  </row>
-                  <row>
                     <cell id="{5839396e-63b5-7089-8101-477559082c91}" showlabel="true" locklevel="0" visible="false">
                       <labels>
                         <label description="Arrival Date" languagecode="1033" />
                       </labels>
                       <control disabled="false" id="tc_arrivaldate" uniqueid="{12651743-5a23-2627-dc14-050874a5a1cd}" datafieldname="tc_arrivaldate" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{cb85a4ad-ac9e-6511-6140-d8154c032ce4}" showlabel="true" locklevel="0" visible="false">
+                      <labels>
+                        <label description="Departure Date" languagecode="1033" />
+                      </labels>
+                      <control disabled="false" id="tc_departuredate" uniqueid="{49604071-659d-721a-ac6d-c1451d47e821}" datafieldname="tc_departuredate" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" />
                     </cell>
                   </row>
                   <row>
@@ -813,18 +813,6 @@
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{9a58ab0b-2726-1623-48a0-b4944c2d7958}" showlabel="false">
-                      <labels>
-                        <label description="" languagecode="1033" />
-                      </labels>
-                    </cell>
-                    <cell id="{65ecd644-40e8-d11c-5788-92960dc3b6b4}" showlabel="false">
-                      <labels>
-                        <label description="" languagecode="1033" />
-                      </labels>
-                    </cell>
-                  </row>
-                  <row>
                     <cell id="{b2870be2-ee57-a25c-3512-734d79c6e24d}" showlabel="true" rowspan="5" colspan="2" auto="false">
                       <labels>
                         <label description="Compensations" languagecode="1033" />
@@ -849,7 +837,7 @@
                       </control>
                     </cell>
                   </row>
-                  <row />
+                  <row></row>
                   <row />
                   <row />
                   <row />
@@ -1074,13 +1062,13 @@
         <columns>
           <column width="34%">
             <sections>
-              <section id="{d2609a6b-8ee5-4731-9895-97c00b502e7c}" name="Solutions" showlabel="false" IsUserDefined="0" celllabelposition="Left" labelwidth="102" showbar="false" layout="varwidth">
+              <section name="Solutions" showlabel="false" showbar="false" id="{d2609a6b-8ee5-4731-9895-97c00b502e7c}" IsUserDefined="0" layout="varwidth" labelwidth="102" celllabelposition="Left">
                 <labels>
                   <label description="" languagecode="1033" />
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{75bc5581-dde6-d9e8-a877-5a28e96246ee}" showlabel="true" rowspan="7" colspan="1" auto="false">
+                    <cell id="{75bc5581-dde6-d9e8-a877-5a28e96246ee}" showlabel="true" colspan="1" auto="false" rowspan="7">
                       <labels>
                         <label description="SIMILAR CASES" languagecode="1033" />
                         <label description="INCIDENTS SIMILAIRES" languagecode="1036" />
@@ -1111,7 +1099,7 @@
                   <row />
                 </rows>
               </section>
-              <section id="{e6031605-b0d3-42e6-a666-ae358e9e0a0e}" name="Research" showlabel="false" IsUserDefined="0" celllabelposition="Left" labelwidth="102" showbar="false" visible="false" layout="varwidth">
+              <section name="Research" showlabel="false" showbar="false" id="{e6031605-b0d3-42e6-a666-ae358e9e0a0e}" IsUserDefined="0" layout="varwidth" labelwidth="102" celllabelposition="Left" visible="false">
                 <labels>
                   <label description="Recherche" languagecode="1031" />
                   <label description="RESEARCH" languagecode="1033" />
@@ -1119,7 +1107,7 @@
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{a5be55d1-d0e1-d9e8-a877-5a28e00006ee}" showlabel="false" locklevel="1" rowspan="1" colspan="1" auto="false">
+                    <cell id="{a5be55d1-d0e1-d9e8-a877-5a28e00006ee}" showlabel="false" colspan="1" auto="false" rowspan="1" locklevel="1">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
@@ -1137,13 +1125,13 @@
           </column>
           <column width="33%">
             <sections>
-              <section id="{f344f3e4-c7c1-43ff-8514-6405d7b8fa35}" name="MergedCases" showlabel="false" IsUserDefined="0" celllabelposition="Left" labelwidth="102" showbar="false" layout="varwidth">
+              <section name="MergedCases" showlabel="false" showbar="false" id="{f344f3e4-c7c1-43ff-8514-6405d7b8fa35}" IsUserDefined="0" layout="varwidth" labelwidth="102" celllabelposition="Left">
                 <labels>
                   <label description="" languagecode="1033" />
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{db20c8bd-b402-4323-83ac-514921ab7ca5}" showlabel="true" rowspan="7" colspan="1" auto="false">
+                    <cell id="{db20c8bd-b402-4323-83ac-514921ab7ca5}" showlabel="true" colspan="1" auto="false" rowspan="7">
                       <labels>
                         <label description="MERGED CASES" languagecode="1033" />
                         <label description="INCIDENTS FUSIONNÉS" languagecode="1036" />
@@ -1178,13 +1166,13 @@
           </column>
           <column width="33%">
             <sections>
-              <section id="{b1f997ea-9b7b-4a2d-9a33-eb3cb14e08f7}" name="ChildCases" showlabel="false" IsUserDefined="0" celllabelposition="Left" labelwidth="102" showbar="false" layout="varwidth">
+              <section name="ChildCases" showlabel="false" showbar="false" id="{b1f997ea-9b7b-4a2d-9a33-eb3cb14e08f7}" IsUserDefined="0" layout="varwidth" labelwidth="102" celllabelposition="Left">
                 <labels>
                   <label description="" languagecode="1033" />
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{363a5e29-8bfe-492f-8a8f-d0e1c114f2f9}" showlabel="true" rowspan="7" colspan="1" auto="false">
+                    <cell id="{363a5e29-8bfe-492f-8a8f-d0e1c114f2f9}" showlabel="true" colspan="1" auto="false" rowspan="7">
                       <labels>
                         <label description="CHILD CASES" languagecode="1033" />
                         <label description="INCIDENTS ENFANTS" languagecode="1036" />
@@ -1221,7 +1209,7 @@
       </tab>
       <tab name="tab_11" id="{982eb9d0-4328-ec17-7b9d-42cb4a3686c4}" IsUserDefined="0" locklevel="0" showlabel="true" expanded="false">
         <labels>
-          <label description="Linked KB Artilcles" languagecode="1033" />
+          <label description="Linked KB Articles" languagecode="1033" />
         </labels>
         <columns>
           <column width="100%">
@@ -1278,7 +1266,7 @@
         <columns>
           <column width="50%">
             <sections>
-              <section id="{9404c284-21bf-4194-a6d7-cdc9291b9f19}" name="kb article" showlabel="true" locklevel="1" IsUserDefined="0" labelwidth="160" showbar="true">
+              <section name="kb article" labelwidth="160" showlabel="true" showbar="true" locklevel="1" id="{9404c284-21bf-4194-a6d7-cdc9291b9f19}" IsUserDefined="0">
                 <labels>
                   <label description="ARTIKEL" languagecode="1031" />
                   <label description="ARTICLES" languagecode="1033" />
@@ -1286,24 +1274,24 @@
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{44424fb9-0507-4f9f-b42f-3d76f7c4d30d}" colspan="2">
+                    <cell colspan="2" id="{44424fb9-0507-4f9f-b42f-3d76f7c4d30d}">
                       <labels>
                         <label description="Knowledge Base Article" languagecode="1033" />
                         <label description="Article de la Base de connaissances" languagecode="1036" />
                         <label description="Wissensdatenbankartikel" languagecode="1031" />
                       </labels>
                       <events>
-                        <event name="onshowdialog" active="true" application="true">
+                        <event name="onshowdialog" application="true" active="true">
                           <InternalHandlers>
-                            <Handler passExecutionContext="true" enabled="true" handlerUniqueId="dd2e17cf-80ec-4539-9776-c75ff6c5ad16" libraryName="Incident_main_system_library.js" functionName="Mscrm.kbarticleid_onshowdialog" />
+                            <Handler functionName="Mscrm.kbarticleid_onshowdialog" libraryName="Incident_main_system_library.js" handlerUniqueId="dd2e17cf-80ec-4539-9776-c75ff6c5ad16" enabled="true" passExecutionContext="true" />
                           </InternalHandlers>
                         </event>
                       </events>
-                      <control id="kbarticleid" datafieldname="kbarticleid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" />
+                      <control id="kbarticleid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="kbarticleid" />
                     </cell>
                   </row>
                   <row>
-                    <cell id="{e8536a7b-ab85-42bf-a772-ef53b8854268}" showlabel="false" rowspan="3" colspan="2">
+                    <cell colspan="2" showlabel="false" rowspan="3" id="{e8536a7b-ab85-42bf-a772-ef53b8854268}">
                       <labels>
                         <label description="Anzeige für Wissensdatenbank" languagecode="1031" />
                         <label description="KB Viewer" languagecode="1033" />
@@ -1335,18 +1323,18 @@
                         <label description="Vertrag" languagecode="1031" />
                       </labels>
                       <events>
-                        <event name="onclick" active="true" application="true">
+                        <event name="onclick" application="true" active="true">
                           <InternalHandlers>
-                            <Handler enabled="true" handlerUniqueId="cb1cce9a-6ca5-4474-8817-b60c6af43f1d" libraryName="Incident_main_system_library.js" functionName="Mscrm.contractid_onclick">
+                            <Handler functionName="Mscrm.contractid_onclick" libraryName="Incident_main_system_library.js" handlerUniqueId="cb1cce9a-6ca5-4474-8817-b60c6af43f1d" enabled="true">
                               <dependencies>
                                 <dependency id="customerid" />
                               </dependencies>
                             </Handler>
                           </InternalHandlers>
                         </event>
-                        <event name="setadditionalparams" active="true" application="true">
+                        <event name="setadditionalparams" application="true" active="true">
                           <InternalHandlers>
-                            <Handler passExecutionContext="true" enabled="true" handlerUniqueId="eebc0919-9ffa-4a7b-9b25-b2763a35ded1" libraryName="Incident_main_system_library.js" functionName="Mscrm.contractid_setadditionalparams">
+                            <Handler functionName="Mscrm.contractid_setadditionalparams" libraryName="Incident_main_system_library.js" handlerUniqueId="eebc0919-9ffa-4a7b-9b25-b2763a35ded1" enabled="true" passExecutionContext="true">
                               <dependencies>
                                 <dependency id="customerid" />
                               </dependencies>
@@ -1354,7 +1342,7 @@
                           </InternalHandlers>
                         </event>
                       </events>
-                      <control id="contractid" datafieldname="contractid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}">
+                      <control id="contractid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="contractid">
                         <parameters>
                           <IsInlineNewEnabled>false</IsInlineNewEnabled>
                           <DefaultViewId>{646DE3EE-EBFB-4d19-8A44-4A619505E188}</DefaultViewId>
@@ -1370,9 +1358,9 @@
                         <label description="Vertragszeile" languagecode="1031" />
                       </labels>
                       <events>
-                        <event name="onclick" active="true" application="true">
+                        <event name="onclick" application="true" active="true">
                           <InternalHandlers>
-                            <Handler enabled="true" handlerUniqueId="069c3411-c466-496c-ab3e-15dc59afa9a1" libraryName="Incident_main_system_library.js" functionName="Mscrm.contractdetailid_onclick">
+                            <Handler functionName="Mscrm.contractdetailid_onclick" libraryName="Incident_main_system_library.js" handlerUniqueId="069c3411-c466-496c-ab3e-15dc59afa9a1" enabled="true">
                               <dependencies>
                                 <dependency id="contractid" />
                               </dependencies>
@@ -1380,7 +1368,7 @@
                           </InternalHandlers>
                         </event>
                       </events>
-                      <control id="contractdetailid" datafieldname="contractdetailid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}">
+                      <control id="contractdetailid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="contractdetailid">
                         <parameters>
                           <FilterRelationshipName>contract_line_items</FilterRelationshipName>
                           <DependentAttributeName>incident.contractid</DependentAttributeName>
@@ -1398,7 +1386,7 @@
           </column>
         </columns>
       </tab>
-      <tab id="{adeb5057-b98c-97c1-9205-e9ca53620523}" name="hidden" showlabel="true" expanded="false" locklevel="0" IsUserDefined="0" visible="false">
+      <tab id="{adeb5057-b98c-97c1-9205-e9ca53620523}" name="hidden" showlabel="true" locklevel="0" IsUserDefined="0" visible="false" expanded="false">
         <labels>
           <label description="Hidden" languagecode="1033" />
         </labels>
@@ -1418,6 +1406,14 @@
                         <label description="Erstellt am" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="createdon" uniqueid="{0971b959-dead-6164-a893-2061559a1ee2}" datafieldname="createdon" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{cb6c6148-7281-2b61-0ee7-2092a254ab63}" showlabel="true" locklevel="1">
+                      <labels>
+                        <label description="Survey Id" languagecode="1033" />
+                      </labels>
+                      <control id="tc_surveyid" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_surveyid" disabled="true" uniqueid="{1107b414-4d6e-9459-2059-727b4de3eb53}" />
                     </cell>
                   </row>
                 </rows>
@@ -1599,14 +1595,9 @@
         </columns>
       </tab>
     </tabs>
-    <header id="{CF9CD80E-17E4-438D-9705-5575B9BDF2D1}" celllabelposition="Top" labelwidth="115" columns="1111">
+    <header id="{CF9CD80E-17E4-438D-9705-5575B9BDF2D1}" celllabelposition="Top" columns="1111" labelwidth="115">
       <rows>
         <row>
-          <cell id="{34cb4ab8-ae00-2570-5a21-9babb7e32e4d}" showlabel="false">
-            <labels>
-              <label description="" languagecode="1033" />
-            </labels>
-          </cell>
           <cell id="{dd33c7c9-a917-68b7-5473-0edb0e95bba5}" showlabel="true" locklevel="0">
             <labels>
               <label description="24 Hour Promise" languagecode="1033" />
@@ -1638,9 +1629,184 @@
             </labels>
             <control id="header_ownerid" datafieldname="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" />
           </cell>
+          <cell id="{aaac1559-d9c1-2a28-e137-7ccd46b06bb8}" showlabel="true" locklevel="0">
+            <labels>
+              <label description="Total Offered Amount" languagecode="1033" />
+            </labels>
+            <control id="header_tc_totalofferedamount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_totalofferedamount" disabled="true" uniqueid="{36cee532-7418-37e8-855b-d798e9a42897}" />
+          </cell>
         </row>
       </rows>
     </header>
+    <DisplayConditions FallbackForm="true" Order="2">
+      <Everyone />
+    </DisplayConditions>
+    <events>
+      <event name="onload" application="true" active="true">
+        <InternalHandlers>
+          <Handler functionName="Mscrm.Form_onload" libraryName="Incident_main_system_library.js" handlerUniqueId="76e18454-eeba-47c3-8a9d-6d701c77fbcc" enabled="true">
+            <dependencies>
+              <dependency id="contractid" />
+              <dependency id="contractdetailid" />
+            </dependencies>
+          </Handler>
+        </InternalHandlers>
+        <Handlers>
+          <Handler handlerUniqueId="{8035b284-093e-3158-2605-119b8d85a6a0}" functionName="Tc.Crm.Scripts.Events.Case.OnLoad" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" enabled="true" passExecutionContext="false" parameters="" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="true" active="true" attribute="customerid">
+        <InternalHandlers>
+          <Handler functionName="Mscrm.customerid_onchange" libraryName="Incident_main_system_library.js" handlerUniqueId="5349bfe7-817f-4c54-ae0f-f65df037361b" enabled="true">
+            <dependencies>
+              <dependency id="contractid" />
+              <dependency id="contractdetailid" />
+            </dependencies>
+          </Handler>
+        </InternalHandlers>
+        <Handlers>
+          <Handler handlerUniqueId="{cb2c189d-a6ec-b55e-2736-2ee35a15d38b}" functionName="Tc.Crm.Scripts.Events.Case.OnChangeCustomer" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" enabled="true" passExecutionContext="false" parameters="" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="true" active="true" attribute="contractid">
+        <InternalHandlers>
+          <Handler functionName="Mscrm.contractid_onchange" libraryName="Incident_main_system_library.js" handlerUniqueId="1ff26f3d-f9f4-470b-a379-bc74ce466a53" enabled="true">
+            <dependencies>
+              <dependency id="contractdetailid" />
+            </dependencies>
+          </Handler>
+        </InternalHandlers>
+      </event>
+      <event name="onchange" application="true" active="true" attribute="contractdetailid">
+        <InternalHandlers>
+          <Handler functionName="Mscrm.contractdetailid_onchange" libraryName="Incident_main_system_library.js" handlerUniqueId="fde679b3-af20-4b24-ab99-13f7de54fbb1" enabled="true">
+            <dependencies>
+              <dependency id="contractid" />
+            </dependencies>
+          </Handler>
+        </InternalHandlers>
+      </event>
+      <event name="onchange" application="true" active="true" attribute="kbarticleid">
+        <InternalHandlers>
+          <Handler functionName="Mscrm.kbarticleid_onchange" libraryName="Incident_main_system_library.js" handlerUniqueId="1d4f95de-79c3-44e4-a782-469a8fc6132d" enabled="true" />
+        </InternalHandlers>
+      </event>
+      <event name="onchange" application="true" active="true" attribute="productid">
+        <InternalHandlers>
+          <Handler functionName="Mscrm.productid_onchange" libraryName="Incident_main_system_library.js" handlerUniqueId="97cabf35-d106-4f20-b656-97aebe91927c" enabled="true">
+            <dependencies>
+              <dependency id="entitlementid" />
+            </dependencies>
+          </Handler>
+        </InternalHandlers>
+      </event>
+      <event name="onchange" application="true" active="true" attribute="primarycontactid">
+        <InternalHandlers>
+          <Handler functionName="Mscrm.primarycontactid_onchange" libraryName="Incident_main_system_library.js" handlerUniqueId="e44c699a-b67f-40e1-8074-26a51241f017" enabled="true">
+            <dependencies>
+              <dependency id="entitlementid" />
+            </dependencies>
+          </Handler>
+        </InternalHandlers>
+      </event>
+      <event name="onsave" active="false" application="false">
+        <Handlers>
+          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{e27b5c77-2ac1-01d7-4cca-18a47475ae0e}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnSave" parameters="" />
+        </Handlers>
+      </event>
+      <event name="onchange" active="false" application="false" attribute="tc_bookingid">
+        <Handlers>
+          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{5ec7c30e-899c-87ad-ae60-3452ec186609}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChange" parameters="" />
+        </Handlers>
+      </event>
+      <event name="onchange" active="false" application="false" attribute="tc_sourcemarketid">
+        <Handlers>
+          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{74b19cdc-100d-b0e2-7428-31162cd46cb3}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChange" parameters="" />
+          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{587b1366-ba63-3174-0d3c-28620295eb64}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" parameters="" />
+          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnChangeSourceMarket" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{5b5ed509-3eb0-c292-71bc-33dbd024708d}" enabled="true" parameters="" passExecutionContext="false" />
+        </Handlers>
+      </event>
+      <event name="onchange" active="false" application="false" attribute="tc_istheholidaystoppingshorterthanplanned">
+        <Handlers>
+          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{3942ea0a-d219-3d6d-8cb8-9b6ae1588645}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" parameters="" />
+        </Handlers>
+      </event>
+      <event name="onchange" active="false" application="false" attribute="tc_resortofficeid">
+        <Handlers>
+          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{5403271b-d7d1-e185-cc94-dc970a3a9e96}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" parameters="" />
+        </Handlers>
+      </event>
+      <event name="onchange" active="false" application="false" attribute="tc_datereported">
+        <Handlers>
+          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{433c86c0-7c34-64a7-38cc-ae8093b598a9}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" parameters="" />
+        </Handlers>
+      </event>
+      <event name="onchange" active="false" application="false" attribute="caseorigincode">
+        <Handlers>
+          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{47303225-0c03-21ca-91d5-9a775cc2e09e}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" parameters="" />
+        </Handlers>
+      </event>
+      <event name="onchange" active="false" application="false" attribute="tc_3rdpartyresponserequired">
+        <Handlers>
+          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{7563d984-8a51-6484-ed3d-6216376093ab}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" parameters="" />
+        </Handlers>
+      </event>
+      <event name="onchange" active="false" application="false" attribute="tc_preferredmethodofcommunication">
+        <Handlers>
+          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{d194a90a-029e-b704-0622-e3e2bec37965}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" parameters="" />
+        </Handlers>
+      </event>
+      <event name="onchange" active="false" application="false" attribute="tc_brandid">
+        <Handlers>
+          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{ce23a62c-1d0a-79b7-87a3-d7e71373532d}" libraryName="tc_es6promise.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" parameters="" />
+        </Handlers>
+      </event>
+      <event name="onchange" active="false" application="false" attribute="tc_destinationid">
+        <Handlers>
+          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{d5eab6bc-d980-0411-4091-774d4b1b8bee}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" parameters="" />
+        </Handlers>
+      </event>
+      <event name="onchange" active="false" application="false" attribute="tc_locationid">
+        <Handlers>
+          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{882e8317-6600-b262-1ad1-b3636538d2e6}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" parameters="" />
+        </Handlers>
+      </event>
+      <event name="onchange" active="false" application="false" attribute="tc_gateway">
+        <Handlers>
+          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{794e2d18-27cd-979a-3dbd-269743dc4074}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" parameters="" />
+        </Handlers>
+      </event>
+      <event name="onchange" active="false" application="false" attribute="description">
+        <Handlers>
+          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{ec335375-0964-6227-c6db-e0201b6d5a0c}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" parameters="" />
+        </Handlers>
+      </event>
+      <event name="onchange" active="false" application="false" attribute="tc_departuredate">
+        <Handlers>
+          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{7a64d393-2ae0-7060-2a75-764c8abde6a8}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" parameters="" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_bookingtravelamount">
+        <Handlers>
+          <Handler handlerUniqueId="{c95dea62-6bc3-d126-6375-24b2dc700eed}" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" enabled="true" passExecutionContext="false" parameters="" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_durationofstay">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{113b4827-2687-c5a8-06da-547aeda3e707}" enabled="true" parameters="" passExecutionContext="false" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_alternativephone">
+        <Handlers>
+          <Handler handlerUniqueId="{23161098-820a-4463-097a-b06812b30cec}" functionName="Tc.Crm.Scripts.Events.Case.OnChangeTelephone1" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" enabled="true" passExecutionContext="true" parameters="" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_otherpartyphone">
+        <Handlers>
+          <Handler handlerUniqueId="{b47d4ab4-b2c0-21cc-78ad-065aa4e3e160}" functionName="Tc.Crm.Scripts.Events.Case.OnChangeTelephone2" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" enabled="true" passExecutionContext="true" parameters="" />
+        </Handlers>
+      </event>
+    </events>
     <clientresources>
       <internalresources>
         <clientincludes>
@@ -1657,14 +1823,9 @@
     </clientresources>
     <Navigation>
       <NavBar>
-        <NavBarByRelationshipItem Id="navKbRecords" Area="Info" Sequence="0" RelationshipName="KnowledgeBaseRecord_Incident" Show="false">
-          <Titles>
-            <Title Text="Knowledge Base Records" LCID="1033" />
-          </Titles>
-        </NavBarByRelationshipItem>
         <NavBarByRelationshipItem Icon="/_imgs/ico_18_act.gif" Id="navActivities" Area="Info" Sequence="10" RelationshipName="Incident_ActivityPointers">
           <Privileges>
-            <Privilege Privilege="ReadActivity" Entity="" />
+            <Privilege Entity="" Privilege="ReadActivity" />
           </Privileges>
           <Titles>
             <Title Text="Activities" LCID="1033" />
@@ -1672,10 +1833,15 @@
         </NavBarByRelationshipItem>
         <NavBarByRelationshipItem Icon="/_imgs/ico_18_history.gif" Id="navActivityHistory" Area="Info" Sequence="20" RelationshipName="Incident_ActivityPointers" ViewId="21E2B905-6FDB-470d-8517-AD69B4C01268" TitleResourceId="Tab_Label_History">
           <Privileges>
-            <Privilege Privilege="ReadActivity" Entity="" />
+            <Privilege Entity="" Privilege="ReadActivity" />
           </Privileges>
           <Titles>
             <Title Text="Closed Activities" LCID="1033" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem Id="navKbRecords" Area="Info" Sequence="0" RelationshipName="KnowledgeBaseRecord_Incident" Show="false">
+          <Titles>
+            <Title Text="Knowledge Base Records" LCID="1033" />
           </Titles>
         </NavBarByRelationshipItem>
         <NavBarByRelationshipItem Id="navSPDocuments" Area="Service" Sequence="1001" RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navSPDocuments" Show="true">
@@ -1974,176 +2140,10 @@
     <formLibraries>
       <Library name="tc_es6promise.js" libraryUniqueId="{c1e872a4-e748-135c-6e5b-4060deb5ac72}" />
       <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{4cb4eb92-a591-b261-303b-ebbe8265e177}" />
-      <Library name="tc_Tc.Crm.Scripts.Events.Contact.js" libraryUniqueId="{dc670e3a-aa36-bbd0-94b6-ed787dc8315b}" />
+      <Library name="tc_Tc.Crm.Scripts.Library.Contact.js" libraryUniqueId="{18935516-6e36-8685-8a5b-667b7dd5bb7b}" />
       <Library name="tc_Tc.Crm.Scripts.Library.Case.js" libraryUniqueId="{0016cbec-ca20-4e7d-4406-8651a2cccbae}" />
       <Library name="tc_Tc.Crm.Scripts.Events.Case.js" libraryUniqueId="{b1c93c95-9273-87a7-5c8d-a3553b5ebe64}" />
     </formLibraries>
-    <events>
-      <event name="onload" active="true" application="true">
-        <InternalHandlers>
-          <Handler enabled="true" handlerUniqueId="76e18454-eeba-47c3-8a9d-6d701c77fbcc" libraryName="Incident_main_system_library.js" functionName="Mscrm.Form_onload">
-            <dependencies>
-              <dependency id="contractid" />
-              <dependency id="contractdetailid" />
-            </dependencies>
-          </Handler>
-        </InternalHandlers>
-        <Handlers>
-          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnLoad" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{8035b284-093e-3158-2605-119b8d85a6a0}" enabled="true" parameters="&quot;telephone1&quot;,&quot;telephone2&quot;" passExecutionContext="true" />
-        </Handlers>
-      </event>
-      <event name="onchange" active="true" application="true" attribute="customerid">
-        <InternalHandlers>
-          <Handler enabled="true" handlerUniqueId="5349bfe7-817f-4c54-ae0f-f65df037361b" libraryName="Incident_main_system_library.js" functionName="Mscrm.customerid_onchange">
-            <dependencies>
-              <dependency id="contractid" />
-              <dependency id="contractdetailid" />
-            </dependencies>
-          </Handler>
-        </InternalHandlers>
-      </event>
-      <event name="onchange" active="true" application="true" attribute="contractid">
-        <InternalHandlers>
-          <Handler enabled="true" handlerUniqueId="1ff26f3d-f9f4-470b-a379-bc74ce466a53" libraryName="Incident_main_system_library.js" functionName="Mscrm.contractid_onchange">
-            <dependencies>
-              <dependency id="contractdetailid" />
-            </dependencies>
-          </Handler>
-        </InternalHandlers>
-      </event>
-      <event name="onchange" active="true" application="true" attribute="contractdetailid">
-        <InternalHandlers>
-          <Handler enabled="true" handlerUniqueId="fde679b3-af20-4b24-ab99-13f7de54fbb1" libraryName="Incident_main_system_library.js" functionName="Mscrm.contractdetailid_onchange">
-            <dependencies>
-              <dependency id="contractid" />
-            </dependencies>
-          </Handler>
-        </InternalHandlers>
-      </event>
-      <event name="onchange" active="true" application="true" attribute="kbarticleid">
-        <InternalHandlers>
-          <Handler enabled="true" handlerUniqueId="1d4f95de-79c3-44e4-a782-469a8fc6132d" libraryName="Incident_main_system_library.js" functionName="Mscrm.kbarticleid_onchange" />
-        </InternalHandlers>
-      </event>
-      <event name="onchange" active="true" application="true" attribute="productid">
-        <InternalHandlers>
-          <Handler enabled="true" handlerUniqueId="97cabf35-d106-4f20-b656-97aebe91927c" libraryName="Incident_main_system_library.js" functionName="Mscrm.productid_onchange">
-            <dependencies>
-              <dependency id="entitlementid" />
-            </dependencies>
-          </Handler>
-        </InternalHandlers>
-      </event>
-      <event name="onchange" active="true" application="true" attribute="primarycontactid">
-        <InternalHandlers>
-          <Handler enabled="true" handlerUniqueId="e44c699a-b67f-40e1-8074-26a51241f017" libraryName="Incident_main_system_library.js" functionName="Mscrm.primarycontactid_onchange">
-            <dependencies>
-              <dependency id="entitlementid" />
-            </dependencies>
-          </Handler>
-        </InternalHandlers>
-      </event>
-      <event name="onsave" active="false" application="false">
-        <Handlers>
-          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{e27b5c77-2ac1-01d7-4cca-18a47475ae0e}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnSave" parameters="" />
-        </Handlers>
-      </event>
-      <event name="onchange" active="false" application="false" attribute="tc_bookingid">
-        <Handlers>
-          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{5ec7c30e-899c-87ad-ae60-3452ec186609}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChange" parameters="" />
-        </Handlers>
-      </event>
-      <event name="onchange" active="false" application="false" attribute="tc_sourcemarketid">
-        <Handlers>
-          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{74b19cdc-100d-b0e2-7428-31162cd46cb3}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChange" parameters="" />
-          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{587b1366-ba63-3174-0d3c-28620295eb64}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" parameters="" />
-          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnChangeSourceMarket" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{5b5ed509-3eb0-c292-71bc-33dbd024708d}" enabled="true" parameters="" passExecutionContext="false" />
-        </Handlers>
-      </event>
-      <event name="onchange" active="false" application="false" attribute="tc_istheholidaystoppingshorterthanplanned">
-        <Handlers>
-          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{3942ea0a-d219-3d6d-8cb8-9b6ae1588645}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" parameters="" />
-        </Handlers>
-      </event>
-      <event name="onchange" active="false" application="false" attribute="tc_resortofficeid">
-        <Handlers>
-          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{5403271b-d7d1-e185-cc94-dc970a3a9e96}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" parameters="" />
-        </Handlers>
-      </event>
-      <event name="onchange" active="false" application="false" attribute="tc_datereported">
-        <Handlers>
-          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{433c86c0-7c34-64a7-38cc-ae8093b598a9}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" parameters="" />
-        </Handlers>
-      </event>
-      <event name="onchange" active="false" application="false" attribute="caseorigincode">
-        <Handlers>
-          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{47303225-0c03-21ca-91d5-9a775cc2e09e}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" parameters="" />
-        </Handlers>
-      </event>
-      <event name="onchange" active="false" application="false" attribute="tc_3rdpartyresponserequired">
-        <Handlers>
-          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{7563d984-8a51-6484-ed3d-6216376093ab}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" parameters="" />
-        </Handlers>
-      </event>
-      <event name="onchange" active="false" application="false" attribute="tc_preferredmethodofcommunication">
-        <Handlers>
-          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{d194a90a-029e-b704-0622-e3e2bec37965}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" parameters="" />
-        </Handlers>
-      </event>
-      <event name="onchange" active="false" application="false" attribute="tc_brandid">
-        <Handlers>
-          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{ce23a62c-1d0a-79b7-87a3-d7e71373532d}" libraryName="tc_es6promise.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" parameters="" />
-        </Handlers>
-      </event>
-      <event name="onchange" active="false" application="false" attribute="tc_destinationid">
-        <Handlers>
-          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{d5eab6bc-d980-0411-4091-774d4b1b8bee}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" parameters="" />
-        </Handlers>
-      </event>
-      <event name="onchange" active="false" application="false" attribute="tc_locationid">
-        <Handlers>
-          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{882e8317-6600-b262-1ad1-b3636538d2e6}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" parameters="" />
-        </Handlers>
-      </event>
-      <event name="onchange" active="false" application="false" attribute="tc_gateway">
-        <Handlers>
-          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{794e2d18-27cd-979a-3dbd-269743dc4074}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" parameters="" />
-        </Handlers>
-      </event>
-      <event name="onchange" active="false" application="false" attribute="description">
-        <Handlers>
-          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{ec335375-0964-6227-c6db-e0201b6d5a0c}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" parameters="" />
-        </Handlers>
-      </event>
-      <event name="onchange" active="false" application="false" attribute="tc_departuredate">
-        <Handlers>
-          <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{7a64d393-2ae0-7060-2a75-764c8abde6a8}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" parameters="" />
-        </Handlers>
-      </event>
-      <event name="onchange" application="false" active="false" attribute="tc_bookingtravelamount">
-        <Handlers>
-          <Handler handlerUniqueId="{c95dea62-6bc3-d126-6375-24b2dc700eed}" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" enabled="true" passExecutionContext="false" parameters="" />
-        </Handlers>
-      </event>
-      <event name="onchange" application="false" active="false" attribute="tc_durationofstay">
-        <Handlers>
-          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{113b4827-2687-c5a8-06da-547aeda3e707}" enabled="true" parameters="" passExecutionContext="false" />
-        </Handlers>
-      </event>
-      <event name="onchange" application="false" active="false" attribute="tc_alternativephone">
-        <Handlers>
-          <Handler handlerUniqueId="{23161098-820a-4463-097a-b06812b30cec}" functionName="Tc.Crm.Scripts.Events.Case.OnCaseTelephoneFieldChange" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" enabled="true" passExecutionContext="true" parameters="&quot;tc_alternativephone&quot;,&quot;tc_otherpartyphone&quot;" />
-        </Handlers>
-      </event>
-      <event name="onchange" application="false" active="false" attribute="tc_otherpartyphone">
-        <Handlers>
-          <Handler handlerUniqueId="{b47d4ab4-b2c0-21cc-78ad-065aa4e3e160}" functionName="Tc.Crm.Scripts.Events.Case.OnCaseTelephoneFieldChange" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" enabled="true" passExecutionContext="true" parameters="&quot;tc_alternativephone&quot;,&quot;tc_otherpartyphone&quot;" />
-        </Handlers>
-      </event>
-    </events>
-    <DisplayConditions FallbackForm="true" Order="2">
-      <Everyone />
-    </DisplayConditions>
   </form>
   <LocalizedNames>
     <LocalizedName description="Anfrage" languagecode="1031" />

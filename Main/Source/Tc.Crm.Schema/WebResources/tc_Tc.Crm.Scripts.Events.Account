@@ -21,21 +21,32 @@ if (typeof (Tc.Crm.Scripts.Events) === "undefined") {
 Tc.Crm.Scripts.Events.Account = (function () {
     "use strict";
     // private stuff
-    function validateAccountPhoneNum(ExecutionContext, telephone1, telephone2) {
-        Tc.Crm.Scripts.Events.Contact.ValidatePhoneNum(ExecutionContext, telephone1, telephone2);
+
+    function onLoad() {
+
+        Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("telephone1");
+        
     }
+    var onChangeTelephone1 = function () {
+        Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("telephone1");
+    }
+    var onChangeTelephone2 = function () {
+        Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("telephone2");
+    }
+    
 
     // public methods     
     return {
-        
-        OnLoad: function (executioncontext, telephone1, telephone2) {
-            debugger;
-            validateAccountPhoneNum(executioncontext, telephone1, telephone2);
+
+        OnLoad: function () {
+            onLoad();
         },
-        OnAccountTelephoneFieldChange: function (executioncontext, telephone1, telephone2) {
-            debugger;
-            validateAccountPhoneNum(executioncontext, telephone1, telephone2);
+        OnChangeTelephone1: function () {
+            onChangeTelephone1();
+        },
+        OnChangeTelephone2: function () {
+            onChangeTelephone2();
         }
-       
+
     };
 })();// JavaScript source code

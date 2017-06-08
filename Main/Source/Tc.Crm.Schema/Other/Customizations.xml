@@ -9,6 +9,22 @@
   <EntityMaps />
   <EntityRelationships />
   <OrganizationSettings>
+    <general>
+      <fullnameconventioncode>1</fullnameconventioncode>
+      <numberformat>us</numberformat>
+      <negativeformatcode>1</negativeformatcode>
+      <currencysymbol>£</currencysymbol>
+      <currencyformatcode>0</currencyformatcode>
+      <pricingdecimalprecision>2</pricingdecimalprecision>
+      <sharetopreviousowneronassign>False</sharetopreviousowneronassign>
+      <blockedattachments>ade;adp;app;asa;ashx;asmx;asp;bas;bat;cdx;cer;chm;class;cmd;com;config;cpl;crt;csh;dll;exe;fxp;hlp;hta;htr;htw;ida;idc;idq;inf;ins;isp;its;jar;js;jse;ksh;lnk;mad;maf;mag;mam;maq;mar;mas;mat;mau;mav;maw;mda;mdb;mde;mdt;mdw;mdz;msc;msh;msh1;msh1xml;msh2;msh2xml;mshxml;msi;msp;mst;ops;pcd;pif;prf;prg;printer;pst;reg;rem;scf;scr;sct;shb;shs;shtm;shtml;soap;stm;tmp;url;vb;vbe;vbs;vsmacros;vss;vst;vsw;ws;wsc;wsf;wsh;dot;</blockedattachments>
+      <getstartedpanecontentenabled>True</getstartedpanecontentenabled>
+      <ispresenceenabled>True</ispresenceenabled>
+      <isautosaveenabled>True</isautosaveenabled>
+      <globalhelpurl></globalhelpurl>
+      <globalhelpurlenabled>False</globalhelpurlenabled>
+      <globalappendurlparametersenabled>False</globalappendurlparametersenabled>
+    </general>
     <email>
       <trackingprefix>#;CRM:;</trackingprefix>
       <trackingtokenidbase>0</trackingtokenidbase>
@@ -563,7 +579,7 @@
           <relatedfield>tc_24hrpromisekpiresolvebyid</relatedfield>
           <name>Tc.Case.SlaItem.24HrPromiseSla</name>
           <description></description>
-          <applicablewhenxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_24hourpromise"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="950000000" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_casetypeid"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="&amp;#60;lookup&amp;#62;&amp;#60;value&amp;#32;uiname&amp;#32;&amp;#61;&amp;#32;&amp;#39;Complaint&amp;#39;&amp;#32;uitype&amp;#32;&amp;#61;&amp;#32;&amp;#39;tc_casetype&amp;#39;&amp;#32;&amp;#62;&amp;#38;&amp;#35;123&amp;#59;478C99E9-93E4-E611-8109-1458D041F8E8&amp;#38;&amp;#35;125&amp;#59;&amp;#60;&amp;#47;value&amp;#62;&amp;#60;&amp;#47;lookup&amp;#62;" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</applicablewhenxml>
+          <applicablewhenxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_24hourpromise"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="950000000" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_casetypeid"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="&amp;#60;lookup&amp;#62;&amp;#60;value&amp;#32;uiname&amp;#32;&amp;#61;&amp;#32;&amp;#39;Complaint&amp;#39;&amp;#32;uitype&amp;#32;&amp;#61;&amp;#32;&amp;#39;tc_casetype&amp;#39;&amp;#32;&amp;#62;&amp;#38;&amp;#35;123&amp;#59;478C99E9-93E4-E611-8109-1458D041F8E8&amp;#38;&amp;#35;125&amp;#59;&amp;#60;&amp;#47;value&amp;#62;&amp;#60;&amp;#47;lookup&amp;#62;" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_comeback"/&gt;&lt;column id="colOperator" value="ne"/&gt;&lt;column id="colStaticValue" value="1" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</applicablewhenxml>
           <successconditionsxml>&lt;or&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="statuscode"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="5&amp;#59;6" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_24hourpromise"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="950000002" dataslugs="" /&gt;&lt;/condition&gt;&lt;/or&gt;</successconditionsxml>
           <sequencenumber>1</sequencenumber>
           <workflowid>1cf8a4dd-2d68-4f28-84f9-2edbdcb880bf</workflowid>
@@ -644,6 +660,32 @@
           <failureafter>2880</failureafter>
           <warnafter>1440</warnafter>
         </SlaItem>
+        <SlaItem slaitemid="03a57543-a947-e711-810b-e0071b66e0a1" name="Comeback 1">
+          <slaid>640c8705-f503-e711-810d-1458d041f8e8</slaid>
+          <slaitemid>03a57543-a947-e711-810b-e0071b66e0a1</slaitemid>
+          <relatedfield>tc_crresolvebykpiid</relatedfield>
+          <name>Comeback 1</name>
+          <description></description>
+          <applicablewhenxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="statecode"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="0" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_comebackreopen1"/&gt;&lt;column id="colOperator" value="not-null"/&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_comebackreopen2"/&gt;&lt;column id="colOperator" value="null"/&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_comeback"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="1" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_casesladuration"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="950000200" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</applicablewhenxml>
+          <successconditionsxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="statecode"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="0&amp;#59;2&amp;#59;1" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</successconditionsxml>
+          <sequencenumber>6</sequencenumber>
+          <workflowid>85b5b954-5614-4e6b-be16-1a2d82fb5e76</workflowid>
+          <failureafter>20160</failureafter>
+          <warnafter>14400</warnafter>
+        </SlaItem>
+        <SlaItem slaitemid="cbffa489-a947-e711-810b-e0071b66e0a1" name="Comeback 2">
+          <slaid>640c8705-f503-e711-810d-1458d041f8e8</slaid>
+          <slaitemid>cbffa489-a947-e711-810b-e0071b66e0a1</slaitemid>
+          <relatedfield>tc_crresolvebykpiid</relatedfield>
+          <name>Comeback 2</name>
+          <description></description>
+          <applicablewhenxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="statecode"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="0" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_comebackreopen1"/&gt;&lt;column id="colOperator" value="not-null"/&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_comebackreopen1"/&gt;&lt;column id="colOperator" value="not-null"/&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_comeback"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="1" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_casesladuration"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="950000200" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</applicablewhenxml>
+          <successconditionsxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="statecode"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="0&amp;#59;1&amp;#59;2" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</successconditionsxml>
+          <sequencenumber>7</sequencenumber>
+          <workflowid>9ab95de7-823c-4b2e-9617-484fabecaa9c</workflowid>
+          <failureafter>20160</failureafter>
+          <warnafter>14400</warnafter>
+        </SlaItem>
       </SlaItems>
     </Sla>
     <Sla SLAId="c912c3b8-6218-e711-8110-1458d041f8e8" Name="Tc.Case.DefaultSla" PrimaryEntityOTC="112">
@@ -659,7 +701,7 @@
           <relatedfield>resolvebykpiid</relatedfield>
           <name>Tc.Case.SLA3rdPartyNo</name>
           <description></description>
-          <applicablewhenxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_3rdpartyresponserequired"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="950000001" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_casetypeid"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="&amp;#60;lookup&amp;#62;&amp;#60;value&amp;#32;uiname&amp;#32;&amp;#61;&amp;#32;&amp;#39;Complaint&amp;#39;&amp;#32;uitype&amp;#32;&amp;#61;&amp;#32;&amp;#39;tc_casetype&amp;#39;&amp;#32;&amp;#62;&amp;#38;&amp;#35;123&amp;#59;478C99E9-93E4-E611-8109-1458D041F8E8&amp;#38;&amp;#35;125&amp;#59;&amp;#60;&amp;#47;value&amp;#62;&amp;#60;&amp;#47;lookup&amp;#62;" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_originatingbusinessarea"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="950000002&amp;#59;950000001" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_24hourpromise"/&gt;&lt;column id="colOperator" value="ne"/&gt;&lt;column id="colStaticValue" value="950000000" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</applicablewhenxml>
+          <applicablewhenxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_3rdpartyresponserequired"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="950000001" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_casetypeid"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="&amp;#60;lookup&amp;#62;&amp;#60;value&amp;#32;uiname&amp;#32;&amp;#61;&amp;#32;&amp;#39;Complaint&amp;#39;&amp;#32;uitype&amp;#32;&amp;#61;&amp;#32;&amp;#39;tc_casetype&amp;#39;&amp;#32;&amp;#62;&amp;#38;&amp;#35;123&amp;#59;478C99E9-93E4-E611-8109-1458D041F8E8&amp;#38;&amp;#35;125&amp;#59;&amp;#60;&amp;#47;value&amp;#62;&amp;#60;&amp;#47;lookup&amp;#62;" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_originatingbusinessarea"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="950000002&amp;#59;950000001" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_24hourpromise"/&gt;&lt;column id="colOperator" value="ne"/&gt;&lt;column id="colStaticValue" value="950000000" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_comeback"/&gt;&lt;column id="colOperator" value="ne"/&gt;&lt;column id="colStaticValue" value="1" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</applicablewhenxml>
           <successconditionsxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="statecode"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="2&amp;#59;1" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</successconditionsxml>
           <sequencenumber>1</sequencenumber>
           <workflowid>6c0b8350-d7ec-4dec-8a10-3fe54ade741a</workflowid>
@@ -672,7 +714,7 @@
           <relatedfield>resolvebykpiid</relatedfield>
           <name>Tc.Case.SLA3rdPartyYes</name>
           <description></description>
-          <applicablewhenxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_3rdpartyresponserequired"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="950000000" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_casetypeid"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="&amp;#60;lookup&amp;#62;&amp;#60;value&amp;#32;uiname&amp;#32;&amp;#61;&amp;#32;&amp;#39;Complaint&amp;#39;&amp;#32;uitype&amp;#32;&amp;#61;&amp;#32;&amp;#39;tc_casetype&amp;#39;&amp;#32;&amp;#62;&amp;#38;&amp;#35;123&amp;#59;478C99E9-93E4-E611-8109-1458D041F8E8&amp;#38;&amp;#35;125&amp;#59;&amp;#60;&amp;#47;value&amp;#62;&amp;#60;&amp;#47;lookup&amp;#62;" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_originatingbusinessarea"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="950000002&amp;#59;950000001" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_24hourpromise"/&gt;&lt;column id="colOperator" value="ne"/&gt;&lt;column id="colStaticValue" value="950000000" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</applicablewhenxml>
+          <applicablewhenxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_3rdpartyresponserequired"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="950000000" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_casetypeid"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="&amp;#60;lookup&amp;#62;&amp;#60;value&amp;#32;uiname&amp;#32;&amp;#61;&amp;#32;&amp;#39;Complaint&amp;#39;&amp;#32;uitype&amp;#32;&amp;#61;&amp;#32;&amp;#39;tc_casetype&amp;#39;&amp;#32;&amp;#62;&amp;#38;&amp;#35;123&amp;#59;478C99E9-93E4-E611-8109-1458D041F8E8&amp;#38;&amp;#35;125&amp;#59;&amp;#60;&amp;#47;value&amp;#62;&amp;#60;&amp;#47;lookup&amp;#62;" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_originatingbusinessarea"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="950000002&amp;#59;950000001" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_24hourpromise"/&gt;&lt;column id="colOperator" value="ne"/&gt;&lt;column id="colStaticValue" value="950000000" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_comeback"/&gt;&lt;column id="colOperator" value="ne"/&gt;&lt;column id="colStaticValue" value="1" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</applicablewhenxml>
           <successconditionsxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="statecode"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="2&amp;#59;1" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</successconditionsxml>
           <sequencenumber>2</sequencenumber>
           <workflowid>dbe15aa6-98cf-461e-8777-811bf9eee8db</workflowid>
@@ -685,7 +727,7 @@
           <relatedfield>resolvebykpiid</relatedfield>
           <name>Tc.Case.CRSLA</name>
           <description></description>
-          <applicablewhenxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_originatingbusinessarea"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="950000000" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_casetypeid"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="&amp;#60;lookup&amp;#62;&amp;#60;value&amp;#32;uiname&amp;#32;&amp;#61;&amp;#32;&amp;#39;Complaint&amp;#39;&amp;#32;uitype&amp;#32;&amp;#61;&amp;#32;&amp;#39;tc_casetype&amp;#39;&amp;#32;&amp;#62;&amp;#38;&amp;#35;123&amp;#59;478C99E9-93E4-E611-8109-1458D041F8E8&amp;#38;&amp;#35;125&amp;#59;&amp;#60;&amp;#47;value&amp;#62;&amp;#60;&amp;#47;lookup&amp;#62;" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</applicablewhenxml>
+          <applicablewhenxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_originatingbusinessarea"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="950000000" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_casetypeid"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="&amp;#60;lookup&amp;#62;&amp;#60;value&amp;#32;uiname&amp;#32;&amp;#61;&amp;#32;&amp;#39;Complaint&amp;#39;&amp;#32;uitype&amp;#32;&amp;#61;&amp;#32;&amp;#39;tc_casetype&amp;#39;&amp;#32;&amp;#62;&amp;#38;&amp;#35;123&amp;#59;478C99E9-93E4-E611-8109-1458D041F8E8&amp;#38;&amp;#35;125&amp;#59;&amp;#60;&amp;#47;value&amp;#62;&amp;#60;&amp;#47;lookup&amp;#62;" dataslugs="" /&gt;&lt;/condition&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="tc_comeback"/&gt;&lt;column id="colOperator" value="ne"/&gt;&lt;column id="colStaticValue" value="1" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</applicablewhenxml>
           <successconditionsxml>&lt;and&gt;&lt;condition&gt;&lt;column id="colEntity" value="incident" /&gt;&lt;column id="colAttribute" value="statecode"/&gt;&lt;column id="colOperator" value="eq"/&gt;&lt;column id="colStaticValue" value="2&amp;#59;1" dataslugs="" /&gt;&lt;/condition&gt;&lt;/and&gt;</successconditionsxml>
           <sequencenumber>3</sequencenumber>
           <workflowid>f78bceef-f028-4eb1-949e-da4acacc4668</workflowid>
@@ -774,6 +816,7 @@
   </InteractionCentricDashboards>
   <WebResources />
   <SolutionPluginAssemblies />
+  <SdkMessageProcessingSteps />
   <Languages>
     <Language>1033</Language>
     <Language>1036</Language>

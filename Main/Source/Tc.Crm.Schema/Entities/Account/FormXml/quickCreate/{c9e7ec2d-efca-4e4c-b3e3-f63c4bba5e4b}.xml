@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<systemform unmodified="1">
+<systemform>
   <formid>{c9e7ec2d-efca-4e4c-b3e3-f63c4bba5e4b}</formid>
   <IntroducedVersion>6.0.0.0</IntroducedVersion>
   <FormPresentation>0</FormPresentation>
@@ -39,7 +39,7 @@
                         <label description="Téléphone principal" languagecode="1036" />
                         <label description="Telefon 1" languagecode="1031" />
                       </labels>
-                      <control id="telephone1" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="telephone1" disabled="false" />
+                      <control id="telephone1" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="telephone1" disabled="false" uniqueid="{89954d96-342a-39ed-0ebb-5178d6c0c249}" />
                     </cell>
                   </row>
                   <row>
@@ -102,7 +102,7 @@
                       <control id="description" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="description" disabled="false" />
                     </cell>
                   </row>
-                  <row />
+                  <row></row>
                 </rows>
               </section>
             </sections>
@@ -163,6 +163,20 @@
         </columns>
       </tab>
     </tabs>
+    <controlDescriptions />
+    <formLibraries>
+      <Library name="tc_es6promise.js" libraryUniqueId="{3038c068-a5da-7be7-66c8-355eb60412b6}" />
+      <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{6719c6dd-2b97-6858-22b4-c8b0b8aabbe9}" />
+      <Library name="tc_Tc.Crm.Scripts.Library.Contact.js" libraryUniqueId="{19823e76-c683-dda1-5d0c-7de23806897e}" />
+      <Library name="tc_Tc.Crm.Scripts.Events.Account" libraryUniqueId="{d2ed31b2-d8e8-81c3-1041-9b3363141e51}" />
+    </formLibraries>
+    <events>
+      <event name="onchange" application="false" active="false" attribute="telephone1">
+        <Handlers>
+          <Handler handlerUniqueId="{9cdcdcba-9a12-1404-7a68-a349c595e1eb}" functionName="Tc.Crm.Scripts.Events.Account.OnChangeTelephone1" libraryName="tc_Tc.Crm.Scripts.Common.js" enabled="true" passExecutionContext="false" parameters="" />
+        </Handlers>
+      </event>
+    </events>
     <DisplayConditions FallbackForm="true" Order="2">
       <Everyone />
     </DisplayConditions>

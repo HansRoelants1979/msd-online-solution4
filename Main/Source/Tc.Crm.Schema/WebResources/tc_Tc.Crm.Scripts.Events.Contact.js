@@ -1,4 +1,3 @@
-
 if (typeof (Tc) === "undefined") {
     Tc = {
         __namespace: true
@@ -19,7 +18,7 @@ if (typeof (Tc.Crm.Scripts.Events) === "undefined") {
         __namespace: true
     };
 }
-Tc.Crm.Scripts.Events.Contact = ( function () {
+Tc.Crm.Scripts.Events.Contact = (function () {
     "use strict";
     // private stuff
     var FORM_MODE_CREATE = 1;
@@ -27,52 +26,33 @@ Tc.Crm.Scripts.Events.Contact = ( function () {
     var CLIENT_STATE_OFFLINE = "Offline";
 
     // public methods
-    function validatePhoneNum(ExecutionContext, telephone1, telephone2) {
+    function onLoad() {
 
-        var phone1 = Xrm.Page.data.entity.attributes.get(telephone1);
-        if (phone1 != null) {
-            var phone1Value = phone1.getValue();
-            if (phone1Value != null && phone1Value != "") {
-                GetNotificationFrPhNumVal(phone1Value, telephone1);
-            }
-        }
-        var phone2 = Xrm.Page.data.entity.attributes.get(telephone2);
-        if (phone2 != null) {
-            var phone2Value = phone2.getValue();
-            if (phone2Value != null && phone2Value != "") {
-                GetNotificationFrPhNumVal(phone2Value, telephone2);
-            }
-        }
+        Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("telephone1");
+        // Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("telephone2");
     }
-    function GetNotificationFrPhNumVal(phone, telephoneFieldName) {
-        var regex = /^\+(?:[0-9] ?){9,14}[0-9]$/;
-        if (regex.test(phone)) {
-            if (Xrm.Page.ui.getFormType() == FORM_MODE_CREATE) {
-                Xrm.Page.getControl(telephoneFieldName).clearNotification();
-            }
-            if (Xrm.Page.ui.getFormType() == FORM_MODE_UPDATE) {
-                Xrm.Page.ui.clearFormNotification("TelNumNotification");
-            }
-        }
-        else {
-            if (Xrm.Page.ui.getFormType() == FORM_MODE_CREATE) {
-                Xrm.Page.getControl(telephoneFieldName).setNotification("telephone number is not valid");
-            }
-            if (Xrm.Page.ui.getFormType() == FORM_MODE_UPDATE) {
-                Xrm.Page.getControl(telephoneFieldName).clearNotification();
-                Xrm.Page.ui.setFormNotification("telephone number is not valid", "WARNING", "TelNumNotification");
-            }
-        }
+    var onChangeTelephone1 = function () {
+
+        Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("telephone1");
+    }
+    var onChangeTelephone2 = function () {
+        Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("telephone2");
+    }
+    var onChangeTelephone3 = function () {
+        Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("telephone3");
     }
     return {
-        ValidatePhoneNum: function (executioncontext, telephone1, telephone2) {
-            validatePhoneNum(executioncontext, telephone1, telephone2);
+        OnLoad: function () {
+            onLoad();
         },
-        OnLoad: function (executioncontext, telephone1, telephone2) {
-            validatePhoneNum(executioncontext, telephone1, telephone2);
+        OnChangeTelephone1: function () {
+            onChangeTelephone1();
         },
-        OnContactTelephoneFieldChange: function (executioncontext, telephone1, telephone2) {
-            validatePhoneNum(executioncontext, telephone1, telephone2);
+        OnChangeTelephone2: function () {
+            onChangeTelephone2();
+        },
+        OnChangeTelephone3: function () {
+            onChangeTelephone3();
         },
         OnSave: function () {
             if (Xrm.Page.context.client.getClientState() !== CLIENT_STATE_OFFLINE) {

@@ -14,6 +14,7 @@
   <EntityRelationship Name="activity_pointer_email" unmodified="1" />
   <EntityRelationship Name="activity_pointer_tc_assistancerequest" />
   <EntityRelationship Name="activity_pointer_tc_surveyresponse" />
+  <EntityRelationship Name="ActivityMimeAttachment_SyncErrors" unmodified="1" />
   <EntityRelationship Name="annotation_owning_user" unmodified="1" />
   <EntityRelationship Name="appointment_activity_mime_attachment" unmodified="1" />
   <EntityRelationship Name="Appointment_Annotation" unmodified="1" />
@@ -40,7 +41,6 @@
   <EntityRelationship Name="business_unit_contacts" />
   <EntityRelationship Name="business_unit_email_activities" unmodified="1" />
   <EntityRelationship Name="business_unit_incidents" />
-  <EntityRelationship Name="business_unit_slakpiinstance" unmodified="1" />
   <EntityRelationship Name="business_unit_system_users" />
   <EntityRelationship Name="business_unit_tc_accounttype" />
   <EntityRelationship Name="business_unit_tc_alternativeemail" />
@@ -181,8 +181,6 @@
   <EntityRelationship Name="lk_incident_ChildIncidentCount" />
   <EntityRelationship Name="lk_incidentbase_createdby" />
   <EntityRelationship Name="lk_incidentbase_modifiedby" />
-  <EntityRelationship Name="lk_slakpiinstancebase_createdby" unmodified="1" />
-  <EntityRelationship Name="lk_slakpiinstancebase_modifiedby" unmodified="1" />
   <EntityRelationship Name="lk_systemuserbase_createdby" />
   <EntityRelationship Name="lk_systemuserbase_modifiedby" />
   <EntityRelationship Name="lk_tc_accounttype_createdby" />
@@ -320,7 +318,6 @@
   <EntityRelationship Name="profilerule_Annotations" unmodified="1" />
   <EntityRelationship Name="profileruleitem_Annotations" unmodified="1" />
   <EntityRelationship Name="Queue_Email_EmailSender" unmodified="1" />
-  <EntityRelationship Name="Queue_SyncErrors" unmodified="1" />
   <EntityRelationship Name="queue_system_user" />
   <EntityRelationship Name="queue_team" unmodified="1" />
   <EntityRelationship Name="Quote_Annotation" unmodified="1" />
@@ -350,26 +347,8 @@
   <EntityRelationship Name="sla_contact" />
   <EntityRelationship Name="sla_email" unmodified="1" />
   <EntityRelationship Name="sla_tc_compensationapproval" />
-  <EntityRelationship Name="slakpiinstance_account" unmodified="1" />
-  <EntityRelationship Name="slakpiinstance_activitypointer" unmodified="1" />
-  <EntityRelationship Name="slakpiinstance_appointment" unmodified="1" />
-  <EntityRelationship Name="slakpiinstance_contact" unmodified="1" />
-  <EntityRelationship Name="slakpiinstance_email" unmodified="1" />
-  <EntityRelationship Name="slakpiinstance_fax" unmodified="1" />
-  <EntityRelationship Name="slakpiinstance_incident" unmodified="1" />
   <EntityRelationship Name="slakpiinstance_incident_firstresponsebykpi" />
   <EntityRelationship Name="slakpiinstance_incident_resolvebykpi" />
-  <EntityRelationship Name="slakpiinstance_invoice" unmodified="1" />
-  <EntityRelationship Name="slakpiinstance_lead" unmodified="1" />
-  <EntityRelationship Name="slakpiinstance_letter" unmodified="1" />
-  <EntityRelationship Name="slakpiinstance_opportunity" unmodified="1" />
-  <EntityRelationship Name="slakpiinstance_owner" unmodified="1" />
-  <EntityRelationship Name="slakpiinstance_phonecall" unmodified="1" />
-  <EntityRelationship Name="slakpiinstance_quote" unmodified="1" />
-  <EntityRelationship Name="slakpiinstance_salesorder" unmodified="1" />
-  <EntityRelationship Name="slakpiinstance_serviceappointment" unmodified="1" />
-  <EntityRelationship Name="slakpiinstance_socialactivity" unmodified="1" />
-  <EntityRelationship Name="slakpiinstance_task" unmodified="1" />
   <EntityRelationship Name="SocialActivity_Annotation" unmodified="1" />
   <EntityRelationship Name="socialprofile_cases" />
   <EntityRelationship Name="subject_incidents" />
@@ -398,7 +377,6 @@
   <EntityRelationship Name="tc_assistancerequest_sla" />
   <EntityRelationship Name="tc_assistancerequest_sla_slaid" />
   <EntityRelationship Name="tc_assistancerequest_sla_slainvokedid" />
-  <EntityRelationship Name="tc_assistancerequest_SLAKPIInstances" />
   <EntityRelationship Name="tc_assistancerequest_systemuser_createdby" />
   <EntityRelationship Name="tc_assistancerequest_systemuser_modifiedby" />
   <EntityRelationship Name="tc_assistancerequest_systemuser_owninguser" />
@@ -446,7 +424,6 @@
   <EntityRelationship Name="tc_caseline_tc_compensationline_caseline4" />
   <EntityRelationship Name="tc_compensation_tc_compensationline" />
   <EntityRelationship Name="tc_compensationapproval_Annotations" />
-  <EntityRelationship Name="tc_compensationapproval_SLAKPIInstances" />
   <EntityRelationship Name="tc_compensationapprovalslikpi_compensationap" />
   <EntityRelationship Name="tc_contact_incident" />
   <EntityRelationship Name="tc_contact_letter_Customer" />

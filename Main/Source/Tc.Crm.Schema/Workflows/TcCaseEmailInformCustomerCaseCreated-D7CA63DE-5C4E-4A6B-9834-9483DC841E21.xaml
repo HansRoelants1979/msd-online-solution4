@@ -37,7 +37,10 @@
           <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep2_14" />
           <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep2_15" />
           <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep2_16" />
-          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep2_17" />
+          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep2_17" />
+          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep2_18" />
+          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep2_19" />
+          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep2_20" />
         </sco:Collection>
         <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
           <mxswa:GetEntityProperty Attribute="tc_preferredmethodofcommunication" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" Value="[ConditionBranchStep2_2]">
@@ -150,7 +153,7 @@
               <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep2_14]</OutArgument>
             </mxswa:ActivityReference.Arguments>
           </mxswa:ActivityReference>
-          <mxswa:GetEntityProperty Attribute="tc_alternativeemaillookup" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" Value="[ConditionBranchStep2_17]">
+          <mxswa:GetEntityProperty Attribute="tc_alternativeemaillookup" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" Value="[ConditionBranchStep2_18]">
             <mxswa:GetEntityProperty.TargetType>
               <InArgument x:TypeArguments="s:Type">
                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
@@ -163,7 +166,32 @@
             <mxswa:ActivityReference.Arguments>
               <InArgument x:TypeArguments="mxsq:ConditionOperator" x:Key="ConditionOperator">NotNull</InArgument>
               <x:Null x:Key="Parameters" />
-              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep2_17]</InArgument>
+              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep2_18]</InArgument>
+              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep2_17]</OutArgument>
+            </mxswa:ActivityReference.Arguments>
+          </mxswa:ActivityReference>
+          <mxswa:GetEntityProperty Attribute="emailaddress1" Entity="[InputEntities(&quot;related_customerid#account&quot;)]" EntityName="account" Value="[ConditionBranchStep2_20]">
+            <mxswa:GetEntityProperty.TargetType>
+              <InArgument x:TypeArguments="s:Type">
+                <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
+                  <x:Null />
+                </mxswa:ReferenceLiteral>
+              </InArgument>
+            </mxswa:GetEntityProperty.TargetType>
+          </mxswa:GetEntityProperty>
+          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateCondition">
+            <mxswa:ActivityReference.Arguments>
+              <InArgument x:TypeArguments="mxsq:ConditionOperator" x:Key="ConditionOperator">NotNull</InArgument>
+              <x:Null x:Key="Parameters" />
+              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep2_20]</InArgument>
+              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep2_19]</OutArgument>
+            </mxswa:ActivityReference.Arguments>
+          </mxswa:ActivityReference>
+          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateLogicalCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateLogicalCondition">
+            <mxswa:ActivityReference.Arguments>
+              <InArgument x:TypeArguments="mxsq:LogicalOperator" x:Key="LogicalOperator">Or</InArgument>
+              <InArgument x:TypeArguments="x:Boolean" x:Key="LeftOperand">[ConditionBranchStep2_17]</InArgument>
+              <InArgument x:TypeArguments="x:Boolean" x:Key="RightOperand">[ConditionBranchStep2_19]</InArgument>
               <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep2_16]</OutArgument>
             </mxswa:ActivityReference.Arguments>
           </mxswa:ActivityReference>
@@ -251,14 +279,19 @@
                         <sco:Collection x:TypeArguments="Variable" x:Key="Variables">
                           <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep150_condition" />
                           <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep150_1" />
-                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep150_2" />
+                          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep150_2" />
                           <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep150_3" />
                           <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep150_4" />
-                          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep150_5" />
-                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep150_6" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep150_5" />
+                          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep150_6" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep150_7" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep150_8" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep150_9" />
+                          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep150_10" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep150_11" />
                         </sco:Collection>
                         <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
-                          <mxswa:GetEntityProperty Attribute="tc_language" Entity="[InputEntities(&quot;related_customerid#contact&quot;)]" EntityName="contact" Value="[ConditionBranchStep150_2]">
+                          <mxswa:GetEntityProperty Attribute="tc_language" Entity="[InputEntities(&quot;related_customerid#contact&quot;)]" EntityName="contact" Value="[ConditionBranchStep150_3]">
                             <mxswa:GetEntityProperty.TargetType>
                               <InArgument x:TypeArguments="s:Type">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
@@ -274,7 +307,7 @@
                               <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
                               </InArgument>
-                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep150_3]</OutArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep150_4]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
                           <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
@@ -284,14 +317,61 @@
                               <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
                               </InArgument>
-                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep150_4]</OutArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep150_5]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
                           <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateCondition">
                             <mxswa:ActivityReference.Arguments>
                               <InArgument x:TypeArguments="mxsq:ConditionOperator" x:Key="ConditionOperator">In</InArgument>
-                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep150_3, ConditionBranchStep150_4 }]</InArgument>
-                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep150_2]</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep150_4, ConditionBranchStep150_5 }]</InArgument>
+                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep150_3]</InArgument>
+                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep150_2]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:GetEntityProperty Attribute="tc_sourcemarketid" Entity="[InputEntities(&quot;related_customerid#account&quot;)]" EntityName="account" Value="[ConditionBranchStep150_7]">
+                            <mxswa:GetEntityProperty.TargetType>
+                              <InArgument x:TypeArguments="s:Type">
+                                <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
+                                  <x:Null />
+                                </mxswa:ReferenceLiteral>
+                              </InArgument>
+                            </mxswa:GetEntityProperty.TargetType>
+                          </mxswa:GetEntityProperty>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.Guid, "fa255c25-8a14-e711-810c-3863bb34fa70", "UniqueIdentifier" }]</InArgument>
+                              <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                                <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:Guid" />
+                              </InArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep150_9]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.EntityReference, "tc_country", "United Kingdom", ConditionBranchStep150_9, "Lookup" }]</InArgument>
+                              <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                                <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
+                                  <x:Null />
+                                </mxswa:ReferenceLiteral>
+                              </InArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep150_8]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateCondition">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="mxsq:ConditionOperator" x:Key="ConditionOperator">Equal</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep150_8 }]</InArgument>
+                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep150_7]</InArgument>
+                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep150_6]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateLogicalCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateLogicalCondition">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="mxsq:LogicalOperator" x:Key="LogicalOperator">Or</InArgument>
+                              <InArgument x:TypeArguments="x:Boolean" x:Key="LeftOperand">[ConditionBranchStep150_2]</InArgument>
+                              <InArgument x:TypeArguments="x:Boolean" x:Key="RightOperand">[ConditionBranchStep150_6]</InArgument>
                               <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep150_1]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
@@ -302,22 +382,22 @@
                               <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                               </InArgument>
-                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep150_6]</OutArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep150_11]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
                           <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateCondition">
                             <mxswa:ActivityReference.Arguments>
                               <InArgument x:TypeArguments="mxsq:ConditionOperator" x:Key="ConditionOperator">Equal</InArgument>
-                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep150_6 }]</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep150_11 }]</InArgument>
                               <InArgument x:TypeArguments="x:Object" x:Key="Operand">[CustomActivityStep174IsInRole_localParameter]</InArgument>
-                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep150_5]</OutArgument>
+                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep150_10]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
                           <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateLogicalCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateLogicalCondition">
                             <mxswa:ActivityReference.Arguments>
                               <InArgument x:TypeArguments="mxsq:LogicalOperator" x:Key="LogicalOperator">And</InArgument>
                               <InArgument x:TypeArguments="x:Boolean" x:Key="LeftOperand">[ConditionBranchStep150_1]</InArgument>
-                              <InArgument x:TypeArguments="x:Boolean" x:Key="RightOperand">[ConditionBranchStep150_5]</InArgument>
+                              <InArgument x:TypeArguments="x:Boolean" x:Key="RightOperand">[ConditionBranchStep150_10]</InArgument>
                               <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep150_condition]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
@@ -356,14 +436,19 @@
                         <sco:Collection x:TypeArguments="Variable" x:Key="Variables">
                           <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep153_condition" />
                           <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep153_1" />
-                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep153_2" />
+                          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep153_2" />
                           <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep153_3" />
                           <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep153_4" />
-                          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep153_5" />
-                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep153_6" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep153_5" />
+                          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep153_6" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep153_7" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep153_8" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep153_9" />
+                          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep153_10" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep153_11" />
                         </sco:Collection>
                         <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
-                          <mxswa:GetEntityProperty Attribute="tc_language" Entity="[InputEntities(&quot;related_customerid#contact&quot;)]" EntityName="contact" Value="[ConditionBranchStep153_2]">
+                          <mxswa:GetEntityProperty Attribute="tc_language" Entity="[InputEntities(&quot;related_customerid#contact&quot;)]" EntityName="contact" Value="[ConditionBranchStep153_3]">
                             <mxswa:GetEntityProperty.TargetType>
                               <InArgument x:TypeArguments="s:Type">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
@@ -379,7 +464,7 @@
                               <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
                               </InArgument>
-                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep153_3]</OutArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep153_4]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
                           <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
@@ -389,14 +474,61 @@
                               <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
                               </InArgument>
-                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep153_4]</OutArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep153_5]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
                           <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateCondition">
                             <mxswa:ActivityReference.Arguments>
                               <InArgument x:TypeArguments="mxsq:ConditionOperator" x:Key="ConditionOperator">In</InArgument>
-                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep153_3, ConditionBranchStep153_4 }]</InArgument>
-                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep153_2]</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep153_4, ConditionBranchStep153_5 }]</InArgument>
+                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep153_3]</InArgument>
+                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep153_2]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:GetEntityProperty Attribute="tc_sourcemarketid" Entity="[InputEntities(&quot;related_customerid#account&quot;)]" EntityName="account" Value="[ConditionBranchStep153_7]">
+                            <mxswa:GetEntityProperty.TargetType>
+                              <InArgument x:TypeArguments="s:Type">
+                                <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
+                                  <x:Null />
+                                </mxswa:ReferenceLiteral>
+                              </InArgument>
+                            </mxswa:GetEntityProperty.TargetType>
+                          </mxswa:GetEntityProperty>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.Guid, "fa255c25-8a14-e711-810c-3863bb34fa70", "UniqueIdentifier" }]</InArgument>
+                              <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                                <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:Guid" />
+                              </InArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep153_9]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.EntityReference, "tc_country", "United Kingdom", ConditionBranchStep153_9, "Lookup" }]</InArgument>
+                              <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                                <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
+                                  <x:Null />
+                                </mxswa:ReferenceLiteral>
+                              </InArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep153_8]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateCondition">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="mxsq:ConditionOperator" x:Key="ConditionOperator">Equal</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep153_8 }]</InArgument>
+                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep153_7]</InArgument>
+                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep153_6]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateLogicalCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateLogicalCondition">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="mxsq:LogicalOperator" x:Key="LogicalOperator">Or</InArgument>
+                              <InArgument x:TypeArguments="x:Boolean" x:Key="LeftOperand">[ConditionBranchStep153_2]</InArgument>
+                              <InArgument x:TypeArguments="x:Boolean" x:Key="RightOperand">[ConditionBranchStep153_6]</InArgument>
                               <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep153_1]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
@@ -407,22 +539,22 @@
                               <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                               </InArgument>
-                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep153_6]</OutArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep153_11]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
                           <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateCondition">
                             <mxswa:ActivityReference.Arguments>
                               <InArgument x:TypeArguments="mxsq:ConditionOperator" x:Key="ConditionOperator">Equal</InArgument>
-                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep153_6 }]</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep153_11 }]</InArgument>
                               <InArgument x:TypeArguments="x:Object" x:Key="Operand">[CustomActivityStep174IsInRole_localParameter]</InArgument>
-                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep153_5]</OutArgument>
+                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep153_10]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
                           <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateLogicalCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateLogicalCondition">
                             <mxswa:ActivityReference.Arguments>
                               <InArgument x:TypeArguments="mxsq:LogicalOperator" x:Key="LogicalOperator">And</InArgument>
                               <InArgument x:TypeArguments="x:Boolean" x:Key="LeftOperand">[ConditionBranchStep153_1]</InArgument>
-                              <InArgument x:TypeArguments="x:Boolean" x:Key="RightOperand">[ConditionBranchStep153_5]</InArgument>
+                              <InArgument x:TypeArguments="x:Boolean" x:Key="RightOperand">[ConditionBranchStep153_10]</InArgument>
                               <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep153_condition]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
@@ -461,15 +593,20 @@
                         <sco:Collection x:TypeArguments="Variable" x:Key="Variables">
                           <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep159_condition" />
                           <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep159_1" />
-                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep159_2" />
+                          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep159_2" />
                           <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep159_3" />
-                          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep159_4" />
-                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep159_5" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep159_4" />
+                          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep159_5" />
                           <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep159_6" />
                           <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep159_7" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep159_8" />
+                          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep159_9" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep159_10" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep159_11" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep159_12" />
                         </sco:Collection>
                         <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
-                          <mxswa:GetEntityProperty Attribute="tc_language" Entity="[InputEntities(&quot;related_customerid#contact&quot;)]" EntityName="contact" Value="[ConditionBranchStep159_2]">
+                          <mxswa:GetEntityProperty Attribute="tc_language" Entity="[InputEntities(&quot;related_customerid#contact&quot;)]" EntityName="contact" Value="[ConditionBranchStep159_3]">
                             <mxswa:GetEntityProperty.TargetType>
                               <InArgument x:TypeArguments="s:Type">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
@@ -485,18 +622,18 @@
                               <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
                               </InArgument>
-                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep159_3]</OutArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep159_4]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
                           <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateCondition">
                             <mxswa:ActivityReference.Arguments>
                               <InArgument x:TypeArguments="mxsq:ConditionOperator" x:Key="ConditionOperator">Equal</InArgument>
-                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep159_3 }]</InArgument>
-                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep159_2]</InArgument>
-                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep159_1]</OutArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep159_4 }]</InArgument>
+                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep159_3]</InArgument>
+                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep159_2]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
-                          <mxswa:GetEntityProperty Attribute="tc_sourcemarketid" Entity="[InputEntities(&quot;related_customerid#contact&quot;)]" EntityName="contact" Value="[ConditionBranchStep159_5]">
+                          <mxswa:GetEntityProperty Attribute="tc_sourcemarketid" Entity="[InputEntities(&quot;related_customerid#contact&quot;)]" EntityName="contact" Value="[ConditionBranchStep159_6]">
                             <mxswa:GetEntityProperty.TargetType>
                               <InArgument x:TypeArguments="s:Type">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
@@ -512,34 +649,81 @@
                               <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:Guid" />
                               </InArgument>
-                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep159_7]</OutArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep159_8]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
                           <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
                             <mxswa:ActivityReference.Arguments>
                               <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.EntityReference, "tc_country", "Belgium", ConditionBranchStep159_7, "Lookup" }]</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.EntityReference, "tc_country", "Belgium", ConditionBranchStep159_8, "Lookup" }]</InArgument>
                               <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
                                   <x:Null />
                                 </mxswa:ReferenceLiteral>
                               </InArgument>
-                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep159_6]</OutArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep159_7]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
                           <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateCondition">
                             <mxswa:ActivityReference.Arguments>
                               <InArgument x:TypeArguments="mxsq:ConditionOperator" x:Key="ConditionOperator">NotEqual</InArgument>
-                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep159_6 }]</InArgument>
-                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep159_5]</InArgument>
-                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep159_4]</OutArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep159_7 }]</InArgument>
+                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep159_6]</InArgument>
+                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep159_5]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
                           <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateLogicalCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateLogicalCondition">
                             <mxswa:ActivityReference.Arguments>
                               <InArgument x:TypeArguments="mxsq:LogicalOperator" x:Key="LogicalOperator">And</InArgument>
+                              <InArgument x:TypeArguments="x:Boolean" x:Key="LeftOperand">[ConditionBranchStep159_2]</InArgument>
+                              <InArgument x:TypeArguments="x:Boolean" x:Key="RightOperand">[ConditionBranchStep159_5]</InArgument>
+                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep159_1]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:GetEntityProperty Attribute="tc_sourcemarketid" Entity="[InputEntities(&quot;related_customerid#account&quot;)]" EntityName="account" Value="[ConditionBranchStep159_10]">
+                            <mxswa:GetEntityProperty.TargetType>
+                              <InArgument x:TypeArguments="s:Type">
+                                <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
+                                  <x:Null />
+                                </mxswa:ReferenceLiteral>
+                              </InArgument>
+                            </mxswa:GetEntityProperty.TargetType>
+                          </mxswa:GetEntityProperty>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.Guid, "f8255c25-8a14-e711-810c-3863bb34fa70", "UniqueIdentifier" }]</InArgument>
+                              <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                                <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:Guid" />
+                              </InArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep159_12]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.EntityReference, "tc_country", "France", ConditionBranchStep159_12, "Lookup" }]</InArgument>
+                              <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                                <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
+                                  <x:Null />
+                                </mxswa:ReferenceLiteral>
+                              </InArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep159_11]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateCondition">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="mxsq:ConditionOperator" x:Key="ConditionOperator">Equal</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep159_11 }]</InArgument>
+                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep159_10]</InArgument>
+                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep159_9]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateLogicalCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateLogicalCondition">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="mxsq:LogicalOperator" x:Key="LogicalOperator">Or</InArgument>
                               <InArgument x:TypeArguments="x:Boolean" x:Key="LeftOperand">[ConditionBranchStep159_1]</InArgument>
-                              <InArgument x:TypeArguments="x:Boolean" x:Key="RightOperand">[ConditionBranchStep159_4]</InArgument>
+                              <InArgument x:TypeArguments="x:Boolean" x:Key="RightOperand">[ConditionBranchStep159_9]</InArgument>
                               <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep159_condition]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
@@ -577,11 +761,16 @@
                       <mxswa:ActivityReference.Properties>
                         <sco:Collection x:TypeArguments="Variable" x:Key="Variables">
                           <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep30_condition" />
-                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep30_1" />
+                          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep30_1" />
                           <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep30_2" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep30_3" />
+                          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep30_4" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep30_5" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep30_6" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep30_7" />
                         </sco:Collection>
                         <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
-                          <mxswa:GetEntityProperty Attribute="tc_language" Entity="[InputEntities(&quot;related_customerid#contact&quot;)]" EntityName="contact" Value="[ConditionBranchStep30_1]">
+                          <mxswa:GetEntityProperty Attribute="tc_language" Entity="[InputEntities(&quot;related_customerid#contact&quot;)]" EntityName="contact" Value="[ConditionBranchStep30_2]">
                             <mxswa:GetEntityProperty.TargetType>
                               <InArgument x:TypeArguments="s:Type">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
@@ -597,14 +786,61 @@
                               <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
                               </InArgument>
-                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep30_2]</OutArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep30_3]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
                           <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateCondition">
                             <mxswa:ActivityReference.Arguments>
                               <InArgument x:TypeArguments="mxsq:ConditionOperator" x:Key="ConditionOperator">Equal</InArgument>
-                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep30_2 }]</InArgument>
-                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep30_1]</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep30_3 }]</InArgument>
+                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep30_2]</InArgument>
+                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep30_1]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:GetEntityProperty Attribute="tc_sourcemarketid" Entity="[InputEntities(&quot;related_customerid#account&quot;)]" EntityName="account" Value="[ConditionBranchStep30_5]">
+                            <mxswa:GetEntityProperty.TargetType>
+                              <InArgument x:TypeArguments="s:Type">
+                                <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
+                                  <x:Null />
+                                </mxswa:ReferenceLiteral>
+                              </InArgument>
+                            </mxswa:GetEntityProperty.TargetType>
+                          </mxswa:GetEntityProperty>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.Guid, "68265c25-8a14-e711-810c-3863bb34fa70", "UniqueIdentifier" }]</InArgument>
+                              <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                                <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:Guid" />
+                              </InArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep30_7]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.EntityReference, "tc_country", "Poland", ConditionBranchStep30_7, "Lookup" }]</InArgument>
+                              <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                                <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
+                                  <x:Null />
+                                </mxswa:ReferenceLiteral>
+                              </InArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep30_6]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateCondition">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="mxsq:ConditionOperator" x:Key="ConditionOperator">Equal</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep30_6 }]</InArgument>
+                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep30_5]</InArgument>
+                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep30_4]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateLogicalCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateLogicalCondition">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="mxsq:LogicalOperator" x:Key="LogicalOperator">Or</InArgument>
+                              <InArgument x:TypeArguments="x:Boolean" x:Key="LeftOperand">[ConditionBranchStep30_1]</InArgument>
+                              <InArgument x:TypeArguments="x:Boolean" x:Key="RightOperand">[ConditionBranchStep30_4]</InArgument>
                               <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep30_condition]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
@@ -642,11 +878,16 @@
                       <mxswa:ActivityReference.Properties>
                         <sco:Collection x:TypeArguments="Variable" x:Key="Variables">
                           <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep43_condition" />
-                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep43_1" />
+                          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep43_1" />
                           <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep43_2" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep43_3" />
+                          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep43_4" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep43_5" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep43_6" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep43_7" />
                         </sco:Collection>
                         <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
-                          <mxswa:GetEntityProperty Attribute="tc_language" Entity="[InputEntities(&quot;related_customerid#contact&quot;)]" EntityName="contact" Value="[ConditionBranchStep43_1]">
+                          <mxswa:GetEntityProperty Attribute="tc_language" Entity="[InputEntities(&quot;related_customerid#contact&quot;)]" EntityName="contact" Value="[ConditionBranchStep43_2]">
                             <mxswa:GetEntityProperty.TargetType>
                               <InArgument x:TypeArguments="s:Type">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
@@ -662,14 +903,61 @@
                               <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
                               </InArgument>
-                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep43_2]</OutArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep43_3]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
                           <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateCondition">
                             <mxswa:ActivityReference.Arguments>
                               <InArgument x:TypeArguments="mxsq:ConditionOperator" x:Key="ConditionOperator">Equal</InArgument>
-                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep43_2 }]</InArgument>
-                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep43_1]</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep43_3 }]</InArgument>
+                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep43_2]</InArgument>
+                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep43_1]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:GetEntityProperty Attribute="tc_sourcemarketid" Entity="[InputEntities(&quot;related_customerid#account&quot;)]" EntityName="account" Value="[ConditionBranchStep43_5]">
+                            <mxswa:GetEntityProperty.TargetType>
+                              <InArgument x:TypeArguments="s:Type">
+                                <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
+                                  <x:Null />
+                                </mxswa:ReferenceLiteral>
+                              </InArgument>
+                            </mxswa:GetEntityProperty.TargetType>
+                          </mxswa:GetEntityProperty>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.Guid, "0a265c25-8a14-e711-810c-3863bb34fa70", "UniqueIdentifier" }]</InArgument>
+                              <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                                <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:Guid" />
+                              </InArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep43_7]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.EntityReference, "tc_country", "Hungary", ConditionBranchStep43_7, "Lookup" }]</InArgument>
+                              <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                                <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
+                                  <x:Null />
+                                </mxswa:ReferenceLiteral>
+                              </InArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep43_6]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateCondition">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="mxsq:ConditionOperator" x:Key="ConditionOperator">Equal</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep43_6 }]</InArgument>
+                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep43_5]</InArgument>
+                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep43_4]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateLogicalCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateLogicalCondition">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="mxsq:LogicalOperator" x:Key="LogicalOperator">Or</InArgument>
+                              <InArgument x:TypeArguments="x:Boolean" x:Key="LeftOperand">[ConditionBranchStep43_1]</InArgument>
+                              <InArgument x:TypeArguments="x:Boolean" x:Key="RightOperand">[ConditionBranchStep43_4]</InArgument>
                               <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep43_condition]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
@@ -707,11 +995,16 @@
                       <mxswa:ActivityReference.Properties>
                         <sco:Collection x:TypeArguments="Variable" x:Key="Variables">
                           <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep48_condition" />
-                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep48_1" />
+                          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep48_1" />
                           <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep48_2" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep48_3" />
+                          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep48_4" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep48_5" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep48_6" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep48_7" />
                         </sco:Collection>
                         <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
-                          <mxswa:GetEntityProperty Attribute="tc_language" Entity="[InputEntities(&quot;related_customerid#contact&quot;)]" EntityName="contact" Value="[ConditionBranchStep48_1]">
+                          <mxswa:GetEntityProperty Attribute="tc_language" Entity="[InputEntities(&quot;related_customerid#contact&quot;)]" EntityName="contact" Value="[ConditionBranchStep48_2]">
                             <mxswa:GetEntityProperty.TargetType>
                               <InArgument x:TypeArguments="s:Type">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
@@ -727,14 +1020,61 @@
                               <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
                               </InArgument>
-                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep48_2]</OutArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep48_3]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
                           <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateCondition">
                             <mxswa:ActivityReference.Arguments>
                               <InArgument x:TypeArguments="mxsq:ConditionOperator" x:Key="ConditionOperator">Equal</InArgument>
-                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep48_2 }]</InArgument>
-                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep48_1]</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep48_3 }]</InArgument>
+                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep48_2]</InArgument>
+                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep48_1]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:GetEntityProperty Attribute="tc_sourcemarketid" Entity="[InputEntities(&quot;related_customerid#account&quot;)]" EntityName="account" Value="[ConditionBranchStep48_5]">
+                            <mxswa:GetEntityProperty.TargetType>
+                              <InArgument x:TypeArguments="s:Type">
+                                <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
+                                  <x:Null />
+                                </mxswa:ReferenceLiteral>
+                              </InArgument>
+                            </mxswa:GetEntityProperty.TargetType>
+                          </mxswa:GetEntityProperty>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.Guid, "e4255c25-8a14-e711-810c-3863bb34fa70", "UniqueIdentifier" }]</InArgument>
+                              <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                                <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:Guid" />
+                              </InArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep48_7]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.EntityReference, "tc_country", "Czech Republic", ConditionBranchStep48_7, "Lookup" }]</InArgument>
+                              <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                                <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
+                                  <x:Null />
+                                </mxswa:ReferenceLiteral>
+                              </InArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep48_6]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateCondition">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="mxsq:ConditionOperator" x:Key="ConditionOperator">Equal</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep48_6 }]</InArgument>
+                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep48_5]</InArgument>
+                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep48_4]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateLogicalCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateLogicalCondition">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="mxsq:LogicalOperator" x:Key="LogicalOperator">Or</InArgument>
+                              <InArgument x:TypeArguments="x:Boolean" x:Key="LeftOperand">[ConditionBranchStep48_1]</InArgument>
+                              <InArgument x:TypeArguments="x:Boolean" x:Key="RightOperand">[ConditionBranchStep48_4]</InArgument>
                               <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep48_condition]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
@@ -772,11 +1112,16 @@
                       <mxswa:ActivityReference.Properties>
                         <sco:Collection x:TypeArguments="Variable" x:Key="Variables">
                           <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep162_condition" />
-                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep162_1" />
+                          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep162_1" />
                           <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep162_2" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep162_3" />
+                          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep162_4" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep162_5" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep162_6" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep162_7" />
                         </sco:Collection>
                         <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
-                          <mxswa:GetEntityProperty Attribute="tc_language" Entity="[InputEntities(&quot;related_customerid#contact&quot;)]" EntityName="contact" Value="[ConditionBranchStep162_1]">
+                          <mxswa:GetEntityProperty Attribute="tc_language" Entity="[InputEntities(&quot;related_customerid#contact&quot;)]" EntityName="contact" Value="[ConditionBranchStep162_2]">
                             <mxswa:GetEntityProperty.TargetType>
                               <InArgument x:TypeArguments="s:Type">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
@@ -792,14 +1137,61 @@
                               <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
                               </InArgument>
-                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep162_2]</OutArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep162_3]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
                           <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateCondition">
                             <mxswa:ActivityReference.Arguments>
                               <InArgument x:TypeArguments="mxsq:ConditionOperator" x:Key="ConditionOperator">Equal</InArgument>
-                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep162_2 }]</InArgument>
-                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep162_1]</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep162_3 }]</InArgument>
+                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep162_2]</InArgument>
+                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep162_1]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:GetEntityProperty Attribute="tc_sourcemarketid" Entity="[InputEntities(&quot;related_customerid#account&quot;)]" EntityName="account" Value="[ConditionBranchStep162_5]">
+                            <mxswa:GetEntityProperty.TargetType>
+                              <InArgument x:TypeArguments="s:Type">
+                                <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
+                                  <x:Null />
+                                </mxswa:ReferenceLiteral>
+                              </InArgument>
+                            </mxswa:GetEntityProperty.TargetType>
+                          </mxswa:GetEntityProperty>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.Guid, "e6255c25-8a14-e711-810c-3863bb34fa70", "UniqueIdentifier" }]</InArgument>
+                              <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                                <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:Guid" />
+                              </InArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep162_7]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.EntityReference, "tc_country", "Germany", ConditionBranchStep162_7, "Lookup" }]</InArgument>
+                              <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                                <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
+                                  <x:Null />
+                                </mxswa:ReferenceLiteral>
+                              </InArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep162_6]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateCondition">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="mxsq:ConditionOperator" x:Key="ConditionOperator">Equal</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep162_6 }]</InArgument>
+                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep162_5]</InArgument>
+                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep162_4]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateLogicalCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateLogicalCondition">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="mxsq:LogicalOperator" x:Key="LogicalOperator">Or</InArgument>
+                              <InArgument x:TypeArguments="x:Boolean" x:Key="LeftOperand">[ConditionBranchStep162_1]</InArgument>
+                              <InArgument x:TypeArguments="x:Boolean" x:Key="RightOperand">[ConditionBranchStep162_4]</InArgument>
                               <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep162_condition]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
@@ -838,15 +1230,20 @@
                         <sco:Collection x:TypeArguments="Variable" x:Key="Variables">
                           <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep165_condition" />
                           <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep165_1" />
-                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep165_2" />
+                          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep165_2" />
                           <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep165_3" />
-                          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep165_4" />
-                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep165_5" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep165_4" />
+                          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep165_5" />
                           <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep165_6" />
                           <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep165_7" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep165_8" />
+                          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep165_9" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep165_10" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep165_11" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep165_12" />
                         </sco:Collection>
                         <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
-                          <mxswa:GetEntityProperty Attribute="tc_language" Entity="[InputEntities(&quot;related_customerid#contact&quot;)]" EntityName="contact" Value="[ConditionBranchStep165_2]">
+                          <mxswa:GetEntityProperty Attribute="tc_language" Entity="[InputEntities(&quot;related_customerid#contact&quot;)]" EntityName="contact" Value="[ConditionBranchStep165_3]">
                             <mxswa:GetEntityProperty.TargetType>
                               <InArgument x:TypeArguments="s:Type">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
@@ -862,18 +1259,18 @@
                               <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
                               </InArgument>
-                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep165_3]</OutArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep165_4]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
                           <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateCondition">
                             <mxswa:ActivityReference.Arguments>
                               <InArgument x:TypeArguments="mxsq:ConditionOperator" x:Key="ConditionOperator">Equal</InArgument>
-                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep165_3 }]</InArgument>
-                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep165_2]</InArgument>
-                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep165_1]</OutArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep165_4 }]</InArgument>
+                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep165_3]</InArgument>
+                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep165_2]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
-                          <mxswa:GetEntityProperty Attribute="tc_sourcemarketid" Entity="[InputEntities(&quot;related_customerid#contact&quot;)]" EntityName="contact" Value="[ConditionBranchStep165_5]">
+                          <mxswa:GetEntityProperty Attribute="tc_sourcemarketid" Entity="[InputEntities(&quot;related_customerid#contact&quot;)]" EntityName="contact" Value="[ConditionBranchStep165_6]">
                             <mxswa:GetEntityProperty.TargetType>
                               <InArgument x:TypeArguments="s:Type">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
@@ -889,34 +1286,81 @@
                               <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:Guid" />
                               </InArgument>
-                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep165_7]</OutArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep165_8]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
                           <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
                             <mxswa:ActivityReference.Arguments>
                               <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.EntityReference, "tc_country", "Belgium", ConditionBranchStep165_7, "Lookup" }]</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.EntityReference, "tc_country", "Belgium", ConditionBranchStep165_8, "Lookup" }]</InArgument>
                               <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
                                   <x:Null />
                                 </mxswa:ReferenceLiteral>
                               </InArgument>
-                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep165_6]</OutArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep165_7]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
                           <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateCondition">
                             <mxswa:ActivityReference.Arguments>
                               <InArgument x:TypeArguments="mxsq:ConditionOperator" x:Key="ConditionOperator">Equal</InArgument>
-                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep165_6 }]</InArgument>
-                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep165_5]</InArgument>
-                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep165_4]</OutArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep165_7 }]</InArgument>
+                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep165_6]</InArgument>
+                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep165_5]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
                           <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateLogicalCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateLogicalCondition">
                             <mxswa:ActivityReference.Arguments>
                               <InArgument x:TypeArguments="mxsq:LogicalOperator" x:Key="LogicalOperator">And</InArgument>
+                              <InArgument x:TypeArguments="x:Boolean" x:Key="LeftOperand">[ConditionBranchStep165_2]</InArgument>
+                              <InArgument x:TypeArguments="x:Boolean" x:Key="RightOperand">[ConditionBranchStep165_5]</InArgument>
+                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep165_1]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:GetEntityProperty Attribute="tc_sourcemarketid" Entity="[InputEntities(&quot;related_customerid#account&quot;)]" EntityName="account" Value="[ConditionBranchStep165_10]">
+                            <mxswa:GetEntityProperty.TargetType>
+                              <InArgument x:TypeArguments="s:Type">
+                                <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
+                                  <x:Null />
+                                </mxswa:ReferenceLiteral>
+                              </InArgument>
+                            </mxswa:GetEntityProperty.TargetType>
+                          </mxswa:GetEntityProperty>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.Guid, "c0255c25-8a14-e711-810c-3863bb34fa70", "UniqueIdentifier" }]</InArgument>
+                              <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                                <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:Guid" />
+                              </InArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep165_12]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.EntityReference, "tc_country", "Belgium", ConditionBranchStep165_12, "Lookup" }]</InArgument>
+                              <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                                <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
+                                  <x:Null />
+                                </mxswa:ReferenceLiteral>
+                              </InArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep165_11]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateCondition">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="mxsq:ConditionOperator" x:Key="ConditionOperator">Equal</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep165_11 }]</InArgument>
+                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep165_10]</InArgument>
+                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep165_9]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateLogicalCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateLogicalCondition">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="mxsq:LogicalOperator" x:Key="LogicalOperator">Or</InArgument>
                               <InArgument x:TypeArguments="x:Boolean" x:Key="LeftOperand">[ConditionBranchStep165_1]</InArgument>
-                              <InArgument x:TypeArguments="x:Boolean" x:Key="RightOperand">[ConditionBranchStep165_4]</InArgument>
+                              <InArgument x:TypeArguments="x:Boolean" x:Key="RightOperand">[ConditionBranchStep165_9]</InArgument>
                               <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep165_condition]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
@@ -955,15 +1399,20 @@
                         <sco:Collection x:TypeArguments="Variable" x:Key="Variables">
                           <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep168_condition" />
                           <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep168_1" />
-                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep168_2" />
+                          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep168_2" />
                           <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep168_3" />
-                          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep168_4" />
-                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep168_5" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep168_4" />
+                          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep168_5" />
                           <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep168_6" />
                           <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep168_7" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep168_8" />
+                          <Variable x:TypeArguments="x:Boolean" Default="False" Name="ConditionBranchStep168_9" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep168_10" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep168_11" />
+                          <Variable x:TypeArguments="x:Object" Name="ConditionBranchStep168_12" />
                         </sco:Collection>
                         <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
-                          <mxswa:GetEntityProperty Attribute="tc_language" Entity="[InputEntities(&quot;related_customerid#contact&quot;)]" EntityName="contact" Value="[ConditionBranchStep168_2]">
+                          <mxswa:GetEntityProperty Attribute="tc_language" Entity="[InputEntities(&quot;related_customerid#contact&quot;)]" EntityName="contact" Value="[ConditionBranchStep168_3]">
                             <mxswa:GetEntityProperty.TargetType>
                               <InArgument x:TypeArguments="s:Type">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
@@ -979,18 +1428,18 @@
                               <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
                               </InArgument>
-                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep168_3]</OutArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep168_4]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
                           <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateCondition">
                             <mxswa:ActivityReference.Arguments>
                               <InArgument x:TypeArguments="mxsq:ConditionOperator" x:Key="ConditionOperator">Equal</InArgument>
-                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep168_3 }]</InArgument>
-                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep168_2]</InArgument>
-                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep168_1]</OutArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep168_4 }]</InArgument>
+                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep168_3]</InArgument>
+                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep168_2]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
-                          <mxswa:GetEntityProperty Attribute="tc_sourcemarketid" Entity="[InputEntities(&quot;related_customerid#contact&quot;)]" EntityName="contact" Value="[ConditionBranchStep168_5]">
+                          <mxswa:GetEntityProperty Attribute="tc_sourcemarketid" Entity="[InputEntities(&quot;related_customerid#contact&quot;)]" EntityName="contact" Value="[ConditionBranchStep168_6]">
                             <mxswa:GetEntityProperty.TargetType>
                               <InArgument x:TypeArguments="s:Type">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
@@ -1006,34 +1455,81 @@
                               <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:Guid" />
                               </InArgument>
-                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep168_7]</OutArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep168_8]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
                           <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
                             <mxswa:ActivityReference.Arguments>
                               <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.EntityReference, "tc_country", "Belgium", ConditionBranchStep168_7, "Lookup" }]</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.EntityReference, "tc_country", "Belgium", ConditionBranchStep168_8, "Lookup" }]</InArgument>
                               <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
                                   <x:Null />
                                 </mxswa:ReferenceLiteral>
                               </InArgument>
-                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep168_6]</OutArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep168_7]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
                           <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateCondition">
                             <mxswa:ActivityReference.Arguments>
                               <InArgument x:TypeArguments="mxsq:ConditionOperator" x:Key="ConditionOperator">NotEqual</InArgument>
-                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep168_6 }]</InArgument>
-                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep168_5]</InArgument>
-                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep168_4]</OutArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep168_7 }]</InArgument>
+                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep168_6]</InArgument>
+                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep168_5]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>
                           <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateLogicalCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateLogicalCondition">
                             <mxswa:ActivityReference.Arguments>
                               <InArgument x:TypeArguments="mxsq:LogicalOperator" x:Key="LogicalOperator">And</InArgument>
+                              <InArgument x:TypeArguments="x:Boolean" x:Key="LeftOperand">[ConditionBranchStep168_2]</InArgument>
+                              <InArgument x:TypeArguments="x:Boolean" x:Key="RightOperand">[ConditionBranchStep168_5]</InArgument>
+                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep168_1]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:GetEntityProperty Attribute="tc_sourcemarketid" Entity="[InputEntities(&quot;related_customerid#account&quot;)]" EntityName="account" Value="[ConditionBranchStep168_10]">
+                            <mxswa:GetEntityProperty.TargetType>
+                              <InArgument x:TypeArguments="s:Type">
+                                <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
+                                  <x:Null />
+                                </mxswa:ReferenceLiteral>
+                              </InArgument>
+                            </mxswa:GetEntityProperty.TargetType>
+                          </mxswa:GetEntityProperty>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.Guid, "{58265C25-8A14-E711-810C-3863BB34FA70}", "UniqueIdentifier" }]</InArgument>
+                              <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                                <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:Guid" />
+                              </InArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep168_12]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.EntityReference, "tc_country", "Netherlands", ConditionBranchStep168_12, "Lookup" }]</InArgument>
+                              <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                                <mxswa:ReferenceLiteral x:TypeArguments="s:Type">
+                                  <x:Null />
+                                </mxswa:ReferenceLiteral>
+                              </InArgument>
+                              <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ConditionBranchStep168_11]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateCondition">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="mxsq:ConditionOperator" x:Key="ConditionOperator">Equal</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ConditionBranchStep168_11 }]</InArgument>
+                              <InArgument x:TypeArguments="x:Object" x:Key="Operand">[ConditionBranchStep168_10]</InArgument>
+                              <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep168_9]</OutArgument>
+                            </mxswa:ActivityReference.Arguments>
+                          </mxswa:ActivityReference>
+                          <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateLogicalCondition, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateLogicalCondition">
+                            <mxswa:ActivityReference.Arguments>
+                              <InArgument x:TypeArguments="mxsq:LogicalOperator" x:Key="LogicalOperator">Or</InArgument>
                               <InArgument x:TypeArguments="x:Boolean" x:Key="LeftOperand">[ConditionBranchStep168_1]</InArgument>
-                              <InArgument x:TypeArguments="x:Boolean" x:Key="RightOperand">[ConditionBranchStep168_4]</InArgument>
+                              <InArgument x:TypeArguments="x:Boolean" x:Key="RightOperand">[ConditionBranchStep168_9]</InArgument>
                               <OutArgument x:TypeArguments="x:Boolean" x:Key="Result">[ConditionBranchStep168_condition]</OutArgument>
                             </mxswa:ActivityReference.Arguments>
                           </mxswa:ActivityReference>

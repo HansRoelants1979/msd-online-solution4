@@ -45,6 +45,7 @@ Tc.Crm.Scripts.Library.Case = (function () {
     }
 
     function getPromiseResponse(promiseResponse, entity) {
+        if (promiseResponse == null) return;
         if (IsOfflineMode()) {
             return promiseResponse.values != null ? promiseResponse.values : promiseResponse;
         }
@@ -83,6 +84,7 @@ Tc.Crm.Scripts.Library.Case = (function () {
         compensationsReceivedPromise.then(
             function (compensationsResponse) {
                 var compensations = getPromiseResponse(compensationsResponse, "Compensation");
+                if (compensations == null) return;
                 compensations.forEach(function (compensation) {
                     if (IsOfflineMode()) {
                         Xrm.Mobile.offline.updateRecord(EntityNames.Compensation, compensation.tc_compensationid, compensationFields).then(

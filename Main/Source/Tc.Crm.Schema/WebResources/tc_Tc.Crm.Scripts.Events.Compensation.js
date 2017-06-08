@@ -20,10 +20,14 @@ if (typeof (Tc.Crm.Scripts.Events) === "undefined") {
 }
 Tc.Crm.Scripts.Events.Compensation = (function () {
     "use strict";
-    
+
     var isComplainCaseType = null;
+    var isIncidentCaseType = null;
     var CASE_TYPE_COMPLAIN = "478C99E9-93E4-E611-8109-1458D041F8E8";
+    var CASE_TYPE_INCIDENT = "D264C3F0-93E4-E611-8109-1458D041F8E8";
     var CLIENT_STATE_OFFLINE = "Offline";
+    var FORM_MODE_CREATE = 1;
+    var FORM_MODE_UPDATE = 2;
 
     var SOURCE_MARKET_UK = "GB";
 
@@ -56,18 +60,22 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
 
     var Configuration = {
         LimitUk: "Tc.Compensation.UpperLimit.UnitedKingdom",
-        LimitContinental: "Tc.Compensation.UpperLimit.Continental"
+        LimitContinental: "Tc.Compensation.UpperLimit.Continental",
+        IncidentApprovalLimitUk: "Tc.Incident.ApprovalLimit.UK",
+        IncidentApprovalLimitNonUk: "Tc.Incident.ApprovalLimit.Non-UK"
+
     }
 
     function formatEntityId(id) {
         return id !== null ? id.replace("{", "").replace("}", "") : null;
-        }
+    }
 
     function IsOfflineMode() {
         return Xrm.Page.context.client.getClientState() === CLIENT_STATE_OFFLINE
     }
 
     function getPromiseResponse(promiseResponse, entity) {
+        if (promiseResponse == null) return null;
         if (IsOfflineMode()) {
             return promiseResponse.values != null ? promiseResponse.values : promiseResponse;
         }
@@ -129,6 +137,18 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
         }
     }
 
+    function getIncident(caseId) {
+        if (IsOfflineMode()) {
+            var query = "?$select=_tc_bookingid_value,tc_bookingreference,_tc_sourcemarketid_value&$expand=tc_BookingId($select=_tc_sourcemarketid_value),tc_sourcemarketid($select=tc_countryname,tc_iso2code)";
+            return Xrm.Mobile.offline.retrieveRecord(EntityNames.Case, caseId, query);
+        }
+        else {
+            var query = "?$select=_tc_bookingid_value,tc_bookingreference,_tc_sourcemarketid_value&$expand=tc_BookingId($select=_tc_sourcemarketid_value),tc_sourcemarketid($select=tc_countryname,tc_iso2code)";
+            return Tc.Crm.Scripts.Common.GetById(EntitySetNames.Case, caseId, query);
+
+        }
+    }
+
     function getCase(caseId) {
         if (IsOfflineMode()) {
             var query = "?$select=tc_bookingreference,tc_bookingid,tc_bookingtravelamount,tc_durationofstay";
@@ -165,7 +185,7 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
         var query = "?$select=tc_duration,tc_travelamount";
         if (IsOfflineMode()) {
             return Xrm.Mobile.offline.retrieveRecord(EntityNames.Booking, bookingId, query);
-        } else {            
+        } else {
             return Tc.Crm.Scripts.Common.GetById(EntitySetNames.Booking, bookingId, query);
         }
     }
@@ -175,7 +195,7 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
         if (IsOfflineMode()) {
             return Xrm.Mobile.offline.retrieveRecord(EntityNames.Country, countryId, query);
         }
-        else {            
+        else {
             return Tc.Crm.Scripts.Common.GetById(EntitySetNames.Country, countryId, query);
         }
     }
@@ -238,34 +258,34 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
         getConfigurationValue(Configuration.LimitContinental).then(function (response) {
             var parsedResponse = getPromiseResponse(response, "Configuration");
             var limit = parseConfigurationValue(parsedResponse);
-                if (limit == null) {
-                    Xrm.Utility.alertDialog("No value in configuration for " + Configuration.LimitContinental + ". Contact System configuration");
-                    return;
-                }
-                parsedResponse = getPromiseResponse(caseResponse, "Case");
-                var incident = parseCase(parsedResponse);
-                if (incident == null) return;
-                if (incident.hasBookingReference) {
-                    getBooking(incident.bookingId).then(
-                        function (bookingResponse) {
-                            parsedResponse = getPromiseResponse(bookingResponse, "Booking");
-                            var booking = parseBooking(parsedResponse);
-                            if (booking == null) return;
-                            var value = booking.travelAmount;
-                            var duration = booking.duration;
-                            setContinentalCompensationAmountLimit(value, duration, limit);
-                        },
-                        function (error) {
-                            console.warn("Problem getting booking");
-                        }
-                    );
-                }
-                else {
-                    var value = incident.travelAmount;
-                    var duration = incident.durationOfStay;
-                    setContinentalCompensationAmountLimit(value, duration, limit);
-                }                
-            },
+            if (limit == null) {
+                Xrm.Utility.alertDialog("No value in configuration for " + Configuration.LimitContinental + ". Contact System configuration");
+                return;
+            }
+            parsedResponse = getPromiseResponse(caseResponse, "Case");
+            var incident = parseCase(parsedResponse);
+            if (incident == null) return;
+            if (incident.hasBookingReference) {
+                getBooking(incident.bookingId).then(
+                    function (bookingResponse) {
+                        parsedResponse = getPromiseResponse(bookingResponse, "Booking");
+                        var booking = parseBooking(parsedResponse);
+                        if (booking == null) return;
+                        var value = booking.travelAmount;
+                        var duration = booking.duration;
+                        setContinentalCompensationAmountLimit(value, duration, limit);
+                    },
+                    function (error) {
+                        console.warn("Problem getting booking");
+                    }
+                );
+            }
+            else {
+                var value = incident.travelAmount;
+                var duration = incident.durationOfStay;
+                setContinentalCompensationAmountLimit(value, duration, limit);
+            }
+        },
             function (error) {
                 console.warn("Problem getting configuration value");
             });
@@ -274,21 +294,45 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
     var setContinentalCompensationAmountLimit = function (bookingValue, duration, maxLimit) {
         if (duration === 0) {
             Xrm.Utility.alertDialog("Cannot calculate compensation amount limit for 0 days duration of holiday");
+            return;
         }
-        var limit = bookingValue / duration * maxLimit / 100;
-        Xrm.Page.getAttribute(Attributes.CompensationAmountLimit).setValue(limit);
+        var limit = bookingValue / duration * (maxLimit / 100);
+        var attr = Xrm.Page.getAttribute(Attributes.CompensationAmountLimit);
+        if (attr != null) {
+            attr.setValue(limit);
+        }
     }
 
     var setCompensationAmountLimitUk = function () {
         getConfigurationValue(Configuration.LimitUk).then(function (response) {
             var parsedResponse = getPromiseResponse(response, "Configuration");
             var limit = parseConfigurationValue(parsedResponse);
-                if (limit == null) {
-                    Xrm.Utility.alertDialog("No value in configuration for " + Configuration.LimitUk + "Contact System configurator");
-                    return;
-                }                
-                Xrm.Page.getAttribute(Attributes.CompensationAmountLimit).setValue(limit);
-            },
+            if (limit == null) {
+                Xrm.Utility.alertDialog("No value in configuration for " + Configuration.LimitUk + "Contact System configurator");
+                return;
+            }
+            var attr = Xrm.Page.getAttribute(Attributes.CompensationAmountLimit);
+            if (attr != null) {
+                attr.setValue(limit);
+            }
+        },
+            function (error) {
+                console.warn("Problem getting configuration value");
+            });
+    }
+    var setCompensationAmountLimitBasedOnIncidentApprovalLimit = function (configValue) {
+        getConfigurationValue(configValue).then(function (response) {
+            var parsedResponse = getPromiseResponse(response, "Configuration");
+            var limit = parseConfigurationValue(parsedResponse);
+            if (limit == null) {
+                Xrm.Utility.alertDialog("No value in configuration for " + configValue + "");
+                return;
+            }
+            var attr = Xrm.Page.getAttribute(Attributes.CompensationAmountLimit);
+            if (attr != null) {
+                attr.setValue(limit);
+            }
+        },
             function (error) {
                 console.warn("Problem getting configuration value");
             });
@@ -316,17 +360,17 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
         var value = country.getValue();
         if (value == null || value.length == 0 || value[0] == null) return;
         getSourceMarketIso2Code(formatEntityId(value[0].id)).then(function (response) {
-                var parsedResponse = getPromiseResponse(response);
-                var iso2Code = parseSourceMarketIso2Code(parsedResponse);
-                if (iso2Code != null) {
-                    var isUkMarket = iso2Code.toUpperCase() === SOURCE_MARKET_UK;
-                    if (isUkMarket) {
-                        setCompensationAmountLimitUk();
-                    } else {
-                        setCompensationAmountLimitContinental();
-                    }
+            var parsedResponse = getPromiseResponse(response);
+            var iso2Code = parseSourceMarketIso2Code(parsedResponse);
+            if (iso2Code != null) {
+                var isUkMarket = iso2Code.toUpperCase() === SOURCE_MARKET_UK;
+                if (isUkMarket) {
+                    setCompensationAmountLimitUk();
+                } else {
+                    setCompensationAmountLimitContinental();
                 }
-            },
+            }
+        },
             function (error) {
                 console.warn("Problem getting source market");
             });
@@ -343,8 +387,13 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
         addCaseLineToCalculation(promises, names, Attributes.CaseLine4);
         Promise.all(promises).then(
             function (response) {
+                if (response == null) {
+                    console.warn("Problem getting case lines");
+                    return;
+                }
                 var totalAmount = 0;
                 var totalAmountAttr = Xrm.Page.getAttribute(Attributes.Amount);
+                if (totalAmountAttr == null) return;
                 for (var i = 0; i < response.length; i++) {
                     var parsedResponse = getPromiseResponse(response[i]);
                     var caseLineOffer = parseCaseLine(parsedResponse);
@@ -383,11 +432,89 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
                 var caseType = parseCaseType(parsedResponse);
                 if (caseType != null) {
                     isComplainCaseType = caseType.toUpperCase() === CASE_TYPE_COMPLAIN;
+                    isIncidentCaseType = caseType.toUpperCase() === CASE_TYPE_INCIDENT;
+                     if (isIncidentCaseType == false) return;
+                         if (Xrm.Page.ui.getFormType() != FORM_MODE_CREATE) return;
+                             setCompensationAmountLimitBasedOnBookingSourceMarket();
                 }
             },
-            function (error) {
-                console.warn("Problem getting case");              
-            });
+             function (error) {
+                 console.warn("Problem getting case");
+             });
+    }
+
+    // to validate Bacs Account Number
+    var validateBacsAccountNumber = function () {
+
+        var bacsAccountNumber = Xrm.Page.data.entity.attributes.get("tc_bacsaccountnumber");
+        if (bacsAccountNumber == null) return;
+        var bacsAccountNumberValue = bacsAccountNumber.getValue();
+        if (bacsAccountNumberValue == null || bacsAccountNumberValue == "") return;
+
+        var regex = new RegExp("^([0-9]){8}$");
+        if (regex.test(bacsAccountNumberValue)) {
+            if (Xrm.Page.ui.getFormType() == FORM_MODE_CREATE) {
+                Xrm.Page.getControl("tc_bacsaccountnumber").clearNotification();
+            }
+            if (Xrm.Page.ui.getFormType() == FORM_MODE_UPDATE) {
+                Xrm.Page.ui.clearFormNotification("BacsAccNumNotification");
+            }
+        }
+        else {
+            if (Xrm.Page.ui.getFormType() == FORM_MODE_CREATE) {
+                Xrm.Page.getControl("tc_bacsaccountnumber").setNotification("The BACS Account number does not match the required format. The number should contain 8 digits and no spaces or other special characters i.e. 01234567.");
+            }
+            if (Xrm.Page.ui.getFormType() == FORM_MODE_UPDATE) {
+                Xrm.Page.getControl("tc_bacsaccountnumber").clearNotification();
+                Xrm.Page.ui.setFormNotification("The BACS Account number does not match the required format. The number should contain 8 digits and no spaces or other special characters i.e. 01234567.", "WARNING", "BacsAccNumNotification");
+            }
+        }
+    }
+
+    var setCompensationAmountLimitBasedOnBookingSourceMarket = function () {
+
+        var caseIdAttr = Xrm.Page.getAttribute(Attributes.Case);
+        if (caseIdAttr == null) return;
+        var value = caseIdAttr.getValue();
+        if (value == null | value.length == 0) return;
+        var caseId = formatEntityId(caseIdAttr.getValue()[0].id);
+
+        var sourceMarketReceivedPromise = getIncident(caseId).then(
+                        function (incidentResponse) {
+                            var incident = JSON.parse(incidentResponse.response);
+                            if (incident == null) return;
+                            if (incident.tc_sourcemarketid == null && incident.tc_BookingId == null) return;
+                            if (incident.tc_sourcemarketid != null)
+                                if (incident.tc_sourcemarketid.tc_iso2code != null && incident.tc_sourcemarketid.tc_iso2code != "")
+                                    if (incident.tc_sourcemarketid.tc_iso2code == SOURCE_MARKET_UK)
+                                        setCompensationAmountLimitBasedOnIncidentApprovalLimit(Configuration.IncidentApprovalLimitUk);
+                                    else
+                                        setCompensationAmountLimitBasedOnIncidentApprovalLimit(Configuration.IncidentApprovalLimitNonUk);
+
+
+                            if (incident.tc_BookingId == null) return;
+                            if (incident.tc_BookingId._tc_sourcemarketid_value != null && incident.tc_BookingId._tc_sourcemarketid_value != "") {
+                                var sourceMarketId = incident.tc_BookingId._tc_sourcemarketid_value;
+                                if (sourceMarketId) {
+                                    getSourceMarketIso2Code(formatEntityId(sourceMarketId)).then(
+                                      function (sourceMarketIso2CodeResponse) {
+                                          var sourceMarket = JSON.parse(sourceMarketIso2CodeResponse.response);
+                                          if (sourceMarket.tc_iso2code != null && sourceMarket.tc_iso2code != "");
+                                          if (sourceMarket.tc_iso2code == SOURCE_MARKET_UK)
+                                              setCompensationAmountLimitBasedOnIncidentApprovalLimit(Configuration.IncidentApprovalLimitUk);
+                                          else
+                                              setCompensationAmountLimitBasedOnIncidentApprovalLimit(Configuration.IncidentApprovalLimitNonUk);
+                                      },
+                    function (error) {
+                        console.warn("Problem getting booking");
+                    }
+                );
+                                }
+                            }
+                        }).catch(function (err) {
+                            throw new Error("Problem in setting Compensation AmountLimit based on Booking SourceMarket");
+                        });
+
     }
 
     // public
@@ -396,6 +523,10 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
             Tc.Crm.Scripts.Library.Compensation.SetDefaultsOnCreate();
             // init case type for compensation calculation
             initCaseType();
+
+        },
+        OnChangeBacsAccountNumber: function () {
+            validateBacsAccountNumber();
         },
         OnAccountSortCodeChanged: function (context) {
             if (context === null) {

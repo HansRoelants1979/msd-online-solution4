@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workflow WorkflowId="{be19b709-db46-e711-8126-e0071b659e11}" Name="Tc.Compensation.Cash.Set.Exch.Rate" Description="Click to add description">
+  <XamlFileName>/Workflows/TcCompensationCashSetExchRate-BE19B709-DB46-E711-8126-E0071B659E11.xaml</XamlFileName>
+  <Type>1</Type>
+  <Subprocess>0</Subprocess>
+  <Category>2</Category>
+  <Mode>1</Mode>
+  <Scope>4</Scope>
+  <OnDemand>0</OnDemand>
+  <TriggerOnCreate>0</TriggerOnCreate>
+  <TriggerOnDelete>0</TriggerOnDelete>
+  <AsyncAutodelete>0</AsyncAutodelete>
+  <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+  <StateCode>1</StateCode>
+  <StatusCode>2</StatusCode>
+  <RunAs>1</RunAs>
+  <IsTransacted>1</IsTransacted>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <BusinessProcessType>0</BusinessProcessType>
+  <PrimaryEntity>tc_compensation</PrimaryEntity>
+  <ProcessTriggers>
+    <ProcessTrigger processtriggerid="{9ec85396-db46-e711-8126-e0071b659e11}">
+      <controltype>1</controltype>
+      <formid>{9d0bc1e4-713f-42e6-a107-9e662730f9e7}</formid>
+      <scope>1</scope>
+      <controlname>tc_cashcompensationtype</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_compensation</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{9fc85396-db46-e711-8126-e0071b659e11}">
+      <formid>{9d0bc1e4-713f-42e6-a107-9e662730f9e7}</formid>
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_compensation</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{a0c85396-db46-e711-8126-e0071b659e11}">
+      <controltype>1</controltype>
+      <formid>{9d0bc1e4-713f-42e6-a107-9e662730f9e7}</formid>
+      <scope>1</scope>
+      <controlname>tc_exchangerate</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_compensation</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{a1c85396-db46-e711-8126-e0071b659e11}">
+      <formid>{9d0bc1e4-713f-42e6-a107-9e662730f9e7}</formid>
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_compensation</primaryentitytypecode>
+    </ProcessTrigger>
+  </ProcessTriggers>
+</Workflow>

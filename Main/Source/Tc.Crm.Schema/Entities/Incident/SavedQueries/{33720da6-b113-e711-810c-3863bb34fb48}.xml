@@ -24,7 +24,7 @@
   </layoutxml>
   <querytype>0</querytype>
   <fetchxml>
-    <fetch distinct="true" version="1.0" output-format="xml-platform" mapping="logical">
+    <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="true">
       <entity name="incident">
         <attribute name="title" />
         <attribute name="tc_casetypeid" />
@@ -37,18 +37,22 @@
         <attribute name="ticketnumber" />
         <order attribute="ownerid" descending="false" />
         <filter type="and">
-          <condition value="1" attribute="statecode" operator="eq" />
+          <condition attribute="statecode" operator="eq" value="1" />
         </filter>
         <link-entity name="slakpiinstance" from="slakpiinstanceid" to="tc_crresolvebykpiid" alias="aa">
           <filter type="and">
-            <condition value="4" attribute="status" operator="eq" />
+            <condition attribute="status" operator="eq" value="4" />
           </filter>
         </link-entity>
         <link-entity name="incidentresolution" from="incidentid" to="incidentid" alias="ab">
           <link-entity name="systemuser" from="systemuserid" to="owninguser" alias="ac">
-            <filter type="and">
-              <condition attribute="parentsystemuserid" operator="eq-userid" />
-            </filter>
+            <link-entity name="teammembership" from="systemuserid" to="systemuserid" visible="false" intersect="true">
+              <link-entity name="team" from="teamid" to="teamid" alias="ad">
+                <filter type="and">
+                  <condition attribute="administratorid" operator="eq-userid" />
+                </filter>
+              </link-entity>
+            </link-entity>
           </link-entity>
         </link-entity>
         <attribute name="incidentid" />

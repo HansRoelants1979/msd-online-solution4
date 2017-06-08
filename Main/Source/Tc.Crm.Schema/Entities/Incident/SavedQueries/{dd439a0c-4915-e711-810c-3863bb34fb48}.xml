@@ -22,7 +22,7 @@
   </layoutxml>
   <querytype>0</querytype>
   <fetchxml>
-    <fetch distinct="false" version="1.0" output-format="xml-platform" mapping="logical">
+    <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="true">
       <entity name="incident">
         <attribute name="title" />
         <attribute name="tc_casetypeid" />
@@ -36,9 +36,13 @@
         </filter>
         <link-entity name="systemuser" from="systemuserid" to="owninguser" alias="a_cf39b8fda77b421483a1af5e511c39ca">
           <attribute name="parentsystemuserid" />
-          <filter type="and">
-            <condition attribute="parentsystemuserid" operator="eq-userid" />
-          </filter>
+          <link-entity name="teammembership" from="systemuserid" to="systemuserid" visible="false" intersect="true">
+            <link-entity name="team" from="teamid" to="teamid" alias="aa">
+              <filter type="and">
+                <condition attribute="administratorid" operator="eq-userid" />
+              </filter>
+            </link-entity>
+          </link-entity>
         </link-entity>
         <attribute name="incidentid" />
       </entity>

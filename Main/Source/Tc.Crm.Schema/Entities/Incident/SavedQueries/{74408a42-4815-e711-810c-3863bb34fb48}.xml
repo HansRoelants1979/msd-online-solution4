@@ -23,7 +23,7 @@
   </layoutxml>
   <querytype>0</querytype>
   <fetchxml>
-    <fetch mapping="logical" output-format="xml-platform" version="1.0" distinct="false">
+    <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="true">
       <entity name="incident">
         <attribute name="title" />
         <attribute name="tc_casetypeid" />
@@ -34,17 +34,21 @@
         <attribute name="createdon" />
         <order descending="false" attribute="title" />
         <filter type="and">
-          <condition value="0" attribute="statecode" operator="eq" />
+          <condition attribute="statecode" operator="eq" value="0" />
         </filter>
-        <link-entity name="systemuser" alias="ab" to="owninguser" from="systemuserid">
-          <filter type="and">
-            <condition attribute="parentsystemuserid" operator="eq-userid" />
-          </filter>
+        <link-entity name="systemuser" from="systemuserid" to="owninguser" alias="ab">
+          <link-entity name="teammembership" from="systemuserid" to="systemuserid" visible="false" intersect="true">
+            <link-entity name="team" from="teamid" to="teamid" alias="aa">
+              <filter type="and">
+                <condition attribute="administratorid" operator="eq-userid" />
+              </filter>
+            </link-entity>
+          </link-entity>
         </link-entity>
-        <link-entity name="slakpiinstance" alias="a_956e253f274944aeb37dafbc211474a8" to="resolvebykpiid" from="slakpiinstanceid" link-type="outer" visible="false">
+        <link-entity name="slakpiinstance" from="slakpiinstanceid" to="resolvebykpiid" visible="false" link-type="outer" alias="a_956e253f274944aeb37dafbc211474a8">
           <attribute name="failuretime" />
         </link-entity>
-        <link-entity name="slakpiinstance" alias="ac" to="tc_crresolvebykpiid" from="slakpiinstanceid">
+        <link-entity name="slakpiinstance" from="slakpiinstanceid" to="tc_crresolvebykpiid" alias="ac">
           <filter type="and">
             <condition attribute="status" operator="in">
               <value>1</value>

@@ -24,6 +24,8 @@
         <cell name="createdon" width="150" />
         <cell name="resolveby" width="100" />
         <cell name="ownerid" width="150" />
+        <cell name="tc_sourcemarketid" width="100" />
+        <cell name="a_dbfa5a4915eae61181053863bb340dd8.tc_sourcemarketid" width="100" disableSorting="1" />
       </row>
     </grid>
   </layoutxml>
@@ -49,11 +51,13 @@
           <condition attribute="tc_casetypeid" operator="eq" uiname="Incident" uitype="tc_casetype" value="{D264C3F0-93E4-E611-8109-1458D041F8E8}" />
           <condition attribute="ownerid" operator="eq-userid" />
         </filter>
-        <link-entity name="tc_booking" from="tc_bookingid" to="tc_bookingid" visible="false" link-type="outer" alias="a_dbfa5a4915eae61181053863bb340dd8">
-          <attribute name="tc_name" />
-        </link-entity>
         <link-entity name="contact" from="contactid" to="primarycontactid" visible="false" link-type="outer" alias="a_03424782c7d54a34bbb5b2df729e0302">
           <attribute name="tc_language" />
+        </link-entity>
+        <attribute name="tc_sourcemarketid" />
+        <link-entity name="tc_booking" from="tc_bookingid" to="tc_bookingid" visible="false" link-type="outer" alias="a_dbfa5a4915eae61181053863bb340dd8">
+          <attribute name="tc_name" />
+          <attribute name="tc_sourcemarketid" />
         </link-entity>
         <attribute name="incidentid" />
       </entity>

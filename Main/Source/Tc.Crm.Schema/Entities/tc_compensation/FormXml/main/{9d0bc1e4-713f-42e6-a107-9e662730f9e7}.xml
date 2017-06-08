@@ -104,7 +104,7 @@
                   </row>
                 </rows>
               </section>
-              <section id="{1343807c-c916-9128-74b8-27a51d44dd97}" name="tab_4_section_1" IsUserDefined="0" locklevel="0" showlabel="true" columns="11" showbar="true" labelwidth="250" celllabelposition="Left" celllabelalignment="Left" layout="varwidth">
+              <section id="{1343807c-c916-9128-74b8-27a51d44dd97}" name="tab_4_section_1" IsUserDefined="0" locklevel="0" showlabel="true" columns="11" showbar="true" labelwidth="155" celllabelposition="Top" celllabelalignment="Left" layout="varwidth">
                 <labels>
                   <label description="OVERALL COMPENSATION OFFER VALUES" languagecode="1033" />
                 </labels>
@@ -153,12 +153,13 @@
                       <labels>
                         <label description="Send Compensation Offer" languagecode="1033" />
                       </labels>
-                      <control disabled="false" id="tc_sendcompensationoffer" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_sendcompensationoffer" uniqueid="{1c69d278-99d3-92c6-7b3b-859a5766165e}" />
+                      <control disabled="false" id="tc_sendcompensationoffer" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_sendcompensationoffer" uniqueid="{1c69d278-99d3-92c6-7b3b-859a5766165e}" />
                     </cell>
-                    <cell id="{b95e4771-3066-9b81-9054-35a1c11ceaac}" showlabel="false">
+                    <cell id="{934892b2-be6d-c323-be1c-726274128873}" showlabel="true" locklevel="0" rowspan="5" visible="false">
                       <labels>
-                        <label description="" languagecode="1033" />
+                        <label description="Offer Rejection Notes" languagecode="1033" />
                       </labels>
+                      <control id="tc_offerrejectionnotes" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="tc_offerrejectionnotes" disabled="false" uniqueid="{aa10cd11-8613-0b5e-dec7-aa333bbc1856}" />
                     </cell>
                   </row>
                   <row>
@@ -168,11 +169,6 @@
                       </labels>
                       <control disabled="false" id="tc_sendforapproval" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="tc_sendforapproval" uniqueid="{bb7ab142-8806-4972-1c50-eca9ce0b66ca}" />
                     </cell>
-                    <cell id="{d2a19609-9a88-9476-19c6-aa9c771e5a83}" showlabel="false">
-                      <labels>
-                        <label description="" languagecode="1033" />
-                      </labels>
-                    </cell>
                   </row>
                   <row>
                     <cell id="{e5006420-6763-8850-9d38-7e47c8cb211c}" locklevel="0" showlabel="true" visible="false">
@@ -180,11 +176,6 @@
                         <label description="Approval Status" languagecode="1033" />
                       </labels>
                       <control disabled="true" id="tc_approvalstatus" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_approvalstatus" uniqueid="{6e4094c5-30b3-0e09-c43d-3059bce243e5}" />
-                    </cell>
-                    <cell id="{86a02684-97a0-1b01-76d0-3ae493e259b1}" showlabel="false">
-                      <labels>
-                        <label description="" languagecode="1033" />
-                      </labels>
                     </cell>
                   </row>
                   <row>
@@ -194,11 +185,6 @@
                       </labels>
                       <control disabled="false" id="tc_offerstatus" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_offerstatus" uniqueid="{0b99e955-67b1-b491-5b47-e48830a01548}" />
                     </cell>
-                    <cell id="{acce8895-a0c6-c8ec-7044-8083aaa77ccc}" showlabel="false">
-                      <labels>
-                        <label description="" languagecode="1033" />
-                      </labels>
-                    </cell>
                   </row>
                   <row>
                     <cell id="{a27a0555-12e1-107a-7bec-5d88dd494ebe}" locklevel="0" showlabel="true" visible="false" colspan="1">
@@ -206,11 +192,6 @@
                         <label description="Acknowledgement Method" languagecode="1033" />
                       </labels>
                       <control disabled="false" id="tc_customerofferacknowledgement" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_customerofferacknowledgement" uniqueid="{7cb3e726-ba6a-bc63-e86d-1bda1b11e995}" />
-                    </cell>
-                    <cell id="{ea464b17-a814-816d-a853-331acb7a1549}" showlabel="false">
-                      <labels>
-                        <label description="" languagecode="1033" />
-                      </labels>
                     </cell>
                   </row>
                 </rows>
@@ -256,11 +237,11 @@
                       </control>
                     </cell>
                   </row>
-                  <row />
-                  <row />
-                  <row />
-                  <row />
-                  <row />
+                  <row></row>
+                  <row></row>
+                  <row></row>
+                  <row></row>
+                  <row></row>
                 </rows>
               </section>
             </sections>
@@ -536,7 +517,7 @@
                       <labels>
                         <label description="Account Number" languagecode="1033" />
                       </labels>
-                      <control id="tc_bacsaccountnumber" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_bacsaccountnumber" uniqueid="{a8d7bb98-2390-b1ed-a3b9-3b77e3cd1e7e}" />
+                      <control id="tc_bacsaccountnumber" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_bacsaccountnumber" uniqueid="{a8d7bb98-2390-b1ed-a3b9-3b77e3cd1e7e}" disabled="false" />
                     </cell>
                   </row>
                   <row>
@@ -721,11 +702,10 @@
                       </labels>
                       <control id="tc_localnonfinancialamount" classid="{C3EFE0C3-0EC6-42be-8349-CBD9079DFD8E}" datafieldname="tc_localnonfinancialamount" disabled="true" uniqueid="{46b66649-9994-1399-1c53-baac8c1485ce}" />
                     </cell>
-                    <cell id="{6b651946-90d9-3b72-a4db-648726c4cced}" locklevel="0" showlabel="true" visible="false">
+                    <cell id="{77963b10-8b99-c12d-7048-392358e71bdb}" showlabel="false">
                       <labels>
-                        <label description="Compensation Email Text" languagecode="1033" />
+                        <label description="" languagecode="1033" />
                       </labels>
-                      <control id="tc_compensationemailtext" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_compensationemailtext" uniqueid="{43a772a5-d998-6044-37d6-53b263918e53}" />
                     </cell>
                   </row>
                   <row>
@@ -744,7 +724,7 @@
                         </parameters>
                       </control>
                     </cell>
-                    <cell id="{77963b10-8b99-c12d-7048-392358e71bdb}" showlabel="false">
+                    <cell id="{763d9363-7124-ead4-26d9-9e4353d76c21}" showlabel="false">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
@@ -757,7 +737,7 @@
                       </labels>
                       <control disabled="true" id="tc_nonfinancialcompensationsubtype" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_nonfinancialcompensationsubtype" uniqueid="{c6ba66da-9eda-1762-a75e-c709193d912a}" />
                     </cell>
-                    <cell id="{763d9363-7124-ead4-26d9-9e4353d76c21}" showlabel="false">
+                    <cell id="{a6425159-772c-64a0-9111-bd11e8ec77cb}" showlabel="false">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
@@ -770,7 +750,7 @@
                       </labels>
                       <control id="tc_nonfinancialcompensationsubtypeother" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_nonfinancialcompensationsubtypeother" disabled="true" uniqueid="{602b9cc1-8b6d-37ec-b3b3-3d2c0971dc0e}" />
                     </cell>
-                    <cell id="{a6425159-772c-64a0-9111-bd11e8ec77cb}" showlabel="false">
+                    <cell id="{eea18437-5774-e688-9928-2ceb9ced57ab}" showlabel="false">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
@@ -840,15 +820,15 @@
                       <control disabled="false" id="tc_compensationsignature" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_compensationsignature" uniqueid="{db20e110-47d9-e3e7-8aea-a73c64eab101}" />
                     </cell>
                   </row>
-                  <row />
-                  <row />
-                  <row />
-                  <row />
-                  <row />
-                  <row />
-                  <row />
-                  <row />
-                  <row />
+                  <row></row>
+                  <row></row>
+                  <row></row>
+                  <row></row>
+                  <row></row>
+                  <row></row>
+                  <row></row>
+                  <row></row>
+                  <row></row>
                   <row>
                     <cell id="{3a08619a-4651-e698-7764-ae7293bb23a9}" showlabel="true" colspan="1" auto="false" rowspan="6">
                       <labels>
@@ -872,11 +852,11 @@
                       </events>
                     </cell>
                   </row>
-                  <row />
-                  <row />
-                  <row />
-                  <row />
-                  <row />
+                  <row></row>
+                  <row></row>
+                  <row></row>
+                  <row></row>
+                  <row></row>
                   <row>
                     <cell id="{8eb47206-ed4a-15e0-77b0-7c52ed49e7cd}" showlabel="false" userspacer="true">
                       <labels>
@@ -935,11 +915,11 @@
                       </control>
                     </cell>
                   </row>
-                  <row />
-                  <row />
-                  <row />
-                  <row />
-                  <row />
+                  <row></row>
+                  <row></row>
+                  <row></row>
+                  <row></row>
+                  <row></row>
                 </rows>
               </section>
             </sections>
@@ -978,11 +958,10 @@
     <header id="{a92aba85-7268-438e-8148-cff6ccc89bf1}" columns="1111" labelwidth="115" celllabelposition="Left" celllabelalignment="Left">
       <rows>
         <row>
-          <cell id="{01a71ea8-b4ab-6233-7204-52858c299dba}" locklevel="0" showlabel="true">
+          <cell id="{d8925829-3860-310b-1a53-a9d55876372d}" showlabel="false">
             <labels>
-              <label description="Amount" languagecode="1033" />
+              <label description="" languagecode="1033" />
             </labels>
-            <control id="header_tc_amount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_amount" />
           </cell>
           <cell id="{bb8a351c-0894-936a-b6de-ceb763053d9b}" locklevel="0" showlabel="true">
             <labels>
@@ -1121,13 +1100,13 @@
         <customControl formFactor="0" name="MscrmControls.InputMask.InputMaskControl">
           <parameters>
             <value>tc_bacsaccountnumber</value>
-            <mask type="SingleLine.Text" static="true">99999999</mask>
+            <mask static="true" type="SingleLine.Text">99999999</mask>
           </parameters>
         </customControl>
         <customControl formFactor="1" name="MscrmControls.InputMask.InputMaskControl">
           <parameters>
             <value>tc_bacsaccountnumber</value>
-            <mask type="SingleLine.Text" static="true">99999999</mask>
+            <mask static="true" type="SingleLine.Text">99999999</mask>
           </parameters>
         </customControl>
       </controlDescription>
@@ -1181,23 +1160,6 @@
         <customControl formFactor="1" name="MscrmControls.OptionSet.OptionSetControl">
           <parameters>
             <value>tc_bacsaccounttype</value>
-          </parameters>
-        </customControl>
-      </controlDescription>
-      <controlDescription forControl="{54a73e68-3188-8559-88d7-d5b319c76382}">
-        <customControl id="{B0C6723A-8503-4fd7-BB28-C8A06AC933C2}" formFactor="0">
-          <parameters>
-            <datafieldname>tc_vouchercompensationtype</datafieldname>
-          </parameters>
-        </customControl>
-        <customControl id="{B0C6723A-8503-4fd7-BB28-C8A06AC933C2}" formFactor="2">
-          <parameters>
-            <datafieldname>tc_vouchercompensationtype</datafieldname>
-          </parameters>
-        </customControl>
-        <customControl formFactor="1" name="MscrmControls.FlipSwitch.FlipSwitchControl">
-          <parameters>
-            <value>tc_vouchercompensationtype</value>
           </parameters>
         </customControl>
       </controlDescription>
@@ -1320,6 +1282,40 @@
           </parameters>
         </customControl>
       </controlDescription>
+      <controlDescription forControl="{1c69d278-99d3-92c6-7b3b-859a5766165e}">
+        <customControl id="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" formFactor="0">
+          <parameters>
+            <datafieldname>tc_sendcompensationoffer</datafieldname>
+          </parameters>
+        </customControl>
+        <customControl id="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" formFactor="2">
+          <parameters>
+            <datafieldname>tc_sendcompensationoffer</datafieldname>
+          </parameters>
+        </customControl>
+        <customControl formFactor="1" name="MscrmControls.OptionSet.OptionSetControl">
+          <parameters>
+            <value>tc_sendcompensationoffer</value>
+          </parameters>
+        </customControl>
+      </controlDescription>
+      <controlDescription forControl="{54a73e68-3188-8559-88d7-d5b319c76382}">
+        <customControl id="{B0C6723A-8503-4fd7-BB28-C8A06AC933C2}" formFactor="0">
+          <parameters>
+            <datafieldname>tc_vouchercompensationtype</datafieldname>
+          </parameters>
+        </customControl>
+        <customControl id="{B0C6723A-8503-4fd7-BB28-C8A06AC933C2}" formFactor="2">
+          <parameters>
+            <datafieldname>tc_vouchercompensationtype</datafieldname>
+          </parameters>
+        </customControl>
+        <customControl formFactor="1" name="MscrmControls.FlipSwitch.FlipSwitchControl">
+          <parameters>
+            <value>tc_vouchercompensationtype</value>
+          </parameters>
+        </customControl>
+      </controlDescription>
     </controlDescriptions>
     <formLibraries>
       <Library name="tc_es6promise.js" libraryUniqueId="{dc67601d-97b9-8045-56b7-ea92662b9ad3}" />
@@ -1356,6 +1352,11 @@
       <event name="onchange" application="false" active="false" attribute="tc_compensation4id">
         <Handlers>
           <Handler functionName="Tc.Crm.Scripts.Events.Compensation.OnCompensationCalculate" libraryName="tc_Tc.Crm.Scripts.Events.Compensation.js" handlerUniqueId="{045e5789-2146-4c1b-3701-009a14458b20}" enabled="true" parameters="" passExecutionContext="false" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_bacsaccountnumber">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Compensation.OnChangeBacsAccountNumber" libraryName="tc_Tc.Crm.Scripts.Events.Compensation.js" handlerUniqueId="{420151c5-396c-2b92-1ad8-ca1be7358e52}" enabled="true" parameters="" passExecutionContext="false" />
         </Handlers>
       </event>
     </events>

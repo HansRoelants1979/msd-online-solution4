@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workflow WorkflowId="{dd39afb4-c649-e711-8107-e0071b66a0a1}" Name="Tc.Compensation.Voucher.Specific.Control" Description="Click to add description">
+  <XamlFileName>/Workflows/TcCompensationVoucherSpecificControl-DD39AFB4-C649-E711-8107-E0071B66A0A1.xaml</XamlFileName>
+  <Type>1</Type>
+  <Subprocess>0</Subprocess>
+  <Category>2</Category>
+  <Mode>1</Mode>
+  <Scope>4</Scope>
+  <OnDemand>0</OnDemand>
+  <TriggerOnCreate>0</TriggerOnCreate>
+  <TriggerOnDelete>0</TriggerOnDelete>
+  <AsyncAutodelete>0</AsyncAutodelete>
+  <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+  <StateCode>1</StateCode>
+  <StatusCode>2</StatusCode>
+  <RunAs>1</RunAs>
+  <IsTransacted>1</IsTransacted>
+  <IntroducedVersion>1.0.0.113</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <BusinessProcessType>0</BusinessProcessType>
+  <PrimaryEntity>tc_compensation</PrimaryEntity>
+  <ProcessTriggers>
+    <ProcessTrigger processtriggerid="{f4aa4c49-cd49-e711-8107-e0071b66a0a1}">
+      <controltype>1</controltype>
+      <scope>1</scope>
+      <controlname>tc_vouchercompensationtype</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_compensation</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{f5aa4c49-cd49-e711-8107-e0071b66a0a1}">
+      <scope>1</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>tc_compensation</primaryentitytypecode>
+    </ProcessTrigger>
+  </ProcessTriggers>
+</Workflow>

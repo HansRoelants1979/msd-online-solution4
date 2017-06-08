@@ -116,7 +116,32 @@
                         <label description="Devise" languagecode="1036" />
                         <label description="Währung" languagecode="1031" />
                       </labels>
-                      <control disabled="false" id="transactioncurrencyid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="transactioncurrencyid" />
+                      <control disabled="true" id="transactioncurrencyid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="transactioncurrencyid" uniqueid="{5d9e328e-9377-96b8-eb70-9788621b7338}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{CD5625B0-DDA8-4EE2-B13F-B9331E027C8A}</DefaultViewId>
+                          <AllowFilterOff>false</AllowFilterOff>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{5c46ec4e-6e03-1098-eea0-e243c1b05c97}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Total Offer Amount" languagecode="1033" />
+                      </labels>
+                      <control id="tc_amount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_amount" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{b933c31a-d70a-70b3-1a92-b49a9526c74a}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Send Compensation Offer" languagecode="1033" />
+                      </labels>
+                      <control id="tc_sendcompensationoffer" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_sendcompensationoffer" disabled="false" />
                     </cell>
                   </row>
                 </rows>
@@ -130,6 +155,22 @@
                   <label description="section" languagecode="1033" />
                 </labels>
                 <rows>
+                  <row>
+                    <cell id="{c2d5e12a-6057-20b4-e262-ea575894e9c3}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Offer Status" languagecode="1033" />
+                      </labels>
+                      <control id="tc_offerstatus" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_offerstatus" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{e427328e-e0c0-1151-c72a-37dc502d861e}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Customer Offer Acknowledgement" languagecode="1033" />
+                      </labels>
+                      <control id="tc_customerofferacknowledgement" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_customerofferacknowledgement" disabled="false" />
+                    </cell>
+                  </row>
                   <row>
                     <cell id="{24b0b07d-4aa1-a97d-3c4d-e86c4edda0a4}" showlabel="false" userspacer="true">
                       <labels>
