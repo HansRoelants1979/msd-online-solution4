@@ -294,23 +294,26 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 return;
             }
 
-            Entity entityBookingRole = new Entity(EntityName.CustomerBookingRole);
-            entityBookingRole[Attributes.CustomerBookingRole.BookingId] = new EntityReference(EntityName.Booking, new Guid(payloadBooking.BookingId));
-
-            if (payloadBooking.BookingInfo.Customer.CustomerGeneral.CustomerType == CustomerType.Company)
+            if (payloadBooking.Response.Created || payloadBooking.DeleteBookingRole)
             {
-                entityBookingRole[Attributes.CustomerBookingRole.Customer] = new EntityReference(EntityName.Account, new Guid(payloadBooking.CustomerId));
+                Entity entityBookingRole = new Entity(EntityName.CustomerBookingRole);
+                entityBookingRole[Attributes.CustomerBookingRole.BookingId] = new EntityReference(EntityName.Booking, new Guid(payloadBooking.BookingId));
+
+                if (payloadBooking.BookingInfo.Customer.CustomerGeneral.CustomerType == CustomerType.Company)
+                {
+                    entityBookingRole[Attributes.CustomerBookingRole.Customer] = new EntityReference(EntityName.Account, new Guid(payloadBooking.CustomerId));
+                }
+                else
+                {
+                    entityBookingRole[Attributes.CustomerBookingRole.Customer] = new EntityReference(EntityName.Contact, new Guid(payloadBooking.CustomerId));
+
+                }
+
+                EntityCollection entityCollection = new EntityCollection();
+                entityCollection.Entities.Add(entityBookingRole);
+
+                CommonXrm.BulkCreate(entityCollection, crmService);
             }
-            else
-            {
-                entityBookingRole[Attributes.CustomerBookingRole.Customer] = new EntityReference(EntityName.Contact, new Guid(payloadBooking.CustomerId));
-
-            }
-
-            EntityCollection entityCollection = new EntityCollection();
-            entityCollection.Entities.Add(entityBookingRole);
-
-            CommonXrm.BulkCreate(entityCollection, crmService);
             trace.Trace("Booking Roles information - end");
         }
 
