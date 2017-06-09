@@ -41,74 +41,59 @@ Tc.Crm.Scripts.Events.Case = (function () {
         preFilterLocationOfficeLookup();        
     }
     var GetTheSourceMarketCurrency = function () {
-
-        
+               
+        var sourceMarketId;
+        var currencyId;
         console.log("Get The Source Market Currency - Start");
-        if (Xrm.Page.getControl(CASE_TYPE_CONTROL_BOOKINGREF).getAttribute().getValue() == true) {
+        if (Xrm.Page.getAttribute(CASE_TYPE_CONTROL_BOOKINGREF).getValue() == true) {
 
+            if (Xrm.Page.getAttribute(CASE_BOOKING_NUMBER).getValue() != null) {
 
-            if (Xrm.Page.getControl(CASE_BOOKING_NUMBER).getAttribute().getValue() != null) {
-                var sourceMarketId;
-                var Currencyid;
-                var BookingId = Xrm.Page.getControl(CASE_BOOKING_NUMBER).getAttribute().getValue()[0].id;
+                var BookingId = Xrm.Page.getAttribute(CASE_BOOKING_NUMBER).getValue()[0].id;
                 if (BookingId != null) {
-
                     BookingId = BookingId.replace("{", "").replace("}", "");
-                    
-
                     var SourceMarketReceivedPromise = getBooking(BookingId).then(
                         function (bookingResponse) {
-                            var booking = JSON.parse(bookingResponse.response);
 
-                            sourceMarketId = booking._tc_sourcemarketid_value;
-                            if (sourceMarketId != null) {
-                                return getSourceMarketCurrency(sourceMarketId);
+                            var booking = JSON.parse(bookingResponse.response);
+                            if (booking == null || booking == "" || booking == "undefined") return;
+                            if (booking.tc_SourceMarketId == null || booking.tc_SourceMarketId == "" || booking.tc_SourceMarketId == "undefined") return;
+                            if (booking.tc_SourceMarketId._transactioncurrencyid_value == null || booking.tc_SourceMarketId._transactioncurrencyid_value == "" || booking.tc_SourceMarketId._transactioncurrencyid_value == "undefined") return;
+                            currencyId = booking.tc_SourceMarketId._transactioncurrencyid_value;
+                            if (currencyId != null) {
+                                return getSourceMarketCurrencyname(currencyId);
                             }
 
                             else {
-                                Xrm.Utility.alertDialog("Source Market is not associated with Booking");
-                                throw new Error("Source Market is not associated with Booking");
+
+                                Xrm.Utility.alertDialog("Currency is not associated with Source Market");
+
                             }
 
                         }).catch(function (err) {
-                            throw new Error("Source Market is not associated with Booking");                    
+                            throw new Error("Problem in retrieving the Source Market Currency");
                         });
 
-                    var SourceMarketCurrency = SourceMarketReceivedPromise.then(
-                   function (sourceMarketResponse) {
-                       var sourceMarket = JSON.parse(sourceMarketResponse.response);
 
-                       Currencyid = sourceMarket._transactioncurrencyid_value;
+                    SourceMarketReceivedPromise.then(
+                    function (SourceMarketReceivedPromiseResponse) {
+                        if (SourceMarketReceivedPromiseResponse == null || SourceMarketReceivedPromiseResponse == "" || SourceMarketReceivedPromiseResponse == "undefined") return;
+                        var Currency = JSON.parse(SourceMarketReceivedPromiseResponse.response);
+                        if (Currency == null || Currency == "" || Currency == "undefined") return;
+                        if (Currency.currencyname == null || Currency.currencyname == "" || Currency.currencyname == "undefined") return;
+                        if (currencyId != null) {
+                            var currencyReference = [];
+                            currencyReference[0] = {};
+                            currencyReference[0].id = currencyId;
+                            currencyReference[0].entityType = "transactioncurrency";
+                            currencyReference[0].name = Currency.currencyname;
 
-                       if (Currencyid != null) {
-                           return getSourceMarketCurrencyname(Currencyid);
-                       }
-                       else {
-                           Xrm.Utility.alertDialog("Currency is not associated with SourceMarket");
-                           throw new Error("Currency is not associated with SourceMarket");
-                       }                      
+                            Xrm.Page.getAttribute(CASE_SOURCE_MARKET_CURRENCY).setValue(currencyReference);
+                        }
 
-                   }).catch(function (err) {
-                       throw new Error("Source Market is not associated with Booking");
-                   });
-
-                    SourceMarketCurrency.then(
-                   function (sourceMarketCurrencyNameResponse) {
-                       var Currency = JSON.parse(sourceMarketCurrencyNameResponse.response);
-
-                       if (Currency != null && Currency.currencyname != null && Currencyid != null) {
-                           var currencyReference = [];
-                           currencyReference[0] = {};
-                           currencyReference[0].id = Currencyid;
-                           currencyReference[0].entityType = "transactioncurrency"; //YTODO: test
-                           currencyReference[0].name = Currency.currencyname;
-
-                           Xrm.Page.getControl(CASE_SOURCE_MARKET_CURRENCY).getAttribute().setValue(currencyReference);
-                       }
-
-                   }).catch(function (err) {
-                       throw new Error("Currency  is not associated with Source Market");
-                   });
+                    }).catch(function (err) {
+                        throw new Error("Problem in retrieving the Source Market Currency");
+                    });
 
                 }
 
@@ -116,55 +101,36 @@ Tc.Crm.Scripts.Events.Case = (function () {
 
         }
         else {
-            if (Xrm.Page.getControl(CASE_SOURCE_MARKET_ID).getAttribute().getValue() != null) {
-                var Currencyid;
-                var SourceMarketId = Xrm.Page.getControl(CASE_SOURCE_MARKET_ID).getAttribute().getValue()[0].id;
-                if (SourceMarketId != null) {
+            if (Xrm.Page.getAttribute(CASE_SOURCE_MARKET_ID).getValue() != null) {
 
-                    SourceMarketId = SourceMarketId.replace("{", "").replace("}", "");
-
-                    var SourceMarketCurrency = getSourceMarketCurrency(SourceMarketId).then(
-                        function (sourceMarketResponse) {
-                            var sourceMarket = JSON.parse(sourceMarketResponse.response);
-
-                            Currencyid = sourceMarket._transactioncurrencyid_value;
-
-                            if (Currencyid != null) {
-                                return getSourceMarketCurrencyname(Currencyid);
-                            }
-
-                            else {
-                                Xrm.Utility.alertDialog("Currency is not associated with SourceMarket");
-                                throw new Error("Currency is not associated with SourceMarket");
-                            }
-                            
-                        }).catch(function (err) {
-
-                            throw new Error("Currency  is not associated with Source Market");                            
-                        });
-
-
-                    SourceMarketCurrency.then(
-                       function (sourceMarketCurrencyNameResponse) {
-                           var Currency = JSON.parse(sourceMarketCurrencyNameResponse.response);
-
-                           if (Currency != null && Currency.currencyname != null && Currencyid != null) {
+                sourceMarketId = Xrm.Page.getAttribute(CASE_SOURCE_MARKET_ID).getValue()[0].id;
+                if (sourceMarketId != null) {
+                    sourceMarketId = sourceMarketId.replace("{", "").replace("}", "");
+                    var SourceMarketCurrency = getSourceMarketCurrency(sourceMarketId).then(
+                       function (sourceMarketResponse) {
+                           if (sourceMarketResponse == null || sourceMarketResponse == "" || sourceMarketResponse == "undefined") return;
+                           var sourceMarket = JSON.parse(sourceMarketResponse.response);
+                           if (sourceMarket == null || sourceMarket == "" || sourceMarket == "undefined") return;
+                           if (sourceMarket._transactioncurrencyid_value == null || sourceMarket._transactioncurrencyid_value == "" || sourceMarket._transactioncurrencyid_value == "undefined") return;
+                           currencyId = sourceMarket._transactioncurrencyid_value;
+                           var currencyName = sourceMarket.transactioncurrencyid.currencyname;
+                           if (currencyId != null) {
                                var currencyReference = [];
                                currencyReference[0] = {};
-                               currencyReference[0].id = Currencyid;
-                               currencyReference[0].entityType = "transactioncurrency"; //YTODO: test
-                               currencyReference[0].name = Currency.currencyname;
+                               currencyReference[0].id = currencyId;
+                               currencyReference[0].entityType = "transactioncurrency";
+                               currencyReference[0].name = currencyName;
 
-                               Xrm.Page.getControl(CASE_SOURCE_MARKET_CURRENCY).getAttribute().setValue(currencyReference);
+                               Xrm.Page.getAttribute(CASE_SOURCE_MARKET_CURRENCY).setValue(currencyReference);
+
                            }
 
+                           else {
+                               Xrm.Utility.alertDialog("Currency is not associated with SourceMarket");
+                           }
 
                        }).catch(function (err) {
-
-                           throw new Error("Currency  is not associated with Source Market");
-
-                           //Exception Handling functionality, we can get exception message by using [err.message]
-
+                           throw new Error("Problem in retrieving the Source Market Currency");
                        });
 
                 }
@@ -176,14 +142,14 @@ Tc.Crm.Scripts.Events.Case = (function () {
     }
     function getBooking(bookingId) {
 
-        var query = "?$select=_tc_sourcemarketid_value";
+        var query = "?$select=_tc_sourcemarketid_value&$expand=tc_SourceMarketId($select=_transactioncurrencyid_value)";
         var entityName = "tc_bookings";
         var id = bookingId;
         return Tc.Crm.Scripts.Common.GetById(entityName, id, query);
 
     }
     function getSourceMarketCurrency(sourcMarketId) {
-        var query = "?$select=_transactioncurrencyid_value";        
+        var query = "?$select=_transactioncurrencyid_value&$expand=transactioncurrencyid($select=currencyname)";
         var entityName = "tc_countries";
         return Tc.Crm.Scripts.Common.GetById(entityName, sourcMarketId, query);
     }
@@ -281,7 +247,7 @@ Tc.Crm.Scripts.Events.Case = (function () {
     function getCustomerTelephoneNum(customerId,entityType) {
 
         var query = "?$select=telephone1";
-        var entityName = entityType;
+        var entityName = entityType + "s";
         var id = customerId;
         return Tc.Crm.Scripts.Common.GetById(entityName, id, query);
 
