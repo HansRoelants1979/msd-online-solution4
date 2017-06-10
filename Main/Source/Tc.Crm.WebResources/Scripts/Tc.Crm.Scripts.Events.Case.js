@@ -23,7 +23,6 @@ Tc.Crm.Scripts.Events.Case = (function () {
     "use strict";
 
     var CLIENT_STATE_OFFLINE = "Offline";
-
     var CASE_TYPE_CONTROL_BOOKINGREF = "tc_bookingreference";
     var CASE_BOOKING_NUMBER = "tc_bookingid";
     var CASE_SOURCE_MARKET_ID = "tc_sourcemarketid";
@@ -33,6 +32,7 @@ Tc.Crm.Scripts.Events.Case = (function () {
     var CASE_SOURCE_MARKET_ENTITY_NAME = "tc_country"
     var FORM_MODE_CREATE = 1;
     var FORM_MODE_UPDATE = 2;
+    
 
     function OnLoad() {
         Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("tc_alternativephone");
@@ -249,8 +249,12 @@ Tc.Crm.Scripts.Events.Case = (function () {
         var query = "?$select=telephone1";
         var entityName = entityType + "s";
         var id = customerId;
-        return Tc.Crm.Scripts.Common.GetById(entityName, id, query);
-
+        if (IsOfflineMode()) {
+            return Xrm.Mobile.offline.retrieveRecord(entityName, id, query);
+        }
+        else {
+            return Tc.Crm.Scripts.Common.GetById(entityName, id, query);
+        }
     }
     var onChangeTelephone1 = function () {
 
@@ -349,6 +353,9 @@ Tc.Crm.Scripts.Events.Case = (function () {
 
     var formatEntityId = function (id) {
         return id !== null ? id.replace("{", "").replace("}", "") : null;
+    }
+    function IsOfflineMode() {
+        return Xrm.Page.context.client.getClientState() === CLIENT_STATE_OFFLINE
     }
 
     // public methods
