@@ -38,73 +38,53 @@ namespace Tc.Crm.CustomWorkflowSteps.ExecutingUserInDepartment.Service
 
             QueryExpression query = new QueryExpression();
 
-            query.EntityName = "role"; //role entity name
-
+            query.EntityName = EntityName.Role; //role entity name
             ColumnSet cols = new ColumnSet();
-
-            cols.AddColumn("name"); //We only need role name
-
+            cols.AddColumn(Attributes.Role.Name); //We only need role name
             query.ColumnSet = cols;
 
-            ConditionExpression Condition1 = new ConditionExpression();
+            ConditionExpression systemUserIdCondition = new ConditionExpression();
+            systemUserIdCondition.AttributeName = Attributes.Role.SystemUserId;
+            systemUserIdCondition.Operator = ConditionOperator.Equal;
+            systemUserIdCondition.Values.Add(userId);
 
-            Condition1.AttributeName = "systemuserid";
-
-            Condition1.Operator = ConditionOperator.Equal;
-
-            Condition1.Values.Add(userId);
-
-            ConditionExpression Condition2 = new ConditionExpression();
-
-            Condition2.AttributeName = "name";
-
-            Condition2.Operator = ConditionOperator.Equal;
-
-            Condition2.Values.Add(securityRoleName);
+            ConditionExpression securityRoleNameCondition = new ConditionExpression();
+            securityRoleNameCondition.AttributeName = Attributes.Role.Name;
+            securityRoleNameCondition.Operator = ConditionOperator.Equal;
+            securityRoleNameCondition.Values.Add(securityRoleName);
 
             //system roles
 
             LinkEntity linkRole = new LinkEntity();
-
-            linkRole.LinkFromAttributeName = "roleid";
-
-            linkRole.LinkFromEntityName = "role"; //FROM
-
-            linkRole.LinkToEntityName = "systemuserroles";
-
-            linkRole.LinkToAttributeName = "roleid";
+            linkRole.LinkFromAttributeName = Attributes.Role.RoleId;
+            linkRole.LinkFromEntityName = EntityName.Role; //FROM
+            linkRole.LinkToEntityName = EntityName.SystemUserRoles;
+            linkRole.LinkToAttributeName = Attributes.SystemUserRoles.RoleId;
 
             //system users
 
             LinkEntity linkSystemusers = new LinkEntity();
-
-            linkSystemusers.LinkFromEntityName = "systemuserroles";
-
-            linkSystemusers.LinkFromAttributeName = "systemuserid";
-
-            linkSystemusers.LinkToEntityName = "systemuser";
-
-            linkSystemusers.LinkToAttributeName = "systemuserid";
+            linkSystemusers.LinkFromEntityName = EntityName.SystemUserRoles;
+            linkSystemusers.LinkFromAttributeName = Attributes.SystemUserRoles.SystemUserId;
+            linkSystemusers.LinkToEntityName = EntityName.SystemUser;
+            linkSystemusers.LinkToAttributeName = Attributes.SystemUser.SystemUserId;
 
             linkSystemusers.LinkCriteria = new FilterExpression();
-
-            linkSystemusers.LinkCriteria.Conditions.Add(Condition1);
+            linkSystemusers.LinkCriteria.Conditions.Add(systemUserIdCondition);
 
             linkRole.LinkEntities.Add(linkSystemusers);
-
             query.LinkEntities.Add(linkRole);
-
-            query.Criteria.Conditions.Add(Condition2);
+            query.Criteria.Conditions.Add(securityRoleNameCondition);
 
             EntityCollection collRoles = service.RetrieveMultiple(query);
 
             if (collRoles != null && collRoles.Entities.Count > 0)
             {
 
-                foreach (Entity _entity in collRoles.Entities)
+                foreach (Entity entity in collRoles.Entities)
                 {
 
-                    if (_entity.Attributes["name"].ToString().ToLower() == securityRoleName)
+                    if (entity.Contains(Attributes.Role.Name)&& entity.Attributes[Attributes.Role.Name].ToString().ToLower() == securityRoleName)
                     {
                         return response = true;
                     }

@@ -61,8 +61,11 @@
         public const string Location = "tc_location";
         public const string Region = "tc_region";
         public const string Remark = "tc_remark";
+        public const string Role = "role";
         public const string LocationOffice = "tc_locationoffice";
         public const string SocialProfile = "socialprofile";
+        public const string SystemUserRoles = "systemuserroles";
+        public const string SystemUser = "systemuser";        
         public const string TourOperator = "tc_touroperator";
         public const string User = "systemuser";
         public const string BookingTransfer = "tc_bookingtransfer";
@@ -101,6 +104,8 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
     public static class Role
     {
         public const string Name = "name";
+        public const string SystemUserId = "systemuserid";
+        public const string RoleId = "roleid";
     }
     public static class Contact
     {
@@ -401,6 +406,11 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string UniqueProfileId = "uniqueprofileid";
 
     }
+    public static class SystemUser
+    {
+        public const string SystemUserId = "systemuserid";        
+
+    }
 
     public static class BookingTransfer
     {
@@ -468,6 +478,13 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string QuestionFieldType = "tc_question_fieldtype";
         public const string QuestionResponse = "tc_question_response";
         public const string SurveyFeedbackId = "tc_surveyfeedbackid";
+    }
+    public static class SystemUserRoles
+    {
+        public const string RoleId = "roleid";
+        public const string SystemUserId = "systemuserid";
+        
+
     }
 
 

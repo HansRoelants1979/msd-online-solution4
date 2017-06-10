@@ -33,8 +33,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ExecutingUserInDepartment
                 }
                 var UserId = context.InitiatingUserId;
 
-                if (UserId != Guid.Empty)
-                {
+                
                     trace.Trace("Checking executing User is in role or not");
                     var response = RetrieveSecurityRoles.GetSecurityRoles(SecurityRoleName,UserId,service,trace);
                     if (response != false)
@@ -45,7 +44,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ExecutingUserInDepartment
                     {
                         trace.Trace("Executing User is not in Role");
                     }
-                }
+                
             }
 
             catch (FaultException<OrganizationServiceFault> ex)
