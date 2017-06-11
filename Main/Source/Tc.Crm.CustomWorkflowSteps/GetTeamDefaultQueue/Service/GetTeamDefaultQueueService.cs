@@ -74,9 +74,9 @@ namespace Tc.Crm.CustomWorkflowSteps.GetTeamDefaultQueue.Service
             
             trace.Trace("Team record retrieved.");
 
-            if (response.Entities[0].Contains("queueid") && response.Entities[0]["queueid"] != null)
+            if (response.Entities[0].Contains(Attributes.Queue.QueueId) && response.Entities[0][Attributes.Queue.QueueId] != null)
             {
-                teamDefaultQueue = ((EntityReference)(response.Entities[0]["queueid"]));
+                teamDefaultQueue = ((EntityReference)(response.Entities[0][Attributes.Queue.QueueId]));
             }
 
             trace.Trace("GetteamDefaultQueueDetails - end");

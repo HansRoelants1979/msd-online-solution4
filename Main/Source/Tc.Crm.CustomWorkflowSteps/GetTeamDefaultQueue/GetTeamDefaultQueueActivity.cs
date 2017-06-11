@@ -4,6 +4,7 @@ using System;
 using System.Activities;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using Tc.Crm.CustomWorkflowSteps.GetTeamDefaultQueue.Service;
@@ -19,14 +20,12 @@ namespace Tc.Crm.CustomWorkflowSteps.GetTeamDefaultQueue
             IWorkflowContext context = executionContext.GetExtension<IWorkflowContext>();
             IOrganizationServiceFactory serviceFactory = executionContext.GetExtension<IOrganizationServiceFactory>();
             IOrganizationService service = serviceFactory.CreateOrganizationService(context.UserId);
-
-            var sourceMarketId = SourceMarket.Get<EntityReference>(executionContext);
-
-            var teamDefaultQueueService = new GetTeamDefaultQueueService();
-
-            trace.Trace("getting team default queue by Source Market.");
-            if (sourceMarketId != null)
+            try
             {
+                var sourceMarketId = SourceMarket.Get<EntityReference>(executionContext);
+                var teamDefaultQueueService = new GetTeamDefaultQueueService();
+                trace.Trace("getting team default queue by Source Market.");
+
                 var response = teamDefaultQueueService.GetTeamDefaultQueue(sourceMarketId, service, trace);
                 if (response != null)
                 {
@@ -34,8 +33,20 @@ namespace Tc.Crm.CustomWorkflowSteps.GetTeamDefaultQueue
                 }
                 else
                     trace.Trace("response is null");
-
                 return;
+
+            }
+            catch (FaultException<OrganizationServiceFault> ex)
+            {
+                throw new InvalidPluginExecutionException(ex.ToString());
+            }
+            catch (TimeoutException ex)
+            {
+                throw new InvalidPluginExecutionException(ex.ToString());
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidPluginExecutionException(ex.ToString());
             }
         }
 
