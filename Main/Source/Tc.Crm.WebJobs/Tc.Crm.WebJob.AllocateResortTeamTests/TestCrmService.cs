@@ -397,7 +397,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeamTests
                 b["hotel.ownerid"] = new AliasedValue("tc_hotel", "ownerid", item.HotelOwner);
                 b["role.tc_customer"] = new AliasedValue("tc_customerbookingrole", "tc_customer", item.Customer);
                 b["contact.ownerid"] = new AliasedValue("contact", "ownerid", item.CustomerOwner);
-                b["contactsourcemarket.tc_sourcemarketbusinessunitid"] = new AliasedValue("tc_country", "tc_sourcemarketbusinessunitid", item.SourceMarketBusinessUnit);
+                b["sourcemarket.tc_sourcemarketbusinessunitid"] = new AliasedValue("tc_country", "tc_sourcemarketbusinessunitid", item.SourceMarketBusinessUnit);
                 bookings.Add(b);
             }
 

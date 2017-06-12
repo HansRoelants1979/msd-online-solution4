@@ -24,9 +24,7 @@
         public const string RoleAliasName = "role.";
         public const string AccountAliasName = "account.";
         public const string ContactAliasName = "contact.";
-        public const string SourceMarketAliasName = "sourcemarket.";
-        public const string ContactSourceMarketAliasName = "contactsourcemarket.";
-        public const string AccountSourceMarketAliasName = "accountsourcemarket.";
+        public const string SourceMarketAliasName = "sourcemarket.";     
         public const string TeamAliasName = "team.";
         public const string UserAliasName = "systemuser.";
         public const string ContactCaseAliasName = "contactincident.";

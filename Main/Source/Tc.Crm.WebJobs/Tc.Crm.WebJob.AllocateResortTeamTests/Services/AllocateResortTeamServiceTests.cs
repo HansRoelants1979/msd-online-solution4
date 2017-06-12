@@ -391,8 +391,8 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
             childTeam["businessunitid"] = new EntityReference("businessunit", ((EntityReference)country["tc_sourcemarketbusinessunitid"]).Id);
 
             //expected value
-            var expectedBookingOwnerId = user.Id;
-            var expectedCusomerOwnerId = user.Id;
+            var expectedBookingOwnerId = childTeam.Id;
+            var expectedCusomerOwnerId = childTeam.Id;
 
             var service = new AllocateResortTeamService(logger, allocationService, configurationService);
             service.Run();

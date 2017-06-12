@@ -53,6 +53,12 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                                                             </condition>
                                                         </filter>
                                                     </filter>
+                                                    <link-entity name='tc_country' alias='sourcemarket' to='tc_sourcemarketid' from='tc_countryid'>
+                                                     <attribute name='tc_sourcemarketbusinessunitid'/>
+                                                        <filter type='and'>
+                                                            <condition attribute='tc_sourcemarketbusinessunitid' operator='not-null'/>
+                                                        </filter>
+                                                    </link-entity>
                                                     <link-entity name='tc_bookingaccommodation' alias='accommodation' from='tc_bookingid' to='tc_bookingid'>
                                                         <attribute name='tc_startdateandtime'/>
                                                         <attribute name='tc_enddateandtime'/>
@@ -64,25 +70,13 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                                                             </link-entity>
                                                     </link-entity>
                                                     <link-entity name='tc_customerbookingrole' alias='role' from='tc_bookingid' to='tc_bookingid'>
-                                                        <attribute name='tc_customer'/>
+                                                      <attribute name='tc_customer'/>
                                                          <link-entity link-type='outer' name='account' alias='account' from='accountid' to='tc_customer'>
                                                             <attribute name='ownerid'/>
-                                                                <link-entity link-type='outer' name='tc_country' alias='accountsourcemarket' from='tc_countryid' to='tc_sourcemarketid'>
-                                                                  <attribute name='tc_sourcemarketbusinessunitid'/>
-                                                                   <filter type='and'>
-                                                                    <condition attribute='tc_sourcemarketbusinessunitid' operator='not-null' />
-                                                                   </filter>
-                                                         </link-entity>
                                                          </link-entity>
                                                          <link-entity link-type='outer' name='contact' alias='contact' from='contactid' to='tc_customer'>
                                                             <attribute name='ownerid'/>
-                                                                <link-entity link-type='outer' name='tc_country' alias='contactsourcemarket' from='tc_countryid' to='tc_sourcemarketid'>
-                                                                  <attribute name='tc_sourcemarketbusinessunitid'/>
-                                                                   <filter type='and'>
-                                                                    <condition attribute='tc_sourcemarketbusinessunitid' operator='not-null' />
-                                                                   </filter>
                                                          </link-entity>
-                                                    </link-entity>
                                                     </link-entity>
                                                  </entity>
                                                  </fetch>",
@@ -139,13 +133,10 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
 
         public string GetBusinessUnitField(Entity booking)
         {
-            var fieldContactSourceMarketBu = AliasName.ContactSourceMarketAliasName + Attributes.SourceMarket.BusinessUnitId;
-            var fieldAccountSourceMarketBu = AliasName.AccountSourceMarketAliasName + Attributes.SourceMarket.BusinessUnitId;
+            var fieldSourceMarketBu = AliasName.SourceMarketAliasName + Attributes.SourceMarket.BusinessUnitId;            
             var fieldSourceMarket = string.Empty;
-            if (booking.Attributes.Contains(fieldContactSourceMarketBu) && booking.Attributes[fieldContactSourceMarketBu] != null)
-                fieldSourceMarket = AliasName.ContactSourceMarketAliasName + Attributes.SourceMarket.BusinessUnitId;
-            else if (booking.Attributes.Contains(fieldAccountSourceMarketBu) && booking.Attributes[fieldAccountSourceMarketBu] != null)
-                fieldSourceMarket = AliasName.AccountSourceMarketAliasName + Attributes.SourceMarket.BusinessUnitId;
+            if (booking.Attributes.Contains(fieldSourceMarketBu) && booking.Attributes[fieldSourceMarketBu] != null)
+                fieldSourceMarket = fieldSourceMarketBu;
             return fieldSourceMarket;
         }
 

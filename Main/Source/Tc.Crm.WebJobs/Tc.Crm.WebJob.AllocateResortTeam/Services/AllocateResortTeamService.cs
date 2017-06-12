@@ -84,7 +84,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
             var bookingAllocationResortTeamRequest = new List<BookingAllocationResortTeamRequest>();
 
             var processedCustomers = new List<Guid>();
-            var processedBookings = new List<BookingAllocationResponse>();           
+            var processedBookings = new List<BookingAllocationResponse>();                  
             for (int i = 0; i < bookingAllocationResponses.Count; i++)
             {
                 var bookingResponse = bookingAllocationResponses[i];
@@ -94,6 +94,8 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
 
                 var bookingAllocated = IsBookingAllocated(bookingResponse);
                 var customerAllocated = IsCustomerAllocated(bookingResponse);
+                
+                
 
                 if (bookingAllocated && customerAllocated)
                 {
@@ -101,17 +103,21 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                     continue;
                 }
 
-                if (bookingResponse.AccommodationStartDate.Value.Date < DateTime.Now.Date)
+                if (bookingResponse.AccommodationStartDate != null && bookingResponse.AccommodationStartDate.Value.Date < DateTime.Now.Date)
                 {
-                    logger.LogInformation(responseLog + "Not processing this record as accommodation start date is less than current date");
-                    continue;
-                }
-
+                    var futureBookingsExists = bookingAllocationResponses.ToList().Find(b => b.BookingId == bookingResponse.BookingId
+                                                                                          && b.AccommodationStartDate > bookingResponse.AccommodationStartDate) != null;
+                    if (futureBookingsExists)
+                        continue;
+                }              
+                
+                
                 var differentBooking = processedBookings.Find(b => b.BookingId == bookingResponse.BookingId) == null;
                 var sameBookingDifferentCustomer = processedBookings.Find(b => b.BookingId == bookingResponse.BookingId
+                                                                            && bookingResponse.AccommodationStartDate != null
                                                                             && b.AccommodationStartDate == bookingResponse.AccommodationStartDate
                                                                             && b.Customer.Id != bookingResponse.Customer.Id) != null;
-                
+
                 if (!differentBooking && !sameBookingDifferentCustomer)
                 {
                     logger.LogInformation(responseLog + "Not processing this record as the booking was already processed");
@@ -119,7 +125,8 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                 }
 
                 var log = AllocateToChildHotelTeam(bookingResponse, bookingAllocationResortTeamRequest, differentBooking, sameBookingDifferentCustomer, bookingAllocated, customerAllocated);
-                logger.LogInformation(responseLog + log);
+                logger.LogInformation(responseLog + log);               
+
                 processedCustomers.Add(bookingResponse.Customer.Id);
                 processedBookings.Add(bookingResponse);
             }
@@ -166,25 +173,25 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
             if (bookingResponse == null) return false;
             if (bookingResponse.ChildHotelTeam == null)
             {
-                logger.LogWarning(responseLog + "Not processing this record as no child hotel team exists for this combination of customers sourcemarket businessunit and hotel owner");
+                logger.LogWarning(responseLog + "Not processing this record as no child hotel team exists for this combination of booking's sourcemarket businessunit and hotel owner");
                 return false;
             }
-            if (bookingResponse.Customer == null)
-            {
-                logger.LogWarning(responseLog+"Not processing this record as no customer exists");
-                return false;
-            }
-            
+            //if (bookingResponse.Customer == null)
+            //{
+            //    logger.LogWarning(responseLog+"Not processing this record as no customer exists");
+            //    return false;
+            //}
+
             //customer already allocated
             if (processedCustomers.Contains(bookingResponse.Customer.Id))
             {
-                logger.LogWarning(responseLog+"Not processing this record as customer: " + bookingResponse.Customer.Name + " was already got processed.");
+                logger.LogWarning(responseLog + "Not processing this record as customer: " + bookingResponse.Customer.Name + " was already got processed.");
                 return false;
             }
             //accommodation start date is not provided
             if (bookingResponse.AccommodationStartDate == null)
             {
-                logger.LogWarning(responseLog+"Not processing this record as accommodation startdate is null");
+                logger.LogWarning(responseLog + "Not processing this record as accommodation startdate is null");
                 return false;
             }
             return true;
@@ -192,7 +199,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
 
         public bool IsBookingAllocated(BookingAllocationResponse bookingResponse)
         {
-            if (bookingResponse.BookingOwner == null) return false;
+            if (bookingResponse.BookingOwner == null || bookingResponse.ChildHotelTeam == null) return false;
             if (bookingResponse.BookingOwner.OwnerType == OwnerType.Team)
             {
                 if (Guid.Equals(bookingResponse.BookingOwner.Id, bookingResponse.ChildHotelTeam.Id))
@@ -205,7 +212,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
 
         public bool IsCustomerAllocated(BookingAllocationResponse bookingResponse)
         {
-            if (bookingResponse.Customer.Owner == null) return false;
+            if (bookingResponse.Customer.Owner == null || bookingResponse.ChildHotelTeam == null) return false;
             if (bookingResponse.Customer.Owner.OwnerType == OwnerType.Team)
             {
                 if (Guid.Equals(bookingResponse.Customer.Owner.Id, bookingResponse.ChildHotelTeam.Id))
