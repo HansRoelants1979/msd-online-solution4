@@ -7,7 +7,7 @@
         <DataProvider>MSCRMFETCH</DataProvider>
         <ConnectString>https://thomascookdev.crm4.dynamics.com</ConnectString>
       </ConnectionProperties>
-      <rd:SecurityType>None</rd:SecurityType>
+      <rd:SecurityType>DataBase</rd:SecurityType>
       <rd:DataSourceID>e8c7df74-e913-4e38-a332-f3568f02cbd9</rd:DataSourceID>
     </DataSource>
   </DataSources>
@@ -16,8 +16,14 @@
       <Query>
         <DataSourceName>Crm</DataSourceName>
         <QueryParameters>
+          <QueryParameter Name="@Start">
+            <Value>=Parameters!Start.Value</Value>
+          </QueryParameter>
           <QueryParameter Name="@SourceMarket">
             <Value>=Parameters!SourceMarket.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@End">
+            <Value>=Parameters!End.Value</Value>
           </QueryParameter>
         </QueryParameters>
         <CommandText>&lt;fetch&gt;
@@ -34,7 +40,9 @@
     &lt;attribute name="tc_departuredate" /&gt;
     &lt;attribute name="modifiedby" /&gt;
     &lt;attribute name="tc_bookingreferencefreetext" /&gt;
+    &lt;attribute name="tc_bookingid" /&gt;
     &lt;attribute name="tc_originatingbusinessarea" /&gt;
+    &lt;attribute name="tc_datereported" /&gt;
     &lt;attribute name="tc_bookingreference" /&gt;
     &lt;attribute name="tc_flightnumber" /&gt;
     &lt;attribute name="ownerid" /&gt;
@@ -46,10 +54,10 @@
     &lt;attribute name="incidentid" /&gt;
     &lt;attribute name="tc_sourcemarketid" /&gt;
     &lt;attribute name="tc_offeredamountdecision" /&gt;
-    &lt;attribute name="tc_bookingid" /&gt;
     &lt;attribute name="tc_brandid" /&gt;
     &lt;filter type="and" &gt;
-      &lt;condition attribute="modifiedon" operator="yesterday" /&gt;
+      &lt;condition attribute="modifiedon" operator="on-or-after" value="@Start" /&gt;
+      &lt;condition attribute="modifiedon" operator="on-or-before" value="@End" /&gt;
       &lt;filter type="or" &gt;
         &lt;condition attribute="tc_bookingid" operator="not-null" /&gt;
         &lt;filter type="and" &gt;
@@ -113,6 +121,9 @@
     &lt;link-entity name="tc_country" from="tc_countryid" to="tc_sourcemarketid" link-type="outer" alias="cco" &gt;
       &lt;attribute name="tc_countryid" /&gt;
       &lt;attribute name="tc_countryname" /&gt;
+    &lt;/link-entity&gt;
+    &lt;link-entity name="systemuser" from="systemuserid" to="modifiedby" link-type="outer" alias="msu" &gt;
+      &lt;attribute name="systemuserid" /&gt;
     &lt;/link-entity&gt;
   &lt;/entity&gt;
 &lt;/fetch&gt;</CommandText>
@@ -237,6 +248,14 @@
         <Field Name="tc_originatingbusinessarea">
           <DataField>tc_originatingbusinessarea</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="tc_datereported">
+          <DataField>tc_datereported</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="tc_datereportedValue">
+          <DataField>tc_datereportedValue</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
         <Field Name="owneridEntityName">
           <DataField>owneridEntityName</DataField>
@@ -552,9 +571,16 @@
           <DataField>cco_tc_countryname</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="msu_systemuserid">
+          <DataField>msu_systemuserid</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="cco_tc_countrynameValue">
           <DataField>cco_tc_countrynameValue</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="key">
+          <Value>=Fields!incidentid.Value &amp; Fields!cl_tc_caselineid.Value</Value>
         </Field>
       </Fields>
       <Filters>
@@ -608,13 +634,22 @@
         </Field>
       </Fields>
     </DataSet>
-    <DataSet Name="CaseUserRoles">
+    <DataSet Name="CaseOwnerUserRoles">
       <Query>
         <DataSourceName>Crm</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@Start">
+            <Value>=Parameters!Start.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@End">
+            <Value>=Parameters!End.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
         <CommandText>&lt;fetch &gt;
   &lt;entity name="incident" &gt;
     &lt;filter type="and" &gt;
-      &lt;condition attribute="modifiedon" operator="yesterday" /&gt;
+      &lt;condition attribute="modifiedon" operator="on-or-after" value="@Start" /&gt;
+      &lt;condition attribute="modifiedon" operator="on-or-before" value="@End" /&gt;
     &lt;/filter&gt;
     &lt;link-entity name="systemuser" from="systemuserid" to="ownerid" link-type="outer" alias="s" &gt;
       &lt;attribute name="systemuserid" /&gt;
@@ -673,6 +708,292 @@
         <Field Name="TotalAmountValue">
           <DataField>TotalAmountValue</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="LocalServiceCodes">
+      <Query>
+        <DataSourceName>Crm</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@Start">
+            <Value>=Parameters!Start.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@SourceMarket">
+            <Value>=Parameters!SourceMarket.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@End">
+            <Value>=Parameters!End.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>&lt;fetch&gt;
+  &lt;entity name="incident" &gt;
+    &lt;attribute name="ticketnumber" /&gt;
+    &lt;attribute name="incidentid" /&gt;
+    &lt;filter type="and" &gt;
+      &lt;condition attribute="modifiedon" operator="on-or-after" value="@Start" /&gt;
+      &lt;condition attribute="modifiedon" operator="on-or-before" value="@End" /&gt;
+      &lt;filter type="or" &gt;
+        &lt;condition attribute="tc_bookingid" operator="not-null" /&gt;
+        &lt;filter type="and" &gt;
+          &lt;condition attribute="tc_sourcemarketid" operator="not-null" /&gt;
+          &lt;condition attribute="tc_sourcemarketid" operator="eq" value="@SourceMarket" /&gt;
+        &lt;/filter&gt;
+      &lt;/filter&gt;
+    &lt;/filter&gt;
+    &lt;order attribute="ticketnumber" /&gt;
+    &lt;link-entity name="tc_caseline" from="tc_caseid" to="incidentid" link-type="outer" alias="cl" &gt;
+      &lt;attribute name="tc_areextraservicesdetailscorrect" /&gt;
+      &lt;attribute name="tc_transportflightnumber" /&gt;
+      &lt;attribute name="tc_transfercode" /&gt;
+      &lt;attribute name="tc_extraservicecode" /&gt;
+      &lt;attribute name="tc_areaccommodationdetailscorrect" /&gt;
+      &lt;attribute name="tc_aretransferdetailscorrect" /&gt;
+      &lt;attribute name="tc_caselineid" /&gt;
+      &lt;attribute name="tc_aretransportdetailscorrect" /&gt;
+      &lt;link-entity name="tc_bookingaccommodation" from="tc_bookingaccommodationid" to="tc_bookingaccommodationid" link-type="outer" alias="acc" &gt;
+        &lt;attribute name="tc_hotelid" /&gt;
+        &lt;link-entity name="tc_hotel" from="tc_hotelid" to="tc_hotelid" link-type="outer" alias="ho" &gt;
+          &lt;attribute name="tc_masterhotelid" /&gt;
+        &lt;/link-entity&gt;
+      &lt;/link-entity&gt;
+      &lt;link-entity name="tc_bookingaccommodation" from="tc_bookingaccommodationid" to="tc_accommodationpropertyname" link-type="outer" alias="claccprop" &gt;
+        &lt;link-entity name="tc_hotel" from="tc_hotelid" to="tc_hotelid" link-type="outer" alias="claccprophot" &gt;
+          &lt;attribute name="tc_masterhotelid" /&gt;
+        &lt;/link-entity&gt;
+      &lt;/link-entity&gt;
+      &lt;link-entity name="tc_bookingtransport" from="tc_bookingtransportid" to="tc_bookingtransportid" link-type="outer" alias="cltransp" &gt;
+        &lt;attribute name="tc_transportcode" /&gt;
+      &lt;/link-entity&gt;
+      &lt;link-entity name="tc_bookingtransfer" from="tc_bookingtransferid" to="tc_bookingtransferid" link-type="outer" alias="cltransf" &gt;
+        &lt;attribute name="tc_transfercode" /&gt;
+      &lt;/link-entity&gt;
+      &lt;link-entity name="tc_bookingextraservice" from="tc_bookingextraserviceid" to="tc_bookingextraserviceid" link-type="outer" alias="clextra" &gt;
+        &lt;attribute name="tc_extraservicecode" /&gt;
+      &lt;/link-entity&gt;
+    &lt;/link-entity&gt;
+    &lt;link-entity name="tc_booking" from="tc_bookingid" to="tc_bookingid" link-type="outer" alias="bo" &gt;
+      &lt;attribute name="tc_bookingid" /&gt;
+      &lt;attribute name="tc_numberofparticipants" /&gt;
+      &lt;attribute name="tc_sourcemarketid" /&gt;
+      &lt;attribute name="tc_departuredate" /&gt;
+      &lt;attribute name="tc_returndate" /&gt;
+      &lt;filter type="or" &gt;
+        &lt;condition attribute="tc_sourcemarketid" operator="null" /&gt;
+        &lt;filter type="and" &gt;
+          &lt;condition attribute="tc_sourcemarketid" operator="not-null" /&gt;
+          &lt;condition attribute="tc_sourcemarketid" operator="eq" value="@SourceMarket" /&gt;
+        &lt;/filter&gt;
+      &lt;/filter&gt;
+      &lt;link-entity name="tc_country" from="tc_countryid" to="tc_sourcemarketid" link-type="outer" alias="boco" &gt;
+        &lt;attribute name="tc_countryid" /&gt;
+        &lt;attribute name="tc_countryname" /&gt;
+      &lt;/link-entity&gt;
+    &lt;/link-entity&gt;
+  &lt;/entity&gt;
+&lt;/fetch&gt;</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="ticketnumber">
+          <DataField>ticketnumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="incidentid">
+          <DataField>incidentid</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="cl_tc_areextraservicesdetailscorrect">
+          <DataField>cl_tc_areextraservicesdetailscorrect</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="cl_tc_areextraservicesdetailscorrectValue">
+          <DataField>cl_tc_areextraservicesdetailscorrectValue</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="cl_tc_transportflightnumber">
+          <DataField>cl_tc_transportflightnumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="cl_tc_transfercode">
+          <DataField>cl_tc_transfercode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="cl_tc_areaccommodationdetailscorrect">
+          <DataField>cl_tc_areaccommodationdetailscorrect</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="cl_tc_extraservicecode">
+          <DataField>cl_tc_extraservicecode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="cl_tc_areaccommodationdetailscorrectValue">
+          <DataField>cl_tc_areaccommodationdetailscorrectValue</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="cl_tc_aretransferdetailscorrect">
+          <DataField>cl_tc_aretransferdetailscorrect</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="cl_tc_aretransferdetailscorrectValue">
+          <DataField>cl_tc_aretransferdetailscorrectValue</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="cl_tc_caselineid">
+          <DataField>cl_tc_caselineid</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="cl_tc_aretransportdetailscorrect">
+          <DataField>cl_tc_aretransportdetailscorrect</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="cl_tc_aretransportdetailscorrectValue">
+          <DataField>cl_tc_aretransportdetailscorrectValue</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="acc_tc_hotelid">
+          <DataField>acc_tc_hotelid</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="acc_tc_hotelidValue">
+          <DataField>acc_tc_hotelidValue</DataField>
+          <rd:TypeName>System.Guid</rd:TypeName>
+        </Field>
+        <Field Name="acc_tc_hotelidEntityName">
+          <DataField>acc_tc_hotelidEntityName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ho_tc_masterhotelid">
+          <DataField>ho_tc_masterhotelid</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="claccprophot_tc_masterhotelid">
+          <DataField>claccprophot_tc_masterhotelid</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="cltransp_tc_transportcode">
+          <DataField>cltransp_tc_transportcode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="cltransf_tc_transfercode">
+          <DataField>cltransf_tc_transfercode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="clextra_tc_extraservicecode">
+          <DataField>clextra_tc_extraservicecode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="bo_tc_bookingid">
+          <DataField>bo_tc_bookingid</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="bo_tc_numberofparticipants">
+          <DataField>bo_tc_numberofparticipants</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="bo_tc_numberofparticipantsValue">
+          <DataField>bo_tc_numberofparticipantsValue</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="bo_tc_sourcemarketid">
+          <DataField>bo_tc_sourcemarketid</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="bo_tc_sourcemarketidValue">
+          <DataField>bo_tc_sourcemarketidValue</DataField>
+          <rd:TypeName>System.Guid</rd:TypeName>
+        </Field>
+        <Field Name="bo_tc_sourcemarketidEntityName">
+          <DataField>bo_tc_sourcemarketidEntityName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="bo_tc_departuredate">
+          <DataField>bo_tc_departuredate</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="bo_tc_departuredateValue">
+          <DataField>bo_tc_departuredateValue</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="bo_tc_returndate">
+          <DataField>bo_tc_returndate</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="bo_tc_returndateValue">
+          <DataField>bo_tc_returndateValue</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="boco_tclsc__countryid">
+          <DataField>boco_tc_countryid</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="boco_tc_countryname">
+          <DataField>boco_tc_countryname</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="boco_tc_countrynameValue">
+          <DataField>boco_tc_countrynameValue</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="lsc_accommodation">
+          <Value>=IIf(Fields!cl_tc_areaccommodationdetailscorrect.Value = "Yes",Fields!ho_tc_masterhotelid.Value,Fields!claccprophot_tc_masterhotelid.Value)</Value>
+        </Field>
+        <Field Name="lsc_transport">
+          <Value>=IIf(Fields!cl_tc_aretransportdetailscorrect.Value = "Yes",Fields!cltransp_tc_transportcode.Value,Fields!cl_tc_transportflightnumber.Value)</Value>
+        </Field>
+        <Field Name="lsc_transfer">
+          <Value>=IIf(Fields!cl_tc_aretransferdetailscorrect.Value="Yes",Fields!cltransf_tc_transfercode.Value,Fields!cl_tc_transfercode.Value)</Value>
+        </Field>
+        <Field Name="lsc_extraservice">
+          <Value>=IIf(Fields!cl_tc_areextraservicesdetailscorrect.Value="Yes",Fields!clextra_tc_extraservicecode.Value,Fields!cl_tc_extraservicecode.Value)</Value>
+        </Field>
+        <Field Name="lsc_key">
+          <Value>=Fields!incidentid.Value &amp; Fields!cl_tc_caselineid.Value</Value>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="CaseModifierUserRoles">
+      <Query>
+        <DataSourceName>Crm</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@Start">
+            <Value>=Parameters!Start.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@End">
+            <Value>=Parameters!End.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>&lt;fetch &gt;
+  &lt;entity name="incident" &gt;
+    &lt;filter type="and" &gt;
+      &lt;condition attribute="modifiedon" operator="on-or-after" value="@Start" /&gt;
+      &lt;condition attribute="modifiedon" operator="on-or-before" value="@End" /&gt;
+    &lt;/filter&gt;
+    &lt;link-entity name="systemuser" from="systemuserid" to="ownerid" link-type="outer" alias="s" &gt;
+      &lt;attribute name="systemuserid" /&gt;
+      &lt;link-entity name="systemuserroles" from="systemuserid" to="systemuserid" link-type="outer" alias="sr" intersect="true" &gt;
+        &lt;link-entity name="role" from="roleid" to="roleid" link-type="outer" alias="r" &gt;
+          &lt;attribute name="name" /&gt;
+          &lt;filter type="or" &gt;
+            &lt;condition attribute="name" operator="eq" value="Tc.CustomerRelations.Agent" /&gt;
+            &lt;condition attribute="name" operator="eq" value="Tc.Ids.ConnectedServices.Consultant" /&gt;
+            &lt;condition attribute="name" operator="eq" value="Tc.Ids.Rep" /&gt;
+          &lt;/filter&gt;
+        &lt;/link-entity&gt;
+      &lt;/link-entity&gt;
+    &lt;/link-entity&gt;
+  &lt;/entity&gt;
+&lt;/fetch&gt;</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="s_systemuserid">
+          <DataField>s_systemuserid</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="r_name">
+          <DataField>r_name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="UserRole">
+          <Value>=IIf(IsNothing(Fields!s_systemuserid.Value),"",Fields!s_systemuserid.Value) &amp; IIf(IsNothing(Fields!r_name.Value),"",Fields!r_name.Value)</Value>
         </Field>
       </Fields>
     </DataSet>
@@ -753,6 +1074,9 @@
                   <Width>2.29167in</Width>
                 </TablixColumn>
                 <TablixColumn>
+                  <Width>1.95833in</Width>
+                </TablixColumn>
+                <TablixColumn>
                   <Width>1in</Width>
                 </TablixColumn>
                 <TablixColumn>
@@ -778,6 +1102,9 @@
                 </TablixColumn>
                 <TablixColumn>
                   <Width>2.38542in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.03125in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>1.52083in</Width>
@@ -844,6 +1171,18 @@
                 </TablixColumn>
                 <TablixColumn>
                   <Width>2.20833in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.94792in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.45833in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.38542in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.70833in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>1.27083in</Width>
@@ -1323,6 +1662,42 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="Textbox17">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Last Modified By: Team</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox17</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>SteelBlue</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="Textbox46">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -1631,6 +2006,42 @@
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox156</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>SteelBlue</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Date of 1st Conversation</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox2</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -2439,6 +2850,150 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="Textbox4">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Local Service Code: Accommodation</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox4</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>SteelBlue</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox6">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Local Service Code: Transport</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox6</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>SteelBlue</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox9">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Local Service Code: Transfer</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox9</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>SteelBlue</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox11">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Local Service Code: Extra Service</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox11</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>SteelBlue</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="Textbox82">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -2896,6 +3451,38 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="statuscode1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=IIf(IsNothing(Lookup(Fields!msu_systemuserid.Value &amp; "Tc.Ids.Rep",Fields!UserRole.Value,"iDS Rep","CaseModifierUserRoles")),IIf(IsNothing(Lookup(Fields!msu_systemuserid.Value &amp; "Tc.CustomerRelations.Agent",Fields!UserRole.Value,"Customer Relations Agent","CaseModifierUserRoles")),IIf(IsNothing(Lookup(Fields!msu_systemuserid.Value &amp; "Tc.Ids.ConnectedServices.Consultant",Fields!UserRole.Value,"Customer Relations Agent","CaseModifierUserRoles")),"","Connected Services Consultant"),"Customer Relations Agent"),"iDS Rep")</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>statuscode1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="con_tc_salutation">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -3169,6 +3756,38 @@
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>re_tc_commentsontotalrecovery</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="tc_datereported">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!tc_datereported.Value</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>tc_datereported</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -3511,7 +4130,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=IIf(IsNothing(Lookup(Fields!su_systemuserid.Value &amp; "Tc.Ids.Rep",Fields!UserRole.Value,"iDS Rep","CaseUserRoles")),IIf(IsNothing(Lookup(Fields!su_systemuserid.Value &amp; "Tc.CustomerRelations.Agent",Fields!UserRole.Value,"Customer Relations Agent","CaseUserRoles")),IIf(IsNothing(Lookup(Fields!su_systemuserid.Value &amp; "Tc.Ids.ConnectedServices.Consultant",Fields!UserRole.Value,"Customer Relations Agent","CaseUserRoles")),"","Connected Services Consultant"),"Customer Relations Agent"),"iDS Rep")</Value>
+                                  <Value>=IIf(IsNothing(Lookup(Fields!su_systemuserid.Value &amp; "Tc.Ids.Rep",Fields!UserRole.Value,"iDS Rep","CaseOwnerUserRoles")),IIf(IsNothing(Lookup(Fields!su_systemuserid.Value &amp; "Tc.CustomerRelations.Agent",Fields!UserRole.Value,"Customer Relations Agent","CaseOwnerUserRoles")),IIf(IsNothing(Lookup(Fields!su_systemuserid.Value &amp; "Tc.Ids.ConnectedServices.Consultant",Fields!UserRole.Value,"Customer Relations Agent","CaseOwnerUserRoles")),"","Connected Services Consultant"),"Customer Relations Agent"),"iDS Rep")</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                   </Style>
@@ -3888,6 +4507,134 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="Textbox5">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Lookup(Fields!key.Value,Fields!lsc_key.Value,Fields!lsc_accommodation.Value,"LocalServiceCodes")</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox5</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="createdon">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Lookup(Fields!key.Value,Fields!lsc_key.Value,Fields!lsc_transport.Value,"LocalServiceCodes")</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>createdon</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox10">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Lookup(Fields!key.Value,Fields!lsc_key.Value,Fields!lsc_transfer.Value,"LocalServiceCodes")</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox10</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox12">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Lookup(Fields!key.Value,Fields!lsc_key.Value,Fields!lsc_extraservice.Value,"LocalServiceCodes")</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox12</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="cl_tc_accommodationroomtype">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -3969,6 +4716,12 @@
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
@@ -3994,7 +4747,7 @@
             <DataSetName>CasesAndCaseItems</DataSetName>
             <Top>0.36in</Top>
             <Height>0.43in</Height>
-            <Width>73.46875in</Width>
+            <Width>87.95833in</Width>
             <ZIndex>1</ZIndex>
             <Style />
           </Tablix>
@@ -4002,7 +4755,7 @@
         <Height>0.79in</Height>
         <Style />
       </Body>
-      <Width>73.46875in</Width>
+      <Width>87.95833in</Width>
       <Page>
         <LeftMargin>1in</LeftMargin>
         <RightMargin>1in</RightMargin>
@@ -4023,6 +4776,14 @@
           <LabelField>tc_countryname</LabelField>
         </DataSetReference>
       </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="Start">
+      <DataType>DateTime</DataType>
+      <Prompt>Start Date</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="End">
+      <DataType>DateTime</DataType>
+      <Prompt>End Date</Prompt>
     </ReportParameter>
   </ReportParameters>
   <Language>en-US</Language>
