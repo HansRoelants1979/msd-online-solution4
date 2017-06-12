@@ -83,7 +83,7 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
 	        var properties = [
             "tc_countryid",
             "tc_iso_code"].join();
-	        var query = "?$filter=tc_iso2code eq '" + sourceMarketCode + "'&$select=" + properties;
+	        var query = "?$filter=tc_iso2code eq '" + encodeURIComponent(sourceMarketCode) + "'&$select=" + properties;
 	        return Tc.Crm.Scripts.Common.Get("tc_countries", query).then(function (request)
 	        {
 	            var sourceMarket = JSON.parse(request.response);
@@ -146,7 +146,7 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
 	{
 	    if (countryCode && sourceMarketId)
 	    {
-	        var query = "?$filter=tc_iso2code eq '" + countryCode + "'&$select=tc_countryid";
+	        var query = "?$filter=tc_iso2code eq '" + encodeURIComponent(countryCode) + "'&$select=tc_countryid";
 	        Tc.Crm.Scripts.Common.Get("tc_countries", query).then(function (request)
 	        {
 	            var country = JSON.parse(request.response);
@@ -212,7 +212,7 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
 	        var properties = [
             "tc_brandid",
             "tc_name"].join();
-	        var query = "?$filter=tc_brandcode eq '" + brandCode + "'&$select=" + properties;
+	        var query = "?$filter=tc_brandcode eq '" + encodeURIComponent(brandCode) + "'&$select=" + properties;
 	        Tc.Crm.Scripts.Common.Get("tc_brands", query).then(function (request)
 	        {
 	            var brand = JSON.parse(request.response);
@@ -236,7 +236,7 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
 	        var properties = [
             "tc_hotelid",
             "tc_name"].join();
-	        var query = "?$filter=tc_name eq '" + hotelCode + "'&$select=" + properties;
+	        var query = "?$filter=tc_name eq '" + encodeURIComponent(hotelCode) + "'&$select=" + properties;
 	        return Tc.Crm.Scripts.Common.Get("tc_hotels", query).then(function (request) {
 	            var hotel = JSON.parse(request.response);
 	            if (hotel && hotel.value.length > 0) {
@@ -259,7 +259,7 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
 	        var properties = [
             "tc_gatewayid",
             "tc_iata"].join();
-	        var query = "?$filter=tc_iata eq '" + gateWayCode + "'&$select=" + properties;
+	        var query = "?$filter=tc_iata eq '" + encodeURIComponent(gateWayCode) + "'&$select=" + properties;
 	        Tc.Crm.Scripts.Common.Get("tc_gatewaies", query).then(function (request) {
 	            var gateway = JSON.parse(request.response);
 	            if (gateway && gateway.value.length > 0) {

@@ -53,6 +53,8 @@ namespace Tc.Crm.Plugins.Case.BusinessLogic
             trace.Trace("UpdateSurveyResponse - Start");
             var survey = new Entity(Entities.SurveyResponse);
             survey.Attributes[Attributes.SurveyResponse.Regarding] = new EntityReference(Entities.Case, caseId);
+            survey.Attributes[Attributes.SurveyResponse.StateCode] = new OptionSetValue(1);
+            survey.Attributes[Attributes.SurveyResponse.StatusCode] = new OptionSetValue(2);
             survey.Id = surveyId;
             service.Update(survey);
             trace.Trace("UpdateSurveyResponse - End");

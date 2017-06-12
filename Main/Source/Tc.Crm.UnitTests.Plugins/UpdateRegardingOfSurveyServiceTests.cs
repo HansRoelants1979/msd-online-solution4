@@ -31,6 +31,8 @@ namespace Tc.Crm.UnitTests.Plugins
             var surveyId = Guid.NewGuid();
             var survey = new Entity("tc_surveyresponse", surveyId);
             survey["regardingobjectid"] = null;
+            survey["statecode"] = new OptionSetValue(0);
+            survey["statuscode"] = new OptionSetValue(1);
             context.Initialize(new List<Entity> { survey });
             var cntxt = GetPluginContext(surveyId.ToString());
             context.ExecutePluginWith<Tc.Crm.Plugins.Case.PostCaseCreationUpdateRegardingOfSurvey>(cntxt);
@@ -40,6 +42,8 @@ namespace Tc.Crm.UnitTests.Plugins
             Assert.IsTrue(surveyUpdated.Count == 1);
             var surveyUpdated1 = surveyUpdated[0];
             Assert.IsNotNull(surveyUpdated1["regardingobjectid"]);
+            Assert.AreEqual(((OptionSetValue)surveyUpdated1["statecode"]).Value, 1);
+            Assert.AreEqual(((OptionSetValue)surveyUpdated1["statuscode"]).Value, 2);
         }
 
         [TestMethod]
@@ -49,6 +53,8 @@ namespace Tc.Crm.UnitTests.Plugins
             var surveyId = Guid.NewGuid();
             var survey = new Entity("tc_surveyresponse", surveyId);
             survey["regardingobjectid"] = null;
+            survey["statecode"] = new OptionSetValue(0);
+            survey["statuscode"] = new OptionSetValue(1);
             context.Initialize(new List<Entity> { survey });
             var cntxt = GetPluginContext("");
             context.ExecutePluginWith<Tc.Crm.Plugins.Case.PostCaseCreationUpdateRegardingOfSurvey>(cntxt);
@@ -58,6 +64,8 @@ namespace Tc.Crm.UnitTests.Plugins
             Assert.IsTrue(surveyUpdated.Count == 1);
             var surveyUpdated1 = surveyUpdated[0];
             Assert.IsNull(surveyUpdated1["regardingobjectid"]);
+            Assert.AreEqual(((OptionSetValue)surveyUpdated1["statecode"]).Value, 0);
+            Assert.AreEqual(((OptionSetValue)surveyUpdated1["statuscode"]).Value, 1);
         }
     }
 }

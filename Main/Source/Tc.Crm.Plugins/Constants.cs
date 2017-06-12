@@ -67,6 +67,8 @@ namespace Tc.Crm.Plugins.Attributes
     public static class SurveyResponse
     {
         public const string Regarding = "regardingobjectid";
+        public const string StateCode = "statecode";
+        public const string StatusCode = "statuscode";
     }
 
     public static class Case
