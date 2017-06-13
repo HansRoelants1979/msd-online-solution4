@@ -433,9 +433,9 @@ Tc.Crm.Scripts.Events.Compensation = (function () {
                 if (caseType != null) {
                     isComplainCaseType = caseType.toUpperCase() === CASE_TYPE_COMPLAIN;
                     isIncidentCaseType = caseType.toUpperCase() === CASE_TYPE_INCIDENT;
-                     if (isIncidentCaseType == false) return;
-                         if (Xrm.Page.ui.getFormType() != FORM_MODE_CREATE) return;
-                             setCompensationAmountLimitBasedOnBookingSourceMarket();
+                    if (isIncidentCaseType == false) return;
+                    if (Xrm.Page.ui.getFormType() != FORM_MODE_CREATE) return;
+                    setCompensationAmountLimitBasedOnBookingSourceMarket();
                 }
             },
              function (error) {

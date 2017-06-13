@@ -82,6 +82,7 @@
             <condition attribute="tc_bookingreferencefreetext" operator="not-null" />
             <condition attribute="tc_alternativeemaillookup" operator="null" />
             <condition attribute="tc_othercustomeremail" operator="null" />
+            <condition attribute="tc_preferredmethodofcommunication" operator="eq" value="950000002" />
           </filter>
         </link-entity>
         <link-entity name="contact" from="contactid" to="tc_customer" alias="a_af93e89fd41ae71181043863bb354ff0">

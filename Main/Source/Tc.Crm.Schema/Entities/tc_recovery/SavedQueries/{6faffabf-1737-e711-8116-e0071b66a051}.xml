@@ -10,7 +10,6 @@
   <layoutxml>
     <grid name="resultset" object="10077" jump="tc_name" select="1" preview="1" icon="1">
       <row name="result" id="tc_recoveryid">
-        <cell name="tc_name" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="a_1780b3ec7b14e71181043863bb354ff0.customerid" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="a_96c736447b14e71181043863bb354ff0.tc_name" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="a_1780b3ec7b14e71181043863bb354ff0.ticketnumber" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
@@ -19,21 +18,22 @@
         <cell name="a_1780b3ec7b14e71181043863bb354ff0.tc_gateway" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="a_1780b3ec7b14e71181043863bb354ff0.tc_arrivaldate" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="a_1780b3ec7b14e71181043863bb354ff0.tc_brandid" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="a_96c736447b14e71181043863bb354ff0.tc_travelamount" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="a_1780b3ec7b14e71181043863bb354ff0.tc_bookingtravelamount" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_travelamount" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="a_5b386c256514e71181043863bb354ff0.tc_amount" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="a_5b386c256514e71181043863bb354ff0.transactioncurrencyid" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="tc_commentsontotalrecovery" width="200" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_categoryofcomplaint" width="300" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="tc_categorylevel1id" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="tc_categorylevel2id" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="tc_categorylevel3id" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="tc_recoverableamount" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="tc_nonrecoverableamount" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="transactioncurrencyid" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="tc_writtenoffamount" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="tc_writeoffreason" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="tc_suppliercontacted" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="tc_recoveryreceived" width="300" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_amount" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="transactioncurrencyid" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="tc_responsible" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="tc_responsibleparty" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="tc_brochurecontent" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
@@ -68,7 +68,6 @@
         <attribute name="tc_categorylevel3id" />
         <attribute name="tc_categorylevel2id" />
         <attribute name="tc_categorylevel1id" />
-        <attribute name="tc_name" />
         <order attribute="tc_writtenoffamount" descending="false" />
         <filter type="and">
           <condition attribute="createdon" operator="last-seven-days" />
@@ -79,17 +78,6 @@
         </link-entity>
         <link-entity name="tc_booking" from="tc_bookingid" to="tc_bookingid" visible="false" link-type="outer" alias="a_96c736447b14e71181043863bb354ff0">
           <attribute name="tc_name" />
-          <attribute name="tc_travelamount" />
-        </link-entity>
-        <link-entity name="incident" from="incidentid" to="tc_caseid" visible="false" link-type="outer" alias="a_1780b3ec7b14e71181043863bb354ff0">
-          <attribute name="customerid" />
-          <attribute name="statecode" />
-          <attribute name="tc_sourcemarketid" />
-          <attribute name="tc_gateway" />
-          <attribute name="ticketnumber" />
-          <attribute name="tc_brandid" />
-          <attribute name="tc_arrivaldate" />
-          <attribute name="tc_bookingtravelamount" />
         </link-entity>
         <link-entity name="tc_compensationline" from="tc_compensationlineid" to="tc_compensationlineid" visible="false" link-type="outer" alias="a_212aee6a1c19e711810c3863bb34fb48">
           <attribute name="tc_voucheramount" />
@@ -111,6 +99,18 @@
         <attribute name="tc_other" />
         <attribute name="tc_brochurecontent" />
         <attribute name="tc_responsible" />
+        <attribute name="tc_amount" />
+        <link-entity name="incident" from="incidentid" to="tc_caseid" visible="false" link-type="outer" alias="a_1780b3ec7b14e71181043863bb354ff0">
+          <attribute name="customerid" />
+          <attribute name="statecode" />
+          <attribute name="tc_sourcemarketid" />
+          <attribute name="tc_gateway" />
+          <attribute name="ticketnumber" />
+          <attribute name="tc_brandid" />
+          <attribute name="tc_arrivaldate" />
+        </link-entity>
+        <attribute name="tc_categoryofcomplaint" />
+        <attribute name="tc_travelamount" />
         <attribute name="tc_recoveryid" />
       </entity>
     </fetch>

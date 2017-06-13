@@ -10,6 +10,7 @@
   <layoutxml>
     <grid name="resultset" object="10067" jump="subject" select="1" icon="1" preview="1">
       <row name="result" id="activityid">
+        <cell name="tc_response_id" width="100" />
         <cell name="subject" width="300" />
         <cell name="tc_begintime" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="customers" width="200" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
@@ -38,6 +39,7 @@
           <attribute name="tc_destinationgatewayid" />
           <attribute name="tc_destinationid" />
         </link-entity>
+        <attribute name="tc_response_id" />
         <attribute name="activityid" />
       </entity>
     </fetch>

@@ -35,6 +35,7 @@ Tc.Crm.Scripts.Events.Case = (function () {
     var FORM_MODE_UPDATE = 2;
 
     function OnLoad() {
+        debugger;
         Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("tc_alternativephone");
         Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("tc_otherpartyphone");
         validateCaseAssociatedCustomerPhoneNum();

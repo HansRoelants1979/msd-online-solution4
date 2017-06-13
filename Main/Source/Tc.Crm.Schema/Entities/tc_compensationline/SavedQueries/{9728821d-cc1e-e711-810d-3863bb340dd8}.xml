@@ -78,6 +78,7 @@
             <condition attribute="tc_bookingid" operator="not-null" />
             <condition attribute="tc_alternativeemaillookup" operator="null" />
             <condition attribute="tc_othercustomeremail" operator="null" />
+            <condition attribute="tc_preferredmethodofcommunication" operator="eq" value="950000002" />
           </filter>
         </link-entity>
         <link-entity name="systemuser" from="systemuserid" to="modifiedby" visible="false" link-type="outer" alias="a_f7c6aeda0bf9e61181073863bb34fb48">

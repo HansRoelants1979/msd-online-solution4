@@ -16,6 +16,7 @@
         <cell name="incidentstagecode" width="125" imageproviderwebresource="$webresource:" imageproviderfunctionname="" />
         <cell name="caseorigincode" width="100" />
         <cell name="tc_casetypeid" width="100" />
+        <cell name="tc_producttype" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="statecode" width="100" />
         <cell name="statuscode" width="100" />
         <cell name="followupby" width="100" />
@@ -50,6 +51,7 @@
         <link-entity name="contact" alias="a_cdf05794a0ec49a3b2548ed7aa26cdd5" from="contactid" to="customerid" link-type="outer" visible="false">
           <attribute name="tc_language" />
         </link-entity>
+        <attribute name="tc_producttype" />
         <attribute name="incidentid" />
       </entity>
     </fetch>

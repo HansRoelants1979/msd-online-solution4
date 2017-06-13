@@ -10,8 +10,14 @@
   <layoutxml>
     <grid name="resultset" object="10067" jump="subject" select="1" icon="1" preview="1">
       <row name="result" id="activityid">
+        <cell name="tc_response_id" width="100" />
         <cell name="subject" width="300" />
-        <cell name="createdon" width="125" />
+        <cell name="tc_begintime" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="customers" width="200" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="tc_mode" width="100" />
+        <cell name="regardingobjectid" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_c36f5d832f0ae71181023863bb354ff0.tc_destinationid" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+        <cell name="a_c36f5d832f0ae71181023863bb354ff0.tc_destinationgatewayid" width="150" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
       </row>
     </grid>
   </layoutxml>
@@ -19,13 +25,21 @@
   <fetchxml>
     <fetch version="1.0" mapping="logical">
       <entity name="tc_surveyresponse">
-        <attribute name="activityid" />
         <attribute name="subject" />
-        <attribute name="createdon" />
         <order attribute="subject" descending="false" />
         <filter type="or" isquickfindfields="1">
           <condition attribute="subject" operator="like" value="{0}" />
         </filter>
+        <attribute name="tc_response_id" />
+        <attribute name="customers" />
+        <attribute name="tc_begintime" />
+        <attribute name="regardingobjectid" />
+        <attribute name="tc_mode" />
+        <link-entity alias="a_c36f5d832f0ae71181023863bb354ff0" name="tc_booking" from="tc_bookingid" to="regardingobjectid" link-type="outer" visible="false">
+          <attribute name="tc_destinationid" />
+          <attribute name="tc_destinationgatewayid" />
+        </link-entity>
+        <attribute name="activityid" />
       </entity>
     </fetch>
   </fetchxml>

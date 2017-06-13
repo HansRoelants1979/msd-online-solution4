@@ -47,9 +47,9 @@
     <ReferencingAttributeName>ObjectId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Objekts, dem die Notiz zugeordnet ist." languagecode="1031" />
         <Description description="Unique identifier of the object with which the note is associated." languagecode="1033" />
         <Description description="Identificateur unique de l'objet auquel la note est associée." languagecode="1036" />
-        <Description description="Eindeutiger Bezeichner des Objekts, dem die Notiz zugeordnet ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -67,8 +67,8 @@
     <ReferencingAttributeName>RegardingObjectId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Unique identifier of the object with which the e-mail is associated." languagecode="1033" />
         <Description description="Wählen Sie den Datensatz aus, auf den sich die E-Mail bezieht." languagecode="1031" />
+        <Description description="Unique identifier of the object with which the e-mail is associated." languagecode="1033" />
         <Description description="Choisissez l'enregistrement concerné par le courrier électronique." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
@@ -107,8 +107,8 @@
     <ReferencingAttributeName>MasterId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Choose the primary case the current case was merged into." languagecode="1033" />
         <Description description="Wählen Sie die primäre Anfrage aus, mit der die aktuelle Anfrage zusammengeführt wurde." languagecode="1031" />
+        <Description description="Choose the primary case the current case was merged into." languagecode="1033" />
         <Description description="Sélectionnez l'incident principal avec lequel l'incident actuel va être fusionné." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
@@ -127,9 +127,9 @@
     <ReferencingAttributeName>ParentCaseId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Sélectionnez un incident parent pour l'incident." languagecode="1036" />
         <Description description="Wählen Sie die übergeordnete Anfrage für eine Anfrage aus." languagecode="1031" />
         <Description description="Choose the parent case for a case." languagecode="1033" />
+        <Description description="Sélectionnez un incident parent pour l'incident." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -245,6 +245,41 @@
       </EntityRelationshipRole>
       <EntityRelationshipRole>
         <NavigationPropertyName>tc_incident_tc_compensation</NavigationPropertyName>
+        <RelationshipRoleType>0</RelationshipRoleType>
+      </EntityRelationshipRole>
+    </EntityRelationshipRoles>
+  </EntityRelationship>
+  <EntityRelationship Name="tc_incident_tc_compensationapproval">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>1.0.0.114</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_compensationapproval</ReferencingEntityName>
+    <ReferencedEntityName>Incident</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>RemoveLink</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <CascadeRollupView>NoCascade</CascadeRollupView>
+    <IsValidForAdvancedFind>1</IsValidForAdvancedFind>
+    <ReferencingAttributeName>tc_caseId</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Unique identifier for Case associated with Compensation Approval." languagecode="1033" />
+      </Descriptions>
+    </RelationshipDescription>
+    <EntityRelationshipRoles>
+      <EntityRelationshipRole>
+        <NavPaneDisplayOption>DoNotDisplay</NavPaneDisplayOption>
+        <NavigationPropertyName>tc_caseId</NavigationPropertyName>
+        <CustomLabels>
+          <CustomLabel description="" languagecode="1033" />
+        </CustomLabels>
+        <RelationshipRoleType>1</RelationshipRoleType>
+      </EntityRelationshipRole>
+      <EntityRelationshipRole>
+        <NavigationPropertyName>tc_incident_tc_compensationapproval</NavigationPropertyName>
         <RelationshipRoleType>0</RelationshipRoleType>
       </EntityRelationshipRole>
     </EntityRelationshipRoles>
