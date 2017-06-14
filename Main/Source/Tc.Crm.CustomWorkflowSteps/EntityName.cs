@@ -469,6 +469,8 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string QuestionFieldType = "tc_question_fieldtype";
         public const string QuestionResponse = "tc_question_response";
         public const string SurveyFeedbackId = "tc_surveyfeedbackid";
+        public const string StateCode = "statecode";
+        public const string StatusCode = "statuscode";
     }
     public static class SystemUserRoles
     {

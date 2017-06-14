@@ -558,6 +558,16 @@ namespace Tc.Crm.CustomWorkflowSteps
             return new XrmResponse { Create = true, Id = id.ToString(), EntityName = entityRecord.LogicalName };
         }
 
+
+        public static XrmResponse UpdateEntity(Entity entityRecord, IOrganizationService service)
+        {
+            if (entityRecord == null) return null;
+            if (service == null) return null;
+
+            service.Update(entityRecord);
+            return new XrmResponse { Create = false, EntityName = entityRecord.LogicalName };
+        }
+
         /// <summary>
         /// Call this method for bulk create
         /// </summary>

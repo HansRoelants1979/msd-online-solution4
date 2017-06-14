@@ -2,6 +2,7 @@
 using Microsoft.Xrm.Sdk;
 using Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Models;
 using System;
+using System.Linq;
 
 namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
 {
@@ -33,6 +34,34 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
                 feedback[Attributes.SurveyResponseFeedback.QuestionResponse] = GetValueByFieldType(answer,trace);
             }
             trace.Trace("Processing GetFeedbackEntityFromPayLoad - end");
+            return feedback;
+        }
+
+        /// <summary>
+        /// To prepare feedback entity from payload
+        /// </summary>
+        /// <param name="answer"></param>
+        /// <param name="existingFeedback"></param>
+        /// <param name="isSurveyCreate"></param>
+        /// <param name="trace"></param>
+        /// <returns></returns>
+        public static Entity GetFeedbackEntityFromPayload(Answer answer, Dictionary<Guid, string> existingFeedback, bool isCreateSurvey, ITracingService trace)
+        {
+            Entity feedback = null;
+            if (existingFeedback != null && existingFeedback.Count > 0)
+            {
+                KeyValuePair<Guid, string> feedbackKey = existingFeedback.FirstOrDefault(f => f.Value == answer.Id.ToString());
+                if (feedbackKey.Key != Guid.Empty)
+                {
+                    feedback = GetFeedbackEntityFromPayload(answer, trace);
+                    feedback.Id = feedbackKey.Key;
+                }
+            }
+            else if (isCreateSurvey)
+            {
+                feedback = GetFeedbackEntityFromPayload(answer, trace);
+            }
+
             return feedback;
         }
 

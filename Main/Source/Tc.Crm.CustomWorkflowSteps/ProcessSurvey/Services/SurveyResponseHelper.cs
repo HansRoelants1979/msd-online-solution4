@@ -13,6 +13,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// To prepare survey response entity from payload
         /// </summary>
         /// <param name="response"></param>
+        /// <param name="trace"></param>
         /// <returns></returns>
         public static Entity GetResponseEntityFromPayload(Response response, ITracingService trace)
         {
@@ -59,9 +60,25 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         }
 
         /// <summary>
+        /// To get Response Id from payload
+        /// </summary>
+        /// <param name="response"></param>
+        /// <param name="trace"></param>
+        /// <returns></returns>
+        public static long GetResponseId(Response response, ITracingService trace)
+        {
+            if (trace == null) throw new InvalidPluginExecutionException("trace is null.");
+            trace.Trace("Processing GetResponseId - start");
+            if (response == null) throw new InvalidPluginExecutionException("Response in Json is null");
+            trace.Trace("Processing GetResponseId - end");
+            return response.Id;
+        }
+
+        /// <summary>
         /// To prepare additional parameters from payload
         /// </summary>
         /// <param name="response"></param>
+        /// <param name="trace"></param>
         /// <returns></returns>
         private static string PrepareAdditionalParameters(Response response, ITracingService trace)
         {

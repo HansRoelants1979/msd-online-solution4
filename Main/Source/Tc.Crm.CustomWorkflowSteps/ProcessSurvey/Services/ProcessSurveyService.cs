@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Microsoft.Xrm.Sdk;
 using Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Models;
 using System.ServiceModel;
+using System.Collections;
+using System.Linq;
 
 namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
 {
@@ -40,6 +42,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
             if (payloadSurvey.SurveyResponse == null) throw new InvalidPluginExecutionException("SurveyResponse is null in json payload");
             if (payloadSurvey.SurveyResponse.Responses == null) throw new InvalidPluginExecutionException("Response object in payload json is null");
             List<Response> responses = payloadSurvey.SurveyResponse.Responses;
+            var surveyId = Guid.Empty;
+            Dictionary<Guid, string> existingFeedback = null;
             var failedSurveys = new List<FailedSurvey>();
             for (int i = 0; i < responses.Count; i++)
             {
@@ -47,12 +51,14 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
                 {
                     trace.Trace("Processing Response " + i + " - start");
                     var surveyResponse = SurveyResponseHelper.GetResponseEntityFromPayload(responses[i], trace);
+                    surveyId = GetSurveyId(SurveyResponseHelper.GetResponseId(responses[i], trace));
                     if (responses[i].Answers != null && responses[i].Answers.Count > 0)
                     {
-                        MapBookingContact(surveyResponse, responses[i]);
-                        ProcessFeedback(surveyResponse, responses[i].Answers);
+                        MapBookingContact(surveyResponse, responses[i]);                        
+                        existingFeedback = GetExistingSurveyFeedback(surveyId);
+                        ProcessFeedback(surveyResponse, responses[i].Answers, existingFeedback, (surveyId == Guid.Empty));
                     }
-                    CommonXrm.CreateRecord(surveyResponse, payloadSurvey.CrmService);
+                    CreateOrUpdateSurveyFeedback(surveyId, surveyResponse, responses[i].Answers, existingFeedback);                   
                     trace.Trace("Processing Response " + i + " - end");
                 }
                 catch (FaultException<OrganizationServiceFault> ex)
@@ -73,7 +79,73 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
             return failedSurveys;
         }
 
-        
+        /// <summary>
+        /// To Create OR Update Survey and Survey Feedback records
+        /// </summary>
+        /// <param name="surveyId"></param>
+        /// <param name="surveyResponse"></param>
+        /// <param name="answers"></param>
+        /// <param name="existingFeedback"></param>
+        private void CreateOrUpdateSurveyFeedback(Guid surveyId, Entity surveyResponse, List<Answer> answers, Dictionary<Guid, string> existingFeedback)
+        {
+            if (surveyId != Guid.Empty)
+            {
+                surveyResponse.Id = surveyId;
+                CommonXrm.UpdateEntity(surveyResponse, payloadSurvey.CrmService);
+                if (answers == null || answers.Count == 0) return;
+                if (existingFeedback != null && existingFeedback.Count > 0)
+                {
+                    List<Answer> answersToCreate = answers.Where(a => !existingFeedback.Any(f => f.Value == a.Id.ToString())).ToList();
+                    IEnumerable answersToDelete = existingFeedback.Where(f => !answers.Any(a => a.Id.ToString() == f.Value));
+                    UpdateFeedbackAsPendingDelete(answersToDelete);
+                    CreateFeedback(answersToCreate, surveyId);
+                }
+                else
+                {
+                    CreateFeedback(answers, surveyId);
+                }
+
+            }
+            else
+                CommonXrm.CreateEntity(surveyResponse, payloadSurvey.CrmService);
+        }
+
+
+        /// <summary>
+        /// To create Feedback records
+        /// </summary>
+        /// <param name="answersToCreate"></param>
+        /// <param name="surveyId"></param>
+        private void CreateFeedback(List<Answer> answersToCreate, Guid surveyId)
+        {
+            if (answersToCreate == null || answersToCreate.Count == 0 || surveyId == Guid.Empty) return;
+            for (int i = 0; i < answersToCreate.Count; i++)
+            {
+                var feedbackEntity = AnswerHelper.GetFeedbackEntityFromPayload(answersToCreate[i], payloadSurvey.Trace);
+                feedbackEntity.Attributes[Attributes.SurveyResponseFeedback.SurveyFeedbackId] = new EntityReference(EntityName.SurveyResponse, surveyId);
+                CommonXrm.CreateEntity(feedbackEntity, payloadSurvey.CrmService);
+            }
+        }
+
+        /// <summary>
+        /// To update Feedback records status to pending delete, which are removed from payload
+        /// </summary>
+        /// <param name="answersToDelete"></param>
+        private void UpdateFeedbackAsPendingDelete(IEnumerable answersToDelete)
+        {
+            var deleteAnswers = answersToDelete.GetEnumerator();
+            while (deleteAnswers.MoveNext())
+            {
+                KeyValuePair<Guid, string> answerToDelete = (KeyValuePair<Guid, string>)deleteAnswers.Current;
+                if (answerToDelete.Key == Guid.Empty) continue;
+                var feedbackEntity = new Entity(EntityName.SurveyResponseFeedback, answerToDelete.Key);
+                feedbackEntity.Attributes[Attributes.SurveyResponseFeedback.StateCode] = new OptionSetValue(1);
+                feedbackEntity.Attributes[Attributes.SurveyResponseFeedback.StatusCode] = new OptionSetValue(950000000);
+                CommonXrm.UpdateEntity(feedbackEntity, payloadSurvey.CrmService);
+            }
+        }
+
+
 
         /// <summary>
         /// To prepare failed surveys information
@@ -313,10 +385,12 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// </summary>
         /// <param name="surveyResponse"></param>
         /// <param name="answers"></param>
-        private void ProcessFeedback(Entity surveyResponse, List<Answer> answers)
+        /// <param name="existingFeedback"></param>
+        /// <param name="isCreateSurvey"></param>
+        private void ProcessFeedback(Entity surveyResponse, List<Answer> answers, Dictionary<Guid, string> existingFeedback, bool isCreateSurvey)
         {
             trace.Trace("Processing ProcessFeedback - start");
-            var feedbackCollection = ProcessAnswers(answers);
+            var feedbackCollection = ProcessAnswers(answers, existingFeedback, isCreateSurvey);
             if (feedbackCollection != null && feedbackCollection.Entities.Count > 0)
                 surveyResponse.RelatedEntities.Add(new Relationship(Relationships.SurveyResponseFeedback), feedbackCollection);
             trace.Trace("Processing ProcessFeedback - end");
@@ -326,8 +400,10 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// To process answer records
         /// </summary>
         /// <param name="answers"></param>
+        /// <param name="existingFeedback"></param>
+        /// <param name="isSurveyCreate"></param>
         /// <returns></returns>
-        private EntityCollection ProcessAnswers(List<Answer> answers)
+        private EntityCollection ProcessAnswers(List<Answer> answers, Dictionary<Guid, string> existingFeedback, bool isCreateSurvey)
         {
             trace.Trace("Processing ProcessAnswers - start");
             var feedbackCollection = new EntityCollection();
@@ -336,13 +412,61 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
                 for (int i = 0; i < answers.Count; i++)
                 {
                     trace.Trace("Processing Answer " + i + " - start");
-                    var feedback = AnswerHelper.GetFeedbackEntityFromPayload(answers[i],trace);                    
-                    feedbackCollection.Entities.Add(feedback);
+                    var feedback = AnswerHelper.GetFeedbackEntityFromPayload(answers[i], existingFeedback, isCreateSurvey, trace);
+                    if (feedback != null)
+                        feedbackCollection.Entities.Add(feedback);
                     trace.Trace("Processing Answer " + i + " - end");
-                }                
+                }
             }
             trace.Trace("Processing ProcessAnswers - end");
             return feedbackCollection;
+        }
+
+
+        private Guid GetSurveyId(long surveyId)
+        {
+            var surveyGuid = Guid.Empty;
+            var query = $@"<fetch distinct='false' mapping='logical' output-format='xml-platform' version='1.0'>
+                           <entity name='tc_surveyresponse'>
+                           <attribute name='activityid'/>
+                               <filter type='and'>
+                                 <condition attribute='tc_response_id' value='{surveyId.ToString()}' operator='eq'/>
+                               </filter>
+                           </entity>
+                           </fetch>";
+            var surveyCollection = CommonXrm.RetrieveMultipleRecordsFetchXml(query, payloadSurvey.CrmService);
+            if (surveyCollection != null && surveyCollection.Entities.Count > 0)
+                surveyGuid = surveyCollection.Entities[0].Id;
+            return surveyGuid;
+        }
+
+        private Dictionary<Guid, string> GetExistingSurveyFeedback(Guid surveyId)
+        {
+            var existingFeedback = new Dictionary<Guid, string>();
+            if (surveyId == Guid.Empty) return existingFeedback;
+
+            var query = $@"<fetch distinct='false' mapping='logical' output-format='xml-platform' version='1.0'>
+                            <entity name='tc_surveyresponsefeedback'>
+                            <attribute name='tc_surveyresponsefeedbackid'/>
+                            <attribute name='tc_question_id'/>
+                              <filter type='and'>
+                                <condition attribute='statecode' value='0' operator='eq'/>
+                                <condition attribute='tc_surveyfeedbackid' value='{surveyId}' operator='eq'/>
+                              </filter>
+                            </entity>
+                            </fetch>";
+
+            var surveyFeedbackCollection = CommonXrm.RetrieveMultipleRecordsFetchXml(query, payloadSurvey.CrmService);
+            if (surveyFeedbackCollection == null || surveyFeedbackCollection.Entities.Count == 0) return existingFeedback;
+            for (int i = 0; i < surveyFeedbackCollection.Entities.Count; i++)
+            {
+                var surveyFeedback = surveyFeedbackCollection.Entities[i];
+                if (surveyFeedback == null) continue;
+                if (surveyFeedback.Attributes.Contains(Attributes.SurveyResponseFeedback.QuestionId) && surveyFeedback.Attributes[Attributes.SurveyResponseFeedback.QuestionId] != null)
+                    existingFeedback.Add(surveyFeedback.Id, surveyFeedback.Attributes[Attributes.SurveyResponseFeedback.QuestionId].ToString());
+
+            }
+            return existingFeedback;
         }
 
     }
