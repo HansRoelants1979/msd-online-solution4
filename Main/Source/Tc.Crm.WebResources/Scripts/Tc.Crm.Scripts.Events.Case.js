@@ -165,14 +165,22 @@ Tc.Crm.Scripts.Events.Case = (function () {
                     if (Xrm.Page.getControl("tc_casetypeid").getAttribute().getValue()[0].name == "Complaint") {
                         if (Xrm.Page.getControl("tc_resortofficeid").getAttribute().getValue() != null &&
                             Xrm.Page.getControl("tc_datereported").getAttribute().getValue() != null &&
-                            Xrm.Page.getControl("tc_istheholidaystoppingshorterthanplanned").getAttribute().getValue() != null &&
-                            Xrm.Page.getControl("tc_3rdpartyresponserequired").getAttribute().getValue() != null &&
                             Xrm.Page.getControl("tc_preferredmethodofcommunication").getAttribute().getValue() != null &&
                             Xrm.Page.getControl("caseorigincode").getAttribute().getValue() != null &&
                             Xrm.Page.getControl("description").getAttribute().getValue() != null
                             ) {
-                            Xrm.Page.getControl("tc_mandatoryconditionsmet").getAttribute().setValue(true);
-                            Xrm.Page.data.entity.save();
+                            if (Xrm.Page.getControl("tc_producttype").getAttribute().getValue() == null || Xrm.Page.getControl("tc_producttype").getAttribute().getValue() != null &&
+                                Xrm.Page.getControl("tc_producttype").getAttribute().getValue() != "950000000") {
+                                if (Xrm.Page.getControl("tc_istheholidaystoppingshorterthanplanned").getAttribute().getValue() != null &&
+                                    Xrm.Page.getControl("tc_3rdpartyresponserequired").getAttribute().getValue() != null) {
+                                    Xrm.Page.getControl("tc_mandatoryconditionsmet").getAttribute().setValue(true);
+                                    Xrm.Page.data.entity.save();
+                                }
+                            }
+                            else {
+                                Xrm.Page.getControl("tc_mandatoryconditionsmet").getAttribute().setValue(true);
+                                Xrm.Page.data.entity.save();
+                            }
                         }
                     }
                 }
@@ -185,8 +193,6 @@ Tc.Crm.Scripts.Events.Case = (function () {
                     if (Xrm.Page.getControl("tc_casetypeid").getAttribute().getValue()[0].name == "Complaint") {
                         if (Xrm.Page.getControl("tc_resortofficeid").getAttribute().getValue() != null &&
                             Xrm.Page.getControl("tc_datereported").getAttribute().getValue() != null &&
-                            Xrm.Page.getControl("tc_istheholidaystoppingshorterthanplanned").getAttribute().getValue() != null &&
-                            Xrm.Page.getControl("tc_3rdpartyresponserequired").getAttribute().getValue() != null &&
                             Xrm.Page.getControl("tc_preferredmethodofcommunication").getAttribute().getValue() != null &&
                             Xrm.Page.getControl("caseorigincode").getAttribute().getValue() != null &&
                             Xrm.Page.getControl("tc_sourcemarketid").getAttribute().getValue() != null &&
@@ -196,17 +202,27 @@ Tc.Crm.Scripts.Events.Case = (function () {
                             Xrm.Page.getControl("tc_gateway").getAttribute().getValue() != null &&
                             Xrm.Page.getControl("description").getAttribute().getValue() != null &&
                             Xrm.Page.getControl("tc_departuredate").getAttribute().getValue() != null &&
-                            Xrm.Page.getControl("tc_bookingtravelamount").getAttribute().getValue() != null &&
-                            Xrm.Page.getControl("tc_durationofstay").getAttribute().getValue() != null
-                            ) {
-                            Xrm.Page.getControl("tc_mandatoryconditionsmet").getAttribute().setValue(true);
-                            Xrm.Page.data.entity.save();
+                            Xrm.Page.getControl("tc_bookingtravelamount").getAttribute().getValue() != null
+                             ) {
+                            if (Xrm.Page.getControl("tc_producttype").getAttribute().getValue() == null || Xrm.Page.getControl("tc_producttype").getAttribute().getValue() != null &&
+                                Xrm.Page.getControl("tc_producttype").getAttribute().getValue() != "950000000") {
+                                if (Xrm.Page.getControl("tc_istheholidaystoppingshorterthanplanned").getAttribute().getValue() != null &&
+                                    Xrm.Page.getControl("tc_3rdpartyresponserequired").getAttribute().getValue() != null &&
+                                    Xrm.Page.getControl("tc_durationofstay").getAttribute().getValue() != null) {
+                                    Xrm.Page.getControl("tc_mandatoryconditionsmet").getAttribute().setValue(true);
+                                    Xrm.Page.data.entity.save();
+                                }
+                            }
+                            else {
+                                Xrm.Page.getControl("tc_mandatoryconditionsmet").getAttribute().setValue(true);
+                                Xrm.Page.data.entity.save();
+                            }
                         }
                     }
                 }
             }
         }
-    }    
+    }
     function validateCaseAssociatedCustomerPhoneNum() {
         var Customer = Xrm.Page.getAttribute("customerid").getValue();
         if (Customer == null)
