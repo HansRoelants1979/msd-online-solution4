@@ -201,6 +201,8 @@ namespace Tc.Crm.Service.Services
                     if (!string.IsNullOrWhiteSpace(sourceMarket.TeamId))
                         customer.Owner = sourceMarket.TeamId;
                 }
+                else
+                    customer.CustomerIdentifier.SourceMarket = null;
             }
 
 
