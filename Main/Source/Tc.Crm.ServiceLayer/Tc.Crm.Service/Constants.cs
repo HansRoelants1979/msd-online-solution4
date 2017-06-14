@@ -40,8 +40,8 @@
     }
     public static class Messages
     {
-        public const string CustomerSourceMarketMissing = "Customer record doesn't have a source market.";
-        public const string SourceMarketMissing = "Booking record doesn't have a source market.";
+        public const string CustomerSourceMarketMissing = "Customer record doesn't have a source market or the source market provided could not be resolved.";
+        public const string SourceMarketMissing = "Booking record doesn't have a source market or the source market provided could not be resolved.";
         public const string CurrencyResolutionError = "Currency could not be resolved.";
         public const string CustomerIdIsNull = "Customer does not have a customer id.";
         public const string BookingSystemIsUnknown = "Booking system provided is either null or unknown";
