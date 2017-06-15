@@ -16,14 +16,11 @@
       <Query>
         <DataSourceName>Crm</DataSourceName>
         <QueryParameters>
-          <QueryParameter Name="@Start">
-            <Value>=Parameters!Start.Value</Value>
+          <QueryParameter Name="@ExtractDate">
+            <Value>=Parameters!ExtractDate.Value</Value>
           </QueryParameter>
           <QueryParameter Name="@SourceMarket">
             <Value>=Parameters!SourceMarket.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@End">
-            <Value>=Parameters!End.Value</Value>
           </QueryParameter>
         </QueryParameters>
         <CommandText>&lt;fetch&gt;
@@ -38,6 +35,7 @@
     &lt;attribute name="createdon" /&gt;
     &lt;attribute name="tc_24hourpromise" /&gt;
     &lt;attribute name="tc_departuredate" /&gt;
+    &lt;attribute name="description" /&gt;
     &lt;attribute name="modifiedby" /&gt;
     &lt;attribute name="tc_bookingreferencefreetext" /&gt;
     &lt;attribute name="tc_bookingid" /&gt;
@@ -56,8 +54,7 @@
     &lt;attribute name="tc_offeredamountdecision" /&gt;
     &lt;attribute name="tc_brandid" /&gt;
     &lt;filter type="and" &gt;
-      &lt;condition attribute="modifiedon" operator="on-or-after" value="@Start" /&gt;
-      &lt;condition attribute="modifiedon" operator="on-or-before" value="@End" /&gt;
+      &lt;condition attribute="modifiedon" operator="on" value="@ExtractDate" /&gt;
       &lt;filter type="or" &gt;
         &lt;condition attribute="tc_bookingid" operator="not-null" /&gt;
         &lt;filter type="and" &gt;
@@ -212,6 +209,10 @@
         <Field Name="tc_24hourpromiseValue">
           <DataField>tc_24hourpromiseValue</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="description">
+          <DataField>description</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="tc_bookingreference">
           <DataField>tc_bookingreference</DataField>
@@ -638,19 +639,15 @@
       <Query>
         <DataSourceName>Crm</DataSourceName>
         <QueryParameters>
-          <QueryParameter Name="@Start">
-            <Value>=Parameters!Start.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@End">
-            <Value>=Parameters!End.Value</Value>
+          <QueryParameter Name="@ExtractDate">
+            <Value>=Parameters!ExtractDate.Value</Value>
           </QueryParameter>
         </QueryParameters>
         <CommandText>&lt;fetch &gt;
   &lt;entity name="incident" &gt;
     &lt;filter type="and" &gt;
-      &lt;condition attribute="modifiedon" operator="on-or-after" value="@Start" /&gt;
-      &lt;condition attribute="modifiedon" operator="on-or-before" value="@End" /&gt;
-    &lt;/filter&gt;
+      &lt;condition attribute="modifiedon" operator="on" value="@ExtractDate" /&gt;
+      &lt;/filter&gt;
     &lt;link-entity name="systemuser" from="systemuserid" to="ownerid" link-type="outer" alias="s" &gt;
       &lt;attribute name="systemuserid" /&gt;
       &lt;link-entity name="systemuserroles" from="systemuserid" to="systemuserid" link-type="outer" alias="sr" intersect="true" &gt;
@@ -684,11 +681,16 @@
     <DataSet Name="CaseCompensationLines">
       <Query>
         <DataSourceName>Crm</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@ExtractDate">
+            <Value>=Parameters!ExtractDate.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
         <CommandText>&lt;fetch aggregate="true" &gt;
   &lt;entity name="incident" &gt;
     &lt;attribute name="incidentid" alias="incidentid" groupby="true" /&gt;
     &lt;filter type="and" &gt;
-      &lt;condition attribute="modifiedon" operator="yesterday" /&gt;
+      &lt;condition attribute="modifiedon" operator="on" value="@ExtractDate" /&gt;
     &lt;/filter&gt;
     &lt;link-entity name="tc_compensationline" from="tc_caseid" to="incidentid" link-type="outer" alias="col" &gt;
       &lt;attribute name="tc_amount" alias="TotalAmount" aggregate="sum" /&gt;
@@ -715,14 +717,11 @@
       <Query>
         <DataSourceName>Crm</DataSourceName>
         <QueryParameters>
-          <QueryParameter Name="@Start">
-            <Value>=Parameters!Start.Value</Value>
+          <QueryParameter Name="@ExtractDate">
+            <Value>=Parameters!ExtractDate.Value</Value>
           </QueryParameter>
           <QueryParameter Name="@SourceMarket">
             <Value>=Parameters!SourceMarket.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@End">
-            <Value>=Parameters!End.Value</Value>
           </QueryParameter>
         </QueryParameters>
         <CommandText>&lt;fetch&gt;
@@ -730,8 +729,7 @@
     &lt;attribute name="ticketnumber" /&gt;
     &lt;attribute name="incidentid" /&gt;
     &lt;filter type="and" &gt;
-      &lt;condition attribute="modifiedon" operator="on-or-after" value="@Start" /&gt;
-      &lt;condition attribute="modifiedon" operator="on-or-before" value="@End" /&gt;
+      &lt;condition attribute="modifiedon" operator="on" value="@ExtractDate" /&gt;
       &lt;filter type="or" &gt;
         &lt;condition attribute="tc_bookingid" operator="not-null" /&gt;
         &lt;filter type="and" &gt;
@@ -954,18 +952,14 @@
       <Query>
         <DataSourceName>Crm</DataSourceName>
         <QueryParameters>
-          <QueryParameter Name="@Start">
-            <Value>=Parameters!Start.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@End">
-            <Value>=Parameters!End.Value</Value>
+          <QueryParameter Name="@ExtractDate">
+            <Value>=Parameters!ExtractDate.Value</Value>
           </QueryParameter>
         </QueryParameters>
         <CommandText>&lt;fetch &gt;
   &lt;entity name="incident" &gt;
     &lt;filter type="and" &gt;
-      &lt;condition attribute="modifiedon" operator="on-or-after" value="@Start" /&gt;
-      &lt;condition attribute="modifiedon" operator="on-or-before" value="@End" /&gt;
+      &lt;condition attribute="modifiedon" operator="on" value="@ExtractDate" /&gt;
     &lt;/filter&gt;
     &lt;link-entity name="systemuser" from="systemuserid" to="ownerid" link-type="outer" alias="s" &gt;
       &lt;attribute name="systemuserid" /&gt;
@@ -994,6 +988,50 @@
         </Field>
         <Field Name="UserRole">
           <Value>=IIf(IsNothing(Fields!s_systemuserid.Value),"",Fields!s_systemuserid.Value) &amp; IIf(IsNothing(Fields!r_name.Value),"",Fields!r_name.Value)</Value>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="CaseFinalNotes">
+      <Query>
+        <DataSourceName>Crm</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@ExtractDate">
+            <Value>=Parameters!ExtractDate.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>&lt;fetch&gt;
+  &lt;entity name="incident" &gt;
+    &lt;attribute name="incidentid" /&gt;
+    &lt;filter type="and" &gt;
+      &lt;condition attribute="modifiedon" operator="on" value="@ExtractDate" /&gt;
+    &lt;/filter&gt;
+    &lt;link-entity name="activitypointer" from="regardingobjectid" to="incidentid" link-type="inner" alias="cr" &gt;
+      &lt;attribute name="createdon" /&gt;
+      &lt;attribute name="description" /&gt;
+      &lt;filter type="and" &gt;
+        &lt;condition attribute="activitytypecode" operator="eq" value="4206" /&gt;
+      &lt;/filter&gt;
+      &lt;order attribute="createdon" descending="true" /&gt;
+    &lt;/link-entity&gt;
+  &lt;/entity&gt;
+&lt;/fetch&gt;</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="incidentid">
+          <DataField>incidentid</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="cr_createdon">
+          <DataField>cr_createdon</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="cr_createdonValue">
+          <DataField>cr_createdonValue</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="cr_description">
+          <DataField>cr_description</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
@@ -1036,6 +1074,12 @@
               <TablixColumns>
                 <TablixColumn>
                   <Width>1.48958in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.84375in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>1.69792in</Width>
@@ -1214,6 +1258,78 @@
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox7</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>SteelBlue</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox3">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Summary</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox3</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>SteelBlue</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox13">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Final Statement Rep</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox13</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -3067,6 +3183,70 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="description">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!description.Value</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>description</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="caseorigincodeValue">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Lookup(Fields!incidentid.Value,Fields!incidentid.Value,Fields!cr_description.Value,"CaseFinalNotes")</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>caseorigincodeValue</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="tc_bookingid">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -4722,6 +4902,8 @@
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
+                <TablixMember />
+                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
@@ -4747,7 +4929,7 @@
             <DataSetName>CasesAndCaseItems</DataSetName>
             <Top>0.36in</Top>
             <Height>0.43in</Height>
-            <Width>87.95833in</Width>
+            <Width>90.80208in</Width>
             <ZIndex>1</ZIndex>
             <Style />
           </Tablix>
@@ -4755,7 +4937,7 @@
         <Height>0.79in</Height>
         <Style />
       </Body>
-      <Width>87.95833in</Width>
+      <Width>90.80208in</Width>
       <Page>
         <LeftMargin>1in</LeftMargin>
         <RightMargin>1in</RightMargin>
@@ -4777,13 +4959,9 @@
         </DataSetReference>
       </ValidValues>
     </ReportParameter>
-    <ReportParameter Name="Start">
+    <ReportParameter Name="ExtractDate">
       <DataType>DateTime</DataType>
-      <Prompt>Start Date</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="End">
-      <DataType>DateTime</DataType>
-      <Prompt>End Date</Prompt>
+      <Prompt>Date</Prompt>
     </ReportParameter>
   </ReportParameters>
   <Language>en-US</Language>

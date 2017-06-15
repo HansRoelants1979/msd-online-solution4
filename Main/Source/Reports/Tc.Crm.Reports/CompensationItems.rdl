@@ -56,10 +56,16 @@
               <Width>1.86458in</Width>
             </TablixColumn>
             <TablixColumn>
+              <Width>1.46875in</Width>
+            </TablixColumn>
+            <TablixColumn>
               <Width>1.28125in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>2.01042in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1.60417in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.65625in</Width>
@@ -344,6 +350,42 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
+                    <Textbox Name="Textbox16">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Created By: Team</Value>
+                              <Style>
+                                <FontFamily>Tahoma</FontFamily>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>White</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox16</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>SteelBlue</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
                     <Textbox Name="textbox9">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -400,6 +442,42 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>textbox10</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>SteelBlue</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox21">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Modified By: Team</Value>
+                              <Style>
+                                <FontFamily>Tahoma</FontFamily>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>White</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox21</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -933,6 +1011,38 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
+                    <Textbox Name="col_tc_reasonforvouchercancellation">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=IIf(IsNothing(Lookup(Fields!csu_systemuserid.Value &amp; "Tc.Ids.Rep",Fields!UserRole.Value,"iDS Rep","CaseCreatorUserRoles")),IIf(IsNothing(Lookup(Fields!csu_systemuserid.Value &amp; "Tc.CustomerRelations.Agent",Fields!UserRole.Value,"Customer Relations Agent","CaseCreatorUserRoles")),IIf(IsNothing(Lookup(Fields!csu_systemuserid.Value &amp; "Tc.Ids.ConnectedServices.Consultant",Fields!UserRole.Value,"Customer Relations Agent","CaseCreatorUserRoles")),"","Connected Services Consultant"),"Customer Relations Agent"),"iDS Rep")</Value>
+                              <Style>
+                                <FontFamily>Tahoma</FontFamily>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>col_tc_reasonforvouchercancellation</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
                     <Textbox Name="col_modifiedon">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -982,6 +1092,38 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>col_modifiedby</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="col_tc_nonfinancialcompensationsubtypeValue">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=IIf(IsNothing(Lookup(Fields!msu_systemuserid.Value &amp; "Tc.Ids.Rep",Fields!UserRole.Value,"iDS Rep","CaseModifierUserRoles")),IIf(IsNothing(Lookup(Fields!msu_systemuserid.Value &amp; "Tc.CustomerRelations.Agent",Fields!UserRole.Value,"Customer Relations Agent","CaseModifierUserRoles")),IIf(IsNothing(Lookup(Fields!msu_systemuserid.Value &amp; "Tc.Ids.ConnectedServices.Consultant",Fields!UserRole.Value,"Customer Relations Agent","CaseModifierUserRoles")),"","Connected Services Consultant"),"Customer Relations Agent"),"iDS Rep")</Value>
+                              <Style>
+                                <FontFamily>Tahoma</FontFamily>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>col_tc_nonfinancialcompensationsubtypeValue</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1274,6 +1416,8 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
+            <TablixMember />
+            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -1299,7 +1443,7 @@
         <DataSetName>CompensationItems</DataSetName>
         <Top>0.36in</Top>
         <Height>0.43in</Height>
-        <Width>26.76041in</Width>
+        <Width>29.83334in</Width>
         <ZIndex>1</ZIndex>
         <Style />
       </Tablix>
@@ -1307,7 +1451,7 @@
     <Height>0.79in</Height>
     <Style />
   </Body>
-  <Width>26.76041in</Width>
+  <Width>29.83334in</Width>
   <Page>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>
@@ -1373,6 +1517,12 @@
         &lt;attribute name="transactioncurrencyid" /&gt;
         &lt;attribute name="tc_chapsamount" /&gt;
         &lt;attribute name="tc_cashamount" /&gt;
+        &lt;link-entity name="systemuser" from="systemuserid" to="createdby" link-type="outer" alias="csu" &gt;
+          &lt;attribute name="systemuserid" /&gt;
+        &lt;/link-entity&gt;
+        &lt;link-entity name="systemuser" from="systemuserid" to="modifiedby" link-type="outer" alias="msu" &gt;
+          &lt;attribute name="systemuserid" /&gt;
+        &lt;/link-entity&gt;
       &lt;/link-entity&gt;
     &lt;/link-entity&gt;
     &lt;link-entity name="tc_booking" from="tc_bookingid" to="tc_bookingid" link-type="outer" alias="bo" &gt;
@@ -1567,8 +1717,16 @@
           <DataField>col_tc_cashamountValue</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
+        <Field Name="csu_systemuserid">
+          <DataField>csu_systemuserid</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="bo_tc_bookingid">
           <DataField>bo_tc_bookingid</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="msu_systemuserid">
+          <DataField>msu_systemuserid</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="bo_tc_sourcemarketid">
@@ -1670,6 +1828,92 @@ IIf(IsNothing(Fields!col_tc_cashamount.Value),"","Cash")
         <Field Name="tc_countryid">
           <DataField>tc_countryid</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="CaseCreatorUserRoles">
+      <Query>
+        <DataSourceName>Crm</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@ExtractDate">
+            <Value>=Parameters!ExtractDate.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>&lt;fetch &gt;
+  &lt;entity name="incident" &gt;
+    &lt;filter type="and" &gt;
+      &lt;condition attribute="modifiedon" operator="on" value="@ExtractDate" /&gt;
+      &lt;/filter&gt;
+    &lt;link-entity name="systemuser" from="systemuserid" to="createdby" link-type="outer" alias="s" &gt;
+      &lt;attribute name="systemuserid" /&gt;
+      &lt;link-entity name="systemuserroles" from="systemuserid" to="systemuserid" link-type="outer" alias="sr" intersect="true" &gt;
+        &lt;link-entity name="role" from="roleid" to="roleid" link-type="outer" alias="r" &gt;
+          &lt;attribute name="name" /&gt;
+          &lt;filter type="or" &gt;
+            &lt;condition attribute="name" operator="eq" value="Tc.CustomerRelations.Agent" /&gt;
+            &lt;condition attribute="name" operator="eq" value="Tc.Ids.ConnectedServices.Consultant" /&gt;
+            &lt;condition attribute="name" operator="eq" value="Tc.Ids.Rep" /&gt;
+          &lt;/filter&gt;
+        &lt;/link-entity&gt;
+      &lt;/link-entity&gt;
+    &lt;/link-entity&gt;
+  &lt;/entity&gt;
+&lt;/fetch&gt;</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="s_systemuserid">
+          <DataField>s_systemuserid</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="r_name">
+          <DataField>r_name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="UserRole">
+          <Value>=IIf(IsNothing(Fields!s_systemuserid.Value),"",Fields!s_systemuserid.Value) &amp; IIf(IsNothing(Fields!r_name.Value),"",Fields!r_name.Value)</Value>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="CaseModifierUserRoles">
+      <Query>
+        <DataSourceName>Crm</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@ExtractDate">
+            <Value>=Parameters!ExtractDate.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>&lt;fetch &gt;
+  &lt;entity name="incident" &gt;
+    &lt;filter type="and" &gt;
+      &lt;condition attribute="modifiedon" operator="on" value="@ExtractDate" /&gt;
+      &lt;/filter&gt;
+    &lt;link-entity name="systemuser" from="systemuserid" to="modifiedby" link-type="outer" alias="s" &gt;
+      &lt;attribute name="systemuserid" /&gt;
+      &lt;link-entity name="systemuserroles" from="systemuserid" to="systemuserid" link-type="outer" alias="sr" intersect="true" &gt;
+        &lt;link-entity name="role" from="roleid" to="roleid" link-type="outer" alias="r" &gt;
+          &lt;attribute name="name" /&gt;
+          &lt;filter type="or" &gt;
+            &lt;condition attribute="name" operator="eq" value="Tc.CustomerRelations.Agent" /&gt;
+            &lt;condition attribute="name" operator="eq" value="Tc.Ids.ConnectedServices.Consultant" /&gt;
+            &lt;condition attribute="name" operator="eq" value="Tc.Ids.Rep" /&gt;
+          &lt;/filter&gt;
+        &lt;/link-entity&gt;
+      &lt;/link-entity&gt;
+    &lt;/link-entity&gt;
+  &lt;/entity&gt;
+&lt;/fetch&gt;</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="s_systemuserid">
+          <DataField>s_systemuserid</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="r_name">
+          <DataField>r_name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="UserRole">
+          <Value>=IIf(IsNothing(Fields!s_systemuserid.Value),"",Fields!s_systemuserid.Value) &amp; IIf(IsNothing(Fields!r_name.Value),"",Fields!r_name.Value)</Value>
         </Field>
       </Fields>
     </DataSet>
