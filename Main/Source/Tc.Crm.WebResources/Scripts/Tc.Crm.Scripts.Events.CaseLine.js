@@ -22,6 +22,7 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
     "use strict";
 
     var VIEW_RANDOM_GUID = "{5A8261E7-71F5-4904-B046-EE8001A01CF5}";
+    var CLIENT_STATE_OFFLINE = "Offline";
 
     var Attributes = {
         Name: "tc_name",
@@ -29,6 +30,10 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
         CaseCategory1: "tc_categorylevel1id",
         CaseCategory2: "tc_casecategory2id",
         CaseCategory3: "tc_category3id",
+        ServiceType: "tc_servicetype",
+        AccommodationId: "tc_bookingaccommodationid",
+        EmailAddress: "emailaddress",
+        AccommodationPropertyName: "tc_accommodationpropertyname",
     }
 
     var EntityNames = {
@@ -160,6 +165,117 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
         console.log("formation The Name of The Case Line Entity - End");
     }
 
+    var setAlternateEmailAddressOnAccommodation = function () {
+        console.log("setAlternateEmailAddressOnAccomdation - Start");
+        var serviceTypeAttribute = Xrm.Page.getAttribute(Attributes.ServiceType);
+        if (serviceTypeAttribute == null || serviceTypeAttribute == undefined) return;
+        var serviceType = serviceTypeAttribute.getValue();
+        if (serviceType !== 950000000) return;
+
+        var accommodationAttribute = Xrm.Page.getAttribute(Attributes.AccommodationId);
+        if (accommodationAttribute == null || accommodationAttribute == undefined) return;
+
+        var accommodation = accommodationAttribute.getValue();
+        if (accommodation == null || accommodation == "undefined" || accommodation == "")
+            return;
+        var accommodationId = accommodation[0].id;
+        if (accommodationId == null || accommodationId == "" || accommodationId == "undefined")
+            return;
+        accommodationId = accommodationId.replace("{", "").replace("}", "");
+        var entityType = accommodation[0].entityType;
+        if (entityType == null || entityType == "" || entityType == "undefined")
+            return;
+
+        var accommodationReceivedPromise = getAccommodation(accommodationId).then(
+                        function (accommodationResponse) {
+
+                            var accommodationRecord = JSON.parse(accommodationResponse.response);
+                            if (accommodationRecord == null || accommodationRecord == "" || accommodationRecord == "undefined") return;
+                            if (accommodationRecord.tc_HotelId == null || accommodationRecord.tc_HotelId == "" || accommodationRecord.tc_HotelId == "undefined") return;
+                            if (accommodationRecord.tc_HotelId.tc_primaryemailaddress == null || accommodationRecord.tc_HotelId.tc_primaryemailaddress == "" || accommodationRecord.tc_HotelId.tc_primaryemailaddress == "undefined") return;
+                            var emailAddressAttribute = Xrm.Page.getAttribute(Attributes.EmailAddress);
+                            if (emailAddressAttribute == null || emailAddressAttribute == undefined) return;
+                            emailAddressAttribute.setValue(accommodationRecord.tc_HotelId.tc_primaryemailaddress);
+
+                        }).catch(function (err) {
+                            throw new Error("Problem in retrieving the Accommodation");
+                        });
+
+        console.log("setAlternateEmailAddressOnAccomdation - End");
+
+
+    }
+    var setAlternateEmailAddressOnPropertyName = function () {
+        console.log("setAlternateEmailAddressOnPropertyName - Start");
+        var serviceTypeAttribute = Xrm.Page.getAttribute(Attributes.ServiceType);
+        if (serviceTypeAttribute == null || serviceTypeAttribute == undefined) return;
+        var serviceType = serviceTypeAttribute.getValue();
+        if (serviceType !== 950000000) return;
+
+        var accommodationPropertyNameAttribute = Xrm.Page.getAttribute(Attributes.AccommodationPropertyName);
+        if (accommodationPropertyNameAttribute == null || accommodationPropertyNameAttribute == undefined) return;
+
+        var accommodationPropertyName = accommodationPropertyNameAttribute.getValue();
+        if (accommodationPropertyName == null || accommodationPropertyName == "undefined" || accommodationPropertyName == "")
+            return;
+        var accommodationPropertyNameId = accommodationPropertyName[0].id;
+        if (accommodationPropertyNameId == null || accommodationPropertyNameId == "" || accommodationPropertyNameId == "undefined")
+            return;
+        accommodationPropertyNameId = accommodationPropertyNameId.replace("{", "").replace("}", "");
+        var entityType = accommodationPropertyName[0].entityType;
+        if (entityType == null || entityType == "" || entityType == "undefined")
+            return;
+
+        var accommodationReceivedPromise = getHotel(accommodationPropertyNameId).then(
+                        function (accommodationPropertyNameResponse) {
+
+                            var hotelRecord = JSON.parse(accommodationPropertyNameResponse.response);
+                            if (hotelRecord == null || hotelRecord == "" || hotelRecord == "undefined") return;
+                            if (hotelRecord.tc_primaryemailaddress == null || hotelRecord.tc_primaryemailaddress == "" || hotelRecord.tc_primaryemailaddress == "undefined") return;
+                            var emailAddressAttribute = Xrm.Page.getAttribute(Attributes.EmailAddress);
+                            if (emailAddressAttribute == null || emailAddressAttribute == undefined) return;
+                            emailAddressAttribute.setValue(hotelRecord.tc_primaryemailaddress);
+
+                        }).catch(function (err) {
+                            throw new Error("Problem in retrieving the Hotel");
+                        });
+
+        console.log("setAlternateEmailAddressOnPropertyName - End");
+
+
+    }
+
+    function getAccommodation(accommodationId) {
+
+        var query = "?$select=_tc_hotelid_value&$expand=tc_HotelId($select=tc_primaryemailaddress)";
+        var entityName = "tc_bookingaccommodations";
+        var id = accommodationId;
+        if (IsOfflineMode()) {
+            return Xrm.Mobile.offline.retrieveRecord(entityName, id, query);
+        }
+        else {
+            return Tc.Crm.Scripts.Common.GetById(entityName, id, query);
+        }
+
+    }
+    function getHotel(accommodationPropertyNameId) {
+
+        var query = "?$select=tc_primaryemailaddress";
+        var entityName = "tc_hotels";
+        var id = accommodationPropertyNameId;
+        if (IsOfflineMode()) {
+            return Xrm.Mobile.offline.retrieveRecord(entityName, id, query);
+        }
+        else {
+            return Tc.Crm.Scripts.Common.GetById(entityName, id, query);
+        }
+
+    }
+
+    function IsOfflineMode() {
+        return Xrm.Page.context.client.getClientState() === CLIENT_STATE_OFFLINE
+    }
+
     // public methods
     return {
         OnLoad: function () {
@@ -175,6 +291,12 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
         OnCaseCategoryLevel3Change: function () {
             Tc.Crm.Scripts.Library.CaseLine.ClearCompensationCalculatorValues();
             Tc.Crm.Scripts.Library.CaseLine.ShowHideCompensationCalculator(true);
+        },
+        OnCaseLineAccommodationChange: function () {
+            setAlternateEmailAddressOnAccommodation();
+        },
+        OnCaseLinePropertyNameChange: function () {
+            setAlternateEmailAddressOnPropertyName();
         }
     };
 })();
