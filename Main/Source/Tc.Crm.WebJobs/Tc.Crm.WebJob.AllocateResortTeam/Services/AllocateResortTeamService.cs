@@ -26,7 +26,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.WebJob.AllocateResortTeam.Services.ILogger.LogInformation(System.String)")]
         public void GetBookingAllocations()
         {
-            //logger.LogInformation("Executing GetBookingAllocations");
+            
             IList<Guid> destinationGateways = GetDestinationGateways();
             if (destinationGateways == null || destinationGateways.Count == 0)
             {
@@ -78,7 +78,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
 
         public IList<BookingAllocationResortTeamRequest> ProcessAllocationResponse(IList<BookingAllocationResponse> bookingAllocationResponses)
         {
-            //logger.LogInformation("ProcessAllocationResponse - start");
+            
             if (bookingAllocationResponses == null || bookingAllocationResponses.Count == 0) return null;
 
             var bookingAllocationResortTeamRequest = new List<BookingAllocationResortTeamRequest>();
@@ -176,12 +176,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                 logger.LogWarning(responseLog + "Not processing this record as no child hotel team exists for this combination of booking's sourcemarket businessunit and hotel owner");
                 return false;
             }
-            //if (bookingResponse.Customer == null)
-            //{
-            //    logger.LogWarning(responseLog+"Not processing this record as no customer exists");
-            //    return false;
-            //}
-
+            
             //customer already allocated
             if (processedCustomers.Contains(bookingResponse.Customer.Id))
             {
@@ -285,7 +280,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
 
         public CustomerResortTeamRequest PrepareCustomerResortTeamRequest(BookingAllocationResponse bookingResponse)
         {
-            //logger.LogInformation("PrepareCustomerResortTeamRequest - start");
+            
             if (bookingResponse == null) throw new ArgumentNullException("bookingResponse");
             if (bookingResponse.Customer == null || bookingResponse.ChildHotelTeam == null) return null;            
             var customerResortTeamRequest = new CustomerResortTeamRequest
@@ -294,13 +289,13 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                 Owner = bookingResponse.ChildHotelTeam
             };
 
-            //logger.LogInformation("PrepareCustomerResortTeamRequest - end");
+            
             return customerResortTeamRequest;
         }
 
         public BookingResortTeamRequest PrepareBookingResortTeamRequest(BookingAllocationResponse bookingResponse)
         {
-            //logger.LogInformation("PrepareBookingResortTeamRequest - start");
+            
             if (bookingResponse == null) throw new ArgumentNullException("bookingResponse");
             if (bookingResponse.BookingId == null || bookingResponse.ChildHotelTeam == null) return null;
             var bookingResortTeamRequest = new BookingResortTeamRequest
@@ -310,7 +305,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                 Owner = bookingResponse.ChildHotelTeam
             };
 
-            //logger.LogInformation("PrepareBookingResortTeamRequest - end");
+            
             return bookingResortTeamRequest;
         }
 

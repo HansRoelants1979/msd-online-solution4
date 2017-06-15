@@ -98,7 +98,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
 
         public StringBuilder GetDestinationGateways(IList<Guid> destinationGateways)
         {
-            //logger.LogInformation("GetDestinationGateways - start");
+            
             StringBuilder gateways = new StringBuilder();
             if (destinationGateways == null || destinationGateways.Count == 0)
                 throw new ArgumentNullException("destinationGateways");
@@ -107,7 +107,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
             {
                 gateways.Append("<value>" + destinationGateways[i].ToString() + "</value>");
             }
-            //logger.LogInformation("GetDestinationGateways - end");
+            
             return gateways;
         }
 
@@ -297,7 +297,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
 
 
             }
-            //logger.LogInformation("PrepareBookingAllocation - end");
+            
             return bookingAllocationResponse;
         }
 
@@ -330,7 +330,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.WebJob.AllocateResortTeam.Services.ILogger.LogInformation(System.String)")]
         public void ProcessBookingAllocations(IList<BookingAllocationResortTeamRequest> bookingAllocationResortTeamRequests)
         {
-            //logger.LogInformation("ProcessBookingAllocations - start");
+            
             if (bookingAllocationResortTeamRequests == null || bookingAllocationResortTeamRequests.Count == 0)
                 return;
 
@@ -369,7 +369,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
             if (assignRequests != null && assignRequests.Count > 0)
                 crmService.BulkAssign(assignRequests);
 
-            //logger.LogInformation("ProcessBookingAllocations - end");
+            
         }
 
 

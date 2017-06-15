@@ -42,7 +42,6 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
             if (payloadSurvey.SurveyResponse == null) throw new InvalidPluginExecutionException("SurveyResponse is null in json payload");
             if (payloadSurvey.SurveyResponse.Responses == null) throw new InvalidPluginExecutionException("Response object in payload json is null");
             List<Response> responses = payloadSurvey.SurveyResponse.Responses;
-
             var failedSurveys = new List<FailedSurvey>();
             for (int i = 0; i < responses.Count; i++)
             {
@@ -84,6 +83,12 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
             return failedSurveys;
         }
 
+        /// <summary>
+        /// To process answers while updating
+        /// </summary>
+        /// <param name="surveyResponse"></param>
+        /// <param name="response"></param>
+        /// <param name="existingFeedback"></param>
         private void ProcessAnswersOnUpdate(Entity surveyResponse, Response response, Dictionary<Guid, string> existingFeedback)
         {
             if (response.Answers != null && response.Answers.Count > 0)
@@ -91,8 +96,18 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
                 MapBookingContact(surveyResponse, response);
                 ProcessFeedback(surveyResponse, response.Answers, existingFeedback, false);
             }
+            else
+            {
+                surveyResponse[Attributes.SurveyResponse.BookingId] = null;
+                surveyResponse[Attributes.SurveyResponse.CustomerId] = null;
+            }
         }
 
+        /// <summary>
+        /// To process answers while creating
+        /// </summary>
+        /// <param name="surveyResponse"></param>
+        /// <param name="response"></param>
         private void ProcessAnswersOnCreate(Entity surveyResponse, Response response)
         {
             if (response.Answers != null && response.Answers.Count > 0)
@@ -113,7 +128,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         {
             surveyResponse.Id = surveyId;
             CommonXrm.UpdateEntity(surveyResponse, payloadSurvey.CrmService);
-            if (answers == null || answers.Count == 0) return;
+            if (answers == null || answers.Count == 0) { UpdateAllFeedbackAsPendingDelete(existingFeedback); return; }
             if (existingFeedback != null && existingFeedback.Count > 0)
             {
                 List<Answer> answersToCreate = answers.Where(a => !existingFeedback.Any(f => f.Value == a.Id.ToString())).ToList();
@@ -127,9 +142,23 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
             }
         }
 
+        /// <summary>
+        /// To create survey feedback record
+        /// </summary>
+        /// <param name="surveyResponse"></param>
         private void CreateSurveyFeedback(Entity surveyResponse)
         {
             CommonXrm.CreateEntity(surveyResponse, payloadSurvey.CrmService);
+        }
+
+        /// <summary>
+        /// To update all feedback records to pending delete status
+        /// </summary>
+        /// <param name="existingFeedback"></param>
+        private void UpdateAllFeedbackAsPendingDelete(Dictionary<Guid, string> existingFeedback)
+        {
+            if (existingFeedback != null && existingFeedback.Count > 0)
+                UpdateFeedbackAsPendingDelete(existingFeedback.Where(f => f.Key != Guid.Empty));
         }
 
 
@@ -333,6 +362,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         private void MapBooking(Entity surveyResponse, EntityCollection entColBookingContact)
         {
             trace.Trace("Processing MapBooking - start");
+            surveyResponse[Attributes.SurveyResponse.BookingId] = null;
             if (entColBookingContact != null && entColBookingContact.Entities.Count > 0)
             {
                 var fieldBooking = AliasName.Booking + Attributes.Booking.BookingId;
@@ -354,6 +384,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         private void MapContact(Entity surveyResponse, EntityCollection entColBookingContact)
         {
             trace.Trace("Processing MapContact - start");
+            surveyResponse[Attributes.SurveyResponse.CustomerId] = null;
             if (entColBookingContact != null && entColBookingContact.Entities.Count > 0)
             {
                 var fieldContact = AliasName.Contact + Attributes.Contact.ContactId;
