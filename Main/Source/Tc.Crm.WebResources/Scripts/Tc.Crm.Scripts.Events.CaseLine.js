@@ -228,7 +228,6 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
 
         var accommodationReceivedPromise = getHotel(accommodationPropertyNameId).then(
                         function (accommodationPropertyNameResponse) {
-
                             var hotelRecord = JSON.parse(accommodationPropertyNameResponse.response);
                             if (hotelRecord == null || hotelRecord == "" || hotelRecord == "undefined") return;
                             if (hotelRecord.tc_primaryemailaddress == null || hotelRecord.tc_primaryemailaddress == "" || hotelRecord.tc_primaryemailaddress == "undefined") return;
