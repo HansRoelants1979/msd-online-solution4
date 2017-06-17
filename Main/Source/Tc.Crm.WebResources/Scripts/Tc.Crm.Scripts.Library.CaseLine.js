@@ -24,7 +24,6 @@ Tc.Crm.Scripts.Library.CaseLine = (function () {
     var FORM_MODE_CREATE = 1;
     var FORM_MODE_UPDATE = 2;
     var FORM_MODE_QUICK_CREATE = 5;
-
     var CASE_TYPE_COMPLAIN = "{478C99E9-93E4-E611-8109-1458D041F8E8}";
     var CLIENT_STATE_OFFLINE = "Offline";
 
