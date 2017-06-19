@@ -69,7 +69,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                                                                   <link-entity name='team' alias='hotelteam' from='teamid' to='owningteam'/>
                                                             </link-entity>
                                                     </link-entity>
-                                                    <link-entity name='tc_customerbookingrole' alias='role' from='tc_bookingid' to='tc_bookingid'>
+                                                    <link-entity link-type='outer' name='tc_customerbookingrole' alias='role' from='tc_bookingid' to='tc_bookingid'>
                                                       <attribute name='tc_customer'/>
                                                          <link-entity link-type='outer' name='account' alias='account' from='accountid' to='tc_customer'>
                                                             <attribute name='ownerid'/>

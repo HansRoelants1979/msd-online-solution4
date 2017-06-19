@@ -88,14 +88,19 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
             for (int i = 0; i < bookingAllocationResponses.Count; i++)
             {
                 var bookingResponse = bookingAllocationResponses[i];
+                if (bookingResponse == null) throw new ArgumentNullException("bookingResponse");
                 var responseLog = WriteAllocationResponseLog(bookingResponse);
 
                 if (!ValidForProcessing(bookingResponse, processedCustomers, responseLog)) continue;
 
                 var bookingAllocated = IsBookingAllocated(bookingResponse);
                 var customerAllocated = IsCustomerAllocated(bookingResponse);
-                
-                
+
+                if (bookingAllocated && bookingResponse.Customer == null)
+                {
+                    logger.LogInformation(responseLog + "Not processing this record as the booking was already allocated to child hotel team and no customer exists to allocate");
+                    continue;
+                }
 
                 if (bookingAllocated && customerAllocated)
                 {
@@ -105,16 +110,16 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
 
                 if (bookingResponse.AccommodationStartDate != null && bookingResponse.AccommodationStartDate.Value.Date < DateTime.Now.Date)
                 {
-                    var futureBookingsExists = bookingAllocationResponses.ToList().Find(b => b.BookingId == bookingResponse.BookingId
+                    var futureBookingAccommodationExists = bookingAllocationResponses.ToList().Find(b => b.BookingId == bookingResponse.BookingId
                                                                                           && b.AccommodationStartDate > bookingResponse.AccommodationStartDate) != null;
-                    if (futureBookingsExists)
+                    if (futureBookingAccommodationExists)
                         continue;
                 }              
                 
                 
                 var differentBooking = processedBookings.Find(b => b.BookingId == bookingResponse.BookingId) == null;
                 var sameBookingDifferentCustomer = processedBookings.Find(b => b.BookingId == bookingResponse.BookingId
-                                                                            && bookingResponse.AccommodationStartDate != null
+                                                                            && bookingResponse.AccommodationStartDate != null && bookingResponse.Customer != null
                                                                             && b.AccommodationStartDate == bookingResponse.AccommodationStartDate
                                                                             && b.Customer.Id != bookingResponse.Customer.Id) != null;
 
@@ -125,9 +130,11 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                 }
 
                 var log = AllocateToChildHotelTeam(bookingResponse, bookingAllocationResortTeamRequest, differentBooking, sameBookingDifferentCustomer, bookingAllocated, customerAllocated);
-                logger.LogInformation(responseLog + log);               
+                logger.LogInformation(responseLog + log);
 
-                processedCustomers.Add(bookingResponse.Customer.Id);
+                if (bookingResponse.Customer != null)
+                    processedCustomers.Add(bookingResponse.Customer.Id);
+
                 processedBookings.Add(bookingResponse);
             }
            
@@ -170,7 +177,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
 
         public bool ValidForProcessing(BookingAllocationResponse bookingResponse, List<Guid> processedCustomers, string responseLog)
         {
-            if (bookingResponse == null) return false;
+            if (bookingResponse == null) throw new ArgumentNullException("bookingResponse"); ;
             if (bookingResponse.ChildHotelTeam == null)
             {
                 logger.LogWarning(responseLog + "Not processing this record as no child hotel team exists for this combination of booking's sourcemarket businessunit and hotel owner");
@@ -178,7 +185,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
             }
             
             //customer already allocated
-            if (processedCustomers.Contains(bookingResponse.Customer.Id))
+            if (bookingResponse.Customer != null && processedCustomers.Contains(bookingResponse.Customer.Id))
             {
                 logger.LogWarning(responseLog + "Not processing this record as customer: " + bookingResponse.Customer.Name + " was already got processed.");
                 return false;
@@ -207,7 +214,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
 
         public bool IsCustomerAllocated(BookingAllocationResponse bookingResponse)
         {
-            if (bookingResponse.Customer.Owner == null || bookingResponse.ChildHotelTeam == null) return false;
+            if (bookingResponse.Customer == null  || bookingResponse.Customer.Owner == null || bookingResponse.ChildHotelTeam == null) return false;
             if (bookingResponse.Customer.Owner.OwnerType == OwnerType.Team)
             {
                 if (Guid.Equals(bookingResponse.Customer.Owner.Id, bookingResponse.ChildHotelTeam.Id))
