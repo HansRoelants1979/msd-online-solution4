@@ -309,11 +309,11 @@ namespace Tc.Crm.CustomWorkflowSteps
                     value = 950000002;
                     break;
 
-                case EmailType.Pri:
+                case EmailType.Primary:
                     value = 950000000;
 
                     break;
-                case EmailType.Pro:
+                case EmailType.Promo:
                     value = 950000001;
                     break;
                 default:
@@ -351,11 +351,14 @@ namespace Tc.Crm.CustomWorkflowSteps
                 case PhoneType.NotSpecified:
                     value = 950000002;
                     break;
-                case PhoneType.H:
+                case PhoneType.Home:
                     value = 950000001;
                     break;
-                case PhoneType.M:
+                case PhoneType.Mobile:
                     value = 950000000;
+                    break;
+                case PhoneType.Business:
+                    value = 950000003;
                     break;
                 default:
                     value = 950000002;

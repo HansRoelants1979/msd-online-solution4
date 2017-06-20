@@ -118,9 +118,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
                 },
                 Phone = new Phone[]
                {
-                   new Phone {Number="12345",PhoneType=PhoneType.H },
-                    new Phone {Number="123456",PhoneType=PhoneType.M },
-                     new Phone {Number="1234567",PhoneType=PhoneType.M }
+                   new Phone {Number="12345",PhoneType=PhoneType.Home },
+                    new Phone {Number="123456",PhoneType=PhoneType.Mobile },
+                     new Phone {Number="1234567",PhoneType=PhoneType.Mobile }
                }
             };
             var contact = ContactHelper.GetContactEntityForBookingPayload(c, trace);
@@ -162,9 +162,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services.Tests
                 },
                 Email = new Email[]
                 {
-                    new Email {Address="one@tc.com",EmailType = EmailType.Pri },
-                    new Email {Address="two@tc.com",EmailType = EmailType.Pro },
-                    new Email {Address="three@tc.com",EmailType = EmailType.Pro }
+                    new Email {Address="one@tc.com",EmailType = EmailType.Primary },
+                    new Email {Address="two@tc.com",EmailType = EmailType.Promo },
+                    new Email {Address="three@tc.com",EmailType = EmailType.Promo }
                 }
             };
             var contact = ContactHelper.GetContactEntityForBookingPayload(c, trace);

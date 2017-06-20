@@ -317,10 +317,12 @@ namespace Tc.Crm.Service.Models
         NotSpecified,
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "H")]
         [EnumMember]
-        H,
+        Home,
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "M")]
         [EnumMember]
-        M
+        Mobile,
+        [EnumMember]
+        Business
     }
     [DataContract(Name = "EmailType")]
     public enum EmailType
@@ -329,9 +331,9 @@ namespace Tc.Crm.Service.Models
         NotSpecified,
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pri")]
         [EnumMember]
-        Pri,
+        Primary,
         [EnumMember]
-        Pro
+        Promo
     }
     [DataContract(Name = "RemarkType")]
     public enum RemarkType
