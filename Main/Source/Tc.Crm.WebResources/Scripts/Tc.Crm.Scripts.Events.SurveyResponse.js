@@ -298,19 +298,32 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
 	    var returnDate = feedBack.filter(function (item) { return item.key === 'TCDIS Return Date'; })[0].value;
 	    if (returnDate)
 	        parameters["tc_departuredate"] = returnDate;
+	    if (arrivalDate && returnDate)
+	    {
+	        parameters["tc_durationofstay"] = getDifferenceInDays(arrivalDate,returnDate);
+	    }
 	    var flightNumber = feedBack.filter(function (item) { return item.key === 'TCDIS Flight Code'; })[0].value;
 	    if (flightNumber)
 	        parameters["tc_flightnumber"] = flightNumber;
 	    parameters["caseorigincode"] = 100000006;
 	    parameters["tc_casetypeid"] = '478C99E9-93E4-E611-8109-1458D041F8E8';
 	    parameters["tc_casetypeidname"] = 'Complaint';
+	    parameters["tc_originatingbusinessarea"] = 950000001;
 	    var preferredCommunication = getPreferredMethodOfCommunication(feedBack.filter(function (item) { return item.key === 'TCDIS Contact Method'; })[0].value);
 	    if (preferredCommunication > 0)
 	        parameters["tc_preferredmethodofcommunication"] = preferredCommunication;
 	    if (booking && booking.length > 0)
 	    {
+	        parameters["tc_bookingreference"] = 1;
 	        parameters["tc_bookingid"] = booking[0].id;
 	        parameters["tc_bookingidname"] = booking[0].name;
+	    }
+	    else
+	    {
+	        parameters["tc_bookingreference"] = 0;
+	        var bookingNumber = feedBack.filter(function (item) { return item.key === 'TCDIS Booking_ref'; })[0].value;
+	        if (bookingNumber)
+	            parameters["tc_bookingreferencefreetext"] = bookingNumber;
 	    }
 	    parameters["tc_surveyid"] = Xrm.Page.data.entity.getId();
 	    Xrm.Utility.openEntityForm("incident", null, parameters);
@@ -392,6 +405,23 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
 	var formatEntityId = function (id) {
 	    return id !== null ? id.replace("{", "").replace("}", "") : null;
 	}
+
+	var getDifferenceInDays = function(arrivalDate, departureDate) {
+	    //Get 1 day in milliseconds
+	    var one_day=1000*60*60*24;
+	    arrivalDate = new Date(arrivalDate);
+	    departureDate = new Date(departureDate);
+	    // Convert both dates to milliseconds
+	    var arrivalDate_ms = arrivalDate.getTime();
+	    var departureDate_ms = departureDate.getTime();
+
+	    // Calculate the difference in milliseconds
+	    var difference_ms = departureDate_ms - arrivalDate_ms;
+    
+	    // Convert back to days and return
+	    return Math.round(difference_ms/one_day); 
+	}
+
 
 	// public
 	return {

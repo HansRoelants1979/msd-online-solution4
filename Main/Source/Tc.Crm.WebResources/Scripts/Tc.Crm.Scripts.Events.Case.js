@@ -304,25 +304,38 @@ Tc.Crm.Scripts.Events.Case = (function () {
     }
 
     var getGateWayFromBooking = function()
-    {
-        var gatewayId = "{00000000-0000-0000-0000-000000000000}";
+    {   
         if (Xrm.Page.getAttribute("tc_bookingid") && Xrm.Page.getAttribute("tc_bookingid").getValue() && Xrm.Page.getAttribute("tc_bookingid").getValue().length > 0)
         {
             var bookingId = Xrm.Page.getAttribute("tc_bookingid").getValue()[0].id;
             var query = "?$select=_tc_destinationgatewayid_value";
-            Tc.Crm.Scripts.Common.GetById("tc_bookings", formatEntityId(bookingId), query).then(function (request)
+            var entityName = "tc_bookings";
+            var id = formatEntityId(bookingId);
+            if (IsOfflineMode())
             {
-                var booking = JSON.parse(request.response);
-                if (booking && booking._tc_destinationgatewayid_value)
-                {
-                    gatewayId = booking._tc_destinationgatewayid_value;
-                    addCustomFilterForLocationOffice(gatewayId);
-                }
-                
-            }).catch(function (err) {
-                console.log("ERROR: " + err.message);
-            });
+                processCustomFilterPromise(Xrm.Mobile.offline.retrieveRecord(entityName, id, query));
+            }
+            else
+            {
+                processCustomFilterPromise(Tc.Crm.Scripts.Common.GetById(entityName, id, query));
+            }
         }
+    }
+
+    var processCustomFilterPromise = function(promise)
+    {
+        promise.then(function (request)
+        {   
+            var booking = JSON.parse(request.response);
+            if (booking && booking._tc_destinationgatewayid_value)
+            {
+                var gatewayId = booking._tc_destinationgatewayid_value;
+                addCustomFilterForLocationOffice(gatewayId);
+            }
+                
+        }).catch(function (err) {
+            console.log("ERROR: " + err.message);
+        });
     }
 
     var addCustomFilterForLocationOffice = function(gatewayId)
