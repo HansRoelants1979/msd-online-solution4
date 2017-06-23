@@ -48,7 +48,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
                 try
                 {
                     trace.Trace("Processing Response " + i + " - start");
-                    var surveyResponse = SurveyResponseHelper.GetResponseEntityFromPayload(responses[i], trace);
+                    var surveyResponse = SurveyResponseHelper.GetResponseEntityFromPayload(responses[i], trace);                    
                     var surveyId = GetSurveyId(SurveyResponseHelper.GetResponseId(responses[i], trace));
 
                     if (surveyId == Guid.Empty)
@@ -84,6 +84,33 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         }
 
         /// <summary>
+        /// To map Gateway information to survey record
+        /// </summary>
+        /// <param name="surveyResponse"></param>
+        /// <param name="response"></param>
+        private void MapGateway(Entity surveyResponse, Response response)
+        {
+            trace.Trace("Processing MapGateway - start");
+            surveyResponse[Attributes.SurveyResponse.GatewayId] = null;
+            if (response.Answers == null || response.Answers.Count == 0) return;            
+            var gatewayCode = AnswerHelper.GetGatewayAlias(response.Answers, payloadSurvey.Trace);
+            if (string.IsNullOrWhiteSpace(gatewayCode)) return;
+            var query = $@"<fetch distinct='false' mapping='logical' output-format='xml-platform' version='1.0'>
+                           <entity name='tc_gateway'>
+                           <attribute name='tc_gatewayid'/>
+                            <filter type='and'>
+                             <condition attribute='tc_iata' value='{gatewayCode}' operator='eq'/>
+                            </filter>
+                           </entity>
+                           </fetch>";
+
+            var entColGateways = CommonXrm.RetrieveMultipleRecordsFetchXml(query, payloadSurvey.CrmService);
+            if (entColGateways == null || entColGateways.Entities.Count == 0) return;
+            surveyResponse.Attributes[Attributes.SurveyResponse.GatewayId] = new EntityReference(EntityName.Gateway, entColGateways.Entities[0].Id);
+            trace.Trace("Processing MapGateway - end");
+        }
+
+        /// <summary>
         /// To process answers while updating
         /// </summary>
         /// <param name="surveyResponse"></param>
@@ -91,16 +118,20 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// <param name="existingFeedback"></param>
         private void ProcessAnswersOnUpdate(Entity surveyResponse, Response response, Dictionary<Guid, string> existingFeedback)
         {
+            trace.Trace("Processing ProcessAnswersOnUpdate - start");
             if (response.Answers != null && response.Answers.Count > 0)
             {
                 MapBookingContact(surveyResponse, response);
+                MapGateway(surveyResponse, response);
                 ProcessFeedback(surveyResponse, response.Answers, existingFeedback, false);
             }
             else
             {
                 surveyResponse[Attributes.SurveyResponse.BookingId] = null;
                 surveyResponse[Attributes.SurveyResponse.CustomerId] = null;
+                surveyResponse[Attributes.SurveyResponse.GatewayId] = null;
             }
+            trace.Trace("Processing ProcessAnswersOnUpdate - end");
         }
 
         /// <summary>
@@ -110,11 +141,14 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// <param name="response"></param>
         private void ProcessAnswersOnCreate(Entity surveyResponse, Response response)
         {
+            trace.Trace("Processing ProcessAnswersOnCreate - start");
             if (response.Answers != null && response.Answers.Count > 0)
             {
                 MapBookingContact(surveyResponse, response);
+                MapGateway(surveyResponse, response);
                 ProcessFeedback(surveyResponse, response.Answers, null, true);
             }
+            trace.Trace("Processing ProcessAnswersOnCreate - start");
         }
 
         /// <summary>
@@ -126,6 +160,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// <param name="existingFeedback"></param>
         private void UpdateSurveyFeedback(Guid surveyId, Entity surveyResponse, List<Answer> answers, Dictionary<Guid, string> existingFeedback)
         {
+            trace.Trace("Processing UpdateSurveyFeedback - start");
             surveyResponse.Id = surveyId;
             CommonXrm.UpdateEntity(surveyResponse, payloadSurvey.CrmService);
             if (answers == null || answers.Count == 0) { UpdateAllFeedbackAsPendingDelete(existingFeedback); return; }
@@ -140,6 +175,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
             {
                 CreateFeedback(answers, surveyId);
             }
+            trace.Trace("Processing UpdateSurveyFeedback - end");
         }
 
         /// <summary>
@@ -148,7 +184,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// <param name="surveyResponse"></param>
         private void CreateSurveyFeedback(Entity surveyResponse)
         {
+            trace.Trace("Processing CreateSurveyFeedback - start");
             CommonXrm.CreateEntity(surveyResponse, payloadSurvey.CrmService);
+            trace.Trace("Processing CreateSurveyFeedback - end");
         }
 
         /// <summary>
@@ -157,8 +195,10 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// <param name="existingFeedback"></param>
         private void UpdateAllFeedbackAsPendingDelete(Dictionary<Guid, string> existingFeedback)
         {
+            trace.Trace("Processing UpdateAllFeedbackAsPendingDelete - start");
             if (existingFeedback != null && existingFeedback.Count > 0)
                 UpdateFeedbackAsPendingDelete(existingFeedback.Where(f => f.Key != Guid.Empty));
+            trace.Trace("Processing UpdateAllFeedbackAsPendingDelete - end");
         }
 
 
@@ -169,6 +209,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// <param name="surveyId"></param>
         private void CreateFeedback(List<Answer> answersToCreate, Guid surveyId)
         {
+            trace.Trace("Processing CreateFeedback - start");
             if (answersToCreate == null || answersToCreate.Count == 0 || surveyId == Guid.Empty) return;
             for (int i = 0; i < answersToCreate.Count; i++)
             {
@@ -176,6 +217,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
                 feedbackEntity.Attributes[Attributes.SurveyResponseFeedback.SurveyFeedbackId] = new EntityReference(EntityName.SurveyResponse, surveyId);
                 CommonXrm.CreateEntity(feedbackEntity, payloadSurvey.CrmService);
             }
+            trace.Trace("Processing CreateFeedback - end");
         }
 
         /// <summary>
@@ -184,6 +226,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// <param name="answersToDelete"></param>
         private void UpdateFeedbackAsPendingDelete(IEnumerable answersToDelete)
         {
+            trace.Trace("Processing UpdateFeedbackAsPendingDelete - start");
             var deleteAnswers = answersToDelete.GetEnumerator();
             while (deleteAnswers.MoveNext())
             {
@@ -194,6 +237,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
                 feedbackEntity.Attributes[Attributes.SurveyResponseFeedback.StatusCode] = new OptionSetValue(950000000);
                 CommonXrm.UpdateEntity(feedbackEntity, payloadSurvey.CrmService);
             }
+            trace.Trace("Processing UpdateFeedbackAsPendingDelete - end");
         }
 
 
@@ -206,10 +250,11 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// <returns></returns>
         private FailedSurvey PrepareFailedSurveys(long? surveyId, string exception)
         {
+            trace.Trace("Processing PrepareFailedSurveys - start");
             if (surveyId != null && surveyId.HasValue)
                 return new FailedSurvey { SurveyId = surveyId.Value.ToString(), Exception = exception };
             else
-                return new FailedSurvey { Exception = exception };
+                return new FailedSurvey { Exception = exception };            
         }
 
         /// <summary>
@@ -283,6 +328,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// <returns></returns>
         private string PrepareContactCondition(string lastName)
         {
+            trace.Trace("Processing PrepareContactCondition - start");
             var contactCondition = string.Empty;
             if (!string.IsNullOrWhiteSpace(lastName))
             {
@@ -293,6 +339,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
                                          </filter>
                                       </link-entity>";
             }
+            trace.Trace("Processing PrepareContactCondition - end");
             return contactCondition;
         }
 
@@ -303,6 +350,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// <returns></returns>
         private string PrepareSourceMarketCondition(string sourceMarket)
         {
+            trace.Trace("Processing PrepareSourceMarketCondition - start");
             var sourceMarketCondition = string.Empty;
             if (!string.IsNullOrWhiteSpace(sourceMarket))
             {
@@ -312,6 +360,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
                                            </filter>
                                            </link-entity>";
             }
+            trace.Trace("Processing PrepareSourceMarketCondition - end");
             return sourceMarketCondition;
         }
 
@@ -322,6 +371,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// <returns></returns>
         private string PrepareBrandCondition(string brand)
         {
+            trace.Trace("Processing PrepareBrandCondition - start");
             var brandCondition = string.Empty;
             if (!string.IsNullOrWhiteSpace(brand))
             {
@@ -331,6 +381,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
                                     </filter>
                                     </link-entity>";
             }
+            trace.Trace("Processing PrepareBrandCondition - end");
             return brandCondition;
         }
 
@@ -341,6 +392,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// <returns></returns>
         private string PrepareTourOperatorCondition(string tourOperatorCode)
         {
+            trace.Trace("Processing PrepareTourOperatorCondition - start");
             var tourOperatorCondition = string.Empty;
             if (!string.IsNullOrWhiteSpace(tourOperatorCode))
             {
@@ -350,6 +402,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
                                            </filter>
                                            </link-entity>";
             }
+            trace.Trace("Processing PrepareTourOperatorCondition - end");
             return tourOperatorCondition;
         }
 
@@ -478,6 +531,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
 
         private Guid GetSurveyId(long surveyId)
         {
+            trace.Trace("Processing GetSurveyId - start");
             var surveyGuid = Guid.Empty;
             var query = $@"<fetch distinct='false' mapping='logical' output-format='xml-platform' version='1.0'>
                            <entity name='tc_surveyresponse'>
@@ -490,11 +544,13 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
             var surveyCollection = CommonXrm.RetrieveMultipleRecordsFetchXml(query, payloadSurvey.CrmService);
             if (surveyCollection != null && surveyCollection.Entities.Count > 0)
                 surveyGuid = surveyCollection.Entities[0].Id;
+            trace.Trace("Processing GetSurveyId - end");
             return surveyGuid;
         }
 
         private Dictionary<Guid, string> GetExistingSurveyFeedback(Guid surveyId)
         {
+            trace.Trace("Processing GetExistingSurveyFeedback - start");
             var existingFeedback = new Dictionary<Guid, string>();
             if (surveyId == Guid.Empty) return existingFeedback;
 
@@ -519,6 +575,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
                     existingFeedback.Add(surveyFeedback.Id, surveyFeedback.Attributes[Attributes.SurveyResponseFeedback.QuestionId].ToString());
 
             }
+            trace.Trace("Processing GetExistingSurveyFeedback - end");
             return existingFeedback;
         }
 

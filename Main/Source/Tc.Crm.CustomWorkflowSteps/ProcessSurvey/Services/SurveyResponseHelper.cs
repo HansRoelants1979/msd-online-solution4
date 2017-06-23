@@ -17,7 +17,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// <returns></returns>
         public static Entity GetResponseEntityFromPayload(Response response, ITracingService trace)
         {
-            if (trace == null) throw new InvalidPluginExecutionException("trace is null.");
+            if (trace == null) throw new InvalidPluginExecutionException("trace is null");
             trace.Trace("Processing GetResponseEntityFromPayLoad - start");
             if (response == null) throw new InvalidPluginExecutionException("Response in Json is null");
             var surveyResponse = new Entity(EntityName.SurveyResponse);
@@ -67,7 +67,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// <returns></returns>
         public static long GetResponseId(Response response, ITracingService trace)
         {
-            if (trace == null) throw new InvalidPluginExecutionException("trace is null.");
+            if (trace == null) throw new InvalidPluginExecutionException("trace is null");
             trace.Trace("Processing GetResponseId - start");
             if (response == null) throw new InvalidPluginExecutionException("Response in Json is null");
             trace.Trace("Processing GetResponseId - end");
@@ -82,6 +82,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// <returns></returns>
         private static string PrepareAdditionalParameters(Response response, ITracingService trace)
         {
+            if (trace == null) throw new InvalidPluginExecutionException("trace is null");
             trace.Trace("Processing PrepareAdditionalParameters - start");
             var skipProperties = new string[] { "Contact", "Answers" };
             var propertyName = string.Empty;
@@ -119,18 +120,6 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
 
             return format;
         }
-
-        /// <summary>
-        /// To format as JSON key value
-        /// </summary>
-        /// <param name="fieldName"></param>
-        /// <param name="fieldValue"></param>
-        /// <returns></returns>
-        private static string FormatJson(string fieldName, object fieldValue)
-        {
-            return FormatJson(fieldName, fieldValue, false);
-        }
-
-
+               
     }
 }

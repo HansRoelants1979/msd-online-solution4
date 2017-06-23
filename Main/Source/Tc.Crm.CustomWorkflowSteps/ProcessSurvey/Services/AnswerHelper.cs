@@ -47,6 +47,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// <returns></returns>
         public static Entity GetFeedbackEntityFromPayload(Answer answer, Dictionary<Guid, string> existingFeedback, bool isCreateSurvey, ITracingService trace)
         {
+            if (trace == null) throw new InvalidPluginExecutionException("Trace service is null;");
+            trace.Trace("Processing GetFeedbackEntityFromPayLoad - start");
             Entity feedback = null;
             if (existingFeedback != null && existingFeedback.Count > 0)
             {
@@ -61,7 +63,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
             {
                 feedback = GetFeedbackEntityFromPayload(answer, trace);
             }
-
+            trace.Trace("Processing GetFeedbackEntityFromPayLoad - end");
             return feedback;
         }
 
@@ -88,7 +90,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
                 case FieldType.COMMENT:
                     value = answer.LiteralValue;
                     if (answer.FieldId == PayloadSurveyFieldMapping.TourOperatorCode)
-                        value = ReplaceTourOperator(value);
+                        value = ReplaceTourOperator(value, trace);
                     break;
                 case FieldType.RATING:
                 case FieldType.MULTIPLE_CHOICE:
@@ -176,7 +178,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
                     tourOperatorCode = tourOperator.LiteralValue;
                 }
             }
-            tourOperatorCode = ReplaceTourOperator(tourOperatorCode);
+            tourOperatorCode = ReplaceTourOperator(tourOperatorCode, trace);
             trace.Trace("Processing FindTourOperator - end");
             return tourOperatorCode;
         }
@@ -186,10 +188,13 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// </summary>
         /// <param name="tourOperatorCode"></param>
         /// <returns></returns>
-        private static string ReplaceTourOperator(string tourOperatorCode)
+        private static string ReplaceTourOperator(string tourOperatorCode, ITracingService trace)
         {
+            if (trace == null) throw new InvalidPluginExecutionException("Trace service is null;");
+            trace.Trace("Processing ReplaceTourOperator - start");
             if (string.Equals(tourOperatorCode, General.TourOperatorCodeToReplace, StringComparison.OrdinalIgnoreCase))
                 tourOperatorCode = General.ReplacedTourOperatorCode;
+            trace.Trace("Processing ReplaceTourOperator - end");
             return tourOperatorCode;
         }
 
@@ -214,6 +219,29 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
             }
             trace.Trace("Processing FindBrand - end");
             return brandName;
-        }        
+        }
+        
+        /// <summary>
+        /// To get Gateway Alias from Answer
+        /// </summary>
+        /// <param name="answers"></param>
+        /// <param name="trace"></param>
+        /// <returns></returns>
+        public static string GetGatewayAlias(List<Answer> answers, ITracingService trace)
+        {
+            if (trace == null) throw new InvalidPluginExecutionException("Trace service is null;");
+            trace.Trace("Processing GetGatewayAlias - start");
+            var gatewayCode = string.Empty;
+            if (answers != null && answers.Count > 0)
+            {
+                var gatewayAlias = answers.Find(a => a.FieldId == PayloadSurveyFieldMapping.GatewayAlias);
+                if (gatewayAlias != null && !string.IsNullOrWhiteSpace(gatewayAlias.LiteralValue))
+                {
+                    gatewayCode = gatewayAlias.LiteralValue;
+                }
+            }
+            trace.Trace("Processing GetGatewayAlias - end");
+            return gatewayCode;
+        }
     }
 }

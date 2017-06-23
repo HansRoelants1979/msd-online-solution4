@@ -92,6 +92,7 @@
         public const int Surname = 251887;
         public const int TourOperatorCode = 251883;
         public const int Brand = 251882;
+        public const int GatewayAlias = 256428;
     }
 
 }
@@ -458,6 +459,7 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string CustomerLastName = "tc_customerlastname";
         public const string CustomerPhone = "tc_customerphone";
         public const string CustomerEmail = "tc_customeremail";
+        public const string GatewayId = "tc_gatewayid";
     }
     public static class SurveyResponseFeedback
     {
