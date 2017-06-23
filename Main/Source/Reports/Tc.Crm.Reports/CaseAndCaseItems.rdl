@@ -583,6 +583,9 @@
         <Field Name="key">
           <Value>=Fields!incidentid.Value &amp; Fields!cl_tc_caselineid.Value</Value>
         </Field>
+        <Field Name="DateModified">
+          <Value>=FormatDateTime(Fields!modifiedon.Value,DateFormat.ShortDate)</Value>
+        </Field>
       </Fields>
       <Filters>
         <Filter>
@@ -3318,7 +3321,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!createdonValue.Value</Value>
+                                  <Value>=IIf(IsNothing(Fields!createdonValue.Value),"",FormatDateTime(Fields!createdonValue.Value,DateFormat.ShortDate))</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                   </Style>
@@ -3542,7 +3545,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!modifiedon.Value</Value>
+                                  <Value>=IIf(IsNothing(Fields!modifiedon.Value),"",FormatDateTime(Fields!modifiedon.Value,DateFormat.ShortDate))</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                   </Style>
@@ -3958,7 +3961,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!tc_datereported.Value</Value>
+                                  <Value>=IIf(IsNothing(Fields!tc_datereported.Value),"",FormatDateTime(Fields!tc_datereported.Value,DateFormat.ShortDate))</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                   </Style>
@@ -4406,7 +4409,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!bo_tc_departuredate.Value</Value>
+                                  <Value>=IIf(IsNothing(Fields!bo_tc_departuredate.Value),"",FormatDateTime(Fields!bo_tc_departuredate.Value,DateFormat.ShortDate))</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                   </Style>
@@ -4438,7 +4441,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!bo_tc_returndate.Value</Value>
+                                  <Value>=IIf(IsNothing(Fields!bo_tc_returndate.Value),"",FormatDateTime(Fields!bo_tc_returndate.Value,DateFormat.ShortDate))</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                   </Style>
@@ -4937,7 +4940,7 @@
         <Height>0.79in</Height>
         <Style />
       </Body>
-      <Width>90.80208in</Width>
+      <Width>91.80208in</Width>
       <Page>
         <LeftMargin>1in</LeftMargin>
         <RightMargin>1in</RightMargin>
