@@ -293,14 +293,16 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
 	    if (expectedResolution)
 	        parameters["tc_expectedresolution"] = expectedResolution;
 	    var arrivalDate = feedBack.filter(function (item) { return item.key === 'TC_IDS_DepartDate'; })[0].value;
-	    if (arrivalDate)
+	    if (arrivalDate && isValidDate(arrivalDate))
 	        parameters["tc_arrivaldate"] = arrivalDate;
 	    var returnDate = feedBack.filter(function (item) { return item.key === 'TCDIS Return Date'; })[0].value;
-	    if (returnDate)
+	    if (returnDate && isValidDate(returnDate))
 	        parameters["tc_departuredate"] = returnDate;
 	    if (arrivalDate && returnDate)
 	    {
-	        parameters["tc_durationofstay"] = getDifferenceInDays(arrivalDate,returnDate);
+	        var days = getDifferenceInDays(arrivalDate, returnDate);
+	        if (days)
+	            parameters["tc_durationofstay"] = days;
 	    }
 	    var flightNumber = feedBack.filter(function (item) { return item.key === 'TCDIS Flight Code'; })[0].value;
 	    if (flightNumber)
@@ -406,20 +408,29 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
 	    return id !== null ? id.replace("{", "").replace("}", "") : null;
 	}
 
-	var getDifferenceInDays = function(arrivalDate, departureDate) {
+	var getDifferenceInDays = function (arrivalDate, departureDate)
+	{
 	    //Get 1 day in milliseconds
-	    var one_day=1000*60*60*24;
+	    var one_day = 1000 * 60 * 60 * 24;	   
+	    if (!isValidDate(arrivalDate) || !isValidDate(departureDate)) return "";
 	    arrivalDate = new Date(arrivalDate);
 	    departureDate = new Date(departureDate);
 	    // Convert both dates to milliseconds
 	    var arrivalDate_ms = arrivalDate.getTime();
 	    var departureDate_ms = departureDate.getTime();
-
 	    // Calculate the difference in milliseconds
 	    var difference_ms = departureDate_ms - arrivalDate_ms;
-    
 	    // Convert back to days and return
-	    return Math.round(difference_ms/one_day); 
+	    return Math.round(difference_ms / one_day);
+	}
+
+	var isValidDate = function(date)
+	{
+	    var dateStamp = Date.parse(date);
+	    if (isNaN(dateStamp) == false)
+	        return true;
+	    else
+	        return false;
 	}
 
 
