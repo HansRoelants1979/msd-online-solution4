@@ -237,6 +237,10 @@ namespace Tc.Crm.Service.Models
         HalfBoard,
         [EnumMember(Value = "Half Board Upgrade")]
         HalfBoardUpgrade,
+        [EnumMember(Value = "Lodging only")]
+        LodgingOnly,
+        [EnumMember(Value = "Lodging with Breakfast")]
+        LodgingWithBreakfast,
         [EnumMember(Value = "Meal Plan")]
         MealPlan,
         [EnumMember(Value = "Not Applicable")]
