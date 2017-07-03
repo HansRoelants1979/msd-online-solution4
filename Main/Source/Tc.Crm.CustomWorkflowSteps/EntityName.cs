@@ -92,7 +92,7 @@
         public const int Surname = 251887;
         public const int TourOperatorCode = 251883;
         public const int Brand = 251882;
-        public const int GatewayAlias = 256428;
+        public const int TcdisDestAirport = 251889;
     }
 
 }
