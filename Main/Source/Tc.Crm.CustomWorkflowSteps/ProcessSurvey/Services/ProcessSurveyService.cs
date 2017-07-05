@@ -93,7 +93,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
             trace.Trace("Processing MapGateway - start");
             surveyResponse[Attributes.SurveyResponse.GatewayId] = null;
             if (response.Answers == null || response.Answers.Count == 0) return;            
-            var gatewayCode = AnswerHelper.GetTcdisDestinationAirport(response.Answers, payloadSurvey.Trace);
+            var gatewayCode = AnswerHelper.GetGatewayAlias(response.Answers, payloadSurvey.Trace);
             if (string.IsNullOrWhiteSpace(gatewayCode)) return;
             var query = $@"<fetch distinct='false' mapping='logical' output-format='xml-platform' version='1.0'>
                            <entity name='tc_gateway'>

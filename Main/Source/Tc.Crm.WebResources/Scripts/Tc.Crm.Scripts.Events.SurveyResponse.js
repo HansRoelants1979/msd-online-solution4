@@ -27,60 +27,43 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
 	var parameters = {};
 	var feedBack = [];
 	var contact = {};
-	var questionFieldId =
-    {
-        "TC_RT_HolidayExpectation": 251397,
-        "TCIDS_Time_of_day_Contact": 251401,
-        "TCDIS_Contact_Method": 252559,
-        "TCDIS_Best_Method_Contact_Other": 252622,
-        "TCDIS_Booking_ref": 251884,
-        "TCDIS_Hotel_Name": 251893,
-        "TCDIS_Dest_Airport": 251889,
-        "TC_IDS_DepartDate": 251895,
-        "TCDIS_Return_Date": 251894,
-        "TCDIS_Flight_Code": 251896,
-        "TC_TX_SourceMarketCode": 251727,
-        "TC_TX_Brand": 251882,
-        "TCDIS_Language_code": 251888,
-        "TCDIS_Customer_Country": 252817
-    }
 	var convertToComplaint = function ()
 	{
 	    try
-	    {   
+	    {
 	         parameters = {};
 	         feedBack = [];
 	         contact = {};	         
 	         var id = Xrm.Page.data.entity.getId();
 	        var properties = [
-           "tc_question_field_id",
+           "tc_question_name",
            "tc_question_response"].join();
 	        var query = "?$filter=_tc_surveyfeedbackid_value eq " + formatEntityId(id) + "&$select=" + properties;
 	        Tc.Crm.Scripts.Common.Get("tc_surveyresponsefeedbacks", query).then(function (request) {
 	            var feedbackCollection = JSON.parse(request.response);
 	            if (feedbackCollection && feedbackCollection.value) {
-	                feedBack.push({ key: questionFieldId.TC_RT_HolidayExpectation, value: '' });
-	                feedBack.push({ key: questionFieldId.TCIDS_Time_of_day_Contact, value: '' });
-	                feedBack.push({ key: questionFieldId.TCDIS_Contact_Method, value: '' });
-	                feedBack.push({ key: questionFieldId.TCDIS_Best_Method_Contact_Other, value: '' });
-	                feedBack.push({ key: questionFieldId.TCDIS_Booking_ref, value: '' });
-	                feedBack.push({ key: questionFieldId.TCDIS_Hotel_Name, value: '' });
-	                feedBack.push({ key: questionFieldId.TCDIS_Dest_Airport, value: '' });
-	                feedBack.push({ key: questionFieldId.TC_IDS_DepartDate, value: '' });
-	                feedBack.push({ key: questionFieldId.TCDIS_Return_Date, value: '' });
-	                feedBack.push({ key: questionFieldId.TCDIS_Flight_Code, value: '' });
-	                feedBack.push({ key: questionFieldId.TC_TX_SourceMarketCode, value: '' });
-	                feedBack.push({ key: questionFieldId.TC_TX_Brand, value: '' });
-	                feedBack.push({ key: questionFieldId.TCDIS_Language_code, value: '' });
-	                feedBack.push({ key: questionFieldId.TCDIS_Customer_Country, value: '' });
+	                feedBack.push({ key: 'TC_RT_HolidayExpectation', value: '' });
+	                feedBack.push({ key: 'TCIDS Time of day Contact', value: '' });
+	                feedBack.push({ key: 'TCDIS Contact Method', value: '' });
+	                feedBack.push({ key: 'TCDIS Best_Method_Contact_Other', value: '' });
+	                feedBack.push({ key: 'TCDIS Booking_ref', value: '' });
+	                feedBack.push({ key: 'TCDIS Hotel Name', value: '' });
+	                feedBack.push({ key: 'TCDIS Dest_Airport', value: '' });
+	                feedBack.push({ key: 'TC_IDS_DepartDate', value: '' });
+	                feedBack.push({ key: 'TCDIS Return Date', value: '' });
+	                feedBack.push({ key: 'TCDIS Flight Code', value: '' });
+	                feedBack.push({ key: 'TC_TX_SourceMarketCode', value: '' });
+	                feedBack.push({ key: 'TC_TX_Brand', value: '' });
+	                feedBack.push({ key: 'TCDIS Language_code', value: '' });
+	                feedBack.push({ key: 'TCDIS Customer Country', value: '' });
 	                for (var i = 0; i < feedbackCollection.value.length; i++) {
-	                    if (feedbackCollection.value[i].tc_question_field_id) {
-	                        var index = feedBack.map(function (e) { return e.key; }).indexOf(feedbackCollection.value[i].tc_question_field_id);
+	                    if (feedbackCollection.value[i].tc_question_name) {
+	                        var index = feedBack.map(function (e) { return e.key; }).indexOf(feedbackCollection.value[i].tc_question_name);
 	                        if (index >= 0)
 	                            feedBack[index].value = feedbackCollection.value[i].tc_question_response;
 	                    }
 	                }
-	                getSourceMarket(feedBack.filter(function (item) { return item.key === questionFieldId.TC_TX_SourceMarketCode; })[0].value);
+	                getSourceMarket(feedBack.filter(function (item) { return item.key === 'TC_TX_SourceMarketCode'; })[0].value);
 	            }
 	        }).catch(function (err) {
 	            console.log("ERROR: " + err.message);
@@ -100,7 +83,7 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
 	        var properties = [
             "tc_countryid",
             "tc_iso_code"].join();
-	        var query = "?$filter=tc_iso2code eq '" + replaceSpecialCharacters(sourceMarketCode) + "'&$select=" + properties;
+	        var query = "?$filter=tc_iso2code eq '" + encodeURIComponent(sourceMarketCode) + "'&$select=" + properties;
 	        return Tc.Crm.Scripts.Common.Get("tc_countries", query).then(function (request)
 	        {
 	            var sourceMarket = JSON.parse(request.response);
@@ -130,7 +113,7 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
 	        parameters["customerid"] = customer[0].id;
 	        parameters["customeridname"] = customer[0].name;
 	        parameters["customeridtype"] = "contact";
-	        getBrand(feedBack.filter(function (item) { return item.key === questionFieldId.TC_TX_Brand; })[0].value);
+	        getBrand(feedBack.filter(function (item) { return item.key === 'TC_TX_Brand'; })[0].value);
 	    }
 	    else
 	    {
@@ -153,8 +136,8 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
 	                contact.emailaddress1 = customerEmail;
 	            if (customerPhone)
 	                contact.telephone1 = customerPhone;
-	            contact.tc_language = getLanguage(feedBack.filter(function (item) { return item.key === questionFieldId.TCDIS_Language_code; })[0].value);
-	            getCountry(feedBack.filter(function (item) { return item.key === questionFieldId.TCDIS_Customer_Country; })[0].value, sourceMarketId);
+	            contact.tc_language = getLanguage(feedBack.filter(function (item) { return item.key === 'TCDIS Language_code'; })[0].value);
+	            getCountry(feedBack.filter(function (item) { return item.key === 'TCDIS Customer Country'; })[0].value, sourceMarketId);
 	        }
 	    }
 	}
@@ -163,7 +146,7 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
 	{
 	    if (countryCode && sourceMarketId)
 	    {
-	        var query = "?$filter=tc_iso2code eq '" + replaceSpecialCharacters(countryCode) + "'&$select=tc_countryid";
+	        var query = "?$filter=tc_iso2code eq '" + encodeURIComponent(countryCode) + "'&$select=tc_countryid";
 	        Tc.Crm.Scripts.Common.Get("tc_countries", query).then(function (request)
 	        {
 	            var country = JSON.parse(request.response);
@@ -202,7 +185,7 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
 	            createCustomerBookingRole(customerId, formatEntityId(bookingId[0].id));
 	        }
 	        else {
-	            getBrand(feedBack.filter(function (item) { return item.key === questionFieldId.TC_TX_Brand; })[0].value);
+	            getBrand(feedBack.filter(function (item) { return item.key === 'TC_TX_Brand'; })[0].value);
 	        }
 
 	    }).catch(function (err) {
@@ -217,7 +200,7 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
 	    customerBookingRole["tc_BookingId@odata.bind"] = "/tc_bookings(" + bookingId + ")";
 	    customerBookingRole["tc_bookingrole"] = 950000002;
 	    Tc.Crm.Scripts.Common.Create("tc_customerbookingroles", customerBookingRole).then(function (request) {
-	        getBrand(feedBack.filter(function (item) { return item.key === questionFieldId.TC_TX_Brand; })[0].value);
+	        getBrand(feedBack.filter(function (item) { return item.key === 'TC_TX_Brand'; })[0].value);
 
 	    }).catch(function (err) {
 	        console.log("ERROR: " + err.message);
@@ -229,7 +212,7 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
 	        var properties = [
             "tc_brandid",
             "tc_name"].join();
-	        var query = "?$filter=tc_brandcode eq '" + replaceSpecialCharacters(brandCode) + "'&$select=" + properties;
+	        var query = "?$filter=tc_brandcode eq '" + encodeURIComponent(brandCode) + "'&$select=" + properties;
 	        Tc.Crm.Scripts.Common.Get("tc_brands", query).then(function (request)
 	        {
 	            var brand = JSON.parse(request.response);
@@ -238,13 +221,13 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
 	                parameters["tc_brandid"] = brand.value[0].tc_brandid;
 	                parameters["tc_brandidname"] = brand.value[0].tc_name;
 	            }
-	            getHotel(feedBack.filter(function (item) { return item.key === questionFieldId.TCDIS_Hotel_Name; })[0].value);
+	            getHotel(feedBack.filter(function (item) { return item.key === 'TCDIS Hotel Name'; })[0].value);
 	        }).catch(function (err) {
 	            console.log("ERROR: " + err.message);
 	        });
 	    }
 	    else {
-	        getHotel(feedBack.filter(function (item) { return item.key === questionFieldId.TCDIS_Hotel_Name; })[0].value);
+	        getHotel(feedBack.filter(function (item) { return item.key === 'TCDIS Hotel Name'; })[0].value);
 	    }
 	}
 
@@ -253,21 +236,21 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
 	        var properties = [
             "tc_hotelid",
             "tc_name"].join();
-	        var query = "?$filter=tc_name eq '" + replaceSpecialCharacters(hotelCode) + "'&$select=" + properties;
+	        var query = "?$filter=tc_name eq '" + encodeURIComponent(hotelCode) + "'&$select=" + properties;
 	        return Tc.Crm.Scripts.Common.Get("tc_hotels", query).then(function (request) {
 	            var hotel = JSON.parse(request.response);
 	            if (hotel && hotel.value.length > 0) {
 	                parameters["tc_accommodation"] = hotel.value[0].tc_hotelid;
 	                parameters["tc_accommodationname"] = hotel.value[0].tc_name;
 	            }
-	            getGateWay(feedBack.filter(function (item) { return item.key === questionFieldId.TCDIS_Dest_Airport; })[0].value);
+	            getGateWay(feedBack.filter(function (item) { return item.key === 'TCDIS Dest_Airport'; })[0].value);
 	        }).catch(function (err) {
 	            console.log("ERROR: " + err.message);
 	        });
 
 	    }
 	    else {
-	        getGateWay(feedBack.filter(function (item) { return item.key === questionFieldId.TCDIS_Dest_Airport; })[0].value);
+	        getGateWay(feedBack.filter(function (item) { return item.key === 'TCDIS Dest_Airport'; })[0].value);
 	    }
 	}
 
@@ -276,7 +259,7 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
 	        var properties = [
             "tc_gatewayid",
             "tc_iata"].join();
-	        var query = "?$filter=tc_iata eq '" + replaceSpecialCharacters(gateWayCode) + "'&$select=" + properties;
+	        var query = "?$filter=tc_iata eq '" + encodeURIComponent(gateWayCode) + "'&$select=" + properties;
 	        Tc.Crm.Scripts.Common.Get("tc_gatewaies", query).then(function (request) {
 	            var gateway = JSON.parse(request.response);
 	            if (gateway && gateway.value.length > 0) {
@@ -306,13 +289,13 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
 	        parameters["tc_alternativeemail"] = customerEmail;
 	    if (customerPhone)
 	        parameters["tc_alternativephone"] = customerPhone;
-	    var expectedResolution = feedBack.filter(function (item) { return item.key === questionFieldId.TC_RT_HolidayExpectation; })[0].value;
+	    var expectedResolution = feedBack.filter(function (item) { return item.key === 'TC_RT_HolidayExpectation'; })[0].value;
 	    if (expectedResolution)
 	        parameters["tc_expectedresolution"] = expectedResolution;
-	    var arrivalDate = feedBack.filter(function (item) { return item.key === questionFieldId.TC_IDS_DepartDate; })[0].value;
+	    var arrivalDate = feedBack.filter(function (item) { return item.key === 'TC_IDS_DepartDate'; })[0].value;
 	    if (arrivalDate && isValidDate(arrivalDate))
 	        parameters["tc_arrivaldate"] = arrivalDate;
-	    var returnDate = feedBack.filter(function (item) { return item.key === questionFieldId.TCDIS_Return_Date; })[0].value;
+	    var returnDate = feedBack.filter(function (item) { return item.key === 'TCDIS Return Date'; })[0].value;
 	    if (returnDate && isValidDate(returnDate))
 	        parameters["tc_departuredate"] = returnDate;
 	    if (arrivalDate && returnDate)
@@ -321,14 +304,14 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
 	        if (days)
 	            parameters["tc_durationofstay"] = days;
 	    }
-	    var flightNumber = feedBack.filter(function (item) { return item.key === questionFieldId.TCDIS_Flight_Code; })[0].value;
+	    var flightNumber = feedBack.filter(function (item) { return item.key === 'TCDIS Flight Code'; })[0].value;
 	    if (flightNumber)
 	        parameters["tc_flightnumber"] = flightNumber;
 	    parameters["caseorigincode"] = 100000006;
 	    parameters["tc_casetypeid"] = '478C99E9-93E4-E611-8109-1458D041F8E8';
 	    parameters["tc_casetypeidname"] = 'Complaint';
 	    parameters["tc_originatingbusinessarea"] = 950000001;
-	    var preferredCommunication = getPreferredMethodOfCommunication(feedBack.filter(function (item) { return item.key === questionFieldId.TCDIS_Contact_Method; })[0].value);
+	    var preferredCommunication = getPreferredMethodOfCommunication(feedBack.filter(function (item) { return item.key === 'TCDIS Contact Method'; })[0].value);
 	    if (preferredCommunication > 0)
 	        parameters["tc_preferredmethodofcommunication"] = preferredCommunication;
 	    if (booking && booking.length > 0)
@@ -340,7 +323,7 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
 	    else
 	    {
 	        parameters["tc_bookingreference"] = 0;
-	        var bookingNumber = feedBack.filter(function (item) { return item.key === questionFieldId.TCDIS_Booking_ref; })[0].value;
+	        var bookingNumber = feedBack.filter(function (item) { return item.key === 'TCDIS Booking_ref'; })[0].value;
 	        if (bookingNumber)
 	            parameters["tc_bookingreferencefreetext"] = bookingNumber;
 	    }
@@ -349,60 +332,52 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
 	}
 
 	var getLanguage = function (languageCode) {
-	    var value = 950000006;
-	    if (languageCode)
-	    {
-	        switch (languageCode.toUpperCase())
-	        {
-	            case "EN":
-	                value = 950000000;
-	                break;
-	            case "DE":
-	                value = 950000001;
-	                break;
-	            case "NL":
-	                value = 950000002;
-	                break;
-	            case "FR":
-	                value = 950000003;
-	                break;
-	            case "ES":
-	                value = 950000004;
-	                break;
-	            case "DA":
-	                value = 950000005;
-	                break;
-	            case "":
-	            case null:
-	                value = 950000006;
-	                break;
-	            default:
-	                value = 950000006;
-	                break;
-	        }
+	    var value;
+	    switch (languageCode) {
+	        case "EN":
+	            value = 950000000;
+	            break;
+	        case "DE":
+	            value = 950000001;
+	            break;
+	        case "NL":
+	            value = 950000002;
+	            break;
+	        case "FR":
+	            value = 950000003;
+	            break;
+	        case "ES":
+	            value = 950000004;
+	            break;
+	        case "DA":
+	            value = 950000005;
+	            break;
+	        case "":
+	        case null:
+	            value = 950000006;
+	            break;
+	        default:
+	            value = 950000006;
+	            break;
 	    }
 	    return value;
 	}
 
 	var getPreferredMethodOfCommunication = function (preferredCommunication) {
-	    var value = -1;
-	    if (preferredCommunication)
-	    {
-	        switch (preferredCommunication.toUpperCase())
-	        {
-	            case "SMS":
-	                value = 950000000;
-	                break;
-	            case "WHITEMAIL":
-	                value = 950000002;
-	                break;
-	            case "EMAIL":
-	                value = 950000001;
-	                break;
-	            default:
-	                value = -1;
-	                break;
-	        }
+	    var value;
+	    switch (preferredCommunication) {
+	        case "SMS":
+	            value = 950000000;
+	            break;
+	        case "Whitemail":
+	            value = 950000002;
+	            break;
+	        case "Email":
+	            value = 950000001;
+	            break;
+	        default:
+	            value = -1;
+	            break;
 	    }
 	    return value;
 	}
@@ -456,19 +431,6 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
 	        return true;
 	    else
 	        return false;
-	}
-
-	var replaceSpecialCharacters = function(attribute) {
-	    // replace the single quotes
-	    attribute = attribute.replace(/'/g, "''");
-
-	    attribute = attribute.replace(/"+"/g, "%2B");
-	    attribute = attribute.replace(/\//g, "%2F");
-	    attribute = attribute.replace(/"?"/g, "%3F");
-	    attribute = attribute.replace(/%/g, "%25");
-	    attribute = attribute.replace(/#/g, "%23");
-	    attribute = attribute.replace(/&/g, "%26");
-	    return attribute;
 	}
 
 

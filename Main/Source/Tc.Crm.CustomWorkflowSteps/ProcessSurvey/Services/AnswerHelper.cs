@@ -227,17 +227,17 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessSurvey.Services
         /// <param name="answers"></param>
         /// <param name="trace"></param>
         /// <returns></returns>
-        public static string GetTcdisDestinationAirport(List<Answer> answers, ITracingService trace)
+        public static string GetGatewayAlias(List<Answer> answers, ITracingService trace)
         {
             if (trace == null) throw new InvalidPluginExecutionException("Trace service is null;");
             trace.Trace("Processing GetGatewayAlias - start");
             var gatewayCode = string.Empty;
             if (answers != null && answers.Count > 0)
             {
-                var tcdisDestAirport = answers.Find(a => a.FieldId == PayloadSurveyFieldMapping.TcdisDestAirport);
-                if (tcdisDestAirport != null && !string.IsNullOrWhiteSpace(tcdisDestAirport.LiteralValue))
+                var gatewayAlias = answers.Find(a => a.FieldId == PayloadSurveyFieldMapping.GatewayAlias);
+                if (gatewayAlias != null && !string.IsNullOrWhiteSpace(gatewayAlias.LiteralValue))
                 {
-                    gatewayCode = tcdisDestAirport.LiteralValue;
+                    gatewayCode = gatewayAlias.LiteralValue;
                 }
             }
             trace.Trace("Processing GetGatewayAlias - end");
