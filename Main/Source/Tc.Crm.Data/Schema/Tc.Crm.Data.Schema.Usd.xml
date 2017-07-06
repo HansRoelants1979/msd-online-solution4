@@ -1,0 +1,824 @@
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <entity name="msdyusd_agentscriptaction" displayname="Action Call" etc="10075" primaryidfield="msdyusd_agentscriptactionid" primarynamefield="msdyusd_name" disableplugins="true">
+    <fields>
+      <field displayname="Action" name="msdyusd_action" type="entityreference" lookupType="uii_action" customfield="true" />
+      <field displayname="Agent Script Action" name="msdyusd_agentscriptactionid" type="guid" primaryKey="true" />
+      <field displayname="Application" name="msdyusd_application" type="entityreference" lookupType="uii_hostedapplication" customfield="true" />
+      <field displayname="Condition" name="msdyusd_condition" type="string" customfield="true" />
+      <field displayname="Created By" name="createdby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created By (Delegate)" name="createdonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created On" name="createdon" type="datetime" />
+      <field displayname="Data" name="msdyusd_actiondata" type="string" customfield="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Launch if Dynamic" name="msdyusd_launchifdynamic" type="bool" customfield="true" />
+      <field displayname="Modified By" name="modifiedby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified By (Delegate)" name="modifiedonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified On" name="modifiedon" type="datetime" />
+      <field updateCompare="true" displayname="Name" name="msdyusd_name" type="string" customfield="true" />
+      <field displayname="Order" name="msdyusd_order" type="number" customfield="true" />
+      <field displayname="Owner" name="ownerid" type="owner" />
+      <field displayname="Owning Business Unit" name="owningbusinessunit" type="entityreference" lookupType="businessunit" />
+      <field displayname="Owning Team" name="owningteam" type="entityreference" lookupType="team" />
+      <field displayname="Owning User" name="owninguser" type="entityreference" lookupType="systemuser" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Shortcut Key" name="msdyusd_shortcutkey" type="string" customfield="true" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Time Zone Rule Version Number" name="timezoneruleversionnumber" type="number" />
+      <field displayname="UTC Conversion Time Zone Code" name="utcconversiontimezonecode" type="number" />
+    </fields>
+    <relationships>
+      <relationship name="msdyusd_subactioncalls" manyToMany="true" isreflexive="true" relatedEntityName="msdyusd_subactioncalls" m2mTargetEntity="msdyusd_agentscriptaction" m2mTargetEntityPrimaryKey="msdyusd_agentscriptactionid" />
+    </relationships>
+  </entity>
+  <entity name="msdyusd_actioncallworkflow" displayname="Action Call Workflow" etc="10074" primaryidfield="msdyusd_actioncallworkflowid" primarynamefield="msdyusd_name" disableplugins="true">
+    <fields>
+      <field displayname="Action Call Workflow" name="msdyusd_actioncallworkflowid" type="guid" primaryKey="true" />
+      <field displayname="Created By" name="createdby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created By (Delegate)" name="createdonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created On" name="createdon" type="datetime" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Modified By" name="modifiedby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified By (Delegate)" name="modifiedonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified On" name="modifiedon" type="datetime" />
+      <field updateCompare="true" displayname="Name" name="msdyusd_name" type="string" customfield="true" />
+      <field displayname="Owner" name="ownerid" type="owner" />
+      <field displayname="Owning Business Unit" name="owningbusinessunit" type="entityreference" lookupType="businessunit" />
+      <field displayname="Owning Team" name="owningteam" type="entityreference" lookupType="team" />
+      <field displayname="Owning User" name="owninguser" type="entityreference" lookupType="systemuser" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Time Zone Rule Version Number" name="timezoneruleversionnumber" type="number" />
+      <field displayname="UTC Conversion Time Zone Code" name="utcconversiontimezonecode" type="number" />
+      <field displayname="Workflow" name="msdyusd_workflow" type="string" customfield="true" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="msdyusd_answer" displayname="Agent Script Answer" etc="10077" primaryidfield="msdyusd_answerid" primarynamefield="msdyusd_name" disableplugins="true">
+    <fields>
+      <field displayname="Answer" name="msdyusd_answerid" type="guid" primaryKey="true" />
+      <field displayname="AnswerText" name="msdyusd_answertext" type="string" customfield="true" />
+      <field displayname="Created By" name="createdby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created By (Delegate)" name="createdonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created On" name="createdon" type="datetime" />
+      <field displayname="Enable Condition" name="msdyusd_enabledcondition" type="string" customfield="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field updateCompare="true" displayname="Linked Task" name="msdyusd_linkedtask" type="entityreference" lookupType="msdyusd_task" customfield="true" />
+      <field displayname="Modified By" name="modifiedby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified By (Delegate)" name="modifiedonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified On" name="modifiedon" type="datetime" />
+      <field updateCompare="true" displayname="Name" name="msdyusd_name" type="string" customfield="true" />
+      <field displayname="Order" name="msdyusd_order" type="number" customfield="true" />
+      <field displayname="Owner" name="ownerid" type="owner" />
+      <field displayname="Owning Business Unit" name="owningbusinessunit" type="entityreference" lookupType="businessunit" />
+      <field displayname="Owning Team" name="owningteam" type="entityreference" lookupType="team" />
+      <field displayname="Owning User" name="owninguser" type="entityreference" lookupType="systemuser" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Show Tab" name="msdyusd_showtab" type="entityreference" lookupType="uii_hostedapplication" customfield="true" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Time Zone Rule Version Number" name="timezoneruleversionnumber" type="number" />
+      <field displayname="UTC Conversion Time Zone Code" name="utcconversiontimezonecode" type="number" />
+      <field displayname="Visible Condition" name="msdyusd_visiblecondition" type="string" customfield="true" />
+    </fields>
+    <relationships>
+      <relationship name="msdyusd_answer_agentscriptaction" manyToMany="true" isreflexive="false" relatedEntityName="msdyusd_answer_agentscriptaction" m2mTargetEntity="msdyusd_agentscriptaction" m2mTargetEntityPrimaryKey="msdyusd_agentscriptactionid" />
+    </relationships>
+  </entity>
+  <entity name="msdyusd_task" displayname="Agent Script Task" etc="10090" primaryidfield="msdyusd_taskid" primarynamefield="msdyusd_name" disableplugins="true">
+    <fields>
+      <field displayname="Category" name="msdyusd_category" type="entityreference" lookupType="msdyusd_agentscripttaskcategory" customfield="true" />
+      <field displayname="Created By" name="createdby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created By (Delegate)" name="createdonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created On" name="createdon" type="datetime" />
+      <field displayname="Description" name="msdyusd_description" type="string" customfield="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Instructions" name="msdyusd_instructions" type="string" customfield="true" />
+      <field displayname="Modified By" name="modifiedby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified By (Delegate)" name="modifiedonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified On" name="modifiedon" type="datetime" />
+      <field updateCompare="true" displayname="Name" name="msdyusd_name" type="string" customfield="true" />
+      <field displayname="Owner" name="ownerid" type="owner" />
+      <field displayname="Owning Business Unit" name="owningbusinessunit" type="entityreference" lookupType="businessunit" />
+      <field displayname="Owning Team" name="owningteam" type="entityreference" lookupType="team" />
+      <field displayname="Owning User" name="owninguser" type="entityreference" lookupType="systemuser" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Script Text" name="msdyusd_scripttext" type="string" customfield="true" />
+      <field displayname="Show Tab" name="msdyusd_showtab" type="entityreference" lookupType="uii_hostedapplication" customfield="true" />
+      <field displayname="Start Task" name="msdyusd_starttask" type="bool" customfield="true" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Task" name="msdyusd_taskid" type="guid" primaryKey="true" />
+      <field displayname="Time Zone Rule Version Number" name="timezoneruleversionnumber" type="number" />
+      <field displayname="UTC Conversion Time Zone Code" name="utcconversiontimezonecode" type="number" />
+    </fields>
+    <relationships>
+      <relationship name="msdyusd_task_agentscriptaction" manyToMany="true" isreflexive="false" relatedEntityName="msdyusd_task_agentscriptaction" m2mTargetEntity="msdyusd_agentscriptaction" m2mTargetEntityPrimaryKey="msdyusd_agentscriptactionid" />
+      <relationship name="msdyusd_task_answer" manyToMany="true" isreflexive="false" relatedEntityName="msdyusd_task_answer" m2mTargetEntity="msdyusd_answer" m2mTargetEntityPrimaryKey="msdyusd_answerid" />
+    </relationships>
+  </entity>
+  <entity name="msdyusd_agentscripttaskcategory" displayname="Agent Script Task Category" etc="10076" primaryidfield="msdyusd_agentscripttaskcategoryid" primarynamefield="msdyusd_name" disableplugins="true">
+    <fields>
+      <field displayname="Agent Script Task Category" name="msdyusd_agentscripttaskcategoryid" type="guid" primaryKey="true" />
+      <field displayname="Created By" name="createdby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created By (Delegate)" name="createdonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created On" name="createdon" type="datetime" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Modified By" name="modifiedby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified By (Delegate)" name="modifiedonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified On" name="modifiedon" type="datetime" />
+      <field updateCompare="true" displayname="Name" name="msdyusd_name" type="string" customfield="true" />
+      <field displayname="Owner" name="ownerid" type="owner" />
+      <field displayname="Owning Business Unit" name="owningbusinessunit" type="entityreference" lookupType="businessunit" />
+      <field displayname="Owning Team" name="owningteam" type="entityreference" lookupType="team" />
+      <field displayname="Owning User" name="owninguser" type="entityreference" lookupType="systemuser" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Time Zone Rule Version Number" name="timezoneruleversionnumber" type="number" />
+      <field displayname="UTC Conversion Time Zone Code" name="utcconversiontimezonecode" type="number" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="msdyusd_auditanddiagnosticssetting" displayname="Audit &amp; Diagnostics Setting" etc="10078" primaryidfield="msdyusd_auditanddiagnosticssettingid" primarynamefield="msdyusd_name" disableplugins="true">
+    <fields>
+      <field displayname="Activity Tracking Enabled" name="msdyusd_ATEnabled" type="bool" customfield="true" />
+      <field displayname="Activity Tracking for Action Calls" name="msdyusd_ATforActionCalls" type="bool" customfield="true" />
+      <field displayname="Activity Tracking for Agent Login" name="msdyusd_ATforAgentLogin" type="bool" customfield="true" />
+      <field displayname="Activity Tracking for Agent Scripts" name="msdyusd_ATforAgentScripts" type="bool" customfield="true" />
+      <field displayname="Activity Tracking for Customer Session" name="msdyusd_ATforCustomerSession" type="bool" customfield="true" />
+      <field displayname="Activity Tracking for Events" name="msdyusd_ATforEvents" type="bool" customfield="true" />
+      <field displayname="Activity Tracking for Hosted Controls" name="msdyusd_ATforHostedControl" type="bool" customfield="true" />
+      <field displayname="Activity Tracking for Sub Action Calls" name="msdyusd_ATforSubActionCalls" type="bool" customfield="true" />
+      <field displayname="Activity Tracking for UII Action" name="msdyusd_ATforUIIAction" type="bool" customfield="true" />
+      <field displayname="Activity Tracking for Windows Navigation Rules" name="msdyusd_ATforWindowsNavRules" type="bool" customfield="true" />
+      <field displayname="Audit &amp; Diagnostics Settings" name="msdyusd_auditanddiagnosticssettingid" type="guid" primaryKey="true" />
+      <field displayname="CacheSize" name="msdyusd_CacheSize" type="number" customfield="true" />
+      <field displayname="Created By" name="createdby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created By (Delegate)" name="createdonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created On" name="createdon" type="datetime" />
+      <field displayname="Diagnostics Tracking Enabled" name="msdyusd_DGTEnabled" type="bool" customfield="true" />
+      <field displayname="Diagnostics Verbosity Level" name="msdyusd_DGTVerbosityLevel" type="optionsetvalue" customfield="true" />
+      <field displayname="Enable Caching UII Action" name="msdyusd_EnableCaching" type="bool" customfield="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Is Default" name="msdyusd_isdefault" type="bool" customfield="true" />
+      <field displayname="Modified By" name="modifiedby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified By (Delegate)" name="modifiedonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified On" name="modifiedon" type="datetime" />
+      <field updateCompare="true" displayname="Name" name="msdyusd_name" type="string" customfield="true" />
+      <field displayname="Owner" name="ownerid" type="owner" />
+      <field displayname="Owning Business Unit" name="owningbusinessunit" type="entityreference" lookupType="businessunit" />
+      <field displayname="Owning Team" name="owningteam" type="entityreference" lookupType="team" />
+      <field displayname="Owning User" name="owninguser" type="entityreference" lookupType="systemuser" />
+      <field displayname="Process Id" name="processid" type="guid" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Stage Id" name="stageid" type="guid" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Time Zone Rule Version Number" name="timezoneruleversionnumber" type="number" />
+      <field displayname="User Schema Settings" name="msdyusd_userschemasettings" type="string" customfield="true" />
+      <field displayname="UTC Conversion Time Zone Code" name="utcconversiontimezonecode" type="number" />
+    </fields>
+    <relationships>
+      <relationship name="msdyusd_auditdiag_tracesourcesetting" manyToMany="true" isreflexive="false" relatedEntityName="msdyusd_auditdiag_tracesourcesetting" m2mTargetEntity="msdyusd_tracesourcesetting" m2mTargetEntityPrimaryKey="msdyusd_tracesourcesettingid" />
+    </relationships>
+  </entity>
+  <entity name="msdyusd_configuration" displayname="Configuration" etc="10079" primaryidfield="msdyusd_configurationid" primarynamefield="msdyusd_name" disableplugins="true">
+    <fields>
+      <field displayname="Audit &amp; Diagnostics Setting" name="msdyusd_auditanddiagnosticssettingfield" type="entityreference" lookupType="msdyusd_auditanddiagnosticssetting" customfield="true" />
+      <field displayname="Configuration" name="msdyusd_configurationid" type="guid" primaryKey="true" />
+      <field displayname="Created By" name="createdby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created By (Delegate)" name="createdonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created On" name="createdon" type="datetime" />
+      <field displayname="Description" name="msdyusd_Description" type="string" customfield="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Is Default" name="msdyusd_isdefault" type="bool" customfield="true" />
+      <field displayname="Modified By" name="modifiedby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified By (Delegate)" name="modifiedonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified On" name="modifiedon" type="datetime" />
+      <field updateCompare="true" displayname="Name" name="msdyusd_name" type="string" customfield="true" />
+      <field displayname="Owner" name="ownerid" type="owner" />
+      <field displayname="Owning Business Unit" name="owningbusinessunit" type="entityreference" lookupType="businessunit" />
+      <field displayname="Owning Team" name="owningteam" type="entityreference" lookupType="team" />
+      <field displayname="Owning User" name="owninguser" type="entityreference" lookupType="systemuser" />
+      <field displayname="parentConfigurationId" name="msdyusd_parentconfigurationid" type="entityreference" lookupType="msdyusd_configuration" customfield="true" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Time Zone Rule Version Number" name="timezoneruleversionnumber" type="number" />
+      <field displayname="UTC Conversion Time Zone Code" name="utcconversiontimezonecode" type="number" />
+    </fields>
+    <relationships>
+      <relationship name="msdyusd_configuration_actioncalls" manyToMany="true" isreflexive="false" relatedEntityName="msdyusd_configuration_actioncalls" m2mTargetEntity="msdyusd_agentscriptaction" m2mTargetEntityPrimaryKey="msdyusd_agentscriptactionid" />
+      <relationship name="msdyusd_configuration_agentscript" manyToMany="true" isreflexive="false" relatedEntityName="msdyusd_configuration_agentscript" m2mTargetEntity="msdyusd_task" m2mTargetEntityPrimaryKey="msdyusd_taskid" />
+      <relationship name="msdyusd_configuration_entitysearch" manyToMany="true" isreflexive="false" relatedEntityName="msdyusd_configuration_entitysearch" m2mTargetEntity="msdyusd_entitysearch" m2mTargetEntityPrimaryKey="msdyusd_entitysearchid" />
+      <relationship name="msdyusd_configuration_event" manyToMany="true" isreflexive="false" relatedEntityName="msdyusd_configuration_event" m2mTargetEntity="msdyusd_uiievent" m2mTargetEntityPrimaryKey="msdyusd_uiieventid" />
+      <relationship name="msdyusd_configuration_form" manyToMany="true" isreflexive="false" relatedEntityName="msdyusd_configuration_form" m2mTargetEntity="msdyusd_form" m2mTargetEntityPrimaryKey="msdyusd_formid" />
+      <relationship name="msdyusd_configuration_hostedcontrol" manyToMany="true" isreflexive="false" relatedEntityName="msdyusd_configuration_hostedcontrol" m2mTargetEntity="uii_hostedapplication" m2mTargetEntityPrimaryKey="uii_hostedapplicationid" />
+      <relationship name="msdyusd_configuration_option" manyToMany="true" isreflexive="false" relatedEntityName="msdyusd_configuration_option" m2mTargetEntity="uii_option" m2mTargetEntityPrimaryKey="uii_optionid" />
+      <relationship name="msdyusd_configuration_scriptlet" manyToMany="true" isreflexive="false" relatedEntityName="msdyusd_configuration_scriptlet" m2mTargetEntity="msdyusd_scriptlet" m2mTargetEntityPrimaryKey="msdyusd_scriptletid" />
+      <relationship name="msdyusd_configuration_sessionlines" manyToMany="true" isreflexive="false" relatedEntityName="msdyusd_configuration_sessionlines" m2mTargetEntity="msdyusd_sessioninformation" m2mTargetEntityPrimaryKey="msdyusd_sessioninformationid" />
+      <relationship name="msdyusd_configuration_toolbar" manyToMany="true" isreflexive="false" relatedEntityName="msdyusd_configuration_toolbar" m2mTargetEntity="msdyusd_toolbarstrip" m2mTargetEntityPrimaryKey="msdyusd_toolbarstripid" />
+      <relationship name="msdyusd_configuration_windowroute" manyToMany="true" isreflexive="false" relatedEntityName="msdyusd_configuration_windowroute" m2mTargetEntity="msdyusd_windowroute" m2mTargetEntityPrimaryKey="msdyusd_windowrouteid" />
+    </relationships>
+  </entity>
+  <entity name="msdyusd_search" displayname="CTI Search" etc="10087" primaryidfield="msdyusd_searchid" primarynamefield="msdyusd_name" disableplugins="true">
+    <fields>
+      <field displayname="Created By" name="createdby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created By (Delegate)" name="createdonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created On" name="createdon" type="datetime" />
+      <field displayname="Direction" name="msdyusd_direction" type="optionsetvalue" customfield="true" />
+      <field displayname="FetchXML" name="msdyusd_fetchxml" type="string" customfield="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Modified By" name="modifiedby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified By (Delegate)" name="modifiedonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified On" name="modifiedon" type="datetime" />
+      <field updateCompare="true" displayname="Name" name="msdyusd_name" type="string" customfield="true" />
+      <field displayname="Order" name="msdyusd_searchorder" type="number" customfield="true" />
+      <field displayname="Owner" name="ownerid" type="owner" />
+      <field displayname="Owning Business Unit" name="owningbusinessunit" type="entityreference" lookupType="businessunit" />
+      <field displayname="Owning Team" name="owningteam" type="entityreference" lookupType="team" />
+      <field displayname="Owning User" name="owninguser" type="entityreference" lookupType="systemuser" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Search" name="msdyusd_searchid" type="guid" primaryKey="true" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Time Zone Rule Version Number" name="timezoneruleversionnumber" type="number" />
+      <field displayname="UTC Conversion Time Zone Code" name="utcconversiontimezonecode" type="number" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="msdyusd_customizationfiles" displayname="Customization File" etc="10080" primaryidfield="msdyusd_customizationfilesid" primarynamefield="msdyusd_name" disableplugins="true">
+    <fields>
+      <field displayname="Created By" name="createdby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created By (Delegate)" name="createdonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created On" name="createdon" type="datetime" />
+      <field displayname="Customization Files" name="msdyusd_customizationfilesid" type="guid" primaryKey="true" />
+      <field updateCompare="true" displayname="Customization Version" name="msdyusd_customizationversion" type="string" customfield="true" />
+      <field displayname="Description" name="msdyusd_description" type="string" customfield="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Modified By" name="modifiedby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified By (Delegate)" name="modifiedonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified On" name="modifiedon" type="datetime" />
+      <field updateCompare="true" displayname="Name" name="msdyusd_name" type="string" customfield="true" />
+      <field displayname="Owner" name="ownerid" type="owner" />
+      <field displayname="Owning Business Unit" name="owningbusinessunit" type="entityreference" lookupType="businessunit" />
+      <field displayname="Owning Team" name="owningteam" type="entityreference" lookupType="team" />
+      <field displayname="Owning User" name="owninguser" type="entityreference" lookupType="systemuser" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Time Zone Rule Version Number" name="timezoneruleversionnumber" type="number" />
+      <field displayname="UTC Conversion Time Zone Code" name="utcconversiontimezonecode" type="number" />
+    </fields>
+    <relationships>
+      <relationship name="msdyusd_customizationfiles_configuration" manyToMany="true" isreflexive="false" relatedEntityName="msdyusd_customizationfiles_configuration" m2mTargetEntity="msdyusd_configuration" m2mTargetEntityPrimaryKey="msdyusd_configurationid" />
+    </relationships>
+  </entity>
+  <entity name="msdyusd_entitysearch" displayname="Entity Search" etc="10082" primaryidfield="msdyusd_entitysearchid" primarynamefield="msdyusd_name" disableplugins="true">
+    <fields>
+      <field displayname="Created By" name="createdby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created By (Delegate)" name="createdonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created On" name="createdon" type="datetime" />
+      <field displayname="Entity" name="msdyusd_entity" type="entityreference" lookupType="msdyusd_entityassignment" customfield="true" />
+      <field displayname="Entity Search" name="msdyusd_entitysearchid" type="guid" primaryKey="true" />
+      <field displayname="Fetch XML" name="msdyusd_fetchxml" type="string" customfield="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Modified By" name="modifiedby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified By (Delegate)" name="modifiedonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified On" name="modifiedon" type="datetime" />
+      <field updateCompare="true" displayname="Name" name="msdyusd_name" type="string" customfield="true" />
+      <field displayname="Owner" name="ownerid" type="owner" />
+      <field displayname="Owning Business Unit" name="owningbusinessunit" type="entityreference" lookupType="businessunit" />
+      <field displayname="Owning Team" name="owningteam" type="entityreference" lookupType="team" />
+      <field displayname="Owning User" name="owninguser" type="entityreference" lookupType="systemuser" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Time Zone Rule Version Number" name="timezoneruleversionnumber" type="number" />
+      <field displayname="UTC Conversion Time Zone Code" name="utcconversiontimezonecode" type="number" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="msdyusd_entityassignment" displayname="Entity Type" etc="10081" primaryidfield="msdyusd_entityassignmentid" primarynamefield="msdyusd_name" disableplugins="true">
+    <fields>
+      <field displayname="Created By" name="createdby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created By (Delegate)" name="createdonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created On" name="createdon" type="datetime" />
+      <field displayname="Entity Numeric Mapping" name="msdyusd_entityassignmentid" type="guid" primaryKey="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Modified By" name="modifiedby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified By (Delegate)" name="modifiedonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified On" name="modifiedon" type="datetime" />
+      <field updateCompare="true" displayname="Name" name="msdyusd_name" type="string" customfield="true" />
+      <field displayname="Numeric Code" name="msdyusd_numericcode" type="number" customfield="true" />
+      <field displayname="Owner" name="ownerid" type="owner" />
+      <field displayname="Owning Business Unit" name="owningbusinessunit" type="entityreference" lookupType="businessunit" />
+      <field displayname="Owning Team" name="owningteam" type="entityreference" lookupType="team" />
+      <field displayname="Owning User" name="owninguser" type="entityreference" lookupType="systemuser" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Time Zone Rule Version Number" name="timezoneruleversionnumber" type="number" />
+      <field displayname="UTC Conversion Time Zone Code" name="utcconversiontimezonecode" type="number" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="msdyusd_uiievent" displayname="Event" etc="10094" primaryidfield="msdyusd_uiieventid" primarynamefield="msdyusd_name" disableplugins="true">
+    <fields>
+      <field displayname="Created By" name="createdby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created By (Delegate)" name="createdonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created On" name="createdon" type="datetime" />
+      <field updateCompare="true" displayname="Hosted Application" name="msdyusd_hostedapplicationid" type="entityreference" lookupType="uii_hostedapplication" customfield="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Modified By" name="modifiedby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified By (Delegate)" name="modifiedonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified On" name="modifiedon" type="datetime" />
+      <field updateCompare="true" displayname="Name" name="msdyusd_name" type="string" customfield="true" />
+      <field displayname="Owner" name="ownerid" type="owner" />
+      <field displayname="Owning Business Unit" name="owningbusinessunit" type="entityreference" lookupType="businessunit" />
+      <field displayname="Owning Team" name="owningteam" type="entityreference" lookupType="team" />
+      <field displayname="Owning User" name="owninguser" type="entityreference" lookupType="systemuser" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Time Zone Rule Version Number" name="timezoneruleversionnumber" type="number" />
+      <field displayname="UII Event" name="msdyusd_uiieventid" type="guid" primaryKey="true" />
+      <field displayname="UTC Conversion Time Zone Code" name="utcconversiontimezonecode" type="number" />
+    </fields>
+    <relationships>
+      <relationship name="msdyusd_uiievent_agentscriptaction" manyToMany="true" isreflexive="false" relatedEntityName="msdyusd_uiievent_agentscriptaction" m2mTargetEntity="msdyusd_agentscriptaction" m2mTargetEntityPrimaryKey="msdyusd_agentscriptactionid" />
+    </relationships>
+  </entity>
+  <entity name="msdyusd_form" displayname="Form" etc="10083" primaryidfield="msdyusd_formid" primarynamefield="msdyusd_name" disableplugins="true">
+    <fields>
+      <field displayname="Created By" name="createdby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created By (Delegate)" name="createdonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created On" name="createdon" type="datetime" />
+      <field displayname="Form" name="msdyusd_formid" type="guid" primaryKey="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="markup" name="msdyusd_markup" type="string" customfield="true" />
+      <field displayname="Modified By" name="modifiedby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified By (Delegate)" name="modifiedonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified On" name="modifiedon" type="datetime" />
+      <field updateCompare="true" displayname="Name" name="msdyusd_name" type="string" customfield="true" />
+      <field displayname="Order" name="msdyusd_order" type="number" customfield="true" />
+      <field displayname="Owner" name="ownerid" type="owner" />
+      <field displayname="Owning Business Unit" name="owningbusinessunit" type="entityreference" lookupType="businessunit" />
+      <field displayname="Owning Team" name="owningteam" type="entityreference" lookupType="team" />
+      <field displayname="Owning User" name="owninguser" type="entityreference" lookupType="systemuser" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Time Zone Rule Version Number" name="timezoneruleversionnumber" type="number" />
+      <field displayname="UTC Conversion Time Zone Code" name="utcconversiontimezonecode" type="number" />
+    </fields>
+    <relationships>
+      <relationship name="msdyusd_form_hostedapplication" manyToMany="true" isreflexive="false" relatedEntityName="msdyusd_form_hostedapplication" m2mTargetEntity="uii_hostedapplication" m2mTargetEntityPrimaryKey="uii_hostedapplicationid" />
+    </relationships>
+  </entity>
+  <entity name="uii_hostedapplication" displayname="Hosted Control" etc="10066" primaryidfield="uii_hostedapplicationid" primarynamefield="uii_name" disableplugins="true">
+    <fields>
+      <field displayname="Adapter" name="uii_adaptermode" type="optionsetvalue" customfield="true" />
+      <field displayname="Allow Multiple Pages" name="msdyusd_allowmultiplepages" type="bool" customfield="true" />
+      <field displayname="Application Hosting Mode" name="uii_applicationhostingmode" type="optionsetvalue" customfield="true" />
+      <field displayname="Application is Dynamic" name="uii_isappdynamic" type="bool" customfield="true" />
+      <field displayname="Application is Global" name="uii_isglobalapplication" type="bool" customfield="true" />
+      <field displayname="Arguments" name="uii_externalapparguments" type="string" customfield="true" />
+      <field displayname="Assembly Type" name="uii_assemblytype" type="string" customfield="true" />
+      <field displayname="Assembly URI" name="uii_assemblyuri" type="string" customfield="true" />
+      <field displayname="Attach Input Thread" name="uii_isattachinputthread" type="bool" customfield="true" />
+      <field displayname="Auto Launch" name="msdyusd_autolaunch" type="bool" customfield="true" />
+      <field displayname="Auto Sign On" name="uii_isautosignon" type="bool" customfield="true" />
+      <field displayname="Automation XML" name="uii_automationxml" type="string" customfield="true" />
+      <field displayname="Caption" name="uii_toplevelwindowcaption" type="string" customfield="true" />
+      <field displayname="Created By" name="createdby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created By (Delegate)" name="createdonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created On" name="createdon" type="datetime" />
+      <field displayname="CRM Window Host Type" name="msdyusd_crmwindowhosttype" type="optionsetvalue" customfield="true" />
+      <field displayname="Dashboard Name" name="msdyusd_dashboardname" type="string" customfield="true" />
+      <field displayname="Dependent on Workflow" name="uii_isdependentonworkflow" type="bool" customfield="true" />
+      <field displayname="Display Group" name="uii_displaygroup" type="string" customfield="true" />
+      <field displayname="Display Name" name="msdyusd_displayname" type="string" customfield="true" />
+      <field displayname="Extensions XML" name="uii_extensionsxml" type="string" customfield="true" />
+      <field displayname="External App URI" name="uii_externalappuri" type="string" customfield="true" />
+      <field displayname="FindWindow Class" name="uii_findwindowclass" type="string" customfield="true" />
+      <field displayname="Hosted Application Type" name="uii_hostedapplicationtype" type="optionsetvalue" customfield="true" />
+      <field displayname="Hosting Type" name="msdyusd_hostingtype" type="optionsetvalue" customfield="true" />
+      <field displayname="ICA File Name" name="uii_icafilename" type="string" customfield="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Limit to Process ?" name="uii_islimittoprocess" type="bool" customfield="true" />
+      <field displayname="Main Window Acquisition Timeout (ms)" name="uii_mainwindowacquisitiontimeout" type="number" customfield="true" />
+      <field displayname="Manage Hosting" name="uii_managehosting" type="bool" customfield="true" />
+      <field displayname="Manage Popups" name="uii_managepopups" type="bool" customfield="true" />
+      <field displayname="Managed Application" name="uii_managedapplication" type="bool" customfield="true" />
+      <field displayname="Maximum Browsers" name="msdyusd_maximumbrowsers" type="number" customfield="true" />
+      <field displayname="Minimum Size X" name="uii_minimumsizex" type="number" customfield="true" />
+      <field displayname="Minimum Size Y" name="uii_minimumsizey" type="number" customfield="true" />
+      <field displayname="Modified By" name="modifiedby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified By (Delegate)" name="modifiedonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified On" name="modifiedon" type="datetime" />
+      <field updateCompare="true" displayname="Name" name="uii_name" type="string" customfield="true" />
+      <field displayname="No Message Pump" name="uii_isnomessagepump" type="bool" customfield="true" />
+      <field displayname="Optimal Size X" name="uii_optimalsizex" type="number" customfield="true" />
+      <field displayname="Optimal Size Y" name="uii_optimalsizey" type="number" customfield="true" />
+      <field displayname="Owner" name="ownerid" type="owner" />
+      <field displayname="Owning Business Unit" name="owningbusinessunit" type="entityreference" lookupType="businessunit" />
+      <field displayname="Owning Team" name="owningteam" type="entityreference" lookupType="team" />
+      <field displayname="Owning User" name="owninguser" type="entityreference" lookupType="systemuser" />
+      <field displayname="PanelType" name="msdyusd_paneltype" type="optionsetvalue" customfield="true" />
+      <field displayname="Process Acquisition Attempts" name="uii_remote_processacquisitionattempts" type="number" customfield="true" />
+      <field displayname="Process Acquisition Delay" name="uii_remote_processacquisitiondelay" type="number" customfield="true" />
+      <field displayname="Process Acquisition Filename" name="uii_processacquisitionfilename" type="string" customfield="true" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Remove Sizing Controls" name="uii_removesizingcontrols" type="bool" customfield="true" />
+      <field displayname="Restore if Minimized" name="uii_isrestoreifminimized" type="bool" customfield="true" />
+      <field displayname="Retain Frame and Caption" name="uii_isretainframeandcaption" type="bool" customfield="true" />
+      <field displayname="Retain on Taskbar" name="uii_isretainontaskbar" type="bool" customfield="true" />
+      <field displayname="Retain System Menu" name="uii_isretainsystemmenu" type="bool" customfield="true" />
+      <field displayname="Saved URL" name="msdyusd_savedurl" type="string" customfield="true" />
+      <field displayname="Scan for Data Parameters" name="msdyusd_scanfordataparameters" type="bool" customfield="true" />
+      <field displayname="Show in Toolbar Dropdown" name="uii_isshowintoolbardropdown" type="bool" customfield="true" />
+      <field displayname="Show Menu" name="uii_isshowmenu" type="bool" customfield="true" />
+      <field displayname="Sort Order" name="uii_sortorder" type="number" customfield="true" />
+      <field displayname="Specify URL" name="msdyusd_specifyurl" type="bool" customfield="true" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Time Zone Rule Version Number" name="timezoneruleversionnumber" type="number" />
+      <field displayname="Top Level Window Mode" name="uii_toplevelwindowmode" type="optionsetvalue" customfield="true" />
+      <field displayname="Type" name="uii_adaptertype" type="string" customfield="true" />
+      <field displayname="UII Hosted Application" name="uii_hostedapplicationid" type="guid" primaryKey="true" />
+      <field displayname="URI" name="uii_adapteruri" type="string" customfield="true" />
+      <field displayname="URL" name="uii_webappurl" type="string" customfield="true" />
+      <field displayname="Use new browser process" name="uii_isusenewbrowserprocess" type="bool" customfield="true" />
+      <field displayname="Use Toolbar" name="uii_iswebappusetoolbar" type="bool" customfield="true" />
+      <field displayname="User Can Close" name="uii_usercanclose" type="bool" customfield="true" />
+      <field displayname="UTC Conversion Time Zone Code" name="utcconversiontimezonecode" type="number" />
+      <field displayname="Working Directory" name="uii_externalappworkingdirectory" type="string" customfield="true" />
+      <field displayname="XAML" name="msdyusd_xaml" type="string" customfield="true" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="msdyusd_languagemodule" displayname="Language Module" etc="10084" primaryidfield="msdyusd_languagemoduleid" primarynamefield="msdyusd_name" disableplugins="true">
+    <fields>
+      <field displayname="Created By" name="createdby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created By (Delegate)" name="createdonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created On" name="createdon" type="datetime" />
+      <field displayname="Global Manager" name="msdyusd_globalmanagerid" type="entityreference" lookupType="uii_hostedapplication" customfield="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Language Code" name="msdyusd_languagecode" type="string" customfield="true" />
+      <field displayname="Language Module" name="msdyusd_languagemoduleid" type="guid" primaryKey="true" />
+      <field updateCompare="true" displayname="LCID" name="msdyusd_lcid" type="string" customfield="true" />
+      <field displayname="Modified By" name="modifiedby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified By (Delegate)" name="modifiedonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified On" name="modifiedon" type="datetime" />
+      <field updateCompare="true" displayname="Name" name="msdyusd_name" type="string" customfield="true" />
+      <field displayname="Owner" name="ownerid" type="owner" />
+      <field displayname="Owning Business Unit" name="owningbusinessunit" type="entityreference" lookupType="businessunit" />
+      <field displayname="Owning Team" name="owningteam" type="entityreference" lookupType="team" />
+      <field displayname="Owning User" name="owninguser" type="entityreference" lookupType="systemuser" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Time Zone Rule Version Number" name="timezoneruleversionnumber" type="number" />
+      <field displayname="UTC Conversion Time Zone Code" name="utcconversiontimezonecode" type="number" />
+      <field displayname="XML Web Resource Name" name="msdyusd_location" type="string" customfield="true" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="uii_option" displayname="Option" etc="10068" primaryidfield="uii_optionid" primarynamefield="uii_name" disableplugins="true">
+    <fields>
+      <field displayname="Created By" name="createdby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created By (Delegate)" name="createdonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created On" name="createdon" type="datetime" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Modified By" name="modifiedby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified By (Delegate)" name="modifiedonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified On" name="modifiedon" type="datetime" />
+      <field updateCompare="true" displayname="Name" name="uii_name" type="string" customfield="true" />
+      <field displayname="Owner" name="ownerid" type="owner" />
+      <field displayname="Owning Business Unit" name="owningbusinessunit" type="entityreference" lookupType="businessunit" />
+      <field displayname="Owning Team" name="owningteam" type="entityreference" lookupType="team" />
+      <field displayname="Owning User" name="owninguser" type="entityreference" lookupType="systemuser" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Time Zone Rule Version Number" name="timezoneruleversionnumber" type="number" />
+      <field displayname="UII Option" name="uii_optionid" type="guid" primaryKey="true" />
+      <field displayname="UTC Conversion Time Zone Code" name="utcconversiontimezonecode" type="number" />
+      <field displayname="Value" name="uii_value" type="string" customfield="true" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="msdyusd_scripttasktrigger" displayname="Script Task Trigger" etc="10086" primaryidfield="msdyusd_scripttasktriggerid" primarynamefield="msdyusd_name" disableplugins="true">
+    <fields>
+      <field displayname="Created By" name="createdby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created By (Delegate)" name="createdonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created On" name="createdon" type="datetime" />
+      <field displayname="Data" name="msdyusd_scripttasktriggerdata" type="string" customfield="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Modified By" name="modifiedby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified By (Delegate)" name="modifiedonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified On" name="modifiedon" type="datetime" />
+      <field updateCompare="true" displayname="Name" name="msdyusd_name" type="string" customfield="true" />
+      <field displayname="Owner" name="ownerid" type="owner" />
+      <field displayname="Owning Business Unit" name="owningbusinessunit" type="entityreference" lookupType="businessunit" />
+      <field displayname="Owning Team" name="owningteam" type="entityreference" lookupType="team" />
+      <field displayname="Owning User" name="owninguser" type="entityreference" lookupType="systemuser" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Script Task Trigger" name="msdyusd_scripttasktriggerid" type="guid" primaryKey="true" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Time Zone Rule Version Number" name="timezoneruleversionnumber" type="number" />
+      <field displayname="Trigger" name="msdyusd_triggerid" type="entityreference" lookupType="msdyusd_task" customfield="true" />
+      <field displayname="Type" name="msdyusd_scripttasktriggertype" type="optionsetvalue" customfield="true" />
+      <field displayname="UTC Conversion Time Zone Code" name="utcconversiontimezonecode" type="number" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="msdyusd_scriptlet" displayname="Scriptlet" etc="10085" primaryidfield="msdyusd_scriptletid" primarynamefield="msdyusd_name" disableplugins="true">
+    <fields>
+      <field displayname="Created By" name="createdby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created By (Delegate)" name="createdonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created On" name="createdon" type="datetime" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Modified By" name="modifiedby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified By (Delegate)" name="modifiedonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified On" name="modifiedon" type="datetime" />
+      <field updateCompare="true" displayname="Name" name="msdyusd_name" type="string" customfield="true" />
+      <field displayname="Owner" name="ownerid" type="owner" />
+      <field displayname="Owning Business Unit" name="owningbusinessunit" type="entityreference" lookupType="businessunit" />
+      <field displayname="Owning Team" name="owningteam" type="entityreference" lookupType="team" />
+      <field displayname="Owning User" name="owninguser" type="entityreference" lookupType="systemuser" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Script Text" name="msdyusd_scripttext" type="string" customfield="true" />
+      <field displayname="ScriptLet" name="msdyusd_scriptletid" type="guid" primaryKey="true" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Time Zone Rule Version Number" name="timezoneruleversionnumber" type="number" />
+      <field displayname="UTC Conversion Time Zone Code" name="utcconversiontimezonecode" type="number" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="msdyusd_sessioninformation" displayname="Session Information" etc="10088" primaryidfield="msdyusd_sessioninformationid" primarynamefield="msdyusd_name" disableplugins="true">
+    <fields>
+      <field displayname="Created By" name="createdby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created By (Delegate)" name="createdonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created On" name="createdon" type="datetime" />
+      <field displayname="Display" name="msdyusd_display" type="string" customfield="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Modified By" name="modifiedby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified By (Delegate)" name="modifiedonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified On" name="modifiedon" type="datetime" />
+      <field updateCompare="true" displayname="Name" name="msdyusd_name" type="string" customfield="true" />
+      <field displayname="Order" name="msdyusd_order" type="number" customfield="true" />
+      <field displayname="Owner" name="ownerid" type="owner" />
+      <field displayname="Owning Business Unit" name="owningbusinessunit" type="entityreference" lookupType="businessunit" />
+      <field displayname="Owning Team" name="owningteam" type="entityreference" lookupType="team" />
+      <field displayname="Owning User" name="owninguser" type="entityreference" lookupType="systemuser" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Selected Entity" name="msdyusd_selectedentity" type="entityreference" lookupType="msdyusd_entityassignment" customfield="true" />
+      <field displayname="Session Information" name="msdyusd_sessioninformationid" type="guid" primaryKey="true" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Time Zone Rule Version Number" name="timezoneruleversionnumber" type="number" />
+      <field displayname="Type" name="msdyusd_type" type="optionsetvalue" customfield="true" />
+      <field displayname="UTC Conversion Time Zone Code" name="utcconversiontimezonecode" type="number" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="msdyusd_sessiontransfer" displayname="Session Transfer" etc="10089" primaryidfield="msdyusd_sessiontransferid" primarynamefield="msdyusd_name" disableplugins="true">
+    <fields>
+      <field displayname="Created By" name="createdby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created By (Delegate)" name="createdonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created On" name="createdon" type="datetime" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Modified By" name="modifiedby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified By (Delegate)" name="modifiedonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified On" name="modifiedon" type="datetime" />
+      <field updateCompare="true" displayname="Name" name="msdyusd_name" type="string" customfield="true" />
+      <field displayname="Owner" name="ownerid" type="owner" />
+      <field displayname="Owning Business Unit" name="owningbusinessunit" type="entityreference" lookupType="businessunit" />
+      <field displayname="Owning Team" name="owningteam" type="entityreference" lookupType="team" />
+      <field displayname="Owning User" name="owninguser" type="entityreference" lookupType="systemuser" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Session Information" name="msdyusd_sessioninformation" type="string" customfield="true" />
+      <field displayname="Session Transfer" name="msdyusd_sessiontransferid" type="guid" primaryKey="true" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Time Zone Rule Version Number" name="timezoneruleversionnumber" type="number" />
+      <field displayname="UTC Conversion Time Zone Code" name="utcconversiontimezonecode" type="number" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="msdyusd_toolbarstrip" displayname="Toolbar" etc="10092" primaryidfield="msdyusd_toolbarstripid" primarynamefield="msdyusd_name" disableplugins="true">
+    <fields>
+      <field displayname="Autoload" name="msdyusd_autoload" type="optionsetvalue" customfield="true" />
+      <field displayname="Created By" name="createdby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created By (Delegate)" name="createdonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created On" name="createdon" type="datetime" />
+      <field displayname="Enabled Condition" name="msdyusd_enabledcondition" type="string" customfield="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Modified By" name="modifiedby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified By (Delegate)" name="modifiedonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified On" name="modifiedon" type="datetime" />
+      <field updateCompare="true" displayname="Name" name="msdyusd_name" type="string" customfield="true" />
+      <field displayname="Order" name="msdyusd_order" type="number" customfield="true" />
+      <field displayname="Owner" name="ownerid" type="owner" />
+      <field displayname="Owning Business Unit" name="owningbusinessunit" type="entityreference" lookupType="businessunit" />
+      <field displayname="Owning Team" name="owningteam" type="entityreference" lookupType="team" />
+      <field displayname="Owning User" name="owninguser" type="entityreference" lookupType="systemuser" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Time Zone Rule Version Number" name="timezoneruleversionnumber" type="number" />
+      <field displayname="Title" name="msdyusd_title" type="string" customfield="true" />
+      <field displayname="Toolbar" name="msdyusd_toolbarstripid" type="guid" primaryKey="true" />
+      <field displayname="UTC Conversion Time Zone Code" name="utcconversiontimezonecode" type="number" />
+      <field displayname="Visible Condition" name="msdyusd_visiblecondition" type="string" customfield="true" />
+    </fields>
+    <relationships>
+      <relationship name="msdyusd_toolbarstrip_uii_hostedapplication" manyToMany="true" isreflexive="false" relatedEntityName="msdyusd_toolbarstrip_uii_hostedapplication" m2mTargetEntity="uii_hostedapplication" m2mTargetEntityPrimaryKey="uii_hostedapplicationid" />
+    </relationships>
+  </entity>
+  <entity name="msdyusd_toolbarbutton" displayname="Toolbar Button" etc="10091" primaryidfield="msdyusd_toolbarbuttonid" primarynamefield="msdyusd_name" disableplugins="true">
+    <fields>
+      <field displayname="Buttons" name="msdyusd_buttons" type="entityreference" lookupType="msdyusd_toolbarbutton" customfield="true" />
+      <field displayname="ButtonText" name="msdyusd_buttontext" type="string" customfield="true" />
+      <field displayname="Created By" name="createdby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created By (Delegate)" name="createdonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created On" name="createdon" type="datetime" />
+      <field displayname="Enable Condition" name="msdyusd_enablecondition" type="optionsetvalue" customfield="true" />
+      <field displayname="Enabled Condition" name="msdyusd_enabledcondition" type="string" customfield="true" />
+      <field displayname="Image" name="msdyusd_image" type="string" customfield="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Modified By" name="modifiedby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified By (Delegate)" name="modifiedonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified On" name="modifiedon" type="datetime" />
+      <field updateCompare="true" displayname="Name" name="msdyusd_name" type="string" customfield="true" />
+      <field displayname="Order" name="msdyusd_order" type="number" customfield="true" />
+      <field displayname="Owner" name="ownerid" type="owner" />
+      <field displayname="Owning Business Unit" name="owningbusinessunit" type="entityreference" lookupType="businessunit" />
+      <field displayname="Owning Team" name="owningteam" type="entityreference" lookupType="team" />
+      <field displayname="Owning User" name="owninguser" type="entityreference" lookupType="systemuser" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Script Condition" name="msdyusd_scriptcondition" type="string" customfield="true" />
+      <field displayname="Show Tab" name="msdyusd_showtab" type="entityreference" lookupType="uii_hostedapplication" customfield="true" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Time Zone Rule Version Number" name="timezoneruleversionnumber" type="number" />
+      <field updateCompare="true" displayname="Toolbar" name="msdyusd_toolbarid" type="entityreference" lookupType="msdyusd_toolbarstrip" customfield="true" />
+      <field displayname="ToolbarButton" name="msdyusd_toolbarbuttonid" type="guid" primaryKey="true" />
+      <field displayname="Tooltip" name="msdyusd_tooltip" type="string" customfield="true" />
+      <field displayname="UTC Conversion Time Zone Code" name="utcconversiontimezonecode" type="number" />
+      <field displayname="Visible Condition" name="msdyusd_visiblecondition" type="string" customfield="true" />
+      <field displayname="WebResourceUrl" name="msdyusd_webresourceurl" type="string" customfield="true" />
+    </fields>
+    <relationships>
+      <relationship name="msdyusd_toolbarbutton_agentscriptaction" manyToMany="true" isreflexive="false" relatedEntityName="msdyusd_toolbarbutton_agentscriptaction" m2mTargetEntity="msdyusd_agentscriptaction" m2mTargetEntityPrimaryKey="msdyusd_agentscriptactionid" />
+    </relationships>
+  </entity>
+  <entity name="msdyusd_tracesourcesetting" displayname="Trace Source Setting" etc="10093" primaryidfield="msdyusd_tracesourcesettingid" primarynamefield="msdyusd_name" disableplugins="true">
+    <fields>
+      <field displayname="Created By" name="createdby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created By (Delegate)" name="createdonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created On" name="createdon" type="datetime" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Modified By" name="modifiedby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified By (Delegate)" name="modifiedonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified On" name="modifiedon" type="datetime" />
+      <field displayname="Owner" name="ownerid" type="owner" />
+      <field displayname="Owning Business Unit" name="owningbusinessunit" type="entityreference" lookupType="businessunit" />
+      <field displayname="Owning Team" name="owningteam" type="entityreference" lookupType="team" />
+      <field displayname="Owning User" name="owninguser" type="entityreference" lookupType="systemuser" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field updateCompare="true" displayname="Source Name" name="msdyusd_name" type="string" customfield="true" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Switch" name="msdyusd_switchlevel" type="optionsetvalue" customfield="true" />
+      <field displayname="Time Zone Rule Version Number" name="timezoneruleversionnumber" type="number" />
+      <field displayname="Trace Source Setting" name="msdyusd_tracesourcesettingid" type="guid" primaryKey="true" />
+      <field displayname="UTC Conversion Time Zone Code" name="utcconversiontimezonecode" type="number" />
+    </fields>
+    <relationships>
+      <relationship name="msdyusd_tracesourcesetting_hostedcontrol" manyToMany="true" isreflexive="false" relatedEntityName="msdyusd_tracesourcesetting_hostedcontrol" m2mTargetEntity="uii_hostedapplication" m2mTargetEntityPrimaryKey="uii_hostedapplicationid" />
+    </relationships>
+  </entity>
+  <entity name="uii_action" displayname="UII Action" etc="10063" primaryidfield="uii_actionid" primarynamefield="uii_name" disableplugins="true">
+    <fields>
+      <field displayname="Automation Mode" name="uii_automationmode" type="optionsetvalue" customfield="true" />
+      <field displayname="Created By" name="createdby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created By (Delegate)" name="createdonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created On" name="createdon" type="datetime" />
+      <field displayname="Extensions XML" name="uii_extensionsxml" type="string" customfield="true" />
+      <field displayname="Focus Application" name="uii_isfocussedapplication" type="bool" customfield="true" />
+      <field displayname="Help" name="msdyusd_help" type="string" customfield="true" />
+      <field updateCompare="true" displayname="Hosted Application" name="uii_hostedapplicationid" type="entityreference" lookupType="uii_hostedapplication" customfield="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="isDefault" name="uii_isdefault" type="bool" customfield="true" />
+      <field displayname="Method" name="uii_method" type="optionsetvalue" customfield="true" />
+      <field displayname="Modified By" name="modifiedby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified By (Delegate)" name="modifiedonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified On" name="modifiedon" type="datetime" />
+      <field updateCompare="true" displayname="Name" name="uii_name" type="string" customfield="true" />
+      <field displayname="Owner" name="ownerid" type="owner" />
+      <field displayname="Owning Business Unit" name="owningbusinessunit" type="entityreference" lookupType="businessunit" />
+      <field displayname="Owning Team" name="owningteam" type="entityreference" lookupType="team" />
+      <field displayname="Owning User" name="owninguser" type="entityreference" lookupType="systemuser" />
+      <field displayname="Query String" name="uii_querystring" type="string" customfield="true" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Run automation asynchronously to desktop thread" name="uii_isrunmodeasynchronous" type="bool" customfield="true" />
+      <field displayname="Script File Path to Run" name="uii_scriptfilepathtorun" type="string" customfield="true" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Time Zone Rule Version Number" name="timezoneruleversionnumber" type="number" />
+      <field displayname="UII Action" name="uii_actionid" type="guid" primaryKey="true" />
+      <field displayname="Unified Service Desk Created" name="msdyusd_unifiedservicedeskcreated" type="bool" customfield="true" />
+      <field displayname="URL" name="uii_url" type="string" customfield="true" />
+      <field displayname="UTC Conversion Time Zone Code" name="utcconversiontimezonecode" type="number" />
+      <field displayname="Workflow Assembly Type" name="uii_workflowassemblytype" type="string" customfield="true" />
+      <field displayname="Workflow Rules" name="uii_workflowrules" type="string" customfield="true" />
+      <field displayname="Workflow XAML" name="uii_workflowxaml" type="string" customfield="true" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="msdyusd_usersettings" displayname="User Setting" etc="10095" primaryidfield="msdyusd_usersettingsid" primarynamefield="msdyusd_name" disableplugins="true">
+    <fields>
+      <field displayname="Created By" name="createdby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created By (Delegate)" name="createdonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created On" name="createdon" type="datetime" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Modified By" name="modifiedby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified By (Delegate)" name="modifiedonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified On" name="modifiedon" type="datetime" />
+      <field updateCompare="true" displayname="Name" name="msdyusd_name" type="string" customfield="true" />
+      <field displayname="Owner" name="ownerid" type="owner" />
+      <field displayname="Owning Business Unit" name="owningbusinessunit" type="entityreference" lookupType="businessunit" />
+      <field displayname="Owning Team" name="owningteam" type="entityreference" lookupType="team" />
+      <field displayname="Owning User" name="owninguser" type="entityreference" lookupType="systemuser" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Time Zone Rule Version Number" name="timezoneruleversionnumber" type="number" />
+      <field displayname="User" name="msdyusd_user" type="entityreference" lookupType="systemuser" customfield="true" />
+      <field displayname="User Setting" name="msdyusd_usersettingsid" type="guid" primaryKey="true" />
+      <field displayname="UTC Conversion Time Zone Code" name="utcconversiontimezonecode" type="number" />
+      <field displayname="Value" name="msdyusd_settingvalue" type="string" customfield="true" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="msdyusd_windowroute" displayname="Window Navigation Rule" etc="10096" primaryidfield="msdyusd_windowrouteid" primarynamefield="msdyusd_name" disableplugins="true">
+    <fields>
+      <field displayname="Action" name="msdyusd_action" type="optionsetvalue" customfield="true" />
+      <field displayname="Action" name="msdyusd_singlematchaction" type="entityreference" lookupType="msdyusd_agentscriptaction" customfield="true" />
+      <field displayname="Action" name="msdyusd_nomatchesaction" type="entityreference" lookupType="msdyusd_agentscriptaction" customfield="true" />
+      <field displayname="Application Action" name="msdyusd_applicationaction" type="entityreference" lookupType="msdyusd_agentscriptaction" customfield="true" />
+      <field displayname="Condition" name="msdyusd_condition" type="string" customfield="true" />
+      <field displayname="Created By" name="createdby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created By (Delegate)" name="createdonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Created On" name="createdon" type="datetime" />
+      <field displayname="Decision" name="msdyusd_singlematchdecision" type="optionsetvalue" customfield="true" />
+      <field displayname="Decision" name="msdyusd_multiplematchesdecision" type="optionsetvalue" customfield="true" />
+      <field displayname="Decision" name="msdyusd_nomatchdecision" type="optionsetvalue" customfield="true" />
+      <field displayname="Destination" name="msdyusd_destination" type="optionsetvalue" customfield="true" />
+      <field displayname="Direction" name="msdyusd_direction" type="optionsetvalue" customfield="true" />
+      <field displayname="Entity" name="msdyusd_entity" type="entityreference" lookupType="msdyusd_entityassignment" customfield="true" />
+      <field displayname="Entity Search" name="msdyusd_entitysearch" type="entityreference" lookupType="msdyusd_entitysearch" customfield="true" />
+      <field displayname="Field" name="msdyusd_field" type="string" customfield="true" />
+      <field displayname="Frame" name="msdyusd_dashboardframe" type="string" customfield="true" />
+      <field displayname="From" name="msdyusd_from" type="entityreference" lookupType="uii_hostedapplication" customfield="true" />
+      <field displayname="From Search" name="msdyusd_fromsearch" type="entityreference" lookupType="msdyusd_entitysearch" customfield="true" />
+      <field displayname="Hide Command Bar" name="msdyusd_hideribbon" type="bool" customfield="true" />
+      <field displayname="Hide Navigation Bar" name="msdyusd_hidenavbar" type="bool" customfield="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Initiating Activity" name="msdyusd_initiatingactivity" type="entityreference" lookupType="msdyusd_entityassignment" customfield="true" />
+      <field displayname="Load Area" name="msdyusd_loadarea" type="string" customfield="true" />
+      <field displayname="Modified By" name="modifiedby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified By (Delegate)" name="modifiedonbehalfby" type="entityreference" lookupType="systemuser" />
+      <field displayname="Modified On" name="modifiedon" type="datetime" />
+      <field displayname="Multiple Matches" name="msdyusd_multiplematches" type="entityreference" lookupType="msdyusd_agentscriptaction" customfield="true" />
+      <field updateCompare="true" displayname="Name" name="msdyusd_name" type="string" customfield="true" />
+      <field displayname="Order" name="msdyusd_order" type="number" customfield="true" />
+      <field displayname="Owner" name="ownerid" type="owner" />
+      <field displayname="Owning Business Unit" name="owningbusinessunit" type="entityreference" lookupType="businessunit" />
+      <field displayname="Owning Team" name="owningteam" type="entityreference" lookupType="team" />
+      <field displayname="Owning User" name="owninguser" type="entityreference" lookupType="systemuser" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Route Type" name="msdyusd_routetype" type="optionsetvalue" customfield="true" />
+      <field displayname="showtab" name="msdyusd_showtab" type="entityreference" lookupType="uii_hostedapplication" customfield="true" />
+      <field displayname="Source Frame" name="msdyusd_sourceframe" type="string" customfield="true" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Target Tab" name="msdyusd_application" type="entityreference" lookupType="uii_hostedapplication" customfield="true" />
+      <field displayname="Time Zone Rule Version Number" name="timezoneruleversionnumber" type="number" />
+      <field displayname="Url" name="msdyusd_url" type="string" customfield="true" />
+      <field displayname="UTC Conversion Time Zone Code" name="utcconversiontimezonecode" type="number" />
+      <field displayname="Window Route" name="msdyusd_windowrouteid" type="guid" primaryKey="true" />
+    </fields>
+    <relationships>
+      <relationship name="msdyusd_windowroute_agentscriptaction" manyToMany="true" isreflexive="false" relatedEntityName="msdyusd_windowroute_agentscriptaction" m2mTargetEntity="msdyusd_agentscriptaction" m2mTargetEntityPrimaryKey="msdyusd_agentscriptactionid" />
+      <relationship name="msdyusd_windowroute_ctisearch" manyToMany="true" isreflexive="false" relatedEntityName="msdyusd_windowroute_ctisearch" m2mTargetEntity="msdyusd_search" m2mTargetEntityPrimaryKey="msdyusd_searchid" />
+    </relationships>
+  </entity>
+</entities>
