@@ -45,7 +45,7 @@ Tc.Crm.Scripts.Ribbon.TravellerPlanner = (function () {
                 if (req.readyState == STATUS_READY && req.status == HTTP_SUCCESS) {
                     var results = JSON.parse(req.response);
                     var name = results.value[0]["name"];
-                    if (name == "System Customizer" || name == "Sales Manager") {
+                    if (name == "Tc.Retail.ClusterManager" || name == "Tc.Retail.AssistantManager" || name == "Tc.Retail.RegionalManager") {
                         if (Xrm.Page.getAttribute(Attributes.Validation).getValue() == false && Xrm.Page.ui.getFormType() == FORM_MODE_UPDATE) {
                             bool = true;
                         }
