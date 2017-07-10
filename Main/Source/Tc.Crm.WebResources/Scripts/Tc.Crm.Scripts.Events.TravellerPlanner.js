@@ -13,28 +13,32 @@ if (typeof (Tc.Crm.Scripts) === "undefined") {
         __namespace: true
     };
 }
-if (typeof (Tc.Crm.Scripts.Ribbon) === "undefined") {
-    Tc.Crm.Scripts.Ribbon = {
+if (typeof (Tc.Crm.Scripts.Events) === "undefined") {
+    Tc.Crm.Scripts.Events = {
         __namespace: true
     };
 }
-Tc.Crm.Scripts.Ribbon.TravellerPlanner = (function () {
+Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
     "use strict";
 
-    var FORM_MODE_UPDATE = 2;
+    var FORM_MODE_CREATE = 1;
     var HTTP_SUCCESS = 200;
     var STATUS_READY = 4;
-    var NO_CONTENT = 204;
+    var NO_CONTENT = 204;    
+    var CLUSTER_MANAGER = "Tc.Retail.ClusterManager";
+    var ASSISTANT_MANAGER = "Tc.Retail.AssistantManager";
+    var REGIONAL_MANAGER = "Tc.Retail.RegionalManager";
+
 
 
     var Attributes = {
         Validation: "tc_validation",
     }
 
-    var GetUserRoles = function () {
-        var bool = false;
+    var getUserRoles = function () {
+        var enable = false;
         var UserRole = window.parent.Xrm.Page.context.getUserRoles();
-        if (UserRole == null || UserRole == "" || UserRole == undefined) return bool;
+        if (UserRole == null || UserRole == "" || UserRole == undefined) return enable;
         for (var i = 0; i < UserRole.length; i++) {
             var req = new XMLHttpRequest();
             var userRoleId = UserRole[i];
@@ -45,22 +49,24 @@ Tc.Crm.Scripts.Ribbon.TravellerPlanner = (function () {
                 if (req.readyState == STATUS_READY && req.status == HTTP_SUCCESS) {
                     var results = JSON.parse(req.response);
                     var name = results.value[0]["name"];
-                    if (name == "Tc.Retail.ClusterManager" || name == "Tc.Retail.AssistantManager" || name == "Tc.Retail.RegionalManager") {
-                        if (Xrm.Page.getAttribute(Attributes.Validation).getValue() == false && Xrm.Page.ui.getFormType() == FORM_MODE_UPDATE) {
-                            bool = true;
+                    if (name == CLUSTER_MANAGER || name == ASSISTANT_MANAGER || name == REGIONAL_MANAGER) {
+                        var ValidationAttr = getControlValue(Attributes.Validation);
+                        if (ValidationAttr == null) return enable;
+                        if (ValidationAttr == false && Xrm.Page.ui.getFormType() != FORM_MODE_CREATE) {
+                                enable = true;
                         }
                     }                    
                 }
             };
             req.send();
-            if (bool == true) break;
+            if (enable == true) break;
         }
-        return bool;
+        return enable;
     }
-    var EnableValidateRibbonButton = function () {
-        var bool = GetUserRoles();
-        if (bool != null && bool != "" && bool != undefined)
-            return bool;
+    var enableValidateRibbonButton = function () {
+        var enable = getUserRoles();
+        if (enable != null && enable != "" && enable != undefined)
+            return enable;
     }
     var setValidationFieldValue = function () {
         var entity = {};
@@ -79,6 +85,7 @@ Tc.Crm.Scripts.Ribbon.TravellerPlanner = (function () {
                     Xrm.Page.data.save().then(function () { Xrm.Page.data.refresh(false); });
                 } else {
                     Xrm.Utility.alertDialog(this.statusText);
+                    console.log("ERROR: " + this.statusText);
                 }
             }
         };
@@ -87,15 +94,18 @@ Tc.Crm.Scripts.Ribbon.TravellerPlanner = (function () {
     function formatEntityId(id) {
         return id !== null ? id.replace("{", "").replace("}", "") : null;
     }
+    var getControlValue = function (controlName) {
+        if (Xrm.Page.getAttribute(controlName) && (Xrm.Page.getAttribute(controlName).getValue() !=null))
+            return Xrm.Page.getAttribute(controlName).getValue();
+        else
+            return null;
+    }
     return {
         OnValidateRibbonButtonClick: function () {
             setValidationFieldValue();
-        },
-        refreshRibbonNavigation: function () {
-            Xrm.Page.ui.refreshRibbon();
-        },
-        OnRibbonLoad: function () {            
-          return EnableValidateRibbonButton();            
+        },        
+        EnableDisableValidateButton: function () {            
+            return enableValidateRibbonButton();
         }
     };
 })();
