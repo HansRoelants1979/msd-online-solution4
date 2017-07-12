@@ -182,6 +182,12 @@ namespace Tc.Crm.CustomWorkflowSteps
                 case BoardType.HalfBoardUpgrade:
                     value = 950000020;
                     break;
+                case BoardType.LodgingOnly:
+                    value = 950000030;
+                    break;
+                case BoardType.LodgingWithBreakfast:
+                    value = 950000029;
+                    break;
                 case BoardType.MealPlan:
                     value = 950000021;
                     break;
@@ -599,12 +605,12 @@ namespace Tc.Crm.CustomWorkflowSteps
         {
             if (entity == null) return;
             if (service == null) return;
-            
+
             var createRequest = new CreateRequest { Target = entity };
-            service.Execute(createRequest);           
+            service.Execute(createRequest);
         }
 
-        
+
         /// <summary>
         /// To get records by using filter keys and values
         /// </summary>
