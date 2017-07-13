@@ -17,6 +17,7 @@ namespace Tc.Crm.UnitTests.Plugins
         private Entity hotelEntity = null;
         private Entity hotelPromiseEntity = null;
         private Entity brandEntity;
+        private Entity bookingTransportEntity;
 
         DateTime currentUTCTime = DateTime.UtcNow;
         XrmFakedContext context = null;
@@ -51,6 +52,11 @@ namespace Tc.Crm.UnitTests.Plugins
             bookingAccommodationEntity.Attributes.Add("tc_name", "Steigenberger Aqua Magic - 20170405153");
             bookingAccommodationEntity.Attributes.Add("tc_bookingid", bookingEntity.ToEntityReference());
 
+            //Create a new Booking Transport dummy object
+            bookingTransportEntity = new Entity("tc_bookingtransport", Guid.NewGuid());
+            bookingTransportEntity.Attributes.Add("tc_enddateandtime", currentUTCTime.AddDays(5));
+            bookingTransportEntity.Attributes.Add("tc_bookingid", bookingEntity.ToEntityReference());
+
             //Create a new Case dummy object            
             incidentEntity = new Entity("incident", Guid.NewGuid());
             incidentEntity.Attributes.Add("ticketnumber", "TC-00539-B7R7");
@@ -67,7 +73,7 @@ namespace Tc.Crm.UnitTests.Plugins
 
             context = new XrmFakedContext();
             context.Initialize(new List<Entity>() { brandEntity, hotelEntity, hotelPromiseEntity, bookingEntity,
-                bookingAccommodationEntity,incidentEntity, caseLineEntity});
+                bookingAccommodationEntity,incidentEntity, caseLineEntity,bookingTransportEntity});
         }        
 
         [TestMethod]
@@ -181,7 +187,7 @@ namespace Tc.Crm.UnitTests.Plugins
         }
 
         [TestMethod]
-        public void PreCaseLinePlugin_BookingAccommodationStartDateTimeLessThanCaseCreatedOnDate()
+        public void PreCaseLinePlugin_BookingTransportEndDateTimeLessThanCaseCreatedOnDate()
         {
             context.CreateQueryFromEntityName(incidentEntity.LogicalName).FirstOrDefault().Attributes["createdon"] = currentUTCTime.AddDays(6).AddMinutes(1); //BookingAccommodation --> StartDate + 24 Hours + 1 Min
 
@@ -191,13 +197,13 @@ namespace Tc.Crm.UnitTests.Plugins
 
             var incident = context.CreateQueryFromEntityName(incidentEntity.LogicalName).FirstOrDefault();
             Assert.IsTrue((incident.Attributes["tc_24hourpromise"] as OptionSetValue).Value != 950000000);
-            Assert.IsTrue(context.GetFakeTracingService().DumpTrace().Contains(string.Format("No Booking Accommodation Start Date or it's less than the Case CreatedOn.")));
+            Assert.IsTrue(context.GetFakeTracingService().DumpTrace().Contains(string.Format("No Booking Transport End Date or it's less than the Case CreatedOn.")));
 
             context.CreateQueryFromEntityName(incidentEntity.LogicalName).FirstOrDefault().Attributes["createdon"] = currentUTCTime;
         }
 
         [TestMethod]
-        public void PreCaseLinePlugin_BookingAccommodationStartDateTimeEqualToCaseCreatedOnDate()
+        public void PreCaseLinePlugin_BookingTransportEndDateTimeEqualToCaseCreatedOnDate()
         {
             context.CreateQueryFromEntityName(incidentEntity.LogicalName).FirstOrDefault().Attributes["createdon"] = currentUTCTime.AddDays(5); //Same as BookingAccommodation --> StartDate 
 
@@ -213,7 +219,7 @@ namespace Tc.Crm.UnitTests.Plugins
         }
 
         [TestMethod]
-        public void PreCaseLinePlugin_BookingAccommodationStartDateTimeGreaterThanCaseCreatedOnDate()
+        public void PreCaseLinePlugin_BookingTransportEndDateTimeGreaterThanCaseCreatedOnDate()
         {
             context.CreateQueryFromEntityName(incidentEntity.LogicalName).FirstOrDefault().Attributes["createdon"] = DateTime.UtcNow;
 
