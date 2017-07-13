@@ -182,12 +182,6 @@ namespace Tc.Crm.CustomWorkflowSteps
                 case BoardType.HalfBoardUpgrade:
                     value = 950000020;
                     break;
-                case BoardType.LodgingOnly:
-                    value = 950000030;
-                    break;
-                case BoardType.LodgingWithBreakfast:
-                    value = 950000029;
-                    break;
                 case BoardType.MealPlan:
                     value = 950000021;
                     break;
