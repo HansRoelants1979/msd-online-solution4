@@ -109,10 +109,10 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
         }
         public static int GetDurationFrom(Transport[] transports, ITracingService trace)
         {
-            if (transports == null || transports.Length == 0) return -1;
+            if (transports == null || transports.Length == 0 ) return -1;
 
-            var inboundTransport = transports.First<Transport>(t=> t.TransferType == TransferType.Inbound);
-            var outboundTransport = transports.First<Transport>(t => t.TransferType == TransferType.Outbound);
+            var inboundTransport = transports.FirstOrDefault<Transport>(t=> t.TransferType == TransferType.Inbound);
+            var outboundTransport = transports.FirstOrDefault<Transport>(t => t.TransferType == TransferType.Outbound);
 
             if (inboundTransport == null || outboundTransport == null) return -1;
 
