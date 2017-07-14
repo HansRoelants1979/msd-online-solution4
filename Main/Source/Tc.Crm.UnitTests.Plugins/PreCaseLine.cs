@@ -56,6 +56,7 @@ namespace Tc.Crm.UnitTests.Plugins
             bookingTransportEntity = new Entity("tc_bookingtransport", Guid.NewGuid());
             bookingTransportEntity.Attributes.Add("tc_enddateandtime", currentUTCTime.AddDays(5));
             bookingTransportEntity.Attributes.Add("tc_bookingid", bookingEntity.ToEntityReference());
+            bookingTransportEntity.Attributes.Add("tc_transfertype", 950000000);
 
             //Create a new Case dummy object            
             incidentEntity = new Entity("incident", Guid.NewGuid());

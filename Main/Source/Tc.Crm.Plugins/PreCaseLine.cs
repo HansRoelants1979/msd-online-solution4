@@ -289,17 +289,17 @@ namespace Tc.Crm.Plugins
                                                     ITracingService tracingService,
                                                     Guid bookingId)
         {
-            DateTime bookingTransportEndDate = DateTime.MinValue;
+            DateTime bookingTransportEndDate = DateTime.MinValue;            
             StringBuilder transportReferenceQuery = new StringBuilder(string.Format(@"<fetch>
-                                                                                          <entity name='tc_bookingtransport' >
-                                                                                            <attribute name='tc_enddateandtime' />                                                                                            
-                                                                                            <filter>
-                                                                                              <condition attribute='tc_bookingid' operator='eq' value='{0}' />
-                                                                                            </filter>                                                                                                
-                                                                                          </entity>
-                                                                                        </fetch>", bookingId));
-
-            //Get the booking transport of the case booking.
+                                                                        <entity name='tc_bookingtransport'>
+                                                                        <attribute name='tc_enddateandtime'/>                                                                        
+                                                                        <filter type='and'><condition attribute='tc_bookingid' operator='eq' value='{0}'/>
+                                                                        <condition attribute='tc_transfertype' operator='eq' value='950000000'/>
+                                                                        </filter>
+                                                                        </entity>
+                                                                        </fetch>", bookingId));
+            
+            //Get the booking transport of the case booking.            
             var bookingTransport = orgService.RetrieveMultiple(new FetchExpression(transportReferenceQuery.ToString())).Entities.FirstOrDefault();
 
             if (bookingTransport == null) return bookingTransportEndDate;
