@@ -19,7 +19,13 @@ if (typeof (Tc.Crm.Scripts.Events) === "undefined") {
         __namespace: true
     };
 }
-Tc.Crm.Scripts.Events.Contact = (function () {
+if (typeof (Tc.Crm.Scripts.Events.Contact) === "undefined") {
+    Tc.Crm.Scripts.Events.Contact = {
+        __namespace: true
+    };
+}
+
+Tc.Crm.Scripts.Events.Contact.Ids = (function () {
     "use strict";
     // private stuff
     var FORM_MODE_CREATE = 1;

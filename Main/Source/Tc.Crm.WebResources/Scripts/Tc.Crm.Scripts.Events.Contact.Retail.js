@@ -8,27 +8,27 @@ if (typeof (Tc.Crm) === "undefined") {
         __namespace: true
     };
 }
-if (typeof (Tc.Crm.Uk) === "undefined") {
-    Tc.Crm.Uk = {
+if (typeof (Tc.Crm.Scripts) === "undefined") {
+    Tc.Crm.Scripts = {
         __namespace: true
     };
 }
-if (typeof (Tc.Crm.Uk.Scripts) === "undefined") {
-    Tc.Crm.Uk.Scripts = {
-        __namespace: true
-    };
-}
-if (typeof (Tc.Crm.Uk.Scripts.Events) === "undefined") {
-    Tc.Crm.Uk.Scripts.Events = {
+if (typeof (Tc.Crm.Scripts.Events) === "undefined") {
+    Tc.Crm.Scripts.Events = {
         __namespace: true
     };
 }
 
-Tc.Crm.Uk.Scripts.Events.Contact = (function () {
+if (typeof (Tc.Crm.Scripts.Events.Contact) === "undefined") {
+    Tc.Crm.Scripts.Events.Contact = {
+        __namespace: true
+    };
+}
+
+Tc.Crm.Scripts.Events.Contact.Retail = (function () {
     "use strict";
 
     function onPhoneChanged(context) {
-        debugger;
         var attribute = context.getEventSource();
         var value = attribute.getValue();
         var isValid = true;
