@@ -5,6 +5,8 @@ using FakeXrmEasy;
 using System.Collections.Generic;
 using System.Linq;
 
+
+
 namespace Tc.Crm.UnitTests.Plugins
 {
     [TestClass]
@@ -53,10 +55,23 @@ namespace Tc.Crm.UnitTests.Plugins
             bookingAccommodationEntity.Attributes.Add("tc_bookingid", bookingEntity.ToEntityReference());
 
             //Create a new Booking Transport dummy object
-            bookingTransportEntity = new Entity("tc_bookingtransport", Guid.NewGuid());
-            bookingTransportEntity.Attributes.Add("tc_enddateandtime", currentUTCTime.AddDays(5));
-            bookingTransportEntity.Attributes.Add("tc_bookingid", bookingEntity.ToEntityReference());
-            bookingTransportEntity.Attributes.Add("tc_transfertype", 950000000);
+            //bookingTransportEntity = new Entity("tc_bookingtransport", Guid.NewGuid());
+            //bookingTransportEntity.Attributes.Add("tc_enddateandtime", currentUTCTime.AddDays(5));
+            //bookingTransportEntity.Attributes.Add("tc_bookingid", bookingEntity.ToEntityReference());
+            //bookingTransportEntity.Attributes.Add("tc_transfertype", new OptionSetValue((int)CrmEarlyBound.tc_TransferType.Inbound));
+
+            //context.ProxyTypesAssembly = Assembly.GetAssembly(typeof(CrmEarlyBound.tc_bookingtransport));           
+
+             bookingTransportEntity = new CrmEarlyBound.tc_bookingtransport
+            {
+                Id = Guid.NewGuid(),
+                tc_EndDateandTime = currentUTCTime.AddDays(5),
+                tc_BookingId = bookingEntity.ToEntityReference(),
+                tc_TransferType = new OptionSetValue((int)CrmEarlyBound.tc_TransferType.Inbound)
+
+            };
+           // bookingTransportEntity["tc_transfertype"] = new OptionSetValue((int)CrmEarlyBound.tc_TransferType.Inbound);
+
 
             //Create a new Case dummy object            
             incidentEntity = new Entity("incident", Guid.NewGuid());
@@ -75,6 +90,7 @@ namespace Tc.Crm.UnitTests.Plugins
             context = new XrmFakedContext();
             context.Initialize(new List<Entity>() { brandEntity, hotelEntity, hotelPromiseEntity, bookingEntity,
                 bookingAccommodationEntity,incidentEntity, caseLineEntity,bookingTransportEntity});
+            
         }        
 
         [TestMethod]
@@ -206,6 +222,7 @@ namespace Tc.Crm.UnitTests.Plugins
         [TestMethod]
         public void PreCaseLinePlugin_BookingTransportEndDateTimeEqualToCaseCreatedOnDate()
         {
+           
             context.CreateQueryFromEntityName(incidentEntity.LogicalName).FirstOrDefault().Attributes["createdon"] = currentUTCTime.AddDays(5); //Same as BookingAccommodation --> StartDate 
 
             var target = caseLineEntity;
@@ -222,6 +239,7 @@ namespace Tc.Crm.UnitTests.Plugins
         [TestMethod]
         public void PreCaseLinePlugin_BookingTransportEndDateTimeGreaterThanCaseCreatedOnDate()
         {
+            
             context.CreateQueryFromEntityName(incidentEntity.LogicalName).FirstOrDefault().Attributes["createdon"] = DateTime.UtcNow;
 
             var target = caseLineEntity;
