@@ -8,12 +8,16 @@
         <Grid.Resources>
             <CCA:CRMImageConverter x:Key="CRMImageLoader" />
         </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="119*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="53*"/>
-            <ColumnDefinition Width="17*"/>
+            <ColumnDefinition Width="265.6"/>
+            <ColumnDefinition Width="84.8"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.ColumnSpan="2" >
+        <Grid Grid.ColumnSpan="2" Margin="0,0,0.4,0" Grid.RowSpan="2" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="57*"></ColumnDefinition>
                 <ColumnDefinition Width="31*"/>
@@ -27,7 +31,8 @@
                 <RowDefinition Height="40"></RowDefinition>
                 <RowDefinition Height="40"></RowDefinition>
                 <RowDefinition Height="40"></RowDefinition>
-                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="33.6"></RowDefinition>
+                <RowDefinition Height="6.4"/>
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0" Grid.Column="0"  FontSize="15" Padding="4" Foreground="Orange" Grid.ColumnSpan="3" Margin="0,0,55.4,0">External Login</TextBlock>
@@ -44,8 +49,8 @@
             <TextBlock Grid.Row="4" Grid.Column="2" Height="20" Grid.ColumnSpan="2" Margin="0,10,87.4,10">Initials</TextBlock>
             <TextBox Grid.Row="4" x:Name="txtInitials" MaxLength="3" Grid.Column="2" Text="[[tc_externallogin.tc_initials]+]" Height="20" Grid.ColumnSpan="2" Margin="86,10,0.4,10"></TextBox>
 
-            <Button Grid.Row="5" Command="CCA:ActionCommands.UIIEvent" CommandParameter="{Binding Path=Text,ElementName=tbResult}" Height="30" Width="100" HorizontalAlignment="Right" Grid.ColumnSpan="2" Margin="0,0,74.4,10" Grid.Column="2">Save Details</Button>
-            <TextBlock Grid.Row="5" Visibility="Hidden" Grid.Column="3" x:Name="tbResult" Grid.ColumnSpan="2" Margin="87.6,0,0.4,0" >
+            <Button Grid.Row="5" Command="CCA:ActionCommands.UIIEvent" CommandParameter="{Binding Path=Text,ElementName=tbResult}" Height="30" Width="100" HorizontalAlignment="Right" Grid.ColumnSpan="2" Margin="0,0,74.4,3.6" Grid.Column="2">Save Details</Button>
+            <TextBlock Grid.Row="5" Visibility="Hidden" Grid.Column="3" x:Name="tbResult" Grid.ColumnSpan="2" Margin="87.6,0,0.4,0" Grid.RowSpan="2" >
                 <TextBlock.Text>
                     <MultiBinding StringFormat="Tc.ExternalLogin.Custom.Save?employeeId={0}&amp;branchcode={1}&amp;abta={2}&amp;initials={3}&amp;id={4}">
                         <Binding Path="Text" ElementName="txtEmployeeId" />
@@ -56,8 +61,8 @@
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>
-            <TextBlock x:Name="tbLoginId" Grid.Row="5" Visibility="Hidden" Grid.Column="3" Text="[[tc_externallogin.tc_externalloginid]+]" Grid.ColumnSpan="2" Margin="87.6,0,0.4,0"></TextBlock>
+            <TextBlock x:Name="tbLoginId" Grid.Row="5" Visibility="Hidden" Grid.Column="3" Text="[[tc_externallogin.tc_externalloginid]+]" Grid.ColumnSpan="2" Margin="87.6,0,0.4,0" Grid.RowSpan="2"></TextBlock>
         </Grid>
-        <Button Command="CCA:ActionCommands.UIIEvent" Content="Cancel" CommandParameter="Cancel" Height="30" Width="100" HorizontalAlignment="Right" Margin="0,200,24.4,10" Grid.ColumnSpan="2"/>
+        <Button Command="CCA:ActionCommands.UIIEvent" Content="Cancel" CommandParameter="Cancel" Height="30" Width="100" HorizontalAlignment="Right" Margin="0,198.4,24.4,10" Grid.ColumnSpan="2" Grid.Row="1"/>
     </Grid>
 </Border>
