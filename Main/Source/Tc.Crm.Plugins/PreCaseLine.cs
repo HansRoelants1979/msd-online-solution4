@@ -268,21 +268,45 @@ namespace Tc.Crm.Plugins
                                             bookingAccommodationReferenceQuery.ToString()));
                 return false;
             }
-
-            var bookingAccommodationStartDateTime = bookingAccommodation.Contains("tc_startdateandtime") ? (DateTime)bookingAccommodation["tc_startdateandtime"] : DateTime.MinValue;
+                        
+            var bookingTransportEndDate = getBookingTransportEndDate(orgService, tracingService, bookingEntityReference.Id);
 
             //Add a day to booking accommodation start date for calculation for 24 Hours promise business logic
-            bookingAccommodationStartDateTime = bookingAccommodationStartDateTime.AddDays(1);
+            bookingTransportEndDate = bookingTransportEndDate.AddDays(1);
 
-            if (bookingAccommodationStartDateTime.CompareTo((DateTime)incident.Attributes["createdon"]) == -1) // Case.CreatedOn <= BookingAccommodation.StartDateTime
+            if (bookingTransportEndDate.CompareTo((DateTime)incident.Attributes["createdon"]) == -1) // Case.CreatedOn <= BookingTransport.EndDateTime
             {
-                tracingService.Trace(string.Format(@"No Booking Accommodation Start Date or it's less than the Case CreatedOn. \n\n " +
-                                        "Booking Accommodation Start Date: {0:MM/dd/yy H:mm:ss} \n\n Query Used: {1}\n", bookingAccommodationStartDateTime,
+                tracingService.Trace(string.Format(@"No Booking Transport End Date or it's less than the Case CreatedOn. \n\n " +
+                                        "Booking Transport End Date: {0:MM/dd/yy H:mm:ss} \n\n Query Used: {1}\n", bookingTransportEndDate,
                                             bookingAccommodationReferenceQuery.ToString()));
                 return false;
             }
 
             return true;
+        }
+
+        private DateTime getBookingTransportEndDate(IOrganizationService orgService,
+                                                    ITracingService tracingService,
+                                                    Guid bookingId)
+        {
+            DateTime bookingTransportEndDate = DateTime.MinValue;            
+            StringBuilder transportReferenceQuery = new StringBuilder(string.Format(@"<fetch>
+                                                                        <entity name='tc_bookingtransport'>
+                                                                        <attribute name='tc_enddateandtime'/>                                                                        
+                                                                        <filter type='and'><condition attribute='tc_bookingid' operator='eq' value='{0}'/>
+                                                                        <condition attribute='tc_transfertype' operator='eq' value='950000000'/>
+                                                                        </filter>
+                                                                        </entity>
+                                                                        </fetch>", bookingId));
+            
+            //Get the booking transport of the case booking.            
+            var bookingTransport = orgService.RetrieveMultiple(new FetchExpression(transportReferenceQuery.ToString())).Entities.FirstOrDefault();
+
+            if (bookingTransport == null) return bookingTransportEndDate;
+                return bookingTransportEndDate = bookingTransport.Contains("tc_enddateandtime") ? (DateTime)bookingTransport["tc_enddateandtime"] : DateTime.MinValue;
+
+
+
         }
     }
 }

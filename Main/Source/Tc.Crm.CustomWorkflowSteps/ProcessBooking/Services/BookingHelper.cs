@@ -67,7 +67,6 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 booking[Attributes.Booking.BookingDate] = (!string.IsNullOrWhiteSpace(general.BookingDate)) ? Convert.ToDateTime(general.BookingDate) : (DateTime?)null;
                 booking[Attributes.Booking.DepartureDate] = (!string.IsNullOrWhiteSpace(general.DepartureDate)) ? Convert.ToDateTime(general.DepartureDate) : (DateTime?)null;
                 booking[Attributes.Booking.ReturnDate] = (!string.IsNullOrWhiteSpace(general.ReturnDate)) ? Convert.ToDateTime(general.ReturnDate) : (DateTime?)null;
-                booking[Attributes.Booking.Duration] = Convert.ToInt32(general.Duration);
                 booking[Attributes.Booking.DestinationGatewayId] = (!string.IsNullOrWhiteSpace(general.Destination)) ? new EntityReference(EntityName.Gateway, new Guid(general.Destination)) : null;
                 booking[Attributes.Booking.TourOperatorId] = (!string.IsNullOrWhiteSpace(general.ToCode)) ? new EntityReference(EntityName.TourOperator, new Guid(general.ToCode)) : null;
                 booking[Attributes.Booking.BrandId] = (!string.IsNullOrWhiteSpace(general.Brand)) ? new EntityReference(EntityName.Brand, new Guid(general.Brand)) : null;
@@ -85,6 +84,53 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             }
             trace.Trace("Booking general - end");
 
+        }
+
+        public static void PopulateDurationFrom(Booking bookingRecord, Entity booking, ITracingService service)
+        {
+            if (booking == null) return;
+            if (bookingRecord == null) return;
+            if (bookingRecord.BookingGeneral == null) return;
+            if (bookingRecord.BookingGeneral.Duration > 0)
+            {
+                booking[Attributes.Booking.Duration] = bookingRecord.BookingGeneral.Duration;
+                return;
+            }
+
+            if (bookingRecord.Services == null) return;
+            if (bookingRecord.Services.Transport == null) return;
+            if (bookingRecord.Services.Transport.Length == 0) return;
+
+            int duration = GetDurationFrom(bookingRecord.Services.Transport, service);
+
+            if (duration == -1) return;
+
+            booking[Attributes.Booking.Duration] = duration;
+        }
+        public static int GetDurationFrom(Transport[] transports, ITracingService trace)
+        {
+            if (transports == null || transports.Length == 0 ) return -1;
+
+            var inboundTransport = transports.FirstOrDefault<Transport>(t=> t.TransferType == TransferType.Inbound);
+            var outboundTransport = transports.FirstOrDefault<Transport>(t => t.TransferType == TransferType.Outbound);
+
+            if (inboundTransport == null || outboundTransport == null) return -1;
+
+            if (string.IsNullOrEmpty(inboundTransport.EndDate)) return -1;
+            if (string.IsNullOrEmpty(outboundTransport.StartDate)) return -1;
+
+            DateTime startDate = DateTime.MinValue;
+            DateTime endDate = DateTime.MinValue;
+
+            if (!DateTime.TryParse(outboundTransport.StartDate, out startDate))
+                return -1;
+            if (!DateTime.TryParse(inboundTransport.EndDate, out endDate))
+                return -1;
+
+            if (startDate < endDate) return -1;
+            var diff = (startDate - endDate).TotalDays;
+            
+            return (int)diff;
         }
 
         public static void PopulateServices(Entity booking, BookingServices service, ITracingService trace)
@@ -221,6 +267,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             PopulateIdentifier(bookingEntity, booking.BookingIdentifier, trace);
             PopulateIdentity(bookingEntity, booking.BookingIdentity, trace);
             PopulateGeneralFields(bookingEntity, booking.BookingGeneral, trace);
+            PopulateDurationFrom(booking, bookingEntity, trace);
 
             bookingEntity[Attributes.Booking.Participants] = PrepareTravelParticipantsInfo(booking.TravelParticipant, trace);
             bookingEntity[Attributes.Booking.ParticipantRemarks] = PrepareTravelParticipantsRemarks(booking.TravelParticipant, trace);
