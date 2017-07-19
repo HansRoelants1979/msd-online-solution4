@@ -16,7 +16,7 @@
           <ValidForReadApi>1</ValidForReadApi>
           <ValidForCreateApi>1</ValidForCreateApi>
           <IsCustomField>0</IsCustomField>
-          <IsAuditEnabled>0</IsAuditEnabled>
+          <IsAuditEnabled>1</IsAuditEnabled>
           <IsSecured>0</IsSecured>
           <IntroducedVersion>5.0.0.0</IntroducedVersion>
           <SourceType>0</SourceType>
@@ -29,9 +29,9 @@
             <displayname description="Concernant" languagecode="1036" />
           </displaynames>
           <Descriptions>
-            <Description description="Wählen Sie den Datensatz aus, auf den sich die E-Mail bezieht." languagecode="1031" />
+            <Description description="Eindeutiger Bezeichner des Objekts, dem die E-Mail zugeordnet ist." languagecode="1031" />
             <Description description="Unique identifier of the object with which the e-mail is associated." languagecode="1033" />
-            <Description description="Choisissez l'enregistrement concerné par le courrier électronique." languagecode="1036" />
+            <Description description="Identificateur unique de l'objet auquel le courrier électronique est associé." languagecode="1036" />
           </Descriptions>
         </attribute>
       </attributes>
@@ -86,4 +86,11 @@
   <FormXml />
   <SavedQueries />
   <RibbonDiffXml />
+  <Strings>
+    <Strings ResourceKey="MC_MSG_WizardUsage">
+      <String languagecode="1031" Comment="">Dieser Assistent kann für die direkte Kommunikation mit Kunden (z. B. zum Senden von E-Mails) oder zum Zuweisen von Aktivitäten verwendet werden, die von Anderen       durchgeführt werden sollen (wie etwa Telefonanrufe). Anschließend können Sie die Reaktionen auf diese Aktivitäten nachverfolgen.</String>
+      <String languagecode="1033" Comment="">You can use this wizard to communicate directly with your customers, such as by sending email, or to assign activities to others       to complete, such as making phone calls. Then, you can track the responses to these activities.</String>
+      <String languagecode="1036" Comment="">Vous pouvez utiliser cet Assistant pour communiquer directement avec vos clients, notamment par courrier électronique, ou pour attribuer des activités à d'autres,       par exemple des appels téléphoniques. Vous pouvez ensuite effectuer le suivi des réponses à ces activités.</String>
+    </Strings>
+  </Strings>
 </Entity>

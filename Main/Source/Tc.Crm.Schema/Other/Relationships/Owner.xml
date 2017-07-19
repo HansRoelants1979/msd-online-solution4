@@ -122,6 +122,27 @@
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
+  <EntityRelationship Name="owner_tc_boardbasis">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>0.0.0.1</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_boardbasis</ReferencingEntityName>
+    <ReferencedEntityName>Owner</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>OwnerId</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Besitzer-ID" languagecode="1031" />
+        <Description description="Owner Id" languagecode="1033" />
+        <Description description="ID du propriétaire" languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
   <EntityRelationship Name="owner_tc_booking">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
@@ -137,7 +158,9 @@
     <ReferencingAttributeName>OwnerId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eigentümer ID" languagecode="1031" />
         <Description description="Owner Id" languagecode="1033" />
+        <Description description="identifiant de la personne en charge" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -156,7 +179,9 @@
     <ReferencingAttributeName>OwnerId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eigentümer ID" languagecode="1031" />
         <Description description="Owner Id" languagecode="1033" />
+        <Description description="identifiant de la personne en charge" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -238,7 +263,9 @@
     <ReferencingAttributeName>OwnerId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Besitzer-ID" languagecode="1031" />
         <Description description="Owner Id" languagecode="1033" />
+        <Description description="ID du propriétaire" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -257,7 +284,9 @@
     <ReferencingAttributeName>OwnerId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eigentümer ID" languagecode="1031" />
         <Description description="Owner Id" languagecode="1033" />
+        <Description description="identifiant de la personne en charge" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -297,7 +326,9 @@
     <ReferencingAttributeName>OwnerId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eigentümer ID" languagecode="1031" />
         <Description description="Owner Id" languagecode="1033" />
+        <Description description="identifiant de la personne en charge" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -379,7 +410,9 @@
     <ReferencingAttributeName>OwnerId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eigentümer ID" languagecode="1031" />
         <Description description="Owner Id" languagecode="1033" />
+        <Description description="identifiant de la personne en charge" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -398,7 +431,30 @@
     <ReferencingAttributeName>OwnerId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eigentümer ID" languagecode="1031" />
         <Description description="Owner Id" languagecode="1033" />
+        <Description description="identifiant de la personne en charge" languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
+  <EntityRelationship Name="owner_tc_externallogin">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>1.0.0.139</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_externallogin</ReferencingEntityName>
+    <ReferencedEntityName>Owner</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>OwnerId</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Besitzer-ID" languagecode="1031" />
+        <Description description="Owner Id" languagecode="1033" />
+        <Description description="ID du propriétaire" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -417,7 +473,9 @@
     <ReferencingAttributeName>OwnerId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eigentümer ID" languagecode="1031" />
         <Description description="Owner Id" languagecode="1033" />
+        <Description description="identifiant de la personne en charge" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -457,7 +515,30 @@
     <ReferencingAttributeName>OwnerId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eigentümer ID" languagecode="1031" />
         <Description description="Owner Id" languagecode="1033" />
+        <Description description="identifiant de la personne en charge" languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
+  <EntityRelationship Name="owner_tc_killerquestions">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>0.0.0.1</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_killerquestions</ReferencingEntityName>
+    <ReferencedEntityName>Owner</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>OwnerId</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Besitzer-ID" languagecode="1031" />
+        <Description description="Owner Id" languagecode="1033" />
+        <Description description="ID du propriétaire" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -476,7 +557,9 @@
     <ReferencingAttributeName>OwnerId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eigentümer ID" languagecode="1031" />
         <Description description="Owner Id" languagecode="1033" />
+        <Description description="identifiant de la personne en charge" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -495,7 +578,9 @@
     <ReferencingAttributeName>OwnerId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eigentümer ID" languagecode="1031" />
         <Description description="Owner Id" languagecode="1033" />
+        <Description description="identifiant de la personne en charge" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -535,7 +620,9 @@
     <ReferencingAttributeName>OwnerId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eigentümer ID" languagecode="1031" />
         <Description description="Owner Id" languagecode="1033" />
+        <Description description="identifiant de la personne en charge" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -608,6 +695,27 @@
     <IntroducedVersion>1.0.0.51</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_assistancerequest</ReferencingEntityName>
+    <ReferencedEntityName>Owner</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>OwnerId</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Eindeutiger Bezeichner des für die Aktivität zuständigen Benutzers oder Teams." languagecode="1031" />
+        <Description description="Unique identifier of the user or team who owns the activity." languagecode="1033" />
+        <Description description="Identificateur unique de l’utilisateur ou de l’équipe propriétaire de l’activité." languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
+  <EntityRelationship Name="tc_followup_owner_ownerid">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>1.0.0.139</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_followup</ReferencingEntityName>
     <ReferencedEntityName>Owner</ReferencedEntityName>
     <CascadeAssign>NoCascade</CascadeAssign>
     <CascadeDelete>NoCascade</CascadeDelete>

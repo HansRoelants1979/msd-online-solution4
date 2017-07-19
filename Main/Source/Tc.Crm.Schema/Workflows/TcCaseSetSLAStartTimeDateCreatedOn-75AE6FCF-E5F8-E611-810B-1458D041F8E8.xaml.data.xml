@@ -20,7 +20,7 @@
   <BusinessProcessType>0</BusinessProcessType>
   <PrimaryEntity>Incident</PrimaryEntity>
   <ProcessTriggers>
-    <ProcessTrigger processtriggerid="{6fd59150-ad0d-e711-810a-3863bb340dd8}">
+    <ProcessTrigger processtriggerid="{9fba9b29-f357-e711-810c-e0071b66e0a1}">
       <controltype>1</controltype>
       <scope>2</scope>
       <controlname>tc_slastarttimedate</controlname>
@@ -29,7 +29,23 @@
       <iscustomizable>1</iscustomizable>
       <primaryentitytypecode>Incident</primaryentitytypecode>
     </ProcessTrigger>
-    <ProcessTrigger processtriggerid="{70d59150-ad0d-e711-810a-3863bb340dd8}">
+    <ProcessTrigger processtriggerid="{a0ba9b29-f357-e711-810c-e0071b66e0a1}">
+      <scope>2</scope>
+      <event>load</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{a1ba9b29-f357-e711-810c-e0071b66e0a1}">
+      <controltype>1</controltype>
+      <scope>2</scope>
+      <controlname>caseorigincode</controlname>
+      <event>change</event>
+      <pipelinestage>0</pipelinestage>
+      <iscustomizable>1</iscustomizable>
+      <primaryentitytypecode>Incident</primaryentitytypecode>
+    </ProcessTrigger>
+    <ProcessTrigger processtriggerid="{a2ba9b29-f357-e711-810c-e0071b66e0a1}">
       <scope>2</scope>
       <event>load</event>
       <pipelinestage>0</pipelinestage>

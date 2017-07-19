@@ -4,6 +4,15 @@
   <ObjectTypeCode>99</ObjectTypeCode>
   <EntityInfo>
     <entity Name="SocialProfile">
+      <LocalizedNames>
+        <LocalizedName description="Social Profile" languagecode="1033" />
+      </LocalizedNames>
+      <LocalizedCollectionNames>
+        <LocalizedCollectionName description="Social Profiles" languagecode="1033" />
+      </LocalizedCollectionNames>
+      <Descriptions>
+        <Description description="This entity is used to store social profile information of its associated account and contacts on different social channels." languagecode="1033" />
+      </Descriptions>
       <attributes />
       <EntityKeys>
         <EntityKey>
@@ -27,6 +36,7 @@
       <IsCollaboration>0</IsCollaboration>
       <AutoRouteToOwnerQueue>0</AutoRouteToOwnerQueue>
       <IsConnectionsEnabled>1</IsConnectionsEnabled>
+      <EntityColor></EntityColor>
       <IsDocumentManagementEnabled>0</IsDocumentManagementEnabled>
       <IsOneNoteIntegrationEnabled>0</IsOneNoteIntegrationEnabled>
       <IsKnowledgeManagementEnabled>0</IsKnowledgeManagementEnabled>
@@ -55,10 +65,39 @@
       <IntroducedVersion>6.1.0.0</IntroducedVersion>
       <EnforceStateTransitions>0</EnforceStateTransitions>
       <EntityHelpUrlEnabled>0</EntityHelpUrlEnabled>
+      <EntityHelpUrl></EntityHelpUrl>
       <ChangeTrackingEnabled>1</ChangeTrackingEnabled>
       <IsEnabledForExternalChannels>0</IsEnabledForExternalChannels>
     </entity>
   </EntityInfo>
+  <FormXml />
   <SavedQueries />
   <RibbonDiffXml />
+  <CustomControlDefaultConfigs>
+    <CustomControlDefaultConfig>
+      <PrimaryEntityTypeCode>99</PrimaryEntityTypeCode>
+      <CustomControlDefaultConfigId>{a0300da5-31c7-e611-80fe-3863bb34da28}</CustomControlDefaultConfigId>
+      <ControlDescriptionXML>
+        <controlDescriptions>
+          <controlDescription>
+            <customControl id="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" formFactor="0">
+              <parameters />
+            </customControl>
+            <customControl id="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" formFactor="1">
+              <parameters />
+            </customControl>
+            <customControl formFactor="2" name="MscrmControls.Grid.GridControl">
+              <parameters>
+                <data-set name="Grid">
+                  <columnsDefaultView />
+                </data-set>
+                <EnableGroupBy static="true" type="Enum">yes</EnableGroupBy>
+              </parameters>
+            </customControl>
+          </controlDescription>
+        </controlDescriptions>
+      </ControlDescriptionXML>
+      <IntroducedVersion>5.0</IntroducedVersion>
+    </CustomControlDefaultConfig>
+  </CustomControlDefaultConfigs>
 </Entity>

@@ -11,10 +11,11 @@
     <grid name="resultset" object="10025" jump="tc_name" select="1" icon="1" preview="1">
       <row name="result" id="tc_bookingaccommodationid">
         <cell name="tc_hotelid" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="tc_bookingid" width="100" />
-        <cell name="tc_sourcemarkethotelname" width="100" />
+        <cell name="tc_participants" width="100" />
+        <cell name="a_7df26b339adce61180fb3863bb354ff0.tc_sourcemarketid" width="100" disableSorting="1" />
         <cell name="tc_startdateandtime" width="100" />
         <cell name="tc_enddateandtime" width="100" />
+        <cell name="tc_bookingid" width="100" />
       </row>
     </grid>
   </layoutxml>
@@ -34,16 +35,20 @@
           <condition attribute="tc_bookingid" operator="like" value="{0}" />
         </filter>
         <attribute name="tc_startdateandtime" />
-        <attribute name="tc_sourcemarkethotelname" />
         <attribute name="tc_hotelid" />
         <attribute name="tc_enddateandtime" />
         <attribute name="tc_bookingid" />
+        <attribute name="tc_participants" />
+        <link-entity alias="a_7df26b339adce61180fb3863bb354ff0" name="tc_booking" from="tc_bookingid" to="tc_bookingid" link-type="outer" visible="false">
+          <attribute name="tc_sourcemarketid" />
+        </link-entity>
         <attribute name="tc_bookingaccommodationid" />
       </entity>
     </fetch>
   </fetchxml>
   <IntroducedVersion>1.0.0.0</IntroducedVersion>
   <LocalizedNames>
+    <LocalizedName description="Schnellsuche Aktivbuchung Unterkünfte" languagecode="1031" />
     <LocalizedName description="Quick Find Active Booking Accommodations" languagecode="1033" />
   </LocalizedNames>
 </savedquery>

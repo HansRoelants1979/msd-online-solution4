@@ -8,20 +8,25 @@
     <tabs>
       <tab id="{b95e9ebc-bba8-4349-8d55-d4704c3bafb5}" name="tab_1" showlabel="false" locklevel="0" expanded="true">
         <labels>
+          <label description="Tab" languagecode="1031" />
           <label description="Tab" languagecode="1033" />
+          <label description="Tab" languagecode="1036" />
         </labels>
         <columns>
           <column width="33%">
             <sections>
               <section id="{707d3b49-11a9-4734-a559-f75a0ee8bc4d}" name="tab_1_column_1_section_1" showlabel="true" locklevel="0" columns="1" showbar="false" IsUserDefined="0" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
+                  <label description="Fall Details" languagecode="1031" />
                   <label description="CASE DETAILS" languagecode="1033" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{ac747569-6c2e-745a-3a65-61c2d6965e50}" showlabel="true" locklevel="0">
                       <labels>
-                        <label description="Booking Reference?" languagecode="1033" />
+                        <label description="Reference in System?" languagecode="1033" />
+                        <label description="Référence de réservation?" languagecode="1036" />
+                        <label description="Buchungsnummer?" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_bookingreference" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="tc_bookingreference" uniqueid="{7192d762-c3a2-e4c7-470e-ee10333c8b59}" />
                     </cell>
@@ -30,6 +35,8 @@
                     <cell id="{5eea8808-76d2-438a-c346-b69e53289a80}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Booking Reference" languagecode="1033" />
+                        <label description="Buchungsnummer" languagecode="1031" />
+                        <label description="Référence de réservation" languagecode="1036" />
                       </labels>
                       <control disabled="false" id="tc_bookingid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_bookingid" uniqueid="{d8d84c47-7cc5-6325-1c45-8d381ed5150d}">
                         <parameters>
@@ -47,6 +54,8 @@
                     <cell id="{3db18bcb-1300-a31a-5412-4aa3d1c09426}" showlabel="true" locklevel="0" visible="false">
                       <labels>
                         <label description="Booking Reference" languagecode="1033" />
+                        <label description="Buchungsnummer" languagecode="1031" />
+                        <label description="Référence de réservation" languagecode="1036" />
                       </labels>
                       <control disabled="false" id="tc_bookingreferencefreetext" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_bookingreferencefreetext" uniqueid="{7117cc33-0832-22d8-22e6-c23411992d5e}" />
                     </cell>
@@ -55,6 +64,8 @@
                     <cell id="{cc6559a4-688e-26de-015a-0b034eb14138}" showlabel="true" locklevel="0" visible="false">
                       <labels>
                         <label description="Source Market" languagecode="1033" />
+                        <label description="Pays organisateur" languagecode="1036" />
+                        <label description="Quellmarkt" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_sourcemarketid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_sourcemarketid" uniqueid="{0a86dee0-7578-91c7-9592-c9e4872364e1}">
                         <parameters>
@@ -73,6 +84,8 @@
                     <cell id="{7ed010a1-8bed-7bc4-1053-71466bada05e}" showlabel="true" locklevel="0" visible="false">
                       <labels>
                         <label description="Brand" languagecode="1033" />
+                        <label description="Marque" languagecode="1036" />
+                        <label description="Marke" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_brandid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_brandid" uniqueid="{0bcb3812-2c8c-9eb8-3ec3-5cd184ab6b7e}">
                         <parameters>
@@ -93,6 +106,8 @@
                     <cell id="{d2eaa3e0-ec54-a77d-3ada-1d7120e16aa6}" showlabel="true" locklevel="0" visible="false">
                       <labels>
                         <label description="Destination" languagecode="1033" />
+                        <label description="Destination" languagecode="1036" />
+                        <label description="Zielgebiet" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_destinationid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_destinationid" uniqueid="{907ea358-a53d-6818-8ca9-d7b52b7b1c67}">
                         <parameters>
@@ -110,6 +125,8 @@
                     <cell id="{071d1975-59ee-8b53-6e5c-c76d8000d972}" showlabel="true" locklevel="0" visible="false">
                       <labels>
                         <label description="Location" languagecode="1033" />
+                        <label description="lieu" languagecode="1036" />
+                        <label description="Ort" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_locationid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_locationid" uniqueid="{a65b1766-e76a-6564-55a1-1edaade50700}">
                         <parameters>
@@ -150,6 +167,7 @@
                     <cell id="{32703d8a-0b1c-9167-ae30-06a83aba7667}" showlabel="true" locklevel="0" visible="false">
                       <labels>
                         <label description="Arrival Date" languagecode="1033" />
+                        <label description="Ankunftsdatum" languagecode="1031" />
                       </labels>
                       <control id="tc_arrivaldate" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="tc_arrivaldate" disabled="false" uniqueid="{a3754254-5b29-1b11-e361-b44815072186}" />
                     </cell>
@@ -158,6 +176,8 @@
                     <cell id="{91a95b8b-737b-bd25-55ed-6b708c846225}" showlabel="true" locklevel="0" visible="false">
                       <labels>
                         <label description="Departure Date" languagecode="1033" />
+                        <label description="Date de départ " languagecode="1036" />
+                        <label description="Abflug Datum" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_departuredate" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="tc_departuredate" uniqueid="{eb8beeb4-604a-0dab-415b-1dda5d8b70dc}" />
                     </cell>
@@ -170,13 +190,17 @@
             <sections>
               <section id="{5544f04f-7d45-49f2-9b42-538ec21f8b28}" name="tab_1_column_2_section_1" showlabel="true" locklevel="0" columns="1" showbar="false" IsUserDefined="0" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
+                  <label description="ANDERE DETAILS" languagecode="1031" />
                   <label description="OTHER DETAILS" languagecode="1033" />
+                  <label description="AUTRES DÉTAILS" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{39bec54e-7043-99eb-a10c-a5c56b8eb7b2}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Type" languagecode="1033" />
+                        <label description="type" languagecode="1036" />
+                        <label description="Typ" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_casetypeid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_casetypeid" uniqueid="{5ac6c6e7-6c96-c177-e945-be9e5ad048e8}">
                         <parameters>
@@ -185,31 +209,6 @@
                           <DisableQuickFind>false</DisableQuickFind>
                           <DisableViewPicker>false</DisableViewPicker>
                           <DefaultViewId>{F2469BBD-BD54-4853-A0AC-BFA8DDF327A6}</DefaultViewId>
-                          <AllowFilterOff>false</AllowFilterOff>
-                        </parameters>
-                      </control>
-                    </cell>
-                  </row>
-                  <row>
-                    <cell id="{67714dc4-5eeb-b2b3-0960-b2a2a322108a}" showlabel="true" locklevel="0" visible="false">
-                      <labels>
-                        <label description="Product Type" languagecode="1033" />
-                      </labels>
-                      <control id="tc_producttype" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_producttype" disabled="false" uniqueid="{85eeee85-8de0-c59c-7758-c9d85366785d}" />
-                    </cell>
-                  </row>
-                  <row>
-                    <cell id="{a661a8ab-b458-48b0-138a-885862d9723e}" showlabel="true" locklevel="0" visible="false">
-                      <labels>
-                        <label description="Sharer" languagecode="1033" />
-                      </labels>
-                      <control id="tc_sharerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_sharerid" disabled="false" uniqueid="{71794b86-aeae-3530-3b77-809be6abbca9}">
-                        <parameters>
-                          <AutoResolve>true</AutoResolve>
-                          <DisableMru>false</DisableMru>
-                          <DisableQuickFind>false</DisableQuickFind>
-                          <DisableViewPicker>false</DisableViewPicker>
-                          <DefaultViewId>{8795F15C-89E4-4284-AD2A-0D5F7F705208}</DefaultViewId>
                           <AllowFilterOff>false</AllowFilterOff>
                         </parameters>
                       </control>
@@ -236,8 +235,8 @@
                     <cell id="{e08d1cc6-5488-08bd-8dea-9a194e501e0e}" showlabel="true" locklevel="0" rowspan="6">
                       <labels>
                         <label description="Summary" languagecode="1033" />
-                        <label description="Description" languagecode="1036" />
-                        <label description="Beschreibung" languagecode="1031" />
+                        <label description="Résumé" languagecode="1036" />
+                        <label description="Summe" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="description" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="description" uniqueid="{6d3c1d6c-bb3e-610e-5e51-68964dc1dc31}" />
                     </cell>
@@ -255,6 +254,7 @@
             <sections>
               <section id="{0aa0925e-5a4c-4834-8858-5286967d1567}" name="tab_1_column_3_section_1" showlabel="true" locklevel="0" columns="1" showbar="false" IsUserDefined="0" labelwidth="120" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
+                  <label description="Kundendetails" languagecode="1031" />
                   <label description="CUSTOMER DETAILS" languagecode="1033" />
                 </labels>
                 <rows>
@@ -277,6 +277,8 @@
                     <cell id="{15623791-9cac-44dd-e3ba-2c92ed97aad0}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="No Customer?" languagecode="1033" />
+                        <label description="Aucun client?" languagecode="1036" />
+                        <label description="Kein Kunde?" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_customerenquiry" classid="{B0C6723A-8503-4fd7-BB28-C8A06AC933C2}" datafieldname="tc_customerenquiry" uniqueid="{442e951e-7c8d-4536-d0d7-d2a591695a74}" />
                     </cell>
@@ -285,6 +287,7 @@
                     <cell id="{ad977129-3a74-420d-37e9-484da8c6cdb0}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Comm. Method" languagecode="1033" />
+                        <label description="Bevorzugte Methode der Kommunikation" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_preferredmethodofcommunication" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_preferredmethodofcommunication" uniqueid="{418154c4-2685-6a99-0801-7185b9c40c6d}" />
                     </cell>
@@ -301,6 +304,8 @@
                     <cell id="{53b52592-8875-eecd-62c7-ea2ee94c6221}" showlabel="true" locklevel="0" visible="false">
                       <labels>
                         <label description="Alternative Email" languagecode="1033" />
+                        <label description="e-mail alternatif" languagecode="1036" />
+                        <label description="alternative Email Adresse" languagecode="1031" />
                       </labels>
                       <control id="tc_alternativeemaillookup" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_alternativeemaillookup" disabled="false" uniqueid="{5a22063c-1574-0792-300c-63418c7639b6}">
                         <parameters>
@@ -318,8 +323,9 @@
                     <cell id="{31740db1-5715-221a-2737-3500555c1c94}" showlabel="true" locklevel="0" visible="false">
                       <labels>
                         <label description="Send Comms Manually" languagecode="1033" />
+                        <label description="Kommunikation manuell schicken" languagecode="1031" />
                       </labels>
-                      <control id="tc_sendemails" classid="{B0C6723A-8503-4fd7-BB28-C8A06AC933C2}" datafieldname="tc_sendemails" disabled="false" uniqueid="{9aaae747-ec94-e667-10c2-0281ca457bee}" />
+                      <control id="tc_sendemails" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_sendemails" disabled="false" uniqueid="{9aaae747-ec94-e667-10c2-0281ca457bee}" />
                     </cell>
                   </row>
                   <row>
@@ -393,11 +399,30 @@
         </columns>
       </tab>
     </tabs>
-    <controlDescriptions />
+    <controlDescriptions>
+      <controlDescription forControl="{9aaae747-ec94-e667-10c2-0281ca457bee}">
+        <customControl id="{B0C6723A-8503-4fd7-BB28-C8A06AC933C2}" formFactor="0">
+          <parameters>
+            <datafieldname>tc_sendemails</datafieldname>
+          </parameters>
+        </customControl>
+        <customControl id="{B0C6723A-8503-4fd7-BB28-C8A06AC933C2}" formFactor="2">
+          <parameters>
+            <datafieldname>tc_sendemails</datafieldname>
+          </parameters>
+        </customControl>
+        <customControl formFactor="1" name="MscrmControls.FlipSwitch.FlipSwitchControl">
+          <parameters>
+            <value>tc_sendemails</value>
+          </parameters>
+        </customControl>
+      </controlDescription>
+    </controlDescriptions>
     <formLibraries>
       <Library name="tc_es6promise.js" libraryUniqueId="{eaa8b456-1cd3-c08c-5130-5b6686cb9de9}" />
       <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{3678ee73-b13c-2b40-09ba-c1a2a6b5be49}" />
       <Library name="tc_Tc.Crm.Scripts.Library.Contact.js" libraryUniqueId="{02a9826b-1e39-165c-9823-c7a1c69ba4c5}" />
+      <Library name="tc_Tc.Crm.Scripts.Library.Case.js" libraryUniqueId="{cd4a26bd-4090-a801-95ab-2e0ebe127ddc}" />
       <Library name="tc_Tc.Crm.Scripts.Events.Case.js" libraryUniqueId="{ec964a7a-1161-d363-6610-556dbdbba7aa}" />
     </formLibraries>
     <events>
@@ -430,6 +455,7 @@
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>0</CanBeDeleted>
   <LocalizedNames>
+    <LocalizedName description="Fall schnell erstellen" languagecode="1031" />
     <LocalizedName description="Case Quick Create" languagecode="1033" />
   </LocalizedNames>
   <Descriptions>

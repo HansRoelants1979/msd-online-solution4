@@ -46,6 +46,7 @@
         <Variable x:TypeArguments="x:Object" Name="UpdateStep1_31" />
         <Variable x:TypeArguments="x:Object" Name="UpdateStep1_32" />
         <Variable x:TypeArguments="x:Object" Name="UpdateStep1_33" />
+        <Variable x:TypeArguments="x:Object" Name="UpdateStep1_34" />
       </Sequence.Variables>
       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;tc_compensation&quot;)]" />
       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
@@ -211,52 +212,80 @@
           </InArgument>
         </mxswa:SetEntityProperty.TargetType>
       </mxswa:SetEntityProperty>
-      <mxswa:SetEntityProperty Attribute="tc_bacsaccounttype" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_17]">
-        <mxswa:SetEntityProperty.TargetType>
-          <InArgument x:TypeArguments="s:Type">
-            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
-          </InArgument>
-        </mxswa:SetEntityProperty.TargetType>
-      </mxswa:SetEntityProperty>
-      <mxswa:SetEntityProperty Attribute="tc_bacsbuildingsocietyrolenumber" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_18]">
-        <mxswa:SetEntityProperty.TargetType>
-          <InArgument x:TypeArguments="s:Type">
-            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
-          </InArgument>
-        </mxswa:SetEntityProperty.TargetType>
-      </mxswa:SetEntityProperty>
-      <mxswa:SetEntityProperty Attribute="tc_bacsaccountname" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_19]">
-        <mxswa:SetEntityProperty.TargetType>
-          <InArgument x:TypeArguments="s:Type">
-            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
-          </InArgument>
-        </mxswa:SetEntityProperty.TargetType>
-      </mxswa:SetEntityProperty>
-      <mxswa:SetEntityProperty Attribute="tc_bacsaccountsortcode" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_20]">
-        <mxswa:SetEntityProperty.TargetType>
-          <InArgument x:TypeArguments="s:Type">
-            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
-          </InArgument>
-        </mxswa:SetEntityProperty.TargetType>
-      </mxswa:SetEntityProperty>
-      <mxswa:SetEntityProperty Attribute="tc_bacsaccountnumber" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_21]">
-        <mxswa:SetEntityProperty.TargetType>
-          <InArgument x:TypeArguments="s:Type">
-            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
-          </InArgument>
-        </mxswa:SetEntityProperty.TargetType>
-      </mxswa:SetEntityProperty>
-      <mxswa:SetEntityProperty Attribute="tc_bacsamount" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_22]">
+      <mxswa:SetEntityProperty Attribute="tc_voucheramount" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_17]">
         <mxswa:SetEntityProperty.TargetType>
           <InArgument x:TypeArguments="s:Type">
             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:Money" />
           </InArgument>
         </mxswa:SetEntityProperty.TargetType>
       </mxswa:SetEntityProperty>
-      <mxswa:SetEntityProperty Attribute="tc_internationalbankaccountnumber" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_23]">
+      <mxswa:SetEntityProperty Attribute="tc_voucherrecipientfirstname" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_18]">
         <mxswa:SetEntityProperty.TargetType>
           <InArgument x:TypeArguments="s:Type">
             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
+          </InArgument>
+        </mxswa:SetEntityProperty.TargetType>
+      </mxswa:SetEntityProperty>
+      <mxswa:SetEntityProperty Attribute="tc_voucherrecipientlastname" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_19]">
+        <mxswa:SetEntityProperty.TargetType>
+          <InArgument x:TypeArguments="s:Type">
+            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
+          </InArgument>
+        </mxswa:SetEntityProperty.TargetType>
+      </mxswa:SetEntityProperty>
+      <mxswa:SetEntityProperty Attribute="tc_bacsaccounttype" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_20]">
+        <mxswa:SetEntityProperty.TargetType>
+          <InArgument x:TypeArguments="s:Type">
+            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
+          </InArgument>
+        </mxswa:SetEntityProperty.TargetType>
+      </mxswa:SetEntityProperty>
+      <mxswa:SetEntityProperty Attribute="tc_bacsbuildingsocietyrolenumber" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_21]">
+        <mxswa:SetEntityProperty.TargetType>
+          <InArgument x:TypeArguments="s:Type">
+            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
+          </InArgument>
+        </mxswa:SetEntityProperty.TargetType>
+      </mxswa:SetEntityProperty>
+      <mxswa:SetEntityProperty Attribute="tc_bacsaccountname" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_22]">
+        <mxswa:SetEntityProperty.TargetType>
+          <InArgument x:TypeArguments="s:Type">
+            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
+          </InArgument>
+        </mxswa:SetEntityProperty.TargetType>
+      </mxswa:SetEntityProperty>
+      <mxswa:SetEntityProperty Attribute="tc_bacsaccountsortcode" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_23]">
+        <mxswa:SetEntityProperty.TargetType>
+          <InArgument x:TypeArguments="s:Type">
+            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
+          </InArgument>
+        </mxswa:SetEntityProperty.TargetType>
+      </mxswa:SetEntityProperty>
+      <mxswa:SetEntityProperty Attribute="tc_bacsaccountnumber" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_24]">
+        <mxswa:SetEntityProperty.TargetType>
+          <InArgument x:TypeArguments="s:Type">
+            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
+          </InArgument>
+        </mxswa:SetEntityProperty.TargetType>
+      </mxswa:SetEntityProperty>
+      <mxswa:SetEntityProperty Attribute="tc_bacsamount" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_25]">
+        <mxswa:SetEntityProperty.TargetType>
+          <InArgument x:TypeArguments="s:Type">
+            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:Money" />
+          </InArgument>
+        </mxswa:SetEntityProperty.TargetType>
+      </mxswa:SetEntityProperty>
+      <mxswa:SetEntityProperty Attribute="tc_internationalbankaccountnumber" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_26]">
+        <mxswa:SetEntityProperty.TargetType>
+          <InArgument x:TypeArguments="s:Type">
+            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
+          </InArgument>
+        </mxswa:SetEntityProperty.TargetType>
+      </mxswa:SetEntityProperty>
+      <mxswa:SetEntityProperty Attribute="tc_chapsamount" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_27]">
+        <mxswa:SetEntityProperty.TargetType>
+          <InArgument x:TypeArguments="s:Type">
+            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:Money" />
           </InArgument>
         </mxswa:SetEntityProperty.TargetType>
       </mxswa:SetEntityProperty>
@@ -267,73 +296,52 @@
           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
           </InArgument>
-          <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep1_24]</OutArgument>
+          <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep1_28]</OutArgument>
         </mxswa:ActivityReference.Arguments>
       </mxswa:ActivityReference>
-      <mxswa:SetEntityProperty Attribute="tc_paymentstatus" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_24]">
+      <mxswa:SetEntityProperty Attribute="tc_paymentstatus" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_28]">
         <mxswa:SetEntityProperty.TargetType>
           <InArgument x:TypeArguments="s:Type">
             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
           </InArgument>
         </mxswa:SetEntityProperty.TargetType>
       </mxswa:SetEntityProperty>
-      <mxswa:SetEntityProperty Attribute="tc_additionaldetails" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_25]">
+      <mxswa:SetEntityProperty Attribute="tc_additionaldetails" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_29]">
         <mxswa:SetEntityProperty.TargetType>
           <InArgument x:TypeArguments="s:Type">
             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
           </InArgument>
         </mxswa:SetEntityProperty.TargetType>
       </mxswa:SetEntityProperty>
-      <mxswa:SetEntityProperty Attribute="tc_legalstatement" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_26]">
+      <mxswa:SetEntityProperty Attribute="tc_legalstatement" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_30]">
         <mxswa:SetEntityProperty.TargetType>
           <InArgument x:TypeArguments="s:Type">
             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
           </InArgument>
         </mxswa:SetEntityProperty.TargetType>
       </mxswa:SetEntityProperty>
-      <mxswa:SetEntityProperty Attribute="tc_isfullandfinalstatement" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_27]">
+      <mxswa:SetEntityProperty Attribute="tc_isfullandfinalstatement" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_31]">
         <mxswa:SetEntityProperty.TargetType>
           <InArgument x:TypeArguments="s:Type">
             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
           </InArgument>
         </mxswa:SetEntityProperty.TargetType>
       </mxswa:SetEntityProperty>
-      <mxswa:SetEntityProperty Attribute="tc_chapsamount" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_28]">
+      <mxswa:SetEntityProperty Attribute="tc_thomascookconfirmation" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_32]">
         <mxswa:SetEntityProperty.TargetType>
           <InArgument x:TypeArguments="s:Type">
-            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:Money" />
+            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
           </InArgument>
         </mxswa:SetEntityProperty.TargetType>
       </mxswa:SetEntityProperty>
-      <mxswa:SetEntityProperty Attribute="tc_compensationemailtext" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_29]">
-        <mxswa:SetEntityProperty.TargetType>
-          <InArgument x:TypeArguments="s:Type">
-            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
-          </InArgument>
-        </mxswa:SetEntityProperty.TargetType>
-      </mxswa:SetEntityProperty>
-      <mxswa:SetEntityProperty Attribute="tc_compensationsignature" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_30]">
+      <mxswa:SetEntityProperty Attribute="tc_compensationemailtext" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_33]">
         <mxswa:SetEntityProperty.TargetType>
           <InArgument x:TypeArguments="s:Type">
             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
           </InArgument>
         </mxswa:SetEntityProperty.TargetType>
       </mxswa:SetEntityProperty>
-      <mxswa:SetEntityProperty Attribute="tc_voucheramount" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_31]">
-        <mxswa:SetEntityProperty.TargetType>
-          <InArgument x:TypeArguments="s:Type">
-            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:Money" />
-          </InArgument>
-        </mxswa:SetEntityProperty.TargetType>
-      </mxswa:SetEntityProperty>
-      <mxswa:SetEntityProperty Attribute="tc_voucherrecipientfirstname" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_32]">
-        <mxswa:SetEntityProperty.TargetType>
-          <InArgument x:TypeArguments="s:Type">
-            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
-          </InArgument>
-        </mxswa:SetEntityProperty.TargetType>
-      </mxswa:SetEntityProperty>
-      <mxswa:SetEntityProperty Attribute="tc_voucherrecipientlastname" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_33]">
+      <mxswa:SetEntityProperty Attribute="tc_compensationsignature" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep1_34]">
         <mxswa:SetEntityProperty.TargetType>
           <InArgument x:TypeArguments="s:Type">
             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />

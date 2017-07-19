@@ -8,7 +8,9 @@
     <tabs>
       <tab id="{6094870c-14c9-8c24-7c2c-2409e30428c0}" name="Offer" IsUserDefined="0" locklevel="0" expanded="true" showlabel="true">
         <labels>
+          <label description="Angebot" languagecode="1031" />
           <label description="Offer" languagecode="1033" />
+          <label description="offre" languagecode="1036" />
         </labels>
         <columns>
           <column width="100%">
@@ -21,7 +23,7 @@
                   <row>
                     <cell id="{77050dc7-3b26-b5c6-a180-9ac4d3a37445}" locklevel="0" showlabel="true">
                       <labels>
-                        <label description="Category 1" languagecode="1033" />
+                        <label description="Complaint 1" languagecode="1033" />
                       </labels>
                       <control disabled="false" id="tc_compensation1id" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_compensation1id" uniqueid="{104ed894-6165-4130-c563-19918e557166}">
                         <parameters>
@@ -42,7 +44,7 @@
                   <row>
                     <cell id="{52257489-ba42-99a2-727c-2b28e12577c7}" locklevel="0" showlabel="true" visible="false">
                       <labels>
-                        <label description="Category 2" languagecode="1033" />
+                        <label description="Complaint 2" languagecode="1033" />
                       </labels>
                       <control disabled="false" id="tc_compensation2id" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_compensation2id" uniqueid="{89d4a4d9-84c5-9e5c-aac2-99b9b46d078c}">
                         <parameters>
@@ -63,7 +65,7 @@
                   <row>
                     <cell id="{e4be24d0-673a-4270-987d-4c1cee5c7937}" locklevel="0" showlabel="true" visible="false">
                       <labels>
-                        <label description="Category 3" languagecode="1033" />
+                        <label description="Complaint 3" languagecode="1033" />
                       </labels>
                       <control disabled="false" id="tc_compensation3id" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_compensation3id" uniqueid="{c5350c8c-8b17-8416-72c5-288aa66a6552}">
                         <parameters>
@@ -84,7 +86,7 @@
                   <row>
                     <cell id="{3c695eb7-a3c5-48d4-3b83-4257deeb3121}" locklevel="0" showlabel="true" visible="false">
                       <labels>
-                        <label description="Category 4" languagecode="1033" />
+                        <label description="Complaint 4" languagecode="1033" />
                       </labels>
                       <control disabled="false" id="tc_compensation4id" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_compensation4id" uniqueid="{d6a557b1-8cdc-d761-9401-7e3c0922b5ad}">
                         <parameters>
@@ -106,6 +108,7 @@
               </section>
               <section id="{1343807c-c916-9128-74b8-27a51d44dd97}" name="tab_4_section_1" IsUserDefined="0" locklevel="0" showlabel="true" columns="11" showbar="true" labelwidth="155" celllabelposition="Top" celllabelalignment="Left" layout="varwidth">
                 <labels>
+                  <label description="GESAMTKOMPONENTENANGEBOTE WERTE" languagecode="1031" />
                   <label description="OVERALL COMPENSATION OFFER VALUES" languagecode="1033" />
                 </labels>
                 <rows>
@@ -130,6 +133,7 @@
                     <cell id="{a0136890-860d-44e8-5917-5b9a88664ada}" locklevel="0" showlabel="true" visible="false">
                       <labels>
                         <label description="Compensation Approval Required" languagecode="1033" />
+                        <label description="Kompensationsgenehmigung erforderlich" languagecode="1031" />
                       </labels>
                       <control id="tc_compensationapprovalrequired" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="tc_compensationapprovalrequired" uniqueid="{37d871e8-3186-c029-3281-b427a3374dc2}" />
                     </cell>
@@ -138,12 +142,15 @@
                     <cell id="{eaa70943-c90c-0277-e8e4-4ac5b93a411e}" locklevel="0" showlabel="true" colspan="1">
                       <labels>
                         <label description="Total Offered Amount" languagecode="1033" />
+                        <label description="Gesamter angebotener Betrag" languagecode="1031" />
+                        <label description="Montant total offert" languagecode="1036" />
                       </labels>
                       <control disabled="false" id="tc_amount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_amount" uniqueid="{cc4aa551-8a07-c809-4725-853d94412359}" />
                     </cell>
                     <cell id="{752c8eb1-1608-cdc7-9d33-0b001ca93921}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Compensation Amount Limit" languagecode="1033" />
+                        <label description="Entschädigungsbetragsgrenze" languagecode="1031" />
                       </labels>
                       <control disabled="true" id="tc_compensationamountlimit" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_compensationamountlimit" uniqueid="{4ac01ac7-b5cb-3e66-427b-2e8be3b36bc8}" />
                     </cell>
@@ -152,12 +159,14 @@
                     <cell id="{11cc949a-bd1a-acc2-c7d1-1257a54c7688}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Send Compensation Offer" languagecode="1033" />
+                        <label description="Kompensationsangebot schicken" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_sendcompensationoffer" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_sendcompensationoffer" uniqueid="{1c69d278-99d3-92c6-7b3b-859a5766165e}" />
                     </cell>
                     <cell id="{934892b2-be6d-c323-be1c-726274128873}" showlabel="true" locklevel="0" rowspan="5" visible="false">
                       <labels>
                         <label description="Offer Rejection Notes" languagecode="1033" />
+                        <label description="Angebot Ablehnungsscheine" languagecode="1031" />
                       </labels>
                       <control id="tc_offerrejectionnotes" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="tc_offerrejectionnotes" disabled="false" uniqueid="{aa10cd11-8613-0b5e-dec7-aa333bbc1856}" />
                     </cell>
@@ -166,6 +175,7 @@
                     <cell id="{7d987b87-bda8-3ab5-3638-2a6c3ba3b50d}" locklevel="0" showlabel="true" visible="false">
                       <labels>
                         <label description="Send for Approval" languagecode="1033" />
+                        <label description="Genehmigung schicken" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_sendforapproval" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="tc_sendforapproval" uniqueid="{bb7ab142-8806-4972-1c50-eca9ce0b66ca}" />
                     </cell>
@@ -174,6 +184,7 @@
                     <cell id="{e5006420-6763-8850-9d38-7e47c8cb211c}" locklevel="0" showlabel="true" visible="false">
                       <labels>
                         <label description="Approval Status" languagecode="1033" />
+                        <label description="Genehmigter Status" languagecode="1031" />
                       </labels>
                       <control disabled="true" id="tc_approvalstatus" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_approvalstatus" uniqueid="{6e4094c5-30b3-0e09-c43d-3059bce243e5}" />
                     </cell>
@@ -182,6 +193,8 @@
                     <cell id="{49d983a0-5e9e-c795-303c-c72a0b7c8098}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Customer Decision" languagecode="1033" />
+                        <label description="statut de l'offre" languagecode="1036" />
+                        <label description="Kundenentscheidung" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_offerstatus" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_offerstatus" uniqueid="{0b99e955-67b1-b491-5b47-e48830a01548}" />
                     </cell>
@@ -190,6 +203,8 @@
                     <cell id="{a27a0555-12e1-107a-7bec-5d88dd494ebe}" locklevel="0" showlabel="true" visible="false" colspan="1">
                       <labels>
                         <label description="Acknowledgement Method" languagecode="1033" />
+                        <label description="Annerkennungsmethode" languagecode="1031" />
+                        <label description="méthode d'accusé de réception" languagecode="1036" />
                       </labels>
                       <control disabled="false" id="tc_customerofferacknowledgement" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_customerofferacknowledgement" uniqueid="{7cb3e726-ba6a-bc63-e86d-1bda1b11e995}" />
                     </cell>
@@ -202,13 +217,16 @@
       </tab>
       <tab id="{e29988c5-c3ba-a011-30c3-ae17ad55dc1e}" name="Approvals" IsUserDefined="0" locklevel="0" expanded="false" showlabel="true">
         <labels>
+          <label description="Bewilligungen" languagecode="1031" />
           <label description="Approvals" languagecode="1033" />
+          <label description="Autorisations" languagecode="1036" />
         </labels>
         <columns>
           <column width="100%">
             <sections>
               <section id="{278bd872-ab5b-cb4d-18b8-4a8b6c915b62}" name="CompensationApprovals" IsUserDefined="0" locklevel="0" showlabel="false" columns="1" showbar="false" labelwidth="115" celllabelposition="Left" celllabelalignment="Left" layout="varwidth">
                 <labels>
+                  <label description="Entschädigung" languagecode="1031" />
                   <label description="Compensation Approvals" languagecode="1033" />
                 </labels>
                 <rows>
@@ -216,6 +234,7 @@
                     <cell id="{ab0ea56b-22e9-e9c9-d93d-c306d1274211}" showlabel="false" colspan="1" auto="false" rowspan="6">
                       <labels>
                         <label description="Compensation Approvals (Compensation)" languagecode="1033" />
+                        <label description="Entschädigungsgenehmigungen (Entschädigung)" languagecode="1031" />
                       </labels>
                       <control id="OfferCompensationApprovals" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" uniqueid="{00dc28ce-c613-ac41-45c9-8e010de071e1}" indicationOfSubgrid="true">
                         <parameters>
@@ -237,11 +256,11 @@
                       </control>
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
             </sections>
@@ -259,6 +278,7 @@
             <sections>
               <section id="{b1a11333-a7a5-6874-cd0b-05c81d27ca31}" name="{1bc86e91-9dd4-43b3-b400-95f510b66a26}_section_6" IsUserDefined="0" locklevel="0" showlabel="true" columns="1111" showbar="true" labelwidth="150" celllabelposition="Left" celllabelalignment="Left" layout="varwidth">
                 <labels>
+                  <label description="Kompensationstyp" languagecode="1031" />
                   <label description="COMPENSATION TYPE" languagecode="1033" />
                 </labels>
                 <rows>
@@ -266,24 +286,29 @@
                     <cell id="{7381935b-921b-57eb-00ee-2a4674c43680}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Non-Financial" languagecode="1033" />
+                        <label description="Nichtfinanzielle" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_nonfinancialcompensationtype" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_nonfinancialcompensationtype" uniqueid="{087e17b4-8b58-b153-59ac-27466cc9508e}" />
                     </cell>
                     <cell id="{021e1507-a5ac-ca75-9aec-03e93c390d77}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Cash" languagecode="1033" />
+                        <label description="Bar" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_cashcompensationtype" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_cashcompensationtype" uniqueid="{e4c97243-9a9e-edea-60cb-3c8e030a93ed}" />
                     </cell>
                     <cell id="{2766e431-ac70-d199-2054-c14d97d5dd1b}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Voucher" languagecode="1033" />
+                        <label description="Bon de réduction" languagecode="1036" />
+                        <label description="Gutschein" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_vouchercompensationtype" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_vouchercompensationtype" uniqueid="{54a73e68-3188-8559-88d7-d5b319c76382}" />
                     </cell>
                     <cell id="{324b199a-9418-cccc-9aa4-977058716ada}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="BACS" languagecode="1033" />
+                        <label description="BACS" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_bacscompensationtype" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_bacscompensationtype" uniqueid="{1e876934-168b-2923-1604-c045da1b47cb}" />
                     </cell>
@@ -292,6 +317,7 @@
                     <cell id="{3be96a1d-9eb5-d26d-d9a5-b8223a3c89d6}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="CHAPS" languagecode="1033" />
+                        <label description="CHAPS" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_chapscompensationtype" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_chapscompensationtype" uniqueid="{8d08d5a0-9dc4-e2e3-9d04-5695d042c35d}" />
                     </cell>
@@ -322,12 +348,16 @@
                     <cell id="{e5696b6d-e87a-3987-b4c5-19a29c7648ba}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Type" languagecode="1033" />
+                        <label description="Typ" languagecode="1031" />
+                        <label description="type" languagecode="1036" />
                       </labels>
                       <control disabled="false" id="tc_nonfinancialcompensationsubtype" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_nonfinancialcompensationsubtype" uniqueid="{7915626a-179a-47a6-c661-a09d260b6506}" />
                     </cell>
                     <cell id="{820e38a5-6d47-952b-410b-e99058269392}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Local Currency" languagecode="1033" />
+                        <label description="Lokale Währung" languagecode="1031" />
+                        <label description="Devise locale" languagecode="1036" />
                       </labels>
                       <control id="tc_nonfinancialcurrency" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_nonfinancialcurrency" disabled="false" uniqueid="{ab950e1d-4d15-6b3a-7ce6-cb2cdac74dc5}">
                         <parameters>
@@ -345,12 +375,15 @@
                     <cell id="{c3eaa343-1a8e-457c-d329-94b9ec385e4b}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Cost Coverage By" languagecode="1033" />
+                        <label description="Kostendeckung durch" languagecode="1031" />
                       </labels>
                       <control id="tc_costcoveredby" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_costcoveredby" uniqueid="{25337349-210c-ad93-6874-9b7a180a2653}" />
                     </cell>
                     <cell id="{99451d84-b252-88c2-40c3-6bb08927e7b2}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Exchange Rate" languagecode="1033" />
+                        <label description="Wechselkurs" languagecode="1031" />
+                        <label description="Taux de change" languagecode="1036" />
                       </labels>
                       <control id="tc_nonfinancialexchangerate" classid="{C3EFE0C3-0EC6-42be-8349-CBD9079DFD8E}" datafieldname="tc_nonfinancialexchangerate" disabled="false" uniqueid="{2d818b85-1b69-9e34-283d-2126323b0389}" />
                     </cell>
@@ -359,12 +392,15 @@
                     <cell id="{6289cc3c-d7b5-9ada-e762-c5d899cd0cca}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Amount" languagecode="1033" />
+                        <label description="Betrag" languagecode="1031" />
+                        <label description="montant" languagecode="1036" />
                       </labels>
                       <control id="tc_nonfinancialamount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_nonfinancialamount" disabled="false" uniqueid="{57a72b3e-c3b2-cd05-96b9-522d12e29810}" />
                     </cell>
                     <cell id="{de3d0224-5990-86ce-7e2d-ab04de91d94d}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Local Non-Financial Amount" languagecode="1033" />
+                        <label description="Lokaler nichtfinanzieller Betrag" languagecode="1031" />
                       </labels>
                       <control id="tc_localnonfinancialamount" classid="{C3EFE0C3-0EC6-42be-8349-CBD9079DFD8E}" datafieldname="tc_localnonfinancialamount" disabled="false" uniqueid="{79a51e79-da6a-67c3-7035-21802a45d160}" />
                     </cell>
@@ -373,6 +409,8 @@
                     <cell id="{2b04d4e0-aa05-be91-23cb-015e4dee5245}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Other" languagecode="1033" />
+                        <label description="andere" languagecode="1031" />
+                        <label description="Autre" languagecode="1036" />
                       </labels>
                       <control id="tc_nonfinancialcompensationsubtypeother" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_nonfinancialcompensationsubtypeother" uniqueid="{2969b813-e02d-6b2a-b4c7-8da1c3019740}" disabled="false" />
                     </cell>
@@ -386,6 +424,7 @@
               </section>
               <section id="{5917c5c3-b92b-0ad7-c7cd-eb57db33aa22}" name="{1bc86e91-9dd4-43b3-b400-95f510b66a26}_section_3" IsUserDefined="0" locklevel="0" showlabel="true" columns="11" showbar="true" labelwidth="115" celllabelposition="Left" celllabelalignment="Left" layout="varwidth">
                 <labels>
+                  <label description="Bar SPEZIFISCHER ABSCHNITT" languagecode="1031" />
                   <label description="CASH SPECIFIC SECTION" languagecode="1033" />
                 </labels>
                 <rows>
@@ -393,12 +432,16 @@
                     <cell id="{0809871d-bb76-8c6d-aec8-530594a607dc}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Amount" languagecode="1033" />
+                        <label description="Betrag" languagecode="1031" />
+                        <label description="montant" languagecode="1036" />
                       </labels>
                       <control disabled="false" id="tc_cashamount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_cashamount" uniqueid="{11202767-bcde-67d2-d4bb-162b1d4d9970}" />
                     </cell>
                     <cell id="{21d64b37-ec11-6a3a-51d4-4342ee9609e5}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Local Currency" languagecode="1033" />
+                        <label description="Devise locale" languagecode="1036" />
+                        <label description="Lokale Währung" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_localcurrencyid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_localcurrencyid" uniqueid="{ccbecaa2-ee24-2682-9c8a-a2cd6bc7bd8d}">
                         <parameters>
@@ -421,6 +464,7 @@
                     <cell id="{ecbd1380-6846-b72c-4b90-55b3cd0cc764}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Exchange Rate" languagecode="1033" />
+                        <label description="Tauschrate" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_exchangerate" classid="{C3EFE0C3-0EC6-42be-8349-CBD9079DFD8E}" datafieldname="tc_exchangerate" uniqueid="{0d1a2c95-b178-2e30-545a-e64a264e9949}" />
                     </cell>
@@ -434,42 +478,50 @@
                     <cell id="{54daa70c-8c06-9c5c-e095-ed8ad561d4ac}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Local Cash Amount" languagecode="1033" />
+                        <label description="Lituanie" languagecode="1036" />
+                        <label description="Litauen" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_localcashamount_decimal" classid="{C3EFE0C3-0EC6-42be-8349-CBD9079DFD8E}" datafieldname="tc_localcashamount_decimal" uniqueid="{76838d10-a7e0-7453-2672-0a0b98323d31}" />
                     </cell>
                   </row>
                 </rows>
               </section>
-              <section id="{55237bc1-cd7c-863e-bd9d-7764a43b6652}" name="{1bc86e91-9dd4-43b3-b400-95f510b66a26}_section_7" IsUserDefined="0" locklevel="0" showlabel="true" columns="11" showbar="true" labelwidth="115" celllabelposition="Left" celllabelalignment="Left" layout="varwidth" visible="false">
+              <section id="{55237bc1-cd7c-863e-bd9d-7764a43b6652}" name="{1bc86e91-9dd4-43b3-b400-95f510b66a26}_section_7" IsUserDefined="0" locklevel="0" showlabel="true" columns="11" showbar="true" labelwidth="115" celllabelposition="Left" celllabelalignment="Left" layout="varwidth">
                 <labels>
-                  <label description="VOUCHER" languagecode="1033" />
+                  <label description="VOUCHER SPECIFIC SECTION" languagecode="1033" />
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{a6e0bba1-4cde-ba0b-0a09-2e685b6242e2}" locklevel="0" showlabel="true">
+                    <cell id="{3dc0d1a3-13b7-8208-d942-0e171a09acac}" showlabel="true" locklevel="0">
                       <labels>
-                        <label description="Amount" languagecode="1033" />
+                        <label description="Voucher Amount" languagecode="1033" />
+                        <label description="montant/ valeur du bon de réduction" languagecode="1036" />
+                        <label description="Gutscheinbetrag" languagecode="1031" />
                       </labels>
-                      <control disabled="false" id="tc_voucheramount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_voucheramount" uniqueid="{2822a71b-c29c-0abe-e8c4-6a310ae935b9}" />
+                      <control id="tc_voucheramount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_voucheramount" disabled="false" uniqueid="{10220c33-d4ac-6b50-4479-066587e6d025}" />
                     </cell>
-                    <cell id="{55c98844-d8ca-9dbd-e168-28e4704d73ec}" showlabel="true" locklevel="0">
+                    <cell id="{7714c404-5073-5e9b-641d-45820c0e26c2}" showlabel="true" locklevel="0">
                       <labels>
-                        <label description="Recipient First Name" languagecode="1033" />
+                        <label description="Voucher Recipient First Name" languagecode="1033" />
+                        <label description="Prénom du bénéficiaire du bon de réduction" languagecode="1036" />
+                        <label description="Gutscheinempfänger Vorname" languagecode="1031" />
                       </labels>
-                      <control id="tc_voucherrecipientfirstname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_voucherrecipientfirstname" disabled="false" uniqueid="{dbd2ba55-c410-4a86-73cc-dda74c5a0a76}" />
+                      <control id="tc_voucherrecipientfirstname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_voucherrecipientfirstname" disabled="false" />
                     </cell>
                   </row>
                   <row>
-                    <cell id="{d70d5c9b-aee9-847e-13a6-4d469d0e413b}" showlabel="false">
+                    <cell id="{4941e21b-7a8c-8ce1-7bbe-45c02db3d85e}" showlabel="false">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
                     </cell>
-                    <cell id="{7e09cc7e-8519-c439-52e5-762e84bb51ee}" showlabel="true" locklevel="0">
+                    <cell id="{1eb17bab-680e-dc56-b121-508adb142ab2}" showlabel="true" locklevel="0">
                       <labels>
-                        <label description="Recipient Last Name" languagecode="1033" />
+                        <label description="Voucher Recipient Last Name" languagecode="1033" />
+                        <label description="nom du bénéficiaire du bon de réduction" languagecode="1036" />
+                        <label description="Gutscheinempfänger Nachname" languagecode="1031" />
                       </labels>
-                      <control id="tc_voucherrecipientlastname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_voucherrecipientlastname" disabled="false" uniqueid="{03d839ca-9ed5-e1ed-51c6-92eb24c39636}" />
+                      <control id="tc_voucherrecipientlastname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_voucherrecipientlastname" disabled="false" />
                     </cell>
                   </row>
                 </rows>
@@ -483,12 +535,15 @@
                     <cell id="{8d2c0570-7b22-e096-b102-1194b4b462a6}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Account Type" languagecode="1033" />
+                        <label description="Konto Typ" languagecode="1031" />
+                        <label description="Type de compte" languagecode="1036" />
                       </labels>
                       <control disabled="false" id="tc_bacsaccounttype" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_bacsaccounttype" uniqueid="{ee84a035-ec14-822a-98c6-98ce2b45261d}" />
                     </cell>
                     <cell id="{e0aab408-99a2-94d5-c098-66ae2915247e}" locklevel="0" showlabel="true" colspan="1">
                       <labels>
                         <label description="Building Society Role Number" languagecode="1033" />
+                        <label description="Baustelle-Rollenzahl" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_bacsbuildingsocietyrolenumber" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_bacsbuildingsocietyrolenumber" uniqueid="{0a687990-d13e-2431-e1bc-38d089d002ec}" />
                     </cell>
@@ -497,14 +552,17 @@
                     <cell id="{43c6aa49-c266-415e-11dc-1797651757b1}" locklevel="0" showlabel="true" colspan="1">
                       <labels>
                         <label description="Account Name" languagecode="1033" />
+                        <label description="Konto Name" languagecode="1031" />
+                        <label description="Nom du compte" languagecode="1036" />
                       </labels>
                       <control disabled="false" id="tc_bacsaccountname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_bacsaccountname" uniqueid="{e0cc3e84-6417-94b9-6c84-9220a6d90c19}" />
                     </cell>
                     <cell id="{de39d91c-75c9-3da8-e37c-968e20a9c97c}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Sort Code i.e.123456" languagecode="1033" />
+                        <label description="Sort Code i.e.123456" languagecode="1031" />
                       </labels>
-                      <control id="tc_bacsaccountsortcode" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_bacsaccountsortcode" uniqueid="{e7819ea4-0a45-10ab-57b4-50d76240864a}" />
+                      <control id="tc_bacsaccountsortcode" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_bacsaccountsortcode" uniqueid="{e7819ea4-0a45-10ab-57b4-50d76240864a}" disabled="false" />
                     </cell>
                   </row>
                   <row>
@@ -516,6 +574,8 @@
                     <cell id="{1ab76497-d82c-e540-a221-d4bce95948ad}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Account Number" languagecode="1033" />
+                        <label description="Konto Nummer" languagecode="1031" />
+                        <label description="Numéro de compte" languagecode="1036" />
                       </labels>
                       <control id="tc_bacsaccountnumber" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_bacsaccountnumber" uniqueid="{a8d7bb98-2390-b1ed-a3b9-3b77e3cd1e7e}" disabled="false" />
                     </cell>
@@ -529,6 +589,8 @@
                     <cell id="{75aeeb9c-7cb9-161c-9b5c-a6e49a1b1033}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Amount" languagecode="1033" />
+                        <label description="Betrag" languagecode="1031" />
+                        <label description="montant" languagecode="1036" />
                       </labels>
                       <control disabled="false" id="tc_bacsamount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_bacsamount" uniqueid="{9eea21ad-deba-9181-da2a-8abd385160d7}" />
                     </cell>
@@ -537,14 +599,17 @@
                     <cell id="{1be0cce1-6da2-3473-b466-eb1d4985a563}" locklevel="0" showlabel="true" colspan="2">
                       <labels>
                         <label description="IBAN" languagecode="1033" />
+                        <label description="IBAN" languagecode="1036" />
+                        <label description="IBAN" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_internationalbankaccountnumber" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_internationalbankaccountnumber" uniqueid="{c5a60d7e-e2dd-751c-9d32-91481d82455d}" />
                     </cell>
                   </row>
                 </rows>
               </section>
-              <section id="{d22c3dc6-2323-7831-d16c-2bb0c835e93a}" name="{1bc86e91-9dd4-43b3-b400-95f510b66a26}_section_8" IsUserDefined="0" locklevel="0" showlabel="true" columns="11" showbar="true" labelwidth="115" celllabelposition="Left" celllabelalignment="Left" layout="varwidth" visible="false">
+              <section id="{d22c3dc6-2323-7831-d16c-2bb0c835e93a}" name="{1bc86e91-9dd4-43b3-b400-95f510b66a26}_section_8" IsUserDefined="0" locklevel="0" showlabel="true" columns="11" showbar="true" labelwidth="115" celllabelposition="Left" celllabelalignment="Left" layout="varwidth">
                 <labels>
+                  <label description="CHAPS" languagecode="1031" />
                   <label description="CHAPS" languagecode="1033" />
                 </labels>
                 <rows>
@@ -552,6 +617,7 @@
                     <cell id="{d75db6c2-323b-6a1d-0891-995bcab5867e}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="CHAPS Amount" languagecode="1033" />
+                        <label description="CHAPS Betrag" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_chapsamount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_chapsamount" uniqueid="{42d58d55-48c7-4445-3495-1e6415db9aeb}" />
                     </cell>
@@ -569,6 +635,7 @@
       </tab>
       <tab id="{800b2a67-5801-0d0b-6b31-de1e8ce81142}" name="tab_8" IsUserDefined="0" locklevel="0" expanded="true" showlabel="true">
         <labels>
+          <label description="Finales Angebot" languagecode="1031" />
           <label description="Final Offer" languagecode="1033" />
         </labels>
         <columns>
@@ -576,13 +643,17 @@
             <sections>
               <section id="{94d20a33-d2dd-1a3e-96ad-5ee47a20bddb}" name="tab_8_section_3" IsUserDefined="0" locklevel="0" showlabel="true" columns="11" showbar="false" labelwidth="115" celllabelposition="Left" celllabelalignment="Left" layout="varwidth">
                 <labels>
+                  <label description="Summe" languagecode="1031" />
                   <label description="SUMMARY" languagecode="1033" />
+                  <label description="Résumé" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{1c6ad8c1-aa12-a55c-290c-cd54285c63a4}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Customer" languagecode="1033" />
+                        <label description="client" languagecode="1036" />
+                        <label description="Kunde" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_customer" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_customer" />
                     </cell>
@@ -596,6 +667,7 @@
               </section>
               <section id="{b566b1e7-6d9b-a63b-d848-29a8e6cbd3bd}" name="tab_8_section_2" IsUserDefined="0" locklevel="0" showlabel="true" columns="11" showbar="false" labelwidth="250" celllabelposition="Left" celllabelalignment="Left" layout="varwidth">
                 <labels>
+                  <label description="Kundenentscheidung" languagecode="1031" />
                   <label description="CUSTOMER DECISION" languagecode="1033" />
                 </labels>
                 <rows>
@@ -603,6 +675,8 @@
                     <cell id="{114dc4c0-30ac-0ac3-c9a7-63c85c75865b}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Decision" languagecode="1033" />
+                        <label description="Décision" languagecode="1036" />
+                        <label description="Entscheidung" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_paymentstatus" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_paymentstatus" uniqueid="{0de9bc8e-5b73-8586-1d29-a634786ca8e0}" />
                     </cell>
@@ -616,6 +690,7 @@
                     <cell id="{d987ba24-e8a6-22c6-84a8-19b1ac1530db}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Acknowledgement Method" languagecode="1033" />
+                        <label description="Kundenservice Bestätigung" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_customerpaymentacknowledgement" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_customerpaymentacknowledgement" uniqueid="{274c00be-cab7-a9d9-8ce1-c9a538553837}" />
                     </cell>
@@ -629,6 +704,7 @@
               </section>
               <section id="{e1ed277a-b0e3-b205-3803-7878dc292a2d}" name="tab_8_section_5" IsUserDefined="0" locklevel="0" showlabel="true" columns="11" showbar="false" labelwidth="155" celllabelposition="Left" celllabelalignment="Left" layout="varwidth">
                 <labels>
+                  <label description="VERGÜTUNGSDATEN" languagecode="1031" />
                   <label description="COMPENSATION DETAILS" languagecode="1033" />
                 </labels>
                 <rows>
@@ -636,12 +712,16 @@
                     <cell id="{be6d8223-c5e5-b786-ab23-d6a86c07e6b9}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Total Offered Amount" languagecode="1033" />
+                        <label description="Gesamter angebotener Betrag" languagecode="1031" />
+                        <label description="Montant total offert" languagecode="1036" />
                       </labels>
                       <control disabled="true" id="tc_amount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_amount" uniqueid="{7a4d8614-06a7-8444-50e8-85b78e9a7471}" />
                     </cell>
                     <cell id="{a7756cdd-bd9a-1908-76b8-9a9c1b8188b7}" locklevel="0" showlabel="true" rowspan="6">
                       <labels>
                         <label description="Additional Payment Details" languagecode="1033" />
+                        <label description="détails supplémentaires à propos du paiement" languagecode="1036" />
+                        <label description="Zusätzliche Zahlungsinformation" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_additionaldetails" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="tc_additionaldetails" uniqueid="{358e2055-9db9-07ed-3e89-228393a0adeb}" />
                     </cell>
@@ -650,6 +730,8 @@
                     <cell id="{c2e1371c-c06c-65b7-45a1-819c920e03a7}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Local Cash Amount" languagecode="1033" />
+                        <label description="Lituanie" languagecode="1036" />
+                        <label description="Litauen" languagecode="1031" />
                       </labels>
                       <control id="tc_localcashamount_decimal" classid="{C3EFE0C3-0EC6-42be-8349-CBD9079DFD8E}" datafieldname="tc_localcashamount_decimal" disabled="true" uniqueid="{e8154c18-a964-3b76-e15d-deed991a66e9}" />
                     </cell>
@@ -658,6 +740,8 @@
                     <cell id="{4d4889d4-de56-a35c-11c8-b33c80d29d4d}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Local Currency" languagecode="1033" />
+                        <label description="Devise locale" languagecode="1036" />
+                        <label description="Lokale Währung" languagecode="1031" />
                       </labels>
                       <control id="tc_localcurrencyid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_localcurrencyid" disabled="true" uniqueid="{54d8a0be-8882-2318-3da4-ed5ba651a149}">
                         <parameters>
@@ -675,6 +759,8 @@
                     <cell id="{a36407be-67c6-24d4-b894-32d70da6ab78}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Voucher Amount" languagecode="1033" />
+                        <label description="montant/ valeur du bon de réduction" languagecode="1036" />
+                        <label description="Gutscheinbetrag" languagecode="1031" />
                       </labels>
                       <control disabled="true" id="tc_voucheramount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_voucheramount" uniqueid="{65bae074-27c5-c641-7155-a35927e01087}" />
                     </cell>
@@ -683,6 +769,7 @@
                     <cell id="{d7d0b933-c7d5-971b-39be-550b70b2a604}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="BACS Amount" languagecode="1033" />
+                        <label description="BACS Betrag" languagecode="1031" />
                       </labels>
                       <control disabled="true" id="tc_bacsamount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_bacsamount" uniqueid="{2519036d-d907-751a-c90a-76db9573d4d0}" />
                     </cell>
@@ -691,6 +778,7 @@
                     <cell id="{dc6ec44c-1b32-3a49-044c-a8e4da34405e}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="CHAPS Amount" languagecode="1033" />
+                        <label description="CHAPS Betrag" languagecode="1031" />
                       </labels>
                       <control disabled="true" id="tc_chapsamount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_chapsamount" uniqueid="{5e205b1a-471b-996a-4d2a-dd05d3de9ebd}" />
                     </cell>
@@ -699,6 +787,7 @@
                     <cell id="{10553811-5b76-3c95-bae9-0b413ab94442}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Non-Financial Amount" languagecode="1033" />
+                        <label description="Nicht-finanzieller Betrag" languagecode="1031" />
                       </labels>
                       <control id="tc_localnonfinancialamount" classid="{C3EFE0C3-0EC6-42be-8349-CBD9079DFD8E}" datafieldname="tc_localnonfinancialamount" disabled="true" uniqueid="{46b66649-9994-1399-1c53-baac8c1485ce}" />
                     </cell>
@@ -712,6 +801,7 @@
                     <cell id="{715045ba-31ba-a60d-c066-72c893759c05}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Non-Financial Currency" languagecode="1033" />
+                        <label description="Nichtfinanzwährung" languagecode="1031" />
                       </labels>
                       <control id="tc_nonfinancialcurrency" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_nonfinancialcurrency" disabled="true" uniqueid="{de793e08-b8c5-6150-d635-8e0de18a9721}">
                         <parameters>
@@ -734,6 +824,7 @@
                     <cell id="{e0a15896-b05c-1140-845c-cd0064109332}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Non Financial Sub-Type" languagecode="1033" />
+                        <label description="Nicht finanzieller Untertyp" languagecode="1031" />
                       </labels>
                       <control disabled="true" id="tc_nonfinancialcompensationsubtype" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_nonfinancialcompensationsubtype" uniqueid="{c6ba66da-9eda-1762-a75e-c709193d912a}" />
                     </cell>
@@ -747,6 +838,7 @@
                     <cell id="{ee111777-802c-3be8-9c47-aa950818c21d}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Non-Financial Other" languagecode="1033" />
+                        <label description="Nicht-finanzielle sonstige" languagecode="1031" />
                       </labels>
                       <control id="tc_nonfinancialcompensationsubtypeother" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_nonfinancialcompensationsubtypeother" disabled="true" uniqueid="{602b9cc1-8b6d-37ec-b3b3-3d2c0971dc0e}" />
                     </cell>
@@ -760,6 +852,7 @@
               </section>
               <section id="{43a35294-918a-68ca-0c71-696b288a5ce7}" height="auto" name="LegalStatement" IsUserDefined="0" locklevel="0" showlabel="true" columns="1" showbar="false" labelwidth="115" celllabelposition="Left" celllabelalignment="Left" layout="varwidth">
                 <labels>
+                  <label description="Rechtliche Erklärung" languagecode="1031" />
                   <label description="LEGAL STATEMENT" languagecode="1033" />
                 </labels>
                 <rows>
@@ -767,6 +860,8 @@
                     <cell id="{45a6ed1c-a702-cb41-4dcb-60b90d700e7d}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Source Market" languagecode="1033" />
+                        <label description="Pays organisateur" languagecode="1036" />
+                        <label description="Quellmarkt" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_sourcemarketid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_sourcemarketid" uniqueid="{02701ae8-381b-02be-6ed6-c14e07114029}">
                         <parameters>
@@ -785,6 +880,8 @@
                     <cell id="{eab8d1e1-e7b4-5a95-ecd4-b48e4c6062ad}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Language" languagecode="1033" />
+                        <label description="Langue" languagecode="1036" />
+                        <label description="Sprache" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_language" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_language" uniqueid="{91287766-b5c7-5e28-73c9-50e4a3ee544e}" />
                     </cell>
@@ -793,6 +890,7 @@
                     <cell id="{16e84e13-0179-929e-6091-2ed15acba63d}" locklevel="0" showlabel="false" colspan="1" auto="true">
                       <labels>
                         <label description="Legal Statement" languagecode="1033" />
+                        <label description="Rechtliche Erklärung" languagecode="1031" />
                       </labels>
                       <control disabled="true" id="tc_legalstatement" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="tc_legalstatement" uniqueid="{8859e0e2-c8d4-776c-2be8-75b835078344}" />
                     </cell>
@@ -801,13 +899,16 @@
               </section>
               <section id="{c19ba192-8c31-7b41-6d7d-5c5d3cba65b3}" height="auto" name="tab_3_section_2" IsUserDefined="0" locklevel="0" showlabel="true" columns="1" showbar="false" labelwidth="115" celllabelposition="Top" celllabelalignment="Left" layout="varwidth">
                 <labels>
+                  <label description="Vertragsunterschrift" languagecode="1031" />
                   <label description="SIGNATURE OF AGREEMENT" languagecode="1033" />
+                  <label description="SIGNATURE D'ACCORD" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{bb071cab-4e4b-5d26-3cc0-5c951e356ede}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Is Full and Final Statement" languagecode="1033" />
+                        <label description="Ist voll und endgültig" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_isfullandfinalstatement" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="tc_isfullandfinalstatement" uniqueid="{56b2e76e-7317-282d-1be1-c52560cd2267}" />
                     </cell>
@@ -824,23 +925,26 @@
                     <cell id="{075ec0a1-79c9-795e-2795-89e2759becc0}" locklevel="0" showlabel="false" visible="false" auto="false" rowspan="10">
                       <labels>
                         <label description="Compensation Signature" languagecode="1033" />
+                        <label description="Ausgleichsunterschrift" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_compensationsignature" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_compensationsignature" uniqueid="{db20e110-47d9-e3e7-8aea-a73c64eab101}" />
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                   <row>
                     <cell id="{3a08619a-4651-e698-7764-ae7293bb23a9}" showlabel="true" colspan="1" auto="false" rowspan="6">
                       <labels>
+                        <label description="Unterschrift " languagecode="1031" />
                         <label description="Signature" languagecode="1033" />
+                        <label description="signature" languagecode="1036" />
                       </labels>
                       <control id="WebResource_Signature" classid="{9FDF5F91-88B1-47f4-AD53-C11EFC01A01D}">
                         <parameters>
@@ -860,11 +964,11 @@
                       </events>
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                   <row>
                     <cell id="{8eb47206-ed4a-15e0-77b0-7c52ed49e7cd}" showlabel="false" userspacer="true">
                       <labels>
@@ -876,6 +980,7 @@
                     <cell id="{8bd6dac3-93d8-50d4-9e47-781c1eb3a78c}" locklevel="0" showlabel="true" colspan="1">
                       <labels>
                         <label description="Process Payment Confirmation" languagecode="1033" />
+                        <label description="Zahlungsbestätigung bearbeiten" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_thomascookconfirmation" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_thomascookconfirmation" uniqueid="{36ae8b24-dcc0-87a1-4ba2-b3047c109e56}" />
                     </cell>
@@ -888,6 +993,7 @@
       </tab>
       <tab id="{ce0e750b-e705-9eaa-08e6-1352b4a4d289}" name="tab_6" IsUserDefined="0" locklevel="0" expanded="false" showlabel="true">
         <labels>
+          <label description="Entschädigungs Historie" languagecode="1031" />
           <label description="Compensation History" languagecode="1033" />
         </labels>
         <columns>
@@ -895,6 +1001,7 @@
             <sections>
               <section id="{cdb51546-4c07-30c0-32ac-82009adb21c6}" name="tab_6_section_1" IsUserDefined="0" locklevel="0" showlabel="false" columns="1" showbar="false" labelwidth="115" layout="varwidth">
                 <labels>
+                  <label description="Abschnitt" languagecode="1031" />
                   <label description="Section" languagecode="1033" />
                 </labels>
                 <rows>
@@ -902,6 +1009,7 @@
                     <cell id="{5392dae1-d5a1-3b56-9115-cab6460c2b98}" showlabel="false" colspan="1" auto="false" rowspan="6">
                       <labels>
                         <label description="Compensation Lines (Compensation)" languagecode="1033" />
+                        <label description="Entschädigungslinien (Entschädigung)" languagecode="1031" />
                       </labels>
                       <control id="compensationhistory" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
                         <parameters>
@@ -923,11 +1031,11 @@
                       </control>
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
             </sections>
@@ -936,7 +1044,9 @@
       </tab>
       <tab id="{0175c423-7ddc-e3db-6953-61b8da43c460}" name="tab_2" IsUserDefined="0" locklevel="0" expanded="false" showlabel="true" visible="false">
         <labels>
+          <label description="Zusatzinformation" languagecode="1031" />
           <label description="Additional Information" languagecode="1033" />
+          <label description="informations complémentaires" languagecode="1036" />
         </labels>
         <columns>
           <column width="100%">
@@ -952,6 +1062,8 @@
                     <cell id="{ad13a503-ea76-4be1-198b-0a84dabd49c4}" locklevel="0" showlabel="true" visible="false">
                       <labels>
                         <label description="Name" languagecode="1033" />
+                        <label description="Nom" languagecode="1036" />
+                        <label description="Name" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_name" uniqueid="{4dec848c-36aa-2cee-9be2-23e56c38cdd6}" />
                     </cell>
@@ -974,6 +1086,8 @@
           <cell id="{bb8a351c-0894-936a-b6de-ceb763053d9b}" locklevel="0" showlabel="true">
             <labels>
               <label description="Case" languagecode="1033" />
+              <label description="cas" languagecode="1036" />
+              <label description="Fall" languagecode="1031" />
             </labels>
             <control disabled="true" id="header_tc_caseid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_caseid" uniqueid="{57a58c3a-7db0-29e6-59a0-82cad6e489c0}">
               <parameters>
@@ -989,6 +1103,8 @@
           <cell id="{b2e0b7a8-16bc-b934-0d0d-b50cbd825621}" locklevel="0" showlabel="true">
             <labels>
               <label description="Booking" languagecode="1033" />
+              <label description="Réservation" languagecode="1036" />
+              <label description="Buchung" languagecode="1031" />
             </labels>
             <control disabled="true" id="header_tc_bookingid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_bookingid" uniqueid="{69b6bbe6-9e93-7093-591e-e90575d4ce77}">
               <parameters>
@@ -1089,13 +1205,13 @@
         <customControl formFactor="0" name="MscrmControls.InputMask.InputMaskControl">
           <parameters>
             <value>tc_bacsaccountsortcode</value>
-            <mask type="SingleLine.Text" static="true">99-99-99</mask>
+            <mask static="true" type="SingleLine.Text">99-99-99</mask>
           </parameters>
         </customControl>
         <customControl formFactor="1" name="MscrmControls.InputMask.InputMaskControl">
           <parameters>
             <value>tc_bacsaccountsortcode</value>
-            <mask type="SingleLine.Text" static="true">99-99-99</mask>
+            <mask static="true" type="SingleLine.Text">99-99-99</mask>
           </parameters>
         </customControl>
       </controlDescription>
@@ -1373,9 +1489,12 @@
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>
   <LocalizedNames>
+    <LocalizedName description="Kompensation" languagecode="1031" />
     <LocalizedName description="Compensation" languagecode="1033" />
   </LocalizedNames>
   <Descriptions>
+    <Description description="Kompensationsformular" languagecode="1031" />
     <Description description="A form for Compensation" languagecode="1033" />
+    <Description description="formulaire de compensation" languagecode="1036" />
   </Descriptions>
 </systemform>

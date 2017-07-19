@@ -8,20 +8,25 @@
     <tabs>
       <tab name="General" id="{7683519d-90b4-95d9-5d26-7de937cb4bd1}" IsUserDefined="0" locklevel="0" showlabel="true" expanded="true">
         <labels>
+          <label description="Allgemein" languagecode="1031" />
           <label description="General" languagecode="1033" />
+          <label description="Général" languagecode="1036" />
         </labels>
         <columns>
           <column width="100%">
             <sections>
               <section name="tab_2_section_1" showlabel="false" showbar="false" locklevel="0" id="{62cb7614-306c-166a-7ad8-bd2883e40aa1}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115">
                 <labels>
+                  <label description="Abschnitt" languagecode="1031" />
                   <label description="Section" languagecode="1033" />
+                  <label description="Section" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{bc725c52-1bc7-2ebc-9541-cc15431acce0}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Extra Service Code" languagecode="1033" />
+                        <label description="Extra Service Code" languagecode="1031" />
                       </labels>
                       <control id="tc_extraservicecode" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_extraservicecode" disabled="false" />
                     </cell>
@@ -30,6 +35,7 @@
                     <cell id="{5dac4956-4119-0ecc-1c58-3e060271616c}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Start Date And Time" languagecode="1033" />
+                        <label description="Anfangsdatum &amp; Zeit" languagecode="1031" />
                       </labels>
                       <control id="tc_startdateandtime" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="tc_startdateandtime" disabled="false" />
                     </cell>
@@ -46,6 +52,8 @@
                     <cell id="{ab46b760-0d85-0b81-5569-a2aeb009be5b}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Participants" languagecode="1033" />
+                        <label description="participants" languagecode="1036" />
+                        <label description="Teilnehmer" languagecode="1031" />
                       </labels>
                       <control id="tc_participants" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_participants" disabled="false" />
                     </cell>
@@ -54,6 +62,8 @@
                     <cell id="{14505aa7-3173-3a77-cb5a-8d02ea502545}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Order" languagecode="1033" />
+                        <label description="Commande" languagecode="1036" />
+                        <label description="Auftrag" languagecode="1031" />
                       </labels>
                       <control id="tc_order" classid="{C6D124CA-7EDA-4a60-AEA9-7FB8D318B68F}" datafieldname="tc_order" disabled="false" />
                     </cell>
@@ -66,20 +76,26 @@
       </tab>
       <tab name="tab_3" id="{a471812e-034c-a463-702e-dbb1037a10aa}" IsUserDefined="0" locklevel="0" showlabel="false" expanded="true">
         <labels>
+          <label description="Tab" languagecode="1031" />
           <label description="Tab" languagecode="1033" />
+          <label description="Tab" languagecode="1036" />
         </labels>
         <columns>
           <column width="100%">
             <sections>
               <section name="tab_3_section_1" showlabel="true" showbar="false" locklevel="0" id="{60a7bc79-a425-51a7-7eab-6674b09a0eda}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" height="auto" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
+                  <label description="Bemerkungen" languagecode="1031" />
                   <label description="REMARKS" languagecode="1033" />
+                  <label description="remarques" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{dc863c0e-10bc-0c86-d82c-0b5b09d4694b}" showlabel="false" locklevel="0" auto="true" rowspan="5">
                       <labels>
                         <label description="Remark" languagecode="1033" />
+                        <label description="remarque" languagecode="1036" />
+                        <label description="Bemerkung" languagecode="1031" />
                       </labels>
                       <control id="tc_remark" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="tc_remark" disabled="true" uniqueid="{da1be35a-494b-a762-12a9-1ba75603c3cd}" />
                     </cell>
@@ -114,6 +130,8 @@
                     <cell id="{20a97b8b-ea80-4396-90cc-cb9853858846}">
                       <labels>
                         <label description="Name" languagecode="1033" />
+                        <label description="Nom" languagecode="1036" />
+                        <label description="Name" languagecode="1031" />
                       </labels>
                       <control id="tc_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_name" />
                     </cell>
@@ -151,6 +169,8 @@
           <cell id="{09d9ec15-bcc0-e590-ba03-0dc1d56918ea}" showlabel="true" locklevel="0">
             <labels>
               <label description="Booking" languagecode="1033" />
+              <label description="Réservation" languagecode="1036" />
+              <label description="Buchung" languagecode="1031" />
             </labels>
             <control id="header_tc_bookingid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_bookingid" disabled="false" uniqueid="{388a86ac-4e65-3ee4-cd16-2d9c6db4db46}">
               <parameters>
@@ -207,9 +227,12 @@
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>
   <LocalizedNames>
+    <LocalizedName description="Information" languagecode="1031" />
     <LocalizedName description="Information" languagecode="1033" />
+    <LocalizedName description="Information" languagecode="1036" />
   </LocalizedNames>
   <Descriptions>
+    <Description description="Formblatt für diese Einheit" languagecode="1031" />
     <Description description="A form for this entity." languagecode="1033" />
   </Descriptions>
 </systemform>

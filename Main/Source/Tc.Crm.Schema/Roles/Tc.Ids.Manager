@@ -2,41 +2,67 @@
 <Role id="{a2518d2f-f9f8-e611-8107-3863bb34fb48}" name="Tc.Ids.Manager">
   <IsCustomizable>1</IsCustomizable>
   <RolePrivileges>
+    <RolePrivilege name="prvAppendAccount" level="Global" />
     <RolePrivilege name="prvAppendActivity" level="Global" />
-    <RolePrivilege name="prvAppendIncident" level="Local" />
-    <RolePrivilege name="prvAppendKnowledgeArticle" level="Deep" />
-    <RolePrivilege name="prvAppendKnowledgeArticleViews" level="Deep" />
+    <RolePrivilege name="prvAppendContact" level="Global" />
+    <RolePrivilege name="prvAppendIncident" level="Global" />
+    <RolePrivilege name="prvAppendKnowledgeArticle" level="Global" />
+    <RolePrivilege name="prvAppendKnowledgeArticleViews" level="Global" />
     <RolePrivilege name="prvAppendKnowledgeBaseRecord" level="Global" />
+    <RolePrivilege name="prvAppendNote" level="Global" />
+    <RolePrivilege name="prvAppendQueue" level="Basic" />
     <RolePrivilege name="prvAppendSLA" level="Local" />
     <RolePrivilege name="prvAppendSLAKPIInstance" level="Local" />
-    <RolePrivilege name="prvAppendtc_recovery" level="Local" />
+    <RolePrivilege name="prvAppendtc_alternativeemail" level="Global" />
+    <RolePrivilege name="prvAppendtc_booking" level="Global" />
+    <RolePrivilege name="prvAppendtc_caseline" level="Global" />
+    <RolePrivilege name="prvAppendtc_compensation" level="Global" />
+    <RolePrivilege name="prvAppendtc_compensationapproval" level="Global" />
+    <RolePrivilege name="prvAppendtc_compensationline" level="Global" />
+    <RolePrivilege name="prvAppendtc_recovery" level="Global" />
+    <RolePrivilege name="prvAppendToAccount" level="Global" />
     <RolePrivilege name="prvAppendToActivity" level="Global" />
-    <RolePrivilege name="prvAppendToIncident" level="Local" />
-    <RolePrivilege name="prvAppendToKnowledgeArticle" level="Deep" />
-    <RolePrivilege name="prvAppendToKnowledgeArticleViews" level="Deep" />
+    <RolePrivilege name="prvAppendToContact" level="Global" />
+    <RolePrivilege name="prvAppendToIncident" level="Global" />
+    <RolePrivilege name="prvAppendToKnowledgeArticle" level="Global" />
+    <RolePrivilege name="prvAppendToKnowledgeArticleViews" level="Global" />
     <RolePrivilege name="prvAppendToKnowledgeBaseRecord" level="Global" />
+    <RolePrivilege name="prvAppendToNote" level="Global" />
+    <RolePrivilege name="prvAppendToQueue" level="Basic" />
     <RolePrivilege name="prvAppendToSLA" level="Local" />
     <RolePrivilege name="prvAppendToSLAKPIInstance" level="Local" />
-    <RolePrivilege name="prvAppendTotc_recovery" level="Local" />
-    <RolePrivilege name="prvAssignIncident" level="Local" />
-    <RolePrivilege name="prvAssignKnowledgeArticle" level="Deep" />
-    <RolePrivilege name="prvAssignKnowledgeArticleViews" level="Deep" />
+    <RolePrivilege name="prvAppendTotc_alternativeemail" level="Global" />
+    <RolePrivilege name="prvAppendTotc_booking" level="Global" />
+    <RolePrivilege name="prvAppendTotc_caseline" level="Global" />
+    <RolePrivilege name="prvAppendTotc_compensation" level="Global" />
+    <RolePrivilege name="prvAppendTotc_compensationapproval" level="Global" />
+    <RolePrivilege name="prvAppendTotc_compensationline" level="Global" />
+    <RolePrivilege name="prvAppendTotc_recovery" level="Global" />
+    <RolePrivilege name="prvAssignActivity" level="Global" />
+    <RolePrivilege name="prvAssignContact" level="Global" />
+    <RolePrivilege name="prvAssignIncident" level="Global" />
+    <RolePrivilege name="prvAssignKnowledgeArticle" level="Global" />
+    <RolePrivilege name="prvAssignKnowledgeArticleViews" level="Global" />
     <RolePrivilege name="prvAssignSLA" level="Local" />
     <RolePrivilege name="prvAssignSLAKPIInstance" level="Local" />
-    <RolePrivilege name="prvAssigntc_recovery" level="Local" />
-    <RolePrivilege name="prvCreateIncident" level="Local" />
+    <RolePrivilege name="prvAssigntc_recovery" level="Global" />
+    <RolePrivilege name="prvCreateAccount" level="Global" />
+    <RolePrivilege name="prvCreateActivity" level="Global" />
+    <RolePrivilege name="prvCreateIncident" level="Global" />
     <RolePrivilege name="prvCreateSharePointData" level="Global" />
     <RolePrivilege name="prvCreateSLA" level="Local" />
     <RolePrivilege name="prvCreateSLAKPIInstance" level="Local" />
-    <RolePrivilege name="prvCreatetc_recovery" level="Local" />
-    <RolePrivilege name="prvDeletetc_recovery" level="Local" />
+    <RolePrivilege name="prvReadAccount" level="Global" />
     <RolePrivilege name="prvReadActivity" level="Global" />
-    <RolePrivilege name="prvReadIncident" level="Local" />
-    <RolePrivilege name="prvReadKnowledgeArticle" level="Deep" />
-    <RolePrivilege name="prvReadKnowledgeArticleViews" level="Deep" />
+    <RolePrivilege name="prvReadContact" level="Global" />
+    <RolePrivilege name="prvReadIncident" level="Global" />
+    <RolePrivilege name="prvReadKnowledgeArticle" level="Global" />
+    <RolePrivilege name="prvReadKnowledgeArticleViews" level="Global" />
     <RolePrivilege name="prvReadKnowledgeBaseRecord" level="Global" />
+    <RolePrivilege name="prvReadNote" level="Global" />
     <RolePrivilege name="prvReadPluginAssembly" level="Global" />
     <RolePrivilege name="prvReadPluginType" level="Global" />
+    <RolePrivilege name="prvReadQueue" level="Basic" />
     <RolePrivilege name="prvReadSdkMessage" level="Global" />
     <RolePrivilege name="prvReadSdkMessageProcessingStep" level="Global" />
     <RolePrivilege name="prvReadSdkMessageProcessingStepImage" level="Global" />
@@ -44,19 +70,34 @@
     <RolePrivilege name="prvReadSharePointDocument" level="Global" />
     <RolePrivilege name="prvReadSLA" level="Local" />
     <RolePrivilege name="prvReadSLAKPIInstance" level="Local" />
-    <RolePrivilege name="prvReadtc_recovery" level="Local" />
-    <RolePrivilege name="prvShareIncident" level="Local" />
-    <RolePrivilege name="prvShareKnowledgeArticle" level="Deep" />
-    <RolePrivilege name="prvShareKnowledgeArticleViews" level="Deep" />
+    <RolePrivilege name="prvReadtc_alternativeemail" level="Global" />
+    <RolePrivilege name="prvReadtc_booking" level="Global" />
+    <RolePrivilege name="prvReadtc_caseline" level="Global" />
+    <RolePrivilege name="prvReadtc_compensation" level="Global" />
+    <RolePrivilege name="prvReadtc_compensationapproval" level="Global" />
+    <RolePrivilege name="prvReadtc_compensationline" level="Global" />
+    <RolePrivilege name="prvReadtc_recovery" level="Global" />
+    <RolePrivilege name="prvShareIncident" level="Global" />
+    <RolePrivilege name="prvShareKnowledgeArticle" level="Global" />
+    <RolePrivilege name="prvShareKnowledgeArticleViews" level="Global" />
     <RolePrivilege name="prvShareSLA" level="Local" />
     <RolePrivilege name="prvShareSLAKPIInstance" level="Local" />
-    <RolePrivilege name="prvSharetc_recovery" level="Local" />
+    <RolePrivilege name="prvSharetc_recovery" level="Global" />
+    <RolePrivilege name="prvWriteAccount" level="Global" />
     <RolePrivilege name="prvWriteActivity" level="Global" />
-    <RolePrivilege name="prvWriteIncident" level="Local" />
+    <RolePrivilege name="prvWriteContact" level="Global" />
+    <RolePrivilege name="prvWriteIncident" level="Global" />
+    <RolePrivilege name="prvWriteNote" level="Global" />
+    <RolePrivilege name="prvWriteQueue" level="Basic" />
     <RolePrivilege name="prvWriteSharePointData" level="Global" />
     <RolePrivilege name="prvWriteSLA" level="Local" />
     <RolePrivilege name="prvWriteSLAKPIInstance" level="Local" />
-    <RolePrivilege name="prvWritetc_compensationapproval" level="Deep" />
-    <RolePrivilege name="prvWritetc_recovery" level="Local" />
+    <RolePrivilege name="prvWritetc_alternativeemail" level="Global" />
+    <RolePrivilege name="prvWritetc_booking" level="Global" />
+    <RolePrivilege name="prvWritetc_caseline" level="Global" />
+    <RolePrivilege name="prvWritetc_compensation" level="Global" />
+    <RolePrivilege name="prvWritetc_compensationapproval" level="Global" />
+    <RolePrivilege name="prvWritetc_compensationline" level="Global" />
+    <RolePrivilege name="prvWritetc_recovery" level="Global" />
   </RolePrivileges>
 </Role>

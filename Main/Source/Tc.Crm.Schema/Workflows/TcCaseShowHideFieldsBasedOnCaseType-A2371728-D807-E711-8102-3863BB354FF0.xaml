@@ -545,89 +545,79 @@
                 <mxswa:ActivityReference.Properties>
                   <sco:Collection x:TypeArguments="Variable" x:Key="Variables" />
                   <sco:Collection x:TypeArguments="Activity" x:Key="Activities">
-                    <Sequence DisplayName="SetVisibilityStep_ConditionBranchStep4_37_38: Display Date Reported">
+                    <Sequence DisplayName="SetVisibilityStep38: Display Date Reported">
                       <mcwc:SetVisibility ControlId="tc_datereported" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="True" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_ConditionBranchStep4_37_38_39: Display Is the Holiday Stopping Shorter than Planned">
+                    <Sequence DisplayName="SetVisibilityStep39: Display Is the Holiday Stopping Shorter than Planned">
                       <mcwc:SetVisibility ControlId="tc_istheholidaystoppingshorterthanplanned" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="False" />
                     </Sequence>
-                    <Sequence DisplayName="SetFieldRequiredLevelStep_ConditionBranchStep4_37_38_39_40: Set Holiday Stopped to Non-Mandatory">
-                      <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;incident&quot;)]" />
-                      <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mcwc:SetFieldRequiredLevel ControlId="tc_istheholidaystoppingshorterthanplanned" ControlType="standard" DisplayName="SetFieldRequiredLevelStep_ConditionBranchStep4_37_38_39_40" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="None" />
-                    </Sequence>
-                    <Sequence DisplayName="SetAttributeValueStep_ConditionBranchStep4_37_38_39_40_41: Clear Holiday Stopped">
+                    <Sequence DisplayName="SetAttributeValueStep41: Clear Holiday Stopped">
                       <Sequence.Variables>
-                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep_ConditionBranchStep4_37_38_39_40_41_1" />
+                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep41_1" />
                       </Sequence.Variables>
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;incident&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mxswa:SetEntityProperty Attribute="tc_istheholidaystoppingshorterthanplanned" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" Value="[SetAttributeValueStep_ConditionBranchStep4_37_38_39_40_41_1]">
+                      <mxswa:SetEntityProperty Attribute="tc_istheholidaystoppingshorterthanplanned" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" Value="[SetAttributeValueStep41_1]">
                         <mxswa:SetEntityProperty.TargetType>
                           <InArgument x:TypeArguments="s:Type">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
                           </InArgument>
                         </mxswa:SetEntityProperty.TargetType>
                       </mxswa:SetEntityProperty>
-                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep_ConditionBranchStep4_37_38_39_40_41" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" />
+                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep41" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" />
                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_ConditionBranchStep4_37_38_39_40_41_42: Display Flight Length">
+                    <Sequence DisplayName="SetVisibilityStep42867: Display Flight Length">
                       <mcwc:SetVisibility ControlId="tc_flightlength" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="True" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_ConditionBranchStep4_37_38_39_40_41_42_43: Hide Hotel Rating">
+                    <Sequence DisplayName="SetVisibilityStep43118: Hide Hotel Rating">
                       <mcwc:SetVisibility ControlId="tc_hotelrating" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="False" />
                     </Sequence>
-                    <Sequence DisplayName="SetAttributeValueStep_ConditionBranchStep4_37_38_39_40_41_42_43_44: Clear Hotel Rating">
+                    <Sequence DisplayName="SetAttributeValueStep44: Clear Hotel Rating">
                       <Sequence.Variables>
-                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep_ConditionBranchStep4_37_38_39_40_41_42_43_44_1" />
+                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep44_1" />
                       </Sequence.Variables>
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;incident&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mxswa:SetEntityProperty Attribute="tc_hotelrating" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" Value="[SetAttributeValueStep_ConditionBranchStep4_37_38_39_40_41_42_43_44_1]">
+                      <mxswa:SetEntityProperty Attribute="tc_hotelrating" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" Value="[SetAttributeValueStep44_1]">
                         <mxswa:SetEntityProperty.TargetType>
                           <InArgument x:TypeArguments="s:Type">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
                           </InArgument>
                         </mxswa:SetEntityProperty.TargetType>
                       </mxswa:SetEntityProperty>
-                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep_ConditionBranchStep4_37_38_39_40_41_42_43_44" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" />
+                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep44" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" />
                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_ConditionBranchStep4_37_38_39_40_41_42_43_44_45: Show Resolved By">
+                    <Sequence DisplayName="SetVisibilityStep45: Show Resolved By">
                       <mcwc:SetVisibility ControlId="resolveby" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="True" />
                     </Sequence>
-                    <Sequence DisplayName="SetDisplayModeStep_ConditionBranchStep4_37_38_39_40_41_42_43_44_45_46: Lock Resolve By">
+                    <Sequence DisplayName="SetDisplayModeStep46: Lock Resolve By">
                       <mcwc:SetDisplayMode ControlId="resolveby" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsReadOnly="True" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_ConditionBranchStep4_37_38_39_40_41_42_43_44_45_46_47: Show Resort Office">
+                    <Sequence DisplayName="SetVisibilityStep47: Show Resort Office">
                       <mcwc:SetVisibility ControlId="tc_resortofficeid" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="True" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_ConditionBranchStep4_37_38_39_40_41_42_43_44_45_46_47_48: Display Product Type">
+                    <Sequence DisplayName="SetVisibilityStep48: Display Product Type">
                       <mcwc:SetVisibility ControlId="tc_producttype" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="True" />
                     </Sequence>
-                    <Sequence DisplayName="SetVisibilityStep_ConditionBranchStep4_37_38_39_40_41_42_43_44_45_46_47_48_49: Show 3rd Party Response">
+                    <Sequence DisplayName="SetVisibilityStep49: Show 3rd Party Response">
                       <mcwc:SetVisibility ControlId="tc_3rdpartyresponserequired" ControlType="standard" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" IsVisible="False" />
                     </Sequence>
-                    <Sequence DisplayName="SetFieldRequiredLevelStep_ConditionBranchStep4_37_38_39_40_41_42_43_44_45_46_47_48_49_50: Make 3rd Party Response non-mandatory">
-                      <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;incident&quot;)]" />
-                      <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mcwc:SetFieldRequiredLevel ControlId="tc_3rdpartyresponserequired" ControlType="standard" DisplayName="SetFieldRequiredLevelStep_ConditionBranchStep4_37_38_39_40_41_42_43_44_45_46_47_48_49_50" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="incident" RequiredLevel="None" />
-                    </Sequence>
-                    <Sequence DisplayName="SetAttributeValueStep_ConditionBranchStep4_37_38_39_40_41_42_43_44_45_46_47_48_49_50_51: Clear 12hr SLA">
+                    <Sequence DisplayName="SetAttributeValueStep51: Clear 12hr SLA">
                       <Sequence.Variables>
-                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep_ConditionBranchStep4_37_38_39_40_41_42_43_44_45_46_47_48_49_50_51_1" />
+                        <Variable x:TypeArguments="x:Object" Name="SetAttributeValueStep51_1" />
                       </Sequence.Variables>
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" Value="[New Entity(&quot;incident&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;primaryEntity#Temp&quot;).Id]" Value="[InputEntities(&quot;primaryEntity&quot;).Id]" />
-                      <mxswa:SetEntityProperty Attribute="tc_3rdpartyresponserequired" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" Value="[SetAttributeValueStep_ConditionBranchStep4_37_38_39_40_41_42_43_44_45_46_47_48_49_50_51_1]">
+                      <mxswa:SetEntityProperty Attribute="tc_3rdpartyresponserequired" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" Value="[SetAttributeValueStep51_1]">
                         <mxswa:SetEntityProperty.TargetType>
                           <InArgument x:TypeArguments="s:Type">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
                           </InArgument>
                         </mxswa:SetEntityProperty.TargetType>
                       </mxswa:SetEntityProperty>
-                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep_ConditionBranchStep4_37_38_39_40_41_42_43_44_45_46_47_48_49_50_51" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" />
+                      <mcwc:SetAttributeValue DisplayName="SetAttributeValueStep51" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" />
                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
                     </Sequence>
                   </sco:Collection>

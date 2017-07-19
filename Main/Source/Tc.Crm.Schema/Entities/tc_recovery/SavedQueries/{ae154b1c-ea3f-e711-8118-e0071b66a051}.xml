@@ -20,6 +20,9 @@
       <entity name="tc_recovery">
         <attribute name="tc_name" />
         <order attribute="tc_name" descending="false" />
+        <filter type="and">
+          <condition attribute="statuscode" operator="eq" value="1" />
+        </filter>
         <link-entity name="systemuser" from="systemuserid" to="owninguser" alias="aa">
           <link-entity name="teammembership" from="systemuserid" to="systemuserid" visible="false" intersect="true">
             <link-entity name="team" from="teamid" to="teamid" alias="ab">
@@ -35,6 +38,6 @@
   </fetchxml>
   <IntroducedVersion>1.0.0.104</IntroducedVersion>
   <LocalizedNames>
-    <LocalizedName description="My Teams Recoveries" languagecode="1033" />
+    <LocalizedName description="My Teams Active Recoveries" languagecode="1033" />
   </LocalizedNames>
 </savedquery>

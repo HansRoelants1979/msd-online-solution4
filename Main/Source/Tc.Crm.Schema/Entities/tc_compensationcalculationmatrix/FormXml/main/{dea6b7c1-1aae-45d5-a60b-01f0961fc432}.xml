@@ -26,6 +26,8 @@
                     <cell id="{f9b6eedb-10fd-4c56-96ce-5eb70ec4ab5b}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Name" languagecode="1033" />
+                        <label description="Nom" languagecode="1036" />
+                        <label description="Name" languagecode="1031" />
                       </labels>
                       <control id="tc_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_name" uniqueid="{328d3cb3-3dad-5bbc-4dc3-17114036683b}" disabled="true" />
                     </cell>
@@ -34,6 +36,7 @@
               </section>
               <section name="{e3106642-950d-4d1c-921a-6bb034a3deb5}_section_2" showlabel="true" showbar="false" locklevel="0" id="{7e251d19-cd9c-8b6e-edae-4835151b5ce1}" IsUserDefined="0" layout="varwidth" columns="111" labelwidth="115" celllabelalignment="Left" celllabelposition="Left" height="auto">
                 <labels>
+                  <label description="Kompensationsmatrix" languagecode="1031" />
                   <label description="Compensaiton Matrix" languagecode="1033" />
                 </labels>
                 <rows>
@@ -41,12 +44,14 @@
                     <cell id="{d6c6189e-6dd3-2e24-a899-1ca0e0c46921}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Category 1" languagecode="1033" />
+                        <label description="Kategorie 1" languagecode="1031" />
                       </labels>
                       <control id="tc_category1" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_category1" disabled="false" />
                     </cell>
                     <cell id="{db335389-c7e4-919c-03c5-1b8cd0845726}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Category 2" languagecode="1033" />
+                        <label description="Kategorie 2" languagecode="1031" />
                       </labels>
                       <control id="tc_category2" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_category2" disabled="false" uniqueid="{5775a60b-368c-c8a7-7aa2-358242483571}">
                         <parameters>
@@ -65,6 +70,7 @@
                     <cell id="{748db974-6436-b29b-d8cb-e391dee8b491}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Category 3" languagecode="1033" />
+                        <label description="Kategorie 3" languagecode="1031" />
                       </labels>
                       <control id="tc_category3" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_category3" disabled="false" uniqueid="{349e177a-4ad1-b69a-44c1-02076e9a2c69}">
                         <parameters>
@@ -85,6 +91,8 @@
                     <cell id="{02620b82-addc-8589-e48c-b9127c8b50e4}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Source Market" languagecode="1033" />
+                        <label description="Pays organisateur" languagecode="1036" />
+                        <label description="Quellmarkt" languagecode="1031" />
                       </labels>
                       <control id="tc_sourcemarket" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_sourcemarket" disabled="false" />
                     </cell>
@@ -120,6 +128,7 @@
                     <cell id="{3adbd712-c6d0-4e49-36e5-73199a5a6e22}" showlabel="true" colspan="3" auto="true" rowspan="4">
                       <labels>
                         <label description="Compensation Calculation Lines" languagecode="1033" />
+                        <label description="Kompensationsberechnungslinien" languagecode="1031" />
                       </labels>
                       <control id="Lines" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true" uniqueid="{0e76511e-c654-1385-3ad3-72c86d35bd13}">
                         <parameters>
@@ -152,14 +161,18 @@
       </tab>
       <tab name="tab_2" id="{91459747-3968-0144-ab62-b936747724e8}" IsUserDefined="0" locklevel="0" showlabel="true" expanded="true" visible="false">
         <labels>
+          <label description="verstecken" languagecode="1031" />
           <label description="Hide" languagecode="1033" />
+          <label description="cacher" languagecode="1036" />
         </labels>
         <columns>
           <column width="100%">
             <sections>
               <section name="tab_2_section_1" showlabel="false" showbar="false" locklevel="0" id="{185c41db-5e6c-3c4a-9831-b13c21471301}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115">
                 <labels>
+                  <label description="Abschnitt" languagecode="1031" />
                   <label description="Section" languagecode="1033" />
+                  <label description="Section" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
@@ -211,9 +224,12 @@
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>
   <LocalizedNames>
+    <LocalizedName description="Informationen" languagecode="1031" />
     <LocalizedName description="Information" languagecode="1033" />
+    <LocalizedName description="Informations" languagecode="1036" />
   </LocalizedNames>
   <Descriptions>
+    <Description description="Formblatt für diese Einheit" languagecode="1031" />
     <Description description="A form for this entity." languagecode="1033" />
   </Descriptions>
 </systemform>

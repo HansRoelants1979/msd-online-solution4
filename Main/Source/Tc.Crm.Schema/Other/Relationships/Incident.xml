@@ -23,7 +23,9 @@
         <NavPaneOrder>10000</NavPaneOrder>
         <NavigationPropertyName>bpf_incidentid</NavigationPropertyName>
         <CustomLabels>
+          <CustomLabel description="Vorfall" languagecode="1031" />
           <CustomLabel description="incident" languagecode="1033" />
+          <CustomLabel description="incident" languagecode="1036" />
         </CustomLabels>
         <RelationshipRoleType>1</RelationshipRoleType>
       </EntityRelationshipRole>
@@ -67,9 +69,9 @@
     <ReferencingAttributeName>RegardingObjectId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Wählen Sie den Datensatz aus, auf den sich die E-Mail bezieht." languagecode="1031" />
+        <Description description="Eindeutiger Bezeichner des Objekts, dem die E-Mail zugeordnet ist." languagecode="1031" />
         <Description description="Unique identifier of the object with which the e-mail is associated." languagecode="1033" />
-        <Description description="Choisissez l'enregistrement concerné par le courrier électronique." languagecode="1036" />
+        <Description description="Identificateur unique de l'objet auquel le courrier électronique est associé." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -154,6 +156,27 @@
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
+  <EntityRelationship Name="incident_tc_followups">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>1.0.0.139</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_followup</ReferencingEntityName>
+    <ReferencedEntityName>Incident</ReferencedEntityName>
+    <CascadeAssign>Cascade</CascadeAssign>
+    <CascadeDelete>Cascade</CascadeDelete>
+    <CascadeReparent>Cascade</CascadeReparent>
+    <CascadeShare>Cascade</CascadeShare>
+    <CascadeUnshare>Cascade</CascadeUnshare>
+    <ReferencingAttributeName>RegardingObjectId</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Objekts, dem die Aktivität zugeordnet ist." languagecode="1031" />
+        <Description description="Unique identifier of the object with which the activity is associated." languagecode="1033" />
+        <Description description="Identificateur unique de l'objet auquel l'activité est associée." languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
   <EntityRelationship Name="incident_tc_surveyresponses">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
@@ -192,6 +215,7 @@
     <ReferencingAttributeName>tc_CaseId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="einheitlicher Identifikator zum Fall mit Fallzeile" languagecode="1031" />
         <Description description="Unique identifier for Case associated with Case Line." languagecode="1033" />
       </Descriptions>
     </RelationshipDescription>
@@ -229,6 +253,7 @@
     <ReferencingAttributeName>tc_CaseId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Verbindet die Vergütung mit dem Fall (für Reklamationen)" languagecode="1031" />
         <Description description="Connects the Compensation to the Case (for Complaints)" languagecode="1033" />
       </Descriptions>
     </RelationshipDescription>
@@ -301,6 +326,7 @@
     <ReferencingAttributeName>tc_CaseId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Verbinden Sie Case Record mit Compensation Lines (kundengerechte Vergütungsangebote) für Reklamationen" languagecode="1031" />
         <Description description="Connects Case record with Compensation Lines (customer agreed compensation offers) for Complaints" languagecode="1033" />
       </Descriptions>
     </RelationshipDescription>

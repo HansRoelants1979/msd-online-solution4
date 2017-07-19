@@ -128,6 +128,7 @@
     <ReferencingAttributeName>tc_SourceMarketId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Verbindet Buchungen mit Ländern (als Quellmarkt)" languagecode="1031" />
         <Description description="Connects Bookings to Countries (as Source Market)" languagecode="1033" />
       </Descriptions>
     </RelationshipDescription>
@@ -138,6 +139,7 @@
         <NavPaneOrder>10000</NavPaneOrder>
         <NavigationPropertyName>tc_SourceMarketId</NavigationPropertyName>
         <CustomLabels>
+          <CustomLabel description="Source Market Bookings" languagecode="1031" />
           <CustomLabel description="Source Market Bookings" languagecode="1033" />
         </CustomLabels>
         <RelationshipRoleType>1</RelationshipRoleType>
@@ -165,6 +167,7 @@
     <ReferencingAttributeName>tc_CountryId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Verbindet Marken mit dem Quellmarkt (Land)" languagecode="1031" />
         <Description description="Connects Brands to Source Market (Country)" languagecode="1033" />
       </Descriptions>
     </RelationshipDescription>
@@ -276,6 +279,7 @@
     <ReferencingAttributeName>tc_CountryId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Links Land zu assoziierten Regionen" languagecode="1031" />
         <Description description="Links Country to associated Regions" languagecode="1033" />
       </Descriptions>
     </RelationshipDescription>
@@ -313,6 +317,7 @@
     <ReferencingAttributeName>tc_CountryId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Verbindet Reiseveranstalter mit dem Quellmarkt (Land)" languagecode="1031" />
         <Description description="Connects Tour Operators to Source Market (Country)" languagecode="1033" />
       </Descriptions>
     </RelationshipDescription>
@@ -424,6 +429,7 @@
     <ReferencingAttributeName>tc_SourceMarketId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Verbinden Sie den Kunden mit dem Land als Quellmarkt" languagecode="1031" />
         <Description description="Connect Customer to Country as Source Market" languagecode="1033" />
       </Descriptions>
     </RelationshipDescription>
@@ -461,6 +467,7 @@
     <ReferencingAttributeName>tc_SourceMarketId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Der Quellmarkt, aus dem das Konto stammt" languagecode="1031" />
         <Description description="The source market that the account originates from" languagecode="1033" />
       </Descriptions>
     </RelationshipDescription>
@@ -510,6 +517,117 @@
       </EntityRelationshipRole>
       <EntityRelationshipRole>
         <NavigationPropertyName>tc_tc_country_incident</NavigationPropertyName>
+        <RelationshipRoleType>0</RelationshipRoleType>
+      </EntityRelationshipRole>
+    </EntityRelationshipRoles>
+  </EntityRelationship>
+  <EntityRelationship Name="tc_tc_country_opportunity_DestinationCountry1">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>Opportunity</ReferencingEntityName>
+    <ReferencedEntityName>tc_country</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>RemoveLink</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <CascadeRollupView>NoCascade</CascadeRollupView>
+    <IsValidForAdvancedFind>1</IsValidForAdvancedFind>
+    <ReferencingAttributeName>tc_DestinationCountry1</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="" languagecode="1033" />
+      </Descriptions>
+    </RelationshipDescription>
+    <EntityRelationshipRoles>
+      <EntityRelationshipRole>
+        <NavPaneDisplayOption>UseCollectionName</NavPaneDisplayOption>
+        <NavPaneArea>Details</NavPaneArea>
+        <NavPaneOrder>10000</NavPaneOrder>
+        <NavigationPropertyName>tc_DestinationCountry1</NavigationPropertyName>
+        <CustomLabels>
+          <CustomLabel description="" languagecode="1033" />
+        </CustomLabels>
+        <RelationshipRoleType>1</RelationshipRoleType>
+      </EntityRelationshipRole>
+      <EntityRelationshipRole>
+        <NavigationPropertyName>tc_tc_country_opportunity_DestinationCountry1</NavigationPropertyName>
+        <RelationshipRoleType>0</RelationshipRoleType>
+      </EntityRelationshipRole>
+    </EntityRelationshipRoles>
+  </EntityRelationship>
+  <EntityRelationship Name="tc_tc_country_opportunity_DestinationCountry2">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>Opportunity</ReferencingEntityName>
+    <ReferencedEntityName>tc_country</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>RemoveLink</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <CascadeRollupView>NoCascade</CascadeRollupView>
+    <IsValidForAdvancedFind>1</IsValidForAdvancedFind>
+    <ReferencingAttributeName>tc_DestinationCountry2</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="" languagecode="1033" />
+      </Descriptions>
+    </RelationshipDescription>
+    <EntityRelationshipRoles>
+      <EntityRelationshipRole>
+        <NavPaneDisplayOption>UseCollectionName</NavPaneDisplayOption>
+        <NavPaneArea>Details</NavPaneArea>
+        <NavPaneOrder>10000</NavPaneOrder>
+        <NavigationPropertyName>tc_DestinationCountry2</NavigationPropertyName>
+        <CustomLabels>
+          <CustomLabel description="" languagecode="1033" />
+        </CustomLabels>
+        <RelationshipRoleType>1</RelationshipRoleType>
+      </EntityRelationshipRole>
+      <EntityRelationshipRole>
+        <NavigationPropertyName>tc_tc_country_opportunity_DestinationCountry2</NavigationPropertyName>
+        <RelationshipRoleType>0</RelationshipRoleType>
+      </EntityRelationshipRole>
+    </EntityRelationshipRoles>
+  </EntityRelationship>
+  <EntityRelationship Name="tc_tc_country_opportunity_DestinationCountry3">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>Opportunity</ReferencingEntityName>
+    <ReferencedEntityName>tc_country</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>RemoveLink</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <CascadeRollupView>NoCascade</CascadeRollupView>
+    <IsValidForAdvancedFind>1</IsValidForAdvancedFind>
+    <ReferencingAttributeName>tc_DestinationCountry3</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="" languagecode="1033" />
+      </Descriptions>
+    </RelationshipDescription>
+    <EntityRelationshipRoles>
+      <EntityRelationshipRole>
+        <NavPaneDisplayOption>UseCollectionName</NavPaneDisplayOption>
+        <NavPaneArea>Details</NavPaneArea>
+        <NavPaneOrder>10000</NavPaneOrder>
+        <NavigationPropertyName>tc_DestinationCountry3</NavigationPropertyName>
+        <CustomLabels>
+          <CustomLabel description="" languagecode="1033" />
+        </CustomLabels>
+        <RelationshipRoleType>1</RelationshipRoleType>
+      </EntityRelationshipRole>
+      <EntityRelationshipRole>
+        <NavigationPropertyName>tc_tc_country_opportunity_DestinationCountry3</NavigationPropertyName>
         <RelationshipRoleType>0</RelationshipRoleType>
       </EntityRelationshipRole>
     </EntityRelationshipRoles>

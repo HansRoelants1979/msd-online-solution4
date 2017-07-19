@@ -8,20 +8,23 @@
     <tabs>
       <tab id="{9d2757dd-c5d2-44f2-8b43-ba3d3bd6f516}" name="tab_1" showlabel="false">
         <labels>
+          <label description="Tab" languagecode="1031" />
           <label description="Tab" languagecode="1033" />
+          <label description="Tab" languagecode="1036" />
         </labels>
         <columns>
           <column width="33%">
             <sections>
               <section id="{6d104ff1-54ee-4caa-b2b5-c869271a340b}" name="tab_1_column_1_section_1" showlabel="false" columns="1" showbar="false" IsUserDefined="0">
                 <labels>
+                  <label description="Abschnitt" languagecode="1031" />
                   <label description="section" languagecode="1033" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{e2bbeabc-995b-7be3-a65c-81a8cad771d3}" showlabel="true" locklevel="0">
                       <labels>
-                        <label description="Compensation 1" languagecode="1033" />
+                        <label description="Complaint 1" languagecode="1033" />
                       </labels>
                       <control disabled="false" id="tc_compensation1id" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_compensation1id" uniqueid="{a85026d8-358d-7aa0-c190-978ab84a158c}">
                         <parameters>
@@ -41,7 +44,7 @@
                   <row>
                     <cell id="{ba84e392-b644-160b-c447-9b85e8d21a70}" showlabel="true" locklevel="0" visible="false">
                       <labels>
-                        <label description="Compensation 2" languagecode="1033" />
+                        <label description="Complaint 2" languagecode="1033" />
                       </labels>
                       <control disabled="false" id="tc_compensation2id" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_compensation2id" uniqueid="{e35350d5-3410-e57e-1807-a428eb9bc11b}">
                         <parameters>
@@ -61,7 +64,7 @@
                   <row>
                     <cell id="{54654ec5-257e-2db0-206e-d20b631ab066}" showlabel="true" locklevel="0" visible="false">
                       <labels>
-                        <label description="Compensation 3" languagecode="1033" />
+                        <label description="Complaint 3" languagecode="1033" />
                       </labels>
                       <control disabled="false" id="tc_compensation3id" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_compensation3id" uniqueid="{d7995e0d-dba1-16a3-54a8-ced2b82ed5de}">
                         <parameters>
@@ -81,7 +84,7 @@
                   <row>
                     <cell id="{b503b294-4305-8d9d-76d6-0e2b283de8ca}" showlabel="true" locklevel="0" visible="false">
                       <labels>
-                        <label description="Compensation 4" languagecode="1033" />
+                        <label description="Complaint 4" languagecode="1033" />
                       </labels>
                       <control disabled="false" id="tc_compensation4id" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_compensation4id" uniqueid="{3e7c1200-30ce-2cee-1566-96a611d4a287}">
                         <parameters>
@@ -106,7 +109,9 @@
             <sections>
               <section id="{40eb1ce1-8202-46de-b0d5-80d1b3ad5699}" name="tab_1_column_2_section_1" showlabel="false" columns="1" showbar="false" IsUserDefined="0" locklevel="0" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
+                  <label description="Betrag anbieten" languagecode="1031" />
                   <label description="Offer Amount" languagecode="1033" />
+                  <label description="montant de l'offre" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
@@ -132,6 +137,7 @@
                     <cell id="{5c46ec4e-6e03-1098-eea0-e243c1b05c97}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Total Offer Amount" languagecode="1033" />
+                        <label description="Gesamte Angebotssumme" languagecode="1031" />
                       </labels>
                       <control id="tc_amount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_amount" disabled="false" />
                     </cell>
@@ -140,6 +146,7 @@
                     <cell id="{b933c31a-d70a-70b3-1a92-b49a9526c74a}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Send Compensation Offer" languagecode="1033" />
+                        <label description="Kompensationsangebot schicken" languagecode="1031" />
                       </labels>
                       <control id="tc_sendcompensationoffer" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_sendcompensationoffer" disabled="false" />
                     </cell>
@@ -152,6 +159,7 @@
             <sections>
               <section id="{d4882807-4dc1-4eee-b285-4258d7aaa886}" name="tab_1_column_3_section_1" showlabel="false" columns="1" showbar="false" IsUserDefined="0">
                 <labels>
+                  <label description="Abschnitt" languagecode="1031" />
                   <label description="section" languagecode="1033" />
                 </labels>
                 <rows>
@@ -159,6 +167,8 @@
                     <cell id="{c2d5e12a-6057-20b4-e262-ea575894e9c3}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Offer Status" languagecode="1033" />
+                        <label description="statut de l'offre" languagecode="1036" />
+                        <label description="Angebotsstatus" languagecode="1031" />
                       </labels>
                       <control id="tc_offerstatus" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_offerstatus" disabled="false" />
                     </cell>
@@ -167,6 +177,7 @@
                     <cell id="{e427328e-e0c0-1151-c72a-37dc502d861e}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Customer Offer Acknowledgement" languagecode="1033" />
+                        <label description="Kundenangebot Anerkennung" languagecode="1031" />
                       </labels>
                       <control id="tc_customerofferacknowledgement" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_customerofferacknowledgement" disabled="false" />
                     </cell>
@@ -182,6 +193,8 @@
                     <cell id="{c1a67b90-854c-d0d9-7635-ae7d840a48ee}" showlabel="true" locklevel="0" visible="false">
                       <labels>
                         <label description="Case" languagecode="1033" />
+                        <label description="cas" languagecode="1036" />
+                        <label description="Fall" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_caseid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_caseid" uniqueid="{ebe18a73-aae7-b90e-05c0-1cb13116772c}">
                         <parameters>
@@ -199,6 +212,8 @@
                     <cell id="{8297eb43-97a7-96e9-96b6-7432d54c77ba}" showlabel="true" locklevel="0" visible="false">
                       <labels>
                         <label description="Name" languagecode="1033" />
+                        <label description="Nom" languagecode="1036" />
+                        <label description="Name" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_name" uniqueid="{06ca4891-9545-b44a-e500-683a8c8b8a4a}" />
                     </cell>
@@ -266,9 +281,11 @@
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>
   <LocalizedNames>
+    <LocalizedName description="Kompensation" languagecode="1031" />
     <LocalizedName description="Compensation" languagecode="1033" />
   </LocalizedNames>
   <Descriptions>
+    <Description description="Schnelles Formular zur Kompensation erstellen." languagecode="1031" />
     <Description description="Quick create form for compensation." languagecode="1033" />
   </Descriptions>
 </systemform>

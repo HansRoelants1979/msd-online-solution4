@@ -364,6 +364,48 @@
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
+  <EntityRelationship Name="lk_tc_boardbasis_createdby">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>0.0.0.1</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_boardbasis</ReferencingEntityName>
+    <ReferencedEntityName>SystemUser</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>CreatedBy</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz erstellt hat." languagecode="1031" />
+        <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificateur unique de l’utilisateur qui a créé l’enregistrement." languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
+  <EntityRelationship Name="lk_tc_boardbasis_modifiedby">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>0.0.0.1</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_boardbasis</ReferencingEntityName>
+    <ReferencedEntityName>SystemUser</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>ModifiedBy</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz geändert hat." languagecode="1031" />
+        <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificateur unique de l’utilisateur qui a modifié l’enregistrement." languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
   <EntityRelationship Name="lk_tc_booking_createdby">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
@@ -379,7 +421,9 @@
     <ReferencingAttributeName>CreatedBy</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz erstellt hat." languagecode="1031" />
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="unique identifiant pour l'utilisateur qui a créé l'entrée" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -398,7 +442,9 @@
     <ReferencingAttributeName>ModifiedBy</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz geändert hat." languagecode="1031" />
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="unique identifiant pour l'utilisateur qui a modifié l'entrée" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -417,7 +463,9 @@
     <ReferencingAttributeName>CreatedBy</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz erstellt hat." languagecode="1031" />
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="unique identifiant pour l'utilisateur qui a créé l'entrée" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -436,7 +484,9 @@
     <ReferencingAttributeName>ModifiedBy</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz geändert hat." languagecode="1031" />
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="unique identifiant pour l'utilisateur qui a modifié l'entrée" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -600,7 +650,9 @@
     <ReferencingAttributeName>ModifiedBy</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz erstellt hat." languagecode="1031" />
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="unique identifiant pour l'utilisateur qui a créé l'entrée" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -661,7 +713,9 @@
     <ReferencingAttributeName>CreatedBy</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz erstellt hat." languagecode="1031" />
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="unique identifiant pour l'utilisateur qui a créé l'entrée" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -680,7 +734,9 @@
     <ReferencingAttributeName>ModifiedBy</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz geändert hat." languagecode="1031" />
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="unique identifiant pour l'utilisateur qui a modifié l'entrée" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -783,7 +839,9 @@
     <ReferencingAttributeName>CreatedBy</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz erstellt hat." languagecode="1031" />
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="unique identifiant pour l'utilisateur qui a créé l'entrée" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1073,7 +1131,9 @@
     <ReferencingAttributeName>CreatedBy</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz erstellt hat." languagecode="1031" />
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="unique identifiant pour l'utilisateur qui a créé l'entrée" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1092,7 +1152,9 @@
     <ReferencingAttributeName>ModifiedBy</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz geändert hat." languagecode="1031" />
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="unique identifiant pour l'utilisateur qui a modifié l'entrée" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1111,7 +1173,9 @@
     <ReferencingAttributeName>CreatedBy</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz erstellt hat." languagecode="1031" />
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="unique identifiant pour l'utilisateur qui a créé l'entrée" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1130,7 +1194,51 @@
     <ReferencingAttributeName>ModifiedBy</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz geändert hat." languagecode="1031" />
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="unique identifiant pour l'utilisateur qui a modifié l'entrée" languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
+  <EntityRelationship Name="lk_tc_externallogin_createdby">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>1.0.0.139</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_externallogin</ReferencingEntityName>
+    <ReferencedEntityName>SystemUser</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>CreatedBy</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz erstellt hat." languagecode="1031" />
+        <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificateur unique de l’utilisateur qui a créé l’enregistrement." languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
+  <EntityRelationship Name="lk_tc_externallogin_modifiedby">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>1.0.0.139</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_externallogin</ReferencingEntityName>
+    <ReferencedEntityName>SystemUser</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>ModifiedBy</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz geändert hat." languagecode="1031" />
+        <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificateur unique de l’utilisateur qui a modifié l’enregistrement." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1149,7 +1257,9 @@
     <ReferencingAttributeName>CreatedBy</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz erstellt hat." languagecode="1031" />
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="unique identifiant pour l'utilisateur qui a créé l'entrée" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1168,7 +1278,9 @@
     <ReferencingAttributeName>ModifiedBy</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eigentümer ID Typ" languagecode="1031" />
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="type d'identifiant de la personne en charge" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1229,7 +1341,9 @@
     <ReferencingAttributeName>CreatedBy</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz erstellt hat." languagecode="1031" />
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="unique identifiant pour l'utilisateur qui a créé l'entrée" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1248,7 +1362,51 @@
     <ReferencingAttributeName>ModifiedBy</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz geändert hat." languagecode="1031" />
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="unique identifiant pour l'utilisateur qui a modifié l'entrée" languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
+  <EntityRelationship Name="lk_tc_killerquestions_createdby">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>0.0.0.1</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_killerquestions</ReferencingEntityName>
+    <ReferencedEntityName>SystemUser</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>CreatedBy</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz erstellt hat." languagecode="1031" />
+        <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificateur unique de l’utilisateur qui a créé l’enregistrement." languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
+  <EntityRelationship Name="lk_tc_killerquestions_modifiedby">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>0.0.0.1</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_killerquestions</ReferencingEntityName>
+    <ReferencedEntityName>SystemUser</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>ModifiedBy</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz geändert hat." languagecode="1031" />
+        <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificateur unique de l’utilisateur qui a modifié l’enregistrement." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1267,7 +1425,9 @@
     <ReferencingAttributeName>CreatedBy</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz erstellt hat." languagecode="1031" />
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="unique identifiant pour l'utilisateur qui a créé l'entrée" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1286,7 +1446,9 @@
     <ReferencingAttributeName>ModifiedBy</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz geändert hat." languagecode="1031" />
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="unique identifiant pour l'utilisateur qui a modifié l'entrée" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1305,7 +1467,9 @@
     <ReferencingAttributeName>CreatedBy</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz erstellt hat." languagecode="1031" />
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="unique identifiant pour l'utilisateur qui a créé l'entrée" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1385,7 +1549,9 @@
     <ReferencingAttributeName>CreatedBy</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz erstellt hat." languagecode="1031" />
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="unique identifiant pour l'utilisateur qui a créé l'entrée" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1534,6 +1700,48 @@
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
+  <EntityRelationship Name="lk_tc_whatsnext_createdby">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>1.0.0.139</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_whatsnext</ReferencingEntityName>
+    <ReferencedEntityName>SystemUser</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>CreatedBy</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz erstellt hat." languagecode="1031" />
+        <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificateur unique de l’utilisateur qui a créé l’enregistrement." languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
+  <EntityRelationship Name="lk_tc_whatsnext_modifiedby">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>1.0.0.139</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_whatsnext</ReferencingEntityName>
+    <ReferencedEntityName>SystemUser</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>ModifiedBy</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz geändert hat." languagecode="1031" />
+        <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificateur unique de l’utilisateur qui a modifié l’enregistrement." languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
   <EntityRelationship Name="lk_teambase_administratorid" unmodified="1">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IntroducedVersion>5.0.0.0</IntroducedVersion>
@@ -1611,7 +1819,7 @@
       <Descriptions>
         <Description description="Eindeutiger Bezeichner für den Benutzer, dem die Benutzereinstellung für die Pinnwandansicht zugeordnet ist." languagecode="1031" />
         <Description description="Unique identifier for User associated with Wall View User Setting." languagecode="1033" />
-        <Description description="Identificateur unique pour l'utilisateur associé au paramètre utilisateur de la vue du mur." languagecode="1036" />
+        <Description description="Identificateur unique de l'utilisateur associé au paramètre utilisateur de la vue du mur." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
     <EntityRelationshipRoles>
@@ -1620,6 +1828,45 @@
         <NavPaneArea>Details</NavPaneArea>
         <NavPaneOrder>10000</NavPaneOrder>
         <NavigationPropertyName>msdyn_userid</NavigationPropertyName>
+        <CustomLabels>
+          <CustomLabel description="" languagecode="1031" />
+          <CustomLabel description="" languagecode="1033" />
+          <CustomLabel description="" languagecode="1036" />
+        </CustomLabels>
+        <RelationshipRoleType>1</RelationshipRoleType>
+      </EntityRelationshipRole>
+      <EntityRelationshipRole>
+        <RelationshipRoleType>0</RelationshipRoleType>
+      </EntityRelationshipRole>
+    </EntityRelationshipRoles>
+  </EntityRelationship>
+  <EntityRelationship Name="msdyusd_systemuser_msdyusd_usersettings_User">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IntroducedVersion>3.1.0.5</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>msdyusd_usersettings</ReferencingEntityName>
+    <ReferencedEntityName>SystemUser</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>RemoveLink</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <CascadeRollupView>NoCascade</CascadeRollupView>
+    <IsValidForAdvancedFind>1</IsValidForAdvancedFind>
+    <ReferencingAttributeName>msdyusd_User</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Eindeutiger Bezeichner für den Benutzer, der der Benutzereinstellung zugeordnet ist." languagecode="1031" />
+        <Description description="Unique identifier for User associated with User Setting." languagecode="1033" />
+        <Description description="Identificateur unique de l'utilisateur associé au paramètre utilisateur." languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+    <EntityRelationshipRoles>
+      <EntityRelationshipRole>
+        <NavPaneDisplayOption>UseCollectionName</NavPaneDisplayOption>
+        <NavPaneArea>Details</NavPaneArea>
+        <NavPaneOrder>10000</NavPaneOrder>
+        <NavigationPropertyName>msdyusd_User</NavigationPropertyName>
         <CustomLabels>
           <CustomLabel description="" languagecode="1031" />
           <CustomLabel description="" languagecode="1033" />
@@ -1775,6 +2022,69 @@
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
+  <EntityRelationship Name="tc_followup_systemuser_createdby">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>1.0.0.139</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_followup</ReferencingEntityName>
+    <ReferencedEntityName>SystemUser</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>CreatedBy</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der die Aktivität erstellt hat." languagecode="1031" />
+        <Description description="Unique identifier of the user who created the activity." languagecode="1033" />
+        <Description description="Identificateur unique de l'utilisateur qui a créé l'activité." languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
+  <EntityRelationship Name="tc_followup_systemuser_modifiedby">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>1.0.0.139</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_followup</ReferencingEntityName>
+    <ReferencedEntityName>SystemUser</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>ModifiedBy</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der die Aktivität zuletzt geändert hat." languagecode="1031" />
+        <Description description="Unique identifier of user who last modified the activity." languagecode="1033" />
+        <Description description="Identificateur unique de l'utilisateur qui a modifié l'activité pour la dernière fois." languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
+  <EntityRelationship Name="tc_followup_systemuser_owninguser">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>1.0.0.139</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_followup</ReferencingEntityName>
+    <ReferencedEntityName>SystemUser</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>OwningUser</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der im Besitz der Aktivität ist." languagecode="1031" />
+        <Description description="Unique identifier of the user that owns the activity." languagecode="1033" />
+        <Description description="Identificateur unique de l’utilisateur propriétaire de l’activité." languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
   <EntityRelationship Name="tc_LastAssignee">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
@@ -1874,6 +2184,43 @@
         <Description description="Identificateur unique de l’utilisateur propriétaire de l’activité." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
+  </EntityRelationship>
+  <EntityRelationship Name="tc_systemuser_contact_MarketingUpdatedBy">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>Contact</ReferencingEntityName>
+    <ReferencedEntityName>SystemUser</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>RemoveLink</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <CascadeRollupView>NoCascade</CascadeRollupView>
+    <IsValidForAdvancedFind>1</IsValidForAdvancedFind>
+    <ReferencingAttributeName>tc_MarketingUpdatedBy</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="" languagecode="1033" />
+      </Descriptions>
+    </RelationshipDescription>
+    <EntityRelationshipRoles>
+      <EntityRelationshipRole>
+        <NavPaneDisplayOption>UseCollectionName</NavPaneDisplayOption>
+        <NavPaneArea>Details</NavPaneArea>
+        <NavPaneOrder>10000</NavPaneOrder>
+        <NavigationPropertyName>tc_MarketingUpdatedBy</NavigationPropertyName>
+        <CustomLabels>
+          <CustomLabel description="" languagecode="1033" />
+        </CustomLabels>
+        <RelationshipRoleType>1</RelationshipRoleType>
+      </EntityRelationshipRole>
+      <EntityRelationshipRole>
+        <NavigationPropertyName>tc_systemuser_contact_MarketingUpdatedBy</NavigationPropertyName>
+        <RelationshipRoleType>0</RelationshipRoleType>
+      </EntityRelationshipRole>
+    </EntityRelationshipRoles>
   </EntityRelationship>
   <EntityRelationship Name="tc_systemuser_incident_OriginalResolutionBy">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
@@ -2039,6 +2386,7 @@
         <NavPaneOrder>10000</NavPaneOrder>
         <NavigationPropertyName>tc_systemuser_tc_hotel</NavigationPropertyName>
         <CustomLabels>
+          <CustomLabel description="Benutzerhotels" languagecode="1031" />
           <CustomLabel description="User Hotels" languagecode="1033" />
         </CustomLabels>
         <AssociationRoleOrdinal>1</AssociationRoleOrdinal>
@@ -2078,6 +2426,44 @@
           <CustomLabel description="" languagecode="1033" />
         </CustomLabels>
         <AssociationRoleOrdinal>2</AssociationRoleOrdinal>
+      </EntityRelationshipRole>
+    </EntityRelationshipRoles>
+  </EntityRelationship>
+  <EntityRelationship Name="uii_toagent_uii_sessiontransfer">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>UII_sessiontransfer</ReferencingEntityName>
+    <ReferencedEntityName>SystemUser</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>RemoveLink</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <CascadeRollupView>NoCascade</CascadeRollupView>
+    <IsValidForAdvancedFind>1</IsValidForAdvancedFind>
+    <ReferencingAttributeName>uii_toagentid</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Erfasst die Informationen zu dem Agenten, an den die Sitzung übertragen wird" languagecode="1031" />
+        <Description description="Captures the agent information to whom the session is transferred" languagecode="1033" />
+        <Description description="Capture les informations sur l'agent auquel la session est transférée" languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+    <EntityRelationshipRoles>
+      <EntityRelationshipRole>
+        <NavPaneDisplayOption>DoNotDisplay</NavPaneDisplayOption>
+        <NavPaneArea>Details</NavPaneArea>
+        <NavigationPropertyName>uii_toagentid</NavigationPropertyName>
+        <CustomLabels>
+          <CustomLabel description="" languagecode="1031" />
+          <CustomLabel description="" languagecode="1033" />
+          <CustomLabel description="" languagecode="1036" />
+        </CustomLabels>
+        <RelationshipRoleType>1</RelationshipRoleType>
+      </EntityRelationshipRole>
+      <EntityRelationshipRole>
+        <RelationshipRoleType>0</RelationshipRoleType>
       </EntityRelationshipRole>
     </EntityRelationshipRoles>
   </EntityRelationship>
@@ -2168,6 +2554,27 @@
     <IntroducedVersion>1.0.0.86</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_alternativeemail</ReferencingEntityName>
+    <ReferencedEntityName>SystemUser</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>OwningUser</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der im Besitz des Datensatzes ist." languagecode="1031" />
+        <Description description="Unique identifier for the user that owns the record." languagecode="1033" />
+        <Description description="Identificateur unique de l'utilisateur propriétaire de l'enregistrement." languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
+  <EntityRelationship Name="user_tc_boardbasis">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>0.0.0.1</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_boardbasis</ReferencingEntityName>
     <ReferencedEntityName>SystemUser</ReferencedEntityName>
     <CascadeAssign>NoCascade</CascadeAssign>
     <CascadeDelete>NoCascade</CascadeDelete>
@@ -2463,6 +2870,27 @@
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
+  <EntityRelationship Name="user_tc_externallogin">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>1.0.0.139</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_externallogin</ReferencingEntityName>
+    <ReferencedEntityName>SystemUser</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>OwningUser</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der im Besitz des Datensatzes ist." languagecode="1031" />
+        <Description description="Unique identifier for the user that owns the record." languagecode="1033" />
+        <Description description="Identificateur unique de l'utilisateur propriétaire de l'enregistrement." languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
   <EntityRelationship Name="user_tc_gateway">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
@@ -2519,6 +2947,27 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the user that owns the record." languagecode="1033" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
+  <EntityRelationship Name="user_tc_killerquestions">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>0.0.0.1</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_killerquestions</ReferencingEntityName>
+    <ReferencedEntityName>SystemUser</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>OwningUser</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der im Besitz des Datensatzes ist." languagecode="1031" />
+        <Description description="Unique identifier for the user that owns the record." languagecode="1033" />
+        <Description description="Identificateur unique de l'utilisateur propriétaire de l'enregistrement." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>

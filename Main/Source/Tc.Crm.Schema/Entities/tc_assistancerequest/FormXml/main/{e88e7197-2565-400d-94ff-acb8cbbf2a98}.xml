@@ -42,15 +42,15 @@
                       <control id="description" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="description" disabled="false" uniqueid="{d8093e97-2487-ac98-79d5-612dc727858c}" />
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                   <row>
                     <cell id="{d4b2d229-83db-4e57-b6e7-fd5db36fa685}">
                       <labels>
@@ -65,6 +65,8 @@
                     <cell id="{ab31d43d-c682-d8d6-5c14-982e8dab7c52}" showlabel="true" locklevel="0" visible="false">
                       <labels>
                         <label description="Respond By KPI" languagecode="1033" />
+                        <label description="Répondre par indicateur de performance clé" languagecode="1036" />
+                        <label description="geantwortet von KPI" languagecode="1031" />
                       </labels>
                       <control id="tc_respondbykpiid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_respondbykpiid" disabled="false" uniqueid="{79d8c098-1d0d-9ea9-e648-a00bc3702ab0}">
                         <parameters>
@@ -101,6 +103,7 @@
             <sections>
               <section name="{574d1cf2-4eb8-475a-a9ef-116d919172e4}_section_2" showlabel="true" showbar="false" locklevel="0" id="{8c6e4d26-5c14-7433-7864-49eda544a733}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
+                  <label description="SLA TIMER" languagecode="1031" />
                   <label description="SLA TIMER" languagecode="1033" />
                 </labels>
                 <rows>
@@ -108,6 +111,8 @@
                     <cell id="{dcd689bb-5321-cd49-4495-3ac7c3b52a66}" showlabel="false" colspan="1" auto="false">
                       <labels>
                         <label description="Respond By" languagecode="1033" />
+                        <label description="répondre d'ici " languagecode="1036" />
+                        <label description="geantwortet von" languagecode="1031" />
                       </labels>
                       <control id="RespondBy" classid="{5C5600E0-1D6E-4205-A272-BE80DA87FD42}" datafieldname="tc_respondbykpiid" disabled="false">
                         <parameters>
@@ -190,6 +195,33 @@
         </row>
       </rows>
     </header>
+    <footer id="{e3d5d502-fb5e-42c3-9b21-adf8d35f21a4}" columns="111">
+      <rows>
+        <row>
+          <cell id="{a019390e-c4e8-4ffc-8f82-b70f1eb06af7}">
+            <labels>
+              <label description="" languagecode="1033" />
+            </labels>
+          </cell>
+          <cell id="{28c60d16-4e25-a32d-2d65-9dd508ba2b9e}" showlabel="true" locklevel="0">
+            <labels>
+              <label description="Date Created" languagecode="1033" />
+              <label description="Date de création" languagecode="1036" />
+              <label description="Erstellungsdatum" languagecode="1031" />
+            </labels>
+            <control id="footer_createdon" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="createdon" disabled="true" />
+          </cell>
+          <cell id="{814001c0-835a-25b4-9a08-7a27d5ce4ccd}" showlabel="true" locklevel="0">
+            <labels>
+              <label description="Created By" languagecode="1033" />
+              <label description="Créé par" languagecode="1036" />
+              <label description="Erstellt von" languagecode="1031" />
+            </labels>
+            <control id="footer_createdby" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="createdby" disabled="true" />
+          </cell>
+        </row>
+      </rows>
+    </footer>
     <Navigation>
       <NavBar></NavBar>
       <NavBarAreas>
@@ -225,9 +257,12 @@
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>
   <LocalizedNames>
+    <LocalizedName description="Information" languagecode="1031" />
     <LocalizedName description="Information" languagecode="1033" />
+    <LocalizedName description="Information" languagecode="1036" />
   </LocalizedNames>
   <Descriptions>
+    <Description description="Formblatt für diese Einheit" languagecode="1031" />
     <Description description="A form for this entity." languagecode="1033" />
   </Descriptions>
 </systemform>

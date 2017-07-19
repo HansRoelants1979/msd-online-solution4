@@ -162,6 +162,27 @@
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
+  <EntityRelationship Name="business_unit_tc_boardbasis">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>0.0.0.1</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_boardbasis</ReferencingEntityName>
+    <ReferencedEntityName>BusinessUnit</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>OwningBusinessUnit</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
+        <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
+        <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
   <EntityRelationship Name="business_unit_tc_booking">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
@@ -196,7 +217,9 @@
     <ReferencingAttributeName>OwningBusinessUnit</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Besitzer (Unternehmenseinheit)" languagecode="1031" />
         <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
+        <Description description="Division propriétaire" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -442,6 +465,27 @@
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
+  <EntityRelationship Name="business_unit_tc_externallogin">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>1.0.0.139</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_externallogin</ReferencingEntityName>
+    <ReferencedEntityName>BusinessUnit</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>OwningBusinessUnit</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
+        <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
+        <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
   <EntityRelationship Name="business_unit_tc_gateway">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
@@ -457,7 +501,9 @@
     <ReferencingAttributeName>OwningBusinessUnit</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz geändert hat." languagecode="1031" />
         <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
+        <Description description="unique identifiant pour l'utilisateur qui a modifié l'entrée" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -498,6 +544,27 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
+  <EntityRelationship Name="business_unit_tc_killerquestions">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>0.0.0.1</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_killerquestions</ReferencingEntityName>
+    <ReferencedEntityName>BusinessUnit</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>OwningBusinessUnit</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
+        <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
+        <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -700,6 +767,7 @@
     <ReferencingAttributeName>tc_SourceMarketBusinessUnitId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Wird verwendet, um anzugeben, welche Geschäftseinheitsdatensätze aus einem bestimmten Land (Quellmarkt) bei der Erstellung zugewiesen werden sollen." languagecode="1031" />
         <Description description="Used to indicate which business unit records from a given country (source market) should be allocated to upon creation." languagecode="1033" />
       </Descriptions>
     </RelationshipDescription>
@@ -717,6 +785,27 @@
         <RelationshipRoleType>0</RelationshipRoleType>
       </EntityRelationshipRole>
     </EntityRelationshipRoles>
+  </EntityRelationship>
+  <EntityRelationship Name="tc_followup_businessunit_owningbusinessunit">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>1.0.0.139</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_followup</ReferencingEntityName>
+    <ReferencedEntityName>BusinessUnit</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>OwningBusinessUnit</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz der Aktivität ist." languagecode="1031" />
+        <Description description="Unique identifier of the business unit that owns the activity." languagecode="1033" />
+        <Description description="Identificateur unique de la division propriétaire de l'activité." languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
   </EntityRelationship>
   <EntityRelationship Name="tc_surveyresponse_businessunit_owningbusinessunit">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>

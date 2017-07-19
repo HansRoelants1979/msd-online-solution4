@@ -26,6 +26,7 @@
                     <cell id="{a62b64a2-dde1-1bd5-203d-650023485d4e}" showlabel="true" locklevel="0" colspan="3">
                       <labels>
                         <label description="Compensation Matrix" languagecode="1033" />
+                        <label description="Kompensationsmatrix" languagecode="1031" />
                       </labels>
                       <control id="tc_compensationmatrix" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_compensationmatrix" disabled="false" uniqueid="{d36cb6d9-d84b-cdc2-30e5-05b6ac75e17e}">
                         <parameters>
@@ -43,12 +44,14 @@
                     <cell id="{a69d88da-b1dc-a6a6-2733-cb146024b514}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Impact Level" languagecode="1033" />
+                        <label description="Impact Level" languagecode="1031" />
                       </labels>
                       <control id="tc_impactlevel" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_impactlevel" disabled="false" />
                     </cell>
                     <cell id="{909db74e-c384-0a02-2185-4cc6a3e900ca}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Impact Severity" languagecode="1033" />
+                        <label description="Auswirkungen &amp; Schweregrad" languagecode="1031" />
                       </labels>
                       <control id="tc_impactseverity" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_impactseverity" disabled="false" />
                     </cell>
@@ -63,6 +66,7 @@
               </section>
               <section name="{fc4d5750-5c0f-4894-944e-9f811b3e6a82}_section_2" showlabel="true" showbar="true" locklevel="0" id="{d4627126-5337-9452-abe7-6554b37d5da9}" IsUserDefined="0" layout="varwidth" columns="111" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
+                  <label description="Linienprozentsätze" languagecode="1031" />
                   <label description="Line Percentages" languagecode="1033" />
                 </labels>
                 <rows>
@@ -70,12 +74,14 @@
                     <cell id="{b5b0d8aa-abda-49e8-0b7a-8373edc021cc}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Impact Percentage" languagecode="1033" />
+                        <label description="Einfluss-Prozentsatz" languagecode="1031" />
                       </labels>
                       <control id="tc_impactpercentage" classid="{C3EFE0C3-0EC6-42be-8349-CBD9079DFD8E}" datafieldname="tc_impactpercentage" disabled="false" />
                     </cell>
                     <cell id="{73caa11d-bacc-6d52-3650-8d3c91c8c4a6}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Range Percentage" languagecode="1033" />
+                        <label description="Reichweite" languagecode="1031" />
                       </labels>
                       <control id="tc_rangepercentage" classid="{C3EFE0C3-0EC6-42be-8349-CBD9079DFD8E}" datafieldname="tc_rangepercentage" disabled="false" />
                     </cell>
@@ -93,20 +99,26 @@
       </tab>
       <tab name="Hide" id="{1deeb8e7-4a54-0d41-3e3e-388263a4ba58}" IsUserDefined="0" locklevel="0" showlabel="true" expanded="true" visible="false">
         <labels>
+          <label description="verstecken" languagecode="1031" />
           <label description="Hide" languagecode="1033" />
+          <label description="cacher" languagecode="1036" />
         </labels>
         <columns>
           <column width="100%">
             <sections>
               <section name="tab_2_section_1" showlabel="false" showbar="false" locklevel="0" id="{54438e1d-c882-cca8-9e77-b785389a81e8}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115">
                 <labels>
+                  <label description="Abschnitt" languagecode="1031" />
                   <label description="Section" languagecode="1033" />
+                  <label description="Section" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{8168c16a-a6ec-4695-b1dd-a8d65f9c7af0}">
                       <labels>
                         <label description="Name" languagecode="1033" />
+                        <label description="Nom" languagecode="1036" />
+                        <label description="Name" languagecode="1031" />
                       </labels>
                       <control id="tc_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_name" />
                     </cell>
@@ -153,9 +165,12 @@
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>
   <LocalizedNames>
+    <LocalizedName description="Information" languagecode="1031" />
     <LocalizedName description="Information" languagecode="1033" />
+    <LocalizedName description="Information" languagecode="1036" />
   </LocalizedNames>
   <Descriptions>
+    <Description description="Formblatt für diese Einheit" languagecode="1031" />
     <Description description="A form for this entity." languagecode="1033" />
   </Descriptions>
 </systemform>

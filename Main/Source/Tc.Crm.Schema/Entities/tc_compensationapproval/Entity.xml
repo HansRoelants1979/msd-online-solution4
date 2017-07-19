@@ -5,12 +5,15 @@
   <EntityInfo>
     <entity Name="tc_compensationapproval">
       <LocalizedNames>
+        <LocalizedName description="Entschädigung" languagecode="1031" />
         <LocalizedName description="Compensation Approval" languagecode="1033" />
       </LocalizedNames>
       <LocalizedCollectionNames>
+        <LocalizedCollectionName description="Entschädigung" languagecode="1031" />
         <LocalizedCollectionName description="Compensation Approvals" languagecode="1033" />
       </LocalizedCollectionNames>
       <Descriptions>
+        <Description description="Entität für die Anforderung und Bereitstellung der Genehmigungen für die Entschädigung über die festgelegte Grenze für britische und nicht-britische Märkte" languagecode="1031" />
         <Description description="Entity for requesting and providing the approvals for compensations over set limit for UK and non-UK markets" languagecode="1033" />
       </Descriptions>
       <attributes>
@@ -679,8 +682,9 @@
             <LookupType id="00000000-0000-0000-0000-000000000000">9750</LookupType>
           </LookupTypes>
           <displaynames>
+            <displayname description="SLA" languagecode="1031" />
             <displayname description="SLA" languagecode="1033" />
-            <displayname description="Contrat SLA" languagecode="1036" />
+            <displayname description="accord de prestation de service (SLA) " languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="Wählen Sie die Vereinbarung zum Servicelevel (Service Level Agreement, SLA) aus, die Sie auf den Datensatz anwenden möchten." languagecode="1031" />
@@ -752,6 +756,7 @@
             <IntroducedVersion>1.0.0.50</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
+              <displayname description="Status" languagecode="1031" />
               <displayname description="Status" languagecode="1033" />
               <displayname description="Statut" languagecode="1036" />
             </displaynames>
@@ -778,6 +783,7 @@
             </states>
           </optionset>
           <displaynames>
+            <displayname description="Status" languagecode="1031" />
             <displayname description="Status" languagecode="1033" />
             <displayname description="Statut" languagecode="1036" />
           </displaynames>
@@ -880,9 +886,11 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_acceptancestatus</OptionSetName>
           <displaynames>
+            <displayname description="Genehmigter Status" languagecode="1031" />
             <displayname description="Approval Status" languagecode="1033" />
           </displaynames>
           <Descriptions>
+            <Description description="Feld, um den Status der Genehmigung zu erfassen" languagecode="1031" />
             <Description description="Field to capture the status of the approval" languagecode="1033" />
           </Descriptions>
         </attribute>
@@ -914,7 +922,9 @@
           <CanChangeDateTimeBehavior>1</CanChangeDateTimeBehavior>
           <Behavior>1</Behavior>
           <displaynames>
+            <displayname description="bewilligen von" languagecode="1031" />
             <displayname description="Approve By" languagecode="1033" />
+            <displayname description="Autorisé par" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -947,7 +957,9 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="bewilligt von" languagecode="1031" />
             <displayname description="Approved By" languagecode="1033" />
+            <displayname description="Autorisé par" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -981,7 +993,9 @@
           <CanChangeDateTimeBehavior>1</CanChangeDateTimeBehavior>
           <Behavior>1</Behavior>
           <displaynames>
+            <displayname description="bewilligt am" languagecode="1031" />
             <displayname description="Approved On" languagecode="1033" />
+            <displayname description="autorisé le " languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1013,7 +1027,9 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Fall" languagecode="1031" />
             <displayname description="Case" languagecode="1033" />
+            <displayname description="cas" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="Unique identifier for Case associated with Compensation Approval." languagecode="1033" />
@@ -1046,10 +1062,14 @@
           <Format></Format>
           <MaxLength>2000</MaxLength>
           <displaynames>
+            <displayname description="Kommentar" languagecode="1031" />
             <displayname description="Comment" languagecode="1033" />
+            <displayname description="Remarques" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Kommentar falls abgelehnt" languagecode="1031" />
             <Description description="Comment if request is rejected" languagecode="1033" />
+            <Description description="commentaire si demande est rejetée" languagecode="1036" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="tc_compensationapprovalId">
@@ -1076,6 +1096,7 @@
           <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
           <displaynames>
+            <displayname description="Entschädigung" languagecode="1031" />
             <displayname description="Compensation Approval" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1110,6 +1131,7 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Entschädigungsgenehmigung KPI" languagecode="1031" />
             <displayname description="Compensation Approval KPI" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1142,6 +1164,7 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Kompensation" languagecode="1031" />
             <displayname description="Compensation" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1176,9 +1199,12 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Name" languagecode="1031" />
             <displayname description="Name" languagecode="1033" />
+            <displayname description="Nom" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Der Name der benutzerdefinierten Entität." languagecode="1031" />
             <Description description="The name of the custom entity." languagecode="1033" />
           </Descriptions>
         </attribute>
@@ -1209,7 +1235,9 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Angefordert von" languagecode="1031" />
             <displayname description="Requested By" languagecode="1033" />
+            <displayname description="Demandé par" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1244,7 +1272,9 @@
           <Accuracy>2</Accuracy>
           <AccuracySource>0</AccuracySource>
           <displaynames>
+            <displayname description="Betrag anbieten" languagecode="1031" />
             <displayname description="Offer Amount" languagecode="1033" />
+            <displayname description="montant de l'offre" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />

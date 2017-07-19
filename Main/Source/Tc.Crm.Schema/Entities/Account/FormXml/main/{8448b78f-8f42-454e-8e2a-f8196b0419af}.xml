@@ -41,6 +41,8 @@
                     <cell id="{8b02e1dd-5a02-9195-e484-b17187a13a83}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Source Market" languagecode="1033" />
+                        <label description="Pays organisateur" languagecode="1036" />
+                        <label description="Quellmarkt" languagecode="1031" />
                       </labels>
                       <control id="tc_sourcemarketid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_sourcemarketid" disabled="false" />
                     </cell>
@@ -49,6 +51,7 @@
                     <cell id="{1bbebc20-958c-3eb6-7de6-2c6deebb61b2}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Account Type" languagecode="1033" />
+                        <label description="Konto Typ" languagecode="1031" />
                       </labels>
                       <control id="tc_accounttypeid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_accounttypeid" disabled="false" />
                     </cell>
@@ -57,6 +60,7 @@
                     <cell id="{d60a6651-d2b6-7771-9da8-b80e5e1ab6a8}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Key Account" languagecode="1033" />
+                        <label description="Key Account" languagecode="1031" />
                       </labels>
                       <control id="tc_keyaccount" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_keyaccount" disabled="false" />
                     </cell>
@@ -65,7 +69,9 @@
               </section>
               <section name="SUMMARY_TAB_section_5" showlabel="true" showbar="false" locklevel="0" id="{963157c2-20d4-7eb9-87bc-31eabad552b9}" IsUserDefined="0" layout="varwidth" columns="11" labelwidth="115" celllabelalignment="Left" celllabelposition="Top">
                 <labels>
+                  <label description="Kontakt" languagecode="1031" />
                   <label description="Contact" languagecode="1033" />
+                  <label description="contact" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
@@ -80,6 +86,8 @@
                     <cell id="{2bdbe17d-a409-8e9d-9145-a8b48e7b1ede}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Type" languagecode="1033" />
+                        <label description="type" languagecode="1036" />
+                        <label description="Typ" languagecode="1031" />
                       </labels>
                       <control id="tc_emailaddress1_type" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_emailaddress1_type" disabled="false" uniqueid="{8164198e-486b-14ea-a524-22c52abd89e2}" />
                     </cell>
@@ -88,14 +96,16 @@
                     <cell id="{7da6ba54-174a-94c1-6063-4ed380854d4e}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Phone" languagecode="1033" />
-                        <label description="Téléphone principal" languagecode="1036" />
-                        <label description="Telefon 1" languagecode="1031" />
+                        <label description="téléphone" languagecode="1036" />
+                        <label description="Telefon" languagecode="1031" />
                       </labels>
                       <control id="telephone1" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="telephone1" disabled="false" uniqueid="{0546698b-6da2-6ea4-0c6a-3ba1c5aed94a}" />
                     </cell>
                     <cell id="{4ae660b6-97b7-0e9b-c388-d4e7902c9e89}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Type" languagecode="1033" />
+                        <label description="type" languagecode="1036" />
+                        <label description="Typ" languagecode="1031" />
                       </labels>
                       <control id="tc_telephone1_type" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_telephone1_type" disabled="false" uniqueid="{232212b4-9076-7d91-3514-62c67b174538}" />
                     </cell>
@@ -116,7 +126,9 @@
                   <row>
                     <cell id="{da084e20-0107-8127-aa10-885b5ad187db}" showlabel="false" rowspan="12" auto="false" colspan="1" locklevel="0">
                       <labels>
+                        <label description="Notizentext" languagecode="1031" />
                         <label description="Note Text" languagecode="1033" />
+                        <label description="Texte de la note" languagecode="1036" />
                       </labels>
                       <control id="notescontrol" classid="{06375649-c143-495e-a496-c962e5b4488e}" uniqueid="{572a3aa2-7b6d-e80b-9194-d0a597bae0a0}" disabled="false">
                         <parameters>
@@ -157,6 +169,8 @@
                     <cell id="{6525559b-d9c3-3c23-1a10-42203e3048b7}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Flat or Unit Number" languagecode="1033" />
+                        <label description="Adresse 1 -numéro d'appartement" languagecode="1036" />
+                        <label description="Adresse 1 - Wohnungsnummer" languagecode="1031" />
                       </labels>
                       <control id="tc_address1_flatorunitnumber" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address1_flatorunitnumber" disabled="false" uniqueid="{70bd4d2c-14a4-e62d-eec6-e70d555722ac}" />
                     </cell>
@@ -165,6 +179,8 @@
                     <cell id="{ada8323e-36c9-c195-7e29-8c8390787b6a}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="House No. or Building" languagecode="1033" />
+                        <label description="Adresse 1 -numéro de maison ou résidence" languagecode="1036" />
+                        <label description="Haus Nr. Oder Gebäude" languagecode="1031" />
                       </labels>
                       <control id="tc_address1_housenumberorbuilding" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address1_housenumberorbuilding" disabled="false" uniqueid="{cb34532a-d693-0d9e-69da-d708c787da4c}" />
                     </cell>
@@ -173,6 +189,8 @@
                     <cell id="{2036ab43-4cb6-d8c2-aca8-80e9cb989a7b}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Street" languagecode="1033" />
+                        <label description="rue" languagecode="1036" />
+                        <label description="Strasse" languagecode="1031" />
                       </labels>
                       <control id="tc_address1_street" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address1_street" disabled="false" uniqueid="{a78b37d8-7d57-2b6a-a4d2-8cc708853465}" />
                     </cell>
@@ -181,6 +199,8 @@
                     <cell id="{0e793916-09ea-9c77-2397-7048ae7c477e}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Additional Information" languagecode="1033" />
+                        <label description="Zusatzinformation" languagecode="1031" />
+                        <label description="informations complémentaires" languagecode="1036" />
                       </labels>
                       <control id="tc_address1_additionalinformation" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address1_additionalinformation" disabled="false" uniqueid="{16ddcce1-6d09-981b-86eb-850dea80a859}" />
                     </cell>
@@ -189,6 +209,8 @@
                     <cell id="{6869c2e8-0565-29eb-73c5-b93592ce8b76}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Town" languagecode="1033" />
+                        <label description="Stadt" languagecode="1031" />
+                        <label description="Ville" languagecode="1036" />
                       </labels>
                       <control id="tc_address1_town" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address1_town" disabled="false" uniqueid="{ccb8b4a9-71d5-15b9-b39e-9678ba942e41}" />
                     </cell>
@@ -197,6 +219,8 @@
                     <cell id="{1877a63a-11d4-be0c-6ce1-25c84a5ad595}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="County" languagecode="1033" />
+                        <label description="comté" languagecode="1036" />
+                        <label description="Bundesland" languagecode="1031" />
                       </labels>
                       <control id="tc_address1_county" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address1_county" disabled="false" uniqueid="{842ecdb1-9251-0593-2258-06b3c597da27}" />
                     </cell>
@@ -205,6 +229,8 @@
                     <cell id="{77596890-403b-c4a4-69bc-6d4d63111489}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Postal Code" languagecode="1033" />
+                        <label description="code postal" languagecode="1036" />
+                        <label description="Postleitzahl" languagecode="1031" />
                       </labels>
                       <control id="tc_address1_postalcode" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_address1_postalcode" disabled="false" uniqueid="{d74ca9d7-22d7-31c7-e11c-ce78c99b1170}" />
                     </cell>
@@ -213,6 +239,8 @@
                     <cell id="{02e78cab-6e92-5508-4ee5-81ac99858243}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Country" languagecode="1033" />
+                        <label description="Adresse 1 - pays" languagecode="1036" />
+                        <label description="Land" languagecode="1031" />
                       </labels>
                       <control id="tc_address1_countryid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_address1_countryid" disabled="false" uniqueid="{b4bc28ce-37d3-ab0c-bb1e-730a557aaa67}">
                         <parameters>
@@ -242,22 +270,26 @@
       </tab>
       <tab name="tab_3rdPartyCustomers" id="{2522b197-5304-dbd2-e1a0-058856305052}" IsUserDefined="0" locklevel="0" showlabel="true" expanded="true">
         <labels>
+          <label description="Kunden" languagecode="1031" />
           <label description="Customers" languagecode="1033" />
+          <label description="client" languagecode="1036" />
         </labels>
         <columns>
           <column width="100%">
             <sections>
               <section name="tab_2_section_1" showlabel="false" showbar="false" locklevel="0" id="{b9c89c4c-6385-0161-c310-bc3a369ec887}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115">
                 <labels>
+                  <label description="Abschnitt" languagecode="1031" />
                   <label description="Section" languagecode="1033" />
+                  <label description="Section" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{28eb32ec-0690-b392-0b0d-5acd8cb7a093}" showlabel="false" colspan="1" auto="false" rowspan="6">
                       <labels>
                         <label description="Customers" languagecode="1033" />
-                        <label description="Contacts" languagecode="1036" />
-                        <label description="Kontakte" languagecode="1031" />
+                        <label description="client" languagecode="1036" />
+                        <label description="Kunde" languagecode="1031" />
                       </labels>
                       <control id="tc_Account_3rdPartyCustomers" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true" uniqueid="{c5d0883a-c54e-07ab-7c40-2737d7c24d79}">
                         <parameters>
@@ -292,22 +324,26 @@
       </tab>
       <tab name="tab_3rdPartyCustomerCases" id="{5aa9c809-cd1a-d1c2-d9a2-c7e7eb017ddb}" IsUserDefined="0" locklevel="0" showlabel="true" expanded="true">
         <labels>
+          <label description="Fall" languagecode="1031" />
           <label description="Cases" languagecode="1033" />
+          <label description="cas" languagecode="1036" />
         </labels>
         <columns>
           <column width="100%">
             <sections>
               <section name="tab_3_section_1" showlabel="false" showbar="false" locklevel="0" id="{1592cd7b-cabe-b994-b16a-6c1c696d59b8}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115">
                 <labels>
+                  <label description="Abschnitt" languagecode="1031" />
                   <label description="Section" languagecode="1033" />
+                  <label description="Section" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{9baa6b0a-4804-ec40-3eb3-ca406d11a638}" showlabel="false" colspan="1" auto="false" rowspan="6">
                       <labels>
                         <label description="Cases" languagecode="1033" />
-                        <label description="Incidents" languagecode="1036" />
-                        <label description="Anfragen" languagecode="1031" />
+                        <label description="cas" languagecode="1036" />
+                        <label description="Fall" languagecode="1031" />
                       </labels>
                       <control id="tc_Account_3rdPartyCustomerCases" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
                         <parameters>
@@ -347,6 +383,8 @@
           <cell id="{32b1015a-3a88-62d3-dc32-a608c4309eb4}" showlabel="true" locklevel="0">
             <labels>
               <label description="Source Market" languagecode="1033" />
+              <label description="Pays organisateur" languagecode="1036" />
+              <label description="Quellmarkt" languagecode="1031" />
             </labels>
             <control id="header_tc_sourcemarketid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_sourcemarketid" disabled="false" />
           </cell>
@@ -361,8 +399,8 @@
           <cell id="{724eba69-ba02-06d8-9954-98ba8b45a51e}" showlabel="true" locklevel="0">
             <labels>
               <label description="Status" languagecode="1033" />
-              <label description="Raison du statut" languagecode="1036" />
-              <label description="Statusgrund" languagecode="1031" />
+              <label description="Statut" languagecode="1036" />
+              <label description="Status" languagecode="1031" />
             </labels>
             <control id="header_statuscode" classid="{5D68B988-0661-4db2-BC3E-17598AD3BE6C}" datafieldname="statuscode" disabled="false" uniqueid="{2d6843ce-3b44-ec72-c410-33bc3e6dd420}" />
           </cell>

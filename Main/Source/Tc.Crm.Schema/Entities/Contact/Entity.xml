@@ -5,14 +5,14 @@
   <EntityInfo>
     <entity Name="Contact">
       <LocalizedNames>
-        <LocalizedName description="Kontakt" languagecode="1031" />
+        <LocalizedName description="Kunde" languagecode="1031" />
         <LocalizedName description="Customer" languagecode="1033" />
-        <LocalizedName description="Contact" languagecode="1036" />
+        <LocalizedName description="client" languagecode="1036" />
       </LocalizedNames>
       <LocalizedCollectionNames>
-        <LocalizedCollectionName description="Kontakte" languagecode="1031" />
+        <LocalizedCollectionName description="Kunde" languagecode="1031" />
         <LocalizedCollectionName description="Customers" languagecode="1033" />
-        <LocalizedCollectionName description="Contacts" languagecode="1036" />
+        <LocalizedCollectionName description="client" languagecode="1036" />
       </LocalizedCollectionNames>
       <Descriptions>
         <Description description="Person, mit der eine Unternehmenseinheit eine Geschäftsbeziehung unterhält, wie z.B. ein Kunde, ein Lieferant und ein Kollege." languagecode="1031" />
@@ -710,6 +710,38 @@
             <Description description="Sélectionnez la méthode de contact préférée." languagecode="1036" />
           </Descriptions>
         </attribute>
+        <attribute PhysicalName="SLAId">
+          <Type>lookup</Type>
+          <Name>slaid</Name>
+          <LogicalName>slaid</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>8.1.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <LookupStyle>single</LookupStyle>
+          <LookupTypes>
+            <LookupType id="00000000-0000-0000-0000-000000000000">9750</LookupType>
+          </LookupTypes>
+          <displaynames>
+            <displayname description="SLA" languagecode="1031" />
+            <displayname description="SLA" languagecode="1033" />
+            <displayname description="accord de prestation de service (SLA) " languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Wählen Sie die Vereinbarung zum Servicelevel (Service Level Agreement, SLA) aus, die Sie auf den Kontaktdatensatz anwenden möchten." languagecode="1031" />
+            <Description description="Choose the service level agreement (SLA) that you want to apply to the Contact record." languagecode="1033" />
+            <Description description="Choisissez le contrat de niveau de service (contrat SLA) que vous voulez appliquer à l'enregistrement de contact." languagecode="1036" />
+          </Descriptions>
+        </attribute>
         <attribute PhysicalName="StateCode">
           <Type>state</Type>
           <Name>statecode</Name>
@@ -807,21 +839,26 @@
               </status>
               <status value="950000002" state="0" TransitionData="" Color="#0000ff">
                 <labels>
+                  <label description="unbekannt" languagecode="1031" />
                   <label description="Unknown" languagecode="1033" />
+                  <label description="inconnu" languagecode="1036" />
                 </labels>
               </status>
               <status value="950000003" state="0" TransitionData="" Color="#0000ff">
                 <labels>
+                  <label description="Blacklist" languagecode="1031" />
                   <label description="Blacklisted" languagecode="1033" />
                 </labels>
               </status>
               <status value="950000004" state="0" TransitionData="" Color="#0000ff">
                 <labels>
+                  <label description="Verstorbene" languagecode="1031" />
                   <label description="Deceased" languagecode="1033" />
                 </labels>
               </status>
               <status value="950000005" state="0" TransitionData="" Color="#0000ff">
                 <labels>
+                  <label description="nicht aktiv/passiv" languagecode="1031" />
                   <label description="Inactive" languagecode="1033" />
                 </labels>
               </status>
@@ -873,7 +910,9 @@
           <MaxLength>50</MaxLength>
           <Length>100</Length>
           <displaynames>
+            <displayname description="Akademischer Titel" languagecode="1031" />
             <displayname description="Academic Title" languagecode="1033" />
+            <displayname description="Titre académique" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -907,7 +946,9 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Adresse 1 - Zusatzinformation" languagecode="1031" />
             <displayname description="Address 1 Additional Information" languagecode="1033" />
+            <displayname description="Adresse 1 - informations complémentaires" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -940,7 +981,9 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Adresse 1 - Land" languagecode="1031" />
             <displayname description="Address 1 Country" languagecode="1033" />
+            <displayname description="Adresse 1 - pays" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="Connects contact address 1 to country entity" languagecode="1033" />
@@ -974,7 +1017,9 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Adresse 1 - Bundesland" languagecode="1031" />
             <displayname description="Address 1 County" languagecode="1033" />
+            <displayname description="Adresse 1 - comté" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1008,7 +1053,9 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Adresse 1 - Wohnungsnummer" languagecode="1031" />
             <displayname description="Address 1 Flat or Unit Number" languagecode="1033" />
+            <displayname description="Adresse 1 -numéro d'appartement" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1042,7 +1089,9 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Adresse 1 - Hausnummer" languagecode="1031" />
             <displayname description="Address 1 House Number or Building" languagecode="1033" />
+            <displayname description="Adresse 1 -numéro de maison ou résidence" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1076,7 +1125,9 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Adresse 1 - Postleitzahl" languagecode="1031" />
             <displayname description="Address 1 Postal Code" languagecode="1033" />
+            <displayname description="Adresse 1 -code postal" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1110,7 +1161,9 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Adresse 1 - Strasse" languagecode="1031" />
             <displayname description="Address 1 Street" languagecode="1033" />
+            <displayname description="Adresse 1 -rue" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1144,7 +1197,9 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Adresse 1 - Stadt" languagecode="1031" />
             <displayname description="Address 1 Town" languagecode="1033" />
+            <displayname description="Adresse 1 -Ville" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1178,7 +1233,9 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Adresse 2 - Zusatzinformation" languagecode="1031" />
             <displayname description="Address 2 Additional Information" languagecode="1033" />
+            <displayname description="Adresse 2 - informations complémentaires" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1211,7 +1268,9 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Adresse 2 - Land" languagecode="1031" />
             <displayname description="Address 2 Country" languagecode="1033" />
+            <displayname description="Adresse 2 - pays" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="Connects contact address 2 to country entity" languagecode="1033" />
@@ -1245,7 +1304,9 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Adresse 2 - Bundesland" languagecode="1031" />
             <displayname description="Address 2 County" languagecode="1033" />
+            <displayname description="Adresse 2 - comté" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1279,7 +1340,9 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Adresse 2 - Wohnungsnummer" languagecode="1031" />
             <displayname description="Address 2 Flat or Unit Number" languagecode="1033" />
+            <displayname description="Adresse 2 -numéro d'appartement" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1313,7 +1376,9 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Adresse 2 - Hausnummer" languagecode="1031" />
             <displayname description="Address 2 House Number or Building" languagecode="1033" />
+            <displayname description="Adresse 2-numéro de maison ou résidence" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1347,7 +1412,9 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Adresse 2 - Postleitzahl" languagecode="1031" />
             <displayname description="Address 2 Postal Code" languagecode="1033" />
+            <displayname description="Adresse 2 -code postal" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1381,7 +1448,9 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Adresse 2 - Strasse" languagecode="1031" />
             <displayname description="Address 2 Street" languagecode="1033" />
+            <displayname description="Adresse 2 -rue" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1415,7 +1484,76 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Adresse 2 - Stadt" languagecode="1031" />
             <displayname description="Address 2 Town" languagecode="1033" />
+            <displayname description="Adresse 2 -Ville" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="" languagecode="1033" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tc_AnnualInsurance">
+          <Type>picklist</Type>
+          <Name>tc_annualinsurance</Name>
+          <LogicalName>tc_annualinsurance</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.0.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <AppDefaultValue>-1</AppDefaultValue>
+          <OptionSetName>tc_annualinsurance</OptionSetName>
+          <displaynames>
+            <displayname description="Annual Insurance" languagecode="1033" />
+          </displaynames>
+          <Descriptions>
+            <Description description="" languagecode="1033" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tc_AnnualInsuranceExpireDate">
+          <Type>datetime</Type>
+          <Name>tc_annualinsuranceexpiredate</Name>
+          <LogicalName>tc_annualinsuranceexpiredate</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.0.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <Format>date</Format>
+          <CanChangeDateTimeBehavior>1</CanChangeDateTimeBehavior>
+          <Behavior>1</Behavior>
+          <displaynames>
+            <displayname description="Annual Insurance Expire Date" languagecode="1033" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1448,7 +1586,9 @@
           <MinValue>0</MinValue>
           <MaxValue>9999</MaxValue>
           <displaynames>
+            <displayname description="Errechnetes Geburtsjahr" languagecode="1031" />
             <displayname description="Calculated Year of Birth" languagecode="1033" />
+            <displayname description="Date de naissance calculée" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1482,9 +1622,12 @@
           <CanChangeDateTimeBehavior>1</CanChangeDateTimeBehavior>
           <Behavior>3</Behavior>
           <displaynames>
+            <displayname description="Todestag" languagecode="1031" />
             <displayname description="Date of Death" languagecode="1033" />
+            <displayname description="date du décès" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Das Datum als Todesdatum des Kunden" languagecode="1031" />
             <Description description="The date recorded as the date of death of the customer" languagecode="1033" />
           </Descriptions>
         </attribute>
@@ -1518,6 +1661,7 @@
             <IntroducedVersion>1.0.0.51</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
+              <displayname description="Deaktivierte Indikator" languagecode="1031" />
               <displayname description="Disabled Indicator" languagecode="1033" />
             </displaynames>
             <Descriptions>
@@ -1526,17 +1670,22 @@
             <options>
               <option value="0" Color="#0000ff">
                 <labels>
+                  <label description="Nein" languagecode="1031" />
                   <label description="No" languagecode="1033" />
+                  <label description="non" languagecode="1036" />
                 </labels>
               </option>
               <option value="1" Color="#0000ff">
                 <labels>
+                  <label description="Ja" languagecode="1031" />
                   <label description="Yes" languagecode="1033" />
+                  <label description="Oui" languagecode="1036" />
                 </labels>
               </option>
             </options>
           </optionset>
           <displaynames>
+            <displayname description="Deaktivierte Indikator" languagecode="1031" />
             <displayname description="Disabled Indicator" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1573,6 +1722,7 @@
             <IntroducedVersion>1.0.0.0</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
+              <displayname description="Keine SMS zulassen" languagecode="1031" />
               <displayname description="Do not allow SMS" languagecode="1033" />
             </displaynames>
             <Descriptions>
@@ -1581,21 +1731,60 @@
             <options>
               <option value="0" Color="#0000ff">
                 <labels>
+                  <label description="Zulassen" languagecode="1031" />
                   <label description="Allow" languagecode="1033" />
+                  <label description="Autoriser" languagecode="1036" />
                 </labels>
               </option>
               <option value="1" Color="#0000ff">
                 <labels>
+                  <label description="Nicht erlaubt" languagecode="1031" />
                   <label description="Do Not Allow" languagecode="1033" />
+                  <label description="ne pas autoriser" languagecode="1036" />
                 </labels>
               </option>
             </options>
           </optionset>
           <displaynames>
+            <displayname description="Keine SMS zulassen" languagecode="1031" />
             <displayname description="Do not allow SMS" languagecode="1033" />
           </displaynames>
           <Descriptions>
             <Description description="Select whether the contact allows direct SMS. If Do Not Allow is selected, the contact will be excluded from SMS activities distributed in marketing campaigns." languagecode="1033" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tc_EmailAddress1Confirmation">
+          <Type>nvarchar</Type>
+          <Name>tc_emailaddress1confirmation</Name>
+          <LogicalName>tc_emailaddress1confirmation</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>0</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>0.0.0.1</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <Format>email</Format>
+          <MaxLength>100</MaxLength>
+          <Length>200</Length>
+          <displaynames>
+            <displayname description="Email Address 1 Confirmation" languagecode="1033" />
+          </displaynames>
+          <Descriptions>
+            <Description description="" languagecode="1033" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="tc_EmailAddress1Type">
@@ -1625,7 +1814,9 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_emailaddresstype</OptionSetName>
           <displaynames>
+            <displayname description="Email Address 1 Type" languagecode="1031" />
             <displayname description="Email Address 1 Type" languagecode="1033" />
+            <displayname description="adresse e-mail 1" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1658,7 +1849,9 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_emailaddresstype</OptionSetName>
           <displaynames>
+            <displayname description="Email Address 2 Type" languagecode="1031" />
             <displayname description="Email Address 2 Type" languagecode="1033" />
+            <displayname description="adresse e-mail 2" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1691,7 +1884,102 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_emailaddresstype</OptionSetName>
           <displaynames>
+            <displayname description="Email Address 3 Type" languagecode="1031" />
             <displayname description="Email Address 3 Type" languagecode="1033" />
+            <displayname description="type d'adresse e-mail 3" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="" languagecode="1033" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tc_EmailAddressAvailable">
+          <Type>bit</Type>
+          <Name>tc_emailaddressavailable</Name>
+          <LogicalName>tc_emailaddressavailable</LogicalName>
+          <RequiredLevel>required</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>0</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>0.0.0.1</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <AppDefaultValue>1</AppDefaultValue>
+          <optionset Name="tc_contact_tc_emailaddressavailable">
+            <OptionSetType>bit</OptionSetType>
+            <IntroducedVersion>0.0.0.1</IntroducedVersion>
+            <IsCustomizable>1</IsCustomizable>
+            <displaynames>
+              <displayname description="Email Address Available" languagecode="1033" />
+            </displaynames>
+            <Descriptions>
+              <Description description="" languagecode="1033" />
+            </Descriptions>
+            <options>
+              <option value="0" Color="#0000ff">
+                <labels>
+                  <label description="Nein" languagecode="1031" />
+                  <label description="No" languagecode="1033" />
+                  <label description="Non" languagecode="1036" />
+                </labels>
+              </option>
+              <option value="1" Color="#0000ff">
+                <labels>
+                  <label description="Ja" languagecode="1031" />
+                  <label description="Yes" languagecode="1033" />
+                  <label description="Oui" languagecode="1036" />
+                </labels>
+              </option>
+            </options>
+          </optionset>
+          <displaynames>
+            <displayname description="Email Address Available" languagecode="1033" />
+          </displaynames>
+          <Descriptions>
+            <Description description="" languagecode="1033" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tc_FacebookUserName">
+          <Type>nvarchar</Type>
+          <Name>tc_facebookusername</Name>
+          <LogicalName>tc_facebookusername</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>0.0.0.1</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <Format>text</Format>
+          <MaxLength>100</MaxLength>
+          <Length>200</Length>
+          <displaynames>
+            <displayname description="Facebook" languagecode="1033" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1724,10 +2012,45 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_gender</OptionSetName>
           <displaynames>
+            <displayname description="Geschlecht" languagecode="1031" />
             <displayname description="Gender" languagecode="1033" />
+            <displayname description="Genre" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tc_KeyContactChangeReason">
+          <Type>picklist</Type>
+          <Name>tc_keycontactchangereason</Name>
+          <LogicalName>tc_keycontactchangereason</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>0.0.0.1</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <AppDefaultValue>-1</AppDefaultValue>
+          <OptionSetName>tc_contactchangereason</OptionSetName>
+          <displaynames>
+            <displayname description="Key Contact Change Reason" languagecode="1033" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Capture the reason for a change in customer name - Title, First Name, Surname, DoB" languagecode="1033" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="tc_Language">
@@ -1757,9 +2080,12 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_languages</OptionSetName>
           <displaynames>
+            <displayname description="Sprache" languagecode="1031" />
             <displayname description="Language" languagecode="1033" />
+            <displayname description="Langue" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Bevorzugte Sprache des Kunden" languagecode="1031" />
             <Description description="Preferred language of customer" languagecode="1033" />
           </Descriptions>
         </attribute>
@@ -1793,6 +2119,7 @@
             <IntroducedVersion>1.0.0.8</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
+              <displayname description="Marketing" languagecode="1031" />
               <displayname description="Marketing" languagecode="1033" />
             </displaynames>
             <Descriptions>
@@ -1801,18 +2128,189 @@
             <options>
               <option value="0" Color="#0000ff">
                 <labels>
+                  <label description="Nein" languagecode="1031" />
                   <label description="No" languagecode="1033" />
+                  <label description="Non" languagecode="1036" />
                 </labels>
               </option>
               <option value="1" Color="#0000ff">
                 <labels>
+                  <label description="Ja" languagecode="1031" />
                   <label description="Yes" languagecode="1033" />
+                  <label description="Oui" languagecode="1036" />
                 </labels>
               </option>
             </options>
           </optionset>
           <displaynames>
+            <displayname description="Marketing" languagecode="1031" />
             <displayname description="Marketing" languagecode="1033" />
+          </displaynames>
+          <Descriptions>
+            <Description description="" languagecode="1033" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tc_MarketingbyPhone">
+          <Type>picklist</Type>
+          <Name>tc_marketingbyphone</Name>
+          <LogicalName>tc_marketingbyphone</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.0.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <AppDefaultValue>-1</AppDefaultValue>
+          <OptionSetName>tc_yesno</OptionSetName>
+          <displaynames>
+            <displayname description="Marketing by Phone" languagecode="1033" />
+          </displaynames>
+          <Descriptions>
+            <Description description="" languagecode="1033" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tc_MarketingPreferencesTaken">
+          <Type>picklist</Type>
+          <Name>tc_marketingpreferencestaken</Name>
+          <LogicalName>tc_marketingpreferencestaken</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.0.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <AppDefaultValue>-1</AppDefaultValue>
+          <OptionSetName>tc_yesno</OptionSetName>
+          <displaynames>
+            <displayname description="Marketing Preferences Taken" languagecode="1033" />
+          </displaynames>
+          <Descriptions>
+            <Description description="" languagecode="1033" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tc_MarketingUpdated">
+          <Type>datetime</Type>
+          <Name>tc_marketingupdated</Name>
+          <LogicalName>tc_marketingupdated</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.0.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <Format>date</Format>
+          <CanChangeDateTimeBehavior>1</CanChangeDateTimeBehavior>
+          <Behavior>1</Behavior>
+          <displaynames>
+            <displayname description="Marketing Updated" languagecode="1033" />
+          </displaynames>
+          <Descriptions>
+            <Description description="" languagecode="1033" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tc_MarketingUpdatedBy">
+          <Type>lookup</Type>
+          <Name>tc_marketingupdatedby</Name>
+          <LogicalName>tc_marketingupdatedby</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.0.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <LookupStyle>single</LookupStyle>
+          <LookupTypes />
+          <displaynames>
+            <displayname description="Marketing Updated By" languagecode="1033" />
+          </displaynames>
+          <Descriptions>
+            <Description description="" languagecode="1033" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tc_PaymentByDirectDebit">
+          <Type>picklist</Type>
+          <Name>tc_paymentbydirectdebit</Name>
+          <LogicalName>tc_paymentbydirectdebit</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.0.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <AppDefaultValue>-1</AppDefaultValue>
+          <OptionSetName>tc_financedd</OptionSetName>
+          <displaynames>
+            <displayname description="Payment By Direct Debit" languagecode="1033" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1845,7 +2343,9 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_salutation</OptionSetName>
           <displaynames>
+            <displayname description="Titel" languagecode="1031" />
             <displayname description="Title" languagecode="1033" />
+            <displayname description="Titre" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1878,10 +2378,112 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_customersegment</OptionSetName>
           <displaynames>
+            <displayname description="Segment" languagecode="1031" />
             <displayname description="Segment" languagecode="1033" />
+            <displayname description="Segment" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Kundensegment" languagecode="1031" />
             <Description description="The customers segment score" languagecode="1033" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tc_SendMarketingbyEmail">
+          <Type>picklist</Type>
+          <Name>tc_sendmarketingbyemail</Name>
+          <LogicalName>tc_sendmarketingbyemail</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.0.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <AppDefaultValue>-1</AppDefaultValue>
+          <OptionSetName>tc_yesno</OptionSetName>
+          <displaynames>
+            <displayname description="Send Marketing by Email" languagecode="1033" />
+          </displaynames>
+          <Descriptions>
+            <Description description="" languagecode="1033" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tc_SendMarketingbyPost">
+          <Type>picklist</Type>
+          <Name>tc_sendmarketingbypost</Name>
+          <LogicalName>tc_sendmarketingbypost</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.0.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <AppDefaultValue>-1</AppDefaultValue>
+          <OptionSetName>tc_yesno</OptionSetName>
+          <displaynames>
+            <displayname description="Send Marketing by Post" languagecode="1033" />
+          </displaynames>
+          <Descriptions>
+            <Description description="" languagecode="1033" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tc_SendMarketingbySMS">
+          <Type>picklist</Type>
+          <Name>tc_sendmarketingbysms</Name>
+          <LogicalName>tc_sendmarketingbysms</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.0.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <AppDefaultValue>-1</AppDefaultValue>
+          <OptionSetName>tc_yesno</OptionSetName>
+          <displaynames>
+            <displayname description="Send Marketing by SMS" languagecode="1033" />
+          </displaynames>
+          <Descriptions>
+            <Description description="" languagecode="1033" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="tc_SourceMarketId">
@@ -1911,9 +2513,12 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Quellmarkt" languagecode="1031" />
             <displayname description="Source Market" languagecode="1033" />
+            <displayname description="Pays organisateur" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Verbinden Sie den Kunden mit dem Land als Quellmarkt" languagecode="1031" />
             <Description description="Connect Customer to Country as Source Market" languagecode="1033" />
           </Descriptions>
         </attribute>
@@ -1945,9 +2550,12 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Source System ID" languagecode="1031" />
             <displayname description="Source System ID" languagecode="1033" />
+            <displayname description="Identifiant système source" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="ID aus TC-Quellsystem (zB über GBG TCV gefüttert)" languagecode="1031" />
             <Description description="ID from TC Source System (eg. fed via GBG TCV)" languagecode="1033" />
           </Descriptions>
         </attribute>
@@ -1978,7 +2586,9 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_telephonetype</OptionSetName>
           <displaynames>
+            <displayname description="Telefon 1 Tpy" languagecode="1031" />
             <displayname description="Telephone 1 Type" languagecode="1033" />
+            <displayname description="Type de téléphone 1" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -2011,7 +2621,9 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_telephonetype</OptionSetName>
           <displaynames>
+            <displayname description="Telefon 2 Typ" languagecode="1031" />
             <displayname description="Telephone 2 Type" languagecode="1033" />
+            <displayname description="Type de téléphone 2" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -2044,10 +2656,193 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_telephonetype</OptionSetName>
           <displaynames>
+            <displayname description="Telefon 3 Typ" languagecode="1031" />
             <displayname description="Telephone 3 Type" languagecode="1033" />
+            <displayname description="Type de téléphone 3" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tc_thomascookmarketingconsent">
+          <Type>picklist</Type>
+          <Name>tc_thomascookmarketingconsent</Name>
+          <LogicalName>tc_thomascookmarketingconsent</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>0.0.0.1</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <AppDefaultValue>950000000</AppDefaultValue>
+          <optionset Name="tc_contact_tc_thomascookmarketingconsent">
+            <OptionSetType>picklist</OptionSetType>
+            <IntroducedVersion>0.0.0.1</IntroducedVersion>
+            <IsCustomizable>1</IsCustomizable>
+            <displaynames>
+              <displayname description="Thomas Cook Marketing Consent" languagecode="1033" />
+            </displaynames>
+            <Descriptions>
+              <Description description="" languagecode="1033" />
+            </Descriptions>
+            <options>
+              <option value="950000000" Color="#0000ff">
+                <labels>
+                  <label description="No, Opt Me Out" languagecode="1033" />
+                </labels>
+              </option>
+              <option value="950000001" Color="#0000ff">
+                <labels>
+                  <label description="Yes, Opt Me In" languagecode="1033" />
+                </labels>
+              </option>
+            </options>
+          </optionset>
+          <displaynames>
+            <displayname description="Thomas Cook Marketing Consent" languagecode="1033" />
+          </displaynames>
+          <Descriptions>
+            <Description description="" languagecode="1033" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tc_TravelFinance">
+          <Type>picklist</Type>
+          <Name>tc_travelfinance</Name>
+          <LogicalName>tc_travelfinance</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.0.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <AppDefaultValue>-1</AppDefaultValue>
+          <OptionSetName>tc_financedd</OptionSetName>
+          <displaynames>
+            <displayname description="Travel Finance" languagecode="1033" />
+          </displaynames>
+          <Descriptions>
+            <Description description="" languagecode="1033" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tc_TwitterHandle">
+          <Type>nvarchar</Type>
+          <Name>tc_twitterhandle</Name>
+          <LogicalName>tc_twitterhandle</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>0.0.0.1</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <Format>text</Format>
+          <MaxLength>100</MaxLength>
+          <Length>200</Length>
+          <displaynames>
+            <displayname description="Twitter" languagecode="1033" />
+          </displaynames>
+          <Descriptions>
+            <Description description="" languagecode="1033" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tc_VIP">
+          <Type>bit</Type>
+          <Name>tc_vip</Name>
+          <LogicalName>tc_vip</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>1</IsSecured>
+          <IntroducedVersion>0.0.0.1</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <AppDefaultValue>0</AppDefaultValue>
+          <optionset Name="tc_contact_tc_vip">
+            <OptionSetType>bit</OptionSetType>
+            <IntroducedVersion>0.0.0.1</IntroducedVersion>
+            <IsCustomizable>1</IsCustomizable>
+            <displaynames>
+              <displayname description="VIP" languagecode="1033" />
+            </displaynames>
+            <Descriptions>
+              <Description description="VIP Flag Value" languagecode="1033" />
+            </Descriptions>
+            <options>
+              <option value="0" Color="#0000ff">
+                <labels>
+                  <label description="Nein" languagecode="1031" />
+                  <label description="No" languagecode="1033" />
+                  <label description="Non" languagecode="1036" />
+                </labels>
+              </option>
+              <option value="1" Color="#0000ff">
+                <labels>
+                  <label description="Ja" languagecode="1031" />
+                  <label description="Yes" languagecode="1033" />
+                  <label description="Oui" languagecode="1036" />
+                </labels>
+              </option>
+            </options>
+          </optionset>
+          <displaynames>
+            <displayname description="VIP" languagecode="1033" />
+          </displaynames>
+          <Descriptions>
+            <Description description="VIP Flag Value" languagecode="1033" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="Telephone1">
@@ -2068,7 +2863,7 @@
           <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
           <IsSortableEnabled>0</IsSortableEnabled>
           <Format>phone</Format>
-          <MaxLength>50</MaxLength>
+          <MaxLength>15</MaxLength>
           <Length>100</Length>
           <displaynames>
             <displayname description="Telefon (geschäftlich)" languagecode="1031" />
@@ -2099,7 +2894,7 @@
           <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
           <IsSortableEnabled>0</IsSortableEnabled>
           <Format>phone</Format>
-          <MaxLength>50</MaxLength>
+          <MaxLength>15</MaxLength>
           <Length>100</Length>
           <displaynames>
             <displayname description="Telefon (privat)" languagecode="1031" />
@@ -2130,7 +2925,7 @@
           <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
           <IsSortableEnabled>0</IsSortableEnabled>
           <Format>phone</Format>
-          <MaxLength>50</MaxLength>
+          <MaxLength>15</MaxLength>
           <Length>100</Length>
           <displaynames>
             <displayname description="Telefon 3" languagecode="1031" />

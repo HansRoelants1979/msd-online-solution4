@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<systemform unmodified="1">
+<systemform>
   <formid>{16654191-19ad-48ca-9e46-c4b4fbdad76f}</formid>
   <IntroducedVersion>6.0.0.0</IntroducedVersion>
   <FormPresentation>1</FormPresentation>
@@ -166,6 +166,33 @@
         </row>
       </rows>
     </header>
+    <footer id="{accec78e-d3c0-430c-957d-a1acd9297823}" columns="111">
+      <rows>
+        <row>
+          <cell id="{1a7820b6-7163-439b-8ac3-1fc9de2dbce8}">
+            <labels>
+              <label description="" languagecode="1033" />
+            </labels>
+          </cell>
+          <cell id="{b797a053-693d-1d24-e9d2-e56508629d43}" showlabel="true" locklevel="0">
+            <labels>
+              <label description="Created On" languagecode="1033" />
+              <label description="Créé le" languagecode="1036" />
+              <label description="Erstellt am" languagecode="1031" />
+            </labels>
+            <control id="footer_createdon" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="createdon" disabled="true" />
+          </cell>
+          <cell id="{6b3014d8-6794-cb57-698b-8934a9551c63}" showlabel="true" locklevel="0">
+            <labels>
+              <label description="Created By" languagecode="1033" />
+              <label description="Créé par" languagecode="1036" />
+              <label description="Erstellt von" languagecode="1031" />
+            </labels>
+            <control id="footer_createdby" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="createdby" disabled="true" />
+          </cell>
+        </row>
+      </rows>
+    </footer>
     <events>
       <event name="onload" application="true" active="true">
         <InternalHandlers>
@@ -180,6 +207,36 @@
         </clientincludes>
       </internalresources>
     </clientresources>
+    <Navigation>
+      <NavBar></NavBar>
+      <NavBarAreas>
+        <NavBarArea Id="Info">
+          <Titles>
+            <Title LCID="1033" Text="Common" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Sales">
+          <Titles>
+            <Title LCID="1033" Text="Sales" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Service">
+          <Titles>
+            <Title LCID="1033" Text="Service" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Marketing">
+          <Titles>
+            <Title LCID="1033" Text="Marketing" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="ProcessCenter">
+          <Titles>
+            <Title LCID="1033" Text="Process Sessions" />
+          </Titles>
+        </NavBarArea>
+      </NavBarAreas>
+    </Navigation>
   </form>
   <LocalizedNames>
     <LocalizedName description="Aufgabe" languagecode="1031" />

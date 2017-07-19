@@ -5,9 +5,11 @@
   <EntityInfo>
     <entity Name="tc_assistancerequest">
       <LocalizedNames>
+        <LocalizedName description="Assistenzanfrage" languagecode="1031" />
         <LocalizedName description="Assistance Request" languagecode="1033" />
       </LocalizedNames>
       <LocalizedCollectionNames>
+        <LocalizedCollectionName description="Assistenze Anfrage" languagecode="1031" />
         <LocalizedCollectionName description="Assistance Requests" languagecode="1033" />
       </LocalizedCollectionNames>
       <Descriptions>
@@ -309,6 +311,7 @@
             <LookupType id="00000000-0000-0000-0000-000000000000">8</LookupType>
           </LookupTypes>
           <displaynames>
+            <displayname description="CC" languagecode="1031" />
             <displayname description="CC" languagecode="1033" />
             <displayname description="Cc" languagecode="1036" />
           </displaynames>
@@ -2705,7 +2708,9 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="geantwortet von KPI" languagecode="1031" />
             <displayname description="Respond By KPI" languagecode="1033" />
+            <displayname description="Répondre par indicateur de performance clé" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="Unique identifier for SLA KPI Instance associated with Assistance Request." languagecode="1033" />
@@ -2882,7 +2887,7 @@
       <IsDocumentRecommendationsEnabled>0</IsDocumentRecommendationsEnabled>
       <IsBPFEntity>0</IsBPFEntity>
       <OwnershipTypeMask>UserOwned</OwnershipTypeMask>
-      <IsAuditEnabled>0</IsAuditEnabled>
+      <IsAuditEnabled>1</IsAuditEnabled>
       <IsActivity>1</IsActivity>
       <ActivityTypeMask>CommunicationActivity</ActivityTypeMask>
       <IsActivityParty>0</IsActivityParty>

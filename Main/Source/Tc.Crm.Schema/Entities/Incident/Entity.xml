@@ -5,9 +5,9 @@
   <EntityInfo>
     <entity Name="Incident">
       <LocalizedNames>
-        <LocalizedName description="Anfrage" languagecode="1031" />
+        <LocalizedName description="Fall" languagecode="1031" />
         <LocalizedName description="Case" languagecode="1033" />
-        <LocalizedName description="Incident" languagecode="1036" />
+        <LocalizedName description="cas" languagecode="1036" />
       </LocalizedNames>
       <LocalizedCollectionNames>
         <LocalizedCollectionName description="Anfragen" languagecode="1031" />
@@ -72,7 +72,7 @@
             <OptionSetType>picklist</OptionSetType>
             <IntroducedVersion>5.0.0.0</IntroducedVersion>
             <displaynames>
-              <displayname description="Anfragetyp" languagecode="1031" />
+              <displayname description="Fall Art" languagecode="1031" />
               <displayname description="Case Type" languagecode="1033" />
               <displayname description="Type d’incident" languagecode="1036" />
             </displaynames>
@@ -106,7 +106,7 @@
             </options>
           </optionset>
           <displaynames>
-            <displayname description="Anfragetyp" languagecode="1031" />
+            <displayname description="Fall Art" languagecode="1031" />
             <displayname description="Case Type" languagecode="1033" />
             <displayname description="Type d’incident" languagecode="1036" />
           </displaynames>
@@ -164,9 +164,9 @@
           <Format>textarea</Format>
           <MaxLength>2000</MaxLength>
           <displaynames>
-            <displayname description="Beschreibung" languagecode="1031" />
+            <displayname description="Summe" languagecode="1031" />
             <displayname description="Summary" languagecode="1033" />
-            <displayname description="Description" languagecode="1036" />
+            <displayname description="Résumé" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="Geben Sie zusätzliche beschreibende Informationen für die Anfrage ein, um das Serviceteam bei der Lösungsfindung zu unterstützen." languagecode="1031" />
@@ -215,16 +215,21 @@
               </option>
               <option value="950000000" Color="#0000ff">
                 <labels>
+                  <label description="Angebot" languagecode="1031" />
                   <label description="Offer" languagecode="1033" />
+                  <label description="offre" languagecode="1036" />
                 </labels>
               </option>
               <option value="950000001" Color="#0000ff">
                 <labels>
+                  <label description="lösen" languagecode="1031" />
                   <label description="Resolve" languagecode="1033" />
+                  <label description="Résoudre" languagecode="1036" />
                 </labels>
               </option>
               <option value="950000002" Color="#0000ff">
                 <labels>
+                  <label description="Comeback" languagecode="1031" />
                   <label description="Comeback" languagecode="1033" />
                 </labels>
               </option>
@@ -400,6 +405,38 @@
             <Description description="Choisissez un autre contact client pouvant également vous aider à résoudre l'incident." languagecode="1036" />
           </Descriptions>
         </attribute>
+        <attribute PhysicalName="SLAId">
+          <Type>lookup</Type>
+          <Name>slaid</Name>
+          <LogicalName>slaid</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>8.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <LookupStyle>single</LookupStyle>
+          <LookupTypes>
+            <LookupType id="00000000-0000-0000-0000-000000000000">9750</LookupType>
+          </LookupTypes>
+          <displaynames>
+            <displayname description="SLA" languagecode="1031" />
+            <displayname description="SLA" languagecode="1033" />
+            <displayname description="accord de prestation de service (SLA) " languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Wählen Sie die Vereinbarung zum Servicelevel (Service Level Agreement, SLA) aus, die Sie auf den Anfragedatensatz anwenden möchten." languagecode="1031" />
+            <Description description="Choose the service level agreement (SLA) that you want to apply to the case record." languagecode="1033" />
+            <Description description="Choisissez le contrat de niveau de service (contrat SLA) que vous voulez appliquer à l'enregistrement d'incident." languagecode="1036" />
+          </Descriptions>
+        </attribute>
         <attribute PhysicalName="StateCode">
           <Type>state</Type>
           <Name>statecode</Name>
@@ -509,6 +546,7 @@
               </status>
               <status value="950000004" state="0" TransitionData="" Color="#0000ff">
                 <labels>
+                  <label description="Eskaliert zum lokalen Quellmarkt" languagecode="1031" />
                   <label description="Escalated to Local Source Market" languagecode="1033" />
                 </labels>
               </status>
@@ -521,17 +559,21 @@
               </status>
               <status value="950000001" state="1" TransitionData="" Color="#0000ff">
                 <labels>
+                  <label description="Bezogen auf Legal (CR)" languagecode="1031" />
                   <label description="Referred to Legal (CR)" languagecode="1033" />
                 </labels>
               </status>
               <status value="950000002" state="1" TransitionData="" Color="#0000ff">
                 <labels>
+                  <label description="nicht zufriedenstellende Lösung" languagecode="1031" />
                   <label description="Unsatisfied Resolution" languagecode="1033" />
                 </labels>
               </status>
               <status value="950000005" state="1" TransitionData="" Color="#0000ff">
                 <labels>
+                  <label description="Vorfall geschlossen" languagecode="1031" />
                   <label description="Incident Closed" languagecode="1033" />
+                  <label description="incident clos" languagecode="1036" />
                 </labels>
               </status>
               <status value="6" state="2" TransitionData="" Color="#0000ff">
@@ -588,9 +630,12 @@
           <AppDefaultValue>950000001</AppDefaultValue>
           <OptionSetName>tc_24hourpromise</OptionSetName>
           <displaynames>
+            <displayname description="24 Stunden Versprechen" languagecode="1031" />
             <displayname description="24 Hour Promise" languagecode="1033" />
+            <displayname description="promesse résolution en 24h " languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Um anzugeben, ob die Beschwerde ein 24-Stunden-Fall ist oder nicht. Kann vom Benutzer überschrieben werden." languagecode="1031" />
             <Description description="To indicate whether or not the Complaint is a 24hr Case. Can be overridden by the user." languagecode="1033" />
           </Descriptions>
         </attribute>
@@ -621,7 +666,9 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="24 Std Versprechen zu lösen von KPI" languagecode="1031" />
             <displayname description="24 Hr Promise Resolve By KPI" languagecode="1033" />
+            <displayname description="promesse résolution en 24h - résolution par indicateur de performance" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="Unique identifier for SLA KPI Instance associated with Case." languagecode="1033" />
@@ -655,7 +702,9 @@
           <CanChangeDateTimeBehavior>1</CanChangeDateTimeBehavior>
           <Behavior>1</Behavior>
           <displaynames>
+            <displayname description="24 Std Versprechen zu lösen von" languagecode="1031" />
             <displayname description="24 Hr Promise Resolve By" languagecode="1033" />
+            <displayname description="promesse résolution en 24h - résolu par" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -689,7 +738,9 @@
           <CanChangeDateTimeBehavior>1</CanChangeDateTimeBehavior>
           <Behavior>1</Behavior>
           <displaynames>
+            <displayname description="24 Std Versprechen SLA Start Datum &amp; Zeit" languagecode="1031" />
             <displayname description="24 Hr Promise SLA Start Time &amp; Date" languagecode="1033" />
+            <displayname description="promesse résolution en 24h  - date et heure de début du SLA" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -722,7 +773,9 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="3rd Party Agent" languagecode="1031" />
             <displayname description="3rd Party Agent" languagecode="1033" />
+            <displayname description="agent tierce partie" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="Unique identifier for Customer associated with Case." languagecode="1033" />
@@ -755,7 +808,9 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_yesno</OptionSetName>
           <displaynames>
+            <displayname description="12 Std Leistungsvereinbarung" languagecode="1031" />
             <displayname description="12hr SLA?" languagecode="1033" />
+            <displayname description="12h SLA?" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -788,7 +843,9 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Unterbringung" languagecode="1031" />
             <displayname description="Accommodation" languagecode="1033" />
+            <displayname description="Logement" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -822,6 +879,7 @@
           <MaxLength>50</MaxLength>
           <Length>100</Length>
           <displaynames>
+            <displayname description="alternative Email alt" languagecode="1031" />
             <displayname description="Alternative Email old" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -855,7 +913,9 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="alternative Email Adresse" languagecode="1031" />
             <displayname description="Alternative Email" languagecode="1033" />
+            <displayname description="e-mail alternatif" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -922,6 +982,7 @@
           <Format></Format>
           <MaxLength>2000</MaxLength>
           <displaynames>
+            <displayname description="Alternative Adresse" languagecode="1031" />
             <displayname description="Alternative Postal Address" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -956,6 +1017,7 @@
           <CanChangeDateTimeBehavior>1</CanChangeDateTimeBehavior>
           <Behavior>1</Behavior>
           <displaynames>
+            <displayname description="Ankunftsdatum" languagecode="1031" />
             <displayname description="Arrival Date" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -989,10 +1051,13 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Verknüpfte Buchungsreferenz" languagecode="1031" />
             <displayname description="Linked Booking Reference" languagecode="1033" />
           </displaynames>
           <Descriptions>
+            <Description description="Buchungsnummer" languagecode="1031" />
             <Description description="Booking Reference" languagecode="1033" />
+            <Description description="Référence de réservation" languagecode="1036" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="tc_BookingReference">
@@ -1025,7 +1090,9 @@
             <IntroducedVersion>1.0.0.11</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
+              <displayname description="Buchungsnummer" languagecode="1031" />
               <displayname description="Booking Reference" languagecode="1033" />
+              <displayname description="Référence de réservation" languagecode="1036" />
             </displaynames>
             <Descriptions>
               <Description description="" languagecode="1033" />
@@ -1033,18 +1100,24 @@
             <options>
               <option value="0" Color="#0000ff">
                 <labels>
+                  <label description="Nein" languagecode="1031" />
                   <label description="No" languagecode="1033" />
+                  <label description="non" languagecode="1036" />
                 </labels>
               </option>
               <option value="1" Color="#0000ff">
                 <labels>
+                  <label description="Ja" languagecode="1031" />
                   <label description="Yes" languagecode="1033" />
+                  <label description="Oui" languagecode="1036" />
                 </labels>
               </option>
             </options>
           </optionset>
           <displaynames>
+            <displayname description="Buchungsnummer" languagecode="1031" />
             <displayname description="Booking Reference" languagecode="1033" />
+            <displayname description="Référence de réservation" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1078,9 +1151,11 @@
           <MaxLength>50</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Manuelle Buchungsreferenz" languagecode="1031" />
             <displayname description="Manual Booking Reference" languagecode="1033" />
           </displaynames>
           <Descriptions>
+            <Description description="Buchungsreferenz eingeben" languagecode="1031" />
             <Description description="Enter Booking Reference" languagecode="1033" />
           </Descriptions>
         </attribute>
@@ -1113,6 +1188,7 @@
           <Accuracy>2</Accuracy>
           <AccuracySource>0</AccuracySource>
           <displaynames>
+            <displayname description="Buchungsbetrag" languagecode="1031" />
             <displayname description="Booking Travel Amount" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1184,9 +1260,12 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Marke" languagecode="1031" />
             <displayname description="Brand" languagecode="1033" />
+            <displayname description="Marque" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="einheitlicher Identifikator zur Marke zum Fall" languagecode="1031" />
             <Description description="Unique identifier for Brand associated with Case." languagecode="1033" />
           </Descriptions>
         </attribute>
@@ -1217,6 +1296,7 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_sladuration</OptionSetName>
           <displaynames>
+            <displayname description="SLA Dauer" languagecode="1031" />
             <displayname description="SLA Duration" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1250,7 +1330,9 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Typ" languagecode="1031" />
             <displayname description="Type" languagecode="1033" />
+            <displayname description="type" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="Unique identifier for Case Type associated with Case." languagecode="1033" />
@@ -1294,12 +1376,16 @@
             <options>
               <option value="0" Color="#0000ff">
                 <labels>
+                  <label description="Nein" languagecode="1031" />
                   <label description="No" languagecode="1033" />
+                  <label description="non" languagecode="1036" />
                 </labels>
               </option>
               <option value="1" Color="#0000ff">
                 <labels>
+                  <label description="Ja" languagecode="1031" />
                   <label description="Yes" languagecode="1033" />
+                  <label description="Oui" languagecode="1036" />
                 </labels>
               </option>
             </options>
@@ -1349,12 +1435,16 @@
             <options>
               <option value="0" Color="#0000ff">
                 <labels>
+                  <label description="Nein" languagecode="1031" />
                   <label description="No" languagecode="1033" />
+                  <label description="non" languagecode="1036" />
                 </labels>
               </option>
               <option value="1" Color="#0000ff">
                 <labels>
+                  <label description="Ja" languagecode="1031" />
                   <label description="Yes" languagecode="1033" />
+                  <label description="Oui" languagecode="1036" />
                 </labels>
               </option>
             </options>
@@ -1396,6 +1486,7 @@
             <IntroducedVersion>1.0.0.34</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
+              <displayname description="Wiederkehrend" languagecode="1031" />
               <displayname description="Comeback?" languagecode="1033" />
             </displaynames>
             <Descriptions>
@@ -1404,17 +1495,22 @@
             <options>
               <option value="0" Color="#0000ff">
                 <labels>
+                  <label description="Nein" languagecode="1031" />
                   <label description="No" languagecode="1033" />
+                  <label description="non" languagecode="1036" />
                 </labels>
               </option>
               <option value="1" Color="#0000ff">
                 <labels>
+                  <label description="Ja" languagecode="1031" />
                   <label description="Yes" languagecode="1033" />
+                  <label description="Oui" languagecode="1036" />
                 </labels>
               </option>
             </options>
           </optionset>
           <displaynames>
+            <displayname description="Wiederkehrend" languagecode="1031" />
             <displayname description="Comeback?" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1448,6 +1544,7 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_comebackreason</OptionSetName>
           <displaynames>
+            <displayname description="Wiederkehrender Grund 1" languagecode="1031" />
             <displayname description="Comeback Reason 1" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1481,6 +1578,7 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_comebackreason</OptionSetName>
           <displaynames>
+            <displayname description="Wiederkehrender Grund 2" languagecode="1031" />
             <displayname description="Comeback Reason 2" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1515,6 +1613,7 @@
           <CanChangeDateTimeBehavior>1</CanChangeDateTimeBehavior>
           <Behavior>1</Behavior>
           <displaynames>
+            <displayname description="Wiederkehrende öffnen 1" languagecode="1031" />
             <displayname description="Comeback Re-Open 1" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1549,6 +1648,7 @@
           <CanChangeDateTimeBehavior>1</CanChangeDateTimeBehavior>
           <Behavior>1</Behavior>
           <displaynames>
+            <displayname description="Wiederkehrende öffnen 2" languagecode="1031" />
             <displayname description="Comeback Re-Open 2" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1582,6 +1682,7 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_comebackresult</OptionSetName>
           <displaynames>
+            <displayname description="Wiederkehrendes Ergebnis 1" languagecode="1031" />
             <displayname description="Comeback Result 1" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1615,6 +1716,7 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_comebackresult</OptionSetName>
           <displaynames>
+            <displayname description="Wiederkehrendes Ergebnis 2" languagecode="1031" />
             <displayname description="Comeback Result 2" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1651,6 +1753,7 @@
             <IntroducedVersion>1.0.0.36</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
+              <displayname description="Entschädigung hinzugefügt" languagecode="1031" />
               <displayname description="Compensation Added" languagecode="1033" />
             </displaynames>
             <Descriptions>
@@ -1659,17 +1762,21 @@
             <options>
               <option value="0" Color="#0000ff">
                 <labels>
+                  <label description="Nein" languagecode="1031" />
                   <label description="No" languagecode="1033" />
                 </labels>
               </option>
               <option value="1" Color="#0000ff">
                 <labels>
+                  <label description="Ja" languagecode="1031" />
                   <label description="Yes" languagecode="1033" />
+                  <label description="Oui" languagecode="1036" />
                 </labels>
               </option>
             </options>
           </optionset>
           <displaynames>
+            <displayname description="Entschädigung hinzugefügt" languagecode="1031" />
             <displayname description="Compensation Added" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1703,6 +1810,7 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_acceptancestatus</OptionSetName>
           <displaynames>
+            <displayname description="Entschädigungsentscheidung" languagecode="1031" />
             <displayname description="Compensation Decision" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1737,6 +1845,7 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Kontrollpunkt Ref" languagecode="1031" />
             <displayname description="Control Point Ref" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1770,6 +1879,7 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="CR-Auflösung durch KPI" languagecode="1031" />
             <displayname description="CR Resolve By KPI" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1803,6 +1913,7 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_customerrelationslevel</OptionSetName>
           <displaynames>
+            <displayname description="Aktuelle Kundenbeteiligung" languagecode="1031" />
             <displayname description="Current Customer Relations Level" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1839,6 +1950,7 @@
             <IntroducedVersion>1.0.0.90</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
+              <displayname description="Kundenanfrage" languagecode="1031" />
               <displayname description="Customer Enquiry" languagecode="1033" />
             </displaynames>
             <Descriptions>
@@ -1847,18 +1959,24 @@
             <options>
               <option value="0" Color="#0000ff">
                 <labels>
+                  <label description="Nein" languagecode="1031" />
                   <label description="No" languagecode="1033" />
+                  <label description="non" languagecode="1036" />
                 </labels>
               </option>
               <option value="1" Color="#0000ff">
                 <labels>
+                  <label description="Ja" languagecode="1031" />
                   <label description="Yes" languagecode="1033" />
+                  <label description="Oui" languagecode="1036" />
                 </labels>
               </option>
             </options>
           </optionset>
           <displaynames>
+            <displayname description="Kein Kunde" languagecode="1031" />
             <displayname description="No Customer" languagecode="1033" />
+            <displayname description="Aucun client" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1892,6 +2010,7 @@
           <CanChangeDateTimeBehavior>1</CanChangeDateTimeBehavior>
           <Behavior>1</Behavior>
           <displaynames>
+            <displayname description="Datum gemeldet" languagecode="1031" />
             <displayname description="Date Reported" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1926,7 +2045,9 @@
           <CanChangeDateTimeBehavior>1</CanChangeDateTimeBehavior>
           <Behavior>1</Behavior>
           <displaynames>
+            <displayname description="Abflug Datum" languagecode="1031" />
             <displayname description="Departure Date" languagecode="1033" />
+            <displayname description="Date de départ " languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1959,7 +2080,9 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Zielgebiet" languagecode="1031" />
             <displayname description="Destination" languagecode="1033" />
+            <displayname description="Destination" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="Unique identifier for Region associated with Case." languagecode="1033" />
@@ -1992,6 +2115,7 @@
           <MinValue>1</MinValue>
           <MaxValue>100</MaxValue>
           <displaynames>
+            <displayname description="Aufenthaltsdauer" languagecode="1031" />
             <displayname description="Duration of Stay" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -2026,6 +2150,7 @@
           <CanChangeDateTimeBehavior>1</CanChangeDateTimeBehavior>
           <Behavior>1</Behavior>
           <displaynames>
+            <displayname description="Anfrage Fälligkeitsdatum" languagecode="1031" />
             <displayname description="Enquiry Due Date" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -2062,6 +2187,7 @@
             <IntroducedVersion>1.0.0.90</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
+              <displayname description="Anfrage ohne Kunde" languagecode="1031" />
               <displayname description="Enquiry With No Customer" languagecode="1033" />
             </displaynames>
             <Descriptions>
@@ -2070,12 +2196,14 @@
             <options>
               <option value="950000000" Color="#0000ff">
                 <labels>
+                  <label description="Anfrage ohne Kunde" languagecode="1031" />
                   <label description="Enquiry with No Customer" languagecode="1033" />
                 </labels>
               </option>
             </options>
           </optionset>
           <displaynames>
+            <displayname description="Anfrage ohne Kunde" languagecode="1031" />
             <displayname description="Enquiry With No Customer" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -2112,6 +2240,7 @@
             <IntroducedVersion>1.0.0.36</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
+              <displayname description="Eskalieren zu den Kundenbeziehungen" languagecode="1031" />
               <displayname description="Escalate to Customer Relations" languagecode="1033" />
             </displaynames>
             <Descriptions>
@@ -2120,17 +2249,22 @@
             <options>
               <option value="0" Color="#0000ff">
                 <labels>
+                  <label description="Nein" languagecode="1031" />
                   <label description="No" languagecode="1033" />
+                  <label description="Non" languagecode="1036" />
                 </labels>
               </option>
               <option value="1" Color="#0000ff">
                 <labels>
+                  <label description="Ja" languagecode="1031" />
                   <label description="Yes" languagecode="1033" />
+                  <label description="Oui" languagecode="1036" />
                 </labels>
               </option>
             </options>
           </optionset>
           <displaynames>
+            <displayname description="Eskalieren zu den Kundenbeziehungen" languagecode="1031" />
             <displayname description="Escalate to Customer Relations" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -2167,6 +2301,7 @@
             <IntroducedVersion>1.0.0.51</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
+              <displayname description="Eskalationsbestätigung" languagecode="1031" />
               <displayname description="Escalation Confirmation" languagecode="1033" />
             </displaynames>
             <Descriptions>
@@ -2175,17 +2310,22 @@
             <options>
               <option value="0" Color="#0000ff">
                 <labels>
+                  <label description="Nein" languagecode="1031" />
                   <label description="No" languagecode="1033" />
+                  <label description="non" languagecode="1036" />
                 </labels>
               </option>
               <option value="1" Color="#0000ff">
                 <labels>
+                  <label description="Ja" languagecode="1031" />
                   <label description="Yes" languagecode="1033" />
+                  <label description="Oui" languagecode="1036" />
                 </labels>
               </option>
             </options>
           </optionset>
           <displaynames>
+            <displayname description="Eskalationsbestätigung" languagecode="1031" />
             <displayname description="Escalation Confirmation" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -2219,9 +2359,11 @@
           <Format></Format>
           <MaxLength>2000</MaxLength>
           <displaynames>
+            <displayname description="Eskalationshinweise" languagecode="1031" />
             <displayname description="Escalation Notes" languagecode="1033" />
           </displaynames>
           <Descriptions>
+            <Description description="Anmerkungen erfasst, wenn Fall eskaliert zurück zu Source Market Customer Relations Team." languagecode="1031" />
             <Description description="Notes captured when Case to be escalated back to Source Market Customer Relations team." languagecode="1033" />
           </Descriptions>
         </attribute>
@@ -2255,6 +2397,7 @@
             <IntroducedVersion>1.0.0.0</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
+              <displayname description="Beweis gesammelt" languagecode="1031" />
               <displayname description="Evidence Gathered" languagecode="1033" />
             </displaynames>
             <Descriptions>
@@ -2263,17 +2406,22 @@
             <options>
               <option value="0" Color="#0000ff">
                 <labels>
+                  <label description="Nein" languagecode="1031" />
                   <label description="No" languagecode="1033" />
+                  <label description="non" languagecode="1036" />
                 </labels>
               </option>
               <option value="1" Color="#0000ff">
                 <labels>
+                  <label description="Ja" languagecode="1031" />
                   <label description="Yes" languagecode="1033" />
+                  <label description="Oui" languagecode="1036" />
                 </labels>
               </option>
             </options>
           </optionset>
           <displaynames>
+            <displayname description="Beweis gesammelt" languagecode="1031" />
             <displayname description="Evidence Gathered" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -2307,6 +2455,7 @@
           <Format></Format>
           <MaxLength>2000</MaxLength>
           <displaynames>
+            <displayname description="Kundenwunsch" languagecode="1031" />
             <displayname description="Customer Expectation" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -2341,6 +2490,7 @@
           <CanChangeDateTimeBehavior>1</CanChangeDateTimeBehavior>
           <Behavior>1</Behavior>
           <displaynames>
+            <displayname description="Erstes Unterschriftdatum" languagecode="1031" />
             <displayname description="First Signature Date" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -2374,6 +2524,7 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_flightlength</OptionSetName>
           <displaynames>
+            <displayname description="Fluglänge" languagecode="1031" />
             <displayname description="Flight Length" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -2408,6 +2559,7 @@
           <MaxLength>50</MaxLength>
           <Length>100</Length>
           <displaynames>
+            <displayname description="Flugnummer" languagecode="1031" />
             <displayname description="Flight Number" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -2474,6 +2626,7 @@
           <MinValue>1</MinValue>
           <MaxValue>5</MaxValue>
           <displaynames>
+            <displayname description="Hotelbewertung" languagecode="1031" />
             <displayname description="Hotel Rating" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -2543,6 +2696,7 @@
             <IntroducedVersion>1.0.0.34</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
+              <displayname description="Informieren Sie einen anderen Kunden" languagecode="1031" />
               <displayname description="Inform Another Customer" languagecode="1033" />
             </displaynames>
             <Descriptions>
@@ -2551,17 +2705,22 @@
             <options>
               <option value="0" Color="#0000ff">
                 <labels>
+                  <label description="Nein" languagecode="1031" />
                   <label description="No" languagecode="1033" />
+                  <label description="non" languagecode="1036" />
                 </labels>
               </option>
               <option value="1" Color="#0000ff">
                 <labels>
+                  <label description="Ja" languagecode="1031" />
                   <label description="Yes" languagecode="1033" />
+                  <label description="Oui" languagecode="1036" />
                 </labels>
               </option>
             </options>
           </optionset>
           <displaynames>
+            <displayname description="Informieren Sie einen anderen Kunden" languagecode="1031" />
             <displayname description="Inform Another Customer" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -2595,7 +2754,8 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_yesno</OptionSetName>
           <displaynames>
-            <displayname description="Is the Holiday Stopping Shorter than Planned" languagecode="1033" />
+            <displayname description="Urlaub beendet?" languagecode="1031" />
+            <displayname description="Holiday Stopped?" languagecode="1033" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -2628,6 +2788,7 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Letzter Bevollmächtigter" languagecode="1031" />
             <displayname description="Last Assignee" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -2662,6 +2823,7 @@
           <CanChangeDateTimeBehavior>1</CanChangeDateTimeBehavior>
           <Behavior>1</Behavior>
           <displaynames>
+            <displayname description="Aktuelle Aktivitätsdatum" languagecode="1031" />
             <displayname description="Latest Activity Date" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -2695,7 +2857,9 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Ort" languagecode="1031" />
             <displayname description="Location" languagecode="1033" />
+            <displayname description="lieu" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="Unique identifier for Location associated with Case." languagecode="1033" />
@@ -2731,6 +2895,7 @@
             <IntroducedVersion>1.0.0.49</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
+              <displayname description="Pflichtbedingungen" languagecode="1031" />
               <displayname description="Mandatory Conditions Met" languagecode="1033" />
             </displaynames>
             <Descriptions>
@@ -2739,17 +2904,22 @@
             <options>
               <option value="0" Color="#0000ff">
                 <labels>
+                  <label description="Nein" languagecode="1031" />
                   <label description="No" languagecode="1033" />
+                  <label description="non" languagecode="1036" />
                 </labels>
               </option>
               <option value="1" Color="#0000ff">
                 <labels>
+                  <label description="Ja" languagecode="1031" />
                   <label description="Yes" languagecode="1033" />
+                  <label description="Oui" languagecode="1036" />
                 </labels>
               </option>
             </options>
           </optionset>
           <displaynames>
+            <displayname description="Pflichtbedingungen" languagecode="1031" />
             <displayname description="Mandatory Conditions Met" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -2783,7 +2953,9 @@
           <MinValue>0</MinValue>
           <MaxValue>100</MaxValue>
           <displaynames>
+            <displayname description="Anzahl Teilnehmer" languagecode="1031" />
             <displayname description="Number of Participants" languagecode="1033" />
+            <displayname description="nombre de participants" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -2816,6 +2988,7 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_acceptancestatus</OptionSetName>
           <displaynames>
+            <displayname description="Angebotsbetrag" languagecode="1031" />
             <displayname description="Offered Amount Decision" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -2852,7 +3025,9 @@
             <IntroducedVersion>1.0.0.0</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
+              <displayname description="Angebot TC" languagecode="1031" />
               <displayname description="Offer TC" languagecode="1033" />
+              <displayname description="Offre Thomas Cook" languagecode="1036" />
             </displaynames>
             <Descriptions>
               <Description description="" languagecode="1033" />
@@ -2860,18 +3035,24 @@
             <options>
               <option value="950000000" Color="#0000ff">
                 <labels>
+                  <label description="Englisch" languagecode="1031" />
                   <label description="English" languagecode="1033" />
+                  <label description="anglais" languagecode="1036" />
                 </labels>
               </option>
               <option value="950000001" Color="#0000ff">
                 <labels>
+                  <label description="französisch" languagecode="1031" />
                   <label description="French" languagecode="1033" />
+                  <label description="français" languagecode="1036" />
                 </labels>
               </option>
             </options>
           </optionset>
           <displaynames>
+            <displayname description="Angebot TC" languagecode="1031" />
             <displayname description="Offer TC" languagecode="1033" />
+            <displayname description="Offre Thomas Cook" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -2904,6 +3085,7 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Ursprünglich gelöst durch" languagecode="1031" />
             <displayname description="Originally Resolved By" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -2937,6 +3119,7 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_originatingbusinessarea</OptionSetName>
           <displaynames>
+            <displayname description="Ursprünglich durch Geschäftsbereich gelöst" languagecode="1031" />
             <displayname description="Originally Resolved by Business Area" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -2970,6 +3153,7 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_originatingbusinessarea</OptionSetName>
           <displaynames>
+            <displayname description="Ursprünglicher Geschäftsbereich" languagecode="1031" />
             <displayname description="Originating Business Area" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -3004,7 +3188,9 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="anderer Kunde" languagecode="1031" />
             <displayname description="Other Customer" languagecode="1033" />
+            <displayname description="autre client" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -3037,7 +3223,9 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="andere Kunden Email" languagecode="1031" />
             <displayname description="Other Customer Email" languagecode="1033" />
+            <displayname description="e-mail de l'autre client" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -3071,6 +3259,7 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Andere Party Email" languagecode="1031" />
             <displayname description="Other Party Email" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -3105,6 +3294,7 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Andere Party Telefon" languagecode="1031" />
             <displayname description="Other Party Phone" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -3171,7 +3361,9 @@
           <MinValue>0</MinValue>
           <MaxValue>100</MaxValue>
           <displaynames>
+            <displayname description="betroffene Teilnehmer" languagecode="1031" />
             <displayname description="Participants Impacted" languagecode="1033" />
+            <displayname description="participants impactés" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -3204,6 +3396,7 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_methodofcommunication</OptionSetName>
           <displaynames>
+            <displayname description="Bevorzugte Methode der Kommunikation" languagecode="1031" />
             <displayname description="Preferred Method of Communication" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -3240,6 +3433,7 @@
             <IntroducedVersion>1.0.0.90</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
+              <displayname description="Vorherige Auflösung" languagecode="1031" />
               <displayname description="Prior Resolution" languagecode="1033" />
             </displaynames>
             <Descriptions>
@@ -3248,17 +3442,22 @@
             <options>
               <option value="0" Color="#0000ff">
                 <labels>
+                  <label description="Nein" languagecode="1031" />
                   <label description="No" languagecode="1033" />
+                  <label description="Non" languagecode="1036" />
                 </labels>
               </option>
               <option value="1" Color="#0000ff">
                 <labels>
+                  <label description="Ja" languagecode="1031" />
                   <label description="Yes" languagecode="1033" />
+                  <label description="Oui" languagecode="1036" />
                 </labels>
               </option>
             </options>
           </optionset>
           <displaynames>
+            <displayname description="Vorherige Auflösung" languagecode="1031" />
             <displayname description="Prior Resolution" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -3292,7 +3491,9 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_producttype</OptionSetName>
           <displaynames>
+            <displayname description="Produkttyp" languagecode="1031" />
             <displayname description="Product Type" languagecode="1033" />
+            <displayname description="Type de produit" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -3326,6 +3527,7 @@
           <CanChangeDateTimeBehavior>1</CanChangeDateTimeBehavior>
           <Behavior>1</Behavior>
           <displaynames>
+            <displayname description="Gelöst Wiederbegin 1" languagecode="1031" />
             <displayname description="Resolved Comeback 1" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -3360,6 +3562,7 @@
           <CanChangeDateTimeBehavior>1</CanChangeDateTimeBehavior>
           <Behavior>1</Behavior>
           <displaynames>
+            <displayname description="Gelöst Wiederbegin 2" languagecode="1031" />
             <displayname description="Resolved Comeback 2" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -3429,7 +3632,9 @@
             <IntroducedVersion>1.0.0.102</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
+              <displayname description="Send Emails" languagecode="1031" />
               <displayname description="Send Emails" languagecode="1033" />
+              <displayname description="envoyer emails" languagecode="1036" />
             </displaynames>
             <Descriptions>
               <Description description="" languagecode="1033" />
@@ -3437,17 +3642,22 @@
             <options>
               <option value="0" Color="#0000ff">
                 <labels>
+                  <label description="Nein" languagecode="1031" />
                   <label description="No" languagecode="1033" />
+                  <label description="non" languagecode="1036" />
                 </labels>
               </option>
               <option value="1" Color="#0000ff">
                 <labels>
+                  <label description="Ja" languagecode="1031" />
                   <label description="Yes" languagecode="1033" />
+                  <label description="Oui" languagecode="1036" />
                 </labels>
               </option>
             </options>
           </optionset>
           <displaynames>
+            <displayname description="Kommunikation manuell schicken" languagecode="1031" />
             <displayname description="Send Comms Manually" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -3514,6 +3724,7 @@
           <CanChangeDateTimeBehavior>1</CanChangeDateTimeBehavior>
           <Behavior>1</Behavior>
           <displaynames>
+            <displayname description="SLA Anfangsdatum &amp; Zeit" languagecode="1031" />
             <displayname description="SLA Start Time &amp; Date" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -3547,7 +3758,9 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Quellmarkt" languagecode="1031" />
             <displayname description="Source Market" languagecode="1033" />
+            <displayname description="Pays organisateur" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="Unique identifier for Country associated with Case." languagecode="1033" />
@@ -3581,9 +3794,11 @@
           <MaxLength>50</MaxLength>
           <Length>100</Length>
           <displaynames>
+            <displayname description="Survey Id" languagecode="1031" />
             <displayname description="Survey Id" languagecode="1033" />
           </displaynames>
           <Descriptions>
+            <Description description="Um die ID des Umfrage-Response-Datensatzes zu speichern (bei der Erstellung eines Falles aus Survey Response)" languagecode="1031" />
             <Description description="To store Id of the survey response record (while creating a case from Survey Response)" languagecode="1033" />
           </Descriptions>
         </attribute>
@@ -3617,7 +3832,9 @@
             <IntroducedVersion>1.0.0.80</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
+              <displayname description="TC Produkt bezogen" languagecode="1031" />
               <displayname description="TC product related" languagecode="1033" />
+              <displayname description="concerne un produit Thomas Cook" languagecode="1036" />
             </displaynames>
             <Descriptions>
               <Description description="" languagecode="1033" />
@@ -3625,18 +3842,23 @@
             <options>
               <option value="950000000" Color="#0000ff">
                 <labels>
+                  <label description="TC Produkt" languagecode="1031" />
                   <label description="TC Product" languagecode="1033" />
+                  <label description="Produit Thomas Cook" languagecode="1036" />
                 </labels>
               </option>
               <option value="950000001" Color="#0000ff">
                 <labels>
+                  <label description="Nicht-TC-Produkt" languagecode="1031" />
                   <label description="Non-TC Product" languagecode="1033" />
                 </labels>
               </option>
             </options>
           </optionset>
           <displaynames>
+            <displayname description="TC Produkt bezogen" languagecode="1031" />
             <displayname description="TC Product Related" languagecode="1033" />
+            <displayname description="concerne un produit Thomas Cook" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -3669,7 +3891,9 @@
           <Accuracy>2</Accuracy>
           <AccuracySource>2</AccuracySource>
           <displaynames>
+            <displayname description="Gesamter angebotener Betrag" languagecode="1031" />
             <displayname description="Total Offered Amount" languagecode="1033" />
+            <displayname description="Montant total offert" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />

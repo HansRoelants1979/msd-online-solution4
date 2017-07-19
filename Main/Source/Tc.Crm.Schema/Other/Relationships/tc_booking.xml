@@ -38,7 +38,9 @@
     <ReferencingAttributeName>tc_BookingId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Buchungsnummer" languagecode="1031" />
         <Description description="Booking Reference" languagecode="1033" />
+        <Description description="Référence de réservation" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
     <EntityRelationshipRoles>
@@ -73,9 +75,9 @@
     <ReferencingAttributeName>RegardingObjectId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Wählen Sie den Datensatz aus, auf den sich die E-Mail bezieht." languagecode="1031" />
+        <Description description="Eindeutiger Bezeichner des Objekts, dem die E-Mail zugeordnet ist." languagecode="1031" />
         <Description description="Unique identifier of the object with which the e-mail is associated." languagecode="1033" />
-        <Description description="Choisissez l'enregistrement concerné par le courrier électronique." languagecode="1036" />
+        <Description description="Identificateur unique de l'objet auquel le courrier électronique est associé." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -117,6 +119,7 @@
     <ReferencingAttributeName>tc_BookingId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="einheitlicher Identifikator für Buchung zur Hotelbuchung" languagecode="1031" />
         <Description description="Unique identifier for Booking associated with Booking Accommodation." languagecode="1033" />
       </Descriptions>
     </RelationshipDescription>
@@ -228,6 +231,7 @@
     <ReferencingAttributeName>tc_BookingId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Verbindet die Buchungen mit dem Buchungsverkehr" languagecode="1031" />
         <Description description="Connects the Bookings with the Booking Transport" languagecode="1033" />
       </Descriptions>
     </RelationshipDescription>
@@ -265,6 +269,7 @@
     <ReferencingAttributeName>tc_bookingId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="einheitlicher Identifikator für Buchung zur Kompensation " languagecode="1031" />
         <Description description="Unique identifier for Booking associated with Compensation." languagecode="1033" />
       </Descriptions>
     </RelationshipDescription>
@@ -300,6 +305,7 @@
     <ReferencingAttributeName>tc_BookingId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="einheitlicher Identifikator zur Buchung zur  Kundenbuchungsrolle" languagecode="1031" />
         <Description description="Unique identifier for Booking associated with Customer Booking Role." languagecode="1033" />
       </Descriptions>
     </RelationshipDescription>
@@ -320,6 +326,27 @@
       </EntityRelationshipRole>
     </EntityRelationshipRoles>
   </EntityRelationship>
+  <EntityRelationship Name="tc_booking_tc_followups">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>1.0.0.139</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_followup</ReferencingEntityName>
+    <ReferencedEntityName>tc_booking</ReferencedEntityName>
+    <CascadeAssign>Cascade</CascadeAssign>
+    <CascadeDelete>Cascade</CascadeDelete>
+    <CascadeReparent>Cascade</CascadeReparent>
+    <CascadeShare>Cascade</CascadeShare>
+    <CascadeUnshare>Cascade</CascadeUnshare>
+    <ReferencingAttributeName>RegardingObjectId</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Objekts, dem die Aktivität zugeordnet ist." languagecode="1031" />
+        <Description description="Unique identifier of the object with which the activity is associated." languagecode="1033" />
+        <Description description="Identificateur unique de l'objet auquel l'activité est associée." languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
   <EntityRelationship Name="tc_booking_tc_recovery">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
@@ -337,6 +364,7 @@
     <ReferencingAttributeName>tc_Bookingid</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="einheitlicher Identifikator zur Buchung zur Kompensation/Rückzahlung" languagecode="1031" />
         <Description description="Unique identifier for Booking Associated with Compensation/Recovery" languagecode="1033" />
       </Descriptions>
     </RelationshipDescription>
@@ -374,6 +402,7 @@
     <ReferencingAttributeName>tc_bookingid</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="einheitlicher Identifikator zur Buchung zur Fragebogenantwort" languagecode="1031" />
         <Description description="Unique identifier for Booking associated with Survey Response." languagecode="1033" />
       </Descriptions>
     </RelationshipDescription>
@@ -430,6 +459,7 @@
     <ReferencingAttributeName>tc_BookingId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="einheitlicher Identifikator zur Buchung zum Brief" languagecode="1031" />
         <Description description="Unique identifier for Booking associated with Letter." languagecode="1033" />
       </Descriptions>
     </RelationshipDescription>
@@ -504,6 +534,7 @@
     <ReferencingAttributeName>tc_BookingId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="einheitlicher Identifikator für Buchung zur Kompensationszeile" languagecode="1031" />
         <Description description="Unique identifier for Booking associated with Compensation Line." languagecode="1033" />
       </Descriptions>
     </RelationshipDescription>

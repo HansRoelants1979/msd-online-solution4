@@ -3,17 +3,21 @@
   <SolutionManifest>
     <UniqueName>ThomasCook</UniqueName>
     <LocalizedNames>
+      <LocalizedName description="Thomas Cook" languagecode="1031" />
       <LocalizedName description="Thomas Cook" languagecode="1033" />
+      <LocalizedName description="Thomas Cook" languagecode="1036" />
     </LocalizedNames>
     <Descriptions>
-      <Description description="Version control&#xA;&#xA;1.0.0.51 etc etc&#xA;&#xA;1.0.0.98: replaced transfer type field in booking transfer with a one that uses global optionset" languagecode="1033" />
+      <Description description="Version control  1.0.0.51 etc etc  1.0.0.98: replaced transfer type field in booking transfer with a one that uses global optionset 1.0.0.122: changed the max value of booking.duration from 100 to 2000 1.0.0.128: Updated reports for agreed upon date time format" languagecode="1033" />
     </Descriptions>
-    <Version>1.0.0.118</Version>
+    <Version>1.0.0.139</Version>
     <Managed>0</Managed>
     <Publisher>
       <UniqueName>thomascook</UniqueName>
       <LocalizedNames>
+        <LocalizedName description="Thomas Cook" languagecode="1031" />
         <LocalizedName description="Thomas Cook" languagecode="1033" />
+        <LocalizedName description="Thomas Cook" languagecode="1036" />
       </LocalizedNames>
       <Descriptions />
       <EMailAddress xsi:nil="true"></EMailAddress>
@@ -82,7 +86,9 @@
     <RootComponents>
       <RootComponent type="1" schemaName="account" behavior="0" />
       <RootComponent type="1" schemaName="activitymimeattachment" behavior="0" />
+      <RootComponent type="1" schemaName="activitypointer" behavior="1" />
       <RootComponent type="1" schemaName="annotation" behavior="0" />
+      <RootComponent type="1" schemaName="campaignresponse" behavior="1" />
       <RootComponent type="1" schemaName="category" behavior="1" />
       <RootComponent type="1" schemaName="competitor" behavior="1" />
       <RootComponent type="1" schemaName="contact" behavior="0" />
@@ -93,7 +99,9 @@
       <RootComponent type="1" schemaName="lead" behavior="1" />
       <RootComponent type="1" schemaName="letter" behavior="2" />
       <RootComponent type="1" schemaName="msdyn_wallsavedqueryusersettings" behavior="2" />
+      <RootComponent type="1" schemaName="msdyusd_usersettings" behavior="2" />
       <RootComponent type="1" schemaName="opportunity" behavior="1" />
+      <RootComponent type="1" schemaName="phonecall" behavior="1" />
       <RootComponent type="1" schemaName="popat_powerattachment" behavior="1" />
       <RootComponent type="1" schemaName="posms_smsmessage" behavior="1" />
       <RootComponent type="1" schemaName="product" behavior="1" />
@@ -109,6 +117,7 @@
       <RootComponent type="1" schemaName="tc_accounttype" behavior="0" />
       <RootComponent type="1" schemaName="tc_alternativeemail" behavior="0" />
       <RootComponent type="1" schemaName="tc_assistancerequest" behavior="0" />
+      <RootComponent type="1" schemaName="tc_boardbasis" behavior="0" />
       <RootComponent type="1" schemaName="tc_booking" behavior="0" />
       <RootComponent type="1" schemaName="tc_bookingaccommodation" behavior="0" />
       <RootComponent type="1" schemaName="tc_bookingextraservice" behavior="0" />
@@ -128,9 +137,12 @@
       <RootComponent type="1" schemaName="tc_configuration" behavior="0" />
       <RootComponent type="1" schemaName="tc_country" behavior="0" />
       <RootComponent type="1" schemaName="tc_customerbookingrole" behavior="0" />
+      <RootComponent type="1" schemaName="tc_externallogin" behavior="0" />
+      <RootComponent type="1" schemaName="tc_followup" behavior="0" />
       <RootComponent type="1" schemaName="tc_gateway" behavior="0" />
       <RootComponent type="1" schemaName="tc_hotel" behavior="0" />
       <RootComponent type="1" schemaName="tc_hotelpromises" behavior="0" />
+      <RootComponent type="1" schemaName="tc_killerquestions" behavior="0" />
       <RootComponent type="1" schemaName="tc_location" behavior="0" />
       <RootComponent type="1" schemaName="tc_locationoffice" behavior="0" />
       <RootComponent type="1" schemaName="tc_recovery" behavior="0" />
@@ -139,12 +151,15 @@
       <RootComponent type="1" schemaName="tc_surveyresponse" behavior="0" />
       <RootComponent type="1" schemaName="tc_surveyresponsefeedback" behavior="0" />
       <RootComponent type="1" schemaName="tc_touroperator" behavior="0" />
+      <RootComponent type="1" schemaName="tc_whatsnext" behavior="0" />
       <RootComponent type="1" schemaName="team" behavior="0" />
       <RootComponent type="1" schemaName="transactioncurrency" behavior="1" />
+      <RootComponent type="1" schemaName="uii_sessiontransfer" behavior="2" />
       <RootComponent type="9" schemaName="incident_caseorigincode" behavior="0" />
       <RootComponent type="9" schemaName="processstage_category" behavior="0" />
       <RootComponent type="9" schemaName="tc_24hourpromise" behavior="0" />
       <RootComponent type="9" schemaName="tc_acceptancestatus" behavior="0" />
+      <RootComponent type="9" schemaName="tc_annualinsurance" behavior="0" />
       <RootComponent type="9" schemaName="tc_bacsaccountnumberowner" behavior="0" />
       <RootComponent type="9" schemaName="tc_bacsaccounttype" behavior="0" />
       <RootComponent type="9" schemaName="tc_boardtype" behavior="0" />
@@ -152,22 +167,30 @@
       <RootComponent type="9" schemaName="tc_buildingworkgrade" behavior="0" />
       <RootComponent type="9" schemaName="tc_casetype" behavior="0" />
       <RootComponent type="9" schemaName="tc_cashcurrencies" behavior="0" />
+      <RootComponent type="9" schemaName="tc_childrensages" behavior="0" />
       <RootComponent type="9" schemaName="tc_comebackreason" behavior="0" />
       <RootComponent type="9" schemaName="tc_comebackresult" behavior="0" />
       <RootComponent type="9" schemaName="tc_compensationcostcover" behavior="0" />
       <RootComponent type="9" schemaName="tc_compensationseverityimpact" behavior="0" />
       <RootComponent type="9" schemaName="tc_compensationtcconfirmation" behavior="0" />
       <RootComponent type="9" schemaName="tc_compensation_paymentofferstatus" behavior="0" />
+      <RootComponent type="9" schemaName="tc_contactchangereason" behavior="0" />
+      <RootComponent type="9" schemaName="tc_contactmethod" behavior="0" />
+      <RootComponent type="9" schemaName="tc_contacttime" behavior="0" />
       <RootComponent type="9" schemaName="tc_countries" behavior="0" />
       <RootComponent type="9" schemaName="tc_customerbookingrole" behavior="0" />
       <RootComponent type="9" schemaName="tc_customerrelationslevel" behavior="0" />
       <RootComponent type="9" schemaName="tc_customersegment" behavior="0" />
       <RootComponent type="9" schemaName="tc_department" behavior="0" />
+      <RootComponent type="9" schemaName="tc_duration" behavior="0" />
       <RootComponent type="9" schemaName="tc_emailaddresstype" behavior="0" />
+      <RootComponent type="9" schemaName="tc_emails" behavior="0" />
       <RootComponent type="9" schemaName="tc_externalservicecodetype" behavior="0" />
+      <RootComponent type="9" schemaName="tc_financedd" behavior="0" />
       <RootComponent type="9" schemaName="tc_flightlength" behavior="0" />
       <RootComponent type="9" schemaName="tc_gender" behavior="0" />
       <RootComponent type="9" schemaName="tc_highmediumlow" behavior="0" />
+      <RootComponent type="9" schemaName="tc_holidaysearch" behavior="0" />
       <RootComponent type="9" schemaName="tc_hotelcategory" behavior="0" />
       <RootComponent type="9" schemaName="tc_hotelcomplextype" behavior="0" />
       <RootComponent type="9" schemaName="tc_hotelpromisetype" behavior="0" />
@@ -176,8 +199,11 @@
       <RootComponent type="9" schemaName="tc_languages" behavior="0" />
       <RootComponent type="9" schemaName="tc_methodofcommunication" behavior="0" />
       <RootComponent type="9" schemaName="tc_nonfinancialcompensationsubtype" behavior="0" />
+      <RootComponent type="9" schemaName="tc_offertype" behavior="0" />
       <RootComponent type="9" schemaName="tc_originatingbusinessarea" behavior="0" />
+      <RootComponent type="9" schemaName="tc_phonenumbers" behavior="0" />
       <RootComponent type="9" schemaName="tc_producttype" behavior="0" />
+      <RootComponent type="9" schemaName="tc_responsetype" behavior="0" />
       <RootComponent type="9" schemaName="tc_salutation" behavior="0" />
       <RootComponent type="9" schemaName="tc_servicetype" behavior="0" />
       <RootComponent type="9" schemaName="tc_sladuration" behavior="0" />
@@ -186,7 +212,11 @@
       <RootComponent type="9" schemaName="tc_transfertype" behavior="0" />
       <RootComponent type="9" schemaName="tc_vouchertypes" behavior="0" />
       <RootComponent type="9" schemaName="tc_yesno" behavior="0" />
+      <RootComponent type="20" id="{03b19833-5f35-e711-8102-e0071b66a0a1}" behavior="0" />
+      <RootComponent type="20" id="{1a795b7d-1563-e711-8105-e0071b65ce81}" behavior="0" />
       <RootComponent type="20" id="{1fc1d43b-f9f8-e611-8107-3863bb34fb48}" behavior="0" />
+      <RootComponent type="20" id="{237424f5-4657-e711-8107-e0071b66a0a1}" behavior="0" />
+      <RootComponent type="20" id="{23da832c-fc57-e711-810c-e0071b66e0a1}" behavior="0" />
       <RootComponent type="20" id="{2d8ae3cf-1f3f-e711-810b-e0071b66e0a1}" behavior="0" />
       <RootComponent type="20" id="{2eef0323-f9f8-e611-8107-3863bb34fb48}" behavior="0" />
       <RootComponent type="20" id="{2fa23aa7-b205-e711-8109-3863bb34fb48}" behavior="0" />
@@ -195,10 +225,12 @@
       <RootComponent type="20" id="{6fd27bee-defc-e611-8108-3863bb34fb48}" behavior="0" />
       <RootComponent type="20" id="{808ffa91-f8f8-e611-8107-3863bb34fb48}" behavior="0" />
       <RootComponent type="20" id="{834ba58b-f8f8-e611-8107-3863bb34fb48}" behavior="0" />
+      <RootComponent type="20" id="{9a5cefa5-1563-e711-8105-e0071b65ce81}" behavior="0" />
       <RootComponent type="20" id="{a2518d2f-f9f8-e611-8107-3863bb34fb48}" behavior="0" />
       <RootComponent type="20" id="{a65769fa-f9f8-e611-8107-3863bb34fb48}" behavior="0" />
       <RootComponent type="20" id="{a87c699e-f8f8-e611-8107-3863bb34fb48}" behavior="0" />
       <RootComponent type="20" id="{ad31700e-a129-e711-810e-3863bb34fb48}" behavior="0" />
+      <RootComponent type="20" id="{c477d8c4-1563-e711-8105-e0071b65ce81}" behavior="0" />
       <RootComponent type="20" id="{d14317c4-18f8-e611-80ff-3863bb354ff0}" behavior="0" />
       <RootComponent type="20" id="{e478dc35-f9f8-e611-8107-3863bb34fb48}" behavior="0" />
       <RootComponent type="20" id="{ef5563ee-f9f8-e611-8107-3863bb34fb48}" behavior="0" />
@@ -213,6 +245,7 @@
       <RootComponent type="29" id="{04ec99a8-145d-448d-ab3e-4d6062746ee0}" behavior="0" />
       <RootComponent type="29" id="{06570f2d-e7fc-e611-8108-3863bb340dd8}" behavior="0" />
       <RootComponent type="29" id="{0685119b-1144-4e16-aafc-4ac62fa8d32f}" behavior="0" />
+      <RootComponent type="29" id="{06fa25c0-9656-e711-8107-e0071b66a0a1}" behavior="0" />
       <RootComponent type="29" id="{07946764-9c05-e711-810d-1458d041f8e8}" behavior="0" />
       <RootComponent type="29" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" behavior="0" />
       <RootComponent type="29" id="{095568ae-7ac9-445d-ab0a-eb3059a96044}" behavior="0" />
@@ -238,16 +271,15 @@
       <RootComponent type="29" id="{1f4c4c53-4836-e711-8104-e0071b66a0a1}" behavior="0" />
       <RootComponent type="29" id="{1f965f52-0a37-479d-ade5-c4fca8781310}" behavior="0" />
       <RootComponent type="29" id="{1f9b5739-f23f-e711-8118-e0071b66a051}" behavior="0" />
-      <RootComponent type="29" id="{1fc0a632-5f03-4233-aff1-13938cf09668}" behavior="0" />
       <RootComponent type="29" id="{20fcdb60-74dd-41cc-8694-038078ba01bc}" behavior="0" />
       <RootComponent type="29" id="{221dab26-d308-e711-8102-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{24f76fa6-d408-e711-8102-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{250b2a34-030c-e711-810a-3863bb34fb48}" behavior="0" />
       <RootComponent type="29" id="{25a3b46b-ced5-432b-a798-3bfdecfd682c}" behavior="0" />
-      <RootComponent type="29" id="{26557269-4574-4ed7-828f-b5c608d9c8d8}" behavior="0" />
       <RootComponent type="29" id="{2699b8c5-b315-441e-b633-50dcf49709a6}" behavior="0" />
       <RootComponent type="29" id="{2719910c-d695-4b6f-a52e-4cae3517c3d8}" behavior="0" />
       <RootComponent type="29" id="{2992e799-9110-e711-810e-1458d041f8e8}" behavior="0" />
+      <RootComponent type="29" id="{29dd3098-9174-4a5f-8aa6-f0ee0a5b847c}" behavior="0" />
       <RootComponent type="29" id="{2b7cfcc6-9c1e-e711-8110-1458d041f8e8}" behavior="0" />
       <RootComponent type="29" id="{2ca981aa-7e8d-4f8d-a937-462b906ec985}" behavior="0" />
       <RootComponent type="29" id="{2e1ba5f7-b98a-4a3a-8275-e61921ce4784}" behavior="0" />
@@ -274,6 +306,7 @@
       <RootComponent type="29" id="{433a41ef-d879-407d-8387-e3bf5bd54b8d}" behavior="0" />
       <RootComponent type="29" id="{43840855-dcfd-e611-8100-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{43d8e53b-0109-e711-8102-3863bb354ff0}" behavior="0" />
+      <RootComponent type="29" id="{46bb2d49-d16a-e711-8133-e0071b65cea1}" behavior="0" />
       <RootComponent type="29" id="{46eea6c9-17dd-4172-af9f-061dd5b32211}" behavior="0" />
       <RootComponent type="29" id="{47fe5461-a4fa-e611-8108-3863bb340dd8}" behavior="0" />
       <RootComponent type="29" id="{49458e66-1bde-4090-8764-8b36bcc6ed50}" behavior="0" />
@@ -305,6 +338,7 @@
       <RootComponent type="29" id="{6c0b8350-d7ec-4dec-8a10-3fe54ade741a}" behavior="0" />
       <RootComponent type="29" id="{6da56062-520a-e711-810a-3863bb340dd8}" behavior="0" />
       <RootComponent type="29" id="{6fa03874-fa08-e711-8102-3863bb354ff0}" behavior="0" />
+      <RootComponent type="29" id="{7142bade-154a-4634-a169-f1b74ebb0951}" behavior="0" />
       <RootComponent type="29" id="{71d50574-2192-4395-8dcb-512552d8ad6c}" behavior="0" />
       <RootComponent type="29" id="{71ee6c85-e598-4cbb-8abe-33b8be03e1cc}" behavior="0" />
       <RootComponent type="29" id="{720f687d-9772-46fd-a008-8bbb37f8d40f}" behavior="0" />
@@ -312,18 +346,18 @@
       <RootComponent type="29" id="{74cab45f-4700-e711-8108-3863bb34fb48}" behavior="0" />
       <RootComponent type="29" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" behavior="0" />
       <RootComponent type="29" id="{75ae6fcf-e5f8-e611-810b-1458d041f8e8}" behavior="0" />
-      <RootComponent type="29" id="{783a3576-79cf-4944-ac90-305c2eb09476}" behavior="0" />
-      <RootComponent type="29" id="{783f9c10-a4fe-484b-ac70-0fe6eacb0a73}" behavior="0" />
       <RootComponent type="29" id="{78cbd8b4-274d-e711-8107-e0071b66a0a1}" behavior="0" />
       <RootComponent type="29" id="{78f837c6-8c2e-4c23-8b91-c69d63d42005}" behavior="0" />
       <RootComponent type="29" id="{7a9843eb-eb3e-e711-8126-e0071b659e11}" behavior="0" />
       <RootComponent type="29" id="{7b10c326-807c-4f01-a3d0-4264dec1f418}" behavior="0" />
       <RootComponent type="29" id="{7bf73d13-8bfa-e611-8108-3863bb340dd8}" behavior="0" />
       <RootComponent type="29" id="{7f6eca77-fb37-4355-8ffc-b532cda3ca7c}" behavior="0" />
+      <RootComponent type="29" id="{85366a2a-753a-4950-9c28-0cb8e9a4c574}" behavior="0" />
       <RootComponent type="29" id="{85b5b954-5614-4e6b-be16-1a2d82fb5e76}" behavior="0" />
       <RootComponent type="29" id="{89a1d87f-ad5c-4cd8-a459-4ca2f0194aec}" behavior="0" />
       <RootComponent type="29" id="{8c84028a-b2fd-e611-8100-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{8d7dcf0d-4e8d-4b27-9d90-7e54a826078d}" behavior="0" />
+      <RootComponent type="29" id="{8ff161ca-6668-e711-8106-e0071b65ce81}" behavior="0" />
       <RootComponent type="29" id="{918ef2bb-a6fa-e611-8108-3863bb340dd8}" behavior="0" />
       <RootComponent type="29" id="{92d984a6-1724-494d-a087-15c21d710f34}" behavior="0" />
       <RootComponent type="29" id="{94b7e66b-330a-e711-810a-3863bb340dd8}" behavior="0" />
@@ -331,12 +365,12 @@
       <RootComponent type="29" id="{99cdf643-a229-4b61-9aa1-02849011d679}" behavior="0" />
       <RootComponent type="29" id="{9a6527b8-defc-e611-8108-3863bb340dd8}" behavior="0" />
       <RootComponent type="29" id="{9ab95de7-823c-4b2e-9617-484fabecaa9c}" behavior="0" />
-      <RootComponent type="29" id="{9ba41f33-4d12-4f44-bb82-14dad2936d4b}" behavior="0" />
       <RootComponent type="29" id="{9c659960-85a6-4cb2-b114-269d7df0d443}" behavior="0" />
       <RootComponent type="29" id="{a1d73372-181d-4396-92ec-4e12f155e5b4}" behavior="0" />
       <RootComponent type="29" id="{a2371728-d807-e711-8102-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{a3b3d612-849f-4480-9d72-96dad41b8031}" behavior="0" />
       <RootComponent type="29" id="{a422fdd9-e803-e711-8109-3863bb34fb48}" behavior="0" />
+      <RootComponent type="29" id="{a4c4bec4-1e59-41f0-ab31-748042fc2843}" behavior="0" />
       <RootComponent type="29" id="{a620ecb5-84a1-4624-8e1e-03f5d8a21750}" behavior="0" />
       <RootComponent type="29" id="{a68f4c83-c569-4834-b9a1-abf1c452d5ce}" behavior="0" />
       <RootComponent type="29" id="{a7877e0a-9a76-458a-901e-02560a4678bb}" behavior="0" />
@@ -349,12 +383,16 @@
       <RootComponent type="29" id="{af9db957-a126-e711-8111-1458d041f8e8}" behavior="0" />
       <RootComponent type="29" id="{b04c6c77-5d32-e711-8106-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{b119a5a8-1404-4a7b-8345-4cb70fd7485b}" behavior="0" />
+      <RootComponent type="29" id="{b262383d-6066-e711-8132-e0071b65cea1}" behavior="0" />
       <RootComponent type="29" id="{b3c59c51-8321-4c27-bce8-a9bed9a58956}" behavior="0" />
+      <RootComponent type="29" id="{b4a21e5d-c424-4f80-bee9-288de6df5be2}" behavior="0" />
       <RootComponent type="29" id="{b5d5f0fa-c43a-485b-a79d-caa3eec476e9}" behavior="0" />
       <RootComponent type="29" id="{b5fb8d18-d66a-4b9f-a21f-f155cc164aea}" behavior="0" />
       <RootComponent type="29" id="{b6834a0a-83c7-4fbb-94ed-2e04f315ea4c}" behavior="0" />
       <RootComponent type="29" id="{b7158425-f57c-4603-ad60-a2e06ae56317}" behavior="0" />
       <RootComponent type="29" id="{b7a1d492-4a57-41ac-a14c-4383ad2afe83}" behavior="0" />
+      <RootComponent type="29" id="{b7e1d796-6656-e711-8127-e0071b659e11}" behavior="0" />
+      <RootComponent type="29" id="{b8be13a0-b351-e711-8127-e0071b659e11}" behavior="0" />
       <RootComponent type="29" id="{b9e1b4dd-5b46-4a79-932e-94ff4d406302}" behavior="0" />
       <RootComponent type="29" id="{ba1d2273-ac1f-e711-8104-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{bb69c295-1b2c-e711-810e-3863bb34fb48}" behavior="0" />
@@ -362,7 +400,10 @@
       <RootComponent type="29" id="{c2106e2b-de44-4a90-9ff5-b6a10027417d}" behavior="0" />
       <RootComponent type="29" id="{c2f28b15-fd2b-4c1f-98d2-357ae429f270}" behavior="0" />
       <RootComponent type="29" id="{c34d9cf9-90d0-4ef0-be4e-e1ee0c3d9670}" behavior="0" />
+      <RootComponent type="29" id="{c3abe32e-1367-e711-8133-e0071b65cea1}" behavior="0" />
       <RootComponent type="29" id="{c5515fb3-9d1f-e711-8104-3863bb354ff0}" behavior="0" />
+      <RootComponent type="29" id="{c634f35f-6de2-4531-bd0a-636dc2b4af8e}" behavior="0" />
+      <RootComponent type="29" id="{c77d01b6-1936-4be1-8dfd-a11e26e5e349}" behavior="0" />
       <RootComponent type="29" id="{c93edb17-fd6b-450d-a362-526335fb5d0d}" behavior="0" />
       <RootComponent type="29" id="{cc287dce-e0da-4d1f-8b42-a64cf338a5d7}" behavior="0" />
       <RootComponent type="29" id="{cc56eb5b-edf8-e611-810b-1458d041f8e8}" behavior="0" />
@@ -398,6 +439,7 @@
       <RootComponent type="29" id="{e64bda7f-a5fa-e611-8108-3863bb340dd8}" behavior="0" />
       <RootComponent type="29" id="{e656ed68-4352-4d91-8590-ba9e5312ea4c}" behavior="0" />
       <RootComponent type="29" id="{e7188b50-7f32-e711-8106-3863bb354ff0}" behavior="0" />
+      <RootComponent type="29" id="{eb30886a-d46a-e711-8133-e0071b65cea1}" behavior="0" />
       <RootComponent type="29" id="{eb6a3cae-9a0a-4a05-9a09-40433863b431}" behavior="0" />
       <RootComponent type="29" id="{ec193d5d-003d-48b5-8bcf-6f0d8d0f54c6}" behavior="0" />
       <RootComponent type="29" id="{ed094fcc-1d79-4584-a15e-ba86935a44a5}" behavior="0" />
@@ -415,6 +457,7 @@
       <RootComponent type="29" id="{f82f9b9b-6c2b-442c-a261-99a6995d8e0e}" behavior="0" />
       <RootComponent type="29" id="{f946b341-3ea8-4cfd-8163-9620d74a80cd}" behavior="0" />
       <RootComponent type="29" id="{fa4e772c-a06b-4ed6-b709-30fdb928aa6d}" behavior="0" />
+      <RootComponent type="29" id="{fa9ec1dc-1767-e711-8133-e0071b65cea1}" behavior="0" />
       <RootComponent type="29" id="{fcae3925-e201-e711-8101-3863bb354ff0}" behavior="0" />
       <RootComponent type="29" id="{fdb7564e-0ffe-4acc-980b-ce625ee8db5d}" behavior="0" />
       <RootComponent type="29" id="{fed249cc-5162-4ad0-8338-8ba2fcc07000}" behavior="0" />
@@ -447,8 +490,12 @@
       <RootComponent type="36" id="{fbdfc293-5b4f-e711-8119-e0071b66a051}" behavior="0" />
       <RootComponent type="36" id="{fff964f5-4c4f-e711-8119-e0071b66a051}" behavior="0" />
       <RootComponent type="39" id="{7a7a5a31-552b-e711-8112-1458d041f8e8}" behavior="0" />
+      <RootComponent type="60" id="{0185ac7a-1ffe-4831-bd47-5d1c2348b3c6}" behavior="0" />
       <RootComponent type="60" id="{03f2a13e-f6df-4428-8b3b-1ed3b97842ae}" behavior="0" />
+      <RootComponent type="60" id="{04a6fe9e-7738-48cc-86f2-fbe2fbd9727c}" behavior="0" />
       <RootComponent type="60" id="{0619ad6c-95d6-462f-ac3d-d27eac8a4840}" behavior="0" />
+      <RootComponent type="60" id="{094fb08a-77bb-49e0-b7ea-8dbddfd01294}" behavior="0" />
+      <RootComponent type="60" id="{0a86ac1e-a46e-44b8-93da-bb00b4535239}" behavior="0" />
       <RootComponent type="60" id="{0b60b9eb-4b06-45c0-a557-d899cecea65e}" behavior="0" />
       <RootComponent type="60" id="{0d1e47ff-12b2-4f53-9090-bee951b98cb4}" />
       <RootComponent type="60" id="{0ea91742-bb28-430a-b92e-076f181381b7}" behavior="0" />
@@ -457,52 +504,81 @@
       <RootComponent type="60" id="{14d6fd80-3319-e711-8104-3863bb354ff0}" behavior="0" />
       <RootComponent type="60" id="{15915835-b87c-49ec-9ffc-bfac3ac44ef1}" behavior="0" />
       <RootComponent type="60" id="{16654191-19ad-48ca-9e46-c4b4fbdad76f}" />
+      <RootComponent type="60" id="{166bd7ab-1c12-44fe-930b-c02e20def1b3}" behavior="0" />
       <RootComponent type="60" id="{187197f1-ab1d-44e2-a2bb-e93bef4aed66}" behavior="0" />
       <RootComponent type="60" id="{19b14c51-3d43-4d56-ab34-49c540bf468c}" behavior="0" />
       <RootComponent type="60" id="{1c5b35af-5f0d-4e31-a5cd-25c149792427}" behavior="0" />
+      <RootComponent type="60" id="{1c732e5b-3f6e-46be-b452-c92ef981ef57}" behavior="0" />
+      <RootComponent type="60" id="{1e034bf7-d6ad-4338-9be1-51fb54d050c4}" behavior="0" />
+      <RootComponent type="60" id="{1f0c47ef-928b-4b9f-a488-3ba977790ede}" behavior="0" />
       <RootComponent type="60" id="{1f849572-4d3f-42a5-b8ae-b8bf0b32b4a2}" behavior="0" />
       <RootComponent type="60" id="{1fac7e2e-0b1c-4b6c-ab92-8af0f92dbdbc}" />
+      <RootComponent type="60" id="{1fd72128-a5bf-4dcb-aecb-940a6eba3c30}" behavior="0" />
       <RootComponent type="60" id="{1fed44d1-ae68-4a41-bd2b-f13acac4acfa}" behavior="0" />
       <RootComponent type="60" id="{20bf94ae-4adb-4b3a-be9a-3fe6bf878834}" behavior="0" />
       <RootComponent type="60" id="{21f5dd7a-c813-e711-810d-3863bb340dd8}" behavior="0" />
+      <RootComponent type="60" id="{2252583b-f4c0-42f8-97fb-1f56718a6fbf}" behavior="0" />
       <RootComponent type="60" id="{238fe671-b59d-4fcc-84fd-6949db6c2dfa}" behavior="0" />
       <RootComponent type="60" id="{27216331-e27b-4216-b50f-628419db3d32}" behavior="0" />
       <RootComponent type="60" id="{2852c805-2e64-49d7-ab12-52333121efe4}" behavior="0" />
+      <RootComponent type="60" id="{2aafec48-ed9d-47bb-ad59-3251e0d6675f}" behavior="0" />
       <RootComponent type="60" id="{2b36a508-65da-402c-a5f7-30e76f7ec778}" behavior="0" />
+      <RootComponent type="60" id="{2f48d5ff-1c10-4170-9eac-1a8738a7c61f}" behavior="0" />
+      <RootComponent type="60" id="{30f9e0b3-bc16-4641-924a-9be7bf6db1cb}" behavior="0" />
       <RootComponent type="60" id="{3190c04d-f37d-47ed-8e53-92f7c6f773db}" behavior="0" />
       <RootComponent type="60" id="{33ab18eb-9335-e711-8102-e0071b66a0a1}" behavior="0" />
       <RootComponent type="60" id="{33e7aab8-375c-4c02-8d4d-eae82d3b5cca}" behavior="0" />
       <RootComponent type="60" id="{3423bc24-e745-42e4-88f1-c65289f58abb}" behavior="0" />
+      <RootComponent type="60" id="{37006f9c-08c7-4855-a3c3-b888b70a698f}" behavior="0" />
       <RootComponent type="60" id="{3a03e16e-19ed-47ee-aff0-4967d68133b9}" behavior="0" />
       <RootComponent type="60" id="{3a0b2969-21c0-49c7-8590-43bd0688145d}" behavior="0" />
+      <RootComponent type="60" id="{3a67723b-a572-46de-b845-c9c05afd7083}" behavior="0" />
       <RootComponent type="60" id="{3ba95cd3-f668-4a13-a416-2a47a1da402b}" behavior="0" />
+      <RootComponent type="60" id="{3cbecd0d-734e-40fd-8739-02435abc0142}" behavior="0" />
+      <RootComponent type="60" id="{3e7768a8-3c5c-4336-a8be-58f8b87420c2}" behavior="0" />
       <RootComponent type="60" id="{3ee48486-c00b-4f99-ab2e-21cf96d80407}" behavior="0" />
       <RootComponent type="60" id="{403592e8-03fe-4a60-994e-3110531dad0c}" behavior="0" />
+      <RootComponent type="60" id="{42602d9f-77e6-4315-a73f-0cc100a92f7f}" behavior="0" />
       <RootComponent type="60" id="{43fc8d5e-1a0a-4da7-ba12-e878abf7c7fa}" behavior="0" />
       <RootComponent type="60" id="{47795f41-6ce9-49e0-8a7c-59b0d0e3b80c}" behavior="0" />
       <RootComponent type="60" id="{4a63c8d1-6c1e-48ec-9db4-3e6c7155334c}" behavior="0" />
       <RootComponent type="60" id="{4a7b0d08-760e-4b3c-999e-9b7bae357d70}" behavior="0" />
+      <RootComponent type="60" id="{4d03b27e-5c31-47d4-8628-fcb40a8314aa}" behavior="0" />
+      <RootComponent type="60" id="{4ec2d084-8206-4ca0-8ce7-cbd5554d562d}" behavior="0" />
       <RootComponent type="60" id="{4ed5377d-04f0-4ea9-8a33-d479f6ac795a}" behavior="0" />
+      <RootComponent type="60" id="{4ef9c9e0-48ea-4f34-88b0-93d41fb0eb55}" behavior="0" />
       <RootComponent type="60" id="{4f469c79-25cb-41e6-8cf3-6c4d65800986}" behavior="0" />
+      <RootComponent type="60" id="{5013c524-ee5c-4e66-99d4-640b588f9653}" behavior="0" />
+      <RootComponent type="60" id="{53666430-ec75-44de-a7cf-83dc4129a1c7}" behavior="0" />
       <RootComponent type="60" id="{554c801c-931f-e711-810c-3863bb34fb48}" behavior="0" />
+      <RootComponent type="60" id="{55d1cb7f-90c0-421f-8250-5c20e8c12ce0}" behavior="0" />
       <RootComponent type="60" id="{55ec3a33-a81a-43c7-b356-06b455cafa84}" behavior="0" />
       <RootComponent type="60" id="{58ef8e27-a26a-4f89-8159-0e82c863772c}" behavior="0" />
+      <RootComponent type="60" id="{5964b39a-7d48-49ca-9786-f8c690e167e0}" behavior="0" />
       <RootComponent type="60" id="{5998bdf9-b8aa-416c-9d3e-7b7bcd3390d7}" behavior="0" />
       <RootComponent type="60" id="{5caa9a69-2ce0-47fd-885e-b6a6b2edc12f}" behavior="0" />
       <RootComponent type="60" id="{5e9725e4-5449-4363-8c1c-5ae71767af34}" />
       <RootComponent type="60" id="{5f79e89a-ba4c-4b24-b4b5-4349f414faf9}" behavior="0" />
       <RootComponent type="60" id="{61a21ee4-7943-4d00-8a41-42097c88e110}" behavior="0" />
+      <RootComponent type="60" id="{63f526f0-d66e-49e8-acc1-acddbfa545fa}" behavior="0" />
+      <RootComponent type="60" id="{6442784b-709a-4d74-8d89-800553c0cb24}" behavior="0" />
       <RootComponent type="60" id="{661157fe-2fc9-4eaa-835f-5bfa2f7b64f7}" behavior="0" />
       <RootComponent type="60" id="{6a59d3e6-ce8b-4d2f-8019-5ec48a74b241}" behavior="0" />
       <RootComponent type="60" id="{6dc0e3fa-4915-e711-810c-3863bb34fb48}" behavior="0" />
+      <RootComponent type="60" id="{6e8407a2-005f-45fb-985c-fb7f7a7ae8f2}" />
       <RootComponent type="60" id="{6ed25386-e3ec-4e2b-bc5e-6a2a7803c8f3}" />
       <RootComponent type="60" id="{704332b7-6387-4d8f-b6bd-4ff369824e8c}" behavior="0" />
       <RootComponent type="60" id="{707fc57b-c5e6-471b-a180-e37ed28a38e2}" behavior="0" />
       <RootComponent type="60" id="{70ad8b15-e3f3-4d7d-9e4b-16cb4e51b484}" behavior="0" />
+      <RootComponent type="60" id="{7120c6bd-2bcf-4d15-a640-5152cf6f5954}" behavior="0" />
       <RootComponent type="60" id="{72b3222f-1cc4-4cd0-8855-079161cc5340}" behavior="0" />
       <RootComponent type="60" id="{73b30fee-9928-4f19-abbe-48911d95ef04}" behavior="0" />
+      <RootComponent type="60" id="{74d4852e-6158-4e7d-9cc4-0c2ee2df890a}" behavior="0" />
       <RootComponent type="60" id="{77aae261-4d19-e711-8104-3863bb354ff0}" behavior="0" />
+      <RootComponent type="60" id="{79782c5d-7338-4534-a30c-c2224d35082b}" behavior="0" />
+      <RootComponent type="60" id="{7a7f2c03-061d-42ad-8d41-5148d7cb3359}" behavior="0" />
       <RootComponent type="60" id="{7ba7fac1-1418-4335-935f-f7f8dfd73fcc}" />
+      <RootComponent type="60" id="{7dcf44f5-5663-44b7-8af2-3e0f6e70f2da}" behavior="0" />
       <RootComponent type="60" id="{7f30adfe-f124-e711-8104-3863bb354ff0}" behavior="0" />
       <RootComponent type="60" id="{81497873-7e70-4d2e-81fd-7a99b4a791bb}" behavior="0" />
       <RootComponent type="60" id="{814ce71e-6be2-4470-99bd-399aca0c5994}" behavior="0" />
@@ -514,57 +590,90 @@
       <RootComponent type="60" id="{88599263-c11e-4c33-bf9d-a46fcee7595b}" behavior="0" />
       <RootComponent type="60" id="{888a26c3-7014-e711-8110-1458d041f8e8}" behavior="0" />
       <RootComponent type="60" id="{8a500bd5-5230-48f1-af4e-7e72f77a7fa0}" behavior="0" />
+      <RootComponent type="60" id="{8bb60157-09f2-428c-95c6-8cb73ac2b893}" behavior="0" />
+      <RootComponent type="60" id="{8d105808-80af-4567-8b2f-e139032ab6a1}" behavior="0" />
       <RootComponent type="60" id="{8e10b902-0b3e-441c-8b12-88e6c1793848}" behavior="0" />
       <RootComponent type="60" id="{8e867ca8-1fd7-4904-b4f5-d407fea0ca99}" />
+      <RootComponent type="60" id="{8eb5c2c6-93ff-43db-8382-59e6765030b3}" behavior="0" />
       <RootComponent type="60" id="{9132b4eb-963c-e711-8126-e0071b659e11}" behavior="0" />
       <RootComponent type="60" id="{915f6055-2e07-4276-ae08-2b96c8d02c57}" behavior="0" />
       <RootComponent type="60" id="{93c134e1-cfda-4630-bf1d-e86a4c7a9a6e}" behavior="0" />
       <RootComponent type="60" id="{95be2005-6b14-e711-8110-1458d041f8e8}" behavior="0" />
+      <RootComponent type="60" id="{95ca960d-0684-4131-87c6-833420936294}" behavior="0" />
+      <RootComponent type="60" id="{983dc188-2a05-4cfe-b907-4fbfae8c21f7}" behavior="0" />
+      <RootComponent type="60" id="{99356c61-ad5c-406e-9c07-25efed3e9864}" behavior="0" />
       <RootComponent type="60" id="{9aca58e8-6630-461f-8d7d-6bf1d43d6676}" behavior="0" />
       <RootComponent type="60" id="{9d0bc1e4-713f-42e6-a107-9e662730f9e7}" behavior="0" />
+      <RootComponent type="60" id="{9e270842-55cf-4803-aff7-4e0e9a002f5a}" behavior="0" />
+      <RootComponent type="60" id="{9e52c4e1-4a67-472a-8a42-ec15c9291fb1}" behavior="0" />
+      <RootComponent type="60" id="{a415c4c8-0c17-4843-b1f6-393f2ce840ab}" behavior="0" />
+      <RootComponent type="60" id="{a56bc812-c8df-4618-92ee-0970f5c923c0}" behavior="0" />
+      <RootComponent type="60" id="{a597f7b0-2fa5-4a21-9c06-0cfc470f6509}" behavior="0" />
       <RootComponent type="60" id="{a758a67a-3a15-e711-810d-3863bb340dd8}" behavior="0" />
+      <RootComponent type="60" id="{a837e4a7-01b8-4f82-a475-be9abd67e667}" behavior="0" />
+      <RootComponent type="60" id="{aa4ed7d3-a24b-4558-9aa6-404f2453db50}" behavior="0" />
       <RootComponent type="60" id="{aa5e448a-b707-4364-8059-52eefb03c5db}" behavior="0" />
       <RootComponent type="60" id="{b028db32-3619-48a5-ac51-cf3f947b0ef3}" behavior="0" />
       <RootComponent type="60" id="{b192a953-ef67-4d7b-896a-d878bfa51ceb}" behavior="0" />
       <RootComponent type="60" id="{b7062b3a-d74e-438d-b297-334766c5234e}" behavior="0" />
       <RootComponent type="60" id="{b7943d2c-d5fd-4483-baf0-5cec3a2bb688}" behavior="0" />
+      <RootComponent type="60" id="{ba8ca2ab-ad69-4074-9d4f-f8a067518c8d}" behavior="0" />
+      <RootComponent type="60" id="{bc082a52-2b3e-4813-b2d1-02e8ce7480ce}" behavior="0" />
       <RootComponent type="60" id="{bc3f9e9d-3021-4fde-b424-37bd3ac1cc88}" behavior="0" />
       <RootComponent type="60" id="{bec074ec-0734-e711-8114-e0071b66a051}" behavior="0" />
+      <RootComponent type="60" id="{c1d3133b-fba6-4b59-951f-0e7a12c03e26}" behavior="0" />
       <RootComponent type="60" id="{c29c16fe-963c-e711-8126-e0071b659e11}" behavior="0" />
       <RootComponent type="60" id="{c2cd9e55-d4b4-4b55-9951-16ead79643e5}" behavior="0" />
+      <RootComponent type="60" id="{c36cd2e8-1d21-4c7c-8aa2-b7f82f462964}" behavior="0" />
       <RootComponent type="60" id="{c49ccb7d-ed78-401c-8797-d8719e678f49}" behavior="0" />
       <RootComponent type="60" id="{c4bc3e8c-71a3-41f6-9a2a-5a4f147d92e8}" behavior="0" />
       <RootComponent type="60" id="{c52c7230-0cab-4de5-a996-80af7b36a33e}" behavior="0" />
       <RootComponent type="60" id="{c5356a0d-3b19-e711-8104-3863bb354ff0}" behavior="0" />
       <RootComponent type="60" id="{c555bc66-715c-483d-a0dd-ef3806dcbc06}" behavior="0" />
       <RootComponent type="60" id="{c6615f56-67b7-413b-b238-2a7005cea726}" behavior="0" />
+      <RootComponent type="60" id="{c9529382-3cea-473d-af37-a3f90b4e2b4c}" behavior="0" />
       <RootComponent type="60" id="{c9e7ec2d-efca-4e4c-b3e3-f63c4bba5e4b}" behavior="0" />
       <RootComponent type="60" id="{ca8dfced-338c-43b2-b212-83745e257c28}" />
+      <RootComponent type="60" id="{cb667780-5050-434b-9460-e383a99d05f5}" behavior="0" />
+      <RootComponent type="60" id="{cc760212-3eab-4009-b5c3-ea9cf6f3e141}" behavior="0" />
       <RootComponent type="60" id="{cdbf9f84-14ed-4753-9c30-20cfbe42d6e9}" behavior="0" />
       <RootComponent type="60" id="{cec325d1-9f13-e711-810d-3863bb340dd8}" behavior="0" />
+      <RootComponent type="60" id="{ceede1fb-11d3-4809-bab1-fb6cae64b895}" behavior="0" />
       <RootComponent type="60" id="{d1e9fb5f-c4b3-4cd5-bda3-16f664c7b4e7}" behavior="0" />
+      <RootComponent type="60" id="{d1ff4991-a366-4882-a6f9-c3ac0facbc25}" behavior="0" />
       <RootComponent type="60" id="{d4b6ee17-768c-4e93-8276-eef3140a8d02}" behavior="0" />
       <RootComponent type="60" id="{d6784cb8-bc33-4fcc-a9a9-3dc5b46ea9c6}" />
+      <RootComponent type="60" id="{d7ac8178-0a6c-4b38-8746-fd1423e32ef8}" behavior="0" />
+      <RootComponent type="60" id="{d8a8acb7-497e-467e-b335-d6f78538deed}" behavior="0" />
+      <RootComponent type="60" id="{db49d5fc-e52d-4987-a213-6c0e581643d7}" behavior="0" />
       <RootComponent type="60" id="{dc9bae21-7ec6-4ef4-8483-e9090c14e1f6}" behavior="0" />
       <RootComponent type="60" id="{de9e32bd-1a1d-48e6-9c18-0fb705453a13}" behavior="0" />
       <RootComponent type="60" id="{dea6b7c1-1aae-45d5-a60b-01f0961fc432}" behavior="0" />
+      <RootComponent type="60" id="{df130a23-6d24-4a9b-8689-7c20bae025d8}" behavior="0" />
+      <RootComponent type="60" id="{e5538bb9-77ec-4d24-bc5f-8cb2d825f664}" behavior="0" />
       <RootComponent type="60" id="{e5f3114d-0bc1-4f30-a88c-85f890a39afe}" behavior="0" />
       <RootComponent type="60" id="{e6fa6e79-4b6a-4b08-916f-5cf1ba40fd8c}" behavior="0" />
       <RootComponent type="60" id="{e88e7197-2565-400d-94ff-acb8cbbf2a98}" behavior="0" />
       <RootComponent type="60" id="{e8905e4c-fe1d-e711-810d-3863bb340dd8}" behavior="0" />
+      <RootComponent type="60" id="{e9d02f24-404f-4035-83fc-74599a78fc26}" behavior="0" />
       <RootComponent type="60" id="{eb3748b8-5f90-4050-a039-8b7d279ad8fe}" behavior="0" />
       <RootComponent type="60" id="{eb49f73c-c585-4adf-b07a-9547613dc26f}" behavior="0" />
+      <RootComponent type="60" id="{eb5a1dec-3db5-4e48-8df3-bd8c265907fd}" behavior="0" />
       <RootComponent type="60" id="{ec641943-514b-4cd4-b965-cb4c61c6d40c}" behavior="0" />
       <RootComponent type="60" id="{ecd565f4-ff33-e711-8114-e0071b66a051}" behavior="0" />
       <RootComponent type="60" id="{ed92b7e8-4e36-458a-9a89-273ddf68f03e}" behavior="0" />
       <RootComponent type="60" id="{ef28f965-ef13-e711-810d-3863bb340dd8}" behavior="0" />
+      <RootComponent type="60" id="{ef3ef667-4f17-4f32-9bfd-2d08d29d18a0}" behavior="0" />
       <RootComponent type="60" id="{efd07c8e-c7b7-44d2-885c-7862747ff7b0}" behavior="0" />
       <RootComponent type="60" id="{f2b8a98b-7418-4821-9066-ce182141887d}" behavior="0" />
+      <RootComponent type="60" id="{f4f6c126-03e1-4f0b-bfa7-5700f30c76c4}" behavior="0" />
       <RootComponent type="60" id="{f7efc210-973c-e711-8126-e0071b659e11}" behavior="0" />
       <RootComponent type="60" id="{fa9e13f0-a63b-e711-8117-e0071b66a051}" behavior="0" />
       <RootComponent type="60" id="{fcf83436-d034-e711-8122-e0071b659e11}" behavior="0" />
       <RootComponent type="60" id="{fdd6d28a-6a67-4bf3-802c-37eb1a472ae2}" />
+      <RootComponent type="60" id="{fe299025-ba8e-44cb-b992-4586b943a020}" behavior="0" />
       <RootComponent type="60" id="{ff46e7c1-edf6-4368-9e77-c121bd15f2b2}" behavior="0" />
+      <RootComponent type="61" schemaName="msdyusd_Logo" behavior="0" />
       <RootComponent type="61" schemaName="new_Incident_origincode_icon100000000.png" behavior="0" />
       <RootComponent type="61" schemaName="new_Incident_origincode_icon100000001.png" behavior="0" />
       <RootComponent type="61" schemaName="new_Incident_origincode_icon100000002.png" behavior="0" />
@@ -587,6 +696,9 @@
       <RootComponent type="61" schemaName="tc_AlternativeEmail32px" behavior="0" />
       <RootComponent type="61" schemaName="tc_assistancerequesticon16" behavior="0" />
       <RootComponent type="61" schemaName="tc_assistancerequesticon32" behavior="0" />
+      <RootComponent type="61" schemaName="tc_BeachLogo" behavior="0" />
+      <RootComponent type="61" schemaName="tc_BoardBasisIcon16.png" behavior="0" />
+      <RootComponent type="61" schemaName="tc_BoardBasisIcon32.png" behavior="0" />
       <RootComponent type="61" schemaName="tc_BookingAccommodationIcon16" behavior="0" />
       <RootComponent type="61" schemaName="tc_BookingAccommodationIcon32" behavior="0" />
       <RootComponent type="61" schemaName="tc_BookingExtraService16" behavior="0" />
@@ -630,6 +742,8 @@
       <RootComponent type="61" schemaName="tc_CustomerBookingRole32" behavior="0" />
       <RootComponent type="61" schemaName="tc_CustomerKPIChartIcon16" behavior="0" />
       <RootComponent type="61" schemaName="tc_CustomerKPIChartIcon32" behavior="0" />
+      <RootComponent type="61" schemaName="tc_CustomerVIPIcon16" behavior="0" />
+      <RootComponent type="61" schemaName="tc_CustomerVIPIcon32" behavior="0" />
       <RootComponent type="61" schemaName="tc_es6promise.js" behavior="0" />
       <RootComponent type="61" schemaName="tc_GatewayGateIcon16" behavior="0" />
       <RootComponent type="61" schemaName="tc_GatewayGateIcon32" behavior="0" />
@@ -639,10 +753,17 @@
       <RootComponent type="61" schemaName="tc_HotelPromiseIcon32" behavior="0" />
       <RootComponent type="61" schemaName="tc_iDSConfigurationIcon16" behavior="0" />
       <RootComponent type="61" schemaName="tc_iDSConfigurationIcon32" behavior="0" />
+      <RootComponent type="61" schemaName="tc_key32x32" behavior="0" />
+      <RootComponent type="61" schemaName="tc_KillerQuestionIcon16.png" behavior="0" />
+      <RootComponent type="61" schemaName="tc_KillerQuestionIcon32.png" behavior="0" />
+      <RootComponent type="61" schemaName="tc_LIMEIcon16" behavior="0" />
+      <RootComponent type="61" schemaName="tc_LIMEIcon32" behavior="0" />
       <RootComponent type="61" schemaName="tc_LocationOfficeIcon16" behavior="0" />
       <RootComponent type="61" schemaName="tc_LocationOfficeIcon32" behavior="0" />
       <RootComponent type="61" schemaName="tc_LocationPyramidIcon16" behavior="0" />
       <RootComponent type="61" schemaName="tc_LocationPyramidIcon32" behavior="0" />
+      <RootComponent type="61" schemaName="tc_OWRLogo16" behavior="0" />
+      <RootComponent type="61" schemaName="tc_OWRLogo32" behavior="0" />
       <RootComponent type="61" schemaName="tc_ParticipantIcon16" behavior="0" />
       <RootComponent type="61" schemaName="tc_ParticipantIcon32" behavior="0" />
       <RootComponent type="61" schemaName="tc_recoveryicon16" behavior="0" />
@@ -651,6 +772,7 @@
       <RootComponent type="61" schemaName="tc_RegionIcon32" behavior="0" />
       <RootComponent type="61" schemaName="tc_Remark16" behavior="0" />
       <RootComponent type="61" schemaName="tc_Remark32" behavior="0" />
+      <RootComponent type="61" schemaName="tc_require.js" behavior="0" />
       <RootComponent type="61" schemaName="tc_Sharer16" behavior="0" />
       <RootComponent type="61" schemaName="tc_Sharer32" behavior="0" />
       <RootComponent type="61" schemaName="tc_SiteMapDataArea32x32" behavior="0" />
@@ -660,33 +782,50 @@
       <RootComponent type="61" schemaName="tc_SurveyIcon32" behavior="0" />
       <RootComponent type="61" schemaName="tc_surveyresponseicon16" behavior="0" />
       <RootComponent type="61" schemaName="tc_surveyresponseicon32" behavior="0" />
+      <RootComponent type="61" schemaName="tc_Tc.Crm.Html.TravellerPlanner.KillerQuestions.html" behavior="0" />
       <RootComponent type="61" schemaName="tc_Tc.Crm.Scripts.Common.js" behavior="0" />
       <RootComponent type="61" schemaName="tc_Tc.Crm.Scripts.Events.Account" behavior="0" />
       <RootComponent type="61" schemaName="tc_Tc.Crm.Scripts.Events.Case.js" behavior="0" />
       <RootComponent type="61" schemaName="tc_Tc.Crm.Scripts.Events.CaseLine.js" behavior="0" />
       <RootComponent type="61" schemaName="tc_Tc.Crm.Scripts.Events.Compensation.js" behavior="0" />
-      <RootComponent type="61" schemaName="tc_Tc.Crm.Scripts.Events.Contact.js" behavior="0" />
+      <RootComponent type="61" schemaName="tc_Tc.Crm.Scripts.Events.Contact.Ids.js" behavior="0" />
+      <RootComponent type="61" schemaName="tc_Tc.Crm.Scripts.Events.Contact.Retail.js" behavior="0" />
       <RootComponent type="61" schemaName="tc_Tc.Crm.Scripts.Events.Email.js" behavior="0" />
       <RootComponent type="61" schemaName="tc_Tc.Crm.Scripts.Events.SurveyResponse.js" behavior="0" />
+      <RootComponent type="61" schemaName="tc_Tc.Crm.Scripts.Events.TravellerPlanner.js" behavior="0" />
+      <RootComponent type="61" schemaName="tc_Tc.Crm.Scripts.EventTriggers.Case.js" behavior="0" />
       <RootComponent type="61" schemaName="tc_Tc.Crm.Scripts.Html.Compensation.js" behavior="0" />
+      <RootComponent type="61" schemaName="tc_Tc.Crm.Scripts.Html.TravellerPlanner.js" behavior="0" />
       <RootComponent type="61" schemaName="tc_Tc.Crm.Scripts.Library.Case.js" behavior="0" />
       <RootComponent type="61" schemaName="tc_Tc.Crm.Scripts.Library.CaseLine.js" behavior="0" />
       <RootComponent type="61" schemaName="tc_Tc.Crm.Scripts.Library.Compensation.js" behavior="0" />
       <RootComponent type="61" schemaName="tc_Tc.Crm.Scripts.Library.Contact.js" behavior="0" />
+      <RootComponent type="61" schemaName="tc_Tc.Crm.Scripts.Utils.js" behavior="0" />
+      <RootComponent type="61" schemaName="tc_Tc.Crm.Uk.Scripts.Events.Contact.js" behavior="0" />
+      <RootComponent type="61" schemaName="tc_Tc.Image.Search" behavior="0" />
+      <RootComponent type="61" schemaName="tc_Tc.Opportunity.Events" behavior="0" />
       <RootComponent type="61" schemaName="tc_TestScript" behavior="0" />
       <RootComponent type="61" schemaName="tc_TestScriptPlzIgnore" behavior="0" />
       <RootComponent type="61" schemaName="tc_TestScriptPlzIgnore1" behavior="0" />
+      <RootComponent type="61" schemaName="tc_ThomasCookMainLogo" behavior="0" />
       <RootComponent type="61" schemaName="tc_ThomasCookStripLogoDevelopment" behavior="0" />
       <RootComponent type="61" schemaName="tc_ThomasCookStripLogoProduction" behavior="0" />
       <RootComponent type="61" schemaName="tc_ThomasCookStripLogoSIT" behavior="0" />
       <RootComponent type="61" schemaName="tc_ThomasCookStripLogoStaging" behavior="0" />
       <RootComponent type="61" schemaName="tc_ThomasCookStripLogoTraining" behavior="0" />
       <RootComponent type="61" schemaName="tc_ThomasCookStripLogoUAT" behavior="0" />
+      <RootComponent type="61" schemaName="tc_ThomasCookStripLogoUSD" behavior="0" />
       <RootComponent type="61" schemaName="tc_TourOperatorIcon16" behavior="0" />
       <RootComponent type="61" schemaName="tc_TourOperatorIcon32" behavior="0" />
+      <RootComponent type="61" schemaName="tc_ValidateIcon16" behavior="0" />
+      <RootComponent type="61" schemaName="tc_ValidateIcon32" behavior="0" />
+      <RootComponent type="61" schemaName="tc_WhatsNext16" behavior="0" />
+      <RootComponent type="61" schemaName="tc_WhatsNext32" behavior="0" />
       <RootComponent type="62" behavior="0" />
+      <RootComponent type="70" id="{3ab8f05d-ce54-e711-8127-e0071b659e11}" behavior="0" />
       <RootComponent type="70" id="{596e68a9-f203-e711-810d-1458d041f8e8}" behavior="0" />
       <RootComponent type="70" id="{a8c7b94e-f203-e711-810d-1458d041f8e8}" behavior="0" />
+      <RootComponent type="70" id="{c3014921-165b-e711-8121-e0071b662011}" behavior="0" />
       <RootComponent type="70" id="{e101fdc2-9714-e711-810c-3863bb34fb48}" behavior="0" />
       <RootComponent type="70" id="{f249bb95-f424-e711-8104-3863bb354ff0}" behavior="0" />
       <RootComponent type="91" schemaName="Tc.Crm.CustomWorkflowSteps, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9d1841d22f62ace3" behavior="0" />
@@ -709,252 +848,544 @@
     </RootComponents>
     <MissingDependencies>
       <MissingDependency>
-        <Required key="0" type="1" schemaName="posms_smsmessage" displayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="0" type="1" schemaName="posms_smsmessage" displayName="SMS Message" />
+        <Required key="0" type="1" schemaName="msdyn_wallsavedqueryusersettings" displayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
+        <Dependent key="1" type="10" schemaName="msdyn_systemuser_wallsavedqueryusersettings_userid" displayName="msdyn_systemuser_wallsavedqueryusersettings_userid" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="1" type="1" schemaName="msdyn_wallsavedqueryusersettings" displayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
-        <Dependent key="2" type="2" schemaName="msdyn_useridname" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
+        <Required key="2" type="1" schemaName="uii_sessiontransfer" displayName="UII Session Transfer" solution="UiiForMicrosoftDynamicsCRM2011 (3.5.0.755)" />
+        <Dependent key="3" type="10" schemaName="uii_toagent_uii_sessiontransfer" displayName="uii_toagent_uii_sessiontransfer" parentSchemaName="uii_sessiontransfer" parentDisplayName="UII Session Transfer" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="1" type="1" schemaName="msdyn_wallsavedqueryusersettings" displayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
-        <Dependent key="3" type="2" schemaName="msdyn_useridyominame" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
+        <Required key="4" type="1" schemaName="msdyusd_usersettings" displayName="User Setting" solution="DynamicsUnifiedServiceDesk (2.2.0.755)" />
+        <Dependent key="5" type="10" schemaName="msdyusd_systemuser_msdyusd_usersettings_User" displayName="msdyusd_systemuser_msdyusd_usersettings_User" parentSchemaName="msdyusd_usersettings" parentDisplayName="User Setting" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="1" type="1" schemaName="msdyn_wallsavedqueryusersettings" displayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
-        <Dependent key="1" type="1" schemaName="msdyn_wallsavedqueryusersettings" displayName="Filter" />
+        <Required key="4" type="1" schemaName="msdyusd_usersettings" displayName="User Setting" solution="DynamicsUnifiedServiceDesk (2.2.0.755)" />
+        <Dependent key="4" type="1" schemaName="msdyusd_usersettings" displayName="User Setting" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="4" type="1" schemaName="popat_powerattachment" displayName="PowerAttachment" solution="PowerAttachment (1.2.2.2013)" />
-        <Dependent key="4" type="1" schemaName="popat_powerattachment" displayName="PowerAttachment" />
+        <Required key="6" type="1" schemaName="popat_powerattachment" displayName="PowerAttachment" solution="PowerAttachment (1.2.2.2013)" />
+        <Dependent key="6" type="1" schemaName="popat_powerattachment" displayName="PowerAttachment" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="1" type="1" schemaName="msdyn_wallsavedqueryusersettings" displayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
-        <Dependent key="5" type="10" schemaName="msdyn_systemuser_wallsavedqueryusersettings_userid" displayName="msdyn_systemuser_wallsavedqueryusersettings_userid" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
+        <Required key="7" type="1" schemaName="posms_smsmessage" displayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="7" type="1" schemaName="posms_smsmessage" displayName="SMS Message" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="6" type="1" schemaName="msdyn_postruleconfig" displayName="Post Rule Configuration" solution="ActivityFeedsCore (8.2.0.0)" />
-        <Dependent key="7" type="62" />
+        <Required key="2" type="1" schemaName="uii_sessiontransfer" displayName="UII Session Transfer" solution="UiiForMicrosoftDynamicsCRM2011 (3.5.0.755)" />
+        <Dependent key="2" type="1" schemaName="uii_sessiontransfer" displayName="UII Session Transfer" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="8" type="1" schemaName="msdyn_postconfig" displayName="Post Configuration" solution="ActivityFeedsCore (8.2.0.0)" />
-        <Dependent key="7" type="62" />
+        <Required key="0" type="1" schemaName="msdyn_wallsavedqueryusersettings" displayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
+        <Dependent key="0" type="1" schemaName="msdyn_wallsavedqueryusersettings" displayName="Filter" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="9" type="1" schemaName="poan_powerautonumber" displayName="PowerAutoNumber" solution="PowerAutoNumber (1.2.14.2016)" />
-        <Dependent key="7" type="62" />
+        <Required key="8" type="1" schemaName="msdyusd_configuration" displayName="Configuration" solution="DynamicsUnifiedServiceDesk (2.2.0.755)" />
+        <Dependent key="9" type="10" schemaName="msdyusd_configuration_users" displayName="msdyusd_configuration_users" parentSchemaName="systemuser" parentDisplayName="User" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="10" type="2" schemaName="prioritycode" displayName="Priority" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="11" type="29" displayName="Tc.Case.SMS.InformAnotherCustomerCaseCreated" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" />
+        <Required key="10" type="1" schemaName="msdyn_postruleconfig" displayName="Post Rule Configuration" solution="ActivityFeedsCore (8.2.0.0)" />
+        <Dependent key="11" type="62" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="12" type="2" schemaName="ownerid" displayName="Owner" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
-        <Dependent key="11" type="29" displayName="Tc.Case.SMS.InformAnotherCustomerCaseCreated" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" />
+        <Required key="12" type="1" schemaName="msdyn_postconfig" displayName="Post Configuration" solution="ActivityFeedsCore (8.2.0.0)" />
+        <Dependent key="11" type="62" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="13" type="2" schemaName="regardingobjectid" displayName="Regarding" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
-        <Dependent key="11" type="29" displayName="Tc.Case.SMS.InformAnotherCustomerCaseCreated" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" />
+        <Required key="13" type="1" schemaName="poan_powerautonumber" displayName="PowerAutoNumber" solution="PowerAutoNumber (1.2.14.2016)" />
+        <Dependent key="11" type="62" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="14" type="2" schemaName="subject" displayName="SMS (legacy)" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="11" type="29" displayName="Tc.Case.SMS.InformAnotherCustomerCaseCreated" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" />
+        <Required key="0" type="1" schemaName="msdyn_wallsavedqueryusersettings" displayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
+        <Dependent key="14" type="2" schemaName="msdyn_useridname" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="15" type="2" schemaName="posms_smsmessagelarge" displayName="SMS Message" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="11" type="29" displayName="Tc.Case.SMS.InformAnotherCustomerCaseCreated" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" />
+        <Required key="0" type="1" schemaName="msdyn_wallsavedqueryusersettings" displayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
+        <Dependent key="15" type="2" schemaName="msdyn_useridyominame" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="16" type="2" schemaName="leftvoicemail" displayName="Left Voice Mail" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="11" type="29" displayName="Tc.Case.SMS.InformAnotherCustomerCaseCreated" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" />
+        <Required key="4" type="1" schemaName="msdyusd_usersettings" displayName="User Setting" solution="DynamicsUnifiedServiceDesk (2.2.0.755)" />
+        <Dependent key="16" type="2" schemaName="msdyusd_username" parentSchemaName="msdyusd_usersettings" parentDisplayName="User Setting" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="17" type="2" schemaName="deliveryprioritycode" displayName="Delivery Priority" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="11" type="29" displayName="Tc.Case.SMS.InformAnotherCustomerCaseCreated" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" />
+        <Required key="4" type="1" schemaName="msdyusd_usersettings" displayName="User Setting" solution="DynamicsUnifiedServiceDesk (2.2.0.755)" />
+        <Dependent key="17" type="2" schemaName="msdyusd_useryominame" parentSchemaName="msdyusd_usersettings" parentDisplayName="User Setting" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="18" type="2" schemaName="statuscode" displayName="Status Reason" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="11" type="29" displayName="Tc.Case.SMS.InformAnotherCustomerCaseCreated" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" />
+        <Required key="2" type="1" schemaName="uii_sessiontransfer" displayName="UII Session Transfer" solution="UiiForMicrosoftDynamicsCRM2011 (3.5.0.755)" />
+        <Dependent key="18" type="2" schemaName="uii_toagentidname" parentSchemaName="uii_sessiontransfer" parentDisplayName="UII Session Transfer" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="19" type="2" schemaName="posms_phonenumber" displayName="Phone Number" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="11" type="29" displayName="Tc.Case.SMS.InformAnotherCustomerCaseCreated" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" />
+        <Required key="2" type="1" schemaName="uii_sessiontransfer" displayName="UII Session Transfer" solution="UiiForMicrosoftDynamicsCRM2011 (3.5.0.755)" />
+        <Dependent key="19" type="2" schemaName="uii_toagentidyominame" parentSchemaName="uii_sessiontransfer" parentDisplayName="UII Session Transfer" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="20" type="2" schemaName="activityid" displayName="Activity" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
-        <Dependent key="11" type="29" displayName="Tc.Case.SMS.InformAnotherCustomerCaseCreated" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" />
+        <Required key="20" type="2" schemaName="regardingobjectid" displayName="Regarding" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
+        <Dependent key="21" type="29" displayName="Tc.Case.SMS.InformAnotherCustomerCaseCreated" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="18" type="2" schemaName="statuscode" displayName="Status Reason" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="21" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
+        <Required key="22" type="2" schemaName="ownerid" displayName="Owner" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
+        <Dependent key="21" type="29" displayName="Tc.Case.SMS.InformAnotherCustomerCaseCreated" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="19" type="2" schemaName="posms_phonenumber" displayName="Phone Number" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="21" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
+        <Required key="23" type="2" schemaName="prioritycode" displayName="Priority" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="21" type="29" displayName="Tc.Case.SMS.InformAnotherCustomerCaseCreated" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="20" type="2" schemaName="activityid" displayName="Activity" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
-        <Dependent key="21" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
+        <Required key="24" type="2" schemaName="deliveryprioritycode" displayName="Delivery Priority" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="21" type="29" displayName="Tc.Case.SMS.InformAnotherCustomerCaseCreated" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="14" type="2" schemaName="subject" displayName="SMS (legacy)" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="21" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
+        <Required key="25" type="2" schemaName="posms_smsmessagelarge" displayName="SMS Message" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="21" type="29" displayName="Tc.Case.SMS.InformAnotherCustomerCaseCreated" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="15" type="2" schemaName="posms_smsmessagelarge" displayName="SMS Message" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="21" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
+        <Required key="26" type="2" schemaName="subject" displayName="SMS (legacy)" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="21" type="29" displayName="Tc.Case.SMS.InformAnotherCustomerCaseCreated" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="16" type="2" schemaName="leftvoicemail" displayName="Left Voice Mail" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="21" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
+        <Required key="27" type="2" schemaName="leftvoicemail" displayName="Left Voice Mail" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="21" type="29" displayName="Tc.Case.SMS.InformAnotherCustomerCaseCreated" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="17" type="2" schemaName="deliveryprioritycode" displayName="Delivery Priority" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="21" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
+        <Required key="28" type="2" schemaName="activityid" displayName="Activity" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
+        <Dependent key="21" type="29" displayName="Tc.Case.SMS.InformAnotherCustomerCaseCreated" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="13" type="2" schemaName="regardingobjectid" displayName="Regarding" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
-        <Dependent key="21" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
+        <Required key="29" type="2" schemaName="statuscode" displayName="Status Reason" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="21" type="29" displayName="Tc.Case.SMS.InformAnotherCustomerCaseCreated" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="12" type="2" schemaName="ownerid" displayName="Owner" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
-        <Dependent key="21" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
+        <Required key="30" type="2" schemaName="posms_phonenumber" displayName="Phone Number" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="21" type="29" displayName="Tc.Case.SMS.InformAnotherCustomerCaseCreated" id="{74e4ec13-7eb7-44b6-9e29-0dd8dfaccedc}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="10" type="2" schemaName="prioritycode" displayName="Priority" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="21" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
+        <Required key="31" type="2" schemaName="msdyusd_name" displayName="Name" parentSchemaName="msdyusd_configuration" parentDisplayName="Configuration" solution="DynamicsUnifiedServiceDesk (2.2.0.755)" />
+        <Dependent key="9" type="10" schemaName="msdyusd_configuration_users" displayName="msdyusd_configuration_users" parentSchemaName="systemuser" parentDisplayName="User" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="19" type="2" schemaName="posms_phonenumber" displayName="Phone Number" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="22" type="29" displayName="Tc.Case.SMS.InformCustomerCaseClosedNoOffer" id="{f0765bb8-e091-4963-906c-45d56eb021e4}" />
+        <Required key="24" type="2" schemaName="deliveryprioritycode" displayName="Delivery Priority" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="32" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="18" type="2" schemaName="statuscode" displayName="Status Reason" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="22" type="29" displayName="Tc.Case.SMS.InformCustomerCaseClosedNoOffer" id="{f0765bb8-e091-4963-906c-45d56eb021e4}" />
+        <Required key="20" type="2" schemaName="regardingobjectid" displayName="Regarding" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
+        <Dependent key="32" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="20" type="2" schemaName="activityid" displayName="Activity" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
-        <Dependent key="22" type="29" displayName="Tc.Case.SMS.InformCustomerCaseClosedNoOffer" id="{f0765bb8-e091-4963-906c-45d56eb021e4}" />
+        <Required key="22" type="2" schemaName="ownerid" displayName="Owner" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
+        <Dependent key="32" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="17" type="2" schemaName="deliveryprioritycode" displayName="Delivery Priority" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="22" type="29" displayName="Tc.Case.SMS.InformCustomerCaseClosedNoOffer" id="{f0765bb8-e091-4963-906c-45d56eb021e4}" />
+        <Required key="23" type="2" schemaName="prioritycode" displayName="Priority" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="32" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="16" type="2" schemaName="leftvoicemail" displayName="Left Voice Mail" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="22" type="29" displayName="Tc.Case.SMS.InformCustomerCaseClosedNoOffer" id="{f0765bb8-e091-4963-906c-45d56eb021e4}" />
+        <Required key="29" type="2" schemaName="statuscode" displayName="Status Reason" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="32" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="15" type="2" schemaName="posms_smsmessagelarge" displayName="SMS Message" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="22" type="29" displayName="Tc.Case.SMS.InformCustomerCaseClosedNoOffer" id="{f0765bb8-e091-4963-906c-45d56eb021e4}" />
+        <Required key="28" type="2" schemaName="activityid" displayName="Activity" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
+        <Dependent key="32" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="14" type="2" schemaName="subject" displayName="SMS (legacy)" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="22" type="29" displayName="Tc.Case.SMS.InformCustomerCaseClosedNoOffer" id="{f0765bb8-e091-4963-906c-45d56eb021e4}" />
+        <Required key="26" type="2" schemaName="subject" displayName="SMS (legacy)" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="32" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="10" type="2" schemaName="prioritycode" displayName="Priority" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="22" type="29" displayName="Tc.Case.SMS.InformCustomerCaseClosedNoOffer" id="{f0765bb8-e091-4963-906c-45d56eb021e4}" />
+        <Required key="25" type="2" schemaName="posms_smsmessagelarge" displayName="SMS Message" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="32" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="13" type="2" schemaName="regardingobjectid" displayName="Regarding" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
-        <Dependent key="22" type="29" displayName="Tc.Case.SMS.InformCustomerCaseClosedNoOffer" id="{f0765bb8-e091-4963-906c-45d56eb021e4}" />
+        <Required key="27" type="2" schemaName="leftvoicemail" displayName="Left Voice Mail" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="32" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="12" type="2" schemaName="ownerid" displayName="Owner" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
-        <Dependent key="22" type="29" displayName="Tc.Case.SMS.InformCustomerCaseClosedNoOffer" id="{f0765bb8-e091-4963-906c-45d56eb021e4}" />
+        <Required key="30" type="2" schemaName="posms_phonenumber" displayName="Phone Number" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="32" type="29" displayName="Tc.CompensationLine.SMS.InformCompensationMade.Close" id="{08a78341-f38d-4bab-adb6-567abcec7d5a}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="23" type="2" schemaName="msdyn_userid" displayName="User Id" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
-        <Dependent key="5" type="10" schemaName="msdyn_systemuser_wallsavedqueryusersettings_userid" displayName="msdyn_systemuser_wallsavedqueryusersettings_userid" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
+        <Required key="33" type="2" schemaName="msdyusd_configurationid" displayName="Configuration" parentSchemaName="msdyusd_configuration" parentDisplayName="Configuration" solution="DynamicsUnifiedServiceDesk (2.2.0.755)" />
+        <Dependent key="9" type="10" schemaName="msdyusd_configuration_users" displayName="msdyusd_configuration_users" parentSchemaName="systemuser" parentDisplayName="User" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="24" type="2" schemaName="popat_email" displayName="Email" parentSchemaName="popat_powerattachment" parentDisplayName="PowerAttachment" solution="PowerAttachment (1.2.2.2013)" />
-        <Dependent key="24" type="2" schemaName="popat_email" displayName="Email" parentSchemaName="popat_powerattachment" parentDisplayName="PowerAttachment" />
+        <Required key="22" type="2" schemaName="ownerid" displayName="Owner" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
+        <Dependent key="34" type="60" displayName="Information" parentDisplayName="SMS Message" id="{63f526f0-d66e-49e8-acc1-acddbfa545fa}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="23" type="2" schemaName="msdyn_userid" displayName="User Id" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
-        <Dependent key="23" type="2" schemaName="msdyn_userid" displayName="User Id" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
+        <Required key="20" type="2" schemaName="regardingobjectid" displayName="Regarding" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
+        <Dependent key="34" type="60" displayName="Information" parentDisplayName="SMS Message" id="{63f526f0-d66e-49e8-acc1-acddbfa545fa}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="17" type="2" schemaName="deliveryprioritycode" displayName="Delivery Priority" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="25" type="29" displayName="Tc.Case.SMS.InformCustomerCaseCreated" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" />
+        <Required key="35" type="2" schemaName="description" displayName="Results" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="34" type="60" displayName="Information" parentDisplayName="SMS Message" id="{63f526f0-d66e-49e8-acc1-acddbfa545fa}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="15" type="2" schemaName="posms_smsmessagelarge" displayName="SMS Message" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="25" type="29" displayName="Tc.Case.SMS.InformCustomerCaseCreated" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" />
+        <Required key="36" type="2" schemaName="createdby" displayName="Created By" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
+        <Dependent key="34" type="60" displayName="Information" parentDisplayName="SMS Message" id="{63f526f0-d66e-49e8-acc1-acddbfa545fa}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="16" type="2" schemaName="leftvoicemail" displayName="Left Voice Mail" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="25" type="29" displayName="Tc.Case.SMS.InformCustomerCaseCreated" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" />
+        <Required key="37" type="2" schemaName="posms_charactercount" displayName="CharacterCount" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="34" type="60" displayName="Information" parentDisplayName="SMS Message" id="{63f526f0-d66e-49e8-acc1-acddbfa545fa}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="14" type="2" schemaName="subject" displayName="SMS (legacy)" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="25" type="29" displayName="Tc.Case.SMS.InformCustomerCaseCreated" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" />
+        <Required key="30" type="2" schemaName="posms_phonenumber" displayName="Phone Number" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="34" type="60" displayName="Information" parentDisplayName="SMS Message" id="{63f526f0-d66e-49e8-acc1-acddbfa545fa}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="20" type="2" schemaName="activityid" displayName="Activity" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
-        <Dependent key="25" type="29" displayName="Tc.Case.SMS.InformCustomerCaseCreated" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" />
+        <Required key="38" type="2" schemaName="createdon" displayName="Date Created" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="34" type="60" displayName="Information" parentDisplayName="SMS Message" id="{63f526f0-d66e-49e8-acc1-acddbfa545fa}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="18" type="2" schemaName="statuscode" displayName="Status Reason" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="25" type="29" displayName="Tc.Case.SMS.InformCustomerCaseCreated" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" />
+        <Required key="39" type="2" schemaName="posms_marketinglists" displayName="Marketing List(s)" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="34" type="60" displayName="Information" parentDisplayName="SMS Message" id="{63f526f0-d66e-49e8-acc1-acddbfa545fa}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="13" type="2" schemaName="regardingobjectid" displayName="Regarding" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
-        <Dependent key="25" type="29" displayName="Tc.Case.SMS.InformCustomerCaseCreated" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" />
+        <Required key="29" type="2" schemaName="statuscode" displayName="Status Reason" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="34" type="60" displayName="Information" parentDisplayName="SMS Message" id="{63f526f0-d66e-49e8-acc1-acddbfa545fa}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="12" type="2" schemaName="ownerid" displayName="Owner" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
-        <Dependent key="25" type="29" displayName="Tc.Case.SMS.InformCustomerCaseCreated" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" />
+        <Required key="40" type="2" schemaName="statecode" displayName="Activity Status" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="34" type="60" displayName="Information" parentDisplayName="SMS Message" id="{63f526f0-d66e-49e8-acc1-acddbfa545fa}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="10" type="2" schemaName="prioritycode" displayName="Priority" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="25" type="29" displayName="Tc.Case.SMS.InformCustomerCaseCreated" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" />
+        <Required key="26" type="2" schemaName="subject" displayName="SMS (legacy)" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="34" type="60" displayName="Information" parentDisplayName="SMS Message" id="{63f526f0-d66e-49e8-acc1-acddbfa545fa}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="19" type="2" schemaName="posms_phonenumber" displayName="Phone Number" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="25" type="29" displayName="Tc.Case.SMS.InformCustomerCaseCreated" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" />
+        <Required key="25" type="2" schemaName="posms_smsmessagelarge" displayName="SMS Message" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="34" type="60" displayName="Information" parentDisplayName="SMS Message" id="{63f526f0-d66e-49e8-acc1-acddbfa545fa}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="5" type="10" schemaName="msdyn_systemuser_wallsavedqueryusersettings_userid" displayName="msdyn_systemuser_wallsavedqueryusersettings_userid" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
-        <Dependent key="5" type="10" schemaName="msdyn_systemuser_wallsavedqueryusersettings_userid" displayName="msdyn_systemuser_wallsavedqueryusersettings_userid" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
+        <Required key="24" type="2" schemaName="deliveryprioritycode" displayName="Delivery Priority" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="41" type="29" displayName="Tc.Case.SMS.InformCustomerCaseCreated" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="5" type="10" schemaName="msdyn_systemuser_wallsavedqueryusersettings_userid" displayName="msdyn_systemuser_wallsavedqueryusersettings_userid" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
-        <Dependent key="2" type="2" schemaName="msdyn_useridname" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
+        <Required key="20" type="2" schemaName="regardingobjectid" displayName="Regarding" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
+        <Dependent key="41" type="29" displayName="Tc.Case.SMS.InformCustomerCaseCreated" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="5" type="10" schemaName="msdyn_systemuser_wallsavedqueryusersettings_userid" displayName="msdyn_systemuser_wallsavedqueryusersettings_userid" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
-        <Dependent key="3" type="2" schemaName="msdyn_useridyominame" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
+        <Required key="22" type="2" schemaName="ownerid" displayName="Owner" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
+        <Dependent key="41" type="29" displayName="Tc.Case.SMS.InformCustomerCaseCreated" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="26" type="10" schemaName="popat_email_popat_powerattachment_Email" displayName="popat_email_popat_powerattachment_Email" parentSchemaName="popat_powerattachment" parentDisplayName="PowerAttachment" solution="PowerAttachment (1.2.2.2013)" />
-        <Dependent key="26" type="10" schemaName="popat_email_popat_powerattachment_Email" displayName="popat_email_popat_powerattachment_Email" parentSchemaName="popat_powerattachment" parentDisplayName="PowerAttachment" />
+        <Required key="23" type="2" schemaName="prioritycode" displayName="Priority" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="41" type="29" displayName="Tc.Case.SMS.InformCustomerCaseCreated" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="27" type="61" schemaName="posms_icon66x48" displayName="posms_icon66x48" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="0" type="1" schemaName="posms_smsmessage" displayName="SMS Message" />
+        <Required key="30" type="2" schemaName="posms_phonenumber" displayName="Phone Number" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="41" type="29" displayName="Tc.Case.SMS.InformCustomerCaseCreated" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="28" type="61" schemaName="posms_icon16x16" displayName="posms_icon16x16" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="0" type="1" schemaName="posms_smsmessage" displayName="SMS Message" />
+        <Required key="28" type="2" schemaName="activityid" displayName="Activity" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
+        <Dependent key="41" type="29" displayName="Tc.Case.SMS.InformCustomerCaseCreated" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="29" type="61" schemaName="posms_icon32x32" displayName="posms_icon32x32" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="0" type="1" schemaName="posms_smsmessage" displayName="SMS Message" />
+        <Required key="29" type="2" schemaName="statuscode" displayName="Status Reason" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="41" type="29" displayName="Tc.Case.SMS.InformCustomerCaseCreated" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="30" type="61" schemaName="posms_/Scripts/jquery.min.js" displayName="posms_/Scripts/jquery.min.js" solution="PowerSMS (2.2.4.2016)" />
-        <Dependent key="31" type="60" displayName="Compensation" parentDisplayName="Compensation" id="{9d0bc1e4-713f-42e6-a107-9e662730f9e7}" />
+        <Required key="27" type="2" schemaName="leftvoicemail" displayName="Left Voice Mail" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="41" type="29" displayName="Tc.Case.SMS.InformCustomerCaseCreated" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="32" type="61" schemaName="popat_/PowerAttachmentsHTML" displayName="popat_/PowerAttachmentsHTML" solution="PowerAttachment (1.2.2.2013)" />
-        <Dependent key="32" type="61" schemaName="popat_/PowerAttachmentsHTML" displayName="popat_/PowerAttachmentsHTML" />
+        <Required key="26" type="2" schemaName="subject" displayName="SMS (legacy)" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="41" type="29" displayName="Tc.Case.SMS.InformCustomerCaseCreated" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" />
       </MissingDependency>
       <MissingDependency>
-        <Required key="33" type="61" schemaName="popat_/Scripts/jquery.min.js" displayName="popat_/Scripts/jquery.min.js" solution="PowerAttachment (1.2.2.2013)" />
-        <Dependent key="33" type="61" schemaName="popat_/Scripts/jquery.min.js" displayName="popat_/Scripts/jquery.min.js" />
+        <Required key="25" type="2" schemaName="posms_smsmessagelarge" displayName="SMS Message" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="41" type="29" displayName="Tc.Case.SMS.InformCustomerCaseCreated" id="{d503a012-b7c8-4d54-bef5-39c176453ecc}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="42" type="2" schemaName="tc_customerfollowupdate" displayName="Customer Follow up Date" parentSchemaName="opportunity" parentDisplayName="Travel Planner" solution="Active" />
+        <Dependent key="43" type="26" schemaName="UK Travel Records - with the status Travel Planners or Quotes" displayName="UK Travel Records - with the status Travel Planners or Quotes" parentSchemaName="opportunity" parentDisplayName="Travel Planner" id="{1930795e-9d29-e711-8100-5065f38a1b01}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="44" type="2" schemaName="popat_name" displayName="Name" parentSchemaName="popat_powerattachment" parentDisplayName="PowerAttachment" solution="PowerAttachment (1.2.2.2013)" />
+        <Dependent key="45" type="60" displayName="Information" parentDisplayName="PowerAttachment" id="{2f48d5ff-1c10-4170-9eac-1a8738a7c61f}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="46" type="2" schemaName="ownerid" displayName="Owner" parentSchemaName="popat_powerattachment" parentDisplayName="PowerAttachment" solution="Active" />
+        <Dependent key="45" type="60" displayName="Information" parentDisplayName="PowerAttachment" id="{2f48d5ff-1c10-4170-9eac-1a8738a7c61f}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="47" type="2" schemaName="popat_url" displayName="url" parentSchemaName="popat_powerattachment" parentDisplayName="PowerAttachment" solution="PowerAttachment (1.2.2.2013)" />
+        <Dependent key="45" type="60" displayName="Information" parentDisplayName="PowerAttachment" id="{2f48d5ff-1c10-4170-9eac-1a8738a7c61f}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="48" type="2" schemaName="popat_locationtype" displayName="Location Type" parentSchemaName="popat_powerattachment" parentDisplayName="PowerAttachment" solution="PowerAttachment (1.2.2.2013)" />
+        <Dependent key="45" type="60" displayName="Information" parentDisplayName="PowerAttachment" id="{2f48d5ff-1c10-4170-9eac-1a8738a7c61f}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="49" type="2" schemaName="popat_error" displayName="Error" parentSchemaName="popat_powerattachment" parentDisplayName="PowerAttachment" solution="PowerAttachment (1.2.2.2013)" />
+        <Dependent key="45" type="60" displayName="Information" parentDisplayName="PowerAttachment" id="{2f48d5ff-1c10-4170-9eac-1a8738a7c61f}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="50" type="2" schemaName="popat_filesize" displayName="filesize" parentSchemaName="popat_powerattachment" parentDisplayName="PowerAttachment" solution="PowerAttachment (1.2.2.2013)" />
+        <Dependent key="45" type="60" displayName="Information" parentDisplayName="PowerAttachment" id="{2f48d5ff-1c10-4170-9eac-1a8738a7c61f}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="51" type="2" schemaName="popat_noteguid" displayName="Note Guid" parentSchemaName="popat_powerattachment" parentDisplayName="PowerAttachment" solution="PowerAttachment (1.2.2.2013)" />
+        <Dependent key="45" type="60" displayName="Information" parentDisplayName="PowerAttachment" id="{2f48d5ff-1c10-4170-9eac-1a8738a7c61f}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="30" type="2" schemaName="posms_phonenumber" displayName="Phone Number" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="52" type="29" displayName="Tc.Case.SMS.InformCustomerCaseClosedNoOffer" id="{f0765bb8-e091-4963-906c-45d56eb021e4}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="27" type="2" schemaName="leftvoicemail" displayName="Left Voice Mail" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="52" type="29" displayName="Tc.Case.SMS.InformCustomerCaseClosedNoOffer" id="{f0765bb8-e091-4963-906c-45d56eb021e4}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="25" type="2" schemaName="posms_smsmessagelarge" displayName="SMS Message" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="52" type="29" displayName="Tc.Case.SMS.InformCustomerCaseClosedNoOffer" id="{f0765bb8-e091-4963-906c-45d56eb021e4}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="26" type="2" schemaName="subject" displayName="SMS (legacy)" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="52" type="29" displayName="Tc.Case.SMS.InformCustomerCaseClosedNoOffer" id="{f0765bb8-e091-4963-906c-45d56eb021e4}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="28" type="2" schemaName="activityid" displayName="Activity" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
+        <Dependent key="52" type="29" displayName="Tc.Case.SMS.InformCustomerCaseClosedNoOffer" id="{f0765bb8-e091-4963-906c-45d56eb021e4}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="29" type="2" schemaName="statuscode" displayName="Status Reason" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="52" type="29" displayName="Tc.Case.SMS.InformCustomerCaseClosedNoOffer" id="{f0765bb8-e091-4963-906c-45d56eb021e4}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="20" type="2" schemaName="regardingobjectid" displayName="Regarding" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
+        <Dependent key="52" type="29" displayName="Tc.Case.SMS.InformCustomerCaseClosedNoOffer" id="{f0765bb8-e091-4963-906c-45d56eb021e4}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="22" type="2" schemaName="ownerid" displayName="Owner" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="Active" />
+        <Dependent key="52" type="29" displayName="Tc.Case.SMS.InformCustomerCaseClosedNoOffer" id="{f0765bb8-e091-4963-906c-45d56eb021e4}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="23" type="2" schemaName="prioritycode" displayName="Priority" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="52" type="29" displayName="Tc.Case.SMS.InformCustomerCaseClosedNoOffer" id="{f0765bb8-e091-4963-906c-45d56eb021e4}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="24" type="2" schemaName="deliveryprioritycode" displayName="Delivery Priority" parentSchemaName="posms_smsmessage" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="52" type="29" displayName="Tc.Case.SMS.InformCustomerCaseClosedNoOffer" id="{f0765bb8-e091-4963-906c-45d56eb021e4}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="53" type="2" schemaName="popat_email" displayName="Email" parentSchemaName="popat_powerattachment" parentDisplayName="PowerAttachment" solution="PowerAttachment (1.2.2.2013)" />
+        <Dependent key="53" type="2" schemaName="popat_email" displayName="Email" parentSchemaName="popat_powerattachment" parentDisplayName="PowerAttachment" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="54" type="2" schemaName="msdyusd_user" displayName="User" parentSchemaName="msdyusd_usersettings" parentDisplayName="User Setting" solution="DynamicsUnifiedServiceDesk (2.2.0.755)" />
+        <Dependent key="54" type="2" schemaName="msdyusd_user" displayName="User" parentSchemaName="msdyusd_usersettings" parentDisplayName="User Setting" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="55" type="2" schemaName="msdyn_userid" displayName="User Id" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
+        <Dependent key="55" type="2" schemaName="msdyn_userid" displayName="User Id" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="56" type="2" schemaName="uii_toagentid" displayName="To Agent" parentSchemaName="uii_sessiontransfer" parentDisplayName="UII Session Transfer" solution="UiiForMicrosoftDynamicsCRM2011 (3.5.0.755)" />
+        <Dependent key="56" type="2" schemaName="uii_toagentid" displayName="To Agent" parentSchemaName="uii_sessiontransfer" parentDisplayName="UII Session Transfer" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="53" type="2" schemaName="popat_email" displayName="Email" parentSchemaName="popat_powerattachment" parentDisplayName="PowerAttachment" solution="PowerAttachment (1.2.2.2013)" />
+        <Dependent key="45" type="60" displayName="Information" parentDisplayName="PowerAttachment" id="{2f48d5ff-1c10-4170-9eac-1a8738a7c61f}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="57" type="2" schemaName="msdyusd_usdconfigurationid" displayName="Unified Service Desk Configuration" parentSchemaName="systemuser" parentDisplayName="User" solution="DynamicsUnifiedServiceDesk (2.2.0.755)" />
+        <Dependent key="58" type="60" displayName="Information" parentDisplayName="User" id="{c0d7d7dd-afd0-4675-85fe-1cc5a48be6df}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="56" type="2" schemaName="uii_toagentid" displayName="To Agent" parentSchemaName="uii_sessiontransfer" parentDisplayName="UII Session Transfer" solution="UiiForMicrosoftDynamicsCRM2011 (3.5.0.755)" />
+        <Dependent key="3" type="10" schemaName="uii_toagent_uii_sessiontransfer" displayName="uii_toagent_uii_sessiontransfer" parentSchemaName="uii_sessiontransfer" parentDisplayName="UII Session Transfer" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="57" type="2" schemaName="msdyusd_usdconfigurationid" displayName="Unified Service Desk Configuration" parentSchemaName="systemuser" parentDisplayName="User" solution="DynamicsUnifiedServiceDesk (2.2.0.755)" />
+        <Dependent key="9" type="10" schemaName="msdyusd_configuration_users" displayName="msdyusd_configuration_users" parentSchemaName="systemuser" parentDisplayName="User" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="54" type="2" schemaName="msdyusd_user" displayName="User" parentSchemaName="msdyusd_usersettings" parentDisplayName="User Setting" solution="DynamicsUnifiedServiceDesk (2.2.0.755)" />
+        <Dependent key="5" type="10" schemaName="msdyusd_systemuser_msdyusd_usersettings_User" displayName="msdyusd_systemuser_msdyusd_usersettings_User" parentSchemaName="msdyusd_usersettings" parentDisplayName="User Setting" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="57" type="2" schemaName="msdyusd_usdconfigurationid" displayName="Unified Service Desk Configuration" parentSchemaName="systemuser" parentDisplayName="User" solution="DynamicsUnifiedServiceDesk (2.2.0.755)" />
+        <Dependent key="59" type="60" displayName="User" parentDisplayName="User" id="{c2cd9e55-d4b4-4b55-9951-16ead79643e5}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="55" type="2" schemaName="msdyn_userid" displayName="User Id" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
+        <Dependent key="1" type="10" schemaName="msdyn_systemuser_wallsavedqueryusersettings_userid" displayName="msdyn_systemuser_wallsavedqueryusersettings_userid" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="1" type="10" schemaName="msdyn_systemuser_wallsavedqueryusersettings_userid" displayName="msdyn_systemuser_wallsavedqueryusersettings_userid" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
+        <Dependent key="1" type="10" schemaName="msdyn_systemuser_wallsavedqueryusersettings_userid" displayName="msdyn_systemuser_wallsavedqueryusersettings_userid" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="5" type="10" schemaName="msdyusd_systemuser_msdyusd_usersettings_User" displayName="msdyusd_systemuser_msdyusd_usersettings_User" parentSchemaName="msdyusd_usersettings" parentDisplayName="User Setting" solution="DynamicsUnifiedServiceDesk (2.2.0.755)" />
+        <Dependent key="5" type="10" schemaName="msdyusd_systemuser_msdyusd_usersettings_User" displayName="msdyusd_systemuser_msdyusd_usersettings_User" parentSchemaName="msdyusd_usersettings" parentDisplayName="User Setting" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="3" type="10" schemaName="uii_toagent_uii_sessiontransfer" displayName="uii_toagent_uii_sessiontransfer" parentSchemaName="uii_sessiontransfer" parentDisplayName="UII Session Transfer" solution="UiiForMicrosoftDynamicsCRM2011 (3.5.0.755)" />
+        <Dependent key="3" type="10" schemaName="uii_toagent_uii_sessiontransfer" displayName="uii_toagent_uii_sessiontransfer" parentSchemaName="uii_sessiontransfer" parentDisplayName="UII Session Transfer" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="9" type="10" schemaName="msdyusd_configuration_users" displayName="msdyusd_configuration_users" parentSchemaName="systemuser" parentDisplayName="User" solution="DynamicsUnifiedServiceDesk (2.2.0.755)" />
+        <Dependent key="9" type="10" schemaName="msdyusd_configuration_users" displayName="msdyusd_configuration_users" parentSchemaName="systemuser" parentDisplayName="User" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="5" type="10" schemaName="msdyusd_systemuser_msdyusd_usersettings_User" displayName="msdyusd_systemuser_msdyusd_usersettings_User" parentSchemaName="msdyusd_usersettings" parentDisplayName="User Setting" solution="DynamicsUnifiedServiceDesk (2.2.0.755)" />
+        <Dependent key="17" type="2" schemaName="msdyusd_useryominame" parentSchemaName="msdyusd_usersettings" parentDisplayName="User Setting" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="1" type="10" schemaName="msdyn_systemuser_wallsavedqueryusersettings_userid" displayName="msdyn_systemuser_wallsavedqueryusersettings_userid" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
+        <Dependent key="14" type="2" schemaName="msdyn_useridname" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="5" type="10" schemaName="msdyusd_systemuser_msdyusd_usersettings_User" displayName="msdyusd_systemuser_msdyusd_usersettings_User" parentSchemaName="msdyusd_usersettings" parentDisplayName="User Setting" solution="DynamicsUnifiedServiceDesk (2.2.0.755)" />
+        <Dependent key="16" type="2" schemaName="msdyusd_username" parentSchemaName="msdyusd_usersettings" parentDisplayName="User Setting" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="3" type="10" schemaName="uii_toagent_uii_sessiontransfer" displayName="uii_toagent_uii_sessiontransfer" parentSchemaName="uii_sessiontransfer" parentDisplayName="UII Session Transfer" solution="UiiForMicrosoftDynamicsCRM2011 (3.5.0.755)" />
+        <Dependent key="18" type="2" schemaName="uii_toagentidname" parentSchemaName="uii_sessiontransfer" parentDisplayName="UII Session Transfer" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="1" type="10" schemaName="msdyn_systemuser_wallsavedqueryusersettings_userid" displayName="msdyn_systemuser_wallsavedqueryusersettings_userid" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" solution="ActivityFeedsCore (8.2.0.0)" />
+        <Dependent key="15" type="2" schemaName="msdyn_useridyominame" parentSchemaName="msdyn_wallsavedqueryusersettings" parentDisplayName="Filter" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="9" type="10" schemaName="msdyusd_configuration_users" displayName="msdyusd_configuration_users" parentSchemaName="systemuser" parentDisplayName="User" solution="DynamicsUnifiedServiceDesk (2.2.0.755)" />
+        <Dependent key="60" type="2" schemaName="msdyusd_usdconfigurationidname" parentSchemaName="systemuser" parentDisplayName="User" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="3" type="10" schemaName="uii_toagent_uii_sessiontransfer" displayName="uii_toagent_uii_sessiontransfer" parentSchemaName="uii_sessiontransfer" parentDisplayName="UII Session Transfer" solution="UiiForMicrosoftDynamicsCRM2011 (3.5.0.755)" />
+        <Dependent key="19" type="2" schemaName="uii_toagentidyominame" parentSchemaName="uii_sessiontransfer" parentDisplayName="UII Session Transfer" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="9" type="10" schemaName="msdyusd_configuration_users" displayName="msdyusd_configuration_users" parentSchemaName="systemuser" parentDisplayName="User" solution="DynamicsUnifiedServiceDesk (2.2.0.755)" />
+        <Dependent key="59" type="60" displayName="User" parentDisplayName="User" id="{c2cd9e55-d4b4-4b55-9951-16ead79643e5}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="5" type="10" schemaName="msdyusd_systemuser_msdyusd_usersettings_User" displayName="msdyusd_systemuser_msdyusd_usersettings_User" parentSchemaName="msdyusd_usersettings" parentDisplayName="User Setting" solution="DynamicsUnifiedServiceDesk (2.2.0.755)" />
+        <Dependent key="58" type="60" displayName="Information" parentDisplayName="User" id="{c0d7d7dd-afd0-4675-85fe-1cc5a48be6df}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="9" type="10" schemaName="msdyusd_configuration_users" displayName="msdyusd_configuration_users" parentSchemaName="systemuser" parentDisplayName="User" solution="DynamicsUnifiedServiceDesk (2.2.0.755)" />
+        <Dependent key="58" type="60" displayName="Information" parentDisplayName="User" id="{c0d7d7dd-afd0-4675-85fe-1cc5a48be6df}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="61" type="10" schemaName="popat_email_popat_powerattachment_Email" displayName="popat_email_popat_powerattachment_Email" parentSchemaName="popat_powerattachment" parentDisplayName="PowerAttachment" solution="PowerAttachment (1.2.2.2013)" />
+        <Dependent key="45" type="60" displayName="Information" parentDisplayName="PowerAttachment" id="{2f48d5ff-1c10-4170-9eac-1a8738a7c61f}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="61" type="10" schemaName="popat_email_popat_powerattachment_Email" displayName="popat_email_popat_powerattachment_Email" parentSchemaName="popat_powerattachment" parentDisplayName="PowerAttachment" solution="PowerAttachment (1.2.2.2013)" />
+        <Dependent key="61" type="10" schemaName="popat_email_popat_powerattachment_Email" displayName="popat_email_popat_powerattachment_Email" parentSchemaName="popat_powerattachment" parentDisplayName="PowerAttachment" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="62" type="20" displayName="PowerSMS User" solution="PowerSMS (2.2.4.2016)" id="{83b27124-2386-e211-bc15-000c298a36a7}" />
+        <Dependent key="63" type="60" displayName="Retail Customer" parentDisplayName="Customer" id="{9e52c4e1-4a67-472a-8a42-ec15c9291fb1}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="64" type="20" displayName="PowerAutoNumber User Role" solution="PowerAutoNumber (1.2.14.2016)" id="{24bd3295-a3d6-e411-9426-00155dcfc00d}" />
+        <Dependent key="63" type="60" displayName="Retail Customer" parentDisplayName="Customer" id="{9e52c4e1-4a67-472a-8a42-ec15c9291fb1}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="65" type="20" displayName="PowerSMS Administrator" solution="PowerSMS (2.2.4.2016)" id="{fb8e9dc4-b5ff-e511-9438-00155dcfc00d}" />
+        <Dependent key="63" type="60" displayName="Retail Customer" parentDisplayName="Customer" id="{9e52c4e1-4a67-472a-8a42-ec15c9291fb1}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="66" type="20" displayName="PowerAttachment Service Account" solution="PowerAttachment (1.2.2.2013)" id="{c953d024-45bb-e411-9424-00155dcfc00d}" />
+        <Dependent key="63" type="60" displayName="Retail Customer" parentDisplayName="Customer" id="{9e52c4e1-4a67-472a-8a42-ec15c9291fb1}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="67" type="20" displayName="PowerAttachment User" solution="PowerAttachment (1.2.2.2013)" id="{d9af258f-44bb-e411-9424-00155dcfc00d}" />
+        <Dependent key="63" type="60" displayName="Retail Customer" parentDisplayName="Customer" id="{9e52c4e1-4a67-472a-8a42-ec15c9291fb1}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="68" type="20" displayName="PowerAutoNumber Admin Role" solution="PowerAutoNumber (1.2.14.2016)" id="{6b61b74b-a3d6-e411-9426-00155dcfc00d}" />
+        <Dependent key="63" type="60" displayName="Retail Customer" parentDisplayName="Customer" id="{9e52c4e1-4a67-472a-8a42-ec15c9291fb1}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="69" type="20" displayName="Activity Feeds" solution="ActivityFeedsCore (8.2.0.0)" id="{cb269f84-e19d-e011-b66c-00155db528b6}" />
+        <Dependent key="63" type="60" displayName="Retail Customer" parentDisplayName="Customer" id="{9e52c4e1-4a67-472a-8a42-ec15c9291fb1}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="70" type="20" displayName="Sales app access" solution="msdyn_SalesApp (1.0.0.1)" id="{cad52a75-568c-e611-80d4-00155d42a122}" />
+        <Dependent key="71" type="60" displayName="IDS Customer" parentDisplayName="Customer" id="{1fed44d1-ae68-4a41-bd2b-f13acac4acfa}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="68" type="20" displayName="PowerAutoNumber Admin Role" solution="PowerAutoNumber (1.2.14.2016)" id="{6b61b74b-a3d6-e411-9426-00155dcfc00d}" />
+        <Dependent key="71" type="60" displayName="IDS Customer" parentDisplayName="Customer" id="{1fed44d1-ae68-4a41-bd2b-f13acac4acfa}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="69" type="20" displayName="Activity Feeds" solution="ActivityFeedsCore (8.2.0.0)" id="{cb269f84-e19d-e011-b66c-00155db528b6}" />
+        <Dependent key="71" type="60" displayName="IDS Customer" parentDisplayName="Customer" id="{1fed44d1-ae68-4a41-bd2b-f13acac4acfa}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="67" type="20" displayName="PowerAttachment User" solution="PowerAttachment (1.2.2.2013)" id="{d9af258f-44bb-e411-9424-00155dcfc00d}" />
+        <Dependent key="71" type="60" displayName="IDS Customer" parentDisplayName="Customer" id="{1fed44d1-ae68-4a41-bd2b-f13acac4acfa}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="66" type="20" displayName="PowerAttachment Service Account" solution="PowerAttachment (1.2.2.2013)" id="{c953d024-45bb-e411-9424-00155dcfc00d}" />
+        <Dependent key="71" type="60" displayName="IDS Customer" parentDisplayName="Customer" id="{1fed44d1-ae68-4a41-bd2b-f13acac4acfa}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="64" type="20" displayName="PowerAutoNumber User Role" solution="PowerAutoNumber (1.2.14.2016)" id="{24bd3295-a3d6-e411-9426-00155dcfc00d}" />
+        <Dependent key="71" type="60" displayName="IDS Customer" parentDisplayName="Customer" id="{1fed44d1-ae68-4a41-bd2b-f13acac4acfa}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="62" type="20" displayName="PowerSMS User" solution="PowerSMS (2.2.4.2016)" id="{83b27124-2386-e211-bc15-000c298a36a7}" />
+        <Dependent key="71" type="60" displayName="IDS Customer" parentDisplayName="Customer" id="{1fed44d1-ae68-4a41-bd2b-f13acac4acfa}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="65" type="20" displayName="PowerSMS Administrator" solution="PowerSMS (2.2.4.2016)" id="{fb8e9dc4-b5ff-e511-9438-00155dcfc00d}" />
+        <Dependent key="71" type="60" displayName="IDS Customer" parentDisplayName="Customer" id="{1fed44d1-ae68-4a41-bd2b-f13acac4acfa}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="45" type="60" displayName="Information" parentDisplayName="PowerAttachment" solution="PowerAttachment (1.2.2.2013)" id="{2f48d5ff-1c10-4170-9eac-1a8738a7c61f}" />
+        <Dependent key="45" type="60" displayName="Information" parentDisplayName="PowerAttachment" id="{2f48d5ff-1c10-4170-9eac-1a8738a7c61f}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="34" type="60" displayName="Information" parentDisplayName="SMS Message" solution="PowerSMS (2.2.4.2016)" id="{63f526f0-d66e-49e8-acc1-acddbfa545fa}" />
+        <Dependent key="34" type="60" displayName="Information" parentDisplayName="SMS Message" id="{63f526f0-d66e-49e8-acc1-acddbfa545fa}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="72" type="61" schemaName="msdyusd_Logo" displayName="msdyusd_Logo" solution="DynamicsUnifiedServiceDesk (2.2.0.755)" />
+        <Dependent key="72" type="61" schemaName="msdyusd_Logo" displayName="msdyusd_Logo" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="73" type="61" schemaName="popat_/Scripts/jquery.min.js" displayName="popat_/Scripts/jquery.min.js" solution="PowerAttachment (1.2.2.2013)" />
+        <Dependent key="73" type="61" schemaName="popat_/Scripts/jquery.min.js" displayName="popat_/Scripts/jquery.min.js" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="74" type="61" schemaName="popat_/PowerAttachmentsHTML" displayName="popat_/PowerAttachmentsHTML" solution="PowerAttachment (1.2.2.2013)" />
+        <Dependent key="74" type="61" schemaName="popat_/PowerAttachmentsHTML" displayName="popat_/PowerAttachmentsHTML" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="75" type="61" schemaName="posms_/Scripts/jquery.min.js" displayName="posms_/Scripts/jquery.min.js" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="76" type="60" displayName="Compensation" parentDisplayName="Compensation" id="{9d0bc1e4-713f-42e6-a107-9e662730f9e7}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="77" type="61" schemaName="msdyusd_/USDMain.html" displayName="msdyusd_/USDMain.html" solution="DynamicsUnifiedServiceDesk (2.2.0.755)" />
+        <Dependent key="11" type="62" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="78" type="61" schemaName="posms_SmsMessage.js" displayName="posms_SmsMessage.js" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="34" type="60" displayName="Information" parentDisplayName="SMS Message" id="{63f526f0-d66e-49e8-acc1-acddbfa545fa}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="79" type="61" schemaName="posms_/Scripts/Bitly.js" displayName="posms_/Scripts/Bitly.js" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="34" type="60" displayName="Information" parentDisplayName="SMS Message" id="{63f526f0-d66e-49e8-acc1-acddbfa545fa}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="75" type="61" schemaName="posms_/Scripts/jquery.min.js" displayName="posms_/Scripts/jquery.min.js" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="34" type="60" displayName="Information" parentDisplayName="SMS Message" id="{63f526f0-d66e-49e8-acc1-acddbfa545fa}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="80" type="61" schemaName="posms_icon66x48" displayName="posms_icon66x48" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="7" type="1" schemaName="posms_smsmessage" displayName="SMS Message" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="81" type="61" schemaName="posms_icon16x16" displayName="posms_icon16x16" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="7" type="1" schemaName="posms_smsmessage" displayName="SMS Message" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required key="82" type="61" schemaName="posms_icon32x32" displayName="posms_icon32x32" solution="PowerSMS (2.2.4.2016)" />
+        <Dependent key="7" type="1" schemaName="posms_smsmessage" displayName="SMS Message" />
       </MissingDependency>
     </MissingDependencies>
   </SolutionManifest>

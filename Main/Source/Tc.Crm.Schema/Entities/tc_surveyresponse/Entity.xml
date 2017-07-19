@@ -5,9 +5,11 @@
   <EntityInfo>
     <entity Name="tc_surveyresponse">
       <LocalizedNames>
+        <LocalizedName description="Survey Response" languagecode="1031" />
         <LocalizedName description="Survey Response" languagecode="1033" />
       </LocalizedNames>
       <LocalizedCollectionNames>
+        <LocalizedCollectionName description="Survey Responses" languagecode="1031" />
         <LocalizedCollectionName description="Survey Responses" languagecode="1033" />
       </LocalizedCollectionNames>
       <Descriptions>
@@ -267,6 +269,7 @@
             <LookupType id="00000000-0000-0000-0000-000000000000">8</LookupType>
           </LookupTypes>
           <displaynames>
+            <displayname description="BCC" languagecode="1031" />
             <displayname description="BCC" languagecode="1033" />
             <displayname description="Cci" languagecode="1036" />
           </displaynames>
@@ -309,6 +312,7 @@
             <LookupType id="00000000-0000-0000-0000-000000000000">8</LookupType>
           </LookupTypes>
           <displaynames>
+            <displayname description="CC" languagecode="1031" />
             <displayname description="CC" languagecode="1033" />
             <displayname description="Cc" languagecode="1036" />
           </displaynames>
@@ -2707,9 +2711,12 @@
           <CanChangeDateTimeBehavior>1</CanChangeDateTimeBehavior>
           <Behavior>3</Behavior>
           <displaynames>
+            <displayname description="Anfangszeit" languagecode="1031" />
             <displayname description="Begin Time" languagecode="1033" />
+            <displayname description="heure du début" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Das Datum und die Uhrzeit der Umfrage wurde vom Kunden gestartet." languagecode="1031" />
             <Description description="The date and time the survey was started by the customer." languagecode="1033" />
           </Descriptions>
         </attribute>
@@ -2740,9 +2747,12 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Buchung" languagecode="1031" />
             <displayname description="Booking" languagecode="1033" />
+            <displayname description="Réservation" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="einheitlicher Identifikator zur Buchung zur Fragebogenantwort" languagecode="1031" />
             <Description description="Unique identifier for Booking associated with Survey Response." languagecode="1033" />
           </Descriptions>
         </attribute>
@@ -2774,7 +2784,9 @@
           <MaxLength>50</MaxLength>
           <Length>100</Length>
           <displaynames>
+            <displayname description="Kunden Email" languagecode="1031" />
             <displayname description="Customer Email" languagecode="1033" />
+            <displayname description="email du client" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -2808,7 +2820,9 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Kunden Vorname" languagecode="1031" />
             <displayname description="Customer First Name" languagecode="1033" />
+            <displayname description="prénom du client" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -2842,7 +2856,9 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Kunden Nachname" languagecode="1031" />
             <displayname description="Customer Last Name" languagecode="1033" />
+            <displayname description="nom de famille du client" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -2876,10 +2892,45 @@
           <MaxLength>50</MaxLength>
           <Length>100</Length>
           <displaynames>
+            <displayname description="Kunden Telefon" languagecode="1031" />
             <displayname description="Customer Phone" languagecode="1033" />
+            <displayname description="téléphone du client" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tc_gatewayid">
+          <Type>lookup</Type>
+          <Name>tc_gatewayid</Name>
+          <LogicalName>tc_gatewayid</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>0</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.0.0.126</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <LookupStyle>single</LookupStyle>
+          <LookupTypes />
+          <displaynames>
+            <displayname description="Gateway" languagecode="1033" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Unique identifier for Gateway associated with Survey Response." languagecode="1033" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="tc_Mode">
@@ -2910,6 +2961,7 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Modus" languagecode="1031" />
             <displayname description="Mode" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -2944,6 +2996,7 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Antwort ID" languagecode="1031" />
             <displayname description="Response Id" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -2978,6 +3031,7 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Survey Beschreibung" languagecode="1031" />
             <displayname description="Survey Description" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -3012,6 +3066,7 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Survey Id" languagecode="1031" />
             <displayname description="Survey Id" languagecode="1033" />
           </displaynames>
           <Descriptions>

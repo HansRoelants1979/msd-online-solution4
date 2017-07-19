@@ -8,6 +8,7 @@
     <tabs>
       <tab id="{f6a85c4b-e988-4572-b4f8-96cfa8e1eec4}" IsUserDefined="1" verticallayout="true" name="{f6a85c4b-e988-4572-b4f8-96cfa8e1eec4}" locklevel="0" expanded="true" showlabel="true">
         <labels>
+          <label description="Fall Art" languagecode="1031" />
           <label description="Case Type" languagecode="1033" />
         </labels>
         <columns>
@@ -15,13 +16,17 @@
             <sections>
               <section id="{ce4d49e0-28ef-4e99-a8f7-fd9d7c1c6805}" IsUserDefined="0" showbar="false" showlabel="false" height="auto">
                 <labels>
+                  <label description="Allgemein" languagecode="1031" />
                   <label description="General" languagecode="1033" />
+                  <label description="Général" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{026a7b0a-9b9f-40b0-aa32-27fff29cc397}">
                       <labels>
                         <label description="Name" languagecode="1033" />
+                        <label description="Nom" languagecode="1036" />
+                        <label description="Name" languagecode="1031" />
                       </labels>
                       <control id="tc_name" datafieldname="tc_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" />
                     </cell>
@@ -37,6 +42,7 @@
                     <cell id="{98b6992a-74b6-41e0-1b46-cc218c020aa6}" showlabel="true" colspan="1" auto="true" rowspan="4">
                       <labels>
                         <label description="Case Categories" languagecode="1033" />
+                        <label description="Fallkategorien" languagecode="1031" />
                       </labels>
                       <control id="case_categories" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true" uniqueid="{3e32cb5b-5525-a469-6658-dcb6c88120a2}">
                         <parameters>
@@ -65,6 +71,8 @@
                     <cell id="{864b6778-a3aa-4221-9efe-2d65307b6600}" showlabel="true" locklevel="1" visible="false">
                       <labels>
                         <label description="Owner" languagecode="1033" />
+                        <label description="en charge du cas" languagecode="1036" />
+                        <label description="Eigentümer" languagecode="1031" />
                       </labels>
                       <control id="ownerid" datafieldname="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" uniqueid="{d8dd2346-5703-c481-0a47-1877d2c94641}" disabled="false">
                         <parameters>
@@ -97,6 +105,8 @@
           <cell id="{36970b3d-eaeb-7c68-ce91-742ba0363140}" showlabel="true" locklevel="0">
             <labels>
               <label description="Owner" languagecode="1033" />
+              <label description="en charge du cas" languagecode="1036" />
+              <label description="Eigentümer" languagecode="1031" />
             </labels>
             <control id="header_ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" disabled="false" />
           </cell>
@@ -138,9 +148,12 @@
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>
   <LocalizedNames>
+    <LocalizedName description="Informationen" languagecode="1031" />
     <LocalizedName description="Information" languagecode="1033" />
+    <LocalizedName description="Informations" languagecode="1036" />
   </LocalizedNames>
   <Descriptions>
+    <Description description="Formblatt für diese Einheit" languagecode="1031" />
     <Description description="A form for this entity." languagecode="1033" />
   </Descriptions>
 </systemform>

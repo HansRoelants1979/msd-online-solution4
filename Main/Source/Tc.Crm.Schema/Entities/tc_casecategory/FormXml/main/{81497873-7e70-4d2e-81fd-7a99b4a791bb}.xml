@@ -8,6 +8,7 @@
     <tabs>
       <tab id="{cf380e43-a412-4509-8723-1e8a4e9f1a44}" name="{cf380e43-a412-4509-8723-1e8a4e9f1a44}" verticallayout="true" IsUserDefined="1" locklevel="0" expanded="true" showlabel="true">
         <labels>
+          <label description="Fallkategorie" languagecode="1031" />
           <label description="Case Category" languagecode="1033" />
         </labels>
         <columns>
@@ -15,13 +16,17 @@
             <sections>
               <section id="{7e173380-878a-465e-9841-384c9140bbd9}" height="auto" name="{7e173380-878a-465e-9841-384c9140bbd9}" IsUserDefined="0" locklevel="0" showlabel="false" celllabelposition="Left" celllabelalignment="Left" labelwidth="250" showbar="false" columns="1">
                 <labels>
+                  <label description="Allgemein" languagecode="1031" />
                   <label description="General" languagecode="1033" />
+                  <label description="Général" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{7654f617-b218-433d-b3aa-b809a375cc14}">
                       <labels>
                         <label description="Name" languagecode="1033" />
+                        <label description="Nom" languagecode="1036" />
+                        <label description="Name" languagecode="1031" />
                       </labels>
                       <control id="tc_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_name" uniqueid="{4d92c50b-c6ce-7c76-0e80-86ab7a8e8219}" />
                     </cell>
@@ -37,6 +42,7 @@
                     <cell id="{c5a8eea1-ee3b-62d5-57b9-149261943c68}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Health &amp; Safety Category" languagecode="1033" />
+                        <label description="Gesundheit &amp; Sicherheit Kategorie" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_healthsafetycategory" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="tc_healthsafetycategory" uniqueid="{dc97d47e-ac31-eeb6-94c3-ca785828c6ea}" />
                     </cell>
@@ -45,6 +51,7 @@
                     <cell id="{b0646e7e-8831-22eb-4a40-b0394bad8335}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Health &amp; Safety Child Protection Category" languagecode="1033" />
+                        <label description="Gesundheit &amp; Sicherheit Kinderschutz Kategorie" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_healthsafetychildprotectioncategory" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="tc_healthsafetychildprotectioncategory" />
                     </cell>
@@ -53,6 +60,7 @@
                     <cell id="{52b56d3e-bd05-e652-c7ae-422ded91b82d}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Case Type" languagecode="1033" />
+                        <label description="Fall Art" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_casetypeid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_casetypeid" />
                     </cell>
@@ -61,6 +69,7 @@
                     <cell id="{0daa76bc-ba52-5467-c55e-3192605604a4}" showlabel="true" rowspan="4" auto="true" colspan="1">
                       <labels>
                         <label description="Case Sub Categories" languagecode="1033" />
+                        <label description="Fall Unterkategorien" languagecode="1031" />
                       </labels>
                       <control id="casecategory" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" uniqueid="{154c42d0-e432-5638-7947-57ba01aa43b1}" indicationOfSubgrid="true">
                         <parameters>
@@ -90,6 +99,8 @@
                     <cell id="{4b7eccf0-9923-4a09-9a8e-ad5dd2ffba70}" locklevel="1" showlabel="true" visible="false">
                       <labels>
                         <label description="Owner" languagecode="1033" />
+                        <label description="en charge du cas" languagecode="1036" />
+                        <label description="Eigentümer" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" uniqueid="{66e7a055-d4a7-2d1a-9b97-4cd71ea5d6d2}">
                         <parameters>
@@ -110,6 +121,7 @@
                     <cell id="{1849db6b-782a-c945-d0e1-07b171e9e557}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Selection Path" languagecode="1033" />
+                        <label description="Auswahlpfad" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_selectionpath" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_selectionpath" />
                     </cell>
@@ -137,6 +149,8 @@
           <cell id="{78259e13-7979-13bd-8452-eec592354a24}" locklevel="0" showlabel="true">
             <labels>
               <label description="Owner" languagecode="1033" />
+              <label description="en charge du cas" languagecode="1036" />
+              <label description="Eigentümer" languagecode="1031" />
             </labels>
             <control disabled="false" id="header_ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
           </cell>
@@ -265,9 +279,12 @@
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>
   <LocalizedNames>
+    <LocalizedName description="Information" languagecode="1031" />
     <LocalizedName description="Information" languagecode="1033" />
+    <LocalizedName description="Information" languagecode="1036" />
   </LocalizedNames>
   <Descriptions>
+    <Description description="Formblatt für diese Einheit" languagecode="1031" />
     <Description description="A form for this entity." languagecode="1033" />
   </Descriptions>
 </systemform>

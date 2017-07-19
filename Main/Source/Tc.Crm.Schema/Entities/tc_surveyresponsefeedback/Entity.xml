@@ -5,9 +5,11 @@
   <EntityInfo>
     <entity Name="tc_surveyresponsefeedback">
       <LocalizedNames>
+        <LocalizedName description="Survey Response Feedback" languagecode="1031" />
         <LocalizedName description="Survey Response Feedback" languagecode="1033" />
       </LocalizedNames>
       <LocalizedCollectionNames>
+        <LocalizedCollectionName description="Survey Responses Feedback" languagecode="1031" />
         <LocalizedCollectionName description="Survey Responses Feedback" languagecode="1033" />
       </LocalizedCollectionNames>
       <Descriptions>
@@ -568,6 +570,7 @@
             <IntroducedVersion>1.0.0.51</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
+              <displayname description="Status" languagecode="1031" />
               <displayname description="Status" languagecode="1033" />
               <displayname description="Statut" languagecode="1036" />
             </displaynames>
@@ -584,7 +587,7 @@
                   <label description="Actif" languagecode="1036" />
                 </labels>
               </state>
-              <state value="1" defaultstatus="2" invariantname="Inactive">
+              <state value="1" defaultstatus="950000000" invariantname="Inactive">
                 <labels>
                   <label description="Inaktiv" languagecode="1031" />
                   <label description="Inactive" languagecode="1033" />
@@ -594,6 +597,7 @@
             </states>
           </optionset>
           <displaynames>
+            <displayname description="Status" languagecode="1031" />
             <displayname description="Status" languagecode="1033" />
             <displayname description="Statut" languagecode="1036" />
           </displaynames>
@@ -642,18 +646,24 @@
               <Description description="Raison du statut de l'élément Survey Response Feedback" languagecode="1036" />
             </Descriptions>
             <statuses>
-              <status value="1" state="0">
+              <status value="1" state="0" TransitionData="" Color="#0000ff">
                 <labels>
                   <label description="Aktiv" languagecode="1031" />
                   <label description="Active" languagecode="1033" />
                   <label description="Actif" languagecode="1036" />
                 </labels>
               </status>
-              <status value="2" state="1">
+              <status value="2" state="1" TransitionData="" Color="#0000ff">
                 <labels>
                   <label description="Inaktiv" languagecode="1031" />
                   <label description="Inactive" languagecode="1033" />
                   <label description="Inactif" languagecode="1036" />
+                </labels>
+              </status>
+              <status value="950000000" state="1" TransitionData="" Color="#0000ff">
+                <labels>
+                  <label description="Bevorstehende Löschung" languagecode="1031" />
+                  <label description="Pending Delete" languagecode="1033" />
                 </labels>
               </status>
             </statuses>
@@ -697,9 +707,11 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Frage Feldtext" languagecode="1031" />
             <displayname description="Question Field Text" languagecode="1033" />
           </displaynames>
           <Descriptions>
+            <Description description="Der Name der benutzerdefinierten Entität." languagecode="1031" />
             <Description description="The name of the custom entity." languagecode="1033" />
           </Descriptions>
         </attribute>
@@ -730,6 +742,7 @@
           <MinValue>0</MinValue>
           <MaxValue>2147483647</MaxValue>
           <displaynames>
+            <displayname description="Frage Feld ID" languagecode="1031" />
             <displayname description="Question Field Id" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -832,6 +845,7 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Frage ID" languagecode="1031" />
             <displayname description="Question Id" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -866,6 +880,7 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Frage Name" languagecode="1031" />
             <displayname description="Question Name" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -899,6 +914,7 @@
           <Format></Format>
           <MaxLength>2000</MaxLength>
           <displaynames>
+            <displayname description="Frage Antwort" languagecode="1031" />
             <displayname description="Question Response" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -931,6 +947,7 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Survey Feedback" languagecode="1031" />
             <displayname description="Survey Feedback" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -961,6 +978,7 @@
           <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
           <displaynames>
+            <displayname description="Survey Response Feedback" languagecode="1031" />
             <displayname description="Survey Response Feedback" languagecode="1033" />
           </displaynames>
           <Descriptions>

@@ -8,6 +8,7 @@
     <tabs>
       <tab name="tab_3" id="{1055973b-b06b-49a3-1455-dcd30992c884}" IsUserDefined="0" locklevel="0" showlabel="true" expanded="false">
         <labels>
+          <label description="Hotelinformation" languagecode="1031" />
           <label description="Hotel Information" languagecode="1033" />
         </labels>
         <columns>
@@ -15,13 +16,17 @@
             <sections>
               <section name="tab_3_section_1" showlabel="true" showbar="false" locklevel="0" id="{b13672d4-852b-3954-6c14-49bd2ae87625}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="160" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
+                  <label description="Allgemein" languagecode="1031" />
                   <label description="General" languagecode="1033" />
+                  <label description="Général" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{9e710a72-f90a-4d56-a3e1-4d24328fd07b}">
                       <labels>
                         <label description="Name" languagecode="1033" />
+                        <label description="Nom" languagecode="1036" />
+                        <label description="Name" languagecode="1031" />
                       </labels>
                       <control id="tc_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_name" uniqueid="{824a6322-d3da-c45a-7cc9-8a051abbe27e}" />
                     </cell>
@@ -30,6 +35,7 @@
                     <cell id="{993768a6-4bc0-8390-4634-cc6789e4d249}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Master Hotel ID" languagecode="1033" />
+                        <label description="Master Hotel ID" languagecode="1031" />
                       </labels>
                       <control id="tc_masterhotelid" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_masterhotelid" disabled="false" />
                     </cell>
@@ -38,6 +44,7 @@
                     <cell id="{1848e32b-7d53-a451-5d68-d38274245528}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Category" languagecode="1033" />
+                        <label description="Kategorie" languagecode="1031" />
                       </labels>
                       <control id="tc_category" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_category" disabled="false" />
                     </cell>
@@ -46,6 +53,8 @@
                     <cell id="{4cb3e293-4e75-4da7-17db-80811032524d}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Location" languagecode="1033" />
+                        <label description="lieu" languagecode="1036" />
+                        <label description="Ort" languagecode="1031" />
                       </labels>
                       <control id="tc_locationid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_locationid" disabled="false" />
                     </cell>
@@ -54,6 +63,7 @@
                     <cell id="{a189a5a6-a60d-4ad7-3a33-1c453b006a6d}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Complex Type" languagecode="1033" />
+                        <label description="Komplexer Typ" languagecode="1031" />
                       </labels>
                       <control id="tc_complextype" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_complextype" disabled="false" />
                     </cell>
@@ -62,6 +72,7 @@
                     <cell id="{34400519-cdb5-29b7-c417-e9b5aa48a182}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Complex Type Description" languagecode="1033" />
+                        <label description="Komplexe Typ Beschreibung" languagecode="1031" />
                       </labels>
                       <control id="tc_complextypedescription" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="tc_complextypedescription" disabled="false" />
                     </cell>
@@ -74,13 +85,16 @@
             <sections>
               <section name="tab_3_section_2" showlabel="true" showbar="false" locklevel="0" id="{6b79a8db-5c6a-0d0e-0e87-e866620e6276}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="135" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
+                  <label description="Kontakt Details" languagecode="1031" />
                   <label description="Contact Details" languagecode="1033" />
+                  <label description="détails du contact " languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{48626458-4b2a-89e1-b990-e443d2d74b1e}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Primary Email Address" languagecode="1033" />
+                        <label description="Primäre Email Adresse" languagecode="1031" />
                       </labels>
                       <control id="tc_primaryemailaddress" classid="{ADA2203E-B4CD-49be-9DDF-234642B43B52}" datafieldname="tc_primaryemailaddress" disabled="false" />
                     </cell>
@@ -89,6 +103,8 @@
                     <cell id="{83463b89-b0bc-c59b-4540-0d39b549ecde}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="CC Email Address" languagecode="1033" />
+                        <label description="adresse email en CC" languagecode="1036" />
+                        <label description="CC Email Address" languagecode="1031" />
                       </labels>
                       <control id="tc_ccemailaddress" classid="{ADA2203E-B4CD-49be-9DDF-234642B43B52}" datafieldname="tc_ccemailaddress" disabled="false" />
                     </cell>
@@ -97,6 +113,8 @@
                     <cell id="{3b418e90-c8a1-15e4-8a9c-d93aa9e1a61b}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Telephone Number" languagecode="1033" />
+                        <label description="numéro de téléphone" languagecode="1036" />
+                        <label description="Telefonnummer" languagecode="1031" />
                       </labels>
                       <control id="tc_telephonenumber" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_telephonenumber" disabled="false" />
                     </cell>
@@ -105,6 +123,8 @@
                     <cell id="{b0c28bea-5a53-badd-cd56-6754d63cdd29}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Fax Number" languagecode="1033" />
+                        <label description="numéro de fax" languagecode="1036" />
+                        <label description="Fax  Nummer" languagecode="1031" />
                       </labels>
                       <control id="tc_faxnumber" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_faxnumber" disabled="false" />
                     </cell>
@@ -117,13 +137,17 @@
             <sections>
               <section name="{6eb632ff-f2ed-477b-b843-5f48b0df8359}_section_2" showlabel="true" showbar="false" locklevel="0" id="{16375848-b612-d730-51ab-603eab88ab6d}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="155" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
+                  <label description="Adresse" languagecode="1031" />
                   <label description="Address" languagecode="1033" />
+                  <label description="adresse" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{6adb80a5-009a-8ae8-7848-2a8054726d28}" showlabel="false" locklevel="0" rowspan="4">
                       <labels>
                         <label description="Address" languagecode="1033" />
+                        <label description="adresse" languagecode="1036" />
+                        <label description="Adresse" languagecode="1031" />
                       </labels>
                       <control id="tc_address" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="tc_address" disabled="false" uniqueid="{d1936acb-0641-279d-c1c9-a7c29c0e8132}" />
                     </cell>
@@ -139,6 +163,7 @@
       </tab>
       <tab name="tab_5" id="{50c773bc-732c-65ca-9754-19260661dd5d}" IsUserDefined="0" locklevel="0" showlabel="false" expanded="true">
         <labels>
+          <label description="Hoteldetails" languagecode="1031" />
           <label description="Hotel Details" languagecode="1033" />
         </labels>
         <columns>
@@ -146,6 +171,7 @@
             <sections>
               <section name="tab_5_section_1" showlabel="true" showbar="false" locklevel="0" id="{5d719065-103e-6275-e48a-3d5284de3891}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Top">
                 <labels>
+                  <label description="Hotel Versprechen" languagecode="1031" />
                   <label description="Hotel Promises" languagecode="1033" />
                 </labels>
                 <rows>
@@ -153,6 +179,7 @@
                     <cell id="{b5be1498-3542-59dc-4ab5-14a11b270e03}" showlabel="false" colspan="1" auto="false" rowspan="6">
                       <labels>
                         <label description="Hotel Promises" languagecode="1033" />
+                        <label description="Hotel Versprechen" languagecode="1031" />
                       </labels>
                       <control id="tc_HotelPromises" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true" uniqueid="{35366199-23c2-5358-b4ed-00e61d94e01e}">
                         <parameters>
@@ -187,6 +214,7 @@
       </tab>
       <tab name="tab_4" id="{e207bc87-cd49-4456-5817-62ec9be913e7}" IsUserDefined="0" locklevel="0" showlabel="true" expanded="true">
         <labels>
+          <label description="Hotelbenutzer" languagecode="1031" />
           <label description="Hotel Users" languagecode="1033" />
         </labels>
         <columns>
@@ -194,7 +222,9 @@
             <sections>
               <section name="tab_4_section_1" showlabel="false" showbar="false" locklevel="0" id="{c278c755-3e2c-58ae-e219-66b74d4e58b0}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115">
                 <labels>
+                  <label description="Abschnitt" languagecode="1031" />
                   <label description="Section" languagecode="1033" />
+                  <label description="Section" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
@@ -202,7 +232,7 @@
                       <labels>
                         <label description="Hotel Users" languagecode="1033" />
                         <label description="Utilisateurs" languagecode="1036" />
-                        <label description="Benutzer" languagecode="1031" />
+                        <label description="Hotelbenutzer" languagecode="1031" />
                       </labels>
                       <control id="gridHotelUsers" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
                         <parameters>
@@ -238,6 +268,7 @@
       </tab>
       <tab name="tab_2" id="{3d482135-9e10-e094-c2d0-4bd3588bb253}" IsUserDefined="0" locklevel="0" showlabel="false" expanded="true" visible="false">
         <labels>
+          <label description="Versteckt" languagecode="1031" />
           <label description="Hidden" languagecode="1033" />
         </labels>
         <columns>
@@ -245,7 +276,9 @@
             <sections>
               <section name="tab_2_section_1" showlabel="false" showbar="false" locklevel="0" id="{ca5e1c0b-8028-650d-c9e4-588bea6b5001}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115">
                 <labels>
+                  <label description="Abschnitt" languagecode="1031" />
                   <label description="Section" languagecode="1033" />
+                  <label description="Section" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
@@ -271,6 +304,8 @@
           <cell id="{22ea06e5-e74e-c8e1-2409-aa24c12eba46}" showlabel="true" locklevel="0">
             <labels>
               <label description="Location" languagecode="1033" />
+              <label description="lieu" languagecode="1036" />
+              <label description="Ort" languagecode="1031" />
             </labels>
             <control id="header_tc_locationid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_locationid" disabled="false" />
           </cell>
@@ -376,9 +411,12 @@
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>
   <LocalizedNames>
+    <LocalizedName description="Hotel" languagecode="1031" />
     <LocalizedName description="Hotel" languagecode="1033" />
+    <LocalizedName description="Hôtel" languagecode="1036" />
   </LocalizedNames>
   <Descriptions>
+    <Description description="Formblatt für diese Einheit" languagecode="1031" />
     <Description description="A form for this entity." languagecode="1033" />
   </Descriptions>
 </systemform>

@@ -9,10 +9,12 @@
   <EntityRelationship Name="account_parent_account" />
   <EntityRelationship Name="account_primary_contact" />
   <EntityRelationship Name="account_tc_assistancerequests" />
+  <EntityRelationship Name="account_tc_followups" />
   <EntityRelationship Name="account_tc_surveyresponses" />
   <EntityRelationship Name="activity_pointer_activity_mime_attachment" unmodified="1" />
   <EntityRelationship Name="activity_pointer_email" unmodified="1" />
   <EntityRelationship Name="activity_pointer_tc_assistancerequest" />
+  <EntityRelationship Name="activity_pointer_tc_followup" />
   <EntityRelationship Name="activity_pointer_tc_surveyresponse" />
   <EntityRelationship Name="ActivityMimeAttachment_SyncErrors" unmodified="1" />
   <EntityRelationship Name="annotation_owning_user" unmodified="1" />
@@ -24,10 +26,12 @@
   <EntityRelationship Name="bookableresourcebooking_Annotations" unmodified="1" />
   <EntityRelationship Name="bookableresourcebooking_Emails" unmodified="1" />
   <EntityRelationship Name="bookableresourcebooking_tc_assistancerequests" />
+  <EntityRelationship Name="bookableresourcebooking_tc_followups" />
   <EntityRelationship Name="bookableresourcebooking_tc_surveyresponses" />
   <EntityRelationship Name="bookableresourcebookingheader_Annotations" unmodified="1" />
   <EntityRelationship Name="bookableresourcebookingheader_Emails" unmodified="1" />
   <EntityRelationship Name="bookableresourcebookingheader_tc_assistancerequests" />
+  <EntityRelationship Name="bookableresourcebookingheader_tc_followups" />
   <EntityRelationship Name="bookableresourcebookingheader_tc_surveyresponses" />
   <EntityRelationship Name="bookableresourcecategoryassn_Annotations" unmodified="1" />
   <EntityRelationship Name="bookableresourcecharacteristic_Annotations" unmodified="1" />
@@ -35,6 +39,7 @@
   <EntityRelationship Name="bpf_incident_tc_caseflow" />
   <EntityRelationship Name="BulkOperation_Email" />
   <EntityRelationship Name="bulkoperation_tc_assistancerequests" />
+  <EntityRelationship Name="bulkoperation_tc_followups" />
   <EntityRelationship Name="bulkoperation_tc_surveyresponses" />
   <EntityRelationship Name="business_unit_accounts" />
   <EntityRelationship Name="business_unit_annotations" unmodified="1" />
@@ -44,6 +49,7 @@
   <EntityRelationship Name="business_unit_system_users" />
   <EntityRelationship Name="business_unit_tc_accounttype" />
   <EntityRelationship Name="business_unit_tc_alternativeemail" />
+  <EntityRelationship Name="business_unit_tc_boardbasis" />
   <EntityRelationship Name="business_unit_tc_booking" />
   <EntityRelationship Name="business_unit_tc_bookingaccommodation" />
   <EntityRelationship Name="business_unit_tc_bookingextraservice" />
@@ -58,9 +64,11 @@
   <EntityRelationship Name="business_unit_tc_compensationline" />
   <EntityRelationship Name="business_unit_tc_country" />
   <EntityRelationship Name="business_unit_tc_customerbookingrole" />
+  <EntityRelationship Name="business_unit_tc_externallogin" />
   <EntityRelationship Name="business_unit_tc_gateway" />
   <EntityRelationship Name="business_unit_tc_hotel" />
   <EntityRelationship Name="business_unit_tc_hotelpromises" />
+  <EntityRelationship Name="business_unit_tc_killerquestions" />
   <EntityRelationship Name="business_unit_tc_location" />
   <EntityRelationship Name="business_unit_tc_locationoffice" />
   <EntityRelationship Name="business_unit_tc_recovery" />
@@ -74,10 +82,12 @@
   <EntityRelationship Name="Campaign_Annotation" unmodified="1" />
   <EntityRelationship Name="Campaign_Emails" />
   <EntityRelationship Name="campaign_tc_assistancerequests" />
+  <EntityRelationship Name="campaign_tc_followups" />
   <EntityRelationship Name="campaign_tc_surveyresponses" />
   <EntityRelationship Name="CampaignActivity_Annotation" unmodified="1" />
   <EntityRelationship Name="CampaignActivity_Emails" />
   <EntityRelationship Name="campaignactivity_tc_assistancerequests" />
+  <EntityRelationship Name="campaignactivity_tc_followups" />
   <EntityRelationship Name="campaignactivity_tc_surveyresponses" />
   <EntityRelationship Name="CampaignResponse_Annotation" unmodified="1" />
   <EntityRelationship Name="channelaccessprofile_Annotations" unmodified="1" />
@@ -94,6 +104,7 @@
   <EntityRelationship Name="contact_originating_lead" />
   <EntityRelationship Name="contact_owning_user" />
   <EntityRelationship Name="contact_tc_assistancerequests" />
+  <EntityRelationship Name="contact_tc_followups" />
   <EntityRelationship Name="contact_tc_surveyresponses" />
   <EntityRelationship Name="Contract_Annotation" unmodified="1" />
   <EntityRelationship Name="contract_cases" />
@@ -101,6 +112,7 @@
   <EntityRelationship Name="contract_detail_cases" />
   <EntityRelationship Name="Contract_Emails" />
   <EntityRelationship Name="contract_tc_assistancerequests" />
+  <EntityRelationship Name="contract_tc_followups" />
   <EntityRelationship Name="contract_tc_surveyresponses" />
   <EntityRelationship Name="ContractDetail_Annotation" unmodified="1" />
   <EntityRelationship Name="ConvertRule_Annotation" unmodified="1" />
@@ -115,11 +127,13 @@
   <EntityRelationship Name="entitlement_cases" />
   <EntityRelationship Name="entitlement_Emails" unmodified="1" />
   <EntityRelationship Name="entitlement_tc_assistancerequests" />
+  <EntityRelationship Name="entitlement_tc_followups" />
   <EntityRelationship Name="entitlement_tc_surveyresponses" />
   <EntityRelationship Name="entitlementchannel_Annotations" unmodified="1" />
   <EntityRelationship Name="entitlementtemplate_Annotations" unmodified="1" />
   <EntityRelationship Name="entitlementtemplate_Emails" unmodified="1" />
   <EntityRelationship Name="entitlementtemplate_tc_assistancerequests" />
+  <EntityRelationship Name="entitlementtemplate_tc_followups" />
   <EntityRelationship Name="entitlementtemplate_tc_surveyresponses" />
   <EntityRelationship Name="equipment_accounts" />
   <EntityRelationship Name="Equipment_Annotation" unmodified="1" />
@@ -135,31 +149,37 @@
   <EntityRelationship Name="incident_master_incident" />
   <EntityRelationship Name="incident_parent_incident" />
   <EntityRelationship Name="incident_tc_assistancerequests" />
+  <EntityRelationship Name="incident_tc_followups" />
   <EntityRelationship Name="incident_tc_surveyresponses" />
   <EntityRelationship Name="IncidentResolution_Annotation" unmodified="1" />
   <EntityRelationship Name="interactionforemail_tc_assistancerequests" />
+  <EntityRelationship Name="interactionforemail_tc_followups" />
   <EntityRelationship Name="interactionforemail_tc_surveyresponses" />
   <EntityRelationship Name="Invoice_Annotation" unmodified="1" />
   <EntityRelationship Name="invoice_customer_contacts" />
   <EntityRelationship Name="Invoice_Emails" />
   <EntityRelationship Name="invoice_tc_assistancerequests" />
+  <EntityRelationship Name="invoice_tc_followups" />
   <EntityRelationship Name="invoice_tc_surveyresponses" />
   <EntityRelationship Name="KbArticle_Annotation" unmodified="1" />
   <EntityRelationship Name="kbarticle_incidents" />
   <EntityRelationship Name="knowledgearticle_Annotations" unmodified="1" />
   <EntityRelationship Name="KnowledgeArticle_Emails" unmodified="1" />
   <EntityRelationship Name="knowledgearticle_tc_assistancerequests" />
+  <EntityRelationship Name="knowledgearticle_tc_followups" />
   <EntityRelationship Name="knowledgearticle_tc_surveyresponses" />
   <EntityRelationship Name="KnowledgeBaseRecord_Annotations" unmodified="1" />
   <EntityRelationship Name="KnowledgeBaseRecord_Emails" unmodified="1" />
   <EntityRelationship Name="KnowledgeBaseRecord_Incident" unmodified="1" />
   <EntityRelationship Name="knowledgebaserecord_tc_assistancerequests" />
+  <EntityRelationship Name="knowledgebaserecord_tc_followups" />
   <EntityRelationship Name="knowledgebaserecord_tc_surveyresponses" />
   <EntityRelationship Name="Lead_Annotation" unmodified="1" />
   <EntityRelationship Name="lead_customer_contacts" />
   <EntityRelationship Name="Lead_Email_EmailSender" unmodified="1" />
   <EntityRelationship Name="Lead_Emails" />
   <EntityRelationship Name="lead_tc_assistancerequests" />
+  <EntityRelationship Name="lead_tc_followups" />
   <EntityRelationship Name="lead_tc_surveyresponses" />
   <EntityRelationship Name="Letter_Annotation" unmodified="1" />
   <EntityRelationship Name="List_Annotation" unmodified="1" />
@@ -188,6 +208,8 @@
   <EntityRelationship Name="lk_tc_accounttype_modifiedby" />
   <EntityRelationship Name="lk_tc_alternativeemail_createdby" />
   <EntityRelationship Name="lk_tc_alternativeemail_modifiedby" />
+  <EntityRelationship Name="lk_tc_boardbasis_createdby" />
+  <EntityRelationship Name="lk_tc_boardbasis_modifiedby" />
   <EntityRelationship Name="lk_tc_booking_createdby" />
   <EntityRelationship Name="lk_tc_booking_modifiedby" />
   <EntityRelationship Name="lk_tc_bookingaccommodation_createdby" />
@@ -228,12 +250,16 @@
   <EntityRelationship Name="lk_tc_country_modifiedby" />
   <EntityRelationship Name="lk_tc_customerbookingrole_createdby" />
   <EntityRelationship Name="lk_tc_customerbookingrole_modifiedby" />
+  <EntityRelationship Name="lk_tc_externallogin_createdby" />
+  <EntityRelationship Name="lk_tc_externallogin_modifiedby" />
   <EntityRelationship Name="lk_tc_gateway_createdby" />
   <EntityRelationship Name="lk_tc_gateway_modifiedby" />
   <EntityRelationship Name="lk_tc_hotel_createdby" />
   <EntityRelationship Name="lk_tc_hotel_modifiedby" />
   <EntityRelationship Name="lk_tc_hotelpromises_createdby" />
   <EntityRelationship Name="lk_tc_hotelpromises_modifiedby" />
+  <EntityRelationship Name="lk_tc_killerquestions_createdby" />
+  <EntityRelationship Name="lk_tc_killerquestions_modifiedby" />
   <EntityRelationship Name="lk_tc_location_createdby" />
   <EntityRelationship Name="lk_tc_location_modifiedby" />
   <EntityRelationship Name="lk_tc_locationoffice_createdby" />
@@ -248,6 +274,8 @@
   <EntityRelationship Name="lk_tc_surveyresponsefeedback_modifiedby" />
   <EntityRelationship Name="lk_tc_touroperator_createdby" />
   <EntityRelationship Name="lk_tc_touroperator_modifiedby" />
+  <EntityRelationship Name="lk_tc_whatsnext_createdby" />
+  <EntityRelationship Name="lk_tc_whatsnext_modifiedby" />
   <EntityRelationship Name="lk_teambase_administratorid" unmodified="1" />
   <EntityRelationship Name="lk_teambase_createdby" unmodified="1" />
   <EntityRelationship Name="lk_teambase_modifiedby" unmodified="1" />
@@ -261,12 +289,34 @@
   <EntityRelationship Name="msdyn_postalbum_Annotations" />
   <EntityRelationship Name="msdyn_postalbum_Emails" />
   <EntityRelationship Name="msdyn_postalbum_tc_assistancerequests" />
+  <EntityRelationship Name="msdyn_postalbum_tc_followups" />
   <EntityRelationship Name="msdyn_postalbum_tc_surveyresponses" />
   <EntityRelationship Name="msdyn_systemuser_wallsavedqueryusersettings_userid" />
+  <EntityRelationship Name="msdyusd_agentscriptaction_Annotations" />
+  <EntityRelationship Name="msdyusd_answer_Annotations" />
+  <EntityRelationship Name="msdyusd_configuration_Annotations" />
+  <EntityRelationship Name="msdyusd_configuration_users" />
+  <EntityRelationship Name="msdyusd_customizationfiles_Annotations" />
+  <EntityRelationship Name="msdyusd_entityassignment_Annotations" />
+  <EntityRelationship Name="msdyusd_entitysearch_Annotations" />
+  <EntityRelationship Name="msdyusd_form_Annotations" />
+  <EntityRelationship Name="msdyusd_languagemodule_Annotations" />
+  <EntityRelationship Name="msdyusd_scriptlet_Annotations" />
+  <EntityRelationship Name="msdyusd_scripttasktrigger_Annotations" />
+  <EntityRelationship Name="msdyusd_search_Annotations" />
+  <EntityRelationship Name="msdyusd_sessioninformation_Annotations" />
+  <EntityRelationship Name="msdyusd_systemuser_msdyusd_usersettings_User" />
+  <EntityRelationship Name="msdyusd_task_Annotations" />
+  <EntityRelationship Name="msdyusd_toolbarbutton_Annotations" />
+  <EntityRelationship Name="msdyusd_toolbarstrip_Annotations" />
+  <EntityRelationship Name="msdyusd_tracesourcesetting_Annotations" />
+  <EntityRelationship Name="msdyusd_uiievent_Annotations" />
+  <EntityRelationship Name="msdyusd_windowroute_Annotations" />
   <EntityRelationship Name="Opportunity_Annotation" unmodified="1" />
   <EntityRelationship Name="opportunity_customer_contacts" />
   <EntityRelationship Name="Opportunity_Emails" />
   <EntityRelationship Name="opportunity_tc_assistancerequests" />
+  <EntityRelationship Name="opportunity_tc_followups" />
   <EntityRelationship Name="opportunity_tc_surveyresponses" />
   <EntityRelationship Name="OpportunityClose_Annotation" unmodified="1" />
   <EntityRelationship Name="order_customer_contacts" />
@@ -277,6 +327,7 @@
   <EntityRelationship Name="organization_tc_compensationcalculationline" />
   <EntityRelationship Name="organization_tc_compensationcalculationmatrix" />
   <EntityRelationship Name="organization_tc_configuration" />
+  <EntityRelationship Name="organization_tc_whatsnext" />
   <EntityRelationship Name="organization_teams" unmodified="1" />
   <EntityRelationship Name="owner_accounts" />
   <EntityRelationship Name="owner_annotations" unmodified="1" />
@@ -284,6 +335,7 @@
   <EntityRelationship Name="owner_incidents" />
   <EntityRelationship Name="owner_tc_accounttype" />
   <EntityRelationship Name="owner_tc_alternativeemail" />
+  <EntityRelationship Name="owner_tc_boardbasis" />
   <EntityRelationship Name="owner_tc_booking" />
   <EntityRelationship Name="owner_tc_bookingaccommodation" />
   <EntityRelationship Name="owner_tc_bookingextraservice" />
@@ -298,9 +350,11 @@
   <EntityRelationship Name="owner_tc_compensationline" />
   <EntityRelationship Name="owner_tc_country" />
   <EntityRelationship Name="owner_tc_customerbookingrole" />
+  <EntityRelationship Name="owner_tc_externallogin" />
   <EntityRelationship Name="owner_tc_gateway" />
   <EntityRelationship Name="owner_tc_hotel" />
   <EntityRelationship Name="owner_tc_hotelpromises" />
+  <EntityRelationship Name="owner_tc_killerquestions" />
   <EntityRelationship Name="owner_tc_location" />
   <EntityRelationship Name="owner_tc_locationoffice" />
   <EntityRelationship Name="owner_tc_recovery" />
@@ -328,6 +382,7 @@
   <EntityRelationship Name="quote_customer_contacts" />
   <EntityRelationship Name="Quote_Emails" />
   <EntityRelationship Name="quote_tc_assistancerequests" />
+  <EntityRelationship Name="quote_tc_followups" />
   <EntityRelationship Name="quote_tc_surveyresponses" />
   <EntityRelationship Name="QuoteClose_Annotation" unmodified="1" />
   <EntityRelationship Name="RecurringAppointmentMaster_Annotation" unmodified="1" />
@@ -337,6 +392,7 @@
   <EntityRelationship Name="SalesOrder_Annotation" unmodified="1" />
   <EntityRelationship Name="SalesOrder_Emails" />
   <EntityRelationship Name="salesorder_tc_assistancerequests" />
+  <EntityRelationship Name="salesorder_tc_followups" />
   <EntityRelationship Name="salesorder_tc_surveyresponses" />
   <EntityRelationship Name="service_accounts" />
   <EntityRelationship Name="Service_Annotation" unmodified="1" />
@@ -395,6 +451,7 @@
   <EntityRelationship Name="tc_booking_tc_bookingtransport" />
   <EntityRelationship Name="tc_booking_tc_compensation" />
   <EntityRelationship Name="tc_booking_tc_customerbookingrole" />
+  <EntityRelationship Name="tc_booking_tc_followups" />
   <EntityRelationship Name="tc_booking_tc_recovery" />
   <EntityRelationship Name="tc_booking_tc_surveyresponse" />
   <EntityRelationship Name="tc_booking_tc_surveyresponses" />
@@ -402,6 +459,7 @@
   <EntityRelationship Name="tc_bookingaccommodation_Emails" />
   <EntityRelationship Name="tc_bookingaccommodation_tc_assistancerequests" />
   <EntityRelationship Name="tc_bookingaccommodation_tc_caseline" />
+  <EntityRelationship Name="tc_bookingaccommodation_tc_followups" />
   <EntityRelationship Name="tc_bookingaccommodation_tc_surveyresponses" />
   <EntityRelationship Name="tc_bookingextraservice_Annotations" />
   <EntityRelationship Name="tc_bookingextraservice_tc_caseline" />
@@ -431,9 +489,13 @@
   <EntityRelationship Name="tc_compensationapprovalslikpi_compensationap" />
   <EntityRelationship Name="tc_contact_incident" />
   <EntityRelationship Name="tc_contact_letter_Customer" />
+  <EntityRelationship Name="tc_contact_opportunity_Customer" />
+  <EntityRelationship Name="tc_contact_tc_booking" />
   <EntityRelationship Name="tc_contact_tc_compensation_Customer" />
   <EntityRelationship Name="tc_contact_tc_compensationLine_Customer" />
   <EntityRelationship Name="tc_contact_tc_customerbookingrole_Customer" />
+  <EntityRelationship Name="tc_contact_tc_followup_Customer" />
+  <EntityRelationship Name="tc_contact_tc_whatsnext" />
   <EntityRelationship Name="tc_country_tc_booking" />
   <EntityRelationship Name="tc_country_tc_brand" />
   <EntityRelationship Name="tc_country_tc_compensation" />
@@ -444,6 +506,17 @@
   <EntityRelationship Name="tc_departuregateway_tc_bookingtransfer" />
   <EntityRelationship Name="tc_departuregateway_tc_bookingtransport" />
   <EntityRelationship Name="tc_destinationgateway_tc_booking" />
+  <EntityRelationship Name="tc_followup_Annotations" />
+  <EntityRelationship Name="tc_followup_businessunit_owningbusinessunit" />
+  <EntityRelationship Name="tc_followup_mailbox_sendermailboxid" />
+  <EntityRelationship Name="tc_followup_owner_ownerid" />
+  <EntityRelationship Name="tc_followup_service_serviceid" />
+  <EntityRelationship Name="tc_followup_sla_slaid" />
+  <EntityRelationship Name="tc_followup_sla_slainvokedid" />
+  <EntityRelationship Name="tc_followup_systemuser_createdby" />
+  <EntityRelationship Name="tc_followup_systemuser_modifiedby" />
+  <EntityRelationship Name="tc_followup_systemuser_owninguser" />
+  <EntityRelationship Name="tc_followup_team_owningteam" />
   <EntityRelationship Name="tc_gateway_incident_gateway" />
   <EntityRelationship Name="tc_gateway_tc_caseline_TransportArrivalAirport" />
   <EntityRelationship Name="tc_gateway_tc_caseline_TransportDepartureAirport" />
@@ -454,6 +527,7 @@
   <EntityRelationship Name="tc_hotel_tc_assistancerequests" />
   <EntityRelationship Name="tc_hotel_tc_bookingaccommodation" />
   <EntityRelationship Name="tc_hotel_tc_caseline_AccommodationPropertyName" />
+  <EntityRelationship Name="tc_hotel_tc_followups" />
   <EntityRelationship Name="tc_hotel_tc_hotelpromises" />
   <EntityRelationship Name="tc_hotel_tc_surveyresponses" />
   <EntityRelationship Name="tc_incident_alternativeemaillookup" />
@@ -471,6 +545,7 @@
   <EntityRelationship Name="tc_queue_tc_locationoffice" />
   <EntityRelationship Name="tc_region_tc_booking" />
   <EntityRelationship Name="tc_region_tc_location" />
+  <EntityRelationship Name="tc_slakpiinstance_opportunity_31DaysInactivityTravelerPlannerCloseByKPI" />
   <EntityRelationship Name="tc_source_market_contact" />
   <EntityRelationship Name="tc_surveyresponse_Annotations" />
   <EntityRelationship Name="tc_surveyresponse_businessunit_owningbusinessunit" />
@@ -484,12 +559,14 @@
   <EntityRelationship Name="tc_surveyresponse_systemuser_owninguser" />
   <EntityRelationship Name="tc_surveyresponse_tc_surveyresponsefeedback" />
   <EntityRelationship Name="tc_surveyresponse_team_owningteam" />
+  <EntityRelationship Name="tc_systemuser_contact_MarketingUpdatedBy" />
   <EntityRelationship Name="tc_systemuser_incident_OriginalResolutionBy" />
   <EntityRelationship Name="tc_systemuser_tc_compensationapproval_ApprovedBy" />
   <EntityRelationship Name="tc_systemuser_tc_compensationapproval_RequestedBy" />
   <EntityRelationship Name="tc_systemuser_tc_compensationline_CaseCreatedBy" />
   <EntityRelationship Name="tc_systemuser_tc_hotel" />
   <EntityRelationship Name="tc_systemuser_tc_locationoffice" />
+  <EntityRelationship Name="tc_tc_boardbasis_opportunity_BoardBasis" />
   <EntityRelationship Name="tc_tc_booking_letter" />
   <EntityRelationship Name="tc_tc_booking_tc_caseline_bookingid" />
   <EntityRelationship Name="tc_tc_booking_tc_compensationline" />
@@ -510,10 +587,29 @@
   <EntityRelationship Name="tc_tc_compensationline_tc_recovery" />
   <EntityRelationship Name="tc_tc_country_account" />
   <EntityRelationship Name="tc_tc_country_incident" />
+  <EntityRelationship Name="tc_tc_country_opportunity_DestinationCountry1" />
+  <EntityRelationship Name="tc_tc_country_opportunity_DestinationCountry2" />
+  <EntityRelationship Name="tc_tc_country_opportunity_DestinationCountry3" />
+  <EntityRelationship Name="tc_tc_gateway_opportunity_DeparturePoint1" />
+  <EntityRelationship Name="tc_tc_gateway_opportunity_DeparturePoint2" />
+  <EntityRelationship Name="tc_tc_gateway_opportunity_DeparturePoint3" />
+  <EntityRelationship Name="tc_tc_gateway_opportunity_Destinationairport1" />
+  <EntityRelationship Name="tc_tc_gateway_opportunity_Destinationairport2" />
+  <EntityRelationship Name="tc_tc_gateway_opportunity_Destinationairport3" />
   <EntityRelationship Name="tc_tc_gateway_systemuser" />
+  <EntityRelationship Name="tc_tc_gateway_tc_surveyresponse" />
+  <EntityRelationship Name="tc_tc_hotel_opportunity_Hotel1" />
+  <EntityRelationship Name="tc_tc_hotel_opportunity_Hotel2" />
+  <EntityRelationship Name="tc_tc_hotel_opportunity_Hotel3" />
   <EntityRelationship Name="tc_tc_location_incident" />
+  <EntityRelationship Name="tc_tc_location_opportunity_Location1" />
+  <EntityRelationship Name="tc_tc_location_opportunity_Location2" />
+  <EntityRelationship Name="tc_tc_location_opportunity_Location3" />
   <EntityRelationship Name="tc_tc_locationoffice_incident" />
   <EntityRelationship Name="tc_tc_region_incident" />
+  <EntityRelationship Name="tc_tc_region_opportunity_Region1" />
+  <EntityRelationship Name="tc_tc_region_opportunity_Region2" />
+  <EntityRelationship Name="tc_tc_region_opportunity_Region3" />
   <EntityRelationship Name="tc_tc_sharer_incident" />
   <EntityRelationship Name="tc_team_sourcemarketteam" />
   <EntityRelationship Name="tc_touroperator_tc_booking" />
@@ -529,6 +625,7 @@
   <EntityRelationship Name="team_incidents" />
   <EntityRelationship Name="team_tc_accounttype" />
   <EntityRelationship Name="team_tc_alternativeemail" />
+  <EntityRelationship Name="team_tc_boardbasis" />
   <EntityRelationship Name="team_tc_booking" />
   <EntityRelationship Name="team_tc_bookingaccommodation" />
   <EntityRelationship Name="team_tc_bookingextraservice" />
@@ -543,9 +640,11 @@
   <EntityRelationship Name="team_tc_compensationline" />
   <EntityRelationship Name="team_tc_country" />
   <EntityRelationship Name="team_tc_customerbookingrole" />
+  <EntityRelationship Name="team_tc_externallogin" />
   <EntityRelationship Name="team_tc_gateway" />
   <EntityRelationship Name="team_tc_hotel" />
   <EntityRelationship Name="team_tc_hotelpromises" />
+  <EntityRelationship Name="team_tc_killerquestions" />
   <EntityRelationship Name="team_tc_location" />
   <EntityRelationship Name="team_tc_locationoffice" />
   <EntityRelationship Name="team_tc_recovery" />
@@ -567,11 +666,52 @@
   <EntityRelationship Name="TransactionCurrency_tc_compensationline" />
   <EntityRelationship Name="TransactionCurrency_tc_country" />
   <EntityRelationship Name="TransactionCurrency_tc_recovery" />
+  <EntityRelationship Name="uii_action_Annotations" />
+  <EntityRelationship Name="uii_action_Emails" />
+  <EntityRelationship Name="uii_action_tc_assistancerequests" />
+  <EntityRelationship Name="uii_action_tc_followups" />
+  <EntityRelationship Name="uii_action_tc_surveyresponses" />
+  <EntityRelationship Name="uii_hostedapplication_Annotations" />
+  <EntityRelationship Name="uii_hostedapplication_Emails" />
+  <EntityRelationship Name="uii_hostedapplication_tc_assistancerequests" />
+  <EntityRelationship Name="uii_hostedapplication_tc_followups" />
+  <EntityRelationship Name="uii_hostedapplication_tc_surveyresponses" />
+  <EntityRelationship Name="uii_nonhostedapplication_Annotations" />
+  <EntityRelationship Name="uii_nonhostedapplication_Emails" />
+  <EntityRelationship Name="uii_nonhostedapplication_tc_assistancerequests" />
+  <EntityRelationship Name="uii_nonhostedapplication_tc_followups" />
+  <EntityRelationship Name="uii_nonhostedapplication_tc_surveyresponses" />
+  <EntityRelationship Name="uii_option_Annotations" />
+  <EntityRelationship Name="uii_option_Emails" />
+  <EntityRelationship Name="uii_option_tc_assistancerequests" />
+  <EntityRelationship Name="uii_option_tc_followups" />
+  <EntityRelationship Name="uii_option_tc_surveyresponses" />
+  <EntityRelationship Name="uii_savedsession_Emails" />
+  <EntityRelationship Name="uii_savedsession_tc_assistancerequests" />
+  <EntityRelationship Name="uii_savedsession_tc_followups" />
+  <EntityRelationship Name="uii_savedsession_tc_surveyresponses" />
+  <EntityRelationship Name="uii_toagent_uii_sessiontransfer" />
+  <EntityRelationship Name="uii_workflow_Annotations" />
+  <EntityRelationship Name="uii_workflow_Emails" />
+  <EntityRelationship Name="uii_workflow_tc_assistancerequests" />
+  <EntityRelationship Name="uii_workflow_tc_followups" />
+  <EntityRelationship Name="uii_workflow_tc_surveyresponses" />
+  <EntityRelationship Name="uii_workflow_workflowstep_mapping_Annotations" />
+  <EntityRelationship Name="uii_workflow_workflowstep_mapping_Emails" />
+  <EntityRelationship Name="uii_workflow_workflowstep_mapping_tc_assistancerequests" />
+  <EntityRelationship Name="uii_workflow_workflowstep_mapping_tc_followups" />
+  <EntityRelationship Name="uii_workflow_workflowstep_mapping_tc_surveyresponses" />
+  <EntityRelationship Name="uii_workflowstep_Annotations" />
+  <EntityRelationship Name="uii_workflowstep_Emails" />
+  <EntityRelationship Name="uii_workflowstep_tc_assistancerequests" />
+  <EntityRelationship Name="uii_workflowstep_tc_followups" />
+  <EntityRelationship Name="uii_workflowstep_tc_surveyresponses" />
   <EntityRelationship Name="user_accounts" />
   <EntityRelationship Name="user_email" unmodified="1" />
   <EntityRelationship Name="user_parent_user" />
   <EntityRelationship Name="user_tc_accounttype" />
   <EntityRelationship Name="user_tc_alternativeemail" />
+  <EntityRelationship Name="user_tc_boardbasis" />
   <EntityRelationship Name="user_tc_booking" />
   <EntityRelationship Name="user_tc_bookingaccommodation" />
   <EntityRelationship Name="user_tc_bookingextraservice" />
@@ -586,9 +726,11 @@
   <EntityRelationship Name="user_tc_compensationline" />
   <EntityRelationship Name="user_tc_country" />
   <EntityRelationship Name="user_tc_customerbookingrole" />
+  <EntityRelationship Name="user_tc_externallogin" />
   <EntityRelationship Name="user_tc_gateway" />
   <EntityRelationship Name="user_tc_hotel" />
   <EntityRelationship Name="user_tc_hotelpromises" />
+  <EntityRelationship Name="user_tc_killerquestions" />
   <EntityRelationship Name="user_tc_location" />
   <EntityRelationship Name="user_tc_locationoffice" />
   <EntityRelationship Name="user_tc_recovery" />

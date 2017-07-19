@@ -30,7 +30,7 @@ Tc.Crm.Scripts.Library.Contact = (function () {
 
     var EntityNames = {
         Contact: "contact",
-        Case: "incident",
+        Case: "incident",        
         Compensation: "tc_compensation"
     }
 
@@ -143,7 +143,7 @@ Tc.Crm.Scripts.Library.Contact = (function () {
             }
         );
     }
-    var getNotificationForPhoneNumber = function (telephoneFieldName) {
+    var getNotificationForPhoneNumber = function(telephoneFieldName) {
         var phone = Xrm.Page.data.entity.attributes.get(telephoneFieldName);
         if (phone == null) return;
         var phoneValue = phone.getValue();
@@ -168,7 +168,6 @@ Tc.Crm.Scripts.Library.Contact = (function () {
             }
         }
     }
-
     // public
     return {
         UpdateCustomerCompensationsLanguage: updateCustomerCompensationsLanguage,

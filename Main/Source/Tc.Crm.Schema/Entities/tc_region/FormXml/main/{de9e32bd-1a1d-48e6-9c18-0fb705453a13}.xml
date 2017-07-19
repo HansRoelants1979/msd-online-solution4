@@ -8,6 +8,7 @@
     <tabs>
       <tab verticallayout="true" id="{3302da67-58f8-47cc-8a70-5d3df9ac6f67}" IsUserDefined="1" name="{3302da67-58f8-47cc-8a70-5d3df9ac6f67}" locklevel="0" expanded="true" showlabel="true">
         <labels>
+          <label description="Regionsinformation" languagecode="1031" />
           <label description="Region Information" languagecode="1033" />
         </labels>
         <columns>
@@ -15,6 +16,7 @@
             <sections>
               <section showlabel="false" showbar="false" IsUserDefined="0" id="{77fedea8-cfd5-45ef-957a-f8b7a0b2ce62}">
                 <labels>
+                  <label description="Allgemein" languagecode="1031" />
                   <label description="General" languagecode="1033" />
                 </labels>
                 <rows>
@@ -22,6 +24,8 @@
                     <cell id="{b6b185e6-1845-462b-b91a-a7d25ee04969}">
                       <labels>
                         <label description="Name" languagecode="1033" />
+                        <label description="Nom" languagecode="1036" />
+                        <label description="Name" languagecode="1031" />
                       </labels>
                       <control id="tc_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_name" />
                     </cell>
@@ -30,6 +34,7 @@
                     <cell id="{51577ca1-e777-05bb-c03b-edce6d1e3668}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Region Code" languagecode="1033" />
+                        <label description="Regionscode" languagecode="1031" />
                       </labels>
                       <control id="tc_regioncode" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_regioncode" disabled="false" />
                     </cell>
@@ -38,6 +43,7 @@
                     <cell id="{e7ae5d53-e738-b4ee-6606-e267c78d526d}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Country" languagecode="1033" />
+                        <label description="Land" languagecode="1031" />
                       </labels>
                       <control id="tc_countryid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_countryid" disabled="false" />
                     </cell>
@@ -46,6 +52,8 @@
                     <cell id="{f04b0bf6-228a-4f72-a4e7-309cc6c50f1d}" showlabel="true" locklevel="1" visible="false">
                       <labels>
                         <label description="Owner" languagecode="1033" />
+                        <label description="Propriétaire" languagecode="1036" />
+                        <label description="Besitzer" languagecode="1031" />
                       </labels>
                       <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" uniqueid="{dc3e7c5b-ed5c-9085-b99c-5a724722207b}" disabled="false">
                         <parameters>
@@ -59,6 +67,7 @@
                     <cell id="{c9cebc69-e53b-eeb8-c918-a475d9187e4d}" showlabel="true" colspan="1" auto="false" rowspan="6">
                       <labels>
                         <label description="Locations" languagecode="1033" />
+                        <label description="Standorte" languagecode="1031" />
                       </labels>
                       <control id="Location_Region" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
                         <parameters>
@@ -108,6 +117,8 @@
           <cell id="{010668ed-7bdd-40cb-d830-eb052c5865d0}" showlabel="true" locklevel="0">
             <labels>
               <label description="Owner" languagecode="1033" />
+              <label description="Propriétaire" languagecode="1036" />
+              <label description="Besitzer" languagecode="1031" />
             </labels>
             <control id="header_ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" disabled="false" />
           </cell>
@@ -160,9 +171,13 @@
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>
   <LocalizedNames>
+    <LocalizedName description="Region" languagecode="1031" />
     <LocalizedName description="Region" languagecode="1033" />
+    <LocalizedName description="Région" languagecode="1036" />
   </LocalizedNames>
   <Descriptions>
+    <Description description="Region" languagecode="1031" />
     <Description description="Region" languagecode="1033" />
+    <Description description="Région" languagecode="1036" />
   </Descriptions>
 </systemform>

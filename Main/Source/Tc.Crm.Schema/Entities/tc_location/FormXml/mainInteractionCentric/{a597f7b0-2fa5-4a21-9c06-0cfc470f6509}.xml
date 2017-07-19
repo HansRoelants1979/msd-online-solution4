@@ -8,6 +8,7 @@
     <tabs>
       <tab verticallayout="true" id="{8850f0e5-0e98-4cc0-b9fe-291be812d042}" IsUserDefined="1">
         <labels>
+          <label description="Allgemeine Informationen" languagecode="1031" />
           <label description="General Info" languagecode="1033" />
         </labels>
         <columns>
@@ -15,13 +16,17 @@
             <sections>
               <section showlabel="false" showbar="false" IsUserDefined="0" id="{e1cb96a0-a8ac-4a15-a35c-e3135d9b21e2}">
                 <labels>
+                  <label description="Allgemein" languagecode="1031" />
                   <label description="General" languagecode="1033" />
+                  <label description="Général" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{25e0280c-f4d1-40c2-8e94-8869810b8e44}">
                       <labels>
                         <label description="Name" languagecode="1033" />
+                        <label description="Nom" languagecode="1036" />
+                        <label description="Name" languagecode="1031" />
                       </labels>
                       <control id="tc_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_name" />
                     </cell>
@@ -30,6 +35,8 @@
                     <cell id="{82f746fe-85f6-4d65-b7fd-15753fd36e39}">
                       <labels>
                         <label description="Owner" languagecode="1033" />
+                        <label description="en charge du cas" languagecode="1036" />
+                        <label description="Eigentümer" languagecode="1031" />
                       </labels>
                       <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
                     </cell>
@@ -42,13 +49,17 @@
             <sections>
               <section showlabel="true" showbar="false" id="{21c96ee6-323f-42df-92c3-d4e3f13a67df}" IsUserDefined="0" height="auto">
                 <labels>
+                  <label description="ZEITPLANUNG" languagecode="1031" />
                   <label description="TIMELINE" languagecode="1033" />
+                  <label description="CHRONOLOGIE" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell showlabel="false" colspan="1" rowspan="18" auto="false" id="{e54c0aae-630d-4f69-89d8-5b2b9bcde370}">
                       <labels>
+                        <label description="Unterhaltungsregisterkarten" languagecode="1031" />
                         <label description="Conversation Tabs" languagecode="1033" />
+                        <label description="Onglets de conversation" languagecode="1036" />
                       </labels>
                       <control id="interactionwallcontrol" classid="{1F179106-FA28-4495-961E-F6BD93C21974}" />
                     </cell>
@@ -78,7 +89,9 @@
             <sections>
               <section showlabel="true" columns="1" showbar="false" id="{ea61af46-1313-4671-afcd-8b4e813472de}" name="ref_pan_{ea61af46-1313-4671-afcd-8b4e813472de}" IsUserDefined="0">
                 <labels>
+                  <label description="VERKNÜPFT" languagecode="1031" />
                   <label description="RELATED" languagecode="1033" />
+                  <label description="ASSOCIATION" languagecode="1036" />
                 </labels>
                 <rows>
                   <row />
@@ -98,9 +111,12 @@
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>
   <LocalizedNames>
+    <LocalizedName description="Information" languagecode="1031" />
     <LocalizedName description="Information" languagecode="1033" />
+    <LocalizedName description="Information" languagecode="1036" />
   </LocalizedNames>
   <Descriptions>
+    <Description description="Formblatt für diese Einheit" languagecode="1031" />
     <Description description="A form for this entity." languagecode="1033" />
   </Descriptions>
 </systemform>

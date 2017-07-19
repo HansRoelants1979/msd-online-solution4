@@ -699,6 +699,10 @@
                         <Variable x:TypeArguments="x:Object" Name="SendEmailStep6_31" />
                         <Variable x:TypeArguments="x:Object" Name="SendEmailStep6_32" />
                         <Variable x:TypeArguments="x:Object" Name="SendEmailStep6_33" />
+                        <Variable x:TypeArguments="x:Object" Name="SendEmailStep6_34" />
+                        <Variable x:TypeArguments="x:Object" Name="SendEmailStep6_35" />
+                        <Variable x:TypeArguments="x:Object" Name="SendEmailStep6_36" />
+                        <Variable x:TypeArguments="x:Object" Name="SendEmailStep6_37" />
                       </Sequence.Variables>
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;SendEmailStep6_localParameter#Temp&quot;)]" Value="[New Entity(&quot;email&quot;)]" />
                       <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
@@ -867,21 +871,21 @@
                       <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
                         <mxswa:ActivityReference.Arguments>
                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;font face=&amp;#34;&amp;#34;Tahoma&amp;#34;&amp;#34; size=&amp;#34;&amp;#34;2&amp;#34;&amp;#34;&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;div&amp;gt;&amp;lt;div&amp;gt;&amp;lt;div&amp;gt;&amp;lt;span style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;Sehr geehrter Reisegast&amp;#44;&amp;lt;/span&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;div&amp;gt;&amp;lt;span style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;&amp;lt;br&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;div&amp;gt;&amp;lt;span style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;Gast:&amp;amp;nbsp;&amp;lt;/span&amp;gt;&amp;lt;span style=&amp;#34;&amp;#34;background-color: rgb(255&amp;#44; 255&amp;#44; 255); color: rgb(51&amp;#44; 51&amp;#44; 51); font-size: small;&amp;#34;&amp;#34;&amp;gt;{Account Name(Customer (Account));Full Name(Customer (Customer))}&amp;lt;/span&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/font&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;div&amp;gt;&amp;lt;font face=&amp;#34;&amp;#34;Tahoma&amp;#34;&amp;#34; size=&amp;#34;&amp;#34;2&amp;#34;&amp;#34;&amp;gt;&amp;lt;span style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;Buchungsnummer:&amp;amp;nbsp;", "String" }]</InArgument>
+                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;font face=&amp;#34;&amp;#34;Tahoma&amp;#34;&amp;#34; size=&amp;#34;&amp;#34;2&amp;#34;&amp;#34;&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;div&amp;gt;&amp;lt;div&amp;gt;&amp;lt;div&amp;gt;&amp;lt;span style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;Sehr geehrter Reisegast&amp;#44;&amp;lt;/span&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;div&amp;gt;&amp;lt;span style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;&amp;lt;br&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;div&amp;gt;&amp;lt;span style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;Gast: ", "String" }]</InArgument>
                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
                           </InArgument>
                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[SendEmailStep6_17]</OutArgument>
                         </mxswa:ActivityReference.Arguments>
                       </mxswa:ActivityReference>
-                      <mxswa:GetEntityProperty Attribute="tc_bookingreferencefreetext" Entity="[InputEntities(&quot;related_tc_caseid#incident&quot;)]" EntityName="incident" Value="[SendEmailStep6_19]">
+                      <mxswa:GetEntityProperty Attribute="fullname" Entity="[InputEntities(&quot;related_tc_customer#contact&quot;)]" EntityName="contact" Value="[SendEmailStep6_19]">
                         <mxswa:GetEntityProperty.TargetType>
                           <InArgument x:TypeArguments="s:Type">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
                           </InArgument>
                         </mxswa:GetEntityProperty.TargetType>
                       </mxswa:GetEntityProperty>
-                      <mxswa:GetEntityProperty Attribute="tc_bookingid" Entity="[InputEntities(&quot;related_tc_caseid#incident&quot;)]" EntityName="incident" Value="[SendEmailStep6_20]">
+                      <mxswa:GetEntityProperty Attribute="name" Entity="[InputEntities(&quot;related_tc_customer#account&quot;)]" EntityName="account" Value="[SendEmailStep6_20]">
                         <mxswa:GetEntityProperty.TargetType>
                           <InArgument x:TypeArguments="s:Type">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
@@ -901,14 +905,21 @@
                       <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
                         <mxswa:ActivityReference.Arguments>
                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters" xml:space="preserve">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, " &amp;lt;/span&amp;gt;&amp;lt;/font&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;div&amp;gt;&amp;lt;font face=&amp;#34;&amp;#34;Tahoma&amp;#34;&amp;#34; size=&amp;#34;&amp;#34;2&amp;#34;&amp;#34;&amp;gt;&amp;lt;br&amp;gt;&amp;lt;/font&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;div&amp;gt;&amp;lt;font face=&amp;#34;&amp;#34;Tahoma&amp;#34;&amp;#34; size=&amp;#34;&amp;#34;2&amp;#34;&amp;#34;&amp;gt;&amp;lt;span style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;wie mit Ihnen besprochen&amp;#44; haben wir Ihr Anliegen abschließend geprüft.&amp;lt;/span&amp;gt;&amp;lt;br style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;&amp;lt;br style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;&amp;lt;span style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;Sie haben uns mitgeteilt:  ", "String" }]</InArgument>
+                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, " &amp;lt;/span&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/font&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;span&amp;gt;&amp;lt;div&amp;gt;&amp;lt;font face=&amp;#34;&amp;#34;Tahoma&amp;#34;&amp;#34; size=&amp;#34;&amp;#34;2&amp;#34;&amp;#34;&amp;gt;&amp;lt;span style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;Buchungsnummer: ", "String" }]</InArgument>
                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
                           </InArgument>
                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[SendEmailStep6_21]</OutArgument>
                         </mxswa:ActivityReference.Arguments>
                       </mxswa:ActivityReference>
-                      <mxswa:GetEntityProperty Attribute="description" Entity="[InputEntities(&quot;related_tc_caseid#incident&quot;)]" EntityName="incident" Value="[SendEmailStep6_23]">
+                      <mxswa:GetEntityProperty Attribute="tc_bookingreferencefreetext" Entity="[InputEntities(&quot;related_tc_caseid#incident&quot;)]" EntityName="incident" Value="[SendEmailStep6_23]">
+                        <mxswa:GetEntityProperty.TargetType>
+                          <InArgument x:TypeArguments="s:Type">
+                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
+                          </InArgument>
+                        </mxswa:GetEntityProperty.TargetType>
+                      </mxswa:GetEntityProperty>
+                      <mxswa:GetEntityProperty Attribute="tc_bookingid" Entity="[InputEntities(&quot;related_tc_caseid#incident&quot;)]" EntityName="incident" Value="[SendEmailStep6_24]">
                         <mxswa:GetEntityProperty.TargetType>
                           <InArgument x:TypeArguments="s:Type">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
@@ -918,7 +929,7 @@
                       <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
                         <mxswa:ActivityReference.Arguments>
                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
-                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { SendEmailStep6_23 }]</InArgument>
+                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { SendEmailStep6_23, SendEmailStep6_24 }]</InArgument>
                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
                           </InArgument>
@@ -928,11 +939,38 @@
                       <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
                         <mxswa:ActivityReference.Arguments>
                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters" xml:space="preserve">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "  &amp;lt;/span&amp;gt;&amp;lt;/font&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;div&amp;gt;&amp;lt;font face=&amp;#34;&amp;#34;Tahoma&amp;#34;&amp;#34; size=&amp;#34;&amp;#34;2&amp;#34;&amp;#34;&amp;gt;&amp;lt;span style=&amp;#34;&amp;#34;background-color: rgb(255&amp;#44; 255&amp;#44; 255); color: rgb(51&amp;#44; 51&amp;#44; 51);&amp;#34;&amp;#34;&amp;gt;&amp;lt;br&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/font&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;div&amp;gt;&amp;lt;font face=&amp;#34;&amp;#34;Tahoma&amp;#34;&amp;#34; size=&amp;#34;&amp;#34;2&amp;#34;&amp;#34;&amp;gt;&amp;lt;span style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;Der Ordnung halber möchten wir darauf hinweisen&amp;#44; dass die vor Ort aufgenommene Mängelrüge nicht die gesetzlich vorgeschriebene Geltendmachung etwaiger Ansprüche innerhalb der gesetzlichen Fristen nach Reiseende gegenüber dem Reiseveranstalter ersetzt.&amp;lt;/span&amp;gt;&amp;lt;br style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;&amp;lt;br style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;&amp;lt;span style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;Für die entstandenen Unannehmlichkeiten während Ihres Urlaubes bitten wir nochmals um Entschuldigung. Ihre Kritik sehen wir als Chance&amp;#44; das Urlaubserlebnis für unsere Gäste zu verbessern.&amp;lt;/span&amp;gt;&amp;lt;br style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;&amp;lt;br style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;&amp;lt;span style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;Wir freuen uns&amp;#44; auch auf Ihrer nächsten Reise für Sie da zu sein.&amp;lt;/span&amp;gt;&amp;lt;br style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;&amp;lt;br style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;&amp;lt;span style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;Bis zum nächsten Mal herzliche Grüße von Ihrer Reiseleitung&amp;lt;/span&amp;gt;&amp;lt;/font&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;div&amp;gt;&amp;lt;font face=&amp;#34;&amp;#34;Tahoma&amp;#34;&amp;#34; size=&amp;#34;&amp;#34;2&amp;#34;&amp;#34;&amp;gt;&amp;lt;br&amp;gt; ", "String" }]</InArgument>
+                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters" xml:space="preserve">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "  &amp;lt;/span&amp;gt;&amp;lt;/font&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;div&amp;gt;&amp;lt;font face=&amp;#34;&amp;#34;Tahoma&amp;#34;&amp;#34; size=&amp;#34;&amp;#34;2&amp;#34;&amp;#34;&amp;gt;&amp;lt;br&amp;gt;&amp;lt;/font&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;div&amp;gt;&amp;lt;font face=&amp;#34;&amp;#34;Tahoma&amp;#34;&amp;#34; size=&amp;#34;&amp;#34;2&amp;#34;&amp;#34;&amp;gt;&amp;lt;span style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;wie mit Ihnen besprochen&amp;#44; haben wir Ihr Anliegen abschließend geprüft.&amp;lt;/span&amp;gt;&amp;lt;br style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;&amp;lt;br style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;&amp;lt;span style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;Sie haben uns mitgeteilt: ", "String" }]</InArgument>
                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
                           </InArgument>
-                          <OutArgument x:TypeArguments="x:Object" x:Key="Result">[SendEmailStep6_24]</OutArgument>
+                          <OutArgument x:TypeArguments="x:Object" x:Key="Result">[SendEmailStep6_25]</OutArgument>
+                        </mxswa:ActivityReference.Arguments>
+                      </mxswa:ActivityReference>
+                      <mxswa:GetEntityProperty Attribute="description" Entity="[InputEntities(&quot;related_tc_caseid#incident&quot;)]" EntityName="incident" Value="[SendEmailStep6_27]">
+                        <mxswa:GetEntityProperty.TargetType>
+                          <InArgument x:TypeArguments="s:Type">
+                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
+                          </InArgument>
+                        </mxswa:GetEntityProperty.TargetType>
+                      </mxswa:GetEntityProperty>
+                      <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                        <mxswa:ActivityReference.Arguments>
+                          <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
+                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { SendEmailStep6_27 }]</InArgument>
+                          <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
+                          </InArgument>
+                          <OutArgument x:TypeArguments="x:Object" x:Key="Result">[SendEmailStep6_26]</OutArgument>
+                        </mxswa:ActivityReference.Arguments>
+                      </mxswa:ActivityReference>
+                      <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                        <mxswa:ActivityReference.Arguments>
+                          <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters" xml:space="preserve">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "   &amp;lt;/span&amp;gt;&amp;lt;/font&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;div&amp;gt;&amp;lt;font face=&amp;#34;&amp;#34;Tahoma&amp;#34;&amp;#34; size=&amp;#34;&amp;#34;2&amp;#34;&amp;#34;&amp;gt;&amp;lt;span style=&amp;#34;&amp;#34;background-color: rgb(255&amp;#44; 255&amp;#44; 255); color: rgb(51&amp;#44; 51&amp;#44; 51);&amp;#34;&amp;#34;&amp;gt;&amp;lt;br&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/font&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;div&amp;gt;&amp;lt;font face=&amp;#34;&amp;#34;Tahoma&amp;#34;&amp;#34; size=&amp;#34;&amp;#34;2&amp;#34;&amp;#34;&amp;gt;&amp;lt;span style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;Der Ordnung halber möchten wir darauf hinweisen&amp;#44; dass die vor Ort aufgenommene Mängelrüge nicht die gesetzlich vorgeschriebene Geltendmachung etwaiger Ansprüche innerhalb der gesetzlichen Fristen nach Reiseende gegenüber dem Reiseveranstalter ersetzt.&amp;lt;/span&amp;gt;&amp;lt;br style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;&amp;lt;br style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;&amp;lt;span style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;Für die entstandenen Unannehmlichkeiten während Ihres Urlaubes bitten wir nochmals um Entschuldigung. Ihre Kritik sehen wir als Chance&amp;#44; das Urlaubserlebnis für unsere Gäste zu verbessern.&amp;lt;/span&amp;gt;&amp;lt;br style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;&amp;lt;br style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;&amp;lt;span style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;Wir freuen uns&amp;#44; auch auf Ihrer nächsten Reise für Sie da zu sein.&amp;lt;/span&amp;gt;&amp;lt;br style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;&amp;lt;br style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;&amp;lt;span style=&amp;#34;&amp;#34;color: rgb(51&amp;#44; 51&amp;#44; 51); background-color: rgb(255&amp;#44; 255&amp;#44; 255);&amp;#34;&amp;#34;&amp;gt;Bis zum nächsten Mal herzliche Grüße von Ihrer Reiseleitung&amp;lt;/span&amp;gt;&amp;lt;/font&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;div&amp;gt;&amp;lt;font face=&amp;#34;&amp;#34;Tahoma&amp;#34;&amp;#34; size=&amp;#34;&amp;#34;2&amp;#34;&amp;#34;&amp;gt;&amp;lt;br&amp;gt; ", "String" }]</InArgument>
+                          <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
+                          </InArgument>
+                          <OutArgument x:TypeArguments="x:Object" x:Key="Result">[SendEmailStep6_28]</OutArgument>
                         </mxswa:ActivityReference.Arguments>
                       </mxswa:ActivityReference>
                       <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
@@ -942,23 +980,23 @@
                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
                           </InArgument>
-                          <OutArgument x:TypeArguments="x:Object" x:Key="Result">[SendEmailStep6_25]</OutArgument>
+                          <OutArgument x:TypeArguments="x:Object" x:Key="Result">[SendEmailStep6_29]</OutArgument>
                         </mxswa:ActivityReference.Arguments>
                       </mxswa:ActivityReference>
                       <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
                         <mxswa:ActivityReference.Arguments>
                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, "&amp;lt;/font&amp;gt; &amp;lt;br&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;", "String" }]</InArgument>
+                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.String, " &amp;lt;br&amp;gt;&amp;lt;/font&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;", "String" }]</InArgument>
                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
                           </InArgument>
-                          <OutArgument x:TypeArguments="x:Object" x:Key="Result">[SendEmailStep6_26]</OutArgument>
+                          <OutArgument x:TypeArguments="x:Object" x:Key="Result">[SendEmailStep6_30]</OutArgument>
                         </mxswa:ActivityReference.Arguments>
                       </mxswa:ActivityReference>
                       <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
                         <mxswa:ActivityReference.Arguments>
                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
-                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { SendEmailStep6_17, SendEmailStep6_18, SendEmailStep6_21, SendEmailStep6_22, SendEmailStep6_24, SendEmailStep6_25, SendEmailStep6_26 }]</InArgument>
+                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { SendEmailStep6_17, SendEmailStep6_18, SendEmailStep6_21, SendEmailStep6_22, SendEmailStep6_25, SendEmailStep6_26, SendEmailStep6_28, SendEmailStep6_29, SendEmailStep6_30 }]</InArgument>
                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:String" />
                           </InArgument>
@@ -972,7 +1010,7 @@
                           </InArgument>
                         </mxswa:SetEntityProperty.TargetType>
                       </mxswa:SetEntityProperty>
-                      <mxswa:GetEntityProperty Attribute="incidentid" Entity="[InputEntities(&quot;related_tc_caseid#incident&quot;)]" EntityName="incident" Value="[SendEmailStep6_28]">
+                      <mxswa:GetEntityProperty Attribute="incidentid" Entity="[InputEntities(&quot;related_tc_caseid#incident&quot;)]" EntityName="incident" Value="[SendEmailStep6_32]">
                         <mxswa:GetEntityProperty.TargetType>
                           <InArgument x:TypeArguments="s:Type">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:EntityReference" />
@@ -982,85 +1020,17 @@
                       <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
                         <mxswa:ActivityReference.Arguments>
                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
-                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { SendEmailStep6_28 }]</InArgument>
+                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { SendEmailStep6_32 }]</InArgument>
                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:EntityReference" />
-                          </InArgument>
-                          <OutArgument x:TypeArguments="x:Object" x:Key="Result">[SendEmailStep6_27]</OutArgument>
-                        </mxswa:ActivityReference.Arguments>
-                      </mxswa:ActivityReference>
-                      <mxswa:SetEntityProperty Attribute="regardingobjectid" Entity="[CreatedEntities(&quot;SendEmailStep6_localParameter#Temp&quot;)]" EntityName="email" Value="[SendEmailStep6_27]">
-                        <mxswa:SetEntityProperty.TargetType>
-                          <InArgument x:TypeArguments="s:Type">
-                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:EntityReference" />
-                          </InArgument>
-                        </mxswa:SetEntityProperty.TargetType>
-                      </mxswa:SetEntityProperty>
-                      <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
-                        <mxswa:ActivityReference.Arguments>
-                          <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.OptionSetValue, "1", "Picklist" }]</InArgument>
-                          <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
-                          </InArgument>
-                          <OutArgument x:TypeArguments="x:Object" x:Key="Result">[SendEmailStep6_29]</OutArgument>
-                        </mxswa:ActivityReference.Arguments>
-                      </mxswa:ActivityReference>
-                      <mxswa:SetEntityProperty Attribute="deliveryprioritycode" Entity="[CreatedEntities(&quot;SendEmailStep6_localParameter#Temp&quot;)]" EntityName="email" Value="[SendEmailStep6_29]">
-                        <mxswa:SetEntityProperty.TargetType>
-                          <InArgument x:TypeArguments="s:Type">
-                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
-                          </InArgument>
-                        </mxswa:SetEntityProperty.TargetType>
-                      </mxswa:SetEntityProperty>
-                      <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
-                        <mxswa:ActivityReference.Arguments>
-                          <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.Boolean, "True" }]</InArgument>
-                          <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
-                          </InArgument>
-                          <OutArgument x:TypeArguments="x:Object" x:Key="Result">[SendEmailStep6_30]</OutArgument>
-                        </mxswa:ActivityReference.Arguments>
-                      </mxswa:ActivityReference>
-                      <mxswa:SetEntityProperty Attribute="directioncode" Entity="[CreatedEntities(&quot;SendEmailStep6_localParameter#Temp&quot;)]" EntityName="email" Value="[SendEmailStep6_30]">
-                        <mxswa:SetEntityProperty.TargetType>
-                          <InArgument x:TypeArguments="s:Type">
-                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
-                          </InArgument>
-                        </mxswa:SetEntityProperty.TargetType>
-                      </mxswa:SetEntityProperty>
-                      <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
-                        <mxswa:ActivityReference.Arguments>
-                          <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.Boolean, "False" }]</InArgument>
-                          <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                           </InArgument>
                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[SendEmailStep6_31]</OutArgument>
                         </mxswa:ActivityReference.Arguments>
                       </mxswa:ActivityReference>
-                      <mxswa:SetEntityProperty Attribute="followemailuserpreference" Entity="[CreatedEntities(&quot;SendEmailStep6_localParameter#Temp&quot;)]" EntityName="email" Value="[SendEmailStep6_31]">
+                      <mxswa:SetEntityProperty Attribute="regardingobjectid" Entity="[CreatedEntities(&quot;SendEmailStep6_localParameter#Temp&quot;)]" EntityName="email" Value="[SendEmailStep6_31]">
                         <mxswa:SetEntityProperty.TargetType>
                           <InArgument x:TypeArguments="s:Type">
-                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
-                          </InArgument>
-                        </mxswa:SetEntityProperty.TargetType>
-                      </mxswa:SetEntityProperty>
-                      <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
-                        <mxswa:ActivityReference.Arguments>
-                          <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.OptionSetValue, "0", "Picklist" }]</InArgument>
-                          <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
-                          </InArgument>
-                          <OutArgument x:TypeArguments="x:Object" x:Key="Result">[SendEmailStep6_32]</OutArgument>
-                        </mxswa:ActivityReference.Arguments>
-                      </mxswa:ActivityReference>
-                      <mxswa:SetEntityProperty Attribute="notifications" Entity="[CreatedEntities(&quot;SendEmailStep6_localParameter#Temp&quot;)]" EntityName="email" Value="[SendEmailStep6_32]">
-                        <mxswa:SetEntityProperty.TargetType>
-                          <InArgument x:TypeArguments="s:Type">
-                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
+                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:EntityReference" />
                           </InArgument>
                         </mxswa:SetEntityProperty.TargetType>
                       </mxswa:SetEntityProperty>
@@ -1074,7 +1044,75 @@
                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[SendEmailStep6_33]</OutArgument>
                         </mxswa:ActivityReference.Arguments>
                       </mxswa:ActivityReference>
-                      <mxswa:SetEntityProperty Attribute="prioritycode" Entity="[CreatedEntities(&quot;SendEmailStep6_localParameter#Temp&quot;)]" EntityName="email" Value="[SendEmailStep6_33]">
+                      <mxswa:SetEntityProperty Attribute="deliveryprioritycode" Entity="[CreatedEntities(&quot;SendEmailStep6_localParameter#Temp&quot;)]" EntityName="email" Value="[SendEmailStep6_33]">
+                        <mxswa:SetEntityProperty.TargetType>
+                          <InArgument x:TypeArguments="s:Type">
+                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
+                          </InArgument>
+                        </mxswa:SetEntityProperty.TargetType>
+                      </mxswa:SetEntityProperty>
+                      <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                        <mxswa:ActivityReference.Arguments>
+                          <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.Boolean, "True" }]</InArgument>
+                          <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
+                          </InArgument>
+                          <OutArgument x:TypeArguments="x:Object" x:Key="Result">[SendEmailStep6_34]</OutArgument>
+                        </mxswa:ActivityReference.Arguments>
+                      </mxswa:ActivityReference>
+                      <mxswa:SetEntityProperty Attribute="directioncode" Entity="[CreatedEntities(&quot;SendEmailStep6_localParameter#Temp&quot;)]" EntityName="email" Value="[SendEmailStep6_34]">
+                        <mxswa:SetEntityProperty.TargetType>
+                          <InArgument x:TypeArguments="s:Type">
+                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
+                          </InArgument>
+                        </mxswa:SetEntityProperty.TargetType>
+                      </mxswa:SetEntityProperty>
+                      <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                        <mxswa:ActivityReference.Arguments>
+                          <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.Boolean, "False" }]</InArgument>
+                          <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
+                          </InArgument>
+                          <OutArgument x:TypeArguments="x:Object" x:Key="Result">[SendEmailStep6_35]</OutArgument>
+                        </mxswa:ActivityReference.Arguments>
+                      </mxswa:ActivityReference>
+                      <mxswa:SetEntityProperty Attribute="followemailuserpreference" Entity="[CreatedEntities(&quot;SendEmailStep6_localParameter#Temp&quot;)]" EntityName="email" Value="[SendEmailStep6_35]">
+                        <mxswa:SetEntityProperty.TargetType>
+                          <InArgument x:TypeArguments="s:Type">
+                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
+                          </InArgument>
+                        </mxswa:SetEntityProperty.TargetType>
+                      </mxswa:SetEntityProperty>
+                      <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                        <mxswa:ActivityReference.Arguments>
+                          <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.OptionSetValue, "0", "Picklist" }]</InArgument>
+                          <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
+                          </InArgument>
+                          <OutArgument x:TypeArguments="x:Object" x:Key="Result">[SendEmailStep6_36]</OutArgument>
+                        </mxswa:ActivityReference.Arguments>
+                      </mxswa:ActivityReference>
+                      <mxswa:SetEntityProperty Attribute="notifications" Entity="[CreatedEntities(&quot;SendEmailStep6_localParameter#Temp&quot;)]" EntityName="email" Value="[SendEmailStep6_36]">
+                        <mxswa:SetEntityProperty.TargetType>
+                          <InArgument x:TypeArguments="s:Type">
+                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
+                          </InArgument>
+                        </mxswa:SetEntityProperty.TargetType>
+                      </mxswa:SetEntityProperty>
+                      <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                        <mxswa:ActivityReference.Arguments>
+                          <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
+                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.OptionSetValue, "1", "Picklist" }]</InArgument>
+                          <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
+                          </InArgument>
+                          <OutArgument x:TypeArguments="x:Object" x:Key="Result">[SendEmailStep6_37]</OutArgument>
+                        </mxswa:ActivityReference.Arguments>
+                      </mxswa:ActivityReference>
+                      <mxswa:SetEntityProperty Attribute="prioritycode" Entity="[CreatedEntities(&quot;SendEmailStep6_localParameter#Temp&quot;)]" EntityName="email" Value="[SendEmailStep6_37]">
                         <mxswa:SetEntityProperty.TargetType>
                           <InArgument x:TypeArguments="s:Type">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />

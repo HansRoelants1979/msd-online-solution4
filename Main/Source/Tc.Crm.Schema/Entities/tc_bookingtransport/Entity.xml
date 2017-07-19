@@ -5,12 +5,15 @@
   <EntityInfo>
     <entity Name="tc_bookingtransport">
       <LocalizedNames>
+        <LocalizedName description="Beförderung buchen" languagecode="1031" />
         <LocalizedName description="Booking Transport" languagecode="1033" />
       </LocalizedNames>
       <LocalizedCollectionNames>
+        <LocalizedCollectionName description="Beförderungen Buchen" languagecode="1031" />
         <LocalizedCollectionName description="Booking Transports" languagecode="1033" />
       </LocalizedCollectionNames>
       <Descriptions>
+        <Description description="Flugbuchungen für eine Buchung (und spätere Züge, Bus)." languagecode="1031" />
         <Description description="Flight bookings relating to a booking (and later trains, bus)." languagecode="1033" />
       </Descriptions>
       <attributes>
@@ -568,6 +571,7 @@
             <IntroducedVersion>1.0.0.0</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
+              <displayname description="Status" languagecode="1031" />
               <displayname description="Status" languagecode="1033" />
               <displayname description="Statut" languagecode="1036" />
             </displaynames>
@@ -594,6 +598,7 @@
             </states>
           </optionset>
           <displaynames>
+            <displayname description="Status" languagecode="1031" />
             <displayname description="Status" languagecode="1033" />
             <displayname description="Statut" languagecode="1036" />
           </displaynames>
@@ -658,6 +663,7 @@
               </status>
               <status value="950000000" state="1" TransitionData="" Color="#0000ff">
                 <labels>
+                  <label description="Bevorstehende Löschung" languagecode="1031" />
                   <label description="Pending Delete" languagecode="1033" />
                 </labels>
               </status>
@@ -734,9 +740,12 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Buchung" languagecode="1031" />
             <displayname description="Booking" languagecode="1033" />
+            <displayname description="Réservation" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Verbindet die Buchungen mit dem Buchungsverkehr" languagecode="1031" />
             <Description description="Connects the Bookings with the Booking Transport" languagecode="1033" />
           </Descriptions>
         </attribute>
@@ -800,7 +809,9 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Carrier Code" languagecode="1031" />
             <displayname description="Carrier Code" languagecode="1033" />
+            <displayname description="code transporteur" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -833,7 +844,9 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Abflugsgate" languagecode="1031" />
             <displayname description="Departure Gateway" languagecode="1033" />
+            <displayname description="lieu d'aéroport de départ " languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="Connects the departure gateway (eg Airport) to the Booking Transport" languagecode="1033" />
@@ -867,6 +880,7 @@
           <MaxLength>1000</MaxLength>
           <Length>2000</Length>
           <displaynames>
+            <displayname description="Beschreibung" languagecode="1031" />
             <displayname description="Description" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -935,6 +949,7 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Flugkennung" languagecode="1031" />
             <displayname description="Flight Identifier" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -969,6 +984,7 @@
           <MaxLength>50</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Flugnummer" languagecode="1031" />
             <displayname description="Flight Number" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1003,9 +1019,12 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Name" languagecode="1031" />
             <displayname description="Name" languagecode="1033" />
+            <displayname description="Nom" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Buchungsname" languagecode="1031" />
             <Description description="Booking Transport Name" languagecode="1033" />
           </Descriptions>
         </attribute>
@@ -1036,7 +1055,9 @@
           <MinValue>0</MinValue>
           <MaxValue>2147483647</MaxValue>
           <displaynames>
+            <displayname description="Anzahl Teilnehmer" languagecode="1031" />
             <displayname description="Number of Participants" languagecode="1033" />
+            <displayname description="nombre de participants" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1069,7 +1090,9 @@
           <MinValue>0</MinValue>
           <MaxValue>2147483647</MaxValue>
           <displaynames>
+            <displayname description="Auftrag" languagecode="1031" />
             <displayname description="Order" languagecode="1033" />
+            <displayname description="Commande" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1103,7 +1126,9 @@
           <MaxLength>1000</MaxLength>
           <Length>2000</Length>
           <displaynames>
+            <displayname description="Teilnehmer" languagecode="1031" />
             <displayname description="Participants" languagecode="1033" />
+            <displayname description="participants" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1136,7 +1161,9 @@
           <Format></Format>
           <MaxLength>5000</MaxLength>
           <displaynames>
+            <displayname description="Bemerkung" languagecode="1031" />
             <displayname description="Remark" languagecode="1033" />
+            <displayname description="remarque" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1170,6 +1197,7 @@
           <CanChangeDateTimeBehavior>1</CanChangeDateTimeBehavior>
           <Behavior>3</Behavior>
           <displaynames>
+            <displayname description="Anfangsdatum &amp; Zeit" languagecode="1031" />
             <displayname description="Start Date and Time" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1203,7 +1231,9 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_transfertype</OptionSetName>
           <displaynames>
+            <displayname description="Transport Typ" languagecode="1031" />
             <displayname description="Transfer Type" languagecode="1033" />
+            <displayname description="type de transfert" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1237,7 +1267,9 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Transport Nummer" languagecode="1031" />
             <displayname description="Transport Code" languagecode="1033" />
+            <displayname description="code transport" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />

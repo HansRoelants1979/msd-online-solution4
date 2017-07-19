@@ -8,6 +8,7 @@
     <tabs>
       <tab verticallayout="true" id="{80a40da9-2fbf-44bb-959b-69ca05f857a4}" IsUserDefined="1" name="{80a40da9-2fbf-44bb-959b-69ca05f857a4}" locklevel="0" expanded="true" showlabel="true">
         <labels>
+          <label description="Hotel Versprechen Informationen" languagecode="1031" />
           <label description="Hotel Promise Information" languagecode="1033" />
         </labels>
         <columns>
@@ -15,13 +16,17 @@
             <sections>
               <section showlabel="false" showbar="false" IsUserDefined="0" id="{f1fbcee8-6ce4-44cd-ad02-d775c44b9c7c}">
                 <labels>
+                  <label description="Allgemein" languagecode="1031" />
                   <label description="General" languagecode="1033" />
+                  <label description="Général" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{c26954e4-1001-288b-eb9e-e5bac2d21204}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Name" languagecode="1033" />
+                        <label description="Nom" languagecode="1036" />
+                        <label description="Name" languagecode="1031" />
                       </labels>
                       <control id="tc_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_name" disabled="false" />
                     </cell>
@@ -30,6 +35,8 @@
                     <cell id="{96928ea9-a15a-6a37-a8d7-27e18707585b}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Brand" languagecode="1033" />
+                        <label description="Marque" languagecode="1036" />
+                        <label description="Marke" languagecode="1031" />
                       </labels>
                       <control id="tc_brandid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_brandid" disabled="false" />
                     </cell>
@@ -38,6 +45,8 @@
                     <cell id="{c0cd1e56-51c2-9ee9-7bee-7899c04bb291}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Hotel" languagecode="1033" />
+                        <label description="Hôtel" languagecode="1036" />
+                        <label description="Hotel" languagecode="1031" />
                       </labels>
                       <control id="tc_hotelid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_hotelid" disabled="false" />
                     </cell>
@@ -46,6 +55,7 @@
                     <cell id="{0a803687-c923-402d-06c3-4ec105d7da06}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Promise Type" languagecode="1033" />
+                        <label description="Versprechen Typ" languagecode="1031" />
                       </labels>
                       <control id="tc_promisetype" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_promisetype" disabled="false" />
                     </cell>
@@ -54,6 +64,8 @@
                     <cell id="{2870fa49-9d09-4a46-b347-1aa40db6c75d}" showlabel="false" locklevel="1" visible="false">
                       <labels>
                         <label description="Owner" languagecode="1033" />
+                        <label description="en charge du cas" languagecode="1036" />
+                        <label description="Eigentümer" languagecode="1031" />
                       </labels>
                       <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" uniqueid="{636933d1-76d4-58e6-cb31-91c7415c11bb}" disabled="false">
                         <parameters>
@@ -86,6 +98,8 @@
           <cell id="{8edd024e-d5b4-bc30-add1-dccd64adb168}" showlabel="true" locklevel="0">
             <labels>
               <label description="Owner" languagecode="1033" />
+              <label description="en charge du cas" languagecode="1036" />
+              <label description="Eigentümer" languagecode="1031" />
             </labels>
             <control id="header_ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" disabled="false" uniqueid="{4dacd0a0-e7a0-a67d-9aac-11dc3eebac7a}">
               <parameters>
@@ -103,6 +117,8 @@
           <cell id="{5c848be8-273a-e98e-a455-2d0e57eddb24}" showlabel="true" locklevel="0">
             <labels>
               <label description="Owner" languagecode="1033" />
+              <label description="en charge du cas" languagecode="1036" />
+              <label description="Eigentümer" languagecode="1031" />
             </labels>
             <control id="footer_ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" disabled="true" uniqueid="{b117ced9-9784-e44a-64be-099437d25321}" />
           </cell>
@@ -165,9 +181,11 @@
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>
   <LocalizedNames>
+    <LocalizedName description="Hotel Versprechen" languagecode="1031" />
     <LocalizedName description="Hotel Promises" languagecode="1033" />
   </LocalizedNames>
   <Descriptions>
+    <Description description="Formblatt für diese Einheit" languagecode="1031" />
     <Description description="A form for this entity." languagecode="1033" />
   </Descriptions>
 </systemform>

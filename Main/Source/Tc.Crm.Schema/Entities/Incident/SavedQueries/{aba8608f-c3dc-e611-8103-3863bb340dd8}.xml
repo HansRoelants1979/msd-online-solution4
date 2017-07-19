@@ -26,7 +26,6 @@
     <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
       <entity name="incident">
         <attribute name="ticketnumber" />
-        <order attribute="createdon" descending="true" />
         <attribute name="createdon" />
         <attribute name="tc_24hourpromise" />
         <attribute name="tc_casetypeid" />
@@ -34,15 +33,22 @@
         <attribute name="tc_3rdpartyresponserequired" />
         <attribute name="tc_bookingreferencefreetext" />
         <attribute name="tc_bookingid" />
+        <order attribute="createdon" descending="true" />
+        <filter type="and">
+          <condition attribute="modifiedon" operator="last-x-years" value="6" />
+        </filter>
         <attribute name="incidentid" />
       </entity>
     </fetch>
   </fetchxml>
   <IntroducedVersion>1.0.0.0</IntroducedVersion>
   <LocalizedNames>
+    <LocalizedName description="Alle Fälle auf Kunden" languagecode="1031" />
     <LocalizedName description="All Cases on Customer" languagecode="1033" />
   </LocalizedNames>
   <Descriptions>
+    <Description description="Aktive Fälle auf Kontakt" languagecode="1031" />
     <Description description="Active Cases on Contact" languagecode="1033" />
+    <Description description="cas actifs d'un contact" languagecode="1036" />
   </Descriptions>
 </savedquery>

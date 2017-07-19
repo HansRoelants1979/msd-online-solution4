@@ -8,6 +8,7 @@
     <tabs>
       <tab verticallayout="true" id="{d2237eab-aa6f-428f-9b85-09d554f283bc}" IsUserDefined="1" name="{d2237eab-aa6f-428f-9b85-09d554f283bc}" expanded="true" locklevel="0" showlabel="true">
         <labels>
+          <label description="Standortinformationen" languagecode="1031" />
           <label description="Location Information" languagecode="1033" />
         </labels>
         <columns>
@@ -15,13 +16,17 @@
             <sections>
               <section showlabel="false" showbar="false" IsUserDefined="0" id="{c891c20b-75ea-4932-bb94-e9fd4dc4ae9d}" name="{c891c20b-75ea-4932-bb94-e9fd4dc4ae9d}" columns="1" locklevel="0" labelwidth="150" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
+                  <label description="Allgemein" languagecode="1031" />
                   <label description="General" languagecode="1033" />
+                  <label description="Général" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{0e6c21ad-ac8a-4e58-9145-6df1eb9c1f21}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Location" languagecode="1033" />
+                        <label description="lieu" languagecode="1036" />
+                        <label description="Ort" languagecode="1031" />
                       </labels>
                       <control id="tc_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_name" uniqueid="{434a9581-489e-b8ea-7361-d78e6e27ba25}" disabled="false" />
                     </cell>
@@ -30,6 +35,8 @@
                     <cell id="{8d4051de-3000-c8ac-726d-43b953cc5bee}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Location Code" languagecode="1033" />
+                        <label description="code de lieu" languagecode="1036" />
+                        <label description="Ortscode" languagecode="1031" />
                       </labels>
                       <control id="tc_locationcode" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_locationcode" disabled="false" />
                     </cell>
@@ -38,6 +45,7 @@
                     <cell id="{c23e6b0b-c2bc-2e09-dad8-40b8cc803321}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Primary Gateway" languagecode="1033" />
+                        <label description="Primärer Ort" languagecode="1031" />
                       </labels>
                       <control id="tc_primarylocationid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_primarylocationid" disabled="false" uniqueid="{c0a690e4-c2d0-32ac-aabd-4896c4c6dd63}">
                         <parameters>
@@ -55,6 +63,8 @@
                     <cell id="{b4c553a3-baba-1268-a767-a5a6591b433b}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Region" languagecode="1033" />
+                        <label description="Région" languagecode="1036" />
+                        <label description="Region" languagecode="1031" />
                       </labels>
                       <control id="tc_regionid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_regionid" disabled="false" />
                     </cell>
@@ -63,6 +73,8 @@
                     <cell id="{54d01c33-db92-4667-958b-44dee66d24e0}" showlabel="true" locklevel="1" visible="false">
                       <labels>
                         <label description="Owner" languagecode="1033" />
+                        <label description="en charge du cas" languagecode="1036" />
+                        <label description="Eigentümer" languagecode="1031" />
                       </labels>
                       <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" uniqueid="{c5023188-4db3-90d7-ab5c-b0bc7e3b351b}" disabled="false">
                         <parameters>
@@ -76,13 +88,17 @@
               </section>
               <section name="{d2237eab-aa6f-428f-9b85-09d554f283bc}_section_2" showlabel="false" showbar="false" locklevel="0" id="{e8cca597-6215-5992-d14a-05e86b67a642}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
+                  <label description="Abschnitt" languagecode="1031" />
                   <label description="Section" languagecode="1033" />
+                  <label description="Section" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{aa0d3239-d103-d225-72ed-ad12b2cd18e6}" showlabel="false" colspan="1" auto="false" rowspan="8">
                       <labels>
                         <label description="Hotels" languagecode="1033" />
+                        <label description="Hôtels" languagecode="1036" />
+                        <label description="Hotels" languagecode="1031" />
                       </labels>
                       <control id="Hotels_Location" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true" uniqueid="{4251c557-957d-1239-1a29-526e663d7dd3}">
                         <parameters>
@@ -134,6 +150,8 @@
           <cell id="{a33ce9ba-9e3c-8164-d5c2-0d5d31951e04}" showlabel="true" locklevel="0">
             <labels>
               <label description="Owner" languagecode="1033" />
+              <label description="en charge du cas" languagecode="1036" />
+              <label description="Eigentümer" languagecode="1031" />
             </labels>
             <control id="header_ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" disabled="false" />
           </cell>
@@ -206,9 +224,12 @@
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>
   <LocalizedNames>
+    <LocalizedName description="Ort" languagecode="1031" />
     <LocalizedName description="Location" languagecode="1033" />
+    <LocalizedName description="lieu" languagecode="1036" />
   </LocalizedNames>
   <Descriptions>
+    <Description description="Formblatt für diese Einheit" languagecode="1031" />
     <Description description="A form for this entity." languagecode="1033" />
   </Descriptions>
 </systemform>

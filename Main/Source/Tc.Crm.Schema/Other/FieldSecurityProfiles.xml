@@ -124,6 +124,35 @@
       </FieldPermission>
     </FieldPermissions>
   </FieldSecurityProfile>
+  <FieldSecurityProfile name="Tc.CompensationLine.VoucherUpdate" fieldsecurityprofileid="{3ab8f05d-ce54-e711-8127-e0071b659e11}">
+    <FieldPermissions>
+      <FieldPermission>
+        <EntityName>tc_compensationline</EntityName>
+        <AttributeName>tc_reasonforvouchercancellation</AttributeName>
+        <CanRead>4</CanRead>
+        <CanUpdate>4</CanUpdate>
+        <CanCreate>0</CanCreate>
+      </FieldPermission>
+      <FieldPermission>
+        <EntityName>tc_compensationline</EntityName>
+        <AttributeName>tc_voucherredeemedon</AttributeName>
+        <CanRead>4</CanRead>
+        <CanUpdate>4</CanUpdate>
+        <CanCreate>0</CanCreate>
+      </FieldPermission>
+    </FieldPermissions>
+  </FieldSecurityProfile>
+  <FieldSecurityProfile name="Tc.Retail.CC.Travel.Team" fieldsecurityprofileid="{c3014921-165b-e711-8121-e0071b662011}">
+    <FieldPermissions>
+      <FieldPermission>
+        <EntityName>contact</EntityName>
+        <AttributeName>tc_vip</AttributeName>
+        <CanRead>4</CanRead>
+        <CanUpdate>4</CanUpdate>
+        <CanCreate>4</CanCreate>
+      </FieldPermission>
+    </FieldPermissions>
+  </FieldSecurityProfile>
   <FieldSecurityProfile name="Tc.SystemMaintenance" fieldsecurityprofileid="{a8c7b94e-f203-e711-810d-1458d041f8e8}">
     <FieldPermissions>
       <FieldPermission>

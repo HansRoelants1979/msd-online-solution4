@@ -474,9 +474,11 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Konto Typ" languagecode="1031" />
             <displayname description="Account Type" languagecode="1033" />
           </displaynames>
           <Descriptions>
+            <Description description="einheitlicher Identifikator für Konto Typ zum Konto" languagecode="1031" />
             <Description description="Unique identifier for Account Type associated with Account." languagecode="1033" />
           </Descriptions>
         </attribute>
@@ -508,6 +510,7 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Adresse 1 - Zusatzinformation" languagecode="1031" />
             <displayname description="Address 1 Additional Information" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -541,7 +544,9 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Adresse 1 - Land" languagecode="1031" />
             <displayname description="Address 1 Country" languagecode="1033" />
+            <displayname description="Adresse 1 - pays" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="Unique identifier for Country associated with Account." languagecode="1033" />
@@ -575,7 +580,9 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Adresse 1 - Bundesland" languagecode="1031" />
             <displayname description="Address 1 County" languagecode="1033" />
+            <displayname description="Adresse 1 - comté" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -609,7 +616,9 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Adresse 1 - Wohnungsnummer" languagecode="1031" />
             <displayname description="Address 1 Flat or Unit Number" languagecode="1033" />
+            <displayname description="Adresse 1 -numéro d'appartement" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -643,7 +652,9 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Adresse 1 - Hausnummer" languagecode="1031" />
             <displayname description="Address 1 House Number or Building" languagecode="1033" />
+            <displayname description="Adresse 1 -numéro de maison ou résidence" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -677,7 +688,9 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Adresse 1 - Postleitzahl" languagecode="1031" />
             <displayname description="Address 1 Postal Code" languagecode="1033" />
+            <displayname description="Adresse 1 -code postal" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -711,7 +724,9 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Adresse 1 - Strasse" languagecode="1031" />
             <displayname description="Address 1 Street" languagecode="1033" />
+            <displayname description="Adresse 1 -rue" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -778,7 +793,9 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_emailaddresstype</OptionSetName>
           <displaynames>
+            <displayname description="Email Address 1 Type" languagecode="1031" />
             <displayname description="Email Address 1 Type" languagecode="1033" />
+            <displayname description="adresse e-mail 1" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -844,6 +861,7 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_emailaddresstype</OptionSetName>
           <displaynames>
+            <displayname description="Email Address 3 Type" languagecode="1031" />
             <displayname description="Email Address 3 Type" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -880,6 +898,7 @@
             <IntroducedVersion>1.0.0.13</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
+              <displayname description="Key Account" languagecode="1031" />
               <displayname description="Key Account" languagecode="1033" />
             </displaynames>
             <Descriptions>
@@ -888,17 +907,22 @@
             <options>
               <option value="950000001" Color="#0000ff">
                 <labels>
+                  <label description="Nein" languagecode="1031" />
                   <label description="No" languagecode="1033" />
+                  <label description="non" languagecode="1036" />
                 </labels>
               </option>
               <option value="950000000" Color="#0000ff">
                 <labels>
+                  <label description="Ja" languagecode="1031" />
                   <label description="Yes" languagecode="1033" />
+                  <label description="Oui" languagecode="1036" />
                 </labels>
               </option>
             </options>
           </optionset>
           <displaynames>
+            <displayname description="Key Account" languagecode="1031" />
             <displayname description="Key Account" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -931,9 +955,12 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Quellmarkt" languagecode="1031" />
             <displayname description="Source Market" languagecode="1033" />
+            <displayname description="Pays organisateur" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Der Quellmarkt, aus dem das Konto stammt" languagecode="1031" />
             <Description description="The source market that the account originates from" languagecode="1033" />
           </Descriptions>
         </attribute>
@@ -965,9 +992,12 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Source System ID" languagecode="1031" />
             <displayname description="Source System ID" languagecode="1033" />
+            <displayname description="Identifiant système source" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Die ID des Kontos innerhalb des Thomas Cook Quellmarktes" languagecode="1031" />
             <Description description="The ID of the account within the Thomas Cook source market" languagecode="1033" />
           </Descriptions>
         </attribute>
@@ -998,7 +1028,9 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_telephonetype</OptionSetName>
           <displaynames>
+            <displayname description="Telefon 1 Tpy" languagecode="1031" />
             <displayname description="Telephone 1 Type" languagecode="1033" />
+            <displayname description="Type de téléphone 1" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1031,7 +1063,9 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_telephonetype</OptionSetName>
           <displaynames>
+            <displayname description="Telefon 2 Typ" languagecode="1031" />
             <displayname description="Telephone 2 Type" languagecode="1033" />
+            <displayname description="Type de téléphone 2" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1064,7 +1098,9 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_telephonetype</OptionSetName>
           <displaynames>
+            <displayname description="Telefon 3 Typ" languagecode="1031" />
             <displayname description="Telephone 3 Type" languagecode="1033" />
+            <displayname description="Type de téléphone 3" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />

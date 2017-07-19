@@ -26,6 +26,8 @@
                     <cell id="{baba794b-1195-ebd5-61dd-73e28041b4d7}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Begin Time" languagecode="1033" />
+                        <label description="heure du début" languagecode="1036" />
+                        <label description="Anfangszeit" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_begintime" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="tc_begintime" />
                     </cell>
@@ -34,6 +36,7 @@
                     <cell id="{12c694c7-63c9-7cbb-cbc2-81dc6546576b}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Survey Description" languagecode="1033" />
+                        <label description="Survey Beschreibung" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_survey_description" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_survey_description" />
                     </cell>
@@ -42,8 +45,27 @@
                     <cell id="{611cd881-7313-b2cc-7001-7820c0757564}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Mode" languagecode="1033" />
+                        <label description="Modus" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_mode" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_mode" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{033a3284-add4-9cc2-6728-425a0ad6dca7}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Destination Gateway" languagecode="1033" />
+                        <label description="Ziel Gate Way" languagecode="1031" />
+                      </labels>
+                      <control id="tc_gatewayid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_gatewayid" disabled="false" uniqueid="{b6051949-9ae3-6b28-a62d-5ba94d7e9bd5}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{4E29CB42-F586-45B8-9D57-AF21CEA59536}</DefaultViewId>
+                          <AllowFilterOff>false</AllowFilterOff>
+                        </parameters>
+                      </control>
                     </cell>
                   </row>
                   <row>
@@ -60,6 +82,8 @@
                     <cell id="{6234e257-851b-2640-e399-2931aa753d31}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Booking" languagecode="1033" />
+                        <label description="Réservation" languagecode="1036" />
+                        <label description="Buchung" languagecode="1031" />
                       </labels>
                       <control id="tc_bookingid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_bookingid" disabled="false" uniqueid="{83abc147-1466-ceea-0d7b-8d7436a94b28}" />
                     </cell>
@@ -78,8 +102,8 @@
                     <cell id="{69318794-1a88-aab1-131c-140b62e8ce6c}" showlabel="false" auto="false" colspan="1">
                       <labels>
                         <label description="Booking" languagecode="1033" />
-                        <label description="Concernant" languagecode="1036" />
-                        <label description="Bezug" languagecode="1031" />
+                        <label description="Réservation" languagecode="1036" />
+                        <label description="Buchung" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="qvBooking" classid="{5C5600E0-1D6E-4205-A272-BE80DA87FD42}" datafieldname="regardingobjectid">
                         <parameters>
@@ -95,15 +119,66 @@
           </column>
           <column width="66%">
             <sections>
-              <section id="{3a157eb7-3771-b7ed-2727-3d7110cc0643}" name="{ffa54179-65a4-45cb-bd70-5ab78f523e20}_section_4" IsUserDefined="0" locklevel="0" showlabel="false" columns="1" showbar="false" celllabelposition="Left" celllabelalignment="Left" labelwidth="115" layout="varwidth">
+              <section id="{3a157eb7-3771-b7ed-2727-3d7110cc0643}" name="{ffa54179-65a4-45cb-bd70-5ab78f523e20}_section_4" IsUserDefined="0" locklevel="0" showlabel="true" columns="1" showbar="false" celllabelposition="Left" celllabelalignment="Left" labelwidth="115" layout="varwidth" height="auto">
                 <labels>
+                  <label description="Key Survey Reponses" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{5d9b4e70-558c-4d63-e069-4a584b5c2610}" showlabel="false" colspan="1" auto="true" rowspan="4">
+                      <labels>
+                        <label description="Survey Responses Feedback (Survey Feedback)" languagecode="1033" />
+                        <label description="Survey Responses Feedback (Survey Feedback)" languagecode="1031" />
+                      </labels>
+                      <control id="Key_Survey_Responses" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true" uniqueid="{ee761678-a76e-be4c-2370-92bd113e5c9d}">
+                        <parameters>
+                          <ViewId>{BBF35B45-4A57-E711-8107-E0071B66A0A1}</ViewId>
+                          <IsUserView>false</IsUserView>
+                          <RelationshipName>tc_surveyresponse_tc_surveyresponsefeedback</RelationshipName>
+                          <TargetEntityType>tc_surveyresponsefeedback</TargetEntityType>
+                          <AutoExpand>Auto</AutoExpand>
+                          <EnableQuickFind>false</EnableQuickFind>
+                          <EnableViewPicker>false</EnableViewPicker>
+                          <ViewIds>{FFA2055F-6083-4718-8972-C140DAC90CB8},{BBF35B45-4A57-E711-8107-E0071B66A0A1},{0B9C86F5-2C0A-E711-8102-3863BB354FF0}</ViewIds>
+                          <EnableJumpBar>false</EnableJumpBar>
+                          <ChartGridMode>Grid</ChartGridMode>
+                          <VisualizationId />
+                          <IsUserChart>false</IsUserChart>
+                          <EnableChartPicker>false</EnableChartPicker>
+                          <RecordsPerPage>12</RecordsPerPage>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                  <row />
+                  <row />
+                  <row height="auto" />
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
+      <tab name="tab_4" id="{50cda0ac-36c5-d8cd-2ec1-726920d5c412}" IsUserDefined="0" locklevel="0" showlabel="true" expanded="false">
+        <labels>
+          <label description="Survey Responses Feedback" languagecode="1031" />
+          <label description="Survey Responses Feedback" languagecode="1033" />
+        </labels>
+        <columns>
+          <column width="100%">
+            <sections>
+              <section name="tab_4_section_1" showlabel="false" showbar="false" locklevel="0" id="{1e935cb0-3929-4a28-15d3-060b8a27b385}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115">
+                <labels>
+                  <label description="Abschnitt" languagecode="1031" />
                   <label description="Section" languagecode="1033" />
+                  <label description="Section" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{6b943087-20a5-051d-ca11-3031342c25a4}" showlabel="false" auto="false" colspan="1" rowspan="13">
                       <labels>
                         <label description="Survey Responses Feedback (Survey Feedback)" languagecode="1033" />
+                        <label description="Survey Responses Feedback (Survey Feedback)" languagecode="1031" />
                       </labels>
                       <control id="grdResponses" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" uniqueid="{7de8296b-87e8-dedb-4515-9bb5a01206b0}" indicationOfSubgrid="true">
                         <parameters>
@@ -125,36 +200,76 @@
                       </control>
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
             </sections>
           </column>
         </columns>
       </tab>
-      <tab id="{99895aae-d39d-0c03-737b-369a94ad2556}" name="tab_3" IsUserDefined="0" locklevel="0" expanded="true" showlabel="true" visible="false">
+      <tab name="Hidden Attributes" id="{01a3ad0c-8ba0-ec70-50c0-40b883609da6}" IsUserDefined="0" locklevel="0" showlabel="true" visible="false" expanded="false">
         <labels>
-          <label description="Tab" languagecode="1033" />
+          <label description="Versteckte Attribute" languagecode="1031" />
+          <label description="Hidden Attributes" languagecode="1033" />
+          <label description="attributs cachés" languagecode="1036" />
         </labels>
         <columns>
           <column width="100%">
             <sections>
-              <section id="{c8597ddb-e43b-796b-ede3-94235e75691e}" name="tab_3_section_1" IsUserDefined="0" locklevel="0" showlabel="false" columns="1" showbar="false" labelwidth="115" layout="varwidth">
+              <section name="Hidden Section" showlabel="false" showbar="false" locklevel="0" id="{169ac3d5-1675-8da9-dea7-6c2e0392282d}" IsUserDefined="0" layout="varwidth" columns="11" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
+                  <label description="Abschnitt" languagecode="1031" />
                   <label description="Section" languagecode="1033" />
+                  <label description="Section" languagecode="1036" />
                 </labels>
                 <rows>
+                  <row>
+                    <cell id="{04c505a8-d8d1-081a-87c4-b87b58196bc9}" showlabel="true" locklevel="1">
+                      <labels>
+                        <label description="Customer First Name" languagecode="1033" />
+                        <label description="prénom du client" languagecode="1036" />
+                        <label description="Kunden Vorname" languagecode="1031" />
+                      </labels>
+                      <control id="tc_customerfirstname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_customerfirstname" disabled="true" uniqueid="{7767891b-a9dd-b453-09bd-4abe1c96d9cc}" />
+                    </cell>
+                    <cell id="{0d866d8d-0abb-2503-cec4-91442905ecd5}" showlabel="true" locklevel="1">
+                      <labels>
+                        <label description="Customer Last Name" languagecode="1033" />
+                        <label description="nom de famille du client" languagecode="1036" />
+                        <label description="Kunden Nachname" languagecode="1031" />
+                      </labels>
+                      <control id="tc_customerlastname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_customerlastname" disabled="true" uniqueid="{0756dc44-988d-9e07-d1c0-414641b39e92}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{1c76da7d-3451-d904-985c-70dceabd75a8}" showlabel="true" locklevel="1">
+                      <labels>
+                        <label description="Customer Email" languagecode="1033" />
+                        <label description="email du client" languagecode="1036" />
+                        <label description="Kunden Email" languagecode="1031" />
+                      </labels>
+                      <control id="tc_customeremail" classid="{ADA2203E-B4CD-49be-9DDF-234642B43B52}" datafieldname="tc_customeremail" disabled="true" uniqueid="{214553cb-0458-8952-03d5-ee3b5b00b472}" />
+                    </cell>
+                    <cell id="{7966580e-3b86-04e4-b145-138e543b5721}" showlabel="true" locklevel="1">
+                      <labels>
+                        <label description="Customer Phone" languagecode="1033" />
+                        <label description="téléphone du client" languagecode="1036" />
+                        <label description="Kunden Telefon" languagecode="1031" />
+                      </labels>
+                      <control id="tc_customerphone" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_customerphone" disabled="true" uniqueid="{56899c84-b6c8-321e-b3be-5e971c393560}" />
+                    </cell>
+                  </row>
                   <row>
                     <cell id="{ae1f93cd-c9bd-4a2b-9606-2bb9fb2f424e}">
                       <labels>
@@ -164,8 +279,6 @@
                       </labels>
                       <control id="subject" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="subject" />
                     </cell>
-                  </row>
-                  <row>
                     <cell id="{2a0b2651-b8f6-4997-a81d-f89a702a9451}">
                       <labels>
                         <label description="Owner" languagecode="1033" />
@@ -184,51 +297,10 @@
                       </labels>
                       <control disabled="false" id="statecode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="statecode" />
                     </cell>
-                  </row>
-                </rows>
-              </section>
-            </sections>
-          </column>
-        </columns>
-      </tab>
-      <tab name="Hidden Attributes" id="{01a3ad0c-8ba0-ec70-50c0-40b883609da6}" IsUserDefined="0" locklevel="0" showlabel="true" visible="false" expanded="false">
-        <labels>
-          <label description="Hidden Attributes" languagecode="1033" />
-        </labels>
-        <columns>
-          <column width="100%">
-            <sections>
-              <section name="Hidden Section" showlabel="false" showbar="false" locklevel="0" id="{169ac3d5-1675-8da9-dea7-6c2e0392282d}" IsUserDefined="0" layout="varwidth" columns="11" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
-                <labels>
-                  <label description="Section" languagecode="1033" />
-                </labels>
-                <rows>
-                  <row>
-                    <cell id="{04c505a8-d8d1-081a-87c4-b87b58196bc9}" showlabel="true" locklevel="1">
+                    <cell id="{1dc52e54-eaab-7015-70d2-6e347b982351}" showlabel="false">
                       <labels>
-                        <label description="Customer First Name" languagecode="1033" />
+                        <label description="" languagecode="1033" />
                       </labels>
-                      <control id="tc_customerfirstname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_customerfirstname" disabled="true" uniqueid="{7767891b-a9dd-b453-09bd-4abe1c96d9cc}" />
-                    </cell>
-                    <cell id="{0d866d8d-0abb-2503-cec4-91442905ecd5}" showlabel="true" locklevel="1">
-                      <labels>
-                        <label description="Customer Last Name" languagecode="1033" />
-                      </labels>
-                      <control id="tc_customerlastname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_customerlastname" disabled="true" uniqueid="{0756dc44-988d-9e07-d1c0-414641b39e92}" />
-                    </cell>
-                  </row>
-                  <row>
-                    <cell id="{1c76da7d-3451-d904-985c-70dceabd75a8}" showlabel="true" locklevel="1">
-                      <labels>
-                        <label description="Customer Email" languagecode="1033" />
-                      </labels>
-                      <control id="tc_customeremail" classid="{ADA2203E-B4CD-49be-9DDF-234642B43B52}" datafieldname="tc_customeremail" disabled="true" uniqueid="{214553cb-0458-8952-03d5-ee3b5b00b472}" />
-                    </cell>
-                    <cell id="{7966580e-3b86-04e4-b145-138e543b5721}" showlabel="true" locklevel="1">
-                      <labels>
-                        <label description="Customer Phone" languagecode="1033" />
-                      </labels>
-                      <control id="tc_customerphone" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_customerphone" disabled="true" uniqueid="{56899c84-b6c8-321e-b3be-5e971c393560}" />
                     </cell>
                   </row>
                 </rows>
@@ -249,12 +321,14 @@
           <cell id="{203843ce-04b1-c2ad-c843-9cb0cadee030}" locklevel="0" showlabel="true">
             <labels>
               <label description="Survey Id" languagecode="1033" />
+              <label description="Survey Id" languagecode="1031" />
             </labels>
             <control disabled="true" id="header_tc_survey_id" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_survey_id" uniqueid="{e109ca1e-e638-95d7-5dd8-3092ed5d83d1}" />
           </cell>
           <cell id="{7c3c46de-e767-a450-8a45-7e7aa457504b}" locklevel="0" showlabel="true">
             <labels>
               <label description="Response Id" languagecode="1033" />
+              <label description="Antwort ID" languagecode="1031" />
             </labels>
             <control disabled="true" id="header_tc_response_id" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_response_id" uniqueid="{ba0a4613-99ca-2570-449b-468ead0156ee}" />
           </cell>
@@ -325,9 +399,12 @@
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>
   <LocalizedNames>
+    <LocalizedName description="Information" languagecode="1031" />
     <LocalizedName description="Information" languagecode="1033" />
+    <LocalizedName description="Information" languagecode="1036" />
   </LocalizedNames>
   <Descriptions>
+    <Description description="Formblatt für diese Einheit" languagecode="1031" />
     <Description description="A form for this entity." languagecode="1033" />
   </Descriptions>
 </systemform>

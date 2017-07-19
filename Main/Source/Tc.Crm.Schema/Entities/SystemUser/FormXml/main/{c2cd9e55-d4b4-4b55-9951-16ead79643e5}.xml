@@ -7,12 +7,12 @@
   <form showImage="true">
     <ancestor id="{c2cd9e55-d4b4-4b55-9951-16ead79643e5}" />
     <hiddencontrols>
-      <data id="emailrouteraccessapproval" classid="{5546E6CD-394C-4bee-94A8-4425E17EF6C6}" datafieldname="emailrouteraccessapproval" />
-      <data id="outgoingemaildeliverymethod" classid="{5546E6CD-394C-4bee-94A8-4425E17EF6C6}" datafieldname="outgoingemaildeliverymethod" />
-      <data id="incomingemaildeliverymethod" classid="{5546E6CD-394C-4bee-94A8-4425E17EF6C6}" datafieldname="incomingemaildeliverymethod" />
+      <data id="emailrouteraccessapproval" datafieldname="emailrouteraccessapproval" classid="{5546E6CD-394C-4bee-94A8-4425E17EF6C6}" />
+      <data id="outgoingemaildeliverymethod" datafieldname="outgoingemaildeliverymethod" classid="{5546E6CD-394C-4bee-94A8-4425E17EF6C6}" />
+      <data id="incomingemaildeliverymethod" datafieldname="incomingemaildeliverymethod" classid="{5546E6CD-394C-4bee-94A8-4425E17EF6C6}" />
     </hiddencontrols>
     <tabs>
-      <tab id="{33c4221d-ccb0-4a92-853e-369d2d0adb85}" name="SUMMARY_TAB" expanded="true" showlabel="true" IsUserDefined="0">
+      <tab name="SUMMARY_TAB" id="{33c4221d-ccb0-4a92-853e-369d2d0adb85}" IsUserDefined="0" showlabel="true" expanded="true">
         <labels>
           <label description="Zusammenfassung" languagecode="1031" />
           <label description="Summary" languagecode="1033" />
@@ -21,59 +21,59 @@
         <columns>
           <column width="28%">
             <sections>
-              <section id="{a89a591d-8259-4e19-8bc4-514f3312928f}" name="onpremise account information" showlabel="true" IsUserDefined="0" locklevel="0" showbar="true">
+              <section name="onpremise account information" showlabel="true" showbar="true" id="{a89a591d-8259-4e19-8bc4-514f3312928f}" IsUserDefined="0" locklevel="0">
                 <labels>
                   <label description="Firmeninformationen" languagecode="1031" />
-                  <label description="Account Information" languagecode="1033" />
-                  <label description="Informations sur le compte" languagecode="1036" />
+                  <label description="ACCOUNT INFORMATION" languagecode="1033" />
+                  <label description="INFORMATIONS SUR LE COMPTE" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{260074a5-5be0-4304-a223-91a242bc79e7}" showlabel="true" locklevel="0" colspan="1" rowspan="1" auto="false">
+                    <cell auto="false" showlabel="true" locklevel="0" rowspan="1" colspan="1" id="{260074a5-5be0-4304-a223-91a242bc79e7}">
                       <labels>
                         <label description="User Name" languagecode="1033" />
                         <label description="Nom d'utilisateur" languagecode="1036" />
                         <label description="Benutzername" languagecode="1031" />
                       </labels>
-                      <control disabled="false" id="domainname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="domainname" />
+                      <control id="domainname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="domainname" disabled="false" />
                     </cell>
                   </row>
                 </rows>
               </section>
-              <section id="{50c53b90-8e97-4da4-8069-041d6a58aa05}" name="online account information" showlabel="true" IsUserDefined="0" locklevel="0" showbar="true">
+              <section name="online account information" showlabel="true" showbar="true" id="{50c53b90-8e97-4da4-8069-041d6a58aa05}" IsUserDefined="0" locklevel="0">
                 <labels>
                   <label description="Firmeninformationen" languagecode="1031" />
-                  <label description="Account Information" languagecode="1033" />
-                  <label description="Informations sur le compte" languagecode="1036" />
+                  <label description="ACCOUNT INFORMATION" languagecode="1033" />
+                  <label description="INFORMATIONS SUR LE COMPTE" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{78ba55b2-173e-42c9-b579-84f96926059f}" showlabel="true" locklevel="0" colspan="1" rowspan="1" auto="false">
+                    <cell auto="false" showlabel="true" locklevel="0" rowspan="1" colspan="1" id="{78ba55b2-173e-42c9-b579-84f96926059f}">
                       <labels>
                         <label description="Windows Live ID" languagecode="1033" />
                         <label description="Windows Live ID" languagecode="1036" />
                         <label description="Windows Live ID" languagecode="1031" />
                       </labels>
-                      <control disabled="true" id="windowsliveid" classid="{ADA2203E-B4CD-49be-9DDF-234642B43B52}" datafieldname="windowsliveid" />
+                      <control id="windowsliveid" classid="{ADA2203E-B4CD-49be-9DDF-234642B43B52}" datafieldname="windowsliveid" disabled="true" />
                     </cell>
                   </row>
                   <row>
-                    <cell id="{8b90bd6f-0038-4faf-82c2-ca8990c47409}" showlabel="true" locklevel="0" colspan="1" rowspan="1" auto="false">
+                    <cell auto="false" showlabel="true" locklevel="0" rowspan="1" colspan="1" id="{8b90bd6f-0038-4faf-82c2-ca8990c47409}">
                       <labels>
                         <label description="Invitation Status" languagecode="1033" />
                         <label description="Statut de l'invitation" languagecode="1036" />
                         <label description="Einladungsstatus" languagecode="1031" />
                       </labels>
-                      <control disabled="true" id="invitestatuscode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="invitestatuscode" />
+                      <control id="invitestatuscode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="invitestatuscode" disabled="true" />
                     </cell>
                   </row>
                 </rows>
               </section>
-              <section id="{9b914e4e-027c-4e9c-90d7-59daed00fd53}" name="user information" showlabel="true" IsUserDefined="0" locklevel="0" showbar="true">
+              <section name="user information" showlabel="true" showbar="true" id="{9b914e4e-027c-4e9c-90d7-59daed00fd53}" IsUserDefined="0" locklevel="0">
                 <labels>
                   <label description="Benutzerinformationen" languagecode="1031" />
-                  <label description="User Information" languagecode="1033" />
-                  <label description="Informations sur l'utilisateur" languagecode="1036" />
+                  <label description="USER INFORMATION" languagecode="1033" />
+                  <label description="INFORMATIONS SUR L'UTILISATEUR" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
@@ -126,27 +126,37 @@
                       <control id="address1_telephone1" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="address1_telephone1" />
                     </cell>
                   </row>
+                  <row>
+                    <cell id="{3c70013b-3945-b22c-61d0-a152a115e215}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Unified Service Desk Configuration" languagecode="1033" />
+                        <label description="Configuration Unified Service Desk" languagecode="1036" />
+                        <label description="Konfiguration von Unified Service Desk" languagecode="1031" />
+                      </labels>
+                      <control id="msdyusd_usdconfigurationid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="msdyusd_usdconfigurationid" disabled="false" />
+                    </cell>
+                  </row>
                 </rows>
               </section>
             </sections>
           </column>
           <column width="44%">
             <sections>
-              <section id="{ddd9570e-c22b-4fd9-84c0-84bb2b594766}" name="SOCIAL_PANE_TAB" showlabel="false" IsUserDefined="0" columns="1" locklevel="0" showbar="false" celllabelalignment="Left" celllabelposition="Top" labelwidth="115" layout="varwidth">
+              <section name="SOCIAL_PANE_TAB" showlabel="false" showbar="false" id="{ddd9570e-c22b-4fd9-84c0-84bb2b594766}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelposition="Top" locklevel="0" celllabelalignment="Left">
                 <labels>
                   <label description="SOZIALER BEREICH" languagecode="1031" />
                   <label description="SOCIAL PANE" languagecode="1033" />
                   <label description="VOLET SOCIAL" languagecode="1036" />
                 </labels>
                 <rows>
-                  <row height="stdwithlabel">
-                    <cell id="{f3367a48-b751-496b-9641-abd402e6be4a}" showlabel="false" colspan="1" rowspan="20" auto="false">
+                  <row>
+                    <cell id="{f3367a48-b751-496b-9641-abd402e6be4a}" showlabel="false" rowspan="20" auto="false" colspan="1">
                       <labels>
                         <label description="Notiztext" languagecode="1031" />
                         <label description="Note Text" languagecode="1033" />
                         <label description="Texte de la note" languagecode="1036" />
                       </labels>
-                      <control disabled="false" id="notescontrol" classid="{06375649-c143-495e-a496-c962e5b4488e}" />
+                      <control id="notescontrol" classid="{06375649-c143-495e-a496-c962e5b4488e}" disabled="false" />
                     </cell>
                   </row>
                   <row />
@@ -174,17 +184,17 @@
           </column>
           <column width="28%">
             <sections>
-              <section id="{bba8f882-2050-4d63-ba78-071401809ad5}" name="teams information" showlabel="false" IsUserDefined="0" locklevel="0" showbar="false">
+              <section name="teams information" showlabel="false" showbar="false" id="{bba8f882-2050-4d63-ba78-071401809ad5}" IsUserDefined="0" locklevel="0">
                 <labels>
                   <label description="" languagecode="1033" />
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{21dbb018-6a86-a856-7070-e7d9160ccd36}" showlabel="true" colspan="1" rowspan="6" auto="false">
+                    <cell id="{21dbb018-6a86-a856-7070-e7d9160ccd36}" showlabel="true" colspan="1" auto="false" rowspan="6">
                       <labels>
                         <label description="Hotels" languagecode="1033" />
-                        <label description="TEAMS" languagecode="1031" />
                         <label description="Équipes" languagecode="1036" />
+                        <label description="TEAMS" languagecode="1031" />
                       </labels>
                       <control id="HotelsSubGrid" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" uniqueid="{d052378d-aca6-486b-36a8-264277bb4adb}" indicationOfSubgrid="true">
                         <parameters>
@@ -214,11 +224,11 @@
                   <row />
                 </rows>
               </section>
-              <section id="{81278426-fb20-424e-91bd-7ceb5a6248d2}" name="organization information" showlabel="true" IsUserDefined="0" locklevel="0" showbar="true">
+              <section name="organization information" showlabel="true" showbar="true" id="{81278426-fb20-424e-91bd-7ceb5a6248d2}" IsUserDefined="0" locklevel="0">
                 <labels>
                   <label description="Organisationsinformationen" languagecode="1031" />
-                  <label description="Organization Information" languagecode="1033" />
-                  <label description="Informations sur l’organisation" languagecode="1036" />
+                  <label description="ORGANIZATION INFORMATION" languagecode="1033" />
+                  <label description="INFORMATIONS SUR L'ORGANISATION" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
@@ -243,11 +253,11 @@
                   </row>
                 </rows>
               </section>
-              <section id="{11aec2bb-ecbc-4d53-a409-f4b849f03e6e}" name="queue selection" showlabel="true" IsUserDefined="0" locklevel="0" showbar="true">
+              <section name="queue selection" showlabel="true" showbar="true" locklevel="0" id="{11aec2bb-ecbc-4d53-a409-f4b849f03e6e}" IsUserDefined="0">
                 <labels>
                   <label description="Warteschlangeninformationen" languagecode="1031" />
-                  <label description="Queue Information" languagecode="1033" />
-                  <label description="Informations sur la file d’attente" languagecode="1036" />
+                  <label description="QUEUE INFORMATION" languagecode="1033" />
+                  <label description="INFORMATIONS SUR LA FILE D'ATTENTE" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
@@ -262,63 +272,24 @@
                   </row>
                 </rows>
               </section>
-              <section id="{8b91768d-1e89-41e2-a9df-d9ef9e5adfaa}" name="queue information" showlabel="true" IsUserDefined="0" locklevel="0" showbar="true">
-                <labels>
-                  <label description="" languagecode="1033" />
-                </labels>
-                <rows>
-                  <row>
-                    <cell id="{2054092e-c447-42f1-b04b-7d42a2610111}" showlabel="true" colspan="1" rowspan="6" auto="false">
-                      <labels>
-                        <label description="Queues I'm a member of" languagecode="1033" />
-                        <label description="Files d'attente dont je suis membre" languagecode="1036" />
-                        <label description="Warteschlangen, bei denen ich Mitglied bin" languagecode="1031" />
-                      </labels>
-                      <control id="PrivateQueuesSubGrid" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}">
-                        <parameters>
-                          <ViewId>{6692d3a5-268d-4392-9752-2acf707062bb}</ViewId>
-                          <IsUserView>false</IsUserView>
-                          <RelationshipName>queuemembership_association</RelationshipName>
-                          <TargetEntityType>queue</TargetEntityType>
-                          <AutoExpand>Fixed</AutoExpand>
-                          <EnableQuickFind>false</EnableQuickFind>
-                          <EnableViewPicker>false</EnableViewPicker>
-                          <EnableJumpBar>false</EnableJumpBar>
-                          <ChartGridMode>Grid</ChartGridMode>
-                          <VisualizationId />
-                          <IsUserChart>false</IsUserChart>
-                          <EnableChartPicker>false</EnableChartPicker>
-                          <EnableContextualActions>false</EnableContextualActions>
-                          <RecordsPerPage>4</RecordsPerPage>
-                        </parameters>
-                      </control>
-                    </cell>
-                  </row>
-                  <row />
-                  <row />
-                  <row />
-                  <row />
-                  <row />
-                </rows>
-              </section>
             </sections>
           </column>
         </columns>
       </tab>
-      <tab id="{4feff6ea-5874-4746-aa30-353a3da2bd8c}" name="DETAILS_TAB" expanded="false" showlabel="true" IsUserDefined="0">
+      <tab name="DETAILS_TAB" id="{4feff6ea-5874-4746-aa30-353a3da2bd8c}" IsUserDefined="0" expanded="false" showlabel="true">
         <labels>
           <label description="Details" languagecode="1031" />
           <label description="Details" languagecode="1033" />
           <label description="Détails" languagecode="1036" />
         </labels>
         <columns>
-          <column width="34%">
+          <column width="50%">
             <sections>
-              <section id="{807e902f-4627-49fc-9a26-01c226a2738c}" name="user information" showlabel="true" IsUserDefined="0" locklevel="0" showbar="true">
+              <section name="user information" showlabel="true" showbar="true" id="{807e902f-4627-49fc-9a26-01c226a2738c}" IsUserDefined="0" locklevel="0">
                 <labels>
                   <label description="Benutzerinformationen" languagecode="1031" />
-                  <label description="User Information" languagecode="1033" />
-                  <label description="Informations sur l'utilisateur" languagecode="1036" />
+                  <label description="USER INFORMATION" languagecode="1033" />
+                  <label description="INFORMATIONS SUR L'UTILISATEUR" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
@@ -388,7 +359,7 @@
                         <label description="Télécopie" languagecode="1036" />
                         <label description="Fax" languagecode="1031" />
                       </labels>
-                      <control disabled="false" id="address1_fax" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="address1_fax" />
+                      <control id="address1_fax" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="address1_fax" disabled="false" />
                     </cell>
                   </row>
                 </rows>
@@ -397,11 +368,11 @@
           </column>
           <column width="50%">
             <sections>
-              <section id="{9cce3064-bdb7-4bfd-ac2b-83eeaa9a34c7}" name="mailing address" showlabel="true" IsUserDefined="0" showbar="true">
+              <section name="mailing address" showlabel="true" showbar="true" id="{9cce3064-bdb7-4bfd-ac2b-83eeaa9a34c7}" IsUserDefined="0">
                 <labels>
-                  <label description="Postanschrift" languagecode="1031" />
-                  <label description="Mailing Address" languagecode="1033" />
-                  <label description="Postale : Adresse" languagecode="1036" />
+                  <label description="Adresse" languagecode="1031" />
+                  <label description="ADDRESS" languagecode="1033" />
+                  <label description="ADRESSE" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
@@ -436,7 +407,7 @@
                   </row>
                 </rows>
               </section>
-              <section id="{8dc97288-b3e6-0931-96e6-b3b13b259d4a}" name="DirectReports" showlabel="true" IsUserDefined="0" columns="1" locklevel="0" showbar="true" celllabelalignment="Left" celllabelposition="Left" labelwidth="115" layout="varwidth">
+              <section name="DirectReports" showlabel="true" showbar="true" locklevel="0" id="{8dc97288-b3e6-0931-96e6-b3b13b259d4a}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
                   <label description="Mitarbeiter" languagecode="1031" />
                   <label description="Direct Reports" languagecode="1033" />
@@ -444,7 +415,7 @@
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{40654da9-62e4-3431-dc0d-7d687291e157}" showlabel="false" colspan="1" rowspan="6" auto="false">
+                    <cell id="{40654da9-62e4-3431-dc0d-7d687291e157}" showlabel="false" colspan="1" auto="false" rowspan="6">
                       <labels>
                         <label description="Direct Reports" languagecode="1033" />
                         <label description="Mes rapports directs" languagecode="1036" />
@@ -481,56 +452,56 @@
           </column>
         </columns>
       </tab>
-      <tab id="{cdb4e61c-1e67-48ae-a26b-2b6852eedc86}" name="ADMINISTRATION_TAB" expanded="false" showlabel="true" IsUserDefined="0">
+      <tab name="ADMINISTRATION_TAB" id="{cdb4e61c-1e67-48ae-a26b-2b6852eedc86}" IsUserDefined="0" expanded="false" showlabel="true">
         <labels>
           <label description="Verwaltung" languagecode="1031" />
           <label description="Administration" languagecode="1033" />
           <label description="Administration" languagecode="1036" />
         </labels>
         <columns>
-          <column width="100%">
+          <column width="50%">
             <sections>
-              <section id="{b003567f-dfc2-4d62-8099-d6ceeca69e88}" name="administration" showlabel="true" IsUserDefined="0" columns="11" locklevel="0" showbar="true" layout="varwidth">
+              <section name="administration" showlabel="true" showbar="true" locklevel="0" id="{b003567f-dfc2-4d62-8099-d6ceeca69e88}" IsUserDefined="0">
                 <labels>
                   <label description="Informationen zur Clientzugriffslizenz (CAL)" languagecode="1031" />
-                  <label description="Client Access License (CAL) Information" languagecode="1033" />
-                  <label description="Informations sur les licences d'accès client" languagecode="1036" />
+                  <label description="CLIENT ACCESS LICENSE (CAL) INFORMATION" languagecode="1033" />
+                  <label description="INFORMATIONS SUR LES LICENCES D'ACCÈS CLIENT" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{4f9ae15e-74b8-4902-80fb-b09da583467b}" showlabel="true" locklevel="0" colspan="1" rowspan="1" auto="false">
+                    <cell id="{4f9ae15e-74b8-4902-80fb-b09da583467b}">
                       <labels>
                         <label description="Access Mode" languagecode="1033" />
                         <label description="Mode d'accès" languagecode="1036" />
                         <label description="Zugriffsmodus" languagecode="1031" />
                       </labels>
                       <events>
-                        <event name="onchange" active="true" application="true">
+                        <event name="onchange" application="true" active="true">
                           <InternalHandlers>
-                            <Handler enabled="true" handlerUniqueId="2ed02fdb-2e59-49f1-99ed-f123b0859694" libraryName="SystemUser_main_system_library.js" functionName="Mscrm.accessmode_onchange">
+                            <Handler functionName="Mscrm.accessmode_onchange" libraryName="SystemUser_main_system_library.js" handlerUniqueId="2ed02fdb-2e59-49f1-99ed-f123b0859694" enabled="true">
                               <dependencies />
                             </Handler>
                           </InternalHandlers>
                         </event>
                       </events>
-                      <control disabled="false" id="accessmode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="accessmode" />
+                      <control id="accessmode" classid="{3ef39988-22bb-4f0b-bbbe-64b5a3748aee}" datafieldname="accessmode" />
                     </cell>
-                    <cell id="{04277ce1-f208-4e5c-9f54-8c29eac9dc48}" showlabel="true" colspan="1">
+                    <cell id="{92ac93ae-75f4-4e83-8391-a2ea13c5a0a8}">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
                     </cell>
                   </row>
                   <row>
-                    <cell id="{90c4f2cf-5933-4338-a791-119227fc1df1}" showlabel="true" locklevel="0" colspan="1" rowspan="1" auto="false">
+                    <cell id="{90c4f2cf-5933-4338-a791-119227fc1df1}">
                       <labels>
                         <label description="License Type" languagecode="1033" />
                         <label description="Type de licence" languagecode="1036" />
                         <label description="Lizenztyp" languagecode="1031" />
                       </labels>
-                      <control disabled="false" id="caltype" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="caltype" />
+                      <control id="caltype" classid="{3ef39988-22bb-4f0b-bbbe-64b5a3748aee}" datafieldname="caltype" />
                     </cell>
-                    <cell id="{9438e1c1-f30b-43eb-8204-59996ef65dd0}" showlabel="true" colspan="1">
+                    <cell id="{63af20af-1f0a-4d91-963b-b0ea68989974}">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
@@ -542,11 +513,11 @@
           </column>
           <column width="50%">
             <sections>
-              <section id="{213541fd-4665-46d1-b0a3-095de74a8f17}" name="e-mail configuration" showlabel="true" IsUserDefined="0" locklevel="0" showbar="true">
+              <section name="Email configuration" showlabel="true" showbar="true" id="{213541fd-4665-46d1-b0a3-095de74a8f17}" IsUserDefined="0">
                 <labels>
-                  <label description="E-Mail-Zugriffskonfiguration" languagecode="1031" />
-                  <label description="E-mail Access Configuration" languagecode="1033" />
-                  <label description="Configuration de l'accès au courrier électronique" languagecode="1036" />
+                  <label description="E-Mail-Konfiguration" languagecode="1031" />
+                  <label description="EMAIL CONFIGURATION" languagecode="1033" />
+                  <label description="CONFIGURATION DE LA MESSAGERIE" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
@@ -558,7 +529,7 @@
                       </labels>
                       <control id="defaultmailbox" classid="{270bd3db-d9af-4782-9025-509e298dec0a}" datafieldname="defaultmailbox" />
                     </cell>
-                    <cell id="{04b782b3-7edf-4df2-88a7-d9a9434ef872}" showlabel="false">
+                    <cell id="{aac29b1b-5ba4-4633-92d9-e62f08037cf0}">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
@@ -570,7 +541,7 @@
           </column>
         </columns>
       </tab>
-      <tab id="{4624aa3e-fb33-42e7-87c2-ca7b810a81c1}" name="MobileOfflineProfile_TAB" IsUserDefined="0" visible="false">
+      <tab name="MobileOfflineProfile_TAB" id="{4624aa3e-fb33-42e7-87c2-ca7b810a81c1}" IsUserDefined="0" visible="false">
         <labels>
           <label description="Details zum Mobile Offline-Profil" languagecode="1031" />
           <label description="Mobile Offline Profile Details" languagecode="1033" />
@@ -579,7 +550,7 @@
         <columns>
           <column width="100%">
             <sections>
-              <section id="{a23f96fd-f7d4-428c-b57a-aff892bb862f}" name="mobileofflineaccessinfo" showlabel="true" IsUserDefined="0" showbar="true" celllabelposition="Left" labelwidth="200">
+              <section name="mobileofflineaccessinfo" showlabel="true" showbar="true" id="{a23f96fd-f7d4-428c-b57a-aff892bb862f}" labelwidth="200" celllabelposition="Left" IsUserDefined="0">
                 <labels>
                   <label description="Informationen zum Mobile Offline-Zugriff" languagecode="1031" />
                   <label description="Mobile Offline Access Information" languagecode="1033" />
@@ -587,7 +558,7 @@
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{5f349331-5903-4c36-b8a3-6fa5e098dfc4}" showlabel="true" locklevel="0" colspan="1" rowspan="1">
+                    <cell showlabel="true" locklevel="0" rowspan="1" colspan="1" id="{5f349331-5903-4c36-b8a3-6fa5e098dfc4}">
                       <labels>
                         <label description="Mobile Offline Profile" languagecode="1033" />
                         <label description="Profil Mobile Offline" languagecode="1036" />
@@ -595,7 +566,7 @@
                       </labels>
                       <control id="mobileofflineprofileid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="mobileofflineprofileid" />
                     </cell>
-                    <cell id="{92724F99-75DA-410C-8E11-CBD9D257F599}" showlabel="true" colspan="1">
+                    <cell showlabel="true" colspan="1" id="{92724F99-75DA-410C-8E11-CBD9D257F599}">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
@@ -636,6 +607,24 @@
         </clientvariables>
       </internalresources>
     </clientresources>
+    <events>
+      <event name="onchange" application="true" active="true" attribute="domainname">
+        <InternalHandlers>
+          <Handler functionName="Mscrm.domainname_onchange" libraryName="SystemUser_main_system_library.js" handlerUniqueId="d3b227fb-f3b5-4106-ab55-1cbd9edd1946" enabled="true">
+            <dependencies>
+              <dependency id="domainname" />
+            </dependencies>
+          </Handler>
+        </InternalHandlers>
+      </event>
+      <event name="onload" application="true" active="true">
+        <InternalHandlers>
+          <Handler functionName="Mscrm.Form_onload" libraryName="SystemUser_main_system_library.js" handlerUniqueId="de67cc7a-a007-412e-a011-fcc38a62ca01" enabled="true">
+            <dependencies />
+          </Handler>
+        </InternalHandlers>
+      </event>
+    </events>
     <Navigation>
       <NavBar>
         <NavBarByRelationshipItem RelationshipName="tc_LastAssignee" Sequence="10000" Area="Info" Id="nav_tc_LastAssignee" Show="false">
@@ -667,53 +656,35 @@
       <NavBarAreas>
         <NavBarArea Id="Info">
           <Titles>
-            <Title Text="Common" LCID="1033" />
+            <Title LCID="1033" Text="Common" />
           </Titles>
         </NavBarArea>
         <NavBarArea Id="Sales">
           <Titles>
-            <Title Text="Sales" LCID="1033" />
+            <Title LCID="1033" Text="Sales" />
           </Titles>
         </NavBarArea>
         <NavBarArea Id="Service">
           <Titles>
-            <Title Text="Service" LCID="1033" />
+            <Title LCID="1033" Text="Service" />
           </Titles>
         </NavBarArea>
         <NavBarArea Id="Marketing">
           <Titles>
-            <Title Text="Marketing" LCID="1033" />
+            <Title LCID="1033" Text="Marketing" />
           </Titles>
         </NavBarArea>
         <NavBarArea Id="ProcessCenter">
           <Titles>
-            <Title Text="Processes" LCID="1033" />
+            <Title LCID="1033" Text="Processes" />
           </Titles>
         </NavBarArea>
       </NavBarAreas>
     </Navigation>
-    <events>
-      <event name="onchange" active="true" application="true" attribute="domainname">
-        <InternalHandlers>
-          <Handler enabled="true" handlerUniqueId="d3b227fb-f3b5-4106-ab55-1cbd9edd1946" libraryName="SystemUser_main_system_library.js" functionName="Mscrm.domainname_onchange">
-            <dependencies>
-              <dependency id="domainname" />
-            </dependencies>
-          </Handler>
-        </InternalHandlers>
-      </event>
-      <event name="onload" active="true" application="true">
-        <InternalHandlers>
-          <Handler enabled="true" handlerUniqueId="de67cc7a-a007-412e-a011-fcc38a62ca01" libraryName="SystemUser_main_system_library.js" functionName="Mscrm.Form_onload">
-            <dependencies />
-          </Handler>
-        </InternalHandlers>
-      </event>
-    </events>
-    <controlDescriptions />
     <DisplayConditions FallbackForm="true" Order="2">
       <Everyone />
     </DisplayConditions>
+    <controlDescriptions />
   </form>
   <LocalizedNames>
     <LocalizedName description="Benutzer" languagecode="1031" />

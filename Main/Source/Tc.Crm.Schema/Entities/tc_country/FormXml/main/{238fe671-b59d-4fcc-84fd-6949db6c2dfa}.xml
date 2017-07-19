@@ -8,6 +8,7 @@
     <tabs>
       <tab verticallayout="true" id="{36d044b7-1681-44fb-b701-759652b8d659}" IsUserDefined="1" name="{36d044b7-1681-44fb-b701-759652b8d659}" locklevel="0" expanded="true" showlabel="true">
         <labels>
+          <label description="Länderinformation" languagecode="1031" />
           <label description="Country Information" languagecode="1033" />
         </labels>
         <columns>
@@ -15,13 +16,16 @@
             <sections>
               <section showlabel="false" showbar="false" IsUserDefined="0" id="{3c6d501c-580a-4601-a23f-a16d1cf6a84c}" name="{3c6d501c-580a-4601-a23f-a16d1cf6a84c}" columns="11" locklevel="0" labelwidth="150" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
+                  <label description="Allgemein" languagecode="1031" />
                   <label description="General" languagecode="1033" />
+                  <label description="Général" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{9b79e318-4a92-484e-845f-c022ac440ce8}">
                       <labels>
                         <label description="Country" languagecode="1033" />
+                        <label description="Land" languagecode="1031" />
                       </labels>
                       <control id="tc_iso_code" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_iso_code" />
                     </cell>
@@ -35,6 +39,7 @@
                     <cell id="{ddb70baa-eb2a-11e7-2bcc-6a4346a33d24}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="ISO 2 Code" languagecode="1033" />
+                        <label description="ISO 2 Code" languagecode="1031" />
                       </labels>
                       <control id="tc_iso2code" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_iso2code" disabled="false" />
                     </cell>
@@ -48,6 +53,7 @@
                     <cell id="{b972c4bb-ebb8-829c-c51e-40d69cc73119}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Country Name" languagecode="1033" />
+                        <label description="Ländername" languagecode="1031" />
                       </labels>
                       <control id="tc_countryname" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_countryname" disabled="false" />
                     </cell>
@@ -61,6 +67,8 @@
                     <cell id="{babfad8e-e5be-46a7-83db-dc4e94cc0ac9}" showlabel="true" locklevel="1" visible="false">
                       <labels>
                         <label description="Owner" languagecode="1033" />
+                        <label description="en charge du cas" languagecode="1036" />
+                        <label description="Eigentümer" languagecode="1031" />
                       </labels>
                       <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" uniqueid="{69a815b0-7c51-7d4e-d044-6137e6893166}" disabled="false">
                         <parameters>
@@ -79,6 +87,7 @@
                     <cell id="{341413c7-e067-4e03-ea9d-d3b8302615d9}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Source Market Business Unit" languagecode="1033" />
+                        <label description="Source Market Business Unit" languagecode="1031" />
                       </labels>
                       <control id="tc_sourcemarketbusinessunitid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_sourcemarketbusinessunitid" disabled="false" />
                     </cell>
@@ -93,7 +102,7 @@
                       <labels>
                         <label description="Source Market Currency" languagecode="1033" />
                         <label description="Devise" languagecode="1036" />
-                        <label description="Währung" languagecode="1031" />
+                        <label description="Source Market Currency" languagecode="1031" />
                       </labels>
                       <control id="transactioncurrencyid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="transactioncurrencyid" disabled="false" uniqueid="{80237e3c-267c-679c-4489-c4d26a1c093e}">
                         <parameters>
@@ -116,6 +125,8 @@
                     <cell id="{625451ab-a39d-51d8-7db4-7e897c3b729c}" showlabel="true" locklevel="0" visible="false">
                       <labels>
                         <label description="Currency Amount" languagecode="1033" />
+                        <label description="Montant en devise" languagecode="1036" />
+                        <label description="Währung Betrag" languagecode="1031" />
                       </labels>
                       <control id="tc_currency" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_currency" disabled="false" uniqueid="{a5e92d20-ddce-22d6-3a29-790d56dc0078}" />
                     </cell>
@@ -129,13 +140,17 @@
               </section>
               <section name="{36d044b7-1681-44fb-b701-759652b8d659}_section_2" showlabel="false" showbar="false" locklevel="0" id="{60248cd9-6901-8849-26dc-1e5e8ddc8c6e}" IsUserDefined="0" layout="varwidth" columns="11" labelwidth="115" height="auto">
                 <labels>
+                  <label description="Abschnitt" languagecode="1031" />
                   <label description="Section" languagecode="1033" />
+                  <label description="Section" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
                     <cell id="{5b468ebb-a26c-b8a0-94a3-3cd75ead0675}" showlabel="true" colspan="1" auto="true" rowspan="4">
                       <labels>
                         <label description="Regions" languagecode="1033" />
+                        <label description="Régions" languagecode="1036" />
+                        <label description="Regionen" languagecode="1031" />
                       </labels>
                       <control id="Regions_RelatedCountry" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true" uniqueid="{2107a709-bd00-a9b1-da01-27d84db533d4}">
                         <parameters>
@@ -159,6 +174,8 @@
                     <cell id="{65eb06d9-c343-003b-c9ad-6dbd17863886}" showlabel="true" colspan="1" rowspan="8" auto="false">
                       <labels>
                         <label description="Brands " languagecode="1033" />
+                        <label description="Marken" languagecode="1031" />
+                        <label description="marques " languagecode="1036" />
                       </labels>
                       <control id="Brands_RelatedCountry" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true" uniqueid="{16102638-d428-96dc-ae14-d4e058951b86}">
                         <parameters>
@@ -234,6 +251,8 @@
           <cell id="{b4d73e24-dee0-b489-1e10-48ab03de4d17}" showlabel="true" locklevel="0">
             <labels>
               <label description="Owner" languagecode="1033" />
+              <label description="en charge du cas" languagecode="1036" />
+              <label description="Eigentümer" languagecode="1031" />
             </labels>
             <control id="header_ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" disabled="false" />
           </cell>
@@ -341,9 +360,12 @@
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>
   <LocalizedNames>
+    <LocalizedName description="Länder" languagecode="1031" />
     <LocalizedName description="Countries" languagecode="1033" />
+    <LocalizedName description="Pays" languagecode="1036" />
   </LocalizedNames>
   <Descriptions>
+    <Description description="Hauptform - Länder" languagecode="1031" />
     <Description description="Main form - Countries" languagecode="1033" />
   </Descriptions>
 </systemform>

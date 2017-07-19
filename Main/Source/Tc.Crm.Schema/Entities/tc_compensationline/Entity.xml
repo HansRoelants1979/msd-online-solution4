@@ -5,12 +5,15 @@
   <EntityInfo>
     <entity Name="tc_compensationline">
       <LocalizedNames>
+        <LocalizedName description="Kompensationslinie" languagecode="1031" />
         <LocalizedName description="Compensation Line" languagecode="1033" />
       </LocalizedNames>
       <LocalizedCollectionNames>
+        <LocalizedCollectionName description="Kompensationslinien" languagecode="1031" />
         <LocalizedCollectionName description="Compensation Lines" languagecode="1033" />
       </LocalizedCollectionNames>
       <Descriptions>
+        <Description description="(vom Kunden akzeptiert] Kompensationszeilen" languagecode="1031" />
         <Description description="[Customer Agreed] Lines of Compensation." languagecode="1033" />
       </Descriptions>
       <attributes>
@@ -604,6 +607,7 @@
             <IntroducedVersion>1.0.0.18</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
+              <displayname description="Status" languagecode="1031" />
               <displayname description="Status" languagecode="1033" />
               <displayname description="Statut" languagecode="1036" />
             </displaynames>
@@ -630,6 +634,7 @@
             </states>
           </optionset>
           <displaynames>
+            <displayname description="Status" languagecode="1031" />
             <displayname description="Status" languagecode="1033" />
             <displayname description="Statut" languagecode="1036" />
           </displaynames>
@@ -734,7 +739,9 @@
           <Accuracy>2</Accuracy>
           <AccuracySource>0</AccuracySource>
           <displaynames>
+            <displayname description="Betrag" languagecode="1031" />
             <displayname description="Amount" languagecode="1033" />
+            <displayname description="montant" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -805,6 +812,7 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_acceptancestatus</OptionSetName>
           <displaynames>
+            <displayname description="Genehmigter Status" languagecode="1031" />
             <displayname description="Approval Status" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -822,7 +830,7 @@
           <ValidForReadApi>1</ValidForReadApi>
           <ValidForCreateApi>1</ValidForCreateApi>
           <IsCustomField>1</IsCustomField>
-          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsAuditEnabled>0</IsAuditEnabled>
           <IsSecured>0</IsSecured>
           <IntroducedVersion>1.0.0.49</IntroducedVersion>
           <IsCustomizable>1</IsCustomizable>
@@ -839,6 +847,7 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="BACS Kontoname" languagecode="1031" />
             <displayname description="BACS Account Name" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -856,7 +865,7 @@
           <ValidForReadApi>1</ValidForReadApi>
           <ValidForCreateApi>1</ValidForCreateApi>
           <IsCustomField>1</IsCustomField>
-          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsAuditEnabled>0</IsAuditEnabled>
           <IsSecured>1</IsSecured>
           <IntroducedVersion>1.0.0.49</IntroducedVersion>
           <IsCustomizable>1</IsCustomizable>
@@ -873,6 +882,7 @@
           <MaxLength>8</MaxLength>
           <Length>16</Length>
           <displaynames>
+            <displayname description="BACS Kontonummer" languagecode="1031" />
             <displayname description="BACS Account Number" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -890,7 +900,7 @@
           <ValidForReadApi>1</ValidForReadApi>
           <ValidForCreateApi>1</ValidForCreateApi>
           <IsCustomField>1</IsCustomField>
-          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsAuditEnabled>0</IsAuditEnabled>
           <IsSecured>1</IsSecured>
           <IntroducedVersion>1.0.0.49</IntroducedVersion>
           <IsCustomizable>1</IsCustomizable>
@@ -907,6 +917,7 @@
           <MaxLength>10</MaxLength>
           <Length>20</Length>
           <displaynames>
+            <displayname description="BACS-Konto-Sortiercode" languagecode="1031" />
             <displayname description="BACS Account Sort Code" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -940,6 +951,7 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_bacsaccounttype</OptionSetName>
           <displaynames>
+            <displayname description="BACS Kontotyp" languagecode="1031" />
             <displayname description="BACS Account Type" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -975,6 +987,7 @@
           <Accuracy>2</Accuracy>
           <AccuracySource>0</AccuracySource>
           <displaynames>
+            <displayname description="BACS Betrag" languagecode="1031" />
             <displayname description="BACS Amount" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1030,7 +1043,7 @@
           <ValidForReadApi>1</ValidForReadApi>
           <ValidForCreateApi>1</ValidForCreateApi>
           <IsCustomField>1</IsCustomField>
-          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsAuditEnabled>0</IsAuditEnabled>
           <IsSecured>1</IsSecured>
           <IntroducedVersion>1.0.0.49</IntroducedVersion>
           <IsCustomizable>1</IsCustomizable>
@@ -1047,6 +1060,7 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Baustelle-Rollenzahl" languagecode="1031" />
             <displayname description="BACS Building Society Role Number" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1080,9 +1094,12 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Buchung" languagecode="1031" />
             <displayname description="Booking" languagecode="1033" />
+            <displayname description="Réservation" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="einheitlicher Identifikator für Buchung zur Kompensationszeile" languagecode="1031" />
             <Description description="Unique identifier for Booking associated with Compensation Line." languagecode="1033" />
           </Descriptions>
         </attribute>
@@ -1113,6 +1130,7 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Fall Erstellt von" languagecode="1031" />
             <displayname description="Case Created By" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1146,9 +1164,12 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Fall" languagecode="1031" />
             <displayname description="Case" languagecode="1033" />
+            <displayname description="cas" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Verbinden Sie Case Record mit Compensation Lines (kundengerechte Vergütungsangebote) für Reklamationen" languagecode="1031" />
             <Description description="Connects Case record with Compensation Lines (customer agreed compensation offers) for Complaints" languagecode="1033" />
           </Descriptions>
         </attribute>
@@ -1179,6 +1200,7 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Falllinie I" languagecode="1031" />
             <displayname description="Case Line 1" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1214,6 +1236,7 @@
           <Accuracy>4</Accuracy>
           <AccuracySource>2</AccuracySource>
           <displaynames>
+            <displayname description="Falllinie 1 Betrag" languagecode="1031" />
             <displayname description="Case Line 1 Amount" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1285,6 +1308,7 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Falllinie 2" languagecode="1031" />
             <displayname description="Case Line 2" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1320,6 +1344,7 @@
           <Accuracy>4</Accuracy>
           <AccuracySource>2</AccuracySource>
           <displaynames>
+            <displayname description="Falllinie 2 Betrag" languagecode="1031" />
             <displayname description="Case Line 2 Amount" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1391,6 +1416,7 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Falllinie 3" languagecode="1031" />
             <displayname description="Case Line 3" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1426,6 +1452,7 @@
           <Accuracy>4</Accuracy>
           <AccuracySource>2</AccuracySource>
           <displaynames>
+            <displayname description="Falllinie 3 Betrag" languagecode="1031" />
             <displayname description="Case Line 3 Amount" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1497,6 +1524,7 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Falllinie 4" languagecode="1031" />
             <displayname description="Case Line 4" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1532,6 +1560,7 @@
           <Accuracy>4</Accuracy>
           <AccuracySource>2</AccuracySource>
           <displaynames>
+            <displayname description="Falllinie 4  Betrag" languagecode="1031" />
             <displayname description="Case Line 4 Amount" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1605,6 +1634,7 @@
           <Accuracy>2</Accuracy>
           <AccuracySource>0</AccuracySource>
           <displaynames>
+            <displayname description="Geldbetrag" languagecode="1031" />
             <displayname description="Cash Amount" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1677,9 +1707,11 @@
           <MaxValue>100000000000</MaxValue>
           <Accuracy>2</Accuracy>
           <displaynames>
+            <displayname description="Bar-Wechselkurs" languagecode="1031" />
             <displayname description="Cash Exchange Rate" languagecode="1033" />
           </displaynames>
           <Descriptions>
+            <Description description="Wechselkurs von Buchungswährung zu Bargeld Währung" languagecode="1031" />
             <Description description="Exchange Rate from Booking Currency to Cash Currency" languagecode="1033" />
           </Descriptions>
         </attribute>
@@ -1712,6 +1744,7 @@
           <Accuracy>2</Accuracy>
           <AccuracySource>0</AccuracySource>
           <displaynames>
+            <displayname description="CHAPS Betrag" languagecode="1031" />
             <displayname description="CHAPS Amount" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1784,6 +1817,7 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Kompensation 3" languagecode="1031" />
             <displayname description="Compensation 3" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1817,9 +1851,11 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Kompensation" languagecode="1031" />
             <displayname description="Compensation" languagecode="1033" />
           </displaynames>
           <Descriptions>
+            <Description description="Verbindet die Kompensationslinien mit dem Kompensationsdatensatz." languagecode="1031" />
             <Description description="Connects the Compensation Lines to the Compensation record." languagecode="1033" />
           </Descriptions>
         </attribute>
@@ -1847,6 +1883,7 @@
           <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
           <displaynames>
+            <displayname description="Kompensationslinie" languagecode="1031" />
             <displayname description="Compensation Line" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1882,6 +1919,7 @@
           <Format></Format>
           <MaxLength>15000</MaxLength>
           <displaynames>
+            <displayname description="Ausgleichsunterschrift" languagecode="1031" />
             <displayname description="Compensation Signature" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1915,6 +1953,7 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_compensationcostcover</OptionSetName>
           <displaynames>
+            <displayname description="Kostendeckung durch" languagecode="1031" />
             <displayname description="Cost Coverage By" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -1946,7 +1985,9 @@
           <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
           <displaynames>
+            <displayname description="Kunde" languagecode="1031" />
             <displayname description="Customer" languagecode="1033" />
+            <displayname description="client" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -1980,9 +2021,11 @@
           <MaxLength>10</MaxLength>
           <Length>20</Length>
           <displaynames>
+            <displayname description="Kundenbezahlungsverfahren Entscheidung" languagecode="1031" />
             <displayname description="Customer Payment Method Decision" languagecode="1033" />
           </displaynames>
           <Descriptions>
+            <Description description="Bestimmt aus dem Vergütungsstatus" languagecode="1031" />
             <Description description="Determined from the Compensation Payment Status" languagecode="1033" />
           </Descriptions>
         </attribute>
@@ -2014,7 +2057,9 @@
           <CanChangeDateTimeBehavior>1</CanChangeDateTimeBehavior>
           <Behavior>1</Behavior>
           <displaynames>
+            <displayname description="Aublaufdatum des Gutscheins" languagecode="1031" />
             <displayname description="Expiry Date Of Voucher" languagecode="1033" />
+            <displayname description="date d'expiration du bon de réduction" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -2048,7 +2093,9 @@
           <MaxLength>30</MaxLength>
           <Length>60</Length>
           <displaynames>
+            <displayname description="IBAN" languagecode="1031" />
             <displayname description="IBAN" languagecode="1033" />
+            <displayname description="IBAN" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -2081,7 +2128,9 @@
           <Format></Format>
           <MaxLength>2000</MaxLength>
           <displaynames>
+            <displayname description="Rechnungs Fehler Beschreibung" languagecode="1031" />
             <displayname description="Invoice Error Description" languagecode="1033" />
+            <displayname description="description de l'erreur sur la facture" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -2114,7 +2163,9 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_invoicestatusvalues</OptionSetName>
           <displaynames>
+            <displayname description="Rechnungsstatus" languagecode="1031" />
             <displayname description="Invoice Status" languagecode="1033" />
+            <displayname description="statut de la facture" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -2150,6 +2201,7 @@
             <IntroducedVersion>1.0.0.83</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
+              <displayname description="Ist voll und endgültig" languagecode="1031" />
               <displayname description="Is Full and Final Statement" languagecode="1033" />
             </displaynames>
             <Descriptions>
@@ -2158,17 +2210,22 @@
             <options>
               <option value="0" Color="#0000ff">
                 <labels>
+                  <label description="Nein" languagecode="1031" />
                   <label description="No" languagecode="1033" />
+                  <label description="non" languagecode="1036" />
                 </labels>
               </option>
               <option value="1" Color="#0000ff">
                 <labels>
+                  <label description="Ja" languagecode="1031" />
                   <label description="Yes" languagecode="1033" />
+                  <label description="Oui" languagecode="1036" />
                 </labels>
               </option>
             </options>
           </optionset>
           <displaynames>
+            <displayname description="Ist voll und endgültig" languagecode="1031" />
             <displayname description="Is Full and Final Statement" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -2203,7 +2260,9 @@
           <MaxValue>100000000000</MaxValue>
           <Accuracy>2</Accuracy>
           <displaynames>
+            <displayname description="Litauen" languagecode="1031" />
             <displayname description="Local Cash Amount" languagecode="1033" />
+            <displayname description="Lituanie" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -2236,7 +2295,9 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Lokale Währung" languagecode="1031" />
             <displayname description="Local Currency" languagecode="1033" />
+            <displayname description="Devise locale" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="Unique identifier for Currency associated with Compensation Line." languagecode="1033" />
@@ -2270,6 +2331,7 @@
           <MaxValue>100000000000</MaxValue>
           <Accuracy>2</Accuracy>
           <displaynames>
+            <displayname description="Lokaler nichtfinanzieller Betrag" languagecode="1031" />
             <displayname description="Local Non-Financial Amount" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -2304,9 +2366,12 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Bezug" languagecode="1031" />
             <displayname description="Reference" languagecode="1033" />
+            <displayname description="référence" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Der Name der benutzerdefinierten Entität." languagecode="1031" />
             <Description description="The name of the custom entity." languagecode="1033" />
           </Descriptions>
         </attribute>
@@ -2339,6 +2404,7 @@
           <Accuracy>4</Accuracy>
           <AccuracySource>2</AccuracySource>
           <displaynames>
+            <displayname description="Nicht-finanzieller Betrag" languagecode="1031" />
             <displayname description="Non-Financial Amount" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -2410,6 +2476,7 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_nonfinancialcompensationsubtype</OptionSetName>
           <displaynames>
+            <displayname description="Kompensation Untertyp" languagecode="1031" />
             <displayname description="Compensation Sub-Type" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -2444,6 +2511,7 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Andere Kompensation Sub-Type" languagecode="1031" />
             <displayname description="Other Compensation Sub-Type" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -2477,6 +2545,7 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Nichtfinanzwährung" languagecode="1031" />
             <displayname description="Non-Financial Currency" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -2511,9 +2580,11 @@
           <MaxValue>100000000000</MaxValue>
           <Accuracy>2</Accuracy>
           <displaynames>
+            <displayname description="Nicht-finanzieller Wechselkurs" languagecode="1031" />
             <displayname description="Non-Financial Exchange Rate" languagecode="1033" />
           </displaynames>
           <Descriptions>
+            <Description description="Wechselkurs von Buchungswährung zu Non-Fin Währung" languagecode="1031" />
             <Description description="Exchange Rate from Booking Currency to Non-Fin Currency" languagecode="1033" />
           </Descriptions>
         </attribute>
@@ -2544,9 +2615,12 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_compensation_paymentofferstatus</OptionSetName>
           <displaynames>
+            <displayname description="Zahlungsstatus" languagecode="1031" />
             <displayname description="Payment Status" languagecode="1033" />
+            <displayname description="statut du paiement" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Zeigt den Ausgleichszahlungsstatus in Bezug auf die Kundenannahme an." languagecode="1031" />
             <Description description="Indicates the compensation payment status with respect of the customer acceptance." languagecode="1033" />
           </Descriptions>
         </attribute>
@@ -2580,6 +2654,7 @@
             <IntroducedVersion>1.0.0.88</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
+              <displayname description="Grund für Gutscheinstornierung" languagecode="1031" />
               <displayname description="Reason for Voucher Cancellation" languagecode="1033" />
             </displaynames>
             <Descriptions>
@@ -2588,17 +2663,21 @@
             <options>
               <option value="950000000" Color="#0000ff">
                 <labels>
+                  <label description="Nicht länger benötigt" languagecode="1031" />
                   <label description="No Longer Required" languagecode="1033" />
+                  <label description="n'est plus nécessaire" languagecode="1036" />
                 </labels>
               </option>
               <option value="950000001" Color="#0000ff">
                 <labels>
+                  <label description="Kunde hat nicht erhalten" languagecode="1031" />
                   <label description="Customer Did Not Receive" languagecode="1033" />
                 </labels>
               </option>
             </options>
           </optionset>
           <displaynames>
+            <displayname description="Grund für Gutscheinstornierung" languagecode="1031" />
             <displayname description="Reason for Voucher Cancellation" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -2633,7 +2712,9 @@
           <CanChangeDateTimeBehavior>1</CanChangeDateTimeBehavior>
           <Behavior>1</Behavior>
           <displaynames>
+            <displayname description="Unterschriftsdatum" languagecode="1031" />
             <displayname description="Signature Date" languagecode="1033" />
+            <displayname description="date de signature" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -2702,7 +2783,9 @@
           <Accuracy>2</Accuracy>
           <AccuracySource>0</AccuracySource>
           <displaynames>
+            <displayname description="Gutscheinbetrag" languagecode="1031" />
             <displayname description="Voucher Amount" languagecode="1033" />
+            <displayname description="montant/ valeur du bon de réduction" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -2773,6 +2856,7 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_boardtype</OptionSetName>
           <displaynames>
+            <displayname description="Gutschein Verpflegungstyp" languagecode="1031" />
             <displayname description="Voucher Board Type" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -2807,6 +2891,7 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Gutscheinbuchung" languagecode="1031" />
             <displayname description="Voucher Booking" languagecode="1033" />
           </displaynames>
           <Descriptions>
@@ -2841,7 +2926,9 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Gutschein Marke" languagecode="1031" />
             <displayname description="Voucher Brand" languagecode="1033" />
+            <displayname description="marque/ logo du bon de réduction" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -2875,7 +2962,9 @@
           <CanChangeDateTimeBehavior>1</CanChangeDateTimeBehavior>
           <Behavior>1</Behavior>
           <displaynames>
+            <displayname description="Gutschein annulliert am" languagecode="1031" />
             <displayname description="Voucher Cancelled On" languagecode="1033" />
+            <displayname description="Bon de réduction annulé le " languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -2909,7 +2998,9 @@
           <CanChangeDateTimeBehavior>1</CanChangeDateTimeBehavior>
           <Behavior>1</Behavior>
           <displaynames>
+            <displayname description="Gutschein Datum" languagecode="1031" />
             <displayname description="Voucher Date" languagecode="1033" />
+            <displayname description="date d'émission du bon de réduction" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -2943,7 +3034,9 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Gutschein Vorname" languagecode="1031" />
             <displayname description="Voucher first name" languagecode="1033" />
+            <displayname description="Prénom sur le bon de réduction" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -2976,7 +3069,9 @@
           <MinValue>-2147483648</MinValue>
           <MaxValue>2147483647</MaxValue>
           <displaynames>
+            <displayname description="Gutschein Nummer" languagecode="1031" />
             <displayname description="Voucher Issue Number" languagecode="1033" />
+            <displayname description="numéro d'émission du bon de réduction" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -3010,7 +3105,9 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Gutschein Nachname" languagecode="1031" />
             <displayname description="Voucher last name" languagecode="1033" />
+            <displayname description="nom de famille sur le bon de réduction" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -3043,7 +3140,9 @@
           <Format></Format>
           <MaxLength>5000</MaxLength>
           <displaynames>
+            <displayname description="Gutschein Text" languagecode="1031" />
             <displayname description="Voucher message" languagecode="1033" />
+            <displayname description="message du bon de réduction" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -3077,7 +3176,9 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Gutscheinempfänger Vorname" languagecode="1031" />
             <displayname description="Voucher Recipient First Name" languagecode="1033" />
+            <displayname description="Prénom du bénéficiaire du bon de réduction" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -3111,7 +3212,9 @@
           <MaxLength>100</MaxLength>
           <Length>200</Length>
           <displaynames>
+            <displayname description="Gutscheinempfänger Nachname" languagecode="1031" />
             <displayname description="Voucher Recipient Last Name" languagecode="1033" />
+            <displayname description="nom du bénéficiaire du bon de réduction" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -3145,7 +3248,9 @@
           <CanChangeDateTimeBehavior>1</CanChangeDateTimeBehavior>
           <Behavior>1</Behavior>
           <displaynames>
+            <displayname description="Gutschein ausgestellt am" languagecode="1031" />
             <displayname description="Voucher Redeemed On" languagecode="1033" />
+            <displayname description="Bon de réduction utilisé le" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -3179,6 +3284,7 @@
           <MaxValue>2147483647</MaxValue>
           <displaynames>
             <displayname description="Voucher Routing Code" languagecode="1033" />
+            <displayname description="Code de routage du bon de réduction" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -3211,7 +3317,9 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>tc_vouchertypes</OptionSetName>
           <displaynames>
+            <displayname description="Gutschein Typ" languagecode="1031" />
             <displayname description="Voucher Type" languagecode="1033" />
+            <displayname description="type de bon de réduction" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
