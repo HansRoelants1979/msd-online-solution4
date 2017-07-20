@@ -1,4 +1,3 @@
-
 if (typeof (Tc) === "undefined") {
     Tc = {
         __namespace: true
@@ -32,23 +31,28 @@ Tc.Crm.Scripts.Events.Contact.Ids = (function () {
     var FORM_MODE_UPDATE = 2;
     var CLIENT_STATE_OFFLINE = "Offline";
 
+    var Attributes = {
+        Telephone1: "telephone1",
+        Telephone2: "telephone2",
+        Telephone3: "telephone3"
+    }
+
     // public methods
     function onLoad() {
-
-        Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("telephone1");
-        Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("telephone2");
+        Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.Telephone1);
+        Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.Telephone2);
+        Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.Telephone3);
     }
     var onChangeTelephone1 = function () {
-        Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("telephone1");
+        Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.Telephone1);
     }
     var onChangeTelephone2 = function () {
-        Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("telephone2");
+        Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.Telephone2);
     }
     var onChangeTelephone3 = function () {
-        Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("telephone3");
+        Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.Telephone3);
     }
-    return {
-       
+    return {       
         OnLoad: function () {
             onLoad();
         },

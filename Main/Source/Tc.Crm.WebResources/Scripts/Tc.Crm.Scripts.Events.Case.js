@@ -34,9 +34,14 @@ Tc.Crm.Scripts.Events.Case = (function () {
     var FORM_MODE_UPDATE = 2;
     
 
+    var Attributes = {
+        AlternativePhone: "tc_alternativephone",
+        OtherPartyPhone: "tc_otherpartyphone"
+    }
+
     function OnLoad() {
-        Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("tc_alternativephone");
-        Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("tc_otherpartyphone");
+        Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.AlternativePhone);
+        Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.OtherPartyPhone);
         validateCaseAssociatedCustomerPhoneNum();
         preFilterLocationOfficeLookup();        
     }
@@ -273,11 +278,10 @@ Tc.Crm.Scripts.Events.Case = (function () {
         }
     }
     var onChangeTelephone1 = function () {
-
-        Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("tc_alternativephone");
+        Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.AlternativePhone);
     }
     var onChangeTelephone2 = function () {
-        Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("tc_otherpartyphone");
+        Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.OtherPartyPhone);
     }
 
     var preFilterLocationOfficeLookup = function ()

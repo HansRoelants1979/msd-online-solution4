@@ -32,24 +32,15 @@ Tc.Crm.Scripts.Events.Contact.Retail = (function () {
         FirstName: "firstname",
         LastName: "lastname",
         BirthDate: "birthdate",      
-        ContactChangeReason: "tc_keycontactchangereason"
+        ContactChangeReason: "tc_keycontactchangereason",
+        Telephone1: "telephone1",
+        Telephone2: "telephone2",
+        Telephone3: "telephone3",
     }
     var FORM_MODE_UPDATE = 2;
     function onPhoneChanged(context) {
         var attribute = context.getEventSource();
-        var value = attribute.getValue();
-        var isValid = true;
-        if (value != null && value != '') {
-            isValid = /^[0-9]{10,15}$/.test(value);
-        }
-        attribute.controls.forEach(
-            function (control, i) {
-                if (isValid) {
-                    control.clearNotification('validatePhone');
-                } else {
-                    control.setNotification('Should be 10 to 15 digits only', 'validatePhone');
-                }
-            });
+        Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(attribute.getName());
     }
 
     var onCustomerKeyInformationUpdate = function () {
@@ -89,6 +80,11 @@ Tc.Crm.Scripts.Events.Contact.Retail = (function () {
         return false;
     };
 
+    var onLoad = function () {
+        Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.Telephone1);
+        Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.Telephone2);
+        Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.Telephone3);
+    }
   
     var onSave = function (econtext) {
         if (isCustomerKeyInformationUpdated()) {
@@ -142,6 +138,7 @@ Tc.Crm.Scripts.Events.Contact.Retail = (function () {
 
     // public methods
     return {
+        OnLoad: onLoad,
         OnSave: function (econtext) {
             onSave(econtext);
         },
