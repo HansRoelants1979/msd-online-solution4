@@ -1,3 +1,42 @@
+var scriptLoader = scriptLoader || {
+    delayedLoads: [],
+    load: function (name, requires, script) {
+        window._loadedScripts = window._loadedScripts || {};
+        // Check for loaded scripts, if not all loaded then register delayed Load
+        if (requires == null || requires.length == 0 || scriptLoader.areLoaded(requires)) {
+            scriptLoader.runScript(name, script);
+        }
+        else {
+            // Register an onload check
+            scriptLoader.delayedLoads.push({ name: name, requires: requires, script: script });
+        }
+    },
+    runScript: function (name, script) {
+        script.call(window);
+        window._loadedScripts[name] = true;
+        scriptLoader.onScriptLoaded(name);
+    },
+    onScriptLoaded: function (name) {
+        // Check for any registered delayed Loads
+        scriptLoader.delayedLoads.forEach(function (script) {
+            if (script.loaded == null && scriptLoader.areLoaded(script.requires)) {
+                script.loaded = true;
+                scriptLoader.runScript(script.name, script.script);
+            }
+        });
+    },
+    areLoaded: function (requires) {
+        var allLoaded = true;
+        for (var i = 0; i < requires.length; i++) {
+            allLoaded = allLoaded && (window._loadedScripts[requires[i]] != null);
+            if (!allLoaded)
+                break;
+        }
+        return allLoaded;
+    }
+};
+scriptLoader.load("Tc.Crm.Scripts.Library.Contact", ["Tc.Crm.Scripts.Common"], function () {
+// start script
 if (typeof (Tc) === "undefined") {
     Tc = {
         __namespace: true
@@ -143,34 +182,11 @@ Tc.Crm.Scripts.Library.Contact = (function () {
             }
         );
     }
-    var getNotificationForPhoneNumber = function(telephoneFieldName) {
-        var phone = Xrm.Page.data.entity.attributes.get(telephoneFieldName);
-        if (phone == null) return;
-        var phoneValue = phone.getValue();
-        if (phoneValue == null || phoneValue == "") return;
-
-        var regex = /^\+(?:[0-9] ?){9,14}[0-9]$/;
-        if (regex.test(phoneValue)) {
-            if (Xrm.Page.ui.getFormType() == FORM_MODE_CREATE) {
-                Xrm.Page.getControl(telephoneFieldName).clearNotification();
-            }
-            if (Xrm.Page.ui.getFormType() == FORM_MODE_UPDATE) {
-                Xrm.Page.ui.clearFormNotification("TelNumNotification");
-            }
-        }
-        else {
-            if (Xrm.Page.ui.getFormType() == FORM_MODE_CREATE) {
-                Xrm.Page.getControl(telephoneFieldName).setNotification("The telephone number does not match the required format. The number should start with a + followed by the country dialing code and contain no spaces or other special characters i.e. +44 for UK.");
-            }
-            if (Xrm.Page.ui.getFormType() == FORM_MODE_UPDATE) {
-                Xrm.Page.getControl(telephoneFieldName).clearNotification();
-                Xrm.Page.ui.setFormNotification("The telephone number does not match the required format. The number should start with a + followed by the country dialing code and contain no spaces or other special characters i.e. +44 for UK.", "WARNING", "TelNumNotification");
-            }
-        }
-    }
     // public
     return {
-        UpdateCustomerCompensationsLanguage: updateCustomerCompensationsLanguage,
-        GetNotificationForPhoneNumber: getNotificationForPhoneNumber
+        UpdateCustomerCompensationsLanguage: updateCustomerCompensationsLanguage
     };
 })();
+console.log('loaded library.contact');
+// end script
+});
