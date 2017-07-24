@@ -30,9 +30,7 @@ Tc.Crm.Scripts.Events.Account = (function () {
     var onChangeTelephone1 = function () {
         Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("telephone1");
     }
-    var onChangeTelephone2 = function () {
-        Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("telephone2");
-    }
+    
     
 
     // public methods     
@@ -43,10 +41,8 @@ Tc.Crm.Scripts.Events.Account = (function () {
         },
         OnChangeTelephone1: function () {
             onChangeTelephone1();
-        },
-        OnChangeTelephone2: function () {
-            onChangeTelephone2();
         }
+       
 
     };
 })();// JavaScript source code

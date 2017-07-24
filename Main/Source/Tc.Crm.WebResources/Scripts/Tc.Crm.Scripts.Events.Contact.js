@@ -31,6 +31,7 @@ Tc.Crm.Scripts.Events.Contact = (function () {
 
         Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("telephone1");
         Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("telephone2");
+        Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("telephone3");
     }
     var onChangeTelephone1 = function () {
         Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("telephone1");
