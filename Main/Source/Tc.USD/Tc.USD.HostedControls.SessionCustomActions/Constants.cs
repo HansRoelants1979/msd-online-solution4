@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Tc.USD.HostedControls.SessionCustomActions.Constants
+﻿namespace Tc.USD.HostedControls.SessionCustomActions.Constants
 {
     public class ActionName
     {
-        
+        public const string OpenOwr = "Tc.Usd.SessionCustomActions.Custom.OpenOwr";
     }
 
     public class DataKey
     {
-        
+        public const string OwrUrlConfigName = "Tc.Owr.SsoServiceUrl";
+        public const string DiagnosticSource = "Tc.Usd.SessionCustomActions";
     }
 }
