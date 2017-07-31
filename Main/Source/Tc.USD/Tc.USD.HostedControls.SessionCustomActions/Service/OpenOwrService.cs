@@ -4,11 +4,11 @@ using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
 using System.ServiceModel;
-using Tc.USD.HostedControls.SessionCustomActions.Constants;
+using Tc.Usd.HostedControls.Constants;
 
-namespace Tc.USD.HostedControls.SessionCustomActions
+namespace Tc.Usd.HostedControls
 {
-    public partial class CustomAction
+    public partial class SingleSignOnController
     {
         public void GetSsoDetails()
         {
@@ -34,15 +34,15 @@ namespace Tc.USD.HostedControls.SessionCustomActions
             }
             catch (FaultException<OrganizationServiceFault> ex)
             {
-                LogWriter.Log($"{this.ApplicationName} application terminated with an error::Timestamp:{ex.Detail.Timestamp}, Code: {ex.Detail.ErrorCode}::Message: {ex.Detail.Message}", System.Diagnostics.TraceEventType.Error);
+                LogWriter.Log($"{this.ApplicationName} application terminated with an error::{ex.ToString()}", System.Diagnostics.TraceEventType.Error);
             }
             catch (TimeoutException ex)
             {
-                LogWriter.Log($"{this.ApplicationName} application terminated with an error::Message: {ex.Message}::Stack Trace: {ex.StackTrace}", System.Diagnostics.TraceEventType.Error);
+                LogWriter.Log($"{this.ApplicationName} application terminated with an error::{ex.ToString()}", System.Diagnostics.TraceEventType.Error);
             }
             catch (Exception ex)
             {
-                LogWriter.Log($"{this.ApplicationName} application terminated with an error:: Message:{ex.Message}::Stack Trace:{ex.StackTrace}", System.Diagnostics.TraceEventType.Error);
+                LogWriter.Log($"{this.ApplicationName} application terminated with an error::{ex.ToString()}", System.Diagnostics.TraceEventType.Error);
             }
         }
 
@@ -65,15 +65,15 @@ namespace Tc.USD.HostedControls.SessionCustomActions
             }
             catch (FaultException<OrganizationServiceFault> ex)
             {
-                LogWriter.Log($"{this.ApplicationName} application terminated with an error::Timestamp:{ex.Detail.Timestamp}, Code: {ex.Detail.ErrorCode}::Message: {ex.Detail.Message}", System.Diagnostics.TraceEventType.Error);
+                LogWriter.Log($"{this.ApplicationName} application terminated with an error::{ex.ToString()}", System.Diagnostics.TraceEventType.Error);
             }
             catch (TimeoutException ex)
             {
-                LogWriter.Log($"{this.ApplicationName} application terminated with an error::Message: {ex.Message}::Stack Trace: {ex.StackTrace}", System.Diagnostics.TraceEventType.Error);
+                LogWriter.Log($"{this.ApplicationName} application terminated with an error::{ex.ToString()}", System.Diagnostics.TraceEventType.Error);
             }
             catch (Exception ex)
             {
-                LogWriter.Log($"{this.ApplicationName} application terminated with an error:: Message:{ex.Message}::Stack Trace:{ex.StackTrace}", System.Diagnostics.TraceEventType.Error);
+                LogWriter.Log($"{this.ApplicationName} application terminated with an error::{ex.ToString()}", System.Diagnostics.TraceEventType.Error);
             }
         }
     }

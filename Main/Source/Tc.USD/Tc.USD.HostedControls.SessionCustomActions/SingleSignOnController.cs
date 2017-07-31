@@ -2,15 +2,15 @@
 using Microsoft.Crm.UnifiedServiceDesk.Dynamics;
 using Microsoft.Uii.Csr;
 using System;
-using Tc.USD.HostedControls.SessionCustomActions.Constants;
+using Tc.Usd.HostedControls.Constants;
 
 
-namespace Tc.USD.HostedControls.SessionCustomActions
+namespace Tc.Usd.HostedControls
 {
-    public partial class CustomAction: DynamicsBaseHostedControl
+    public partial class SingleSignOnController : DynamicsBaseHostedControl
     {
         public TraceLogger LogWriter = null;
-        public CustomAction(Guid appID, string appName, string initString)
+        public SingleSignOnController(Guid appID, string appName, string initString)
             : base(appID, appName, initString)
         {
             LogWriter = new TraceLogger(DataKey.DiagnosticSource);
@@ -24,13 +24,12 @@ namespace Tc.USD.HostedControls.SessionCustomActions
             {
                 DoActionsOnOpenOwr(args);
             }
-          
         }
 
         public void DoActionsOnOpenOwr(RequestActionEventArgs args)
         {
-            Dispatcher.Invoke(this.GetSsoDetails);
-            Dispatcher.Invoke(this.GetOwrSsoServiceUrl);
+            Dispatcher.InvokeAsync(this.GetSsoDetails);
+            Dispatcher.InvokeAsync(this.GetOwrSsoServiceUrl);
         }
     }
 }

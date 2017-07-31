@@ -1,8 +1,8 @@
-﻿namespace Tc.USD.HostedControls.SessionCustomActions.Constants
+﻿namespace Tc.Usd.HostedControls.Constants
 {
     public class ActionName
     {
-        public const string OpenOwr = "Tc.Usd.SessionCustomActions.Custom.OpenOwr";
+        public const string OpenOwr = "Tc.Usd.SingleSignOnController.Custom.OpenOwr"; 
     }
 
     public class DataKey
