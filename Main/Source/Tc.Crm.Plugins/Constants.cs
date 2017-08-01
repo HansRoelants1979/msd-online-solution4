@@ -74,7 +74,24 @@ namespace Tc.Crm.Plugins.Attributes
     public static class Case
     {
         public const string SurveyId = "tc_surveyid";
+        public const string SourceMarketId = "tc_sourcemarketid";
+        public const string BookingId = "tc_bookingid";
+        public const string CustomerId = "customerid";
+        public const string Owner = "ownerid";
     }
+
+    public static class Customer
+    {
+        public const string SourceMarketId = "tc_sourcemarketid";
+        public const string Owner = "ownerid";
+    }
+
+    public static class Country
+    {
+        public static string SourceMarketBusinessUnitId = "tc_sourcemarketbusinessunitid";
+    }
+
+  
 }
 namespace Tc.Crm.Plugins
 {
@@ -94,7 +111,7 @@ namespace Tc.Crm.Plugins
         public const string RoleTcIdRep = "Tc.Ids.Rep";
     }
 
-    public static class ValidationMessages{
+    public static class ValidationMessages {
         public const string ContextIsNull = "Context is null.";
         public const string TraceIsNull = "Trace is null.";
         public const string OrganizationServiceIsNull = "Organization service is null.";
@@ -123,6 +140,7 @@ namespace Tc.Crm.Plugins
         public const string Associate = "Associate";
         public const string Create = "Create";
         public const string Disassociate = "Disassociate";
+        public const string Update = "Update";
     }
 
     public static class CacheBucket
@@ -138,8 +156,13 @@ namespace Tc.Crm.Plugins
     public static class InputParameters
     {
         public const string Target = "Target";
-        public const string Relationship  = "Relationship";
+        public const string Relationship = "Relationship";
         public const string RelatedEntities = "RelatedEntities";
+    }
+
+    public static class PreEntityImages
+    {
+        public const string CasePreImage = "CasePreImage";
     }
 
     public static class Entities
@@ -153,6 +176,7 @@ namespace Tc.Crm.Plugins
         public const string CacheRequest = "tc_cacherequest";
         public const string SurveyResponse = "tc_surveyresponse";
         public const string Case = "incident";
+        public const string Customer = "contact";
     }
 
     public static class Relationships
