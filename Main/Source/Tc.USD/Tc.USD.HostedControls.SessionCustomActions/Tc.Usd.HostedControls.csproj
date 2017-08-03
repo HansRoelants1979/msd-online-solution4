@@ -37,78 +37,154 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="microsoft.crm.sdk.proxy">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(SolutionDir)\packages\Microsoft.CrmSdk.CoreAssemblies.7.1.0\lib\net45\microsoft.crm.sdk.proxy.dll</HintPath>
+    <Reference Include="Microsoft.Crm.Sdk.Proxy, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CrmSdk.CoreAssemblies.8.2.0.2\lib\net452\Microsoft.Crm.Sdk.Proxy.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Crm.UnifiedServiceDesk.BaseControl">
-      <HintPath>$(SolutionDir)\packages\Microsoft.CrmSdk.USD.CoreAssemblies.7.1.0\lib\net45\Microsoft.Crm.UnifiedServiceDesk.BaseControl.dll</HintPath>
+    <Reference Include="Microsoft.Crm.UnifiedServiceDesk.BaseControl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CrmSdk.USD.CoreAssemblies.8.2.0.2\lib\net452\Microsoft.Crm.UnifiedServiceDesk.BaseControl.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Crm.UnifiedServiceDesk.CommonUtility">
-      <HintPath>$(SolutionDir)\packages\Microsoft.CrmSdk.USD.CoreAssemblies.7.1.0\lib\net45\Microsoft.Crm.UnifiedServiceDesk.CommonUtility.dll</HintPath>
+    <Reference Include="Microsoft.Crm.UnifiedServiceDesk.CommonUtility, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CrmSdk.USD.CoreAssemblies.8.2.0.2\lib\net452\Microsoft.Crm.UnifiedServiceDesk.CommonUtility.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Crm.UnifiedServiceDesk.Dynamics">
-      <HintPath>$(SolutionDir)\packages\Microsoft.CrmSdk.USD.CoreAssemblies.7.1.0\lib\net45\Microsoft.Crm.UnifiedServiceDesk.Dynamics.dll</HintPath>
+    <Reference Include="Microsoft.Crm.UnifiedServiceDesk.Dynamics, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CrmSdk.USD.CoreAssemblies.8.2.0.2\lib\net452\Microsoft.Crm.UnifiedServiceDesk.Dynamics.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Uii.AifServices">
-      <HintPath>$(SolutionDir)\packages\Microsoft.CrmSdk.UII.CommonAssemblies.7.1.0\lib\net45\Microsoft.Uii.AifServices.dll</HintPath>
+    <Reference Include="Microsoft.IdentityModel, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.IdentityModel.6.1.7600.16394\lib\net35\Microsoft.IdentityModel.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Uii.Common">
-      <HintPath>$(SolutionDir)\packages\Microsoft.CrmSdk.UII.CommonAssemblies.7.1.0\lib\net45\Microsoft.Uii.Common.dll</HintPath>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory, Version=2.22.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.2.22.302111727\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Uii.Csr.Core">
-      <HintPath>$(SolutionDir)\packages\Microsoft.CrmSdk.UII.CommonAssemblies.7.1.0\lib\net45\Microsoft.Uii.Csr.Core.dll</HintPath>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms, Version=2.22.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.2.22.302111727\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Uii.Desktop.Core">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(SolutionDir)\packages\Microsoft.CrmSdk.UII.DesktopAssemblies.7.1.0\lib\net45\Microsoft.Uii.Desktop.Core.dll</HintPath>
+    <Reference Include="Microsoft.Uii.AifServices, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CrmSdk.UII.CommonAssemblies.8.2.0.2\lib\net452\Microsoft.Uii.AifServices.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Uii.Desktop.Cti.Core">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(SolutionDir)\packages\Microsoft.CrmSdk.UII.DesktopAssemblies.7.1.0\lib\net45\Microsoft.Uii.Desktop.Cti.Core.dll</HintPath>
+    <Reference Include="Microsoft.Uii.Common, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CrmSdk.UII.CommonAssemblies.8.2.0.2\lib\net452\Microsoft.Uii.Common.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Uii.Desktop.SessionManager">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(SolutionDir)\packages\Microsoft.CrmSdk.UII.DesktopAssemblies.7.1.0\lib\net45\Microsoft.Uii.Desktop.SessionManager.dll</HintPath>
+    <Reference Include="Microsoft.Uii.Common.Configuration, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CrmSdk.UII.CommonAssemblies.8.2.0.2\lib\net452\Microsoft.Uii.Common.Configuration.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Uii.Desktop.UI.Controls">
-      <HintPath>$(SolutionDir)\packages\Microsoft.CrmSdk.UII.DesktopAssemblies.7.1.0\lib\net45\Microsoft.Uii.Desktop.UI.Controls.dll</HintPath>
+    <Reference Include="Microsoft.Uii.Common.Listeners, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CrmSdk.UII.CommonAssemblies.8.2.0.2\lib\net452\Microsoft.Uii.Common.Listeners.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Uii.Desktop.UI.Controls.Wpf">
-      <HintPath>$(SolutionDir)\packages\Microsoft.CrmSdk.UII.DesktopAssemblies.7.1.0\lib\net45\Microsoft.Uii.Desktop.UI.Controls.Wpf.dll</HintPath>
+    <Reference Include="Microsoft.Uii.Common.Logging, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CrmSdk.UII.CommonAssemblies.8.2.0.2\lib\net452\Microsoft.Uii.Common.Logging.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Uii.Desktop.UI.Core">
-      <HintPath>$(SolutionDir)\packages\Microsoft.CrmSdk.UII.DesktopAssemblies.7.1.0\lib\net45\Microsoft.Uii.Desktop.UI.Core.dll</HintPath>
+    <Reference Include="Microsoft.Uii.Common.Logging.Providers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CrmSdk.UII.CommonAssemblies.8.2.0.2\lib\net452\Microsoft.Uii.Common.Logging.Providers.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Uii.Desktop.UI.Wpf">
-      <HintPath>$(SolutionDir)\packages\Microsoft.CrmSdk.UII.DesktopAssemblies.7.1.0\lib\net45\Microsoft.Uii.Desktop.UI.Wpf.dll</HintPath>
+    <Reference Include="Microsoft.Uii.Common.Providers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CrmSdk.UII.CommonAssemblies.8.2.0.2\lib\net452\Microsoft.Uii.Common.Providers.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Uii.Practices.CompositeUI">
-      <HintPath>$(SolutionDir)\packages\Microsoft.CrmSdk.UII.DesktopAssemblies.7.1.0\lib\net45\Microsoft.Uii.Practices.CompositeUI.dll</HintPath>
+    <Reference Include="Microsoft.Uii.Csr.Browser.Web, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CrmSdk.UII.CommonAssemblies.8.2.0.2\lib\net452\Microsoft.Uii.Csr.Browser.Web.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Uii.Practices.CompositeUI.Windows">
-      <HintPath>$(SolutionDir)\packages\Microsoft.CrmSdk.UII.DesktopAssemblies.7.1.0\lib\net45\Microsoft.Uii.Practices.CompositeUI.Windows.dll</HintPath>
+    <Reference Include="Microsoft.Uii.Csr.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CrmSdk.UII.CommonAssemblies.8.2.0.2\lib\net452\Microsoft.Uii.Csr.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="microsoft.xrm.sdk">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(SolutionDir)\packages\Microsoft.CrmSdk.CoreAssemblies.7.1.0\lib\net45\microsoft.xrm.sdk.dll</HintPath>
+    <Reference Include="Microsoft.Uii.Csr.Win32Api, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CrmSdk.UII.CommonAssemblies.8.2.0.2\lib\net452\Microsoft.Uii.Csr.Win32Api.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Xrm.Sdk.Deployment">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(SolutionDir)\packages\Microsoft.CrmSdk.Deployment.7.1.0\lib\net45\Microsoft.Xrm.Sdk.Deployment.dll</HintPath>
+    <Reference Include="Microsoft.Uii.Desktop.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CrmSdk.UII.DesktopAssemblies.8.2.0.2\lib\net452\Microsoft.Uii.Desktop.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="microsoft.xrm.sdk.workflow">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(SolutionDir)\packages\Microsoft.CrmSdk.Workflow.7.1.0\lib\net45\microsoft.xrm.sdk.workflow.dll</HintPath>
+    <Reference Include="Microsoft.Uii.Desktop.Cti.Controls, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CrmSdk.UII.DesktopAssemblies.8.2.0.2\lib\net452\Microsoft.Uii.Desktop.Cti.Controls.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Xrm.Tooling.Connector">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(SolutionDir)\packages\Microsoft.CrmSdk.XrmTooling.CoreAssembly.7.1.0\lib\net45\Microsoft.Xrm.Tooling.Connector.dll</HintPath>
+    <Reference Include="Microsoft.Uii.Desktop.Cti.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CrmSdk.UII.DesktopAssemblies.8.2.0.2\lib\net452\Microsoft.Uii.Desktop.Cti.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Uii.Desktop.SessionManager, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CrmSdk.UII.DesktopAssemblies.8.2.0.2\lib\net452\Microsoft.Uii.Desktop.SessionManager.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Uii.Desktop.UI.Controls, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CrmSdk.UII.DesktopAssemblies.8.2.0.2\lib\net452\Microsoft.Uii.Desktop.UI.Controls.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Uii.Desktop.UI.Controls.Wpf, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CrmSdk.UII.DesktopAssemblies.8.2.0.2\lib\net452\Microsoft.Uii.Desktop.UI.Controls.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Uii.Desktop.UI.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CrmSdk.UII.DesktopAssemblies.8.2.0.2\lib\net452\Microsoft.Uii.Desktop.UI.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Uii.Desktop.UI.Wpf, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CrmSdk.UII.DesktopAssemblies.8.2.0.2\lib\net452\Microsoft.Uii.Desktop.UI.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Uii.Practices.CompositeUI, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CrmSdk.UII.DesktopAssemblies.8.2.0.2\lib\net452\Microsoft.Uii.Practices.CompositeUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Uii.Practices.CompositeUI.Windows, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CrmSdk.UII.DesktopAssemblies.8.2.0.2\lib\net452\Microsoft.Uii.Practices.CompositeUI.Windows.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Uii.Practices.CompositeUI.WinForms, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CrmSdk.UII.DesktopAssemblies.8.2.0.2\lib\net452\Microsoft.Uii.Practices.CompositeUI.WinForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Uii.Practices.ObjectBuilder, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CrmSdk.UII.DesktopAssemblies.8.2.0.2\lib\net452\Microsoft.Uii.Practices.ObjectBuilder.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xrm.Sdk, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CrmSdk.CoreAssemblies.8.2.0.2\lib\net452\Microsoft.Xrm.Sdk.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xrm.Sdk.Deployment, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CrmSdk.Deployment.8.2.0\lib\net45\Microsoft.Xrm.Sdk.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xrm.Sdk.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CrmSdk.Workflow.8.2.0\lib\net45\Microsoft.Xrm.Sdk.Workflow.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xrm.Tooling.Connector, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CrmSdk.XrmTooling.CoreAssembly.8.2.0.5\lib\net452\Microsoft.Xrm.Tooling.Connector.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Activities" />
+    <Reference Include="System.Activities.Presentation" />
     <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.IdentityModel" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Workflow.Activities" />
+    <Reference Include="System.Workflow.ComponentModel" />
+    <Reference Include="System.Workflow.Runtime" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />

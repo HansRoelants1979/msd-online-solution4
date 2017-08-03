@@ -1,9 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
 using System.ServiceModel;
+using System.ServiceModel.Description;
+using Microsoft.Crm.UnifiedServiceDesk.Dynamics;
+using Microsoft.Crm.UnifiedServiceDesk.Dynamics.EntitySearch;
+using Microsoft.Crm.UnifiedServiceDesk.Dynamics.Interfaces;
+using Microsoft.Crm.UnifiedServiceDesk.Dynamics.Utilities;
+using Microsoft.Uii.AifServices;
+using Microsoft.Uii.Csr;
+using Microsoft.Xrm.Sdk.Client;
+using Microsoft.Xrm.Sdk.WebServiceClient;
+using Microsoft.Xrm.Tooling.Connector;
 using Tc.Usd.HostedControls.Constants;
 
 namespace Tc.Usd.HostedControls
@@ -22,7 +34,9 @@ namespace Tc.Usd.HostedControls
             {
                 Query = query
             };
-            var response = (RetrieveMultipleResponse)this._client.CrmInterface.ExecuteCrmOrganizationRequest(req, "Requesting SSO Details");
+            var response =
+                (RetrieveMultipleResponse)
+                this._client.CrmInterface.ExecuteCrmOrganizationRequest(req, "Requesting SSO Details");
             try
             {
                 var login = response.EntityCollection.Entities.FirstOrDefault();
@@ -34,47 +48,161 @@ namespace Tc.Usd.HostedControls
             }
             catch (FaultException<OrganizationServiceFault> ex)
             {
-                LogWriter.Log($"{this.ApplicationName} application terminated with an error::{ex.ToString()}", System.Diagnostics.TraceEventType.Error);
+                LogWriter.Log($"{this.ApplicationName} application terminated with an error::{ex.ToString()}",
+                    System.Diagnostics.TraceEventType.Error);
             }
             catch (TimeoutException ex)
             {
-                LogWriter.Log($"{this.ApplicationName} application terminated with an error::{ex.ToString()}", System.Diagnostics.TraceEventType.Error);
+                LogWriter.Log($"{this.ApplicationName} application terminated with an error::{ex.ToString()}",
+                    System.Diagnostics.TraceEventType.Error);
             }
             catch (Exception ex)
             {
-                LogWriter.Log($"{this.ApplicationName} application terminated with an error::{ex.ToString()}", System.Diagnostics.TraceEventType.Error);
+                LogWriter.Log($"{this.ApplicationName} application terminated with an error::{ex.ToString()}",
+                    System.Diagnostics.TraceEventType.Error);
             }
         }
 
         public void GetOwrSsoServiceUrl()
         {
+            var owrUrl = GetConfigValue(DataKey.OwrUrlConfigName);
+            LogWriter.Log($"Retrieved {DataKey.OwrUrlConfigName} result: {owrUrl}",
+                System.Diagnostics.TraceEventType.Verbose);
+        }
+
+        public void GetPrivateInfo()
+        {
+            var impersonationId = GetConfigValue(DataKey.ImpersonationIdConfigName);
+            if (impersonationId != null)
+            {
+                LogWriter.Log($"Retrieved {DataKey.ImpersonationIdConfigName} result: {impersonationId}",
+                    System.Diagnostics.TraceEventType.Verbose);
+                var privateKey = GetPrivateInfo(DataKey.JwtPrivateKeyConfigName, impersonationId);
+                if (privateKey != null)
+                {
+                    LogWriter.Log(
+                        $"Retrieved {DataKey.JwtPrivateKeyConfigName} result {DataKey.JwtPrivateKeyConfigName} is not null",
+                        System.Diagnostics.TraceEventType.Verbose);
+                }
+            }
+        }
+
+        private string GetConfigValue(string configName)
+        {
             var query = new QueryByAttribute("tc_configuration")
             {
                 ColumnSet = new ColumnSet("tc_value")
             };
-            query.AddAttributeValue("tc_name", DataKey.OwrUrlConfigName);
+            query.AddAttributeValue("tc_name", configName);
+
             var req = new RetrieveMultipleRequest
             {
                 Query = query
             };
             try
-            { 
-            var response = (RetrieveMultipleResponse)this._client.CrmInterface.ExecuteCrmOrganizationRequest(req, "Requesting SSO Service URL");
-            var url = response.EntityCollection.Entities.FirstOrDefault()?.GetAttributeValue<string>("tc_value");
-            LogWriter.Log($"Requesting SSO Service URL result: {url}", System.Diagnostics.TraceEventType.Verbose);
+            {
+                var response =
+                    (RetrieveMultipleResponse)
+                    this._client.CrmInterface.ExecuteCrmOrganizationRequest(req,
+                        $"Requesting {configName}");
+                var configValue =
+                    response.EntityCollection.Entities.FirstOrDefault()?.GetAttributeValue<string>("tc_value");
+                return configValue;
             }
             catch (FaultException<OrganizationServiceFault> ex)
             {
-                LogWriter.Log($"{this.ApplicationName} application terminated with an error::{ex.ToString()}", System.Diagnostics.TraceEventType.Error);
+                LogWriter.Log($"{this.ApplicationName} application terminated with an error::{ex.ToString()}",
+                    System.Diagnostics.TraceEventType.Error);
             }
             catch (TimeoutException ex)
             {
-                LogWriter.Log($"{this.ApplicationName} application terminated with an error::{ex.ToString()}", System.Diagnostics.TraceEventType.Error);
+                LogWriter.Log($"{this.ApplicationName} application terminated with an error::{ex.ToString()}",
+                    System.Diagnostics.TraceEventType.Error);
             }
             catch (Exception ex)
             {
-                LogWriter.Log($"{this.ApplicationName} application terminated with an error::{ex.ToString()}", System.Diagnostics.TraceEventType.Error);
+                LogWriter.Log($"{this.ApplicationName} application terminated with an error::{ex.ToString()}",
+                    System.Diagnostics.TraceEventType.Error);
             }
+            return null;
+        }
+
+        private string GetPrivateInfo(string configName, string impersonationId)
+        {
+
+            var query = new QueryByAttribute("tc_secureconfiguration")
+            {
+                ColumnSet = new ColumnSet("tc_value")
+            };
+            query.AddAttributeValue("tc_name", configName);
+            try
+            {
+                var conn = this._client.CrmInterface;
+                OrganizationWebProxyClient client = conn.OrganizationWebProxyClient;
+                var systemUserId = GetSystemUserId(client, impersonationId);
+                if (systemUserId != Guid.Empty)
+                {
+                    client.CallerId = systemUserId;
+                }
+                var privateInfo = client.RetrieveMultiple(query);
+                LogWriter.Log($"GetPrivateInfo count entities {privateInfo.Entities.Count}");
+                var config = privateInfo.Entities?.FirstOrDefault();
+                if (config != null)
+                {
+                    var configValue = config.GetAttributeValue<string>("tc_value");
+                    return configValue;
+                }
+            }
+            catch (FaultException<OrganizationServiceFault> ex)
+            {
+                LogWriter.Log($"{this.ApplicationName} application terminated with an error::{ex.ToString()}",
+                    System.Diagnostics.TraceEventType.Error);
+            }
+            catch (TimeoutException ex)
+            {
+                LogWriter.Log($"{this.ApplicationName} application terminated with an error::{ex.ToString()}",
+                    System.Diagnostics.TraceEventType.Error);
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log($"{this.ApplicationName} application terminated with an error::{ex.ToString()}",
+                    System.Diagnostics.TraceEventType.Error);
+            }
+            return null;
+        }
+
+        private Guid GetSystemUserId(OrganizationWebProxyClient client, string impersonationId)
+        {
+            QueryExpression query = new QueryExpression("systemuser");
+            FilterExpression filter = new FilterExpression(LogicalOperator.And);
+
+            ConditionExpression byEmail = new ConditionExpression("domainname", ConditionOperator.Equal, impersonationId);
+            filter.Conditions.Add(byEmail);
+
+            query.Criteria.Filters.Add(filter);
+            query.ColumnSet = new ColumnSet(true);
+            try
+            {
+                var activeUsers = client.RetrieveMultiple(query);
+                return activeUsers?[0]?.Id ?? Guid.Empty;
+            }
+            catch (FaultException<OrganizationServiceFault> ex)
+            {
+                LogWriter.Log($"{this.ApplicationName} application terminated with an error::{ex.ToString()}",
+                    System.Diagnostics.TraceEventType.Error);
+            }
+            catch (TimeoutException ex)
+            {
+                LogWriter.Log($"{this.ApplicationName} application terminated with an error::{ex.ToString()}",
+                    System.Diagnostics.TraceEventType.Error);
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log($"{this.ApplicationName} application terminated with an error::{ex.ToString()}",
+                    System.Diagnostics.TraceEventType.Error);
+            }
+            return Guid.Empty;
         }
     }
-}
+}  
+

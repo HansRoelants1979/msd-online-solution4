@@ -2,8 +2,8 @@
 using Microsoft.Crm.UnifiedServiceDesk.Dynamics;
 using Microsoft.Uii.Csr;
 using System;
+using Microsoft.Xrm.Sdk.WebServiceClient;
 using Tc.Usd.HostedControls.Constants;
-
 
 namespace Tc.Usd.HostedControls
 {
@@ -14,7 +14,6 @@ namespace Tc.Usd.HostedControls
             : base(appID, appName, initString)
         {
             LogWriter = new TraceLogger(DataKey.DiagnosticSource);
-
         }
         protected override void DoAction(Microsoft.Uii.Csr.RequestActionEventArgs args)
         {
@@ -28,8 +27,10 @@ namespace Tc.Usd.HostedControls
 
         public void DoActionsOnOpenOwr(RequestActionEventArgs args)
         {
-            Dispatcher.InvokeAsync(this.GetSsoDetails);
-            Dispatcher.InvokeAsync(this.GetOwrSsoServiceUrl);
+            Dispatcher.Invoke(this.GetSsoDetails);
+            Dispatcher.Invoke(this.GetOwrSsoServiceUrl);
+            Dispatcher.Invoke(this.GetPrivateInfo);
         }
     }
 }
+
