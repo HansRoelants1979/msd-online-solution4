@@ -2,7 +2,6 @@
 using Microsoft.Crm.UnifiedServiceDesk.Dynamics;
 using Microsoft.Uii.Csr;
 using System;
-using Microsoft.Xrm.Sdk.WebServiceClient;
 using Tc.Usd.HostedControls.Constants;
 
 namespace Tc.Usd.HostedControls

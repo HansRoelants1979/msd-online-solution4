@@ -1,21 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
 using System.ServiceModel;
-using System.ServiceModel.Description;
-using Microsoft.Crm.UnifiedServiceDesk.Dynamics;
-using Microsoft.Crm.UnifiedServiceDesk.Dynamics.EntitySearch;
-using Microsoft.Crm.UnifiedServiceDesk.Dynamics.Interfaces;
-using Microsoft.Crm.UnifiedServiceDesk.Dynamics.Utilities;
-using Microsoft.Uii.AifServices;
-using Microsoft.Uii.Csr;
-using Microsoft.Xrm.Sdk.Client;
 using Microsoft.Xrm.Sdk.WebServiceClient;
-using Microsoft.Xrm.Tooling.Connector;
 using Tc.Usd.HostedControls.Constants;
 
 namespace Tc.Usd.HostedControls
