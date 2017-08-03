@@ -25,7 +25,7 @@ namespace Tc.Crm.Plugins.Case.BusinessLogic
         private bool IsContextValid()
         {
             if (!context.MessageName.Equals(Messages.Create, StringComparison.OrdinalIgnoreCase) && !context.MessageName.Equals(Messages.Update, StringComparison.OrdinalIgnoreCase)) return false;
-            if (context.Stage != (int)PluginStage.Prevalidation && context.Stage != (int)PluginStage.Postoperation) return false;
+            if (context.Stage != (int)PluginStage.Postoperation) return false;
             if (context.PrimaryEntityName != Entities.Case) return false;
             return true;
         }
@@ -61,7 +61,7 @@ namespace Tc.Crm.Plugins.Case.BusinessLogic
             if (teamId == Guid.Empty) return;
             if (context.MessageName.Equals(Messages.Create, StringComparison.OrdinalIgnoreCase))
             {
-                SetCaseOwner(incident, teamId);
+                UpdateCaseOwner(context.PrimaryEntityId, teamId);
                 UpdateCustomer(incident, teamId);
             }
             else
@@ -84,7 +84,7 @@ namespace Tc.Crm.Plugins.Case.BusinessLogic
             {
                 bookingId = ((EntityReference)incident.Attributes[Attributes.Case.BookingId]).Id;
             }
-            else if (context.PreEntityImages.Contains(PreEntityImages.CasePreImage) && context.PreEntityImages[PreEntityImages.CasePreImage] != null)
+            else if (context.PreEntityImages != null && context.PreEntityImages.Contains(PreEntityImages.CasePreImage) && context.PreEntityImages[PreEntityImages.CasePreImage] != null)
             {
                 var preImageCase = context.PreEntityImages[PreEntityImages.CasePreImage];
                 if (preImageCase.Attributes.Contains(Attributes.Case.BookingId) && preImageCase.Attributes[Attributes.Case.BookingId] != null)
@@ -112,14 +112,17 @@ namespace Tc.Crm.Plugins.Case.BusinessLogic
         }
 
         /// <summary>
-        /// To set hotel Team as owner
+        /// To update hotel Team as owner for case
         /// </summary>
-        /// <param name="customer"></param>
-        private void SetCaseOwner(Entity incident, Guid teamId)
+        /// <param name="incidentId"></param>
+        /// <param name="teamId"></param>
+        private void UpdateCaseOwner(Guid incidentId, Guid teamId)
         {
-            trace.Trace("SetOwner - Start");           
+            trace.Trace("UpdateCaseOwner - Start");
+            var incident = new Entity(Entities.Case, incidentId);
             incident.Attributes[Attributes.Case.Owner] = new EntityReference(Entities.Team, teamId);
-            trace.Trace("SetOwner - End");
+            service.Update(incident);
+            trace.Trace("UpdateCaseOwner - End");
         }
 
         /// <summary>

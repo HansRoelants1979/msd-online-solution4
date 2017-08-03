@@ -5,18 +5,16 @@ using Tc.Crm.Plugins.Case.BusinessLogic;
 
 namespace Tc.Crm.Plugins.Case
 {
-    public class PostCaseUpdateAssignHotelTeamAsOwner : IPlugin
+    public class PostCaseCreateAsyncAssignHotelTeamAsOwner : IPlugin
     {
         /// <summary>
-        /// Description: On case post update, update child hotel team as owner for customer record associated with case
-        /// Message: Update
+        /// Description: On case pre create set child hotel team as owner for case and customer record associated with case
+        /// Message: Create
         /// Primary Entity: incident
-        /// Filtering Attributes: customerid
         /// Run in user's context: Calling User
         /// Pipeline Stage: Post-operation
-        /// Execution Mode: Synchronous
+        /// Execution Mode: Asynchronous
         /// Deployment: Server
-        /// Pre Image: CasePreImage (tc_bookingid)
         /// </summary>
         /// <param name="serviceProvider"></param>
         public void Execute(IServiceProvider serviceProvider)
@@ -27,10 +25,10 @@ namespace Tc.Crm.Plugins.Case
             IOrganizationService service = factory.CreateOrganizationService(context.UserId);
             try
             {
-                trace.Trace("Begin - PostCaseUpdateAssignHotelTeamAsOwner");
+                trace.Trace("Begin - PreCaseValidateSetHotelTeamAsOwner");
                 AssignHotelTeamAsOwner ownerService = new AssignHotelTeamAsOwner(context, trace, service);
                 ownerService.DoActions();
-                trace.Trace("End - PostCaseUpdateAssignHotelTeamAsOwner");
+                trace.Trace("End - PreCaseValidateSetHotelTeamAsOwner");
             }
             catch (FaultException<OrganizationServiceFault> ex)
             {
