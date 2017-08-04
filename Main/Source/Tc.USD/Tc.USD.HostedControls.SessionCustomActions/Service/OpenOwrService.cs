@@ -4,6 +4,7 @@ using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
 using System.ServiceModel;
+using Microsoft.Xrm.Sdk.Client;
 using Microsoft.Xrm.Sdk.WebServiceClient;
 using Tc.Usd.HostedControls.Constants;
 
@@ -127,7 +128,7 @@ namespace Tc.Usd.HostedControls
             try
             {
                 var conn = this._client.CrmInterface;
-                OrganizationWebProxyClient client = conn.OrganizationWebProxyClient;
+                OrganizationServiceProxy client = conn.OrganizationServiceProxy;
                 var systemUserId = GetSystemUserId(client, impersonationId);
                 if (systemUserId != Guid.Empty)
                 {
@@ -160,7 +161,7 @@ namespace Tc.Usd.HostedControls
             return null;
         }
 
-        private Guid GetSystemUserId(OrganizationWebProxyClient client, string impersonationId)
+        private Guid GetSystemUserId(OrganizationServiceProxy client, string impersonationId)
         {
             QueryExpression query = new QueryExpression("systemuser");
             FilterExpression filter = new FilterExpression(LogicalOperator.And);
