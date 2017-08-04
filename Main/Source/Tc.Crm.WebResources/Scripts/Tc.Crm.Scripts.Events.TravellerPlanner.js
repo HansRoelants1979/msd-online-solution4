@@ -33,8 +33,13 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
 
     var Attributes = {
         Validation: "tc_validation",
+        StateCode : "statecode",
+        CustomerId: "customerid",
+        ReviewDate: "tc_reviewdate",
     }
-
+    var StateCode = {
+        Open : 0,
+    }
     var getUserRoles = function () {
         var enable = false;
         var UserRole = window.parent.Xrm.Page.context.getUserRoles();
@@ -91,6 +96,24 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
         };
         req.send(JSON.stringify(entity));
     }
+    var enableOWRorLimeButton = function ()
+    {
+        var enable = false;
+        if (window.IsUSD != true) return enable;       
+        if (Xrm.Page.getAttribute(Attributes.StateCode).getValue() != StateCode.Open) return enable;        
+        if (Xrm.Page.getAttribute(Attributes.CustomerId).getValue() == null) return enable;        
+           return enable = true;        
+
+    }
+    var reviewDateOnChange = function () {
+
+        Xrm.Page.getControl(Attributes.ReviewDate).clearNotification();
+        var reviewDateValueAttr = getControlValue(Attributes.ReviewDate);
+        var isPastDate = Tc.Crm.Scripts.Utils.Validation.IsPastDate(reviewDateValueAttr);
+        if (isPastDate)
+            Xrm.Page.getControl(Attributes.DueDate).setNotification("Review Date cannot be set in the past. Please choose a future date.");
+
+    }
     function formatEntityId(id) {
         return id !== null ? id.replace("{", "").replace("}", "") : null;
     }
@@ -106,6 +129,13 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
         },        
         EnableDisableValidateButton: function () {            
             return enableValidateRibbonButton();
+        },
+        EnableDisableOWRorLimeButton: function () {
+            return enableOWRorLimeButton();
+        },
+        OnReviewDateFieldChange: function () {
+            reviewDateOnChange();
         }
+        
     };
 })();

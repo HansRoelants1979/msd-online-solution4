@@ -41,15 +41,13 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
         Emailaddress3: "emailaddress3",
     }    
     var dueDateOnChange = function () {
-        var today = new Date();
-        today.setHours(0, 0, 0, 0);
-        var dueDateValueAttr = getControlValue(Attributes.DueDate);
-        if (dueDateValueAttr == null) return;      
-            dueDateValueAttr.setHours(0, 0, 0, 0);
-            if (dueDateValueAttr < today)
+
+         Xrm.Page.getControl(Attributes.DueDate).clearNotification();
+         var dueDateValueAttr = getControlValue(Attributes.DueDate);         
+         var isPastDate = Tc.Crm.Scripts.Utils.Validation.IsPastDate(dueDateValueAttr);
+         if (isPastDate)
                 Xrm.Page.getControl(Attributes.DueDate).setNotification("Due Date cannot be set in the past. Please choose a future date.");
-            else
-                Xrm.Page.getControl(Attributes.DueDate).clearNotification();
+            
     }
     var contactMethodOnChange = function () {
         Xrm.Page.getControl(Attributes.ContactPhone).clearNotification();
