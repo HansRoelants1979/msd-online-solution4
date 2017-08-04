@@ -26,9 +26,9 @@ namespace Tc.Usd.HostedControls
 
         public void DoActionsOnOpenOwr(RequestActionEventArgs args)
         {
-            Dispatcher.Invoke(this.GetSsoDetails);
-            Dispatcher.Invoke(this.GetOwrSsoServiceUrl);
-            Dispatcher.Invoke(this.GetPrivateInfo);
+            Dispatcher.InvokeAsync(this.GetSsoDetails);
+            Dispatcher.InvokeAsync(this.GetOwrSsoServiceUrl);
+            Dispatcher.InvokeAsync(this.GetPrivateInfo);
         }
     }
 }
