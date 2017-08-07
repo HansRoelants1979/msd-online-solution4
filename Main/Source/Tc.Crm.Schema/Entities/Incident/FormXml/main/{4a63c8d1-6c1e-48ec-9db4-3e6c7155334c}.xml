@@ -194,6 +194,24 @@
                       <control disabled="false" id="tc_mandatoryconditionsmet" uniqueid="{19e65136-1e0c-1c62-3416-366b0c77b608}" datafieldname="tc_mandatoryconditionsmet" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" />
                     </cell>
                   </row>
+                  <row>
+                    <cell id="{ee698207-a0dc-5eb9-4334-0a1ab104c011}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Escalation Notes" languagecode="1033" />
+                        <label description="Eskalationshinweise" languagecode="1031" />
+                      </labels>
+                      <control id="tc_escalationnotes" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="tc_escalationnotes" disabled="false" uniqueid="{1b834330-1b99-0a18-67c8-b1158d27b85d}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{29270ad0-8cd5-3c8e-95ee-17d7bdad5a57}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Escalate to Customer Relations" languagecode="1033" />
+                        <label description="Eskalieren zu den Kundenbeziehungen" languagecode="1031" />
+                      </labels>
+                      <control id="tc_escalatetocustomerrelations" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="tc_escalatetocustomerrelations" disabled="false" />
+                    </cell>
+                  </row>
                 </rows>
               </section>
               <section id="{2335806E-F713-402F-A9BD-6BEEEC6B8645}" name="{2335806E-F713-402F-A9BD-6BEEEC6B8645}" showlabel="true" locklevel="0" IsUserDefined="0" celllabelalignment="Left" celllabelposition="Top" labelwidth="115" showbar="true" columns="1">
@@ -500,7 +518,7 @@
           </column>
         </columns>
       </tab>
-      <tab id="{9c5799d7-ad8b-8db9-ca47-d925368330da}" name="booking_details" showlabel="true" locklevel="0" IsUserDefined="0" expanded="false">
+      <tab id="{9c5799d7-ad8b-8db9-ca47-d925368330da}" name="booking_details" showlabel="true" locklevel="0" IsUserDefined="0" expanded="true">
         <labels>
           <label description="Buchungsdetails" languagecode="1031" />
           <label description="Booking Details" languagecode="1033" />
@@ -1900,6 +1918,7 @@
       <event name="onchange" active="false" application="false" attribute="tc_departuredate">
         <Handlers>
           <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{7a64d393-2ae0-7060-2a75-764c8abde6a8}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" parameters="" />
+          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnChangeArrivalOrDepartureDates" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{3a92cc1b-49ea-9018-c4e5-a852641c3c92}" enabled="true" parameters="" passExecutionContext="true" />
         </Handlers>
       </event>
       <event name="onchange" application="false" active="false" attribute="tc_bookingtravelamount">
@@ -1927,6 +1946,11 @@
           <Handler functionName="Tc.Crm.Scripts.Events.Case.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{5a471b49-5324-12e9-81e8-5e75b5867e3d}" enabled="true" parameters="" passExecutionContext="true" />
         </Handlers>
       </event>
+      <event name="onchange" application="false" active="false" attribute="tc_arrivaldate">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnChangeArrivalOrDepartureDates" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{5ce8b955-aa06-a9e0-0a50-301c202b826e}" enabled="true" parameters="" passExecutionContext="true" />
+        </Handlers>
+      </event>
     </events>
     <clientresources>
       <internalresources>
@@ -1949,20 +1973,20 @@
             <Title Text="Knowledge Base Records" LCID="1033" />
           </Titles>
         </NavBarByRelationshipItem>
-        <NavBarByRelationshipItem Icon="/_imgs/ico_18_act.gif" Id="navActivities" Area="Info" Sequence="10" RelationshipName="Incident_ActivityPointers">
+        <NavBarByRelationshipItem RelationshipName="Incident_ActivityPointers" Id="navActivities" Icon="/_imgs/ico_18_act.gif" Sequence="10" Area="Info">
           <Privileges>
             <Privilege Entity="" Privilege="ReadActivity" />
           </Privileges>
           <Titles>
-            <Title Text="Activities" LCID="1033" />
+            <Title LCID="1033" Text="Activities" />
           </Titles>
         </NavBarByRelationshipItem>
-        <NavBarByRelationshipItem Icon="/_imgs/ico_18_history.gif" Id="navActivityHistory" Area="Info" Sequence="20" RelationshipName="Incident_ActivityPointers" ViewId="21E2B905-6FDB-470d-8517-AD69B4C01268" TitleResourceId="Tab_Label_History">
+        <NavBarByRelationshipItem RelationshipName="Incident_ActivityPointers" Id="navActivityHistory" TitleResourceId="Tab_Label_History" Icon="/_imgs/ico_18_history.gif" ViewId="21E2B905-6FDB-470d-8517-AD69B4C01268" Sequence="20" Area="Info">
           <Privileges>
             <Privilege Entity="" Privilege="ReadActivity" />
           </Privileges>
           <Titles>
-            <Title Text="Closed Activities" LCID="1033" />
+            <Title LCID="1033" Text="Closed Activities" />
           </Titles>
         </NavBarByRelationshipItem>
         <NavBarByRelationshipItem Id="navSPDocuments" Area="Service" Sequence="1001" RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navSPDocuments" Show="true">
@@ -2004,27 +2028,27 @@
       <NavBarAreas>
         <NavBarArea Id="Info">
           <Titles>
-            <Title Text="Common" LCID="1033" />
+            <Title LCID="1033" Text="Common" />
           </Titles>
         </NavBarArea>
         <NavBarArea Id="Sales">
           <Titles>
-            <Title Text="Sales" LCID="1033" />
+            <Title LCID="1033" Text="Sales" />
           </Titles>
         </NavBarArea>
         <NavBarArea Id="Service">
           <Titles>
-            <Title Text="Service" LCID="1033" />
+            <Title LCID="1033" Text="Service" />
           </Titles>
         </NavBarArea>
         <NavBarArea Id="Marketing">
           <Titles>
-            <Title Text="Marketing" LCID="1033" />
+            <Title LCID="1033" Text="Marketing" />
           </Titles>
         </NavBarArea>
         <NavBarArea Id="ProcessCenter">
           <Titles>
-            <Title Text="Process Sessions" LCID="1033" />
+            <Title LCID="1033" Text="Process Sessions" />
           </Titles>
         </NavBarArea>
       </NavBarAreas>
@@ -2262,7 +2286,7 @@
     <formLibraries>
       <Library name="tc_es6promise.js" libraryUniqueId="{6ecaacad-35c5-5421-ce82-1a0610913302}" />
       <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{13928161-02b5-a530-4ced-6e40c86c8c58}" />
-      <Library name="tc_Tc.Crm.Scripts.Library.Contact.js" libraryUniqueId="{ade46092-164c-9bc7-6d4c-64a9c084b85b}" />
+      <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{934c1188-0903-4933-8a8d-ca628e9d01ce}" />
       <Library name="tc_Tc.Crm.Scripts.Library.Case.js" libraryUniqueId="{d8ad7658-5172-9aeb-8619-4cd9b453318a}" />
       <Library name="tc_Tc.Crm.Scripts.Events.Case.js" libraryUniqueId="{b1c93c95-9273-87a7-5c8d-a3553b5ebe64}" />
     </formLibraries>

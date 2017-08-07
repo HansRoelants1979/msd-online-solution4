@@ -14,9 +14,9 @@
     <ReferencingAttributeName>ObjectId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Eindeutiger Bezeichner des Objekts, dem die Notiz zugeordnet ist." languagecode="1031" />
         <Description description="Unique identifier of the object with which the note is associated." languagecode="1033" />
         <Description description="Identificateur unique de l'objet auquel la note est associée." languagecode="1036" />
+        <Description description="Eindeutiger Bezeichner des Objekts, dem die Notiz zugeordnet ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -34,9 +34,29 @@
     <ReferencingAttributeName>RegardingObjectId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Eindeutiger Bezeichner des Objekts, dem die E-Mail zugeordnet ist." languagecode="1031" />
         <Description description="Unique identifier of the object with which the e-mail is associated." languagecode="1033" />
+        <Description description="Eindeutiger Bezeichner des Objekts, dem die E-Mail zugeordnet ist." languagecode="1031" />
         <Description description="Identificateur unique de l'objet auquel le courrier électronique est associé." languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
+  <EntityRelationship Name="campaign_opportunities">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IntroducedVersion>5.0.0.0</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>Opportunity</ReferencingEntityName>
+    <ReferencedEntityName>Campaign</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>RemoveLink</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>CampaignId</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Shows the campaign that the opportunity was created from. The ID is used for tracking the success of the campaign." languagecode="1033" />
+        <Description description="Affiche la campagne d'origine de l'opportunité. L'ID permet de suivre la réussite de la campagne." languagecode="1036" />
+        <Description description="Zeigt die Kampagne, auf deren Grundlage die Verkaufschance erstellt wurde. Die ID dient zum Nachverfolgen des Kampagnenerfolgs." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>

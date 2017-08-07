@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <EntityRelationships>
-  <EntityRelationship Name="Account_Annotation" unmodified="1" />
+  <EntityRelationship Name="Account_Annotation" />
   <EntityRelationship Name="Account_Email_EmailSender" unmodified="1" />
   <EntityRelationship Name="Account_Email_SendersAccount" unmodified="1" />
   <EntityRelationship Name="Account_Emails" />
@@ -46,6 +46,7 @@
   <EntityRelationship Name="business_unit_contacts" />
   <EntityRelationship Name="business_unit_email_activities" unmodified="1" />
   <EntityRelationship Name="business_unit_incidents" />
+  <EntityRelationship Name="business_unit_opportunities" />
   <EntityRelationship Name="business_unit_system_users" />
   <EntityRelationship Name="business_unit_tc_accounttype" />
   <EntityRelationship Name="business_unit_tc_alternativeemail" />
@@ -59,6 +60,7 @@
   <EntityRelationship Name="business_unit_tc_casecategory" />
   <EntityRelationship Name="business_unit_tc_caseline" />
   <EntityRelationship Name="business_unit_tc_casetype" />
+  <EntityRelationship Name="business_unit_tc_cluster" />
   <EntityRelationship Name="business_unit_tc_compensation" />
   <EntityRelationship Name="business_unit_tc_compensationapproval" />
   <EntityRelationship Name="business_unit_tc_compensationline" />
@@ -73,14 +75,18 @@
   <EntityRelationship Name="business_unit_tc_locationoffice" />
   <EntityRelationship Name="business_unit_tc_recovery" />
   <EntityRelationship Name="business_unit_tc_region" />
+  <EntityRelationship Name="business_unit_tc_room" />
   <EntityRelationship Name="business_unit_tc_sharer" />
+  <EntityRelationship Name="business_unit_tc_store" />
   <EntityRelationship Name="business_unit_tc_surveyresponsefeedback" />
   <EntityRelationship Name="business_unit_tc_touroperator" />
+  <EntityRelationship Name="business_unit_tc_ukregion" />
   <EntityRelationship Name="business_unit_teams" unmodified="1" />
   <EntityRelationship Name="Calendar_Annotation" unmodified="1" />
   <EntityRelationship Name="calendar_system_users" />
   <EntityRelationship Name="Campaign_Annotation" unmodified="1" />
   <EntityRelationship Name="Campaign_Emails" />
+  <EntityRelationship Name="campaign_opportunities" />
   <EntityRelationship Name="campaign_tc_assistancerequests" />
   <EntityRelationship Name="campaign_tc_followups" />
   <EntityRelationship Name="campaign_tc_surveyresponses" />
@@ -93,7 +99,7 @@
   <EntityRelationship Name="channelaccessprofile_Annotations" unmodified="1" />
   <EntityRelationship Name="Commitment_Annotation" unmodified="1" />
   <EntityRelationship Name="Competitor_Annotation" unmodified="1" />
-  <EntityRelationship Name="Contact_Annotation" unmodified="1" />
+  <EntityRelationship Name="Contact_Annotation" />
   <EntityRelationship Name="contact_as_primary_contact" />
   <EntityRelationship Name="contact_as_responsible_contact" />
   <EntityRelationship Name="contact_customer_accounts" />
@@ -141,7 +147,7 @@
   <EntityRelationship Name="Equipment_Email_EmailSender" unmodified="1" />
   <EntityRelationship Name="Fax_Annotation" unmodified="1" />
   <EntityRelationship Name="Goal_Annotation" unmodified="1" />
-  <EntityRelationship Name="Incident_Annotation" unmodified="1" />
+  <EntityRelationship Name="Incident_Annotation" />
   <EntityRelationship Name="incident_customer_accounts" />
   <EntityRelationship Name="incident_customer_contacts" />
   <EntityRelationship Name="Incident_Emails" />
@@ -202,6 +208,8 @@
   <EntityRelationship Name="lk_incident_ChildIncidentCount" />
   <EntityRelationship Name="lk_incidentbase_createdby" />
   <EntityRelationship Name="lk_incidentbase_modifiedby" />
+  <EntityRelationship Name="lk_opportunitybase_createdby" />
+  <EntityRelationship Name="lk_opportunitybase_modifiedby" />
   <EntityRelationship Name="lk_systemuserbase_createdby" />
   <EntityRelationship Name="lk_systemuserbase_modifiedby" />
   <EntityRelationship Name="lk_tc_accounttype_createdby" />
@@ -234,6 +242,8 @@
   <EntityRelationship Name="lk_tc_caseline_modifiedby" />
   <EntityRelationship Name="lk_tc_casetype_createdby" />
   <EntityRelationship Name="lk_tc_casetype_modifiedby" />
+  <EntityRelationship Name="lk_tc_cluster_createdby" />
+  <EntityRelationship Name="lk_tc_cluster_modifiedby" />
   <EntityRelationship Name="lk_tc_compensation_createdby" />
   <EntityRelationship Name="lk_tc_compensation_modifiedby" />
   <EntityRelationship Name="lk_tc_compensationapproval_createdby" />
@@ -268,12 +278,20 @@
   <EntityRelationship Name="lk_tc_recovery_modifiedby" />
   <EntityRelationship Name="lk_tc_region_createdby" />
   <EntityRelationship Name="lk_tc_region_modifiedby" />
+  <EntityRelationship Name="lk_tc_room_createdby" />
+  <EntityRelationship Name="lk_tc_room_modifiedby" />
+  <EntityRelationship Name="lk_tc_secureconfiguration_createdby" />
+  <EntityRelationship Name="lk_tc_secureconfiguration_modifiedby" />
   <EntityRelationship Name="lk_tc_sharer_createdby" />
   <EntityRelationship Name="lk_tc_sharer_modifiedby" />
+  <EntityRelationship Name="lk_tc_store_createdby" />
+  <EntityRelationship Name="lk_tc_store_modifiedby" />
   <EntityRelationship Name="lk_tc_surveyresponsefeedback_createdby" />
   <EntityRelationship Name="lk_tc_surveyresponsefeedback_modifiedby" />
   <EntityRelationship Name="lk_tc_touroperator_createdby" />
   <EntityRelationship Name="lk_tc_touroperator_modifiedby" />
+  <EntityRelationship Name="lk_tc_ukregion_createdby" />
+  <EntityRelationship Name="lk_tc_ukregion_modifiedby" />
   <EntityRelationship Name="lk_tc_whatsnext_createdby" />
   <EntityRelationship Name="lk_tc_whatsnext_modifiedby" />
   <EntityRelationship Name="lk_teambase_administratorid" unmodified="1" />
@@ -284,8 +302,10 @@
   <EntityRelationship Name="manualsla_cases" />
   <EntityRelationship Name="manualsla_contact" />
   <EntityRelationship Name="manualsla_email" unmodified="1" />
+  <EntityRelationship Name="manualsla_opportunity" />
   <EntityRelationship Name="manualsla_tc_compensationapproval" />
   <EntityRelationship Name="MobileOfflineProfile_SystemUser" />
+  <EntityRelationship Name="msdyn_opportunity_knowledgearticle" />
   <EntityRelationship Name="msdyn_postalbum_Annotations" />
   <EntityRelationship Name="msdyn_postalbum_Emails" />
   <EntityRelationship Name="msdyn_postalbum_tc_assistancerequests" />
@@ -313,12 +333,19 @@
   <EntityRelationship Name="msdyusd_uiievent_Annotations" />
   <EntityRelationship Name="msdyusd_windowroute_Annotations" />
   <EntityRelationship Name="Opportunity_Annotation" unmodified="1" />
+  <EntityRelationship Name="opportunity_customer_accounts" />
   <EntityRelationship Name="opportunity_customer_contacts" />
   <EntityRelationship Name="Opportunity_Emails" />
+  <EntityRelationship Name="opportunity_knowledgebaserecord" />
+  <EntityRelationship Name="opportunity_originating_lead" />
+  <EntityRelationship Name="opportunity_owning_user" />
+  <EntityRelationship Name="opportunity_parent_account" />
+  <EntityRelationship Name="opportunity_parent_contact" />
   <EntityRelationship Name="opportunity_tc_assistancerequests" />
   <EntityRelationship Name="opportunity_tc_followups" />
   <EntityRelationship Name="opportunity_tc_surveyresponses" />
   <EntityRelationship Name="OpportunityClose_Annotation" unmodified="1" />
+  <EntityRelationship Name="opportunitycompetitors_association" unmodified="1" />
   <EntityRelationship Name="order_customer_contacts" />
   <EntityRelationship Name="OrderClose_Annotation" unmodified="1" />
   <EntityRelationship Name="organization_system_users" />
@@ -327,12 +354,14 @@
   <EntityRelationship Name="organization_tc_compensationcalculationline" />
   <EntityRelationship Name="organization_tc_compensationcalculationmatrix" />
   <EntityRelationship Name="organization_tc_configuration" />
+  <EntityRelationship Name="organization_tc_secureconfiguration" />
   <EntityRelationship Name="organization_tc_whatsnext" />
   <EntityRelationship Name="organization_teams" unmodified="1" />
   <EntityRelationship Name="owner_accounts" />
   <EntityRelationship Name="owner_annotations" unmodified="1" />
   <EntityRelationship Name="owner_contacts" />
   <EntityRelationship Name="owner_incidents" />
+  <EntityRelationship Name="owner_opportunitys" />
   <EntityRelationship Name="owner_tc_accounttype" />
   <EntityRelationship Name="owner_tc_alternativeemail" />
   <EntityRelationship Name="owner_tc_boardbasis" />
@@ -345,6 +374,7 @@
   <EntityRelationship Name="owner_tc_casecategory" />
   <EntityRelationship Name="owner_tc_caseline" />
   <EntityRelationship Name="owner_tc_casetype" />
+  <EntityRelationship Name="owner_tc_cluster" />
   <EntityRelationship Name="owner_tc_compensation" />
   <EntityRelationship Name="owner_tc_compensationapproval" />
   <EntityRelationship Name="owner_tc_compensationline" />
@@ -359,9 +389,12 @@
   <EntityRelationship Name="owner_tc_locationoffice" />
   <EntityRelationship Name="owner_tc_recovery" />
   <EntityRelationship Name="owner_tc_region" />
+  <EntityRelationship Name="owner_tc_room" />
   <EntityRelationship Name="owner_tc_sharer" />
+  <EntityRelationship Name="owner_tc_store" />
   <EntityRelationship Name="owner_tc_surveyresponsefeedback" />
   <EntityRelationship Name="owner_tc_touroperator" />
+  <EntityRelationship Name="owner_tc_ukregion" />
   <EntityRelationship Name="PhoneCall_Annotation" unmodified="1" />
   <EntityRelationship Name="popat_email_popat_powerattachment_Email" />
   <EntityRelationship Name="popat_powerattachmentprocessqueueemail_Annotations" />
@@ -371,6 +404,7 @@
   <EntityRelationship Name="posms_smsmessage_Annotations" />
   <EntityRelationship Name="price_level_accounts" />
   <EntityRelationship Name="price_level_contacts" />
+  <EntityRelationship Name="price_level_opportunties" />
   <EntityRelationship Name="Product_Annotation" unmodified="1" />
   <EntityRelationship Name="product_incidents" />
   <EntityRelationship Name="profilerule_Annotations" unmodified="1" />
@@ -406,6 +440,7 @@
   <EntityRelationship Name="sla_cases" />
   <EntityRelationship Name="sla_contact" />
   <EntityRelationship Name="sla_email" unmodified="1" />
+  <EntityRelationship Name="sla_opportunity" />
   <EntityRelationship Name="sla_tc_compensationapproval" />
   <EntityRelationship Name="slakpiinstance_incident_firstresponsebykpi" />
   <EntityRelationship Name="slakpiinstance_incident_resolvebykpi" />
@@ -484,6 +519,7 @@
   <EntityRelationship Name="tc_caseline_tc_compensationline_caseline2" />
   <EntityRelationship Name="tc_caseline_tc_compensationline_caseline3" />
   <EntityRelationship Name="tc_caseline_tc_compensationline_caseline4" />
+  <EntityRelationship Name="tc_cluster_tc_store" />
   <EntityRelationship Name="tc_compensation_tc_compensationline" />
   <EntityRelationship Name="tc_compensationapproval_Annotations" />
   <EntityRelationship Name="tc_compensationapprovalslikpi_compensationap" />
@@ -540,13 +576,17 @@
   <EntityRelationship Name="tc_LastAssignee" />
   <EntityRelationship Name="tc_location_tc_hotel" />
   <EntityRelationship Name="tc_locationoffice_Address1_Country" />
+  <EntityRelationship Name="tc_opportunity_tc_followup" />
+  <EntityRelationship Name="tc_opportunity_tc_room" />
   <EntityRelationship Name="tc_other_locations" />
+  <EntityRelationship Name="tc_primarystore_systemuser" />
   <EntityRelationship Name="tc_Queue_SourceMarket" />
   <EntityRelationship Name="tc_queue_tc_locationoffice" />
   <EntityRelationship Name="tc_region_tc_booking" />
   <EntityRelationship Name="tc_region_tc_location" />
   <EntityRelationship Name="tc_slakpiinstance_opportunity_31DaysInactivityTravelerPlannerCloseByKPI" />
   <EntityRelationship Name="tc_source_market_contact" />
+  <EntityRelationship Name="tc_store_systemuser" />
   <EntityRelationship Name="tc_surveyresponse_Annotations" />
   <EntityRelationship Name="tc_surveyresponse_businessunit_owningbusinessunit" />
   <EntityRelationship Name="tc_surveyresponse_mailbox_sendermailboxid" />
@@ -618,11 +658,14 @@
   <EntityRelationship Name="tc_transactioncurrency_tc_compensation_NonFinancialCurrency" />
   <EntityRelationship Name="tc_transactioncurrency_tc_compensationline" />
   <EntityRelationship Name="tc_transactioncurrency_tc_compensationline_NonFinancialCurrency" />
+  <EntityRelationship Name="tc_ukregion_tc_cluster" />
+  <EntityRelationship Name="tc_ukregion_tc_store" />
   <EntityRelationship Name="team_accounts" />
   <EntityRelationship Name="team_annotations" unmodified="1" />
   <EntityRelationship Name="team_contacts" />
   <EntityRelationship Name="team_email" unmodified="1" />
   <EntityRelationship Name="team_incidents" />
+  <EntityRelationship Name="team_opportunities" />
   <EntityRelationship Name="team_tc_accounttype" />
   <EntityRelationship Name="team_tc_alternativeemail" />
   <EntityRelationship Name="team_tc_boardbasis" />
@@ -635,6 +678,7 @@
   <EntityRelationship Name="team_tc_casecategory" />
   <EntityRelationship Name="team_tc_caseline" />
   <EntityRelationship Name="team_tc_casetype" />
+  <EntityRelationship Name="team_tc_cluster" />
   <EntityRelationship Name="team_tc_compensation" />
   <EntityRelationship Name="team_tc_compensationapproval" />
   <EntityRelationship Name="team_tc_compensationline" />
@@ -649,9 +693,12 @@
   <EntityRelationship Name="team_tc_locationoffice" />
   <EntityRelationship Name="team_tc_recovery" />
   <EntityRelationship Name="team_tc_region" />
+  <EntityRelationship Name="team_tc_room" />
   <EntityRelationship Name="team_tc_sharer" />
+  <EntityRelationship Name="team_tc_store" />
   <EntityRelationship Name="team_tc_surveyresponsefeedback" />
   <EntityRelationship Name="team_tc_touroperator" />
+  <EntityRelationship Name="team_tc_ukregion" />
   <EntityRelationship Name="teamtemplate_Teams" unmodified="1" />
   <EntityRelationship Name="template_activity_mime_attachments" unmodified="1" />
   <EntityRelationship Name="territory_accounts" />
@@ -659,6 +706,7 @@
   <EntityRelationship Name="transactioncurrency_account" />
   <EntityRelationship Name="transactioncurrency_contact" />
   <EntityRelationship Name="TransactionCurrency_Incident" />
+  <EntityRelationship Name="transactioncurrency_opportunity" />
   <EntityRelationship Name="TransactionCurrency_tc_booking" />
   <EntityRelationship Name="TransactionCurrency_tc_caseline" />
   <EntityRelationship Name="TransactionCurrency_tc_compensation" />
@@ -721,6 +769,7 @@
   <EntityRelationship Name="user_tc_casecategory" />
   <EntityRelationship Name="user_tc_caseline" />
   <EntityRelationship Name="user_tc_casetype" />
+  <EntityRelationship Name="user_tc_cluster" />
   <EntityRelationship Name="user_tc_compensation" />
   <EntityRelationship Name="user_tc_compensationapproval" />
   <EntityRelationship Name="user_tc_compensationline" />
@@ -735,8 +784,11 @@
   <EntityRelationship Name="user_tc_locationoffice" />
   <EntityRelationship Name="user_tc_recovery" />
   <EntityRelationship Name="user_tc_region" />
+  <EntityRelationship Name="user_tc_room" />
   <EntityRelationship Name="user_tc_sharer" />
+  <EntityRelationship Name="user_tc_store" />
   <EntityRelationship Name="user_tc_surveyresponsefeedback" />
   <EntityRelationship Name="user_tc_touroperator" />
+  <EntityRelationship Name="user_tc_ukregion" />
   <EntityRelationship Name="Workflow_Annotation" unmodified="1" />
 </EntityRelationships>

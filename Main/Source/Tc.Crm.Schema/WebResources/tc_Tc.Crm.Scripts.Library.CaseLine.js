@@ -1,3 +1,42 @@
+var scriptLoader = scriptLoader || {
+    delayedLoads: [],
+    load: function (name, requires, script) {
+        window._loadedScripts = window._loadedScripts || {};
+        // Check for loaded scripts, if not all loaded then register delayed Load
+        if (requires == null || requires.length == 0 || scriptLoader.areLoaded(requires)) {
+            scriptLoader.runScript(name, script);
+        }
+        else {
+            // Register an onload check
+            scriptLoader.delayedLoads.push({ name: name, requires: requires, script: script });
+        }
+    },
+    runScript: function (name, script) {
+        script.call(window);
+        window._loadedScripts[name] = true;
+        scriptLoader.onScriptLoaded(name);
+    },
+    onScriptLoaded: function (name) {
+        // Check for any registered delayed Loads
+        scriptLoader.delayedLoads.forEach(function (script) {
+            if (script.loaded == null && scriptLoader.areLoaded(script.requires)) {
+                script.loaded = true;
+                scriptLoader.runScript(script.name, script.script);
+            }
+        });
+    },
+    areLoaded: function (requires) {
+        var allLoaded = true;
+        for (var i = 0; i < requires.length; i++) {
+            allLoaded = allLoaded && (window._loadedScripts[requires[i]] != null);
+            if (!allLoaded)
+                break;
+        }
+        return allLoaded;
+    }
+};
+scriptLoader.load("Tc.Crm.Scripts.Library.CaseLine", ["Tc.Crm.Scripts.Common"], function () {
+// start script
 if (typeof (Tc) === "undefined") {
     Tc = {
         __namespace: true
@@ -24,7 +63,6 @@ Tc.Crm.Scripts.Library.CaseLine = (function () {
     var FORM_MODE_CREATE = 1;
     var FORM_MODE_UPDATE = 2;
     var FORM_MODE_QUICK_CREATE = 5;
-
     var CASE_TYPE_COMPLAIN = "{478C99E9-93E4-E611-8109-1458D041F8E8}";
     var CLIENT_STATE_OFFLINE = "Offline";
 
@@ -730,3 +768,6 @@ Tc.Crm.Scripts.Library.CaseLine = (function () {
         }
     };
 })();
+console.log('loaded library.caseline');
+// end script
+});

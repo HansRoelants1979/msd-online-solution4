@@ -102,7 +102,7 @@
                       <control id="description" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="description" disabled="false" />
                     </cell>
                   </row>
-                  <row></row>
+                  <row />
                 </rows>
               </section>
             </sections>
@@ -165,15 +165,13 @@
     </tabs>
     <controlDescriptions />
     <formLibraries>
-      <Library name="tc_es6promise.js" libraryUniqueId="{3038c068-a5da-7be7-66c8-355eb60412b6}" />
-      <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{6719c6dd-2b97-6858-22b4-c8b0b8aabbe9}" />
-      <Library name="tc_Tc.Crm.Scripts.Library.Contact.js" libraryUniqueId="{19823e76-c683-dda1-5d0c-7de23806897e}" />
+      <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{aa5dd45d-b026-7be1-5490-cbc25169d0d8}" />
       <Library name="tc_Tc.Crm.Scripts.Events.Account" libraryUniqueId="{d2ed31b2-d8e8-81c3-1041-9b3363141e51}" />
     </formLibraries>
     <events>
       <event name="onchange" application="false" active="false" attribute="telephone1">
         <Handlers>
-          <Handler handlerUniqueId="{9cdcdcba-9a12-1404-7a68-a349c595e1eb}" functionName="Tc.Crm.Scripts.Events.Account.OnChangeTelephone1" libraryName="tc_Tc.Crm.Scripts.Common.js" enabled="true" passExecutionContext="false" parameters="" />
+          <Handler functionName="Tc.Crm.Scripts.Events.Account.OnChangeTelephone1" libraryName="tc_Tc.Crm.Scripts.Events.Account" handlerUniqueId="{10453a7e-c3a8-e6b5-c1ed-d11604a369ca}" enabled="true" parameters="" passExecutionContext="false" />
         </Handlers>
       </event>
     </events>

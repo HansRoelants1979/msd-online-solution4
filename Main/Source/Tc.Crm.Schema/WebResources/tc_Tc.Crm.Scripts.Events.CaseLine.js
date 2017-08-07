@@ -1,3 +1,43 @@
+var scriptLoader = scriptLoader || {
+    delayedLoads: [],
+    load: function (name, requires, script) {
+        window._loadedScripts = window._loadedScripts || {};
+        // Check for loaded scripts, if not all loaded then register delayed Load
+        if (requires == null || requires.length == 0 || scriptLoader.areLoaded(requires)) {
+            scriptLoader.runScript(name, script);
+        }
+        else {
+            // Register an onload check
+            scriptLoader.delayedLoads.push({ name: name, requires: requires, script: script });
+        }
+    },
+    runScript: function (name, script) {
+        script.call(window);
+        window._loadedScripts[name] = true;
+        scriptLoader.onScriptLoaded(name);
+    },
+    onScriptLoaded: function (name) {
+        // Check for any registered delayed Loads
+        scriptLoader.delayedLoads.forEach(function (script) {
+            if (script.loaded == null && scriptLoader.areLoaded(script.requires)) {
+                script.loaded = true;
+                scriptLoader.runScript(script.name, script.script);
+            }
+        });
+    },
+    areLoaded: function (requires) {
+        var allLoaded = true;
+        for (var i = 0; i < requires.length; i++) {
+            allLoaded = allLoaded && (window._loadedScripts[requires[i]] != null);
+            if (!allLoaded)
+                break;
+        }
+        return allLoaded;
+    }
+};
+scriptLoader.load("Tc.Crm.Scripts.Events.CaseLine", ["Tc.Crm.Scripts.Library.CaseLine"], function () {
+// start script
+
 if (typeof (Tc) === "undefined") {
     Tc = {
         __namespace: true
@@ -18,7 +58,7 @@ if (typeof (Tc.Crm.Scripts.Events) === "undefined") {
         __namespace: true
     };
 }
-Tc.Crm.Scripts.Events.CaseLine = (function () {
+Tc.Crm.Scripts.Events.CaseLine = ( function () {
     "use strict";
 
     var VIEW_RANDOM_GUID = "{5A8261E7-71F5-4904-B046-EE8001A01CF5}";
@@ -94,7 +134,8 @@ Tc.Crm.Scripts.Events.CaseLine = (function () {
     ///
     var filterCategoryByParentCaseCategory = function (controlId) {
         var parentControlId = '';
-        switch (controlId) {
+        switch (controlId)
+        {
             case Attributes.CaseCategory2:
                 parentControlId = Attributes.CaseCategory1;
                 break
@@ -110,7 +151,7 @@ Tc.Crm.Scripts.Events.CaseLine = (function () {
         if (parentCaseCategory == null) {
             console.warn("Parent control value is null.");
             return;
-        }
+        }        
         var parentCaseCategoryId = parentCaseCategory[0].id;
         // filter by parent case category id
         var fetchXml =
@@ -173,7 +214,7 @@ Tc.Crm.Scripts.Events.CaseLine = (function () {
 
         var accommodationAttribute = Xrm.Page.getAttribute(Attributes.AccommodationId);
         if (accommodationAttribute == null || accommodationAttribute == undefined) return;
-        
+
         var accommodation = accommodationAttribute.getValue();
         if (accommodation == null || accommodation == "undefined" || accommodation == "")
             return;
@@ -193,10 +234,10 @@ Tc.Crm.Scripts.Events.CaseLine = (function () {
                             if (accommodationRecord.tc_HotelId == null || accommodationRecord.tc_HotelId == "" || accommodationRecord.tc_HotelId == "undefined") return;
                             if (accommodationRecord.tc_HotelId.tc_primaryemailaddress == null || accommodationRecord.tc_HotelId.tc_primaryemailaddress == "" || accommodationRecord.tc_HotelId.tc_primaryemailaddress == "undefined") return;
                             var emailAddressAttribute = Xrm.Page.getAttribute(Attributes.EmailAddress);
-                            if (emailAddressAttribute == null || emailAddressAttribute == undefined) return;                            
-                                emailAddressAttribute.setValue(accommodationRecord.tc_HotelId.tc_primaryemailaddress);
+                            if (emailAddressAttribute == null || emailAddressAttribute == undefined) return;
+                            emailAddressAttribute.setValue(accommodationRecord.tc_HotelId.tc_primaryemailaddress);
 
-                        }).catch(function (err) {                            
+                        }).catch(function (err) {
                             throw new Error("Problem in retrieving the Accommodation");
                         });
 
@@ -227,15 +268,14 @@ Tc.Crm.Scripts.Events.CaseLine = (function () {
 
         var accommodationReceivedPromise = getHotel(accommodationPropertyNameId).then(
                         function (accommodationPropertyNameResponse) {
-
                             var hotelRecord = JSON.parse(accommodationPropertyNameResponse.response);
                             if (hotelRecord == null || hotelRecord == "" || hotelRecord == "undefined") return;
                             if (hotelRecord.tc_primaryemailaddress == null || hotelRecord.tc_primaryemailaddress == "" || hotelRecord.tc_primaryemailaddress == "undefined") return;
                             var emailAddressAttribute = Xrm.Page.getAttribute(Attributes.EmailAddress);
                             if (emailAddressAttribute == null || emailAddressAttribute == undefined) return;
-                                emailAddressAttribute.setValue(hotelRecord.tc_primaryemailaddress);
+                            emailAddressAttribute.setValue(hotelRecord.tc_primaryemailaddress);
 
-                        }).catch(function (err) {                            
+                        }).catch(function (err) {
                             throw new Error("Problem in retrieving the Hotel");
                         });
 
@@ -291,7 +331,7 @@ Tc.Crm.Scripts.Events.CaseLine = (function () {
             Tc.Crm.Scripts.Library.CaseLine.ClearCompensationCalculatorValues();
             Tc.Crm.Scripts.Library.CaseLine.ShowHideCompensationCalculator(true);
         },
-        OnCaseLineAccommodationChange: function() {
+        OnCaseLineAccommodationChange: function () {
             setAlternateEmailAddressOnAccommodation();
         },
         OnCaseLinePropertyNameChange: function () {
@@ -299,3 +339,7 @@ Tc.Crm.Scripts.Events.CaseLine = (function () {
         }
     };
 })();
+
+// end script
+console.log('loaded events.caseline');
+});

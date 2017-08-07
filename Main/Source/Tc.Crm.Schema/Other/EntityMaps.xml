@@ -129,6 +129,21 @@
     <AttributeMaps />
   </EntityMap>
   <EntityMap>
+    <EntitySource>opportunity</EntitySource>
+    <EntityTarget>tc_followup</EntityTarget>
+    <AttributeMaps>
+      <AttributeMap>
+        <AttributeSource>customerid</AttributeSource>
+        <AttributeTarget>tc_customer</AttributeTarget>
+      </AttributeMap>
+    </AttributeMaps>
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>opportunity</EntitySource>
+    <EntityTarget>tc_room</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
     <EntitySource>queue</EntitySource>
     <EntityTarget>tc_locationoffice</EntityTarget>
     <AttributeMaps />
@@ -384,6 +399,11 @@
     <AttributeMaps />
   </EntityMap>
   <EntityMap>
+    <EntitySource>tc_cluster</EntitySource>
+    <EntityTarget>tc_store</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
     <EntitySource>tc_compensationcalculationmatrix</EntitySource>
     <EntityTarget>tc_compensationcalculationline</EntityTarget>
     <AttributeMaps />
@@ -579,6 +599,11 @@
     <AttributeMaps />
   </EntityMap>
   <EntityMap>
+    <EntitySource>tc_store</EntitySource>
+    <EntityTarget>systemuser</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
     <EntitySource>tc_surveyresponse</EntitySource>
     <EntityTarget>tc_surveyresponsefeedback</EntityTarget>
     <AttributeMaps />
@@ -586,6 +611,16 @@
   <EntityMap>
     <EntitySource>tc_touroperator</EntitySource>
     <EntityTarget>tc_booking</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_ukregion</EntitySource>
+    <EntityTarget>tc_cluster</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_ukregion</EntitySource>
+    <EntityTarget>tc_store</EntityTarget>
     <AttributeMaps />
   </EntityMap>
   <EntityMap>

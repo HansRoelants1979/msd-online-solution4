@@ -1,3 +1,43 @@
+var scriptLoader = scriptLoader || {
+    delayedLoads : [],
+            load: function (name, requires, script) {
+                window._loadedScripts = window._loadedScripts || { };
+// Check for loaded scripts, if not all loaded then register delayed Load
+if (requires == null || requires.length == 0 || scriptLoader.areLoaded(requires)) {
+            scriptLoader.runScript(name, script);
+            }
+else {
+    // Register an onload check
+    scriptLoader.delayedLoads.push({ name : name, requires: requires, script : script });
+    }
+    },
+        runScript: function (name, script) {
+script.call(window);
+window._loadedScripts[name]= true;
+scriptLoader.onScriptLoaded(name);
+},
+        onScriptLoaded: function (name) {
+        // Check for any registered delayed Loads
+        scriptLoader.delayedLoads.forEach(function (script) {
+            if (script.loaded == null && scriptLoader.areLoaded(script.requires)) {
+                script.loaded = true;
+                scriptLoader.runScript(script.name, script.script);
+            }
+            });
+            },
+                    areLoaded: function (requires) {
+                        var allLoaded = true;
+                        for (var i = 0; i < requires.length; i++) {
+                            allLoaded = allLoaded && (window._loadedScripts[requires[i]]!= null);
+                            if (!allLoaded)
+                                break;
+            }
+return allLoaded;
+}
+};
+scriptLoader.load("Tc.Crm.Scripts.Events.Case", ["Tc.Crm.Scripts.Utils.Validation"], function () {
+// start script
+
 if (typeof (Tc) === "undefined") {
     Tc = {
         __namespace: true
@@ -32,11 +72,17 @@ Tc.Crm.Scripts.Events.Case = (function () {
     var CASE_SOURCE_MARKET_ENTITY_NAME = "tc_country"
     var FORM_MODE_CREATE = 1;
     var FORM_MODE_UPDATE = 2;
-    
+    var CASE_ARRIVAL_DATE_ATTR_NAME = "tc_arrivaldate";
+    var CASE_DEPARTURE_DATE_ATTR_NAME = "tc_departuredate";    
+
+    var Attributes = {
+        AlternativePhone: "tc_alternativephone",
+        OtherPartyPhone: "tc_otherpartyphone"
+    }
 
     function OnLoad() {
-        Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("tc_alternativephone");
-        Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("tc_otherpartyphone");
+        Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.AlternativePhone);
+        Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.OtherPartyPhone);
         validateCaseAssociatedCustomerPhoneNum();
         preFilterLocationOfficeLookup();        
     }
@@ -273,11 +319,10 @@ Tc.Crm.Scripts.Events.Case = (function () {
         }
     }
     var onChangeTelephone1 = function () {
-
-        Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("tc_alternativephone");
+        Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.AlternativePhone);
     }
     var onChangeTelephone2 = function () {
-        Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("tc_otherpartyphone");
+        Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.OtherPartyPhone);
     }
 
     var preFilterLocationOfficeLookup = function ()
@@ -383,10 +428,37 @@ Tc.Crm.Scripts.Events.Case = (function () {
     var formatEntityId = function (id) {
         return id !== null ? id.replace("{", "").replace("}", "") : null;
     }
+
+    var validateArrivalDateGreaterOrEqualDeparture = function () {
+        var arrivalDateControl = Xrm.Page.getControl(CASE_ARRIVAL_DATE_ATTR_NAME);
+        var arrivalDate = Xrm.Page.data.entity.attributes.get(CASE_ARRIVAL_DATE_ATTR_NAME).getValue();
+        var departureDate = Xrm.Page.data.entity.attributes.get(CASE_DEPARTURE_DATE_ATTR_NAME).getValue();
+        
+        arrivalDateControl.clearNotification();
+        if (arrivalDate != null && departureDate != null) {
+            if (arrivalDate.setHours(0, 0, 0, 0) < departureDate.setHours(0, 0, 0, 0)) {
+                arrivalDateControl.setNotification("Arrival date should be equal or greater than Departure date");
+            }
+        }
+    }
+
     function IsOfflineMode() {
         return Xrm.Page.context.client.getClientState() === CLIENT_STATE_OFFLINE
     }
 
+	    var MandatoryNoteField = function () {
+       // alert("resolve case testing")
+        if (Xrm.Page.getAttribute("tc_escalationnotes")) {
+            var note = Xrm.Page.getAttribute("tc_escalationnotes").getValue();
+            if (note != null || note != undefined)
+                return;
+			Mscrm.CommandBarActions.resolve();
+          //  alert("Please give value in  Note");
+          //  Xrm.Page.data.refresh(true);
+        //    Xrm.Page.getControl("tc_escalationnotes").setFocus(); 
+        }
+		
+    }
     // public methods
     return {
         OnLoad: function () {
@@ -416,6 +488,16 @@ Tc.Crm.Scripts.Events.Case = (function () {
             if (Xrm.Page.context.client.getClientState() === CLIENT_STATE_OFFLINE) {
                 Tc.Crm.Scripts.Library.Case.UpdateRelatedCompensationsSourceMarket();
             }
-        }
+        },
+        OnChangeArrivalOrDepartureDates: function() {
+            validateArrivalDateGreaterOrEqualDeparture();
+        },
+		 ResolveButtonClick: function (){
+            MandatoryNoteField();
+    }
     };
 })();
+
+// end script
+console.log('loaded events.case');
+});

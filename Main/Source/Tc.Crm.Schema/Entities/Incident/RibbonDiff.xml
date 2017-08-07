@@ -6,11 +6,51 @@
   <Templates>
     <RibbonTemplates Id="Mscrm.Templates"></RibbonTemplates>
   </Templates>
-  <CommandDefinitions />
+  <CommandDefinitions>
+    <CommandDefinition Id="Mscrm.Form.incident.Resolve">
+      <EnableRules>
+        <EnableRule Id="Mscrm.CanChangeIncidentForm" />
+        <EnableRule Id="Mscrm.IncidentIsActive" />
+        <EnableRule Id="Mscrm.IsAvailableInMocaOffline" />
+      </EnableRules>
+      <DisplayRules>
+        <DisplayRule Id="Mscrm.CanChangeIncidentForm" />
+        <DisplayRule Id="Mscrm.IncidentIsActive" />
+      </DisplayRules>
+      <Actions>
+        <JavaScriptFunction FunctionName="Mscrm.CommandBarActions.resolve" Library=" /_static/_common/scripts/CommandBarActions.js" />
+      </Actions>
+    </CommandDefinition>
+  </CommandDefinitions>
   <RuleDefinitions>
     <TabDisplayRules />
-    <DisplayRules />
-    <EnableRules />
+    <DisplayRules>
+      <DisplayRule Id="Mscrm.CanChangeIncidentForm">
+        <EntityPrivilegeRule PrivilegeType="Write" PrivilegeDepth="Basic" EntityName="incident" />
+        <EntityPrivilegeRule PrivilegeType="AppendTo" PrivilegeDepth="Basic" EntityName="incident" />
+        <EntityPrivilegeRule PrivilegeType="Create" PrivilegeDepth="Basic" EntityName="activitypointer" />
+        <EntityPrivilegeRule PrivilegeType="Append" PrivilegeDepth="Basic" EntityName="activitypointer" />
+      </DisplayRule>
+      <DisplayRule Id="Mscrm.IncidentIsActive">
+        <FormStateRule State="Existing" />
+      </DisplayRule>
+    </DisplayRules>
+    <EnableRules>
+      <EnableRule Id="Mscrm.CanChangeIncidentForm">
+        <FormStateRule State="Create" InvertResult="true" />
+        <RecordPrivilegeRule PrivilegeType="Write" AppliesTo="PrimaryEntity" />
+        <RecordPrivilegeRule PrivilegeType="AppendTo" AppliesTo="PrimaryEntity" />
+      </EnableRule>
+      <EnableRule Id="Mscrm.IncidentIsActive">
+        <FormStateRule State="Existing" />
+      </EnableRule>
+      <EnableRule Id="Mscrm.IsAvailableInMocaOffline">
+        <CustomRule FunctionName="Mscrm.CommandBarActions.IsCommandAvailableInMocaOffline" Library="/_static/_common/scripts/CommandBarActions.js">
+          <BoolParameter Value="true" />
+          <CrmParameter Value="SelectedEntityTypeName" />
+        </CustomRule>
+      </EnableRule>
+    </EnableRules>
   </RuleDefinitions>
   <LocLabels />
 </RibbonDiffXml>

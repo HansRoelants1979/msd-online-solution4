@@ -366,29 +366,29 @@
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{21dbb018-6a86-a856-7070-e7d9160ccd36}" showlabel="false" colspan="1" auto="false" rowspan="6" labelid="{9549896d-6988-49fd-8e16-5f0fda9bf774}">
+                    <cell id="{426355b1-0b33-653d-a721-b0ea6434d944}" showlabel="false" colspan="1" auto="false" rowspan="6">
                       <labels>
-                        <label description="TEAMS" languagecode="1033" />
-                        <label description="Équipes" languagecode="1036" />
-                        <label description="TEAMS" languagecode="1031" />
+                        <label description="Hotels" languagecode="1033" />
+                        <label description="Hôtels" languagecode="1036" />
+                        <label description="Hotels" languagecode="1031" />
                       </labels>
-                      <control id="TeamsSubGrid" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" uniqueid="{0c1a4366-c19a-d190-9487-5a9e8b316003}" indicationOfSubgrid="true">
+                      <control id="grdHotels" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
                         <parameters>
-                          <ViewId>{E0F07489-1D16-E711-810C-3863BB34FB48}</ViewId>
+                          <ViewId>{21849EE0-61A2-4377-9D47-C0E217522D3A}</ViewId>
                           <IsUserView>false</IsUserView>
-                          <RelationshipName>teammembership_association</RelationshipName>
-                          <TargetEntityType>team</TargetEntityType>
+                          <RelationshipName>tc_systemuser_tc_hotel</RelationshipName>
+                          <TargetEntityType>tc_hotel</TargetEntityType>
                           <AutoExpand>Fixed</AutoExpand>
                           <EnableQuickFind>false</EnableQuickFind>
                           <EnableViewPicker>false</EnableViewPicker>
-                          <ViewIds>{E0F07489-1D16-E711-810C-3863BB34FB48},{00000000-0000-0000-00AA-000010001024}</ViewIds>
+                          <ViewIds>{21849EE0-61A2-4377-9D47-C0E217522D3A}</ViewIds>
                           <EnableJumpBar>false</EnableJumpBar>
                           <ChartGridMode>Grid</ChartGridMode>
                           <VisualizationId />
                           <IsUserChart>false</IsUserChart>
                           <EnableChartPicker>false</EnableChartPicker>
                           <RecordsPerPage>4</RecordsPerPage>
-                          <RelationshipRoleOrdinal>2</RelationshipRoleOrdinal>
+                          <RelationshipRoleOrdinal>1</RelationshipRoleOrdinal>
                         </parameters>
                       </control>
                     </cell>

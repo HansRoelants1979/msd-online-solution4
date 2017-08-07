@@ -121,6 +121,14 @@
                       <control disabled="false" id="tc_gender" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_gender" uniqueid="{8dd679e0-3409-72a2-9d22-dad9399bdb6d}" />
                     </cell>
                   </row>
+                  <row>
+                    <cell id="{893188ed-d976-ab73-b0ca-9d0cadd4e4d3}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="VIP" languagecode="1033" />
+                      </labels>
+                      <control id="tc_vip" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="tc_vip" disabled="false" uniqueid="{48d92677-a611-76dd-ea9a-3137c4743418}" />
+                    </cell>
+                  </row>
                 </rows>
               </section>
             </sections>
@@ -447,12 +455,12 @@
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{519bdfaf-c70c-403a-b895-6d8155e8abe6}" showlabel="false">
+                    <cell id="{7194c897-52bf-4296-bd56-0822e27ec72b}" showlabel="false">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
                     </cell>
-                    <cell id="{a83effdc-eb54-4803-997f-2effe47bc526}" showlabel="false">
+                    <cell id="{99778ec1-cae4-4846-b277-8295b9587a8a}" showlabel="false">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
@@ -539,8 +547,7 @@
                     <cell id="{c25d2789-711a-c759-cd43-7e38cbc796e9}" showlabel="false" rowspan="6" auto="false" colspan="1">
                       <labels>
                         <label description="Customer Booking Roles (Customer)" languagecode="1033" />
-                        <label description="Anfragen" languagecode="1031" />
-                        <label description="Incidents" languagecode="1036" />
+                        <label description="Kundenbuchungsrollen" languagecode="1031" />
                       </labels>
                       <control id="grdBookings" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true" uniqueid="{6d755b82-d30d-0981-300c-de14d3dc0993}">
                         <parameters>
@@ -1031,27 +1038,27 @@
       <NavBarAreas>
         <NavBarArea Id="Info">
           <Titles>
-            <Title Text="Common" LCID="1033" />
+            <Title LCID="1033" Text="Common" />
           </Titles>
         </NavBarArea>
         <NavBarArea Id="Sales">
           <Titles>
-            <Title Text="Sales" LCID="1033" />
+            <Title LCID="1033" Text="Sales" />
           </Titles>
         </NavBarArea>
         <NavBarArea Id="Service">
           <Titles>
-            <Title Text="Service" LCID="1033" />
+            <Title LCID="1033" Text="Service" />
           </Titles>
         </NavBarArea>
         <NavBarArea Id="Marketing">
           <Titles>
-            <Title Text="Marketing" LCID="1033" />
+            <Title LCID="1033" Text="Marketing" />
           </Titles>
         </NavBarArea>
         <NavBarArea Id="ProcessCenter">
           <Titles>
-            <Title Text="Process Sessions" LCID="1033" />
+            <Title LCID="1033" Text="Process Sessions" />
           </Titles>
         </NavBarArea>
       </NavBarAreas>
@@ -1278,6 +1285,7 @@
     <formLibraries>
       <Library name="tc_es6promise.js" libraryUniqueId="{de507201-4eb0-e6e5-94a8-db26e1cd7be2}" />
       <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{a279a9e3-d067-b144-d47d-326570627703}" />
+      <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{a0ae7457-cc72-7024-882d-10c920991941}" />
       <Library name="tc_Tc.Crm.Scripts.Library.Contact.js" libraryUniqueId="{b745c3ae-599b-ad85-50cb-a2a382cc813a}" />
       <Library name="tc_Tc.Crm.Scripts.Events.Contact.Ids.js" libraryUniqueId="{ba945487-dcb6-15c0-de41-273add6093b7}" />
     </formLibraries>
@@ -1290,7 +1298,6 @@
       <Role Id="{FB8E9DC4-B5FF-E511-9438-00155DCFC00D}" />
       <Role Id="{83B27124-2386-E211-BC15-000C298A36A7}" />
       <Role Id="{03B19833-5F35-E711-8102-E0071B66A0A1}" />
-      <Role Id="{CAD52A75-568C-E611-80D4-00155D42A122}" />
       <Role Id="{dcd60b89-421c-44ae-bff0-dd6323df885c}" />
       <Role Id="{627090ff-40a3-4053-8790-584edc5be201}" />
       <Role Id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />

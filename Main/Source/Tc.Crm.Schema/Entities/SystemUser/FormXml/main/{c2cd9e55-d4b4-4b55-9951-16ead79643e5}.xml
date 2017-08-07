@@ -251,6 +251,14 @@
                       <control id="parentsystemuserid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="parentsystemuserid" />
                     </cell>
                   </row>
+                  <row>
+                    <cell id="{36a31278-e07a-8a0d-b0be-bcdb843795a7}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="All Budget Centre Access" languagecode="1033" />
+                      </labels>
+                      <control id="tc_allbudgetcentreaccess" classid="{B0C6723A-8503-4fd7-BB28-C8A06AC933C2}" datafieldname="tc_allbudgetcentreaccess" disabled="false" uniqueid="{db4b0421-3330-7a82-7d91-76d8521bd28c}" />
+                    </cell>
+                  </row>
                 </rows>
               </section>
               <section name="queue selection" showlabel="true" showbar="true" locklevel="0" id="{11aec2bb-ecbc-4d53-a409-f4b849f03e6e}" IsUserDefined="0">
@@ -452,6 +460,63 @@
           </column>
         </columns>
       </tab>
+      <tab name="tab_5" id="{c8280a38-e626-19e6-b842-c448094607e7}" IsUserDefined="0" locklevel="0" showlabel="true" expanded="true" availableforphone="false">
+        <labels>
+          <label description="Retail Configuration" languagecode="1033" />
+        </labels>
+        <columns>
+          <column width="100%">
+            <sections>
+              <section name="tab_5_section_1" showlabel="false" showbar="false" locklevel="0" id="{c8855702-85b5-4c38-1d55-59a6726e17a1}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Top">
+                <labels>
+                  <label description="Section" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{b70979e2-9888-8414-c451-3c5819b22e96}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Primary Store" languagecode="1033" />
+                      </labels>
+                      <control id="tc_primarystoreid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_primarystoreid" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{481c174b-ae40-6de5-6450-2819a016462b}" showlabel="true" colspan="1" auto="false" rowspan="6">
+                      <labels>
+                        <label description="Associated Stores" languagecode="1033" />
+                      </labels>
+                      <control id="OtherStores" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true" uniqueid="{de5ee726-76cb-79cb-6195-a83bce67360b}">
+                        <parameters>
+                          <ViewId>{9841EF4F-12CD-4627-9193-05BA98DDC753}</ViewId>
+                          <IsUserView>false</IsUserView>
+                          <RelationshipName>tc_store_systemuser</RelationshipName>
+                          <TargetEntityType>tc_store</TargetEntityType>
+                          <AutoExpand>Fixed</AutoExpand>
+                          <EnableQuickFind>false</EnableQuickFind>
+                          <EnableViewPicker>false</EnableViewPicker>
+                          <ViewIds>{9841EF4F-12CD-4627-9193-05BA98DDC753}</ViewIds>
+                          <EnableJumpBar>false</EnableJumpBar>
+                          <ChartGridMode>Grid</ChartGridMode>
+                          <VisualizationId />
+                          <IsUserChart>false</IsUserChart>
+                          <EnableChartPicker>false</EnableChartPicker>
+                          <RecordsPerPage>4</RecordsPerPage>
+                          <RelationshipRoleOrdinal>2</RelationshipRoleOrdinal>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
       <tab name="ADMINISTRATION_TAB" id="{cdb4e61c-1e67-48ae-a26b-2b6852eedc86}" IsUserDefined="0" expanded="false" showlabel="true">
         <labels>
           <label description="Verwaltung" languagecode="1031" />
@@ -486,7 +551,7 @@
                       </events>
                       <control id="accessmode" classid="{3ef39988-22bb-4f0b-bbbe-64b5a3748aee}" datafieldname="accessmode" />
                     </cell>
-                    <cell id="{92ac93ae-75f4-4e83-8391-a2ea13c5a0a8}">
+                    <cell id="{92ac93ae-75f4-4e83-8391-a2ea13c5a0a8}" showlabel="false">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
@@ -501,7 +566,7 @@
                       </labels>
                       <control id="caltype" classid="{3ef39988-22bb-4f0b-bbbe-64b5a3748aee}" datafieldname="caltype" />
                     </cell>
-                    <cell id="{63af20af-1f0a-4d91-963b-b0ea68989974}">
+                    <cell id="{63af20af-1f0a-4d91-963b-b0ea68989974}" showlabel="false">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
@@ -529,7 +594,7 @@
                       </labels>
                       <control id="defaultmailbox" classid="{270bd3db-d9af-4782-9025-509e298dec0a}" datafieldname="defaultmailbox" />
                     </cell>
-                    <cell id="{aac29b1b-5ba4-4633-92d9-e62f08037cf0}">
+                    <cell id="{aac29b1b-5ba4-4633-92d9-e62f08037cf0}" showlabel="false">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
@@ -681,10 +746,10 @@
         </NavBarArea>
       </NavBarAreas>
     </Navigation>
+    <controlDescriptions />
     <DisplayConditions FallbackForm="true" Order="2">
       <Everyone />
     </DisplayConditions>
-    <controlDescriptions />
   </form>
   <LocalizedNames>
     <LocalizedName description="Benutzer" languagecode="1031" />
