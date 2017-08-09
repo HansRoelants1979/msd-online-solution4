@@ -69,7 +69,7 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
         return enable;
     }
     var enableValidateRibbonButton = function () {
-        var enable = getUserRoles();
+         var enable = getUserRoles();
         if (enable != null && enable != "" && enable != undefined)
             return enable;
     }
@@ -98,11 +98,14 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
     }
     var enableOWRorLimeButton = function ()
     {
-        var enable = false;
-        if (window.IsUSD != true) return enable;       
+        var enable = false;        
+        if (window.IsUSD != true) return enable;
+        if (Xrm.Page.ui.getFormType() == FORM_MODE_CREATE) return enable;
         if (Xrm.Page.getAttribute(Attributes.StateCode).getValue() != StateCode.Open) return enable;        
-        if (Xrm.Page.getAttribute(Attributes.CustomerId).getValue() == null) return enable;        
-           return enable = true;        
+        if (Xrm.Page.getAttribute(Attributes.CustomerId).getValue() == null) return enable;
+        var ssoLoggined = getExternaLogin();
+        if (ssoLoggined != false && ssoLoggined != undefined && ssoLoggined != "")
+           return ssoLoggined;
 
     }
     var reviewDateOnChange = function () {
@@ -111,7 +114,7 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
         var reviewDateValueAttr = getControlValue(Attributes.ReviewDate);
         var isPastDate = Tc.Crm.Scripts.Utils.Validation.IsPastDate(reviewDateValueAttr);
         if (isPastDate)
-            Xrm.Page.getControl(Attributes.DueDate).setNotification("Review Date cannot be set in the past. Please choose a future date.");
+            Xrm.Page.getControl(Attributes.ReviewDate).setNotification("Review Date cannot be set in the past. Please choose a future date.");
 
     }
     function formatEntityId(id) {
@@ -122,6 +125,35 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
             return Xrm.Page.getAttribute(controlName).getValue();
         else
             return null;
+    }    
+    function getExternaLogin() {        
+        var extraLoginRecordExist = false;
+        var loginnedUserId = null;
+        loginnedUserId = Xrm.Page.context.getUserId();
+        if (loginnedUserId == null || loginnedUserId == undefined || loginnedUserId == "") return extraLoginRecordExist;
+           loginnedUserId = loginnedUserId.replace("{", "").replace("}", "");        
+            var req = new XMLHttpRequest();
+            req.open("GET", Xrm.Page.context.getClientUrl() + "/api/data/v8.2/tc_externallogins?$select=tc_abtanumber,tc_branchcode,tc_employeeid,tc_initials,tc_name&$filter=_ownerid_value eq " + loginnedUserId + "&$count=true", false);
+            req.setRequestHeader("OData-MaxVersion", "4.0");
+            req.setRequestHeader("OData-Version", "4.0");
+            req.setRequestHeader("Accept", "application/json");
+            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+            req.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
+            req.onreadystatechange = function () {
+                if (this.readyState === 4) {
+                    req.onreadystatechange = null;
+                    if (this.status === 200) {
+                        var results = JSON.parse(this.response);
+                        var recordCount = results["@odata.count"];                        
+                        if (recordCount > 0 )
+                            extraLoginRecordExist = true;
+                    } else {
+                        Xrm.Utility.alertDialog(this.statusText);
+                    }
+                }
+            };
+            req.send();  
+            return extraLoginRecordExist;
     }
     return {
         OnValidateRibbonButtonClick: function () {
