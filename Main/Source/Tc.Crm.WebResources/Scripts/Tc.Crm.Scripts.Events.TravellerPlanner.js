@@ -24,7 +24,7 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
     var FORM_MODE_CREATE = 1;
     var HTTP_SUCCESS = 200;
     var STATUS_READY = 4;
-    var NO_CONTENT = 204;    
+    var NO_CONTENT = 204;
     var CLUSTER_MANAGER = "Tc.Retail.ClusterManager";
     var ASSISTANT_MANAGER = "Tc.Retail.AssistantManager";
     var REGIONAL_MANAGER = "Tc.Retail.RegionalManager";
@@ -33,12 +33,13 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
 
     var Attributes = {
         Validation: "tc_validation",
-        StateCode : "statecode",
+        StateCode: "statecode",
         CustomerId: "customerid",
         ReviewDate: "tc_reviewdate",
+        Surprise: "tc_surprise",
     }
     var StateCode = {
-        Open : 0,
+        Open: 0,
     }
     var getUserRoles = function () {
         var enable = false;
@@ -58,9 +59,9 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
                         var ValidationAttr = getControlValue(Attributes.Validation);
                         if (ValidationAttr == null) return enable;
                         if (ValidationAttr == false && Xrm.Page.ui.getFormType() != FORM_MODE_CREATE) {
-                                enable = true;
+                            enable = true;
                         }
-                    }                    
+                    }
                 }
             };
             req.send();
@@ -69,43 +70,35 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
         return enable;
     }
     var enableValidateRibbonButton = function () {
-         var enable = getUserRoles();
+        var enable = getUserRoles();
         if (enable != null && enable != "" && enable != undefined)
             return enable;
     }
     var setValidationFieldValue = function () {
-        var entity = {};
-        entity.tc_validation = true;
 
-        var req = new XMLHttpRequest();
-        req.open("PATCH", Xrm.Page.context.getClientUrl() + "/api/data/v8.2/opportunities(" + formatEntityId(Xrm.Page.data.entity.getId()) + ")", true);
-        req.setRequestHeader("OData-MaxVersion", "4.0");
-        req.setRequestHeader("OData-Version", "4.0");
-        req.setRequestHeader("Accept", "application/json");
-        req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-        req.onreadystatechange = function () {
-            if (this.readyState === STATUS_READY) {
-                req.onreadystatechange = null;
-                if (this.status === NO_CONTENT) {
-                    Xrm.Page.data.save().then(function () { Xrm.Page.data.refresh(false); });
-                } else {
-                    Xrm.Utility.alertDialog(this.statusText);
-                    console.log("ERROR: " + this.statusText);
-                }
-            }
-        };
-        req.send(JSON.stringify(entity));
+        Xrm.Page.getAttribute(Attributes.Validation).setValue(true);
+        Xrm.Page.data.entity.save();
+
+
     }
-    var enableOWRorLimeButton = function ()
-    {
-        var enable = false;        
+    var setSurpriseFieldValue = function () {
+        var surpriseFieldVale = getControlValue(Attributes.Surprise);
+        if (surpriseFieldVale == null) return;
+        if (surpriseFieldVale == false)
+            Xrm.Page.getAttribute(Attributes.Surprise).setValue(true);
+        else
+            Xrm.Page.getAttribute(Attributes.Surprise).setValue(false);
+
+    }
+    var enableOWRorLimeButton = function () {
+        var enable = false;
         if (window.IsUSD != true) return enable;
         if (Xrm.Page.ui.getFormType() == FORM_MODE_CREATE) return enable;
-        if (Xrm.Page.getAttribute(Attributes.StateCode).getValue() != StateCode.Open) return enable;        
+        if (Xrm.Page.getAttribute(Attributes.StateCode).getValue() != StateCode.Open) return enable;
         if (Xrm.Page.getAttribute(Attributes.CustomerId).getValue() == null) return enable;
         var ssoLoggined = getExternaLogin();
         if (ssoLoggined != false && ssoLoggined != undefined && ssoLoggined != "")
-           return ssoLoggined;
+            return ssoLoggined;
 
     }
     var reviewDateOnChange = function () {
@@ -121,53 +114,56 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
         return id !== null ? id.replace("{", "").replace("}", "") : null;
     }
     var getControlValue = function (controlName) {
-        if (Xrm.Page.getAttribute(controlName) && (Xrm.Page.getAttribute(controlName).getValue() !=null))
+        if (Xrm.Page.getAttribute(controlName) && (Xrm.Page.getAttribute(controlName).getValue() != null))
             return Xrm.Page.getAttribute(controlName).getValue();
         else
             return null;
-    }    
-    function getExternaLogin() {        
+    }
+    function getExternaLogin() {
         var extraLoginRecordExist = false;
         var loginnedUserId = null;
         loginnedUserId = Xrm.Page.context.getUserId();
         if (loginnedUserId == null || loginnedUserId == undefined || loginnedUserId == "") return extraLoginRecordExist;
-           loginnedUserId = loginnedUserId.replace("{", "").replace("}", "");        
-            var req = new XMLHttpRequest();
-            req.open("GET", Xrm.Page.context.getClientUrl() + "/api/data/v8.2/tc_externallogins?$select=tc_abtanumber,tc_branchcode,tc_employeeid,tc_initials,tc_name&$filter=_ownerid_value eq " + loginnedUserId + "&$count=true", false);
-            req.setRequestHeader("OData-MaxVersion", "4.0");
-            req.setRequestHeader("OData-Version", "4.0");
-            req.setRequestHeader("Accept", "application/json");
-            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-            req.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
-            req.onreadystatechange = function () {
-                if (this.readyState === 4) {
-                    req.onreadystatechange = null;
-                    if (this.status === 200) {
-                        var results = JSON.parse(this.response);
-                        var recordCount = results["@odata.count"];                        
-                        if (recordCount > 0 )
-                            extraLoginRecordExist = true;
-                    } else {
-                        Xrm.Utility.alertDialog(this.statusText);
-                    }
+        loginnedUserId = loginnedUserId.replace("{", "").replace("}", "");
+        var req = new XMLHttpRequest();
+        req.open("GET", Xrm.Page.context.getClientUrl() + "/api/data/v8.2/tc_externallogins?$select=tc_abtanumber,tc_branchcode,tc_employeeid,tc_initials,tc_name&$filter=_ownerid_value eq " + loginnedUserId + "&$count=true", false);
+        req.setRequestHeader("OData-MaxVersion", "4.0");
+        req.setRequestHeader("OData-Version", "4.0");
+        req.setRequestHeader("Accept", "application/json");
+        req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+        req.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
+        req.onreadystatechange = function () {
+            if (this.readyState === 4) {
+                req.onreadystatechange = null;
+                if (this.status === 200) {
+                    var results = JSON.parse(this.response);
+                    var recordCount = results["@odata.count"];
+                    if (recordCount > 0)
+                        extraLoginRecordExist = true;
+                } else {
+                    Xrm.Utility.alertDialog(this.statusText);
                 }
-            };
-            req.send();  
-            return extraLoginRecordExist;
+            }
+        };
+        req.send();
+        return extraLoginRecordExist;
     }
     return {
         OnValidateRibbonButtonClick: function () {
             setValidationFieldValue();
-        },        
-        EnableDisableValidateButton: function () {            
+        },
+        EnableDisableValidateButton: function () {
             return enableValidateRibbonButton();
         },
         EnableDisableOWRorLimeButton: function () {
             return enableOWRorLimeButton();
         },
+        OnSurpriseRibbonButtonClick: function () {
+            setSurpriseFieldValue();
+        },
         OnReviewDateFieldChange: function () {
             reviewDateOnChange();
         }
-        
+
     };
 })();
