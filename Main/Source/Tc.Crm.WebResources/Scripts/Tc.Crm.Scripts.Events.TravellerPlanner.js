@@ -138,7 +138,7 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
                 if (this.status === 200) {
                     var results = JSON.parse(this.response);
                     var recordCount = results["@odata.count"];
-                    if (recordCount > 0)
+                    if (recordCount === 1)
                         extraLoginRecordExist = true;
                 } else {
                     Xrm.Utility.alertDialog(this.statusText);
