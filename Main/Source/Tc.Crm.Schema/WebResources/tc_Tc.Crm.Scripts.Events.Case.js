@@ -84,8 +84,18 @@ Tc.Crm.Scripts.Events.Case = (function () {
         Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.AlternativePhone);
         Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.OtherPartyPhone);
         validateCaseAssociatedCustomerPhoneNum();
-        preFilterLocationOfficeLookup();        
+        preFilterLocationOfficeLookup();   
+        setNotification();		
     }
+	var setNotification = function(){	
+		 if (Xrm.Page.getAttribute("tc_reportnotes")) {
+            if (Xrm.Page.getAttribute("tc_reportnotes").getValue() == null){
+			 Xrm.Page.ui.setFormNotification(" You must provide a value for Rep Notes to Resolve Case. ", "WARNING",'note')			  
+			}	else{
+				Xrm.Page.ui.clearFormNotification('note')
+			}
+		 }
+	}
     var GetTheSourceMarketCurrency = function () {
                
         var sourceMarketId;
@@ -446,19 +456,10 @@ Tc.Crm.Scripts.Events.Case = (function () {
         return Xrm.Page.context.client.getClientState() === CLIENT_STATE_OFFLINE
     }
 
-	    var MandatoryNoteField = function () {
-       // alert("resolve case testing")
-        if (Xrm.Page.getAttribute("tc_escalationnotes")) {
-            var note = Xrm.Page.getAttribute("tc_escalationnotes").getValue();
-            if (note != null || note != undefined)
-                return;
-			Mscrm.CommandBarActions.resolve();
-          //  alert("Please give value in  Note");
-          //  Xrm.Page.data.refresh(true);
-        //    Xrm.Page.getControl("tc_escalationnotes").setFocus(); 
-        }
-		
-    }
+	   
+	
+
+	
     // public methods
     return {
         OnLoad: function () {
@@ -470,6 +471,10 @@ Tc.Crm.Scripts.Events.Case = (function () {
         OnChangeTelephone2: function () {
             onChangeTelephone2();
         },
+		OnChangeRepNotes: function (){
+			setNotification();
+			
+		},
         OnSave: function () {
             if (Xrm.Page.context.client.getClientState() !== CLIENT_STATE_OFFLINE) {
                 Tc.Crm.Scripts.Library.Case.UpdateRelatedCompensationsSourceMarket();
@@ -491,10 +496,8 @@ Tc.Crm.Scripts.Events.Case = (function () {
         },
         OnChangeArrivalOrDepartureDates: function() {
             validateArrivalDateGreaterOrEqualDeparture();
-        },
-		 ResolveButtonClick: function (){
-            MandatoryNoteField();
-    }
+        }
+		
     };
 })();
 

@@ -126,16 +126,6 @@
                       <control id="address1_telephone1" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="address1_telephone1" />
                     </cell>
                   </row>
-                  <row>
-                    <cell id="{3c70013b-3945-b22c-61d0-a152a115e215}" showlabel="true" locklevel="0">
-                      <labels>
-                        <label description="Unified Service Desk Configuration" languagecode="1033" />
-                        <label description="Configuration Unified Service Desk" languagecode="1036" />
-                        <label description="Konfiguration von Unified Service Desk" languagecode="1031" />
-                      </labels>
-                      <control id="msdyusd_usdconfigurationid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="msdyusd_usdconfigurationid" disabled="false" />
-                    </cell>
-                  </row>
                 </rows>
               </section>
             </sections>
@@ -249,14 +239,6 @@
                         <label description="Manager" languagecode="1031" />
                       </labels>
                       <control id="parentsystemuserid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="parentsystemuserid" />
-                    </cell>
-                  </row>
-                  <row>
-                    <cell id="{36a31278-e07a-8a0d-b0be-bcdb843795a7}" showlabel="true" locklevel="0">
-                      <labels>
-                        <label description="All Budget Centre Access" languagecode="1033" />
-                      </labels>
-                      <control id="tc_allbudgetcentreaccess" classid="{B0C6723A-8503-4fd7-BB28-C8A06AC933C2}" datafieldname="tc_allbudgetcentreaccess" disabled="false" uniqueid="{db4b0421-3330-7a82-7d91-76d8521bd28c}" />
                     </cell>
                   </row>
                 </rows>
@@ -445,63 +427,6 @@
                           <IsUserChart>false</IsUserChart>
                           <EnableChartPicker>false</EnableChartPicker>
                           <RecordsPerPage>4</RecordsPerPage>
-                        </parameters>
-                      </control>
-                    </cell>
-                  </row>
-                  <row />
-                  <row />
-                  <row />
-                  <row />
-                  <row />
-                </rows>
-              </section>
-            </sections>
-          </column>
-        </columns>
-      </tab>
-      <tab name="tab_5" id="{c8280a38-e626-19e6-b842-c448094607e7}" IsUserDefined="0" locklevel="0" showlabel="true" expanded="true" availableforphone="false">
-        <labels>
-          <label description="Retail Configuration" languagecode="1033" />
-        </labels>
-        <columns>
-          <column width="100%">
-            <sections>
-              <section name="tab_5_section_1" showlabel="false" showbar="false" locklevel="0" id="{c8855702-85b5-4c38-1d55-59a6726e17a1}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Top">
-                <labels>
-                  <label description="Section" languagecode="1033" />
-                </labels>
-                <rows>
-                  <row>
-                    <cell id="{b70979e2-9888-8414-c451-3c5819b22e96}" showlabel="true" locklevel="0">
-                      <labels>
-                        <label description="Primary Store" languagecode="1033" />
-                      </labels>
-                      <control id="tc_primarystoreid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_primarystoreid" disabled="false" />
-                    </cell>
-                  </row>
-                  <row>
-                    <cell id="{481c174b-ae40-6de5-6450-2819a016462b}" showlabel="true" colspan="1" auto="false" rowspan="6">
-                      <labels>
-                        <label description="Associated Stores" languagecode="1033" />
-                      </labels>
-                      <control id="OtherStores" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true" uniqueid="{de5ee726-76cb-79cb-6195-a83bce67360b}">
-                        <parameters>
-                          <ViewId>{9841EF4F-12CD-4627-9193-05BA98DDC753}</ViewId>
-                          <IsUserView>false</IsUserView>
-                          <RelationshipName>tc_store_systemuser</RelationshipName>
-                          <TargetEntityType>tc_store</TargetEntityType>
-                          <AutoExpand>Fixed</AutoExpand>
-                          <EnableQuickFind>false</EnableQuickFind>
-                          <EnableViewPicker>false</EnableViewPicker>
-                          <ViewIds>{9841EF4F-12CD-4627-9193-05BA98DDC753}</ViewIds>
-                          <EnableJumpBar>false</EnableJumpBar>
-                          <ChartGridMode>Grid</ChartGridMode>
-                          <VisualizationId />
-                          <IsUserChart>false</IsUserChart>
-                          <EnableChartPicker>false</EnableChartPicker>
-                          <RecordsPerPage>4</RecordsPerPage>
-                          <RelationshipRoleOrdinal>2</RelationshipRoleOrdinal>
                         </parameters>
                       </control>
                     </cell>

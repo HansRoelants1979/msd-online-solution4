@@ -6,14 +6,19 @@
     <HideCustomAction HideActionId="tc.Mscrm.Form.opportunity.Recalculate.Hide" Location="Mscrm.Form.opportunity.Recalculate" />
     <HideCustomAction HideActionId="tc.Mscrm.HomepageGrid.opportunity.MarkAsLost.Hide" Location="Mscrm.HomepageGrid.opportunity.MarkAsLost" />
     <HideCustomAction HideActionId="tc.Mscrm.HomepageGrid.opportunity.MarkAsWon.Hide" Location="Mscrm.HomepageGrid.opportunity.MarkAsWon" />
+    <CustomAction Id="tc.Tc.TravellerPlanner.Button.Surprise.CustomAction" Location="Mscrm.Form.opportunity.MainTab.Actions.Controls._children" Sequence="10">
+      <CommandUIDefinition>
+        <Button Command="tc.TravellerPlanner.SurpriseButton.Command" Id="Tc.TravellerPlanner.Button.Surprise" Image32by32="$webresource:tc_SurpriseIcon_32" Image16by16="$webresource:tc_SurpriseIcon_16" LabelText="$LocLabels:Tc.TravellerPlanner.Button.Surprise.LabelText" Sequence="10" TemplateAlias="o1" />
+      </CommandUIDefinition>
+    </CustomAction>
     <CustomAction Id="tc.Tc.Travellerplanner.Button.Validate.CustomAction" Location="Mscrm.Form.opportunity.MainTab.Actions.Controls._children" Sequence="8">
       <CommandUIDefinition>
         <Button Command="tc.TravellerPlanner.ValidateButton.Command" Id="Tc.Travellerplanner.Button.Validate" Image32by32="$webresource:tc_ValidateIcon32" Image16by16="$webresource:tc_ValidateIcon16" LabelText="$LocLabels:Tc.Travellerplanner.Button.Validate.LabelText" Sequence="8" TemplateAlias="o1" />
       </CommandUIDefinition>
     </CustomAction>
-    <CustomAction Id="tc.TravelPlanner.AddFollowUp.Button.CustomAction" Location="Mscrm.Form.opportunity.MainTab.Actions.Controls._children" Sequence="10">
+    <CustomAction Id="tc.TravelPlanner.AddFollowUp.Button.CustomAction" Location="Mscrm.Form.opportunity.MainTab.Actions.Controls._children" Sequence="11">
       <CommandUIDefinition>
-        <Button Command="tc.TravelPlanner.Command.AddFollowUpActivityToPrimaryRecord" Id="tc.TravelPlanner.AddFollowUp.Button" Image32by32="$webresource:tc_FollowUpIcon32.png" Image16by16="$webresource:tc_FollowUpIcon16.png" LabelText="$LocLabels:tc.TravelPlanner.AddFollowUp.Button.LabelText" Sequence="10" TemplateAlias="o1" />
+        <Button Command="tc.TravelPlanner.Command.AddFollowUpActivityToPrimaryRecord" Id="tc.TravelPlanner.AddFollowUp.Button" Image32by32="$webresource:tc_FollowUpIcon32.png" Image16by16="$webresource:tc_FollowUpIcon16.png" LabelText="$LocLabels:tc.TravelPlanner.AddFollowUp.Button.LabelText" Sequence="11" TemplateAlias="o1" />
       </CommandUIDefinition>
     </CustomAction>
     <CustomAction Id="tc.TravelPlanner.Button.LIME.CustomAction" Location="Mscrm.Form.opportunity.MainTab.Actions.Controls._children" Sequence="7">
@@ -31,6 +36,15 @@
     <RibbonTemplates Id="Mscrm.Templates"></RibbonTemplates>
   </Templates>
   <CommandDefinitions>
+    <CommandDefinition Id="tc.TravellerPlanner.SurpriseButton.Command">
+      <EnableRules>
+        <EnableRule Id="tc.TravellerPlanner.SurpriseButton.EnableRule" />
+      </EnableRules>
+      <DisplayRules />
+      <Actions>
+        <JavaScriptFunction FunctionName="Tc.Crm.Scripts.Events.TravellerPlanner.OnSurpriseRibbonButtonClick" Library="Tc.Crm.Scripts.Events.TravellerPlanner.js" />
+      </Actions>
+    </CommandDefinition>
     <CommandDefinition Id="tc.TravellerPlanner.ValidateButton.Command">
       <EnableRules>
         <EnableRule Id="tc.TravellerPlanner.ValidateButton.EnableRule" />
@@ -52,7 +66,7 @@
       </DisplayRules>
       <Actions>
         <JavaScriptFunction FunctionName="Mscrm.RibbonActions.addActivityOnForm" Library="/_static/_common/scripts/RibbonActions.js">
-          <IntParameter Value="10173" />
+          <CrmParameter Value="SelectedEntityTypeCode" />
         </JavaScriptFunction>
       </Actions>
     </CommandDefinition>
@@ -82,12 +96,20 @@
       <EnableRule Id="tc.TravellerPlanner.OWRorLIMEButton.EnableRule">
         <CustomRule FunctionName="Tc.Crm.Scripts.Events.TravellerPlanner.EnableDisableOWRorLimeButton" Library="$webresource:tc_Tc.Crm.Scripts.Events.TravellerPlanner.js" Default="false" InvertResult="false" />
       </EnableRule>
+      <EnableRule Id="tc.TravellerPlanner.SurpriseButton.EnableRule">
+        <FormStateRule State="Create" Default="true" InvertResult="true" />
+      </EnableRule>
       <EnableRule Id="tc.TravellerPlanner.ValidateButton.EnableRule">
         <CustomRule FunctionName="Tc.Crm.Scripts.Events.TravellerPlanner.EnableDisableValidateButton" Library="$webresource:tc_Tc.Crm.Scripts.Events.TravellerPlanner.js" Default="false" InvertResult="false" />
       </EnableRule>
     </EnableRules>
   </RuleDefinitions>
   <LocLabels>
+    <LocLabel Id="Tc.TravellerPlanner.Button.Surprise.LabelText">
+      <Titles>
+        <Title description="Surprise" languagecode="1033" />
+      </Titles>
+    </LocLabel>
     <LocLabel Id="Tc.Travellerplanner.Button.Validate.LabelText">
       <Titles>
         <Title description="Validate" languagecode="1033" />

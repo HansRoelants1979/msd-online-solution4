@@ -12,13 +12,14 @@
         <EnableRule Id="Mscrm.CanChangeIncidentForm" />
         <EnableRule Id="Mscrm.IncidentIsActive" />
         <EnableRule Id="Mscrm.IsAvailableInMocaOffline" />
+        <EnableRule Id="tc.incident.EnableRule4.EnableRule" />
       </EnableRules>
       <DisplayRules>
         <DisplayRule Id="Mscrm.CanChangeIncidentForm" />
         <DisplayRule Id="Mscrm.IncidentIsActive" />
       </DisplayRules>
       <Actions>
-        <JavaScriptFunction FunctionName="Mscrm.CommandBarActions.resolve" Library=" /_static/_common/scripts/CommandBarActions.js" />
+        <JavaScriptFunction FunctionName="Mscrm.CommandBarActions.resolve" Library="/_static/_common/scripts/CommandBarActions.js" />
       </Actions>
     </CommandDefinition>
   </CommandDefinitions>
@@ -49,6 +50,9 @@
           <BoolParameter Value="true" />
           <CrmParameter Value="SelectedEntityTypeName" />
         </CustomRule>
+      </EnableRule>
+      <EnableRule Id="tc.incident.EnableRule4.EnableRule">
+        <ValueRule Field="tc_reportnotes" Value="null" InvertResult="true" />
       </EnableRule>
     </EnableRules>
   </RuleDefinitions>

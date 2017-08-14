@@ -164,11 +164,22 @@
       </FieldPermission>
     </FieldPermissions>
   </FieldSecurityProfile>
-  <FieldSecurityProfile name="Tc.User.AllBudgetCentreAccess" description="To change tc_allbudgetcentreaccess field by Tc.Uk.Retail.Level2 and Tc.Uk.Retail.Level3 security roles." fieldsecurityprofileid="{4750efb7-2878-e711-8102-5065f38b74a1}">
+  <FieldSecurityProfile name="Tc.Uk.Retail.UserLevel2" description="For Tc.Uk.Retail.Level2 and Tc.Uk.Retail.Level3 Security Roles to be able to edit the following fields:&#xA;- All Budget Centre Access" fieldsecurityprofileid="{4750efb7-2878-e711-8102-5065f38b74a1}">
     <FieldPermissions>
       <FieldPermission>
         <EntityName>systemuser</EntityName>
         <AttributeName>tc_allbudgetcentreaccess</AttributeName>
+        <CanRead>4</CanRead>
+        <CanUpdate>4</CanUpdate>
+        <CanCreate>4</CanCreate>
+      </FieldPermission>
+    </FieldPermissions>
+  </FieldSecurityProfile>
+  <FieldSecurityProfile name="Tc.Uk.Retail.UserLevel3" description="For Tc.Uk.Retail.UserLevel3 Security Roles to be able to edit the following fields:&#xA;- Payroll Number" fieldsecurityprofileid="{742aa960-9f7d-e711-8104-5065f38bb571}">
+    <FieldPermissions>
+      <FieldPermission>
+        <EntityName>systemuser</EntityName>
+        <AttributeName>tc_payrollnumber</AttributeName>
         <CanRead>4</CanRead>
         <CanUpdate>4</CanUpdate>
         <CanCreate>4</CanCreate>

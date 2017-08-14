@@ -5,12 +5,11 @@
       <Group Id="MyWork" ResourceId="Group_MyWork" DescriptionResourceId="My_Work_Description" IntroducedVersion="7.0.0.0" IsProfile="false" ToolTipResourseId="My_Work_ToolTip">
         <SubArea Id="nav_dashboards" ResourceId="Homepage_Dashboards" DescriptionResourceId="Dashboards_Description" Icon="/_imgs/area/18_home.gif" Url="/workplace/home_dashboards.aspx" DefaultDashboard="2701de60-8f2a-48a4-8262-4a35ca7441fa" IntroducedVersion="7.0.0.0" GetStartedPanePath="Dashboards_Web_User_Visor.html" GetStartedPanePathAdmin="Dashboards_Web_Admin_Visor.html" GetStartedPanePathAdminOutlook="Dashboards_Outlook_Admin_Visor.html" GetStartedPanePathOutlook="Dashboards_Outlook_User_Visor.html" AvailableOffline="false" PassParams="false" />
       </Group>
-      <Group Id="Customers" ResourceId="Group_Customers" DescriptionResourceId="Customers_Description" IntroducedVersion="7.0.0.0" IsProfile="false" ToolTipResourseId="Customers_ToolTip">
-        <SubArea Id="nav_accts" DescriptionResourceId="Account_SubArea_Description" Icon="/_imgs/imagestrips/transparent_spacer.gif" IntroducedVersion="7.0.0.0" GetStartedPanePath="Accounts_Web_User_Visor.html" GetStartedPanePathAdmin="Accounts_Web_Admin_Visor.html" GetStartedPanePathAdminOutlook="Accounts_Outlook_Admin_Visor.html" GetStartedPanePathOutlook="Accounts_Outlook_User_Visor.html" Entity="account" AvailableOffline="false" PassParams="false" />
-        <SubArea Id="nav_conts" DescriptionResourceId="Contact_SubArea_Description" Icon="/_imgs/imagestrips/transparent_spacer.gif" IntroducedVersion="7.0.0.0" GetStartedPanePath="Contacts_Web_User_Visor.html" GetStartedPanePathAdmin="Contacts_Web_Admin_Visor.html" GetStartedPanePathAdminOutlook="Contacts_Outlook_Admin_Visor.html" GetStartedPanePathOutlook="Contacts_Outlook_User_Visor.html" Entity="contact" AvailableOffline="false" PassParams="false" />
-      </Group>
+      <Group Id="Customers" ResourceId="Group_Customers" DescriptionResourceId="Customers_Description" IntroducedVersion="7.0.0.0" IsProfile="false" ToolTipResourseId="Customers_ToolTip" />
       <Group Id="SFA" ResourceId="Area_Sales" DescriptionResourceId="Sales_Description" IntroducedVersion="7.0.0.0" IsProfile="false" ToolTipResourseId="Sales_ToolTip">
         <SubArea Id="nav_oppts" DescriptionResourceId="Opportunity_SubArea_Description" Icon="/_imgs/imagestrips/transparent_spacer.gif" IntroducedVersion="7.0.0.0" GetStartedPanePath="Opportunities_Web_User_Visor.html" GetStartedPanePathAdmin="Opportunities_Web_Admin_Visor.html" GetStartedPanePathAdminOutlook="Opportunities_Outlook_Admin_Visor.html" GetStartedPanePathOutlook="Opportunities_Outlook_User_Visor.html" Entity="opportunity" AvailableOffline="false" PassParams="false" />
+        <SubArea Id="nav_conts" DescriptionResourceId="Contact_SubArea_Description" Icon="/_imgs/imagestrips/transparent_spacer.gif" IntroducedVersion="7.0.0.0" GetStartedPanePath="Contacts_Web_User_Visor.html" GetStartedPanePathAdmin="Contacts_Web_Admin_Visor.html" GetStartedPanePathAdminOutlook="Contacts_Outlook_Admin_Visor.html" GetStartedPanePathOutlook="Contacts_Outlook_User_Visor.html" Entity="contact" AvailableOffline="false" PassParams="false" />
+        <SubArea Id="nav_accts" DescriptionResourceId="Account_SubArea_Description" Icon="/_imgs/imagestrips/transparent_spacer.gif" IntroducedVersion="7.0.0.0" GetStartedPanePath="Accounts_Web_User_Visor.html" GetStartedPanePathAdmin="Accounts_Web_Admin_Visor.html" GetStartedPanePathAdminOutlook="Accounts_Outlook_Admin_Visor.html" GetStartedPanePathOutlook="Accounts_Outlook_User_Visor.html" Entity="account" AvailableOffline="false" PassParams="false" />
       </Group>
       <Group Id="Tools" ResourceId="Area_Tools" DescriptionResourceId="Area_Tools_Description" IntroducedVersion="7.0.0.0" IsProfile="true" ToolTipResourseId="Area_Tools_ToolTip">
         <SubArea Id="nav_reports" DescriptionResourceId="Reports_Description" Icon="/_imgs/imagestrips/transparent_spacer.gif" IntroducedVersion="7.0.0.0" Entity="report" AvailableOffline="false" PassParams="false">
@@ -21,14 +20,9 @@
         <Titles>
           <Title LCID="1033" Title="Data" />
         </Titles>
-        <SubArea Id="NewSubArea_35ba4eeb" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="tc_killerquestions" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
-        <SubArea Id="NewSubArea_186b0e35" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="tc_boardbasis" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
       </Group>
-      <Group Id="Extensions" ResourceId="Group_Extensions">
-        <SubArea Id="tc_whatsnext" Entity="tc_whatsnext" />
-        <SubArea Id="tc_cluster" Entity="tc_cluster" />
-        <SubArea Id="tc_store" Entity="tc_store" />
-        <SubArea Id="tc_ukregion" Entity="tc_ukregion" />
+      <Group Id="Extensions" ResourceId="Group_Extensions" IsProfile="false" ToolTipResourseId="SitemapDesigner.Unknown">
+        <SubArea Id="tc_externallogin" Icon="/WebResources/msdyn_/Images/Subarea_Default_Icon.png" Entity="tc_externallogin" AvailableOffline="true" PassParams="false" />
       </Group>
     </Area>
     <Area Id="CS" ResourceId="Area_Service" DescriptionResourceId="Customer_Service_Description" Icon="/_imgs/services_24x24.gif" ShowGroups="true" IntroducedVersion="7.0.0.0">
@@ -93,6 +87,8 @@
         </Titles>
         <SubArea Id="tc_casetype" Icon="/WebResources/msdyn_/Images/Subarea_Default_Icon.png" Entity="tc_casetype" AvailableOffline="true" PassParams="false" />
         <SubArea Id="tc_casecategory" Icon="/WebResources/msdyn_/Images/Subarea_Default_Icon.png" Entity="tc_casecategory" AvailableOffline="true" PassParams="false" />
+        <SubArea Id="NewSubArea_5490213c" Icon="/WebResources/msdyn_/Images/Subarea_Default_Icon.png" Entity="tc_compensationcalculationline" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="tc_compensationcalculationmatrix" Icon="/WebResources/msdyn_/Images/Subarea_Default_Icon.png" Entity="tc_compensationcalculationmatrix" AvailableOffline="true" PassParams="false" />
       </Group>
       <Group Id="Misc" IsProfile="false" ToolTipResourseId="SitemapDesigner.Unknown">
         <Titles>
@@ -103,24 +99,28 @@
         <SubArea Id="tc_accounttype" Icon="/WebResources/msdyn_/Images/Subarea_Default_Icon.png" Entity="tc_accounttype" AvailableOffline="true" PassParams="false" />
         <SubArea Id="tc_sharer" Icon="/WebResources/msdyn_/Images/Subarea_Default_Icon.png" Entity="tc_sharer" AvailableOffline="true" PassParams="false" />
       </Group>
+      <Group Id="NewGroup_e61db2cd" ResourceId="SitemapDesigner.NewGroup" IsProfile="false" ToolTipResourseId="SitemapDesigner.Unknown">
+        <Titles>
+          <Title LCID="1033" Title="Sales" />
+        </Titles>
+        <SubArea Id="NewSubArea_35ba4eeb" Icon="/WebResources/msdyn_/Images/Subarea_Default_Icon.png" Entity="tc_killerquestions" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="NewSubArea_186b0e35" Icon="/WebResources/msdyn_/Images/Subarea_Default_Icon.png" Entity="tc_boardbasis" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="tc_store" Icon="/WebResources/msdyn_/Images/Subarea_Default_Icon.png" Entity="tc_store" AvailableOffline="true" PassParams="false" />
+        <SubArea Id="tc_cluster" Icon="/WebResources/msdyn_/Images/Subarea_Default_Icon.png" Entity="tc_cluster" AvailableOffline="true" PassParams="false" />
+        <SubArea Id="tc_ukregion" Icon="/WebResources/msdyn_/Images/Subarea_Default_Icon.png" Entity="tc_ukregion" AvailableOffline="true" PassParams="false" />
+      </Group>
       <Group Id="NewGroup_c85c847" ResourceId="SitemapDesigner.NewGroup" IsProfile="false" ToolTipResourseId="SitemapDesigner.Unknown">
         <Titles>
           <Title LCID="1033" Title="Settings" />
         </Titles>
         <SubArea Id="tc_configuration" Icon="/WebResources/msdyn_/Images/Subarea_Default_Icon.png" Entity="tc_configuration" AvailableOffline="true" PassParams="false" />
-        <SubArea Id="NewSubArea_5490213c" Icon="/WebResources/msdyn_/Images/Subarea_Default_Icon.png" Entity="tc_compensationcalculationline" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
-        <SubArea Id="tc_compensationcalculationmatrix" Icon="/WebResources/msdyn_/Images/Subarea_Default_Icon.png" Entity="tc_compensationcalculationmatrix" AvailableOffline="true" PassParams="false" />
+        <SubArea Id="tc_secureconfiguration" Icon="/WebResources/msdyn_/Images/Subarea_Default_Icon.png" Entity="tc_secureconfiguration" AvailableOffline="true" PassParams="false" />
+        <SubArea Id="NewSubArea_2b69266b" Icon="/WebResources/msdyn_/Images/Subarea_Default_Icon.png" Entity="tc_cacherequest" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
       </Group>
       <Group Id="Extensions" ResourceId="Group_Extensions" IsProfile="false" ToolTipResourseId="SitemapDesigner.Unknown">
         <SubArea Id="poan_powerautonumber" Icon="/WebResources/msdyn_/Images/Subarea_Default_Icon.png" Entity="poan_powerautonumber" AvailableOffline="true" PassParams="false">
           <Privilege Entity="poan_powerautonumber" Privilege="Read" />
         </SubArea>
-        <SubArea Id="NewSubArea_2b69266b" Icon="/WebResources/msdyn_/Images/Subarea_Default_Icon.png" Entity="tc_cacherequest" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
-        <SubArea Id="tc_externallogin" Entity="tc_externallogin" />
-        <SubArea Id="tc_store" Entity="tc_store" />
-        <SubArea Id="tc_cluster" Entity="tc_cluster" />
-        <SubArea Id="tc_ukregion" Entity="tc_ukregion" />
-        <SubArea Id="tc_secureconfiguration" Entity="tc_secureconfiguration" />
       </Group>
     </Area>
     <Area Id="Settings" ResourceId="Area_Settings" DescriptionResourceId="Settings_Area_Description" Icon="/_imgs/settings_24x24.gif" ShowGroups="true" IntroducedVersion="7.0.0.0">
@@ -132,51 +132,51 @@
         </SubArea>
         <SubArea Id="nav_UnifiedServiceDesk" Icon="/WebResources/msdyusd_/Images/USDSettingsIcon_18.png" Url="$webresource:msdyusd_/USDMain.html" AvailableOffline="true" PassParams="false">
           <Titles>
-            <Title LCID="1033" Title="Unified Service Desk" />
-            <Title LCID="1025" Title="Unified Service Desk" />
-            <Title LCID="1026" Title="Unified Service Desk" />
-            <Title LCID="1027" Title="Unified Service Desk" />
-            <Title LCID="1028" Title="Unified Service Desk" />
-            <Title LCID="1029" Title="Unified Service Desk" />
-            <Title LCID="1030" Title="Unified Service Desk" />
-            <Title LCID="1031" Title="Unified Service Desk" />
-            <Title LCID="1032" Title="Unified Service Desk" />
-            <Title LCID="1035" Title="Unified Service Desk" />
-            <Title LCID="1036" Title="Unified Service Desk" />
-            <Title LCID="1037" Title="Unified Service Desk" />
-            <Title LCID="1038" Title="Unified Service Desk" />
-            <Title LCID="1040" Title="Unified Service Desk" />
-            <Title LCID="1041" Title="Unified Service Desk" />
-            <Title LCID="1042" Title="Unified Service Desk" />
-            <Title LCID="1043" Title="Unified Service Desk" />
-            <Title LCID="1044" Title="Unified Service Desk" />
-            <Title LCID="1045" Title="Unified Service Desk" />
-            <Title LCID="1046" Title="Unified Service Desk" />
-            <Title LCID="1048" Title="Unified Service Desk" />
-            <Title LCID="1049" Title="Unified Service Desk" />
-            <Title LCID="1050" Title="Unified Service Desk" />
-            <Title LCID="1051" Title="Unified Service Desk" />
-            <Title LCID="1053" Title="Unified Service Desk" />
-            <Title LCID="1054" Title="Unified Service Desk" />
-            <Title LCID="1055" Title="Unified Service Desk" />
-            <Title LCID="1057" Title="Unified Service Desk" />
-            <Title LCID="1058" Title="Unified Service Desk" />
-            <Title LCID="1060" Title="Unified Service Desk" />
-            <Title LCID="1061" Title="Unified Service Desk" />
-            <Title LCID="1062" Title="Unified Service Desk" />
-            <Title LCID="1063" Title="„Unified Service Desk“" />
-            <Title LCID="1066" Title="Unified Service Desk" />
-            <Title LCID="1069" Title="Unified Service Desk" />
-            <Title LCID="1081" Title="Unified Service Desk" />
-            <Title LCID="1086" Title="Unified Service Desk" />
-            <Title LCID="1087" Title="Unified Service Desk" />
-            <Title LCID="1110" Title="Unified Service Desk" />
-            <Title LCID="2052" Title="Unified Service Desk" />
-            <Title LCID="2070" Title="Unified Service Desk" />
-            <Title LCID="2074" Title="Unified Service Desk" />
-            <Title LCID="3076" Title="Unified Service Desk" />
-            <Title LCID="3082" Title="Unified Service Desk" />
-            <Title LCID="3098" Title="Unified Service Desk" />
+            <Title Title="Unified Service Desk" LCID="1033" />
+            <Title Title="Unified Service Desk" LCID="1025" />
+            <Title Title="Unified Service Desk" LCID="1026" />
+            <Title Title="Unified Service Desk" LCID="1027" />
+            <Title Title="Unified Service Desk" LCID="1028" />
+            <Title Title="Unified Service Desk" LCID="1029" />
+            <Title Title="Unified Service Desk" LCID="1030" />
+            <Title Title="Unified Service Desk" LCID="1031" />
+            <Title Title="Unified Service Desk" LCID="1032" />
+            <Title Title="Unified Service Desk" LCID="1035" />
+            <Title Title="Unified Service Desk" LCID="1036" />
+            <Title Title="Unified Service Desk" LCID="1037" />
+            <Title Title="Unified Service Desk" LCID="1038" />
+            <Title Title="Unified Service Desk" LCID="1040" />
+            <Title Title="Unified Service Desk" LCID="1041" />
+            <Title Title="Unified Service Desk" LCID="1042" />
+            <Title Title="Unified Service Desk" LCID="1043" />
+            <Title Title="Unified Service Desk" LCID="1044" />
+            <Title Title="Unified Service Desk" LCID="1045" />
+            <Title Title="Unified Service Desk" LCID="1046" />
+            <Title Title="Unified Service Desk" LCID="1048" />
+            <Title Title="Unified Service Desk" LCID="1049" />
+            <Title Title="Unified Service Desk" LCID="1050" />
+            <Title Title="Unified Service Desk" LCID="1051" />
+            <Title Title="Unified Service Desk" LCID="1053" />
+            <Title Title="Unified Service Desk" LCID="1054" />
+            <Title Title="Unified Service Desk" LCID="1055" />
+            <Title Title="Unified Service Desk" LCID="1057" />
+            <Title Title="Unified Service Desk" LCID="1058" />
+            <Title Title="Unified Service Desk" LCID="1060" />
+            <Title Title="Unified Service Desk" LCID="1061" />
+            <Title Title="Unified Service Desk" LCID="1062" />
+            <Title Title="„Unified Service Desk“" LCID="1063" />
+            <Title Title="Unified Service Desk" LCID="1066" />
+            <Title Title="Unified Service Desk" LCID="1069" />
+            <Title Title="Unified Service Desk" LCID="1081" />
+            <Title Title="Unified Service Desk" LCID="1086" />
+            <Title Title="Unified Service Desk" LCID="1087" />
+            <Title Title="Unified Service Desk" LCID="1110" />
+            <Title Title="Unified Service Desk" LCID="2052" />
+            <Title Title="Unified Service Desk" LCID="2070" />
+            <Title Title="Unified Service Desk" LCID="2074" />
+            <Title Title="Unified Service Desk" LCID="3076" />
+            <Title Title="Unified Service Desk" LCID="3082" />
+            <Title Title="Unified Service Desk" LCID="3098" />
           </Titles>
         </SubArea>
         <SubArea Id="nav_externAppmanagement" ResourceId="Homepage_ExternAppManagement" DescriptionResourceId="ExternAppManagement_SubArea_Description" Icon="/_imgs/ExternalAppManagement_16.png" Url="/tools/externappmanagement/externappmanagement.aspx" IntroducedVersion="8.0.0.0" AvailableOffline="false" PassParams="false" />
