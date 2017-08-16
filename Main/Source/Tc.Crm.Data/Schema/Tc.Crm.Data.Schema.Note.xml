@@ -7,11 +7,11 @@
       <field displayname="File Size (Bytes)" name="filesize" type="number" />
       <field displayname="Is Document" name="isdocument" type="bool" />
       <field displayname="Mime Type" name="mimetype" type="string" />
-      <field displayname="Note" name="annotationid" type="guid" primaryKey="true" />
       <field displayname="Object Type " name="objecttypecode" type="string" />
       <field displayname="Regarding" name="objectid" type="entityreference" lookupType="account|appointment|bookableresource|bookableresourcebooking|bookableresourcebookingheader|bookableresourcecategoryassn|bookableresourcecharacteristic|bookableresourcegroup|calendar|campaign|campaignactivity|campaignresponse|channelaccessprofile|channelaccessprofilerule|channelaccessprofileruleitem|commitment|competitor|contact|contract|contractdetail|convertrule|duplicaterule|email|emailserverprofile|entitlement|entitlementchannel|entitlementtemplate|equipment|fax|goal|incident|incidentresolution|invoice|kbarticle|knowledgearticle|knowledgebaserecord|lead|letter|list|mailbox|msdyn_postalbum|msdyusd_agentscriptaction|msdyusd_answer|msdyusd_configuration|msdyusd_customizationfiles|msdyusd_entityassignment|msdyusd_entitysearch|msdyusd_form|msdyusd_languagemodule|msdyusd_scriptlet|msdyusd_scripttasktrigger|msdyusd_search|msdyusd_sessioninformation|msdyusd_task|msdyusd_toolbarbutton|msdyusd_toolbarstrip|msdyusd_tracesourcesetting|msdyusd_uiievent|msdyusd_windowroute|opportunity|opportunityclose|orderclose|phonecall|popat_powerattachmentprocessqueueemail|popat_powerattachmentprocessqueuenotes|posms_powersmsconfiguration|posms_smsmessage|product|quote|quoteclose|recurringappointmentmaster|resourcespec|routingrule|routingruleitem|salesorder|service|serviceappointment|sharepointdocument|sla|socialactivity|task|tc_assistancerequest|tc_booking|tc_bookingaccommodation|tc_bookingextraservice|tc_bookingtransfer|tc_bookingtransport|tc_cacherequest|tc_compensationapproval|tc_followup|tc_surveyresponse|uii_action|uii_hostedapplication|uii_nonhostedapplication|uii_option|uii_workflow|uii_workflowstep|uii_workflow_workflowstep_mapping|workflow" />
       <field displayname="Title" name="subject" type="string" />
       <field displayname="Step Id" name="stepid" type="string" />
+      <field updateCompare="true" displayname="Note" name="annotationid" type="guid" primaryKey="true" />
     </fields>
   </entity>
 </entities>
