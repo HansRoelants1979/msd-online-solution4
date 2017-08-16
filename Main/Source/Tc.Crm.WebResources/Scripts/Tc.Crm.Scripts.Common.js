@@ -79,21 +79,60 @@ scriptLoader.load("Tc.Crm.Scripts.Common", null, function () {
                 }
             }
             return context.getClientUrl();
-        };
+        }
 
         var clientUrl = Sdk.getClientUrl();     // e.g.: https://org.crm.dynamics.com
         var webAPIPath = "/api/data/v8.2";      // Path to the web API.
 
+        /**
+         * @function createXMLHttpRequest
+         * @description Generic helper function to create  createXMLHttpRequest.
+         * @param {bool} async - true if request should be asyncronous.
+         * @param {string} action - The request action. String is case-sensitive.
+         * @param {string} uri - An absolute or relative URI. Relative URI starts with a "/".
+         * @param {object} data - content to be sent with request
+         * @param {function} resolve - method to execute on success
+         * @param {function} reject - method to execute on failure
+         */
+        Sdk.createXMLHttpRequest = function (async, action, uri, data, resolve, reject) {
+            var request = new XMLHttpRequest();
+            request.open(action, encodeURI(uri), async);
+            request.setRequestHeader("OData-MaxVersion", "4.0");
+            request.setRequestHeader("OData-Version", "4.0");
+            request.setRequestHeader("Accept", "application/json");
+            request.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+            request.onreadystatechange = function () {
+                if (this.readyState === 4) {
+                    request.onreadystatechange = null;
+                    switch (this.status) {
+                        case 200: // Success with content returned in response body.
+                        case 204: // Success with no content returned in response body.
+                            resolve(this);
+                            break;
+                        default: // All other statuses are unexpected so are treated like errors.
+                            var error;
+                            try {
+                                error = JSON.parse(request.response).error;
+                            } catch (e) {
+                                error = new Error("Unexpected Error");
+                            }
+                            reject(error);
+                            break;
+                    }
+                }
+            };
+            request.send(JSON.stringify(data));
+        }
 
         /**
-         * @function request
-         * @description Generic helper function to handle basic XMLHttpRequest calls.
+         * @function validateParameters
+         * @description Validate request parameters
          * @param {string} action - The request action. String is case-sensitive.
          * @param {string} uri - An absolute or relative URI. Relative URI starts with a "/".
          * @param {object} data - An object representing an entity. Required for create and update action.
-         * @returns {Promise} - A Promise that returns either the request object or an error object.
+         * @throws {error} - if request parameters are not valid
          */
-        Sdk.request = function (action, uri, data) {
+        Sdk.validateParameters = function (action, uri, data) {
             if (!RegExp(action, "g").test("POST PATCH PUT GET DELETE")) { // Expected action verbs.
                 throw new Error("Sdk.request: action parameter must be one of the following: " +
                     "POST, PATCH, PUT, GET, or DELETE.");
@@ -104,41 +143,50 @@ scriptLoader.load("Tc.Crm.Scripts.Common", null, function () {
             if ((RegExp(action, "g").test("POST PATCH PUT")) && (data === null || data === undefined)) {
                 throw new Error("Sdk.request: data parameter must not be null for operations that create or modify data.");
             }
+        }
+
+        /**
+         * @function request
+         * @description Generic helper function to handle basic asyncronous XMLHttpRequest calls.
+         * @param {string} action - The request action. String is case-sensitive.
+         * @param {string} uri - An absolute or relative URI. Relative URI starts with a "/".
+         * @param {object} data - An object representing an entity. Required for create and update action.
+         * @returns {Promise} - A Promise that returns either the request object or an error object.
+         */
+        Sdk.request = function (action, uri, data) {
+            Sdk.validateParameters(action, uri, data);
+            // Construct a fully qualified URI if a relative URI is passed in.
+            if (uri.charAt(0) === "/") {
+                uri = clientUrl + webAPIPath + uri;
+            }
+            return new Promise(function (resolve, reject) {
+                Sdk.createXMLHttpRequest(true, action, uri, data, resolve, reject);
+            });
+        }
+
+        /**
+         * @function requestSync
+         * @description Generic helper function to handle basic syncronous XMLHttpRequest calls.
+         * @param {string} action - The request action. String is case-sensitive.
+         * @param {string} uri - An absolute or relative URI. Relative URI starts with a "/".
+         * @param {object} data - An object representing an entity. Required for create and update action.
+         * @returns {Object} - Result of request.
+         */
+        Sdk.requestSync = function (action, uri, data) {
+            Sdk.validateParameters(action, uri, data);
 
             // Construct a fully qualified URI if a relative URI is passed in.
             if (uri.charAt(0) === "/") {
                 uri = clientUrl + webAPIPath + uri;
             }
 
-            return new Promise(function (resolve, reject) {
-                var request = new XMLHttpRequest();
-                request.open(action, encodeURI(uri), true);
-                request.setRequestHeader("OData-MaxVersion", "4.0");
-                request.setRequestHeader("OData-Version", "4.0");
-                request.setRequestHeader("Accept", "application/json");
-                request.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-                request.onreadystatechange = function () {
-                    if (this.readyState === 4) {
-                        request.onreadystatechange = null;
-                        switch (this.status) {
-                            case 200: // Success with content returned in response body.
-                            case 204: // Success with no content returned in response body.
-                                resolve(this);
-                                break;
-                            default: // All other statuses are unexpected so are treated like errors.
-                                var error;
-                                try {
-                                    error = JSON.parse(request.response).error;
-                                } catch (e) {
-                                    error = new Error("Unexpected Error");
-                                }
-                                reject(error);
-                                break;
-                        }
-                    }
-                };
-                request.send(JSON.stringify(data));
+            var result;
+            Sdk.createXMLHttpRequest(false, action, uri, data, function (response) {
+                result = JSON.parse(response.response);
+            }, function (error) {
+                throw error;
             });
+            return result;
         }
 
         // public members
@@ -152,6 +200,17 @@ scriptLoader.load("Tc.Crm.Scripts.Common", null, function () {
             Get: function (entityName, query) {
                 var entityUri = "/" + entityName;
                 return Sdk.request("GET", entityUri + query, null);
+            },
+            /**
+                * @function SyncGet - execute get request syncronously                             
+                * @param {string} entityName - Entity set name as per /api/data/v8.2/EntityDefinitions.
+                * @param {string} query - Query to Select, Expand so on.
+                * @returns {Object} - Result of request.
+                * @throws {exception} if failed to process for any reason
+                */
+            SyncGet: function (entityName, query) {
+                var entityUri = "/" + entityName;
+                return Sdk.requestSync("GET", entityUri + query, null);
             },
             /**
                 * @function Get                             
