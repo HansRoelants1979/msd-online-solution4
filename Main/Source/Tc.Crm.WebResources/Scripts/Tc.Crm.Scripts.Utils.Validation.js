@@ -156,12 +156,11 @@ Tc.Crm.Scripts.Utils.Validation = (function () {
 
     var isPastDate = function (date)
     {
-        var pastDate = false;
+        if (date == null || date == undefined || date == "") return false;
         var today = new Date();
-        today.setHours(0, 0, 0, 0);        
-        if (date == null || date == undefined || date == "") return pastDate;
-           date.setHours(0, 0, 0, 0);
-           if (date < today) return pastDate = true;
+        today.setHours(0, 0, 0, 0);
+        date.setHours(0, 0, 0, 0);
+        return (date < today);
        
     }
 
