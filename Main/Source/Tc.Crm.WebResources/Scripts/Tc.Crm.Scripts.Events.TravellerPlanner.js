@@ -38,6 +38,11 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
         ReviewDate: "tc_reviewdate",
         Surprise: "tc_surprise",
     }
+
+    var EntitySetNames = {
+        SecurityRole: "roles",
+        ExternalLogins :"tc_externallogins",
+    }
     var StateCode = {
         Open: 0,
     }
@@ -46,14 +51,8 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
         var UserRole = window.parent.Xrm.Page.context.getUserRoles();
         if (UserRole == null || UserRole == "" || UserRole == undefined) return enable;
         for (var i = 0; i < UserRole.length; i++) {
-            var req = new XMLHttpRequest();
-            var userRoleId = UserRole[i];
-            req.open("GET", Xrm.Page.context.getClientUrl() + "/api/data/v8.2/roles?$select=name&$filter=roleid eq " + userRoleId, false);
-            req.setRequestHeader("Accept", "application/json");
-            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-            req.onreadystatechange = function () {
-                if (req.readyState == STATUS_READY && req.status == HTTP_SUCCESS) {
-                    var results = JSON.parse(req.response);
+            var userRoleId = UserRole[i];            
+            var results = syncGetSecurityRoles(userRoleId);
                     var name = results.value[0]["name"];
                     if (name == CLUSTER_MANAGER || name == ASSISTANT_MANAGER || name == REGIONAL_MANAGER) {
                         var ValidationAttr = getControlValue(Attributes.Validation);
@@ -61,10 +60,7 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
                         if (ValidationAttr == false && Xrm.Page.ui.getFormType() != FORM_MODE_CREATE) {
                             enable = true;
                         }
-                    }
-                }
-            };
-            req.send();
+                    }           
             if (enable == true) break;
         }
         return enable;
@@ -91,12 +87,13 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
 
     }
     var enableOWRorLimeButton = function () {
+       
         var enable = false;
         if (window.IsUSD != true) return enable;
         if (Xrm.Page.ui.getFormType() == FORM_MODE_CREATE) return enable;
         if (Xrm.Page.getAttribute(Attributes.StateCode).getValue() != StateCode.Open) return enable;
         if (Xrm.Page.getAttribute(Attributes.CustomerId).getValue() == null) return enable;
-        var ssoLoggined = getExternaLogin();
+        var ssoLoggined = getExternalLogin();
         if (ssoLoggined != false && ssoLoggined != undefined && ssoLoggined != "")
             return ssoLoggined;
 
@@ -119,34 +116,38 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
         else
             return null;
     }
-    function getExternaLogin() {
+    function getExternalLogin() {
         var extraLoginRecordExist = false;
-        var loginnedUserId = null;
-        loginnedUserId = Xrm.Page.context.getUserId();
-        if (loginnedUserId == null || loginnedUserId == undefined || loginnedUserId == "") return extraLoginRecordExist;
-        loginnedUserId = loginnedUserId.replace("{", "").replace("}", "");
-        var req = new XMLHttpRequest();
-        req.open("GET", Xrm.Page.context.getClientUrl() + "/api/data/v8.2/tc_externallogins?$select=tc_abtanumber,tc_branchcode,tc_employeeid,tc_initials,tc_name&$filter=_ownerid_value eq " + loginnedUserId + "&$count=true", false);
-        req.setRequestHeader("OData-MaxVersion", "4.0");
-        req.setRequestHeader("OData-Version", "4.0");
-        req.setRequestHeader("Accept", "application/json");
-        req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-        req.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
-        req.onreadystatechange = function () {
-            if (this.readyState === 4) {
-                req.onreadystatechange = null;
-                if (this.status === 200) {
-                    var results = JSON.parse(this.response);
-                    var recordCount = results["@odata.count"];
-                    if (recordCount === 1)
-                        extraLoginRecordExist = true;
-                } else {
-                    Xrm.Utility.alertDialog(this.statusText);
-                }
-            }
-        };
-        req.send();
+        var loggedInUserId = null;
+        loggedInUserId = Xrm.Page.context.getUserId();
+        if (loggedInUserId == null || loggedInUserId == undefined || loggedInUserId == "") return extraLoginRecordExist;
+        loggedInUserId = loggedInUserId.replace("{", "").replace("}", "");
+        var results = syncGetExternalLoginRecords(loggedInUserId);
+        var recordCount = results["@odata.count"];
+        if (recordCount === 1)
+            extraLoginRecordExist = true;    
         return extraLoginRecordExist;
+    }
+    var syncGetSecurityRoles = function (userRoleId) {
+        try {
+            var query = "?$select=name&$filter=roleid eq " + userRoleId;
+            var roleNameResults = Tc.Crm.Scripts.Common.SyncGet(EntitySetNames.SecurityRole, query);
+            return roleNameResults;
+        } catch (e) {
+            console.log("Error in retrieving SecurityRoles");
+            return null;
+        }
+    }
+
+    var syncGetExternalLoginRecords = function (loggedInUserId) {
+        try {
+            var query = "?$select=tc_abtanumber,tc_branchcode,tc_employeeid,tc_initials,tc_name&$filter=_ownerid_value eq " + loggedInUserId + "&$count=true";
+            var externalLoginResults = Tc.Crm.Scripts.Common.SyncGet(EntitySetNames.ExternalLogins, query);
+            return externalLoginResults;
+        } catch (e) {
+            console.log("Error in retrieving ExternalLoginRecords");
+            return null;
+        }
     }
     return {
         OnValidateRibbonButtonClick: function () {
