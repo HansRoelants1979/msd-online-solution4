@@ -37,10 +37,39 @@ Tc.Crm.Scripts.Events.Contact.Retail = (function () {
         Telephone2: "telephone2",
         Telephone3: "telephone3",
     }
-    var FORM_MODE_UPDATE = 2;
+    var FormMode = {
+      Create: 1,
+      Update: 2
+    }
+    var Tabs = {
+        CustomerHolidays: "tab_customersholidays",
+        Indicators: "tab_indicators",
+        CustomerPreferences: "tab_customerpreferences",
+        AdditionalCustomerDetails: "tab_additionalcustomerdetails",
+        MarketingConsent: "tab_marketingconsent",
+        PastHolidays: "tab_pastholidays",
+        Cases: "tab_cases",
+        ContactPreference: "tab_contactpreference"
+    }
+    var Sections = {
+        ContactPreferenceNotes: "tab_contactpreference_section_notes"
+    }
+    
     function onPhoneChanged(context) {
         var attribute = context.getEventSource();
         Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(attribute.getName());
+    }
+
+    function hideTabsSections() {
+        Xrm.Page.ui.tabs.get(Tabs.CustomerHolidays).setVisible(false);
+        Xrm.Page.ui.tabs.get(Tabs.Indicators).setVisible(false);
+        Xrm.Page.ui.tabs.get(Tabs.CustomerPreferences).setVisible(false);
+        Xrm.Page.ui.tabs.get(Tabs.AdditionalCustomerDetails).setVisible(false);
+        Xrm.Page.ui.tabs.get(Tabs.MarketingConsent).setVisible(false);
+        Xrm.Page.ui.tabs.get(Tabs.PastHolidays).setVisible(false);
+        Xrm.Page.ui.tabs.get(Tabs.Cases).setVisible(false);
+
+        Xrm.Page.ui.tabs.get(Tabs.ContactPreference).sections.get(Sections.ContactPreferenceNotes).setVisible(false);
     }
 
     var onCustomerKeyInformationUpdate = function () {
@@ -84,6 +113,9 @@ Tc.Crm.Scripts.Events.Contact.Retail = (function () {
         Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.Telephone1);
         Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.Telephone2);
         Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.Telephone3);
+        if (isFormTypeCreate()) {
+            hideTabsSections();
+        }
     }
   
     var onSave = function (econtext) {
@@ -115,10 +147,12 @@ Tc.Crm.Scripts.Events.Contact.Retail = (function () {
 
     var isFormTypeUpdate = function () {
         var formType = Xrm.Page.ui.getFormType();
-        if (formType == FORM_MODE_UPDATE)
-            return true;
-        else
-            return false;
+        return (formType === FormMode.Update)
+    };
+
+    var isFormTypeCreate = function () {
+        var formType = Xrm.Page.ui.getFormType();
+        return (formType === FormMode.Create)
     };
     
     var getIsDirty = function (controlName) {
