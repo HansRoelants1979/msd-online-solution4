@@ -78,7 +78,17 @@ Tc.Crm.Scripts.Events.Case = (function () {
         Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("tc_alternativephone");
         Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("tc_otherpartyphone");
         validateCaseAssociatedCustomerPhoneNum();
-        preFilterLocationOfficeLookup();        
+        preFilterLocationOfficeLookup();
+        setNotification();
+    }
+    var setNotification = function () {
+        if (Xrm.Page.getAttribute("tc_reportnotes")) {
+            if (Xrm.Page.getAttribute("tc_reportnotes").getValue() == null) {
+                Xrm.Page.ui.setFormNotification(" You must provide a value for Rep Notes to Resolve Case. ", "WARNING", 'note')
+            } else {
+                Xrm.Page.ui.clearFormNotification('note')
+            }
+        }
     }
     var GetTheSourceMarketCurrency = function () {
                
@@ -437,6 +447,9 @@ Tc.Crm.Scripts.Events.Case = (function () {
         },
         OnChangeTelephone2: function () {
             onChangeTelephone2();
+        },
+        OnChangeRepNotes: function () {
+            setNotification();
         },
         OnSave: function () {
             if (Xrm.Page.context.client.getClientState() !== CLIENT_STATE_OFFLINE) {
