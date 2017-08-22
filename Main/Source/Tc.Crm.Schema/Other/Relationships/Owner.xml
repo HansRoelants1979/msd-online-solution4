@@ -478,6 +478,27 @@
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
+  <EntityRelationship Name="owner_tc_entitycache">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>2.0.0.3</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_entitycache</ReferencingEntityName>
+    <ReferencedEntityName>Owner</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>OwnerId</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Owner Id" languagecode="1033" />
+        <Description description="ID du propriétaire" languagecode="1036" />
+        <Description description="Besitzer-ID" languagecode="1031" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
   <EntityRelationship Name="owner_tc_externallogin">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>

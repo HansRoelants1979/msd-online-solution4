@@ -868,6 +868,20 @@
                   </row>
                 </rows>
               </section>
+              <section name="tab_compensationCalculator_section_7" showlabel="false" showbar="false" locklevel="0" id="{7e705889-ace0-3413-9457-307d8e01d09d}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
+                <labels>
+                  <label description="Section" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{ba31974c-a66a-4837-dc37-c1cade5ad95b}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                  </row>
+                </rows>
+              </section>
             </sections>
           </column>
           <column width="50%">
@@ -923,6 +937,31 @@
                       </labels>
                     </cell>
                     <cell id="{ceda8b45-d87a-724e-de6d-d8b3955dade4}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
+      <tab name="tab_3" id="{d7958409-3a63-726b-e8b5-2e9e0cd41058}" IsUserDefined="0" locklevel="0" showlabel="true">
+        <labels>
+          <label description="Tab" languagecode="1033" />
+        </labels>
+        <columns>
+          <column width="100%">
+            <sections>
+              <section name="tab_3_section_1" showlabel="false" showbar="false" locklevel="0" id="{59d5ca2a-c609-285d-5e28-15b89393e565}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" height="auto">
+                <labels>
+                  <label description="Section" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{52d3db52-950c-2552-77b9-4aa3b15158cb}" showlabel="false">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
@@ -1191,9 +1230,16 @@
         </customControl>
       </controlDescription>
     </controlDescriptions>
+    <externaldependencies>
+      <dependency id="tc_categorylevel1id" />
+      <dependency id="tc_casecategory2id" />
+      <dependency id="tc_category3id" />
+      <dependency id="tc_categorylevel4id" />
+    </externaldependencies>
     <formLibraries>
       <Library name="tc_es6promise.js" libraryUniqueId="{944351ac-ce4c-a89c-d786-1b97cdbbe8ac}" />
       <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{5ca03ab9-19b4-6bd3-80a4-d55c96016666}" />
+      <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{892266c2-1131-313e-9006-ac2c39ebbe44}" />
       <Library name="tc_Tc.Crm.Scripts.Library.CaseLine.js" libraryUniqueId="{78582764-86a1-872b-09b1-1d276463ae66}" />
       <Library name="tc_Tc.Crm.Scripts.Events.CaseLine.js" libraryUniqueId="{0e5de6a3-ccaa-1984-1448-32a1e9171583}" />
     </formLibraries>
@@ -1205,7 +1251,7 @@
       </event>
       <event name="onsave" application="false" active="false">
         <Handlers>
-          <Handler functionName="Tc.Crm.Scripts.Events.CaseLine.OnCaseLineSave" libraryName="tc_Tc.Crm.Scripts.Events.CaseLine.js" handlerUniqueId="{25537e96-3aeb-27c6-b459-3dc0910cd818}" enabled="true" parameters="" passExecutionContext="false" />
+          <Handler functionName="Tc.Crm.Scripts.Events.CaseLine.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.CaseLine.js" handlerUniqueId="{25537e96-3aeb-27c6-b459-3dc0910cd818}" enabled="true" parameters="" passExecutionContext="true" />
         </Handlers>
       </event>
       <event name="onchange" application="false" active="false" attribute="tc_category3id">
@@ -1269,12 +1315,6 @@
         </Handlers>
       </event>
     </events>
-    <externaldependencies>
-      <dependency id="tc_categorylevel1id" />
-      <dependency id="tc_casecategory2id" />
-      <dependency id="tc_category3id" />
-      <dependency id="tc_categorylevel4id" />
-    </externaldependencies>
   </form>
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>

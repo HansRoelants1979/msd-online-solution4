@@ -506,6 +506,27 @@
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
+  <EntityRelationship Name="business_unit_tc_entitycache">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>2.0.0.3</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_entitycache</ReferencingEntityName>
+    <ReferencedEntityName>BusinessUnit</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>OwningBusinessUnit</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
+        <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
+        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
   <EntityRelationship Name="business_unit_tc_externallogin">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>

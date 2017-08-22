@@ -1,43 +1,43 @@
 var scriptLoader = scriptLoader || {
-    delayedLoads : [],
-            load: function (name, requires, script) {
-                window._loadedScripts = window._loadedScripts || { };
-// Check for loaded scripts, if not all loaded then register delayed Load
-if (requires == null || requires.length == 0 || scriptLoader.areLoaded(requires)) {
+    delayedLoads: [],
+    load: function (name, requires, script) {
+        window._loadedScripts = window._loadedScripts || {};
+        // Check for loaded scripts, if not all loaded then register delayed Load
+        if (requires == null || requires.length == 0 || scriptLoader.areLoaded(requires)) {
             scriptLoader.runScript(name, script);
-            }
-else {
-    // Register an onload check
-    scriptLoader.delayedLoads.push({ name : name, requires: requires, script : script });
-    }
+        }
+        else {
+            // Register an onload check
+            scriptLoader.delayedLoads.push({ name: name, requires: requires, script: script });
+        }
     },
-        runScript: function (name, script) {
-script.call(window);
-window._loadedScripts[name]= true;
-scriptLoader.onScriptLoaded(name);
-},
-        onScriptLoaded: function (name) {
+    runScript: function (name, script) {
+        script.call(window);
+        window._loadedScripts[name] = true;
+        scriptLoader.onScriptLoaded(name);
+    },
+    onScriptLoaded: function (name) {
         // Check for any registered delayed Loads
         scriptLoader.delayedLoads.forEach(function (script) {
             if (script.loaded == null && scriptLoader.areLoaded(script.requires)) {
                 script.loaded = true;
                 scriptLoader.runScript(script.name, script.script);
             }
-            });
-            },
-                    areLoaded: function (requires) {
-                        var allLoaded = true;
-                        for (var i = 0; i < requires.length; i++) {
-                            allLoaded = allLoaded && (window._loadedScripts[requires[i]]!= null);
-                            if (!allLoaded)
-                                break;
-            }
-return allLoaded;
-}
+        });
+    },
+    areLoaded: function (requires) {
+        var allLoaded = true;
+        for (var i = 0; i < requires.length; i++) {
+            allLoaded = allLoaded && (window._loadedScripts[requires[i]] != null);
+            if (!allLoaded)
+                break;
+        }
+        return allLoaded;
+    }
 };
 scriptLoader.load("Tc.Crm.Scripts.Events.Case", ["Tc.Crm.Scripts.Utils.Validation"], function () {
-// start script
 
+// start script
 if (typeof (Tc) === "undefined") {
     Tc = {
         __namespace: true
@@ -73,7 +73,8 @@ Tc.Crm.Scripts.Events.Case = (function () {
     var FORM_MODE_CREATE = 1;
     var FORM_MODE_UPDATE = 2;
     var CASE_ARRIVAL_DATE_ATTR_NAME = "tc_arrivaldate";
-    var CASE_DEPARTURE_DATE_ATTR_NAME = "tc_departuredate";    
+    var CASE_DEPARTURE_DATE_ATTR_NAME = "tc_departuredate";
+    
 
     var Attributes = {
         AlternativePhone: "tc_alternativephone",
@@ -456,10 +457,6 @@ Tc.Crm.Scripts.Events.Case = (function () {
         return Xrm.Page.context.client.getClientState() === CLIENT_STATE_OFFLINE
     }
 
-	   
-	
-
-	
     // public methods
     return {
         OnLoad: function () {
@@ -471,14 +468,14 @@ Tc.Crm.Scripts.Events.Case = (function () {
         OnChangeTelephone2: function () {
             onChangeTelephone2();
         },
-		OnChangeRepNotes: function (){
-			setNotification();
-			
-		},
-        OnSave: function () {
+		 OnChangeRepNotes: function () {
+            setNotification();          
+        },
+        OnSave: function (context) {
             if (Xrm.Page.context.client.getClientState() !== CLIENT_STATE_OFFLINE) {
                 Tc.Crm.Scripts.Library.Case.UpdateRelatedCompensationsSourceMarket();
             }
+            Tc.Crm.Scripts.Utils.Validation.ValidateGdprCompliance(context);
         },
         OnCaseFieldChange: function () {
             GetTheSourceMarketCurrency();
@@ -497,7 +494,6 @@ Tc.Crm.Scripts.Events.Case = (function () {
         OnChangeArrivalOrDepartureDates: function() {
             validateArrivalDateGreaterOrEqualDeparture();
         }
-		
     };
 })();
 

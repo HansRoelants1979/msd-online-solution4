@@ -165,6 +165,8 @@
     </tabs>
     <controlDescriptions />
     <formLibraries>
+      <Library name="tc_es6promise.js" libraryUniqueId="{78113006-00e6-7be4-8631-92dcccdd6b5c}" />
+      <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{1238eeed-23db-cab1-c982-a62b65d323a1}" />
       <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{aa5dd45d-b026-7be1-5490-cbc25169d0d8}" />
       <Library name="tc_Tc.Crm.Scripts.Events.Account" libraryUniqueId="{d2ed31b2-d8e8-81c3-1041-9b3363141e51}" />
     </formLibraries>
@@ -172,6 +174,11 @@
       <event name="onchange" application="false" active="false" attribute="telephone1">
         <Handlers>
           <Handler functionName="Tc.Crm.Scripts.Events.Account.OnChangeTelephone1" libraryName="tc_Tc.Crm.Scripts.Events.Account" handlerUniqueId="{10453a7e-c3a8-e6b5-c1ed-d11604a369ca}" enabled="true" parameters="" passExecutionContext="false" />
+        </Handlers>
+      </event>
+      <event name="onsave" application="false" active="false">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Account.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Account" handlerUniqueId="{690da4dd-1617-0dcc-2800-cdb546e8d000}" enabled="true" parameters="" passExecutionContext="true" />
         </Handlers>
       </event>
     </events>

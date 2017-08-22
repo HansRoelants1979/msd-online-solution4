@@ -10,15 +10,15 @@
     <grid name="resultset" preview="1" icon="1" select="1" jump="fullname" object="2">
       <row id="contactid" name="result">
         <cell name="fullname" imageproviderwebresource="$webresource:" imageproviderfunctionname="" width="150" />
-        <cell name="birthdate" width="100" />
-        <cell name="tc_address1_housenumberorbuilding" width="100" />
         <cell name="tc_address1_street" width="100" />
-        <cell name="tc_address1_town" imageproviderwebresource="$webresource:" imageproviderfunctionname="" width="150" />
         <cell name="tc_address1_postalcode" imageproviderwebresource="$webresource:" imageproviderfunctionname="" width="100" />
+        <cell name="emailaddress1" imageproviderwebresource="$webresource:" imageproviderfunctionname="" width="150" />
+        <cell name="tc_address1_housenumberorbuilding" width="100" />
+        <cell name="birthdate" width="100" />
+        <cell name="tc_address1_town" imageproviderwebresource="$webresource:" imageproviderfunctionname="" width="150" />
         <cell name="tc_address1_countryid" imageproviderwebresource="$webresource:" imageproviderfunctionname="" width="150" />
         <cell name="tc_sourcemarketid" width="100" />
         <cell name="telephone1" width="100" />
-        <cell name="emailaddress1" imageproviderwebresource="$webresource:" imageproviderfunctionname="" width="150" />
         <cell name="tc_gender" imageproviderwebresource="$webresource:" imageproviderfunctionname="" width="75" />
         <cell name="tc_language" width="100" />
       </row>
@@ -32,33 +32,32 @@
           <condition value="0" operator="eq" attribute="statecode" />
         </filter>
         <filter type="or" isquickfindfields="1">
-          <condition attribute="telephone3" operator="like" value="{0}" />
-          <condition attribute="telephone2" operator="like" value="{0}" />
-          <condition attribute="telephone1" operator="like" value="{0}" />
-          <condition attribute="tc_sourcemarketid" operator="like" value="{0}" />
-          <condition attribute="lastname" operator="like" value="{0}" />
-          <condition attribute="tc_language" operator="like" value="{0}" />
-          <condition attribute="fullname" operator="like" value="{0}" />
-          <condition attribute="emailaddress3" operator="like" value="{0}" />
           <condition attribute="emailaddress2" operator="like" value="{0}" />
-          <condition attribute="emailaddress1" operator="like" value="{0}" />
-          <condition attribute="birthdate" operator="on" value="{3}" />
-          <condition attribute="tc_address2_town" operator="like" value="{0}" />
+          <condition attribute="tc_address2_county" operator="like" value="{0}" />
           <condition attribute="tc_address2_street" operator="like" value="{0}" />
-          <condition attribute="tc_address2_postalcode" operator="like" value="{0}" />
+          <condition attribute="fullname" operator="like" value="{0}" />
+          <condition attribute="tc_address1_town" operator="like" value="{0}" />
+          <condition attribute="tc_address1_county" operator="like" value="{0}" />
+          <condition attribute="telephone3" operator="like" value="{0}" />
           <condition attribute="tc_address2_housenumberorbuilding" operator="like" value="{0}" />
           <condition attribute="tc_address2_flatorunitnumber" operator="like" value="{0}" />
-          <condition attribute="tc_address2_county" operator="like" value="{0}" />
-          <condition attribute="tc_address2_countryid" operator="like" value="{0}" />
-          <condition attribute="tc_address2_additionalinformation" operator="like" value="{0}" />
-          <condition attribute="tc_address1_town" operator="like" value="{0}" />
-          <condition attribute="tc_address1_street" operator="like" value="{0}" />
+          <condition attribute="telephone1" operator="like" value="{0}" />
+          <condition attribute="tc_address2_postalcode" operator="like" value="{0}" />
           <condition attribute="tc_address1_postalcode" operator="like" value="{0}" />
-          <condition attribute="tc_address1_housenumberorbuilding" operator="like" value="{0}" />
-          <condition attribute="tc_address1_flatorunitnumber" operator="like" value="{0}" />
-          <condition attribute="tc_address1_county" operator="like" value="{0}" />
-          <condition attribute="tc_address1_countryid" operator="like" value="{0}" />
+          <condition attribute="emailaddress1" operator="like" value="{0}" />
           <condition attribute="tc_address1_additionalinformation" operator="like" value="{0}" />
+          <condition attribute="tc_address1_street" operator="like" value="{0}" />
+          <condition attribute="tc_address1_housenumberorbuilding" operator="like" value="{0}" />
+          <condition attribute="emailaddress3" operator="like" value="{0}" />
+          <condition attribute="tc_address2_town" operator="like" value="{0}" />
+          <condition attribute="tc_address2_additionalinformation" operator="like" value="{0}" />
+          <condition attribute="tc_address1_flatorunitnumber" operator="like" value="{0}" />
+          <condition attribute="telephone2" operator="like" value="{0}" />
+          <condition attribute="lastname" operator="like" value="{0}" />
+          <condition attribute="tc_language" operator="like" value="{0}" />
+          <condition attribute="tc_address2_countryid" operator="like" value="{0}" />
+          <condition attribute="tc_sourcemarketid" operator="like" value="{0}" />
+          <condition attribute="tc_address1_countryid" operator="like" value="{0}" />
         </filter>
         <order attribute="tc_address1_countryid" descending="false" />
         <attribute name="telephone1" />

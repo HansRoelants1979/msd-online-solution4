@@ -64,7 +64,7 @@
           <Type>int</Type>
           <Name>tc_payrollnumber</Name>
           <LogicalName>tc_payrollnumber</LogicalName>
-          <RequiredLevel>required</RequiredLevel>
+          <RequiredLevel>none</RequiredLevel>
           <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
           <ImeMode>auto</ImeMode>
           <ValidForUpdateApi>1</ValidForUpdateApi>
@@ -85,7 +85,41 @@
           <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
           <MinValue>0</MinValue>
-          <MaxValue>15</MaxValue>
+          <MaxValue>2147483647</MaxValue>
+          <displaynames>
+            <displayname description="Payroll Number (Do not use)" languagecode="1033" />
+          </displaynames>
+          <Descriptions>
+            <Description description="DO NOT USE&#xA;- Use tc_payrollnubmertext field instead - &#xA;The field became obsolete - see https://tc-jira.atlassian.net/browse/CRM-2670 for details" languagecode="1033" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tc_payrollnumbertext">
+          <Type>nvarchar</Type>
+          <Name>tc_payrollnumbertext</Name>
+          <LogicalName>tc_payrollnumbertext</LogicalName>
+          <RequiredLevel>required</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>1</IsSecured>
+          <IntroducedVersion>2.0.0.2</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <Format>text</Format>
+          <MaxLength>100</MaxLength>
+          <Length>200</Length>
           <displaynames>
             <displayname description="Payroll Number" languagecode="1033" />
           </displaynames>
