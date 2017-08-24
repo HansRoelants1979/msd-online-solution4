@@ -37,11 +37,16 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
         CustomerId: "customerid",
         ReviewDate: "tc_reviewdate",
         Surprise: "tc_surprise",
+        Name: "name",
     }
 
     var EntitySetNames = {
         SecurityRole: "roles",
-        ExternalLogins :"tc_externallogins",
+        ExternalLogins: "tc_externallogins",
+    }
+    var EntityName = {
+        TravellerPlanner: "opportunity",
+        FollowUp: "tc_followup",
     }
     var StateCode = {
         Open: 0,
@@ -51,16 +56,16 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
         var UserRole = window.parent.Xrm.Page.context.getUserRoles();
         if (UserRole == null || UserRole == "" || UserRole == undefined) return enable;
         for (var i = 0; i < UserRole.length; i++) {
-            var userRoleId = UserRole[i];            
+            var userRoleId = UserRole[i];
             var results = syncGetSecurityRoles(userRoleId);
-                    var name = results.value[0]["name"];
-                    if (name == CLUSTER_MANAGER || name == ASSISTANT_MANAGER || name == REGIONAL_MANAGER) {
-                        var ValidationAttr = getControlValue(Attributes.Validation);
-                        if (ValidationAttr == null) return enable;
-                        if (ValidationAttr == false && Xrm.Page.ui.getFormType() != FORM_MODE_CREATE) {
-                            enable = true;
-                        }
-                    }           
+            var name = results.value[0]["name"];
+            if (name == CLUSTER_MANAGER || name == ASSISTANT_MANAGER || name == REGIONAL_MANAGER) {
+                var ValidationAttr = getControlValue(Attributes.Validation);
+                if (ValidationAttr == null) return enable;
+                if (ValidationAttr == false && Xrm.Page.ui.getFormType() != FORM_MODE_CREATE) {
+                    enable = true;
+                }
+            }
             if (enable == true) break;
         }
         return enable;
@@ -86,8 +91,8 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
             Xrm.Page.getAttribute(Attributes.Surprise).setValue(false);
 
     }
-    var enableOWRorLimeButton = function () {
-       
+    var enableOWRorWebrioButton = function () {
+
         var enable = false;
         if (window.IsUSD != true) return enable;
         if (Xrm.Page.ui.getFormType() == FORM_MODE_CREATE) return enable;
@@ -107,6 +112,33 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
             Xrm.Page.getControl(Attributes.ReviewDate).setNotification("Review Date cannot be set in the past. Please choose a future date.");
 
     }
+    var openNewFollowUp = function () {
+
+        var travellerPlannerId = Xrm.Page.data.entity.getId();
+        var travellerPlannerName = getControlValue(Attributes.Name)
+        var CustomerId = getControlValue(Attributes.CustomerId);
+        var parameters = {};
+
+        //setting CustomerLookup
+        if (CustomerId != null) {
+            if (CustomerId[0] != null && CustomerId[0] != undefined) {
+                if (CustomerId[0].id != null && CustomerId[0].id != undefined)
+                    parameters["tc_customer"] = CustomerId[0].id;
+                if (CustomerId[0].name != null && CustomerId[0].id != undefined && CustomerId[0].id != "")
+                    parameters["tc_customername"] = CustomerId[0].name;
+            }
+        }
+
+        //setting ReagardingLokkup
+        parameters["parameter_regardingid"] = formatEntityId(travellerPlannerId);
+        parameters["parameter_regardingname"] = travellerPlannerName;
+        parameters["parameter_regardingtype"] = EntityName.TravellerPlanner;
+
+        var windowOptions = {
+            openInNewWindow: true
+        };
+        Xrm.Utility.openEntityForm(EntityName.FollowUp, null, parameters, windowOptions);
+    }
     function formatEntityId(id) {
         return id !== null ? id.replace("{", "").replace("}", "") : null;
     }
@@ -125,7 +157,7 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
         var results = syncGetExternalLoginRecords(loggedInUserId);
         var recordCount = results["@odata.count"];
         if (recordCount === 1)
-            extraLoginRecordExist = true;    
+            extraLoginRecordExist = true;
         return extraLoginRecordExist;
     }
     var syncGetSecurityRoles = function (userRoleId) {
@@ -153,11 +185,14 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
         OnValidateRibbonButtonClick: function () {
             setValidationFieldValue();
         },
+        OnAddFollowUpRibbonButtonClick: function () {
+            openNewFollowUp();
+        },
         EnableDisableValidateButton: function () {
             return enableValidateRibbonButton();
         },
-        EnableDisableOWRorLimeButton: function () {
-            return enableOWRorLimeButton();
+        EnableDisableOWRorWebrioButton: function () {
+            return enableOWRorWebrioButton();
         },
         OnSurpriseRibbonButtonClick: function () {
             setSurpriseFieldValue();

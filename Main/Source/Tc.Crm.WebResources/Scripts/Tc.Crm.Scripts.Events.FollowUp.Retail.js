@@ -39,31 +39,30 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
         Emailaddress1: "emailaddress1",
         Emailaddress2: "emailaddress2",
         Emailaddress3: "emailaddress3",
-    }    
+    }
     var dueDateOnChange = function () {
 
-         Xrm.Page.getControl(Attributes.DueDate).clearNotification();
-         var dueDateValueAttr = getControlValue(Attributes.DueDate);         
-         var isPastDate = Tc.Crm.Scripts.Utils.Validation.IsPastDate(dueDateValueAttr);
-         if (isPastDate)
-                Xrm.Page.getControl(Attributes.DueDate).setNotification("Due Date cannot be set in the past. Please choose a future date.");
-            
+        Xrm.Page.getControl(Attributes.DueDate).clearNotification();
+        var dueDateValueAttr = getControlValue(Attributes.DueDate);
+        var isPastDate = Tc.Crm.Scripts.Utils.Validation.IsPastDate(dueDateValueAttr);
+        if (isPastDate)
+            Xrm.Page.getControl(Attributes.DueDate).setNotification("Due Date cannot be set in the past. Please choose a future date.");
+
     }
     var contactMethodOnChange = function () {
         Xrm.Page.getControl(Attributes.ContactPhone).clearNotification();
         Xrm.Page.getControl(Attributes.ContactEmail).clearNotification();
-        
+
     }
     var contactPhoneOrContactEmailOnChange = function (executionContext) {
-        
+
         if (executionContext == null || executionContext == undefined) return;
         var attribute = executionContext.getEventSource();
         if (attribute == null || attribute == undefined) return;
         var fieldName = attribute.getName();
         if (fieldName == null || fieldName == undefined) return;
         var contactPhoneOrConatctEmailAttr = getControlValue(fieldName);
-        if (contactPhoneOrConatctEmailAttr == null || contactPhoneOrConatctEmailAttr == 950000003)
-        {
+        if (contactPhoneOrConatctEmailAttr == null || contactPhoneOrConatctEmailAttr == 950000003) {
             Xrm.Page.getControl(Attributes.ContactPhone).clearNotification();
             Xrm.Page.getControl(Attributes.ContactEmail).clearNotification();
             return;
@@ -71,7 +70,7 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
         var contactMethodAttr = getControlValue(Attributes.ContactMethod);
         if (contactMethodAttr == null || contactMethodAttr == 950000002 || contactMethodAttr == 950000003) return;
         if (contactMethodAttr == 950000000) {
-              Xrm.Page.getControl(Attributes.ContactEmail).clearNotification();
+            Xrm.Page.getControl(Attributes.ContactEmail).clearNotification();
             var phoneValue = getAttributeValue(getPhoneFieldName(contactPhoneOrConatctEmailAttr));
             if (phoneValue == null || phoneValue == "" || phoneValue == undefined) {
                 Xrm.Page.getControl(Attributes.ContactPhone).clearNotification();
@@ -82,7 +81,7 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
             }
         }
         else {
-               Xrm.Page.getControl(Attributes.ContactPhone).clearNotification();
+            Xrm.Page.getControl(Attributes.ContactPhone).clearNotification();
             var emailValue = getAttributeValue(getEmailFieldName(contactPhoneOrConatctEmailAttr));
             if (emailValue == null || emailValue == "" || emailValue == undefined) {
                 Xrm.Page.getControl(Attributes.ContactEmail).clearNotification();
@@ -93,34 +92,29 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
             }
 
         }
-        
+
     }
     var getAttributeValue = function (attributeSchemaName) {
         var customerDeatilsQuickViewControl = Xrm.Page.ui.quickForms.get(CUSTOMER_QUICK_VIEW_FORM);
-        if (customerDeatilsQuickViewControl != undefined)
-        {
-            if (customerDeatilsQuickViewControl.isLoaded())
-            {
+        if (customerDeatilsQuickViewControl != undefined) {
+            if (customerDeatilsQuickViewControl.isLoaded()) {
                 // Access the value of the attribute bound to the constituent control
                 var Value = customerDeatilsQuickViewControl.getControl(attributeSchemaName).getAttribute().getValue();
                 console.log(Value);
                 return Value;
             }
-            else
-            {
+            else {
                 // Wait for some time and check again
                 setTimeout(getAttributeValue, 10);
             }
         }
-        else
-        {
+        else {
             console.log("No data to display in the quick view control.");
             return;
-        }    
+        }
     }
-    var getPhoneFieldName = function (contactPhoneFieldName)
-    {
-        var phoneFieldSchemaName;        
+    var getPhoneFieldName = function (contactPhoneFieldName) {
+        var phoneFieldSchemaName;
 
         switch (contactPhoneFieldName) {
             case 950000000:
@@ -176,19 +170,40 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
             return Xrm.Page.getAttribute(controlName).getValue();
         else
             return null;
-    }       
+    }
+
+    var setRegardingField = function () {
+
+        // Get the Value of the Regarding through the traveller Planner Parameters
+
+        var param = Xrm.Page.context.getQueryStringParameters();
+
+        var regardingId = param["parameter_regardingid"];
+        var regardingName = param["parameter_regardingname"];
+        var regardingType = param["parameter_regardingtype"];
+
+        //Populate the Regarding 
+
+        if (regardingId != null && regardingId != undefined)
+
+        { Xrm.Page.getAttribute("regardingobjectid").setValue([{ id: regardingId, name: regardingName, entityType: regardingType }]); }
+
+    }
+
     // public methods
     return {
         OnDueDateFieldChange: function () {
             dueDateOnChange();
         },
-        OnContactPhoneOrContactEmailChange: function (executionContext)
-        {
+        OnLoad: function () {
+            setRegardingField();
+        },
+        OnContactPhoneOrContactEmailChange: function (executionContext) {
             contactPhoneOrContactEmailOnChange(executionContext);
         },
         OnContactMethodChange: function () {
             contactMethodOnChange();
         }
-       
+
     };
 })();
