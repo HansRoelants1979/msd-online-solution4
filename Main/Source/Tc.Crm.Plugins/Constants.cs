@@ -75,6 +75,12 @@ namespace Tc.Crm.Plugins.Attributes
     {
         public const string SurveyId = "tc_surveyid";
     }
+    public static class Configuration
+    {
+        public const string Name = "tc_name";
+        public const string Configurationid = "tc_configurationid";
+        public const string Value = "tc_value";
+    }
 }
 namespace Tc.Crm.Plugins
 {
@@ -87,6 +93,10 @@ namespace Tc.Crm.Plugins
         public const string IssuedAtTimeFromNow = "Tc.Caching.Payload.IatSecondsFromNow";
         public const string NotBeforeTimeFromNow = "Tc.Caching.Payload.NbfSecondsFromNow";
         public const string ExpirySecondsFromNow = "Tc.Caching.Payload.ExpirySecondsFromNow";
+    }
+    public static class Configurationkeys
+    {
+        public const string CreditCardPattern = "Tc.Validation.GDPR.CreditCardPattern";
     }
     public static class General
     {
@@ -116,6 +126,7 @@ namespace Tc.Crm.Plugins
         public const string CachingServiceUrlIsNullOrEmpty = "Caching service url is null or empty.";
         public const string CachingApiIsNullOrEmpty = "Caching api is null or empty.";
         public const string RequestDataIsEmpty = "Request data is null or empty.";
+        public const string DataYouEnteredInNotesContainPotentionalCreditCardNumber = "Data you entered in notes contain potentional credit card number(16 steright digits). Please remove.";
     }
 
     public static class Messages
@@ -123,6 +134,7 @@ namespace Tc.Crm.Plugins
         public const string Associate = "Associate";
         public const string Create = "Create";
         public const string Disassociate = "Disassociate";
+        public const string Update = "Update";
     }
 
     public static class CacheBucket
@@ -153,6 +165,12 @@ namespace Tc.Crm.Plugins
         public const string CacheRequest = "tc_cacherequest";
         public const string SurveyResponse = "tc_surveyresponse";
         public const string Case = "incident";
+        public const string Contact = "contact";
+        public const string Booking = "tc_booking";
+        public const string Phonecall = "phonecall";
+        public const string Opportunity = "opportunity";
+        public const string Configuration = "tc_configuration";
+
     }
 
     public static class Relationships
@@ -174,4 +192,5 @@ namespace Tc.Crm.Plugins
         Preoperation = 20,
         Postoperation = 40
     }
+    
 }
