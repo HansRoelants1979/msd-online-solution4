@@ -83,9 +83,9 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
 
     }
     var setSurpriseFieldValue = function () {
-        var surpriseFieldVale = getControlValue(Attributes.Surprise);
-        if (surpriseFieldVale == null) return;
-        Xrm.Page.getAttribute(Attributes.Surprise).setValue((surpriseFieldVale) ? false : true);        
+        var surpriseFieldValue = getControlValue(Attributes.Surprise);
+        if (surpriseFieldValue == null) return;
+        Xrm.Page.getAttribute(Attributes.Surprise).setValue(!surpriseFieldValue);        
 
     }
     var enableOWRorWebrioButton = function () {
