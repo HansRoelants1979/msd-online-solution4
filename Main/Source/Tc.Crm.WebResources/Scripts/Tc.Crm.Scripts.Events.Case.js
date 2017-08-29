@@ -79,7 +79,9 @@ Tc.Crm.Scripts.Events.Case = (function () {
         Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("tc_otherpartyphone");
         validateCaseAssociatedCustomerPhoneNum();
         preFilterLocationOfficeLookup();
-        setNotification();
+        if (Xrm.Page.ui.formSelector.getCurrentItem().getLabel() == "iDS Case") {
+            setNotification();
+        }
     }
     var setNotification = function () {
         if (Xrm.Page.getAttribute("tc_reportnotes")) {
