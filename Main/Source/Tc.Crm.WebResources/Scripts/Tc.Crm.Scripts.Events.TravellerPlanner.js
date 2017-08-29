@@ -85,10 +85,7 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
     var setSurpriseFieldValue = function () {
         var surpriseFieldVale = getControlValue(Attributes.Surprise);
         if (surpriseFieldVale == null) return;
-        if (surpriseFieldVale == false)
-            Xrm.Page.getAttribute(Attributes.Surprise).setValue(true);
-        else
-            Xrm.Page.getAttribute(Attributes.Surprise).setValue(false);
+        Xrm.Page.getAttribute(Attributes.Surprise).setValue((surpriseFieldVale) ? false : true);        
 
     }
     var enableOWRorWebrioButton = function () {
@@ -116,20 +113,20 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
 
         var travellerPlannerId = Xrm.Page.data.entity.getId();
         var travellerPlannerName = getControlValue(Attributes.Name)
-        var CustomerId = getControlValue(Attributes.CustomerId);
+        var customerId = getControlValue(Attributes.CustomerId);
         var parameters = {};
 
         //setting CustomerLookup
-        if (CustomerId != null) {
-            if (CustomerId[0] != null && CustomerId[0] != undefined) {
-                if (CustomerId[0].id != null && CustomerId[0].id != undefined)
-                    parameters["tc_customer"] = CustomerId[0].id;
-                if (CustomerId[0].name != null && CustomerId[0].id != undefined && CustomerId[0].id != "")
-                    parameters["tc_customername"] = CustomerId[0].name;
+        if (customerId != null) {
+            if (customerId[0] != null && customerId[0] != undefined) {
+                if (customerId[0].id != null && customerId[0].id != undefined)
+                    parameters["tc_customer"] = customerId[0].id;
+                if (customerId[0].name != null && customerId[0].id != undefined && customerId[0].id != "")
+                    parameters["tc_customername"] = customerId[0].name;
             }
         }
 
-        //setting ReagardingLokkup
+        //setting ReagardingLookup
         parameters["parameter_regardingid"] = formatEntityId(travellerPlannerId);
         parameters["parameter_regardingname"] = travellerPlannerName;
         parameters["parameter_regardingtype"] = EntityName.TravellerPlanner;
