@@ -1,4 +1,7 @@
-﻿var scriptLoader = scriptLoader || {
+﻿/*** 
+THIS IS DEFAULT SCRIPT THAT SHOULD BE ADDED TO ALL FORMS FOR GDPR COMPLIANCY VALIDATION THAT DON'T HAVE SPECIFIC SCRIPT
+*/
+var scriptLoader = scriptLoader || {
     delayedLoads: [],
     load: function (name, requires, script) {
         window._loadedScripts = window._loadedScripts || {};
@@ -35,7 +38,7 @@
         return allLoaded;
     }
 };
-scriptLoader.load("Tc.Crm.Scripts.Events.Account", ["Tc.Crm.Scripts.Utils.Validation"], function () {
+scriptLoader.load("Tc.Crm.Scripts.Events.Default", ["Tc.Crm.Scripts.Utils.Validation"], function () {
 // start script
 
 if (typeof (Tc) === "undefined") {
@@ -58,26 +61,12 @@ if (typeof (Tc.Crm.Scripts.Events) === "undefined") {
         __namespace: true
     };
 }
-Tc.Crm.Scripts.Events.Account = (function () {
+Tc.Crm.Scripts.Events.Default = (function () {
     "use strict";
-    // private stuff
-    var Attributes = {
-        Telephone1: "telephone1"
-    }
-
     // public methods     
     return {
-
-        OnLoad: function () {
-            Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.Telephone1);
-        },
         OnSave: function (context) {
-            var isValid = Tc.Crm.Scripts.Utils.Validation.ValidateGdprCompliance(context);
-            // uncomment in case of additional save actions
-            //if (isValid) { }
-        },
-        OnChangeTelephone1: function () {
-            Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.Telephone1);
+            Tc.Crm.Scripts.Utils.Validation.ValidateGdprCompliance(context);
         }
     };
 })();

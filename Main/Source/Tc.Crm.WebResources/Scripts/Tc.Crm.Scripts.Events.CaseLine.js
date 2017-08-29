@@ -281,8 +281,11 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
             addEventHandlers();
             Tc.Crm.Scripts.Library.CaseLine.LoadSourceMarketAndSetDefaults();
         },
-        OnCaseLineSave: function () {
-            formationTheNameOfTheCaseLineEntity();
+        OnSave: function (context) {
+            var isValid = Tc.Crm.Scripts.Utils.Validation.ValidateGdprCompliance(context);
+            if (isValid) {
+                formationTheNameOfTheCaseLineEntity();
+            }            
         },
         OnCompensationCalculate: function () {
             Tc.Crm.Scripts.Library.CaseLine.CalculateCompensation();

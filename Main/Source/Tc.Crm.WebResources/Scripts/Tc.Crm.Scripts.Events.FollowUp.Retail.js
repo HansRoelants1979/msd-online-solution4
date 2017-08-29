@@ -192,6 +192,11 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
 
     // public methods
     return {
+        OnSave: function (context) {
+            var isValid = Tc.Crm.Scripts.Utils.Validation.ValidateGdprCompliance(context);
+            // uncomment in case of additional save actions
+            //if (isValid) { }
+        },
         OnDueDateFieldChange: function () {
             dueDateOnChange();
         },

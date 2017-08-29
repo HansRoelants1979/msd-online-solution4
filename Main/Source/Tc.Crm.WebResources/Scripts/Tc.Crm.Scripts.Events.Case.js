@@ -459,10 +459,12 @@ Tc.Crm.Scripts.Events.Case = (function () {
             onChangeTelephone2();
         },
         OnSave: function (context) {
-            if (Xrm.Page.context.client.getClientState() !== CLIENT_STATE_OFFLINE) {
-                Tc.Crm.Scripts.Library.Case.UpdateRelatedCompensationsSourceMarket();
-            }
-            Tc.Crm.Scripts.Utils.Validation.ValidateGdprCompliance(context);
+            var isValid = Tc.Crm.Scripts.Utils.Validation.ValidateGdprCompliance(context);
+            if (isValid) {
+                if (Xrm.Page.context.client.getClientState() !== CLIENT_STATE_OFFLINE) {
+                    Tc.Crm.Scripts.Library.Case.UpdateRelatedCompensationsSourceMarket();
+                }
+            }            
         },
         OnCaseFieldChange: function () {
             GetTheSourceMarketCurrency();

@@ -120,17 +120,17 @@ Tc.Crm.Scripts.Utils.Validation = (function () {
     var validateGdprCompliance = function(context)
     {
         // don't validate in offline mode
-        if (IsOfflineMode()) return;        
+        if (IsOfflineMode()) return true;        
         // requires context
         if (context === null) {
             console.log("Tc.Crm.Scripts.Utils.Validation.validateGdprCompliance requires OnSave context");
-            return;
+            return true;
         }
         Xrm.Page.ui.clearFormNotification('GDPR_Compliance');
         // validate
         var patternValue = syncGetConfigurationValue(Configuration.CreditCardPattern);
         if (patternValue == null) {
-            return;
+            return true;
         }
         var pattern = new RegExp(patternValue);
         var isValid = true;
@@ -140,18 +140,30 @@ Tc.Crm.Scripts.Utils.Validation = (function () {
                     var hasCreditCard = pattern.test(attribute.getValue());
                     if (hasCreditCard) {
                         isValid = false;
-                        var label;
-                        if (attribute.controls.getLength() > 0) {
-                            label = attribute.controls.get(0).getLabel();
-                        } else {
-                            label = attribute.getName();
-                        }
+                        var label = getLabel(attribute);
                         Xrm.Page.ui.setFormNotification(Messages.HasCreditCard + label, 'WARNING', 'GDPR_Compliance');
-                        context.getEventArgs().preventDefault();                        
+                        context.getEventArgs().preventDefault();
+                        // HACK FOR MICROSOFT BUG TO WORK ON QUICK CREATE
+                        setTimeout(function () {
+                            top.document.getElementById('globalquickcreate_save_button_NavBarGloablQuickCreate').disabled = false;
+                            top.document.getElementById('globalquickcreate_loading_bar_NavBarGloablQuickCreate').style.visibility = 'hidden';
+                        }, 0);
                     }
                 }
             }
         });
+        return isValid;
+    }
+
+    var getLabel = function (attribute) {
+        if (attribute == null) return '';
+        var label;
+        if (attribute.controls.getLength() > 0) {
+            label = attribute.controls.get(0).getLabel();
+        } else {
+            label = attribute.getName();
+        }
+        return label;
     }
 
     var isPastDate = function (date)
@@ -160,8 +172,7 @@ Tc.Crm.Scripts.Utils.Validation = (function () {
         var today = new Date();
         today.setHours(0, 0, 0, 0);
         date.setHours(0, 0, 0, 0);
-        return (date < today);
-       
+        return (date < today);       
     }
 
     // public
