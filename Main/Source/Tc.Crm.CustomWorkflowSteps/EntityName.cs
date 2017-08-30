@@ -499,5 +499,6 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
     {
         public const string OwnerId = "ownerid";
         public const string StoreId = "tc_budgetcentreid";
+        public const string Initials = "tc_initials";
     }
 }
