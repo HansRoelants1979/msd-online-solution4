@@ -72,5 +72,5 @@ Tc.Crm.Scripts.Events.Default = (function () {
 })();
 
 // end script
-console.log('loaded events.account');
+console.log('loaded events.default');
 });
