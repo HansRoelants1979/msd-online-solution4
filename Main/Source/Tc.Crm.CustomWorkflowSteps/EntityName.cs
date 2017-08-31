@@ -73,6 +73,8 @@
         public const string SurveyResponse = "tc_surveyresponse";
         public const string SurveyResponseFeedback = "tc_surveyresponsefeedback";
         public const string ActivityParty = "activityparty";
+        public const string Store = "tc_store";
+        public const string ExternalLogin = "tc_externallogin";
 
     }
     public static class Relationships
@@ -484,5 +486,18 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
     public static class ActivityParty
     {
         public const string PartyId = "partyid";
+    }
+    public static class Stores
+    {
+        public const string Name = "tc_name";
+        public const string BudgetCentre = "tc_budgetcentre";
+        public const string StoreId = "tc_storeid";
+    }
+
+    public static class ExternalLogins
+    {
+        public const string OwnerId = "ownerid";
+        public const string StoreId = "tc_budgetcentreid";
+        public const string Initials = "tc_initials";
     }
 }

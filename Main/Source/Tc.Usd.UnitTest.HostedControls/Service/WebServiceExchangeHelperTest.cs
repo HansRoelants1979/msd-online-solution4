@@ -35,7 +35,7 @@ namespace Tc.Usd.UnitTest.HostedControls.Service
             var data = WebServiceExchangeHelper.GetCustomerTravelPlannerJson();
             Assert.IsNotNull(data);
             var serviceUrl = ConfigurationManager.AppSettings["serviceUrl"];
-            var content = WebServiceExchangeHelper.SendHttpRequest(serviceUrl, token, data);
+            //var content = WebServiceExchangeHelper.SendHttpRequest(serviceUrl, token, data);
         }
 
         [TestMethod]
