@@ -437,8 +437,8 @@ Tc.Crm.Scripts.Events.Case = (function () {
         
         arrivalDateControl.clearNotification();
         if (arrivalDate != null && departureDate != null) {
-            if (arrivalDate.setHours(0, 0, 0, 0) < departureDate.setHours(0, 0, 0, 0)) {
-                arrivalDateControl.setNotification("Arrival date should be equal or greater than Departure date");
+            if (arrivalDate.setHours(0, 0, 0, 0) <= departureDate.setHours(0, 0, 0, 0)) {
+                arrivalDateControl.setNotification("Departure date should be equal or greater than Arrival date");
             }
         }
     }
