@@ -17,7 +17,7 @@ namespace Tc.Crm.Common.Models
                     case OwnerType.Team:
                         return EntityName.Team;
                     case OwnerType.User:
-                        return EntityName.Team;
+                        return EntityName.User;
                     default:
                         throw new InvalidOperationException("Only team and user are supported as owners of entity");
                 }
