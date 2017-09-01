@@ -5,6 +5,7 @@
       <field updateCompare="true" displayname="Gateway" name="tc_gatewayid" type="guid" primaryKey="true" />
       <field displayname="Gateway Name" name="tc_gateway" type="string" customfield="true" />
       <field displayname="IATA" name="tc_iata" type="string" customfield="true" />
+      <field displayname="Official Airport" name="tc_officialairport" type="bool" customfield="true" />
     </fields>
     <relationships>
       <relationship name="tc_gateway_tc_locationoffice" manyToMany="true" isreflexive="false" relatedEntityName="tc_gateway_tc_locationoffice" m2mTargetEntity="tc_locationoffice" m2mTargetEntityPrimaryKey="tc_locationofficeid" />
