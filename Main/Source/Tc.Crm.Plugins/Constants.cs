@@ -75,11 +75,38 @@ namespace Tc.Crm.Plugins.Attributes
     {
         public const string SurveyId = "tc_surveyid";
     }
+
     public static class Configuration
     {
         public const string Name = "tc_name";
         public const string Configurationid = "tc_configurationid";
         public const string Value = "tc_value";
+    }
+
+    public static class EntityCache
+    {
+        public const string Name = "tc_name";
+        public const string Type = "tc_type";
+        public const string Data = "tc_data";
+        public const string Operation = "tc_operation";
+        public const string SourceMarket = "tc_sourcemarket";
+        public const string RecordId = "tc_recordid";        
+    }
+
+    public static class Customer
+    {
+        public const string SourceMarketId = "tc_sourcemarketid";
+        public const string FullName = "fullname";
+    }
+
+    public static class Country
+    {
+        public const string ISO2Code = "tc_iso2code";
+    }
+
+    public static class ActivityParty
+    {
+        public const string PartyId = "partyid";
     }
 }
 namespace Tc.Crm.Plugins
@@ -98,10 +125,17 @@ namespace Tc.Crm.Plugins
     {
         public const string CreditCardPattern = "Tc.Validation.GDPR.CreditCardPattern";
     }
+
+    public static class SpecialCharacters
+    {
+        public const string OpenBrace = "{";
+        public const string ClosedBrace = "}";
+    }
+
     public static class General
     {
         public const string RoleTcIdBase = "Tc.Ids.Base";
-        public const string RoleTcIdRep = "Tc.Ids.Rep";
+        public const string RoleTcIdRep = "Tc.Ids.Rep";        
     }
 
     public static class ValidationMessages{
@@ -169,8 +203,9 @@ namespace Tc.Crm.Plugins
         public const string Booking = "tc_booking";
         public const string Phonecall = "phonecall";
         public const string Opportunity = "opportunity";
-        public const string Configuration = "tc_configuration";
-
+        public const string Configuration = "tc_configuration";       
+        public const string EntityCache = "tc_entitycache";
+        public const string Country = "tc_country";
     }
 
     public static class Relationships
@@ -192,5 +227,19 @@ namespace Tc.Crm.Plugins
         Preoperation = 20,
         Postoperation = 40
     }
+    public enum PluginMode
+    {
+        Synchronous = 0,
+        Asynchronous = 1
+    }
     
+}
+
+namespace Tc.Crm.Plugins.OptionSetValues
+{
+    public class Operation
+    {
+        public const int Create = 950000000;
+        public const int Update = 950000001;
+    }
 }
