@@ -85,7 +85,7 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
     var setSurpriseFieldValue = function () {
         var surpriseFieldValue = getControlValue(Attributes.Surprise);
         if (surpriseFieldValue == null) return;
-        Xrm.Page.getAttribute(Attributes.Surprise).setValue(!surpriseFieldValue);        
+        Xrm.Page.getAttribute(Attributes.Surprise).setValue(!surpriseFieldValue);
 
     }
     var enableOWRorWebrioButton = function () {
@@ -98,6 +98,22 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
         var ssoLoggined = getExternalLogin();
         if (ssoLoggined != false && ssoLoggined != undefined && ssoLoggined != "")
             return ssoLoggined;
+
+    }
+    var enableLimeButton = function () {
+
+        var enable = false;
+        if (window.IsUSD != true) return enable;
+        if (Xrm.Page.ui.getFormType() == FORM_MODE_CREATE) return enable;
+        if (Xrm.Page.getAttribute(Attributes.StateCode).getValue() != StateCode.Open) return enable;
+        return enable = true;
+
+    }
+    var limeRibbonButtonClick = function () {
+        if (window.IsUSD == true) {
+            window.open("http://event/?eventname=OnClickLimeRibbonButton");
+
+        }
 
     }
     var reviewDateOnChange = function () {
@@ -187,11 +203,17 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
         OnValidateRibbonButtonClick: function () {
             setValidationFieldValue();
         },
+        OnLimeRibbonButtonClick: function () {
+            limeRibbonButtonClick();
+        },
         OnAddFollowUpRibbonButtonClick: function () {
             openNewFollowUp();
         },
         EnableDisableValidateButton: function () {
             return enableValidateRibbonButton();
+        },
+        EnableLimeButton: function () {
+            return enableLimeButton();
         },
         EnableDisableOWRorWebrioButton: function () {
             return enableOWRorWebrioButton();
