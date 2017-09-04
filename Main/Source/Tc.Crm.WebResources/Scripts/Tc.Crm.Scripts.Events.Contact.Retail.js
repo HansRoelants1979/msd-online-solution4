@@ -160,28 +160,26 @@ Tc.Crm.Scripts.Events.Contact.Retail = (function () {
   
     var onSave = function (econtext) {
         if (isCustomerKeyInformationUpdated()) {
-            var eventArgs = econtext.getEventArgs();
+            var eventArgs = econtext.getEventArgs();            
             if (eventArgs.getSaveMode() != 70)//AutoSave
-            {
-                if (confirm("Is this a new customer?"))
-                    yesCloseCallback(econtext);
-                else
-                    noCloseCallback();
+            {   
+                if (!confirm("The changes you have requested will update this customer record only"))
+                    noCloseCallback(econtext);
             }
             else {
-                eventArgs.preventDefault();
+                eventArgs.preventDefault();                
             }
         }
     };
 
-    var yesCloseCallback = function (econtext) {
-        Xrm.Utility.alertDialog("Please create a new customer record");
+   
+    var noCloseCallback = function (econtext)
+    {
+        Xrm.Utility.alertDialog("You need to create a new customer record, do not save the changes you have made");
         var eventArgs = econtext.getEventArgs();
         eventArgs.preventDefault();
-    };
-
-    var noCloseCallback = function () {
-        hideContactChangeReason();     
+        Xrm.Page.data.refresh(false);
+        //Xrm.Page.getAttribute(Attributes.BirthDate).setSubmitMode('never');
     };
     
 
