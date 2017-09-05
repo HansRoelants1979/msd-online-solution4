@@ -29,11 +29,12 @@ namespace Tc.Crm.OutboundSynchronisation.Customer.Services
                        <attribute name='tc_name' />
                        <attribute name='createdon' />
                        <attribute name='tc_data' />
-                       <order attribute='tc_name' descending='false' />
+                       <order attribute='createdon' descending='false' />
                        <filter type='and'>
                          <filter type='and'>
                            <condition attribute='tc_type' operator='eq' value='{type}' />
                            <condition attribute='statuscode' operator='eq' value='1' />
+                           <condition attribute='tc_operation' operator='eq' value='950000000' />
                          </filter>
                        </filter>
                      </entity>
