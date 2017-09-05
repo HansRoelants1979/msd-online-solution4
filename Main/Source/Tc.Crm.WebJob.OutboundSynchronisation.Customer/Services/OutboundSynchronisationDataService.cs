@@ -28,6 +28,12 @@ namespace Tc.Crm.OutboundSynchronisation.Customer.Services
                        <attribute name='tc_entitycacheid' />
                        <attribute name='tc_name' />
                        <attribute name='createdon' />
+                       <attribute name='tc_type' />
+                       <attribute name='statuscode' />
+                       <attribute name='statecode' />
+                       <attribute name='tc_sourcemarket' />
+                       <attribute name='tc_recordid' />
+                       <attribute name='tc_operation' />
                        <attribute name='tc_data' />
                        <order attribute='createdon' descending='false' />
                        <filter type='and'>
