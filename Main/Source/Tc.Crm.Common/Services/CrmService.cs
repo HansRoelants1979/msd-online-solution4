@@ -31,21 +31,30 @@ namespace Tc.Crm.Common.Services
         public EntityCollection RetrieveMultipleRecordsFetchXml(string query)
         {
             EntityCollection entityCollection = new EntityCollection();
-
+           
             int fetchCount = 10000;
             int pageNumber = 1;
             string pagingCookie = null;
 
             while (true)
             {
-                string xml = CreateXml(query, pagingCookie, pageNumber, fetchCount);
-                FetchExpression fetch = new FetchExpression(xml);
-                EntityCollection returnCollection = organizationService.RetrieveMultiple(fetch);
+                var returnCollection = RetrieveMultipleRecords(query, pagingCookie, pageNumber, fetchCount);
                 entityCollection.Entities.AddRange(returnCollection.Entities);
                 if (!returnCollection.MoreRecords)
                     break;
                 pageNumber++;
             }
+            return entityCollection;
+        }
+
+        public EntityCollection RetrieveMultipleRecordsFetchXml(string query, int numberOfElements)
+        {
+            EntityCollection entityCollection = new EntityCollection();
+            string pagingCookie = null;
+
+            var returnCollection = RetrieveMultipleRecords(query, pagingCookie, 1, numberOfElements);
+            entityCollection.Entities.AddRange(returnCollection.Entities);
+
             return entityCollection;
         }
 
@@ -213,6 +222,14 @@ namespace Tc.Crm.Common.Services
             }
             
             return message.ToString();
+        }
+
+        private EntityCollection RetrieveMultipleRecords(string query, string pagingCookie, int pageNumber, int fetchCount)
+        {
+            string xml = CreateXml(query, pagingCookie, pageNumber, fetchCount);
+            FetchExpression fetch = new FetchExpression(xml);
+            EntityCollection returnCollection = organizationService.RetrieveMultiple(fetch);
+            return returnCollection;
         }
 
         #endregion

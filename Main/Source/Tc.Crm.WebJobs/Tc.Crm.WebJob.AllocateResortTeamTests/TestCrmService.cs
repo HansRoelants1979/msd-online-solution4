@@ -281,6 +281,11 @@ namespace Tc.Crm.WebJob.AllocateResortTeamTests
             context.Data.Add("tc_country", countryEntityCollection);
         }
 
+        public EntityCollection RetrieveMultipleRecordsFetchXml(string query, int numberOfElements)
+        {
+            return RetrieveMultipleRecordsFetchXml(query);
+        }
+
         public void BulkAssign(Collection<AssignInformation> assignRequests)
         {
             foreach (var ar in assignRequests)

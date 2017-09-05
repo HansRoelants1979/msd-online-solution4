@@ -15,6 +15,14 @@ namespace Tc.Crm.Common.Services
         EntityCollection RetrieveMultipleRecordsFetchXml(string query);
 
         /// <summary>
+        /// Search CRM with the fetch query
+        /// </summary>
+        /// <param name="query">FetchXml query</param>
+        /// <param name="numberOfElements">Number of retrieved elements</param>
+        /// <returns></returns>
+        EntityCollection RetrieveMultipleRecordsFetchXml(string query, int numberOfElements);
+
+        /// <summary>
         /// Execute assignment requests
         /// </summary>
         /// <param name="assignRequests">The requests</param>

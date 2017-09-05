@@ -203,6 +203,11 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
 
         #region ICrmService        
 
+        public EntityCollection RetrieveMultipleRecordsFetchXml(string query, int numberOfElements)
+        {
+            return RetrieveMultipleRecordsFetchXml(query);
+        }
+
         public void BulkAssign(Collection<AssignInformation> assignRequests)
         {
             throw new NotImplementedException();
