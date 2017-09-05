@@ -89,6 +89,9 @@
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="Tc.Crm.CommonDll.IL">
+      <HintPath>..\Tc.Crm.CommonDll.IL\bin\Debug\Tc.Crm.CommonDll.IL.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CacheRequest\BusinessLogic\CachingApiService.cs" />
@@ -101,8 +104,6 @@
     <Compile Include="Case\PostCaseCreationUpdateRegardingOfSurvey.cs" />
     <Compile Include="Customer\BusinessLogic\CreateEntityCacheOnCustomerOperationService.cs" />
     <Compile Include="MultipleEntities\BusinessLogic\CreateEntityCacheOnEntityOperationService.cs" />
-    <Compile Include="MultipleEntities\Helper\JsonHelper.cs" />
-    <Compile Include="MultipleEntities\Model\EntityModel.cs" />
     <Compile Include="Customer\CreateEntityCacheOnCustomerOperation.cs" />
     <Compile Include="Email\BusinessLogic\UpdateEmailBodyService.cs" />
     <Compile Include="Email\PreoperationUpdateEmailBody.cs" />

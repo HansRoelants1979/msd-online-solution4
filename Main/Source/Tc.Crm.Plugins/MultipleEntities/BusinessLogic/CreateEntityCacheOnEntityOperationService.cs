@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Linq;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using System.Collections.Generic;
-using Tc.Crm.Plugins.MultipleEntities.Model;
-using Tc.Crm.Plugins.MultipleEntities.Helper;
+using Tc.Crm.CommonDll.IL.Model;
+using Tc.Crm.CommonDll.IL.Helper;
 using Tc.Crm.Plugins.OptionSetValues;
-using System.ServiceModel;
+
 
 namespace Tc.Crm.Plugins.MultipleEntities.BusinessLogic
 {

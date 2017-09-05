@@ -1,9 +1,7 @@
 ﻿using Microsoft.Xrm.Sdk;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
-using Tc.Crm.Plugins.Customer.BusinessLogic;
 using Tc.Crm.Plugins.MultipleEntities.BusinessLogic;
 
 namespace Tc.Crm.Plugins.MultipleEntities

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xrm.Sdk;
+﻿using Microsoft.Xrm.Sdk;
 using Tc.Crm.Plugins.MultipleEntities.BusinessLogic;
 
 namespace Tc.Crm.Plugins.Customer.BusinessLogic
