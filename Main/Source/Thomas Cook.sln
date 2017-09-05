@@ -1,13 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tc.Crm.Plugins", "Tc.Crm.Plugins", "{28E27A6E-C184-4019-AAF3-3D5A0F13222D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tc.Crm.CustomWorkflowSteps", "Tc.Crm.CustomWorkflowSteps", "{A27ECFA7-7BEB-465D-A915-E9B7CD2484F1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tc.Crm.Plugins", "Tc.Crm.Plugins\Tc.Crm.Plugins.csproj", "{56ACE05E-3756-4B7D-9B6F-672BB2FFC19B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6C7D9D7E-9258-4ECD-8471-D092C47205BA} = {6C7D9D7E-9258-4ECD-8471-D092C47205BA}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tc.Crm.ServiceLayer", "Tc.Crm.ServiceLayer", "{C91228F0-139F-46AF-B023-C54F9C9870A5}"
 EndProject
@@ -96,6 +99,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tc.Crm.OutboundSynchronisation.Customer", "Tc.Crm.WebJob.OutboundSynchronisation.Customer\Tc.Crm.OutboundSynchronisation.Customer.csproj", "{6CAA1C56-106B-4441-B48A-1C75A110A8B5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tc.Crm.OutboundSynchronisation.CustomerTests", "Tc.Crm.WebJob.OutboundSynchronisation.CustomerTests\Tc.Crm.OutboundSynchronisation.CustomerTests.csproj", "{C963B94B-ADDD-4FB7-A547-866316263CDA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tc.Crm.CommonDlls", "Tc.Crm.CommonDlls", "{50F5769B-6944-47F3-9710-B2C403FB1D46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tc.Crm.CommonDll.IL", "Tc.Crm.CommonDll.IL\Tc.Crm.CommonDll.IL.csproj", "{6C7D9D7E-9258-4ECD-8471-D092C47205BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -273,6 +280,14 @@ Global
 		{C963B94B-ADDD-4FB7-A547-866316263CDA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C963B94B-ADDD-4FB7-A547-866316263CDA}.Uat|Any CPU.ActiveCfg = Release|Any CPU
 		{C963B94B-ADDD-4FB7-A547-866316263CDA}.Uat|Any CPU.Build.0 = Release|Any CPU
+		{6C7D9D7E-9258-4ECD-8471-D092C47205BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C7D9D7E-9258-4ECD-8471-D092C47205BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C7D9D7E-9258-4ECD-8471-D092C47205BA}.Production|Any CPU.ActiveCfg = Release|Any CPU
+		{6C7D9D7E-9258-4ECD-8471-D092C47205BA}.Production|Any CPU.Build.0 = Release|Any CPU
+		{6C7D9D7E-9258-4ECD-8471-D092C47205BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C7D9D7E-9258-4ECD-8471-D092C47205BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C7D9D7E-9258-4ECD-8471-D092C47205BA}.Uat|Any CPU.ActiveCfg = Release|Any CPU
+		{6C7D9D7E-9258-4ECD-8471-D092C47205BA}.Uat|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -303,9 +318,10 @@ Global
 		{CE7F379A-CF92-4B8E-8F1C-13BE4964A802} = {EA6A3D39-5662-4E21-B0BF-79BACE8B1421}
 		{6CAA1C56-106B-4441-B48A-1C75A110A8B5} = {250DA148-FED0-475C-BA42-07007E84C333}
 		{C963B94B-ADDD-4FB7-A547-866316263CDA} = {A34C189D-B4EC-43BD-9A26-F94CF33A8F2D}
+		{6C7D9D7E-9258-4ECD-8471-D092C47205BA} = {50F5769B-6944-47F3-9710-B2C403FB1D46}
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 22
+		SccNumberOfProjects = 23
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://hclmsemea.visualstudio.com/
 		SccLocalPath0 = .
@@ -383,13 +399,17 @@ Global
 		SccProjectTopLevelParentUniqueName19 = Thomas\u0020Cook.sln
 		SccProjectName19 = Tc.Usd.UnitTest.HostedControls
 		SccLocalPath19 = Tc.Usd.UnitTest.HostedControls
-		SccProjectUniqueName20 = Tc.Crm.WebJobs\\Tc.Crm.OutboundSynchronisation.Customer\\Tc.Crm.OutboundSynchronisation.Customer.csproj
+		SccProjectUniqueName20 = Tc.Crm.WebJob.OutboundSynchronisation.CustomerTests\\Tc.Crm.OutboundSynchronisation.CustomerTests.csproj
 		SccProjectTopLevelParentUniqueName20 = Thomas\u0020Cook.sln
-		SccProjectName20 = Tc.Crm.WebJobs/Tc.Crm.WebJob.OutboundSynchronisation.Customer
-		SccLocalPath20 = Tc.Crm.WebJobs\\Tc.Crm.WebJob.OutboundSynchronisation.Customer
-		SccProjectUniqueName21 = Tc.Crm.WebJob.OutboundSynchronisation.CustomerTests\\Tc.Crm.OutboundSynchronisation.CustomerTests.csproj
+		SccProjectName20 = Tc.Crm.WebJob.OutboundSynchronisation.CustomerTests
+		SccLocalPath20 = Tc.Crm.WebJob.OutboundSynchronisation.CustomerTests
+		SccProjectUniqueName21 = Tc.Crm.WebJob.OutboundSynchronisation.Customer\\Tc.Crm.OutboundSynchronisation.Customer.csproj
 		SccProjectTopLevelParentUniqueName21 = Thomas\u0020Cook.sln
-		SccProjectName21 = Tc.Crm.WebJob.OutboundSynchronisation.CustomerTests
-		SccLocalPath21 = Tc.Crm.WebJob.OutboundSynchronisation.CustomerTests
+		SccProjectName21 = Tc.Crm.WebJob.OutboundSynchronisation.Customer
+		SccLocalPath21 = Tc.Crm.WebJob.OutboundSynchronisation.Customer
+		SccProjectUniqueName22 = Tc.Crm.CommonDll.IL\\Tc.Crm.CommonDll.IL.csproj
+		SccProjectTopLevelParentUniqueName22 = Thomas\u0020Cook.sln
+		SccProjectName22 = Tc.Crm.CommonDll.IL
+		SccLocalPath22 = Tc.Crm.CommonDll.IL
 	EndGlobalSection
 EndGlobal
