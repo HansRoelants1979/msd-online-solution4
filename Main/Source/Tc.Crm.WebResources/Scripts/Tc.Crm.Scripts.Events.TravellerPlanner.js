@@ -25,9 +25,9 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
     var HTTP_SUCCESS = 200;
     var STATUS_READY = 4;
     var NO_CONTENT = 204;
-    var CLUSTER_MANAGER = "Tc.Retail.ClusterManager";
-    var ASSISTANT_MANAGER = "Tc.Retail.AssistantManager";
-    var REGIONAL_MANAGER = "Tc.Retail.RegionalManager";
+    var RETAIL_LEVEL2_ACCESS = "Tc.Uk.Retail.Level2";
+    var RETAIL_LEVEL3_ACCESS = "Tc.Uk.Retail.Level3";
+    
 
 
 
@@ -59,7 +59,7 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
             var userRoleId = UserRole[i];
             var results = syncGetSecurityRoles(userRoleId);
             var name = results.value[0]["name"];
-            if (name == CLUSTER_MANAGER || name == ASSISTANT_MANAGER || name == REGIONAL_MANAGER) {
+            if (name == RETAIL_LEVEL2_ACCESS || name == RETAIL_LEVEL3_ACCESS) {
                 var ValidationAttr = getControlValue(Attributes.Validation);
                 if (ValidationAttr == null) return enable;
                 if (ValidationAttr == false && Xrm.Page.ui.getFormType() != FORM_MODE_CREATE) {
