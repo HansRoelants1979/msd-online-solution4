@@ -2,8 +2,8 @@
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using System.Collections.Generic;
-using Tc.Crm.CommonDll.IL.Model;
-using Tc.Crm.CommonDll.IL.Helper;
+using Tc.Crm.Common.IL.Model;
+using Tc.Crm.Common.IL.Helper;
 using Tc.Crm.Plugins.OptionSetValues;
 
 
