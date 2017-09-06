@@ -249,6 +249,7 @@
                           <DisableViewPicker>false</DisableViewPicker>
                           <DefaultViewId>{314A3412-D6BE-4950-BDD7-6EFED38E8C83}</DefaultViewId>
                           <AllowFilterOff>false</AllowFilterOff>
+                          <AvailableViewIds>{314A3412-D6BE-4950-BDD7-6EFED38E8C83}</AvailableViewIds>
                         </parameters>
                       </control>
                     </cell>
@@ -262,13 +263,21 @@
     </tabs>
     <controlDescriptions />
     <formLibraries>
+      <Library name="tc_es6promise.js" libraryUniqueId="{2b23c897-8650-b619-1d62-60e6a9ce73ac}" />
+      <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{eeac9455-4668-ae1e-90d7-2d64c94423a5}" />
       <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{419a504c-1e0d-dc34-9bd6-31de4b6dc3aa}" />
       <Library name="tc_Tc.Crm.Scripts.Events.Contact.Ids.js" libraryUniqueId="{b9075aee-9c23-8cd2-66a0-aa3ba39ca65a}" />
+      <Library name="tc_Tc.Crm.Scripts.Events.Default.js" libraryUniqueId="{037db835-7880-2883-030c-26be318e5c5a}" />
     </formLibraries>
     <events>
       <event name="onchange" application="false" active="false" attribute="telephone1">
         <Handlers>
           <Handler functionName="Tc.Crm.Scripts.Events.Contact.Ids.OnChangeTelephone1" libraryName="tc_Tc.Crm.Scripts.Events.Contact.Ids.js" handlerUniqueId="{c0e1d1b5-053b-4611-2108-6006603bb406}" enabled="true" parameters="" passExecutionContext="false" />
+        </Handlers>
+      </event>
+      <event name="onsave" application="false" active="false">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Default.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Default.js" handlerUniqueId="{1b4698e0-a103-1aea-dcd3-0a4b22dba15b}" enabled="true" parameters="" passExecutionContext="true" />
         </Handlers>
       </event>
     </events>

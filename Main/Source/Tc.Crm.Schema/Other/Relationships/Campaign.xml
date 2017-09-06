@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <EntityRelationships>
-  <EntityRelationship Name="Campaign_Annotation" unmodified="1">
+  <EntityRelationship Name="Campaign_Annotation">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IntroducedVersion>5.0.0.0</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
@@ -14,9 +14,9 @@
     <ReferencingAttributeName>ObjectId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Objekts, dem die Notiz zugeordnet ist." languagecode="1031" />
         <Description description="Unique identifier of the object with which the note is associated." languagecode="1033" />
         <Description description="Identificateur unique de l'objet auquel la note est associée." languagecode="1036" />
-        <Description description="Eindeutiger Bezeichner des Objekts, dem die Notiz zugeordnet ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -34,8 +34,8 @@
     <ReferencingAttributeName>RegardingObjectId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Unique identifier of the object with which the e-mail is associated." languagecode="1033" />
         <Description description="Eindeutiger Bezeichner des Objekts, dem die E-Mail zugeordnet ist." languagecode="1031" />
+        <Description description="Unique identifier of the object with which the e-mail is associated." languagecode="1033" />
         <Description description="Identificateur unique de l'objet auquel le courrier électronique est associé." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
@@ -54,16 +54,16 @@
     <ReferencingAttributeName>CampaignId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Zeigt die Kampagne, auf deren Grundlage die Verkaufschance erstellt wurde. Die ID dient zum Nachverfolgen des Kampagnenerfolgs." languagecode="1031" />
         <Description description="Shows the campaign that the opportunity was created from. The ID is used for tracking the success of the campaign." languagecode="1033" />
         <Description description="Affiche la campagne d'origine de l'opportunité. L'ID permet de suivre la réussite de la campagne." languagecode="1036" />
-        <Description description="Zeigt die Kampagne, auf deren Grundlage die Verkaufschance erstellt wurde. Die ID dient zum Nachverfolgen des Kampagnenerfolgs." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
   <EntityRelationship Name="campaign_tc_assistancerequests">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.51</IntroducedVersion>
+    <IntroducedVersion>1.0.0.113</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_assistancerequest</ReferencingEntityName>
     <ReferencedEntityName>Campaign</ReferencedEntityName>
@@ -84,7 +84,7 @@
   <EntityRelationship Name="campaign_tc_followups">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.139</IntroducedVersion>
+    <IntroducedVersion>1.0.0.129</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_followup</ReferencingEntityName>
     <ReferencedEntityName>Campaign</ReferencedEntityName>
@@ -97,7 +97,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Eindeutiger Bezeichner des Objekts, dem die Aktivität zugeordnet ist." languagecode="1031" />
-        <Description description="Unique identifier of the object with which the activity is associated." languagecode="1033" />
+        <Description description="Unique identifier of the object with which the activity is associated.  This relationship is required to link the follow up to the correct Travel Planner." languagecode="1033" />
         <Description description="Identificateur unique de l'objet auquel l'activité est associée." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
@@ -105,7 +105,7 @@
   <EntityRelationship Name="campaign_tc_surveyresponses">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.51</IntroducedVersion>
+    <IntroducedVersion>1.0.0.113</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_surveyresponse</ReferencingEntityName>
     <ReferencedEntityName>Campaign</ReferencedEntityName>

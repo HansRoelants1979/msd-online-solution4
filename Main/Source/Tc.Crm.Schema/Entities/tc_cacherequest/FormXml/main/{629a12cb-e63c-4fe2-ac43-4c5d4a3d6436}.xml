@@ -4,7 +4,7 @@
   <IntroducedVersion>1.0.0.90</IntroducedVersion>
   <FormPresentation>1</FormPresentation>
   <FormActivationState>1</FormActivationState>
-  <form>
+  <form shownavigationbar="true" showImage="false" maxWidth="1900">
     <tabs>
       <tab verticallayout="true" id="{d88db178-6bd9-4ee2-bb5a-177d709e4357}" IsUserDefined="1">
         <labels>
@@ -79,6 +79,49 @@
         </columns>
       </tab>
     </tabs>
+    <Navigation>
+      <NavBar></NavBar>
+      <NavBarAreas>
+        <NavBarArea Id="Info">
+          <Titles>
+            <Title LCID="1033" Text="Common" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Sales">
+          <Titles>
+            <Title LCID="1033" Text="Sales" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Service">
+          <Titles>
+            <Title LCID="1033" Text="Service" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Marketing">
+          <Titles>
+            <Title LCID="1033" Text="Marketing" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="ProcessCenter">
+          <Titles>
+            <Title LCID="1033" Text="Process Sessions" />
+          </Titles>
+        </NavBarArea>
+      </NavBarAreas>
+    </Navigation>
+    <formLibraries>
+      <Library name="tc_es6promise.js" libraryUniqueId="{547649dc-ccda-91de-00d1-0ea50845b5d4}" />
+      <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{abdd36c4-8ddc-0cb8-507b-bddb03c6996a}" />
+      <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{55822e96-061b-7189-8d62-45e33279d03e}" />
+      <Library name="tc_Tc.Crm.Scripts.Events.Default.js" libraryUniqueId="{917edcac-8cae-b364-d441-d07455422114}" />
+    </formLibraries>
+    <events>
+      <event name="onsave" application="false" active="false">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Default.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Default.js" handlerUniqueId="{95826d90-1276-6176-07c9-624b030a7314}" enabled="true" parameters="" passExecutionContext="true" />
+        </Handlers>
+      </event>
+    </events>
   </form>
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>

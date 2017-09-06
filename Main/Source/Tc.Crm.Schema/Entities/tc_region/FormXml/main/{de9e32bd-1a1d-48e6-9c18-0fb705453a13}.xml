@@ -64,6 +64,14 @@
                     </cell>
                   </row>
                   <row>
+                    <cell id="{3a3eb2c4-55a1-5617-9dd1-a9c360e18139}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Official Region" languagecode="1033" />
+                      </labels>
+                      <control id="tc_officialregion" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="tc_officialregion" disabled="false" uniqueid="{93531163-4d7a-7b26-8193-7dd11deb5d38}" />
+                    </cell>
+                  </row>
+                  <row>
                     <cell id="{c9cebc69-e53b-eeb8-c918-a475d9187e4d}" showlabel="true" colspan="1" auto="false" rowspan="6">
                       <labels>
                         <label description="Locations" languagecode="1033" />
@@ -167,6 +175,19 @@
       </NavBarAreas>
     </Navigation>
     <controlDescriptions />
+    <formLibraries>
+      <Library name="tc_Tc.Crm.Scripts.Events.Default.js" libraryUniqueId="{76b4a56b-1750-7735-9e14-a7202298826b}" />
+      <Library name="tc_es6promise.js" libraryUniqueId="{9197b479-b9c3-6642-2632-6e8ce7c30a8c}" />
+      <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{d5280544-eed5-7549-a9c5-a2e3688071e5}" />
+      <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{eb55971e-4153-e9a2-3a2e-d385a97dc3ab}" />
+    </formLibraries>
+    <events>
+      <event name="onsave" application="false" active="false">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Default.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Default.js" handlerUniqueId="{e7243587-42cc-e91d-b59d-ce13165e1677}" enabled="true" parameters="" passExecutionContext="true" />
+        </Handlers>
+      </event>
+    </events>
   </form>
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>

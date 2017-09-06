@@ -132,6 +132,19 @@
       </NavBarAreas>
     </Navigation>
     <controlDescriptions />
+    <formLibraries>
+      <Library name="tc_es6promise.js" libraryUniqueId="{64654d5b-5813-6180-2459-aae291840be5}" />
+      <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{e6e65887-b0a0-c173-2b40-25ddbb1a140b}" />
+      <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{713d971b-5d54-4040-576e-e6dac74ad6ad}" />
+      <Library name="tc_Tc.Crm.Scripts.Events.Default.js" libraryUniqueId="{45d2296e-823a-47c7-3da1-a9ea93dd85cb}" />
+    </formLibraries>
+    <events>
+      <event name="onsave" application="false" active="false">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Default.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Default.js" handlerUniqueId="{64e62a73-b50b-206c-6db5-5cbdd8b1528c}" enabled="true" parameters="" passExecutionContext="true" />
+        </Handlers>
+      </event>
+    </events>
   </form>
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>

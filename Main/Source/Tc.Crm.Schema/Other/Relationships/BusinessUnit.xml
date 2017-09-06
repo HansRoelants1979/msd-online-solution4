@@ -14,13 +14,13 @@
     <ReferencingAttributeName>OwningBusinessUnit</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Shows the business unit that the record owner belongs to." languagecode="1033" />
         <Description description="Zeigt die Unternehmenseinheit, der der Datensatzbesitzer angehört." languagecode="1031" />
+        <Description description="Shows the business unit that the record owner belongs to." languagecode="1033" />
         <Description description="Affiche la division à laquelle le propriétaire appartient." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
-  <EntityRelationship Name="business_unit_annotations" unmodified="1">
+  <EntityRelationship Name="business_unit_annotations">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IntroducedVersion>5.0.0.0</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
@@ -34,9 +34,9 @@
     <ReferencingAttributeName>OwningBusinessUnit</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz der Notiz ist." languagecode="1031" />
         <Description description="Unique identifier of the business unit that owns the note." languagecode="1033" />
         <Description description="Identificateur unique de la division propriétaire de la note." languagecode="1036" />
-        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz der Notiz ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -54,13 +54,13 @@
     <ReferencingAttributeName>OwningBusinessUnit</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Unique identifier of the business unit that owns the contact." languagecode="1033" />
         <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Kontakts ist." languagecode="1031" />
+        <Description description="Unique identifier of the business unit that owns the contact." languagecode="1033" />
         <Description description="Identificateur unique de la division propriétaire du contact." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
-  <EntityRelationship Name="business_unit_email_activities" unmodified="1">
+  <EntityRelationship Name="business_unit_email_activities">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IntroducedVersion>5.0.0.0</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
@@ -74,9 +74,9 @@
     <ReferencingAttributeName>OwningBusinessUnit</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz der E-Mail-Aktivität ist." languagecode="1031" />
         <Description description="Unique identifier of the business unit that owns the email activity." languagecode="1033" />
         <Description description="Identificateur unique de la division propriétaire de l'activité de courrier électronique." languagecode="1036" />
-        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz der E-Mail-Aktivität ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -94,9 +94,9 @@
     <ReferencingAttributeName>OwningBusinessUnit</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz der Anfrage ist." languagecode="1031" />
         <Description description="Unique identifier of the business unit that owns the case." languagecode="1033" />
         <Description description="Identificateur unique de la division propriétaire de l'incident." languagecode="1036" />
-        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz der Anfrage ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -114,9 +114,9 @@
     <ReferencingAttributeName>OwningBusinessUnit</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz der Verkaufschance ist." languagecode="1031" />
         <Description description="Unique identifier of the business unit that owns the opportunity." languagecode="1033" />
         <Description description="Identificateur unique de la division propriétaire de l'opportunité." languagecode="1036" />
-        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz der Verkaufschance ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -134,8 +134,8 @@
     <ReferencingAttributeName>BusinessUnitId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Unique identifier of the business unit with which the user is associated." languagecode="1033" />
         <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, der der Benutzer zugeordnet ist." languagecode="1031" />
+        <Description description="Unique identifier of the business unit with which the user is associated." languagecode="1033" />
         <Description description="Identificateur unique de la division à laquelle l'utilisateur est associé." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
@@ -156,8 +156,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
-        <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
-        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -177,8 +175,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
-        <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
-        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -197,9 +193,9 @@
     <ReferencingAttributeName>OwningBusinessUnit</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
         <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
         <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
-        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -238,8 +234,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
-        <Description description="Besitzer (Unternehmenseinheit)" languagecode="1031" />
-        <Description description="Division propriétaire" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -259,8 +253,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
-        <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
-        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -280,8 +272,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
-        <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
-        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -301,8 +291,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
-        <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
-        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -360,8 +348,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
-        <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
-        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -399,9 +385,9 @@
     <ReferencingAttributeName>OwningBusinessUnit</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
         <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
         <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
-        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -421,8 +407,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
-        <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
-        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -442,8 +426,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
-        <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
-        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -463,8 +445,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
-        <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
-        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -521,9 +501,30 @@
     <ReferencingAttributeName>OwningBusinessUnit</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
         <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
         <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
+  <EntityRelationship Name="business_unit_tc_entitycachemessage">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>2.0.0.3</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_entitycachemessage</ReferencingEntityName>
+    <ReferencedEntityName>BusinessUnit</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>OwningBusinessUnit</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
         <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
+        <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
+        <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -542,9 +543,9 @@
     <ReferencingAttributeName>OwningBusinessUnit</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
         <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
         <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
-        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -564,8 +565,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
-        <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz geändert hat." languagecode="1031" />
-        <Description description="unique identifiant pour l'utilisateur qui a modifié l'entrée" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -585,8 +584,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
-        <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
-        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -624,9 +621,9 @@
     <ReferencingAttributeName>OwningBusinessUnit</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
         <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
         <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
-        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -668,6 +665,48 @@
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
+  <EntityRelationship Name="business_unit_tc_questionnaire">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_questionnaire</ReferencingEntityName>
+    <ReferencedEntityName>BusinessUnit</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>OwningBusinessUnit</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
+        <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
+        <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
+  <EntityRelationship Name="business_unit_tc_questionnaireresponse">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_questionnaireresponse</ReferencingEntityName>
+    <ReferencedEntityName>BusinessUnit</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>OwningBusinessUnit</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
+        <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
+        <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
   <EntityRelationship Name="business_unit_tc_recovery">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
@@ -684,8 +723,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
-        <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
-        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -723,9 +760,9 @@
     <ReferencingAttributeName>OwningBusinessUnit</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
         <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
         <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
-        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -745,8 +782,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
-        <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
-        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -765,9 +800,9 @@
     <ReferencingAttributeName>OwningBusinessUnit</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
         <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
         <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
-        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -787,8 +822,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
-        <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
-        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -808,8 +841,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
-        <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
-        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -828,13 +859,13 @@
     <ReferencingAttributeName>OwningBusinessUnit</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
         <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
         <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
-        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
-  <EntityRelationship Name="business_unit_teams" unmodified="1">
+  <EntityRelationship Name="business_unit_teams">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IntroducedVersion>5.0.0.0</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
@@ -848,8 +879,8 @@
     <ReferencingAttributeName>BusinessUnitId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Unique identifier of the business unit with which the team is associated." languagecode="1033" />
         <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, der das Team zugeordnet ist." languagecode="1031" />
+        <Description description="Unique identifier of the business unit with which the team is associated." languagecode="1033" />
         <Description description="Identificateur unique de la division à laquelle l'équipe est associée." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
@@ -857,7 +888,7 @@
   <EntityRelationship Name="tc_assistancerequest_businessunit_owningbusinessunit">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.51</IntroducedVersion>
+    <IntroducedVersion>1.0.0.113</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_assistancerequest</ReferencingEntityName>
     <ReferencedEntityName>BusinessUnit</ReferencedEntityName>
@@ -869,9 +900,7 @@
     <ReferencingAttributeName>OwningBusinessUnit</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz der Aktivität ist." languagecode="1031" />
         <Description description="Unique identifier of the business unit that owns the activity." languagecode="1033" />
-        <Description description="Identificateur unique de la division propriétaire de l'activité." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -892,8 +921,8 @@
     <ReferencingAttributeName>tc_SourceMarketBusinessUnitId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Used to indicate which business unit records from a given country (source market) should be allocated to upon creation." languagecode="1033" />
         <Description description="Wird verwendet, um anzugeben, welche Geschäftseinheitsdatensätze aus einem bestimmten Land (Quellmarkt) bei der Erstellung zugewiesen werden sollen." languagecode="1031" />
+        <Description description="Used to indicate which business unit records from a given country (source market) should be allocated to upon creation." languagecode="1033" />
       </Descriptions>
     </RelationshipDescription>
     <EntityRelationshipRoles>
@@ -914,7 +943,7 @@
   <EntityRelationship Name="tc_followup_businessunit_owningbusinessunit">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.139</IntroducedVersion>
+    <IntroducedVersion>1.0.0.129</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_followup</ReferencingEntityName>
     <ReferencedEntityName>BusinessUnit</ReferencedEntityName>
@@ -935,7 +964,7 @@
   <EntityRelationship Name="tc_surveyresponse_businessunit_owningbusinessunit">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.51</IntroducedVersion>
+    <IntroducedVersion>1.0.0.113</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_surveyresponse</ReferencingEntityName>
     <ReferencedEntityName>BusinessUnit</ReferencedEntityName>
@@ -947,9 +976,7 @@
     <ReferencingAttributeName>OwningBusinessUnit</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz der Aktivität ist." languagecode="1031" />
         <Description description="Unique identifier of the business unit that owns the activity." languagecode="1033" />
-        <Description description="Identificateur unique de la division propriétaire de l'activité." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>

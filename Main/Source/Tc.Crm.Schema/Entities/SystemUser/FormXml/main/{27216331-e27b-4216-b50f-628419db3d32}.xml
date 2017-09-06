@@ -705,10 +705,29 @@
           </Handler>
         </InternalHandlers>
       </event>
+      <event name="onsave" application="false" active="false">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Default.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Default.js" handlerUniqueId="{14d83e26-a282-51cb-7e8d-d54e62c732e4}" enabled="true" parameters="" passExecutionContext="true" />
+        </Handlers>
+      </event>
     </events>
+    <formLibraries>
+      <Library name="tc_es6promise.js" libraryUniqueId="{4d3280c2-1eae-0a91-1834-a5a10872c07d}" />
+      <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{45cd711e-8772-50d9-5b41-16d3d290462d}" />
+      <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{1177e654-0464-6c90-6b1c-01b68748c322}" />
+      <Library name="tc_Tc.Crm.Scripts.Events.Default.js" libraryUniqueId="{953cece0-442c-47a5-0aec-62e7c0088ad5}" />
+    </formLibraries>
     <DisplayConditions FallbackForm="true" Order="4">
       <Role Id="{627090ff-40a3-4053-8790-584edc5be201}" />
       <Role Id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
+      <Role Id="{F21E987F-F8F8-E611-8107-3863BB34FB48}" />
+      <Role Id="{6BDB42AF-86FA-E611-8100-3863BB354FF0}" />
+      <Role Id="{F9C784C3-F9F8-E611-8107-3863BB34FB48}" />
+      <Role Id="{D14317C4-18F8-E611-80FF-3863BB354FF0}" />
+      <Role Id="{EF5563EE-F9F8-E611-8107-3863BB34FB48}" />
+      <Role Id="{5C0F71F4-F9F8-E611-8107-3863BB34FB48}" />
+      <Role Id="{A2518D2F-F9F8-E611-8107-3863BB34FB48}" />
+      <Role Id="{E478DC35-F9F8-E611-8107-3863BB34FB48}" />
     </DisplayConditions>
   </form>
   <IsCustomizable>1</IsCustomizable>

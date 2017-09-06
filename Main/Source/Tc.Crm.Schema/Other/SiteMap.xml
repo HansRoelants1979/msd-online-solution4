@@ -116,6 +116,8 @@
         <SubArea Id="tc_configuration" Icon="/WebResources/msdyn_/Images/Subarea_Default_Icon.png" Entity="tc_configuration" AvailableOffline="true" PassParams="false" />
         <SubArea Id="tc_secureconfiguration" Icon="/WebResources/msdyn_/Images/Subarea_Default_Icon.png" Entity="tc_secureconfiguration" AvailableOffline="true" PassParams="false" />
         <SubArea Id="NewSubArea_2b69266b" Icon="/WebResources/msdyn_/Images/Subarea_Default_Icon.png" Entity="tc_cacherequest" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Entity="tc_entitycache" Id="tc_entitycache" AvailableOffline="false" PassParams="false" />
+        <SubArea Entity="tc_entitycachemessage" Id="tc_entitycachemessage" AvailableOffline="false" PassParams="false" />
       </Group>
       <Group Id="Extensions" ResourceId="Group_Extensions" IsProfile="false" ToolTipResourseId="SitemapDesigner.Unknown">
         <SubArea Id="poan_powerautonumber" Icon="/WebResources/msdyn_/Images/Subarea_Default_Icon.png" Entity="poan_powerautonumber" AvailableOffline="true" PassParams="false">
@@ -217,9 +219,6 @@
       <Group Id="Application" ResourceId="Menu_Label_Application" DescriptionResourceId="Menu_Label_Application" IntroducedVersion="8.1.0.0" IsProfile="false" ToolTipResourseId="Menu_Label_Application_ToolTip">
         <SubArea Id="nav_interactive_service_hub" ResourceId="Interactive_Service_Hub_SubArea_Title" DescriptionResourceId="Interactive_Service_Hub_SubArea_Description" Icon="/_imgs/InteractiveServiceHub_32.png" Url="/engagementhub.aspx" IntroducedVersion="8.1.0.0" AvailableOffline="false" PassParams="false" />
         <SubArea Id="nav_app_modules" ResourceId="App_Modules_SubArea_Title" DescriptionResourceId="App_Modules_SubArea_Description" Icon="/_imgs/AppModules_32x32.png" Url="/tools/AppModuleContainer/applandingtilepage.aspx" IntroducedVersion="8.1.0.0" Client="Web" AvailableOffline="false" PassParams="false" />
-      </Group>
-      <Group Id="Extensions" ResourceId="Group_Extensions">
-        <SubArea Id="tc_entitycache" Entity="tc_entitycache" />
       </Group>
     </Area>
     <Area Id="HLP" ResourceId="Area_Help" DescriptionResourceId="Help_Area_Description" Icon="/_imgs/icn_help16.png" ShowGroups="true" IntroducedVersion="7.0.0.0">

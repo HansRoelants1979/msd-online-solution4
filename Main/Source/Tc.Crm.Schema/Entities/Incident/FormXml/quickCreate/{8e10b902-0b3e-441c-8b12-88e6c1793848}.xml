@@ -213,7 +213,15 @@
                   <label description="Customer Details" languagecode="1033" />
                   <label description="Autres détails" languagecode="1036" />
                 </labels>
-                <rows></rows>
+                <rows>
+                  <row>
+                    <cell id="{d23fbb3c-ae42-4881-b49a-4ecef2b87de4}">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                  </row>
+                </rows>
               </section>
             </sections>
           </column>
@@ -225,21 +233,29 @@
                   <label description="Other Details" languagecode="1033" />
                   <label description="Description" languagecode="1036" />
                 </labels>
-                <rows></rows>
+                <rows>
+                  <row>
+                    <cell id="{4592f0c8-f7e3-45fb-967c-ab723b24ec84}">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                  </row>
+                </rows>
               </section>
             </sections>
           </column>
         </columns>
       </tab>
     </tabs>
-    <DisplayConditions FallbackForm="true" Order="3">
-      <Everyone />
-    </DisplayConditions>
     <events>
       <event name="onsave" application="true" active="true">
         <InternalHandlers>
           <Handler functionName="Mscrm.IncidentMainSystemLibraryWebResource.form_OnSave" libraryName="Incident_main_system_library.js" handlerUniqueId="ed27ea24-dc09-47be-8af3-52721df36d96" enabled="true" passExecutionContext="true" />
         </InternalHandlers>
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Default.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Default.js" handlerUniqueId="{d3e34d13-ee10-b981-412b-6eb142d153e8}" enabled="true" parameters="" passExecutionContext="true" />
+        </Handlers>
       </event>
     </events>
     <clientresources>
@@ -257,6 +273,15 @@
       </internalresources>
     </clientresources>
     <controlDescriptions />
+    <formLibraries>
+      <Library name="tc_es6promise.js" libraryUniqueId="{0e48d155-c1c3-598e-0ac4-8ca4870a2972}" />
+      <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{8e3ca701-6db9-d092-e286-36bcbb878b15}" />
+      <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{52b299a4-1014-c760-8584-5404d70a7881}" />
+      <Library name="tc_Tc.Crm.Scripts.Events.Default.js" libraryUniqueId="{aa1a92a7-acbd-3c2d-2312-0195cdc48807}" />
+    </formLibraries>
+    <DisplayConditions FallbackForm="true" Order="3">
+      <Everyone />
+    </DisplayConditions>
   </form>
   <LocalizedNames>
     <LocalizedName description="Anfrage schnell erfassen" languagecode="1031" />

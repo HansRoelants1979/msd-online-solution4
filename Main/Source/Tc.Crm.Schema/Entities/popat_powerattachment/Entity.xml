@@ -1,9 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Entity>
   <Name LocalizedName="PowerAttachment" OriginalName="PowerAttachment">popat_powerattachment</Name>
-  <ObjectTypeCode>10013</ObjectTypeCode>
+  <ObjectTypeCode>10008</ObjectTypeCode>
   <EntityInfo>
     <entity Name="popat_powerattachment">
+      <LocalizedNames>
+        <LocalizedName description="PowerAttachment" languagecode="1033" />
+      </LocalizedNames>
+      <LocalizedCollectionNames>
+        <LocalizedCollectionName description="PowerAttachments" languagecode="1033" />
+      </LocalizedCollectionNames>
+      <Descriptions>
+        <Description description="" languagecode="1033" />
+      </Descriptions>
       <attributes>
         <attribute PhysicalName="popat_Email">
           <Type>lookup</Type>
@@ -11,6 +20,7 @@
           <LogicalName>popat_email</LogicalName>
           <RequiredLevel>none</RequiredLevel>
           <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
           <ValidForUpdateApi>1</ValidForUpdateApi>
           <ValidForReadApi>1</ValidForReadApi>
           <ValidForCreateApi>1</ValidForCreateApi>
@@ -24,8 +34,8 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
-            <displayname description="Email" languagecode="1033" />
             <displayname description="Email" languagecode="1031" />
+            <displayname description="Email" languagecode="1033" />
             <displayname description="e-mail" languagecode="1036" />
           </displaynames>
           <Descriptions>

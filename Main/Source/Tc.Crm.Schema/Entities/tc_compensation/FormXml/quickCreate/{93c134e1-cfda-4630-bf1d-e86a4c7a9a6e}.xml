@@ -245,6 +245,8 @@
       <Library name="tc_es6promise.js" libraryUniqueId="{0c57b738-47a8-4511-d8b5-96e80665a967}" />
       <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{178b1ca5-18ca-22d1-5767-9eb8cae43275}" />
       <Library name="tc_Tc.Crm.Scripts.Events.Compensation.js" libraryUniqueId="{355a5a09-6436-2b13-eb8b-b00b993e2617}" />
+      <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{b5407878-bbe4-8b3a-c208-2ac590140dbc}" />
+      <Library name="tc_Tc.Crm.Scripts.Events.Default.js" libraryUniqueId="{40618c68-eb93-cea6-1d5c-6698e207de51}" />
     </formLibraries>
     <events>
       <event name="onload" application="false" active="false">
@@ -270,6 +272,11 @@
       <event name="onchange" application="false" active="false" attribute="tc_compensation4id">
         <Handlers>
           <Handler functionName="Tc.Crm.Scripts.Events.Compensation.OnCompensationCalculate" libraryName="tc_Tc.Crm.Scripts.Events.Compensation.js" handlerUniqueId="{d0c8bb95-b503-726e-cbec-c641b6407c32}" enabled="true" parameters="" passExecutionContext="false" />
+        </Handlers>
+      </event>
+      <event name="onsave" application="false" active="false">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Default.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Default.js" handlerUniqueId="{2ae97bb9-180a-5d3b-e1b1-557867905e1a}" enabled="true" parameters="" passExecutionContext="true" />
         </Handlers>
       </event>
     </events>

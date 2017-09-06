@@ -15,7 +15,7 @@
         <columns>
           <column width="37%">
             <sections>
-              <section id="{4d345bfa-c3d5-4707-9a88-62efc6e5d360}" name="{4d345bfa-c3d5-4707-9a88-62efc6e5d360}" showlabel="true" locklevel="0" IsUserDefined="0" celllabelposition="Left" celllabelalignment="Left" labelwidth="115" columns="1" showbar="false">
+              <section id="{4d345bfa-c3d5-4707-9a88-62efc6e5d360}" name="{4d345bfa-c3d5-4707-9a88-62efc6e5d360}" showlabel="true" locklevel="0" IsUserDefined="0" celllabelposition="Left" celllabelalignment="Left" labelwidth="130" columns="1" showbar="false">
                 <labels>
                   <label description="Details" languagecode="1031" />
                   <label description="DETAILS" languagecode="1033" />
@@ -79,6 +79,7 @@
                           <DefaultViewId>{4E29CB42-F586-45B8-9D57-AF21CEA59536}</DefaultViewId>
                           <DependentAttributeType>tc_country</DependentAttributeType>
                           <AllowFilterOff>false</AllowFilterOff>
+                          <AvailableViewIds>{4E29CB42-F586-45B8-9D57-AF21CEA59536}</AvailableViewIds>
                         </parameters>
                       </control>
                     </cell>
@@ -152,17 +153,17 @@
                   <row>
                     <cell id="{6e71c384-ea47-27e5-eb78-de66a6d78b11}" showlabel="true" locklevel="0">
                       <labels>
-                        <label description="Tour Operator Reference" languagecode="1033" />
+                        <label description="Tour Operator Ref." languagecode="1033" />
                       </labels>
-                      <control id="tc_touroperatorreference" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_touroperatorreference" disabled="false" />
+                      <control id="tc_touroperatorreference" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_touroperatorreference" disabled="false" uniqueid="{5b802b14-7375-bbd6-21e4-dc8b4db6dbca}" />
                     </cell>
                   </row>
                   <row>
                     <cell id="{2d7d8896-b51e-e76e-eea2-bb92c3c2a71d}" showlabel="true" locklevel="0">
                       <labels>
-                        <label description="Webrio Consultation Reference" languagecode="1033" />
+                        <label description="Webrio Consultation Ref." languagecode="1033" />
                       </labels>
-                      <control id="tc_webrioconsultationreference" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_webrioconsultationreference" disabled="false" />
+                      <control id="tc_webrioconsultationreference" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_webrioconsultationreference" disabled="false" uniqueid="{bd616c11-e4c0-72bb-d07e-9694a9197099}" />
                     </cell>
                   </row>
                 </rows>
@@ -633,6 +634,117 @@
           </column>
         </columns>
       </tab>
+      <tab name="tab_6" id="{ec742936-e0a2-2c8d-95ba-5819901a0052}" IsUserDefined="0" locklevel="0" showlabel="true" expanded="true">
+        <labels>
+          <label description="External Login" languagecode="1033" />
+        </labels>
+        <columns>
+          <column width="50%">
+            <sections>
+              <section name="tab_6_section_2" showlabel="false" showbar="false" locklevel="0" id="{58a4675e-9953-cb45-4983-8bd65c19493d}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115">
+                <labels>
+                  <label description="Section" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{5623b274-4c4a-2e79-ab7d-9926b307870e}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Created On" languagecode="1033" />
+                        <label description="Erstellt am" languagecode="1031" />
+                      </labels>
+                      <control id="createdon" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="createdon" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{a148ebea-4195-ec50-5a1a-806d0bd756e1}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Region (created by)" languagecode="1033" />
+                      </labels>
+                      <control id="tc_regioncreatedby" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_regioncreatedby" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{805dbbd8-a7b1-9549-607e-d7e12092ba2d}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Cluster (created by)" languagecode="1033" />
+                      </labels>
+                      <control id="tc_clustercreatedby" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_clustercreatedby" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{b555ac63-ced7-2510-4550-ee06c2374208}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Territory (created by)" languagecode="1033" />
+                      </labels>
+                      <control id="tc_territorycreatedby" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_territorycreatedby" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{7a759092-ec38-b557-8140-a679945009e5}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Store (created by)" languagecode="1033" />
+                      </labels>
+                      <control id="tc_storecreatedby" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_storecreatedby" disabled="false" />
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+          <column width="50%">
+            <sections>
+              <section name="tab_6_section_3" showlabel="false" showbar="false" locklevel="0" id="{528c942a-9403-58da-ca9c-19ebcd95d529}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115">
+                <labels>
+                  <label description="Section" languagecode="1033" />
+                </labels>
+                <rows>
+                  <row>
+                    <cell id="{a57688b0-295b-2ed8-653c-81a7048d3edd}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Modified On" languagecode="1033" />
+                        <label description="Geändert am" languagecode="1031" />
+                      </labels>
+                      <control id="modifiedon" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="modifiedon" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{36b5a478-898d-9487-e193-1849ce08c936}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Region (modified by)" languagecode="1033" />
+                      </labels>
+                      <control id="tc_regionmodifiedby" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_regionmodifiedby" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{7c9ed35b-d20b-1b42-3b41-bbec0767869c}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Cluster (modified by)" languagecode="1033" />
+                      </labels>
+                      <control id="tc_clustermodifiedby" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_clustermodifiedby" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{e8c147b2-1345-acc4-c30c-aea5995c5ec8}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Territory (modified by)" languagecode="1033" />
+                      </labels>
+                      <control id="tc_territorymodifiedby" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_territorymodifiedby" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{179c89ce-c8d4-bb57-3db7-b0daa6182c1a}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Store (modified by)" languagecode="1033" />
+                      </labels>
+                      <control id="tc_storemodifiedby" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_storemodifiedby" disabled="false" />
+                    </cell>
+                  </row>
+                </rows>
+              </section>
+            </sections>
+          </column>
+        </columns>
+      </tab>
       <tab id="{d378e326-6870-94a1-d3c4-be9bb82eadbd}" name="tab_2" showlabel="true" expanded="true" locklevel="0" IsUserDefined="0" visible="false">
         <labels>
           <label description="Hidden" languagecode="1033" />
@@ -794,6 +906,19 @@
       </NavBarAreas>
     </Navigation>
     <controlDescriptions />
+    <formLibraries>
+      <Library name="tc_es6promise.js" libraryUniqueId="{ed7a9c41-c059-77bc-ca25-38a235231060}" />
+      <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{7625631b-cb27-78a8-6e03-44c002b6dded}" />
+      <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{6782857a-be68-6d86-a6a5-c6627a2c4760}" />
+      <Library name="tc_Tc.Crm.Scripts.Events.Default.js" libraryUniqueId="{b7b50d4e-0c05-3aaa-457a-45cb61a2082b}" />
+    </formLibraries>
+    <events>
+      <event name="onsave" application="false" active="false">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Default.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Default.js" handlerUniqueId="{b5311ced-b8c0-7be1-7edd-d2508c84926b}" enabled="true" parameters="" passExecutionContext="true" />
+        </Handlers>
+      </event>
+    </events>
   </form>
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>

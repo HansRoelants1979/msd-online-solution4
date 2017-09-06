@@ -4,7 +4,7 @@
   <IntroducedVersion>6.0.0.0</IntroducedVersion>
   <FormPresentation>1</FormPresentation>
   <FormActivationState>1</FormActivationState>
-  <form showImage="true">
+  <form showImage="true" shownavigationbar="true" maxWidth="1900">
     <ancestor id="{c2cd9e55-d4b4-4b55-9951-16ead79643e5}" />
     <hiddencontrols>
       <data id="emailrouteraccessapproval" datafieldname="emailrouteraccessapproval" classid="{5546E6CD-394C-4bee-94A8-4425E17EF6C6}" />
@@ -624,6 +624,11 @@
           </Handler>
         </InternalHandlers>
       </event>
+      <event name="onsave" application="false" active="false">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Default.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Default.js" handlerUniqueId="{49e31d86-4a2a-9ada-1a15-a4321678a3ae}" enabled="true" parameters="" passExecutionContext="true" />
+        </Handlers>
+      </event>
     </events>
     <Navigation>
       <NavBar>
@@ -682,6 +687,12 @@
       </NavBarAreas>
     </Navigation>
     <controlDescriptions />
+    <formLibraries>
+      <Library name="tc_es6promise.js" libraryUniqueId="{7dea91d1-972d-c1ad-dad1-4d1e538e33d5}" />
+      <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{09310d32-e967-4755-c0b2-93702e5b2034}" />
+      <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{2be27c5a-d001-6b5d-0d18-aeb0561d67a1}" />
+      <Library name="tc_Tc.Crm.Scripts.Events.Default.js" libraryUniqueId="{1b30edb1-a548-7134-6043-ccc1bd2a290c}" />
+    </formLibraries>
     <DisplayConditions FallbackForm="true" Order="2">
       <Everyone />
     </DisplayConditions>

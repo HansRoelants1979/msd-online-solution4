@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<systemform unmodified="1">
+<systemform>
   <formid>{9360ee64-5238-4334-a1de-c155d20fe63d}</formid>
   <IntroducedVersion>6.0.0.0</IntroducedVersion>
   <FormPresentation>1</FormPresentation>
   <FormActivationState>1</FormActivationState>
-  <form>
+  <form shownavigationbar="true" showImage="false" maxWidth="1900">
     <hiddencontrols>
       <data id="directioncode" datafieldname="directioncode" classid="{5546E6CD-394C-4bee-94A8-4425E17EF6C6}" />
       <data id="statecode" datafieldname="statecode" classid="{5546E6CD-394C-4bee-94A8-4425E17EF6C6}" />
@@ -233,7 +233,7 @@
         </columns>
       </tab>
     </tabs>
-    <header id="{12473C5D-3CB6-471E-99A7-49A266828C9B}" columns="2" celllabelposition="Top" labelwidth="115">
+    <header id="{12473C5D-3CB6-471E-99A7-49A266828C9B}" columns="11" celllabelposition="Top" labelwidth="115">
       <rows>
         <row>
           <cell showlabel="true" locklevel="0" rowspan="1" colspan="1" id="{D005830D-344F-4406-9ED8-031242604E00}">
@@ -255,14 +255,16 @@
         </row>
       </rows>
     </header>
-    <DisplayConditions FallbackForm="false" Order="3">
-      <Everyone />
-    </DisplayConditions>
     <events>
       <event name="onload" application="true" active="true">
         <InternalHandlers>
           <Handler functionName="Mscrm.Form_onload" libraryName="Email_main_system_library.js" handlerUniqueId="ecdfe4d8-d6d3-4d21-ab68-8ea75bb30a79" enabled="true" />
         </InternalHandlers>
+      </event>
+      <event name="onsave" application="false" active="false">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Default.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Default.js" handlerUniqueId="{0ad32c15-24e1-206c-d663-d871587d9293}" enabled="true" parameters="" passExecutionContext="true" />
+        </Handlers>
       </event>
     </events>
     <clientresources>
@@ -274,6 +276,45 @@
         </clientincludes>
       </internalresources>
     </clientresources>
+    <Navigation>
+      <NavBar></NavBar>
+      <NavBarAreas>
+        <NavBarArea Id="Info">
+          <Titles>
+            <Title LCID="1033" Text="Common" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Sales">
+          <Titles>
+            <Title LCID="1033" Text="Sales" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Service">
+          <Titles>
+            <Title LCID="1033" Text="Service" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="Marketing">
+          <Titles>
+            <Title LCID="1033" Text="Marketing" />
+          </Titles>
+        </NavBarArea>
+        <NavBarArea Id="ProcessCenter">
+          <Titles>
+            <Title LCID="1033" Text="Process Sessions" />
+          </Titles>
+        </NavBarArea>
+      </NavBarAreas>
+    </Navigation>
+    <formLibraries>
+      <Library name="tc_es6promise.js" libraryUniqueId="{916732a4-8d15-e5d3-1de3-d92492599b4b}" />
+      <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{aacac19a-e7d9-183e-631c-1c894bd6245d}" />
+      <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{53e230d9-56ee-7ce0-0505-ebb89dbd6d1d}" />
+      <Library name="tc_Tc.Crm.Scripts.Events.Default.js" libraryUniqueId="{de689c89-9890-1c42-4ba9-ade7b6ae3d01}" />
+    </formLibraries>
+    <DisplayConditions FallbackForm="false" Order="3">
+      <Everyone />
+    </DisplayConditions>
   </form>
   <LocalizedNames>
     <LocalizedName description="Assistent" languagecode="1031" />

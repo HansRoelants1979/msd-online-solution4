@@ -175,11 +175,6 @@
             <Title LCID="1033" Text="Gateways" />
           </Titles>
         </NavBarByRelationshipItem>
-        <NavBarByRelationshipItem RelationshipName="tc_location_team" Sequence="10002" Area="Info" Id="nav_tc_location_team" Show="false">
-          <Titles>
-            <Title LCID="1033" Text="Resort Teams" />
-          </Titles>
-        </NavBarByRelationshipItem>
         <NavBarByRelationshipItem RelationshipName="tc_location_tc_hotel" Sequence="10003" Area="Info" Id="nav_tc_location_tc_hotel">
           <Titles>
             <Title LCID="1033" Text="Hotels" />
@@ -220,6 +215,19 @@
       </NavBarAreas>
     </Navigation>
     <controlDescriptions />
+    <formLibraries>
+      <Library name="tc_es6promise.js" libraryUniqueId="{c07857b0-325b-4267-5528-431d9d9de474}" />
+      <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{9675d4a9-edb7-5c44-e3ba-6d5dcd52685a}" />
+      <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{8c22c7a2-6835-dc4a-1069-c8de14070756}" />
+      <Library name="tc_Tc.Crm.Scripts.Events.Default.js" libraryUniqueId="{c9cd3dc0-cb83-121d-86e3-c756d5784285}" />
+    </formLibraries>
+    <events>
+      <event name="onsave" application="false" active="false">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Default.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Default.js" handlerUniqueId="{822e2147-c43e-8b54-123d-be6b459c1976}" enabled="true" parameters="" passExecutionContext="true" />
+        </Handlers>
+      </event>
+    </events>
   </form>
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>

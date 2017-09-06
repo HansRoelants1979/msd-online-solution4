@@ -4,7 +4,7 @@
   <IntroducedVersion>1.0.0.0</IntroducedVersion>
   <FormPresentation>1</FormPresentation>
   <FormActivationState>1</FormActivationState>
-  <form>
+  <form shownavigationbar="true" showImage="false" maxWidth="1900">
     <tabs>
       <tab verticallayout="true" id="{4bce38b6-6acf-4e14-b7b6-85f9f6d6b169}" IsUserDefined="1">
         <labels>
@@ -205,10 +205,10 @@
                       <control id="tc_remark" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="tc_remark" disabled="true" uniqueid="{51a8a6e1-8c33-2724-6843-03b82cc85d88}" />
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row height="auto"></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row height="auto" />
                 </rows>
               </section>
             </sections>
@@ -323,6 +323,19 @@
       </NavBarAreas>
     </Navigation>
     <controlDescriptions />
+    <formLibraries>
+      <Library name="tc_es6promise.js" libraryUniqueId="{72732ec0-765a-40d0-7212-da70644229c6}" />
+      <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{85ae2d30-08cb-cb77-3760-8ee37863ca5b}" />
+      <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{92088a4d-d8b5-bda2-6065-eca0addc5dd2}" />
+      <Library name="tc_Tc.Crm.Scripts.Events.Default.js" libraryUniqueId="{c9b9b196-d771-be9a-b709-561a3d5b65ec}" />
+    </formLibraries>
+    <events>
+      <event name="onsave" application="false" active="false">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Default.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Default.js" handlerUniqueId="{ed1bb34e-93e3-e590-a5d2-3559633a79e2}" enabled="true" parameters="" passExecutionContext="true" />
+        </Handlers>
+      </event>
+    </events>
   </form>
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>

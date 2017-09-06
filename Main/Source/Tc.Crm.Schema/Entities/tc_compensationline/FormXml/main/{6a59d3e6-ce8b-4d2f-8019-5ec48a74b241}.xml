@@ -935,6 +935,19 @@
         </customControl>
       </controlDescription>
     </controlDescriptions>
+    <formLibraries>
+      <Library name="tc_es6promise.js" libraryUniqueId="{923575b0-a46c-21bc-0e7a-10243336a76b}" />
+      <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{dd864729-e488-9c29-4664-9c3a5c5e6988}" />
+      <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{360292b3-9926-385e-25b1-2a2ae2c510be}" />
+      <Library name="tc_Tc.Crm.Scripts.Events.Default.js" libraryUniqueId="{2b3d839b-a90d-7a45-d163-eb9295489ae9}" />
+    </formLibraries>
+    <events>
+      <event name="onsave" application="false" active="false">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Default.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Default.js" handlerUniqueId="{6a826896-c629-4a82-4546-47b7c1eb29bd}" enabled="true" parameters="" passExecutionContext="true" />
+        </Handlers>
+      </event>
+    </events>
   </form>
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>

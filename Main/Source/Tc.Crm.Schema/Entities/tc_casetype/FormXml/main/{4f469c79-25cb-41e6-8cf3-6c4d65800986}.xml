@@ -4,7 +4,7 @@
   <IntroducedVersion>1.0.0.0</IntroducedVersion>
   <FormPresentation>1</FormPresentation>
   <FormActivationState>1</FormActivationState>
-  <form>
+  <form shownavigationbar="true" showImage="false" maxWidth="1900">
     <tabs>
       <tab id="{f6a85c4b-e988-4572-b4f8-96cfa8e1eec4}" IsUserDefined="1" verticallayout="true" name="{f6a85c4b-e988-4572-b4f8-96cfa8e1eec4}" locklevel="0" expanded="true" showlabel="true">
         <labels>
@@ -92,12 +92,12 @@
     <header id="{fe4b931d-c00e-4822-9baa-89344270f7ed}" columns="111">
       <rows>
         <row>
-          <cell id="{32cb7555-0678-43a3-8473-217273609133}">
+          <cell id="{32cb7555-0678-43a3-8473-217273609133}" showlabel="false">
             <labels>
               <label description="" languagecode="1033" />
             </labels>
           </cell>
-          <cell id="{4cef870b-49aa-4464-aa8d-0d4d226d5988}">
+          <cell id="{4cef870b-49aa-4464-aa8d-0d4d226d5988}" showlabel="false">
             <labels>
               <label description="" languagecode="1033" />
             </labels>
@@ -144,6 +144,19 @@
       </NavBarAreas>
     </Navigation>
     <controlDescriptions />
+    <formLibraries>
+      <Library name="tc_es6promise.js" libraryUniqueId="{e59a9b57-c1a0-3c45-eac5-5502b158ebbb}" />
+      <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{13db6776-2175-bed9-7e3b-438a57a370d0}" />
+      <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{24cbe89d-b5cc-0ec4-54e1-e520538cdc03}" />
+      <Library name="tc_Tc.Crm.Scripts.Events.Default.js" libraryUniqueId="{4c396d02-9955-4ee0-a2de-bbd79190d8ed}" />
+    </formLibraries>
+    <events>
+      <event name="onsave" application="false" active="false">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Default.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Default.js" handlerUniqueId="{39891813-308a-b3ed-1c17-a0acad8ece38}" enabled="true" parameters="" passExecutionContext="true" />
+        </Handlers>
+      </event>
+    </events>
   </form>
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>

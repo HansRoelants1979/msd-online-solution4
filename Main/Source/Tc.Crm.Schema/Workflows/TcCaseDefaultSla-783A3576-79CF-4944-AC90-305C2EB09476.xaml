@@ -53,7 +53,7 @@
                     <Sequence DisplayName="StopWorkflowStep3: Stop Workflow Step">
                       <Sequence.Variables>
                         <Variable x:TypeArguments="x:Object" Name="StopWorkflowStep3_1" />
-                        <Variable x:TypeArguments="x:String" Default="7c30d565-188c-4ad1-83f0-782aa87b005d" Name="stepLabelLabelId" />
+                        <Variable x:TypeArguments="x:String" Default="1250394d-de55-423a-8644-3ec448b9f4bd" Name="stepLabelLabelId" />
                         <Variable x:TypeArguments="x:String" Name="stepLabelDescription">
                           <Variable.Default>
                             <Literal x:TypeArguments="x:String" Value="" />
@@ -190,7 +190,7 @@
                           <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
                             <mxswa:ActivityReference.Arguments>
                               <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.Guid, "{478C99E9-93E4-E611-8109-1458D041F8E8}", "UniqueIdentifier" }]</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.Guid, "478c99e9-93e4-e611-8109-1458d041f8e8", "UniqueIdentifier" }]</InArgument>
                               <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:Guid" />
                               </InArgument>
@@ -545,7 +545,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep11_9 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep11_8]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -575,7 +575,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep11_11, CreateStep11_12 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep11_10]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -619,7 +619,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep11_16 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep11_15]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -649,7 +649,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep11_18, CreateStep11_19 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep11_17]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -734,7 +734,6 @@
                                                                       </mxswa:SetEntityProperty>
                                                                       <mxswa:CreateEntity EntityId="{x:Null}" DisplayName="CreateStep11: Create SLA KPI Instance" Entity="[CreatedEntities(&quot;CreateStep11_localParameter#Temp&quot;)]" EntityName="slakpiinstance" />
                                                                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;CreateStep11_localParameter&quot;)]" Value="[CreatedEntities(&quot;CreateStep11_localParameter#Temp&quot;)]" />
-                                                                      <Persist />
                                                                     </Sequence>
                                                                     <Sequence DisplayName="UpdateStep12">
                                                                       <Sequence.Variables>
@@ -769,7 +768,6 @@
                                                                       </mxswa:SetEntityProperty>
                                                                       <mxswa:UpdateEntity DisplayName="UpdateStep12" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" />
                                                                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
-                                                                      <Persist />
                                                                     </Sequence>
                                                                   </sco:Collection>
                                                                 </mxswa:ActivityReference.Properties>
@@ -909,7 +907,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep14_9 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep14_8]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -939,7 +937,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep14_11, CreateStep14_12 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep14_10]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -983,7 +981,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep14_16 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep14_15]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -1013,7 +1011,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep14_18, CreateStep14_19 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep14_17]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -1057,7 +1055,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep14_23 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep14_22]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -1087,7 +1085,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep14_25, CreateStep14_26 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep14_24]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -1131,7 +1129,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep14_30 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep14_29]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -1161,7 +1159,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep14_32, CreateStep14_33 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep14_31]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -1212,7 +1210,6 @@
                                                                       </mxswa:SetEntityProperty>
                                                                       <mxswa:CreateEntity EntityId="{x:Null}" DisplayName="CreateStep14: Create SLA KPI Instance" Entity="[CreatedEntities(&quot;CreateStep14_localParameter#Temp&quot;)]" EntityName="slakpiinstance" />
                                                                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;CreateStep14_localParameter&quot;)]" Value="[CreatedEntities(&quot;CreateStep14_localParameter#Temp&quot;)]" />
-                                                                      <Persist />
                                                                     </Sequence>
                                                                     <Sequence DisplayName="UpdateStep15">
                                                                       <Sequence.Variables>
@@ -1247,7 +1244,6 @@
                                                                       </mxswa:SetEntityProperty>
                                                                       <mxswa:UpdateEntity DisplayName="UpdateStep15" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" />
                                                                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
-                                                                      <Persist />
                                                                     </Sequence>
                                                                   </sco:Collection>
                                                                 </mxswa:ActivityReference.Properties>
@@ -1487,7 +1483,6 @@
                                                                                       </mxswa:SetEntityProperty>
                                                                                       <mxswa:UpdateEntity DisplayName="UpdateStep21" Entity="[CreatedEntities(&quot;related_resolvebykpiid#slakpiinstance#Temp&quot;)]" EntityName="slakpiinstance" />
                                                                                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;related_resolvebykpiid#slakpiinstance&quot;)]" Value="[CreatedEntities(&quot;related_resolvebykpiid#slakpiinstance#Temp&quot;)]" />
-                                                                                      <Persist />
                                                                                     </Sequence>
                                                                                   </sco:Collection>
                                                                                 </mxswa:ActivityReference.Properties>
@@ -1548,7 +1543,6 @@
                                                                                       </mxswa:SetEntityProperty>
                                                                                       <mxswa:UpdateEntity DisplayName="UpdateStep23" Entity="[CreatedEntities(&quot;related_resolvebykpiid#slakpiinstance#Temp&quot;)]" EntityName="slakpiinstance" />
                                                                                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;related_resolvebykpiid#slakpiinstance&quot;)]" Value="[CreatedEntities(&quot;related_resolvebykpiid#slakpiinstance#Temp&quot;)]" />
-                                                                                      <Persist />
                                                                                     </Sequence>
                                                                                   </sco:Collection>
                                                                                 </mxswa:ActivityReference.Properties>
@@ -1754,7 +1748,7 @@
                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep27_4 }]</InArgument>
                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                           </InArgument>
                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep27_3]</OutArgument>
                                                                                         </mxswa:ActivityReference.Arguments>
@@ -1784,7 +1778,7 @@
                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep27_6, UpdateStep27_7 }]</InArgument>
                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                           </InArgument>
                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep27_5]</OutArgument>
                                                                                         </mxswa:ActivityReference.Arguments>
@@ -1828,7 +1822,7 @@
                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep27_11 }]</InArgument>
                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                           </InArgument>
                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep27_10]</OutArgument>
                                                                                         </mxswa:ActivityReference.Arguments>
@@ -1858,7 +1852,7 @@
                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep27_13, UpdateStep27_14 }]</InArgument>
                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                           </InArgument>
                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep27_12]</OutArgument>
                                                                                         </mxswa:ActivityReference.Arguments>
@@ -1892,7 +1886,6 @@
                                                                                       </mxswa:SetEntityProperty>
                                                                                       <mxswa:UpdateEntity DisplayName="UpdateStep27" Entity="[CreatedEntities(&quot;related_resolvebykpiid#slakpiinstance#Temp&quot;)]" EntityName="slakpiinstance" />
                                                                                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;related_resolvebykpiid#slakpiinstance&quot;)]" Value="[CreatedEntities(&quot;related_resolvebykpiid#slakpiinstance#Temp&quot;)]" />
-                                                                                      <Persist />
                                                                                     </Sequence>
                                                                                   </sco:Collection>
                                                                                 </mxswa:ActivityReference.Properties>
@@ -2020,7 +2013,7 @@
                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep31_4 }]</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                           </InArgument>
                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep31_3]</OutArgument>
                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -2050,7 +2043,7 @@
                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep31_6, UpdateStep31_7 }]</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                           </InArgument>
                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep31_5]</OutArgument>
                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -2094,7 +2087,7 @@
                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep31_11 }]</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                           </InArgument>
                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep31_10]</OutArgument>
                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -2124,7 +2117,7 @@
                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep31_13, UpdateStep31_14 }]</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                           </InArgument>
                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep31_12]</OutArgument>
                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -2168,7 +2161,7 @@
                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep31_18 }]</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                           </InArgument>
                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep31_17]</OutArgument>
                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -2198,7 +2191,7 @@
                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep31_20, UpdateStep31_21 }]</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                           </InArgument>
                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep31_19]</OutArgument>
                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -2242,7 +2235,7 @@
                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep31_25 }]</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                           </InArgument>
                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep31_24]</OutArgument>
                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -2272,7 +2265,7 @@
                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep31_27, UpdateStep31_28 }]</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                           </InArgument>
                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep31_26]</OutArgument>
                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -2306,7 +2299,6 @@
                                                                                                       </mxswa:SetEntityProperty>
                                                                                                       <mxswa:UpdateEntity DisplayName="UpdateStep31" Entity="[CreatedEntities(&quot;related_resolvebykpiid#slakpiinstance#Temp&quot;)]" EntityName="slakpiinstance" />
                                                                                                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;related_resolvebykpiid#slakpiinstance&quot;)]" Value="[CreatedEntities(&quot;related_resolvebykpiid#slakpiinstance#Temp&quot;)]" />
-                                                                                                      <Persist />
                                                                                                     </Sequence>
                                                                                                   </sco:Collection>
                                                                                                 </mxswa:ActivityReference.Properties>
@@ -2438,7 +2430,7 @@
                                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep35_4 }]</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                                           </InArgument>
                                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep35_3]</OutArgument>
                                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -2468,7 +2460,7 @@
                                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep35_6, UpdateStep35_7 }]</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                                           </InArgument>
                                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep35_5]</OutArgument>
                                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -2512,7 +2504,7 @@
                                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep35_11 }]</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                                           </InArgument>
                                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep35_10]</OutArgument>
                                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -2542,7 +2534,7 @@
                                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep35_13, UpdateStep35_14 }]</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                                           </InArgument>
                                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep35_12]</OutArgument>
                                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -2603,7 +2595,7 @@
                                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep35_19 }]</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                                           </InArgument>
                                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep35_18]</OutArgument>
                                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -2633,7 +2625,7 @@
                                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep35_21, UpdateStep35_22 }]</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                                           </InArgument>
                                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep35_20]</OutArgument>
                                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -2677,7 +2669,7 @@
                                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep35_26 }]</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                                           </InArgument>
                                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep35_25]</OutArgument>
                                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -2707,7 +2699,7 @@
                                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep35_28, UpdateStep35_29 }]</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                                           </InArgument>
                                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep35_27]</OutArgument>
                                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -2741,7 +2733,6 @@
                                                                                                                       </mxswa:SetEntityProperty>
                                                                                                                       <mxswa:UpdateEntity DisplayName="UpdateStep35" Entity="[CreatedEntities(&quot;related_resolvebykpiid#slakpiinstance#Temp&quot;)]" EntityName="slakpiinstance" />
                                                                                                                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;related_resolvebykpiid#slakpiinstance&quot;)]" Value="[CreatedEntities(&quot;related_resolvebykpiid#slakpiinstance#Temp&quot;)]" />
-                                                                                                                      <Persist />
                                                                                                                     </Sequence>
                                                                                                                   </sco:Collection>
                                                                                                                 </mxswa:ActivityReference.Properties>
@@ -2906,7 +2897,7 @@
                                                             <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                             <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ChildWorkflowStep38_6 }]</InArgument>
                                                             <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                              <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                              <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                             </InArgument>
                                                             <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ChildWorkflowStep38_5]</OutArgument>
                                                           </mxswa:ActivityReference.Arguments>
@@ -2936,7 +2927,7 @@
                                                             <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                             <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ChildWorkflowStep38_8, ChildWorkflowStep38_9 }]</InArgument>
                                                             <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                              <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                              <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                             </InArgument>
                                                             <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ChildWorkflowStep38_7]</OutArgument>
                                                           </mxswa:ActivityReference.Arguments>
@@ -2966,7 +2957,6 @@
                                                       </Sequence>
                                                       <mxswa:StartChildWorkflow DisplayName="ChildWorkflowStep38: Sequence 1" EntityId="[InputEntities(&quot;primaryEntity&quot;).Id]" EntityName="incident" InputParameters="[ChildWorkflowStep38_1]" WorkflowId="6c0b8350-d7ec-4dec-8a10-3fe54ade741a" />
                                                     </Sequence>
-                                                    <Persist />
                                                   </sco:Collection>
                                                 </mxswa:ActivityReference.Properties>
                                               </mxswa:ActivityReference>
@@ -3024,7 +3014,7 @@
                           <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
                             <mxswa:ActivityReference.Arguments>
                               <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.Guid, "{478C99E9-93E4-E611-8109-1458D041F8E8}", "UniqueIdentifier" }]</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.Guid, "478c99e9-93e4-e611-8109-1458d041f8e8", "UniqueIdentifier" }]</InArgument>
                               <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:Guid" />
                               </InArgument>
@@ -3379,7 +3369,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep44_9 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep44_8]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -3409,7 +3399,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep44_11, CreateStep44_12 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep44_10]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -3453,7 +3443,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep44_16 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep44_15]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -3483,7 +3473,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep44_18, CreateStep44_19 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep44_17]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -3568,7 +3558,6 @@
                                                                       </mxswa:SetEntityProperty>
                                                                       <mxswa:CreateEntity EntityId="{x:Null}" DisplayName="CreateStep44: Create SLA KPI Instance" Entity="[CreatedEntities(&quot;CreateStep44_localParameter#Temp&quot;)]" EntityName="slakpiinstance" />
                                                                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;CreateStep44_localParameter&quot;)]" Value="[CreatedEntities(&quot;CreateStep44_localParameter#Temp&quot;)]" />
-                                                                      <Persist />
                                                                     </Sequence>
                                                                     <Sequence DisplayName="UpdateStep45">
                                                                       <Sequence.Variables>
@@ -3603,7 +3592,6 @@
                                                                       </mxswa:SetEntityProperty>
                                                                       <mxswa:UpdateEntity DisplayName="UpdateStep45" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" />
                                                                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
-                                                                      <Persist />
                                                                     </Sequence>
                                                                   </sco:Collection>
                                                                 </mxswa:ActivityReference.Properties>
@@ -3743,7 +3731,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep47_9 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep47_8]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -3773,7 +3761,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep47_11, CreateStep47_12 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep47_10]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -3817,7 +3805,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep47_16 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep47_15]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -3847,7 +3835,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep47_18, CreateStep47_19 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep47_17]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -3891,7 +3879,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep47_23 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep47_22]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -3921,7 +3909,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep47_25, CreateStep47_26 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep47_24]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -3965,7 +3953,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep47_30 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep47_29]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -3995,7 +3983,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep47_32, CreateStep47_33 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep47_31]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -4046,7 +4034,6 @@
                                                                       </mxswa:SetEntityProperty>
                                                                       <mxswa:CreateEntity EntityId="{x:Null}" DisplayName="CreateStep47: Create SLA KPI Instance" Entity="[CreatedEntities(&quot;CreateStep47_localParameter#Temp&quot;)]" EntityName="slakpiinstance" />
                                                                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;CreateStep47_localParameter&quot;)]" Value="[CreatedEntities(&quot;CreateStep47_localParameter#Temp&quot;)]" />
-                                                                      <Persist />
                                                                     </Sequence>
                                                                     <Sequence DisplayName="UpdateStep48">
                                                                       <Sequence.Variables>
@@ -4081,7 +4068,6 @@
                                                                       </mxswa:SetEntityProperty>
                                                                       <mxswa:UpdateEntity DisplayName="UpdateStep48" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" />
                                                                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
-                                                                      <Persist />
                                                                     </Sequence>
                                                                   </sco:Collection>
                                                                 </mxswa:ActivityReference.Properties>
@@ -4321,7 +4307,6 @@
                                                                                       </mxswa:SetEntityProperty>
                                                                                       <mxswa:UpdateEntity DisplayName="UpdateStep54" Entity="[CreatedEntities(&quot;related_resolvebykpiid#slakpiinstance#Temp&quot;)]" EntityName="slakpiinstance" />
                                                                                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;related_resolvebykpiid#slakpiinstance&quot;)]" Value="[CreatedEntities(&quot;related_resolvebykpiid#slakpiinstance#Temp&quot;)]" />
-                                                                                      <Persist />
                                                                                     </Sequence>
                                                                                   </sco:Collection>
                                                                                 </mxswa:ActivityReference.Properties>
@@ -4382,7 +4367,6 @@
                                                                                       </mxswa:SetEntityProperty>
                                                                                       <mxswa:UpdateEntity DisplayName="UpdateStep56" Entity="[CreatedEntities(&quot;related_resolvebykpiid#slakpiinstance#Temp&quot;)]" EntityName="slakpiinstance" />
                                                                                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;related_resolvebykpiid#slakpiinstance&quot;)]" Value="[CreatedEntities(&quot;related_resolvebykpiid#slakpiinstance#Temp&quot;)]" />
-                                                                                      <Persist />
                                                                                     </Sequence>
                                                                                   </sco:Collection>
                                                                                 </mxswa:ActivityReference.Properties>
@@ -4588,7 +4572,7 @@
                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep60_4 }]</InArgument>
                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                           </InArgument>
                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep60_3]</OutArgument>
                                                                                         </mxswa:ActivityReference.Arguments>
@@ -4618,7 +4602,7 @@
                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep60_6, UpdateStep60_7 }]</InArgument>
                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                           </InArgument>
                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep60_5]</OutArgument>
                                                                                         </mxswa:ActivityReference.Arguments>
@@ -4662,7 +4646,7 @@
                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep60_11 }]</InArgument>
                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                           </InArgument>
                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep60_10]</OutArgument>
                                                                                         </mxswa:ActivityReference.Arguments>
@@ -4692,7 +4676,7 @@
                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep60_13, UpdateStep60_14 }]</InArgument>
                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                           </InArgument>
                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep60_12]</OutArgument>
                                                                                         </mxswa:ActivityReference.Arguments>
@@ -4726,7 +4710,6 @@
                                                                                       </mxswa:SetEntityProperty>
                                                                                       <mxswa:UpdateEntity DisplayName="UpdateStep60" Entity="[CreatedEntities(&quot;related_resolvebykpiid#slakpiinstance#Temp&quot;)]" EntityName="slakpiinstance" />
                                                                                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;related_resolvebykpiid#slakpiinstance&quot;)]" Value="[CreatedEntities(&quot;related_resolvebykpiid#slakpiinstance#Temp&quot;)]" />
-                                                                                      <Persist />
                                                                                     </Sequence>
                                                                                   </sco:Collection>
                                                                                 </mxswa:ActivityReference.Properties>
@@ -4854,7 +4837,7 @@
                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep64_4 }]</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                           </InArgument>
                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep64_3]</OutArgument>
                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -4884,7 +4867,7 @@
                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep64_6, UpdateStep64_7 }]</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                           </InArgument>
                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep64_5]</OutArgument>
                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -4928,7 +4911,7 @@
                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep64_11 }]</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                           </InArgument>
                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep64_10]</OutArgument>
                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -4958,7 +4941,7 @@
                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep64_13, UpdateStep64_14 }]</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                           </InArgument>
                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep64_12]</OutArgument>
                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -5002,7 +4985,7 @@
                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep64_18 }]</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                           </InArgument>
                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep64_17]</OutArgument>
                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -5032,7 +5015,7 @@
                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep64_20, UpdateStep64_21 }]</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                           </InArgument>
                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep64_19]</OutArgument>
                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -5076,7 +5059,7 @@
                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep64_25 }]</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                           </InArgument>
                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep64_24]</OutArgument>
                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -5106,7 +5089,7 @@
                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep64_27, UpdateStep64_28 }]</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                           </InArgument>
                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep64_26]</OutArgument>
                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -5140,7 +5123,6 @@
                                                                                                       </mxswa:SetEntityProperty>
                                                                                                       <mxswa:UpdateEntity DisplayName="UpdateStep64" Entity="[CreatedEntities(&quot;related_resolvebykpiid#slakpiinstance#Temp&quot;)]" EntityName="slakpiinstance" />
                                                                                                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;related_resolvebykpiid#slakpiinstance&quot;)]" Value="[CreatedEntities(&quot;related_resolvebykpiid#slakpiinstance#Temp&quot;)]" />
-                                                                                                      <Persist />
                                                                                                     </Sequence>
                                                                                                   </sco:Collection>
                                                                                                 </mxswa:ActivityReference.Properties>
@@ -5272,7 +5254,7 @@
                                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep68_4 }]</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                                           </InArgument>
                                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep68_3]</OutArgument>
                                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -5302,7 +5284,7 @@
                                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep68_6, UpdateStep68_7 }]</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                                           </InArgument>
                                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep68_5]</OutArgument>
                                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -5346,7 +5328,7 @@
                                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep68_11 }]</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                                           </InArgument>
                                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep68_10]</OutArgument>
                                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -5376,7 +5358,7 @@
                                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep68_13, UpdateStep68_14 }]</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                                           </InArgument>
                                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep68_12]</OutArgument>
                                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -5437,7 +5419,7 @@
                                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep68_19 }]</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                                           </InArgument>
                                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep68_18]</OutArgument>
                                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -5467,7 +5449,7 @@
                                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep68_21, UpdateStep68_22 }]</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                                           </InArgument>
                                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep68_20]</OutArgument>
                                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -5511,7 +5493,7 @@
                                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep68_26 }]</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                                           </InArgument>
                                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep68_25]</OutArgument>
                                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -5541,7 +5523,7 @@
                                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep68_28, UpdateStep68_29 }]</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                                           </InArgument>
                                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep68_27]</OutArgument>
                                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -5575,7 +5557,6 @@
                                                                                                                       </mxswa:SetEntityProperty>
                                                                                                                       <mxswa:UpdateEntity DisplayName="UpdateStep68" Entity="[CreatedEntities(&quot;related_resolvebykpiid#slakpiinstance#Temp&quot;)]" EntityName="slakpiinstance" />
                                                                                                                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;related_resolvebykpiid#slakpiinstance&quot;)]" Value="[CreatedEntities(&quot;related_resolvebykpiid#slakpiinstance#Temp&quot;)]" />
-                                                                                                                      <Persist />
                                                                                                                     </Sequence>
                                                                                                                   </sco:Collection>
                                                                                                                 </mxswa:ActivityReference.Properties>
@@ -5740,7 +5721,7 @@
                                                             <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                             <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ChildWorkflowStep71_6 }]</InArgument>
                                                             <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                              <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                              <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                             </InArgument>
                                                             <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ChildWorkflowStep71_5]</OutArgument>
                                                           </mxswa:ActivityReference.Arguments>
@@ -5770,7 +5751,7 @@
                                                             <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                             <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ChildWorkflowStep71_8, ChildWorkflowStep71_9 }]</InArgument>
                                                             <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                              <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                              <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                             </InArgument>
                                                             <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ChildWorkflowStep71_7]</OutArgument>
                                                           </mxswa:ActivityReference.Arguments>
@@ -5800,7 +5781,6 @@
                                                       </Sequence>
                                                       <mxswa:StartChildWorkflow DisplayName="ChildWorkflowStep71: Sequence 2" EntityId="[InputEntities(&quot;primaryEntity&quot;).Id]" EntityName="incident" InputParameters="[ChildWorkflowStep71_1]" WorkflowId="dbe15aa6-98cf-461e-8777-811bf9eee8db" />
                                                     </Sequence>
-                                                    <Persist />
                                                   </sco:Collection>
                                                 </mxswa:ActivityReference.Properties>
                                               </mxswa:ActivityReference>
@@ -5858,7 +5838,7 @@
                           <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
                             <mxswa:ActivityReference.Arguments>
                               <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
-                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.Guid, "{478C99E9-93E4-E611-8109-1458D041F8E8}", "UniqueIdentifier" }]</InArgument>
+                              <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { Microsoft.Xrm.Sdk.Workflow.WorkflowPropertyType.Guid, "478c99e9-93e4-e611-8109-1458d041f8e8", "UniqueIdentifier" }]</InArgument>
                               <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                                 <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:Guid" />
                               </InArgument>
@@ -6133,7 +6113,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep77_9 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep77_8]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -6163,7 +6143,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep77_11, CreateStep77_12 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep77_10]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -6207,7 +6187,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep77_16 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep77_15]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -6237,7 +6217,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep77_18, CreateStep77_19 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep77_17]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -6322,7 +6302,6 @@
                                                                       </mxswa:SetEntityProperty>
                                                                       <mxswa:CreateEntity EntityId="{x:Null}" DisplayName="CreateStep77: Create SLA KPI Instance" Entity="[CreatedEntities(&quot;CreateStep77_localParameter#Temp&quot;)]" EntityName="slakpiinstance" />
                                                                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;CreateStep77_localParameter&quot;)]" Value="[CreatedEntities(&quot;CreateStep77_localParameter#Temp&quot;)]" />
-                                                                      <Persist />
                                                                     </Sequence>
                                                                     <Sequence DisplayName="UpdateStep78">
                                                                       <Sequence.Variables>
@@ -6357,7 +6336,6 @@
                                                                       </mxswa:SetEntityProperty>
                                                                       <mxswa:UpdateEntity DisplayName="UpdateStep78" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" />
                                                                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
-                                                                      <Persist />
                                                                     </Sequence>
                                                                   </sco:Collection>
                                                                 </mxswa:ActivityReference.Properties>
@@ -6497,7 +6475,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep80_9 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep80_8]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -6527,7 +6505,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep80_11, CreateStep80_12 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep80_10]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -6571,7 +6549,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep80_16 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep80_15]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -6601,7 +6579,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep80_18, CreateStep80_19 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep80_17]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -6645,7 +6623,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep80_23 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep80_22]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -6675,7 +6653,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep80_25, CreateStep80_26 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep80_24]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -6719,7 +6697,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep80_30 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep80_29]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -6749,7 +6727,7 @@
                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { CreateStep80_32, CreateStep80_33 }]</InArgument>
                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                           </InArgument>
                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[CreateStep80_31]</OutArgument>
                                                                         </mxswa:ActivityReference.Arguments>
@@ -6800,7 +6778,6 @@
                                                                       </mxswa:SetEntityProperty>
                                                                       <mxswa:CreateEntity EntityId="{x:Null}" DisplayName="CreateStep80: Create SLA KPI Instance" Entity="[CreatedEntities(&quot;CreateStep80_localParameter#Temp&quot;)]" EntityName="slakpiinstance" />
                                                                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;CreateStep80_localParameter&quot;)]" Value="[CreatedEntities(&quot;CreateStep80_localParameter#Temp&quot;)]" />
-                                                                      <Persist />
                                                                     </Sequence>
                                                                     <Sequence DisplayName="UpdateStep81">
                                                                       <Sequence.Variables>
@@ -6835,7 +6812,6 @@
                                                                       </mxswa:SetEntityProperty>
                                                                       <mxswa:UpdateEntity DisplayName="UpdateStep81" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" />
                                                                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
-                                                                      <Persist />
                                                                     </Sequence>
                                                                   </sco:Collection>
                                                                 </mxswa:ActivityReference.Properties>
@@ -7075,7 +7051,6 @@
                                                                                       </mxswa:SetEntityProperty>
                                                                                       <mxswa:UpdateEntity DisplayName="UpdateStep87" Entity="[CreatedEntities(&quot;related_resolvebykpiid#slakpiinstance#Temp&quot;)]" EntityName="slakpiinstance" />
                                                                                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;related_resolvebykpiid#slakpiinstance&quot;)]" Value="[CreatedEntities(&quot;related_resolvebykpiid#slakpiinstance#Temp&quot;)]" />
-                                                                                      <Persist />
                                                                                     </Sequence>
                                                                                   </sco:Collection>
                                                                                 </mxswa:ActivityReference.Properties>
@@ -7136,7 +7111,6 @@
                                                                                       </mxswa:SetEntityProperty>
                                                                                       <mxswa:UpdateEntity DisplayName="UpdateStep89" Entity="[CreatedEntities(&quot;related_resolvebykpiid#slakpiinstance#Temp&quot;)]" EntityName="slakpiinstance" />
                                                                                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;related_resolvebykpiid#slakpiinstance&quot;)]" Value="[CreatedEntities(&quot;related_resolvebykpiid#slakpiinstance#Temp&quot;)]" />
-                                                                                      <Persist />
                                                                                     </Sequence>
                                                                                   </sco:Collection>
                                                                                 </mxswa:ActivityReference.Properties>
@@ -7342,7 +7316,7 @@
                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep93_4 }]</InArgument>
                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                           </InArgument>
                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep93_3]</OutArgument>
                                                                                         </mxswa:ActivityReference.Arguments>
@@ -7372,7 +7346,7 @@
                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep93_6, UpdateStep93_7 }]</InArgument>
                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                           </InArgument>
                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep93_5]</OutArgument>
                                                                                         </mxswa:ActivityReference.Arguments>
@@ -7416,7 +7390,7 @@
                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep93_11 }]</InArgument>
                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                           </InArgument>
                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep93_10]</OutArgument>
                                                                                         </mxswa:ActivityReference.Arguments>
@@ -7446,7 +7420,7 @@
                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep93_13, UpdateStep93_14 }]</InArgument>
                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                           </InArgument>
                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep93_12]</OutArgument>
                                                                                         </mxswa:ActivityReference.Arguments>
@@ -7480,7 +7454,6 @@
                                                                                       </mxswa:SetEntityProperty>
                                                                                       <mxswa:UpdateEntity DisplayName="UpdateStep93" Entity="[CreatedEntities(&quot;related_resolvebykpiid#slakpiinstance#Temp&quot;)]" EntityName="slakpiinstance" />
                                                                                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;related_resolvebykpiid#slakpiinstance&quot;)]" Value="[CreatedEntities(&quot;related_resolvebykpiid#slakpiinstance#Temp&quot;)]" />
-                                                                                      <Persist />
                                                                                     </Sequence>
                                                                                   </sco:Collection>
                                                                                 </mxswa:ActivityReference.Properties>
@@ -7608,7 +7581,7 @@
                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep97_4 }]</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                           </InArgument>
                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep97_3]</OutArgument>
                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -7638,7 +7611,7 @@
                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep97_6, UpdateStep97_7 }]</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                           </InArgument>
                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep97_5]</OutArgument>
                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -7682,7 +7655,7 @@
                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep97_11 }]</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                           </InArgument>
                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep97_10]</OutArgument>
                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -7712,7 +7685,7 @@
                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep97_13, UpdateStep97_14 }]</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                           </InArgument>
                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep97_12]</OutArgument>
                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -7756,7 +7729,7 @@
                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep97_18 }]</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                           </InArgument>
                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep97_17]</OutArgument>
                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -7786,7 +7759,7 @@
                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep97_20, UpdateStep97_21 }]</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                           </InArgument>
                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep97_19]</OutArgument>
                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -7830,7 +7803,7 @@
                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep97_25 }]</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                           </InArgument>
                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep97_24]</OutArgument>
                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -7860,7 +7833,7 @@
                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep97_27, UpdateStep97_28 }]</InArgument>
                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                           </InArgument>
                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep97_26]</OutArgument>
                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -7894,7 +7867,6 @@
                                                                                                       </mxswa:SetEntityProperty>
                                                                                                       <mxswa:UpdateEntity DisplayName="UpdateStep97" Entity="[CreatedEntities(&quot;related_resolvebykpiid#slakpiinstance#Temp&quot;)]" EntityName="slakpiinstance" />
                                                                                                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;related_resolvebykpiid#slakpiinstance&quot;)]" Value="[CreatedEntities(&quot;related_resolvebykpiid#slakpiinstance#Temp&quot;)]" />
-                                                                                                      <Persist />
                                                                                                     </Sequence>
                                                                                                   </sco:Collection>
                                                                                                 </mxswa:ActivityReference.Properties>
@@ -8026,7 +7998,7 @@
                                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep101_4 }]</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                                           </InArgument>
                                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep101_3]</OutArgument>
                                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -8056,7 +8028,7 @@
                                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep101_6, UpdateStep101_7 }]</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                                           </InArgument>
                                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep101_5]</OutArgument>
                                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -8100,7 +8072,7 @@
                                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep101_11 }]</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                                           </InArgument>
                                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep101_10]</OutArgument>
                                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -8130,7 +8102,7 @@
                                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep101_13, UpdateStep101_14 }]</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                                           </InArgument>
                                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep101_12]</OutArgument>
                                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -8191,7 +8163,7 @@
                                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep101_19 }]</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                                           </InArgument>
                                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep101_18]</OutArgument>
                                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -8221,7 +8193,7 @@
                                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep101_21, UpdateStep101_22 }]</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                                           </InArgument>
                                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep101_20]</OutArgument>
                                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -8265,7 +8237,7 @@
                                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep101_26 }]</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                                           </InArgument>
                                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep101_25]</OutArgument>
                                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -8295,7 +8267,7 @@
                                                                                                                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep101_28, UpdateStep101_29 }]</InArgument>
                                                                                                                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                                                                                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                                                                                           </InArgument>
                                                                                                                           <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep101_27]</OutArgument>
                                                                                                                         </mxswa:ActivityReference.Arguments>
@@ -8329,7 +8301,6 @@
                                                                                                                       </mxswa:SetEntityProperty>
                                                                                                                       <mxswa:UpdateEntity DisplayName="UpdateStep101" Entity="[CreatedEntities(&quot;related_resolvebykpiid#slakpiinstance#Temp&quot;)]" EntityName="slakpiinstance" />
                                                                                                                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;related_resolvebykpiid#slakpiinstance&quot;)]" Value="[CreatedEntities(&quot;related_resolvebykpiid#slakpiinstance#Temp&quot;)]" />
-                                                                                                                      <Persist />
                                                                                                                     </Sequence>
                                                                                                                   </sco:Collection>
                                                                                                                 </mxswa:ActivityReference.Properties>
@@ -8494,7 +8465,7 @@
                                                             <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
                                                             <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ChildWorkflowStep104_6 }]</InArgument>
                                                             <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                              <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="s:DateTime" />
+                                                              <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                             </InArgument>
                                                             <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ChildWorkflowStep104_5]</OutArgument>
                                                           </mxswa:ActivityReference.Arguments>
@@ -8524,7 +8495,7 @@
                                                             <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">Add</InArgument>
                                                             <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { ChildWorkflowStep104_8, ChildWorkflowStep104_9 }]</InArgument>
                                                             <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
-                                                              <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Int32" />
+                                                              <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                                                             </InArgument>
                                                             <OutArgument x:TypeArguments="x:Object" x:Key="Result">[ChildWorkflowStep104_7]</OutArgument>
                                                           </mxswa:ActivityReference.Arguments>
@@ -8554,7 +8525,6 @@
                                                       </Sequence>
                                                       <mxswa:StartChildWorkflow DisplayName="ChildWorkflowStep104: Sequence 3" EntityId="[InputEntities(&quot;primaryEntity&quot;).Id]" EntityName="incident" InputParameters="[ChildWorkflowStep104_1]" WorkflowId="f78bceef-f028-4eb1-949e-da4acacc4668" />
                                                     </Sequence>
-                                                    <Persist />
                                                   </sco:Collection>
                                                 </mxswa:ActivityReference.Properties>
                                               </mxswa:ActivityReference>

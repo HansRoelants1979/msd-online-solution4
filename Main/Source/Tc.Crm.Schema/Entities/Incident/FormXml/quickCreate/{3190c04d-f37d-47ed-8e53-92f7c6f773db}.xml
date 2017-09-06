@@ -159,6 +159,7 @@
                           <FilterRelationshipName>tc_gateway_tc_primary_location</FilterRelationshipName>
                           <DependentAttributeName>incident.tc_locationid</DependentAttributeName>
                           <DependentAttributeType>tc_location</DependentAttributeType>
+                          <AvailableViewIds>{4E29CB42-F586-45B8-9D57-AF21CEA59536}</AvailableViewIds>
                         </parameters>
                       </control>
                     </cell>
@@ -424,6 +425,7 @@
       <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{dc5c3e92-bdc3-0704-3301-3c3d1c299b91}" />
       <Library name="tc_Tc.Crm.Scripts.Library.Case.js" libraryUniqueId="{cd4a26bd-4090-a801-95ab-2e0ebe127ddc}" />
       <Library name="tc_Tc.Crm.Scripts.Events.Case.js" libraryUniqueId="{ec964a7a-1161-d363-6610-556dbdbba7aa}" />
+      <Library name="tc_Tc.Crm.Scripts.Events.Default.js" libraryUniqueId="{7391388a-c500-3855-5a11-262685c3acb2}" />
     </formLibraries>
     <events>
       <event name="onchange" attribute="tc_bookingid" active="false" application="false">
@@ -444,6 +446,11 @@
       <event name="onchange" application="false" active="false" attribute="customerid">
         <Handlers>
           <Handler functionName="Tc.Crm.Scripts.Events.Case.OnChangeCustomer" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{77e332d7-9a35-cc75-d852-55b17a96ca2e}" enabled="true" parameters="" passExecutionContext="false" />
+        </Handlers>
+      </event>
+      <event name="onsave" application="false" active="false">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Default.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Default.js" handlerUniqueId="{0aa002e3-28c9-66bb-9ce5-2c0edd6242c9}" enabled="true" parameters="" passExecutionContext="true" />
         </Handlers>
       </event>
     </events>

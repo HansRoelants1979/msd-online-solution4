@@ -4,7 +4,7 @@
   <IntroducedVersion>6.0.0.0</IntroducedVersion>
   <FormPresentation>1</FormPresentation>
   <FormActivationState>1</FormActivationState>
-  <form>
+  <form shownavigationbar="true" showImage="false" maxWidth="1900">
     <ancestor id="{D6784CB8-BC33-4FCC-A9A9-3DC5B46EA9C6}" />
     <tabs>
       <tab id="{0b8ee2e2-8bc5-665a-e80c-2899014de1b6}" name="SUMMARY_TAB" IsUserDefined="0" locklevel="0" showlabel="false" expanded="true">
@@ -278,6 +278,11 @@
           </Handler>
         </InternalHandlers>
       </event>
+      <event name="onsave" application="false" active="false">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Default.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Default.js" handlerUniqueId="{a1c7e39d-0695-3410-441b-eb6358876b0a}" enabled="true" parameters="" passExecutionContext="true" />
+        </Handlers>
+      </event>
     </events>
     <clientresources>
       <internalresources>
@@ -318,6 +323,12 @@
       </NavBarAreas>
     </Navigation>
     <controlDescriptions />
+    <formLibraries>
+      <Library name="tc_es6promise.js" libraryUniqueId="{7dd16941-07a5-9376-0856-22901b793e77}" />
+      <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{94287e0d-53c8-4032-861c-6ee0853d7ce4}" />
+      <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{ec651923-8aa8-b792-1319-d69e6bd26771}" />
+      <Library name="tc_Tc.Crm.Scripts.Events.Default.js" libraryUniqueId="{7a58e5cd-19d0-a13d-3a3b-db7cd39c4001}" />
+    </formLibraries>
     <DisplayConditions FallbackForm="true" Order="2">
       <Everyone />
     </DisplayConditions>

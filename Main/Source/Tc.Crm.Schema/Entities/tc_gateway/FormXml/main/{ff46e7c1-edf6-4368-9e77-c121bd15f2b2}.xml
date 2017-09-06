@@ -44,7 +44,17 @@
                         <label description="Country" languagecode="1033" />
                         <label description="Land" languagecode="1031" />
                       </labels>
-                      <control disabled="false" id="tc_countryid" datafieldname="tc_countryid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" />
+                      <control disabled="false" id="tc_countryid" datafieldname="tc_countryid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" uniqueid="{ecc07d69-1155-d62b-ced3-15587a3033c0}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{314A3412-D6BE-4950-BDD7-6EFED38E8C83}</DefaultViewId>
+                          <AvailableViewIds>{314A3412-D6BE-4950-BDD7-6EFED38E8C83}</AvailableViewIds>
+                          <AllowFilterOff>false</AllowFilterOff>
+                        </parameters>
+                      </control>
                     </cell>
                   </row>
                   <row>
@@ -60,6 +70,14 @@
                           <DisableMru>false</DisableMru>
                         </parameters>
                       </control>
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{63e8ea4a-bb21-390a-9dc3-08e4017da602}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Official Airport" languagecode="1033" />
+                      </labels>
+                      <control id="tc_officialairport" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="tc_officialairport" disabled="false" />
                     </cell>
                   </row>
                 </rows>
@@ -95,6 +113,16 @@
     </header>
     <Navigation>
       <NavBar>
+        <NavBarByRelationshipItem RelationshipName="tc_gateway_tc_primary_location" Sequence="1000" Area="Service" Id="nav_tc_gateway_tc_primary_location">
+          <Titles>
+            <Title LCID="1033" Text="Locations" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_gateway_tc_locationoffice" Id="nav_tc_gateway_tc_locationoffice" Show="true" Sequence="1001" Area="Service">
+          <Titles>
+            <Title LCID="1033" Text="Location Offices" />
+          </Titles>
+        </NavBarByRelationshipItem>
         <NavBarByRelationshipItem RelationshipName="tc_arrivalgateway_tc_bookingtransport" Sequence="9601" Area="Info" Id="nav_tc_arrivalgateway_tc_bookingtransport" Show="false">
           <Titles>
             <Title LCID="1033" Text="Booking Transports" />
@@ -130,16 +158,6 @@
             <Title LCID="1033" Text="Booking Transfers" />
           </Titles>
         </NavBarByRelationshipItem>
-        <NavBarByRelationshipItem RelationshipName="tc_gateway_tc_primary_location" Sequence="1000" Area="Service" Id="nav_tc_gateway_tc_primary_location">
-          <Titles>
-            <Title LCID="1033" Text="Locations" />
-          </Titles>
-        </NavBarByRelationshipItem>
-        <NavBarByRelationshipItem RelationshipName="tc_gateway_tc_locationoffice" Id="nav_tc_gateway_tc_locationoffice" Show="true" Sequence="1001" Area="Service">
-          <Titles>
-            <Title LCID="1033" Text="Location Offices" />
-          </Titles>
-        </NavBarByRelationshipItem>
       </NavBar>
       <NavBarAreas>
         <NavBarArea Id="Info">
@@ -170,6 +188,19 @@
       </NavBarAreas>
     </Navigation>
     <controlDescriptions />
+    <formLibraries>
+      <Library name="tc_es6promise.js" libraryUniqueId="{c4a260c1-4823-5619-d0ca-7a6353d0a862}" />
+      <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{c5c8c7a7-ac53-9ead-325d-49a22ebe4e33}" />
+      <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{58e80650-357b-eb97-0518-5c56dbdd4896}" />
+      <Library name="tc_Tc.Crm.Scripts.Events.Default.js" libraryUniqueId="{0aaa93d7-5b23-c91d-31ec-c5bc844ee202}" />
+    </formLibraries>
+    <events>
+      <event name="onsave" application="false" active="false">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Default.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Default.js" handlerUniqueId="{d14da445-e7a6-3d12-1083-6c555712b864}" enabled="true" parameters="" passExecutionContext="true" />
+        </Handlers>
+      </event>
+    </events>
   </form>
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>

@@ -46,7 +46,7 @@
                         <label description="Destination" languagecode="1036" />
                         <label description="Zielgebiet" languagecode="1031" />
                       </labels>
-                      <control id="tc_destinationid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_destinationid" disabled="false" />
+                      <control id="tc_destinationid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_destinationid" disabled="false" uniqueid="{d8c8504e-4aeb-7a0c-adb1-2ee4c0598b66}" />
                     </cell>
                   </row>
                   <row>
@@ -55,7 +55,17 @@
                         <label description="Destination Gateway" languagecode="1033" />
                         <label description="Ziel Gate Way" languagecode="1031" />
                       </labels>
-                      <control disabled="false" id="tc_destinationgatewayid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_destinationgatewayid" />
+                      <control disabled="false" id="tc_destinationgatewayid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_destinationgatewayid" uniqueid="{746dd4ce-c633-329a-305e-a55e91949cc1}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{4E29CB42-F586-45B8-9D57-AF21CEA59536}</DefaultViewId>
+                          <AvailableViewIds>{4E29CB42-F586-45B8-9D57-AF21CEA59536}</AvailableViewIds>
+                          <AllowFilterOff>false</AllowFilterOff>
+                        </parameters>
+                      </control>
                     </cell>
                   </row>
                   <row>

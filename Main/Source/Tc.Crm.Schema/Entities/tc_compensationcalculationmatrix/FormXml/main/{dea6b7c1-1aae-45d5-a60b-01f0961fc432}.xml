@@ -4,7 +4,7 @@
   <IntroducedVersion>1.0.0.83</IntroducedVersion>
   <FormPresentation>1</FormPresentation>
   <FormActivationState>1</FormActivationState>
-  <form>
+  <form shownavigationbar="true" showImage="false" maxWidth="1900">
     <tabs>
       <tab verticallayout="true" id="{e3106642-950d-4d1c-921a-6bb034a3deb5}" IsUserDefined="1">
         <labels>
@@ -220,6 +220,19 @@
       </NavBarAreas>
     </Navigation>
     <controlDescriptions />
+    <formLibraries>
+      <Library name="tc_es6promise.js" libraryUniqueId="{2035abc1-3470-6514-53d0-9d1ed8cb85e4}" />
+      <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{11339232-9d35-abde-bdc2-3ab1da4b6013}" />
+      <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{d1ecb16c-a6a5-4861-8385-8c340b2b12e7}" />
+      <Library name="tc_Tc.Crm.Scripts.Events.Default.js" libraryUniqueId="{5933d073-8aee-60b5-a2ca-943783467bce}" />
+    </formLibraries>
+    <events>
+      <event name="onsave" application="false" active="false">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Default.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Default.js" handlerUniqueId="{cc72852c-864b-0681-b30b-e8da2e45507e}" enabled="true" parameters="" passExecutionContext="true" />
+        </Handlers>
+      </event>
+    </events>
   </form>
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>

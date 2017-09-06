@@ -85,18 +85,8 @@ Tc.Crm.Scripts.Events.Case = (function () {
         Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.AlternativePhone);
         Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.OtherPartyPhone);
         validateCaseAssociatedCustomerPhoneNum();
-        preFilterLocationOfficeLookup();   
-        setNotification();		
+        preFilterLocationOfficeLookup();        
     }
-	var setNotification = function(){	
-		 if (Xrm.Page.getAttribute("tc_reportnotes")) {
-            if (Xrm.Page.getAttribute("tc_reportnotes").getValue() == null){
-			 Xrm.Page.ui.setFormNotification(" You must provide a value for Rep Notes to Resolve Case. ", "WARNING",'note')			  
-			}	else{
-				Xrm.Page.ui.clearFormNotification('note')
-			}
-		 }
-	}
     var GetTheSourceMarketCurrency = function () {
                
         var sourceMarketId;
@@ -447,8 +437,8 @@ Tc.Crm.Scripts.Events.Case = (function () {
         
         arrivalDateControl.clearNotification();
         if (arrivalDate != null && departureDate != null) {
-            if (arrivalDate.setHours(0, 0, 0, 0) < departureDate.setHours(0, 0, 0, 0)) {
-                arrivalDateControl.setNotification("Arrival date should be equal or greater than Departure date");
+            if (arrivalDate.setHours(0, 0, 0, 0) <= departureDate.setHours(0, 0, 0, 0)) {
+                arrivalDateControl.setNotification("Departure date should be equal or greater than Arrival date");
             }
         }
     }
@@ -468,14 +458,13 @@ Tc.Crm.Scripts.Events.Case = (function () {
         OnChangeTelephone2: function () {
             onChangeTelephone2();
         },
-		 OnChangeRepNotes: function () {
-            setNotification();          
-        },
         OnSave: function (context) {
-            if (Xrm.Page.context.client.getClientState() !== CLIENT_STATE_OFFLINE) {
-                Tc.Crm.Scripts.Library.Case.UpdateRelatedCompensationsSourceMarket();
-            }
-            Tc.Crm.Scripts.Utils.Validation.ValidateGdprCompliance(context);
+            var isValid = Tc.Crm.Scripts.Utils.Validation.ValidateGdprCompliance(context);
+            if (isValid) {
+                if (Xrm.Page.context.client.getClientState() !== CLIENT_STATE_OFFLINE) {
+                    Tc.Crm.Scripts.Library.Case.UpdateRelatedCompensationsSourceMarket();
+                }
+            }            
         },
         OnCaseFieldChange: function () {
             GetTheSourceMarketCurrency();

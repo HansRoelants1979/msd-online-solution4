@@ -24,14 +24,6 @@
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{d9d8c06d-c8ce-de04-9ce0-86ab9b04883b}" showlabel="true" locklevel="0">
-                      <labels>
-                        <label description="Rep Notes" languagecode="1033" />
-                      </labels>
-                      <control id="tc_reportnotes" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="tc_reportnotes" disabled="false" />
-                    </cell>
-                  </row>
-                  <row>
                     <cell id="{4b129ea2-9068-da09-22b7-c7041d846423}" showlabel="true" locklevel="0" visible="false">
                       <labels>
                         <label description="No Customer" languagecode="1033" />
@@ -240,6 +232,19 @@
                   <row />
                   <row />
                   <row />
+                  <row>
+                    <cell id="{d9d8c06d-c8ce-de04-9ce0-86ab9b04883b}" showlabel="true" locklevel="0" rowspan="6">
+                      <labels>
+                        <label description="Rep Notes" languagecode="1033" />
+                      </labels>
+                      <control id="tc_reportnotes" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="tc_reportnotes" disabled="false" uniqueid="{ac82bc82-26b6-4244-0d33-20e26726e8ae}" />
+                    </cell>
+                  </row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
             </sections>
@@ -274,7 +279,7 @@
                           <ShowContextualActions>ShowSelectedActions</ShowContextualActions>
                           <SelectPrimaryCustomer>customerid</SelectPrimaryCustomer>
                           <OrderByActivityWall>descending</OrderByActivityWall>
-                          <SortActivityWall>modifiedon</SortActivityWall>
+                          <SortActivityWall>createdon</SortActivityWall>
                           <AutoSuggestionSource>0</AutoSuggestionSource>
                           <ActionList>0,1,4</ActionList>
                         </parameters>
@@ -727,6 +732,7 @@
                           <DependentAttributeType>tc_location</DependentAttributeType>
                           <FilterRelationshipName>tc_gateway_tc_primary_location</FilterRelationshipName>
                           <DependentAttributeName>incident.tc_locationid</DependentAttributeName>
+                          <AvailableViewIds>{4E29CB42-F586-45B8-9D57-AF21CEA59536}</AvailableViewIds>
                         </parameters>
                       </control>
                     </cell>

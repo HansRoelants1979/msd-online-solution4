@@ -1447,6 +1447,7 @@
       <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{25e815e2-e42c-ec97-7a5d-76833c4d18c0}" />
       <Library name="tc_Tc.Crm.Scripts.Library.Compensation.js" libraryUniqueId="{2d4a9d09-9133-9754-b416-9086eec627a7}" />
       <Library name="tc_Tc.Crm.Scripts.Events.Compensation.js" libraryUniqueId="{1a3611cb-72c1-b5a9-6220-ac4c7a576e55}" />
+      <Library name="tc_Tc.Crm.Scripts.Events.Default.js" libraryUniqueId="{a5473022-eddb-d6a9-c149-eea35eee1a13}" />
     </formLibraries>
     <events>
       <event name="onload" application="false" active="false">
@@ -1482,6 +1483,11 @@
       <event name="onchange" application="false" active="false" attribute="tc_bacsaccountnumber">
         <Handlers>
           <Handler functionName="Tc.Crm.Scripts.Events.Compensation.OnChangeBacsAccountNumber" libraryName="tc_Tc.Crm.Scripts.Events.Compensation.js" handlerUniqueId="{420151c5-396c-2b92-1ad8-ca1be7358e52}" enabled="true" parameters="" passExecutionContext="false" />
+        </Handlers>
+      </event>
+      <event name="onsave" application="false" active="false">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Default.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Default.js" handlerUniqueId="{1245a27d-1536-4a34-30b6-6ca411e9d711}" enabled="true" parameters="" passExecutionContext="true" />
         </Handlers>
       </event>
     </events>

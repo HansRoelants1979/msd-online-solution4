@@ -4,7 +4,7 @@
   <IntroducedVersion>1.0.0.0</IntroducedVersion>
   <FormPresentation>1</FormPresentation>
   <FormActivationState>1</FormActivationState>
-  <form>
+  <form shownavigationbar="true" showImage="false" maxWidth="1900">
     <tabs>
       <tab id="{0e40848d-ea25-4a1d-bbc0-fb00527dc3fe}" name="{0e40848d-ea25-4a1d-bbc0-fb00527dc3fe}" showlabel="true" expanded="true" locklevel="0" IsUserDefined="1" verticallayout="true">
         <labels>
@@ -150,7 +150,17 @@
                         <label description="Country" languagecode="1033" />
                         <label description="Land" languagecode="1031" />
                       </labels>
-                      <control disabled="false" id="tc_address1_country" datafieldname="tc_address1_country" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" />
+                      <control disabled="false" id="tc_address1_country" datafieldname="tc_address1_country" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" uniqueid="{b379c29d-04a9-7085-8581-7b013452cb89}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{314A3412-D6BE-4950-BDD7-6EFED38E8C83}</DefaultViewId>
+                          <AvailableViewIds>{314A3412-D6BE-4950-BDD7-6EFED38E8C83}</AvailableViewIds>
+                          <AllowFilterOff>false</AllowFilterOff>
+                        </parameters>
+                      </control>
                     </cell>
                   </row>
                 </rows>
@@ -281,6 +291,19 @@
       </NavBarAreas>
     </Navigation>
     <controlDescriptions />
+    <formLibraries>
+      <Library name="tc_es6promise.js" libraryUniqueId="{7ba46c16-ea19-d5d6-9cec-2d9dc4587101}" />
+      <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{10ba964a-ece1-4c2c-3016-a4cb8a1178b1}" />
+      <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{7e377a53-a351-5249-4664-e4d3d17bc258}" />
+      <Library name="tc_Tc.Crm.Scripts.Events.Default.js" libraryUniqueId="{cc679259-77ae-8ea0-8e51-b9dde0aac158}" />
+    </formLibraries>
+    <events>
+      <event name="onsave" application="false" active="false">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Default.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Default.js" handlerUniqueId="{e11873bd-0a66-87be-1012-949180dd113b}" enabled="true" parameters="" passExecutionContext="true" />
+        </Handlers>
+      </event>
+    </events>
   </form>
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>

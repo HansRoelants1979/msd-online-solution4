@@ -12,7 +12,6 @@
         <EnableRule Id="Mscrm.CanChangeIncidentForm" />
         <EnableRule Id="Mscrm.IncidentIsActive" />
         <EnableRule Id="Mscrm.IsAvailableInMocaOffline" />
-        <EnableRule Id="tc.incident.EnableRule4.EnableRule" />
       </EnableRules>
       <DisplayRules>
         <DisplayRule Id="Mscrm.CanChangeIncidentForm" />
@@ -50,9 +49,6 @@
           <BoolParameter Value="true" />
           <CrmParameter Value="SelectedEntityTypeName" />
         </CustomRule>
-      </EnableRule>
-      <EnableRule Id="tc.incident.EnableRule4.EnableRule">
-        <ValueRule Field="tc_reportnotes" Value="null" InvertResult="true" />
       </EnableRule>
     </EnableRules>
   </RuleDefinitions>

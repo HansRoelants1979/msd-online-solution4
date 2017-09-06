@@ -3,7 +3,7 @@
   <EntityRelationship Name="tc_assistancerequest_team_owningteam">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.51</IntroducedVersion>
+    <IntroducedVersion>1.0.0.113</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_assistancerequest</ReferencingEntityName>
     <ReferencedEntityName>Team</ReferencedEntityName>
@@ -15,16 +15,14 @@
     <ReferencingAttributeName>OwningTeam</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Eindeutiger Bezeichner des Teams, das im Besitz der Aktivität ist." languagecode="1031" />
         <Description description="Unique identifier of the team that owns the activity." languagecode="1033" />
-        <Description description="Identificateur unique de l’équipe propriétaire de l’activité." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
   <EntityRelationship Name="tc_followup_team_owningteam">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.139</IntroducedVersion>
+    <IntroducedVersion>1.0.0.129</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_followup</ReferencingEntityName>
     <ReferencedEntityName>Team</ReferencedEntityName>
@@ -45,7 +43,7 @@
   <EntityRelationship Name="tc_surveyresponse_team_owningteam">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.51</IntroducedVersion>
+    <IntroducedVersion>1.0.0.113</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_surveyresponse</ReferencingEntityName>
     <ReferencedEntityName>Team</ReferencedEntityName>
@@ -57,9 +55,7 @@
     <ReferencingAttributeName>OwningTeam</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Eindeutiger Bezeichner des Teams, das im Besitz der Aktivität ist." languagecode="1031" />
         <Description description="Unique identifier of the team that owns the activity." languagecode="1033" />
-        <Description description="Identificateur unique de l’équipe propriétaire de l’activité." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -90,8 +86,8 @@
         <NavPaneOrder>10000</NavPaneOrder>
         <NavigationPropertyName>tc_HotelTeamId</NavigationPropertyName>
         <CustomLabels>
-          <CustomLabel description="Source Market Hotel Teams" languagecode="1033" />
           <CustomLabel description="Source Market Hotel Teams" languagecode="1031" />
+          <CustomLabel description="Source Market Hotel Teams" languagecode="1033" />
         </CustomLabels>
         <RelationshipRoleType>1</RelationshipRoleType>
       </EntityRelationshipRole>
@@ -115,13 +111,13 @@
     <ReferencingAttributeName>OwningTeam</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Teams, das im Besitz der Firma ist." languagecode="1031" />
         <Description description="Unique identifier of the team who owns the account." languagecode="1033" />
         <Description description="Identificateur unique de l’équipe propriétaire du compte." languagecode="1036" />
-        <Description description="Eindeutiger Bezeichner des Teams, das im Besitz der Firma ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
-  <EntityRelationship Name="team_annotations" unmodified="1">
+  <EntityRelationship Name="team_annotations">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IntroducedVersion>5.0.0.0</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
@@ -135,9 +131,9 @@
     <ReferencingAttributeName>OwningTeam</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner des Teams, das im Besitz der Notiz ist." languagecode="1031" />
         <Description description="Unique identifier of the team who owns the note." languagecode="1033" />
         <Description description="Identificateur unique de l’équipe propriétaire de la note." languagecode="1036" />
-        <Description description="Eindeutiger Bezeichner des Teams, das im Besitz der Notiz ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -155,13 +151,13 @@
     <ReferencingAttributeName>OwningTeam</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Unique identifier of the team who owns the contact." languagecode="1033" />
         <Description description="Eindeutiger Bezeichner des Teams, das im Besitz des Kontakts ist." languagecode="1031" />
+        <Description description="Unique identifier of the team who owns the contact." languagecode="1033" />
         <Description description="Identificateur unique de l’équipe propriétaire du contact." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
-  <EntityRelationship Name="team_email" unmodified="1">
+  <EntityRelationship Name="team_email">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IntroducedVersion>5.0.0.0</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
@@ -175,8 +171,8 @@
     <ReferencingAttributeName>OwningTeam</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Unique identifier of the team who owns the email activity." languagecode="1033" />
         <Description description="Eindeutiger Bezeichner des Teams, das im Besitz der E-Mail-Aktivität ist." languagecode="1031" />
+        <Description description="Unique identifier of the team who owns the email activity." languagecode="1033" />
         <Description description="Identificateur unique de l’équipe propriétaire de l’activité de courrier électronique." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
@@ -195,8 +191,8 @@
     <ReferencingAttributeName>OwningTeam</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Unique identifier of the team who owns the case." languagecode="1033" />
         <Description description="Eindeutiger Bezeichner des Teams, das im Besitz der Anfrage ist." languagecode="1031" />
+        <Description description="Unique identifier of the team who owns the case." languagecode="1033" />
         <Description description="Identificateur unique de l’équipe propriétaire de l’incident." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
@@ -215,8 +211,8 @@
     <ReferencingAttributeName>OwningTeam</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Unique identifier of the team who owns the opportunity." languagecode="1033" />
         <Description description="Eindeutiger Bezeichner des Teams, das im Besitz der Verkaufschance ist." languagecode="1031" />
+        <Description description="Unique identifier of the team who owns the opportunity." languagecode="1033" />
         <Description description="Identificateur unique de l’équipe propriétaire de l’opportunité." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
@@ -237,8 +233,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
-        <Description description="Identificateur unique pour l’équipe à qui appartient l’enregistrement." languagecode="1036" />
-        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -258,8 +252,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
-        <Description description="Identificateur unique pour l’équipe à qui appartient l’enregistrement." languagecode="1036" />
-        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -278,9 +270,9 @@
     <ReferencingAttributeName>OwningTeam</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
         <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
         <Description description="Identificateur unique pour l’équipe à qui appartient l’enregistrement." languagecode="1036" />
-        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -338,8 +330,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
-        <Description description="Identificateur unique pour l’équipe à qui appartient l’enregistrement." languagecode="1036" />
-        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -359,8 +349,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
-        <Description description="Identificateur unique pour l’équipe à qui appartient l’enregistrement." languagecode="1036" />
-        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -380,8 +368,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
-        <Description description="Identificateur unique pour l’équipe à qui appartient l’enregistrement." languagecode="1036" />
-        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -401,8 +387,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
-        <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz geändert hat." languagecode="1031" />
-        <Description description="unique identifiant pour l'utilisateur qui a modifié l'entrée" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -441,8 +425,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
-        <Description description="Identificateur unique pour l’équipe à qui appartient l’enregistrement." languagecode="1036" />
-        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -480,9 +462,9 @@
     <ReferencingAttributeName>OwningTeam</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
         <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
         <Description description="Identificateur unique pour l’équipe à qui appartient l’enregistrement." languagecode="1036" />
-        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -502,8 +484,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
-        <Description description="Identificateur unique pour l’équipe à qui appartient l’enregistrement." languagecode="1036" />
-        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -523,8 +503,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
-        <Description description="Identificateur unique pour l’équipe à qui appartient l’enregistrement." languagecode="1036" />
-        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -544,8 +522,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
-        <Description description="Identificateur unique pour l’équipe à qui appartient l’enregistrement." languagecode="1036" />
-        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -602,9 +578,30 @@
     <ReferencingAttributeName>OwningTeam</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
         <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
         <Description description="Identificateur unique pour l’équipe à qui appartient l’enregistrement." languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
+  <EntityRelationship Name="team_tc_entitycachemessage">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>2.0.0.3</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_entitycachemessage</ReferencingEntityName>
+    <ReferencedEntityName>Team</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>OwningTeam</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
         <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
+        <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
+        <Description description="Identificateur unique pour l’équipe à qui appartient l’enregistrement." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -623,9 +620,9 @@
     <ReferencingAttributeName>OwningTeam</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
         <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
         <Description description="Identificateur unique pour l’équipe à qui appartient l’enregistrement." languagecode="1036" />
-        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -664,8 +661,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
-        <Description description="Identificateur unique pour l’équipe à qui appartient l’enregistrement." languagecode="1036" />
-        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -703,9 +698,9 @@
     <ReferencingAttributeName>OwningTeam</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
         <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
         <Description description="Identificateur unique pour l’équipe à qui appartient l’enregistrement." languagecode="1036" />
-        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -747,6 +742,48 @@
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
+  <EntityRelationship Name="team_tc_questionnaire">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_questionnaire</ReferencingEntityName>
+    <ReferencedEntityName>Team</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>OwningTeam</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
+        <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
+        <Description description="Identificateur unique pour l’équipe à qui appartient l’enregistrement." languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
+  <EntityRelationship Name="team_tc_questionnaireresponse">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_questionnaireresponse</ReferencingEntityName>
+    <ReferencedEntityName>Team</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>OwningTeam</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
+        <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
+        <Description description="Identificateur unique pour l’équipe à qui appartient l’enregistrement." languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
   <EntityRelationship Name="team_tc_recovery">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
@@ -763,8 +800,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
-        <Description description="Identificateur unique pour l’équipe à qui appartient l’enregistrement." languagecode="1036" />
-        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -802,9 +837,9 @@
     <ReferencingAttributeName>OwningTeam</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
         <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
         <Description description="Identificateur unique pour l’équipe à qui appartient l’enregistrement." languagecode="1036" />
-        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -824,8 +859,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
-        <Description description="Identificateur unique pour l’équipe à qui appartient l’enregistrement." languagecode="1036" />
-        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -844,9 +877,9 @@
     <ReferencingAttributeName>OwningTeam</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
         <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
         <Description description="Identificateur unique pour l’équipe à qui appartient l’enregistrement." languagecode="1036" />
-        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -866,8 +899,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
-        <Description description="Identificateur unique pour l’équipe à qui appartient l’enregistrement." languagecode="1036" />
-        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -887,8 +918,6 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
-        <Description description="Identificateur unique pour l’équipe à qui appartient l’enregistrement." languagecode="1036" />
-        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -907,9 +936,9 @@
     <ReferencingAttributeName>OwningTeam</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
         <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
         <Description description="Identificateur unique pour l’équipe à qui appartient l’enregistrement." languagecode="1036" />
-        <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>

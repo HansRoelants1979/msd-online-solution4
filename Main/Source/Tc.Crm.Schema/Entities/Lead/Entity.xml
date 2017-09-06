@@ -5,13 +5,19 @@
   <EntityInfo>
     <entity Name="Lead">
       <LocalizedNames>
+        <LocalizedName description="Lead" languagecode="1031" />
         <LocalizedName description="Lead" languagecode="1033" />
+        <LocalizedName description="Prospect" languagecode="1036" />
       </LocalizedNames>
       <LocalizedCollectionNames>
+        <LocalizedCollectionName description="Leads" languagecode="1031" />
         <LocalizedCollectionName description="Leads" languagecode="1033" />
+        <LocalizedCollectionName description="Prospects" languagecode="1036" />
       </LocalizedCollectionNames>
       <Descriptions>
+        <Description description="Ein Interessent oder eine potenzielle Verkaufschance. Leads werden zu Firmen, Kontakten oder Verkaufschancen konvertiert, wenn sie qualifiziert sind. Andernfalls werden sie gelöscht oder archiviert." languagecode="1031" />
         <Description description="Prospect or potential sales opportunity. Leads are converted into accounts, contacts, or opportunities when they are qualified. Otherwise, they are deleted or archived." languagecode="1033" />
+        <Description description="Prospect ou opportunité commerciale potentielle. Les prospects sont convertis en comptes, en contacts ou en opportunités lorsqu'ils sont « inclus ». Dans le cas contraire, ils sont supprimés ou archivés." languagecode="1036" />
       </Descriptions>
       <attributes>
         <attribute PhysicalName="CustomerId">
@@ -32,14 +38,14 @@
           <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
           <IsSortableEnabled>0</IsSortableEnabled>
           <displaynames>
+            <displayname description="Kunde" languagecode="1031" />
             <displayname description="Customer" languagecode="1033" />
             <displayname description="Client" languagecode="1036" />
-            <displayname description="Kunde" languagecode="1031" />
           </displaynames>
           <Descriptions>
+            <Description description="Wählen Sie das Kundenkonto oder den Kontakt aus, um eine direkte Verknüpfung mit zusätzlichen Kundendetails wie Firmeninformationen, Aktivitäten und Verkaufschancen bereitzustellen." languagecode="1031" />
             <Description description="Select the customer account or contact to provide a quick link to additional customer details, such as account information, activities, and opportunities." languagecode="1033" />
             <Description description="Sélectionnez le compte client ou le contact pour fournir un lien rapide vers les détails supplémentaires du client, comme les informations de compte, les activités et les opportunités." languagecode="1036" />
-            <Description description="Wählen Sie das Kundenkonto oder den Kontakt aus, um eine direkte Verknüpfung mit zusätzlichen Kundendetails wie Firmeninformationen, Aktivitäten und Verkaufschancen bereitzustellen." languagecode="1031" />
           </Descriptions>
         </attribute>
       </attributes>
@@ -68,9 +74,9 @@
       <IsReplicationUserFiltered>1</IsReplicationUserFiltered>
       <IsMailMergeEnabled>1</IsMailMergeEnabled>
       <IsVisibleInMobile>0</IsVisibleInMobile>
-      <IsVisibleInMobileClient>0</IsVisibleInMobileClient>
+      <IsVisibleInMobileClient>1</IsVisibleInMobileClient>
       <IsReadOnlyInMobileClient>0</IsReadOnlyInMobileClient>
-      <IsOfflineInMobileClient>0</IsOfflineInMobileClient>
+      <IsOfflineInMobileClient>1</IsOfflineInMobileClient>
       <DaysSinceRecordLastModified>10</DaysSinceRecordLastModified>
       <MobileOfflineFilters>
 		&lt;fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false"&gt;

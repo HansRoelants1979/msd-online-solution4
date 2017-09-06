@@ -4,7 +4,7 @@
   <IntroducedVersion>1.0.0.14</IntroducedVersion>
   <FormPresentation>1</FormPresentation>
   <FormActivationState>1</FormActivationState>
-  <form>
+  <form shownavigationbar="true" showImage="false" maxWidth="1900">
     <tabs>
       <tab name="General" id="{7683519d-90b4-95d9-5d26-7de937cb4bd1}" IsUserDefined="0" locklevel="0" showlabel="true" expanded="true">
         <labels>
@@ -156,12 +156,12 @@
     <header id="{b838a8bf-3441-4ae3-9db8-09db59b87d4f}" columns="111">
       <rows>
         <row>
-          <cell id="{03efb9fa-0a01-4405-8278-64b5dacfc718}">
+          <cell id="{03efb9fa-0a01-4405-8278-64b5dacfc718}" showlabel="false">
             <labels>
               <label description="" languagecode="1033" />
             </labels>
           </cell>
-          <cell id="{49986149-69d5-4087-8022-cf78d2acb7b0}">
+          <cell id="{49986149-69d5-4087-8022-cf78d2acb7b0}" showlabel="false">
             <labels>
               <label description="" languagecode="1033" />
             </labels>
@@ -223,6 +223,19 @@
       </NavBarAreas>
     </Navigation>
     <controlDescriptions />
+    <formLibraries>
+      <Library name="tc_es6promise.js" libraryUniqueId="{79431edb-1aa3-8028-54b3-11a1b66ab422}" />
+      <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{6326a965-5315-629d-d5b4-0a81eae808cc}" />
+      <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{be14b225-2b7a-7544-dcd6-6723e707c09c}" />
+      <Library name="tc_Tc.Crm.Scripts.Events.Default.js" libraryUniqueId="{b4a28652-aa0e-747d-dc8e-4d0a63e45323}" />
+    </formLibraries>
+    <events>
+      <event name="onsave" application="false" active="false">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Default.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Default.js" handlerUniqueId="{6189753b-425c-915e-26a0-3b79323b4729}" enabled="true" parameters="" passExecutionContext="true" />
+        </Handlers>
+      </event>
+    </events>
   </form>
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>

@@ -4,6 +4,21 @@
   <ObjectTypeCode>8</ObjectTypeCode>
   <EntityInfo>
     <entity Name="SystemUser">
+      <LocalizedNames>
+        <LocalizedName description="Benutzer" languagecode="1031" />
+        <LocalizedName description="User" languagecode="1033" />
+        <LocalizedName description="Utilisateur" languagecode="1036" />
+      </LocalizedNames>
+      <LocalizedCollectionNames>
+        <LocalizedCollectionName description="Benutzer" languagecode="1031" />
+        <LocalizedCollectionName description="Users" languagecode="1033" />
+        <LocalizedCollectionName description="Utilisateurs" languagecode="1036" />
+      </LocalizedCollectionNames>
+      <Descriptions>
+        <Description description="Person mit Zugriff auf das Microsoft CRM-System, die im Besitz von Objekten in der Microsoft CRM-Datenbank ist." languagecode="1031" />
+        <Description description="Person with access to the Microsoft CRM system and who owns objects in the Microsoft CRM database." languagecode="1033" />
+        <Description description="Personne ayant accès au système Microsoft CRM et qui possède des objets dans la base de données Microsoft CRM." languagecode="1036" />
+      </Descriptions>
       <attributes>
         <attribute PhysicalName="tc_allbudgetcentreaccess">
           <Type>bit</Type>
@@ -84,6 +99,7 @@
           <IsSortableEnabled>0</IsSortableEnabled>
           <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <Format></Format>
           <MinValue>0</MinValue>
           <MaxValue>2147483647</MaxValue>
           <displaynames>
@@ -133,6 +149,7 @@
           <LogicalName>tc_primarystoreid</LogicalName>
           <RequiredLevel>none</RequiredLevel>
           <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
           <ValidForUpdateApi>1</ValidForUpdateApi>
           <ValidForReadApi>1</ValidForReadApi>
           <ValidForCreateApi>1</ValidForCreateApi>

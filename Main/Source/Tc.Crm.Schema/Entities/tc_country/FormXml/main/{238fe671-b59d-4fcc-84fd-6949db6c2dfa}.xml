@@ -136,6 +136,19 @@
                       </labels>
                     </cell>
                   </row>
+                  <row>
+                    <cell id="{79225ae0-2967-5a88-b31b-dc396b6e95e6}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Official Country" languagecode="1033" />
+                      </labels>
+                      <control id="tc_officialcountry" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="tc_officialcountry" disabled="false" />
+                    </cell>
+                    <cell id="{46e003d8-155b-cc75-8bb8-106ba6d06e75}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                  </row>
                 </rows>
               </section>
               <section name="{36d044b7-1681-44fb-b701-759652b8d659}_section_2" showlabel="false" showbar="false" locklevel="0" id="{60248cd9-6901-8849-26dc-1e5e8ddc8c6e}" IsUserDefined="0" layout="varwidth" columns="11" labelwidth="115" height="auto">
@@ -356,6 +369,19 @@
       </NavBarAreas>
     </Navigation>
     <controlDescriptions />
+    <formLibraries>
+      <Library name="tc_es6promise.js" libraryUniqueId="{e6aa7495-5928-ea62-8ec1-e023bb854d02}" />
+      <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{87b3d4db-17a0-e534-5a22-17e0200a7ea9}" />
+      <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{2c2c33db-d39e-b3a9-0ba1-c0c91549d1b2}" />
+      <Library name="tc_Tc.Crm.Scripts.Events.Default.js" libraryUniqueId="{83dd8253-129c-893b-1ddd-40dc01a81739}" />
+    </formLibraries>
+    <events>
+      <event name="onsave" application="false" active="false">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Default.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Default.js" handlerUniqueId="{668242be-3da3-b38b-7360-3e1c958e74dd}" enabled="true" parameters="" passExecutionContext="true" />
+        </Handlers>
+      </event>
+    </events>
   </form>
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>

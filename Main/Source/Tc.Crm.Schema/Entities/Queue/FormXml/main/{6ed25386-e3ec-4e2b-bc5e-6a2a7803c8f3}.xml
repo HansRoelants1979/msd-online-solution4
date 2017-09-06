@@ -4,7 +4,7 @@
   <IntroducedVersion>6.1.0.0</IntroducedVersion>
   <FormPresentation>1</FormPresentation>
   <FormActivationState>1</FormActivationState>
-  <form>
+  <form shownavigationbar="true" showImage="false" maxWidth="1900">
     <hiddencontrols>
       <data id="emailrouteraccessapproval" datafieldname="emailrouteraccessapproval" classid="{5546E6CD-394C-4bee-94A8-4425E17EF6C6}" />
       <data id="outgoingemaildeliverymethod" datafieldname="outgoingemaildeliverymethod" classid="{5546E6CD-394C-4bee-94A8-4425E17EF6C6}" />
@@ -84,10 +84,10 @@
                       <control id="description" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="description" />
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row height="auto"></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row height="auto" />
+                  <row />
                   <row>
                     <cell id="{a948b614-8bd1-6a57-ecd5-284b943cd912}" showlabel="true" locklevel="0" colspan="2">
                       <labels>
@@ -177,17 +177,17 @@
                       </control>
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
             </sections>
@@ -223,11 +223,11 @@
                       </control>
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
               <section name="QueueMembers" showlabel="false" showbar="false" id="{609BA71A-A34C-4021-A3A8-950ED6E27C56}" IsUserDefined="0" locklevel="0" layout="varwidth" labelwidth="250" visible="false">
@@ -260,17 +260,17 @@
                       </control>
                     </cell>
                   </row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
-                  <row></row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                  <row />
                 </rows>
               </section>
               <section name="QueueMembersNoRecord" showlabel="true" showbar="false" id="{5D36D820-65C5-4F55-B084-33388D7202A9}" IsUserDefined="0" locklevel="0" labelwidth="250" visible="false">
@@ -316,6 +316,9 @@
             </dependencies>
           </Handler>
         </InternalHandlers>
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Default.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Default.js" handlerUniqueId="{4148e485-3095-646b-5a48-3314c711863e}" enabled="true" parameters="" passExecutionContext="true" />
+        </Handlers>
       </event>
       <event name="onchange" application="true" active="true" attribute="queueviewtype">
         <InternalHandlers>
@@ -366,6 +369,12 @@
       </NavBarAreas>
     </Navigation>
     <controlDescriptions />
+    <formLibraries>
+      <Library name="tc_es6promise.js" libraryUniqueId="{91b3a33c-91bd-4349-de95-565eecb12539}" />
+      <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{a50a382e-2abc-dde9-8882-42c2e5c97a43}" />
+      <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{a4cb83e5-71e6-41cd-dc69-960c0e0b422c}" />
+      <Library name="tc_Tc.Crm.Scripts.Events.Default.js" libraryUniqueId="{a47ed5c9-841d-937a-9ba3-482466b21c1c}" />
+    </formLibraries>
     <DisplayConditions FallbackForm="true" Order="2">
       <Everyone />
     </DisplayConditions>

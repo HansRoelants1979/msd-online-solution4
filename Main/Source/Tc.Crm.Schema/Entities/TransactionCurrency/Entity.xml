@@ -4,6 +4,21 @@
   <ObjectTypeCode>9105</ObjectTypeCode>
   <EntityInfo>
     <entity Name="TransactionCurrency">
+      <LocalizedNames>
+        <LocalizedName description="Währung" languagecode="1031" />
+        <LocalizedName description="Currency" languagecode="1033" />
+        <LocalizedName description="Devise" languagecode="1036" />
+      </LocalizedNames>
+      <LocalizedCollectionNames>
+        <LocalizedCollectionName description="Währungen" languagecode="1031" />
+        <LocalizedCollectionName description="Currencies" languagecode="1033" />
+        <LocalizedCollectionName description="Devises" languagecode="1036" />
+      </LocalizedCollectionNames>
+      <Descriptions>
+        <Description description="Die Währung, in der eine finanzielle Transaktion ausgeführt wird." languagecode="1031" />
+        <Description description="Currency in which a financial transaction is carried out." languagecode="1033" />
+        <Description description="Devise utilisée pour une transaction financière." languagecode="1036" />
+      </Descriptions>
       <attributes>
         <attribute PhysicalName="CurrencyName" unmodified="1">
           <Type>nvarchar</Type>
@@ -27,13 +42,13 @@
           <Length>200</Length>
           <displaynames>
             <displayname description="Währungsname" languagecode="1031" />
-            <displayname description="Nom de la devise" languagecode="1036" />
             <displayname description="Currency Name" languagecode="1033" />
+            <displayname description="Nom de la devise" languagecode="1036" />
           </displaynames>
           <Descriptions>
-            <Description description="Nom de la devise de transaction." languagecode="1036" />
-            <Description description="Name of the transaction currency." languagecode="1033" />
             <Description description="Der Name der Transaktionswährung." languagecode="1031" />
+            <Description description="Name of the transaction currency." languagecode="1033" />
+            <Description description="Nom de la devise de transaction." languagecode="1036" />
           </Descriptions>
         </attribute>
       </attributes>

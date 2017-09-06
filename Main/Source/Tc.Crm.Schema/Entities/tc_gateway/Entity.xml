@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Entity>
   <Name LocalizedName="Gateway" OriginalName="Gateway">tc_gateway</Name>
-  <ObjectTypeCode>10032</ObjectTypeCode>
+  <ObjectTypeCode>10037</ObjectTypeCode>
   <EntityInfo>
     <entity Name="tc_gateway">
       <LocalizedNames>
@@ -11,8 +11,8 @@
         <LocalizedCollectionName description="Gateways" languagecode="1033" />
       </LocalizedCollectionNames>
       <Descriptions>
-        <Description description="Thomas Cook Gateway - Airport, Station, Port, etc." languagecode="1033" />
         <Description description="Thomas Cook Schalter - Flughafen, Station, Hafen, etc." languagecode="1031" />
+        <Description description="Thomas Cook Gateway - Airport, Station, Port, etc." languagecode="1033" />
       </Descriptions>
       <attributes>
         <attribute PhysicalName="CreatedBy">
@@ -40,12 +40,12 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
-            <displayname description="Created By" languagecode="1033" />
             <displayname description="Erstellt von" languagecode="1031" />
+            <displayname description="Created By" languagecode="1033" />
           </displaynames>
           <Descriptions>
-            <Description description="Unique identifier of the user who created the record." languagecode="1033" />
             <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz erstellt hat." languagecode="1031" />
+            <Description description="Unique identifier of the user who created the record." languagecode="1033" />
             <Description description="unique identifiant pour l'utilisateur qui a créé l'entrée" languagecode="1036" />
           </Descriptions>
         </attribute>
@@ -75,12 +75,12 @@
           <CanChangeDateTimeBehavior>0</CanChangeDateTimeBehavior>
           <Behavior>1</Behavior>
           <displaynames>
-            <displayname description="Created On" languagecode="1033" />
             <displayname description="Erstellt am" languagecode="1031" />
+            <displayname description="Created On" languagecode="1033" />
           </displaynames>
           <Descriptions>
-            <Description description="Date and time when the record was created." languagecode="1033" />
             <Description description="Datum und Uhrzeit der Erstellung des Datensatzes." languagecode="1031" />
+            <Description description="Date and time when the record was created." languagecode="1033" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="CreatedOnBehalfBy">
@@ -108,8 +108,8 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
-            <displayname description="Created By (Delegate)" languagecode="1033" />
             <displayname description="Erstellt von (Stellvertreter)" languagecode="1031" />
+            <displayname description="Created By (Delegate)" languagecode="1033" />
           </displaynames>
           <Descriptions>
             <Description description="Unique identifier of the delegate user who created the record." languagecode="1033" />
@@ -145,8 +145,8 @@
             <displayname description="Import Sequence Number" languagecode="1033" />
           </displaynames>
           <Descriptions>
-            <Description description="Sequence number of the import that created this record." languagecode="1033" />
             <Description description="Sequenznummer des Imports, mit dem der Datensatz erstellt wurde." languagecode="1031" />
+            <Description description="Sequence number of the import that created this record." languagecode="1033" />
             <Description description="Numéro séquentiel de l’importation qui a créé cet enregistrement." languagecode="1036" />
           </Descriptions>
         </attribute>
@@ -175,12 +175,12 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
-            <displayname description="Modified By" languagecode="1033" />
             <displayname description="Geändert von" languagecode="1031" />
+            <displayname description="Modified By" languagecode="1033" />
           </displaynames>
           <Descriptions>
-            <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
             <Description description="Eigentümer ID Typ" languagecode="1031" />
+            <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
             <Description description="type d'identifiant de la personne en charge" languagecode="1036" />
           </Descriptions>
         </attribute>
@@ -210,12 +210,12 @@
           <CanChangeDateTimeBehavior>0</CanChangeDateTimeBehavior>
           <Behavior>1</Behavior>
           <displaynames>
-            <displayname description="Modified On" languagecode="1033" />
             <displayname description="Geändert am" languagecode="1031" />
+            <displayname description="Modified On" languagecode="1033" />
           </displaynames>
           <Descriptions>
-            <Description description="Date and time when the record was modified." languagecode="1033" />
             <Description description="Datum und Uhrzeit, in der der Datensatz geändert wurde" languagecode="1031" />
+            <Description description="Date and time when the record was modified." languagecode="1033" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="ModifiedOnBehalfBy">
@@ -243,8 +243,8 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
-            <displayname description="Modified By (Delegate)" languagecode="1033" />
             <displayname description="Geändert von (Stellvertreter)" languagecode="1031" />
+            <displayname description="Modified By (Delegate)" languagecode="1033" />
           </displaynames>
           <Descriptions>
             <Description description="Unique identifier of the delegate user who modified the record." languagecode="1033" />
@@ -277,13 +277,13 @@
           <CanChangeDateTimeBehavior>0</CanChangeDateTimeBehavior>
           <Behavior>1</Behavior>
           <displaynames>
-            <displayname description="Record Created On" languagecode="1033" />
             <displayname description="Datensatz erstellt am" languagecode="1031" />
+            <displayname description="Record Created On" languagecode="1033" />
             <displayname description="Enregistrement créé le" languagecode="1036" />
           </displaynames>
           <Descriptions>
-            <Description description="Date and time that the record was migrated." languagecode="1033" />
             <Description description="Datum und Uhrzeit, in der der Datensatz migriert wurde." languagecode="1031" />
+            <Description description="Date and time that the record was migrated." languagecode="1033" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="OwnerId">
@@ -316,13 +316,13 @@
             <LookupType id="00000000-0000-0000-0000-000000000000">9</LookupType>
           </LookupTypes>
           <displaynames>
-            <displayname description="Owner" languagecode="1033" />
             <displayname description="Besitzer" languagecode="1031" />
+            <displayname description="Owner" languagecode="1033" />
             <displayname description="Propriétaire" languagecode="1036" />
           </displaynames>
           <Descriptions>
-            <Description description="Owner Id" languagecode="1033" />
             <Description description="Eigentümer ID" languagecode="1031" />
+            <Description description="Owner Id" languagecode="1033" />
             <Description description="identifiant de la personne en charge" languagecode="1036" />
           </Descriptions>
         </attribute>
@@ -353,7 +353,6 @@
           <Length>320</Length>
           <Descriptions>
             <Description description="Name of the owner" languagecode="1033" />
-            <Description description="Name des Eigentümers" languagecode="1031" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="OwnerIdType">
@@ -385,8 +384,6 @@
           <MaxValue>2147483647</MaxValue>
           <Descriptions>
             <Description description="Owner Id Type" languagecode="1033" />
-            <Description description="Besitzer-ID-Typ" languagecode="1031" />
-            <Description description="Type de l’ID du propriétaire" languagecode="1036" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="OwnerIdYomiName">
@@ -417,8 +414,6 @@
           <YomiOf>OwnerIdName</YomiOf>
           <Descriptions>
             <Description description="Yomi name of the owner" languagecode="1033" />
-            <Description description="Yomi-Name des Besitzers" languagecode="1031" />
-            <Description description="Nom Yomi du propriétaire" languagecode="1036" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="OwningBusinessUnit">
@@ -446,13 +441,9 @@
           <LookupTypes />
           <displaynames>
             <displayname description="Owning Business Unit" languagecode="1033" />
-            <displayname description="Besitzer (Unternehmenseinheit)" languagecode="1031" />
-            <displayname description="Division propriétaire" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
-            <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz geändert hat." languagecode="1031" />
-            <Description description="unique identifiant pour l'utilisateur qui a modifié l'entrée" languagecode="1036" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="OwningTeam">
@@ -481,8 +472,6 @@
           <LookupTypes />
           <displaynames>
             <displayname description="Owning Team" languagecode="1033" />
-            <displayname description="Besitzer (Team)" languagecode="1031" />
-            <displayname description="Équipe propriétaire" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
@@ -514,8 +503,6 @@
           <LookupTypes />
           <displaynames>
             <displayname description="Owning User" languagecode="1033" />
-            <displayname description="Besitzer (Benutzer)" languagecode="1031" />
-            <displayname description="Utilisateur propriétaire" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="Unique identifier for the user that owns the record." languagecode="1033" />
@@ -546,11 +533,11 @@
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
           <optionset Name="tc_gateway_statecode">
             <OptionSetType>state</OptionSetType>
-            <IntroducedVersion>1.0.0.0</IntroducedVersion>
+            <IntroducedVersion>1.0.0.113</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
-              <displayname description="Status" languagecode="1033" />
               <displayname description="Status" languagecode="1031" />
+              <displayname description="Status" languagecode="1033" />
               <displayname description="Statut" languagecode="1036" />
             </displaynames>
             <Descriptions>
@@ -559,22 +546,22 @@
             <states>
               <state value="0" defaultstatus="1" invariantname="Active">
                 <labels>
-                  <label description="Active" languagecode="1033" />
                   <label description="aktiv" languagecode="1031" />
+                  <label description="Active" languagecode="1033" />
                   <label description="Actif" languagecode="1036" />
                 </labels>
               </state>
               <state value="1" defaultstatus="2" invariantname="Inactive">
                 <labels>
-                  <label description="Inactive" languagecode="1033" />
                   <label description="nicht aktiv/passiv" languagecode="1031" />
+                  <label description="Inactive" languagecode="1033" />
                 </labels>
               </state>
             </states>
           </optionset>
           <displaynames>
-            <displayname description="Status" languagecode="1033" />
             <displayname description="Status" languagecode="1031" />
+            <displayname description="Status" languagecode="1033" />
             <displayname description="Statut" languagecode="1036" />
           </displaynames>
           <Descriptions>
@@ -607,11 +594,11 @@
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
           <optionset Name="tc_gateway_statuscode">
             <OptionSetType>status</OptionSetType>
-            <IntroducedVersion>1.0.0.0</IntroducedVersion>
+            <IntroducedVersion>1.0.0.113</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
-              <displayname description="Status Reason" languagecode="1033" />
               <displayname description="Statusgrund" languagecode="1031" />
+              <displayname description="Status Reason" languagecode="1033" />
               <displayname description="Raison du statut" languagecode="1036" />
             </displaynames>
             <Descriptions>
@@ -620,22 +607,22 @@
             <statuses>
               <status value="1" state="0">
                 <labels>
-                  <label description="Active" languagecode="1033" />
                   <label description="aktiv" languagecode="1031" />
+                  <label description="Active" languagecode="1033" />
                   <label description="Actif" languagecode="1036" />
                 </labels>
               </status>
               <status value="2" state="1">
                 <labels>
-                  <label description="Inactive" languagecode="1033" />
                   <label description="nicht aktiv/passiv" languagecode="1031" />
+                  <label description="Inactive" languagecode="1033" />
                 </labels>
               </status>
             </statuses>
           </optionset>
           <displaynames>
-            <displayname description="Status Reason" languagecode="1033" />
             <displayname description="Statusgrund" languagecode="1031" />
+            <displayname description="Status Reason" languagecode="1033" />
             <displayname description="Raison du statut" languagecode="1036" />
           </displaynames>
           <Descriptions>
@@ -669,8 +656,8 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
-            <displayname description="Country" languagecode="1033" />
             <displayname description="Land" languagecode="1031" />
+            <displayname description="Country" languagecode="1033" />
           </displaynames>
           <Descriptions>
             <Description description="Connect Gateways to Countries" languagecode="1033" />
@@ -707,8 +694,8 @@
             <displayname description="Gateway Name" languagecode="1033" />
           </displaynames>
           <Descriptions>
-            <Description description="Description/Name of Gateway" languagecode="1033" />
             <Description description="Beschreibung / Name des Gateways" languagecode="1031" />
+            <Description description="Description/Name of Gateway" languagecode="1033" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="tc_gatewayId">
@@ -738,8 +725,8 @@
             <displayname description="Gateway" languagecode="1033" />
           </displaynames>
           <Descriptions>
-            <Description description="Unique identifier for entity instances" languagecode="1033" />
             <Description description="Eindeutiger Bezeichner für Entitätsinstanzen" languagecode="1031" />
+            <Description description="Unique identifier for entity instances" languagecode="1033" />
             <Description description="Identificateur unique des instances d'entité" languagecode="1036" />
           </Descriptions>
         </attribute>
@@ -771,14 +758,69 @@
           <MaxLength>3</MaxLength>
           <Length>6</Length>
           <displaynames>
-            <displayname description="IATA" languagecode="1033" />
             <displayname description="IATA" languagecode="1031" />
+            <displayname description="IATA" languagecode="1033" />
             <displayname description="IATA" languagecode="1036" />
           </displaynames>
           <Descriptions>
-            <Description description="IATA Code." languagecode="1033" />
             <Description description="IATA Code." languagecode="1031" />
+            <Description description="IATA Code." languagecode="1033" />
             <Description description="code IATA" languagecode="1036" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tc_officialairport">
+          <Type>bit</Type>
+          <Name>tc_officialairport</Name>
+          <LogicalName>tc_officialairport</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>2.0.0.3</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <AppDefaultValue>0</AppDefaultValue>
+          <optionset Name="tc_gateway_tc_officialairport">
+            <OptionSetType>bit</OptionSetType>
+            <IntroducedVersion>2.0.0.3</IntroducedVersion>
+            <IsCustomizable>1</IsCustomizable>
+            <displaynames>
+              <displayname description="Official Airport" languagecode="1033" />
+            </displaynames>
+            <Descriptions>
+              <Description description="Used to indicate whether an airport is official or not, e.g. 'London Heathrow Airport' vs. 'Any London'" languagecode="1033" />
+            </Descriptions>
+            <options>
+              <option value="0" Color="#0000ff">
+                <labels>
+                  <label description="No" languagecode="1033" />
+                </labels>
+              </option>
+              <option value="1" Color="#0000ff">
+                <labels>
+                  <label description="Yes" languagecode="1033" />
+                </labels>
+              </option>
+            </options>
+          </optionset>
+          <displaynames>
+            <displayname description="Official Airport" languagecode="1033" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Used to indicate whether an airport is official or not, e.g. 'London Heathrow Airport' vs. 'Any London'" languagecode="1033" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="TimeZoneRuleVersionNumber">
@@ -812,7 +854,6 @@
           </displaynames>
           <Descriptions>
             <Description description="For internal use only." languagecode="1033" />
-            <Description description="Nur für interne Benutzung" languagecode="1031" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="UTCConversionTimeZoneCode">
@@ -843,13 +884,9 @@
           <MaxValue>2147483647</MaxValue>
           <displaynames>
             <displayname description="UTC Conversion Time Zone Code" languagecode="1033" />
-            <displayname description="Zeitzonencode für die UTC-Konvertierung" languagecode="1031" />
-            <displayname description="Code de fuseau horaire pour la conversion UTC" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="Time zone code that was in use when the record was created." languagecode="1033" />
-            <Description description="Zeitzonencode, der bei Erstellung des Datensatzes verwendet wurde." languagecode="1031" />
-            <Description description="Code de fuseau horaire utilisé à la création de l’enregistrement." languagecode="1036" />
           </Descriptions>
         </attribute>
       </attributes>
@@ -935,7 +972,7 @@
   <RibbonDiffXml />
   <CustomControlDefaultConfigs>
     <CustomControlDefaultConfig>
-      <PrimaryEntityTypeCode>10032</PrimaryEntityTypeCode>
+      <PrimaryEntityTypeCode>10037</PrimaryEntityTypeCode>
       <CustomControlDefaultConfigId>{e5f9ccdc-d5e3-e611-8104-3863bb340dd8}</CustomControlDefaultConfigId>
       <ControlDescriptionXML>
         <controlDescriptions />

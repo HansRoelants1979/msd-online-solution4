@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <EntityRelationships>
-  <EntityRelationship Name="activity_pointer_activity_mime_attachment" unmodified="1">
+  <EntityRelationship Name="activity_pointer_activity_mime_attachment">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IntroducedVersion>5.0.0.0</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
@@ -15,12 +15,12 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Eindeutiger Bezeichner des Datensatzes, dem die Anlage zugeordnet ist." languagecode="1031" />
-        <Description description="Identificateur unique de l’enregistrement auquel la pièce jointe est associée" languagecode="1036" />
         <Description description="Unique identifier of the record with which the attachment is associated" languagecode="1033" />
+        <Description description="Identificateur unique de l’enregistrement auquel la pièce jointe est associée" languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
-  <EntityRelationship Name="activity_pointer_email" unmodified="1">
+  <EntityRelationship Name="activity_pointer_email">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IntroducedVersion>5.0.0.0</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
@@ -34,16 +34,16 @@
     <ReferencingAttributeName>ActivityId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner der E-Mail-Aktivität." languagecode="1031" />
         <Description description="Unique identifier of the email activity." languagecode="1033" />
         <Description description="Identificateur unique de l'activité de courrier électronique." languagecode="1036" />
-        <Description description="Eindeutiger Bezeichner der E-Mail-Aktivität." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
   <EntityRelationship Name="activity_pointer_tc_assistancerequest">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.51</IntroducedVersion>
+    <IntroducedVersion>1.0.0.113</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_assistancerequest</ReferencingEntityName>
     <ReferencedEntityName>ActivityPointer</ReferencedEntityName>
@@ -64,7 +64,7 @@
   <EntityRelationship Name="activity_pointer_tc_followup">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.139</IntroducedVersion>
+    <IntroducedVersion>1.0.0.129</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_followup</ReferencingEntityName>
     <ReferencedEntityName>ActivityPointer</ReferencedEntityName>
@@ -85,7 +85,7 @@
   <EntityRelationship Name="activity_pointer_tc_surveyresponse">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.51</IntroducedVersion>
+    <IntroducedVersion>1.0.0.113</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_surveyresponse</ReferencingEntityName>
     <ReferencedEntityName>ActivityPointer</ReferencedEntityName>

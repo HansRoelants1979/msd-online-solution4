@@ -11,9 +11,14 @@
         <Button Command="tc.TravellerPlanner.SurpriseButton.Command" Id="Tc.TravellerPlanner.Button.Surprise" Image32by32="$webresource:tc_SurpriseIcon_32" Image16by16="$webresource:tc_SurpriseIcon_16" LabelText="$LocLabels:Tc.TravellerPlanner.Button.Surprise.LabelText" Sequence="10" TemplateAlias="o1" />
       </CommandUIDefinition>
     </CustomAction>
-    <CustomAction Id="tc.Tc.Travellerplanner.Button.Validate.CustomAction" Location="Mscrm.Form.opportunity.MainTab.Actions.Controls._children" Sequence="8">
+    <CustomAction Id="tc.Tc.Travellerplanner.Button.Validate.CustomAction" Location="Mscrm.Form.opportunity.MainTab.Actions.Controls._children" Sequence="12">
       <CommandUIDefinition>
-        <Button Command="tc.TravellerPlanner.ValidateButton.Command" Id="Tc.Travellerplanner.Button.Validate" Image32by32="$webresource:tc_ValidateIcon32" Image16by16="$webresource:tc_ValidateIcon16" LabelText="$LocLabels:Tc.Travellerplanner.Button.Validate.LabelText" Sequence="8" TemplateAlias="o1" />
+        <Button Command="tc.TravellerPlanner.ValidateButton.Command" Id="Tc.Travellerplanner.Button.Validate" Image32by32="$webresource:tc_ValidateIcon32" Image16by16="$webresource:tc_ValidateIcon16" LabelText="$LocLabels:Tc.Travellerplanner.Button.Validate.LabelText" Sequence="12" TemplateAlias="o1" />
+      </CommandUIDefinition>
+    </CustomAction>
+    <CustomAction Id="tc.Tc.Travellerplanner.Button.Webrio.CustomAction" Location="Mscrm.Form.opportunity.MainTab.Actions.Controls._children" Sequence="7">
+      <CommandUIDefinition>
+        <Button Command="tc.TravelPlanner.WebrioButton.Command" Id="Tc.Travellerplanner.Button.Webrio" Image32by32="$webresource:tc_WebrioIcon32" Image16by16="$webresource:tc_WebrioIcon16" LabelText="$LocLabels:Tc.Travellerplanner.Button.Webrio.LabelText" Sequence="7" TemplateAlias="o1" />
       </CommandUIDefinition>
     </CustomAction>
     <CustomAction Id="tc.TravelPlanner.AddFollowUp.Button.CustomAction" Location="Mscrm.Form.opportunity.MainTab.Actions.Controls._children" Sequence="11">
@@ -21,9 +26,9 @@
         <Button Command="tc.TravelPlanner.Command.AddFollowUpActivityToPrimaryRecord" Id="tc.TravelPlanner.AddFollowUp.Button" Image32by32="$webresource:tc_FollowUpIcon32.png" Image16by16="$webresource:tc_FollowUpIcon16.png" LabelText="$LocLabels:tc.TravelPlanner.AddFollowUp.Button.LabelText" Sequence="11" TemplateAlias="o1" />
       </CommandUIDefinition>
     </CustomAction>
-    <CustomAction Id="tc.TravelPlanner.Button.LIME.CustomAction" Location="Mscrm.Form.opportunity.MainTab.Actions.Controls._children" Sequence="7">
+    <CustomAction Id="tc.TravelPlanner.Button.LIME.CustomAction" Location="Mscrm.Form.opportunity.MainTab.Actions.Controls._children" Sequence="8">
       <CommandUIDefinition>
-        <Button Command="tc.TravelPlanner.LIMEButton.Command" Id="tc.TravelPlanner.Button.LIME" Image32by32="" Image16by16="$webresource:tc_LIMEIcon16" LabelText="$LocLabels:tc.TravelPlanner.Button.LIME.LabelText" Sequence="7" TemplateAlias="o1" />
+        <Button Command="tc.TravelPlanner.LIMEButton.Command" Id="tc.TravelPlanner.Button.LIME" Image32by32="$webresource:tc_LIMEIcon32" Image16by16="$webresource:tc_LIMEIcon16" LabelText="$LocLabels:tc.TravelPlanner.Button.LIME.LabelText" Sequence="8" TemplateAlias="o1" />
       </CommandUIDefinition>
     </CustomAction>
     <CustomAction Id="tc.TravelPlanner.Button.OWR.CustomAction" Location="Mscrm.Form.opportunity.MainTab.Actions.Controls._children" Sequence="6">
@@ -65,42 +70,50 @@
         <DisplayRule Id="Mscrm.AddActivityToPrimary" />
       </DisplayRules>
       <Actions>
-        <JavaScriptFunction FunctionName="Mscrm.RibbonActions.addActivityOnForm" Library="/_static/_common/scripts/RibbonActions.js">
-          <IntParameter Value="10173" />
-        </JavaScriptFunction>
+        <JavaScriptFunction FunctionName="Tc.Crm.Scripts.Events.TravellerPlanner.OnAddFollowUpRibbonButtonClick" Library="Tc.Crm.Scripts.Events.TravellerPlanner.js" />
       </Actions>
     </CommandDefinition>
     <CommandDefinition Id="tc.TravelPlanner.LIMEButton.Command">
       <EnableRules>
-        <EnableRule Id="tc.TravellerPlanner.OWRorLIMEButton.EnableRule" />
+        <EnableRule Id="Tc.TravelPlanner.LimeButton.EnableRule" />
       </EnableRules>
       <DisplayRules />
       <Actions>
-        <Url Address="https://www.bbc.co.uk/" WinMode="0" PassParams="false" />
+        <JavaScriptFunction FunctionName="Tc.Crm.Scripts.Events.TravellerPlanner.OnLimeRibbonButtonClick" Library="Tc.Crm.Scripts.Events.TravellerPlanner.js" />
       </Actions>
     </CommandDefinition>
     <CommandDefinition Id="tc.TravelPlanner.OWRButton.Command">
       <EnableRules>
-        <EnableRule Id="tc.TravellerPlanner.OWRorLIMEButton.EnableRule" />
+        <EnableRule Id="tc.TravellerPlanner.OWRorWebrioButton.EnableRule" />
       </EnableRules>
       <DisplayRules />
       <Actions>
         <JavaScriptFunction FunctionName="OWR" Library="$webresource:tc_Tc.Opportunity.Events" />
       </Actions>
     </CommandDefinition>
+    <CommandDefinition Id="tc.TravelPlanner.WebrioButton.Command">
+      <EnableRules>
+        <EnableRule Id="tc.TravellerPlanner.OWRorWebrioButton.EnableRule" />
+      </EnableRules>
+      <DisplayRules />
+      <Actions />
+    </CommandDefinition>
   </CommandDefinitions>
   <RuleDefinitions>
     <TabDisplayRules />
     <DisplayRules />
     <EnableRules>
-      <EnableRule Id="tc.TravellerPlanner.OWRorLIMEButton.EnableRule">
-        <CustomRule FunctionName="Tc.Crm.Scripts.Events.TravellerPlanner.EnableDisableOWRorLimeButton" Library="$webresource:tc_Tc.Crm.Scripts.Events.TravellerPlanner.js" Default="false" InvertResult="false" />
+      <EnableRule Id="tc.TravellerPlanner.OWRorWebrioButton.EnableRule">
+        <CustomRule FunctionName="Tc.Crm.Scripts.Events.TravellerPlanner.EnableDisableOWRorWebrioButton" Library="$webresource:tc_Tc.Crm.Scripts.Events.TravellerPlanner.js" Default="false" InvertResult="false" />
       </EnableRule>
       <EnableRule Id="tc.TravellerPlanner.SurpriseButton.EnableRule">
         <FormStateRule State="Create" Default="true" InvertResult="true" />
       </EnableRule>
       <EnableRule Id="tc.TravellerPlanner.ValidateButton.EnableRule">
         <CustomRule FunctionName="Tc.Crm.Scripts.Events.TravellerPlanner.EnableDisableValidateButton" Library="$webresource:tc_Tc.Crm.Scripts.Events.TravellerPlanner.js" Default="false" InvertResult="false" />
+      </EnableRule>
+      <EnableRule Id="Tc.TravelPlanner.LimeButton.EnableRule">
+        <CustomRule FunctionName="Tc.Crm.Scripts.Events.TravellerPlanner.EnableLimeButton" Library="$webresource:tc_Tc.Crm.Scripts.Events.TravellerPlanner.js" Default="false" InvertResult="false" />
       </EnableRule>
     </EnableRules>
   </RuleDefinitions>
@@ -113,6 +126,11 @@
     <LocLabel Id="Tc.Travellerplanner.Button.Validate.LabelText">
       <Titles>
         <Title description="Validate" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+    <LocLabel Id="Tc.Travellerplanner.Button.Webrio.LabelText">
+      <Titles>
+        <Title description="Webrio" languagecode="1033" />
       </Titles>
     </LocLabel>
     <LocLabel Id="tc.TravelPlanner.AddFollowUp.Button.LabelText">

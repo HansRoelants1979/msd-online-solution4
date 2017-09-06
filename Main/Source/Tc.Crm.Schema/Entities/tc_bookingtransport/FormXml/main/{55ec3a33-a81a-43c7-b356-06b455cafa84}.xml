@@ -4,7 +4,7 @@
   <IntroducedVersion>1.0.0.0</IntroducedVersion>
   <FormPresentation>1</FormPresentation>
   <FormActivationState>1</FormActivationState>
-  <form>
+  <form shownavigationbar="true" showImage="false" maxWidth="1900">
     <tabs>
       <tab name="General" id="{542dca7a-76b1-b983-0460-b4bc930e3bcc}" IsUserDefined="0" locklevel="0" showlabel="true" expanded="true">
         <labels>
@@ -108,7 +108,17 @@
                       <labels>
                         <label description="Arrival Gateway" languagecode="1033" />
                       </labels>
-                      <control id="tc_arrivalgatewayid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_arrivalgatewayid" disabled="false" />
+                      <control id="tc_arrivalgatewayid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_arrivalgatewayid" disabled="false" uniqueid="{468e72c6-8675-2dcc-c932-68986aa89d8e}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{4E29CB42-F586-45B8-9D57-AF21CEA59536}</DefaultViewId>
+                          <AvailableViewIds>{4E29CB42-F586-45B8-9D57-AF21CEA59536}</AvailableViewIds>
+                          <AllowFilterOff>false</AllowFilterOff>
+                        </parameters>
+                      </control>
                     </cell>
                   </row>
                   <row>
@@ -118,7 +128,17 @@
                         <label description="lieu d'aéroport de départ " languagecode="1036" />
                         <label description="Abflugsgate" languagecode="1031" />
                       </labels>
-                      <control id="tc_departuregatewayid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_departuregatewayid" disabled="false" />
+                      <control id="tc_departuregatewayid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_departuregatewayid" disabled="false" uniqueid="{275103b4-6558-cc05-c987-9c54746c2eed}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{4E29CB42-F586-45B8-9D57-AF21CEA59536}</DefaultViewId>
+                          <AvailableViewIds>{4E29CB42-F586-45B8-9D57-AF21CEA59536}</AvailableViewIds>
+                          <AllowFilterOff>false</AllowFilterOff>
+                        </parameters>
+                      </control>
                     </cell>
                   </row>
                   <row>
@@ -271,6 +291,19 @@
       </NavBarAreas>
     </Navigation>
     <controlDescriptions />
+    <formLibraries>
+      <Library name="tc_es6promise.js" libraryUniqueId="{c7360027-e5d5-89b8-19cd-71d086707a96}" />
+      <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{3a2130b6-b854-5d50-7805-893c167370bc}" />
+      <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{12742a9a-8ed2-8b0b-0216-875a3a0463db}" />
+      <Library name="tc_Tc.Crm.Scripts.Events.Default.js" libraryUniqueId="{4e114068-e189-cc22-c75a-12575ed11993}" />
+    </formLibraries>
+    <events>
+      <event name="onsave" application="false" active="false">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Default.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Default.js" handlerUniqueId="{4a92bd85-6ca6-6504-d819-ce7e6112d700}" enabled="true" parameters="" passExecutionContext="true" />
+        </Handlers>
+      </event>
+    </events>
   </form>
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>
