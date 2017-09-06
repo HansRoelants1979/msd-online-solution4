@@ -61,7 +61,7 @@ namespace Tc.Crm.Plugins.MultipleEntities.BusinessLogic
             trace.Trace("DoActionsOnEntityCreate - Start");
             var entityCache = PrepareEntityCache(primaryEntity);
             SetEntityParameters(primaryEntity, entityCache);
-            entityCache.Attributes[Attributes.EntityCache.Data] = JsonHelper.SerializeJson(GetData(primaryEntity),trace);
+            entityCache.Attributes[Attributes.EntityCache.Data] = JsonHelper.SerializeJson(GetData(primaryEntity));
             service.Create(entityCache);
             trace.Trace("DoActionsOnEntityCreate - End");
         }
