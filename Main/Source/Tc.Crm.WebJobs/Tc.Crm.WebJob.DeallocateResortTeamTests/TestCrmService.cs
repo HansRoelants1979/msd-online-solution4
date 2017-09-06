@@ -357,5 +357,15 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
         {
             return new EntityReference(entity, key, id) { Id = id };
         }
+
+        public Guid Create(Entity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Entity entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

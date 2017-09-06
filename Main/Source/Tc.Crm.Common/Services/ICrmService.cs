@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using Tc.Crm.Common.Models;
 using System.Collections.Generic;
+using System;
 
 namespace Tc.Crm.Common.Services
 {
@@ -33,5 +34,9 @@ namespace Tc.Crm.Common.Services
         /// </summary>
         /// <param name="entities">The entities</param>
         void BulkUpdate(IEnumerable<Entity> entities);
+
+        Guid Create(Entity entity);
+
+        void Update(Entity entity);
     }
 }

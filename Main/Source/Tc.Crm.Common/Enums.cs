@@ -32,4 +32,18 @@
         CustomerRequest = 1,
         Both=2
     }
+
+    public enum EntityCacheStatusReason
+    {
+        Active = 1,
+        InProgress = 950000000,
+        Failed = 950000001,
+        Succeeded = 2
+    }
+
+    public enum EntityCacheOperation
+    {
+        Create = 950000000,
+        Update = 950000001
+    }
 }

@@ -15,6 +15,8 @@
         public const string BusinessUnit = "businessunit";
         public const string Country = "tc_country";
         public const string Gateway = "tc_gateway";
+        public const string EntityCache = "tc_entitycache";
+        public const string EntityCacheMessage = "tc_entitycachemessage";
     }
     public static class AliasName
     {
@@ -23,14 +25,14 @@
         public const string RoleAliasName = "role.";
         public const string AccountAliasName = "account.";
         public const string ContactAliasName = "contact.";
-        public const string SourceMarketAliasName = "sourcemarket.";
+        public const string SourceMarketAliasName = "sourcemarket.";     
         public const string TeamAliasName = "team.";
         public const string UserAliasName = "systemuser.";
         public const string ContactCaseAliasName = "contactincident.";
         public const string AccountCaseAliasName = "accountincident.";
         public const string BusinessUnitAliasName = "businessunit.";
     }
-
+   
     namespace EntityRecords
     {
         public static class BusinessUnit
@@ -161,12 +163,26 @@
             public const string BusinessUnitId = "tc_sourcemarketbusinessunitid";
         }
 
-        public static class ValidationMessages
+        public static class EntityCache
         {
-            public const string TraceIsNull = "Trace is null.";
-            public const string OrganizationServiceIsNull = "Organization service is null.";
-            public const string CachingParameterIsNull = "Caching parametrer is null.";
-            public const string CachingSecretKeyIsNullOrEmpty = "Caching secret key is null or empty.";
+            public const string Name = "tc_name";
+            public const string Type = "tc_type";
+            public const string Data = "tc_data";
+            public const string Operation = "tc_operation";
+            public const string SourceMarket = "tc_sourcemarket";
+            public const string RecordId = "tc_recordid";
+            public const string StatusReason = "statuscode";
+            public const string State = "statecode";
+        }
+
+        public static class EntityCacheMessage
+        {
+            public const string Name = "tc_name";
+            public const string EntityCacheId = "tc_entitycacheid";
+            public const string OutcomeId = "tc_outcomeid";
+            public const string Notes = "tc_notes";
+            public const string StatusReason = "statuscode";
+            public const string State = "statecode";
         }
     }
 }

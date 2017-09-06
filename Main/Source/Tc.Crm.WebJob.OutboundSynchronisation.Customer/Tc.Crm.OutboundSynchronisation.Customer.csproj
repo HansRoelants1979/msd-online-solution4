@@ -139,9 +139,14 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Tc.Crm.CommonDll.IL">
+      <HintPath>..\Tc.Crm.CommonDll.IL\bin\Debug\Tc.Crm.CommonDll.IL.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Model\EntityCacheMessageModel.cs" />
+    <Compile Include="Model\EntityCacheModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IOutboundSynchronisationService.cs" />

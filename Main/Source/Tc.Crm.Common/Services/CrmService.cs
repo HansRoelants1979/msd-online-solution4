@@ -143,6 +143,16 @@ namespace Tc.Crm.Common.Services
             }
         }
 
+        public Guid Create(Entity entity)
+        {
+           return organizationService.Create(entity);
+        }
+
+        public void Update(Entity entity)
+        {
+            organizationService.Update(entity);
+        }
+
         #region Private helpers
 
         private string CreateXml(string xml, string cookie, int page, int count)

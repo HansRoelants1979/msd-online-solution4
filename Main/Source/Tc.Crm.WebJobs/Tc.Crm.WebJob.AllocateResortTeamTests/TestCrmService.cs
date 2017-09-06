@@ -446,5 +446,15 @@ namespace Tc.Crm.WebJob.AllocateResortTeamTests
         {
             throw new NotImplementedException();
         }
+
+        public Guid Create(Entity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Entity entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

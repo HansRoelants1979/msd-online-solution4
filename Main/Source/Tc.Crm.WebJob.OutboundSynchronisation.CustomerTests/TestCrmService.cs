@@ -424,5 +424,15 @@ namespace Tc.Crm.OutboundSynchronisation.CustomerTests
 
             return new EntityCollection(cacheEntities);
         }
+
+        public Guid Create(Entity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Entity entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="tc_Tc.Crm.Css.Questionnaire.css" rel="stylesheet" />  
+    <script src="ClientGlobalContext.js.aspx" type="text/javascript"></script>
+    <script src="popat_/Scripts/jquery.min.js" type="text/javascript"></script>      
+    <script src="tc_es6promise.js" type="text/javascript"></script>
+    <script src="tc_Tc.Crm.Scripts.Common.js" type="text/javascript"></script>
+    <script src="tc_Tc.Crm.Scripts.Events.Questionnaire.js" type="text/javascript"></script>
+    <!--<link href="../css/Tc.Crm.Css.Questionnare.css" rel="stylesheet" />-->
+    <!--<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>-->
+    <!--<script src="../Scripts/Tc.Crm.Scripts.Events.Questionnare.js"></script>-->
+    <title>Questionnaire</title>
+	<meta charset="utf-8" />
+</head>
+<body onload="Tc.Crm.Scripts.Events.Questionnaire.ShowQuestionnaire();">
+    <!--<div><center><h3>Questionnaire</h3></center></div>-->
+    <div id="divQuestionnare">
+    </div>
+    <div class="submitbuttondiv"><input type="button" value="Submit" onclick="Tc.Crm.Scripts.Events.Questionnaire.SubmitQuestionnaire();"></div>
+</body>
+</html>

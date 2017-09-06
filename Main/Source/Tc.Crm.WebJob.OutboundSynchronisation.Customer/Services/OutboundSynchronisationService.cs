@@ -4,8 +4,10 @@ using JWT;
 using JWT.Algorithms;
 using JWT.Serializers;
 using Microsoft.Xrm.Sdk;
-using Tc.Crm.Common.Constants.Attributes;
+using Tc.Crm.Common.Constants;
 using Tc.Crm.Common.Services;
+using Tc.Crm.OutboundSynchronisation.Customer.Model;
+
 
 namespace Tc.Crm.OutboundSynchronisation.Customer.Services
 {
@@ -27,7 +29,30 @@ namespace Tc.Crm.OutboundSynchronisation.Customer.Services
 
         public void Run()
         {
-            outboundSynchronisationDataService.RetrieveEntityCaches("contact", 10000);
+            ProcessEntityCache();
+
+        }
+
+        public void ProcessEntityCache()
+        {
+            var entityCacheCollection = outboundSynchronisationDataService.GetEntityCacheToProcess(EntityName.Contact, 1000);
+
+
+        }
+
+        public void UpdateEntityCacheStatus(int StateCode, int StatusReason)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CreateEntityCacheMessage(EntityCacheMessageModel entityCacheMessageModel)
+        {
+           var recordId = outboundSynchronisationDataService.CreateEntityCacheMessage(entityCacheMessageModel);
+        }
+
+        public void UpdateEntityCacheMessageStatus(int StateCode, int StatusReason)
+        {
+            throw new NotImplementedException();
         }
 
         #region Displosable members
@@ -62,20 +87,22 @@ namespace Tc.Crm.OutboundSynchronisation.Customer.Services
             }
         }
 
+       
+
         #endregion
 
         #region Private methods
 
         private string CreateJWTToken(Dictionary<string, object> payload, ITracingService trace, IOrganizationService service)
         {
-            if (trace == null) throw new ArgumentException(ValidationMessages.TraceIsNull);
-            if (payload == null) throw new ArgumentException(ValidationMessages.CachingParameterIsNull);
-            if (service == null) throw new ArgumentException(ValidationMessages.OrganizationServiceIsNull);
+            //if (trace == null) throw new ArgumentException(ValidationMessages.TraceIsNull);
+            //if (payload == null) throw new ArgumentException(ValidationMessages.CachingParameterIsNull);
+            //if (service == null) throw new ArgumentException(ValidationMessages.OrganizationServiceIsNull);
 
-            trace.Trace("Start - CreateJWTToken");
+            //trace.Trace("Start - CreateJWTToken");
 
-            if (string.IsNullOrWhiteSpace(this.SecretKey))
-               throw new ArgumentException(ValidationMessages.CachingSecretKeyIsNullOrEmpty);
+            //if (string.IsNullOrWhiteSpace(this.SecretKey))
+            //   throw new ArgumentException(ValidationMessages.CachingSecretKeyIsNullOrEmpty);
 
             IJwtAlgorithm algorithm = new HMACSHA256Algorithm();
             IJsonSerializer serializer = new JsonNetSerializer();
