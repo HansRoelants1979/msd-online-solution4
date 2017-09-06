@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Text;
-using Tc.Crm.CommonDll.IL.Model;
+using Tc.Crm.Common.IL.Model;
 
-namespace Tc.Crm.CommonDll.IL.Helper
+namespace Tc.Crm.Common.IL.Helper
 {
     public class JsonHelper
     {

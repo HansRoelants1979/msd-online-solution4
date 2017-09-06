@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace Tc.Crm.CommonDll.IL.Model
+namespace Tc.Crm.Common.IL.Model
 {
     [DataContract(Name = "EntityModel")]
     public class EntityModel
