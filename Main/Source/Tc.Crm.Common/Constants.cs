@@ -1,6 +1,5 @@
 ﻿namespace Tc.Crm.Common.Constants
 {
-
     public static class EntityName
     {
 
@@ -24,14 +23,14 @@
         public const string RoleAliasName = "role.";
         public const string AccountAliasName = "account.";
         public const string ContactAliasName = "contact.";
-        public const string SourceMarketAliasName = "sourcemarket.";     
+        public const string SourceMarketAliasName = "sourcemarket.";
         public const string TeamAliasName = "team.";
         public const string UserAliasName = "systemuser.";
         public const string ContactCaseAliasName = "contactincident.";
         public const string AccountCaseAliasName = "accountincident.";
         public const string BusinessUnitAliasName = "businessunit.";
     }
-   
+
     namespace EntityRecords
     {
         public static class BusinessUnit
@@ -122,7 +121,6 @@
 
         }
 
-
         public static class Customer
         {
             public const string TeamId = "teamid";
@@ -162,9 +160,13 @@
         {
             public const string BusinessUnitId = "tc_sourcemarketbusinessunitid";
         }
+
+        public static class ValidationMessages
+        {
+            public const string TraceIsNull = "Trace is null.";
+            public const string OrganizationServiceIsNull = "Organization service is null.";
+            public const string CachingParameterIsNull = "Caching parametrer is null.";
+            public const string CachingSecretKeyIsNullOrEmpty = "Caching secret key is null or empty.";
+        }
     }
-
-    
 }
-
-
