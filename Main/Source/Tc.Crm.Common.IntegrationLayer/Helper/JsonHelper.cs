@@ -2,9 +2,9 @@
 using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Text;
-using Tc.Crm.Common.IL.Model;
+using Tc.Crm.Common.IntegrationLayer.Model;
 
-namespace Tc.Crm.Common.IL.Helper
+namespace Tc.Crm.Common.IntegrationLayer.Helper
 {
     public class JsonHelper
     {
