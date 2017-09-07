@@ -33,6 +33,12 @@
         Both=2
     }
 
+    public enum Status
+    {
+        Active = 0,
+        Inactive = 1
+    }
+
     public enum EntityCacheStatusReason
     {
         Active = 1,
@@ -45,5 +51,13 @@
     {
         Create = 950000000,
         Update = 950000001
+    }
+
+    public enum EntityCacheMessageStatusReason
+    {
+        Active = 1,
+        SuccessfullySenttoIL = 2,
+        EndtoEndSuccess = 950000000,
+        Failed = 950000001
     }
 }

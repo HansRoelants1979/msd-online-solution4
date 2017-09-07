@@ -1,5 +1,6 @@
 ﻿using System;
-using Tc.Crm.OutboundSynchronisation.Customer.Model;
+using Tc.Crm.Common;
+using Tc.Crm.Common.Models;
 
 namespace Tc.Crm.OutboundSynchronisation.Customer.Services
 {
@@ -12,10 +13,10 @@ namespace Tc.Crm.OutboundSynchronisation.Customer.Services
 
         void ProcessEntityCache();
 
-        void UpdateEntityCacheStatus(int StateCode, int StatusReason);
+        void UpdateEntityCacheStatus(Guid entityCacheId, Status status, EntityCacheStatusReason statusReason);
 
-        void CreateEntityCacheMessage(EntityCacheMessageModel entityCacheMessageModel);
+        Guid CreateEntityCacheMessage(EntityCacheMessage entityCacheMessageModel);
 
-        void UpdateEntityCacheMessageStatus(int StateCode, int StatusReason);
+        void UpdateEntityCacheMessageStatus(Guid entityCacheMessageId, Status status, EntityCacheMessageStatusReason statusReason);
     }
 }

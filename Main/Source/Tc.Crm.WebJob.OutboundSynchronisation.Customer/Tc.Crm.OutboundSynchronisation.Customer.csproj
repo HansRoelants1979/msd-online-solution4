@@ -139,14 +139,12 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Tc.Crm.CommonDll.IL">
-      <HintPath>..\Tc.Crm.CommonDll.IL\bin\Debug\Tc.Crm.CommonDll.IL.dll</HintPath>
+    <Reference Include="Tc.Crm.Common.IL">
+      <HintPath>..\Tc.Crm.Common.IL\bin\Debug\Tc.Crm.Common.IL.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Model\EntityCacheMessageModel.cs" />
-    <Compile Include="Model\EntityCacheModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IOutboundSynchronisationService.cs" />
@@ -185,6 +183,9 @@
       <Project>{860E3979-F2C6-4C90-9FA6-E130BD1EE9BE}</Project>
       <Name>Tc.Crm.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

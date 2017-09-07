@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xrm.Sdk;
 using Tc.Crm.Common;
+using Tc.Crm.Common.Models;
+using Tc.Crm.Common.Helper;
 using Tc.Crm.Common.Services;
 using Tc.Crm.Common.Constants;
 using Attributes = Tc.Crm.Common.Constants.Attributes;
-using System.Collections.Generic;
-using Tc.Crm.OutboundSynchronisation.Customer.Model;
+
 
 namespace Tc.Crm.OutboundSynchronisation.Customer.Services
 {
@@ -22,7 +24,7 @@ namespace Tc.Crm.OutboundSynchronisation.Customer.Services
             this.crmService = crmService;
         }
 
-        public List<EntityCacheModel> GetEntityCacheToProcess(string type, int numberOfElements)
+        public List<EntityCache> GetEntityCacheToProcess(string type, int numberOfElements)
         {
             var entityCacheCollection = RetrieveEntityCaches(type, numberOfElements);
             return PrepareEntityCacheModel(entityCacheCollection);
@@ -49,8 +51,8 @@ namespace Tc.Crm.OutboundSynchronisation.Customer.Services
                        <filter type='and'>
                          <filter type='and'>
                            <condition attribute='tc_type' operator='eq' value='{type}' />
-                           <condition attribute='statuscode' operator='eq' value='1' />
-                           <condition attribute='tc_operation' operator='eq' value='950000000' />
+                           <condition attribute='statuscode' operator='eq' value='{(Int32)EntityCacheStatusReason.Active}' />
+                           <condition attribute='tc_operation' operator='eq' value='{(Int32)EntityCacheOperation.Create}' />
                          </filter>
                        </filter>
                      </entity>
@@ -60,26 +62,29 @@ namespace Tc.Crm.OutboundSynchronisation.Customer.Services
             return entityCacheCollection;
         }
 
-        public List<EntityCacheModel> PrepareEntityCacheModel(EntityCollection entityCacheCollection)
+        public List<EntityCache> PrepareEntityCacheModel(EntityCollection entityCacheCollection)
         {
-            var entityCacheModelList = new List<EntityCacheModel>();
-            for(int i=0; i < entityCacheCollection.Entities.Count; i++)
+            if (entityCacheCollection == null) return null;
+            var entityCacheModelList = new List<EntityCache>();            
+            for (int i=0; i < entityCacheCollection.Entities.Count; i++)
             {
                 var entityCache = entityCacheCollection.Entities[i];
-                var entityCacheModel = new EntityCacheModel();
-                if (GeneralMethods.IsAttributeExistAndNotNull(entityCache, EntityName.EntityCache))
+                var entityCacheModel = new EntityCache();
+
+                entityCacheModel.Id = entityCache.Id;
+                if (EntityHelper.HasAttributeNotNull(entityCache, Attributes.EntityCache.Name))
                     entityCacheModel.Name = entityCache.Attributes[Attributes.EntityCache.Name].ToString();
 
-                if (GeneralMethods.IsAttributeExistAndNotNull(entityCache, Attributes.EntityCache.SourceMarket))
+                if (EntityHelper.HasAttributeNotNull(entityCache, Attributes.EntityCache.SourceMarket))
                     entityCacheModel.SourceMarket = entityCache.Attributes[Attributes.EntityCache.SourceMarket].ToString();
 
-                if (GeneralMethods.IsAttributeExistAndNotNull(entityCache, Attributes.EntityCache.Type))
+                if (EntityHelper.HasAttributeNotNull(entityCache, Attributes.EntityCache.Type))
                     entityCacheModel.Type = entityCache.Attributes[Attributes.EntityCache.Type].ToString();
 
-                if (GeneralMethods.IsAttributeExistAndNotNull(entityCache, Attributes.EntityCache.RecordId))
+                if (EntityHelper.HasAttributeNotNull(entityCache, Attributes.EntityCache.RecordId))
                     entityCacheModel.RecordId = entityCache.Attributes[Attributes.EntityCache.RecordId].ToString();
 
-                if (GeneralMethods.IsAttributeExistAndNotNull(entityCache, Attributes.EntityCache.Operation))
+                if (EntityHelper.HasAttributeNotNull(entityCache, Attributes.EntityCache.Operation))
                     entityCacheModel.Operation = ((OptionSetValue)entityCache.Attributes[Attributes.EntityCache.Operation]).Value;
 
                 entityCacheModelList.Add(entityCacheModel);
@@ -88,9 +93,9 @@ namespace Tc.Crm.OutboundSynchronisation.Customer.Services
             return entityCacheModelList;
         }
 
-        public EntityCollection PrepareEntityCacheMessages(List<EntityCacheMessageModel> entityCacheMessageModelCollection)
+        public EntityCollection PrepareEntityCacheMessages(List<EntityCacheMessage> entityCacheMessageModelCollection)
         {
-            if (entityCacheMessageModelCollection == null || entityCacheMessageModelCollection.Count == 0) return null;
+            if (entityCacheMessageModelCollection == null) return null;
             var entityCacheMessageCollection = new EntityCollection();
             for(int i=0; i< entityCacheMessageModelCollection.Count;i++)
             {
@@ -101,17 +106,19 @@ namespace Tc.Crm.OutboundSynchronisation.Customer.Services
             return entityCacheMessageCollection;
         }
 
-        public Guid CreateEntityCacheMessage(EntityCacheMessageModel entityCacheMessageModel)
+        public Guid CreateEntityCacheMessage(EntityCacheMessage entityCacheMessageModel)
         {
             var entityCacheMessage = PrepareEntityCacheMessage(entityCacheMessageModel);
             return CreateRecord(entityCacheMessage);
         }
 
-        public Entity PrepareEntityCacheMessage(EntityCacheMessageModel entityCacheMessageModel)
+        public Entity PrepareEntityCacheMessage(EntityCacheMessage entityCacheMessageModel)
         {
             if (entityCacheMessageModel == null) return null;
 
             var entityCacheMessage = new Entity(EntityName.EntityCacheMessage);
+
+            entityCacheMessage.Id = entityCacheMessageModel.Id;
 
             if (entityCacheMessageModel.Name != null)
                 entityCacheMessage.Attributes[Attributes.EntityCacheMessage.Name] = entityCacheMessageModel.Name;
@@ -126,6 +133,15 @@ namespace Tc.Crm.OutboundSynchronisation.Customer.Services
                 entityCacheMessage.Attributes[Attributes.EntityCacheMessage.Notes] = entityCacheMessageModel.Notes;
 
             return entityCacheMessage;
+        }
+
+        public void UpdateEntityStatus(Guid id, string entityName, int StateCode, int StatusCode)
+        {
+            var entity = new Entity(entityName);
+            entity.Id = id;
+            entity.Attributes[Attributes.EntityCache.State] = new OptionSetValue(StateCode);
+            entity.Attributes[Attributes.EntityCache.StatusReason] = new OptionSetValue(StatusCode);
+            UpdateRecord(entity);
         }
 
 

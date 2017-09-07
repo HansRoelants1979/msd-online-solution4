@@ -4,9 +4,10 @@ using JWT;
 using JWT.Algorithms;
 using JWT.Serializers;
 using Microsoft.Xrm.Sdk;
+using Tc.Crm.Common;
 using Tc.Crm.Common.Constants;
 using Tc.Crm.Common.Services;
-using Tc.Crm.OutboundSynchronisation.Customer.Model;
+using Tc.Crm.Common.Models;
 
 
 namespace Tc.Crm.OutboundSynchronisation.Customer.Services
@@ -33,26 +34,58 @@ namespace Tc.Crm.OutboundSynchronisation.Customer.Services
 
         }
 
+        /// <summary>
+        /// To process all entitycache records which are of type contact and of operation create
+        /// </summary>
         public void ProcessEntityCache()
         {
             var entityCacheCollection = outboundSynchronisationDataService.GetEntityCacheToProcess(EntityName.Contact, 1000);
+            if (entityCacheCollection == null) return;
+            foreach(EntityCache entityCache in entityCacheCollection)
+            {
+                var entityCacheMessage = new EntityCacheMessage();
+                entityCacheMessage.Id = Guid.NewGuid();
+                entityCacheMessage.EntityCacheId = entityCache.Id;
+                entityCacheMessage.Name = entityCacheMessage.Id.ToString();
 
+                var entityCacheMessageId = CreateEntityCacheMessage(entityCacheMessage);
+                UpdateEntityCacheStatus(entityCache.Id, Status.Active, EntityCacheStatusReason.InProgress);
+                UpdateEntityCacheMessageStatus(entityCacheMessageId, Status.Inactive, EntityCacheMessageStatusReason.SuccessfullySenttoIL);
+            }
 
         }
 
-        public void UpdateEntityCacheStatus(int StateCode, int StatusReason)
+        /// <summary>
+        /// To create entitycachemessage record
+        /// </summary>
+        /// <param name="entityCacheMessageModel"></param>
+        /// <returns></returns>
+        public Guid CreateEntityCacheMessage(EntityCacheMessage entityCacheMessageModel)
         {
-            throw new NotImplementedException();
+            return outboundSynchronisationDataService.CreateEntityCacheMessage(entityCacheMessageModel);
         }
 
-        public void CreateEntityCacheMessage(EntityCacheMessageModel entityCacheMessageModel)
-        {
-           var recordId = outboundSynchronisationDataService.CreateEntityCacheMessage(entityCacheMessageModel);
-        }
 
-        public void UpdateEntityCacheMessageStatus(int StateCode, int StatusReason)
+        /// <summary>
+        /// To update status of entitycache
+        /// </summary>
+        /// <param name="entityCacheId"></param>
+        /// <param name="status"></param>
+        /// <param name="statusReason"></param>
+        public void UpdateEntityCacheStatus(Guid entityCacheId, Status status, EntityCacheStatusReason statusReason)
         {
-            throw new NotImplementedException();
+            outboundSynchronisationDataService.UpdateEntityStatus(entityCacheId, EntityName.EntityCache, (int)status, (int)statusReason);
+        }
+              
+        /// <summary>
+        /// To update status of entitycachemessage
+        /// </summary>
+        /// <param name="entityCacheMessageId"></param>
+        /// <param name="status"></param>
+        /// <param name="statusReason"></param>
+        public void UpdateEntityCacheMessageStatus(Guid entityCacheMessageId, Status status, EntityCacheMessageStatusReason statusReason)
+        {
+            outboundSynchronisationDataService.UpdateEntityStatus(entityCacheMessageId, EntityName.EntityCacheMessage, (int)status, (int)statusReason);
         }
 
         #region Displosable members
@@ -112,6 +145,7 @@ namespace Tc.Crm.OutboundSynchronisation.Customer.Services
             return encoder.Encode(payload, this.SecretKey);
         }
 
+       
         #endregion Private methods
     }
 }

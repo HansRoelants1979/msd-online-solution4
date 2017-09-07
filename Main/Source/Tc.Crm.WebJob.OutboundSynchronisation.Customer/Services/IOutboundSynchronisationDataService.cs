@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.Xrm.Sdk;
-using Tc.Crm.OutboundSynchronisation.Customer.Model;
+using Tc.Crm.Common.Models;
 using System.Collections.Generic;
 
 namespace Tc.Crm.OutboundSynchronisation.Customer.Services
@@ -8,7 +8,7 @@ namespace Tc.Crm.OutboundSynchronisation.Customer.Services
     public interface IOutboundSynchronisationDataService : IDisposable
     {
 
-        List<EntityCacheModel> GetEntityCacheToProcess(string type, int numberOfElements);
+        List<EntityCache> GetEntityCacheToProcess(string type, int numberOfElements);
 
         /// <summary>
         /// Retrieve active antity cache entities for defined type
@@ -18,18 +18,18 @@ namespace Tc.Crm.OutboundSynchronisation.Customer.Services
         /// <returns>active antity cache entities for defined type</returns>
         EntityCollection RetrieveEntityCaches(string type, int numberOfElements);
 
-        List<EntityCacheModel> PrepareEntityCacheModel(EntityCollection entityCacheCollection);
+        List<EntityCache> PrepareEntityCacheModel(EntityCollection entityCacheCollection);
 
-        EntityCollection PrepareEntityCacheMessages(List<EntityCacheMessageModel> entityCacheMessageModelColletion);
+        EntityCollection PrepareEntityCacheMessages(List<EntityCacheMessage> entityCacheMessageModelColletion);
 
-        Guid CreateEntityCacheMessage(EntityCacheMessageModel entityCacheMessageModel);
+        Guid CreateEntityCacheMessage(EntityCacheMessage entityCacheMessageModel);
 
-        Entity PrepareEntityCacheMessage(EntityCacheMessageModel entityCacheMessageModel);
+        Entity PrepareEntityCacheMessage(EntityCacheMessage entityCacheMessageModel);
 
         Guid CreateRecord(Entity entity);
 
         void UpdateRecord(Entity entity);
-        
-       
+
+        void UpdateEntityStatus(Guid id, string entityName, int StateCode, int StatusCode);
     }
 }
