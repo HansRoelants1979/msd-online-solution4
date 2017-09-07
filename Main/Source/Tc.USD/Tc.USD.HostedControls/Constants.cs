@@ -19,5 +19,6 @@
         public const string SsoTokenNotBefore = "Tc.Owr.SsoTokenNotBeforeTimeSeconds";
         public const string AudOneWebRetail = "onewebretail";
         public const string AudWebRio = "webrio";
+        public const string OpportunityIdParamName = "opportunityId";
     }
 }

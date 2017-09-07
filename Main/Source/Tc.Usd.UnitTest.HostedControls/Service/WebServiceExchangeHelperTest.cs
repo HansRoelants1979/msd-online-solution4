@@ -7,20 +7,43 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using System.Configuration;
 using System.IO;
-using Tc.Usd.HostedControls.Models;
+using Tc.Crm.Common.Jti.Models;
+using Tc.Crm.Common.Jti.Service;
+using Tc.Crm.Common.Services;
 
 namespace Tc.Usd.UnitTest.HostedControls.Service
 {
     [TestClass()]
     public class WebServiceExchangeHelperTest
     {
+        private JwtService _jtiService;
+        private OwrJsonWebTokenPayload _payload;
+
+        [TestInitialize]
+        public void Setup()
+        {
+            _jtiService = new JwtService(new Logger());
+            _payload =  new OwrJsonWebTokenPayload
+            {
+                IssuedAtTime = _jtiService.GetIssuedAtTime().ToString(),
+                NotBefore = _jtiService.GetNotBeforeTime("100").ToString(),
+                Expiry = _jtiService.GetExpiry("100").ToString(),
+                Jti = WebServiceExchangeHelper.GetJti().ToString(),
+                Aud = "CRM",
+                BranchCode = "001",
+                AbtaNumber = "002",
+                EmployeeId = "1010",
+                Initials = "IMS",
+                CreatedBy = "IMS"
+            };
+        }
+
         [TestMethod]
         public void CreateJwtTokenTest()
         {
-            var payload = GetPayload();
             var fileName = ConfigurationManager.AppSettings["privateKeyFileName"];
             var privateKey = File.ReadAllText(fileName);
-            var token = WebServiceExchangeHelper.CreateJwtToken(privateKey, payload);
+            var token = _jtiService.CreateJwtToken(privateKey, _payload);
             Assert.IsNotNull(token);
         }
 
@@ -29,20 +52,20 @@ namespace Tc.Usd.UnitTest.HostedControls.Service
         {
             var fileName = ConfigurationManager.AppSettings["privateKeyFileName"];
             var privateKey = File.ReadAllText(fileName);
-            var payload = GetPayload();
-            var token = WebServiceExchangeHelper.CreateJwtToken(privateKey,payload);
+            
+            var token = _jtiService.CreateJwtToken(privateKey, _payload);
             Assert.IsNotNull(token);
             var data = WebServiceExchangeHelper.GetCustomerTravelPlannerJson();
             Assert.IsNotNull(data);
             var serviceUrl = ConfigurationManager.AppSettings["serviceUrl"];
-            //var content = WebServiceExchangeHelper.SendHttpRequest(serviceUrl, token, data);
+            var content = _jtiService.SendHttpRequest(serviceUrl, token, data);
         }
 
         [TestMethod]
         public void ValidateDecodedRequest()
         {
-            var primaryPayload = GetPayload();
-            var request = CreateRequest(primaryPayload);
+            
+            var request = CreateRequest(_payload);
             var token = request.Headers.Authorization.Parameter;
             var parts = token.Split(Crm.Service.Constants.Delimiters.Dot);
             Assert.AreEqual(3, parts.Length);
@@ -52,12 +75,12 @@ namespace Tc.Usd.UnitTest.HostedControls.Service
             Assert.AreEqual("RS256", header.alg.ToString());
             Assert.AreEqual("JWT", header.typ.ToString());
 
-            Assert.AreEqual(primaryPayload.Aud, resultPayload.Aud);
-            Assert.AreEqual(primaryPayload.AbtaNumber, resultPayload.AbtaNumber);
-            Assert.AreEqual(primaryPayload.BranchCode, resultPayload.BranchCode);
-            Assert.AreEqual(primaryPayload.CreatedBy, resultPayload.CreatedBy);
-            Assert.AreEqual(primaryPayload.EmployeeId, resultPayload.EmployeeId);
-            Assert.AreEqual(primaryPayload.Initials, resultPayload.Initials);
+            Assert.AreEqual(_payload.Aud, resultPayload.Aud);
+            Assert.AreEqual(_payload.AbtaNumber, resultPayload.AbtaNumber);
+            Assert.AreEqual(_payload.BranchCode, resultPayload.BranchCode);
+            Assert.AreEqual(_payload.CreatedBy, resultPayload.CreatedBy);
+            Assert.AreEqual(_payload.EmployeeId, resultPayload.EmployeeId);
+            Assert.AreEqual(_payload.Initials, resultPayload.Initials);
 
             var now = Math.Round((DateTime.UtcNow - WebServiceExchangeHelper.UnixEpoch).TotalSeconds);
             Assert.IsFalse(double.Parse(resultPayload.Expiry) < now);
@@ -75,7 +98,7 @@ namespace Tc.Usd.UnitTest.HostedControls.Service
             return headerObj;
         }
 
-        private JsonWebTokenPayload DecodePayload(string token)
+        private OwrJsonWebTokenPayload DecodePayload(string token)
         {
             if (string.IsNullOrWhiteSpace(token)) throw new ArgumentNullException(Crm.Service.Constants.Parameters.Token);
 
@@ -87,37 +110,19 @@ namespace Tc.Usd.UnitTest.HostedControls.Service
 
             var payLoad = parts[1];
             var payLoadJson = Encoding.UTF8.GetString(JsonWebToken.Base64UrlDecode(payLoad));
-            JsonWebTokenPayload payload = JsonConvert.DeserializeObject<JsonWebTokenPayload>(payLoadJson);
+            OwrJsonWebTokenPayload payload = JsonConvert.DeserializeObject<OwrJsonWebTokenPayload>(payLoadJson);
             return payload;
         }
 
-        private HttpRequestMessage CreateRequest(JsonWebTokenPayload payload)
+        private HttpRequestMessage CreateRequest(OwrJsonWebTokenPayload payload)
         {
             var fileName = ConfigurationManager.AppSettings["privateKeyFileName"];
             var privateKey = File.ReadAllText(fileName);
             
-            var token = WebServiceExchangeHelper.CreateJwtToken(privateKey, payload);
+            var token = _jtiService.CreateJwtToken(privateKey, payload);
             HttpRequestMessage request = new HttpRequestMessage();
             request.Headers.Add("Authorization", "Bearer " + token);
             return request;
-        }
-
-        private JsonWebTokenPayload GetPayload()
-        {
-            var payload = new JsonWebTokenPayload
-            {
-                IssuedAtTime = WebServiceExchangeHelper.GetIssuedAtTime().ToString(),
-                NotBefore = WebServiceExchangeHelper.GetNotBeforeTime("100").ToString(),
-                Expiry = WebServiceExchangeHelper.GetExpiry("100").ToString(),
-                Jti = WebServiceExchangeHelper.GetJti().ToString(),
-                Aud = "CRM",
-                BranchCode = "001",
-                AbtaNumber = "002",
-                EmployeeId = "1010",
-                Initials = "IMS",
-                CreatedBy = "IMS"
-            };
-            return payload;
         }
         #endregion
     }

@@ -1,19 +1,10 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Tc.Usd.HostedControls.Models
+namespace Tc.Crm.Common.Jti.Models
 {
     [DataContract]
-    public class JsonWebTokenPayload
+    public class OwrJsonWebTokenPayload: JsonWebTokenPayloadBase
     {
-        [DataMember(Name = "nbf")]
-        public string NotBefore { get; set; }
-
-        [DataMember(Name = "iat")]
-        public string IssuedAtTime { get; set; }
-
-        [DataMember(Name = "exp")]
-        public string Expiry { get; set; }
-
         [DataMember(Name = "jti")]
         public string Jti { get; set; }
 
