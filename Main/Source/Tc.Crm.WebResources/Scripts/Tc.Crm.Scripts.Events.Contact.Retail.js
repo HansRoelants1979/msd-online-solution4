@@ -92,7 +92,6 @@ Tc.Crm.Scripts.Events.Contact.Retail = (function () {
         ContactPreference: "tab_contactpreference"
     }
     var Sections = {
-        ContactPreferenceNotes: "tab_contactpreference_section_notes"
     }
     
     function onPhoneChanged(context) {
@@ -108,8 +107,6 @@ Tc.Crm.Scripts.Events.Contact.Retail = (function () {
         Xrm.Page.ui.tabs.get(Tabs.MarketingConsent).setVisible(false);
         Xrm.Page.ui.tabs.get(Tabs.PastHolidays).setVisible(false);
         Xrm.Page.ui.tabs.get(Tabs.Cases).setVisible(false);
-
-        Xrm.Page.ui.tabs.get(Tabs.ContactPreference).sections.get(Sections.ContactPreferenceNotes).setVisible(false);
     }
 
     var onCustomerKeyInformationUpdate = function () {
