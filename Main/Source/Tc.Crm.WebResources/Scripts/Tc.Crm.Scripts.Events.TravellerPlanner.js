@@ -27,6 +27,7 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
     var NO_CONTENT = 204;
     var RETAIL_LEVEL2_ACCESS = "Tc.Uk.Retail.Level2";
     var RETAIL_LEVEL3_ACCESS = "Tc.Uk.Retail.Level3";
+    var LIME_WEB_PAGE_URL = "http://event/?eventname=Tc.Event.OnClickLimeRibbonButton";
     
 
 
@@ -111,7 +112,7 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
     }
     var limeRibbonButtonClick = function () {
         if (window.IsUSD == true) {
-            window.open("http://event/?eventname=OnClickLimeRibbonButton");
+            window.open(LIME_WEB_PAGE_URL);
 
         }
 
