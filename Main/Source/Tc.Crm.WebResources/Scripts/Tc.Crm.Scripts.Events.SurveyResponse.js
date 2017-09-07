@@ -438,6 +438,11 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
 	return {
 		OnConvertToComplaintClick: function () {
 			convertToComplaint();
+		},
+		OnSave: function (context) {
+		    var isValid = Tc.Crm.Scripts.Utils.Validation.ValidateGdprCompliance(context);
+		    // uncomment in case of additional save actions
+		    //if (isValid) { }
 		}
 	};
 })();
