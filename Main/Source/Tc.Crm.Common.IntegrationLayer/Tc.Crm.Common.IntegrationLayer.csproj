@@ -41,6 +41,10 @@
       <HintPath>..\packages\jose-jwt.2.2.0\lib\net40\jose-jwt.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -53,13 +57,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helper\JsonHelper.cs" />
+    <Compile Include="Helper\FieldMapHelper.cs" />
     <Compile Include="Jti\Models\JsonWebTokenPayloadBase.cs" />
     <Compile Include="Jti\Models\OwrJsonWebTokenPayload.cs" />
     <Compile Include="Jti\Service\IJwtService.cs" />
     <Compile Include="Jti\Service\JwtService.cs" />
     <Compile Include="Model\EntityModel.cs" />
+    <Compile Include="Model\Schema.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\Synchronisation\CreateCustomerRequestMapper.cs" />
+    <Compile Include="Service\Synchronisation\CreateCustomerRequestPayloadCreator.cs" />
+    <Compile Include="Service\Synchronisation\EntityCachePayloadCreator.cs" />
+    <Compile Include="Service\Synchronisation\IEntityCacheMapper.cs" />
+    <Compile Include="Service\Synchronisation\IRequestPayloadCreator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tc.Crm.Common\Tc.Crm.Common.csproj">

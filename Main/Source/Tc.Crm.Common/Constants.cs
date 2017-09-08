@@ -130,6 +130,11 @@
             public const string BusinessUnitId = "businessunitid";
             public const string ParentTeamId = "tc_hotelteamid";
             public const string Owner = "ownerid";
+            public const string Salutation = "tc_salutation";
+            public const string Language = "tc_language";
+            public const string FirstName = "firstname";
+            public const string LastName = "lastname";
+            public const string Birthdate = "birthdate";
         }
 
         public static class Contact
