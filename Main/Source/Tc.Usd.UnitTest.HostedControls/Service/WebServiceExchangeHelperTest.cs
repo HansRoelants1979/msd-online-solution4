@@ -82,10 +82,10 @@ namespace Tc.Usd.UnitTest.HostedControls.Service
             Assert.AreEqual(_payload.EmployeeId, resultPayload.EmployeeId);
             Assert.AreEqual(_payload.Initials, resultPayload.Initials);
 
-            var now = Math.Round((DateTime.UtcNow - WebServiceExchangeHelper.UnixEpoch).TotalSeconds);
+            var now = Math.Round((DateTime.UtcNow - _jtiService.UnixEpoch).TotalSeconds);
             Assert.IsFalse(double.Parse(resultPayload.Expiry) < now);
             Assert.IsFalse(double.Parse(resultPayload.NotBefore) <= now);
-            Assert.IsFalse(double.Parse(resultPayload.IssuedAtTime) >= Math.Round((DateTime.UtcNow - WebServiceExchangeHelper.UnixEpoch).TotalSeconds + 3));
+            Assert.IsFalse(double.Parse(resultPayload.IssuedAtTime) >= Math.Round((DateTime.UtcNow - _jtiService.UnixEpoch).TotalSeconds + 3));
           
         }
 

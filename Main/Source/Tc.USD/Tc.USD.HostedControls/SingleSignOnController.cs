@@ -11,19 +11,19 @@ namespace Tc.Usd.HostedControls
 {
     public partial class SingleSignOnController : DynamicsBaseHostedControl
     {
-        public ILogger LogWriter;
-        public IJwtService JtiService;
+        private readonly ILogger _logger;
+        private readonly IJwtService _jtiService;
 
         public SingleSignOnController(Guid appID, string appName, string initString)
             : base(appID, appName, initString)
         {
-            LogWriter = new UsdLogger(new TraceLogger(DataKey.DiagnosticSource));
-            JtiService = new JwtService(LogWriter);
+            _logger = new UsdLogger(new TraceLogger(DataKey.DiagnosticSource));
+            _jtiService = new JwtService(_logger);
         }
 
         protected override void DoAction(RequestActionEventArgs args)
         {
-            LogWriter.LogInformation($"{ApplicationName} -- DoAction called for action: {args.Action}");
+            _logger.LogInformation($"{ApplicationName} -- DoAction called for action: {args.Action}");
             if (args.Action.Equals(ActionName.OpenOwr, StringComparison.OrdinalIgnoreCase))
                 DoActionsOnOpenOwr(args);
         }
