@@ -105,6 +105,8 @@
     <Compile Include="Email\BusinessLogic\UpdateEmailBodyService.cs" />
     <Compile Include="Email\PreoperationUpdateEmailBody.cs" />
     <Compile Include="MultipleEntities\CreateEntityCacheOnEntityOperation.cs" />
+    <Compile Include="MultipleEntities\Helper\JsonHelper.cs" />
+    <Compile Include="MultipleEntities\Model\EntityModel.cs" />
     <Compile Include="Note\PostNoteUpdateCreditCardPatternValidation.cs" />
     <Compile Include="PreCaseLine.cs" />
     <Compile Include="Constants.cs" />
@@ -124,12 +126,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ILMergeOrder.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Tc.Crm.Common.IntegrationLayer\Tc.Crm.Common.IntegrationLayer.csproj">
-      <Project>{6c7d9d7e-9258-4ecd-8471-d092c47205ba}</Project>
-      <Name>Tc.Crm.Common.IntegrationLayer</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

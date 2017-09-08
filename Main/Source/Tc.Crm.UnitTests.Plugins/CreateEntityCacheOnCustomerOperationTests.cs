@@ -24,7 +24,7 @@ namespace Tc.Crm.UnitTests.Plugins
             var country = new Entity(Entities.Country, sourceMarketId);
             country.Attributes.Add(Attributes.Country.ISO2Code, iso2Code);
             context = new XrmFakedContext();
-            context.Initialize(new List<Entity>() { country }); ;
+            context.Initialize(new List<Entity>() { country });
         }
 
         private XrmFakedPluginExecutionContext GetPluginContext(Guid countryId, string messageName, int stage, int mode)

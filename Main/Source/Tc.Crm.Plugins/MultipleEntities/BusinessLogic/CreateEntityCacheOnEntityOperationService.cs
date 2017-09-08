@@ -2,8 +2,8 @@
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using System.Collections.Generic;
-using Tc.Crm.Common.IntegrationLayer.Model;
-using Tc.Crm.Common.IntegrationLayer.Helper;
+using Tc.Crm.Plugins.MultipleEntities.Model;
+using Tc.Crm.Plugins.MultipleEntities.Helper;
 using Tc.Crm.Plugins.OptionSetValues;
 
 
