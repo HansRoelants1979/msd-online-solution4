@@ -2,9 +2,12 @@
 using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel;
+using Microsoft.Uii.Csr;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
+using Tc.Crm.Common.Jti.Models;
+using Tc.Crm.Common.Jti.Service;
 using Tc.Usd.HostedControls.Constants;
 using Tc.Usd.HostedControls.Models;
 using Tc.Usd.HostedControls.Service;
@@ -13,17 +16,17 @@ namespace Tc.Usd.HostedControls
 {
     public partial class SingleSignOnController
     {
-        public void CallSsoService()
+        public void CallSsoService(RequestActionEventArgs args)
         {
             var login = GetSsoDetails();
             var privateKey = GetPrivateInfo();
             var expiredSeconds = GetConfig(DataKey.SsoTokenExpired);
             var notBeforeSeconds = GetConfig(DataKey.SsoTokenNotBefore);
             var payload = GetPayload(login, expiredSeconds, notBeforeSeconds);
-            var token = WebServiceExchangeHelper.CreateJwtToken(privateKey, payload);
+            var token = JtiService.CreateJwtToken(privateKey, payload);
             var data = WebServiceExchangeHelper.GetCustomerTravelPlannerJson();
             var serviceUrl = GetConfig(DataKey.OwrUrlConfigName);
-            var content = WebServiceExchangeHelper.SendHttpRequest(serviceUrl, token, data);
+            var content = JtiService.SendHttpRequest(serviceUrl, token, data);
             var eventParams = WebServiceExchangeHelper.ContentToEventParams(content);
 
             FireEvent(EventName.SsoCompleteEvent, eventParams);
@@ -43,7 +46,7 @@ namespace Tc.Usd.HostedControls
             var loginInfo =
                 $"Abtanumber is {login.GetAttributeValue<string>("tc_abtanumber")}, BranchCode is {login.GetAttributeValue<string>("tc_branchcode")}, Employee Id is {login.GetAttributeValue<string>("tc_employeeid")}, Initials are {login.GetAttributeValue<string>("tc_initials")}";
 
-            LogWriter.Log($"Requesting SSO Details result: {loginInfo}", TraceEventType.Verbose);
+            LogWriter.LogInformation($"Requesting SSO Details result: {loginInfo}");
             return login;
         }
 
@@ -58,9 +61,8 @@ namespace Tc.Usd.HostedControls
             var config = ExecuteQuery(query);
             var privateKey = config?.GetAttributeValue<string>("tc_value");
             if (privateKey != null)
-                LogWriter.Log(
-                    $"Retrieved {DataKey.JwtPrivateKeyConfigName} result {DataKey.JwtPrivateKeyConfigName} is not null",
-                    TraceEventType.Verbose);
+                LogWriter.LogInformation(
+                    $"Retrieved {DataKey.JwtPrivateKeyConfigName} result {DataKey.JwtPrivateKeyConfigName} is not null");
             return privateKey;
         }
 
@@ -73,8 +75,7 @@ namespace Tc.Usd.HostedControls
             query.AddAttributeValue("tc_name", name);
             var config = ExecuteQuery(query);
             var value = config?.GetAttributeValue<string>("tc_value");
-            LogWriter.Log($"Retrieved {name} result: {value}",
-                TraceEventType.Verbose);
+            LogWriter.LogInformation($"Retrieved {name} result: {value}");
             return value;
         }
 
@@ -95,30 +96,27 @@ namespace Tc.Usd.HostedControls
             }
             catch (FaultException<OrganizationServiceFault> ex)
             {
-                LogWriter.Log($"{ApplicationName} application terminated with an error::{ex}",
-                    TraceEventType.Error);
+                LogWriter.LogError($"{ApplicationName} application terminated with an error::{ex}");
             }
             catch (TimeoutException ex)
             {
-                LogWriter.Log($"{ApplicationName} application terminated with an error::{ex}",
-                    TraceEventType.Error);
+                LogWriter.LogError($"{ApplicationName} application terminated with an error::{ex}");
             }
             catch (Exception ex)
             {
-                LogWriter.Log($"{ApplicationName} application terminated with an error::{ex}",
-                    TraceEventType.Error);
+                LogWriter.LogError($"{ApplicationName} application terminated with an error::{ex}");
             }
 
             return null;
         }
 
-        private JsonWebTokenPayload GetPayload(Entity login, string expiredSeconds, string notBeforeSeconds)
+        private OwrJsonWebTokenPayload GetPayload(Entity login, string expiredSeconds, string notBeforeSeconds)
         {
-            var payload = new JsonWebTokenPayload
+            var payload = new OwrJsonWebTokenPayload
             {
-                IssuedAtTime = WebServiceExchangeHelper.GetIssuedAtTime().ToString(),
-                NotBefore = WebServiceExchangeHelper.GetNotBeforeTime(notBeforeSeconds).ToString(),
-                Expiry = WebServiceExchangeHelper.GetExpiry(expiredSeconds).ToString(),
+                IssuedAtTime = JtiService.GetIssuedAtTime().ToString(),
+                NotBefore = JtiService.GetNotBeforeTime(notBeforeSeconds).ToString(),
+                Expiry = JtiService.GetExpiry(expiredSeconds).ToString(),
                 Jti = WebServiceExchangeHelper.GetJti().ToString(),
                 BranchCode = login.GetAttributeValue<string>("tc_branchcode"),
                 AbtaNumber = login.GetAttributeValue<string>("tc_abtanumber"),

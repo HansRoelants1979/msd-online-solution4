@@ -2,6 +2,7 @@
 using Microsoft.Crm.UnifiedServiceDesk.CommonUtility;
 using Microsoft.Crm.UnifiedServiceDesk.Dynamics;
 using Microsoft.Uii.Csr;
+using Tc.Crm.Common.Jti.Service;
 using Tc.Crm.Common.Services;
 using Tc.Usd.HostedControls.Constants;
 using Tc.Usd.HostedControls.Models;
@@ -11,11 +12,13 @@ namespace Tc.Usd.HostedControls
     public partial class SingleSignOnController : DynamicsBaseHostedControl
     {
         public ILogger LogWriter;
+        public IJwtService JtiService;
 
         public SingleSignOnController(Guid appID, string appName, string initString)
             : base(appID, appName, initString)
         {
             LogWriter = new UsdLogger(new TraceLogger(DataKey.DiagnosticSource));
+            JtiService = new JwtService(LogWriter);
         }
 
         protected override void DoAction(RequestActionEventArgs args)
