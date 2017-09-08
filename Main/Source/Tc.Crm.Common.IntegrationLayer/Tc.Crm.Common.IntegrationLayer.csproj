@@ -37,9 +37,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="jose-jwt, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\jose-jwt.2.2.0\lib\net40\jose-jwt.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,8 +54,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helper\JsonHelper.cs" />
+    <Compile Include="Jti\Models\JsonWebTokenPayloadBase.cs" />
+    <Compile Include="Jti\Models\OwrJsonWebTokenPayload.cs" />
+    <Compile Include="Jti\Service\IJwtService.cs" />
+    <Compile Include="Jti\Service\JwtService.cs" />
     <Compile Include="Model\EntityModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Tc.Crm.Common\Tc.Crm.Common.csproj">
+      <Project>{860E3979-F2C6-4C90-9FA6-E130BD1EE9BE}</Project>
+      <Name>Tc.Crm.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel;
 using Microsoft.Uii.Csr;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
-using Tc.Crm.Common.Jti.Models;
-using Tc.Crm.Common.Jti.Service;
+using Tc.Crm.Common.IntegrationLayer.Jti.Models;
 using Tc.Usd.HostedControls.Constants;
-using Tc.Usd.HostedControls.Models;
 using Tc.Usd.HostedControls.Service;
 
 namespace Tc.Usd.HostedControls

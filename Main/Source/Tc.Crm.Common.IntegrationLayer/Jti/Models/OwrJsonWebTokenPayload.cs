@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Tc.Crm.Common.Jti.Models
+namespace Tc.Crm.Common.IntegrationLayer.Jti.Models
 {
     [DataContract]
     public class OwrJsonWebTokenPayload: JsonWebTokenPayloadBase

@@ -1,6 +1,6 @@
-﻿using Tc.Crm.Common.Jti.Models;
+﻿using Tc.Crm.Common.IntegrationLayer.Jti.Models;
 
-namespace Tc.Crm.Common.Jti.Service
+namespace Tc.Crm.Common.IntegrationLayer.Jti.Service
 {
     public interface IJwtService
     {

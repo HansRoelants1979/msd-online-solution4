@@ -7,8 +7,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using System.Configuration;
 using System.IO;
-using Tc.Crm.Common.Jti.Models;
-using Tc.Crm.Common.Jti.Service;
+using Tc.Crm.Common.IntegrationLayer.Jti.Models;
+using Tc.Crm.Common.IntegrationLayer.Jti.Service;
 using Tc.Crm.Common.Services;
 
 namespace Tc.Usd.UnitTest.HostedControls.Service

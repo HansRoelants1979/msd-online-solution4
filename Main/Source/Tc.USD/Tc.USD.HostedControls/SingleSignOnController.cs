@@ -2,7 +2,7 @@
 using Microsoft.Crm.UnifiedServiceDesk.CommonUtility;
 using Microsoft.Crm.UnifiedServiceDesk.Dynamics;
 using Microsoft.Uii.Csr;
-using Tc.Crm.Common.Jti.Service;
+using Tc.Crm.Common.IntegrationLayer.Jti.Service;
 using Tc.Crm.Common.Services;
 using Tc.Usd.HostedControls.Constants;
 using Tc.Usd.HostedControls.Models;

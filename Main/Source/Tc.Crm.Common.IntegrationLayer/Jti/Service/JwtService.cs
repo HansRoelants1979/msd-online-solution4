@@ -5,11 +5,10 @@ using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
 using Jose;
-using Tc.Crm.Common.Jti.Models;
+using Tc.Crm.Common.IntegrationLayer.Jti.Models;
 using Tc.Crm.Common.Services;
 
-
-namespace Tc.Crm.Common.Jti.Service
+namespace Tc.Crm.Common.IntegrationLayer.Jti.Service
 {
     public class JwtService: IJwtService
     {
@@ -18,8 +17,8 @@ namespace Tc.Crm.Common.Jti.Service
         {
             _logger = logger;
         }
-        public static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-        public string CreateJwtToken(string privateKey, OwrJsonWebTokenPayload payloadObj)
+        public readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+        public virtual string CreateJwtToken(string privateKey, OwrJsonWebTokenPayload payloadObj)
         {
             var payload = new Dictionary<string, object>
             {
@@ -43,7 +42,7 @@ namespace Tc.Crm.Common.Jti.Service
 
             var rsa = new RSACryptoServiceProvider();
             rsa.FromXmlString(privateKey);
-            return JWT.Encode(payload, rsa, JwsAlgorithm.RS256, header);
+            return Jose.JWT.Encode(payload, rsa, JwsAlgorithm.RS256, header);
         }
         public string SendHttpRequest(string serviceUrl, string token, string data)
         {
