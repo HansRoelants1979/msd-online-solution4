@@ -37,8 +37,8 @@
 
       <TextBlock Grid.Row="0" Grid.Column="0"  FontSize="15" Padding="4" Foreground="Orange" Grid.ColumnSpan="3" Margin="0,0,55.4,0">External Login</TextBlock>
 
-      <TextBlock Grid.Row="1" Grid.Column="2" Height="20" Grid.ColumnSpan="2" Margin="0,10,87.4,10">Employee Id</TextBlock>
-      <TextBox Grid.Row="1" x:Name="txtEmployeeId" Grid.Column="2" Text="[[tc_externallogin.tc_employeeid]+]" Height="20" Grid.ColumnSpan="2" Margin="86,10,0.4,10"/>
+      <TextBlock Grid.Row="1" Grid.Column="2" Height="20" Margin="0,10" HorizontalAlignment="Left" Width="67">Employee Id</TextBlock>
+      <TextBox Grid.Row="1" x:Name="txtEmployeeId" Grid.Column="2" Text="[[tc_externallogin.tc_employeeid]+]" Grid.ColumnSpan="2" Margin="86,10,0.4,10"/>
 
       <TextBlock Grid.Row="2" Grid.Column="2" Height="20" Grid.ColumnSpan="2" Margin="0,10,87.4,10">Branch Code</TextBlock>
       <TextBox Grid.Row="2" x:Name="txtBranchCode" Grid.Column="2" Text="[[tc_externallogin.tc_branchcode]+]" Height="20" Grid.ColumnSpan="2" Margin="86,10,0.4,10"></TextBox>
@@ -64,5 +64,9 @@
       <TextBlock x:Name="tbLoginId" Grid.Row="5" Visibility="Hidden" Grid.Column="3" Text="[[tc_externallogin.tc_externalloginid]+]" Grid.ColumnSpan="2" Margin="87.6,0,0.4,0" Grid.RowSpan="2"></TextBlock>
     </Grid>
     <Button Command="CCA:ActionCommands.UIIEvent" Content="Cancel" CommandParameter="Tc.Event.CustomCancel" Height="30" Width="100" HorizontalAlignment="Right" Margin="0,198.4,24.4,10" Grid.ColumnSpan="2" Grid.Row="1"/>
+    <Label x:Name="RequiredEmployeeId" Content="*" Foreground="Red" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="152,35.2,0,0" VerticalAlignment="Top" Grid.Row="1" Height="38" Width="24"/>
+    <Label x:Name="RequiredBranchCode" Content="*" Foreground="Red" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="153,73.2,0,0" VerticalAlignment="Top" Grid.Row="1" Height="38" Width="24"/>
+    <Label x:Name="RequiredAbta" Content="*" Foreground="Red" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="158,112.2,0,0" VerticalAlignment="Top" Grid.Row="1" Height="38" Width="24"/>
+    <Label x:Name="RequiredInitials" Content="*" Foreground="Red" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="119,154.2,0,0" VerticalAlignment="Top" Grid.Row="1" Height="38" Width="24"/>
   </Grid>
 </Border>
