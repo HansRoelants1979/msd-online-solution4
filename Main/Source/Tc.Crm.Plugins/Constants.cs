@@ -108,6 +108,14 @@ namespace Tc.Crm.Plugins.Attributes
     {
         public const string PartyId = "partyid";
     }
+    public static class FollowUp
+    {
+        public const string RescheduleCheck = "tc_reschedulecheck";
+        public const string RescheduleReason = "tc_reschedulereason";
+        public const string DueDate = "scheduledend";
+        public const string ContactTime = "tc_contacttime";
+        
+    }
 }
 namespace Tc.Crm.Plugins
 {
@@ -206,6 +214,8 @@ namespace Tc.Crm.Plugins
         public const string Configuration = "tc_configuration";       
         public const string EntityCache = "tc_entitycache";
         public const string Country = "tc_country";
+        public const string FollowUp = "tc_followup";
+
     }
 
     public static class Relationships

@@ -100,6 +100,8 @@
     <Compile Include="Case\BusinessLogic\UpdateRegardingOfSurveyService.cs" />
     <Compile Include="Case\PostCaseCreationUpdateRegardingOfSurvey.cs" />
     <Compile Include="Customer\BusinessLogic\CreateEntityCacheOnCustomerOperationService.cs" />
+    <Compile Include="FollowUp\BusinessLogic\CreateNoteOnFollowUpOperationService.cs" />
+    <Compile Include="FollowUp\CreateNoteOnFollowUpOperation.cs" />
     <Compile Include="MultipleEntities\BusinessLogic\CreateEntityCacheOnEntityOperationService.cs" />
     <Compile Include="Customer\CreateEntityCacheOnCustomerOperation.cs" />
     <Compile Include="Email\BusinessLogic\UpdateEmailBodyService.cs" />
@@ -127,6 +129,7 @@
   <ItemGroup>
     <Content Include="ILMergeOrder.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
