@@ -26,12 +26,12 @@ namespace Tc.Crm.UnitTests.Plugins
 
             Configuration = new Entity(Entities.Configuration, Guid.NewGuid());
             Configuration.Attributes.Add(Attributes.Configuration.Name, Configurationkeys.CreditCardPattern);
-            Configuration.Attributes.Add(Attributes.Configuration.Value, @"^\D*\d{16}\D*$");
+            Configuration.Attributes.Add(Attributes.Configuration.Value, "^.*(\\d[^a-zA-Z0-9]?){16,}.*$");
             Annotation = new Entity(Entities.Annotation, Guid.NewGuid());
-            Annotation.Attributes.Add(Attributes.Annotation.NoteText, "1234567812345678");
+            Annotation.Attributes.Add(Attributes.Annotation.NoteText, "test 123 \r\n \r\n 1234567812345678");
             context = new XrmFakedContext();
             context.Initialize(new List<Entity>() { Configuration, Annotation });
-
+            
         }
 
         [TestMethod]
@@ -44,8 +44,7 @@ namespace Tc.Crm.UnitTests.Plugins
             pluginContext.PrimaryEntityName = Entities.Annotation;
             pluginContext.InputParameters = new ParameterCollection();
             pluginContext.InputParameters.Add(InputParameters.Target, target);
-            Assert.ThrowsException<InvalidPluginExecutionException>(() => context.ExecutePluginWith<Crm.Plugins.Note.PostNoteUpdateCreditCardPatternValidation>(pluginContext));
-
+            context.ExecutePluginWith<Crm.Plugins.Note.PostNoteUpdateCreditCardPatternValidation>(pluginContext);
         }
 
 
@@ -60,8 +59,7 @@ namespace Tc.Crm.UnitTests.Plugins
             pluginContext.PrimaryEntityName = Entities.Annotation;
             pluginContext.InputParameters = new ParameterCollection();
             pluginContext.InputParameters.Add(InputParameters.Target, target);
-            Assert.ThrowsException<InvalidPluginExecutionException>(() => context.ExecutePluginWith<Crm.Plugins.Note.PostNoteUpdateCreditCardPatternValidation>(pluginContext));
-
+            context.ExecutePluginWith<Crm.Plugins.Note.PostNoteUpdateCreditCardPatternValidation>(pluginContext);
         }
     }
 }

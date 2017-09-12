@@ -57,7 +57,7 @@ namespace Tc.Crm.Plugins.Note
                 string CreditCardPattern = configurations.Entities[0].Attributes.Contains(Attributes.Configuration.Value) ? configurations.Entities[0].GetAttributeValue<string>(Attributes.Configuration.Value) : "";
                 if (CreditCardPattern != null && CreditCardPattern != "")
                 {
-                    MatchCollection matches = Regex.Matches(ccNumber, CreditCardPattern);
+                    MatchCollection matches = Regex.Matches(ccNumber, CreditCardPattern, RegexOptions.Multiline);
                     if (matches.Count > 0)
                         return true;
                 }

@@ -168,7 +168,7 @@ namespace Tc.Crm.Plugins
         public const string CachingServiceUrlIsNullOrEmpty = "Caching service url is null or empty.";
         public const string CachingApiIsNullOrEmpty = "Caching api is null or empty.";
         public const string RequestDataIsEmpty = "Request data is null or empty.";
-        public const string DataYouEnteredInNotesContainPotentionalCreditCardNumber = "Data you entered in notes contain potentional credit card number(16 steright digits). Please remove.";
+        public const string DataYouEnteredInNotesContainPotentionalCreditCardNumber = "The data you entered contains a barred sequence (16 consecutive numbers).";
     }
 
     public static class Messages
