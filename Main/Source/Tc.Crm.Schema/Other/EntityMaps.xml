@@ -27,11 +27,6 @@
   </EntityMap>
   <EntityMap>
     <EntitySource>contact</EntitySource>
-    <EntityTarget>tc_booking</EntityTarget>
-    <AttributeMaps />
-  </EntityMap>
-  <EntityMap>
-    <EntitySource>contact</EntitySource>
     <EntityTarget>tc_compensation</EntityTarget>
     <AttributeMaps />
   </EntityMap>
@@ -405,6 +400,21 @@
   </EntityMap>
   <EntityMap>
     <EntitySource>tc_cluster</EntitySource>
+    <EntityTarget>contact</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_cluster</EntitySource>
+    <EntityTarget>opportunity</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_cluster</EntitySource>
+    <EntityTarget>tc_followup</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_cluster</EntitySource>
     <EntityTarget>tc_store</EntityTarget>
     <AttributeMaps />
   </EntityMap>
@@ -634,6 +644,11 @@
     <AttributeMaps />
   </EntityMap>
   <EntityMap>
+    <EntitySource>tc_store</EntitySource>
+    <EntityTarget>tc_followup</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
     <EntitySource>tc_surveyresponse</EntitySource>
     <EntityTarget>tc_surveyresponsefeedback</EntityTarget>
     <AttributeMaps />
@@ -645,7 +660,22 @@
   </EntityMap>
   <EntityMap>
     <EntitySource>tc_ukregion</EntitySource>
+    <EntityTarget>contact</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_ukregion</EntitySource>
+    <EntityTarget>opportunity</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_ukregion</EntitySource>
     <EntityTarget>tc_cluster</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_ukregion</EntitySource>
+    <EntityTarget>tc_followup</EntityTarget>
     <AttributeMaps />
   </EntityMap>
   <EntityMap>

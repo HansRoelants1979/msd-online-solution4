@@ -392,7 +392,7 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
 	}
 
 	var getControlValue = function (controlName) {
-	    if (Xrm.Page.getAttribute(controlName) && Xrm.Page.getAttribute(controlName).getValue())
+	    if (Xrm.Page.getAttribute(controlName))
 	        return Xrm.Page.getAttribute(controlName).getValue();
 	    else
 	        return null;
@@ -438,6 +438,11 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
 	return {
 		OnConvertToComplaintClick: function () {
 			convertToComplaint();
+		},
+		OnSave: function (context) {
+		    var isValid = Tc.Crm.Scripts.Utils.Validation.ValidateGdprCompliance(context);
+		    // uncomment in case of additional save actions
+		    //if (isValid) { }
 		}
 	};
 })();

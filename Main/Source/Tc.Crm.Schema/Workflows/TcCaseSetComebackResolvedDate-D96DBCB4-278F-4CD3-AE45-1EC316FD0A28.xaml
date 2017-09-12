@@ -309,6 +309,7 @@
                       </mxswa:SetEntityProperty>
                       <mxswa:UpdateEntity DisplayName="UpdateStep4" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" />
                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
+                      <Persist />
                     </Sequence>
                   </sco:Collection>
                 </mxswa:ActivityReference.Properties>
@@ -561,6 +562,7 @@
                       </mxswa:SetEntityProperty>
                       <mxswa:UpdateEntity DisplayName="UpdateStep7" Entity="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" EntityName="incident" />
                       <Assign x:TypeArguments="mxs:Entity" To="[InputEntities(&quot;primaryEntity&quot;)]" Value="[CreatedEntities(&quot;primaryEntity#Temp&quot;)]" />
+                      <Persist />
                     </Sequence>
                   </sco:Collection>
                 </mxswa:ActivityReference.Properties>
@@ -581,7 +583,7 @@
                     <Sequence DisplayName="StopWorkflowStep8: Otherwise set workflow as successful ">
                       <Sequence.Variables>
                         <Variable x:TypeArguments="x:Object" Name="StopWorkflowStep8_1" />
-                        <Variable x:TypeArguments="x:String" Default="80d8c40b-5ae9-4733-9fec-d2412051308c" Name="stepLabelLabelId" />
+                        <Variable x:TypeArguments="x:String" Default="c6ab7593-adbe-44ba-aca2-f68a171c5f00" Name="stepLabelLabelId" />
                         <Variable x:TypeArguments="x:String" Name="stepLabelDescription">
                           <Variable.Default>
                             <Literal x:TypeArguments="x:String" Value="" />

@@ -22,10 +22,6 @@
       <Variable x:TypeArguments="mxs:EntityReference" Default="[New EntityReference()]" Name="CustomActivityStep66Hotel_localParameter" />
       <Variable x:TypeArguments="mxs:EntityReference" Default="[New EntityReference()]" Name="CustomActivityStep66Country_localParameter" />
       <Variable x:TypeArguments="mxs:EntityReference" Default="[New EntityReference()]" Name="CustomActivityStep66BusinessUnit_localParameter" />
-      <Variable x:TypeArguments="mxs:EntityReference" Default="[New EntityReference()]" Name="CustomActivityStep66Recovery_localParameter" />
-      <Variable x:TypeArguments="mxs:EntityReference" Default="[New EntityReference()]" Name="CustomActivityStep66Bookingtransfer_localParameter" />
-      <Variable x:TypeArguments="mxs:EntityReference" Default="[New EntityReference()]" Name="CustomActivityStep66Bookingtransport_localParameter" />
-      <Variable x:TypeArguments="mxs:EntityReference" Default="[New EntityReference()]" Name="CustomActivityStep66Bookingextraservice_localParameter" />
     </mxswa:Workflow.Variables>
     <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.Composite, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="StageStep72: INCIDENT">
       <mxswa:ActivityReference.Properties>
@@ -168,10 +164,6 @@
                     <OutArgument x:TypeArguments="mxs:EntityReference" x:Key="Hotel">[CustomActivityStep66Hotel_localParameter]</OutArgument>
                     <OutArgument x:TypeArguments="mxs:EntityReference" x:Key="Country">[CustomActivityStep66Country_localParameter]</OutArgument>
                     <OutArgument x:TypeArguments="mxs:EntityReference" x:Key="BusinessUnit">[CustomActivityStep66BusinessUnit_localParameter]</OutArgument>
-                    <OutArgument x:TypeArguments="mxs:EntityReference" x:Key="Recovery">[CustomActivityStep66Recovery_localParameter]</OutArgument>
-                    <OutArgument x:TypeArguments="mxs:EntityReference" x:Key="Bookingtransfer">[CustomActivityStep66Bookingtransfer_localParameter]</OutArgument>
-                    <OutArgument x:TypeArguments="mxs:EntityReference" x:Key="Bookingtransport">[CustomActivityStep66Bookingtransport_localParameter]</OutArgument>
-                    <OutArgument x:TypeArguments="mxs:EntityReference" x:Key="Bookingextraservice">[CustomActivityStep66Bookingextraservice_localParameter]</OutArgument>
                   </mxswa:ActivityReference.Arguments>
                 </mxswa:ActivityReference>
                 <If Condition="[Microsoft.VisualBasic.IsNothing(CustomActivityStep66OfficeLocation_localParameter)]">
@@ -252,38 +244,6 @@
                   </If.Then>
                   <If.Else>
                     <mxswa:RetrieveEntity Attributes="{x:Null}" Entity="[CreatedEntities(&quot;CustomActivityStep66BusinessUnit_entity&quot;)]" EntityId="[DirectCast(CustomActivityStep66BusinessUnit_localParameter.Id, System.Guid)]" EntityName="businessunit" ThrowIfNotExists="False" />
-                  </If.Else>
-                </If>
-                <If Condition="[Microsoft.VisualBasic.IsNothing(CustomActivityStep66Recovery_localParameter)]">
-                  <If.Then>
-                    <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;CustomActivityStep66Recovery_entity&quot;)]" Value="[New Entity()]" />
-                  </If.Then>
-                  <If.Else>
-                    <mxswa:RetrieveEntity Attributes="{x:Null}" Entity="[CreatedEntities(&quot;CustomActivityStep66Recovery_entity&quot;)]" EntityId="[DirectCast(CustomActivityStep66Recovery_localParameter.Id, System.Guid)]" EntityName="tc_recovery" ThrowIfNotExists="False" />
-                  </If.Else>
-                </If>
-                <If Condition="[Microsoft.VisualBasic.IsNothing(CustomActivityStep66Bookingtransfer_localParameter)]">
-                  <If.Then>
-                    <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;CustomActivityStep66Bookingtransfer_entity&quot;)]" Value="[New Entity()]" />
-                  </If.Then>
-                  <If.Else>
-                    <mxswa:RetrieveEntity Attributes="{x:Null}" Entity="[CreatedEntities(&quot;CustomActivityStep66Bookingtransfer_entity&quot;)]" EntityId="[DirectCast(CustomActivityStep66Bookingtransfer_localParameter.Id, System.Guid)]" EntityName="tc_bookingtransfer" ThrowIfNotExists="False" />
-                  </If.Else>
-                </If>
-                <If Condition="[Microsoft.VisualBasic.IsNothing(CustomActivityStep66Bookingtransport_localParameter)]">
-                  <If.Then>
-                    <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;CustomActivityStep66Bookingtransport_entity&quot;)]" Value="[New Entity()]" />
-                  </If.Then>
-                  <If.Else>
-                    <mxswa:RetrieveEntity Attributes="{x:Null}" Entity="[CreatedEntities(&quot;CustomActivityStep66Bookingtransport_entity&quot;)]" EntityId="[DirectCast(CustomActivityStep66Bookingtransport_localParameter.Id, System.Guid)]" EntityName="tc_bookingtransport" ThrowIfNotExists="False" />
-                  </If.Else>
-                </If>
-                <If Condition="[Microsoft.VisualBasic.IsNothing(CustomActivityStep66Bookingextraservice_localParameter)]">
-                  <If.Then>
-                    <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;CustomActivityStep66Bookingextraservice_entity&quot;)]" Value="[New Entity()]" />
-                  </If.Then>
-                  <If.Else>
-                    <mxswa:RetrieveEntity Attributes="{x:Null}" Entity="[CreatedEntities(&quot;CustomActivityStep66Bookingextraservice_entity&quot;)]" EntityId="[DirectCast(CustomActivityStep66Bookingextraservice_localParameter.Id, System.Guid)]" EntityName="tc_bookingextraservice" ThrowIfNotExists="False" />
                   </If.Else>
                 </If>
               </sco:Collection>

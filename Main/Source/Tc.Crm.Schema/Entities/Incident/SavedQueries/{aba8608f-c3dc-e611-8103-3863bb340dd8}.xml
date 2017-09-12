@@ -14,10 +14,6 @@
         <cell name="tc_casetypeid" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="createdon" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
         <cell name="statuscode" width="150" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="tc_24hourpromise" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="tc_3rdpartyresponserequired" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="tc_bookingid" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
-        <cell name="tc_bookingreferencefreetext" width="125" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
       </row>
     </grid>
   </layoutxml>
@@ -27,12 +23,8 @@
       <entity name="incident">
         <attribute name="ticketnumber" />
         <attribute name="createdon" />
-        <attribute name="tc_24hourpromise" />
         <attribute name="tc_casetypeid" />
         <attribute name="statuscode" />
-        <attribute name="tc_3rdpartyresponserequired" />
-        <attribute name="tc_bookingreferencefreetext" />
-        <attribute name="tc_bookingid" />
         <order attribute="createdon" descending="true" />
         <filter type="and">
           <condition attribute="modifiedon" operator="last-x-years" value="6" />

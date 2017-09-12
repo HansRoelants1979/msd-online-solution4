@@ -98,7 +98,7 @@
       </EntityRelationshipRole>
     </EntityRelationshipRoles>
   </EntityRelationship>
-  <EntityRelationship Name="manualsla_email">
+  <EntityRelationship Name="manualsla_email" unmodified="1">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IntroducedVersion>8.1.0.0</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
@@ -125,9 +125,6 @@
         <NavPaneOrder>10000</NavPaneOrder>
         <NavigationPropertyName>sla_email_sla</NavigationPropertyName>
         <RelationshipRoleType>1</RelationshipRoleType>
-      </EntityRelationshipRole>
-      <EntityRelationshipRole>
-        <RelationshipRoleType>0</RelationshipRoleType>
       </EntityRelationshipRole>
     </EntityRelationshipRoles>
   </EntityRelationship>
@@ -206,7 +203,7 @@
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
-  <EntityRelationship Name="sla_Annotation">
+  <EntityRelationship Name="sla_Annotation" unmodified="1">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IntroducedVersion>6.1.0.0</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
@@ -267,7 +264,7 @@
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
-  <EntityRelationship Name="sla_email">
+  <EntityRelationship Name="sla_email" unmodified="1">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IntroducedVersion>8.1.0.0</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
@@ -324,14 +321,16 @@
     <ReferencingAttributeName>SLAInvokedId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Nur zur internen Verwendung" languagecode="1031" />
         <Description description="For internal use only." languagecode="1033" />
+        <Description description="Utilisation interne uniquement." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
   <EntityRelationship Name="tc_assistancerequest_sla_slaid">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.113</IntroducedVersion>
+    <IntroducedVersion>1.0.0.51</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_assistancerequest</ReferencingEntityName>
     <ReferencedEntityName>SLA</ReferencedEntityName>
@@ -366,7 +365,7 @@
   <EntityRelationship Name="tc_assistancerequest_sla_slainvokedid">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.113</IntroducedVersion>
+    <IntroducedVersion>1.0.0.51</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_assistancerequest</ReferencingEntityName>
     <ReferencedEntityName>SLA</ReferencedEntityName>
@@ -379,14 +378,16 @@
     <ReferencingAttributeName>SLAInvokedId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Die letzte auf diese Anfrage angewendete SLA. Dieses Feld dient nur zur internen Verwendung." languagecode="1031" />
         <Description description="Last SLA that was applied to this case. This field is for internal use only." languagecode="1033" />
+        <Description description="Dernier contrat SLA ayant été appliqué à cet incident. Ce champ est destiné à une utilisation interne uniquement." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
   <EntityRelationship Name="tc_followup_sla_slaid">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.129</IntroducedVersion>
+    <IntroducedVersion>1.0.0.139</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_followup</ReferencingEntityName>
     <ReferencedEntityName>SLA</ReferencedEntityName>
@@ -421,7 +422,7 @@
   <EntityRelationship Name="tc_followup_sla_slainvokedid">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.129</IntroducedVersion>
+    <IntroducedVersion>1.0.0.139</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_followup</ReferencingEntityName>
     <ReferencedEntityName>SLA</ReferencedEntityName>
@@ -443,7 +444,7 @@
   <EntityRelationship Name="tc_surveyresponse_sla_slaid">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.113</IntroducedVersion>
+    <IntroducedVersion>1.0.0.51</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_surveyresponse</ReferencingEntityName>
     <ReferencedEntityName>SLA</ReferencedEntityName>
@@ -478,7 +479,7 @@
   <EntityRelationship Name="tc_surveyresponse_sla_slainvokedid">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.113</IntroducedVersion>
+    <IntroducedVersion>1.0.0.51</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_surveyresponse</ReferencingEntityName>
     <ReferencedEntityName>SLA</ReferencedEntityName>
@@ -491,7 +492,9 @@
     <ReferencingAttributeName>SLAInvokedId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Die letzte auf diese Anfrage angewendete SLA. Dieses Feld dient nur zur internen Verwendung." languagecode="1031" />
         <Description description="Last SLA that was applied to this case. This field is for internal use only." languagecode="1033" />
+        <Description description="Dernier contrat SLA ayant été appliqué à cet incident. Ce champ est destiné à une utilisation interne uniquement." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>

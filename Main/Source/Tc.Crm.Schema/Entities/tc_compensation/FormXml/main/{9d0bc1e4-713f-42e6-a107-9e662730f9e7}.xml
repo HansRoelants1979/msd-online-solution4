@@ -957,11 +957,6 @@
                           <WebResourceId>{184F4DBC-6F1B-E711-8110-1458D041F8E8}</WebResourceId>
                         </parameters>
                       </control>
-                      <events>
-                        <event name="onload" application="0">
-                          <dependencies />
-                        </event>
-                      </events>
                     </cell>
                   </row>
                   <row />
@@ -1445,9 +1440,9 @@
       <Library name="posms_/Scripts/jquery.min.js" libraryUniqueId="{229179bb-2a5b-a570-c360-55c82801801d}" />
       <Library name="tc_es6promise.js" libraryUniqueId="{dc67601d-97b9-8045-56b7-ea92662b9ad3}" />
       <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{25e815e2-e42c-ec97-7a5d-76833c4d18c0}" />
+      <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{894b1273-32b6-65d8-78c1-dc0e78221c24}" />
       <Library name="tc_Tc.Crm.Scripts.Library.Compensation.js" libraryUniqueId="{2d4a9d09-9133-9754-b416-9086eec627a7}" />
       <Library name="tc_Tc.Crm.Scripts.Events.Compensation.js" libraryUniqueId="{1a3611cb-72c1-b5a9-6220-ac4c7a576e55}" />
-      <Library name="tc_Tc.Crm.Scripts.Events.Default.js" libraryUniqueId="{a5473022-eddb-d6a9-c149-eea35eee1a13}" />
     </formLibraries>
     <events>
       <event name="onload" application="false" active="false">
@@ -1487,7 +1482,7 @@
       </event>
       <event name="onsave" application="false" active="false">
         <Handlers>
-          <Handler functionName="Tc.Crm.Scripts.Events.Default.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Default.js" handlerUniqueId="{1245a27d-1536-4a34-30b6-6ca411e9d711}" enabled="true" parameters="" passExecutionContext="true" />
+          <Handler functionName="Tc.Crm.Scripts.Events.Compensation.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Compensation.js" handlerUniqueId="{691bb7ab-1e6a-7e9d-a0d3-e9612e682ea3}" enabled="true" parameters="" passExecutionContext="true" />
         </Handlers>
       </event>
     </events>

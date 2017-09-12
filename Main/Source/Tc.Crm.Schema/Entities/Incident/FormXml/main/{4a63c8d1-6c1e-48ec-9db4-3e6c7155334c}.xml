@@ -1914,7 +1914,6 @@
       <event name="onchange" active="false" application="false" attribute="tc_departuredate">
         <Handlers>
           <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{7a64d393-2ae0-7060-2a75-764c8abde6a8}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" parameters="" />
-          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnChangeArrivalOrDepartureDates" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{3a92cc1b-49ea-9018-c4e5-a852641c3c92}" enabled="true" parameters="" passExecutionContext="true" />
         </Handlers>
       </event>
       <event name="onchange" application="false" active="false" attribute="tc_bookingtravelamount">
@@ -1940,11 +1939,6 @@
       <event name="onsave" application="false" active="false">
         <Handlers>
           <Handler functionName="Tc.Crm.Scripts.Events.Case.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{5a471b49-5324-12e9-81e8-5e75b5867e3d}" enabled="true" parameters="" passExecutionContext="true" />
-        </Handlers>
-      </event>
-      <event name="onchange" application="false" active="false" attribute="tc_arrivaldate">
-        <Handlers>
-          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnChangeArrivalOrDepartureDates" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{5ce8b955-aa06-a9e0-0a50-301c202b826e}" enabled="true" parameters="" passExecutionContext="true" />
         </Handlers>
       </event>
     </events>

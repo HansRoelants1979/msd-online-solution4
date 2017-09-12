@@ -456,12 +456,12 @@
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{7194c897-52bf-4296-bd56-0822e27ec72b}" showlabel="false">
+                    <cell id="{220e1d8b-5241-4cee-ba49-35cfc3789d5f}">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
                     </cell>
-                    <cell id="{99778ec1-cae4-4846-b277-8295b9587a8a}" showlabel="false">
+                    <cell id="{5e35fb03-e175-43a5-957c-85b71d5de164}">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
@@ -728,12 +728,12 @@
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{91b9693e-3cb6-765c-4c13-67189937094b}" showlabel="false">
+                    <cell id="{36f09159-7e75-4ff5-b4c8-bfc2895a64fe}">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
                     </cell>
-                    <cell id="{0a288924-2d7e-d440-5abb-d8211064a601}" showlabel="false">
+                    <cell id="{a7ee5ebd-1ae3-41de-8170-ba549af23aa0}">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
@@ -747,12 +747,12 @@
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{5928c988-32d7-c2db-cebb-6985424c60b8}" showlabel="false">
+                    <cell id="{3e9a6b3c-d308-403c-9687-0d6b7eb9ba60}">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
                     </cell>
-                    <cell id="{d2e17e74-33eb-cc4c-b0e6-3bbc578b7e73}" showlabel="false">
+                    <cell id="{8628c04b-d34c-461d-905e-fa5959d14c64}">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
@@ -866,7 +866,7 @@
           </column>
         </columns>
       </tab>
-      <tab name="tab_6" id="{74b82d8c-b5ab-7446-e24c-54c0e0dee137}" IsUserDefined="0" locklevel="0" showlabel="true" expanded="true">
+      <tab name="tab_6" id="{74b82d8c-b5ab-7446-e24c-54c0e0dee137}" IsUserDefined="0" locklevel="0" showlabel="true" expanded="false">
         <labels>
           <label description="External Login" languagecode="1033" />
         </labels>
@@ -889,19 +889,54 @@
                     </cell>
                   </row>
                   <row>
-                    <cell id="{b73030c1-66d3-2c4e-6bb2-7a9cc0acc284}" showlabel="true" locklevel="0">
+                    <cell id="{9c9d09b3-12b4-cea3-3c49-79db57d707e8}" showlabel="true" locklevel="0">
                       <labels>
-                        <label description="Region (created by)" languagecode="1033" />
+                        <label description="Store (created by)" languagecode="1033" />
                       </labels>
-                      <control id="tc_regioncreatedby" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_regioncreatedby" disabled="false" />
+                      <control id="tc_storecreated" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_storecreated" disabled="true" uniqueid="{ae5477b1-b87d-879c-9020-e10926107d55}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{2E1DF249-9918-4633-9131-A9E241B185DA}</DefaultViewId>
+                          <AllowFilterOff>false</AllowFilterOff>
+                        </parameters>
+                      </control>
                     </cell>
                   </row>
                   <row>
-                    <cell id="{c60d6201-0356-e5d3-4d7e-6384a5678248}" showlabel="true" locklevel="0">
+                    <cell id="{05a5c880-ebdc-2b21-dbcb-4d5507248d2d}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Cluster (created by)" languagecode="1033" />
                       </labels>
-                      <control id="tc_clustercreatedby" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_clustercreatedby" disabled="false" />
+                      <control id="tc_clustercreated" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_clustercreated" disabled="true" uniqueid="{3c183ce7-a7d9-8909-7544-4720cb8ecd00}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{CE11BCEE-528B-4549-9EEB-4E8B122DCC3C}</DefaultViewId>
+                          <AllowFilterOff>false</AllowFilterOff>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{82c478aa-0286-acc2-d0aa-5a7aca606087}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Region (created by)" languagecode="1033" />
+                      </labels>
+                      <control id="tc_regioncreated" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_regioncreated" disabled="true" uniqueid="{d09255d8-190a-654d-2c02-8a61d669142c}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{E9007225-DBBE-4CE3-85E7-63E3ACFFEB80}</DefaultViewId>
+                          <AllowFilterOff>false</AllowFilterOff>
+                        </parameters>
+                      </control>
                     </cell>
                   </row>
                   <row>
@@ -909,15 +944,7 @@
                       <labels>
                         <label description="Territory (created by)" languagecode="1033" />
                       </labels>
-                      <control id="tc_territorycreatedby" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_territorycreatedby" disabled="false" />
-                    </cell>
-                  </row>
-                  <row>
-                    <cell id="{51ad085b-2085-d41d-0868-890c70e27a92}" showlabel="true" locklevel="0">
-                      <labels>
-                        <label description="Store (created by)" languagecode="1033" />
-                      </labels>
-                      <control id="tc_storecreatedby" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_storecreatedby" disabled="false" />
+                      <control id="tc_territorycreatedby" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_territorycreatedby" disabled="true" uniqueid="{852849c3-13b2-0a70-3ae3-11c45b99733e}" />
                     </cell>
                   </row>
                 </rows>
@@ -942,19 +969,54 @@
                     </cell>
                   </row>
                   <row>
-                    <cell id="{e2988edc-d678-8d9c-5894-2761590409e0}" showlabel="true" locklevel="0">
+                    <cell id="{e8044835-9c28-b7b2-ae8c-ea2ec25382e4}" showlabel="true" locklevel="0">
                       <labels>
-                        <label description="Region (modified by)" languagecode="1033" />
+                        <label description="Store (modified by)" languagecode="1033" />
                       </labels>
-                      <control id="tc_regionmodifiedby" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_regionmodifiedby" disabled="false" />
+                      <control id="tc_storemodified" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_storemodified" disabled="true" uniqueid="{7b14982b-5062-1e13-dba7-3e2b26bd5265}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{2E1DF249-9918-4633-9131-A9E241B185DA}</DefaultViewId>
+                          <AllowFilterOff>false</AllowFilterOff>
+                        </parameters>
+                      </control>
                     </cell>
                   </row>
                   <row>
-                    <cell id="{9e6a71eb-5b9e-cb73-8a9c-6ad53b75b308}" showlabel="true" locklevel="0">
+                    <cell id="{99199a9a-29cd-cd7a-cc84-98b909276220}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Cluster (modified by)" languagecode="1033" />
                       </labels>
-                      <control id="tc_clustermodifiedby" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_clustermodifiedby" disabled="false" />
+                      <control id="tc_clustermodified" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_clustermodified" disabled="true" uniqueid="{dd851ac7-a92e-539b-b7d3-7a24507c941c}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{CE11BCEE-528B-4549-9EEB-4E8B122DCC3C}</DefaultViewId>
+                          <AllowFilterOff>false</AllowFilterOff>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{88313442-1b55-32a8-394c-d669730417dd}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Region (modified by)" languagecode="1033" />
+                      </labels>
+                      <control id="tc_regionmodified" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_regionmodified" disabled="true" uniqueid="{2d29e6d1-aab9-a321-1cc2-6eb840c0de5a}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{E9007225-DBBE-4CE3-85E7-63E3ACFFEB80}</DefaultViewId>
+                          <AllowFilterOff>false</AllowFilterOff>
+                        </parameters>
+                      </control>
                     </cell>
                   </row>
                   <row>
@@ -962,15 +1024,7 @@
                       <labels>
                         <label description="Territory (modified by)" languagecode="1033" />
                       </labels>
-                      <control id="tc_territorymodifiedby" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_territorymodifiedby" disabled="false" />
-                    </cell>
-                  </row>
-                  <row>
-                    <cell id="{09a5374c-95dc-4894-d289-e82de12cc709}" showlabel="true" locklevel="0">
-                      <labels>
-                        <label description="Store (modified by)" languagecode="1033" />
-                      </labels>
-                      <control id="tc_storemodifiedby" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_storemodifiedby" disabled="false" />
+                      <control id="tc_territorymodifiedby" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_territorymodifiedby" disabled="true" uniqueid="{4b1a92dc-6950-d424-60d4-c281e904b3be}" />
                     </cell>
                   </row>
                 </rows>

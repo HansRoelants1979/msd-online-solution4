@@ -5,7 +5,6 @@
       <Group Id="MyWork" ResourceId="Group_MyWork" DescriptionResourceId="My_Work_Description" IntroducedVersion="7.0.0.0" IsProfile="false" ToolTipResourseId="My_Work_ToolTip">
         <SubArea Id="nav_dashboards" ResourceId="Homepage_Dashboards" DescriptionResourceId="Dashboards_Description" Icon="/_imgs/area/18_home.gif" Url="/workplace/home_dashboards.aspx" DefaultDashboard="2701de60-8f2a-48a4-8262-4a35ca7441fa" IntroducedVersion="7.0.0.0" GetStartedPanePath="Dashboards_Web_User_Visor.html" GetStartedPanePathAdmin="Dashboards_Web_Admin_Visor.html" GetStartedPanePathAdminOutlook="Dashboards_Outlook_Admin_Visor.html" GetStartedPanePathOutlook="Dashboards_Outlook_User_Visor.html" AvailableOffline="false" PassParams="false" />
       </Group>
-      <Group Id="Customers" ResourceId="Group_Customers" DescriptionResourceId="Customers_Description" IntroducedVersion="7.0.0.0" IsProfile="false" ToolTipResourseId="Customers_ToolTip" />
       <Group Id="SFA" ResourceId="Area_Sales" DescriptionResourceId="Sales_Description" IntroducedVersion="7.0.0.0" IsProfile="false" ToolTipResourseId="Sales_ToolTip">
         <SubArea Id="nav_oppts" DescriptionResourceId="Opportunity_SubArea_Description" Icon="/_imgs/imagestrips/transparent_spacer.gif" IntroducedVersion="7.0.0.0" GetStartedPanePath="Opportunities_Web_User_Visor.html" GetStartedPanePathAdmin="Opportunities_Web_Admin_Visor.html" GetStartedPanePathAdminOutlook="Opportunities_Outlook_Admin_Visor.html" GetStartedPanePathOutlook="Opportunities_Outlook_User_Visor.html" Entity="opportunity" AvailableOffline="false" PassParams="false" />
         <SubArea Id="nav_conts" DescriptionResourceId="Contact_SubArea_Description" Icon="/_imgs/imagestrips/transparent_spacer.gif" IntroducedVersion="7.0.0.0" GetStartedPanePath="Contacts_Web_User_Visor.html" GetStartedPanePathAdmin="Contacts_Web_Admin_Visor.html" GetStartedPanePathAdminOutlook="Contacts_Outlook_Admin_Visor.html" GetStartedPanePathOutlook="Contacts_Outlook_User_Visor.html" Entity="contact" AvailableOffline="false" PassParams="false" />
@@ -58,7 +57,6 @@
           <Privilege Entity="tracelog" Privilege="Read" />
         </SubArea>
       </Group>
-      <Group Id="Extensions" ResourceId="Group_Extensions" IsProfile="false" ToolTipResourseId="SitemapDesigner.Unknown" />
     </Area>
     <Area Id="DAT" Icon="$webresource:tc_SiteMapDataArea32x32" ShowGroups="true">
       <Titles>
@@ -116,13 +114,13 @@
         <SubArea Id="tc_configuration" Icon="/WebResources/msdyn_/Images/Subarea_Default_Icon.png" Entity="tc_configuration" AvailableOffline="true" PassParams="false" />
         <SubArea Id="tc_secureconfiguration" Icon="/WebResources/msdyn_/Images/Subarea_Default_Icon.png" Entity="tc_secureconfiguration" AvailableOffline="true" PassParams="false" />
         <SubArea Id="NewSubArea_2b69266b" Icon="/WebResources/msdyn_/Images/Subarea_Default_Icon.png" Entity="tc_cacherequest" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
-        <SubArea Entity="tc_entitycache" Id="tc_entitycache" AvailableOffline="false" PassParams="false" />
-        <SubArea Entity="tc_entitycachemessage" Id="tc_entitycachemessage" AvailableOffline="false" PassParams="false" />
       </Group>
       <Group Id="Extensions" ResourceId="Group_Extensions" IsProfile="false" ToolTipResourseId="SitemapDesigner.Unknown">
         <SubArea Id="poan_powerautonumber" Icon="/WebResources/msdyn_/Images/Subarea_Default_Icon.png" Entity="poan_powerautonumber" AvailableOffline="true" PassParams="false">
           <Privilege Entity="poan_powerautonumber" Privilege="Read" />
         </SubArea>
+        <SubArea Entity="tc_entitycache" Id="tc_entitycache" AvailableOffline="false" PassParams="false" />
+        <SubArea Entity="tc_entitycachemessage" Id="tc_entitycachemessage" AvailableOffline="false" PassParams="false" />
       </Group>
     </Area>
     <Area Id="Settings" ResourceId="Area_Settings" DescriptionResourceId="Settings_Area_Description" Icon="/_imgs/settings_24x24.gif" ShowGroups="true" IntroducedVersion="7.0.0.0">

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Entity>
   <Name LocalizedName="Cache Request" OriginalName="Cache Request">tc_cacherequest</Name>
-  <ObjectTypeCode>10024</ObjectTypeCode>
+  <ObjectTypeCode>10095</ObjectTypeCode>
   <EntityInfo>
     <entity Name="tc_cacherequest">
       <LocalizedNames>
@@ -286,13 +286,16 @@
           <IsSortableEnabled>0</IsSortableEnabled>
           <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
-          <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Organisations-ID" languagecode="1031" />
             <displayname description="Organization Id" languagecode="1033" />
+            <displayname description="ID d’organisation" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Eindeutiger Bezeichner für die Organisation." languagecode="1031" />
             <Description description="Unique identifier for the organization" languagecode="1033" />
+            <Description description="Identificateur unique de l’organisation" languagecode="1036" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="OverriddenCreatedOn">
@@ -357,7 +360,7 @@
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
           <optionset Name="tc_cacherequest_statecode">
             <OptionSetType>state</OptionSetType>
-            <IntroducedVersion>1.0.0.113</IntroducedVersion>
+            <IntroducedVersion>1.0.0.90</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Status" languagecode="1031" />
@@ -423,7 +426,7 @@
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
           <optionset Name="tc_cacherequest_statuscode">
             <OptionSetType>status</OptionSetType>
-            <IntroducedVersion>1.0.0.113</IntroducedVersion>
+            <IntroducedVersion>1.0.0.90</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Statusgrund" languagecode="1031" />
@@ -566,10 +569,14 @@
           <MinValue>-1</MinValue>
           <MaxValue>2147483647</MaxValue>
           <displaynames>
+            <displayname description="Versionsnummer der Zeitzonenregel" languagecode="1031" />
             <displayname description="Time Zone Rule Version Number" languagecode="1033" />
+            <displayname description="Numéro de version de la règle du fuseau horaire" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Nur zur internen Verwendung." languagecode="1031" />
             <Description description="For internal use only." languagecode="1033" />
+            <Description description="Utilisation interne uniquement." languagecode="1036" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="UTCConversionTimeZoneCode">
@@ -599,10 +606,14 @@
           <MinValue>-1</MinValue>
           <MaxValue>2147483647</MaxValue>
           <displaynames>
+            <displayname description="Zeitzonencode für die UTC-Konvertierung" languagecode="1031" />
             <displayname description="UTC Conversion Time Zone Code" languagecode="1033" />
+            <displayname description="Code de fuseau horaire pour la conversion UTC" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Zeitzonencode, der bei Erstellung des Datensatzes verwendet wurde." languagecode="1031" />
             <Description description="Time zone code that was in use when the record was created." languagecode="1033" />
+            <Description description="Code de fuseau horaire utilisé à la création de l’enregistrement." languagecode="1036" />
           </Descriptions>
         </attribute>
       </attributes>
@@ -672,7 +683,7 @@
   <RibbonDiffXml />
   <CustomControlDefaultConfigs>
     <CustomControlDefaultConfig>
-      <PrimaryEntityTypeCode>10024</PrimaryEntityTypeCode>
+      <PrimaryEntityTypeCode>10095</PrimaryEntityTypeCode>
       <CustomControlDefaultConfigId>{56d48d67-f42f-e711-8106-3863bb354ff0}</CustomControlDefaultConfigId>
       <ControlDescriptionXML>
         <controlDescriptions />

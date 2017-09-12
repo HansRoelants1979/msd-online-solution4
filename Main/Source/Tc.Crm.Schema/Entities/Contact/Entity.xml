@@ -1583,7 +1583,6 @@
           <IsSortableEnabled>0</IsSortableEnabled>
           <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
-          <Format></Format>
           <MinValue>0</MinValue>
           <MaxValue>9999</MaxValue>
           <displaynames>
@@ -1595,10 +1594,10 @@
             <Description description="" languagecode="1033" />
           </Descriptions>
         </attribute>
-        <attribute PhysicalName="tc_Clustercreatedby">
-          <Type>nvarchar</Type>
-          <Name>tc_clustercreatedby</Name>
-          <LogicalName>tc_clustercreatedby</LogicalName>
+        <attribute PhysicalName="tc_Clustercreated">
+          <Type>lookup</Type>
+          <Name>tc_clustercreated</Name>
+          <LogicalName>tc_clustercreated</LogicalName>
           <RequiredLevel>none</RequiredLevel>
           <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
           <ImeMode>auto</ImeMode>
@@ -1608,7 +1607,7 @@
           <IsCustomField>1</IsCustomField>
           <IsAuditEnabled>1</IsAuditEnabled>
           <IsSecured>0</IsSecured>
-          <IntroducedVersion>2.0.0.3</IntroducedVersion>
+          <IntroducedVersion>2.0.0.5</IntroducedVersion>
           <IsCustomizable>1</IsCustomizable>
           <IsRenameable>1</IsRenameable>
           <CanModifySearchSettings>1</CanModifySearchSettings>
@@ -1619,9 +1618,8 @@
           <IsSortableEnabled>0</IsSortableEnabled>
           <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
-          <Format>text</Format>
-          <MaxLength>100</MaxLength>
-          <Length>200</Length>
+          <LookupStyle>single</LookupStyle>
+          <LookupTypes />
           <displaynames>
             <displayname description="Cluster (created by)" languagecode="1033" />
           </displaynames>
@@ -1629,10 +1627,10 @@
             <Description description="" languagecode="1033" />
           </Descriptions>
         </attribute>
-        <attribute PhysicalName="tc_Clustermodifiedby">
-          <Type>nvarchar</Type>
-          <Name>tc_clustermodifiedby</Name>
-          <LogicalName>tc_clustermodifiedby</LogicalName>
+        <attribute PhysicalName="tc_Clustermodified">
+          <Type>lookup</Type>
+          <Name>tc_clustermodified</Name>
+          <LogicalName>tc_clustermodified</LogicalName>
           <RequiredLevel>none</RequiredLevel>
           <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
           <ImeMode>auto</ImeMode>
@@ -1642,7 +1640,7 @@
           <IsCustomField>1</IsCustomField>
           <IsAuditEnabled>1</IsAuditEnabled>
           <IsSecured>0</IsSecured>
-          <IntroducedVersion>2.0.0.3</IntroducedVersion>
+          <IntroducedVersion>2.0.0.5</IntroducedVersion>
           <IsCustomizable>1</IsCustomizable>
           <IsRenameable>1</IsRenameable>
           <CanModifySearchSettings>1</CanModifySearchSettings>
@@ -1653,9 +1651,8 @@
           <IsSortableEnabled>0</IsSortableEnabled>
           <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
-          <Format>text</Format>
-          <MaxLength>100</MaxLength>
-          <Length>200</Length>
+          <LookupStyle>single</LookupStyle>
+          <LookupTypes />
           <displaynames>
             <displayname description="Cluster (modified by)" languagecode="1033" />
           </displaynames>
@@ -1837,7 +1834,7 @@
           <AppDefaultValue>0</AppDefaultValue>
           <optionset Name="tc_contact_tc_disabledindicator">
             <OptionSetType>bit</OptionSetType>
-            <IntroducedVersion>1.0</IntroducedVersion>
+            <IntroducedVersion>1.0.0.51</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Deaktivierte Indikator" languagecode="1031" />
@@ -1898,7 +1895,7 @@
           <AppDefaultValue>0</AppDefaultValue>
           <optionset Name="tc_contact_tc_donotallowsms">
             <OptionSetType>bit</OptionSetType>
-            <IntroducedVersion>1.0</IntroducedVersion>
+            <IntroducedVersion>1.0.0.0</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Keine SMS zulassen" languagecode="1031" />
@@ -2098,7 +2095,7 @@
           <AppDefaultValue>1</AppDefaultValue>
           <optionset Name="tc_contact_tc_emailaddressavailable">
             <OptionSetType>bit</OptionSetType>
-            <IntroducedVersion>1.0.0.129</IntroducedVersion>
+            <IntroducedVersion>0.0.0.1</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Email Address Available" languagecode="1033" />
@@ -2295,7 +2292,7 @@
           <AppDefaultValue>0</AppDefaultValue>
           <optionset Name="tc_contact_tc_marketing">
             <OptionSetType>bit</OptionSetType>
-            <IntroducedVersion>1.0</IntroducedVersion>
+            <IntroducedVersion>1.0.0.8</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Marketing" languagecode="1031" />
@@ -2550,10 +2547,10 @@
             <Description description="" languagecode="1033" />
           </Descriptions>
         </attribute>
-        <attribute PhysicalName="tc_Regioncreatedby">
-          <Type>nvarchar</Type>
-          <Name>tc_regioncreatedby</Name>
-          <LogicalName>tc_regioncreatedby</LogicalName>
+        <attribute PhysicalName="tc_Regioncreated">
+          <Type>lookup</Type>
+          <Name>tc_regioncreated</Name>
+          <LogicalName>tc_regioncreated</LogicalName>
           <RequiredLevel>none</RequiredLevel>
           <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
           <ImeMode>auto</ImeMode>
@@ -2563,7 +2560,7 @@
           <IsCustomField>1</IsCustomField>
           <IsAuditEnabled>1</IsAuditEnabled>
           <IsSecured>0</IsSecured>
-          <IntroducedVersion>2.0.0.3</IntroducedVersion>
+          <IntroducedVersion>2.0.0.5</IntroducedVersion>
           <IsCustomizable>1</IsCustomizable>
           <IsRenameable>1</IsRenameable>
           <CanModifySearchSettings>1</CanModifySearchSettings>
@@ -2574,9 +2571,8 @@
           <IsSortableEnabled>0</IsSortableEnabled>
           <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
-          <Format>text</Format>
-          <MaxLength>100</MaxLength>
-          <Length>200</Length>
+          <LookupStyle>single</LookupStyle>
+          <LookupTypes />
           <displaynames>
             <displayname description="Region (created by)" languagecode="1033" />
           </displaynames>
@@ -2584,10 +2580,10 @@
             <Description description="" languagecode="1033" />
           </Descriptions>
         </attribute>
-        <attribute PhysicalName="tc_Regionmodifiedby">
-          <Type>nvarchar</Type>
-          <Name>tc_regionmodifiedby</Name>
-          <LogicalName>tc_regionmodifiedby</LogicalName>
+        <attribute PhysicalName="tc_Regionmodified">
+          <Type>lookup</Type>
+          <Name>tc_regionmodified</Name>
+          <LogicalName>tc_regionmodified</LogicalName>
           <RequiredLevel>none</RequiredLevel>
           <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
           <ImeMode>auto</ImeMode>
@@ -2597,7 +2593,7 @@
           <IsCustomField>1</IsCustomField>
           <IsAuditEnabled>1</IsAuditEnabled>
           <IsSecured>0</IsSecured>
-          <IntroducedVersion>2.0.0.3</IntroducedVersion>
+          <IntroducedVersion>2.0.0.5</IntroducedVersion>
           <IsCustomizable>1</IsCustomizable>
           <IsRenameable>1</IsRenameable>
           <CanModifySearchSettings>1</CanModifySearchSettings>
@@ -2608,9 +2604,8 @@
           <IsSortableEnabled>0</IsSortableEnabled>
           <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
-          <Format>text</Format>
-          <MaxLength>100</MaxLength>
-          <Length>200</Length>
+          <LookupStyle>single</LookupStyle>
+          <LookupTypes />
           <displaynames>
             <displayname description="Region (modified by)" languagecode="1033" />
           </displaynames>
@@ -2861,10 +2856,10 @@
             <Description description="ID from TC Source System (eg. fed via GBG TCV)" languagecode="1033" />
           </Descriptions>
         </attribute>
-        <attribute PhysicalName="tc_Storecreatedby">
-          <Type>nvarchar</Type>
-          <Name>tc_storecreatedby</Name>
-          <LogicalName>tc_storecreatedby</LogicalName>
+        <attribute PhysicalName="tc_Storecreated">
+          <Type>lookup</Type>
+          <Name>tc_storecreated</Name>
+          <LogicalName>tc_storecreated</LogicalName>
           <RequiredLevel>none</RequiredLevel>
           <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
           <ImeMode>auto</ImeMode>
@@ -2874,7 +2869,7 @@
           <IsCustomField>1</IsCustomField>
           <IsAuditEnabled>1</IsAuditEnabled>
           <IsSecured>0</IsSecured>
-          <IntroducedVersion>2.0.0.3</IntroducedVersion>
+          <IntroducedVersion>2.0.0.5</IntroducedVersion>
           <IsCustomizable>1</IsCustomizable>
           <IsRenameable>1</IsRenameable>
           <CanModifySearchSettings>1</CanModifySearchSettings>
@@ -2885,9 +2880,8 @@
           <IsSortableEnabled>0</IsSortableEnabled>
           <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
-          <Format>text</Format>
-          <MaxLength>100</MaxLength>
-          <Length>200</Length>
+          <LookupStyle>single</LookupStyle>
+          <LookupTypes />
           <displaynames>
             <displayname description="Store (created by)" languagecode="1033" />
           </displaynames>
@@ -2895,10 +2889,10 @@
             <Description description="" languagecode="1033" />
           </Descriptions>
         </attribute>
-        <attribute PhysicalName="tc_Storemodifiedby">
-          <Type>nvarchar</Type>
-          <Name>tc_storemodifiedby</Name>
-          <LogicalName>tc_storemodifiedby</LogicalName>
+        <attribute PhysicalName="tc_Storemodified">
+          <Type>lookup</Type>
+          <Name>tc_storemodified</Name>
+          <LogicalName>tc_storemodified</LogicalName>
           <RequiredLevel>none</RequiredLevel>
           <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
           <ImeMode>auto</ImeMode>
@@ -2908,7 +2902,7 @@
           <IsCustomField>1</IsCustomField>
           <IsAuditEnabled>1</IsAuditEnabled>
           <IsSecured>0</IsSecured>
-          <IntroducedVersion>2.0.0.3</IntroducedVersion>
+          <IntroducedVersion>2.0.0.5</IntroducedVersion>
           <IsCustomizable>1</IsCustomizable>
           <IsRenameable>1</IsRenameable>
           <CanModifySearchSettings>1</CanModifySearchSettings>
@@ -2919,9 +2913,8 @@
           <IsSortableEnabled>0</IsSortableEnabled>
           <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
-          <Format>text</Format>
-          <MaxLength>100</MaxLength>
-          <Length>200</Length>
+          <LookupStyle>single</LookupStyle>
+          <LookupTypes />
           <displaynames>
             <displayname description="Store (modified by)" languagecode="1033" />
           </displaynames>
@@ -3034,39 +3027,6 @@
             <Description description="" languagecode="1033" />
           </Descriptions>
         </attribute>
-        <attribute PhysicalName="tc_Territory">
-          <Type>lookup</Type>
-          <Name>tc_territory</Name>
-          <LogicalName>tc_territory</LogicalName>
-          <RequiredLevel>none</RequiredLevel>
-          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
-          <ImeMode>auto</ImeMode>
-          <ValidForUpdateApi>1</ValidForUpdateApi>
-          <ValidForReadApi>1</ValidForReadApi>
-          <ValidForCreateApi>1</ValidForCreateApi>
-          <IsCustomField>1</IsCustomField>
-          <IsAuditEnabled>1</IsAuditEnabled>
-          <IsSecured>0</IsSecured>
-          <IntroducedVersion>2.0.0.5</IntroducedVersion>
-          <IsCustomizable>1</IsCustomizable>
-          <IsRenameable>1</IsRenameable>
-          <CanModifySearchSettings>1</CanModifySearchSettings>
-          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
-          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
-          <SourceType>0</SourceType>
-          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
-          <IsSortableEnabled>0</IsSortableEnabled>
-          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
-          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
-          <LookupStyle>single</LookupStyle>
-          <LookupTypes />
-          <displaynames>
-            <displayname description="Territory (created)" languagecode="1033" />
-          </displaynames>
-          <Descriptions>
-            <Description description="" languagecode="1033" />
-          </Descriptions>
-        </attribute>
         <attribute PhysicalName="tc_Territorycreatedby">
           <Type>nvarchar</Type>
           <Name>tc_territorycreatedby</Name>
@@ -3162,7 +3122,7 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <optionset Name="tc_contact_tc_thomascookmarketingconsent">
             <OptionSetType>picklist</OptionSetType>
-            <IntroducedVersion>1.0.0.129</IntroducedVersion>
+            <IntroducedVersion>0.0.0.1</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Thomas Cook Marketing Consent" languagecode="1033" />
@@ -3284,7 +3244,7 @@
           <AppDefaultValue>0</AppDefaultValue>
           <optionset Name="tc_contact_tc_vip">
             <OptionSetType>bit</OptionSetType>
-            <IntroducedVersion>1.0.0.129</IntroducedVersion>
+            <IntroducedVersion>0.0.0.1</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="VIP" languagecode="1033" />

@@ -213,15 +213,7 @@
                   <label description="Customer Details" languagecode="1033" />
                   <label description="Autres détails" languagecode="1036" />
                 </labels>
-                <rows>
-                  <row>
-                    <cell id="{d23fbb3c-ae42-4881-b49a-4ecef2b87de4}">
-                      <labels>
-                        <label description="" languagecode="1033" />
-                      </labels>
-                    </cell>
-                  </row>
-                </rows>
+                <rows></rows>
               </section>
             </sections>
           </column>
@@ -233,21 +225,16 @@
                   <label description="Other Details" languagecode="1033" />
                   <label description="Description" languagecode="1036" />
                 </labels>
-                <rows>
-                  <row>
-                    <cell id="{4592f0c8-f7e3-45fb-967c-ab723b24ec84}">
-                      <labels>
-                        <label description="" languagecode="1033" />
-                      </labels>
-                    </cell>
-                  </row>
-                </rows>
+                <rows></rows>
               </section>
             </sections>
           </column>
         </columns>
       </tab>
     </tabs>
+    <DisplayConditions FallbackForm="true" Order="3">
+      <Everyone />
+    </DisplayConditions>
     <events>
       <event name="onsave" application="true" active="true">
         <InternalHandlers>
@@ -279,9 +266,6 @@
       <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{52b299a4-1014-c760-8584-5404d70a7881}" />
       <Library name="tc_Tc.Crm.Scripts.Events.Default.js" libraryUniqueId="{aa1a92a7-acbd-3c2d-2312-0195cdc48807}" />
     </formLibraries>
-    <DisplayConditions FallbackForm="true" Order="3">
-      <Everyone />
-    </DisplayConditions>
   </form>
   <LocalizedNames>
     <LocalizedName description="Anfrage schnell erfassen" languagecode="1031" />

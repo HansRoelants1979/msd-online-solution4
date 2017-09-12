@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Entity>
   <Name LocalizedName="Brand" OriginalName="Brand">tc_brand</Name>
-  <ObjectTypeCode>10023</ObjectTypeCode>
+  <ObjectTypeCode>10035</ObjectTypeCode>
   <EntityInfo>
     <entity Name="tc_brand">
       <LocalizedNames>
@@ -358,7 +358,9 @@
           <MaxLength>100</MaxLength>
           <Length>320</Length>
           <Descriptions>
+            <Description description="Name des Eigentümers" languagecode="1031" />
             <Description description="Name of the owner" languagecode="1033" />
+            <Description description="Pays organisateur" languagecode="1036" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="OwnerIdType">
@@ -389,7 +391,9 @@
           <MinValue>-2147483648</MinValue>
           <MaxValue>2147483647</MaxValue>
           <Descriptions>
+            <Description description="Besitzer-ID-Typ" languagecode="1031" />
             <Description description="Owner Id Type" languagecode="1033" />
+            <Description description="Type de l’ID du propriétaire" languagecode="1036" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="OwnerIdYomiName">
@@ -419,7 +423,9 @@
           <Length>320</Length>
           <YomiOf>OwnerIdName</YomiOf>
           <Descriptions>
+            <Description description="Yomi-Name des Besitzers" languagecode="1031" />
             <Description description="Yomi name of the owner" languagecode="1033" />
+            <Description description="Nom Yomi du propriétaire" languagecode="1036" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="OwningBusinessUnit">
@@ -446,7 +452,9 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Besitzer (Unternehmenseinheit)" languagecode="1031" />
             <displayname description="Owning Business Unit" languagecode="1033" />
+            <displayname description="Division propriétaire" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
@@ -477,10 +485,14 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Besitzer (Team)" languagecode="1031" />
             <displayname description="Owning Team" languagecode="1033" />
+            <displayname description="Équipe propriétaire" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Eindeutiger Bezeichner des Benutzers, der den Datensatz geändert hat." languagecode="1031" />
             <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
+            <Description description="unique identifiant pour l'utilisateur qui a modifié l'entrée" languagecode="1036" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="OwningUser">
@@ -508,7 +520,9 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Besitzer (Benutzer)" languagecode="1031" />
             <displayname description="Owning User" languagecode="1033" />
+            <displayname description="Utilisateur propriétaire" languagecode="1036" />
           </displaynames>
           <Descriptions>
             <Description description="Unique identifier for the user that owns the record." languagecode="1033" />
@@ -539,7 +553,7 @@
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
           <optionset Name="tc_brand_statecode">
             <OptionSetType>state</OptionSetType>
-            <IntroducedVersion>1.0.0.113</IntroducedVersion>
+            <IntroducedVersion>1.0.0.0</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="aktiv" languagecode="1031" />
@@ -602,7 +616,7 @@
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
           <optionset Name="tc_brand_statuscode">
             <OptionSetType>status</OptionSetType>
-            <IntroducedVersion>1.0.0.113</IntroducedVersion>
+            <IntroducedVersion>1.0.0.0</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="aktiv" languagecode="1031" />
@@ -805,10 +819,14 @@
           <MinValue>-1</MinValue>
           <MaxValue>2147483647</MaxValue>
           <displaynames>
+            <displayname description="Yomi-Name des Besitzers" languagecode="1031" />
             <displayname description="Time Zone Rule Version Number" languagecode="1033" />
+            <displayname description="Nom Yomi du propriétaire" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Eigentümer ID Typ" languagecode="1031" />
             <Description description="For internal use only." languagecode="1033" />
+            <Description description="type d'identifiant de la personne en charge" languagecode="1036" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="UTCConversionTimeZoneCode">
@@ -838,10 +856,14 @@
           <MinValue>-1</MinValue>
           <MaxValue>2147483647</MaxValue>
           <displaynames>
+            <displayname description="Zeitzonencode für die UTC-Konvertierung" languagecode="1031" />
             <displayname description="UTC Conversion Time Zone Code" languagecode="1033" />
+            <displayname description="Code de fuseau horaire pour la conversion UTC" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Zeitzonencode, der bei Erstellung des Datensatzes verwendet wurde." languagecode="1031" />
             <Description description="Time zone code that was in use when the record was created." languagecode="1033" />
+            <Description description="Code de fuseau horaire utilisé à la création de l’enregistrement." languagecode="1036" />
           </Descriptions>
         </attribute>
       </attributes>
@@ -927,7 +949,7 @@
   <RibbonDiffXml />
   <CustomControlDefaultConfigs>
     <CustomControlDefaultConfig>
-      <PrimaryEntityTypeCode>10023</PrimaryEntityTypeCode>
+      <PrimaryEntityTypeCode>10035</PrimaryEntityTypeCode>
       <CustomControlDefaultConfigId>{2150afe1-ece3-e611-8104-3863bb340dd8}</CustomControlDefaultConfigId>
       <ControlDescriptionXML>
         <controlDescriptions />

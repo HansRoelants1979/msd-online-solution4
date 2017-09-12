@@ -112,7 +112,7 @@
       </EntityRelationshipRole>
     </EntityRelationshipRoles>
   </EntityRelationship>
-  <EntityRelationship Name="Contact_Email_EmailSender">
+  <EntityRelationship Name="Contact_Email_EmailSender" unmodified="1">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IntroducedVersion>6.1.0.0</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
@@ -175,7 +175,7 @@
   <EntityRelationship Name="contact_tc_assistancerequests">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.113</IntroducedVersion>
+    <IntroducedVersion>1.0.0.51</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_assistancerequest</ReferencingEntityName>
     <ReferencedEntityName>Contact</ReferencedEntityName>
@@ -196,7 +196,7 @@
   <EntityRelationship Name="contact_tc_followups">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.129</IntroducedVersion>
+    <IntroducedVersion>1.0.0.139</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_followup</ReferencingEntityName>
     <ReferencedEntityName>Contact</ReferencedEntityName>
@@ -217,7 +217,7 @@
   <EntityRelationship Name="contact_tc_surveyresponses">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.113</IntroducedVersion>
+    <IntroducedVersion>1.0.0.51</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_surveyresponse</ReferencingEntityName>
     <ReferencedEntityName>Contact</ReferencedEntityName>
@@ -234,38 +234,6 @@
         <Description description="Identificateur unique de l'objet auquel l'activité est associée." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
-  </EntityRelationship>
-  <EntityRelationship Name="contract_customer_contacts">
-    <EntityRelationshipType>OneToMany</EntityRelationshipType>
-    <IntroducedVersion>5.0.0.0</IntroducedVersion>
-    <IsHierarchical>0</IsHierarchical>
-    <ReferencingEntityName>Contract</ReferencingEntityName>
-    <ReferencedEntityName>Contact</ReferencedEntityName>
-    <CascadeAssign>NoCascade</CascadeAssign>
-    <CascadeDelete>Cascade</CascadeDelete>
-    <CascadeReparent>Cascade</CascadeReparent>
-    <CascadeShare>Cascade</CascadeShare>
-    <CascadeUnshare>Cascade</CascadeUnshare>
-    <ReferencingAttributeName>CustomerId</ReferencingAttributeName>
-    <RelationshipDescription>
-      <Descriptions>
-        <Description description="Wählen Sie das Kundenkonto oder den Kontakt aus, um eine direkte Verknüpfung mit zusätzlichen Kundendetails wie Adresse, Telefonnummer, Aktivitäten und Aufträge bereitzustellen." languagecode="1031" />
-        <Description description="Select the customer account or contact to provide a quick link to additional customer details, such as address, phone number, activities, and orders." languagecode="1033" />
-        <Description description="Sélectionnez le compte client ou le contact pour fournir un lien rapide vers les détails supplémentaires du client, comme l'adresse, le numéro de téléphone, les activités et les commandes." languagecode="1036" />
-      </Descriptions>
-    </RelationshipDescription>
-    <EntityRelationshipRoles>
-      <EntityRelationshipRole>
-        <NavPaneDisplayOption>UseCollectionName</NavPaneDisplayOption>
-        <NavPaneArea>Service</NavPaneArea>
-        <NavPaneOrder>20</NavPaneOrder>
-        <NavigationPropertyName>customerid_contact</NavigationPropertyName>
-        <RelationshipRoleType>1</RelationshipRoleType>
-      </EntityRelationshipRole>
-      <EntityRelationshipRole>
-        <RelationshipRoleType>0</RelationshipRoleType>
-      </EntityRelationshipRole>
-    </EntityRelationshipRoles>
   </EntityRelationship>
   <EntityRelationship Name="incident_customer_contacts">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
@@ -298,58 +266,6 @@
         <RelationshipRoleType>0</RelationshipRoleType>
       </EntityRelationshipRole>
     </EntityRelationshipRoles>
-  </EntityRelationship>
-  <EntityRelationship Name="invoice_customer_contacts">
-    <EntityRelationshipType>OneToMany</EntityRelationshipType>
-    <IntroducedVersion>5.0.0.0</IntroducedVersion>
-    <IsHierarchical>0</IsHierarchical>
-    <ReferencingEntityName>Invoice</ReferencingEntityName>
-    <ReferencedEntityName>Contact</ReferencedEntityName>
-    <CascadeAssign>NoCascade</CascadeAssign>
-    <CascadeDelete>Restrict</CascadeDelete>
-    <CascadeReparent>Cascade</CascadeReparent>
-    <CascadeShare>Cascade</CascadeShare>
-    <CascadeUnshare>Cascade</CascadeUnshare>
-    <ReferencingAttributeName>CustomerId</ReferencingAttributeName>
-    <RelationshipDescription>
-      <Descriptions>
-        <Description description="Wählen Sie das Kundenkonto oder den Kontakt aus, um eine direkte Verknüpfung mit zusätzlichen Kundendetails wie Firmeninformationen, Aktivitäten und Verkaufschancen bereitzustellen." languagecode="1031" />
-        <Description description="Select the customer account or contact to provide a quick link to additional customer details, such as account information, activities, and opportunities." languagecode="1033" />
-        <Description description="Sélectionnez le compte client ou le contact pour fournir un lien rapide vers les détails supplémentaires du client, comme les informations de compte, les activités et les opportunités." languagecode="1036" />
-      </Descriptions>
-    </RelationshipDescription>
-    <EntityRelationshipRoles>
-      <EntityRelationshipRole>
-        <NavPaneDisplayOption>UseCollectionName</NavPaneDisplayOption>
-        <NavPaneArea>Sales</NavPaneArea>
-        <NavPaneOrder>40</NavPaneOrder>
-        <NavigationPropertyName>customerid_contact</NavigationPropertyName>
-        <RelationshipRoleType>1</RelationshipRoleType>
-      </EntityRelationshipRole>
-      <EntityRelationshipRole>
-        <RelationshipRoleType>0</RelationshipRoleType>
-      </EntityRelationshipRole>
-    </EntityRelationshipRoles>
-  </EntityRelationship>
-  <EntityRelationship Name="lead_customer_contacts">
-    <EntityRelationshipType>OneToMany</EntityRelationshipType>
-    <IntroducedVersion>5.0.0.0</IntroducedVersion>
-    <IsHierarchical>0</IsHierarchical>
-    <ReferencingEntityName>Lead</ReferencingEntityName>
-    <ReferencedEntityName>Contact</ReferencedEntityName>
-    <CascadeAssign>NoCascade</CascadeAssign>
-    <CascadeDelete>Cascade</CascadeDelete>
-    <CascadeReparent>Cascade</CascadeReparent>
-    <CascadeShare>Cascade</CascadeShare>
-    <CascadeUnshare>Cascade</CascadeUnshare>
-    <ReferencingAttributeName>CustomerId</ReferencingAttributeName>
-    <RelationshipDescription>
-      <Descriptions>
-        <Description description="Wählen Sie das Kundenkonto oder den Kontakt aus, um eine direkte Verknüpfung mit zusätzlichen Kundendetails wie Firmeninformationen, Aktivitäten und Verkaufschancen bereitzustellen." languagecode="1031" />
-        <Description description="Select the customer account or contact to provide a quick link to additional customer details, such as account information, activities, and opportunities." languagecode="1033" />
-        <Description description="Sélectionnez le compte client ou le contact pour fournir un lien rapide vers les détails supplémentaires du client, comme les informations de compte, les activités et les opportunités." languagecode="1036" />
-      </Descriptions>
-    </RelationshipDescription>
   </EntityRelationship>
   <EntityRelationship Name="opportunity_customer_contacts">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
@@ -402,70 +318,6 @@
         <Description description="Choisissez un contact auquel connecter cette opportunité pour que la relation soit visible dans les rapports et les analyses." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
-  </EntityRelationship>
-  <EntityRelationship Name="order_customer_contacts">
-    <EntityRelationshipType>OneToMany</EntityRelationshipType>
-    <IntroducedVersion>5.0.0.0</IntroducedVersion>
-    <IsHierarchical>0</IsHierarchical>
-    <ReferencingEntityName>SalesOrder</ReferencingEntityName>
-    <ReferencedEntityName>Contact</ReferencedEntityName>
-    <CascadeAssign>NoCascade</CascadeAssign>
-    <CascadeDelete>Restrict</CascadeDelete>
-    <CascadeReparent>Cascade</CascadeReparent>
-    <CascadeShare>Cascade</CascadeShare>
-    <CascadeUnshare>Cascade</CascadeUnshare>
-    <ReferencingAttributeName>CustomerId</ReferencingAttributeName>
-    <RelationshipDescription>
-      <Descriptions>
-        <Description description="Wählen Sie das Kundenkonto oder den Kontakt aus, um eine direkte Verknüpfung mit zusätzlichen Kundendetails wie Firmeninformationen, Aktivitäten und Verkaufschancen bereitzustellen." languagecode="1031" />
-        <Description description="Select the customer account or contact to provide a quick link to additional customer details, such as account information, activities, and opportunities." languagecode="1033" />
-        <Description description="Sélectionnez le compte client ou le contact pour fournir un lien rapide vers les détails supplémentaires du client, comme les informations de compte, les activités et les opportunités." languagecode="1036" />
-      </Descriptions>
-    </RelationshipDescription>
-    <EntityRelationshipRoles>
-      <EntityRelationshipRole>
-        <NavPaneDisplayOption>UseCollectionName</NavPaneDisplayOption>
-        <NavPaneArea>Sales</NavPaneArea>
-        <NavPaneOrder>30</NavPaneOrder>
-        <NavigationPropertyName>customerid_contact</NavigationPropertyName>
-        <RelationshipRoleType>1</RelationshipRoleType>
-      </EntityRelationshipRole>
-      <EntityRelationshipRole>
-        <RelationshipRoleType>0</RelationshipRoleType>
-      </EntityRelationshipRole>
-    </EntityRelationshipRoles>
-  </EntityRelationship>
-  <EntityRelationship Name="quote_customer_contacts">
-    <EntityRelationshipType>OneToMany</EntityRelationshipType>
-    <IntroducedVersion>5.0.0.0</IntroducedVersion>
-    <IsHierarchical>0</IsHierarchical>
-    <ReferencingEntityName>Quote</ReferencingEntityName>
-    <ReferencedEntityName>Contact</ReferencedEntityName>
-    <CascadeAssign>NoCascade</CascadeAssign>
-    <CascadeDelete>Cascade</CascadeDelete>
-    <CascadeReparent>Cascade</CascadeReparent>
-    <CascadeShare>Cascade</CascadeShare>
-    <CascadeUnshare>Cascade</CascadeUnshare>
-    <ReferencingAttributeName>CustomerId</ReferencingAttributeName>
-    <RelationshipDescription>
-      <Descriptions>
-        <Description description="Wählen Sie das Kundenkonto oder den Kontakt aus, um eine direkte Verknüpfung mit zusätzlichen Kundendetails wie Firmeninformationen, Aktivitäten und Verkaufschancen bereitzustellen." languagecode="1031" />
-        <Description description="Select the customer account or contact to provide a quick link to additional customer details, such as account information, activities, and opportunities." languagecode="1033" />
-        <Description description="Sélectionnez le compte client ou le contact pour fournir un lien rapide vers les détails supplémentaires du client, comme les informations de compte, les activités et les opportunités." languagecode="1036" />
-      </Descriptions>
-    </RelationshipDescription>
-    <EntityRelationshipRoles>
-      <EntityRelationshipRole>
-        <NavPaneDisplayOption>UseCollectionName</NavPaneDisplayOption>
-        <NavPaneArea>Sales</NavPaneArea>
-        <NavPaneOrder>20</NavPaneOrder>
-        <NavigationPropertyName>customerid_contact</NavigationPropertyName>
-        <RelationshipRoleType>1</RelationshipRoleType>
-      </EntityRelationshipRole>
-      <EntityRelationshipRole>
-        <RelationshipRoleType>0</RelationshipRoleType>
-      </EntityRelationshipRole>
-    </EntityRelationshipRoles>
   </EntityRelationship>
   <EntityRelationship Name="tc_contact_incident">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
@@ -572,43 +424,6 @@
       </EntityRelationshipRole>
       <EntityRelationshipRole>
         <NavigationPropertyName>tc_contact_opportunity_Customer</NavigationPropertyName>
-        <RelationshipRoleType>0</RelationshipRoleType>
-      </EntityRelationshipRole>
-    </EntityRelationshipRoles>
-  </EntityRelationship>
-  <EntityRelationship Name="tc_contact_tc_booking">
-    <EntityRelationshipType>OneToMany</EntityRelationshipType>
-    <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>0.0.0.1</IntroducedVersion>
-    <IsHierarchical>0</IsHierarchical>
-    <ReferencingEntityName>tc_booking</ReferencingEntityName>
-    <ReferencedEntityName>Contact</ReferencedEntityName>
-    <CascadeAssign>NoCascade</CascadeAssign>
-    <CascadeDelete>RemoveLink</CascadeDelete>
-    <CascadeReparent>NoCascade</CascadeReparent>
-    <CascadeShare>NoCascade</CascadeShare>
-    <CascadeUnshare>NoCascade</CascadeUnshare>
-    <CascadeRollupView>NoCascade</CascadeRollupView>
-    <IsValidForAdvancedFind>1</IsValidForAdvancedFind>
-    <ReferencingAttributeName>tc_CustomerId</ReferencingAttributeName>
-    <RelationshipDescription>
-      <Descriptions>
-        <Description description="Unique identifier for Customer associated with Booking." languagecode="1033" />
-      </Descriptions>
-    </RelationshipDescription>
-    <EntityRelationshipRoles>
-      <EntityRelationshipRole>
-        <NavPaneDisplayOption>UseCollectionName</NavPaneDisplayOption>
-        <NavPaneArea>Details</NavPaneArea>
-        <NavPaneOrder>10000</NavPaneOrder>
-        <NavigationPropertyName>tc_CustomerId</NavigationPropertyName>
-        <CustomLabels>
-          <CustomLabel description="" languagecode="1033" />
-        </CustomLabels>
-        <RelationshipRoleType>1</RelationshipRoleType>
-      </EntityRelationshipRole>
-      <EntityRelationshipRole>
-        <NavigationPropertyName>tc_contact_tc_booking</NavigationPropertyName>
         <RelationshipRoleType>0</RelationshipRoleType>
       </EntityRelationshipRole>
     </EntityRelationshipRoles>

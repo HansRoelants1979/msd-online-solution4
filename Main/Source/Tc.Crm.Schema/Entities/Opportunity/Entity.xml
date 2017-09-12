@@ -756,7 +756,7 @@
           <AppDefaultValue>950000000</AppDefaultValue>
           <optionset Name="tc_opportunity_tc_clubcode">
             <OptionSetType>picklist</OptionSetType>
-            <IntroducedVersion>1.0.0.129</IntroducedVersion>
+            <IntroducedVersion>0.0.0.1</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Club code" languagecode="1033" />
@@ -819,10 +819,10 @@
             <Description description="" languagecode="1033" />
           </Descriptions>
         </attribute>
-        <attribute PhysicalName="tc_Clustercreatedby">
-          <Type>nvarchar</Type>
-          <Name>tc_clustercreatedby</Name>
-          <LogicalName>tc_clustercreatedby</LogicalName>
+        <attribute PhysicalName="tc_Clustercreated">
+          <Type>lookup</Type>
+          <Name>tc_clustercreated</Name>
+          <LogicalName>tc_clustercreated</LogicalName>
           <RequiredLevel>none</RequiredLevel>
           <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
           <ImeMode>auto</ImeMode>
@@ -832,7 +832,7 @@
           <IsCustomField>1</IsCustomField>
           <IsAuditEnabled>1</IsAuditEnabled>
           <IsSecured>0</IsSecured>
-          <IntroducedVersion>2.0.0.3</IntroducedVersion>
+          <IntroducedVersion>2.0.0.5</IntroducedVersion>
           <IsCustomizable>1</IsCustomizable>
           <IsRenameable>1</IsRenameable>
           <CanModifySearchSettings>1</CanModifySearchSettings>
@@ -843,9 +843,8 @@
           <IsSortableEnabled>0</IsSortableEnabled>
           <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
-          <Format>text</Format>
-          <MaxLength>100</MaxLength>
-          <Length>200</Length>
+          <LookupStyle>single</LookupStyle>
+          <LookupTypes />
           <displaynames>
             <displayname description="Cluster (created by)" languagecode="1033" />
           </displaynames>
@@ -853,10 +852,10 @@
             <Description description="" languagecode="1033" />
           </Descriptions>
         </attribute>
-        <attribute PhysicalName="tc_Clustermodifiedby">
-          <Type>nvarchar</Type>
-          <Name>tc_clustermodifiedby</Name>
-          <LogicalName>tc_clustermodifiedby</LogicalName>
+        <attribute PhysicalName="tc_Clustermodified">
+          <Type>lookup</Type>
+          <Name>tc_clustermodified</Name>
+          <LogicalName>tc_clustermodified</LogicalName>
           <RequiredLevel>none</RequiredLevel>
           <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
           <ImeMode>auto</ImeMode>
@@ -866,7 +865,7 @@
           <IsCustomField>1</IsCustomField>
           <IsAuditEnabled>1</IsAuditEnabled>
           <IsSecured>0</IsSecured>
-          <IntroducedVersion>2.0.0.3</IntroducedVersion>
+          <IntroducedVersion>2.0.0.5</IntroducedVersion>
           <IsCustomizable>1</IsCustomizable>
           <IsRenameable>1</IsRenameable>
           <CanModifySearchSettings>1</CanModifySearchSettings>
@@ -877,9 +876,8 @@
           <IsSortableEnabled>0</IsSortableEnabled>
           <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
-          <Format>text</Format>
-          <MaxLength>100</MaxLength>
-          <Length>200</Length>
+          <LookupStyle>single</LookupStyle>
+          <LookupTypes />
           <displaynames>
             <displayname description="Cluster (modified by)" languagecode="1033" />
           </displaynames>
@@ -1017,40 +1015,6 @@
           <displaynames>
             <displayname description="Kunde" languagecode="1031" />
             <displayname description="Customer" languagecode="1033" />
-          </displaynames>
-          <Descriptions>
-            <Description description="" languagecode="1033" />
-          </Descriptions>
-        </attribute>
-        <attribute PhysicalName="tc_CustomerFollowupDate">
-          <Type>datetime</Type>
-          <Name>tc_customerfollowupdate</Name>
-          <LogicalName>tc_customerfollowupdate</LogicalName>
-          <RequiredLevel>none</RequiredLevel>
-          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
-          <ImeMode>auto</ImeMode>
-          <ValidForUpdateApi>1</ValidForUpdateApi>
-          <ValidForReadApi>1</ValidForReadApi>
-          <ValidForCreateApi>1</ValidForCreateApi>
-          <IsCustomField>1</IsCustomField>
-          <IsAuditEnabled>1</IsAuditEnabled>
-          <IsSecured>0</IsSecured>
-          <IntroducedVersion>1.0.0.0</IntroducedVersion>
-          <IsCustomizable>1</IsCustomizable>
-          <IsRenameable>1</IsRenameable>
-          <CanModifySearchSettings>1</CanModifySearchSettings>
-          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
-          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
-          <SourceType>0</SourceType>
-          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
-          <IsSortableEnabled>0</IsSortableEnabled>
-          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
-          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
-          <Format>date</Format>
-          <CanChangeDateTimeBehavior>1</CanChangeDateTimeBehavior>
-          <Behavior>1</Behavior>
-          <displaynames>
-            <displayname description="Customer Follow up Date" languagecode="1033" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -2056,10 +2020,10 @@
             <Description description="" languagecode="1033" />
           </Descriptions>
         </attribute>
-        <attribute PhysicalName="tc_Regioncreatedby">
-          <Type>nvarchar</Type>
-          <Name>tc_regioncreatedby</Name>
-          <LogicalName>tc_regioncreatedby</LogicalName>
+        <attribute PhysicalName="tc_Regioncreated">
+          <Type>lookup</Type>
+          <Name>tc_regioncreated</Name>
+          <LogicalName>tc_regioncreated</LogicalName>
           <RequiredLevel>none</RequiredLevel>
           <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
           <ImeMode>auto</ImeMode>
@@ -2069,7 +2033,7 @@
           <IsCustomField>1</IsCustomField>
           <IsAuditEnabled>1</IsAuditEnabled>
           <IsSecured>0</IsSecured>
-          <IntroducedVersion>2.0.0.3</IntroducedVersion>
+          <IntroducedVersion>2.0.0.5</IntroducedVersion>
           <IsCustomizable>1</IsCustomizable>
           <IsRenameable>1</IsRenameable>
           <CanModifySearchSettings>1</CanModifySearchSettings>
@@ -2080,9 +2044,8 @@
           <IsSortableEnabled>0</IsSortableEnabled>
           <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
-          <Format>text</Format>
-          <MaxLength>100</MaxLength>
-          <Length>200</Length>
+          <LookupStyle>single</LookupStyle>
+          <LookupTypes />
           <displaynames>
             <displayname description="Region (created by)" languagecode="1033" />
           </displaynames>
@@ -2090,10 +2053,10 @@
             <Description description="" languagecode="1033" />
           </Descriptions>
         </attribute>
-        <attribute PhysicalName="tc_Regionmodifiedby">
-          <Type>nvarchar</Type>
-          <Name>tc_regionmodifiedby</Name>
-          <LogicalName>tc_regionmodifiedby</LogicalName>
+        <attribute PhysicalName="tc_Regionmodified">
+          <Type>lookup</Type>
+          <Name>tc_regionmodified</Name>
+          <LogicalName>tc_regionmodified</LogicalName>
           <RequiredLevel>none</RequiredLevel>
           <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
           <ImeMode>auto</ImeMode>
@@ -2103,7 +2066,7 @@
           <IsCustomField>1</IsCustomField>
           <IsAuditEnabled>1</IsAuditEnabled>
           <IsSecured>0</IsSecured>
-          <IntroducedVersion>2.0.0.3</IntroducedVersion>
+          <IntroducedVersion>2.0.0.5</IntroducedVersion>
           <IsCustomizable>1</IsCustomizable>
           <IsRenameable>1</IsRenameable>
           <CanModifySearchSettings>1</CanModifySearchSettings>
@@ -2114,9 +2077,8 @@
           <IsSortableEnabled>0</IsSortableEnabled>
           <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
-          <Format>text</Format>
-          <MaxLength>100</MaxLength>
-          <Length>200</Length>
+          <LookupStyle>single</LookupStyle>
+          <LookupTypes />
           <displaynames>
             <displayname description="Region (modified by)" languagecode="1033" />
           </displaynames>
@@ -2185,7 +2147,7 @@
           <AppDefaultValue>950000000</AppDefaultValue>
           <optionset Name="tc_opportunity_tc_sourcecode">
             <OptionSetType>picklist</OptionSetType>
-            <IntroducedVersion>1.0.0.129</IntroducedVersion>
+            <IntroducedVersion>0.0.0.1</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Source Code" languagecode="1033" />
@@ -2208,10 +2170,10 @@
             <Description description="" languagecode="1033" />
           </Descriptions>
         </attribute>
-        <attribute PhysicalName="tc_StoreCode">
-          <Type>nvarchar</Type>
-          <Name>tc_storecode</Name>
-          <LogicalName>tc_storecode</LogicalName>
+        <attribute PhysicalName="tc_Storemodified">
+          <Type>lookup</Type>
+          <Name>tc_storemodified</Name>
+          <LogicalName>tc_storemodified</LogicalName>
           <RequiredLevel>none</RequiredLevel>
           <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
           <ImeMode>auto</ImeMode>
@@ -2221,7 +2183,7 @@
           <IsCustomField>1</IsCustomField>
           <IsAuditEnabled>1</IsAuditEnabled>
           <IsSecured>0</IsSecured>
-          <IntroducedVersion>1.0.0.139</IntroducedVersion>
+          <IntroducedVersion>2.0.0.5</IntroducedVersion>
           <IsCustomizable>1</IsCustomizable>
           <IsRenameable>1</IsRenameable>
           <CanModifySearchSettings>1</CanModifySearchSettings>
@@ -2232,77 +2194,8 @@
           <IsSortableEnabled>0</IsSortableEnabled>
           <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
-          <Format>text</Format>
-          <MaxLength>5</MaxLength>
-          <Length>10</Length>
-          <displaynames>
-            <displayname description="Store Code" languagecode="1033" />
-          </displaynames>
-          <Descriptions>
-            <Description description="" languagecode="1033" />
-          </Descriptions>
-        </attribute>
-        <attribute PhysicalName="tc_Storecreatedby">
-          <Type>nvarchar</Type>
-          <Name>tc_storecreatedby</Name>
-          <LogicalName>tc_storecreatedby</LogicalName>
-          <RequiredLevel>none</RequiredLevel>
-          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
-          <ImeMode>auto</ImeMode>
-          <ValidForUpdateApi>1</ValidForUpdateApi>
-          <ValidForReadApi>1</ValidForReadApi>
-          <ValidForCreateApi>1</ValidForCreateApi>
-          <IsCustomField>1</IsCustomField>
-          <IsAuditEnabled>1</IsAuditEnabled>
-          <IsSecured>0</IsSecured>
-          <IntroducedVersion>2.0.0.3</IntroducedVersion>
-          <IsCustomizable>1</IsCustomizable>
-          <IsRenameable>1</IsRenameable>
-          <CanModifySearchSettings>1</CanModifySearchSettings>
-          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
-          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
-          <SourceType>0</SourceType>
-          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
-          <IsSortableEnabled>0</IsSortableEnabled>
-          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
-          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
-          <Format>text</Format>
-          <MaxLength>100</MaxLength>
-          <Length>200</Length>
-          <displaynames>
-            <displayname description="Store (created by)" languagecode="1033" />
-          </displaynames>
-          <Descriptions>
-            <Description description="" languagecode="1033" />
-          </Descriptions>
-        </attribute>
-        <attribute PhysicalName="tc_Storemodifiedby">
-          <Type>nvarchar</Type>
-          <Name>tc_storemodifiedby</Name>
-          <LogicalName>tc_storemodifiedby</LogicalName>
-          <RequiredLevel>none</RequiredLevel>
-          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
-          <ImeMode>auto</ImeMode>
-          <ValidForUpdateApi>1</ValidForUpdateApi>
-          <ValidForReadApi>1</ValidForReadApi>
-          <ValidForCreateApi>1</ValidForCreateApi>
-          <IsCustomField>1</IsCustomField>
-          <IsAuditEnabled>1</IsAuditEnabled>
-          <IsSecured>0</IsSecured>
-          <IntroducedVersion>2.0.0.3</IntroducedVersion>
-          <IsCustomizable>1</IsCustomizable>
-          <IsRenameable>1</IsRenameable>
-          <CanModifySearchSettings>1</CanModifySearchSettings>
-          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
-          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
-          <SourceType>0</SourceType>
-          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
-          <IsSortableEnabled>0</IsSortableEnabled>
-          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
-          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
-          <Format>text</Format>
-          <MaxLength>100</MaxLength>
-          <Length>200</Length>
+          <LookupStyle>single</LookupStyle>
+          <LookupTypes />
           <displaynames>
             <displayname description="Store (modified by)" languagecode="1033" />
           </displaynames>
@@ -2527,7 +2420,7 @@
           <AppDefaultValue>0</AppDefaultValue>
           <optionset Name="tc_opportunity_tc_validation">
             <OptionSetType>bit</OptionSetType>
-            <IntroducedVersion>1.0.0.129</IntroducedVersion>
+            <IntroducedVersion>0.0.0.1</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Validation" languagecode="1033" />
@@ -2586,7 +2479,7 @@
           <AppDefaultValue>0</AppDefaultValue>
           <optionset Name="tc_opportunity_tc_vccopportunity">
             <OptionSetType>bit</OptionSetType>
-            <IntroducedVersion>1.0.0.129</IntroducedVersion>
+            <IntroducedVersion>0.0.0.1</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="VCC Opportunity" languagecode="1033" />
@@ -2716,7 +2609,7 @@
   <CustomControlDefaultConfigs>
     <CustomControlDefaultConfig>
       <PrimaryEntityTypeCode>3</PrimaryEntityTypeCode>
-      <CustomControlDefaultConfigId>{084fa32b-4e53-4447-b7d2-62cf73819048}</CustomControlDefaultConfigId>
+      <CustomControlDefaultConfigId>{e74d8432-792c-46e1-8c79-ab647d893e28}</CustomControlDefaultConfigId>
       <ControlDescriptionXML>
         <controlDescriptions>
           <controlDescription>

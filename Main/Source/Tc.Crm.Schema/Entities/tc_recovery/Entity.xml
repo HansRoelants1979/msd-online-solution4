@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Entity>
   <Name LocalizedName="Recovery" OriginalName="Recovery">tc_recovery</Name>
-  <ObjectTypeCode>10042</ObjectTypeCode>
+  <ObjectTypeCode>10077</ObjectTypeCode>
   <EntityInfo>
     <entity Name="tc_recovery">
       <LocalizedNames>
@@ -133,7 +133,7 @@
           <IsCustomField>0</IsCustomField>
           <IsAuditEnabled>1</IsAuditEnabled>
           <IsSecured>0</IsSecured>
-          <IntroducedVersion>1.0.0.98</IntroducedVersion>
+          <IntroducedVersion>1.0.0.51</IntroducedVersion>
           <IsCustomizable>1</IsCustomizable>
           <IsRenameable>1</IsRenameable>
           <CanModifySearchSettings>1</CanModifySearchSettings>
@@ -404,7 +404,9 @@
           <MaxLength>100</MaxLength>
           <Length>320</Length>
           <Descriptions>
+            <Description description="Name des Besitzers." languagecode="1031" />
             <Description description="Name of the owner" languagecode="1033" />
+            <Description description="Nom du propriétaire" languagecode="1036" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="OwnerIdType">
@@ -435,7 +437,9 @@
           <MinValue>-2147483648</MinValue>
           <MaxValue>2147483647</MaxValue>
           <Descriptions>
+            <Description description="Besitzer-ID-Typ" languagecode="1031" />
             <Description description="Owner Id Type" languagecode="1033" />
+            <Description description="Type de l’ID du propriétaire" languagecode="1036" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="OwnerIdYomiName">
@@ -465,7 +469,9 @@
           <Length>320</Length>
           <YomiOf>OwnerIdName</YomiOf>
           <Descriptions>
+            <Description description="Yomi-Name des Besitzers" languagecode="1031" />
             <Description description="Yomi name of the owner" languagecode="1033" />
+            <Description description="Nom Yomi du propriétaire" languagecode="1036" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="OwningBusinessUnit">
@@ -492,10 +498,14 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Besitzer (Unternehmenseinheit)" languagecode="1031" />
             <displayname description="Owning Business Unit" languagecode="1033" />
+            <displayname description="Division propriétaire" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
             <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
+            <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="OwningTeam">
@@ -523,10 +533,14 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Besitzer (Team)" languagecode="1031" />
             <displayname description="Owning Team" languagecode="1033" />
+            <displayname description="Équipe propriétaire" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
             <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
+            <Description description="Identificateur unique pour l’équipe à qui appartient l’enregistrement." languagecode="1036" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="OwningUser">
@@ -554,10 +568,14 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Besitzer (Benutzer)" languagecode="1031" />
             <displayname description="Owning User" languagecode="1033" />
+            <displayname description="Utilisateur propriétaire" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Eindeutiger Bezeichner des Benutzers, der im Besitz des Datensatzes ist." languagecode="1031" />
             <Description description="Unique identifier for the user that owns the record." languagecode="1033" />
+            <Description description="Identificateur unique de l'utilisateur propriétaire de l'enregistrement." languagecode="1036" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="statecode">
@@ -585,7 +603,7 @@
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
           <optionset Name="tc_recovery_statecode">
             <OptionSetType>state</OptionSetType>
-            <IntroducedVersion>1.0.0.113</IntroducedVersion>
+            <IntroducedVersion>1.0.0.51</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Status" languagecode="1031" />
@@ -651,7 +669,7 @@
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
           <optionset Name="tc_recovery_statuscode">
             <OptionSetType>status</OptionSetType>
-            <IntroducedVersion>1.0.0.113</IntroducedVersion>
+            <IntroducedVersion>1.0.0.51</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Statusgrund" languagecode="1031" />
@@ -872,7 +890,7 @@
           <AppDefaultValue>0</AppDefaultValue>
           <optionset Name="tc_recovery_tc_brochurecontent">
             <OptionSetType>bit</OptionSetType>
-            <IntroducedVersion>1.0.0.113</IntroducedVersion>
+            <IntroducedVersion>1.0.0.97</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Katalog Kontakt" languagecode="1031" />
@@ -1465,7 +1483,7 @@
           <AppDefaultValue>0</AppDefaultValue>
           <optionset Name="tc_recovery_tc_product">
             <OptionSetType>bit</OptionSetType>
-            <IntroducedVersion>1.0.0.113</IntroducedVersion>
+            <IntroducedVersion>1.0.0.97</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Produkt" languagecode="1031" />
@@ -1634,7 +1652,7 @@
           <AppDefaultValue>0</AppDefaultValue>
           <optionset Name="tc_recovery_tc_recoveryreceived">
             <OptionSetType>bit</OptionSetType>
-            <IntroducedVersion>1.0.0.113</IntroducedVersion>
+            <IntroducedVersion>1.0.0.98</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Wurde bereits eine Wiederherstellung eingegange" languagecode="1031" />
@@ -1695,7 +1713,7 @@
           <AppDefaultValue>0</AppDefaultValue>
           <optionset Name="tc_recovery_tc_represort">
             <OptionSetType>bit</OptionSetType>
-            <IntroducedVersion>1.0.0.113</IntroducedVersion>
+            <IntroducedVersion>1.0.0.97</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Rep/Resort" languagecode="1031" />
@@ -1756,7 +1774,7 @@
           <AppDefaultValue>0</AppDefaultValue>
           <optionset Name="tc_recovery_tc_reservation">
             <OptionSetType>bit</OptionSetType>
-            <IntroducedVersion>1.0.0.113</IntroducedVersion>
+            <IntroducedVersion>1.0.0.97</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Reservierung" languagecode="1031" />
@@ -1819,7 +1837,7 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <optionset Name="tc_recovery_tc_responsible">
             <OptionSetType>picklist</OptionSetType>
-            <IntroducedVersion>1.0.0.113</IntroducedVersion>
+            <IntroducedVersion>1.0.0.110</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Verantwortlicher" languagecode="1031" />
@@ -1978,7 +1996,7 @@
           <AppDefaultValue>0</AppDefaultValue>
           <optionset Name="tc_recovery_tc_specialassistance">
             <OptionSetType>bit</OptionSetType>
-            <IntroducedVersion>1.0.0.113</IntroducedVersion>
+            <IntroducedVersion>1.0.0.97</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="besondere Betreuung" languagecode="1031" />
@@ -2148,7 +2166,7 @@
           <AppDefaultValue>0</AppDefaultValue>
           <optionset Name="tc_recovery_tc_travelshop">
             <OptionSetType>bit</OptionSetType>
-            <IntroducedVersion>1.0.0.113</IntroducedVersion>
+            <IntroducedVersion>1.0.0.97</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Reisebüro" languagecode="1031" />
@@ -2209,7 +2227,7 @@
           <AppDefaultValue>0</AppDefaultValue>
           <optionset Name="tc_recovery_tc_unknown">
             <OptionSetType>bit</OptionSetType>
-            <IntroducedVersion>1.0.0.113</IntroducedVersion>
+            <IntroducedVersion>1.0.0.97</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="unbekannt" languagecode="1031" />
@@ -2272,7 +2290,7 @@
           <AppDefaultValue>0</AppDefaultValue>
           <optionset Name="tc_recovery_tc_webcontent">
             <OptionSetType>bit</OptionSetType>
-            <IntroducedVersion>1.0.0.113</IntroducedVersion>
+            <IntroducedVersion>1.0.0.97</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Web Content" languagecode="1031" />
@@ -2335,7 +2353,7 @@
           <AppDefaultValue>0</AppDefaultValue>
           <optionset Name="tc_recovery_tc_weddings">
             <OptionSetType>bit</OptionSetType>
-            <IntroducedVersion>1.0.0.113</IntroducedVersion>
+            <IntroducedVersion>1.0.0.97</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Hochzeiten" languagecode="1031" />
@@ -2398,7 +2416,7 @@
           <AppDefaultValue>-1</AppDefaultValue>
           <optionset Name="tc_recovery_tc_writeoffreason">
             <OptionSetType>picklist</OptionSetType>
-            <IntroducedVersion>1.0.0.113</IntroducedVersion>
+            <IntroducedVersion>1.0.0.51</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Abschreibungsgrund" languagecode="1031" />
@@ -2571,10 +2589,14 @@
           <MinValue>-1</MinValue>
           <MaxValue>2147483647</MaxValue>
           <displaynames>
+            <displayname description="Versionsnummer der Zeitzonenregel" languagecode="1031" />
             <displayname description="Time Zone Rule Version Number" languagecode="1033" />
+            <displayname description="Numéro de version de la règle du fuseau horaire" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Nur zur internen Verwendung." languagecode="1031" />
             <Description description="For internal use only." languagecode="1033" />
+            <Description description="Utilisation interne uniquement." languagecode="1036" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="TransactionCurrencyId">
@@ -2590,7 +2612,7 @@
           <IsCustomField>0</IsCustomField>
           <IsAuditEnabled>1</IsAuditEnabled>
           <IsSecured>0</IsSecured>
-          <IntroducedVersion>1.0.0.98</IntroducedVersion>
+          <IntroducedVersion>1.0.0.51</IntroducedVersion>
           <IsCustomizable>1</IsCustomizable>
           <IsRenameable>1</IsRenameable>
           <CanModifySearchSettings>1</CanModifySearchSettings>
@@ -2641,10 +2663,14 @@
           <MinValue>-1</MinValue>
           <MaxValue>2147483647</MaxValue>
           <displaynames>
+            <displayname description="Zeitzonencode für die UTC-Konvertierung" languagecode="1031" />
             <displayname description="UTC Conversion Time Zone Code" languagecode="1033" />
+            <displayname description="Code de fuseau horaire pour la conversion UTC" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Zeitzonencode, der bei Erstellung des Datensatzes verwendet wurde." languagecode="1031" />
             <Description description="Time zone code that was in use when the record was created." languagecode="1033" />
+            <Description description="Code de fuseau horaire utilisé à la création de l’enregistrement." languagecode="1036" />
           </Descriptions>
         </attribute>
       </attributes>
@@ -2717,7 +2743,7 @@
   <RibbonDiffXml />
   <CustomControlDefaultConfigs>
     <CustomControlDefaultConfig>
-      <PrimaryEntityTypeCode>10042</PrimaryEntityTypeCode>
+      <PrimaryEntityTypeCode>10077</PrimaryEntityTypeCode>
       <CustomControlDefaultConfigId>{fa773365-6114-e711-8104-3863bb354ff0}</CustomControlDefaultConfigId>
       <ControlDescriptionXML>
         <controlDescriptions />

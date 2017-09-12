@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Entity>
   <Name LocalizedName="Compensation Approval" OriginalName="Compensation Approval">tc_compensationapproval</Name>
-  <ObjectTypeCode>10030</ObjectTypeCode>
+  <ObjectTypeCode>10063</ObjectTypeCode>
   <EntityInfo>
     <entity Name="tc_compensationapproval">
       <LocalizedNames>
@@ -221,7 +221,7 @@
           <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
           <Format>datetime</Format>
-          <CanChangeDateTimeBehavior>0</CanChangeDateTimeBehavior>
+          <CanChangeDateTimeBehavior>1</CanChangeDateTimeBehavior>
           <Behavior>1</Behavior>
           <displaynames>
             <displayname description="Letzte Zeit der Zurückstellung" languagecode="1031" />
@@ -479,7 +479,9 @@
           <MaxLength>100</MaxLength>
           <Length>320</Length>
           <Descriptions>
+            <Description description="Name des Besitzers." languagecode="1031" />
             <Description description="Name of the owner" languagecode="1033" />
+            <Description description="Nom du propriétaire" languagecode="1036" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="OwnerIdType">
@@ -510,7 +512,9 @@
           <MinValue>-2147483648</MinValue>
           <MaxValue>2147483647</MaxValue>
           <Descriptions>
+            <Description description="Besitzer-ID-Typ" languagecode="1031" />
             <Description description="Owner Id Type" languagecode="1033" />
+            <Description description="Type de l’ID du propriétaire" languagecode="1036" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="OwnerIdYomiName">
@@ -540,7 +544,9 @@
           <Length>320</Length>
           <YomiOf>OwnerIdName</YomiOf>
           <Descriptions>
+            <Description description="Yomi-Name des Besitzers" languagecode="1031" />
             <Description description="Yomi name of the owner" languagecode="1033" />
+            <Description description="Nom Yomi du propriétaire" languagecode="1036" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="OwningBusinessUnit">
@@ -567,10 +573,14 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Besitzer (Unternehmenseinheit)" languagecode="1031" />
             <displayname description="Owning Business Unit" languagecode="1033" />
+            <displayname description="Division propriétaire" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Eindeutiger Bezeichner der Unternehmenseinheit, die im Besitz des Datensatzes ist." languagecode="1031" />
             <Description description="Unique identifier for the business unit that owns the record" languagecode="1033" />
+            <Description description="Identificateur unique de la division propriétaire de l'enregistrement" languagecode="1036" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="OwningTeam">
@@ -598,10 +608,14 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Besitzer (Team)" languagecode="1031" />
             <displayname description="Owning Team" languagecode="1033" />
+            <displayname description="Équipe propriétaire" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Eindeutige Kennung für das Team, das für den Datensatz zuständig ist." languagecode="1031" />
             <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
+            <Description description="Identificateur unique pour l’équipe à qui appartient l’enregistrement." languagecode="1036" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="OwningUser">
@@ -629,10 +643,14 @@
           <LookupStyle>single</LookupStyle>
           <LookupTypes />
           <displaynames>
+            <displayname description="Besitzer (Benutzer)" languagecode="1031" />
             <displayname description="Owning User" languagecode="1033" />
+            <displayname description="Utilisateur propriétaire" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Eindeutiger Bezeichner des Benutzers, der im Besitz des Datensatzes ist." languagecode="1031" />
             <Description description="Unique identifier for the user that owns the record." languagecode="1033" />
+            <Description description="Identificateur unique de l'utilisateur propriétaire de l'enregistrement." languagecode="1036" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="SLAId">
@@ -700,10 +718,14 @@
             <LookupType id="00000000-0000-0000-0000-000000000000">9750</LookupType>
           </LookupTypes>
           <displaynames>
+            <displayname description="Letzte angewendete SLA" languagecode="1031" />
             <displayname description="Last SLA Applied" languagecode="1033" />
+            <displayname description="Dernier contrat SLA appliqué" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Nur zur internen Verwendung" languagecode="1031" />
             <Description description="For internal use only." languagecode="1033" />
+            <Description description="Utilisation interne uniquement." languagecode="1036" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="statecode">
@@ -731,7 +753,7 @@
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
           <optionset Name="tc_compensationapproval_statecode">
             <OptionSetType>state</OptionSetType>
-            <IntroducedVersion>1.0.0.113</IntroducedVersion>
+            <IntroducedVersion>1.0.0.50</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Status" languagecode="1031" />
@@ -797,7 +819,7 @@
           <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
           <optionset Name="tc_compensationapproval_statuscode">
             <OptionSetType>status</OptionSetType>
-            <IntroducedVersion>1.0.0.113</IntroducedVersion>
+            <IntroducedVersion>1.0.0.50</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Statusgrund" languagecode="1031" />
@@ -985,7 +1007,6 @@
           <LogicalName>tc_caseid</LogicalName>
           <RequiredLevel>none</RequiredLevel>
           <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
-          <ImeMode>auto</ImeMode>
           <ValidForUpdateApi>1</ValidForUpdateApi>
           <ValidForReadApi>1</ValidForReadApi>
           <ValidForCreateApi>1</ValidForCreateApi>
@@ -1090,7 +1111,6 @@
           <LogicalName>tc_compensationapprovalkpi</LogicalName>
           <RequiredLevel>none</RequiredLevel>
           <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
-          <ImeMode>auto</ImeMode>
           <ValidForUpdateApi>1</ValidForUpdateApi>
           <ValidForReadApi>1</ValidForReadApi>
           <ValidForCreateApi>1</ValidForCreateApi>
@@ -1124,7 +1144,6 @@
           <LogicalName>tc_compensationid</LogicalName>
           <RequiredLevel>none</RequiredLevel>
           <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
-          <ImeMode>auto</ImeMode>
           <ValidForUpdateApi>1</ValidForUpdateApi>
           <ValidForReadApi>1</ValidForReadApi>
           <ValidForCreateApi>1</ValidForCreateApi>
@@ -1326,10 +1345,14 @@
           <MinValue>-1</MinValue>
           <MaxValue>2147483647</MaxValue>
           <displaynames>
+            <displayname description="Versionsnummer der Zeitzonenregel" languagecode="1031" />
             <displayname description="Time Zone Rule Version Number" languagecode="1033" />
+            <displayname description="Numéro de version de la règle du fuseau horaire" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Nur zur internen Verwendung." languagecode="1031" />
             <Description description="For internal use only." languagecode="1033" />
+            <Description description="Utilisation interne uniquement." languagecode="1036" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="TransactionCurrencyId">
@@ -1396,10 +1419,14 @@
           <MinValue>-1</MinValue>
           <MaxValue>2147483647</MaxValue>
           <displaynames>
+            <displayname description="Zeitzonencode für die UTC-Konvertierung" languagecode="1031" />
             <displayname description="UTC Conversion Time Zone Code" languagecode="1033" />
+            <displayname description="Code de fuseau horaire pour la conversion UTC" languagecode="1036" />
           </displaynames>
           <Descriptions>
+            <Description description="Zeitzonencode, der bei Erstellung des Datensatzes verwendet wurde." languagecode="1031" />
             <Description description="Time zone code that was in use when the record was created." languagecode="1033" />
+            <Description description="Code de fuseau horaire utilisé à la création de l’enregistrement." languagecode="1036" />
           </Descriptions>
         </attribute>
       </attributes>
@@ -1473,7 +1500,7 @@
   <RibbonDiffXml />
   <CustomControlDefaultConfigs>
     <CustomControlDefaultConfig>
-      <PrimaryEntityTypeCode>10030</PrimaryEntityTypeCode>
+      <PrimaryEntityTypeCode>10063</PrimaryEntityTypeCode>
       <CustomControlDefaultConfigId>{205480a8-ad08-e711-810a-3863bb34fb48}</CustomControlDefaultConfigId>
       <ControlDescriptionXML>
         <controlDescriptions />

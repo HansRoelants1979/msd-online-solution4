@@ -20,7 +20,7 @@
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
-  <EntityRelationship Name="Service_Annotation">
+  <EntityRelationship Name="Service_Annotation" unmodified="1">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IntroducedVersion>5.0.0.0</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
@@ -60,7 +60,7 @@
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
-  <EntityRelationship Name="service_emails">
+  <EntityRelationship Name="service_emails" unmodified="1">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IntroducedVersion>5.0.0.0</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
@@ -83,7 +83,7 @@
   <EntityRelationship Name="tc_assistancerequest_service_serviceid">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.113</IntroducedVersion>
+    <IntroducedVersion>1.0.0.51</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_assistancerequest</ReferencingEntityName>
     <ReferencedEntityName>Service</ReferencedEntityName>
@@ -95,14 +95,16 @@
     <ReferencingAttributeName>ServiceId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner eines zugeordneten Services." languagecode="1031" />
         <Description description="Unique identifier of an associated service." languagecode="1033" />
+        <Description description="Identificateur unique d'un service associé." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
   <EntityRelationship Name="tc_followup_service_serviceid">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.129</IntroducedVersion>
+    <IntroducedVersion>1.0.0.139</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_followup</ReferencingEntityName>
     <ReferencedEntityName>Service</ReferencedEntityName>
@@ -123,7 +125,7 @@
   <EntityRelationship Name="tc_surveyresponse_service_serviceid">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.113</IntroducedVersion>
+    <IntroducedVersion>1.0.0.51</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_surveyresponse</ReferencingEntityName>
     <ReferencedEntityName>Service</ReferencedEntityName>
@@ -135,7 +137,9 @@
     <ReferencingAttributeName>ServiceId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
+        <Description description="Eindeutiger Bezeichner eines zugeordneten Services." languagecode="1031" />
         <Description description="Unique identifier of an associated service." languagecode="1033" />
+        <Description description="Identificateur unique d'un service associé." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>

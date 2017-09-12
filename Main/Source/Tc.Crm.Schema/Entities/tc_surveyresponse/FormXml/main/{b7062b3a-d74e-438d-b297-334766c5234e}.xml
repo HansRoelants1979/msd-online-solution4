@@ -394,13 +394,13 @@
     <formLibraries>
       <Library name="tc_es6promise.js" libraryUniqueId="{728783cd-9939-3413-c784-e4b0a4e9ba73}" />
       <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{365a70de-e7e3-8d57-b4d1-2ded7c524106}" />
+      <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{ea860d7d-2e7c-6935-3bc0-7e521b2eca82}" />
       <Library name="tc_Tc.Crm.Scripts.Events.SurveyResponse.js" libraryUniqueId="{24898716-4053-9d7e-a26b-7d35d868c940}" />
-      <Library name="tc_Tc.Crm.Scripts.Events.Default.js" libraryUniqueId="{617adc9d-8ecd-1a0a-7d20-a1504318018d}" />
     </formLibraries>
     <events>
       <event name="onsave" application="false" active="false">
         <Handlers>
-          <Handler functionName="Tc.Crm.Scripts.Events.Default.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Default.js" handlerUniqueId="{e25be59b-1513-dc90-6a26-1b41cb245010}" enabled="true" parameters="" passExecutionContext="true" />
+          <Handler functionName="Tc.Crm.Scripts.Events.SurveyResponse.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.SurveyResponse.js" handlerUniqueId="{b83d9161-94da-9637-3acd-2b3e16e81492}" enabled="true" parameters="" passExecutionContext="true" />
         </Handlers>
       </event>
     </events>
