@@ -267,6 +267,11 @@ Tc.Crm.Scripts.Events.Email = (function () {
         OnLoad: function () {
             clearEmailFrom();
             setFromandToFieldForCase();
+        },
+        OnSave: function (context) {
+            var isValid = Tc.Crm.Scripts.Utils.Validation.ValidateGdprCompliance(context);
+            // uncomment in case of additional save actions
+            //if (isValid) { }
         }
     };
 })();

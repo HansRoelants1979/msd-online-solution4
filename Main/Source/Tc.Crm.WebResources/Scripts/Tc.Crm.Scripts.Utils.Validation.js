@@ -73,7 +73,7 @@ Tc.Crm.Scripts.Utils.Validation = (function () {
     }
     var Messages = {
         InvalidPhone: "The telephone number does not match the required format. The number should start with a + followed by the country dialing code and contain no spaces or other special characters i.e. +44 for UK.",
-        HasCreditCard: "Data you entered contain potentional credit card number(16 streight digits). Field: "
+        HasCreditCard: "The data you entered contains a barred sequence (16 consecutive numbers). Field: "
     }
 
     // retrieve configuration value
