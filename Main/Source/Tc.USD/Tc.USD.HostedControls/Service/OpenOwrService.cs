@@ -7,6 +7,7 @@ using Microsoft.Uii.Csr;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
+using Tc.Crm.Common;
 using Tc.Crm.Common.IntegrationLayer.Jti.Models;
 using Tc.Usd.HostedControls.Constants;
 using Tc.Usd.HostedControls.Service;
@@ -27,7 +28,7 @@ namespace Tc.Usd.HostedControls
             var token = _jtiService.CreateJwtToken(privateKey, payload);
             var data = WebServiceExchangeHelper.GetCustomerTravelPlannerJson();
             var serviceUrl = GetConfig(DataKey.OwrUrlConfigName);
-            var content = _jtiService.SendHttpRequest(serviceUrl, token, data);
+            var content = _jtiService.SendHttpRequest(HttpMethod.Post, serviceUrl, token, data).Content;
             var eventParams = WebServiceExchangeHelper.ContentToEventParams(content);
 
             FireEvent(EventName.SsoCompleteEvent, eventParams);

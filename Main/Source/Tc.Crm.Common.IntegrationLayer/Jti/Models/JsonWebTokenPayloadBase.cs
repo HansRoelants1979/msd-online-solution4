@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Tc.Crm.Common.IntegrationLayer.Jti.Models
 {
@@ -13,5 +14,17 @@ namespace Tc.Crm.Common.IntegrationLayer.Jti.Models
 
         [DataMember(Name = "exp")]
         public string Expiry { get; set; }
+
+        public virtual Dictionary<string, object> GeneratePayload()
+        {
+            var payload = new Dictionary<string, object>
+            {
+                {"iat", IssuedAtTime},
+                {"nbf", NotBefore},
+                {"exp", Expiry}
+            };
+
+            return payload;
+        }
     }
 }

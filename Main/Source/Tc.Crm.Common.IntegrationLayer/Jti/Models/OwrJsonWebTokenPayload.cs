@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Tc.Crm.Common.IntegrationLayer.Jti.Models
 {
@@ -25,5 +26,20 @@ namespace Tc.Crm.Common.IntegrationLayer.Jti.Models
 
         [DataMember(Name = "crt")]
         public string CreatedBy { get; set; }
+
+        public override Dictionary<string, object> GeneratePayload()
+        {
+            var payload = base.GeneratePayload();
+
+            payload.Add("jti", Jti);
+            payload.Add("aud", Aud);
+            payload.Add("bra", BranchCode);
+            payload.Add("abt", AbtaNumber);
+            payload.Add("emp", EmployeeId);
+            payload.Add("ini", Initials);
+            payload.Add("crt", CreatedBy);
+
+            return payload;
+        }
     }
 }

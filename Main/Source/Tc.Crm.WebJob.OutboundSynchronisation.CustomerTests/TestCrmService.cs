@@ -427,12 +427,11 @@ namespace Tc.Crm.OutboundSynchronisation.CustomerTests
 
         public Guid Create(Entity entity)
         {
-            throw new NotImplementedException();
+           return Guid.NewGuid();
         }
 
         public void Update(Entity entity)
         {
-            throw new NotImplementedException();
         }
     }
 }

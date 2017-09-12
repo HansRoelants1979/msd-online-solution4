@@ -2,12 +2,13 @@
 using Microsoft.Xrm.Sdk;
 using Tc.Crm.Common.Models;
 using System.Collections.Generic;
+using Tc.Crm.Common.IntegrationLayer.Jti.Models;
+using Tc.Crm.Common.IntegrationLayer.Model;
 
 namespace Tc.Crm.OutboundSynchronisation.Customer.Services
 {
     public interface IOutboundSynchronisationDataService : IDisposable
     {
-
         List<EntityCache> GetEntityCacheToProcess(string type, int numberOfElements);
 
         /// <summary>
@@ -30,6 +31,24 @@ namespace Tc.Crm.OutboundSynchronisation.Customer.Services
 
         void UpdateRecord(Entity entity);
 
-        void UpdateEntityStatus(Guid id, string entityName, int StateCode, int StatusCode);
+        void UpdateEntityStatus(Guid id, string entityName, int stateCode, int statusCode);
+
+        /// <summary>
+        /// Create JWT token
+        /// </summary>
+        /// <typeparam name="T">JsonWebTokenPayload class </typeparam>
+        /// <param name="privateKey">Sekret key</param>
+        /// <param name="payloadObj">Parametrized object with token data</param>
+        /// <returns>Returns token</returns>
+        string CreateJwtToken<T>(string privateKey, T payloadObj) where T : JsonWebTokenPayloadBase;
+
+        /// <summary>
+        /// Send Http post request 
+        /// </summary>
+        /// <param name="serviceUrl"></param>
+        /// <param name="token"></param>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        ResponseEntity SendHttpPostRequest(string serviceUrl, string token, string data);
     }
 }

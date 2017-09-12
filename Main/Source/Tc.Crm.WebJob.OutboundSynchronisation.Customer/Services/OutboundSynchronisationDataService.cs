@@ -6,8 +6,10 @@ using Tc.Crm.Common.Models;
 using Tc.Crm.Common.Helper;
 using Tc.Crm.Common.Services;
 using Tc.Crm.Common.Constants;
+using Tc.Crm.Common.IntegrationLayer.Jti.Models;
 using Attributes = Tc.Crm.Common.Constants.Attributes;
-
+using Tc.Crm.Common.IntegrationLayer.Jti.Service;
+using Tc.Crm.Common.IntegrationLayer.Model;
 
 namespace Tc.Crm.OutboundSynchronisation.Customer.Services
 {
@@ -15,13 +17,15 @@ namespace Tc.Crm.OutboundSynchronisation.Customer.Services
     {
         private readonly ICrmService crmService;
         private readonly ILogger logger;
+        private readonly IJwtService jwtService;
 
         private bool disposed;
 
-        public OutboundSynchronisationDataService(ILogger logger, ICrmService crmService)
+        public OutboundSynchronisationDataService(ILogger logger, ICrmService crmService, IJwtService jwtService)
         {
             this.logger = logger;
             this.crmService = crmService;
+            this.jwtService = jwtService;
         }
 
         public List<EntityCache> GetEntityCacheToProcess(string type, int numberOfElements)
@@ -51,8 +55,8 @@ namespace Tc.Crm.OutboundSynchronisation.Customer.Services
                        <filter type='and'>
                          <filter type='and'>
                            <condition attribute='tc_type' operator='eq' value='{type}' />
-                           <condition attribute='statuscode' operator='eq' value='{(Int32)EntityCacheStatusReason.Active}' />
-                           <condition attribute='tc_operation' operator='eq' value='{(Int32)EntityCacheOperation.Create}' />
+                           <condition attribute='statuscode' operator='eq' value='{(int)EntityCacheStatusReason.Active}' />
+                           <condition attribute='tc_operation' operator='eq' value='{(int)EntityCacheOperation.Create}' />
                          </filter>
                        </filter>
                      </entity>
@@ -65,8 +69,8 @@ namespace Tc.Crm.OutboundSynchronisation.Customer.Services
         public List<EntityCache> PrepareEntityCacheModel(EntityCollection entityCacheCollection)
         {
             if (entityCacheCollection == null) return null;
-            var entityCacheModelList = new List<EntityCache>();            
-            for (int i=0; i < entityCacheCollection.Entities.Count; i++)
+            var entityCacheModelList = new List<EntityCache>();
+            for (int i = 0; i < entityCacheCollection.Entities.Count; i++)
             {
                 var entityCache = entityCacheCollection.Entities[i];
                 var entityCacheModel = new EntityCache();
@@ -85,7 +89,7 @@ namespace Tc.Crm.OutboundSynchronisation.Customer.Services
                     entityCacheModel.RecordId = entityCache.Attributes[Attributes.EntityCache.RecordId].ToString();
 
                 if (EntityHelper.HasAttributeNotNull(entityCache, Attributes.EntityCache.Operation))
-                    entityCacheModel.Operation = ((OptionSetValue)entityCache.Attributes[Attributes.EntityCache.Operation]).Value;
+                    entityCacheModel.Operation = ((int?)entityCache.Attributes[Attributes.EntityCache.Operation]).Value;
 
                 entityCacheModelList.Add(entityCacheModel);
 
@@ -97,7 +101,7 @@ namespace Tc.Crm.OutboundSynchronisation.Customer.Services
         {
             if (entityCacheMessageModelCollection == null) return null;
             var entityCacheMessageCollection = new EntityCollection();
-            for(int i=0; i< entityCacheMessageModelCollection.Count;i++)
+            for (int i = 0; i < entityCacheMessageModelCollection.Count; i++)
             {
                 var entityCacheMessage = PrepareEntityCacheMessage(entityCacheMessageModelCollection[i]);
                 if (entityCacheMessage != null)
@@ -144,17 +148,33 @@ namespace Tc.Crm.OutboundSynchronisation.Customer.Services
             UpdateRecord(entity);
         }
 
+        public string CreateJwtToken<T>(string privateKey, T payloadObj) where T : JsonWebTokenPayloadBase
+        {
+            if (string.IsNullOrEmpty(privateKey))
+                throw new ArgumentNullException(nameof(privateKey));
+            if(payloadObj == null)
+                throw new ArgumentNullException(nameof(payloadObj));
+
+            return jwtService.CreateJwtToken(privateKey, payloadObj);
+        }
+
+        public ResponseEntity SendHttpPostRequest(string serviceUrl, string token, string data)
+        {
+            if (string.IsNullOrEmpty(serviceUrl))
+                throw new ArgumentNullException(nameof(serviceUrl));
+
+            return jwtService.SendHttpRequest(HttpMethod.Post, serviceUrl, token, data);
+        }
 
         public Guid CreateRecord(Entity entity)
         {
-           return crmService.Create(entity);
+            return crmService.Create(entity);
         }
 
         public void UpdateRecord(Entity entity)
         {
             crmService.Update(entity);
         }
-
 
         #region Displosable members
 

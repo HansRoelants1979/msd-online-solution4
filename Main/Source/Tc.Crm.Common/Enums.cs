@@ -60,4 +60,15 @@
         EndtoEndSuccess = 950000000,
         Failed = 950000001
     }
+
+    public enum HttpMethod
+    {
+        Post,
+        Get,
+        Put,
+        Delete,
+        Options,
+        Trace,
+        Head
+    }
 }

@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using Tc.Crm.Common.IntegrationLayer.Jti.Models;
 using Tc.Crm.Common.IntegrationLayer.Jti.Service;
 using Tc.Crm.Common.Services;
+using HttpMethod = Tc.Crm.Common.HttpMethod;
 
 namespace Tc.Usd.UnitTest.HostedControls.Service
 {
@@ -58,7 +59,7 @@ namespace Tc.Usd.UnitTest.HostedControls.Service
             var data = WebServiceExchangeHelper.GetCustomerTravelPlannerJson();
             Assert.IsNotNull(data);
             var serviceUrl = ConfigurationManager.AppSettings["serviceUrl"];
-            var content = _jtiService.SendHttpRequest(serviceUrl, token, data);
+            var content = _jtiService.SendHttpRequest(HttpMethod.Post, serviceUrl, token, data);
         }
 
         [TestMethod]

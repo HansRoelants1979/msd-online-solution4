@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using JWT;
-using JWT.Algorithms;
-using JWT.Serializers;
-using Microsoft.Xrm.Sdk;
 using Tc.Crm.Common;
 using Tc.Crm.Common.Constants;
 using Tc.Crm.Common.Services;
@@ -31,7 +26,6 @@ namespace Tc.Crm.OutboundSynchronisation.Customer.Services
         public void Run()
         {
             ProcessEntityCache();
-
         }
 
         /// <summary>
@@ -123,29 +117,5 @@ namespace Tc.Crm.OutboundSynchronisation.Customer.Services
        
 
         #endregion
-
-        #region Private methods
-
-        private string CreateJWTToken(Dictionary<string, object> payload, ITracingService trace, IOrganizationService service)
-        {
-            //if (trace == null) throw new ArgumentException(ValidationMessages.TraceIsNull);
-            //if (payload == null) throw new ArgumentException(ValidationMessages.CachingParameterIsNull);
-            //if (service == null) throw new ArgumentException(ValidationMessages.OrganizationServiceIsNull);
-
-            //trace.Trace("Start - CreateJWTToken");
-
-            //if (string.IsNullOrWhiteSpace(this.SecretKey))
-            //   throw new ArgumentException(ValidationMessages.CachingSecretKeyIsNullOrEmpty);
-
-            IJwtAlgorithm algorithm = new HMACSHA256Algorithm();
-            IJsonSerializer serializer = new JsonNetSerializer();
-            IBase64UrlEncoder urlEncoder = new JwtBase64UrlEncoder();
-            IJwtEncoder encoder = new JwtEncoder(algorithm, serializer, urlEncoder);
-
-            return encoder.Encode(payload, this.SecretKey);
-        }
-
-       
-        #endregion Private methods
     }
 }
