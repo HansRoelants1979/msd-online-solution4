@@ -28,6 +28,7 @@ if (typeof (Tc.Crm.Scripts.Events.FollowUp) === "undefined") {
 Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
     "use strict";
     var CUSTOMER_QUICK_VIEW_FORM = "AvailableContactDetails";
+    var FORM_MODE_CREATE = 1;
     var Attributes = {
         DueDate: "scheduledend",
         ContactPhone: "tc_contactphonenumber",
@@ -39,15 +40,37 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
         Emailaddress1: "emailaddress1",
         Emailaddress2: "emailaddress2",
         Emailaddress3: "emailaddress3",
+        RescheduleCheck: "tc_reschedulecheck",
+        RescheduleReason: "tc_reschedulereason",
     }
     var dueDateOnChange = function () {
 
         Xrm.Page.getControl(Attributes.DueDate).clearNotification();
         var dueDateValueAttr = getControlValue(Attributes.DueDate);
         var isPastDate = Tc.Crm.Scripts.Utils.Validation.IsPastDate(dueDateValueAttr);
-        if (isPastDate)
+        if (isPastDate) {
             Xrm.Page.getControl(Attributes.DueDate).setNotification("Due Date cannot be set in the past. Please choose a future date.");
+        }
+        else {
+            if (Xrm.Page.ui.getFormType() === FORM_MODE_CREATE) return;
+            Xrm.Page.getControl(Attributes.RescheduleCheck).setVisible(true);
+            Xrm.Page.getAttribute(Attributes.RescheduleCheck).setValue(false);
+            Xrm.Page.getControl(Attributes.RescheduleCheck).setNotification("Please ensure that you have the correct email and phone number");
+            Xrm.Page.getAttribute(Attributes.RescheduleCheck).setRequiredLevel("required");
+            Xrm.Page.getControl(Attributes.RescheduleReason).setVisible(true);
+            Xrm.Page.getAttribute(Attributes.RescheduleReason).setValue(null);
+            Xrm.Page.getAttribute(Attributes.RescheduleReason).setRequiredLevel("required");
 
+        }
+
+
+    }
+    var rescheduleCheckChange = function () {
+        var rescheduleCheckAttr = getControlValue(Attributes.RescheduleCheck);
+        if (rescheduleCheckAttr)
+            Xrm.Page.getControl(Attributes.RescheduleCheck).clearNotification();
+        else
+            Xrm.Page.getControl(Attributes.RescheduleCheck).setNotification("Please ensure that you have the correct email and phone number");
     }
     var contactMethodOnChange = function () {
         Xrm.Page.getControl(Attributes.ContactPhone).clearNotification();
@@ -199,6 +222,9 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
         },
         OnDueDateFieldChange: function () {
             dueDateOnChange();
+        },
+        OnRescheduleCheckFieldChange: function () {
+            rescheduleCheckChange();
         },
         OnLoad: function () {
             setRegardingField();
