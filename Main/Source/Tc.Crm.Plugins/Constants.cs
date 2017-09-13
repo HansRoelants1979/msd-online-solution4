@@ -116,6 +116,12 @@ namespace Tc.Crm.Plugins.Attributes
         public const string ContactTime = "tc_contacttime";
         
     }
+
+    public static class UserSettings
+    {
+        public const string TimeZoneCode = "timezonecode";
+        public const string SystemUserId = "systemuserid";        
+    }
 }
 namespace Tc.Crm.Plugins
 {
@@ -215,6 +221,7 @@ namespace Tc.Crm.Plugins
         public const string EntityCache = "tc_entitycache";
         public const string Country = "tc_country";
         public const string FollowUp = "tc_followup";
+        public const string UserSettings = "usersettings";
 
     }
 

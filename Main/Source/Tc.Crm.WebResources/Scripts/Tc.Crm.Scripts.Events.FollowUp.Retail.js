@@ -52,18 +52,21 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
             Xrm.Page.getControl(Attributes.DueDate).setNotification("Due Date cannot be set in the past. Please choose a future date.");
         }
         else {
-            if (Xrm.Page.ui.getFormType() === FORM_MODE_CREATE) return;
-            Xrm.Page.getControl(Attributes.RescheduleCheck).setVisible(true);
-            Xrm.Page.getAttribute(Attributes.RescheduleCheck).setValue(false);
-            Xrm.Page.getControl(Attributes.RescheduleCheck).setNotification("Please ensure that you have the correct email and phone number");
-            Xrm.Page.getAttribute(Attributes.RescheduleCheck).setRequiredLevel("required");
-            Xrm.Page.getControl(Attributes.RescheduleReason).setVisible(true);
-            Xrm.Page.getAttribute(Attributes.RescheduleReason).setValue(null);
-            Xrm.Page.getAttribute(Attributes.RescheduleReason).setRequiredLevel("required");
-
+            showRescheduleReasonAndRescheduleCheckBoxFields();
         }
-
-
+    }
+    var contactTimeOnChange = function () {
+        showRescheduleReasonAndRescheduleCheckBoxFields();
+    }
+    var showRescheduleReasonAndRescheduleCheckBoxFields = function () {
+        if (Xrm.Page.ui.getFormType() === FORM_MODE_CREATE) return;
+        Xrm.Page.getControl(Attributes.RescheduleCheck).setVisible(true);
+        Xrm.Page.getAttribute(Attributes.RescheduleCheck).setValue(false);
+        Xrm.Page.getControl(Attributes.RescheduleCheck).setNotification("Please ensure that you have the correct email and phone number");
+        Xrm.Page.getAttribute(Attributes.RescheduleCheck).setRequiredLevel("required");
+        Xrm.Page.getControl(Attributes.RescheduleReason).setVisible(true);
+        Xrm.Page.getAttribute(Attributes.RescheduleReason).setValue(null);
+        Xrm.Page.getAttribute(Attributes.RescheduleReason).setRequiredLevel("required");
     }
     var rescheduleCheckChange = function () {
         var rescheduleCheckAttr = getControlValue(Attributes.RescheduleCheck);
@@ -222,6 +225,9 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
         },
         OnDueDateFieldChange: function () {
             dueDateOnChange();
+        },
+        OnContactTimeFieldChange: function () {
+            contactTimeOnChange();
         },
         OnRescheduleCheckFieldChange: function () {
             rescheduleCheckChange();

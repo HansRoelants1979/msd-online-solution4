@@ -35,8 +35,8 @@ namespace Tc.Crm.Plugins.FollowUp.BusinessLogic
         {
             Entity targetFollowUp = null;
             Guid followUpId = Guid.Empty;
+            DateTime dueDate = new DateTime();
             string contactTime = string.Empty;
-            DateTime  dueDate = new DateTime();
             string noteText = string.Empty;
             string rescheduleReason = string.Empty;
             string subject = "ReSchedule Reason";
@@ -44,96 +44,97 @@ namespace Tc.Crm.Plugins.FollowUp.BusinessLogic
 
             trace.Trace("Begin - PrePareNoteFromFollouWp");
             if (!IsContextValid()) return;
-
             if (!context.PreEntityImages.Contains("PreImage"))
             {
                 trace.Trace("No pre update image has been configured.");
                 return;
             }
-                
-
-            var followUpPreImage = (Entity)context.PreEntityImages["PreImage"];           
+            var followUpPreImage = (Entity)context.PreEntityImages["PreImage"];
             if (!followUpPreImage.Contains(Attributes.FollowUp.DueDate) || followUpPreImage[Attributes.FollowUp.DueDate] == null)
             {
-                trace.Trace("Due Date Time is null or undefined.");
+                trace.Trace("Due Date  is null or undefined.");
                 return;
             }
-            
+
             targetFollowUp = (Entity)context.InputParameters["Target"];
             if (targetFollowUp.Id != Guid.Empty)
                 followUpId = targetFollowUp.Id;
-            if(followUpPreImage[Attributes.FollowUp.ContactTime] != null)
-               contactTime = followUpPreImage.FormattedValues[Attributes.FollowUp.ContactTime];
+
+            // get contact time value from PreImage
+            if (followUpPreImage.Contains(Attributes.FollowUp.ContactTime))
+                if (followUpPreImage[Attributes.FollowUp.ContactTime] != null)
+                    contactTime = followUpPreImage.FormattedValues[Attributes.FollowUp.ContactTime];
+
+            // get due date value from PreImage
             int userTimeZone = RetrieveCurrentUserTimeZoneCode(service);
-            dueDate = LocalTimeFromUTCTime(Convert.ToDateTime(followUpPreImage[Attributes.FollowUp.DueDate]),userTimeZone,service);            
-            rescheduleReason = followUpPreImage[Attributes.FollowUp.RescheduleReason].ToString();            
-            noteText = rescheduleReason + "-" + dueDate.ToShortDateString() + " " + contactTime ;
-            CreateNote(followUpId,subject, noteText);
+            if (userTimeZone == -1) return;
+            dueDate = LocalTimeFromUTCTime(Convert.ToDateTime(followUpPreImage[Attributes.FollowUp.DueDate]), userTimeZone, service);
+
+            //get reschedule reasom value from PreImage
+            if (followUpPreImage.Contains(Attributes.FollowUp.RescheduleReason))
+                if (followUpPreImage[Attributes.FollowUp.RescheduleReason] != null)
+                    rescheduleReason = followUpPreImage[Attributes.FollowUp.RescheduleReason].ToString();
+
+            noteText = rescheduleReason + "-" + dueDate.ToShortDateString() + " " + contactTime;
+            CreateNote(followUpId, subject, noteText);
+
             trace.Trace("End - PrePareNoteFromFollouWp");
         }
 
-        private void CreateNote(Guid objectId,string subject, string noteText)
+        private void CreateNote(Guid objectId, string subject, string noteText)
         {
             trace.Trace("Begin - CreateNote");
-
             Entity Note = new Entity(Entities.Annotation);
             if (objectId != Guid.Empty)
                 Note[Attributes.Annotation.ObjectId] = new EntityReference(Entities.FollowUp, objectId);
-            if(subject != null)
-            Note[Attributes.Annotation.Subject] = subject;
-            if(noteText != null)
-            Note[Attributes.Annotation.NoteText] = noteText;
-
+            if (subject != null)
+                Note[Attributes.Annotation.Subject] = subject;
+            if (noteText != null)
+                Note[Attributes.Annotation.NoteText] = noteText;
             service.Create(Note);
-
             trace.Trace("End - CreateNote");
-
         }
 
         public DateTime LocalTimeFromUTCTime(DateTime utcTime, int timeZoneCode, IOrganizationService service)
-
-
         {
             var request = new LocalTimeFromUtcTimeRequest
             {
                 TimeZoneCode = timeZoneCode,
                 UtcTime = utcTime.ToUniversalTime()
             };
-
             var response = (LocalTimeFromUtcTimeResponse)service.Execute(request);
             return response.LocalTime;
-
         }
 
 
         private int RetrieveCurrentUserTimeZoneCode(IOrganizationService service)
 
         {
-            int timeZoneCode =85;
-
+            int timeZoneCode = -1;
             var currentUserSettings = service.RetrieveMultiple(
-                new QueryExpression("usersettings")
+                new QueryExpression(Entities.UserSettings)
                 {
-                    ColumnSet = new ColumnSet("timezonecode"),
+                    ColumnSet = new ColumnSet(Attributes.UserSettings.TimeZoneCode),
                     Criteria = new FilterExpression
                     {
                         Conditions =
                       {
-                            new ConditionExpression("systemuserid", ConditionOperator.EqualUserId)
+                            new ConditionExpression(Attributes.UserSettings.SystemUserId, ConditionOperator.Equal,context.InitiatingUserId)
                         }
-
                     }
+                });
 
-                }).Entities[0].ToEntity<Entity>();
-
-            //return time zone code
-
-            return timeZoneCode= Convert.ToInt32(currentUserSettings.Attributes["timezonecode"]);
-
-
-
+            var entities = currentUserSettings.Entities;
+            if (entities == null || entities.Count == 0)
+            {
+                trace.Trace("User Setings Entities is null or count is null");
+                return timeZoneCode;
+            }
+            if (entities[0].Contains("timezonecode") && entities[0]["timezonecode"] != null)
+            {
+                timeZoneCode = Convert.ToInt32(entities[0]["timezonecode"]);
+            }
+            return timeZoneCode;
         }
-
-
     }
 }
