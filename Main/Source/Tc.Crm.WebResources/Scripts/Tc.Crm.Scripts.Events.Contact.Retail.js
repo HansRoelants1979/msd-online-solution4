@@ -75,7 +75,7 @@ Tc.Crm.Scripts.Events.Contact.Retail = (function () {
         ContactChangeReason: "tc_keycontactchangereason",
         Telephone1: "telephone1",
         Telephone2: "telephone2",
-        Telephone3: "telephone3",
+        Telephone3: "telephone3"
     }
     var FormMode = {
       Create: 1,
@@ -89,7 +89,9 @@ Tc.Crm.Scripts.Events.Contact.Retail = (function () {
         MarketingConsent: "tab_marketingconsent",
         PastHolidays: "tab_pastholidays",
         Cases: "tab_cases",
-        ContactPreference: "tab_contactpreference"
+        ContactPreference: "tab_contactpreference",
+        ExternalLogin: "tab_externallogin",
+        PastBookings: "tab_bookings"
     }
     var Sections = {
     }
@@ -100,13 +102,22 @@ Tc.Crm.Scripts.Events.Contact.Retail = (function () {
     }
 
     function hideTabsSections() {
-        Xrm.Page.ui.tabs.get(Tabs.CustomerHolidays).setVisible(false);
-        Xrm.Page.ui.tabs.get(Tabs.Indicators).setVisible(false);
-        Xrm.Page.ui.tabs.get(Tabs.CustomerPreferences).setVisible(false);
-        Xrm.Page.ui.tabs.get(Tabs.AdditionalCustomerDetails).setVisible(false);
-        Xrm.Page.ui.tabs.get(Tabs.MarketingConsent).setVisible(false);
-        Xrm.Page.ui.tabs.get(Tabs.PastHolidays).setVisible(false);
-        Xrm.Page.ui.tabs.get(Tabs.Cases).setVisible(false);
+      hideTab(Tabs.CustomerHolidays);
+      hideTab(Tabs.Indicators);
+      hideTab(Tabs.CustomerPreferences);
+      hideTab(Tabs.AdditionalCustomerDetails);
+      hideTab(Tabs.MarketingConsent);
+      hideTab(Tabs.PastHolidays);
+      hideTab(Tabs.Cases);
+      hideTab(Tabs.ExternalLogin);
+      hideTab(Tabs.PastBookings);
+    }
+
+    function hideTab(tabName) {
+      var tab = Xrm.Page.ui.tabs.get(tabName);
+      if (tab) {
+          tab.setVisible(false);
+      }
     }
 
     var onCustomerKeyInformationUpdate = function () {
@@ -114,7 +125,7 @@ Tc.Crm.Scripts.Events.Contact.Retail = (function () {
             showContactChangeReason();
         else
             hideContactChangeReason();
-    };
+      };
 
     var hideContactChangeReason = function () {
         if (Xrm.Page.getAttribute(Attributes.ContactChangeReason)) {
@@ -168,7 +179,6 @@ Tc.Crm.Scripts.Events.Contact.Retail = (function () {
             }
         }
     };
-
    
     var noCloseCallback = function (econtext)
     {
