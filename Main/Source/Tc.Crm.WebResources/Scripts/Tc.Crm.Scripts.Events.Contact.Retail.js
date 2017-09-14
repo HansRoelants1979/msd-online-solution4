@@ -213,6 +213,13 @@ Tc.Crm.Scripts.Events.Contact.Retail = (function () {
         else
             return false;
     };
+    var onModifiedOnChanged = function () {
+        if (window.IsUSD == true) {
+
+            window.open("http://event/?eventname=RefreshFollowUp");
+
+        }
+    };
 
 
     // public methods
@@ -233,6 +240,9 @@ Tc.Crm.Scripts.Events.Contact.Retail = (function () {
         },
         OnCustomerKeyInformationUpdate: function () {
             onCustomerKeyInformationUpdate();
+        },
+        OnModifiedOnChanged: function () {
+            onModifiedOnChanged();
         }
     };
 })();
