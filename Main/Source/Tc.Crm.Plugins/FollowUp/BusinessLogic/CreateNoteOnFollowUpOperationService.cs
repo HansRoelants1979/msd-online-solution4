@@ -39,7 +39,7 @@ namespace Tc.Crm.Plugins.FollowUp.BusinessLogic
             string contactTime = string.Empty;
             string noteText = string.Empty;
             string rescheduleReason = string.Empty;
-            string subject = "ReSchedule Reason";
+            string subject = "Reschedule Reason";
 
 
             trace.Trace("Begin - PrePareNoteFromFollouWp");
@@ -54,11 +54,16 @@ namespace Tc.Crm.Plugins.FollowUp.BusinessLogic
             {
                 trace.Trace("Due Date  is null or undefined.");
                 return;
-            }
+            }           
 
-            targetFollowUp = (Entity)context.InputParameters["Target"];
+              targetFollowUp = (Entity)context.InputParameters["Target"];
             if (targetFollowUp.Id != Guid.Empty)
                 followUpId = targetFollowUp.Id;
+
+            //get reschedule reasom value from PreImage
+            if (!followUpPreImage.Contains(Attributes.FollowUp.RescheduleReason)) return;
+            if (followUpPreImage[Attributes.FollowUp.RescheduleReason] == null) return;
+                    rescheduleReason = followUpPreImage[Attributes.FollowUp.RescheduleReason].ToString();
 
             // get contact time value from PreImage
             if (followUpPreImage.Contains(Attributes.FollowUp.ContactTime))
@@ -69,11 +74,7 @@ namespace Tc.Crm.Plugins.FollowUp.BusinessLogic
             int userTimeZone = RetrieveCurrentUserTimeZoneCode(service);
             if (userTimeZone == -1) return;
             dueDate = LocalTimeFromUTCTime(Convert.ToDateTime(followUpPreImage[Attributes.FollowUp.DueDate]), userTimeZone, service);
-
-            //get reschedule reasom value from PreImage
-            if (followUpPreImage.Contains(Attributes.FollowUp.RescheduleReason))
-                if (followUpPreImage[Attributes.FollowUp.RescheduleReason] != null)
-                    rescheduleReason = followUpPreImage[Attributes.FollowUp.RescheduleReason].ToString();
+            
 
             noteText = rescheduleReason + "-" + dueDate.ToShortDateString() + " " + contactTime;
             CreateNote(followUpId, subject, noteText);
