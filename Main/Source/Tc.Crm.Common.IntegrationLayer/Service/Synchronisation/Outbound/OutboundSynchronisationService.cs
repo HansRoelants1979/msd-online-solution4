@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Net;
 using Newtonsoft.Json;
-using Tc.Crm.Common.Constants;
 using Tc.Crm.Common.IntegrationLayer.Jti.Models;
 using Tc.Crm.Common.IntegrationLayer.Jti.Service;
 using Tc.Crm.Common.Models;
@@ -68,12 +67,16 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
                     if (IsResponseSuccessful(response.StatusCode))
                         UpdateEntityCacheMessageStatus(entityCacheMessageId, Status.Inactive, EntityCacheMessageStatusReason.SuccessfullySentToIL);
                     else
-                        UpdateEntityCacheMessageStatus(entityCacheMessageId, Status.Inactive, EntityCacheMessageStatusReason.Failed);
+                    {
+                        var notes = AppendNote(entityCacheMessage.Notes, response.StatusCode, response.Content);
+                        UpdateEntityCacheMessageStatus(entityCacheMessageId, Status.Inactive, EntityCacheMessageStatusReason.Failed, notes);
+                    }
                 }
                 catch (Exception e)
                 {
                     logger.LogError(e.ToString());
-                    UpdateEntityCacheMessageStatus(entityCacheMessageId, Status.Inactive, EntityCacheMessageStatusReason.Failed);
+                    var notes = AppendNote(entityCacheMessage.Notes, HttpStatusCode.InternalServerError, "Internal server error.");
+                    UpdateEntityCacheMessageStatus(entityCacheMessageId, Status.Inactive, EntityCacheMessageStatusReason.Failed, notes);
                 }
             }
         }
@@ -81,6 +84,17 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
         private bool IsResponseSuccessful(HttpStatusCode statusCode)
         {
             return (int) statusCode >= 200 && (int) statusCode <= 299;
+        }
+
+        private string AppendNote(string notes, HttpStatusCode statusCode, string content)
+        {
+            var errorNote = $"Status code: {(int)statusCode}. Error message: {content}";
+            if (string.IsNullOrEmpty(notes))
+                notes = errorNote;
+            else
+                notes += Environment.NewLine + errorNote;
+
+            return notes;
         }
 
         /// <summary>
@@ -101,7 +115,7 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
         /// <param name="statusReason"></param>
         private void UpdateEntityCacheStatus(Guid entityCacheId, Status status, EntityCacheStatusReason statusReason)
         {
-            outboundSynchronisationDataService.UpdateEntityStatus(entityCacheId, EntityName.EntityCache, (int)status, (int)statusReason);
+            outboundSynchronisationDataService.UpdateEntityCacheStatus(entityCacheId, (int)status, (int)statusReason);
         }
 
         /// <summary>
@@ -110,9 +124,10 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
         /// <param name="entityCacheMessageId"></param>
         /// <param name="status"></param>
         /// <param name="statusReason"></param>
-        private void UpdateEntityCacheMessageStatus(Guid entityCacheMessageId, Status status, EntityCacheMessageStatusReason statusReason)
+        /// <param name="notes"></param>
+        private void UpdateEntityCacheMessageStatus(Guid entityCacheMessageId, Status status, EntityCacheMessageStatusReason statusReason, string notes = null)
         {
-            outboundSynchronisationDataService.UpdateEntityStatus(entityCacheMessageId, EntityName.EntityCacheMessage, (int)status, (int)statusReason);
+            outboundSynchronisationDataService.UpdateEntityCacheMessageStatus(entityCacheMessageId, (int)status, (int)statusReason, notes);
         }
 
         private OutboundJsonWebTokenPayload CreateTokenPayload()

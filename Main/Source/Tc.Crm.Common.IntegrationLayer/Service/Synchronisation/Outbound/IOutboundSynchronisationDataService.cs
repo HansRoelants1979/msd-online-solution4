@@ -29,7 +29,22 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
 
         void UpdateRecord(Entity entity);
 
-        void UpdateEntityStatus(Guid id, string entityName, int stateCode, int statusCode);
+        /// <summary>
+        /// Update Entity Cache record
+        /// </summary>
+        /// <param name="id">Record Id</param>
+        /// <param name="stateCode"></param>
+        /// <param name="statusCode"></param>
+        void UpdateEntityCacheStatus(Guid id, int stateCode, int statusCode);
+
+        /// <summary>
+        /// Update Entity Cache Message record
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="stateCode"></param>
+        /// <param name="statusCode"></param>
+        /// <param name="notes"></param>
+        void UpdateEntityCacheMessageStatus(Guid id, int stateCode, int statusCode, string notes = null);
 
         /// <summary>
         /// Get xpt value from CRM Configuration

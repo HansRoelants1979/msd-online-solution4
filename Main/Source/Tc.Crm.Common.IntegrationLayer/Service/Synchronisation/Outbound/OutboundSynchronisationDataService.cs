@@ -142,12 +142,23 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
             return entityCacheMessage;
         }
 
-        public void UpdateEntityStatus(Guid id, string entityName, int StateCode, int StatusCode)
+        public void UpdateEntityCacheStatus(Guid id, int stateCode, int statusCode)
         {
-            var entity = new Entity(entityName);
+            var entity = new Entity(EntityName.EntityCache);
             entity.Id = id;
-            entity.Attributes[Attributes.EntityCache.State] = new OptionSetValue(StateCode);
-            entity.Attributes[Attributes.EntityCache.StatusReason] = new OptionSetValue(StatusCode);
+            entity.Attributes[Attributes.EntityCache.State] = new OptionSetValue(stateCode);
+            entity.Attributes[Attributes.EntityCache.StatusReason] = new OptionSetValue(statusCode);
+            UpdateRecord(entity);
+        }
+
+        public void UpdateEntityCacheMessageStatus(Guid id, int stateCode, int statusCode, string notes = null)
+        {
+            var entity = new Entity(EntityName.EntityCacheMessage);
+            entity.Id = id;
+            entity.Attributes[Attributes.EntityCacheMessage.State] = new OptionSetValue(stateCode);
+            entity.Attributes[Attributes.EntityCacheMessage.StatusReason] = new OptionSetValue(statusCode);
+            if (!string.IsNullOrEmpty(notes))
+                entity.Attributes[Attributes.EntityCacheMessage.Notes] = notes;
             UpdateRecord(entity);
         }
 

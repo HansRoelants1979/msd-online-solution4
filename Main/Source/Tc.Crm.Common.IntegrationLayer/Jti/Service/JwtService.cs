@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Cryptography;
@@ -45,6 +46,8 @@ namespace Tc.Crm.Common.IntegrationLayer.Jti.Service
             request.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             request.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
+            ResponseEntity result;
+
             try
             {
                 var t = SendHttpRequestAsync(method, serviceUrl, data, request);
@@ -52,18 +55,32 @@ namespace Tc.Crm.Common.IntegrationLayer.Jti.Service
                 var task = response.Content.ReadAsStringAsync();
                 var content = task.Result;
 
-                var result = new ResponseEntity
+                result = new ResponseEntity
                 {
                     Content = content,
                     StatusCode = response.StatusCode
                 };
                 return result;
             }
-            catch (Exception ex)
+            catch (AggregateException ex)
             {
+                result = new ResponseEntity
+                {
+                    Content = ex.InnerException?.Message ?? ex.Message,
+                    StatusCode = HttpStatusCode.InternalServerError
+                };
                 _logger.LogError($"{SendHttpRequestApplicationTerminated}{ex.ToString()}");
             }
-            return null;
+            catch (Exception ex)
+            {
+                result = new ResponseEntity
+                {
+                    Content = ex.Message,
+                    StatusCode = HttpStatusCode.InternalServerError
+                };
+                _logger.LogError($"{SendHttpRequestApplicationTerminated}{ex.ToString()}");
+            }
+            return result;
         }
 
         public double GetExpiry(string expiredSeconds)
