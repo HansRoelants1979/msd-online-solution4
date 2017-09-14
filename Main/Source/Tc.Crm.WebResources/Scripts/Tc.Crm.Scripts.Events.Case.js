@@ -36,7 +36,7 @@
     }
 };
 scriptLoader.load("Tc.Crm.Scripts.Events.Case", ["Tc.Crm.Scripts.Library.Contact"], function () {
-// start script
+// start script 
 
 if (typeof (Tc) === "undefined") {
     Tc = {
@@ -72,6 +72,12 @@ Tc.Crm.Scripts.Events.Case = (function () {
     var CASE_SOURCE_MARKET_ENTITY_NAME = "tc_country"
     var FORM_MODE_CREATE = 1;
     var FORM_MODE_UPDATE = 2;
+
+
+    var Attributes = {
+      ArrivalDate: "tc_arrivaldate",
+      DepartureDate: "tc_departuredate"
+    }
     
 
     function OnLoad() {
@@ -439,6 +445,19 @@ Tc.Crm.Scripts.Events.Case = (function () {
         return Xrm.Page.context.client.getClientState() === CLIENT_STATE_OFFLINE
     }
 
+    var validateArrivalDateGreaterOrEqualDeparture = function () {
+        var arrivalDateControl = Xrm.Page.getControl(Attributes.ArrivalDate);
+        var arrivalDate = Xrm.Page.data.entity.attributes.get(Attributes.ArrivalDate).getValue();
+        var departureDate = Xrm.Page.data.entity.attributes.get(Attributes.DepartureDate).getValue();
+        
+        arrivalDateControl.clearNotification();
+        if (arrivalDate != null && departureDate != null) {
+            if (arrivalDate.setHours(0, 0, 0, 0) > departureDate.setHours(0, 0, 0, 0)) {
+                arrivalDateControl.setNotification("Departure date should be equal or greater than Arrival date");
+            }
+        }
+    }
+
     // public methods
     return {
         OnLoad: function () {
@@ -471,6 +490,9 @@ Tc.Crm.Scripts.Events.Case = (function () {
             if (Xrm.Page.context.client.getClientState() === CLIENT_STATE_OFFLINE) {
                 Tc.Crm.Scripts.Library.Case.UpdateRelatedCompensationsSourceMarket();
             }
+        },
+        OnChangeArrivalOrDepartureDates: function () {
+          validateArrivalDateGreaterOrEqualDeparture();
         }
     };
 })();
