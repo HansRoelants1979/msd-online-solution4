@@ -1,34 +1,76 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using FakeXrmEasy;
 using Microsoft.Xrm.Sdk;
-using Tc.Crm.Common.Models;
-using Tc.Crm.Common.Services;
 
-namespace Tc.Crm.OutboundSynchronisation.CustomerTests
+namespace Tc.Crm.UnitTests.Common.IL
 {
-    public enum DataSwitch
+    internal class CrmServiceHelper
     {
-        NoRecordsReturned = 0,
-        CollectionWithNoRecordsReturned = 1,
-        ReturnsData = 2,
-    }
-    public class TestCrmService : ICrmService
-    {
-        public DataSwitch Switch { get; set; }
         public XrmFakedContext Context { get; set; }
 
-        public TestCrmService()
+        public CrmServiceHelper()
         {
             Context = new XrmFakedContext();
             PrepareData();
         }
 
-        public void AddCacheEntities()
+        public EntityCollection GetCacheEntities()
         {
-            var cacheEntityCollection = new Dictionary<Guid, Entity>();
+            var cacheEntities = Context.Data["tc_entitycache"].Values.ToList()
+                .Where(entity =>
+                    (string)entity.Attributes["tc_type"] == "contact" &&
+                    (int)entity.Attributes["statuscode"] == 1 &&
+                    ((OptionSetValue)entity.Attributes["tc_operation"]).Value == 950000000)
+                .OrderBy(entity => (DateTime)entity.Attributes["createdon"]).ToList();
+
+            return new EntityCollection(cacheEntities);
+        }
+
+        public EntityCollection GetExpiry()
+        {
+            var cacheEntities = Context.Data["tc_configuration"].Values.ToList()
+                .Where(entity =>
+                    (string)entity.Attributes["tc_name"] == "Tc.OutboundSynchronisation.SsoTokenExpiredSeconds")
+                .ToList();
+
+            return new EntityCollection(cacheEntities);
+        }
+
+        public EntityCollection GetNotBeforeTime()
+        {
+            var cacheEntities = Context.Data["tc_configuration"].Values.ToList()
+                .Where(entity =>
+                    (string)entity.Attributes["tc_name"] == "Tc.OutboundSynchronisation.SsoTokenNotBeforeTimeSeconds")
+                .ToList();
+
+            return new EntityCollection(cacheEntities);
+        }
+
+        public EntityCollection GetServiceUrl()
+        {
+            var cacheEntities = Context.Data["tc_configuration"].Values.ToList()
+                .Where(entity =>
+                    (string)entity.Attributes["tc_name"] == "Tc.OutboundSynchronisation.SsoServiceUrl")
+                .ToList();
+
+            return new EntityCollection(cacheEntities);
+        }
+
+        public EntityCollection GetPrivateKey()
+        {
+            var cacheEntities = Context.Data["tc_secureconfiguration"].Values.ToList()
+                .Where(entity =>
+                    (string)entity.Attributes["tc_name"] == "Tc.OutboundSynchronisation.JwtPrivateKey")
+                .ToList();
+
+            return new EntityCollection(cacheEntities);
+        }
+
+        private void AddCacheEntities()
+        {
+            var collection = new Dictionary<Guid, Entity>();
             var entity1Id = Guid.NewGuid();
             var cacheEntity1 = new Entity("tc_entitycache", entity1Id)
             {
@@ -363,75 +405,77 @@ namespace Tc.Crm.OutboundSynchronisation.CustomerTests
                                                 {'Name':'exchangerate','Type':2,'Value':1.0000000000}]}"
             };
 
-            cacheEntityCollection.Add(entity1Id, cacheEntity1);
-            cacheEntityCollection.Add(entityId2, cacheEntity2);
-            cacheEntityCollection.Add(entityId3, cacheEntity3);
-            cacheEntityCollection.Add(entityId4, cacheEntity4);
-            cacheEntityCollection.Add(entityId5, cacheEntity5);
+            collection.Add(entity1Id, cacheEntity1);
+            collection.Add(entityId2, cacheEntity2);
+            collection.Add(entityId3, cacheEntity3);
+            collection.Add(entityId4, cacheEntity4);
+            collection.Add(entityId5, cacheEntity5);
 
-            Context.Data.Add("tc_entitycache", cacheEntityCollection);
+            Context.Data.Add("tc_entitycache", collection);
         }
 
-        public void PrepareData()
+        private void AddConfigurations()
         {
+            var collection = new Dictionary<Guid, Entity>();
+            var entity1Id = Guid.NewGuid();
+            var configuration1 = new Entity("tc_configuration", entity1Id)
+            {
+                ["tc_name"] = "Tc.OutboundSynchronisation.SsoServiceUrl",
+                ["tc_value"] = "http://localhost:8080/int/GetCacheEntity"
+            };
+
+            var entity2Id = Guid.NewGuid();
+            var configuration2 = new Entity("tc_configuration", entity2Id)
+            {
+                ["tc_name"] = "Tc.OutboundSynchronisation.SsoTokenExpiredSeconds",
+                ["tc_value"] = "100"
+            };
+
+            var entity3Id = Guid.NewGuid();
+            var configuration3 = new Entity("tc_configuration", entity3Id)
+            {
+                ["tc_name"] = "Tc.OutboundSynchronisation.SsoTokenNotBeforeTimeSeconds",
+                ["tc_value"] = "100"
+            };
+
+            collection.Add(entity1Id, configuration1);
+            collection.Add(entity2Id, configuration2);
+            collection.Add(entity3Id, configuration3);
+
+            Context.Data.Add("tc_configuration", collection);
+        }
+
+        private void AddSecurityConfigurations()
+        {
+            var collection = new Dictionary<Guid, Entity>();
+            var entity = Guid.NewGuid();
+            var configuration = new Entity("tc_secureconfiguration", entity)
+            {
+                ["tc_name"] = "Tc.OutboundSynchronisation.JwtPrivateKey",
+                ["tc_value"] = @"<RSAKeyValue>
+  <Modulus>29xdU6ptfXHxO4anp6bLjjIbl+Fczr6B39sU9cxv9fKC6bjxQ4cX+RwsLs6PnGWRz0vw+pjazldtEit5Wwk8WNlcKOGNgs2BhWCMHYs9mgu+NlJAXdG8cPxZQKWzGJA+bmp2MnCj1XGN2wTDn+Ah3piZqAPHXlUUUe6AHlmyMwDBkR2tCUXVWVv+VCZuuuv9HVmDVSqUEx+YrKD7kiQgKk4AV25p3eV0b4Vze1sYK+1MiN4/QqBQPAiPPUlPYfm9VAES3t/U4ylbek7tVaS9d5BinGXkOnQXV6sbyRuKtaaDCX0XoNcWzOxYwiHrnO88D88a8SnhNqKIJokPTwLiLw==</Modulus>
+  <Exponent>AQAB</Exponent>
+  <P>/ON3B5UJcIsciTPnhJ2zAGOM4C/viAm64/JBYSMm8udVi4+TGrQRGwGa7H9zKx4wHr9EEsqdJpMz9AUzeSSnaKOXE+tHsqLn9LwW3lvHw7zFqEwyb30vFXEQWX1zDeiHxJc7Ukw+1RrFuP7ZuXf8flMR0YoTNgGgrowC3eDpEiM=</P>
+  <Q>3pDe3ZMe5owxSUMFKDSxHqvIop3tGyDIEdvzkA2aXNeQ3aNaEySh+KI9k9rbpQ6cA9ZV43abfo7PSSiSwZWLzTmuLqx3W8abmkNAWcKWK0uLt61+aJVoYjO/AlboRHyr+J1mSzApGL5P4rYMb4w572+ivqw2GOTN7pcPak4iEoU=</Q>
+  <DP>DlTNsA5QJKKdkWDxo+BT/pelqibNSkZS4wwdjGWzlVxqyqfuTDscJQ2oO/LVEgJ586QfNXlqAn+hGBkbW6gqHJH4w9Y3j/YPcx0dpqhI39zYzrrSuOK9QlfP92JWnNkqqIdxgy5y+Ry1S9CVgh88neQTRG6wvATHmFyy5OQUEUU=</DP>
+  <DQ>oW/xyES7yDzuTxbG+dfmlbnDCXmGEARiOtoRPG8xhaBzGuEvJ+2Ncxyzj7jTU1Fah0oD+L8CoPUTlBxS/wnrYwwwtPgyh6ZzHZ0kYzdK19KvYKb+pvugwIKKTTceuPa5gtcg6O7hEGqS5X5pXMwZBf0yzh16C+qDGUoHS3OrMUU=</DQ>
+  <InverseQ>+IP26tjXOHVO2MiWZU6ZXC7UB1c5hQzfYTsaZ43WfMoABkCZ9WvTVHnvrPAnA0ywaoAiFJb37a3XY4zzayb3ECKMPPC8nFulIxJex5CeSimVchKTPxc6wPpVJFfS4WYPTOXOmrXz7z6KdkwzrmXD5baD+Z6XOu9YHAM4cb1d10k=</InverseQ>
+  <D>DkqQtnOJknHpoFjsZPVundub949qnPW9M3PmNOQJEw+ketTOufj6EfNG2/QJWb0wcS0aiO+OqYL9UAULamN7TLs0RmQC8tGw7Z6M/Q6j/nNs9dL65B5SBXYhxxX+QkZ+CGdbL4Qq4iDze50fqjDDgtighE9akkMtgvXh1hc2giIXix9hWry0DE8ngsXSWO8b/AU+k4z5b+VeoN6c/h+SNKkTJghQgnX33MVtOGS3+VmKhImXxUOb16Eo6GE44n8BJzKmIzl6LUYduJCJcwJjQM/zt+fU1nJ83v9xxtMH1hLf0SpDEkM3gkIfH9EWoR7CKjjjc6pNWHFHgX4jC2zrIQ==</D>
+</RSAKeyValue>"
+            };
+
+
+            collection.Add(entity, configuration);
+
+            Context.Data.Add("tc_secureconfiguration", collection);
+        }
+
+        private void PrepareData()
+        { 
             Context.Data.Clear();
             AddCacheEntities();
-        }
-
-        public void UpdateStatus(Entity cacheEntity, int status)
-        {
-            cacheEntity["statuscode"] = status;
-        }
-
-        public EntityCollection RetrieveMultipleRecordsFetchXml(string query, int numberOfElements)
-        {
-            return RetrieveMultipleRecordsFetchXml(query);
-        }
-
-        public void BulkAssign(Collection<AssignInformation> assignRequests)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void BulkUpdate(IEnumerable<Entity> entities)
-        {
-            throw new NotImplementedException();
-        }
-
-        public EntityCollection RetrieveMultipleRecordsFetchXml(string query)
-        {
-            if (Switch == DataSwitch.NoRecordsReturned)
-                return null;
-            if (Switch == DataSwitch.CollectionWithNoRecordsReturned)
-                return new EntityCollection();
-
-            if (Switch == DataSwitch.ReturnsData)
-            {
-                return GetCacheEntities(Context.Data["tc_entitycache"].Values.ToList());
-            }
-
-            return null;
-        }
-
-        private EntityCollection GetCacheEntities(List<Entity> entityCacheCollection)
-        {
-            var cacheEntities = entityCacheCollection
-                .Where(entity =>
-                    (string) entity.Attributes["tc_type"] == "contact" &&
-                    (int) entity.Attributes["statuscode"] == 1 &&
-                    ((OptionSetValue) entity.Attributes["tc_operation"]).Value == 950000000)
-                .OrderBy(entity => (DateTime) entity.Attributes["createdon"]).ToList();
-
-            return new EntityCollection(cacheEntities);
-        }
-
-        public Guid Create(Entity entity)
-        {
-           return Guid.NewGuid();
-        }
-
-        public void Update(Entity entity)
-        {
+            AddConfigurations();
+            AddSecurityConfigurations();
         }
     }
 }

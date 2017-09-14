@@ -4,7 +4,7 @@ using Microsoft.Crm.UnifiedServiceDesk.Dynamics;
 using Microsoft.Uii.Csr;
 using Tc.Crm.Common.IntegrationLayer.Jti.Service;
 using Tc.Crm.Common.Services;
-using Tc.Usd.HostedControls.Constants;
+using EntityRecords = Tc.Crm.Common.Constants.EntityRecords;
 using Tc.Usd.HostedControls.Models;
 
 namespace Tc.Usd.HostedControls
@@ -17,14 +17,14 @@ namespace Tc.Usd.HostedControls
         public SingleSignOnController(Guid appID, string appName, string initString)
             : base(appID, appName, initString)
         {
-            _logger = new UsdLogger(new TraceLogger(DataKey.DiagnosticSource));
+            _logger = new UsdLogger(new TraceLogger(EntityRecords.Configuration.OwrDiagnosticSource));
             _jtiService = new JwtService(_logger);
         }
 
         protected override void DoAction(RequestActionEventArgs args)
         {
             _logger.LogInformation($"{ApplicationName} -- DoAction called for action: {args.Action}");
-            if (args.Action.Equals(ActionName.OpenOwr, StringComparison.OrdinalIgnoreCase))
+            if (args.Action.Equals(EntityRecords.Configuration.OpenOwr, StringComparison.OrdinalIgnoreCase))
                 DoActionsOnOpenOwr(args);
         }
 

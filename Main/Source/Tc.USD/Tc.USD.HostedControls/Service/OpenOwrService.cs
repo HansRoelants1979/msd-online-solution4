@@ -9,7 +9,7 @@ using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
 using Tc.Crm.Common;
 using Tc.Crm.Common.IntegrationLayer.Jti.Models;
-using Tc.Usd.HostedControls.Constants;
+using EntityRecords = Tc.Crm.Common.Constants.EntityRecords;
 using Tc.Usd.HostedControls.Service;
 
 namespace Tc.Usd.HostedControls
@@ -18,20 +18,20 @@ namespace Tc.Usd.HostedControls
     {
         public void CallSsoService(RequestActionEventArgs args)
         {
-            var opportunityId = GetParamValue(args, DataKey.OpportunityIdParamName);
+            var opportunityId = GetParamValue(args, EntityRecords.Configuration.OwrOpportunityIdParamName);
             var createdByInitials = GetCreatorsInitials(opportunityId);
             var login = GetSsoDetails(_client.CrmInterface.GetMyCrmUserId());
             var privateKey = GetPrivateInfo();
-            var expiredSeconds = GetConfig(DataKey.SsoTokenExpired);
-            var notBeforeSeconds = GetConfig(DataKey.SsoTokenNotBefore);
+            var expiredSeconds = GetConfig(EntityRecords.Configuration.OwrSsoTokenExpired);
+            var notBeforeSeconds = GetConfig(EntityRecords.Configuration.OwrSsoTokenNotBefore);
             var payload = GetPayload(login, expiredSeconds, notBeforeSeconds, createdByInitials);
             var token = _jtiService.CreateJwtToken(privateKey, payload);
             var data = WebServiceExchangeHelper.GetCustomerTravelPlannerJson();
-            var serviceUrl = GetConfig(DataKey.OwrUrlConfigName);
+            var serviceUrl = GetConfig(EntityRecords.Configuration.OwrUrlConfigName);
             var content = _jtiService.SendHttpRequest(HttpMethod.Post, serviceUrl, token, data).Content;
             var eventParams = WebServiceExchangeHelper.ContentToEventParams(content);
 
-            FireEvent(EventName.SsoCompleteEvent, eventParams);
+            FireEvent(EntityRecords.Configuration.SsoCompleteEvent, eventParams);
         }
 
         private string GetCreatorsInitials(string opportunityId)
@@ -78,12 +78,12 @@ namespace Tc.Usd.HostedControls
             {
                 ColumnSet = new ColumnSet("tc_value")
             };
-            query.AddAttributeValue("tc_name", DataKey.JwtPrivateKeyConfigName);
+            query.AddAttributeValue("tc_name", EntityRecords.Configuration.OwrJwtPrivateKeyConfigName);
             var config = ExecuteQuery(query);
             var privateKey = config?.GetAttributeValue<string>("tc_value");
             if (privateKey != null)
                 _logger.LogInformation(
-                    $"Retrieved {DataKey.JwtPrivateKeyConfigName} result {DataKey.JwtPrivateKeyConfigName} is not null");
+                    $"Retrieved {EntityRecords.Configuration.OwrJwtPrivateKeyConfigName} result {EntityRecords.Configuration.OwrJwtPrivateKeyConfigName} is not null");
             return privateKey;
         }
 
@@ -115,7 +115,7 @@ namespace Tc.Usd.HostedControls
                 EmployeeId = login.GetAttributeValue<string>("tc_employeeid"),
                 Initials = login.GetAttributeValue<string>("tc_initials"),
                 CreatedBy = createdByInitials,
-                Aud = DataKey.AudOneWebRetail
+                Aud = EntityRecords.Configuration.OwrAudOneWebRetail
             };
             return payload;
         }

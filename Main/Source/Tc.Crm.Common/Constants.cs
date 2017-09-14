@@ -17,6 +17,8 @@
         public const string Gateway = "tc_gateway";
         public const string EntityCache = "tc_entitycache";
         public const string EntityCacheMessage = "tc_entitycachemessage";
+        public const string Configuration = "tc_configuration";
+        public const string SecurityConfiguration = "tc_secureconfiguration";
     }
     public static class AliasName
     {
@@ -38,6 +40,27 @@
         public static class BusinessUnit
         {
             public const string GB = "GB";
+        }
+
+        public static class Configuration
+        {
+            public const string OutboundSynchronisationUrlConfigName = "Tc.OutboundSynchronisation.SsoServiceUrl";
+            public const string OutboundSynchronisationJwtPrivateKeyConfigName = "Tc.OutboundSynchronisation.JwtPrivateKey";
+            public const string OutboundSynchronisationSsoTokenExpired = "Tc.OutboundSynchronisation.SsoTokenExpiredSeconds";
+            public const string OutboundSynchronisationSsoTokenNotBefore = "Tc.OutboundSynchronisation.SsoTokenNotBeforeTimeSeconds";
+
+            public const string OwrUrlConfigName = "Tc.Owr.SsoServiceUrl";
+            public const string OwrDiagnosticSource = "Tc.Usd.SessionCustomActions";
+            public const string OwrJwtPrivateKeyConfigName = "Tc.Owr.JwtPrivateKey";
+            public const string OwrSsoTokenExpired = "Tc.Owr.SsoTokenExpiredSeconds";
+            public const string OwrSsoTokenNotBefore = "Tc.Owr.SsoTokenNotBeforeTimeSeconds";
+            public const string OwrAudOneWebRetail = "onewebretail";
+            public const string OwrAudWebRio = "webrio";
+            public const string OwrOpportunityIdParamName = "opportunityId";
+
+            public const string SsoCompleteEvent = "Tc.Event.OnSsoComplete";
+
+            public const string OpenOwr = "Tc.Usd.SingleSignOnController.Custom.OpenOwr";
         }
     }
 
@@ -178,6 +201,8 @@
             public const string RecordId = "tc_recordid";
             public const string StatusReason = "statuscode";
             public const string State = "statecode";
+            public const string EntityCacheId = "tc_entitycacheid";
+            public const string CreatedOn = "createdon";
         }
 
         public static class EntityCacheMessage
@@ -188,6 +213,18 @@
             public const string Notes = "tc_notes";
             public const string StatusReason = "statuscode";
             public const string State = "statecode";
+        }
+
+        public static class Configuration
+        {
+            public const string Name = "tc_name";
+            public const string Value = "tc_value";
+        }
+
+        public static class SecurityConfiguration
+        {
+            public const string Name = "tc_name";
+            public const string Value = "tc_value";
         }
     }
 }

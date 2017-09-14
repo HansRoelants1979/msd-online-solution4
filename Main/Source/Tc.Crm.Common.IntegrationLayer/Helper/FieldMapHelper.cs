@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xrm.Sdk;
+using Newtonsoft.Json;
 using Tc.Crm.Common.IntegrationLayer.Model;
 
 namespace Tc.Crm.Common.IntegrationLayer.Helper
@@ -26,6 +28,9 @@ namespace Tc.Crm.Common.IntegrationLayer.Helper
                             break;
                         case FieldType.String:
                             value = field.Value as string;
+                            break;
+                        case FieldType.OptionSet:
+                            value = JsonConvert.DeserializeObject<OptionSetValue>(field.Value.ToString()).Value.ToString();
                             break;
                         default:
                             throw new NotImplementedException("Implement converting value");

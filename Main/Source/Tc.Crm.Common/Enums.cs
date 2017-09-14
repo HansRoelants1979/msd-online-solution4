@@ -56,7 +56,7 @@
     public enum EntityCacheMessageStatusReason
     {
         Active = 1,
-        SuccessfullySenttoIL = 2,
+        SuccessfullySentToIL = 2,
         EndtoEndSuccess = 950000000,
         Failed = 950000001
     }

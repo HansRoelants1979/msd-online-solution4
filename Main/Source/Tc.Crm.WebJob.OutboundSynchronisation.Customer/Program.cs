@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ServiceModel;
 using Microsoft.Practices.Unity;
+using Tc.Crm.Common.IntegrationLayer.Jti.Service;
+using Tc.Crm.Common.IntegrationLayer.Service.Synchronisation;
+using Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound;
 using Tc.Crm.Common.Services;
-using Tc.Crm.OutboundSynchronisation.Customer.Services;
 
 namespace Tc.Crm.OutboundSynchronisation.Customer
 {
@@ -18,6 +20,8 @@ namespace Tc.Crm.OutboundSynchronisation.Customer
                 unitycontainer.RegisterType<ILogger, Logger>(new ContainerControlledLifetimeManager());
                 unitycontainer.RegisterType<IConfigurationService, ConfigurationService>(new ContainerControlledLifetimeManager());
                 unitycontainer.RegisterType<ICrmService, CrmService>(new ContainerControlledLifetimeManager());
+                unitycontainer.RegisterType<IJwtService, JwtService>(new ContainerControlledLifetimeManager());
+                unitycontainer.RegisterType<IRequestPayloadCreator, CreateCustomerRequestPayloadCreator>(new ContainerControlledLifetimeManager());
                 unitycontainer.RegisterType<IOutboundSynchronisationDataService, OutboundSynchronisationDataService>(new ContainerControlledLifetimeManager());
                 unitycontainer.RegisterType<IOutboundSynchronisationService, OutboundSynchronisationService>(new ContainerControlledLifetimeManager());
 

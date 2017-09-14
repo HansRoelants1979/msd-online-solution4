@@ -41,13 +41,32 @@
       <HintPath>..\packages\jose-jwt.2.2.0\lib\net40\jose-jwt.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Crm.Sdk.Proxy, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CrmSdk.CoreAssemblies.8.2.0.2\lib\net452\Microsoft.Crm.Sdk.Proxy.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.6.1.7600.16394\lib\net35\Microsoft.IdentityModel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xrm.Sdk, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CrmSdk.CoreAssemblies.8.2.0.2\lib\net452\Microsoft.Xrm.Sdk.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.IdentityModel" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -71,7 +90,11 @@
     <Compile Include="Service\Synchronisation\CreateCustomerRequestPayloadCreator.cs" />
     <Compile Include="Service\Synchronisation\EntityCachePayloadCreator.cs" />
     <Compile Include="Service\Synchronisation\IEntityCacheMapper.cs" />
+    <Compile Include="Service\Synchronisation\Outbound\IOutboundSynchronisationDataService.cs" />
+    <Compile Include="Service\Synchronisation\Outbound\IOutboundSynchronisationService.cs" />
     <Compile Include="Service\Synchronisation\IRequestPayloadCreator.cs" />
+    <Compile Include="Service\Synchronisation\Outbound\OutboundSynchronisationDataService.cs" />
+    <Compile Include="Service\Synchronisation\Outbound\OutboundSynchronisationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tc.Crm.Common\Tc.Crm.Common.csproj">

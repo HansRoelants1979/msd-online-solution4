@@ -2,7 +2,7 @@
 
 namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation
 {
-    interface IRequestPayloadCreator
+    public interface IRequestPayloadCreator
     {
         /// <summary>
         /// Get payload for syncronisation service call

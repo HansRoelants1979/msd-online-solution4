@@ -1,0 +1,282 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.ServiceModel;
+using Microsoft.Xrm.Sdk;
+using Tc.Crm.Common.Constants;
+using Tc.Crm.Common.Helper;
+using Tc.Crm.Common.Services;
+using Attributes = Tc.Crm.Common.Constants.Attributes;
+using EntityRecords = Tc.Crm.Common.Constants.EntityRecords;
+using EntityCache = Tc.Crm.Common.Models.EntityCache;
+using EntityCacheMessage = Tc.Crm.Common.Models.EntityCacheMessage;
+
+namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
+{
+    public class OutboundSynchronisationDataService : IOutboundSynchronisationDataService
+    {
+        private readonly ICrmService crmService;
+        private readonly ILogger logger;
+
+        private bool disposed;
+
+        private static readonly string applicationName = AppDomain.CurrentDomain.FriendlyName;
+
+        public OutboundSynchronisationDataService(ILogger logger, ICrmService crmService)
+        {
+            this.logger = logger;
+            this.crmService = crmService;
+        }
+
+        public List<EntityCache> GetEntityCacheToProcess(string type, int numberOfElements)
+        {
+            var entityCacheCollection = RetrieveEntityCaches(type, numberOfElements);
+            return PrepareEntityCacheModel(entityCacheCollection);
+        }
+
+        public EntityCollection RetrieveEntityCaches(string type, int numberOfElements)
+        {
+            if (string.IsNullOrEmpty(type))
+                throw new ArgumentNullException(nameof(type), "Type parameter cannot be empty");
+
+            var query = $@"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>
+                     <entity name='{EntityName.EntityCache}'>
+                       <attribute name='{Attributes.EntityCache.EntityCacheId}' />
+                       <attribute name='{Attributes.EntityCache.Name}' />
+                       <attribute name='{Attributes.EntityCache.CreatedOn}' />
+                       <attribute name='{Attributes.EntityCache.Type}' />
+                       <attribute name='{Attributes.EntityCache.StatusReason}' />
+                       <attribute name='{Attributes.EntityCache.State}' />
+                       <attribute name='{Attributes.EntityCache.SourceMarket}' />
+                       <attribute name='{Attributes.EntityCache.RecordId}' />
+                       <attribute name='{Attributes.EntityCache.Operation}' />
+                       <attribute name='{Attributes.EntityCache.Data}' />
+                       <order attribute='{Attributes.EntityCache.CreatedOn}' descending='false' />
+                       <filter type='and'>
+                         <filter type='and'>
+                           <condition attribute='{Attributes.EntityCache.Type}' operator='eq' value='{type}' />
+                           <condition attribute='{Attributes.EntityCache.StatusReason}' operator='eq' value='{(int)EntityCacheStatusReason.Active}' />
+                           <condition attribute='{Attributes.EntityCache.Operation}' operator='eq' value='{(int)EntityCacheOperation.Create}' />
+                         </filter>
+                       </filter>
+                     </entity>
+                   </fetch>";
+
+            EntityCollection entityCacheCollection = crmService.RetrieveMultipleRecordsFetchXml(query, numberOfElements);
+            return entityCacheCollection;
+        }
+
+        public List<EntityCache> PrepareEntityCacheModel(EntityCollection entityCacheCollection)
+        {
+            if (entityCacheCollection == null) return null;
+            var entityCacheModelList = new List<EntityCache>();
+            for (int i = 0; i < entityCacheCollection.Entities.Count; i++)
+            {
+                var entityCache = entityCacheCollection.Entities[i];
+                var entityCacheModel = new EntityCache();
+
+                entityCacheModel.Id = entityCache.Id;
+                if (EntityHelper.HasAttributeNotNull(entityCache, Attributes.EntityCache.Name))
+                    entityCacheModel.Name = entityCache.Attributes[Attributes.EntityCache.Name].ToString();
+
+                if (EntityHelper.HasAttributeNotNull(entityCache, Attributes.EntityCache.SourceMarket))
+                    entityCacheModel.SourceMarket = entityCache.Attributes[Attributes.EntityCache.SourceMarket].ToString();
+
+                if (EntityHelper.HasAttributeNotNull(entityCache, Attributes.EntityCache.Type))
+                    entityCacheModel.Type = entityCache.Attributes[Attributes.EntityCache.Type].ToString();
+
+                if (EntityHelper.HasAttributeNotNull(entityCache, Attributes.EntityCache.RecordId))
+                    entityCacheModel.RecordId = entityCache.Attributes[Attributes.EntityCache.RecordId].ToString();
+
+                if (EntityHelper.HasAttributeNotNull(entityCache, Attributes.EntityCache.Operation))
+                    entityCacheModel.Operation = ((OptionSetValue)entityCache.Attributes[Attributes.EntityCache.Operation]).Value;
+
+                if (EntityHelper.HasAttributeNotNull(entityCache, Attributes.EntityCache.Data))
+                    entityCacheModel.Data = entityCache.Attributes[Attributes.EntityCache.Data].ToString();
+
+                entityCacheModelList.Add(entityCacheModel);
+
+            }
+            return entityCacheModelList;
+        }
+
+        public EntityCollection PrepareEntityCacheMessages(List<EntityCacheMessage> entityCacheMessageModelCollection)
+        {
+            if (entityCacheMessageModelCollection == null) return null;
+            var entityCacheMessageCollection = new EntityCollection();
+            for (int i = 0; i < entityCacheMessageModelCollection.Count; i++)
+            {
+                var entityCacheMessage = PrepareEntityCacheMessage(entityCacheMessageModelCollection[i]);
+                if (entityCacheMessage != null)
+                    entityCacheMessageCollection.Entities.Add(entityCacheMessage);
+            }
+            return entityCacheMessageCollection;
+        }
+
+        public Guid CreateEntityCacheMessage(EntityCacheMessage entityCacheMessageModel)
+        {
+            var entityCacheMessage = PrepareEntityCacheMessage(entityCacheMessageModel);
+            return CreateRecord(entityCacheMessage);
+        }
+
+        public Entity PrepareEntityCacheMessage(EntityCacheMessage entityCacheMessageModel)
+        {
+            if (entityCacheMessageModel == null) return null;
+
+            var entityCacheMessage = new Entity(EntityName.EntityCacheMessage);
+
+            entityCacheMessage.Id = entityCacheMessageModel.Id;
+
+            if (entityCacheMessageModel.Name != null)
+                entityCacheMessage.Attributes[Attributes.EntityCacheMessage.Name] = entityCacheMessageModel.Name;
+
+            if (entityCacheMessageModel.EntityCacheId != null)
+                entityCacheMessage.Attributes[Attributes.EntityCacheMessage.EntityCacheId] = new EntityReference(EntityName.EntityCache, entityCacheMessageModel.EntityCacheId);
+
+            if (entityCacheMessageModel.OutcomeId != null)
+                entityCacheMessage.Attributes[Attributes.EntityCacheMessage.OutcomeId] = entityCacheMessageModel.OutcomeId;
+
+            if (entityCacheMessageModel.Notes != null)
+                entityCacheMessage.Attributes[Attributes.EntityCacheMessage.Notes] = entityCacheMessageModel.Notes;
+
+            return entityCacheMessage;
+        }
+
+        public void UpdateEntityStatus(Guid id, string entityName, int StateCode, int StatusCode)
+        {
+            var entity = new Entity(entityName);
+            entity.Id = id;
+            entity.Attributes[Attributes.EntityCache.State] = new OptionSetValue(StateCode);
+            entity.Attributes[Attributes.EntityCache.StatusReason] = new OptionSetValue(StatusCode);
+            UpdateRecord(entity);
+        }
+
+        public string GetExpiry()
+        {
+            var expiry = GetConfig(EntityRecords.Configuration.OutboundSynchronisationSsoTokenExpired);
+            return expiry;
+        }
+
+        public string GetNotBeforeTime()
+        {
+            var notBeforeTime = GetConfig(EntityRecords.Configuration.OutboundSynchronisationSsoTokenNotBefore);
+            return notBeforeTime;
+        }
+
+        public string GetSecretKey()
+        {
+            var query = $@"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>
+                    <entity name='{EntityName.SecurityConfiguration}'>
+                      <attribute name='{Attributes.SecurityConfiguration.Name}' />
+                      <attribute name ='{Attributes.SecurityConfiguration.Value}' />
+                      <filter type='and'>
+                        <condition attribute='tc_name' operator='eq' value='{EntityRecords.Configuration.OutboundSynchronisationJwtPrivateKeyConfigName}' />
+                      </filter>
+                    </entity>
+                  </fetch>";
+
+            var config = ExecuteQuery(query);
+            var privateKey = config?.GetAttributeValue<string>(Attributes.SecurityConfiguration.Value);
+            if (privateKey != null)
+                logger.LogInformation(
+                    $"Retrieved {EntityRecords.Configuration.OutboundSynchronisationJwtPrivateKeyConfigName} result {EntityRecords.Configuration.OutboundSynchronisationJwtPrivateKeyConfigName} is not null");
+
+            return privateKey;
+        }
+
+        public string GetServiceUrl()
+        {
+            var notBeforeTime = GetConfig(EntityRecords.Configuration.OutboundSynchronisationUrlConfigName);
+            return notBeforeTime;
+        }
+
+        public Guid CreateRecord(Entity entity)
+        {
+            return crmService.Create(entity);
+        }
+
+        public void UpdateRecord(Entity entity)
+        {
+            crmService.Update(entity);
+        }
+
+        #region Private Methods
+
+        private string GetConfig(string name)
+        {
+            var query = $@"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>
+                      <entity name='{EntityName.Configuration}'>
+                        <attribute name='{Attributes.Configuration.Name}' />
+                        <attribute name='{Attributes.Configuration.Value}' />
+                        <filter type='and'>
+                          <condition attribute='{Attributes.Configuration.Name}' operator='eq' value='{name}' />
+                        </filter>
+                      </entity>
+                    </fetch>";
+
+            var config = ExecuteQuery(query);
+            var value = config?.GetAttributeValue<string>(Attributes.Configuration.Value);
+            logger.LogInformation($"Retrieved {name} result: {value}");
+            return value;
+        }
+
+        private Entity ExecuteQuery(string query)
+        {
+            try
+            {
+                var response = crmService.RetrieveMultipleRecordsFetchXml(query);
+                var record = response?.Entities?.FirstOrDefault();
+                return record;
+            }
+            catch (FaultException<OrganizationServiceFault> ex)
+            {
+                logger.LogError($"{applicationName} application terminated with an error::{ex}");
+            }
+            catch (TimeoutException ex)
+            {
+                logger.LogError($"{applicationName} application terminated with an error::{ex}");
+            }
+            catch (Exception ex)
+            {
+                logger.LogError($"{applicationName} application terminated with an error::{ex}");
+            }
+
+            return null;
+        }
+
+        #endregion Private Methods
+
+        #region Displosable members
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed) return;
+            if (disposing)
+            {
+                DisposeObject(logger);
+                DisposeObject(crmService);
+            }
+
+            disposed = true;
+        }
+
+        private void DisposeObject(object obj)
+        {
+            if (obj != null)
+            {
+                if (obj is IDisposable)
+                    ((IDisposable)obj).Dispose();
+                else
+                    obj = null;
+            }
+        }
+
+        #endregion
+    }
+}
