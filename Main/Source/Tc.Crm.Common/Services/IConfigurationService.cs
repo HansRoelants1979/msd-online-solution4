@@ -10,9 +10,9 @@ namespace Tc.Crm.Common.Services
         string DestinationGatewayIds { get; set; }
         Guid DefaultUserId { get; }
         string DefaultUserName { get; }
-
         string TeamRolesToAssignCase { get; }
-
         string UserRolesToAssignCase { get; }
+        string OutboundSyncEntityName { get; }
+        int OutboundSyncBatchSize { get; }
     }
 }

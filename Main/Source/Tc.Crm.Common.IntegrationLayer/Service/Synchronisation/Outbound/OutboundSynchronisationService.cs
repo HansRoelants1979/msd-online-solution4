@@ -43,7 +43,7 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
 
         private void ProcessEntityCache()
         {
-            List<EntityCache> entityCacheCollection = outboundSynchronisationDataService.GetEntityCacheToProcess(EntityName.Contact, 1000);
+            List<EntityCache> entityCacheCollection = outboundSynchronisationDataService.GetEntityCacheToProcess(configurationService.OutboundSyncEntityName, configurationService.OutboundSyncBatchSize);
             if (entityCacheCollection == null) return;
 
             var token = jwtService.CreateJwtToken(outboundSynchronisationDataService.GetSecretKey(), CreateTokenPayload());

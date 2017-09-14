@@ -78,5 +78,9 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
                 return "Tc.CustomerRelations.Agent";
             }
         }
+
+        public string OutboundSyncEntityName => "contact";
+
+        public int OutboundSyncBatchSize => 1000;
     }
 }

@@ -78,5 +78,9 @@ namespace Tc.Crm.WebJob.AllocateResortTeamTests
                 throw new NotImplementedException();
             }
         }
+
+        public string OutboundSyncEntityName => "contact";
+
+        public int OutboundSyncBatchSize => 1000;
     }
 }

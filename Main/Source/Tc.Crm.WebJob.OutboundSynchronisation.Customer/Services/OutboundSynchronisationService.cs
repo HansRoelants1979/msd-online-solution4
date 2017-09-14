@@ -33,7 +33,7 @@ namespace Tc.Crm.OutboundSynchronisation.Customer.Services
         /// </summary>
         public void ProcessEntityCache()
         {
-            var entityCacheCollection = outboundSynchronisationDataService.GetEntityCacheToProcess(EntityName.Contact, 1000);
+            var entityCacheCollection = outboundSynchronisationDataService.GetEntityCacheToProcess(configurationService.OutboundSyncEntityName, configurationService.OutboundSyncBatchSize);
             if (entityCacheCollection == null) return;
             foreach(EntityCache entityCache in entityCacheCollection)
             {

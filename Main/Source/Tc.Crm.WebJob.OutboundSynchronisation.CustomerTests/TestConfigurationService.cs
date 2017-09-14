@@ -13,5 +13,7 @@ namespace Tc.Crm.OutboundSynchronisation.CustomerTests
         public string DefaultUserName { get; }
         public string TeamRolesToAssignCase { get; }
         public string UserRolesToAssignCase { get; }
+        public string OutboundSyncEntityName { get; }
+        public int OutboundSyncBatchSize { get; }
     }
 }

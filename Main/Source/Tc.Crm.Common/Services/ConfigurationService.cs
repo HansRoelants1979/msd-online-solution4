@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 
 namespace Tc.Crm.Common.Services
@@ -104,5 +105,40 @@ namespace Tc.Crm.Common.Services
                 throw new NotImplementedException();
             }
         }
+#region Tc.Crm.OutboundSynchronisation.Customer Configuration
+
+        public string OutboundSyncEntityName
+        {
+            get
+            {
+                var entityName = ConfigurationManager.AppSettings["entityName"];
+                if (!string.IsNullOrEmpty(entityName))
+                {
+                    return entityName;
+                }
+                throw new ConfigurationErrorsException("EntityCache entityName was not found in app.config");
+            }
+        }
+
+
+        public int OutboundSyncBatchSize
+        {
+            get
+            {
+                var batchSizeString = ConfigurationManager.AppSettings["batchSize"];
+                if (string.IsNullOrEmpty(batchSizeString))
+                {
+                    throw new ConfigurationErrorsException("EntityCache batchSize was not found in app.config");
+                }
+                int batchSize;
+                if (int.TryParse(batchSizeString, out batchSize))
+                {
+                    return batchSize;
+                }
+                throw new ConfigurationErrorsException("EntityCache batchSize is not a correct number");
+            }
+        }
+
+#endregion
     }
 }
