@@ -7,15 +7,21 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
 {
     public interface IOutboundSynchronisationDataService : IDisposable
     {
-        List<EntityCache> GetEntityCacheToProcess(string type, int numberOfElements);
-
         /// <summary>
-        /// Retrieve active antity cache entities for defined type
+        /// Retrieve active antity cache entities for defined type with 'create' operation type
         /// </summary>
         /// <param name="type">Type of entity</param>
         /// <param name="numberOfElements">Number of retrieved entities</param>
         /// <returns>active antity cache entities for defined type</returns>
-        EntityCollection RetrieveEntityCaches(string type, int numberOfElements);
+        List<EntityCache> GetCreatedEntityCacheToProcess(string type, int numberOfElements);
+
+        /// <summary>
+        /// Retrieve active antity cache entities for defined type with 'update' operation type
+        /// </summary>
+        /// <param name="type">Type of entity</param>
+        /// <param name="numberOfElements">Number of retrieved entities</param>
+        /// <returns>active antity cache entities for defined type</returns>
+        List<EntityCache> GetUpdatedEntityCacheToProcess(string type, int numberOfElements);
 
         List<EntityCache> PrepareEntityCacheModel(EntityCollection entityCacheCollection);
 

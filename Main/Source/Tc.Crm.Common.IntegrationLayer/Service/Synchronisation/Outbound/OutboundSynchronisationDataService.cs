@@ -20,7 +20,7 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
 
         private bool disposed;
 
-        private static readonly string applicationName = AppDomain.CurrentDomain.FriendlyName;
+        private static readonly string ApplicationName = AppDomain.CurrentDomain.FriendlyName;
 
         public OutboundSynchronisationDataService(ILogger logger, ICrmService crmService)
         {
@@ -28,42 +28,16 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
             this.crmService = crmService;
         }
 
-        public List<EntityCache> GetEntityCacheToProcess(string type, int numberOfElements)
+        public List<EntityCache> GetCreatedEntityCacheToProcess(string type, int numberOfElements)
         {
-            var entityCacheCollection = RetrieveEntityCaches(type, numberOfElements);
+            var entityCacheCollection = RetrieveCreatedEntityCaches(type, numberOfElements);
             return PrepareEntityCacheModel(entityCacheCollection);
         }
 
-        public EntityCollection RetrieveEntityCaches(string type, int numberOfElements)
+        public List<EntityCache> GetUpdatedEntityCacheToProcess(string type, int numberOfElements)
         {
-            if (string.IsNullOrEmpty(type))
-                throw new ArgumentNullException(nameof(type), "Type parameter cannot be empty");
-
-            var query = $@"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>
-                     <entity name='{EntityName.EntityCache}'>
-                       <attribute name='{Attributes.EntityCache.EntityCacheId}' />
-                       <attribute name='{Attributes.EntityCache.Name}' />
-                       <attribute name='{Attributes.EntityCache.CreatedOn}' />
-                       <attribute name='{Attributes.EntityCache.Type}' />
-                       <attribute name='{Attributes.EntityCache.StatusReason}' />
-                       <attribute name='{Attributes.EntityCache.State}' />
-                       <attribute name='{Attributes.EntityCache.SourceMarket}' />
-                       <attribute name='{Attributes.EntityCache.RecordId}' />
-                       <attribute name='{Attributes.EntityCache.Operation}' />
-                       <attribute name='{Attributes.EntityCache.Data}' />
-                       <order attribute='{Attributes.EntityCache.CreatedOn}' descending='false' />
-                       <filter type='and'>
-                         <filter type='and'>
-                           <condition attribute='{Attributes.EntityCache.Type}' operator='eq' value='{type}' />
-                           <condition attribute='{Attributes.EntityCache.StatusReason}' operator='eq' value='{(int)EntityCacheStatusReason.Active}' />
-                           <condition attribute='{Attributes.EntityCache.Operation}' operator='eq' value='{(int)EntityCacheOperation.Create}' />
-                         </filter>
-                       </filter>
-                     </entity>
-                   </fetch>";
-
-            EntityCollection entityCacheCollection = crmService.RetrieveMultipleRecordsFetchXml(query, numberOfElements);
-            return entityCacheCollection;
+            var entityCacheCollection = RetrieveUpdatedEntityCaches(type, numberOfElements);
+            return PrepareEntityCacheModel(entityCacheCollection);
         }
 
         public List<EntityCache> PrepareEntityCacheModel(EntityCollection entityCacheCollection)
@@ -213,6 +187,79 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
 
         #region Private Methods
 
+        private EntityCollection RetrieveCreatedEntityCaches(string type, int numberOfElements)
+        {
+            if (string.IsNullOrEmpty(type))
+                throw new ArgumentNullException(nameof(type), "Type parameter cannot be empty");
+
+            var query = $@"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>
+                     <entity name='{EntityName.EntityCache}'>
+                       <attribute name='{Attributes.EntityCache.EntityCacheId}' />
+                       <attribute name='{Attributes.EntityCache.Name}' />
+                       <attribute name='{Attributes.EntityCache.CreatedOn}' />
+                       <attribute name='{Attributes.EntityCache.Type}' />
+                       <attribute name='{Attributes.EntityCache.StatusReason}' />
+                       <attribute name='{Attributes.EntityCache.State}' />
+                       <attribute name='{Attributes.EntityCache.SourceMarket}' />
+                       <attribute name='{Attributes.EntityCache.RecordId}' />
+                       <attribute name='{Attributes.EntityCache.Operation}' />
+                       <attribute name='{Attributes.EntityCache.Data}' />
+                       <order attribute='{Attributes.EntityCache.CreatedOn}' descending='false' />
+                       <filter type='and'>
+                         <filter type='and'>
+                           <condition attribute='{Attributes.EntityCache.Type}' operator='eq' value='{type}' />
+                           <condition attribute='{Attributes.EntityCache.StatusReason}' operator='eq' value='{(int)EntityCacheStatusReason.Active}' />
+                           <condition attribute='{Attributes.EntityCache.Operation}' operator='eq' value='{(int)EntityCacheOperation.Create}' />
+                         </filter>
+                       </filter>
+                     </entity>
+                   </fetch>";
+
+            EntityCollection entityCacheCollection = crmService.RetrieveMultipleRecordsFetchXml(query, numberOfElements);
+            return entityCacheCollection;
+        }
+
+        private EntityCollection RetrieveUpdatedEntityCaches(string type, int numberOfElements)
+        {
+            if (string.IsNullOrEmpty(type))
+                throw new ArgumentNullException(nameof(type), "Type parameter cannot be empty");
+
+            var query = $@"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>
+                     <entity name='{EntityName.EntityCache}'>
+                       <attribute name='{Attributes.EntityCache.EntityCacheId}' />
+                       <attribute name='{Attributes.EntityCache.Name}' />
+                       <attribute name='{Attributes.EntityCache.CreatedOn}' />
+                       <attribute name='{Attributes.EntityCache.Type}' />
+                       <attribute name='{Attributes.EntityCache.StatusReason}' />
+                       <attribute name='{Attributes.EntityCache.State}' />
+                       <attribute name='{Attributes.EntityCache.SourceMarket}' />
+                       <attribute name='{Attributes.EntityCache.RecordId}' />
+                       <attribute name='{Attributes.EntityCache.Operation}' />
+                       <attribute name='{Attributes.EntityCache.Data}' />
+                       <order attribute='{Attributes.EntityCache.CreatedOn}' descending='false' />
+                       <filter type='and'>
+                         <condition attribute='{Attributes.EntityCache.Type}' operator='eq' value='{type}' />
+                         <condition attribute='{Attributes.EntityCache.StatusReason}' operator='eq' value='{(int)EntityCacheStatusReason.Active}' />
+                         <condition attribute='{Attributes.EntityCache.Operation}' operator='eq' value='{(int)EntityCacheOperation.Update}' />
+                       </filter>
+                       <link-entity name='{EntityName.EntityCacheMessage}' from='{Attributes.EntityCache.EntityCacheId}' to='{Attributes.EntityCache.EntityCacheId}' alias='au'>
+                         <filter type='and'>
+                           <condition attribute='{Attributes.EntityCache.StatusReason}' operator='ne' value='{(int)EntityCacheMessageStatusReason.Failed}' />
+                         </filter>
+                       </link-entity>
+                       <link-entity name='{EntityName.Contact}' from='{Attributes.Contact.ContactId}' to='{Attributes.EntityCache.RecordId}' alias='cntct'>
+                         <attribute name='{Attributes.Contact.ContactId}' />
+                           <filter type='and'>
+                             <condition attribute='{Attributes.Contact.SourceSystemId}' operator='not-null' />
+                           </filter>
+                       </link-entity>
+                     </entity>
+                   </fetch>";
+
+            EntityCollection entityCacheCollection = crmService.RetrieveMultipleRecordsFetchXml(query, numberOfElements);
+            return entityCacheCollection;
+        }
+
         private string GetConfig(string name)
         {
             var query = $@"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>
@@ -241,15 +288,15 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
             }
             catch (FaultException<OrganizationServiceFault> ex)
             {
-                logger.LogError($"{applicationName} application terminated with an error::{ex}");
+                logger.LogError($"{ApplicationName} application terminated with an error::{ex}");
             }
             catch (TimeoutException ex)
             {
-                logger.LogError($"{applicationName} application terminated with an error::{ex}");
+                logger.LogError($"{ApplicationName} application terminated with an error::{ex}");
             }
             catch (Exception ex)
             {
-                logger.LogError($"{applicationName} application terminated with an error::{ex}");
+                logger.LogError($"{ApplicationName} application terminated with an error::{ex}");
             }
 
             return null;

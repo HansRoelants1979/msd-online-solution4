@@ -35,14 +35,15 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
 
         public void Run()
         {
-            ProcessEntityCache();
+            ProcessCreateEntityCache();
+            ProcessUpdateEntityCache();
         }
 
         #region Private methods
 
-        private void ProcessEntityCache()
+        private void ProcessCreateEntityCache()
         {
-            List<EntityCache> entityCacheCollection = outboundSynchronisationDataService.GetEntityCacheToProcess(configurationService.OutboundSyncEntityName, configurationService.OutboundSyncBatchSize);
+            List<EntityCache> entityCacheCollection = outboundSynchronisationDataService.GetCreatedEntityCacheToProcess(configurationService.OutboundSyncEntityName, configurationService.OutboundSyncBatchSize);
             if (entityCacheCollection == null) return;
 
             var token = jwtService.CreateJwtToken(outboundSynchronisationDataService.GetSecretKey(), CreateTokenPayload());
@@ -77,6 +78,31 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
                     logger.LogError(e.ToString());
                     var notes = AppendNote(entityCacheMessage.Notes, HttpStatusCode.InternalServerError, "Internal server error.");
                     UpdateEntityCacheMessageStatus(entityCacheMessageId, Status.Inactive, EntityCacheMessageStatusReason.Failed, notes);
+                }
+            }
+        }
+
+        private void ProcessUpdateEntityCache()
+        {
+            List<EntityCache> entityCacheCollection = outboundSynchronisationDataService.GetUpdatedEntityCacheToProcess(configurationService.OutboundSyncEntityName, configurationService.OutboundSyncBatchSize);
+            if (entityCacheCollection == null) return;
+
+            var token = jwtService.CreateJwtToken(outboundSynchronisationDataService.GetSecretKey(), CreateTokenPayload());
+            var serviceUrl = outboundSynchronisationDataService.GetServiceUrl();
+
+            foreach (EntityCache entityCache in entityCacheCollection)
+            {
+                UpdateEntityCacheStatus(entityCache.Id, Status.Active, EntityCacheStatusReason.InProgress);
+
+                try
+                {
+                    var entityModel = JsonConvert.DeserializeObject<EntityModel>(entityCache.Data);
+                    var requestPayload = requestPayloadCreator.GetPayload(entityModel);
+                    jwtService.SendHttpRequest(HttpMethod.Post, serviceUrl, token, requestPayload);
+                }
+                catch (Exception e)
+                {
+                    logger.LogError(e.ToString());
                 }
             }
         }

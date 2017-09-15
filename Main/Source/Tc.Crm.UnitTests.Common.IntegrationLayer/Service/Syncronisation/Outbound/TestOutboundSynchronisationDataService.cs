@@ -12,7 +12,6 @@ namespace Tc.Crm.UnitTests.Common.IL.Service.Syncronisation.Outbound
         private IOutboundSynchronisationDataService outboundSynchronisationDataService;
         private ILogger logger;
         private ICrmService crmService;
-        private IConfigurationService configurationService;
         private CrmServiceHelper crmServiceHelper;
 
         [TestInitialize]
@@ -27,12 +26,27 @@ namespace Tc.Crm.UnitTests.Common.IL.Service.Syncronisation.Outbound
         /// Expected Result: Not null value is returned and collections contains records
         /// </summary>
         [TestMethod]
-        public void GetEntityCacheToProcessTest()
+        public void GetCreatedEntityCacheToProcessTest()
         {
             var expectedResult = 5;
-            crmService = new TestCrmService(crmServiceHelper.GetCacheEntities);
+            crmService = new TestCrmService(crmServiceHelper.GetCreatedCacheEntities);
             outboundSynchronisationDataService = new OutboundSynchronisationDataService(this.logger, this.crmService);
-            var actualResult = outboundSynchronisationDataService.GetEntityCacheToProcess("contact", expectedResult);
+            var actualResult = outboundSynchronisationDataService.GetCreatedEntityCacheToProcess("contact", expectedResult);
+            Assert.IsNotNull(actualResult);
+            Assert.AreEqual(expectedResult, actualResult.Count);
+        }
+
+        /// <summary>
+        /// Entity caches collecction is retrieved 
+        /// Expected Result: Not null value is returned and collections contains records
+        /// </summary>
+        [TestMethod]
+        public void GetUpdatedEntityCacheToProcessTest()
+        {
+            var expectedResult = 5;
+            crmService = new TestCrmService(crmServiceHelper.GetUpdatedCacheEntities);
+            outboundSynchronisationDataService = new OutboundSynchronisationDataService(this.logger, this.crmService);
+            var actualResult = outboundSynchronisationDataService.GetUpdatedEntityCacheToProcess("contact", expectedResult);
             Assert.IsNotNull(actualResult);
             Assert.AreEqual(expectedResult, actualResult.Count);
         }
@@ -96,6 +110,7 @@ namespace Tc.Crm.UnitTests.Common.IL.Service.Syncronisation.Outbound
             Assert.IsNotNull(config);
 
             var expectedResult = File.ReadAllText(config);
+            Assert.IsNotNull(expectedResult);
 
             crmService = new TestCrmService(crmServiceHelper.GetPrivateKey);
             outboundSynchronisationDataService = new OutboundSynchronisationDataService(this.logger, this.crmService);

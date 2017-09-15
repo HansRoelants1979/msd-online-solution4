@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tc.Crm.Common.IntegrationLayer.Jti.Models;
 using Tc.Crm.Common.IntegrationLayer.Jti.Service;
 using Tc.Crm.Common.Services;
 using Tc.Crm.Common.IntegrationLayer.Service.Synchronisation;
@@ -18,21 +16,14 @@ namespace Tc.Crm.OutboundSynchronisation.CustomerTests.Services
         private TestCrmService crmService;
         private IJwtService jwtService;
         private IRequestPayloadCreator requestPayloadCreator;
-        private OutboundJsonWebTokenPayload _payload;
 
         private readonly DateTime unixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
 
         [TestInitialize]
-        public void Setpup()
+        public void Setup()
         {
-            _payload = new OutboundJsonWebTokenPayload
-            {
-                NotBefore = GetNotBeforeTime("100").ToString(),
-                Expiry = GetExpiry("100").ToString()
-            };
-
             this.logger = new TestLogger();
-            this.configurationService = new TestConfigurationService();
+            this.configurationService = new ConfigurationService();
             this.crmService = new TestCrmService();
             this.jwtService = new TestJwtService();
             this.requestPayloadCreator = new TestRequestPayloadCreator();
@@ -85,29 +76,6 @@ namespace Tc.Crm.OutboundSynchronisation.CustomerTests.Services
             service.Run();
 
             Assert.AreEqual(expectedCacheEntities, cacheEntities);
-        }
-
-        /// <summary>
-        /// All active records are retrieved
-        /// Expected Result: Not null value is returned and collection is not empty
-        /// </summary>
-        [TestMethod]
-        public void RunTest_CacheEntityCollectionReturnOnlyActiveRecords()
-        {
-            crmService.Switch = DataSwitch.ReturnsData;
-            crmService.PrepareData();
-
-            var context = crmService.Context;
-            var cacheEntities = context.Data["tc_entitycache"];
-            var cacheEntity = cacheEntities.Values.ToList()[0];
-            crmService.UpdateStatus(cacheEntity, 2);
-
-            var expectedCacheEntities = outboundSynchronisationService.RetrieveEntityCaches("contact", 10000);
-
-            var service = new OutboundSynchronisationService(logger, outboundSynchronisationService, jwtService, requestPayloadCreator, configurationService);
-            service.Run();
-
-            Assert.AreNotSame(expectedCacheEntities, cacheEntities);
         }
 
         #region Private Methods

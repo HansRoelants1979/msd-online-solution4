@@ -164,6 +164,7 @@
         {
             public const string ContactId = "contactid";
             public const string Owner = "ownerid";
+            public const string SourceSystemId = "tc_sourcesystemid";
         }
 
         public static class Account

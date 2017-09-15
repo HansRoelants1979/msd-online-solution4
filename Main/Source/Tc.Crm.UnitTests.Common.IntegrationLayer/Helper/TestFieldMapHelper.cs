@@ -1,5 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.Xrm.Sdk;
+using Newtonsoft.Json;
 using Tc.Crm.Common.IntegrationLayer.Helper;
 using Tc.Crm.Common.IntegrationLayer.Model;
 
@@ -187,7 +189,6 @@ namespace Tc.Crm.UnitTests.Common.IntegrationLayer.Helper
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NotImplementedException))]
         public void TestMapFieldTypeOptionSet()
         {
             string property = null;
@@ -195,11 +196,11 @@ namespace Tc.Crm.UnitTests.Common.IntegrationLayer.Helper
             {
                 Type = FieldType.OptionSet,
                 Name = "fieldName",
-                Value = "fieldValue"
+                Value = JsonConvert.SerializeObject(new OptionSetValue(1000))
             };
             var mapped = FieldMapHelper.TryMapField("fieldName", field, value => property = value);
-            //Assert.AreEqual(true, mapped);
-            //Assert.AreEqual("fieldValue", property);
+            Assert.IsTrue(mapped);
+            Assert.AreEqual("1000", property);
         }
 
         [TestMethod]
