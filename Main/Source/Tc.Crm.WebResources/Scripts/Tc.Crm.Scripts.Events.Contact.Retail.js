@@ -247,8 +247,9 @@ scriptLoader.load("Tc.Crm.Scripts.Events.Contact.Retail", ["Tc.Crm.Scripts.Utils
         };
         var onModifiedOnChanged = function () {
             if (window.IsUSD == true) {
+                var eventName ="RefreshFollowUp";
 
-                window.open("http://event/?eventname=RefreshFollowUp");
+                window.open("http://event/?eventname="+eventName);
 
             }
         };
