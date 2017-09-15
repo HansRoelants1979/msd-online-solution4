@@ -27,6 +27,7 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
     var parameters = {};
     var feedBack = [];
     var contact = {};
+    var createCustomerOnly = false;
     var questionFieldId =
     {
         "TC_RT_HolidayExpectation": 251397,
@@ -44,50 +45,58 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
         "TCDIS_Language_code": 251888,
         "TCDIS_Customer_Country": 252817
     }
-    var convertToComplaint = function () {
-        try {
-            parameters = {};
-            feedBack = [];
-            contact = {};
-            var id = Xrm.Page.data.entity.getId();
-            var properties = [
-           "tc_question_field_id",
-           "tc_question_response"].join();
-            var query = "?$filter=_tc_surveyfeedbackid_value eq " + formatEntityId(id) + "&$select=" + properties;
-            Tc.Crm.Scripts.Common.Get("tc_surveyresponsefeedbacks", query).then(function (request) {
-                var feedbackCollection = JSON.parse(request.response);
-                if (feedbackCollection && feedbackCollection.value) {
-                    feedBack.push({ key: questionFieldId.TC_RT_HolidayExpectation, value: '' });
-                    feedBack.push({ key: questionFieldId.TCIDS_Time_of_day_Contact, value: '' });
-                    feedBack.push({ key: questionFieldId.TCDIS_Contact_Method, value: '' });
-                    feedBack.push({ key: questionFieldId.TCDIS_Best_Method_Contact_Other, value: '' });
-                    feedBack.push({ key: questionFieldId.TCDIS_Booking_ref, value: '' });
-                    feedBack.push({ key: questionFieldId.TCDIS_Hotel_Name, value: '' });
-                    feedBack.push({ key: questionFieldId.TCDIS_Dest_Airport, value: '' });
-                    feedBack.push({ key: questionFieldId.TC_IDS_DepartDate, value: '' });
-                    feedBack.push({ key: questionFieldId.TCDIS_Return_Date, value: '' });
-                    feedBack.push({ key: questionFieldId.TCDIS_Flight_Code, value: '' });
-                    feedBack.push({ key: questionFieldId.TC_TX_SourceMarketCode, value: '' });
-                    feedBack.push({ key: questionFieldId.TC_TX_Brand, value: '' });
-                    feedBack.push({ key: questionFieldId.TCDIS_Language_code, value: '' });
-                    feedBack.push({ key: questionFieldId.TCDIS_Customer_Country, value: '' });
-                    for (var i = 0; i < feedbackCollection.value.length; i++) {
-                        if (feedbackCollection.value[i].tc_question_field_id) {
-                            var index = feedBack.map(function (e) { return e.key; }).indexOf(feedbackCollection.value[i].tc_question_field_id);
-                            if (index >= 0)
-                                feedBack[index].value = feedbackCollection.value[i].tc_question_response;
-                        }
-                    }
-                    getSourceMarket(feedBack.filter(function (item) { return item.key === questionFieldId.TC_TX_SourceMarketCode; })[0].value);
-                }
-            }).catch(function (err) {
-                console.log("ERROR: " + err.message);
-            });
+    var convertToComplaint = function ()
+    {
+        try
+        {
+            createCustomerOnly = false;
+            processSurveyResponse();
         }
-        catch (e) {
+        catch (e)
+        {
             console.log("ERROR: " + e.message);
         }
     }
+
+    var processSurveyResponse = function () {
+        parameters = {};
+        feedBack = [];
+        contact = {};
+        var id = Xrm.Page.data.entity.getId();
+        var properties = [
+       "tc_question_field_id",
+       "tc_question_response"].join();
+        var query = "?$filter=_tc_surveyfeedbackid_value eq " + formatEntityId(id) + "&$select=" + properties;
+        Tc.Crm.Scripts.Common.Get("tc_surveyresponsefeedbacks", query).then(function (request) {
+            var feedbackCollection = JSON.parse(request.response);
+            if (feedbackCollection && feedbackCollection.value) {
+                feedBack.push({ key: questionFieldId.TC_RT_HolidayExpectation, value: '' });
+                feedBack.push({ key: questionFieldId.TCIDS_Time_of_day_Contact, value: '' });
+                feedBack.push({ key: questionFieldId.TCDIS_Contact_Method, value: '' });
+                feedBack.push({ key: questionFieldId.TCDIS_Best_Method_Contact_Other, value: '' });
+                feedBack.push({ key: questionFieldId.TCDIS_Booking_ref, value: '' });
+                feedBack.push({ key: questionFieldId.TCDIS_Hotel_Name, value: '' });
+                feedBack.push({ key: questionFieldId.TCDIS_Dest_Airport, value: '' });
+                feedBack.push({ key: questionFieldId.TC_IDS_DepartDate, value: '' });
+                feedBack.push({ key: questionFieldId.TCDIS_Return_Date, value: '' });
+                feedBack.push({ key: questionFieldId.TCDIS_Flight_Code, value: '' });
+                feedBack.push({ key: questionFieldId.TC_TX_SourceMarketCode, value: '' });
+                feedBack.push({ key: questionFieldId.TC_TX_Brand, value: '' });
+                feedBack.push({ key: questionFieldId.TCDIS_Language_code, value: '' });
+                feedBack.push({ key: questionFieldId.TCDIS_Customer_Country, value: '' });
+                for (var i = 0; i < feedbackCollection.value.length; i++) {
+                    if (feedbackCollection.value[i].tc_question_field_id) {
+                        var index = feedBack.map(function (e) { return e.key; }).indexOf(feedbackCollection.value[i].tc_question_field_id);
+                        if (index >= 0)
+                            feedBack[index].value = feedbackCollection.value[i].tc_question_response;
+                    }
+                }
+                getSourceMarket(feedBack.filter(function (item) { return item.key === questionFieldId.TC_TX_SourceMarketCode; })[0].value);
+            }
+        }).catch(function (err) {
+            console.log("ERROR: " + err.message);
+        });
+    };
 
     var getSourceMarket = function (sourceMarketCode) {
         var sourceMarketId = "";
@@ -204,8 +213,11 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
         });
     }
 
-    var getBrand = function (brandCode) {
-        if (brandCode) {
+    var getBrand = function (brandCode)
+    {
+        if (createCustomerOnly) return;
+        if (brandCode)
+        {
             var properties = [
             "tc_brandid",
             "tc_name"].join();
@@ -221,7 +233,8 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
                 console.log("ERROR: " + err.message);
             });
         }
-        else {
+        else
+        {
             getHotel(feedBack.filter(function (item) { return item.key === questionFieldId.TCDIS_Hotel_Name; })[0].value);
         }
     }
@@ -394,7 +407,8 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
     }
 
     var showCustomerInformationMissingMessage = function () {
-        Xrm.Utility.alertDialog('We do not have enough Customer data to create the Case, please create the Customer manually before proceeding');
+        var message = createCustomerOnly ? 'We do not have enough data to create Customer, please create manually' : 'We do not have enough Customer data to create the Case, please create the Customer manually before proceeding';
+        Xrm.Utility.alertDialog(message);
         return false;
     }
 
@@ -438,11 +452,33 @@ Tc.Crm.Scripts.Events.SurveyResponse = (function () {
         return attribute;
     }
 
+    var customerHasValue = function ()
+    {       
+        var customer = getControlValue("customers");
+        return (customer && customer.length > 0);
+    };
+
+    var createCustomer = function () {
+        try {
+            createCustomerOnly = true;
+            processSurveyResponse();
+        }
+        catch (e) {
+            console.log("ERROR: " + e.message);
+        }
+    };
 
     // public
     return {
         OnConvertToComplaintClick: function () {
             convertToComplaint();
+        },
+        OnCreateCustomerClick: function () {
+            createCustomer();
+        },
+        CustomerHasValue: function()
+        {
+            return customerHasValue();
         }
     };
 })();
