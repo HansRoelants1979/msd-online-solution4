@@ -29,9 +29,20 @@ namespace Tc.Crm.UnitTests.Plugins
 
         private XrmFakedPluginExecutionContext GetPluginContext(Guid countryId, string messageName, int stage, int mode)
         {
+            return GetPluginContext(countryId, messageName, stage, mode, false, false, false, false);
+        }
+
+        private XrmFakedPluginExecutionContext GetPluginContext(Guid countryId, string messageName, int stage, int mode, bool updateAddress,bool updateEmail,bool updatePhone, bool getPostImage)
+        {
             var customer = new Entity(Entities.Contact, Guid.NewGuid());
             customer.Attributes.Add(Attributes.Customer.FullName, customerName);
             customer.Attributes.Add(Attributes.Customer.SourceMarketId, new EntityReference(Entities.Country, countryId));
+            if(updateAddress)
+            customer.Attributes.Add(Attributes.Customer.Address1FlatorUnitNumber, "143");
+            if(updateEmail)
+            customer.Attributes.Add(Attributes.Customer.EmailAddress1, "srini@gmail.com");
+            if(updatePhone)
+            customer.Attributes.Add(Attributes.Customer.Telephone1, "1234545");
             var cntxt = new XrmFakedPluginExecutionContext();
             cntxt.InputParameters = new ParameterCollection();
             cntxt.InputParameters.Add(InputParameters.Target, customer);
@@ -39,13 +50,22 @@ namespace Tc.Crm.UnitTests.Plugins
             cntxt.MessageName = messageName;
             cntxt.Stage = stage;
             cntxt.Mode = mode;
+            if (getPostImage)
+            {
+                var entPostImage = new Entity();
+                entPostImage.Attributes.Add(Attributes.Customer.Address1Street, "stre");
+                entPostImage.Attributes.Add(Attributes.Customer.EmailAddress2, "test@test.com");
+                entPostImage.Attributes.Add(Attributes.Customer.Telephone2, "97868686");
+                cntxt.PostEntityImages = new EntityImageCollection();
+                cntxt.PostEntityImages.Add("PostImage", entPostImage);
+            }
             return cntxt;
         }
 
         [TestMethod]        
         public void CheckForInvalidMessage()
         {
-            var cntxt = GetPluginContext(sourceMarketId,Messages.Update,(int)PluginStage.Postoperation, (int)PluginMode.Asynchronous);
+            var cntxt = GetPluginContext(sourceMarketId,Messages.Associate,(int)PluginStage.Postoperation, (int)PluginMode.Asynchronous);
             context.ExecutePluginWithConfigurations<Tc.Crm.Plugins.Customer.CreateEntityCacheOnCustomerOperation>(cntxt, null, null);
             Assert.IsTrue(context.Data.Count == 1);
         }
@@ -103,6 +123,108 @@ namespace Tc.Crm.UnitTests.Plugins
             Assert.IsTrue(cache[0].Attributes[Attributes.EntityCache.SourceMarket].ToString() == iso2Code);
             Assert.IsTrue(cache[0].Attributes[Attributes.EntityCache.Name].ToString() == customerName);
             Assert.IsTrue(cache[0].Attributes[Attributes.EntityCache.Data].ToString().Length > 0);
+        }
+
+        [TestMethod]
+        public void CheckUpdateOperation()
+        {
+            var cntxt = GetPluginContext(sourceMarketId, Messages.Update, (int)PluginStage.Postoperation, (int)PluginMode.Asynchronous);
+            context.ExecutePluginWithConfigurations<Tc.Crm.Plugins.Customer.CreateEntityCacheOnCustomerOperation>(cntxt, null, null);
+            Assert.IsTrue(context.Data.Count == 2);
+            var cache = (from c in context.CreateQuery(Entities.EntityCache)
+                         where c.Id != Guid.Empty
+                         select c).ToList();
+            CheckUpdateCoditions(cache, false, false, false);
+        }
+
+        [TestMethod]
+        public void CheckUpdateOperationWithPostImage()
+        {
+            var cntxt = GetPluginContext(sourceMarketId, Messages.Update, (int)PluginStage.Postoperation, (int)PluginMode.Asynchronous,false,false,false,true);
+            context.ExecutePluginWithConfigurations<Tc.Crm.Plugins.Customer.CreateEntityCacheOnCustomerOperation>(cntxt, null, null);
+            Assert.IsTrue(context.Data.Count == 2);
+            var cache = (from c in context.CreateQuery(Entities.EntityCache)
+                         where c.Id != Guid.Empty
+                         select c).ToList();
+            CheckUpdateCoditions(cache, false, false, false);
+        }
+
+        [TestMethod]
+        public void CheckUpdateAddressOperationWithPostImage()
+        {
+            var cntxt = GetPluginContext(sourceMarketId, Messages.Update, (int)PluginStage.Postoperation, (int)PluginMode.Asynchronous, true, false, false, true);
+            context.ExecutePluginWithConfigurations<Tc.Crm.Plugins.Customer.CreateEntityCacheOnCustomerOperation>(cntxt, null, null);
+            Assert.IsTrue(context.Data.Count == 2);
+            var cache = (from c in context.CreateQuery(Entities.EntityCache)
+                         where c.Id != Guid.Empty
+                         select c).ToList();
+            CheckUpdateCoditions(cache, true, false, false);
+        }
+
+        [TestMethod]
+        public void CheckUpdateEmailOperationWithPostImage()
+        {
+            var cntxt = GetPluginContext(sourceMarketId, Messages.Update, (int)PluginStage.Postoperation, (int)PluginMode.Asynchronous, false, true, false, true);
+            context.ExecutePluginWithConfigurations<Tc.Crm.Plugins.Customer.CreateEntityCacheOnCustomerOperation>(cntxt, null, null);
+            Assert.IsTrue(context.Data.Count == 2);
+            var cache = (from c in context.CreateQuery(Entities.EntityCache)
+                         where c.Id != Guid.Empty
+                         select c).ToList();
+            CheckUpdateCoditions(cache, false, false, true);
+        }
+
+        [TestMethod]
+        public void CheckUpdateTelephoneOperationWithPostImage()
+        {
+            var cntxt = GetPluginContext(sourceMarketId, Messages.Update, (int)PluginStage.Postoperation, (int)PluginMode.Asynchronous, false, false, true, true);
+            context.ExecutePluginWithConfigurations<Tc.Crm.Plugins.Customer.CreateEntityCacheOnCustomerOperation>(cntxt, null, null);
+            Assert.IsTrue(context.Data.Count == 2);
+            var cache = (from c in context.CreateQuery(Entities.EntityCache)
+                         where c.Id != Guid.Empty
+                         select c).ToList();
+            CheckUpdateCoditions(cache, false, true, false);
+        }
+
+        [TestMethod]
+        public void CheckUpdateAddressTelephoneEmailOperationWithPostImage()
+        {
+            var cntxt = GetPluginContext(sourceMarketId, Messages.Update, (int)PluginStage.Postoperation, (int)PluginMode.Asynchronous, true, true, true, true);
+            context.ExecutePluginWithConfigurations<Tc.Crm.Plugins.Customer.CreateEntityCacheOnCustomerOperation>(cntxt, null, null);
+            Assert.IsTrue(context.Data.Count == 2);
+            var cache = (from c in context.CreateQuery(Entities.EntityCache)
+                         where c.Id != Guid.Empty
+                         select c).ToList();
+            CheckUpdateCoditions(cache, true, true, true);
+        }
+
+        [TestMethod]
+        public void CheckUpdateAddressTelephoneEmailOperationWithoutPostImage()
+        {
+            var cntxt = GetPluginContext(sourceMarketId, Messages.Update, (int)PluginStage.Postoperation, (int)PluginMode.Asynchronous, true, true, true, false);
+            context.ExecutePluginWithConfigurations<Tc.Crm.Plugins.Customer.CreateEntityCacheOnCustomerOperation>(cntxt, null, null);
+            Assert.IsTrue(context.Data.Count == 2);
+            var cache = (from c in context.CreateQuery(Entities.EntityCache)
+                         where c.Id != Guid.Empty
+                         select c).ToList();
+            CheckUpdateCoditions(cache,false,false,false);            
+        }
+
+        private void CheckUpdateCoditions(List<Entity> cache, bool containsAddress, bool containsTelephone, bool contaisEmail )
+        {
+            Assert.IsTrue(cache.Count == 1);
+            Assert.IsNotNull(cache[0].Attributes[Attributes.EntityCache.Name]);
+            Assert.IsNotNull(cache[0].Attributes[Attributes.EntityCache.Type]);
+            Assert.IsNotNull(cache[0].Attributes[Attributes.EntityCache.Data]);
+            Assert.IsNotNull(cache[0].Attributes[Attributes.EntityCache.Operation]);
+            Assert.IsNotNull(cache[0].Attributes[Attributes.EntityCache.SourceMarket]);
+            Assert.IsTrue(cache[0].Attributes[Attributes.EntityCache.Type].ToString() == Entities.Contact);
+            Assert.IsTrue(((OptionSetValue)cache[0].Attributes[Attributes.EntityCache.Operation]).Value == Operation.Update);
+            Assert.IsTrue(cache[0].Attributes[Attributes.EntityCache.SourceMarket].ToString() == iso2Code);
+            Assert.IsTrue(cache[0].Attributes[Attributes.EntityCache.Name].ToString() == customerName);
+            Assert.IsTrue(cache[0].Attributes[Attributes.EntityCache.Data].ToString().Length > 0);
+            Assert.IsTrue((containsTelephone) ? cache[0].Attributes[Attributes.EntityCache.Data].ToString().Contains(Attributes.Customer.Telephone2) : !cache[0].Attributes[Attributes.EntityCache.Data].ToString().Contains(Attributes.Customer.Telephone2));
+            Assert.IsTrue((containsAddress) ? cache[0].Attributes[Attributes.EntityCache.Data].ToString().Contains(Attributes.Customer.Address1Street) : !cache[0].Attributes[Attributes.EntityCache.Data].ToString().Contains(Attributes.Customer.Address1Street));
+            Assert.IsTrue((contaisEmail) ? cache[0].Attributes[Attributes.EntityCache.Data].ToString().Contains(Attributes.Customer.EmailAddress2) : !cache[0].Attributes[Attributes.EntityCache.Data].ToString().Contains(Attributes.Customer.EmailAddress2));
         }
     }
 }

@@ -33,7 +33,21 @@ namespace Tc.Crm.Plugins.MultipleEntities.BusinessLogic
 
         public abstract void SetEntityParameters(Entity sourceEntity, Entity targetEntity);  
         
-
+        /// <summary>
+        /// To get post entity image from context
+        /// </summary>
+        /// <returns></returns>
+        public virtual Entity GetEntityImage()
+        {
+            trace.Trace("GetEntityImage - Start");
+            Entity postEntityImage = null;
+            if (context.PostEntityImages == null || context.PostEntityImages.Count == 0 || !context.PostEntityImages.Contains(PostImageName) || context.PostEntityImages[PostImageName] == null)
+                return postEntityImage;            
+             postEntityImage = (Entity)context.PostEntityImages[PostImageName];
+            trace.Trace("GetEntityImage - End");
+            return postEntityImage;
+        }
+       
         /// <summary>
         /// To execute logic while creating or updating a customer record
         /// </summary>
@@ -46,15 +60,17 @@ namespace Tc.Crm.Plugins.MultipleEntities.BusinessLogic
                 trace.Trace("Contains Input Parameters 'Target' as Entity");
                 var entity = context.InputParameters[InputParameters.Target] as Entity;
                 if (context.MessageName.Equals(Messages.Create, StringComparison.OrdinalIgnoreCase))
-                    DoActionsOnEntityCreate(entity);                               
+                    DoActionsOnEntityCreate(entity);
+                else if (context.MessageName.Equals(Messages.Update, StringComparison.OrdinalIgnoreCase))
+                    DoActionsOnEntityUpdate(entity);                               
             }
             trace.Trace("DoActionsOnEntityOperation - End");
         }
 
         /// <summary>
-        /// To execute logic while creating a customer record
+        /// To execute logic while creating a record
         /// </summary>
-        /// <param name="customer"></param>
+        /// <param name="primaryEntity"></param>
         private void DoActionsOnEntityCreate(Entity primaryEntity)
         {
             if (primaryEntity == null) return;
@@ -65,6 +81,26 @@ namespace Tc.Crm.Plugins.MultipleEntities.BusinessLogic
             service.Create(entityCache);
             trace.Trace("DoActionsOnEntityCreate - End");
         }
+
+        /// <summary>
+        /// To execute logic while updating a record
+        /// </summary>
+        /// <param name="primaryEntity"></param>
+        private void DoActionsOnEntityUpdate(Entity primaryEntity)
+        {
+            if (primaryEntity == null) return;
+            trace.Trace("DoActionsOnEntityUpdate - Start");
+            var entityCache = PrepareEntityCache(primaryEntity);
+            SetEntityParameters(primaryEntity, entityCache);
+            var entityModel = GetData(primaryEntity);
+            var entityImage = GetEntityImage();
+            if (entityImage != null && entityImage.Attributes.Count > 0)
+                entityModel.Fields.AddRange(GetData(entityImage).Fields);
+            entityCache.Attributes[Attributes.EntityCache.Data] = JsonHelper.SerializeJson(entityModel);
+            service.Create(entityCache);
+            trace.Trace("DoActionsOnEntityUpdate - End");
+        }
+        
 
         /// <summary>
         /// To prepare entitycache record
@@ -327,7 +363,16 @@ namespace Tc.Crm.Plugins.MultipleEntities.BusinessLogic
             return entityRecordList;
         }
 
-        
+        /// <summary>
+        /// To get post entity image name
+        /// </summary>
+        private string PostImageName
+        {
+            get
+            {
+                return "PostImage";
+            }
+        }
         
     }
 }

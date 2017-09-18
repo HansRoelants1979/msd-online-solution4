@@ -97,6 +97,34 @@ namespace Tc.Crm.Plugins.Attributes
     {
         public const string SourceMarketId = "tc_sourcemarketid";
         public const string FullName = "fullname";
+        public const string Address1FlatorUnitNumber = "tc_address1_flatorunitnumber";
+        public const string Address1HouseNumberoBuilding = "tc_address1_housenumberorbuilding";
+        public const string Address1Street = "tc_address1_street";
+        public const string Address1AdditionalInformation = "tc_address1_additionalinformation";
+        public const string Address1Town = "tc_address1_town";
+        public const string Address1County = "tc_address1_county";
+        public const string Address1CountryId = "tc_address1_countryid";
+        public const string Address1PostalCode = "tc_address1_postalcode";
+        public const string Address2FlatorUnitNumber = "tc_address2_flatorunitnumber";
+        public const string Address2HouseNumberoBuilding = "tc_address2_housenumberorbuilding";
+        public const string Address2Street = "tc_address2_street";
+        public const string Address2AdditionalInformation = "tc_address2_additionalinformation";
+        public const string Address2Town = "tc_address2_town";
+        public const string Address2County = "tc_address2_county";
+        public const string Address2CountryId = "tc_address2_countryid";
+        public const string Address2PostalCode = "tc_address2_postalcode";
+        public const string Telephone1 = "telephone1";
+        public const string Telephone1Type = "tc_telephone1type";
+        public const string Telephone2 = "telephone2";
+        public const string Telephone2Type = "tc_telephone2type";
+        public const string Telephone3 = "telephone3";
+        public const string Telephone3Type = "tc_telephone3type";
+        public const string EmailAddress1 = "emailaddress1";
+        public const string EmailAddress1Type = "tc_emailaddress1type";
+        public const string EmailAddress2 = "emailaddress2";
+        public const string EmailAddress2Type = "tc_emailaddress2type";
+        public const string EmailAddress3 = "emailaddress3";
+        public const string EmailAddress3Type = "tc_emailaddress3type";
     }
 
     public static class Country

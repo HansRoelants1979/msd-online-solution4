@@ -55,7 +55,7 @@ namespace Tc.Crm.Plugins.MultipleEntities
         private bool IsContextValid(IPluginExecutionContext context)
         {
             if (!IsValidEntity(context)) return false;
-            if (!context.MessageName.Equals(Messages.Create, StringComparison.OrdinalIgnoreCase)) return false;
+            if (!context.MessageName.Equals(Messages.Create, StringComparison.OrdinalIgnoreCase) && !context.MessageName.Equals(Messages.Update, StringComparison.OrdinalIgnoreCase)) return false;
             if (context.Stage != (int)PluginStage.Postoperation) return false;
             if (context.Mode != (int)PluginMode.Asynchronous) return false;
             if (ServiceAccountsToIgnoreHasValue() && serviceAccountsToIgnore.Contains(FormatGuid(context.InitiatingUserId.ToString()))) return false;
