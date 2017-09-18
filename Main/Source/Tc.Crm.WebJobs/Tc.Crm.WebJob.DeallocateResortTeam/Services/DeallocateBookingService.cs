@@ -10,9 +10,9 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
     {
         private ILogger logger;
         private IDeallocationService deallocationService;
-        private IConfigurationService configurationService;
+        private IAllocationConfigurationService configurationService;
 
-        public DeallocateBookingService(ILogger logger, IDeallocationService deallocationService, IConfigurationService configurationService)
+        public DeallocateBookingService(ILogger logger, IDeallocationService deallocationService, IAllocationConfigurationService configurationService)
         {
             this.logger = logger;
             this.deallocationService = deallocationService;
@@ -55,7 +55,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
                 return;
             }
             logger.LogInformation(string.Format("Found {0} Bookings, {1} Customers, {2} Cases to process", request.TotalBookings, request.TotalCustomers, request.TotalCases));
-            deallocationService.DeallocateEntities(request);
+            deallocationService.DeallocateEntities(request, configurationService.ExecuteMultipleBatchSize);
 
             logger.LogInformation("Finished DeallocateBookings");
         }

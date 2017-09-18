@@ -185,7 +185,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
         {
             var gatewayEntityCollection = new Dictionary<Guid, Entity>();
 
-            var configurationService = new TestConfigurationService();
+            var configurationService = new TestAllocationConfigurationService();
             var gatewayIdsString = configurationService.DestinationGatewayIds;
             var gatewayIds = gatewayIdsString.Split(',');
             for (int i = 0; i < gatewayIds.Length; i++)
@@ -208,12 +208,12 @@ namespace Tc.Crm.WebJob.DeallocateResortTeamTests
             return RetrieveMultipleRecordsFetchXml(query);
         }
 
-        public void BulkAssign(Collection<AssignInformation> assignRequests)
+        public void BulkAssign(Collection<AssignInformation> assignRequests, int batchSize)
         {
             throw new NotImplementedException();
         }
 
-        public void BulkUpdate(IEnumerable<Entity> entities)
+        public void BulkUpdate(IEnumerable<Entity> entities, int batchSize)
         {
             if (entities == null)
                 throw new ArgumentNullException("BulkUpdate: entities are null");

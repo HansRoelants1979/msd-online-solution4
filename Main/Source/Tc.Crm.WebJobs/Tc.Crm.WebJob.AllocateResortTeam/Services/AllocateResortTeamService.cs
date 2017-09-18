@@ -13,8 +13,8 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
 
         ILogger logger;
         IAllocationService allocationService;
-        IConfigurationService configurationService;
-        public AllocateResortTeamService(ILogger logger, IAllocationService allocationService, IConfigurationService configurationService)
+        IAllocationConfigurationService configurationService;
+        public AllocateResortTeamService(ILogger logger, IAllocationService allocationService, IAllocationConfigurationService configurationService)
         {
             this.logger = logger;
             this.allocationService = allocationService;
@@ -57,7 +57,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
                     logger.LogInformation("No booking records matched the criteria to assign it to Resort Team");
                     return;
                 }
-                allocationService.ProcessBookingAllocations(bookingAllocationResortTeamRequests);
+                allocationService.ProcessBookingAllocations(bookingAllocationResortTeamRequests, configurationService.ExecuteMultipleBatchSize);
             }
         }
 

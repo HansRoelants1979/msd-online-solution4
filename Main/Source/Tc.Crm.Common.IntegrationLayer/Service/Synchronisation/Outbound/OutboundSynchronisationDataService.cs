@@ -169,12 +169,6 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
             return privateKey;
         }
 
-        public string GetServiceUrl()
-        {
-            var notBeforeTime = GetConfig(EntityRecords.Configuration.OutboundSynchronisationUrlConfigName);
-            return notBeforeTime;
-        }
-
         public Guid CreateRecord(Entity entity)
         {
             return crmService.Create(entity);

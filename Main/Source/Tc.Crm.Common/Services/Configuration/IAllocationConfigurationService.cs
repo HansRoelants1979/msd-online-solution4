@@ -2,17 +2,14 @@
 
 namespace Tc.Crm.Common.Services
 {
-    public interface IConfigurationService
+    public interface IAllocationConfigurationService
     {
-        string ConnectionString { get; set; }
         int DepartureDateInNextXDays { get; }
-        int ExecuteMultipleBatchSize { get; }
-        string DestinationGatewayIds { get; set; }
+        string DestinationGatewayIds { get; }
         Guid DefaultUserId { get; }
         string DefaultUserName { get; }
         string TeamRolesToAssignCase { get; }
         string UserRolesToAssignCase { get; }
-        string OutboundSyncEntityName { get; }
-        int OutboundSyncBatchSize { get; }
+        int ExecuteMultipleBatchSize { get; }
     }
 }

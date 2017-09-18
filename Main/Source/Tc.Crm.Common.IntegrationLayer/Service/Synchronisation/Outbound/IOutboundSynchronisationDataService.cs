@@ -69,11 +69,5 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
         /// </summary>
         /// <returns>Secret key value for JWT token</returns>
         string GetSecretKey();
-
-        /// <summary>
-        /// Get service URL value for Integration Layer from CRM Configuration
-        /// </summary>
-        /// <returns>Service URL</returns>
-        string GetServiceUrl();
     }
 }

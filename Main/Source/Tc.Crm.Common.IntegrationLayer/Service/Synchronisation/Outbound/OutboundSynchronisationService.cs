@@ -14,7 +14,7 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
     {
         private bool disposed;
         private readonly IOutboundSynchronisationDataService outboundSynchronisationDataService;
-        private readonly IConfigurationService configurationService;
+        private readonly IOutboundSyncConfigurationService configurationService;
         private readonly ILogger logger;
         private readonly IJwtService jwtService;
         private readonly IRequestPayloadCreator requestPayloadCreator;
@@ -24,7 +24,7 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
             IOutboundSynchronisationDataService outboundSynchronisationService,
             IJwtService jwtService,
             IRequestPayloadCreator requestPayloadCreator,
-            IConfigurationService configurationService)
+            IOutboundSyncConfigurationService configurationService)
         {
             this.outboundSynchronisationDataService = outboundSynchronisationService;
             this.logger = logger;
@@ -43,12 +43,11 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
 
         private void ProcessCreateEntityCache()
         {
-            List<EntityCache> entityCacheCollection = outboundSynchronisationDataService.GetCreatedEntityCacheToProcess(configurationService.OutboundSyncEntityName, configurationService.OutboundSyncBatchSize);
+            List<EntityCache> entityCacheCollection = outboundSynchronisationDataService.GetCreatedEntityCacheToProcess(configurationService.EntityName, configurationService.BatchSize);
             if (entityCacheCollection == null) return;
 
             var token = jwtService.CreateJwtToken(outboundSynchronisationDataService.GetSecretKey(), CreateTokenPayload());
-            var serviceUrl = outboundSynchronisationDataService.GetServiceUrl();
-
+            var serviceUrl = configurationService.CreateServiceUrl;
             foreach (EntityCache entityCache in entityCacheCollection)
             {
                 var entityCacheMessage = new EntityCacheMessage();
@@ -63,7 +62,7 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
                 {
                     var entityModel = JsonConvert.DeserializeObject<EntityModel>(entityCache.Data);
                     var requestPayload = requestPayloadCreator.GetPayload(entityModel);
-                    var response = jwtService.SendHttpRequest(HttpMethod.Post, serviceUrl, token, requestPayload);
+                    var response = jwtService.SendHttpRequest(HttpMethod.Post, serviceUrl, token, requestPayload, entityCacheMessageId.ToString());
 
                     if (IsResponseSuccessful(response.StatusCode))
                         UpdateEntityCacheMessageStatus(entityCacheMessageId, Status.Inactive, EntityCacheMessageStatusReason.SuccessfullySentToIL);
@@ -84,25 +83,40 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
 
         private void ProcessUpdateEntityCache()
         {
-            List<EntityCache> entityCacheCollection = outboundSynchronisationDataService.GetUpdatedEntityCacheToProcess(configurationService.OutboundSyncEntityName, configurationService.OutboundSyncBatchSize);
+            List<EntityCache> entityCacheCollection = outboundSynchronisationDataService.GetUpdatedEntityCacheToProcess(configurationService.EntityName, configurationService.BatchSize);
             if (entityCacheCollection == null) return;
 
             var token = jwtService.CreateJwtToken(outboundSynchronisationDataService.GetSecretKey(), CreateTokenPayload());
-            var serviceUrl = outboundSynchronisationDataService.GetServiceUrl();
-
+            var serviceUrl = configurationService.UpdateServiceUrl;
             foreach (EntityCache entityCache in entityCacheCollection)
             {
+                var entityCacheMessage = new EntityCacheMessage();
+                entityCacheMessage.Id = Guid.NewGuid();
+                entityCacheMessage.EntityCacheId = entityCache.Id;
+                entityCacheMessage.Name = entityCacheMessage.Id.ToString();
+
+                var entityCacheMessageId = CreateEntityCacheMessage(entityCacheMessage);
                 UpdateEntityCacheStatus(entityCache.Id, Status.Active, EntityCacheStatusReason.InProgress);
 
                 try
                 {
                     var entityModel = JsonConvert.DeserializeObject<EntityModel>(entityCache.Data);
                     var requestPayload = requestPayloadCreator.GetPayload(entityModel);
-                    jwtService.SendHttpRequest(HttpMethod.Post, serviceUrl, token, requestPayload);
+                    var response = jwtService.SendHttpRequest(HttpMethod.Patch, serviceUrl, token, requestPayload, entityCacheMessageId.ToString());
+
+                    if (IsResponseSuccessful(response.StatusCode))
+                        UpdateEntityCacheMessageStatus(entityCacheMessageId, Status.Inactive, EntityCacheMessageStatusReason.SuccessfullySentToIL);
+                    else
+                    {
+                        var notes = AppendNote(entityCacheMessage.Notes, response.StatusCode, response.Content);
+                        UpdateEntityCacheMessageStatus(entityCacheMessageId, Status.Inactive, EntityCacheMessageStatusReason.Failed, notes);
+                    }
                 }
                 catch (Exception e)
                 {
                     logger.LogError(e.ToString());
+                    var notes = AppendNote(entityCacheMessage.Notes, HttpStatusCode.InternalServerError, "Internal server error.");
+                    UpdateEntityCacheMessageStatus(entityCacheMessageId, Status.Inactive, EntityCacheMessageStatusReason.Failed, notes);
                 }
             }
         }

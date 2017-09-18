@@ -27,13 +27,15 @@ namespace Tc.Crm.Common.Services
         /// Execute assignment requests
         /// </summary>
         /// <param name="assignRequests">The requests</param>
-        void BulkAssign(Collection<AssignInformation> assignRequests);
+        /// <param name="batchSize"></param>
+        void BulkAssign(Collection<AssignInformation> assignRequests, int batchSize);
 
         /// <summary>
         /// Execute bulk update of entities
         /// </summary>
         /// <param name="entities">The entities</param>
-        void BulkUpdate(IEnumerable<Entity> entities);
+        /// <param name="batchSize"></param>
+        void BulkUpdate(IEnumerable<Entity> entities, int batchSize);
 
         Guid Create(Entity entity);
 

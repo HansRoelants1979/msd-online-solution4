@@ -69,6 +69,7 @@
         Delete,
         Options,
         Trace,
-        Head
+        Head,
+        Patch
     }
 }

@@ -10,19 +10,18 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services.Tests
     public class AllocateResortTeamServiceTests
     {
         ILogger logger;
-        IConfigurationService configurationService;
+        IAllocationConfigurationService configurationService;
         IAllocationService allocationService;
         TestCrmService crmService;
 
 
         [TestInitialize()]
-        public void Setpup()
+        public void Setup()
         {
             this.logger = new TestLogger();
-            this.configurationService = new TestConfigurationService();
+            this.configurationService = new TestAllocationConfigurationService();
             this.crmService = new TestCrmService();
             this.allocationService = new AllocationService(this.logger, this.crmService);
-
         }
 
         /// <summary>

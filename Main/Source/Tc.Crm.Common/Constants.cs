@@ -44,7 +44,6 @@
 
         public static class Configuration
         {
-            public const string OutboundSynchronisationUrlConfigName = "Tc.OutboundSynchronisation.SsoServiceUrl";
             public const string OutboundSynchronisationJwtPrivateKeyConfigName = "Tc.OutboundSynchronisation.JwtPrivateKey";
             public const string OutboundSynchronisationSsoTokenExpired = "Tc.OutboundSynchronisation.SsoTokenExpiredSeconds";
             public const string OutboundSynchronisationSsoTokenNotBefore = "Tc.OutboundSynchronisation.SsoTokenNotBeforeTimeSeconds";

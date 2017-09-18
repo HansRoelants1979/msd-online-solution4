@@ -13,7 +13,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
         IList<BookingAllocationResponse> GetBookingAllocations(BookingAllocationRequest bookingAllocationRequest);
         IList<BookingAllocationResponse> PrepareBookingAllocation(EntityCollection bookingCollection, List<ChildHotelTeam> childTeam);
         StringBuilder GetDestinationGateways(IList<Guid> destinationGateways);
-        void ProcessBookingAllocations(IList<BookingAllocationResortTeamRequest> bookingAllocationResortTeamRequest);
+        void ProcessBookingAllocations(IList<BookingAllocationResortTeamRequest> bookingAllocationResortTeamRequest, int batchSize);
         OwnerType GetOwnerType(EntityReference owner);
         Owner GetOwner(Entity entity, string attribute, bool isAliasedValue);
         List<ParentHotelTeam> GetHotelTeams(EntityCollection bookingCollection);

@@ -21,7 +21,8 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
         /// Assign bookings, customers and cases to default team
         /// </summary>
         /// <param name="request"></param>
-        void DeallocateEntities(DeallocationExecutionRequest request);
+        /// <param name="batchSize"></param>
+        void DeallocateEntities(DeallocationExecutionRequest request, int batchSize);
 
         Collection<Guid> GetUsersBySecurityRole(Dictionary<Guid, OwnerType> caseOwnersandDefaultTeams, string securityRole);
 

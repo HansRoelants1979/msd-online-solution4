@@ -14,7 +14,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services.Tests
     public class DeallocateBookingServiceTests
     {
         ILogger logger;
-        IConfigurationService configurationService;
+        IAllocationConfigurationService configurationService;
         IDeallocationService deallocationService;
         TestCrmService crmService;
         public TestContext TestContext{ get; set; }
@@ -23,7 +23,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services.Tests
         public void Setup()
         {
             this.logger = new TestLogger();
-            this.configurationService = new TestConfigurationService();
+            this.configurationService = new TestAllocationConfigurationService();
             this.crmService = new TestCrmService();
             this.deallocationService = new DeallocationService(this.logger, this.crmService);
         }

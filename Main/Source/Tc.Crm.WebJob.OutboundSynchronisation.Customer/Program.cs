@@ -19,6 +19,7 @@ namespace Tc.Crm.OutboundSynchronisation.Customer
                 IUnityContainer unitycontainer = new UnityContainer();
                 unitycontainer.RegisterType<ILogger, Logger>(new ContainerControlledLifetimeManager());
                 unitycontainer.RegisterType<IConfigurationService, ConfigurationService>(new ContainerControlledLifetimeManager());
+                unitycontainer.RegisterType<IOutboundSyncConfigurationService, OutboundSyncConfigurationService>(new ContainerControlledLifetimeManager());
                 unitycontainer.RegisterType<ICrmService, CrmService>(new ContainerControlledLifetimeManager());
                 unitycontainer.RegisterType<IJwtService, JwtService>(new ContainerControlledLifetimeManager());
                 unitycontainer.RegisterType<IRequestPayloadCreator, CreateCustomerRequestPayloadCreator>(new ContainerControlledLifetimeManager());

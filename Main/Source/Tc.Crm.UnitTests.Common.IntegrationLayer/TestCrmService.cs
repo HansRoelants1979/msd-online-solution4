@@ -27,12 +27,12 @@ namespace Tc.Crm.UnitTests.Common.IL
             return executor.Invoke();
         }
 
-        public void BulkAssign(Collection<AssignInformation> assignRequests)
+        public void BulkAssign(Collection<AssignInformation> assignRequests, int batchSize)
         {
             throw new NotImplementedException();
         }
 
-        public void BulkUpdate(IEnumerable<Entity> entities)
+        public void BulkUpdate(IEnumerable<Entity> entities, int batchSize)
         {
             throw new NotImplementedException();
         }

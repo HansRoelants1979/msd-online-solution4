@@ -160,12 +160,16 @@
     <Compile Include="Models\EntityModel.cs" />
     <Compile Include="Models\Owner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ConfigurationService.cs" />
+    <Compile Include="Services\Configuration\AllocationConfigurationService.cs" />
+    <Compile Include="Services\Configuration\CrmConfigurationService.cs" />
     <Compile Include="Services\CrmService.cs" />
-    <Compile Include="Services\IConfigurationService.cs" />
+    <Compile Include="Services\Configuration\IAllocationConfigurationService.cs" />
+    <Compile Include="Services\Configuration\IOutboundSyncConfigurationService.cs" />
+    <Compile Include="Services\Configuration\IConfigurationService.cs" />
     <Compile Include="Services\ICrmService.cs" />
     <Compile Include="Services\ILogger.cs" />
     <Compile Include="Services\Logger.cs" />
+    <Compile Include="Services\Configuration\OutboundSyncConfigurationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">

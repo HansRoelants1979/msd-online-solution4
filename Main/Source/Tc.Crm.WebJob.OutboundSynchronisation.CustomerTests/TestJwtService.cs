@@ -14,11 +14,20 @@ namespace Tc.Crm.OutboundSynchronisation.CustomerTests
             return Guid.NewGuid().ToString();
         }
 
+        public ResponseEntity SendHttpRequest(HttpMethod method, string serviceUrl, string token, string data, string correlationId)
+        {
+            return new ResponseEntity
+            {
+                Content = "Success",
+                StatusCode = HttpStatusCode.OK
+            };
+        }
+
         public ResponseEntity SendHttpRequest(HttpMethod method, string serviceUrl, string token, string data)
         {
             return new ResponseEntity
             {
-                Content = string.Empty,
+                Content = "Success",
                 StatusCode = HttpStatusCode.OK
             };
         }

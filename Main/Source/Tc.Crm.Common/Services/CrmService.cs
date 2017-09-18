@@ -60,7 +60,7 @@ namespace Tc.Crm.Common.Services
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "BulkAssign")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.WebJob.AllocateResortTeam.Services.ILogger.LogInformation(System.String)")]
-        public void BulkAssign(Collection<AssignInformation> assignRequestCollection)
+        public void BulkAssign(Collection<AssignInformation> assignRequestCollection, int batchSize)
         {
             //logger.LogInformation("BulkAssign - start");
             if (assignRequestCollection == null || assignRequestCollection.Count == 0)
@@ -68,7 +68,6 @@ namespace Tc.Crm.Common.Services
 
             logger.LogInformation("\r\n\r\n***** Going to execute " + assignRequestCollection.Count + " assign requests ***** ");
 
-            var batch = configurationService.ExecuteMultipleBatchSize;
             ExecuteMultipleRequest request = new ExecuteMultipleRequest()
             {
                 Settings = new ExecuteMultipleSettings()
@@ -99,12 +98,12 @@ namespace Tc.Crm.Common.Services
                     Target = target,
                     Assignee = assignee
                 });
-                if (request.Requests.Count == batch)
+                if (request.Requests.Count == batchSize)
                 {
                     ExecuteMultipleRequests(request);
                 }
 
-                if (request.Requests.Count < batch && i == assignRequestCollection.Count - 1)
+                if (request.Requests.Count < batchSize && i == assignRequestCollection.Count - 1)
                 {
                     ExecuteMultipleRequests(request);
                 }
@@ -112,12 +111,10 @@ namespace Tc.Crm.Common.Services
             //logger.LogInformation("BulkAssign - end");
         }
 
-        public void BulkUpdate(IEnumerable<Entity> entities)
+        public void BulkUpdate(IEnumerable<Entity> entities, int batchSize)
         {
             if (entities == null)
                 throw new ArgumentNullException("entities");
-
-            var batch = configurationService.ExecuteMultipleBatchSize;
 
             ExecuteMultipleRequest request = new ExecuteMultipleRequest
             {
@@ -132,7 +129,7 @@ namespace Tc.Crm.Common.Services
             foreach(var entity in entities)
             {
                 request.Requests.Add(new UpdateRequest { Target = entity });
-                if (request.Requests.Count == batch)
+                if (request.Requests.Count == batchSize)
                 {
                     ExecuteMultipleRequests(request);
                 }

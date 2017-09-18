@@ -211,7 +211,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
         }
 
 
-        public void DeallocateEntities(DeallocationExecutionRequest request)
+        public void DeallocateEntities(DeallocationExecutionRequest request, int batchSize)
         {
             var requests = new Collection<Entity>();
             // bookings
@@ -222,7 +222,7 @@ namespace Tc.Crm.WebJob.DeallocateResortTeam.Services
             CreateUpdateRequests(requests, request.Cases);
             // assign
             if (requests.Count > 0)
-                crmService.BulkUpdate(requests);
+                crmService.BulkUpdate(requests, batchSize);
         }
 
         public string GetLookupConditions(IEnumerable<Guid> guids)

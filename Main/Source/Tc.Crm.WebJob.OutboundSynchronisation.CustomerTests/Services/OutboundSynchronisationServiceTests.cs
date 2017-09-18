@@ -11,7 +11,7 @@ namespace Tc.Crm.OutboundSynchronisation.CustomerTests.Services
     public class OutboundSynchronisationServiceTests
     {
         private ILogger logger;
-        private IConfigurationService configurationService;
+        private IOutboundSyncConfigurationService configurationService;
         private IOutboundSynchronisationDataService outboundSynchronisationService;
         private TestCrmService crmService;
         private IJwtService jwtService;
@@ -23,7 +23,7 @@ namespace Tc.Crm.OutboundSynchronisation.CustomerTests.Services
         public void Setup()
         {
             this.logger = new TestLogger();
-            this.configurationService = new ConfigurationService();
+            this.configurationService = new TestOutboundSyncConfigurationService();
             this.crmService = new TestCrmService();
             this.jwtService = new TestJwtService();
             this.requestPayloadCreator = new TestRequestPayloadCreator();
@@ -77,23 +77,5 @@ namespace Tc.Crm.OutboundSynchronisation.CustomerTests.Services
 
             Assert.AreEqual(expectedCacheEntities, cacheEntities);
         }
-
-        #region Private Methods
-
-        private double GetExpiry(string expiredSeconds)
-        {
-            int sec;
-            int.TryParse(expiredSeconds, out sec);
-            return Math.Round((DateTime.UtcNow - unixEpoch).TotalSeconds + sec);
-        }
-
-        private double GetNotBeforeTime(string notBeforeSeconds)
-        {
-            int sec;
-            int.TryParse(notBeforeSeconds, out sec);
-            return Math.Round((DateTime.UtcNow - unixEpoch).TotalSeconds + sec);
-        }
-
-        #endregion
     }
 }

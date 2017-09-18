@@ -39,12 +39,14 @@ namespace Tc.Crm.Common.IntegrationLayer.Jti.Service
             return JWT.Encode(payload, rsa, JwsAlgorithm.RS256, header);
         }
 
-        public ResponseEntity SendHttpRequest(HttpMethod method, string serviceUrl, string token, string data)
+        public ResponseEntity SendHttpRequest(HttpMethod method, string serviceUrl, string token, string data, string correlationId)
         {
             var request = new HttpClient();
             request.DefaultRequestHeaders.Accept.Clear();
             request.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             request.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            if (!string.IsNullOrEmpty(correlationId))
+                request.DefaultRequestHeaders.Add("tc-correlation-id", correlationId);
 
             ResponseEntity result;
 
@@ -83,6 +85,11 @@ namespace Tc.Crm.Common.IntegrationLayer.Jti.Service
             return result;
         }
 
+        public ResponseEntity SendHttpRequest(HttpMethod method, string serviceUrl, string token, string data)
+        {
+            return SendHttpRequest(method, serviceUrl, token, data, null);
+        }
+
         public double GetExpiry(string expiredSeconds)
         {
             int sec;
@@ -102,7 +109,7 @@ namespace Tc.Crm.Common.IntegrationLayer.Jti.Service
             return Math.Round((DateTime.UtcNow - UnixEpoch).TotalSeconds + sec);
         }
 
-        private static Task<HttpResponseMessage> SendHttpRequestAsync(HttpMethod method, string serviceUrl, string data, HttpClient request)
+        private Task<HttpResponseMessage> SendHttpRequestAsync(HttpMethod method, string serviceUrl, string data, HttpClient request)
         {
             switch (method)
             {
@@ -114,9 +121,38 @@ namespace Tc.Crm.Common.IntegrationLayer.Jti.Service
                     return request.PutAsync(serviceUrl, new StringContent(data, Encoding.UTF8, "application/json"));
                 case HttpMethod.Delete:
                     return request.DeleteAsync(serviceUrl);
+                case HttpMethod.Patch:
+                    return PatchAsync(request, serviceUrl, new StringContent(data, Encoding.UTF8, "application/json"));
                 default:
                     throw new ArgumentOutOfRangeException(nameof(method), method, null);
             }
+        }
+
+        public async Task<HttpResponseMessage> PatchAsync(HttpClient client, string serviceUrl, HttpContent content)
+        {
+            var method = new System.Net.Http.HttpMethod("PATCH");
+            var request = new HttpRequestMessage(method, serviceUrl)
+            {
+                Content = content
+            };
+
+            var response = new HttpResponseMessage();
+
+            try
+            {
+                response = await client.SendAsync(request);
+            }
+            catch (TaskCanceledException exception)
+            {
+                _logger.LogError(exception.ToString());
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception.ToString());
+            }
+
+            response.StatusCode = HttpStatusCode.InternalServerError;
+            return response;
         }
     }
 }

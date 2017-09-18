@@ -328,7 +328,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "ProcessBookingAllocations")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Tc.Crm.WebJob.AllocateResortTeam.Services.ILogger.LogInformation(System.String)")]
-        public void ProcessBookingAllocations(IList<BookingAllocationResortTeamRequest> bookingAllocationResortTeamRequests)
+        public void ProcessBookingAllocations(IList<BookingAllocationResortTeamRequest> bookingAllocationResortTeamRequests, int batchSize)
         {
             
             if (bookingAllocationResortTeamRequests == null || bookingAllocationResortTeamRequests.Count == 0)
@@ -367,7 +367,7 @@ namespace Tc.Crm.WebJob.AllocateResortTeam.Services
             }
 
             if (assignRequests != null && assignRequests.Count > 0)
-                crmService.BulkAssign(assignRequests);
+                crmService.BulkAssign(assignRequests, batchSize);
 
             
         }
