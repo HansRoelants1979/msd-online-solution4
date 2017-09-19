@@ -44,7 +44,7 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
         private void ProcessCreateEntityCache()
         {
             List<EntityCache> entityCacheCollection = outboundSynchronisationDataService.GetCreatedEntityCacheToProcess(configurationService.EntityName, configurationService.BatchSize);
-            if (entityCacheCollection == null) return;
+            if (entityCacheCollection == null || entityCacheCollection.Count == 0) return;
 
             var token = jwtService.CreateJwtToken(outboundSynchronisationDataService.GetSecretKey(), CreateTokenPayload());
             var serviceUrl = configurationService.CreateServiceUrl;
@@ -84,16 +84,21 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
         private void ProcessUpdateEntityCache()
         {
             List<EntityCache> entityCacheCollection = outboundSynchronisationDataService.GetUpdatedEntityCacheToProcess(configurationService.EntityName, configurationService.BatchSize);
-            if (entityCacheCollection == null) return;
+            if (entityCacheCollection == null || entityCacheCollection.Count == 0) return;
 
             var token = jwtService.CreateJwtToken(outboundSynchronisationDataService.GetSecretKey(), CreateTokenPayload());
             var serviceUrl = configurationService.UpdateServiceUrl;
+            var skippedrecords = new List<string>();
             foreach (EntityCache entityCache in entityCacheCollection)
             {
-                var entityCacheMessage = new EntityCacheMessage();
-                entityCacheMessage.Id = Guid.NewGuid();
-                entityCacheMessage.EntityCacheId = entityCache.Id;
-                entityCacheMessage.Name = entityCacheMessage.Id.ToString();
+                if (skippedrecords.Contains(entityCache.RecordId))
+                    continue;
+
+                var entityCacheMessage = new EntityCacheMessage
+                {
+                    EntityCacheId = entityCache.Id,
+                    Name = Guid.NewGuid().ToString()
+                };
 
                 var entityCacheMessageId = CreateEntityCacheMessage(entityCacheMessage);
                 UpdateEntityCacheStatus(entityCache.Id, Status.Active, EntityCacheStatusReason.InProgress);
@@ -110,6 +115,7 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
                     {
                         var notes = AppendNote(entityCacheMessage.Notes, response.StatusCode, response.Content);
                         UpdateEntityCacheMessageStatus(entityCacheMessageId, Status.Inactive, EntityCacheMessageStatusReason.Failed, notes);
+                        skippedrecords.Add(entityCache.RecordId);
                     }
                 }
                 catch (Exception e)

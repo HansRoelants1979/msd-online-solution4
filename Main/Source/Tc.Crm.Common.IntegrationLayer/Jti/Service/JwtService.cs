@@ -145,13 +145,14 @@ namespace Tc.Crm.Common.IntegrationLayer.Jti.Service
             catch (TaskCanceledException exception)
             {
                 _logger.LogError(exception.ToString());
+                response.StatusCode = HttpStatusCode.InternalServerError;
             }
             catch (Exception exception)
             {
                 _logger.LogError(exception.ToString());
+                response.StatusCode = HttpStatusCode.InternalServerError;
             }
-
-            response.StatusCode = HttpStatusCode.InternalServerError;
+            
             return response;
         }
     }
