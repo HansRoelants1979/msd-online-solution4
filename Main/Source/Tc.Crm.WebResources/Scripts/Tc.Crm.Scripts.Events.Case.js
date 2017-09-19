@@ -76,7 +76,8 @@ Tc.Crm.Scripts.Events.Case = (function () {
 
     var Attributes = {
       ArrivalDate: "tc_arrivaldate",
-      DepartureDate: "tc_departuredate"
+      DepartureDate: "tc_departuredate",
+      RepNotes: "tc_reportnotes"       
     }
     
 
@@ -85,7 +86,8 @@ Tc.Crm.Scripts.Events.Case = (function () {
         Tc.Crm.Scripts.Library.Contact.GetNotificationForPhoneNumber("tc_otherpartyphone");
         validateCaseAssociatedCustomerPhoneNum();
         preFilterLocationOfficeLookup();
-        if (Xrm.Page.ui.formSelector.getCurrentItem().getLabel() == "iDS Case") {
+        var currentItem = Xrm.Page.ui.formSelector.getCurrentItem();
+        if (currentItem == null || currentItem.getLabel() === "iDS Case") {
             setNotification();
         }
     }
@@ -476,6 +478,14 @@ Tc.Crm.Scripts.Events.Case = (function () {
             if (Xrm.Page.context.client.getClientState() !== CLIENT_STATE_OFFLINE) {
                 Tc.Crm.Scripts.Library.Case.UpdateRelatedCompensationsSourceMarket();
             }
+        },
+        OnValidateRepNotes: function () {
+            var currentItem = Xrm.Page.ui.formSelector.getCurrentItem();
+            if (currentItem == null || currentItem.getLabel() === "iDS Case") {
+                var repNotes = Xrm.Page.data.entity.attributes.get(Attributes.RepNotes);
+                return repNotes != null && repNotes.getValue() != null && repNotes.getValue() !== "";
+            }
+            return true;
         },
         OnCaseFieldChange: function () {
             GetTheSourceMarketCurrency();
