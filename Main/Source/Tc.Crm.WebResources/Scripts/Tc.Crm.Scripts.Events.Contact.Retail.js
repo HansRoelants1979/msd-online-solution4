@@ -75,7 +75,10 @@ scriptLoader.load("Tc.Crm.Scripts.Events.Contact.Retail", ["Tc.Crm.Scripts.Utils
             ContactChangeReason: "tc_keycontactchangereason",
             Telephone1: "telephone1",
             Telephone2: "telephone2",
-            Telephone3: "telephone3"
+            Telephone3: "telephone3",
+            MarketingConsentUpdatedOn: "tc_marketingupdated",
+            MarketingConsentUpdatedBy: "tc_marketingupdatedby",
+            MarketingConsentUpdatedCheckbox: "tc_marketingconsentupdated"
         }
         var FormMode = {
             Create: 1,
@@ -96,6 +99,11 @@ scriptLoader.load("Tc.Crm.Scripts.Events.Contact.Retail", ["Tc.Crm.Scripts.Utils
             CustomerDetails: "SUMMARY_TAB"
         }
         var Sections = {
+        }
+        var Messages = {
+            MarketingConsent365DaysNotification: "As one year has elapsed, please check the Marketing Consent with the Customer",
+            MarketingConsentNewlyMigratedNotification: "Please check the Marketing consent with the Customer",
+            MarketingConsentContactDetailsChangedNotification: "As one or more of the customers address, telephone number(s) or email address have been updated, please ask the customer to re-select their marketing preferences"
         }
 
         function onPhoneChanged(context) {
@@ -185,6 +193,66 @@ scriptLoader.load("Tc.Crm.Scripts.Events.Contact.Retail", ["Tc.Crm.Scripts.Utils
             return false;
         };
 
+        function is365DaysPassedSinceLastCheck(lastUpdatedDate) {
+            var currentDate = new Date().setHours(0, 0, 0, 0);
+            var millisecondsPerDay = 24 * 60 * 60 * 1000;
+
+            var differenceInDays = (currentDate - lastUpdatedDate.setHours(0, 0, 0, 0)) / millisecondsPerDay;
+            return differenceInDays >= 365;
+        }
+
+        function checkMarketingConsentOnLoad() {
+            if (!Xrm.Page.getAttribute(Attributes.MarketingConsentUpdatedOn).getValue()) {
+                Xrm.Page.ui.setFormNotification(Messages.MarketingConsentNewlyMigratedNotification, "WARNING", "MarketingConsentNotificationNewlyMigrated");
+                Xrm.Page.getAttribute(Attributes.MarketingConsentUpdatedCheckbox).setValue(false);
+            } else {
+                if (!Xrm.Page.getAttribute(Attributes.MarketingConsentUpdatedCheckbox).getValue()) {
+                    Xrm.Page.ui.setFormNotification(Messages.MarketingConsentContactDetailsChangedNotification, "WARNING", "MarketingConsentNotificationContactDetails");
+                    if (is365DaysPassedSinceLastCheck(Xrm.Page.getAttribute(Attributes.MarketingConsentUpdatedOn).getValue())) {
+                        Xrm.Page.ui.setFormNotification(Messages.MarketingConsent365DaysNotification, "WARNING", "MarketingConsentNotification365");
+                    }
+                }
+            }
+        }
+
+        function marketingConsentCheckOnSave() {
+            if (Xrm.Page.getAttribute(Attributes.MarketingConsentUpdatedCheckbox) && Xrm.Page.getAttribute(Attributes.MarketingConsentUpdatedCheckbox).getValue()) {
+                updateMarketingConsentTimestamp();
+                Xrm.Page.ui.clearFormNotification("MarketingConsentNotificationNewlyMigrated");
+                Xrm.Page.ui.clearFormNotification("MarketingConsentNotificationContactDetails");
+                Xrm.Page.ui.clearFormNotification("MarketingConsentNotification365");
+            }
+        }
+
+        function updateMarketingConsentTimestamp() {
+            Xrm.Page.getAttribute(Attributes.MarketingConsentUpdatedOn).setSubmitMode("always");
+            Xrm.Page.getAttribute(Attributes.MarketingConsentUpdatedBy).setSubmitMode("always");
+            Xrm.Page.getAttribute(Attributes.MarketingConsentUpdatedOn).setValue(new Date());
+
+            var setUservalue = [];
+            setUservalue[0] = {};
+            setUservalue[0].id = Xrm.Page.context.getUserId();
+            setUservalue[0].entityType = "systemuser";
+            setUservalue[0].name = Xrm.Page.context.getUserName();
+
+            Xrm.Page.getAttribute(Attributes.MarketingConsentUpdatedBy).setValue(setUservalue);
+        }
+
+        function marketingConsentFieldsOnChange() {
+            if (isFormTypeUpdate()) {
+                Xrm.Page.getAttribute(Attributes.MarketingConsentUpdatedCheckbox).setValue(true);
+                Xrm.Page.getControl(Attributes.MarketingConsentUpdatedCheckbox).setDisabled(true);
+            }
+        }
+
+        function customerDetailsMarketingConsentFieldsOnChange() {
+            if (isFormTypeUpdate()) {
+                Xrm.Page.getControl(Attributes.MarketingConsentUpdatedCheckbox).setDisabled(false);
+                Xrm.Page.ui.setFormNotification(Messages.MarketingConsentContactDetailsChangedNotification, "WARNING", "MarketingConsentNotificationContactDetails");
+                Xrm.Page.getAttribute(Attributes.MarketingConsentUpdatedCheckbox).setValue(false);
+            }
+        }
+
         var onLoad = function () {
             Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.Telephone1);
             Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.Telephone2);
@@ -196,6 +264,7 @@ scriptLoader.load("Tc.Crm.Scripts.Events.Contact.Retail", ["Tc.Crm.Scripts.Utils
             if (isFormTypeUpdate()) {
                 showTabsSections();
                 toggleTab(Tabs.CustomerDetails, false);
+                checkMarketingConsentOnLoad();
             }
         }
 
@@ -210,6 +279,9 @@ scriptLoader.load("Tc.Crm.Scripts.Events.Contact.Retail", ["Tc.Crm.Scripts.Utils
                 else {
                     eventArgs.preventDefault();
                 }
+            }
+            if (isFormTypeUpdate()) {
+                marketingConsentCheckOnSave();
             }
         };
 
@@ -276,6 +348,12 @@ scriptLoader.load("Tc.Crm.Scripts.Events.Contact.Retail", ["Tc.Crm.Scripts.Utils
             },
             OnModifiedOnChanged: function () {
                 onModifiedOnChanged();
+            },
+            OnChangeMarketingConsent: function() {
+                marketingConsentFieldsOnChange();
+            },
+            OnChangeCustomerDetailsMarketingConsent: function() {
+                customerDetailsMarketingConsentFieldsOnChange();
             }
         };
     })();
