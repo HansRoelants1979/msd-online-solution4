@@ -236,9 +236,10 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
                          <condition attribute='{Attributes.EntityCache.StatusReason}' operator='eq' value='{(int)EntityCacheStatusReason.Active}' />
                          <condition attribute='{Attributes.EntityCache.Operation}' operator='eq' value='{(int)EntityCacheOperation.Update}' />
                        </filter>
-                       <link-entity name='{EntityName.EntityCacheMessage}' from='{Attributes.EntityCache.EntityCacheId}' to='{Attributes.EntityCache.EntityCacheId}' alias='au'>
+                       <link-entity name='{EntityName.EntityCacheMessage}' from='{Attributes.EntityCache.EntityCacheId}' to='{Attributes.EntityCache.EntityCacheId}' link-type='outer' alias='au'>
                          <filter type='and'>
-                           <condition attribute='{Attributes.EntityCache.StatusReason}' operator='ne' value='{(int)EntityCacheMessageStatusReason.Failed}' />
+                           <condition attribute='{Attributes.EntityCacheMessage.StatusReason}' operator='ne' value='{(int)EntityCacheMessageStatusReason.Failed}' />
+                           <condition attribute='{Attributes.EntityCacheMessage.StatusReason}' operator='ne' value='{(int)EntityCacheMessageStatusReason.Active}' />
                          </filter>
                        </link-entity>
                        <link-entity name='{EntityName.Contact}' from='{Attributes.Contact.ContactId}' to='{Attributes.EntityCache.RecordId}' alias='cntct'>
