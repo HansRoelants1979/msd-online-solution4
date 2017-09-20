@@ -18,7 +18,6 @@ namespace Tc.Crm.UnitTests.Common.IntegrationLayer.Service.Syncronisation
             var model = new EntityModel
             {
                 Fields = new List<Field> {
-                    new Field { Name = "tc_sourcesystemid", Type = FieldType.Guid, Value = guid },
                     new Field { Name = Attributes.Customer.Salutation, Type = FieldType.String, Value = "salutation" },
                     new Field { Name = Attributes.Customer.FirstName, Type = FieldType.String, Value = "firstname" },
                     new Field { Name = Attributes.Customer.LastName, Type = FieldType.String, Value = "lastname" },
@@ -27,7 +26,7 @@ namespace Tc.Crm.UnitTests.Common.IntegrationLayer.Service.Syncronisation
                 }
             };
             var mapper = new CreateCustomerRequestMapper();
-            var customer  = mapper.Map(model) as Customer;
+            var customer  = mapper.Map(guid.ToString(), model) as Customer;
             Assert.IsNotNull(customer);
             Assert.IsNotNull(customer.CustomerIdentifier);
             Assert.AreEqual(guid.ToString(), customer.CustomerIdentifier.CustomerId);            

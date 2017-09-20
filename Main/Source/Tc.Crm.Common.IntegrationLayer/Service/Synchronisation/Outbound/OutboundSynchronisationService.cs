@@ -61,7 +61,7 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
                 try
                 {
                     var entityModel = JsonConvert.DeserializeObject<EntityModel>(entityCache.Data);
-                    var requestPayload = requestPayloadCreator.GetPayload(entityModel);
+                    var requestPayload = requestPayloadCreator.GetPayload(entityCache.RecordId, entityModel);
                     var response = jwtService.SendHttpRequest(HttpMethod.Post, serviceUrl, token, requestPayload, entityCacheMessageId.ToString());
 
                     if (IsResponseSuccessful(response.StatusCode))
@@ -106,7 +106,7 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
                 try
                 {
                     var entityModel = JsonConvert.DeserializeObject<EntityModel>(entityCache.Data);
-                    var requestPayload = requestPayloadCreator.GetPayload(entityModel);
+                    var requestPayload = requestPayloadCreator.GetPayload(entityCache.RecordId, entityModel);
                     var response = jwtService.SendHttpRequest(HttpMethod.Patch, serviceUrl, token, requestPayload, entityCacheMessageId.ToString());
 
                     if (IsResponseSuccessful(response.StatusCode))

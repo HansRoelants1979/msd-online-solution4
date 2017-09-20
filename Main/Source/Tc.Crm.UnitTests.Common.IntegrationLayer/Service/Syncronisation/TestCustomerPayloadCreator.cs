@@ -17,7 +17,6 @@ namespace Tc.Crm.UnitTests.Common.IntegrationLayer.Service.Syncronisation
             var model = new EntityModel
             {
                 Fields = new List<Field> {
-                    new Field { Name = "tc_sourcesystemid", Type = FieldType.Guid, Value = guid },
                     new Field { Name = Attributes.Customer.Salutation, Type = FieldType.String, Value = "salutation" },
                     new Field { Name = Attributes.Customer.FirstName, Type = FieldType.String, Value = "firstname" },
                     new Field { Name = Attributes.Customer.LastName, Type = FieldType.String, Value = "lastname" },
@@ -27,7 +26,7 @@ namespace Tc.Crm.UnitTests.Common.IntegrationLayer.Service.Syncronisation
             };
 
             var creator = new CreateCustomerRequestPayloadCreator();
-            var payload = creator.GetPayload(model);
+            var payload = creator.GetPayload(guid.ToString(), model);
             Assert.IsNotNull(payload);
         }
     }

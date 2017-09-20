@@ -11,21 +11,24 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation
     /// </summary>
     public class CreateCustomerRequestMapper : IEntityCacheMapper
     {
+
         /// <summary>
         /// Creates Tc.Crm.Common.IntegrationLayer.Model.Schema.Customer class and fills properties required to create request
         /// </summary>
+        /// <param name="recordId">Customer record guid</param>
         /// <param name="model">Customer record entity model</param>
         /// <returns>mapped Tc.Crm.Common.IntegrationLayer.Model.Schema.Customer</returns>
-        public object Map(EntityModel model)
+        public object Map(string recordId, EntityModel model)
         {
-            const int fieldsToMapCount = 6;
+            const int fieldsToMapCount = 5;
             var mappedFieldsCount = 0;
             var customer = new Customer();
             customer.CustomerIdentifier = new CustomerIdentifier();
             customer.CustomerIdentity = new CustomerIdentity();
+            customer.CustomerIdentifier.CustomerId = recordId;
             foreach (var field in model.Fields)
             {
-                var mapped = FieldMapHelper.TryMapField("tc_sourcesystemid", field, value => customer.CustomerIdentifier.CustomerId = value) ||
+                var mapped = 
                     FieldMapHelper.TryMapField(Attributes.Customer.Salutation, field, value => customer.CustomerIdentity.Salutation = value) ||
                     FieldMapHelper.TryMapField(Attributes.Customer.FirstName, field, value => customer.CustomerIdentity.FirstName = value) ||
                     FieldMapHelper.TryMapField(Attributes.Customer.LastName, field, value => customer.CustomerIdentity.LastName = value) ||
