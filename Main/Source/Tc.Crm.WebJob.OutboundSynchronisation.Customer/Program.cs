@@ -22,9 +22,16 @@ namespace Tc.Crm.OutboundSynchronisation.Customer
                 unitycontainer.RegisterType<IOutboundSyncConfigurationService, OutboundSyncConfigurationService>(new ContainerControlledLifetimeManager());
                 unitycontainer.RegisterType<ICrmService, CrmService>(new ContainerControlledLifetimeManager());
                 unitycontainer.RegisterType<IJwtService, JwtService>(new ContainerControlledLifetimeManager());
-                unitycontainer.RegisterType<IRequestPayloadCreator, CreateCustomerRequestPayloadCreator>(new ContainerControlledLifetimeManager());
+                unitycontainer.RegisterType<IRequestPayloadCreator, CreateCustomerRequestPayloadCreator>("CreateCustomerRequestPayloadCreator", new ContainerControlledLifetimeManager());
+                unitycontainer.RegisterType<IRequestPayloadCreator, UpdateCustomerRequestPayloadCreator>("UpdateCustomerRequestPayloadCreator", new ContainerControlledLifetimeManager());
                 unitycontainer.RegisterType<IOutboundSynchronisationDataService, OutboundSynchronisationDataService>(new ContainerControlledLifetimeManager());
-                unitycontainer.RegisterType<IOutboundSynchronisationService, OutboundSynchronisationService>(new ContainerControlledLifetimeManager());
+                unitycontainer.RegisterType<IOutboundSynchronisationService, OutboundSynchronisationService>(new InjectionConstructor(
+                    new ResolvedParameter<ILogger>(),
+                    new ResolvedParameter<IOutboundSynchronisationDataService>(),
+                    new ResolvedParameter<IJwtService>(),
+                    new ResolvedParameter<IRequestPayloadCreator>("CreateCustomerRequestPayloadCreator"),
+                    new ResolvedParameter<IRequestPayloadCreator>("UpdateCustomerRequestPayloadCreator"),
+                    new ResolvedParameter<IOutboundSyncConfigurationService>()));
 
                 logger = unitycontainer.Resolve<ILogger>();
                 using (var outboundSynchronisationCustomerService = unitycontainer.Resolve<IOutboundSynchronisationService>())

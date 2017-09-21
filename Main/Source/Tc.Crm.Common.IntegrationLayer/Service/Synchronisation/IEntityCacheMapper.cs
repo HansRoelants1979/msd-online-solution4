@@ -1,5 +1,4 @@
-﻿using System;
-using Tc.Crm.Common.IntegrationLayer.Model;
+﻿using Tc.Crm.Common.IntegrationLayer.Model;
 
 namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation
 {
@@ -8,10 +7,9 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation
         /// <summary>
         /// Converts EntityModel to schema object
         /// </summary>
-        /// <param name="recordId">id of record</param>
         /// <param name="model">EntityModel object to convert</param>
         /// <returns>Object of schema type</returns>
         /// <summary>
-        object Map(string recordId, EntityModel model);
+        object Map(EntityModel model);
     }
 }

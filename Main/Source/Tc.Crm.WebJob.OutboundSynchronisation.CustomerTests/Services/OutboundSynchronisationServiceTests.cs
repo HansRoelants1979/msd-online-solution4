@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tc.Crm.Common.IntegrationLayer.Jti.Service;
 using Tc.Crm.Common.Services;
 using Tc.Crm.Common.IntegrationLayer.Service.Synchronisation;
@@ -15,9 +14,8 @@ namespace Tc.Crm.OutboundSynchronisation.CustomerTests.Services
         private IOutboundSynchronisationDataService outboundSynchronisationService;
         private TestCrmService crmService;
         private IJwtService jwtService;
-        private IRequestPayloadCreator requestPayloadCreator;
-
-        private readonly DateTime unixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+        private IRequestPayloadCreator createRequestPayloadCreator;
+        private IRequestPayloadCreator updateRequestPayloadCreator;
 
         [TestInitialize]
         public void Setup()
@@ -26,7 +24,8 @@ namespace Tc.Crm.OutboundSynchronisation.CustomerTests.Services
             this.configurationService = new TestOutboundSyncConfigurationService();
             this.crmService = new TestCrmService();
             this.jwtService = new TestJwtService();
-            this.requestPayloadCreator = new TestRequestPayloadCreator();
+            this.createRequestPayloadCreator = new CreateCustomerRequestPayloadCreator();
+            this.updateRequestPayloadCreator = new UpdateCustomerRequestPayloadCreator();
             this.outboundSynchronisationService = new OutboundSynchronisationDataService(this.logger, this.crmService);
         }
 
@@ -39,7 +38,8 @@ namespace Tc.Crm.OutboundSynchronisation.CustomerTests.Services
         public void RunTest_CacheEntityCollectionIsNulld()
         {
             crmService.Switch = DataSwitch.NoRecordsReturned;
-            var service = new OutboundSynchronisationService(logger, outboundSynchronisationService, jwtService, requestPayloadCreator, configurationService);
+            var service = new OutboundSynchronisationService(logger, outboundSynchronisationService, jwtService,
+                createRequestPayloadCreator, updateRequestPayloadCreator, configurationService);
             service.Run();
             Assert.IsTrue(true);
         }
@@ -53,29 +53,10 @@ namespace Tc.Crm.OutboundSynchronisation.CustomerTests.Services
         public void RunTest_CacheEntityCollectionIsEmpty()
         {
             crmService.Switch = DataSwitch.CollectionWithNoRecordsReturned;
-            var service = new OutboundSynchronisationService(logger, outboundSynchronisationService, jwtService, requestPayloadCreator, configurationService);
+            var service = new OutboundSynchronisationService(logger, outboundSynchronisationService, jwtService,
+                createRequestPayloadCreator, updateRequestPayloadCreator, configurationService);
             service.Run();
             Assert.IsTrue(true);
-        }
-
-        /// <summary>
-        /// All needed records are retrieved
-        /// Expected Result: Not null value is returned and collection is not empty
-        /// </summary>
-        [TestMethod()]
-        public void RunTest_CacheEntityCollectionContainsAllNecessaryRecords()
-        {
-            crmService.Switch = DataSwitch.ReturnsData;
-            crmService.PrepareData();
-
-            var context = crmService.Context;
-            var cacheEntities = context.Data["tc_entitycache"];
-            var expectedCacheEntities = cacheEntities;
-
-            var service = new OutboundSynchronisationService(logger, outboundSynchronisationService, jwtService, requestPayloadCreator, configurationService);
-            service.Run();
-
-            Assert.AreEqual(expectedCacheEntities, cacheEntities);
         }
     }
 }

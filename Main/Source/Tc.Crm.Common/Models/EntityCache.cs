@@ -9,13 +9,6 @@ namespace Tc.Crm.Common.Models
         public string RecordId { get; set; }
         public string Type { get; set; }
         public int? Operation { get; set; }
-
-        public override string EntityName
-        {
-            get
-            {
-                return Entities.EntityName.EntityCache;
-            }
-        }
+        public override string EntityName => Entities.EntityName.EntityCache;
     }
 }

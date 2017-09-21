@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using Newtonsoft.Json;
 using Tc.Crm.Common.IntegrationLayer.Jti.Models;
@@ -7,6 +8,7 @@ using Tc.Crm.Common.IntegrationLayer.Jti.Service;
 using Tc.Crm.Common.Models;
 using Tc.Crm.Common.Services;
 using EntityModel = Tc.Crm.Common.IntegrationLayer.Model.EntityModel;
+using Attributes = Tc.Crm.Common.Constants.Attributes;
 
 namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
 {
@@ -17,20 +19,23 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
         private readonly IOutboundSyncConfigurationService configurationService;
         private readonly ILogger logger;
         private readonly IJwtService jwtService;
-        private readonly IRequestPayloadCreator requestPayloadCreator;
+        private readonly IRequestPayloadCreator createRequestPayloadCreator;
+        private readonly IRequestPayloadCreator updateRequestPayloadCreator;
 
 
         public OutboundSynchronisationService(ILogger logger,
             IOutboundSynchronisationDataService outboundSynchronisationService,
             IJwtService jwtService,
-            IRequestPayloadCreator requestPayloadCreator,
+            IRequestPayloadCreator createRequestPayloadCreator,
+            IRequestPayloadCreator updateRequestPayloadCreator,
             IOutboundSyncConfigurationService configurationService)
         {
             this.outboundSynchronisationDataService = outboundSynchronisationService;
             this.logger = logger;
             this.jwtService = jwtService;
             this.configurationService = configurationService;
-            this.requestPayloadCreator = requestPayloadCreator;
+            this.createRequestPayloadCreator = createRequestPayloadCreator;
+            this.updateRequestPayloadCreator = updateRequestPayloadCreator;
         }
 
         public void Run()
@@ -61,7 +66,7 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
                 try
                 {
                     var entityModel = JsonConvert.DeserializeObject<EntityModel>(entityCache.Data);
-                    var requestPayload = requestPayloadCreator.GetPayload(entityCache.RecordId, entityModel);
+                    var requestPayload = createRequestPayloadCreator.GetPayload(entityModel);
                     var response = jwtService.SendHttpRequest(HttpMethod.Post, serviceUrl, token, requestPayload, entityCacheMessageId.ToString());
 
                     if (IsResponseSuccessful(response.StatusCode))
@@ -106,8 +111,10 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
                 try
                 {
                     var entityModel = JsonConvert.DeserializeObject<EntityModel>(entityCache.Data);
-                    var requestPayload = requestPayloadCreator.GetPayload(entityCache.RecordId, entityModel);
-                    var response = jwtService.SendHttpRequest(HttpMethod.Patch, serviceUrl, token, requestPayload, entityCacheMessageId.ToString());
+                    var requestPayload = updateRequestPayloadCreator.GetPayload(entityModel);
+
+                    var sourceSystemId = entityModel.Fields.Single(field => field.Name == Attributes.Customer.SourceSystemId).Value.ToString();
+                    var response = jwtService.SendHttpRequest(HttpMethod.Patch, CreateServiceUrl(serviceUrl, sourceSystemId), token, requestPayload, entityCacheMessageId.ToString());
 
                     if (IsResponseSuccessful(response.StatusCode))
                         UpdateEntityCacheMessageStatus(entityCacheMessageId, Status.Inactive, EntityCacheMessageStatusReason.SuccessfullySentToIL);
@@ -125,6 +132,14 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
                     UpdateEntityCacheMessageStatus(entityCacheMessageId, Status.Inactive, EntityCacheMessageStatusReason.Failed, notes);
                 }
             }
+        }
+
+        private static string CreateServiceUrl(string serviceUrl, string sourceSystemId)
+        {
+            if (!serviceUrl.EndsWith("/"))
+                return serviceUrl + "/" + sourceSystemId;
+
+            return serviceUrl + sourceSystemId;
         }
 
         private bool IsResponseSuccessful(HttpStatusCode statusCode)

@@ -157,6 +157,7 @@
             public const string FirstName = "firstname";
             public const string LastName = "lastname";
             public const string Birthdate = "birthdate";
+            public const string SourceSystemId = "tc_sourcesystemid";
         }
 
         public static class Contact

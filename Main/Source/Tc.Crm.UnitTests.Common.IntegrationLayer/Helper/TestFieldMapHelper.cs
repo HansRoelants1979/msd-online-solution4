@@ -218,5 +218,359 @@ namespace Tc.Crm.UnitTests.Common.IntegrationLayer.Helper
             //Assert.AreEqual(true, mapped);
             //Assert.AreEqual("fieldValue", property);
         }
+
+        [TestMethod]
+        public void TestPatchElementMapFieldTypeString()
+        {
+            var patch = new PatchElement();
+            var expectedOperator = "op";
+            var expectedPath = "path";
+            var expectedValue = "fieldValue";
+            var field = new Field
+            {
+                Name = "fieldName",
+                Type = FieldType.String,
+                Value = "fieldValue"
+            };
+            var mapped = FieldMapHelper.TryMapField("fieldName", field, expectedOperator, expectedPath, (op, path, value) =>
+            {
+                patch.Operator = op;
+                patch.Path = path;
+                patch.Value = value;
+            });
+
+            Assert.IsTrue(mapped);
+            Assert.IsNotNull(patch);
+            Assert.AreEqual(expectedOperator, patch.Operator);
+            Assert.AreEqual(expectedPath, patch.Path);
+            Assert.AreEqual(expectedValue, patch.Value);
+        }
+
+        [TestMethod]
+        public void TestPatchElementMapFieldMatchFieldName()
+        {
+            var patch = new PatchElement();
+            var expectedOperator = "op";
+            var expectedPath = "path";
+            var expectedValue = "fieldValue";
+            var field = new Field
+            {
+                Name = "fieldName",
+                Type = FieldType.String,
+                Value = expectedValue
+            };
+            var mapped = FieldMapHelper.TryMapField("fieldName", field, expectedOperator, expectedPath, (op, path, value) =>
+            {
+                patch.Operator = op;
+                patch.Path = path;
+                patch.Value = value;
+            });
+            Assert.IsTrue(mapped);
+            Assert.IsNotNull(patch);
+            Assert.AreEqual(expectedOperator, patch.Operator);
+            Assert.AreEqual(expectedPath, patch.Path);
+            Assert.AreEqual(expectedValue, patch.Value);
+            mapped = FieldMapHelper.TryMapField("fieldName1", field, expectedOperator, expectedPath, (op, path, value) =>
+            {
+                patch.Operator = op;
+                patch.Path = path;
+                patch.Value = value;
+            });
+            Assert.IsFalse(mapped);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NotImplementedException))]
+        public void TestPatchElementMapFieldTypeAmount()
+        {
+            var patch = new PatchElement();
+            var expectedOperator = "op";
+            var expectedPath = "path";
+            var expectedValue = "fieldValue";
+            var field = new Field
+            {
+                Type = FieldType.Amount,
+                Name = "fieldName",
+                Value = expectedValue
+            };
+            var mapped = FieldMapHelper.TryMapField("fieldName", field, expectedOperator, expectedPath, (op, path, value) =>
+            {
+                patch.Operator = op;
+                patch.Path = path;
+                patch.Value = value;
+            });
+            //Assert.IsTrue(mapped);
+            //Assert.IsNotNull(patch);
+            //Assert.AreEqual(expectedOperator, patch.Operator);
+            //Assert.AreEqual(expectedPath, patch.Path);
+            //Assert.AreEqual(expectedValue, patch.Value);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NotImplementedException))]
+        public void TestPatchElementMapFieldTypeBoolean()
+        {
+            var patch = new PatchElement();
+            var expectedOperator = "op";
+            var expectedPath = "path";
+            var expectedValue = "fieldValue";
+            var field = new Field
+            {
+                Type = FieldType.Boolean,
+                Name = "fieldName",
+                Value = expectedValue
+            };
+            var mapped = FieldMapHelper.TryMapField("fieldName", field, expectedOperator, expectedPath, (op, path, value) =>
+            {
+                patch.Operator = op;
+                patch.Path = path;
+                patch.Value = value;
+            });
+            //Assert.IsTrue(mapped);
+            //Assert.IsNotNull(patch);
+            //Assert.AreEqual(expectedOperator, patch.Operator);
+            //Assert.AreEqual(expectedPath, patch.Path);
+            //Assert.AreEqual(expectedValue, patch.Value);
+        }
+
+        [TestMethod]
+        public void TestPatchElementMapFieldTypeDateTime()
+        {
+            var patch = new PatchElement();
+            var expectedOperator = "op";
+            var expectedPath = "path";
+            var expectedValue = DateTime.Now.Date;
+            var field = new Field
+            {
+                Type = FieldType.DateTime,
+                Name = "fieldName",
+                Value = expectedValue
+            };
+            var mapped = FieldMapHelper.TryMapField("fieldName", field, expectedOperator, expectedPath, (op, path, value) =>
+            {
+                patch.Operator = op;
+                patch.Path = path;
+                patch.Value = value;
+            });
+            //Assert.IsTrue(mapped);
+            //Assert.IsNotNull(patch);
+            //Assert.AreEqual(expectedOperator, patch.Operator);
+            //Assert.AreEqual(expectedPath, patch.Path);
+            //Assert.AreEqual(expectedValue, patch.Value);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NotImplementedException))]
+        public void TestPatchElementMapFieldTypeDecimal()
+        {
+            var patch = new PatchElement();
+            var expectedOperator = "op";
+            var expectedPath = "path";
+            var expectedValue = "fieldValue";
+            var field = new Field
+            {
+                Type = FieldType.Decimal,
+                Name = "fieldName",
+                Value = expectedValue
+            };
+            var mapped = FieldMapHelper.TryMapField("fieldName", field, expectedOperator, expectedPath, (op, path, value) =>
+            {
+                patch.Operator = op;
+                patch.Path = path;
+                patch.Value = value;
+            });
+            //Assert.IsTrue(mapped);
+            //Assert.IsNotNull(patch);
+            //Assert.AreEqual(expectedOperator, patch.Operator);
+            //Assert.AreEqual(expectedPath, patch.Path);
+            //Assert.AreEqual(expectedValue, patch.Value);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NotImplementedException))]
+        public void TestPatchElementMapFieldTypeDouble()
+        {
+            var patch = new PatchElement();
+            var expectedOperator = "op";
+            var expectedPath = "path";
+            var expectedValue = "fieldValue";
+            var field = new Field
+            {
+                Type = FieldType.Double,
+                Name = "fieldName",
+                Value = expectedValue
+            };
+            var mapped = FieldMapHelper.TryMapField("fieldName", field, expectedOperator, expectedPath, (op, path, value) =>
+            {
+                patch.Operator = op;
+                patch.Path = path;
+                patch.Value = value;
+            });
+            //Assert.IsTrue(mapped);
+            //Assert.IsNotNull(patch);
+            //Assert.AreEqual(expectedOperator, patch.Operator);
+            //Assert.AreEqual(expectedPath, patch.Path);
+            //Assert.AreEqual(expectedValue, patch.Value);
+        }
+
+        [TestMethod]
+        public void TestPatchElementMapFieldTypeGuid()
+        {
+            var patch = new PatchElement();
+            var expectedOperator = "op";
+            var expectedPath = "path";
+            var expectedValue = Guid.NewGuid();
+            var field = new Field
+            {
+                Type = FieldType.Guid,
+                Name = "fieldName",
+                Value = expectedValue
+            };
+            var mapped = FieldMapHelper.TryMapField("fieldName", field, expectedOperator, expectedPath, (op, path, value) =>
+            {
+                patch.Operator = op;
+                patch.Path = path;
+                patch.Value = value;
+            });
+            //Assert.IsTrue(mapped);
+            //Assert.IsNotNull(patch);
+            //Assert.AreEqual(expectedOperator, patch.Operator);
+            //Assert.AreEqual(expectedPath, patch.Path);
+            //Assert.AreEqual(expectedValue, patch.Value);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NotImplementedException))]
+        public void TestPatchElementMapFieldTypeInt32()
+        {
+            var patch = new PatchElement();
+            var expectedOperator = "op";
+            var expectedPath = "path";
+            var expectedValue = "fieldValue";
+            var field = new Field
+            {
+                Type = FieldType.Int32,
+                Name = "fieldName",
+                Value = expectedValue
+            };
+            var mapped = FieldMapHelper.TryMapField("fieldName", field, expectedOperator, expectedPath, (op, path, value) =>
+            {
+                patch.Operator = op;
+                patch.Path = path;
+                patch.Value = value;
+            });
+            //Assert.IsTrue(mapped);
+            //Assert.IsNotNull(patch);
+            //Assert.AreEqual(expectedOperator, patch.Operator);
+            //Assert.AreEqual(expectedPath, patch.Path);
+            //Assert.AreEqual(expectedValue, patch.Value);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NotImplementedException))]
+        public void TestPatchElementMapFieldTypeLookup()
+        {
+            var patch = new PatchElement();
+            var expectedOperator = "op";
+            var expectedPath = "path";
+            var expectedValue = "fieldValue";
+            var field = new Field
+            {
+                Type = FieldType.Lookup,
+                Name = "fieldName",
+                Value = expectedValue
+            };
+            var mapped = FieldMapHelper.TryMapField("fieldName", field, expectedOperator, expectedPath, (op, path, value) =>
+            {
+                patch.Operator = op;
+                patch.Path = path;
+                patch.Value = value;
+            });
+            //Assert.IsTrue(mapped);
+            //Assert.IsNotNull(patch);
+            //Assert.AreEqual(expectedOperator, patch.Operator);
+            //Assert.AreEqual(expectedPath, patch.Path);
+            //Assert.AreEqual(expectedValue, patch.Value);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NotImplementedException))]
+        public void TestPatchElementMapFieldTypeNull()
+        {
+            var patch = new PatchElement();
+            var expectedOperator = "op";
+            var expectedPath = "path";
+            var expectedValue = "fieldValue";
+            var field = new Field
+            {
+                Type = FieldType.Null,
+                Name = "fieldName",
+                Value = expectedValue
+            };
+            var mapped = FieldMapHelper.TryMapField("fieldName", field, expectedOperator, expectedPath, (op, path, value) =>
+            {
+                patch.Operator = op;
+                patch.Path = path;
+                patch.Value = value;
+            });
+            //Assert.IsTrue(mapped);
+            //Assert.IsNotNull(patch);
+            //Assert.AreEqual(expectedOperator, patch.Operator);
+            //Assert.AreEqual(expectedPath, patch.Path);
+            //Assert.AreEqual(expectedValue, patch.Value);
+        }
+
+        [TestMethod]
+        public void TestPatchElementMapFieldTypeOptionSet()
+        {
+            var patch = new PatchElement();
+            var expectedOperator = "op";
+            var expectedPath = "path";
+            var expectedValue = JsonConvert.SerializeObject(new OptionSetValue(1000));
+            var field = new Field
+            {
+                Type = FieldType.OptionSet,
+                Name = "fieldName",
+                Value = expectedValue
+            };
+            var mapped = FieldMapHelper.TryMapField("fieldName", field, expectedOperator, expectedPath, (op, path, value) =>
+            {
+                patch.Operator = op;
+                patch.Path = path;
+                patch.Value = value;
+            });
+            //Assert.IsTrue(mapped);
+            //Assert.IsNotNull(patch);
+            //Assert.AreEqual(expectedOperator, patch.Operator);
+            //Assert.AreEqual(expectedPath, patch.Path);
+            //Assert.AreEqual(expectedValue, patch.Value);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NotImplementedException))]
+        public void TestPatchElementMapFieldTypeOptionRecordCollection()
+        {
+            var patch = new PatchElement();
+            var expectedOperator = "op";
+            var expectedPath = "path";
+            var expectedValue = "fieldValue";
+            var field = new Field
+            {
+                Type = FieldType.RecordCollection,
+                Name = "fieldName",
+                Value = expectedValue
+            };
+            var mapped = FieldMapHelper.TryMapField("fieldName", field, expectedOperator, expectedPath, (op, path, value) =>
+            {
+                patch.Operator = op;
+                patch.Path = path;
+                patch.Value = value;
+            });
+            //Assert.IsTrue(mapped);
+            //Assert.IsNotNull(patch);
+            //Assert.AreEqual(expectedOperator, patch.Operator);
+            //Assert.AreEqual(expectedPath, patch.Path);
+            //Assert.AreEqual(expectedValue, patch.Value);
+        }
     }
 }

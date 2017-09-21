@@ -1,5 +1,4 @@
-﻿using System;
-using Tc.Crm.Common.IntegrationLayer.Helper;
+﻿using Tc.Crm.Common.IntegrationLayer.Helper;
 using Tc.Crm.Common.IntegrationLayer.Model;
 using Tc.Crm.Common.IntegrationLayer.Model.Schema;
 using Attributes = Tc.Crm.Common.Constants.Attributes;
@@ -15,20 +14,19 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation
         /// <summary>
         /// Creates Tc.Crm.Common.IntegrationLayer.Model.Schema.Customer class and fills properties required to create request
         /// </summary>
-        /// <param name="recordId">Customer record guid</param>
         /// <param name="model">Customer record entity model</param>
         /// <returns>mapped Tc.Crm.Common.IntegrationLayer.Model.Schema.Customer</returns>
-        public object Map(string recordId, EntityModel model)
+        public object Map(EntityModel model)
         {
             const int fieldsToMapCount = 5;
             var mappedFieldsCount = 0;
-            var customer = new Customer();
-            customer.CustomerIdentifier = new CustomerIdentifier();
-            customer.CustomerIdentity = new CustomerIdentity();
-            customer.CustomerIdentifier.CustomerId = recordId;
+            var customer = new Customer
+            {
+                CustomerIdentity = new CustomerIdentity()
+            };
             foreach (var field in model.Fields)
             {
-                var mapped = 
+                var mapped =
                     FieldMapHelper.TryMapField(Attributes.Customer.Salutation, field, value => customer.CustomerIdentity.Salutation = value) ||
                     FieldMapHelper.TryMapField(Attributes.Customer.FirstName, field, value => customer.CustomerIdentity.FirstName = value) ||
                     FieldMapHelper.TryMapField(Attributes.Customer.LastName, field, value => customer.CustomerIdentity.LastName = value) ||

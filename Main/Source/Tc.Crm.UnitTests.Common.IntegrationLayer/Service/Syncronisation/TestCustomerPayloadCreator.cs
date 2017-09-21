@@ -11,9 +11,8 @@ namespace Tc.Crm.UnitTests.Common.IntegrationLayer.Service.Syncronisation
     public class TestCustomerPayloadCreator
     {
         [TestMethod]
-        public void TestGetPayload()
+        public void TestCreateGetPayload()
         {
-            var guid = Guid.NewGuid();
             var model = new EntityModel
             {
                 Fields = new List<Field> {
@@ -26,7 +25,26 @@ namespace Tc.Crm.UnitTests.Common.IntegrationLayer.Service.Syncronisation
             };
 
             var creator = new CreateCustomerRequestPayloadCreator();
-            var payload = creator.GetPayload(guid.ToString(), model);
+            var payload = creator.GetPayload(model);
+            Assert.IsNotNull(payload);
+        }
+
+        [TestMethod]
+        public void TestUpdateGetPayload()
+        {
+            var model = new EntityModel
+            {
+                Fields = new List<Field> {
+                    new Field { Name = Attributes.Customer.Salutation, Type = FieldType.String, Value = "salutation" },
+                    new Field { Name = Attributes.Customer.FirstName, Type = FieldType.String, Value = "firstname" },
+                    new Field { Name = Attributes.Customer.LastName, Type = FieldType.String, Value = "lastname" },
+                    new Field { Name = Attributes.Customer.Language, Type = FieldType.String, Value = "language" },
+                    new Field { Name = Attributes.Customer.Birthdate, Type = FieldType.DateTime, Value = DateTime.Now.Date }
+                }
+            };
+
+            var creator = new UpdateCustomerRequestPayloadCreator();
+            var payload = creator.GetPayload(model);
             Assert.IsNotNull(payload);
         }
     }

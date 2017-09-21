@@ -145,15 +145,24 @@ namespace Tc.Crm.Common.IntegrationLayer.Jti.Service
             catch (TaskCanceledException exception)
             {
                 _logger.LogError(exception.ToString());
-                response.StatusCode = HttpStatusCode.InternalServerError;
+                UpdateResponse(response, exception.InnerException?.Message ?? exception.Message);
             }
             catch (Exception exception)
             {
                 _logger.LogError(exception.ToString());
-                response.StatusCode = HttpStatusCode.InternalServerError;
+                UpdateResponse(response, exception.InnerException?.Message ?? exception.Message);
             }
             
             return response;
+        }
+
+        private static void UpdateResponse(HttpResponseMessage response, string data)
+        {
+            response.StatusCode = HttpStatusCode.InternalServerError;
+            if (response.Content == null)
+            {
+                response.Content = new StringContent(data, Encoding.UTF8, "application/json");
+            }
         }
     }
 }
