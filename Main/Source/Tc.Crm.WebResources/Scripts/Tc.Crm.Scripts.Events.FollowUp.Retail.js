@@ -29,6 +29,17 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
     "use strict";
     var CUSTOMER_QUICK_VIEW_FORM = "AvailableContactDetails";
     var FORM_MODE_CREATE = 1;
+    var CLIENT_STATE_OFFLINE = "Offline";
+
+    var EntitySetNames = {
+        Configuration: "tc_configurations"
+    }
+
+    var EntityNames = {
+        Configuration: "tc_configuration"
+    }
+
+
     var Attributes = {
         DueDate: "scheduledend",
         ContactPhone: "tc_contactphonenumber",
@@ -43,8 +54,10 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
         RescheduleCheck: "tc_reschedulecheck",
         RescheduleReason: "tc_reschedulereason",
     }
+    var Configuration = {
+        DueDateDefaultValue: "Tc.FollowUp.DueDateDefaultValue"
+    }
     var dueDateOnChange = function () {
-
         Xrm.Page.getControl(Attributes.DueDate).clearNotification();
         var dueDateValueAttr = getControlValue(Attributes.DueDate);
         var isPastDate = Tc.Crm.Scripts.Utils.Validation.IsPastDate(dueDateValueAttr);
@@ -52,10 +65,15 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
             Xrm.Page.getControl(Attributes.DueDate).setNotification("Due Date cannot be set in the past. Please choose a future date.");
         }
         else {
+            if (dueDateValueAttr == null) return;
+            if (Xrm.Page.ui.getFormType() === FORM_MODE_CREATE) return;
             showRescheduleReasonAndRescheduleCheckBoxFields();
         }
     }
     var contactTimeOnChange = function () {
+        var dueDateValueAttr = getControlValue(Attributes.DueDate);
+        if (dueDateValueAttr == null) return;
+        if (Xrm.Page.ui.getFormType() === FORM_MODE_CREATE) return;
         showRescheduleReasonAndRescheduleCheckBoxFields();
     }
     var showRescheduleReasonAndRescheduleCheckBoxFields = function () {
@@ -197,9 +215,32 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
         else
             return null;
     }
+    var setDueDateOnload = function () {
 
+        if (Xrm.Page.ui.getFormType() !== FORM_MODE_CREATE) return;
+        var dueDateAttr = getControlValue(Attributes.DueDate);
+        if (dueDateAttr !== null) return;
+        getConfigurationValue(Configuration.DueDateDefaultValue).then(function (response) {
+            var parsedResponse = getPromiseResponse(response, "Configuration");
+            var dueDateDefaultValue = parseConfigurationValue(parsedResponse);
+            if (dueDateDefaultValue == null) {
+                Xrm.Utility.alertDialog("No value in configuration for " + Configuration.DueDateDefaultValue + "Contact System configurator");
+                return;
+            }
+            else {
+                var dueDate = Xrm.Page.data.entity.attributes.get(Attributes.DueDate);
+                var now = new Date();
+                var endDate = new Date().setDate(now.getDate() + parseInt(dueDateDefaultValue));
+                dueDate.setValue(endDate);
+            }
+        },
+        function (error) {
+            console.warn("Problem getting configuration value");
+        });
+    }
     var setRegardingField = function () {
 
+        if (Xrm.Page.ui.getFormType() !== FORM_MODE_CREATE) return;
         // Get the Value of the Regarding through the traveller Planner Parameters
 
         var param = Xrm.Page.context.getQueryStringParameters();
@@ -211,17 +252,68 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
         //Populate the Regarding 
 
         if (regardingId != null && regardingId != undefined)
-
-        { Xrm.Page.getAttribute("regardingobjectid").setValue([{ id: regardingId, name: regardingName, entityType: regardingType }]); }
+        { Xrm.Page.getAttribute("regardingobjectid").setValue([{ id: '{' + regardingId.toUpperCase() + '}', name: regardingName, entityType: regardingType }]); }
 
     }
-
+    var getControlValue = function (controlName) {
+        if (Xrm.Page.getAttribute(controlName) && (Xrm.Page.getAttribute(controlName).getValue() != null))
+            return Xrm.Page.getAttribute(controlName).getValue();
+        else
+            return null;
+    }
+    var getConfigurationValue = function (configName) {
+        if (IsOfflineMode()) {
+            var query = "?$filter=tc_name eq '" + configName + "' &$select=tc_value";
+            return Xrm.Mobile.offline.retrieveMultipleRecords(EntityNames.Configuration, query);
+        }
+        else {
+            var query = "?$filter=tc_name eq '" + configName + "' &$select=tc_value";
+            return Tc.Crm.Scripts.Common.Get(EntitySetNames.Configuration, query);
+        }
+    }
+    function IsOfflineMode() {
+        return Xrm.Page.context.client.getClientState() === CLIENT_STATE_OFFLINE
+    }
+    function getPromiseResponse(promiseResponse, entity) {
+        if (promiseResponse == null) return null;
+        if (IsOfflineMode()) {
+            return promiseResponse.values != null ? promiseResponse.values : promiseResponse;
+        }
+        else {
+            if (promiseResponse.response === null || promiseResponse.response === undefined) {
+                console.warn(entity + " information can't be retrieved");
+                return null;
+            }
+            try {
+                return JSON.parse(promiseResponse.response);
+            }
+            catch (e) {
+                console.warn(entity + " information can't be parsed");
+                return null;
+            }
+        }
+    }
+    function parseConfigurationValue(configurationResponse) {
+        if (configurationResponse == null) return null;
+        var result = null;
+        if (!IsOfflineMode()) {
+            if (configurationResponse.value != null && configurationResponse.value.length > 0 && configurationResponse.value[0] != null && configurationResponse.value[0].tc_value != null) {
+                result = parseFloat(configurationResponse.value[0].tc_value);
+            }
+        } else {
+            if (configurationResponse.length > 0 && configurationResponse[0] != null && configurationResponse[0].tc_value != null) {
+                result = parseFloat(configurationResponse[0].tc_value);
+            }
+        }
+        return result;
+    }
     // public methods
     return {
         OnSave: function (context) {
             var isValid = Tc.Crm.Scripts.Utils.Validation.ValidateGdprCompliance(context);
             // uncomment in case of additional save actions
-            //if (isValid) { }
+            //if (isValid) {                
+            //}
         },
         OnDueDateFieldChange: function () {
             dueDateOnChange();
@@ -234,6 +326,7 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
         },
         OnLoad: function () {
             setRegardingField();
+            setDueDateOnload();
         },
         OnContactPhoneOrContactEmailChange: function (executionContext) {
             contactPhoneOrContactEmailOnChange(executionContext);
