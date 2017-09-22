@@ -6,5 +6,9 @@
         InActive = 1
     };
 
-   
+    public enum OperationType
+    {
+        POST,
+        PATCH
+    };
 }

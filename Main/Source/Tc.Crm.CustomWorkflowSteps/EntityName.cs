@@ -151,6 +151,7 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string MiddleName = "middlename";
         public const string Birthdate = "birthdate";
         public const string SourceSystemId = "tc_sourcesystemid";
+        public const string DuplicateSourceSystemId = "tc_duplicatesourcesystemid";
         public const string FullName = "fullname";
         public const string ContactId = "contactid";
 
@@ -181,6 +182,8 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string EmailAddress2 = "emailaddress2";
         public const string EmailAddress3 = "emailaddress3";
         public const string SourceSystemId = "tc_sourcesystemid";
+        public const string DuplicateSourceSystemId = "tc_duplicatesourcesystemid";
+        public const string AccountId = "accountid";
     }
     public static class Annotation
     {

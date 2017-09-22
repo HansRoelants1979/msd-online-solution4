@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using tcm = Tc.Crm.Service.Models;
+using System.Collections.Generic;
+using static Tc.Crm.Service.Constants.Crm.Actions;
 
 namespace Tc.Crm.Service.Services
 {
@@ -8,6 +10,8 @@ namespace Tc.Crm.Service.Services
         tcm.UpdateResponse ExecuteActionForBookingUpdate(string data);
 
         tcm.SurveyReturnResponse ExecuteActionForSurveyCreate(string data);
+
+        tcm.CustomerResponse ExecuteActionOnCustomerEvent(string data, OperationType operation);
 
         Collection<tcm.Brand>    GetBrands();
         Collection<tcm.Country> GetCountries();

@@ -5,6 +5,7 @@ using Tc.Crm.Service.CacheBuckets;
 using Tc.Crm.Service.MessageHandlers;
 using Tc.Crm.Service.Resolver;
 using Tc.Crm.Service.Services;
+using JsonPatch.Formatting;
 
 namespace Tc.Crm.Service
 {
@@ -19,6 +20,7 @@ namespace Tc.Crm.Service
             // Web API configuration and services
             var container = new UnityContainer();
             container.RegisterType<IBookingService, BookingService>();
+            container.RegisterType<ICustomerService, CustomerService>();
             container.RegisterType<ISurveyService, SurveyService>();
             container.RegisterType<ICachingService, CachingService>();
             container.RegisterType<ICrmService, CrmService>(new ContainerControlledLifetimeManager());
@@ -36,6 +38,7 @@ namespace Tc.Crm.Service
             // Web API routes
             config.MapHttpAttributeRoutes();
             config.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new StringEnumConverter());
+            config.Formatters.Add(new JsonPatchFormatter());
             config.Formatters.Remove(config.Formatters.XmlFormatter);
         }
 

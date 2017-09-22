@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Xml;
 using System;
 using Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models;
+using System.ServiceModel;
 
 namespace Tc.Crm.CustomWorkflowSteps
 {
@@ -556,11 +557,10 @@ namespace Tc.Crm.CustomWorkflowSteps
         {
             if (entityRecord == null) return null;
             if (service == null) return null;
-
+            
             var id = service.Create(entityRecord);
             return new XrmResponse { Create = true, Id = id.ToString(), EntityName = entityRecord.LogicalName };
         }
-
 
         public static XrmResponse UpdateEntity(Entity entityRecord, IOrganizationService service)
         {
@@ -588,6 +588,14 @@ namespace Tc.Crm.CustomWorkflowSteps
                 service.Execute(createRequest);
             }
 
+        }
+
+        public static XrmUpdateResponse BulkUpdate(ExecuteTransactionRequest multipleRequest, IOrganizationService service)
+        {           
+            if (multipleRequest == null && multipleRequest.Requests == null && multipleRequest.Requests.Count == 0) return null;
+            if (service == null) return null;
+            ExecuteTransactionResponse multipleResponses = (ExecuteTransactionResponse)service.Execute(multipleRequest);
+            return new XrmUpdateResponse { Updated = true, Existing = true };                 
         }
 
         /// <summary>
@@ -732,9 +740,6 @@ namespace Tc.Crm.CustomWorkflowSteps
             }
         }
 
-
-
-
     }
 
     public class XrmResponse
@@ -745,6 +750,12 @@ namespace Tc.Crm.CustomWorkflowSteps
         public string Details { get; set; }
         public string Key { get; set; }
 
+    }
+
+    public class XrmUpdateResponse :XrmResponse
+    {
+        public bool Existing { get; set; }
+        public bool Updated { get; set; }
     }
 
 }

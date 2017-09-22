@@ -10,6 +10,8 @@ using System.Xml;
 using System.IO;
 using System.Text;
 using Microsoft.Crm.Sdk.Messages;
+using System.Collections.Generic;
+using static Tc.Crm.Service.Constants.Crm.Actions;
 
 namespace Tc.Crm.Service.Services
 {
@@ -41,6 +43,32 @@ namespace Tc.Crm.Service.Services
             var responseObject = JsonConvert.DeserializeObject<tcm.UpdateResponse>(actionResponse);
 
             return new tcm.UpdateResponse { Created = responseObject.Created, Id = responseObject.Id };
+        }
+
+        public tcm.CustomerResponse ExecuteActionOnCustomerEvent(string data, OperationType operation)
+        {
+            if (string.IsNullOrWhiteSpace(data))
+                throw new ArgumentNullException(Constants.Parameters.Data);
+
+            var request = new OrganizationRequest(Constants.Crm.Actions.ProcessCustomer);
+            request[Constants.Crm.Actions.CustomerData] = data;
+            request[Constants.Crm.Actions.Operation] = Enum.GetName(typeof(OperationType), operation);
+            var response = orgService.Execute(request);
+            if (response == null || response.Results == null ||
+                !response.Results.ContainsKey(Constants.Crm.Actions.ProcessCustomerResponse) ||
+                response.Results[Constants.Crm.Actions.ProcessCustomerResponse] == null)
+                throw new InvalidOperationException(Constants.Messages.ResponseFromCrmIsNull);
+
+            var actionResponse = response.Results[Constants.Crm.Actions.ProcessCustomerResponse].ToString();
+
+            var responseObject = JsonConvert.DeserializeObject<tcm.CustomerResponse>(actionResponse);
+
+            return new tcm.CustomerResponse {
+                Existing = responseObject.Existing,
+                Create = responseObject.Create,
+                Updated = responseObject.Updated,
+                Id = responseObject.Id
+            };
         }
 
         public tcm.SurveyReturnResponse ExecuteActionForSurveyCreate(string data)

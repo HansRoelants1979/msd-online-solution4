@@ -22,7 +22,7 @@ namespace Tc.Crm.Service.Client.Console
         {
             try
             {
-                System.Console.WriteLine("Enter 1 to process Booking OR 2 to process survey OR 3 to cache or 4 to ping CRM.");
+                System.Console.WriteLine("Enter 1 to process Booking OR 2 to process survey OR 3 to cache OR 4 to ping CRM OR 5 to process Customer create  OR 6 to process Customer update.");
 
                 var option = System.Console.ReadLine();
                 if (option == "1")
@@ -33,7 +33,7 @@ namespace Tc.Crm.Service.Client.Console
                 {
                     ProcessSurvey();
                 }
-                else if(option == "3")
+                else if (option == "3")
                 {
                     Cache();
                 }
@@ -41,7 +41,17 @@ namespace Tc.Crm.Service.Client.Console
                 {
                     PingCRM();
                 }
+                else if (option == "5")
+                {
+                    ProcessCustomerCreate();
+
+                }
+                else if (option == "6")
+                {
+                    ProcessCustomerUpdate();
+                }
             }
+
             catch (Exception ex)
             {
                 System.Console.WriteLine("Unhandled Exception:: Message: {0} ", ex.Message);
@@ -49,6 +59,111 @@ namespace Tc.Crm.Service.Client.Console
             }
             System.Console.ReadLine();
         }
+
+        private static void ProcessCustomerUpdate()
+        {
+            System.Console.WriteLine("Processing Customer Update.");
+
+            while (true)
+            {
+                System.Console.WriteLine("Reading the Json data");
+                var data = File.ReadAllText("customer-patch.json");
+                System.Console.Write("Enter the Customer ID: ");
+                var customerID = System.Console.ReadLine();
+                var api = "api/customers/" + customerID.ToString();                
+
+                HttpClient cons = new HttpClient();
+
+                cons.BaseAddress = new Uri(GetUrl());
+                cons.DefaultRequestHeaders.Accept.Clear();
+
+                var method = new HttpMethod("PATCH");
+                var request = new HttpRequestMessage(method, api)
+                {
+                    Content = new StringContent(data, Encoding.UTF8, "application/json-patch+json")
+                };
+
+                Task<HttpResponseMessage> t = cons.SendAsync(request);
+
+                var response = t.Result;
+
+                Task<string> task = response.Content.ReadAsStringAsync();
+                var content = task.Result;
+
+                System.Console.WriteLine("Response Code: {0}", response.StatusCode.GetHashCode());
+                if (response.StatusCode == HttpStatusCode.Created)
+                    System.Console.WriteLine("Customer has been created with GUID::{0}", content);
+                else if (response.StatusCode == HttpStatusCode.NoContent)
+                    System.Console.WriteLine("Customer has been updated.");
+                else if (response.StatusCode == HttpStatusCode.BadRequest)
+                    System.Console.WriteLine("Bad Request.");
+                else if (response.StatusCode == HttpStatusCode.InternalServerError)
+                    System.Console.WriteLine("Internal Server Error.");
+                else if (response.StatusCode == HttpStatusCode.Forbidden)
+                    System.Console.WriteLine("Forbidden.");
+
+                if (string.IsNullOrWhiteSpace(content))
+                    System.Console.WriteLine("No content.");
+                else
+                    System.Console.WriteLine("Content:{0}", content);
+
+                System.Console.Write("Do one more test(y/n):");
+                var ans = System.Console.ReadLine();
+                if (ans == "n") break;
+
+            }
+        }
+
+        private static void ProcessCustomerCreate()
+        {
+            System.Console.WriteLine("Processing Customer Create.");
+
+
+            while (true)
+            {
+                System.Console.WriteLine("Reading the Json data");
+                var data = File.ReadAllText("customer.json");
+                var api = "api/customers/customer";
+
+                HttpClient cons = new HttpClient();
+
+                cons.BaseAddress = new Uri(GetUrl());
+
+                cons.DefaultRequestHeaders.Accept.Clear();
+                cons.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json-patch+json"));
+
+                Task<HttpResponseMessage> t = cons.PostAsync(api, new StringContent(data, Encoding.UTF8, "application/json"));
+
+                var response = t.Result;
+
+                Task<string> task = response.Content.ReadAsStringAsync();
+                var content = task.Result;
+
+                System.Console.WriteLine("Response Code: {0}", response.StatusCode.GetHashCode());
+                if (response.StatusCode == HttpStatusCode.Created)
+                    System.Console.WriteLine("Customer has been created with GUID::{0}", content);
+                else if (response.StatusCode == HttpStatusCode.NoContent)
+                    System.Console.WriteLine("Customer has been updated.");
+                else if (response.StatusCode == HttpStatusCode.BadRequest)
+                    System.Console.WriteLine("Bad Request.");
+                else if (response.StatusCode == HttpStatusCode.InternalServerError)
+                    System.Console.WriteLine("Internal Server Error.");
+                else if (response.StatusCode == HttpStatusCode.Forbidden)
+                    System.Console.WriteLine("Forbidden.");
+
+                if (string.IsNullOrWhiteSpace(content))
+                    System.Console.WriteLine("No content.");
+                else
+                    System.Console.WriteLine("Content:{0}", content);
+
+                System.Console.Write("Do one more test(y/n):");
+                var ans = System.Console.ReadLine();
+                if (ans == "n") break;
+
+            }
+
+        }
+
         private static void Cache()
         {
 
@@ -59,7 +174,7 @@ namespace Tc.Crm.Service.Client.Console
             {
                 System.Console.WriteLine("Enter the bucket name:");
                 var name = System.Console.ReadLine();
-               
+
                 var api = "api/cache/refresh";
 
                 //create the token

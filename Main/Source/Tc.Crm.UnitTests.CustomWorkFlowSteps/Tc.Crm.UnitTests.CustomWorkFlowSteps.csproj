@@ -84,6 +84,7 @@
       <HintPath>..\packages\Microsoft.CrmSdk.XrmTooling.CoreAssembly.8.2.0.4\lib\net452\Microsoft.Xrm.Tooling.Connector.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Activities" />
@@ -102,6 +103,7 @@
     <Reference Include="System.Workflow.Runtime" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -122,6 +124,8 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ProcessBooking\Services\AccountHelperTests.cs" />
     <Compile Include="ProcessBooking\Services\ContactHelperTests.cs" />
+    <Compile Include="ProcessCustomer\Services\AccountHelperTests.cs" />
+    <Compile Include="ProcessCustomer\Services\ContactHelperTests.cs" />
     <Compile Include="QueueIdentifier\Service\QueueIdentifierServiceTests.cs" />
     <Compile Include="RetrieveParentRecord\Services\RetrieveRecordProcessHelperTests.cs" />
     <Compile Include="TestOrganizationService.cs" />
@@ -135,6 +139,10 @@
     <ProjectReference Include="..\Tc.Crm.CustomWorkflowSteps\Tc.Crm.CustomWorkflowSteps.csproj">
       <Project>{1F39272E-66E8-44D7-BB6F-74BF89E1B8E6}</Project>
       <Name>Tc.Crm.CustomWorkflowSteps</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tc.Crm.ServiceLayer\Tc.Crm.Service\Tc.Crm.Service.csproj">
+      <Project>{5E016BA7-1FF5-419F-B2DB-F741DD00BB2D}</Project>
+      <Name>Tc.Crm.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

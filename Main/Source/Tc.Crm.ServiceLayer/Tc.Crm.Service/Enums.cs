@@ -10,6 +10,7 @@ namespace Tc.Crm.Service
         Nothing,
         Booking,
         Survey,
-        Caching
+        Caching,
+        Customer
     }
 }

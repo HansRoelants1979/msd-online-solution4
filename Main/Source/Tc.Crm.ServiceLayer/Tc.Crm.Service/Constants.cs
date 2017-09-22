@@ -47,6 +47,7 @@
         public const string BookingSystemIsUnknown = "Booking system provided is either null or unknown";
         public const string ResponseNull = "Response is Null.";
         public const string SourceKeyNotPresent = "Source system id of booking record is empty or null.";
+        public const string CustomerGeneralNotPresent = "Customer general is empty or null";
         public const string JsonWebTokenParserError = "Error while parsing JSON Web Token.";
         public const string SignatureValidationUnhandledError = "Error while validating the signature.";
         public const string HeaderValidationUnhandledError = "Error while validating the header.";
@@ -68,6 +69,12 @@
         public const string SurveyDataPassedIsNullOrCouldNotBeParsed = "Survey data passed is null or could not be parsed.";
         public const string BookingDataDoesNotComplyToSchema = "Booking data passed does not comply to schema.";
         public const string FailedtoCreateSurvey = "The corresponding operations can not be completed on downstream applications (MSD) for some reason. This should be considered as a temporary issue and retried.";
+        public const string CustomerCreationError = "Customer Already Exists in MSD against the provided customer Id";
+        public const string CustomerUpdateError = "Customer does not exists in MSD against the provided customer Id";
+        public const string CustomerDataPassedIsNullOrCouldNotBeParsed = "Customer data passed is null or could not be parsed.";
+        public const string CustomerTypeNotPresent = "Customer type record is empty or null.";
+        public const string CustomerIdentityNotPresent = "Customer Identity is null or empty";
+
     }
     public static class Parameters
     {
@@ -83,10 +90,12 @@
         public const string Customer = "customer";
         public const string Booking = "booking";
         public const string BookingData = "bookingData";
+        public const string ProcessCustomer = "ProcessCustomer";
         public const string DataJson = "dataJson";
         public const string Token = "token";
         public const string ActionContext = "actionContext";
         public const string CrmService = "crmService";
+        public const string CustomerId = "customerId";
         public const string Data = "data";
     }
 }
@@ -111,10 +120,22 @@ namespace Tc.Crm.Service.Constants.Crm
     {
         public const string ProcessBooking = "tc_ProcessBooking";
         public const string ProcessSurvey = "tc_ProcessSurvey";
+        public const string ProcessCustomer = "tc_ProcessCustomer";
         public const string ParameterData = "BookingInfo";
+        public const string CustomerData = "CustomerInfo";
         public const string ParameterSurveyData = "SurveyResponseInfo";
         public const string ProcessSurveyResponse = "Response";
         public const string ProcessBookingResponse = "Response";
+        public const string ProcessCustomerResponse = "Response";
+        public const string Patch = "Patch";
+        public const string Post = "Post";
+        public const string Operation = "Operation";
+
+        public enum OperationType
+        {
+            Post,
+            Patch
+        }
     }
     public static class Booking
     {

@@ -5,6 +5,7 @@ using FakeXrmEasy;
 using Tc.Crm.Service.Models;
 using System.Collections.ObjectModel;
 using System.Net;
+using Tc.Crm.Service.Constants.Crm;
 
 namespace Tc.Crm.ServiceTests
 {
@@ -120,6 +121,26 @@ namespace Tc.Crm.ServiceTests
                 return false;
             else
                 return true;
+        }
+
+        public CustomerResponse ExecuteActionOnCustomerEvent(string data, Actions.OperationType operation)
+        {
+            if (Switch == DataSwitch.Created)
+                return new CustomerResponse { Create = true,Existing=false, Id = Guid.NewGuid().ToString() };
+
+            else if (Switch == DataSwitch.Updated)
+                return new CustomerResponse { Updated = true, Existing = false, Id = Guid.NewGuid().ToString() };
+
+            else if (Switch == DataSwitch.Response_NULL)
+                throw new InvalidOperationException(Tc.Crm.Service.Constants.Messages.ResponseFromCrmIsNull);
+
+            else if (Switch == DataSwitch.Response_Failed)
+                return new CustomerResponse { Existing = false, Id = null };
+            else if (Switch == DataSwitch.Return_NULL)
+                return null;
+            else if (Switch == DataSwitch.ActionThrowsError)
+                throw new Exception("Action faulted");
+            return null;
         }
     }
 }

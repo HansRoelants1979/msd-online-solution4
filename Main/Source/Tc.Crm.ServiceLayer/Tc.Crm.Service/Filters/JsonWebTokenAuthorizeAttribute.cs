@@ -64,6 +64,8 @@ namespace Tc.Crm.Service.Filters
                 return Api.Caching;
             else if (localPath.Contains("booking"))
                 return Api.Booking;
+            else if (localPath.Contains("customer"))
+                return Api.Customer;
             else
                 return Api.Survey;
         }
