@@ -7,9 +7,8 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation
         /// <summary>
         /// Get payload for syncronisation service call
         /// </summary>
-        /// <param name="sourceSystemId">Source system id</param>
         /// <param name="model">Entity model to create payload for</param>
         /// <returns>json payload of call</returns>
-        string GetPayload(string sourceSystemId, EntityModel model);
+        string GetPayload(EntityModel model);
     }
 }

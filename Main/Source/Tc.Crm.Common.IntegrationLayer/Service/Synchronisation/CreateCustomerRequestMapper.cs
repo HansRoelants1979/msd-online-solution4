@@ -13,10 +13,9 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation
         /// <summary>
         /// Creates Tc.Crm.Common.IntegrationLayer.Model.Schema.Customer class and fills properties required to create request
         /// </summary>
-        /// <param name="sourceSystemId">Source system id</param>
         /// <param name="model">Customer record entity model</param>
         /// <returns>mapped Tc.Crm.Common.IntegrationLayer.Model.Schema.Customer</returns>
-        public object Map(string sourceSystemId, EntityModel model)
+        public object Map(EntityModel model)
         {
             const int fieldsToMapCount = 5;
             var mappedFieldsCount = 0;

@@ -7,13 +7,13 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation
     {
         protected abstract IEntityCacheMapper Mapper { get; }
 
-        public virtual string GetPayload(string sourceSystemId, EntityModel model)
+        public virtual string GetPayload(EntityModel model)
         {
-            var settings = new JsonSerializerSettings()
+            var settings = new JsonSerializerSettings
             {
                 DefaultValueHandling = DefaultValueHandling.Ignore
             };
-            var data = Mapper.Map(sourceSystemId, model);
+            var data = Mapper.Map(model);
             var payload = JsonConvert.SerializeObject(data, settings);
             return payload;
         }
