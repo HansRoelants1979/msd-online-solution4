@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using Newtonsoft.Json;
 using Tc.Crm.Common.IntegrationLayer.Jti.Models;
@@ -8,12 +7,13 @@ using Tc.Crm.Common.IntegrationLayer.Jti.Service;
 using Tc.Crm.Common.Models;
 using Tc.Crm.Common.Services;
 using EntityModel = Tc.Crm.Common.IntegrationLayer.Model.EntityModel;
-using Attributes = Tc.Crm.Common.Constants.Attributes;
 
 namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
 {
     public class OutboundSynchronisationService : IOutboundSynchronisationService
     {
+        private const string EntityCacheMessageName = "RecordId: {0}, EntityCacheId: {1}, Status: {2}";
+
         private bool disposed;
         private readonly IOutboundSynchronisationDataService outboundSynchronisationDataService;
         private readonly IOutboundSyncConfigurationService configurationService;
@@ -55,10 +55,11 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
             var serviceUrl = configurationService.CreateServiceUrl;
             foreach (EntityCache entityCache in entityCacheCollection)
             {
-                var entityCacheMessage = new EntityCacheMessage();
-                entityCacheMessage.Id = Guid.NewGuid();
-                entityCacheMessage.EntityCacheId = entityCache.Id;
-                entityCacheMessage.Name = entityCacheMessage.Id.ToString();
+                var entityCacheMessage = new EntityCacheMessage
+                {
+                    EntityCacheId = entityCache.Id,
+                    Name = string.Format(EntityCacheMessageName,entityCache.RecordId, entityCache.Id.ToString(), "Create")
+                };
 
                 var entityCacheMessageId = CreateEntityCacheMessage(entityCacheMessage);
                 UpdateEntityCacheStatus(entityCache.Id, Status.Active, EntityCacheStatusReason.InProgress);
@@ -66,7 +67,7 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
                 try
                 {
                     var entityModel = JsonConvert.DeserializeObject<EntityModel>(entityCache.Data);
-                    var requestPayload = createRequestPayloadCreator.GetPayload(entityModel);
+                    var requestPayload = createRequestPayloadCreator.GetPayload(entityCache.SourceSystemId, entityModel);
                     var response = jwtService.SendHttpRequest(HttpMethod.Post, serviceUrl, token, requestPayload, entityCacheMessageId.ToString());
 
                     if (IsResponseSuccessful(response.StatusCode))
@@ -102,7 +103,7 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
                 var entityCacheMessage = new EntityCacheMessage
                 {
                     EntityCacheId = entityCache.Id,
-                    Name = Guid.NewGuid().ToString()
+                    Name = string.Format(EntityCacheMessageName, entityCache.RecordId, entityCache.Id.ToString(), "Update")
                 };
 
                 var entityCacheMessageId = CreateEntityCacheMessage(entityCacheMessage);
@@ -111,10 +112,10 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
                 try
                 {
                     var entityModel = JsonConvert.DeserializeObject<EntityModel>(entityCache.Data);
-                    var requestPayload = updateRequestPayloadCreator.GetPayload(entityModel);
+                    var requestPayload = updateRequestPayloadCreator.GetPayload(entityCache.SourceSystemId, entityModel);
 
-                    var sourceSystemId = entityModel.Fields.Single(field => field.Name == Attributes.Customer.SourceSystemId).Value.ToString();
-                    var response = jwtService.SendHttpRequest(HttpMethod.Patch, CreateServiceUrl(serviceUrl, sourceSystemId), token, requestPayload, entityCacheMessageId.ToString());
+                    var url = CreateServiceUrl(serviceUrl, entityCache.SourceSystemId);
+                    var response = jwtService.SendHttpRequest(HttpMethod.Patch, url, token, requestPayload, entityCacheMessageId.ToString());
 
                     if (IsResponseSuccessful(response.StatusCode))
                         UpdateEntityCacheMessageStatus(entityCacheMessageId, Status.Inactive, EntityCacheMessageStatusReason.SuccessfullySentToIL);

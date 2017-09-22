@@ -5,6 +5,7 @@ namespace Tc.Crm.Common.Models
     public class EntityCache : EntityModel
     {
         public string Data { get; set; }
+        public string SourceSystemId { get; set; }
         public string SourceMarket { get; set; }
         public string RecordId { get; set; }
         public string Type { get; set; }

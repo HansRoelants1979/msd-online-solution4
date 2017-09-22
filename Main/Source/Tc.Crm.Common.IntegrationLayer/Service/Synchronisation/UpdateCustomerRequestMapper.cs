@@ -18,11 +18,20 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation
         /// <summary>
         /// Creates Tc.Crm.Common.IntegrationLayer.Model.Schema.Customer class and fills properties required to update request
         /// </summary>
+        /// <param name="sourceSystemId">s</param>
         /// <param name="model">Customer record entity model</param>
         /// <returns>mapped Tc.Crm.Common.IntegrationLayer.Model.Schema.Customer</returns>
-        public object Map(EntityModel model)
+        public object Map(string sourceSystemId, EntityModel model)
         {
-            List<PatchElement> elements = null;
+            var elements = new List<PatchElement>
+            {
+                new PatchElement
+                {
+                    Operator = Replace,
+                    Value = sourceSystemId,
+                    Path = "customer/customerIdentifier/customerID"
+                }
+            };
             foreach (var field in model.Fields)
             {
                 var element = new PatchElement();
@@ -34,12 +43,7 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation
                     FieldMapHelper.TryMapField(Attributes.Customer.Language, field, $"{Replace}", $"{Customeridentity}/language", UpdateElement(element)) ||
                     FieldMapHelper.TryMapField(Attributes.Customer.Birthdate, field, $"{Replace}", $"{Customeridentity}/birthdate", UpdateElement(element));
                 if (mapped)
-                {
-                    if (elements == null)
-                        elements = new List<PatchElement> { element };
-                    else
-                        elements.Add(element);
-                }
+                    elements.Add(element);
             }
             return elements;
         }

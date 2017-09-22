@@ -26,7 +26,7 @@ namespace Tc.Crm.UnitTests.Common.IntegrationLayer.Service.Syncronisation
                 }
             };
             var mapper = new CreateCustomerRequestMapper();
-            var customer  = mapper.Map(model) as Customer;
+            var customer  = mapper.Map(Guid.NewGuid().ToString(), model) as Customer;
             Assert.IsNotNull(customer);
             Assert.IsNotNull(customer.CustomerIdentity);
             Assert.AreEqual("salutation", customer.CustomerIdentity.Salutation);
@@ -56,17 +56,20 @@ namespace Tc.Crm.UnitTests.Common.IntegrationLayer.Service.Syncronisation
                     }
                 }
             };
+            var sourceSystemId = Guid.NewGuid().ToString();
+
             var mapper = new UpdateCustomerRequestMapper();
-            var patchElements = mapper.Map(model) as List<PatchElement>;
+            var patchElements = mapper.Map(sourceSystemId, model) as List<PatchElement>;
             Assert.IsNotNull(patchElements);
-            Assert.AreEqual(patchElements.Count, 5);
+            Assert.AreEqual(patchElements.Count, 6);
             CollectionAssert.AllItemsAreUnique(patchElements.Select(element => element.Path).ToList());
             CollectionAssert.AllItemsAreUnique(patchElements.Select(element => element.Value).ToList());
-            Assert.AreEqual("salutation", patchElements[0].Value);
-            Assert.AreEqual("firstname", patchElements[1].Value);
-            Assert.AreEqual("lastname", patchElements[2].Value);
-            Assert.AreEqual("language", patchElements[3].Value);
-            Assert.AreEqual(DateTime.Now.Date.ToShortDateString(), patchElements[4].Value);
+            Assert.AreEqual(sourceSystemId, patchElements[0].Value);
+            Assert.AreEqual("salutation", patchElements[1].Value);
+            Assert.AreEqual("firstname", patchElements[2].Value);
+            Assert.AreEqual("lastname", patchElements[3].Value);
+            Assert.AreEqual("language", patchElements[4].Value);
+            Assert.AreEqual(DateTime.Now.Date.ToShortDateString(), patchElements[5].Value);
         }
     }
 }

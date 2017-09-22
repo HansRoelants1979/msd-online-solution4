@@ -15,6 +15,9 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
 {
     public class OutboundSynchronisationDataService : IOutboundSynchronisationDataService
     {
+        private const string ContactAlias = "cntct";
+        private const string SourceSystemIdKey = ContactAlias + "." + Attributes.Contact.SourceSystemId;
+
         private readonly ICrmService crmService;
         private readonly ILogger logger;
 
@@ -67,6 +70,8 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
 
                 if (EntityHelper.HasAttributeNotNull(entityCache, Attributes.EntityCache.Data))
                     entityCacheModel.Data = entityCache.Attributes[Attributes.EntityCache.Data].ToString();
+                if (EntityHelper.HasAttributeNotNull(entityCache, SourceSystemIdKey))
+                    entityCacheModel.SourceSystemId = ((AliasedValue) entityCache.Attributes[SourceSystemIdKey]).Value.ToString();
 
                 entityCacheModelList.Add(entityCacheModel);
 
@@ -242,8 +247,9 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
                            <condition attribute='{Attributes.EntityCacheMessage.StatusReason}' operator='ne' value='{(int)EntityCacheMessageStatusReason.Active}' />
                          </filter>
                        </link-entity>
-                       <link-entity name='{EntityName.Contact}' from='{Attributes.Contact.ContactId}' to='{Attributes.EntityCache.RecordId}' alias='cntct'>
+                       <link-entity name='{EntityName.Contact}' from='{Attributes.Contact.ContactId}' to='{Attributes.EntityCache.RecordId}' alias='{ContactAlias}'>
                          <attribute name='{Attributes.Contact.ContactId}' />
+                         <attribute name='{Attributes.Contact.SourceSystemId}' />
                            <filter type='and'>
                              <condition attribute='{Attributes.Contact.SourceSystemId}' operator='not-null' />
                            </filter>

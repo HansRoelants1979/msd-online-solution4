@@ -7,9 +7,10 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation
         /// <summary>
         /// Converts EntityModel to schema object
         /// </summary>
+        /// <param name="sourceSystemId"></param>
         /// <param name="model">EntityModel object to convert</param>
         /// <returns>Object of schema type</returns>
         /// <summary>
-        object Map(EntityModel model);
+        object Map(string sourceSystemId, EntityModel model);
     }
 }

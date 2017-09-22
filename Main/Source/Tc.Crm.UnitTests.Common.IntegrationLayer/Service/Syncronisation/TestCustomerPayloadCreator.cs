@@ -25,7 +25,7 @@ namespace Tc.Crm.UnitTests.Common.IntegrationLayer.Service.Syncronisation
             };
 
             var creator = new CreateCustomerRequestPayloadCreator();
-            var payload = creator.GetPayload(model);
+            var payload = creator.GetPayload(Guid.NewGuid().ToString(), model);
             Assert.IsNotNull(payload);
         }
 
@@ -44,7 +44,7 @@ namespace Tc.Crm.UnitTests.Common.IntegrationLayer.Service.Syncronisation
             };
 
             var creator = new UpdateCustomerRequestPayloadCreator();
-            var payload = creator.GetPayload(model);
+            var payload = creator.GetPayload(Guid.NewGuid().ToString(), model);
             Assert.IsNotNull(payload);
         }
     }
