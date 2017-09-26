@@ -18,40 +18,35 @@ namespace Tc.Crm.Service.Client.Console
     class Program
     {
         static string Url = string.Empty;
-        static void Main(string[] args)
+        static void Main()
         {
             try
             {
-                System.Console.WriteLine("Enter 1 to process Booking OR 2 to process survey OR 3 to cache OR 4 to ping CRM OR 5 to process Customer create  OR 6 to process Customer update.");
+                System.Console.WriteLine(@"Enter:
+1 - to process Booking
+2 - to process survey
+3 - to cache
+4 - to ping CRM
+5 - process Customer create
+6 - process Customer update
+7 - process Confirmation.");
 
                 var option = System.Console.ReadLine();
                 if (option == "1")
-                {
                     ProcessBooking();
-                }
                 else if (option == "2")
-                {
                     ProcessSurvey();
-                }
                 else if (option == "3")
-                {
                     Cache();
-                }
                 else if (option == "4")
-                {
                     PingCRM();
-                }
                 else if (option == "5")
-                {
                     ProcessCustomerCreate();
-
-                }
                 else if (option == "6")
-                {
                     ProcessCustomerUpdate();
-                }
+                else if (option == "7")
+                    ProcessConfirmation();
             }
-
             catch (Exception ex)
             {
                 System.Console.WriteLine("Unhandled Exception:: Message: {0} ", ex.Message);
@@ -70,7 +65,7 @@ namespace Tc.Crm.Service.Client.Console
                 var data = File.ReadAllText("customer-patch.json");
                 System.Console.Write("Enter the Customer ID: ");
                 var customerID = System.Console.ReadLine();
-                var api = "api/customers/" + customerID.ToString();                
+                var api = "api/customers/" + customerID.ToString();
 
                 HttpClient cons = new HttpClient();
 
@@ -118,7 +113,6 @@ namespace Tc.Crm.Service.Client.Console
         {
             System.Console.WriteLine("Processing Customer Create.");
 
-
             while (true)
             {
                 System.Console.WriteLine("Reading the Json data");
@@ -159,16 +153,12 @@ namespace Tc.Crm.Service.Client.Console
                 System.Console.Write("Do one more test(y/n):");
                 var ans = System.Console.ReadLine();
                 if (ans == "n") break;
-
             }
-
         }
 
         private static void Cache()
         {
-
             System.Console.WriteLine("Cache Interface");
-
 
             while (true)
             {
@@ -182,7 +172,7 @@ namespace Tc.Crm.Service.Client.Console
                 var pl = new Payload
                 {
                     Bucket = name,
-                    JWTToken = token
+                    JwtToken = token
                 };
                 var data = JsonConvert.SerializeObject(pl);
                 //Call
@@ -221,13 +211,10 @@ namespace Tc.Crm.Service.Client.Console
                 if (ans == "n") break;
 
             }
-
-
         }
 
         private static void ProcessSurvey()
         {
-
             while (true)
             {
                 System.Console.WriteLine("Reading Survey json payload.");
@@ -235,7 +222,7 @@ namespace Tc.Crm.Service.Client.Console
                 var api = "api/survey/create";
 
                 //create the token
-                var token = CreateJWTToken();
+                var token = CreateJwtToken(false);
 
                 //Call
                 HttpClient cons = new HttpClient();
@@ -272,15 +259,12 @@ namespace Tc.Crm.Service.Client.Console
                 System.Console.Write("Do one more test(y/n):");
                 var ans = System.Console.ReadLine();
                 if (ans == "n") break;
-
             }
         }
 
         private static void ProcessBooking()
         {
-
             System.Console.WriteLine("Processing Booking.");
-
 
             while (true)
             {
@@ -289,7 +273,7 @@ namespace Tc.Crm.Service.Client.Console
                 var api = "api/booking/update";
 
                 //create the token
-                var token = CreateJWTToken();
+                var token = CreateJwtToken(false);
 
                 //Call
                 HttpClient cons = new HttpClient();
@@ -328,10 +312,7 @@ namespace Tc.Crm.Service.Client.Console
                 System.Console.Write("Do one more test(y/n):");
                 var ans = System.Console.ReadLine();
                 if (ans == "n") break;
-
             }
-
-
         }
 
         private static void PingCRM()
@@ -358,41 +339,96 @@ namespace Tc.Crm.Service.Client.Console
             }
         }
 
-        private static string CreateJWTToken()
+        private static void ProcessConfirmation()
         {
-            var payload = new Dictionary<string, object>()
+            System.Console.WriteLine("Processing Confirmation");
+
+            while (true)
             {
-                {"iat", GetIssuedAtTime().ToString()},
-                {"nbf", GetNotBeforeTime().ToString()},
-                {"exp", GetExpiry().ToString()},
-            };
+                var file = File.ReadAllText("confirmation.json");
+                var entityCache = JsonConvert.DeserializeObject<IntegrationLayerResponse>(file);
+
+                var api = $"api/confirmations/{entityCache.CorrelationId}";
+
+                var token = CreateJwtToken(true);
+                var data = JsonConvert.SerializeObject(entityCache);
+                //Call
+                var cons = new HttpClient
+                {
+                    BaseAddress = new Uri(GetUrl())
+                };
+
+                cons.DefaultRequestHeaders.Accept.Clear();
+                cons.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                cons.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Ssl3;
+                var t = cons.PutAsync(api, new StringContent(data, Encoding.UTF8, "application/json"));
+
+                var response = t.Result;
+
+                var task = response.Content.ReadAsStringAsync();
+                var content = task.Result;
+
+                System.Console.WriteLine("Response Code: {0}", response.StatusCode.GetHashCode());
+                if (response.StatusCode == HttpStatusCode.OK)
+                    System.Console.WriteLine("The message has been accepted by the Thomas Cook micro-service");
+                else if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    System.Console.WriteLine("Authorisation header missing. Missing or invalid claims.");
+                else if (response.StatusCode == HttpStatusCode.Forbidden)
+                    System.Console.WriteLine("Invalid JWT token or request not on https.");
+                else if (response.StatusCode == HttpStatusCode.GatewayTimeout)
+                    System.Console.WriteLine("The corresponding operations can not be completed on downstream applications for some reason. This should be considered as a temporary issue and retried.");
+                else if (response.StatusCode == HttpStatusCode.InternalServerError)
+                    System.Console.WriteLine("Internal Server Error.");
+
+                if (string.IsNullOrWhiteSpace(content))
+                    System.Console.WriteLine("No content.");
+                else
+                    System.Console.WriteLine("Content:{0}", content);
+
+                System.Console.Write("Do one more test(y/n):");
+                var ans = System.Console.ReadLine();
+                if (ans == "n") break;
+            }
+        }
+
+        private static string CreateJwtToken(bool useHeader)
+        {
+            var payload = GeneratePayload();
 
             var header = new Dictionary<string, object>()
             {
-                {"alg", "HS256"},
+                {"alg", "RS256"},
                 {"typ", "JWT"},
             };
 
-            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
+            var rsa = new RSACryptoServiceProvider();
             var fileName = ConfigurationManager.AppSettings["privateKeyFileName"];
             rsa.FromXmlString(File.ReadAllText(fileName));
-            return Jose.JWT.Encode(payload, rsa, Jose.JwsAlgorithm.RS256);
 
+            return useHeader
+                ? Jose.JWT.Encode(payload, rsa, Jose.JwsAlgorithm.RS256, header)
+                : Jose.JWT.Encode(payload, rsa, Jose.JwsAlgorithm.RS256);
         }
 
         private static string CreateJWTTokenWithHmac()
         {
             byte[] secretKey = Encoding.UTF8.GetBytes(GetJwtKey());
 
+            var payload = GeneratePayload();
+
+            return JsonWebToken.Encode(payload, secretKey, JwtHashAlgorithm.HS256);
+        }
+
+        private static Dictionary<string, object> GeneratePayload()
+        {
             var payload = new Dictionary<string, object>()
             {
                 {"iat", GetIssuedAtTime().ToString()},
                 {"nbf", GetNotBeforeTime().ToString()},
                 {"exp", GetExpiry().ToString()}
             };
-
-            return JWT.JsonWebToken.Encode(payload, secretKey, JwtHashAlgorithm.HS256);
-
+            return payload;
         }
 
         private static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
@@ -402,18 +438,18 @@ namespace Tc.Crm.Service.Client.Console
         }
         private static double GetExpiry()
         {
-            var sec = Int32.Parse(ConfigurationManager.AppSettings["expiryFromNow"]);
+            var sec = int.Parse(ConfigurationManager.AppSettings["expiryFromNow"]);
             return Math.Round((DateTime.UtcNow - UnixEpoch).TotalSeconds + sec);
         }
         private static double GetIssuedAtTime()
         {
-            var sec = Int32.Parse(ConfigurationManager.AppSettings["iatSecondsFromNow"]);
+            var sec = int.Parse(ConfigurationManager.AppSettings["iatSecondsFromNow"]);
             return Math.Round((DateTime.UtcNow - UnixEpoch).TotalSeconds + sec);
         }
 
         private static double GetNotBeforeTime()
         {
-            var sec = Int32.Parse(ConfigurationManager.AppSettings["nbfSecondsFromNow"]);
+            var sec = int.Parse(ConfigurationManager.AppSettings["nbfSecondsFromNow"]);
             return Math.Round((DateTime.UtcNow - UnixEpoch).TotalSeconds + sec);
         }
 
@@ -423,7 +459,5 @@ namespace Tc.Crm.Service.Client.Console
                 Url = ConfigurationManager.AppSettings["ApiUrl"];
             return Url;
         }
-
-
     }
 }

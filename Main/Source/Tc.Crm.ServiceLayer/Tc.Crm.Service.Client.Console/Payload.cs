@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.Serialization;
 
 namespace Tc.Crm.Service.Models
 {
@@ -13,6 +8,6 @@ namespace Tc.Crm.Service.Models
         [DataMember]
         public string Bucket { get; set; }
         [DataMember]
-        public string JWTToken { get; set; }
+        public string JwtToken { get; set; }
     }
 }

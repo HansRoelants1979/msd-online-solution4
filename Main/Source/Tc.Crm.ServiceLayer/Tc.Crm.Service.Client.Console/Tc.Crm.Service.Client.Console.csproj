@@ -68,14 +68,19 @@
   <ItemGroup>
     <Compile Include="Booking.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="IntegrationLayerResponse.cs" />
     <Compile Include="Payload.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="bin\Debug\customer-patch.json" />
-    <None Include="bin\Debug\customer.json" />
+    <None Include="customer-patch.json" />
+    <None Include="customer.json" />
+    <None Include="confirmation.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -85,7 +90,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
