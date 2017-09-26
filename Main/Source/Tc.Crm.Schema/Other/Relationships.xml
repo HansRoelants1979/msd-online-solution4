@@ -53,6 +53,7 @@
   <EntityRelationship Name="business_unit_tc_booking" />
   <EntityRelationship Name="business_unit_tc_bookingaccommodation" />
   <EntityRelationship Name="business_unit_tc_bookingextraservice" />
+  <EntityRelationship Name="business_unit_tc_bookingsummary" />
   <EntityRelationship Name="business_unit_tc_bookingtransfer" />
   <EntityRelationship Name="business_unit_tc_bookingtransport" />
   <EntityRelationship Name="business_unit_tc_brand" />
@@ -67,6 +68,7 @@
   <EntityRelationship Name="business_unit_tc_customerbookingrole" />
   <EntityRelationship Name="business_unit_tc_entitycache" />
   <EntityRelationship Name="business_unit_tc_entitycachemessage" />
+  <EntityRelationship Name="business_unit_tc_entitymerge" />
   <EntityRelationship Name="business_unit_tc_externallogin" />
   <EntityRelationship Name="business_unit_tc_gateway" />
   <EntityRelationship Name="business_unit_tc_hotel" />
@@ -224,6 +226,8 @@
   <EntityRelationship Name="lk_tc_bookingaccommodation_modifiedby" />
   <EntityRelationship Name="lk_tc_bookingextraservice_createdby" />
   <EntityRelationship Name="lk_tc_bookingextraservice_modifiedby" />
+  <EntityRelationship Name="lk_tc_bookingsummary_createdby" />
+  <EntityRelationship Name="lk_tc_bookingsummary_modifiedby" />
   <EntityRelationship Name="lk_tc_bookingtransfer_createdby" />
   <EntityRelationship Name="lk_tc_bookingtransfer_modifiedby" />
   <EntityRelationship Name="lk_tc_bookingtransport_createdby" />
@@ -264,6 +268,8 @@
   <EntityRelationship Name="lk_tc_entitycache_modifiedby" />
   <EntityRelationship Name="lk_tc_entitycachemessage_createdby" />
   <EntityRelationship Name="lk_tc_entitycachemessage_modifiedby" />
+  <EntityRelationship Name="lk_tc_entitymerge_createdby" />
+  <EntityRelationship Name="lk_tc_entitymerge_modifiedby" />
   <EntityRelationship Name="lk_tc_externallogin_createdby" />
   <EntityRelationship Name="lk_tc_externallogin_modifiedby" />
   <EntityRelationship Name="lk_tc_gateway_createdby" />
@@ -375,6 +381,7 @@
   <EntityRelationship Name="owner_tc_booking" />
   <EntityRelationship Name="owner_tc_bookingaccommodation" />
   <EntityRelationship Name="owner_tc_bookingextraservice" />
+  <EntityRelationship Name="owner_tc_bookingsummary" />
   <EntityRelationship Name="owner_tc_bookingtransfer" />
   <EntityRelationship Name="owner_tc_bookingtransport" />
   <EntityRelationship Name="owner_tc_brand" />
@@ -389,6 +396,7 @@
   <EntityRelationship Name="owner_tc_customerbookingrole" />
   <EntityRelationship Name="owner_tc_entitycache" />
   <EntityRelationship Name="owner_tc_entitycachemessage" />
+  <EntityRelationship Name="owner_tc_entitymerge" />
   <EntityRelationship Name="owner_tc_externallogin" />
   <EntityRelationship Name="owner_tc_gateway" />
   <EntityRelationship Name="owner_tc_hotel" />
@@ -465,9 +473,12 @@
   <EntityRelationship Name="Task_Annotation" unmodified="1" />
   <EntityRelationship Name="tc__casecategory3_tc_caseline" />
   <EntityRelationship Name="tc_24hrpromiseresolveslakpiinstance" />
+  <EntityRelationship Name="tc_account_tc_bookingsummary_Customer" />
   <EntityRelationship Name="tc_account_tc_compensation_Customer" />
   <EntityRelationship Name="tc_account_tc_compensationLine_Customer" />
   <EntityRelationship Name="tc_account_tc_customerbookingrole_Customer" />
+  <EntityRelationship Name="tc_account_tc_entitymerge_Master" />
+  <EntityRelationship Name="tc_account_tc_entitymerge_Subordinate" />
   <EntityRelationship Name="tc_accounttype_account" />
   <EntityRelationship Name="tc_address1_country_account" />
   <EntityRelationship Name="tc_address1_country_contact" />
@@ -539,6 +550,8 @@
   <EntityRelationship Name="tc_contact_tc_compensation_Customer" />
   <EntityRelationship Name="tc_contact_tc_compensationLine_Customer" />
   <EntityRelationship Name="tc_contact_tc_customerbookingrole_Customer" />
+  <EntityRelationship Name="tc_contact_tc_entitymerge_Master" />
+  <EntityRelationship Name="tc_contact_tc_entitymerge_Subordinate" />
   <EntityRelationship Name="tc_contact_tc_followup_Customer" />
   <EntityRelationship Name="tc_contact_tc_whatsnext" />
   <EntityRelationship Name="tc_country_tc_booking" />
@@ -551,6 +564,7 @@
   <EntityRelationship Name="tc_departuregateway_tc_bookingtransfer" />
   <EntityRelationship Name="tc_departuregateway_tc_bookingtransport" />
   <EntityRelationship Name="tc_destinationgateway_tc_booking" />
+  <EntityRelationship Name="tc_extrasresponse_Annotations" />
   <EntityRelationship Name="tc_followup_Annotations" />
   <EntityRelationship Name="tc_followup_businessunit_owningbusinessunit" />
   <EntityRelationship Name="tc_followup_mailbox_sendermailboxid" />
@@ -585,6 +599,7 @@
   <EntityRelationship Name="tc_LastAssignee" />
   <EntityRelationship Name="tc_location_tc_hotel" />
   <EntityRelationship Name="tc_locationoffice_Address1_Country" />
+  <EntityRelationship Name="tc_opportunity_tc_bookingsummary_Travelplanner" />
   <EntityRelationship Name="tc_opportunity_tc_followup" />
   <EntityRelationship Name="tc_opportunity_tc_room" />
   <EntityRelationship Name="tc_other_locations" />
@@ -613,6 +628,7 @@
   <EntityRelationship Name="tc_systemuser_tc_compensationapproval_ApprovedBy" />
   <EntityRelationship Name="tc_systemuser_tc_compensationapproval_RequestedBy" />
   <EntityRelationship Name="tc_systemuser_tc_compensationline_CaseCreatedBy" />
+  <EntityRelationship Name="tc_systemuser_tc_followup_AssignedAgent" />
   <EntityRelationship Name="tc_systemuser_tc_hotel" />
   <EntityRelationship Name="tc_systemuser_tc_locationoffice" />
   <EntityRelationship Name="tc_tc_boardbasis_opportunity_BoardBasis" />
@@ -674,6 +690,7 @@
   <EntityRelationship Name="tc_tc_store_opportunity_CreatedAtStore" />
   <EntityRelationship Name="tc_tc_store_opportunity_Storemodified" />
   <EntityRelationship Name="tc_tc_store_tc_externallogin_BudgetCentreId" />
+  <EntityRelationship Name="tc_tc_store_tc_followup_AssignedStore" />
   <EntityRelationship Name="tc_tc_store_tc_followup_Storecreated" />
   <EntityRelationship Name="tc_tc_store_tc_followup_Storemodified" />
   <EntityRelationship Name="tc_tc_ukregion_contact_Regioncreated" />
@@ -703,6 +720,7 @@
   <EntityRelationship Name="team_tc_booking" />
   <EntityRelationship Name="team_tc_bookingaccommodation" />
   <EntityRelationship Name="team_tc_bookingextraservice" />
+  <EntityRelationship Name="team_tc_bookingsummary" />
   <EntityRelationship Name="team_tc_bookingtransfer" />
   <EntityRelationship Name="team_tc_bookingtransport" />
   <EntityRelationship Name="team_tc_brand" />
@@ -717,6 +735,7 @@
   <EntityRelationship Name="team_tc_customerbookingrole" />
   <EntityRelationship Name="team_tc_entitycache" />
   <EntityRelationship Name="team_tc_entitycachemessage" />
+  <EntityRelationship Name="team_tc_entitymerge" />
   <EntityRelationship Name="team_tc_externallogin" />
   <EntityRelationship Name="team_tc_gateway" />
   <EntityRelationship Name="team_tc_hotel" />
@@ -798,6 +817,7 @@
   <EntityRelationship Name="user_tc_booking" />
   <EntityRelationship Name="user_tc_bookingaccommodation" />
   <EntityRelationship Name="user_tc_bookingextraservice" />
+  <EntityRelationship Name="user_tc_bookingsummary" />
   <EntityRelationship Name="user_tc_bookingtransfer" />
   <EntityRelationship Name="user_tc_bookingtransport" />
   <EntityRelationship Name="user_tc_brand" />
@@ -812,6 +832,7 @@
   <EntityRelationship Name="user_tc_customerbookingrole" />
   <EntityRelationship Name="user_tc_entitycache" />
   <EntityRelationship Name="user_tc_entitycachemessage" />
+  <EntityRelationship Name="user_tc_entitymerge" />
   <EntityRelationship Name="user_tc_externallogin" />
   <EntityRelationship Name="user_tc_gateway" />
   <EntityRelationship Name="user_tc_hotel" />

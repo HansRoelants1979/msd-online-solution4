@@ -156,7 +156,7 @@
       </FieldPermission>
     </FieldPermissions>
   </FieldSecurityProfile>
-  <FieldSecurityProfile name="Tc.Uk.Retail.UserLevel1" description="Read-only access to:&#xA;- Payroll Number&#xA;- All Budget Centre Access" fieldsecurityprofileid="{9fc68dbe-3587-e711-8105-5065f38bc531}">
+  <FieldSecurityProfile name="Tc.Uk.Retail.UserLevel1" description="Read-only access to:&#xA;- Payroll Number&#xA;- All Budget Centre Access&#xA;No Access to&#xA;- Date of Death" fieldsecurityprofileid="{9fc68dbe-3587-e711-8105-5065f38bc531}">
     <FieldPermissions>
       <FieldPermission>
         <EntityName>systemuser</EntityName>
@@ -192,7 +192,7 @@
       </FieldPermission>
     </FieldPermissions>
   </FieldSecurityProfile>
-  <FieldSecurityProfile name="Tc.Uk.Retail.UserLevel3" description="Read/Udate/Create:&#xA;- Payroll Number&#xA;- All Budget Centre Access" fieldsecurityprofileid="{742aa960-9f7d-e711-8104-5065f38bb571}">
+  <FieldSecurityProfile name="Tc.Uk.Retail.UserLevel3" description="Read/Udate/Create:&#xA;- Payroll Number&#xA;- All Budget Centre Access&#xA;- Date of Death" fieldsecurityprofileid="{742aa960-9f7d-e711-8104-5065f38bb571}">
     <FieldPermissions>
       <FieldPermission>
         <EntityName>systemuser</EntityName>
@@ -204,6 +204,13 @@
       <FieldPermission>
         <EntityName>systemuser</EntityName>
         <AttributeName>tc_payrollnumbertext</AttributeName>
+        <CanRead>4</CanRead>
+        <CanUpdate>4</CanUpdate>
+        <CanCreate>4</CanCreate>
+      </FieldPermission>
+      <FieldPermission>
+        <EntityName>contact</EntityName>
+        <AttributeName>tc_dateofdeath</AttributeName>
         <CanRead>4</CanRead>
         <CanUpdate>4</CanUpdate>
         <CanCreate>4</CanCreate>

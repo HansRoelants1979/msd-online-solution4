@@ -213,7 +213,7 @@
                   <row />
                   <row />
                   <row />
-                  <row />
+                  <row height="auto" />
                 </rows>
               </section>
               <section name="emailengagementactions" showlabel="false" showbar="true" locklevel="1" id="{29F94F00-EC82-4E0E-94F1-5D25F707DA88}" height="auto" IsUserDefined="0" layout="varheight" columns="11" labelid="{12cace50-4e0b-49ea-2bf8-0e61791a04f2}" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
@@ -256,7 +256,20 @@
                   <label description="Section" languagecode="1033" />
                   <label description="Section" languagecode="1036" />
                 </labels>
-                <rows></rows>
+                <rows>
+                  <row>
+                    <cell id="{cf680477-6aac-4a73-81e5-cd5843fc462c}">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                    <cell id="{03079afa-5bfb-4de8-9053-be69470416f9}">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
+                    </cell>
+                  </row>
+                </rows>
               </section>
             </sections>
           </column>
@@ -405,9 +418,6 @@
         </row>
       </rows>
     </header>
-    <DisplayConditions FallbackForm="true" Order="2">
-      <Everyone />
-    </DisplayConditions>
     <events>
       <event name="onload" application="true" active="true">
         <InternalHandlers>
@@ -419,7 +429,7 @@
       </event>
       <event name="onsave" application="false" active="false">
         <Handlers>
-          <Handler functionName="Tc.Crm.Scripts.Events.Default.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Default.js" handlerUniqueId="{2433985d-5d32-2aa6-8234-25b3b6152986}" enabled="true" parameters="" passExecutionContext="true" />
+          <Handler functionName="Tc.Crm.Scripts.Events.Email.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Email.js" handlerUniqueId="{144b7c33-4d9a-a370-96c7-062a2be42571}" enabled="true" parameters="" passExecutionContext="true" />
         </Handlers>
       </event>
     </events>
@@ -470,8 +480,10 @@
       <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{d864835a-9468-c5b4-e0ab-0db901b9dc19}" />
       <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{476cb140-27ba-9854-3804-b0e1c338a358}" />
       <Library name="tc_Tc.Crm.Scripts.Events.Email.js" libraryUniqueId="{de846c27-d798-0052-8870-56b64ac83084}" />
-      <Library name="tc_Tc.Crm.Scripts.Events.Default.js" libraryUniqueId="{ce0a3903-b781-31e6-9986-781877927a7c}" />
     </formLibraries>
+    <DisplayConditions FallbackForm="true" Order="2">
+      <Everyone />
+    </DisplayConditions>
   </form>
   <LocalizedNames>
     <LocalizedName description="E-Mail" languagecode="1031" />

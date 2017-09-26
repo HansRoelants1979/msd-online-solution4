@@ -456,12 +456,12 @@
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{220e1d8b-5241-4cee-ba49-35cfc3789d5f}">
+                    <cell id="{220e1d8b-5241-4cee-ba49-35cfc3789d5f}" showlabel="false">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
                     </cell>
-                    <cell id="{5e35fb03-e175-43a5-957c-85b71d5de164}">
+                    <cell id="{5e35fb03-e175-43a5-957c-85b71d5de164}" showlabel="false">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
@@ -728,12 +728,12 @@
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{36f09159-7e75-4ff5-b4c8-bfc2895a64fe}">
+                    <cell id="{36f09159-7e75-4ff5-b4c8-bfc2895a64fe}" showlabel="false">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
                     </cell>
-                    <cell id="{a7ee5ebd-1ae3-41de-8170-ba549af23aa0}">
+                    <cell id="{a7ee5ebd-1ae3-41de-8170-ba549af23aa0}" showlabel="false">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
@@ -747,12 +747,12 @@
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{3e9a6b3c-d308-403c-9687-0d6b7eb9ba60}">
+                    <cell id="{3e9a6b3c-d308-403c-9687-0d6b7eb9ba60}" showlabel="false">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
                     </cell>
-                    <cell id="{8628c04b-d34c-461d-905e-fa5959d14c64}">
+                    <cell id="{8628c04b-d34c-461d-905e-fa5959d14c64}" showlabel="false">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
@@ -1091,7 +1091,7 @@
       </event>
       <event name="onsave" application="false" active="false">
         <Handlers>
-          <Handler functionName="Tc.Crm.Scripts.Events.Contact.Ids.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Contact.Ids.js" handlerUniqueId="{b8c499ea-7a34-a205-8166-92e98a0b00b8}" enabled="true" parameters="" passExecutionContext="false" />
+          <Handler functionName="Tc.Crm.Scripts.Events.Contact.Ids.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Contact.Ids.js" handlerUniqueId="{b8c499ea-7a34-a205-8166-92e98a0b00b8}" enabled="true" parameters="" passExecutionContext="true" />
         </Handlers>
       </event>
       <event name="onchange" application="false" active="false" attribute="telephone1">
@@ -1496,19 +1496,18 @@
       <Library name="tc_Tc.Crm.Scripts.Library.Contact.js" libraryUniqueId="{b745c3ae-599b-ad85-50cb-a2a382cc813a}" />
       <Library name="tc_Tc.Crm.Scripts.Events.Contact.Ids.js" libraryUniqueId="{ba945487-dcb6-15c0-de41-273add6093b7}" />
     </formLibraries>
-    <DisplayConditions FallbackForm="true" Order="11">
-      <Role Id="{CB269F84-E19D-E011-B66C-00155DB528B6}" />
-      <Role Id="{C953D024-45BB-E411-9424-00155DCFC00D}" />
-      <Role Id="{D9AF258F-44BB-E411-9424-00155DCFC00D}" />
-      <Role Id="{6B61B74B-A3D6-E411-9426-00155DCFC00D}" />
-      <Role Id="{24BD3295-A3D6-E411-9426-00155DCFC00D}" />
-      <Role Id="{FB8E9DC4-B5FF-E511-9438-00155DCFC00D}" />
-      <Role Id="{83B27124-2386-E211-BC15-000C298A36A7}" />
-      <Role Id="{03B19833-5F35-E711-8102-E0071B66A0A1}" />
-      <Role Id="{dcd60b89-421c-44ae-bff0-dd6323df885c}" />
+    <DisplayConditions Order="2" FallbackForm="true">
       <Role Id="{627090ff-40a3-4053-8790-584edc5be201}" />
       <Role Id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
       <Role Id="{6FD27BEE-DEFC-E611-8108-3863BB34FB48}" />
+      <Role Id="{F21E987F-F8F8-E611-8107-3863BB34FB48}" />
+      <Role Id="{6BDB42AF-86FA-E611-8100-3863BB354FF0}" />
+      <Role Id="{FCAF7D02-B305-E711-8109-3863BB34FB48}" />
+      <Role Id="{F9C784C3-F9F8-E611-8107-3863BB34FB48}" />
+      <Role Id="{834BA58B-F8F8-E611-8107-3863BB34FB48}" />
+      <Role Id="{A87C699E-F8F8-E611-8107-3863BB34FB48}" />
+      <Role Id="{AD31700E-A129-E711-810E-3863BB34FB48}" />
+      <Role Id="{808FFA91-F8F8-E611-8107-3863BB34FB48}" />
       <Role Id="{2FA23AA7-B205-E711-8109-3863BB34FB48}" />
       <Role Id="{1FC1D43B-F9F8-E611-8107-3863BB34FB48}" />
       <Role Id="{D14317C4-18F8-E611-80FF-3863BB354FF0}" />

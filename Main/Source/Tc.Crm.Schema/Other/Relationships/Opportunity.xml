@@ -37,9 +37,9 @@
     <ReferencingAttributeName>ObjectId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Eindeutiger Bezeichner des Objekts, dem die Notiz zugeordnet ist." languagecode="1031" />
         <Description description="Unique identifier of the object with which the note is associated." languagecode="1033" />
         <Description description="Identificateur unique de l'objet auquel la note est associée." languagecode="1036" />
+        <Description description="Eindeutiger Bezeichner des Objekts, dem die Notiz zugeordnet ist." languagecode="1031" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -57,8 +57,8 @@
     <ReferencingAttributeName>RegardingObjectId</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
-        <Description description="Eindeutiger Bezeichner des Objekts, dem die E-Mail zugeordnet ist." languagecode="1031" />
         <Description description="Unique identifier of the object with which the e-mail is associated." languagecode="1033" />
+        <Description description="Eindeutiger Bezeichner des Objekts, dem die E-Mail zugeordnet ist." languagecode="1031" />
         <Description description="Identificateur unique de l'objet auquel le courrier électronique est associé." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
@@ -163,6 +163,43 @@
         <NavPaneOrder>40</NavPaneOrder>
         <NavigationPropertyName>opportunitycompetitors_association</NavigationPropertyName>
         <AssociationRoleOrdinal>2</AssociationRoleOrdinal>
+      </EntityRelationshipRole>
+    </EntityRelationshipRoles>
+  </EntityRelationship>
+  <EntityRelationship Name="tc_opportunity_tc_bookingsummary_Travelplanner">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>2.0.0.6</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>tc_bookingsummary</ReferencingEntityName>
+    <ReferencedEntityName>Opportunity</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>RemoveLink</CascadeDelete>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <CascadeRollupView>NoCascade</CascadeRollupView>
+    <IsValidForAdvancedFind>1</IsValidForAdvancedFind>
+    <ReferencingAttributeName>tc_Travelplanner</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="" languagecode="1033" />
+      </Descriptions>
+    </RelationshipDescription>
+    <EntityRelationshipRoles>
+      <EntityRelationshipRole>
+        <NavPaneDisplayOption>UseCollectionName</NavPaneDisplayOption>
+        <NavPaneArea>Details</NavPaneArea>
+        <NavPaneOrder>10000</NavPaneOrder>
+        <NavigationPropertyName>tc_Travelplanner</NavigationPropertyName>
+        <CustomLabels>
+          <CustomLabel description="" languagecode="1033" />
+        </CustomLabels>
+        <RelationshipRoleType>1</RelationshipRoleType>
+      </EntityRelationshipRole>
+      <EntityRelationshipRole>
+        <NavigationPropertyName>tc_opportunity_tc_bookingsummary_Travelplanner</NavigationPropertyName>
+        <RelationshipRoleType>0</RelationshipRoleType>
       </EntityRelationshipRole>
     </EntityRelationshipRoles>
   </EntityRelationship>

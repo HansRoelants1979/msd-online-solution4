@@ -189,13 +189,14 @@ Tc.Crm.Scripts.Events.Email = (function () {
                 var IncidentReceivedPromise = getIncident(incidentId).then(
                       function (incidentResponse) {
                           var incident = JSON.parse(incidentResponse.response);
-                          if (incident.tc_preferredmethodofcommunication != null && incident.tc_preferredmethodofcommunication != "") {
+                          if (incident.tc_preferredmethodofcommunication != null && incident.tc_preferredmethodofcommunication !="" )
+                          {
                               communicationMethod = incident.tc_preferredmethodofcommunication;
                           }
-                          if (incident.tc_alternativeemaillookup != null && incident.tc_alternativeemaillookup != "") {
+                          if (incident.tc_alternativeemaillookup != null && incident.tc_alternativeemaillookup !="") {
                               alternativeEmailObject = incident.tc_alternativeemaillookup;
                           }
-                          if (incident.tc_OtherCustomerEmail != null && incident.tc_OtherCustomerEmail != "") {
+                          if (incident.tc_OtherCustomerEmail != null && incident.tc_OtherCustomerEmail !="") {
                               alternativeCustomerObject = incident.tc_OtherCustomerEmail;
                           }
                           if (incident.tc_informanothercustomer != null && incident.tc_informanothercustomer != "") {
@@ -237,14 +238,14 @@ Tc.Crm.Scripts.Events.Email = (function () {
                           }
 
                       }).catch(function (err) {
-                          throw new Error("Unexpected error while retrieving the Incident");
+                         throw new Error("Unexpected error while retrieving the Incident");
                       });
 
 
             }
         }
         catch (e) {
-
+           
             console.log("unexpected error has occurred in method setToFieldForCase");
 
         }
@@ -255,7 +256,7 @@ Tc.Crm.Scripts.Events.Email = (function () {
         return resultXml;
     }
     var getIncident = function (incidentId) {
-        debugger;
+        
         var query = "?$select=tc_preferredmethodofcommunication,_tc_alternativeemaillookup_value,tc_informanothercustomer,tc_OtherCustomerEmail&$expand=tc_alternativeemaillookup($select=tc_name,emailaddress),tc_OtherCustomerEmail($select=tc_name,emailaddress)";
         var entityName = "incidents";
         var id = incidentId;
@@ -266,6 +267,11 @@ Tc.Crm.Scripts.Events.Email = (function () {
         OnLoad: function () {
             clearEmailFrom();
             setFromandToFieldForCase();
+        },
+        OnSave: function (context) {
+            var isValid = Tc.Crm.Scripts.Utils.Validation.ValidateGdprCompliance(context);
+            // uncomment in case of additional save actions
+            //if (isValid) { }
         }
     };
 })();
