@@ -20,6 +20,8 @@ namespace Tc.Crm.Service.Services
                 jsonWebTokenService = new SurveyJsonWebTokenService(configurationService);
             else if (contextApi == Api.Caching)
                 jsonWebTokenService = new CacheJsonWebTokenService(configurationService);
+            else if (contextApi == Api.Confirmation)
+                jsonWebTokenService = new ConfirmationJsonWebTokenService(configurationService);
             else
                 throw new InvalidOperationException("Invalid API has been called.");
 

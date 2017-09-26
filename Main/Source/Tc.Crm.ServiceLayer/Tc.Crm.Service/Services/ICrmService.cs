@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using Tc.Crm.Common;
+using System.Collections.ObjectModel;
 using tcm = Tc.Crm.Service.Models;
 using System.Collections.Generic;
 using static Tc.Crm.Service.Constants.Crm.Actions;
@@ -21,5 +23,8 @@ namespace Tc.Crm.Service.Services
         Collection<tcm.SourceMarket> GetSourceMarkets();
         Collection<tcm.Hotel> GetHotels();
         bool PingCRM();
+        Guid ProcessEntityCacheMessage(Guid entityCacheMessageId, string outComeId, Status status, EntityCacheMessageStatusReason statusReason);
+        Guid ProcessEntityCacheMessage(Guid entityCacheMessageId, string outComeId, Status status, EntityCacheMessageStatusReason statusReason, string notes);
+        void ProcessEntityCache(Guid entityCacheId, Status status, EntityCacheStatusReason statusReason);
     }
 }

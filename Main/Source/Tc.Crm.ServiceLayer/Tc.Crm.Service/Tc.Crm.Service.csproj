@@ -203,6 +203,7 @@
     <Content Include="Tc_PublicKey_1.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Tc_PublicKey_5.xml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -228,6 +229,7 @@
     <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\CacheController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\ConfirmationController.cs" />
     <Compile Include="Controllers\PingController.cs" />
     <Compile Include="Controllers\SurveyController.cs" />
     <Compile Include="Enums.cs" />
@@ -251,11 +253,13 @@
     <Compile Include="CacheBuckets\IBucket.cs" />
     <Compile Include="CacheBuckets\SourceMarketBucket.cs" />
     <Compile Include="CacheBuckets\TourOperatorBucket.cs" />
+    <Compile Include="Models\ConfirmationResponse.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Currency.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Gateway.cs" />
     <Compile Include="Models\Hotel.cs" />
+    <Compile Include="Models\IntegrationLayerResponse.cs" />
     <Compile Include="Models\JsonWebTokenHeader.cs" />
     <Compile Include="Models\JsonWebTokenPayload.cs" />
     <Compile Include="Models\JsonWebTokenRequest.cs" />
@@ -274,11 +278,14 @@
     <Compile Include="Services\CacheJsonWebTokenService.cs" />
     <Compile Include="Services\CachingService.cs" />
     <Compile Include="Services\ConfigurationService.cs" />
+    <Compile Include="Services\ConfirmationJsonWebTokenService.cs" />
+    <Compile Include="Services\ConfirmationService.cs" />
     <Compile Include="Services\CrmService.cs" />
     <Compile Include="Services\CustomerService.cs" />
     <Compile Include="Services\IBookingService.cs" />
     <Compile Include="Services\ICachingService.cs" />
     <Compile Include="Services\IConfigurationService.cs" />
+    <Compile Include="Services\IConfirmationService.cs" />
     <Compile Include="Services\ICrmService.cs" />
     <Compile Include="Services\ICustomerService.cs" />
     <Compile Include="Services\ISurveyService.cs" />
@@ -305,6 +312,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Tc.Crm.Common\Tc.Crm.Common.csproj">
+      <Project>{860e3979-f2c6-4c90-9fa6-e130bd1ee9be}</Project>
+      <Name>Tc.Crm.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

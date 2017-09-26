@@ -32,6 +32,7 @@ namespace Tc.Crm.Service
             container.RegisterType<ISourceMarketBucket, SourceMarketBucket>(new ContainerControlledLifetimeManager());
             container.RegisterType<IHotelBucket, HotelBucket>(new ContainerControlledLifetimeManager());
             container.RegisterType<IConfigurationService, ConfigurationService>();
+            container.RegisterType<IConfirmationService, ConfirmationService>();
 
             config.DependencyResolver = new UnityResolver(container);
             

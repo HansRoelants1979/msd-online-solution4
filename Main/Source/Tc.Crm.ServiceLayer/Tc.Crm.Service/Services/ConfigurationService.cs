@@ -33,6 +33,11 @@ namespace Tc.Crm.Service.Services
                 fileNames = ConfigurationManager.AppSettings[Constants.Configuration.AppSettings.SurveyPublicKeyFileNames];
                 return GetFileNamesFromCsv(fileNames);
             }
+            else if (contextApi == Api.Confirmation)
+            {
+                fileNames = ConfigurationManager.AppSettings[Constants.Configuration.AppSettings.ConfirmationPublicKeyFileNames];
+                return GetFileNamesFromCsv(fileNames);
+            }
             else
                 return null;
         }

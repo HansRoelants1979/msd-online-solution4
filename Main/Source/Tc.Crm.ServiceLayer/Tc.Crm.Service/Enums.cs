@@ -11,6 +11,7 @@ namespace Tc.Crm.Service
         Booking,
         Survey,
         Caching,
-        Customer
+        Customer,
+        Confirmation
     }
 }

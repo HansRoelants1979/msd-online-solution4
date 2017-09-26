@@ -6,6 +6,13 @@ using Tc.Crm.Service.Models;
 using System.Collections.ObjectModel;
 using System.Net;
 using Tc.Crm.Service.Constants.Crm;
+using Tc.Crm.Common;
+using Microsoft.Xrm.Sdk;
+using Tc.Crm.Common.Constants;
+using Attributes = Tc.Crm.Common.Constants.Attributes;
+using Microsoft.Xrm.Sdk.Query;
+using Tc.Crm.Service.Constants;
+using Tc.Crm.Service.Constants.Crm;
 
 namespace Tc.Crm.ServiceTests
 {
@@ -21,12 +28,14 @@ namespace Tc.Crm.ServiceTests
     public class TestCrmService : ICrmService
     {
         XrmFakedContext context;
+        IOrganizationService orgService;
 
         public DataSwitch Switch { get; set; }
 
         public TestCrmService(XrmFakedContext context)
         {
             this.context = context;
+            orgService = context.GetFakedOrganizationService();
         }
         public Tc.Crm.Service.Models.UpdateResponse ExecuteActionForBookingUpdate(string data)
         {
@@ -123,24 +132,109 @@ namespace Tc.Crm.ServiceTests
                 return true;
         }
 
+        /// <summary>
+        /// To process entitycachemessage record without notes
+        /// </summary>
+        /// <param name="entityCacheMessageId"></param>
+        /// <param name="outComeId"></param>
+        /// <param name="status"></param>
+        /// <param name="statusReason"></param>
+        /// <returns></returns>
+        public Guid ProcessEntityCacheMessage(Guid entityCacheMessageId, string outComeId, Status status, EntityCacheMessageStatusReason statusReason)
+        {
+            return ProcessEntityCacheMessage(entityCacheMessageId, outComeId, status, statusReason, null);
+        }
+
+        /// <summary>
+        /// To process entitycachemessage record with notes
+        /// </summary>
+        /// <param name="entityCacheMessageId"></param>
+        /// <param name="outComeId"></param>
+        /// <param name="status"></param>
+        /// <param name="statusReason"></param>
+        /// <param name="notes"></param>
+        /// <returns></returns>
+        public Guid ProcessEntityCacheMessage(Guid entityCacheMessageId, string outComeId, Status status, EntityCacheMessageStatusReason statusReason, string notes)
+        {
+            var entityCacheId = Guid.Empty;
+            var entityCacheMessages = GetEntityCacheMessages(entityCacheMessageId);
+            if (entityCacheMessages == null || entityCacheMessages.Entities.Count == 0) return entityCacheId;
+            var entityCacheMessage = entityCacheMessages[0];
+            if (!string.IsNullOrWhiteSpace(outComeId))
+                entityCacheMessage.Attributes[Attributes.EntityCacheMessage.OutcomeId] = outComeId;
+            entityCacheMessage.Attributes[Attributes.EntityCacheMessage.State] = new OptionSetValue((int)status);
+            entityCacheMessage.Attributes[Attributes.EntityCacheMessage.StatusReason] = new OptionSetValue((int)statusReason);
+            if (!string.IsNullOrWhiteSpace(notes))
+            {
+                entityCacheMessage.Attributes[Attributes.EntityCacheMessage.Notes] = GetAppendedNotes(entityCacheMessage, notes);
+            }
+            orgService.Update(entityCacheMessage);
+            if (entityCacheMessage.Attributes.Contains(Attributes.EntityCacheMessage.EntityCacheId) && entityCacheMessage.Attributes[Attributes.EntityCacheMessage.EntityCacheId] != null)
+            {
+                entityCacheId = ((EntityReference)(entityCacheMessage.Attributes[Attributes.EntityCacheMessage.EntityCacheId])).Id;
+            }
+            return entityCacheId;
+        }
+
+        /// <summary>
+        /// To get entitycachemessage based on id
+        /// </summary>
+        /// <param name="entityCacheMessageId"></param>
+        /// <returns></returns>
+        private EntityCollection GetEntityCacheMessages(Guid entityCacheMessageId)
+        {
+            var entityCacheMessages = orgService.RetrieveMultiple(new QueryExpression
+            {
+                EntityName = EntityName.EntityCacheMessage,
+                Criteria = new FilterExpression
+                {
+                    FilterOperator = LogicalOperator.And,
+                    Conditions =
+                               {
+                                new ConditionExpression
+                                    {
+                                        AttributeName = Attributes.EntityCacheMessage.EntityCacheMessageId,
+                                        Operator = ConditionOperator.Equal,
+                                        Values = { entityCacheMessageId }
+                                    }
+                                }
+                },
+                ColumnSet = new ColumnSet(new string[] { Attributes.EntityCacheMessage.EntityCacheId, Attributes.EntityCacheMessage.Notes })
+            });
+            return entityCacheMessages;
+        }
+
+        /// <summary>
+        /// To get tc_notes of entitycachemessage
+        /// </summary>
+        /// <param name="entityCacheMessage"></param>
+        /// <param name="notes"></param>
+        /// <returns></returns>
+        private string GetAppendedNotes(Entity entityCacheMessage, string notes)
+        {
+            if (entityCacheMessage != null && entityCacheMessage.Attributes.Contains(Attributes.EntityCacheMessage.Notes) && entityCacheMessage.Attributes[Attributes.EntityCacheMessage.Notes] != null)
+                if (!string.IsNullOrWhiteSpace(entityCacheMessage.Attributes[Attributes.EntityCacheMessage.Notes].ToString()))
+                    notes += entityCacheMessage.Attributes[Attributes.EntityCacheMessage.Notes].ToString();
+            return notes;
+        }
+
+        /// <summary>
+        /// To update entitycache status
+        /// </summary>
+        /// <param name="entityCacheId"></param>
+        /// <param name="status"></param>
+        /// <param name="statusReason"></param>
+        public void ProcessEntityCache(Guid entityCacheId, Status status, EntityCacheStatusReason statusReason)
+        {
+            var entityCache = new Entity(EntityName.EntityCache, entityCacheId);
+            entityCache.Attributes[Attributes.EntityCache.StatusReason] = new OptionSetValue((int)statusReason);
+            entityCache.Attributes[Attributes.EntityCache.State] = new OptionSetValue((int)status);
+            orgService.Update(entityCache);
+        }
+
         public CustomerResponse ExecuteActionOnCustomerEvent(string data, Actions.OperationType operation)
         {
-            if (Switch == DataSwitch.Created)
-                return new CustomerResponse { Create = true,Existing=false, Id = Guid.NewGuid().ToString() };
-
-            else if (Switch == DataSwitch.Updated)
-                return new CustomerResponse { Updated = true, Existing = false, Id = Guid.NewGuid().ToString() };
-
-            else if (Switch == DataSwitch.Response_NULL)
-                throw new InvalidOperationException(Tc.Crm.Service.Constants.Messages.ResponseFromCrmIsNull);
-
-            else if (Switch == DataSwitch.Response_Failed)
-                return new CustomerResponse { Existing = false, Id = null };
-            else if (Switch == DataSwitch.Return_NULL)
-                return null;
-            else if (Switch == DataSwitch.ActionThrowsError)
-                throw new Exception("Action faulted");
-            return null;
+            throw new NotImplementedException();
         }
     }
 }

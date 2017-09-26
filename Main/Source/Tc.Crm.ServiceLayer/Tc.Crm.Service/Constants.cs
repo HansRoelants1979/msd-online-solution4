@@ -75,6 +75,10 @@
         public const string CustomerTypeNotPresent = "Customer type record is empty or null.";
         public const string CustomerIdentityNotPresent = "Customer Identity is null or empty";
 
+        public const string FailedToUpdateEntityCacheMessage = FailedtoCreateSurvey;
+        public const string ConfirmationDataPassedIsNullOrCouldNotBeParsed = "The payload could not be read.";
+        public const string CorrelationIdWasMissing = "The correlationId was missing.";
+        public const string UnexpectedError = "An unexpected error has occurred.";
     }
     public static class Parameters
     {
@@ -108,6 +112,7 @@ namespace Tc.Crm.Service.Constants.Configuration
         public const string IssuedAtTimeExpiryInSeconds = "issuedAtTimeExpiryInSeconds";
         public const string BookingPublicKeyFileNames = "Booking_PublicKey_FileNames";
         public const string SurveyPublicKeyFileNames = "Survey_PublicKey_FileNames";
+        public const string ConfirmationPublicKeyFileNames = "Confirmation_PublicKey_FileNames";
     }
     public static class ConnectionStrings
     {

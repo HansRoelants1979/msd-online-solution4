@@ -214,6 +214,7 @@
             public const string Notes = "tc_notes";
             public const string StatusReason = "statuscode";
             public const string State = "statecode";
+            public const string EntityCacheMessageId = "tc_entitycachemessageid";
         }
 
         public static class Configuration

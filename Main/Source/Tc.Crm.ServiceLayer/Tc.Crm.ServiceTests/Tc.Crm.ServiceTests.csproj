@@ -145,18 +145,24 @@
     <Compile Include="Controllers\BookingControllerTests.cs" />
     <Compile Include="Controllers\CacheControllerTests.cs" />
     <Compile Include="Controllers\CustomerControllerTests.cs" />
+    <Compile Include="Controllers\ConfirmControllerTests.cs" />
     <Compile Include="Controllers\PingControllerTests.cs" />
     <Compile Include="Controllers\SurveyControllerTests.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BookingServiceTests.cs" />
     <Compile Include="Services\CustomerServiceTests.cs" />
+    <Compile Include="Services\ConfirmationServiceTests.cs" />
     <Compile Include="Services\JsonWebTokenHelperTests.cs" />
     <Compile Include="Services\SurveyServiceTests.cs" />
     <Compile Include="TestConfigurationService.cs" />
     <Compile Include="TestCrmService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Tc.Crm.Common\Tc.Crm.Common.csproj">
+      <Project>{860e3979-f2c6-4c90-9fa6-e130bd1ee9be}</Project>
+      <Name>Tc.Crm.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Tc.Crm.Service\Tc.Crm.Service.csproj">
       <Project>{5E016BA7-1FF5-419F-B2DB-F741DD00BB2D}</Project>
       <Name>Tc.Crm.Service</Name>
