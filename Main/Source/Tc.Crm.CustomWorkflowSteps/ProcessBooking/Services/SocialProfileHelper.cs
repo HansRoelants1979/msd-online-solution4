@@ -42,7 +42,6 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 
             Entity socialprofileEntity = null;
 
-
             if (!string.IsNullOrWhiteSpace(socialprofile.Value))
                 socialprofileEntity = new Entity(EntityName.SocialProfile, Attributes.SocialProfile.UniqueProfileId, socialprofile.Value);
             socialprofileEntity[Attributes.SocialProfile.ProfileName] = socialprofile.Value;

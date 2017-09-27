@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.ObjectModel;
 using System.Text;
+using Tc.Crm.Service.CacheBuckets;
 using Tc.Crm.Service.Models;
 using static Tc.Crm.Service.Constants.Crm.Actions;
 
@@ -10,6 +11,23 @@ namespace Tc.Crm.Service.Services
 {
     public class CustomerService : ICustomerService
     {
+
+        CountryBucket countryBucket;
+        SourceMarketBucket sourceMarketBucket;
+
+        public CustomerService(CountryBucket countryBucket,
+                                SourceMarketBucket sourceMarketBucket)
+        {
+            this.countryBucket = countryBucket;
+            this.sourceMarketBucket = sourceMarketBucket;
+
+            if (this.countryBucket.Items == null || this.countryBucket.Items.Count == 0)
+                this.countryBucket.FillBucket();
+
+            if (this.sourceMarketBucket.Items == null || this.sourceMarketBucket.Items.Count == 0)
+                this.sourceMarketBucket.FillBucket();
+        }
+
         public CustomerResponse Create(string customerData, ICrmService crmService)
         {
             if (string.IsNullOrWhiteSpace(customerData)) throw new ArgumentNullException(Constants.Parameters.ProcessCustomer);
@@ -70,9 +88,9 @@ namespace Tc.Crm.Service.Services
 
             if (customerGeneral != null && customerGeneral.CustomerType == CustomerType.NotSpecified)
                 validationMessages.Add(Constants.Messages.CustomerTypeNotPresent);
-
+            if (customerGeneral != null && customerGeneral.CustomerType == CustomerType.Company)
+                return validationMessages;
             var customerIdentity = customer.CustomerIdentity;
-
             if (customerIdentity == null)
                 validationMessages.Add(Constants.Messages.CustomerIdentityNotPresent);
 
@@ -95,6 +113,39 @@ namespace Tc.Crm.Service.Services
 
             }
             return message.ToString();
+        }
+
+        public void ResolveReferences(Customer customerInfo)
+        {
+            ResolveCountryReferences(customerInfo);
+        }
+
+        public void ResolveCountryReferences(Customer customer)
+        {
+            if (customer == null) return;
+
+            if (customer.Address != null)
+            {
+                foreach (var address in customer.Address)
+                {
+                    address.Country = countryBucket.GetBy(address.Country);
+                }
+            }
+
+            if (customer.CustomerIdentifier != null)
+            {
+                var sourceMarket = sourceMarketBucket.GetBy(customer.CustomerIdentifier.SourceMarket);
+                if (sourceMarket != null)
+                {
+                    customer.CustomerIdentifier.SourceMarket = sourceMarket.Id;
+                    if (!string.IsNullOrWhiteSpace(sourceMarket.TeamId))
+                        customer.Owner = sourceMarket.TeamId;
+                }
+                else
+                    customer.CustomerIdentifier.SourceMarket = null;
+            }
+
+
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Tc.Crm.Service.Filters;
 using Tc.Crm.Service.Models;
 using Tc.Crm.Service.Services;
 
@@ -26,6 +27,7 @@ namespace Tc.Crm.Service.Controllers
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         [Route("api/customers/customer")]
         [HttpPost]
+        [JsonWebTokenAuthorize]
         public HttpResponseMessage Create(CustomerInformation customerInfo)
         {
             try
@@ -39,6 +41,7 @@ namespace Tc.Crm.Service.Controllers
                 }
 
                 var customer = customerInfo.Customer;
+                customerService.ResolveReferences(customer);
                 var jsonData = JsonConvert.SerializeObject(customer);
                 var response = customerService.Create(jsonData, crmService);
                 if (response.Existing)
@@ -59,6 +62,7 @@ namespace Tc.Crm.Service.Controllers
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         [Route("api/customers/{gbgId}")]
         [HttpPatch]
+        [JsonWebTokenAuthorize]
         public HttpResponseMessage Update(string gbgId, JsonPatchDocument<CustomerInformation> customerInfo)
         {
             try
@@ -101,6 +105,13 @@ namespace Tc.Crm.Service.Controllers
             customerInformation.Customer.CustomerIdentity = new CustomerIdentity();
             customerInformation.Customer.CustomerIdentifier = new CustomerIdentifier();
             customerInformation.Customer.CustomerGeneral = new CustomerGeneral();
+            customerInformation.Customer.Company = new Company();
+            customerInformation.Customer.Permission = new Permission();
+            customerInformation.Customer.Additional = new Additional();
+            customerInformation.Customer.Address = new Address[3];
+            customerInformation.Customer.Phone = new Phone[3];
+            customerInformation.Customer.Email = new Email[3];
+            customerInformation.Customer.Social = new Social[3];
 
             customerInfo.ApplyUpdatesTo(customerInformation);
             return customerInformation;

@@ -44,7 +44,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
                 ProcessAccount();
             }
             else if (payloadCustomer.Customer.CustomerGeneral.CustomerType == CustomerType.Person){
-                ProcessContact();
+                ProcessContact();                
             }
             else
                 throw new InvalidPluginExecutionException("The specified Customer Type is not recognized.");
@@ -56,8 +56,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
             var customer = payloadCustomer.Customer;
             var operationType = payloadCustomer.OperationType;
             if (operationType.ToUpper() == Enum.GetName(typeof(OperationType), OperationType.POST)){
-                var account = AccountHelper.GetAccountEntityForCustomerPayload(customer, trace);
-                var existingAccountCollection = CommonXrm.RetrieveMultipleRecords(account.LogicalName,
+                var existingAccountCollection = CommonXrm.RetrieveMultipleRecords(EntityName.Account,
                     new string[] { Attributes.Account.SourceSystemId },
                     new string[] { Attributes.Account.SourceSystemId },
                     new string[] { customer.CustomerIdentifier.CustomerId }, crmService);
@@ -68,10 +67,11 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
                             Create = false,
                             Id = null
                         };
+                        return;
                     }
-                    return;
                 }
-                var xrmResponse = CommonXrm.CreateEntity(account, crmService) ;
+                var account = AccountHelper.GetAccountEntityForCustomerPayload(customer, trace); 
+                var xrmResponse = CommonXrm.CreateEntity(account, crmService) ; 
                 payloadCustomer.CustomerId = xrmResponse.Id;
                 payloadCustomer.Response = new XrmUpdateResponse(){
                     Existing = false,
@@ -80,6 +80,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
                 };
             }
             else if (operationType.ToUpper() == Enum.GetName(typeof(OperationType), OperationType.PATCH)){
+                trace.Trace("inside patch");
                 var existingAccountCollection = CommonXrm.RetrieveMultipleRecords(EntityName.Account,
                     new string[] { Attributes.Account.AccountId, Attributes.Account.SourceSystemId },
                     new string[] { Attributes.Account.DuplicateSourceSystemId },
@@ -97,10 +98,11 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
                     Requests = new OrganizationRequestCollection(),
                     ReturnResponses = true
                 };
-                foreach (Entity existingAccount in existingAccountCollection.Entities){
+                foreach (Entity existingAccount in existingAccountCollection.Entities){ 
                     var account = AccountHelper.GetAccountEntityForCustomerPayload(customer, trace, OperationType.PATCH);
                     account[Attributes.Account.AccountId] = existingAccount.GetAttributeValue<Guid>
                                                                 (Attributes.Account.AccountId);
+                    trace.Trace(account[Attributes.Account.AccountId].ToString());
                     var updateRequest = new UpdateRequest { Target = account };
                     multipleRequest.Requests.Add(updateRequest);
                     if (multipleRequest.Requests.Count == 500){
@@ -114,6 +116,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
             }
             trace.Trace("Processing Account information - end");
         }
+
         private void ProcessContact(){
             trace.Trace("Processing Contact information - start");
             var customer = payloadCustomer.Customer;
@@ -133,18 +136,20 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
                     return;
                 }
                 var xrmResponse = CommonXrm.CreateEntity(contact, crmService);
+                ProcessSocialProfile(new Guid(xrmResponse.Id.ToString()));
                 payloadCustomer.CustomerId = xrmResponse.Id;
                 payloadCustomer.Response = new XrmUpdateResponse(){
                     Existing = false,
                     Create = xrmResponse.Create,
                     Id = xrmResponse.Id
-                }; 
+                };
+                ProcessSocialProfile(Guid.Parse(payloadCustomer.Response.Id));
             }
             else if (operationType.ToUpper() == Enum.GetName(typeof(OperationType), OperationType.PATCH)){
                 var newContacts = new EntityCollection();
 
                 var existingContacts = CommonXrm.RetrieveMultipleRecords(EntityName.Contact,
-                                        new string[] { Attributes.Account.AccountId, Attributes.Account.SourceSystemId },
+                                        new string[] { Attributes.Contact.ContactId, Attributes.Contact.SourceSystemId },
                                         new string[] { Attributes.Contact.DuplicateSourceSystemId },
                                         new string[] { customer.CustomerIdentifier.CustomerId }, crmService);
 
@@ -166,6 +171,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
                 foreach (var existingContact in existingContacts.Entities){
                     var contact = ContactHelper.GetContactEntityForCustomerPayload(existingContact, 
                                                         customer, trace, operationType);
+                    ProcessSocialProfile(contact.Id);
                     updateRequest = new UpdateRequest { Target = contact };
                     multipleRequest.Requests.Add(updateRequest);
                     if (multipleRequest.Requests.Count == 500){
@@ -178,6 +184,24 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
                 }
             }
             trace.Trace("Processing Contact information - end");
+        }
+
+        private void ProcessSocialProfile(Guid CustomerID)
+        {
+            trace.Trace("Processing Social profile information - start");
+            if (payloadCustomer.Customer.Social == null)
+                throw new InvalidPluginExecutionException("Customer Social information is null.");
+            if (CustomerID == null)
+                throw new InvalidPluginExecutionException("Social Profile Customer ID is null.");
+            var entityCollectionsocialProfiles = SocialProfileHelper.GetSocialProfileEntityFromPayload(payloadCustomer.Customer, CustomerID, trace);
+            if (entityCollectionsocialProfiles != null && entityCollectionsocialProfiles.Entities.Count > 0)
+            {
+                foreach (Entity entitySocialProfile in entityCollectionsocialProfiles.Entities)
+                {
+                    CommonXrm.UpsertEntity(entitySocialProfile, crmService);
+                }
+            }
+            trace.Trace("Processing Social Profile information - end");            
         }
     }
 }

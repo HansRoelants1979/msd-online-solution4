@@ -901,6 +901,9 @@ namespace Tc.Crm.Service.Models
         [DataMember(Name = "customerIdentity")]
         public CustomerIdentity CustomerIdentity { get; set; }
 
+        [DataMember(Name = "permission")]
+        public Permission Permission { get; set; }
+
         [DataMember(Name = "company")]
         public Company Company { get; set; }
 
@@ -923,6 +926,23 @@ namespace Tc.Crm.Service.Models
         [DataMember(Name = "social")]
         public Social[] Social { get; set; }
 
+    }
+
+    [DataContract(Name = "permission")]
+    public class Permission
+    {
+        [DataMember(Name = "doNotContactInd")]
+        public string DoNotContactInd { get; set; }
+        [DataMember(Name = "preferredContactMethod")]
+        public string PreferredContactMethod { get; set; }
+        [DataMember(Name = "emailAllowedInd")]
+        public string EmailAllowedInd { get; set; }
+        [DataMember(Name = "mailAllowedInd")]
+        public string MailAllowedInd { get; set; }
+        [DataMember(Name = "phoneAllowedInd")]
+        public string PhoneAllowedInd { get; set; }
+        [DataMember(Name = "smsAllowedInd")]
+        public string SmsAllowedInd { get; set; }
     }
 
     [DataContract(Name = "booking_booker")]

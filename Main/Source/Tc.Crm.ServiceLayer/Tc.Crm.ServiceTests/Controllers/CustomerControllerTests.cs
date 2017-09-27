@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Net;
 using System.Web.Http;
 using System.Web.Http.Hosting;
+using Tc.Crm.Service.CacheBuckets;
 using Tc.Crm.Service.Constants;
 using Tc.Crm.Service.Controllers;
 using Tc.Crm.Service.Models;
@@ -26,7 +27,7 @@ namespace Tc.Crm.ServiceTests.Controllers.Tests
         {
             context = new XrmFakedContext();
             crmService = new TestCrmService(context);
-            customerService =new CustomerService();
+            customerService =new CustomerService(new CountryBucket(crmService), new SourceMarketBucket(crmService));
             controller = new CustomerController(customerService, crmService);
             controller.Request = new System.Net.Http.HttpRequestMessage();
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());

@@ -22,6 +22,8 @@ namespace Tc.Crm.Service.Services
                 jsonWebTokenService = new CacheJsonWebTokenService(configurationService);
             else if (contextApi == Api.Confirmation)
                 jsonWebTokenService = new ConfirmationJsonWebTokenService(configurationService);
+            else if (contextApi == Api.Customer)
+                jsonWebTokenService = new CustomerJsonWebTokenService(configurationService);
             else
                 throw new InvalidOperationException("Invalid API has been called.");
 

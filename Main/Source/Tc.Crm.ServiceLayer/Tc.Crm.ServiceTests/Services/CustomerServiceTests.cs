@@ -1,8 +1,7 @@
 ﻿using FakeXrmEasy;
-using JsonPatch;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.ObjectModel;
+using Tc.Crm.Service.CacheBuckets;
 using Tc.Crm.Service.Constants;
 using Tc.Crm.Service.Models;
 using Tc.Crm.Service.Services;
@@ -21,7 +20,7 @@ namespace Tc.Crm.ServiceTests.Services.Tests
         {
             context = new XrmFakedContext();
             crmService = new TestCrmService(context);
-            customerService = new CustomerService();
+            customerService = new CustomerService(new CountryBucket(crmService), new SourceMarketBucket(crmService));
         }
 
         [TestMethod()]

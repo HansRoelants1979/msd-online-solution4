@@ -334,7 +334,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         Primary,
         [EnumMember]
         Promo
-    }
+    }    
+
     [DataContract(Name = "RemarkType")]
     public enum RemarkType
     {
@@ -861,6 +862,28 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         public string Number { get; set; }
     }
 
+    [DataContract(Name = "permission")]
+    public class Permission
+    {        
+        [DataMember(Name = "doNotContactInd")]
+        public string DoNotContactInd { get; set; }
+
+        [DataMember(Name = "preferredContactMethod")]
+        public string PreferredContactMethod { get; set; }
+
+        [DataMember(Name = "emailAllowedInd")]
+        public string EmailAllowedInd { get; set; }
+
+        [DataMember(Name = "mailAllowedInd")]
+        public string MailAllowedInd { get; set; }
+
+        [DataMember(Name = "phoneAllowedInd")]
+        public string PhoneAllowedInd { get; set; }
+
+        [DataMember(Name = "smsAllowedInd")]
+        public string SmsAllowedInd { get; set; }
+    }
+
     [DataContract(Name = "email")]
     public class Email
     {
@@ -875,12 +898,17 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
     [DataContract(Name = "social")]
     public class Social
     {
-
         [DataMember(Name = "type")]
         public string SocialType { get; set; }
 
         [DataMember(Name = "value")]
         public string Value { get; set; }
+        
+        [DataMember(Name = "facebookusername")]       
+        public string FaceBookUserName { get; set; }
+
+        [DataMember(Name = "twitterhandle")]
+        public string TwitterHandle { get; set; }
     }
 
     [DataContract(Name = "customer")]
@@ -919,6 +947,10 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
         [DataMember(Name = "social")]
         public Social[] Social { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
+        [DataMember(Name = "permission")]
+        public Permission Permission { get; set; }
 
     }
 

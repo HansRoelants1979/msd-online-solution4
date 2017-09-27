@@ -22,27 +22,34 @@ namespace Tc.Crm.Service.Client.Console
         {
             try
             {
-                System.Console.WriteLine(@"Enter:
-1 - to process Booking
-2 - to process survey
-3 - to cache
-4 - to ping CRM
-5 - process Customer create
-6 - process Customer update
-7 - process Confirmation.");
+                System.Console.WriteLine("Enter 1 to process Booking OR \n2 to process survey OR " +
+                            "\n3 to cache OR \n4 to ping CRM OR \n5 to process Customer create  OR "+
+                            "\n6 to process Customer update.");
 
                 var option = System.Console.ReadLine();
                 if (option == "1")
+                {
                     ProcessBooking();
+                }
                 else if (option == "2")
+                {
                     ProcessSurvey();
+                }
                 else if (option == "3")
+                {
                     Cache();
+                }
                 else if (option == "4")
+                {
                     PingCRM();
+                }
                 else if (option == "5")
+                {
                     ProcessCustomerCreate();
+
+                }
                 else if (option == "6")
+                {
                     ProcessCustomerUpdate();
                 else if (option == "7")
                     ProcessConfirmation();
@@ -57,20 +64,27 @@ namespace Tc.Crm.Service.Client.Console
 
         private static void ProcessCustomerUpdate()
         {
-            System.Console.WriteLine("Processing Customer Update.");
+            System.Console.WriteLine("Processing Customer Create.");
 
             while (true)
             {
                 System.Console.WriteLine("Reading the Json data");
                 var data = File.ReadAllText("customer-patch.json");
+
                 System.Console.Write("Enter the Customer ID: ");
                 var customerID = System.Console.ReadLine();
                 var api = "api/customers/" + customerID.ToString();
+
+                //create the token
+                var token = CreateJWTToken();
 
                 HttpClient cons = new HttpClient();
 
                 cons.BaseAddress = new Uri(GetUrl());
                 cons.DefaultRequestHeaders.Accept.Clear();
+                var authHeader = bool.Parse(ConfigurationManager.AppSettings["authHeader"]);
+                if (authHeader)
+                    cons.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
                 var method = new HttpMethod("PATCH");
                 var request = new HttpRequestMessage(method, api)
@@ -112,27 +126,28 @@ namespace Tc.Crm.Service.Client.Console
         private static void ProcessCustomerCreate()
         {
             System.Console.WriteLine("Processing Customer Create.");
-
             while (true)
             {
-                System.Console.WriteLine("Reading the Json data");
-                var data = File.ReadAllText("customer.json");
+                System.Console.WriteLine("Please Input the json file name : ");
+                var fileName = System.Console.ReadLine();
+                System.Console.WriteLine("Reading Json file... ");
+                var data = File.ReadAllText(fileName + ".json");
                 var api = "api/customers/customer";
-
+                //create the token
+                System.Console.WriteLine("Creating JWT Token.. ");
+                var token = CreateJWTToken();
                 HttpClient cons = new HttpClient();
-
                 cons.BaseAddress = new Uri(GetUrl());
-
                 cons.DefaultRequestHeaders.Accept.Clear();
                 cons.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json-patch+json"));
-
+                var authHeader = bool.Parse(ConfigurationManager.AppSettings["authHeader"]);
+                if (authHeader)
+                    cons.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                System.Console.WriteLine("Connecting to CRM Service.. ");
                 Task<HttpResponseMessage> t = cons.PostAsync(api, new StringContent(data, Encoding.UTF8, "application/json"));
-
                 var response = t.Result;
-
                 Task<string> task = response.Content.ReadAsStringAsync();
                 var content = task.Result;
-
                 System.Console.WriteLine("Response Code: {0}", response.StatusCode.GetHashCode());
                 if (response.StatusCode == HttpStatusCode.Created)
                     System.Console.WriteLine("Customer has been created with GUID::{0}", content);
@@ -144,12 +159,10 @@ namespace Tc.Crm.Service.Client.Console
                     System.Console.WriteLine("Internal Server Error.");
                 else if (response.StatusCode == HttpStatusCode.Forbidden)
                     System.Console.WriteLine("Forbidden.");
-
                 if (string.IsNullOrWhiteSpace(content))
                     System.Console.WriteLine("No content.");
                 else
                     System.Console.WriteLine("Content:{0}", content);
-
                 System.Console.Write("Do one more test(y/n):");
                 var ans = System.Console.ReadLine();
                 if (ans == "n") break;

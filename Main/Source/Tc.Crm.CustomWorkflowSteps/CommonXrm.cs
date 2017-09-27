@@ -501,11 +501,104 @@ namespace Tc.Crm.CustomWorkflowSteps
 
             return new OptionSetValue(value);
         }
+
+        public static OptionSetValue GetPreferredContactMethodCode(string preferredContactMethod)
+        {
+            int value = -1;
+            switch (preferredContactMethod)
+            {                
+                case "Email":
+                    value = 2;
+                    break;
+                case "Phone":
+                    value = 3;
+                    break;
+                case "Mail":
+                    value = 5;
+                    break;
+                default:
+                    value = 1;
+                    break;
+            }
+            return new OptionSetValue(value);
+        }    
+            
+        public static OptionSetValue GetMarketingByEmail(string marketingByEmail)
+        {
+            int value = -1;
+            switch (marketingByEmail)
+            {
+                case "true":
+                    value = 950000000;
+                    break;
+                case "false":
+                    value = 950000001;
+                    break;
+            }
+            return new OptionSetValue(value);
+        }
+
+        public static OptionSetValue GetMarketingByPost(string marketingByPost)
+        {
+            int value = -1;
+            switch (marketingByPost)
+            {
+                case "true":
+                    value = 950000000;
+                    break;
+                case "false":
+                    value = 950000001;
+                    break;
+            }
+            return new OptionSetValue(value);
+        }
+
+        public static OptionSetValue GetMarketingByPhone(string marketingByPhone)
+        {
+            int value = -1;
+            switch (marketingByPhone)
+            {
+                case "true":
+                    value = 950000000;
+                    break;
+                case "false":
+                    value = 950000001;
+                    break;
+            }
+            return new OptionSetValue(value);
+        }
+
+        public static OptionSetValue GetMarketingBySms(string marketingBySms)
+        {
+            int value = -1;
+            switch (marketingBySms)
+            {
+                case "true":
+                    value = 950000000;
+                    break;
+                case "false":
+                    value = 950000001;
+                    break;
+            }
+            return new OptionSetValue(value);
+        }
+
+        public static OptionSetValue GetMarketingConsent(string marketingConsent)
+        {
+            int value = -1;
+            switch (marketingConsent)
+            {               
+                case "true":
+                    value = 950000000;
+                    break;
+                case "false":
+                    value = 950000001;
+                    break;               
+            }
+            return new OptionSetValue(value);
+        }
+        
         #endregion Option set mappings
-
-
-
-
         /// <summary>
         /// Call this method to create or update record
         /// </summary>

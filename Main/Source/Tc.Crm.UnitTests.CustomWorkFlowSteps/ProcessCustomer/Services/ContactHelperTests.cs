@@ -16,10 +16,10 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services.Tests
             trace = new TestTracingService();
         }
         [TestMethod()]
+        [ExpectedException(typeof(InvalidPluginExecutionException), "Customer is null.")]
         public void GetContactEntityForCustomerPayload_CustomerIsNull()
-        {
-            var customer = ContactHelper.GetContactEntityForCustomerPayload(null, trace, "POST");
-            Assert.IsNull(customer);
+        {            
+            ContactHelper.GetContactEntityForCustomerPayload(null, trace, "POST");            
         }
 
         [TestMethod()]
@@ -29,58 +29,109 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services.Tests
             ContactHelper.GetContactEntityForCustomerPayload(new Customer(), null, "POST");
         }
 
-        [TestMethod()]
-        public void GetContactEntityForCustomerPayload_CustomerIdentifierIsNull()
+        Customer c = new Customer
         {
-            var contact = ContactHelper.GetContactEntityForCustomerPayload(new Customer(), trace, "POST");
-            Assert.IsNotNull(contact);
-            Assert.AreEqual("", contact[Attributes.Contact.SourceSystemId].ToString());
-        }
+            CustomerIdentifier = new CustomerIdentifier
+            {
+                CustomerId ="",
+                BusinessArea = "Hotel",
+                SourceMarket = Guid.NewGuid().ToString(),
+                SourceSystem = "On Tour"
+            },
+            CustomerIdentity = new CustomerIdentity
+            {
+                FirstName = "Joe",
+                LastName = "Blog",
+                Birthdate = "1982-10-08",
+                Gender = Gender.Female,
+                Language = "English",
+                Salutation = "Mr"
+            },
+            Address = new Address[]
+                {
+                    new Address { Street = "dummy", Town = "dummy", Country = "12345678-1234-1234-1234-123456789012" },
+                    new Address { Street = "dummy", Town = "dummy", Country = "12345678-1234-1234-1234-123456789012" },
+                },
+            Permission = new Permission
+            {              
+                DoNotContactInd = "true",
+                EmailAllowedInd = "true",
+                MailAllowedInd = "true",
+                PhoneAllowedInd = "true",
+                SmsAllowedInd = "true",
+                PreferredContactMethod ="Email"               
+            },
+            Phone = new Phone[]
+                {
+                    new Phone { Number = "dummy"},
+                    new Phone { Number ="dummy"},
+                    new Phone { Number ="dummy"}
+                },
+            Email = new Email[]
+                {
+                    new Email { Address = "dummy" },
+                    new Email { Address ="dummy"},
+                    new Email { Address ="dummy"}
+                }
+        };
 
         [TestMethod()]
-        public void GetContactEntityForCustomerPayload_CustomerIdIsNull()
+        [ExpectedException(typeof(InvalidPluginExecutionException), "Customer Identifier is null.")]
+        public void GetContactEntityForCustomerPayload_CustomerIdentifierIsNull()
         {
-            Customer c = new Customer
-            {
-                CustomerIdentifier = new CustomerIdentifier
-                {
-                    BusinessArea = "Hotel",
-                    SourceMarket = Guid.NewGuid().ToString(),
-                    SourceSystem = "On Tour"
-                }
-            };
-            var contact = ContactHelper.GetContactEntityForCustomerPayload(c, trace, "POST");
-            Assert.IsNotNull(contact);
-            Assert.AreEqual("", contact[Attributes.Contact.SourceSystemId].ToString());
-        }
+            c.CustomerIdentifier = null;
+            ContactHelper.GetContactEntityForCustomerPayload(c, trace, "POST");                      
+        }        
 
         [TestMethod()]
         public void GetContactEntityForCustomerPayload_PopulateIdentity()
-        {
-            Customer c = new Customer
-            {
-                CustomerIdentifier = new CustomerIdentifier
-                {
-                    BusinessArea = "Hotel",
-                    CustomerId = "CONT001",
-                    SourceMarket = Guid.NewGuid().ToString(),
-                    SourceSystem = "On Tour"
-                },
-                CustomerIdentity = new CustomerIdentity
-                {
-                    FirstName = "Joe",
-                    LastName = "Blog",                    
-                    Birthdate = "1982-10-08",
-                    Gender = Gender.Female,
-                    Language = "English",                   
-                    Salutation = "Mr"
-                }
-            };
+        {            
             var contact = ContactHelper.GetContactEntityForCustomerPayload(c, trace, "POST");            
             Assert.AreEqual(c.CustomerIdentity.FirstName, contact[Attributes.Contact.FirstName].ToString());
             Assert.AreEqual(c.CustomerIdentity.LastName, contact[Attributes.Contact.LastName].ToString());            
             Assert.AreEqual(950000006, ((OptionSetValue)(contact[Attributes.Contact.Language])).Value);
             Assert.AreEqual(950000000, ((OptionSetValue)(contact[Attributes.Contact.Salutation])).Value);           
         }
+
+        [TestMethod()]
+        public void GetContactEntityForCustomerPayload_PopulateAddress()
+        {                       
+            var contact = ContactHelper.GetContactEntityForCustomerPayload(c, trace, "POST");
+            Assert.AreEqual(c.Address[0].Street, contact[Attributes.Contact.Address1Street].ToString());
+            Assert.AreEqual(c.Address[0].Street, contact[Attributes.Contact.Address1Town].ToString());
+            Assert.AreEqual(c.Address[1].Street, contact[Attributes.Contact.Address2Street].ToString());
+            Assert.AreEqual(c.Address[1].Street, contact[Attributes.Contact.Address2Street].ToString());            
+        }
+
+        [TestMethod()]
+        public void GetContactEntityForCustomerPayload_PopulatePermission()
+        {          
+            var contact = ContactHelper.GetContactEntityForCustomerPayload(c, trace, "POST");
+            Assert.AreEqual(new OptionSetValue(950000000), contact[Attributes.Contact.MarketingByPhone]);
+            Assert.AreEqual(new OptionSetValue(950000000), contact[Attributes.Contact.SendMarketingByEmail]);
+            Assert.AreEqual(new OptionSetValue(950000000), contact[Attributes.Contact.SendMarketingByPost]);
+            Assert.AreEqual(new OptionSetValue(950000000), contact[Attributes.Contact.ThomasCookMarketingConsent]);
+            Assert.AreEqual(new OptionSetValue(950000000), contact[Attributes.Contact.SendMarketingBySms]);
+            Assert.AreEqual(new OptionSetValue(2), contact[Attributes.Contact.PreferredContactMethodCode]);
+        }
+
+        [TestMethod()]
+        public void GetContactEntityForCustomerPayload_PopulatePhone()
+        {
+            var contact = ContactHelper.GetContactEntityForCustomerPayload(c, trace, "POST");
+            Assert.AreEqual(c.Phone[0].Number, contact[Attributes.Contact.Telephone1].ToString());
+            Assert.AreEqual(c.Phone[1].Number, contact[Attributes.Contact.Telephone2].ToString());
+            Assert.AreEqual(c.Phone[2].Number, contact[Attributes.Contact.Telephone3].ToString());
+        }
+
+        [TestMethod()]
+        public void GetContactEntityForCustomerPayload_PopulateEmail()
+        {            
+            var contact = ContactHelper.GetContactEntityForCustomerPayload(c, trace, "POST");
+            Assert.AreEqual(c.Email[0].Address, contact[Attributes.Contact.EmailAddress1].ToString());
+            Assert.AreEqual(c.Email[1].Address, contact[Attributes.Contact.EmailAddress2].ToString());
+            Assert.AreEqual(c.Email[2].Address, contact[Attributes.Contact.EmailAddress3].ToString());
+        }
+
     }
 }

@@ -154,9 +154,13 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string DuplicateSourceSystemId = "tc_duplicatesourcesystemid";
         public const string FullName = "fullname";
         public const string ContactId = "contactid";
-
-
-    }
+        public const string PreferredContactMethodCode = "preferredcontactmethodcode";
+        public const string ThomasCookMarketingConsent = "tc_thomascookmarketingconsent";
+        public const string SendMarketingByPost = "tc_sendmarketingbypost";
+        public const string MarketingByPhone = "tc_marketingbyphone";
+        public const string SendMarketingBySms = "tc_sendmarketingbysms";
+        public const string SendMarketingByEmail = "tc_sendmarketingbyemail";
+    }   
     public static class Account
     {
         public const string Name = "name";
@@ -184,6 +188,8 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string SourceSystemId = "tc_sourcesystemid";
         public const string DuplicateSourceSystemId = "tc_duplicatesourcesystemid";
         public const string AccountId = "accountid";
+        public const string StateCode = "statecode";
+        public const string StatusCode = "statuscode";
     }
     public static class Annotation
     {
@@ -191,7 +197,6 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string NoteText = "notetext";
         public const string Subject = "subject";
         public const string Regarding = "objectid";
-
     }
     public static class Booking
     {
@@ -289,7 +294,6 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string StartDateAndTime = "tc_startdateandtime";
         public const string TransferType = "tc_transfertype";
         public const string TransportCode = "tc_transportcode";
-
     }
     public static class Brand
     {
@@ -405,8 +409,9 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string ProfileName = "profilename";
         public const string Customer = "customerid";
         public const string SocialChannel = "community";
-        public const string UniqueProfileId = "uniqueprofileid";
-
+        public const string UniqueProfileId = "uniqueprofileid";        
+        public const string FaceBookUserName = "tc_facebookusername";
+        public const string TwitterHandle = "tc_twitterhandle";
     }
     public static class SystemUser
     {

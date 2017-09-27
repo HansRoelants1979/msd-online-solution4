@@ -1,5 +1,4 @@
-﻿using JsonPatch;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using Tc.Crm.Service.Models;
 
 namespace Tc.Crm.Service.Services
@@ -14,5 +13,7 @@ namespace Tc.Crm.Service.Services
         string GetStringFrom(Collection<string> strings);
 
         Collection<string> ValidateCustomerPatchRequest(CustomerInformation customerInfo);
+
+        void ResolveReferences(Customer customerInfo);
     }
 }

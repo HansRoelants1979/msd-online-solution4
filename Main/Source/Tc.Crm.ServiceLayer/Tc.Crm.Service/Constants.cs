@@ -112,6 +112,7 @@ namespace Tc.Crm.Service.Constants.Configuration
         public const string IssuedAtTimeExpiryInSeconds = "issuedAtTimeExpiryInSeconds";
         public const string BookingPublicKeyFileNames = "Booking_PublicKey_FileNames";
         public const string SurveyPublicKeyFileNames = "Survey_PublicKey_FileNames";
+        public const string CustomerPublicKeyFileNames = "Customer_PublicKey_FileNames";
         public const string ConfirmationPublicKeyFileNames = "Confirmation_PublicKey_FileNames";
     }
     public static class ConnectionStrings
