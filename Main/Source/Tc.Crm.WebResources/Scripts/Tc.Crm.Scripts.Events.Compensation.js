@@ -596,11 +596,11 @@ scriptLoader.load("Tc.Crm.Scripts.Events.Compensation", ["Tc.Crm.Scripts.Common"
             else
                 Xrm.Page.getControl(Attributes.Amount).clearNotification();
         }
-
-        var onCancelRibbonButtonClick = function () {
+        ///Mark need to confirm whether we uncomment this code or not on CRM-3098
+        //var onCancelRibbonButtonClick = function () {
            
-            Xrm.Utility.confirmDialog("Do  you want to Cancel the selected Compensation? You Can't activate it later.", cancelCompensation, null);
-        }
+        //    Xrm.Utility.confirmDialog("Do  you want to Cancel the selected Compensation? You Can't activate it later.", cancelCompensation, null);
+        //}
         var cancelCompensation = function () {
             var compensationEntityObj = {};
             var compensationRecId = Xrm.Page.data.entity.getId();
@@ -644,7 +644,7 @@ scriptLoader.load("Tc.Crm.Scripts.Events.Compensation", ["Tc.Crm.Scripts.Common"
                 validateBacsAccountNumber();
             },
             OnClickCancelRibbonButton: function () {
-                onCancelRibbonButtonClick();
+                cancelCompensation();
             },
             OnAccountSortCodeChanged: function (context) {
                 if (context === null) {
