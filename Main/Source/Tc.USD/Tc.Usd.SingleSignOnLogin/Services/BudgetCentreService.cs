@@ -6,6 +6,8 @@ using Microsoft.Xrm.Sdk.Query;
 using Microsoft.Xrm.Tooling.Connector;
 using Tc.Usd.SingleSignOnLogin.Models;
 using Microsoft.Xrm.Sdk.Messages;
+using Tc.Crm.Common.Constants;
+using Attributes = Tc.Crm.Common.Constants.Attributes;
 
 namespace Tc.Usd.SingleSignOnLogin.Services
 {
@@ -13,7 +15,7 @@ namespace Tc.Usd.SingleSignOnLogin.Services
     {
         private readonly Guid _myGuid;
         private readonly CrmServiceClient _crmService;
-        private readonly ColumnSet _storeColumnSet = new ColumnSet("tc_storeid", "tc_abta", "tc_clusterid", "tc_ukregionid", "tc_name", "tc_budgetcentre");
+        private readonly ColumnSet _storeColumnSet = new ColumnSet(Attributes.Store.StoreId, Attributes.Store.Abta, Attributes.Store.ClusterId, Attributes.Store.UkRegionId, Attributes.Store.Name, Attributes.Store.BudgetCentre);
 
         internal BudgetCentreService(CrmServiceClient crmClient)
         {
@@ -21,7 +23,7 @@ namespace Tc.Usd.SingleSignOnLogin.Services
             _myGuid = crmClient.GetMyCrmUserId();
         }
 
-        public List<BudgetCentre> GetBudgetCentre()
+        public List<BudgetCentre> GetBudgetCentre(bool allBudgetCentreAccess)
         {
             var lst = new List<Entity>();
             var primaryStore = GetPrimaryStore();
@@ -29,25 +31,26 @@ namespace Tc.Usd.SingleSignOnLogin.Services
             {
                 lst.Add(primaryStore);
             }
-            lst.AddRange(GetRelatedStores());
+            lst.AddRange(GetStores(allBudgetCentreAccess).Where(b => primaryStore == null || (Guid)b[Attributes.Store.StoreId] != (Guid)primaryStore[Attributes.Store.StoreId]));
             return lst.Select(ConvertEntityToBudgetCentre).ToList();
         }
 
-        private List<Entity> GetRelatedStores()
+        private List<Entity> GetStores(bool loadAllBudgetStores)
         {
             var query = new QueryExpression
             {
-                EntityName = "tc_store",
+                EntityName = EntityName.Store,
                 ColumnSet = _storeColumnSet
             };
-
-            var linkEntStore = new LinkEntity("tc_store", "tc_store_systemuser", "tc_storeid", "tc_storeid", JoinOperator.Inner);
-            var linkEntUser = new LinkEntity("tc_store_systemuser", "systemuser", "systemuserid", "systemuserid", JoinOperator.Inner);
-            linkEntStore.LinkEntities.Add(linkEntUser);
-            query.LinkEntities.Add(linkEntStore);
-            linkEntUser.LinkCriteria = new FilterExpression();
-            linkEntUser.LinkCriteria.AddCondition("systemuserid", ConditionOperator.Equal, _myGuid);
-
+            if (!loadAllBudgetStores)
+            {
+                var linkEntStore = new LinkEntity(EntityName.Store, "tc_store_systemuser", "tc_storeid", "tc_storeid", JoinOperator.Inner);
+                var linkEntUser = new LinkEntity("tc_store_systemuser", EntityName.User, "systemuserid", "systemuserid", JoinOperator.Inner);
+                linkEntStore.LinkEntities.Add(linkEntUser);
+                query.LinkEntities.Add(linkEntStore);
+                linkEntUser.LinkCriteria = new FilterExpression();
+                linkEntUser.LinkCriteria.AddCondition("systemuserid", ConditionOperator.Equal, _myGuid);
+            }
             var req = new RetrieveMultipleRequest
             {
                 Query = query
@@ -60,26 +63,26 @@ namespace Tc.Usd.SingleSignOnLogin.Services
         {
             var suReq = new RetrieveRequest()
             {
-                ColumnSet = new ColumnSet("tc_primarystoreid"),
-                Target = new EntityReference("systemuser", _myGuid)
+                ColumnSet = new ColumnSet(Attributes.User.PrimaryStoreId),
+                Target = new EntityReference(EntityName.User, _myGuid)
             };
             var systemuser = ((RetrieveResponse)_crmService.ExecuteCrmOrganizationRequest(suReq)).Entity;
-            if (!systemuser.Contains("tc_primarystoreid"))
+            if (!systemuser.Contains(Attributes.User.PrimaryStoreId))
                 return null;
 
             var primaryStoreReq = new RetrieveRequest()
             {
                 ColumnSet = _storeColumnSet,
-                Target = new EntityReference("tc_store", ((EntityReference)systemuser["tc_primarystoreid"]).Id)
+                Target = new EntityReference(EntityName.Store, ((EntityReference)systemuser[Attributes.User.PrimaryStoreId]).Id)
             };
             return ((RetrieveResponse)_crmService.ExecuteCrmOrganizationRequest(primaryStoreReq)).Entity;
         }
 
-        public Guid UpsertExternalLogin(string userInitials, string abta, Guid bcId, string branchcode)
+        public Guid UpsertExternalLogin(string userInitials, string abta, Guid bcId, string branchcode, string employeeId, string name)
         {
-            var externalLoginQuery = new QueryExpression("tc_externallogin")
+            var externalLoginQuery = new QueryExpression(EntityName.ExternalLogin)
             {
-                ColumnSet = new ColumnSet("tc_initials", "tc_abtanumber", "tc_budgetcentreid", "tc_employeeid"),
+                ColumnSet = new ColumnSet(Attributes.ExternalLogin.Initials, Attributes.ExternalLogin.AbtaNumber, Attributes.ExternalLogin.BudgetCentreId, Attributes.ExternalLogin.EmployeeId, Attributes.ExternalLogin.Name),
                 Criteria = new FilterExpression()
             };
             externalLoginQuery.Criteria.AddCondition("ownerid", ConditionOperator.Equal, _myGuid);
@@ -88,31 +91,33 @@ namespace Tc.Usd.SingleSignOnLogin.Services
             
             var extLogin = ((RetrieveMultipleResponse)_crmService.ExecuteCrmOrganizationRequest(extLoginReq)).EntityCollection.Entities.FirstOrDefault();
 
-            var extLoginId = extLogin == null ? CreateNewExternalLogin(userInitials, abta, bcId, branchcode) : UpdateExternalLogin(userInitials, abta, bcId, branchcode, extLogin);
+            var extLoginId = extLogin == null ? CreateNewExternalLogin(userInitials, abta, bcId, branchcode, employeeId, name) : UpdateExternalLogin(userInitials, abta, bcId, branchcode, employeeId, name, extLogin);
             return extLoginId;
         }
 
-        private Guid UpdateExternalLogin(string userInitials, string abta, Guid bcId, string branchcode,  Entity extLogin)
+        private Guid UpdateExternalLogin(string userInitials, string abta, Guid bcId, string branchcode, string employeeId, string name,  Entity extLogin)
 
         {
-            extLogin["tc_initials"] = userInitials;
-            extLogin["tc_abtanumber"] = abta;
-            extLogin["tc_budgetcentreid"] = new EntityReference("tc_store", bcId);
-            extLogin["tc_branchcode"] = branchcode;
+            extLogin[Attributes.ExternalLogin.Initials] = userInitials;
+            extLogin[Attributes.ExternalLogin.AbtaNumber] = abta;
+            extLogin[Attributes.ExternalLogin.BudgetCentreId] = new EntityReference(EntityName.Store, bcId);
+            extLogin[Attributes.ExternalLogin.BranchCode] = branchcode;
+            extLogin[Attributes.ExternalLogin.EmployeeId] = employeeId;
+            extLogin[Attributes.ExternalLogin.Name] = name;
 
             var updateReq = new UpdateRequest() {Target = extLogin};
             _crmService.ExecuteCrmOrganizationRequest(updateReq);
             return extLogin.Id;
         }
 
-        private Guid CreateNewExternalLogin(string userInitials, string abta, Guid bcId, string branchcode)
+        private Guid CreateNewExternalLogin(string userInitials, string abta, Guid bcId, string branchcode, string employeeId, string extLogin)
         {
-            var extLoginEntity = new Entity("tc_externallogin");
-            extLoginEntity.Attributes.Add("tc_initials", userInitials);
-            extLoginEntity.Attributes.Add("tc_abtanumber", abta);
-            extLoginEntity.Attributes.Add("tc_branchcode", branchcode);
-            extLoginEntity.Attributes.Add("tc_budgetcentreid", new EntityReference("tc_store", bcId));
-            extLoginEntity.Attributes.Add("ownerid", new EntityReference("systemuser", _myGuid));
+            var extLoginEntity = new Entity(EntityName.ExternalLogin);
+            extLoginEntity.Attributes.Add(Attributes.ExternalLogin.Initials, userInitials);
+            extLoginEntity.Attributes.Add(Attributes.ExternalLogin.AbtaNumber, abta);
+            extLoginEntity.Attributes.Add(Attributes.ExternalLogin.BranchCode, branchcode);
+            extLoginEntity.Attributes.Add(Attributes.ExternalLogin.BudgetCentreId, new EntityReference(EntityName.Store, bcId));
+            extLoginEntity.Attributes.Add(Attributes.ExternalLogin.OwnerId, new EntityReference(EntityName.User, _myGuid));
 
             var createReq = new CreateRequest {Target = extLoginEntity};
             return ((CreateResponse)_crmService.ExecuteCrmOrganizationRequest(createReq)).id;
@@ -122,12 +127,12 @@ namespace Tc.Usd.SingleSignOnLogin.Services
         {
             return new BudgetCentre
             {
-                StoreId = (Guid)entity["tc_storeid"],
-                Name = (string)entity["tc_name"],
-                Abta = (string)entity["tc_abta"],
-                BudgetCentreName = (string)entity["tc_budgetcentre"],
-                Cluster = ((EntityReference)entity["tc_clusterid"]).Name,
-                Region = ((EntityReference)entity["tc_ukregionid"]).Name
+                StoreId = (Guid)entity[Attributes.Store.StoreId],
+                Name = (string)entity[Attributes.Store.Name],
+                Abta = (string)entity[Attributes.Store.Abta],
+                BudgetCentreName = (string)entity[Attributes.Store.BudgetCentre],
+                Cluster = entity.Contains(Attributes.Store.ClusterId) ? ((EntityReference)entity[Attributes.Store.ClusterId]).Name : string.Empty,
+                Region = ((EntityReference)entity[Attributes.Store.UkRegionId]).Name
             };
         }
     }

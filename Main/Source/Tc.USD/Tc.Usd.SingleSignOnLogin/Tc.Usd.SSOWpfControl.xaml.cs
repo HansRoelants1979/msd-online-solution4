@@ -11,6 +11,8 @@ using Microsoft.Uii.Desktop.SessionManager;
 using Tc.Usd.SingleSignOnLogin.Models;
 using Tc.Usd.SingleSignOnLogin.Services;
 using Tc.Crm.Common.Constants.EntityRecords;
+using Tc.Crm.Common.Constants;
+using Attributes = Tc.Crm.Common.Constants.Attributes;
 
 namespace Tc.Usd.SingleSignOnLogin
 {
@@ -48,8 +50,10 @@ namespace Tc.Usd.SingleSignOnLogin
         protected override void DesktopReady()
         {
             budgetCentreService = new BudgetCentreService(_client.CrmInterface);
-
-            this.StoreSelector.ItemsSource = budgetCentreService.GetBudgetCentre();
+            var parameters = ((DynamicsCustomerRecord)((AgentDesktopSession)localSessionManager.GlobalSession).Customer.DesktopCustomer).CapturedReplacementVariables;
+            var loadAllBudgetCenters = parameters.ContainsKey("$User")&& parameters["$User"].ContainsKey(Attributes.User.AllBudgetCentreAccess) &&
+                bool.Parse(parameters["$User"][Attributes.User.AllBudgetCentreAccess].value);
+            this.StoreSelector.ItemsSource = budgetCentreService.GetBudgetCentre(loadAllBudgetCenters);
             
             // this will populate any toolbars assigned to this control in config. 
             PopulateToolbars(ProgrammableToolbarTray);
@@ -115,25 +119,33 @@ namespace Tc.Usd.SingleSignOnLogin
 
         private void UpdateContextValues()
         {
+            var parameters = ((DynamicsCustomerRecord)((AgentDesktopSession)localSessionManager.GlobalSession).Customer.DesktopCustomer).CapturedReplacementVariables;
+            if (!parameters.ContainsKey("$User") && parameters["$User"].ContainsKey(Attributes.User.PayrollNumber)) return;
+
             var initials = UserInitials.Text;
             var budgetCentreId = ((BudgetCentre)StoreSelector.SelectedItem).StoreId;
             var abta = ((BudgetCentre)StoreSelector.SelectedItem).Abta;
             var branchcode = ((BudgetCentre) StoreSelector.SelectedItem).BudgetCentreName;
 
-            var extLoginId = budgetCentreService.UpsertExternalLogin(initials, abta, budgetCentreId, branchcode);
+            var employeeId = parameters["$User"][Attributes.User.PayrollNumber].value;
+            var name = parameters["$User"][Attributes.User.FullName].value;
+
+            var extLoginId = budgetCentreService.UpsertExternalLogin(initials, abta, budgetCentreId, branchcode, employeeId, name);
 
             var externalInfo =
                 ((DynamicsCustomerRecord)
                     ((AgentDesktopSession) localSessionManager.GlobalSession).Customer.DesktopCustomer).Entities.Find(
-                        e => e.LogicalName == "tc_externallogin");
+                        e => e.LogicalName == EntityName.ExternalLogin);
             if (externalInfo != null)
             {
-                externalInfo.data["tc_abtanumber"] = new CRMApplicationData { value = abta, type = "String"};
-                externalInfo.data["tc_initials"] = new CRMApplicationData { value = initials, type = "String" };
-                externalInfo.data["Id"] = new CRMApplicationData { value = extLoginId.ToString(), type = "String" };
+                externalInfo.data[Attributes.ExternalLogin.Id] = new CRMApplicationData { value = extLoginId.ToString(), type = "String" };
+                externalInfo.data[Attributes.ExternalLogin.AbtaNumber] = new CRMApplicationData { value = abta, type = "String"};
+                externalInfo.data[Attributes.ExternalLogin.BudgetCentreId] = new CRMApplicationData { value = budgetCentreId.ToString(), type = "String" };
+                externalInfo.data[Attributes.ExternalLogin.Initials] = new CRMApplicationData { value = initials, type = "String" };
+                externalInfo.data[Attributes.ExternalLogin.Name] = new CRMApplicationData { value = name, type = "String" };
+                externalInfo.data[Attributes.ExternalLogin.EmployeeId] = new CRMApplicationData { value = employeeId, type = "String" };
                 externalInfo.data["tc_externalloginid"] = new CRMApplicationData { value = extLoginId.ToString(), type = "Guid" };
             }
-
             //var extLoginDataToSet = new Dictionary<string, CRMApplicationData>
             //{
             //    {"tc_abtanumber", new CRMApplicationData() {value = abta, type = "String"}},

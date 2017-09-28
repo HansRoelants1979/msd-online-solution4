@@ -19,6 +19,8 @@
         public const string EntityCacheMessage = "tc_entitycachemessage";
         public const string Configuration = "tc_configuration";
         public const string SecurityConfiguration = "tc_secureconfiguration";
+        public const string ExternalLogin = "tc_externallogin";
+        public const string Store = "tc_store";
     }
     public static class AliasName
     {
@@ -67,6 +69,18 @@
 
     namespace Attributes
     {
+        public static class ExternalLogin
+        {
+            public const string AbtaNumber = "tc_abtanumber";
+            public const string BranchCode = "tc_branchcode";
+            public const string BudgetCentreId = "tc_budgetcentreid";
+            public const string EmployeeId = "tc_employeeid";
+            public const string Initials = "tc_initials";
+            public const string Name = "tc_name";
+            public const string Id = "Id";
+            public const string OwnerId = "ownerid";            
+        }
+
         public static class CommonAttribute
         {
             public const string Owner = "ownerid";
@@ -187,6 +201,20 @@
         public static class User
         {
             public const string UserId = "systemuserid";
+            public const string PayrollNumber = "tc_payrollnumbertext";
+            public const string FullName = "fullname";
+            public const string AllBudgetCentreAccess = "tc_allbudgetcentreaccess";
+            public const string PrimaryStoreId = "tc_primarystoreid";
+        }
+
+        public static class Store
+        {
+            public const string StoreId = "tc_storeid";
+            public const string Name = "tc_name";
+            public const string Abta = "tc_abta";
+            public const string BudgetCentre = "tc_budgetcentre";
+            public const string ClusterId = "tc_clusterid";
+            public const string UkRegionId = "tc_ukregionid";
         }
 
         public static class SourceMarket
