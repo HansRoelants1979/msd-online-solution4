@@ -48,33 +48,23 @@
         <!-- this is where any toolbar assigned to this control will go -->
         <Border Grid.Row="0" CornerRadius="10,10,10,10" Background="#F8AC00" BorderBrush="#D8D8D8" BorderThickness="1,1,1,1">
             <Grid Height="30" Width="325">
-                <Border CornerRadius="5,5,5,5">
-                    <ComboBox x:Name="StoreSelector" HorizontalAlignment="Left" Margin="185,2,0,0" VerticalAlignment="Top" Width="79" Height="25" 
+                <ComboBox x:Name="StoreSelector" HorizontalAlignment="Left" Margin="185,2,0,0" VerticalAlignment="Top" Width="76" Height="25" 
                       SelectionChanged="StoreSelector_SelectionChanged" KeyUp="StoreSelector_KeyUp" IsEditable="True" IsEnabled="True"
                       DisplayMemberPath="Name" IsTextSearchEnabled="False" VerticalContentAlignment="Center">
-                        <ComboBox.Resources>
-                            <Style TargetType="{x:Type Border}">
-                                <Setter Property="CornerRadius" Value="5,5,5,5"/>
-                                <Setter Property="UseLayoutRounding" Value="True"/>
-                            </Style>
-                        </ComboBox.Resources>
-                    </ComboBox>
-                </Border>
-                <Border>
-                    <TextBox x:Name="UserInitials" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="50,2,0,0" TextWrapping="Wrap" Text="" 
+                </ComboBox>
+                <TextBox x:Name="UserInitials" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="50,2,0,0" TextWrapping="Wrap" Text="" 
                              VerticalAlignment="Top" Width="43" TextChanged="UserInitials_OnTextChanged" MaxLength ="3">
-                        <TextBox.Resources>
-                            <Style TargetType="{x:Type Border}">
-                                <Setter Property="CornerRadius" Value="5,5,5,5"/>
-                            </Style>
-                        </TextBox.Resources>
-                    </TextBox>
-                </Border>
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="5,5,5,5"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
 
                 <Label x:Name="InitialsLabel"  Content="Initials" HorizontalAlignment="Left" Margin="0,2,0,0" 
                        VerticalAlignment="Top" Width="50" FontWeight="Bold" RenderTransformOrigin="-2.135,0.706"/>
-                <Label x:Name="StoreSelectorLabel" Content="BudgetCentre" HorizontalAlignment="Left" Margin="95,2,0,0" 
-                       VerticalAlignment="Top" Width="88" FontWeight="Bold" Height="25"/>
+                <Label x:Name="StoreSelectorLabel" Content="Budget Centre" HorizontalAlignment="Left" Margin="95,2,0,0" 
+                       VerticalAlignment="Top" Width="93" FontWeight="Bold" Height="25"/>
                 <Button x:Name="LoginButton" Style="{StaticResource Icon}" Margin="290,2,0,0" Click="LoginButton_OnClick">
                     <Button.Tag>
                         <ImageSource>Resources/Tick.png</ImageSource>

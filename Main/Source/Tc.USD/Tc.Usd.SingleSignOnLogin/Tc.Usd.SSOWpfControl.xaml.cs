@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Globalization;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using Microsoft.Crm.UnifiedServiceDesk.CommonUtility;
 using Microsoft.Crm.UnifiedServiceDesk.Dynamics;
 using Microsoft.Crm.UnifiedServiceDesk.Dynamics.Utilities;
@@ -120,7 +122,7 @@ namespace Tc.Usd.SingleSignOnLogin
         private void UpdateContextValues()
         {
             var parameters = ((DynamicsCustomerRecord)((AgentDesktopSession)localSessionManager.GlobalSession).Customer.DesktopCustomer).CapturedReplacementVariables;
-            if (!parameters.ContainsKey("$User") && parameters["$User"].ContainsKey(Attributes.User.PayrollNumber)) return;
+            if (!parameters.ContainsKey("$User") || !parameters["$User"].ContainsKey(Attributes.User.PayrollNumber)) return;
 
             var initials = UserInitials.Text;
             var budgetCentreId = ((BudgetCentre)StoreSelector.SelectedItem).StoreId;
@@ -146,14 +148,11 @@ namespace Tc.Usd.SingleSignOnLogin
                 externalInfo.data[Attributes.ExternalLogin.EmployeeId] = new CRMApplicationData { value = employeeId, type = "String" };
                 externalInfo.data["tc_externalloginid"] = new CRMApplicationData { value = extLoginId.ToString(), type = "Guid" };
             }
-            //var extLoginDataToSet = new Dictionary<string, CRMApplicationData>
-            //{
-            //    {"tc_abtanumber", new CRMApplicationData() {value = abta, type = "String"}},
-            //    {"tc_initials", new CRMApplicationData() {value = initials, type = "String"}},
-            //    {"Id", new CRMApplicationData() {value = extLoginId.ToString(), type = "String"}},
-            //    {"tc_externalloginid", new CRMApplicationData() {value = extLoginId.ToString(), type = "Guid"}}
-            //};
-            //((DynamicsCustomerRecord)((AgentDesktopSession)localSessionManager.GlobalSession).Customer.DesktopCustomer).MergeReplacementParameter(this.ApplicationName, extLoginDataToSet, true);
+
+            this.UserInitials.IsEnabled = false;
+            this.StoreSelector.IsEnabled = false;
+            LoginButton.Tag = new BitmapImage(new Uri(@"Resources/TickDisabled.png", UriKind.Relative));
+            this.LoginButton.IsEnabled = false;
         }
 
         private void CancelButton_OnClick(object sender, RoutedEventArgs e)
@@ -161,6 +160,9 @@ namespace Tc.Usd.SingleSignOnLogin
             this.UserInitials.Text = string.Empty;
             this.StoreSelector.SelectedItem = null;
             this.LoginButton.IsEnabled = false;
+            this.UserInitials.IsEnabled = true;
+            this.StoreSelector.IsEnabled = true;
+            LoginButton.Tag = new BitmapImage(new Uri(@"Resources/Tick.png", UriKind.Relative));
             ((CollectionView)CollectionViewSource.GetDefaultView(this.StoreSelector.ItemsSource)).Filter = null;
             FireEvent(Configuration.SsoCancel);
         }
