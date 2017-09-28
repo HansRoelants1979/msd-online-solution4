@@ -914,14 +914,41 @@ namespace Tc.Crm.Service.Models
         [DataMember(Name = "address")]
         public Address[] Address { get; set; }
 
+        [DataMember(Name = "address1")]
+        public Address Address1 { get; set; }
+
+        [DataMember(Name = "address2")]
+        public Address Address2 { get; set; }
+
+        [DataMember(Name = "address3")]
+        public Address Address3 { get; set; }
+
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
         [DataMember(Name = "phone")]
         public Phone[] Phone { get; set; }
+
+        [DataMember(Name = "phone1")]
+        public Phone Phone1 { get; set; }
+
+        [DataMember(Name = "phone2")]
+        public Phone Phone2 { get; set; }
+
+        [DataMember(Name = "phone3")]
+        public Phone Phone3 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
         [DataMember(Name = "email")]
         public Email[] Email { get; set; }
 
+        [DataMember(Name = "email1")]
+        public Email Email1 { get; set; }
+        [DataMember(Name = "email2")]
+
+        public Email Email2 { get; set; }
+        [DataMember(Name = "email3")]
+        public Email Email3 { get; set; }
+        
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
         [DataMember(Name = "social")]
         public Social[] Social { get; set; }

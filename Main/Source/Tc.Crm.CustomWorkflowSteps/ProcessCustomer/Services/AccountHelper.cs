@@ -47,23 +47,29 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
             var email1 = emailList[0];
             var email2 = emailList.Length > 1 ? emailList[1] : null;
             var email3 = emailList.Length > 2 ? emailList[2] : null;
-            if (email1 == null) return;
-            if (!string.IsNullOrWhiteSpace(email1.Address))
+            if (email1 != null)
             {
-                account[Attributes.Account.EmailAddress1] = email1.Address;
-                account[Attributes.Account.EmailAddress1Type] = CommonXrm.GetEmailType(email1.EmailType);
+                if (!string.IsNullOrWhiteSpace(email1.Address))
+                {
+                    account[Attributes.Account.EmailAddress1] = email1.Address;
+                    account[Attributes.Account.EmailAddress1Type] = CommonXrm.GetEmailType(email1.EmailType);
+                }
             }
-            if (email2 == null) return;
-            if (!string.IsNullOrWhiteSpace(email2.Address))
+            if (email2 != null)
             {
-                account[Attributes.Account.EmailAddress2] = email1.Address;
-                account[Attributes.Account.EmailAddress2Type] = CommonXrm.GetEmailType(email2.EmailType);
+                if (!string.IsNullOrWhiteSpace(email2.Address))
+                {
+                    account[Attributes.Account.EmailAddress2] = email1.Address;
+                    account[Attributes.Account.EmailAddress2Type] = CommonXrm.GetEmailType(email2.EmailType);
+                }
             }
-            if (email3 == null) return;
-            if (!string.IsNullOrWhiteSpace(email3.Address))
+            if (email3 != null)
             {
-                account[Attributes.Account.EmailAddress3] = email3.Address;
-                account[Attributes.Account.EmailAddress3Type] = CommonXrm.GetEmailType(email3.EmailType);
+                if (!string.IsNullOrWhiteSpace(email3.Address))
+                {
+                    account[Attributes.Account.EmailAddress3] = email3.Address;
+                    account[Attributes.Account.EmailAddress3Type] = CommonXrm.GetEmailType(email3.EmailType);
+                }
             }
             trace.Trace("Account populate email - end");
         }
@@ -77,23 +83,29 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
             var phone1 = phoneList[0];
             var phone2 = phoneList.Length > 1 ? phoneList[1] : null;
             var phone3 = phoneList.Length > 2 ? phoneList[2] : null;
-            if (phone1 == null) return;
-            if (!string.IsNullOrWhiteSpace(phone1.Number))
+            if (phone1 != null)
             {
-                account[Attributes.Account.Telephone1] = phone1.Number;
-                account[Attributes.Account.Telephone1Type] = CommonXrm.GetPhoneType(phone1.PhoneType);
+                if (!string.IsNullOrWhiteSpace(phone1.Number))
+                {
+                    account[Attributes.Account.Telephone1] = phone1.Number;
+                    account[Attributes.Account.Telephone1Type] = CommonXrm.GetPhoneType(phone1.PhoneType);
+                }
             }
-            if (phone2 == null) return;
-            if (!string.IsNullOrWhiteSpace(phone2.Number))
+            if (phone2 != null)
             {
-                account[Attributes.Account.Telephone2] = phone2.Number;
-                account[Attributes.Account.Telephone2Type] = CommonXrm.GetPhoneType(phone2.PhoneType);
+                if (!string.IsNullOrWhiteSpace(phone2.Number))
+                {
+                    account[Attributes.Account.Telephone2] = phone2.Number;
+                    account[Attributes.Account.Telephone2Type] = CommonXrm.GetPhoneType(phone2.PhoneType);
+                }
             }
-            if (phone3 == null) return;
-            if (!string.IsNullOrWhiteSpace(phone3.Number))
+            if (phone3 != null)
             {
-                account[Attributes.Account.Telephone3] = phone3.Number;
-                account[Attributes.Account.Telephone3Type] = CommonXrm.GetPhoneType(phone3.PhoneType);
+                if (!string.IsNullOrWhiteSpace(phone3.Number))
+                {
+                    account[Attributes.Account.Telephone3] = phone3.Number;
+                    account[Attributes.Account.Telephone3Type] = CommonXrm.GetPhoneType(phone3.PhoneType);
+                }
             }
             trace.Trace("Account populate phone - end");
         }

@@ -903,12 +903,6 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
 
         [DataMember(Name = "value")]
         public string Value { get; set; }
-        
-        [DataMember(Name = "facebookusername")]       
-        public string FaceBookUserName { get; set; }
-
-        [DataMember(Name = "twitterhandle")]
-        public string TwitterHandle { get; set; }
     }
 
     [DataContract(Name = "customer")]

@@ -23,7 +23,7 @@ namespace Tc.Crm.Service.Client.Console
             try
             {
                 System.Console.WriteLine("Enter 1 to process Booking OR \n2 to process survey OR " +
-                            "\n3 to cache OR \n4 to ping CRM OR \n5 to process Customer create  OR " +
+                            "\n3 to cache OR \n4 to ping CRM OR \n5 to process Customer create  OR "+
                             "\n6 to process Customer update.");
 
                 var option = System.Console.ReadLine();
@@ -64,19 +64,22 @@ namespace Tc.Crm.Service.Client.Console
 
         private static void ProcessCustomerUpdate()
         {
-            System.Console.WriteLine("Processing Customer Create.");
-
             while (true)
             {
-                System.Console.WriteLine("Reading the Json data");
-                var data = File.ReadAllText("customer-patch.json");
+                System.Console.WriteLine("Enter 1 to Process Customer Update OR \n2 to process Account Update");
+                string accountOrCustomer = System.Console.ReadLine();
+                string fileName = string.Empty;
+                if (accountOrCustomer == "1")
+                    fileName = File.ReadAllText("customer-patch.json");
+                else
+                    fileName = File.ReadAllText("account-patch.json");
 
                 System.Console.Write("Enter the Customer ID: ");
                 var customerID = System.Console.ReadLine();
                 var api = "api/customers/" + customerID.ToString();
 
                 //create the token
-                var token = CreateJWTToken();
+                var token = CreateJwtToken(true);
 
                 HttpClient cons = new HttpClient();
 
@@ -89,7 +92,7 @@ namespace Tc.Crm.Service.Client.Console
                 var method = new HttpMethod("PATCH");
                 var request = new HttpRequestMessage(method, api)
                 {
-                    Content = new StringContent(data, Encoding.UTF8, "application/json-patch+json")
+                    Content = new StringContent(fileName, Encoding.UTF8, "application/json-patch+json")
                 };
 
                 Task<HttpResponseMessage> t = cons.SendAsync(request);
@@ -125,17 +128,21 @@ namespace Tc.Crm.Service.Client.Console
 
         private static void ProcessCustomerCreate()
         {
-            System.Console.WriteLine("Processing Customer Create.");
             while (true)
             {
-                System.Console.WriteLine("Please Input the json file name : ");
-                var fileName = System.Console.ReadLine();
-                System.Console.WriteLine("Reading Json file... ");
-                var data = File.ReadAllText(fileName + ".json");
+                System.Console.WriteLine("Enter 1 to Process Customer Create OR \n2 to process Account Create");
+                string accountOrCustomer = System.Console.ReadLine();
+                string fileName = string.Empty;
+                if (accountOrCustomer == "1")
+                    fileName = File.ReadAllText("customer.json");
+                else
+                    fileName = File.ReadAllText("account.json");
+                
                 var api = "api/customers/customer";
+
                 //create the token
                 System.Console.WriteLine("Creating JWT Token.. ");
-                var token = CreateJWTToken();
+                var token = CreateJwtToken(true);
                 HttpClient cons = new HttpClient();
                 cons.BaseAddress = new Uri(GetUrl());
                 cons.DefaultRequestHeaders.Accept.Clear();
@@ -143,8 +150,7 @@ namespace Tc.Crm.Service.Client.Console
                 var authHeader = bool.Parse(ConfigurationManager.AppSettings["authHeader"]);
                 if (authHeader)
                     cons.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-                System.Console.WriteLine("Connecting to CRM Service.. ");
-                Task<HttpResponseMessage> t = cons.PostAsync(api, new StringContent(data, Encoding.UTF8, "application/json"));
+                Task<HttpResponseMessage> t = cons.PostAsync(api, new StringContent(fileName, Encoding.UTF8, "application/json"));
                 var response = t.Result;
                 Task<string> task = response.Content.ReadAsStringAsync();
                 var content = task.Result;
@@ -166,7 +172,9 @@ namespace Tc.Crm.Service.Client.Console
                 System.Console.Write("Do one more test(y/n):");
                 var ans = System.Console.ReadLine();
                 if (ans == "n") break;
+
             }
+
         }
 
         private static void Cache()
@@ -422,27 +430,6 @@ namespace Tc.Crm.Service.Client.Console
             return useHeader
                 ? Jose.JWT.Encode(payload, rsa, Jose.JwsAlgorithm.RS256, header)
                 : Jose.JWT.Encode(payload, rsa, Jose.JwsAlgorithm.RS256);
-        }
-
-        private static string CreateJWTToken()
-        {
-            var payload = new Dictionary<string, object>()
-            {
-                {"iat", GetIssuedAtTime().ToString()},
-                {"nbf", GetNotBeforeTime().ToString()},
-                {"exp", GetExpiry().ToString()},
-            };
-
-            var header = new Dictionary<string, object>()
-            {
-                {"alg", "HS256"},
-                {"typ", "JWT"},
-            };
-
-            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
-            var fileName = ConfigurationManager.AppSettings["privateKeyFileName"];
-            rsa.FromXmlString(File.ReadAllText(fileName));
-            return Jose.JWT.Encode(payload, rsa, Jose.JwsAlgorithm.RS256);
         }
 
         private static string CreateJWTTokenWithHmac()

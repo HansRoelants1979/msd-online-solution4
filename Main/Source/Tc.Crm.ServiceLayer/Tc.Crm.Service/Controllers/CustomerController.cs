@@ -73,6 +73,7 @@ namespace Tc.Crm.Service.Controllers
 
                 CustomerInformation customerInformation = ProcessPatchJsonToActualJson(customerInfo);
 
+
                 var validationMessages = customerService.ValidateCustomerPatchRequest(customerInformation);
 
                 if (validationMessages.Count > 0)
@@ -102,18 +103,49 @@ namespace Tc.Crm.Service.Controllers
         private static CustomerInformation ProcessPatchJsonToActualJson(JsonPatchDocument<CustomerInformation> customerInfo)
         {
             CustomerInformation customerInformation = new CustomerInformation();
-            customerInformation.Customer.CustomerIdentity = new CustomerIdentity();
-            customerInformation.Customer.CustomerIdentifier = new CustomerIdentifier();
-            customerInformation.Customer.CustomerGeneral = new CustomerGeneral();
-            customerInformation.Customer.Company = new Company();
-            customerInformation.Customer.Permission = new Permission();
-            customerInformation.Customer.Additional = new Additional();
-            customerInformation.Customer.Address = new Address[3];
-            customerInformation.Customer.Phone = new Phone[3];
-            customerInformation.Customer.Email = new Email[3];
-            customerInformation.Customer.Social = new Social[3];
+            var customer = customerInformation.Customer;
+            customer.CustomerIdentity = new CustomerIdentity();
+            customer.CustomerIdentifier = new CustomerIdentifier();
+            customer.CustomerGeneral = new CustomerGeneral();
+            customer.Company = new Company();
+            customer.Permission = new Permission();
+            customer.Additional = new Additional();
+            customer.Address = new[] { new Address(), new Address(), new Address() };
+            customer.Address1 = new Address();
+            customer.Address2 = new Address();
+            customer.Address3 = new Address();
+            customer.Phone = new[] { new Phone(), new Phone(), new Phone() };
+            customer.Phone1 = new Phone();
+            customer.Phone2 = new Phone();
+            customer.Phone3 = new Phone();
+            customer.Email = new[] { new Email(), new Email(), new Email() };
+            customer.Email1 = new Email();
+            customer.Email2 = new Email();
+            customer.Email3 = new Email();
+
+            customer.Social = new[] { new Social(), new Social(), new Social() };
 
             customerInfo.ApplyUpdatesTo(customerInformation);
+
+            customer.Address[0] = customer.Address1;
+            customer.Address[1] = customer.Address2;
+            customer.Address[2] = customer.Address3;
+            customer.Address1 = null;
+            customer.Address2 = null;
+            customer.Address3 = null;
+            customer.Email[0] = customer.Email1;
+            customer.Email[1] = customer.Email2;
+            customer.Email[2] = customer.Email3;
+            customer.Email1 = null;
+            customer.Email2 = null;
+            customer.Email3 = null;
+            customer.Phone[0] = customer.Phone1;
+            customer.Phone[1] = customer.Phone2;
+            customer.Phone[2] = customer.Phone3;
+            customer.Phone1 = null;
+            customer.Phone2 = null;
+            customer.Phone3 = null;
+            customerInformation.Customer = customer;
             return customerInformation;
         }
     }

@@ -409,9 +409,7 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string ProfileName = "profilename";
         public const string Customer = "customerid";
         public const string SocialChannel = "community";
-        public const string UniqueProfileId = "uniqueprofileid";        
-        public const string FaceBookUserName = "tc_facebookusername";
-        public const string TwitterHandle = "tc_twitterhandle";
+        public const string UniqueProfileId = "uniqueprofileid";
     }
     public static class SystemUser
     {

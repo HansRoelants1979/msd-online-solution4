@@ -38,6 +38,21 @@ namespace Tc.Crm.CustomWorkFlowSteps.ProcessCustomer.Services.Tests
         {
             Customer c = new Customer{Social = new Social[] { }};
             SocialProfileHelper.GetSocialProfileEntityFromPayload(c, new Guid(), trace);
-        }       
+        }
+
+        [TestMethod()]        
+        public void GetSocialProfileEntityFromPayload_SocialProfileProcess()
+        {
+            Customer c = new Customer {
+                CustomerIdentifier = new CustomerIdentifier
+                {
+                    CustomerId = "1234"
+                },
+                Social = new Social[] {
+                    new Social { Value = "dummy"}
+                }
+            };
+            SocialProfileHelper.GetSocialProfileEntityFromPayload(c, new Guid(), trace);
+        }
     }
 }

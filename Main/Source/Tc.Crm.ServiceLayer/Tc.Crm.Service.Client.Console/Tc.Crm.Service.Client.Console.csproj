@@ -75,8 +75,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="customer-patch.json" />
-    <None Include="customer.json" />
+    <None Include="customer-patch.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="customer.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="confirmation.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

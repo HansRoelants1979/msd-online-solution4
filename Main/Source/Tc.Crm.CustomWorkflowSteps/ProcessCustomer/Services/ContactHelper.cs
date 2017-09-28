@@ -87,42 +87,45 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
             trace.Trace("Contact populate address - start");                       
             var address1 = addresses[0];
             var address2 = addresses.Length > 1 ? addresses[1] : null;
-                        
-            if (address1 == null) return;
-            if (!string.IsNullOrWhiteSpace(address1.Country))
-                contact[Attributes.Contact.Address1CountryId] = new EntityReference(EntityName.Country, new Guid(address1.Country));
-            if (!string.IsNullOrWhiteSpace(address1.AdditionalAddressInfo))
-                contact[Attributes.Contact.Address1AdditionalInformation] = address1.AdditionalAddressInfo;
-            if (!string.IsNullOrWhiteSpace(address1.FlatNumberUnit))
-                contact[Attributes.Contact.Address1FlatOrUnitNumber] = address1.FlatNumberUnit;
-            if (!string.IsNullOrWhiteSpace(address1.HouseNumberBuilding))
-                contact[Attributes.Contact.Address1HouseNumberOrBuilding] = address1.HouseNumberBuilding;
-            if (!string.IsNullOrWhiteSpace(address1.Street))
-                contact[Attributes.Contact.Address1Street] = address1.Street;
-            if (!string.IsNullOrWhiteSpace(address1.Town))
-                contact[Attributes.Contact.Address1Town] = address1.Town;
-            if (!string.IsNullOrWhiteSpace(address1.County))
-                contact[Attributes.Contact.Address1County] = address1.County;
-            if (!string.IsNullOrWhiteSpace(address1.PostalCode))
-                contact[Attributes.Contact.Address1PostalCode] = address1.PostalCode;
-                       
-            if (address2 == null) return;
-            if (!string.IsNullOrWhiteSpace(address2.Country))
-                contact[Attributes.Contact.Address2CountryId] = new EntityReference(EntityName.Country, new Guid(address2.Country));
-            if (!string.IsNullOrWhiteSpace(address2.AdditionalAddressInfo))
-                contact[Attributes.Contact.Address2AdditionalInformation] = address2.AdditionalAddressInfo;
-            if (!string.IsNullOrWhiteSpace(address2.FlatNumberUnit))
-                contact[Attributes.Contact.Address2FlatOrUnitNumber] = address2.FlatNumberUnit;
-            if (!string.IsNullOrWhiteSpace(address2.HouseNumberBuilding))
-                contact[Attributes.Contact.Address2HouseNumberOrBuilding] = address2.HouseNumberBuilding;
-            if (!string.IsNullOrWhiteSpace(address2.Street))
-                contact[Attributes.Contact.Address2Street] = address2.Street;
-            if (!string.IsNullOrWhiteSpace(address2.Town))
-                contact[Attributes.Contact.Address2Town] = address2.Town;
-            if (!string.IsNullOrWhiteSpace(address2.County))
-                contact[Attributes.Contact.Address2County] = address2.County;
-            if (!string.IsNullOrWhiteSpace(address2.PostalCode))
-                contact[Attributes.Contact.Address2PostalCode] = address2.PostalCode;
+
+            if (address1 != null)
+            {
+                if (!string.IsNullOrWhiteSpace(address1.Country))
+                    contact[Attributes.Contact.Address1CountryId] = new EntityReference(EntityName.Country, new Guid(address1.Country));
+                if (!string.IsNullOrWhiteSpace(address1.AdditionalAddressInfo))
+                    contact[Attributes.Contact.Address1AdditionalInformation] = address1.AdditionalAddressInfo;
+                if (!string.IsNullOrWhiteSpace(address1.FlatNumberUnit))
+                    contact[Attributes.Contact.Address1FlatOrUnitNumber] = address1.FlatNumberUnit;
+                if (!string.IsNullOrWhiteSpace(address1.HouseNumberBuilding))
+                    contact[Attributes.Contact.Address1HouseNumberOrBuilding] = address1.HouseNumberBuilding;
+                if (!string.IsNullOrWhiteSpace(address1.Street))
+                    contact[Attributes.Contact.Address1Street] = address1.Street;
+                if (!string.IsNullOrWhiteSpace(address1.Town))
+                    contact[Attributes.Contact.Address1Town] = address1.Town;
+                if (!string.IsNullOrWhiteSpace(address1.County))
+                    contact[Attributes.Contact.Address1County] = address1.County;
+                if (!string.IsNullOrWhiteSpace(address1.PostalCode))
+                    contact[Attributes.Contact.Address1PostalCode] = address1.PostalCode;
+            }
+            if (address2 != null)
+            {
+                if (!string.IsNullOrWhiteSpace(address2.Country))
+                    contact[Attributes.Contact.Address2CountryId] = new EntityReference(EntityName.Country, new Guid(address2.Country));
+                if (!string.IsNullOrWhiteSpace(address2.AdditionalAddressInfo))
+                    contact[Attributes.Contact.Address2AdditionalInformation] = address2.AdditionalAddressInfo;
+                if (!string.IsNullOrWhiteSpace(address2.FlatNumberUnit))
+                    contact[Attributes.Contact.Address2FlatOrUnitNumber] = address2.FlatNumberUnit;
+                if (!string.IsNullOrWhiteSpace(address2.HouseNumberBuilding))
+                    contact[Attributes.Contact.Address2HouseNumberOrBuilding] = address2.HouseNumberBuilding;
+                if (!string.IsNullOrWhiteSpace(address2.Street))
+                    contact[Attributes.Contact.Address2Street] = address2.Street;
+                if (!string.IsNullOrWhiteSpace(address2.Town))
+                    contact[Attributes.Contact.Address2Town] = address2.Town;
+                if (!string.IsNullOrWhiteSpace(address2.County))
+                    contact[Attributes.Contact.Address2County] = address2.County;
+                if (!string.IsNullOrWhiteSpace(address2.PostalCode))
+                    contact[Attributes.Contact.Address2PostalCode] = address2.PostalCode;
+            }
             trace.Trace("Contact populate address - end");
         }      
 
@@ -132,27 +135,30 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
             trace.Trace("Contact populate email - start");
             var email1 = emails[0];
             var email2 = emails.Length > 1 ? emails[1] : null;
-            var email3 = emails.Length > 2 ? emails[2] : null;            
-
-            if (email1 == null) return;            
-            if (!string.IsNullOrWhiteSpace(email1.Address))
+            var email3 = emails.Length > 2 ? emails[2] : null;
+            if (email1 != null)
             {
-                contact[Attributes.Contact.EmailAddress1Type] = CommonXrm.GetEmailType(email1.EmailType);
-                contact[Attributes.Contact.EmailAddress1] = email1.Address;
+                if (!string.IsNullOrWhiteSpace(email1.Address))
+                {
+                    contact[Attributes.Contact.EmailAddress1Type] = CommonXrm.GetEmailType(email1.EmailType);
+                    contact[Attributes.Contact.EmailAddress1] = email1.Address;
+                }
             }
-
-            if (email2 == null) return;            
-            if (!string.IsNullOrWhiteSpace(email2.Address))
+            if (email2 != null)
             {
-                contact[Attributes.Contact.EmailAddress2Type] = CommonXrm.GetEmailType(email2.EmailType);
-                contact[Attributes.Contact.EmailAddress2] = email2.Address;
+                if (!string.IsNullOrWhiteSpace(email2.Address))
+                {
+                    contact[Attributes.Contact.EmailAddress2Type] = CommonXrm.GetEmailType(email2.EmailType);
+                    contact[Attributes.Contact.EmailAddress2] = email2.Address;
+                }
             }
-           
-            if (email3 == null) return;
-            if (!string.IsNullOrWhiteSpace(email3.Address))
+            if (email3 != null)
             {
-                contact[Attributes.Contact.EmailAddress3Type] = CommonXrm.GetEmailType(email3.EmailType);
-                contact[Attributes.Contact.EmailAddress3] = email3.Address;
+                if (!string.IsNullOrWhiteSpace(email3.Address))
+                {
+                    contact[Attributes.Contact.EmailAddress3Type] = CommonXrm.GetEmailType(email3.EmailType);
+                    contact[Attributes.Contact.EmailAddress3] = email3.Address;
+                }
             }
             trace.Trace("Contact populate email - end");
         }      
@@ -164,26 +170,30 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
             var phone1 = phoneNumbers[0];
             var phone2 = phoneNumbers.Length > 1 ? phoneNumbers[1] : null;
             var phone3 = phoneNumbers.Length > 2 ? phoneNumbers[2] : null;
-            
-            if (phone1 == null) return;
-            if (!string.IsNullOrWhiteSpace(phone1.Number))
+            if (phone1 != null)
             {
-                contact[Attributes.Contact.Telephone1Type] = CommonXrm.GetPhoneType(phone1.PhoneType);
-                contact[Attributes.Contact.Telephone1] = phone1.Number;
+                if (!string.IsNullOrWhiteSpace(phone1.Number))
+                {
+                    contact[Attributes.Contact.Telephone1Type] = CommonXrm.GetPhoneType(phone1.PhoneType);
+                    contact[Attributes.Contact.Telephone1] = phone1.Number;
+                }
             }
-            
-            if (phone2 == null) return;
-            if (!string.IsNullOrWhiteSpace(phone2.Number))
+            if (phone2 != null)
             {
-                contact[Attributes.Contact.Telephone2Type] = CommonXrm.GetPhoneType(phone2.PhoneType);
-                contact[Attributes.Contact.Telephone2] = phone2.Number;
+                if (!string.IsNullOrWhiteSpace(phone2.Number))
+                {
+                    contact[Attributes.Contact.Telephone2Type] = CommonXrm.GetPhoneType(phone2.PhoneType);
+                    contact[Attributes.Contact.Telephone2] = phone2.Number;
+                }
             }
-            
-            if (phone3 == null) return;
-            if (!string.IsNullOrWhiteSpace(phone3.Number))
+            if (phone3 != null)
             {
-                contact[Attributes.Contact.Telephone3Type] = CommonXrm.GetPhoneType(phone3.PhoneType);
-                contact[Attributes.Contact.Telephone3] = phone3.Number;
+
+                if (!string.IsNullOrWhiteSpace(phone3.Number))
+                {
+                    contact[Attributes.Contact.Telephone3Type] = CommonXrm.GetPhoneType(phone3.PhoneType);
+                    contact[Attributes.Contact.Telephone3] = phone3.Number;
+                }
             }
             trace.Trace("Contact populate phone - end");
         }      
