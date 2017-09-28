@@ -60,6 +60,8 @@
             public const string SsoCompleteEvent = "Tc.Event.OnSsoComplete";
 
             public const string OpenOwr = "Tc.Usd.SingleSignOnController.Custom.OpenOwr";
+            public const string SsoLogin = "Tc.Event.SsoLogin";
+            public const string SsoCancel = "Tc.Event.SsoCancel";
         }
     }
 
