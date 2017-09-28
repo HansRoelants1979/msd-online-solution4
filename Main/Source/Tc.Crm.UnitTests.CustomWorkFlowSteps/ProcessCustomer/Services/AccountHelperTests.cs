@@ -15,7 +15,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services.Tests
     {
         TestTracingService trace;
         [TestInitialize()]
-        public void Setp()
+        public void Setup()
         {
             trace = new TestTracingService();
         }

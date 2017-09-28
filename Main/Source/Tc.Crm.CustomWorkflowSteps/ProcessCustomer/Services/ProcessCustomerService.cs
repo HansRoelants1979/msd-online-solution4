@@ -80,7 +80,6 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
                 };
             }
             else if (operationType.ToUpper() == Enum.GetName(typeof(OperationType), OperationType.PATCH)){
-                trace.Trace("inside patch");
                 var existingAccountCollection = CommonXrm.RetrieveMultipleRecords(EntityName.Account,
                     new string[] { Attributes.Account.AccountId, Attributes.Account.SourceSystemId },
                     new string[] { Attributes.Account.DuplicateSourceSystemId },
@@ -98,11 +97,10 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
                     Requests = new OrganizationRequestCollection(),
                     ReturnResponses = true
                 };
-                foreach (Entity existingAccount in existingAccountCollection.Entities){ 
+                foreach (Entity existingAccount in existingAccountCollection.Entities){
                     var account = AccountHelper.GetAccountEntityForCustomerPayload(customer, trace, OperationType.PATCH);
                     account[Attributes.Account.AccountId] = existingAccount.GetAttributeValue<Guid>
                                                                 (Attributes.Account.AccountId);
-                    trace.Trace(account[Attributes.Account.AccountId].ToString());
                     var updateRequest = new UpdateRequest { Target = account };
                     multipleRequest.Requests.Add(updateRequest);
                     if (multipleRequest.Requests.Count == 500){
@@ -189,10 +187,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
         private void ProcessSocialProfile(Guid CustomerID)
         {
             trace.Trace("Processing Social profile information - start");
-            if (payloadCustomer.Customer.Social == null)
-                throw new InvalidPluginExecutionException("Customer Social information is null.");
-            if (CustomerID == null)
-                throw new InvalidPluginExecutionException("Social Profile Customer ID is null.");
+            if (payloadCustomer.Customer.Social == null) return;           
             var entityCollectionsocialProfiles = SocialProfileHelper.GetSocialProfileEntityFromPayload(payloadCustomer.Customer, CustomerID, trace);
             if (entityCollectionsocialProfiles != null && entityCollectionsocialProfiles.Entities.Count > 0)
             {

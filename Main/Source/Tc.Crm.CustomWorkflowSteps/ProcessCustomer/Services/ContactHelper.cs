@@ -61,8 +61,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
         }
         private static void PopulateIdentityInformation(Entity contact, CustomerIdentity identity, ITracingService trace)
         {
-            trace.Trace("Contact populate identity - start");
-            if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
+            trace.Trace("Contact populate identity - start");            
             if (identity == null) return;
             if (!string.IsNullOrWhiteSpace(identity.FirstName))
                 contact[Attributes.Contact.FirstName] = identity.FirstName;
@@ -142,8 +141,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
                 contact[Attributes.Contact.EmailAddress1] = email1.Address;
             }
 
-            if (email2 == null) return;
-            trace.Trace("email 2");
+            if (email2 == null) return;            
             if (!string.IsNullOrWhiteSpace(email2.Address))
             {
                 contact[Attributes.Contact.EmailAddress2Type] = CommonXrm.GetEmailType(email2.EmailType);

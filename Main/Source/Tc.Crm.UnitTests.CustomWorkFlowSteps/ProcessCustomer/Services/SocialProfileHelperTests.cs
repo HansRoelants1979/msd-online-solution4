@@ -38,19 +38,6 @@ namespace Tc.Crm.CustomWorkFlowSteps.ProcessCustomer.Services.Tests
         {
             Customer c = new Customer{Social = new Social[] { }};
             SocialProfileHelper.GetSocialProfileEntityFromPayload(c, new Guid(), trace);
-        }
-
-        [TestMethod()]
-        [ExpectedException(typeof(InvalidPluginExecutionException), "Customer Social Profile Value is null.")]
-        public void PrepareCustomerSocialProfiles_SocialProfileValueIsNull()
-        {
-            Customer c = new Customer {
-                Social = new Social[] 
-                {
-                    new Social { Value = null }
-                }
-            };
-            SocialProfileHelper.GetSocialProfileEntityFromPayload(c, new Guid(), trace);
-        }
+        }       
     }
 }

@@ -32,11 +32,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
 
         private static Entity PrepareCustomerSocialProfiles(Social socialprofile, Guid customerId, ITracingService trace)
         {
-            if (socialprofile.Value == null) throw new InvalidPluginExecutionException("social profile service is null;");
+            if (socialprofile.Value == null) return null;
             trace.Trace("Preparing Social Profile information - Start");
-
             Entity socialprofileEntity = null;
-
             if (!string.IsNullOrWhiteSpace(socialprofile.Value))
                 socialprofileEntity = new Entity(EntityName.SocialProfile, Attributes.SocialProfile.UniqueProfileId, socialprofile.Value);
             if (!string.IsNullOrWhiteSpace(socialprofile.Value))
@@ -49,7 +47,6 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
                 socialprofileEntity[Attributes.SocialProfile.TwitterHandle] = socialprofile.TwitterHandle;
             if (customerId != null)
                 socialprofileEntity[Attributes.SocialProfile.Customer] = new EntityReference(EntityName.Contact, customerId);
-
             trace.Trace("Preparing Social Profile information - End");
             return socialprofileEntity;
         }

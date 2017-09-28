@@ -23,7 +23,7 @@ namespace Tc.Crm.Service.Client.Console
             try
             {
                 System.Console.WriteLine("Enter 1 to process Booking OR \n2 to process survey OR " +
-                            "\n3 to cache OR \n4 to ping CRM OR \n5 to process Customer create  OR "+
+                            "\n3 to cache OR \n4 to ping CRM OR \n5 to process Customer create  OR " +
                             "\n6 to process Customer update.");
 
                 var option = System.Console.ReadLine();
@@ -46,11 +46,11 @@ namespace Tc.Crm.Service.Client.Console
                 else if (option == "5")
                 {
                     ProcessCustomerCreate();
-
                 }
                 else if (option == "6")
                 {
                     ProcessCustomerUpdate();
+                }
                 else if (option == "7")
                     ProcessConfirmation();
             }
@@ -422,6 +422,27 @@ namespace Tc.Crm.Service.Client.Console
             return useHeader
                 ? Jose.JWT.Encode(payload, rsa, Jose.JwsAlgorithm.RS256, header)
                 : Jose.JWT.Encode(payload, rsa, Jose.JwsAlgorithm.RS256);
+        }
+
+        private static string CreateJWTToken()
+        {
+            var payload = new Dictionary<string, object>()
+            {
+                {"iat", GetIssuedAtTime().ToString()},
+                {"nbf", GetNotBeforeTime().ToString()},
+                {"exp", GetExpiry().ToString()},
+            };
+
+            var header = new Dictionary<string, object>()
+            {
+                {"alg", "HS256"},
+                {"typ", "JWT"},
+            };
+
+            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
+            var fileName = ConfigurationManager.AppSettings["privateKeyFileName"];
+            rsa.FromXmlString(File.ReadAllText(fileName));
+            return Jose.JWT.Encode(payload, rsa, Jose.JwsAlgorithm.RS256);
         }
 
         private static string CreateJWTTokenWithHmac()
