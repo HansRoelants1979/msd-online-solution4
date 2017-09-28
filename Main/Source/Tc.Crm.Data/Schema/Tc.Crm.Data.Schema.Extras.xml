@@ -1,23 +1,27 @@
 <entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <entity name="tc_extra" displayname="Extra" etc="10201" primaryidfield="tc_extraid" primarynamefield="tc_name" disableplugins="false">
     <fields>
-      <field updateCompare="true"  displayname="Extra" name="tc_extraid" type="guid" primaryKey="true" />
-      <field displayname="Extras Category" name="tc_extrascategoryid" type="entityreference" lookupType="tc_extrascategory" customfield="true" />
-      <field displayname="Name" name="tc_name" type="string" customfield="true" />
+      <field displayname="Label" name="tc_label" type="string" customfield="true" />
       <field displayname="Order" name="tc_order" type="number" customfield="true" />
-      <field displayname="Placeholder" name="tc_placeholder" type="string" customfield="true" />
       <field displayname="Response Data Type" name="tc_responsedatatype" type="optionsetvalue" customfield="true" />
+      <field displayname="Extras Category" name="tc_extrascategoryid" type="entityreference" lookupType="tc_extrascategory" customfield="true" />
+      <field updateCompare="true"  displayname="Extra" name="tc_extraid" type="guid" primaryKey="true" />
     </fields>
-    <relationships />
   </entity>
   <entity name="tc_extrascategory" displayname="Extras Category" etc="10200" primaryidfield="tc_extrascategoryid" primarynamefield="tc_name" disableplugins="false">
     <fields>
-      <field displayname="Entity" name="tc_entity" type="string" customfield="true" />
       <field updateCompare="true" displayname="Extras Category" name="tc_extrascategoryid" type="guid" primaryKey="true" />
       <field displayname="Label" name="tc_label" type="string" customfield="true" />
       <field displayname="Name" name="tc_name" type="string" customfield="true" />
       <field displayname="Order" name="tc_order" type="number" customfield="true" />
     </fields>
-    <relationships />
+  </entity>
+  <entity name="tc_extrasresponse" displayname="Extras Response" etc="10213" primaryidfield="tc_extrasresponseid" primarynamefield="tc_name" disableplugins="false">
+    <fields>
+      <field displayname="Extra" name="tc_extraid" type="entityreference" lookupType="tc_extra" customfield="true" />
+      <field updateCompare="true" displayname="Extras Response" name="tc_extrasresponseid" type="guid" primaryKey="true" />
+      <field displayname="Name" name="tc_name" type="string" customfield="true" />
+      <field displayname="Travel Planner" name="tc_travelplannerid" type="entityreference" lookupType="opportunity" customfield="true" />
+    </fields>
   </entity>
 </entities>
