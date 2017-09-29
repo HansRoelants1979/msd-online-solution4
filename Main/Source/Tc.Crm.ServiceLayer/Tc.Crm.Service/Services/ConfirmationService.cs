@@ -51,7 +51,7 @@ namespace Tc.Crm.Service.Services
         {
             var notes = new StringBuilder();
             if (ilResponse == null) return notes.ToString();
-            notes.Append("SourceSystemStatusCode: " + ilResponse.SourceSystemStatusCode);
+            notes.AppendLine("SourceSystemStatusCode: " + ilResponse.SourceSystemStatusCode);
             if (!string.IsNullOrWhiteSpace(ilResponse.SourceSystemRequest)) notes.AppendLine("SourceSystemRequest: " + ilResponse.SourceSystemRequest);
             if (!string.IsNullOrWhiteSpace(ilResponse.SourceSystemResponse)) notes.AppendLine("SourceSystemResponse: " + ilResponse.SourceSystemResponse);
             return notes.ToString();
