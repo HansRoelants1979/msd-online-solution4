@@ -101,6 +101,7 @@ scriptLoader.load("Tc.Crm.Scripts.Common", null, function () {
             request.setRequestHeader("OData-Version", "4.0");
             request.setRequestHeader("Accept", "application/json");
             request.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+            request.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
             request.onreadystatechange = function () {
                 if (this.readyState === 4) {
                     request.onreadystatechange = null;
