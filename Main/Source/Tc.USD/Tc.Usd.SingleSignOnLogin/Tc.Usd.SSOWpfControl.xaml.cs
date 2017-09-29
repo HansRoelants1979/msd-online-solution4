@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -161,6 +160,7 @@ namespace Tc.Usd.SingleSignOnLogin
         {
             this.UserInitials.Text = string.Empty;
             this.StoreSelector.SelectedItem = null;
+            this.StoreSelector.Text = string.Empty;
             this.LoginButton.IsEnabled = false;
             this.UserInitials.IsEnabled = true;
             this.StoreSelector.IsEnabled = true;
