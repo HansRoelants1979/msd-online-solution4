@@ -19,6 +19,8 @@ namespace Tc.Usd.SingleSignOnLogin
 {
     public partial class USDControl
     {
+        private const int InitialsMaxCount = 3;
+
         #region Vars
         /// <summary>
         /// Log writer for USD 
@@ -104,9 +106,11 @@ namespace Tc.Usd.SingleSignOnLogin
 
         private void ToggleLoginButton()
         {
-            this.LoginButton.IsEnabled = !(this.UserInitials.Text.Length == 0 || this.StoreSelector.SelectedIndex == -1);
-            if (this.LoginButton.IsEnabled)
-                LoginButton.Tag = new BitmapImage(new Uri(@"Resources/Tick.png", UriKind.Relative));
+            this.LoginButton.IsEnabled = !(this.UserInitials.Text.Length != InitialsMaxCount || this.StoreSelector.SelectedIndex == -1);
+
+            LoginButton.Tag = this.LoginButton.IsEnabled
+                ? new BitmapImage(new Uri(@"Resources/Tick.png", UriKind.Relative))
+                : new BitmapImage(new Uri(@"Resources/TickDisabled.png", UriKind.Relative));
         }
 
         private void UserInitials_OnTextChanged(object sender, TextChangedEventArgs e)
@@ -164,7 +168,6 @@ namespace Tc.Usd.SingleSignOnLogin
             this.LoginButton.IsEnabled = false;
             this.UserInitials.IsEnabled = true;
             this.StoreSelector.IsEnabled = true;
-            LoginButton.Tag = new BitmapImage(new Uri(@"Resources/Tick.png", UriKind.Relative));
             ((CollectionView)CollectionViewSource.GetDefaultView(this.StoreSelector.ItemsSource)).Filter = null;
             FireEvent(Configuration.SsoCancel);
         }

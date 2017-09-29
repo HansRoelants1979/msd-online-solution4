@@ -22,6 +22,10 @@
         <SolidColorBrush x:Key="SolidBorderBrush" Color="#888" />
         <SolidColorBrush x:Key="GlyphBrush" Color="#444" />
 
+        <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#888" />
+        <SolidColorBrush x:Key="DisabledBorderBrush" Color="#FCDB8F" />
+        <SolidColorBrush x:Key="DisabledBackgroundBrush" Color="#FCDB8F" />
+
         <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -31,7 +35,7 @@
                 <Border 
                 x:Name="Border" 
                 Grid.ColumnSpan="2"
-                CornerRadius="5,10,10,5"
+                CornerRadius="5,5,5,5"
                 BorderBrush="{StaticResource NormalBorderBrush}"
                 BorderThickness="1" />
                 <Border 
@@ -55,6 +59,12 @@
                 </Trigger>
                 <Trigger Property="ToggleButton.IsChecked" Value="true">
                 </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter TargetName="Border" Property="Background" Value="{StaticResource DisabledBackgroundBrush}" />
+                    <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource DisabledBorderBrush}" />
+                    <Setter Property="Foreground" Value="{StaticResource DisabledForegroundBrush}"/>
+                    <Setter TargetName="Arrow" Property="Fill" Value="{StaticResource DisabledForegroundBrush}" />
+                </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
 
@@ -64,7 +74,7 @@
 
         <ControlTemplate x:Key="ComboBoxTemplate" TargetType="{x:Type ComboBox}">
             <Grid>
-                <Rectangle Stroke="#FFe1e1e1" RadiusX="10" RadiusY="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" x:Name="Rectangle">
+                <Rectangle Stroke="#FFe1e1e1" RadiusX="5" RadiusY="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" x:Name="Rectangle">
                     <Rectangle.Fill>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                             <GradientStop Color="#FFF9F9F9" Offset="0"/>
@@ -72,20 +82,19 @@
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
- 
+
                 <ToggleButton Name="ToggleButton" 
                 Template="{StaticResource ComboBoxToggleButton}" 
                 Focusable="false"
                 IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
                 ClickMode="Press">
                 </ToggleButton>
-
                 <TextBox x:Name="PART_EditableTextBox"
                 Template="{StaticResource ComboBoxTextBox}" 
                 SelectionBrush="Transparent"
                 HorizontalAlignment="Left" 
-                VerticalAlignment="Center" 
-                Margin="3,3,23,3"
+                VerticalAlignment="Center"
+                Margin="-1,0,23,0"
                 Visibility="Hidden" />
 
                 <ContentPresenter
@@ -114,10 +123,6 @@
                 </Trigger>
                 <Trigger Property="IsGrouping" Value="true">
                     <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
-                </Trigger>
-                <Trigger SourceName="Popup" Property="Popup.AllowsTransparency" Value="true">
-                    <Setter TargetName="DropDownBorder" Property="CornerRadius" Value="5"/>
-                    <Setter TargetName="DropDownBorder" Property="Margin" Value="0,2,0,0"/>
                 </Trigger>
                 <Trigger Property="IsEditable" Value="true">
                     <Setter Property="IsTabStop" Value="false"/>
@@ -169,9 +174,9 @@
         <Border Grid.Row="0" CornerRadius="10,10,10,10" Background="#F8AC00" BorderBrush="#D8D8D8" BorderThickness="1,1,1,1">
             <Grid Height="30" Width="325">
                 <ComboBox x:Name="StoreSelector" Template="{StaticResource ComboBoxTemplate}" HorizontalAlignment="Left" VerticalAlignment="Top" 
-                      Margin="185,2,0,0" Width="76" Height="25" 
-                      SelectionChanged="StoreSelector_SelectionChanged" KeyUp="StoreSelector_KeyUp" IsEditable="True" IsEnabled="True"
-                      DisplayMemberPath="Name" IsTextSearchEnabled="False" VerticalContentAlignment="Center">
+                          Margin="185,2,0,0" Width="76" Height="25" 
+                          SelectionChanged="StoreSelector_SelectionChanged" KeyUp="StoreSelector_KeyUp" IsEditable="True" IsEnabled="True"
+                          DisplayMemberPath="Name" IsTextSearchEnabled="False" VerticalContentAlignment="Center">
                 </ComboBox>
                 <TextBox x:Name="UserInitials" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="50,2,0,0" TextWrapping="Wrap" Text="" 
                              VerticalAlignment="Top" Width="43" TextChanged="UserInitials_OnTextChanged" MaxLength ="3">

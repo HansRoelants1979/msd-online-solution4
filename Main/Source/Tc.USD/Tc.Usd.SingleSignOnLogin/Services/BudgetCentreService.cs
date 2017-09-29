@@ -128,7 +128,7 @@ namespace Tc.Usd.SingleSignOnLogin.Services
             return new BudgetCentre
             {
                 StoreId = (Guid)entity[Attributes.Store.StoreId],
-                Name = (string)entity[Attributes.Store.Name],
+                Name = $"{(string)entity[Attributes.Store.BudgetCentre]}({(string)entity[Attributes.Store.Name]})",
                 Abta = (string)entity[Attributes.Store.Abta],
                 BudgetCentreName = (string)entity[Attributes.Store.BudgetCentre],
                 Cluster = entity.Contains(Attributes.Store.ClusterId) ? ((EntityReference)entity[Attributes.Store.ClusterId]).Name : string.Empty,
