@@ -1,5 +1,9 @@
 ﻿namespace Tc.Crm.Common.Constants
 {
+    public static class ResponseAttribute
+    {
+        public const string WebRioResponseCookie_JSessionId = "jsessionid";
+    }
     public static class EntityName
     {
 
@@ -56,14 +60,20 @@
             public const string OwrSsoTokenExpired = "Tc.Owr.SsoTokenExpiredSeconds";
             public const string OwrSsoTokenNotBefore = "Tc.Owr.SsoTokenNotBeforeTimeSeconds";
             public const string OwrAudOneWebRetail = "onewebretail";
-            public const string OwrAudWebRio = "webrio";
             public const string OwrOpportunityIdParamName = "opportunityId";
 
+            public const string WebRioJwtPrivateKeyConfigName = "Tc.WebRio.JwtPrivateKey";
+            public const string WebRioAudWebRio = "webrio";
+            public const string WebRioAdminApi = "Tc.Wr.Api.Admin";
+            public const string WebRioServiceUrl = "Tc.Wr.SSOServiceUrl";
+            public const string WebRioExpirySecondsFromNow = "Tc.Wr.SsoToken.ExpiredSecondsFromNow";
+            public const string WebRioNotBeforeTimeSecondsFromNow = "Tc.Wr.SsoToken.NotBeforeTimeSecondsFromNow";
+            public const string OpenWebRioGlobal = "Tc.Usd.Global.SingleSignOnController.OpenWR";
+
             public const string SsoCompleteEvent = "Tc.Event.OnSsoComplete";
+            public const string GlobalSsoCompleteEvent = "Tc.Event.OnGlobalSsoComplete";
 
             public const string OpenOwr = "Tc.Usd.SingleSignOnController.Custom.OpenOwr";
-            public const string SsoLogin = "Tc.Event.SsoLogin";
-            public const string SsoCancel = "Tc.Event.SsoCancel";
         }
     }
 
@@ -85,7 +95,13 @@
         {
             public const string Owner = "ownerid";
         }
-
+        public static class SecureConfiguration
+        {
+            public const string Name = "tc_name";
+            public const string Value = "tc_value";
+        }
+       
+        
         public static class BusinessUnit
         {
             public const string BusinessUnitId = "businessunitid";

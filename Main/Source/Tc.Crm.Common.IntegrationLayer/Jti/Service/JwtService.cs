@@ -13,7 +13,7 @@ using Tc.Crm.Common.Services;
 
 namespace Tc.Crm.Common.IntegrationLayer.Jti.Service
 {
-    public class JwtService: IJwtService
+    public class JwtService : IJwtService
     {
         private const string SendHttpRequestApplicationTerminated = "SendHttpRequest application terminated with an error::";
 
@@ -37,6 +37,82 @@ namespace Tc.Crm.Common.IntegrationLayer.Jti.Service
             var rsa = new RSACryptoServiceProvider();
             rsa.FromXmlString(privateKey);
             return JWT.Encode(payload, rsa, JwsAlgorithm.RS256, header);
+        }
+
+        public ResponseEntity SendHttpRequestWithCookie(HttpMethod method, string serviceUrl, string token, string data, string correlationId, Dictionary<string, string> cookies)
+        {
+            var request = new HttpClient();
+            request.DefaultRequestHeaders.Accept.Clear();
+            request.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            request.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            if (!string.IsNullOrEmpty(correlationId))
+                request.DefaultRequestHeaders.Add("tc-correlation-id", correlationId);
+            if (cookies != null && cookies.Count > 0)
+            {
+                var cookieString = new StringBuilder();
+                foreach (var item in cookies)
+                {
+                    cookieString.Append($"{item.Key}={item.Value},");
+                }
+                request.DefaultRequestHeaders.Add("Cookie", cookieString.ToString().TrimEnd(','));
+            }
+
+            ResponseEntity result;
+
+            try
+            {
+                var t = SendHttpRequestAsync(method, serviceUrl, data, request);
+                var response = t.Result;
+                var task = response.Content.ReadAsStringAsync();
+                var content = task.Result;
+                result = new ResponseEntity
+                {
+                    Content = content,
+                    StatusCode = response.StatusCode
+                };
+
+                Dictionary<string, string> responseCookies = null;
+                IEnumerable<string> cookieList;
+                if (response.Headers.TryGetValues("Set-Cookie", out cookieList))
+                {
+                    foreach (string c in cookieList)
+                    {
+                        responseCookies = new Dictionary<string, string>();
+                        var cookieArray = c.Split(',');
+                        foreach (var ci in cookieArray)
+                        {
+                            var cookieItemArray = ci.Split('=');
+                            responseCookies.Add(cookieItemArray[0], cookieItemArray[1]);
+                        }
+                        break;
+                    }
+
+                    result.Cookies = responseCookies;
+                }
+
+
+                
+                return result;
+            }
+            catch (AggregateException ex)
+            {
+                result = new ResponseEntity
+                {
+                    Content = ex.InnerException?.Message ?? ex.Message,
+                    StatusCode = HttpStatusCode.InternalServerError
+                };
+                _logger.LogError($"{SendHttpRequestApplicationTerminated}{ex.ToString()}");
+            }
+            catch (Exception ex)
+            {
+                result = new ResponseEntity
+                {
+                    Content = ex.Message,
+                    StatusCode = HttpStatusCode.InternalServerError
+                };
+                _logger.LogError($"{SendHttpRequestApplicationTerminated}{ex.ToString()}");
+            }
+            return result;
         }
 
         public ResponseEntity SendHttpRequest(HttpMethod method, string serviceUrl, string token, string data, string correlationId)
@@ -152,7 +228,7 @@ namespace Tc.Crm.Common.IntegrationLayer.Jti.Service
                 _logger.LogError(exception.ToString());
                 UpdateResponse(response, exception.InnerException?.Message ?? exception.Message);
             }
-            
+
             return response;
         }
 

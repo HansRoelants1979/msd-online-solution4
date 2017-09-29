@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Tc.Usd.HostedControls.Models;
+using System.IO;
+using System.Text;
+using System.Runtime.Serialization.Json;
 
 namespace Tc.Usd.HostedControls.Service
 {
@@ -22,6 +26,31 @@ namespace Tc.Usd.HostedControls.Service
                 {"LaunchUri", ssoResult.definitions.properties.owrRequest.launchUri.ToString()}
             };
             return eventParams;
+        }
+
+        public static Dictionary<string, string> ContentToEventParamsForWebRio(string content)
+        {
+            var ssoResult = DeserializeJson(content);
+
+            var eventParams = new Dictionary<string, string>();
+            eventParams.Add("responseCode", ssoResult.ResponseCode);
+            eventParams.Add("responseMessage", ssoResult.ResponseMessage);
+            eventParams.Add("webRioUrl", ssoResult.WebRioUrl);
+
+            return eventParams;
+        }
+
+        public static WebRioResponse DeserializeJson(string json)
+        {
+            if (string.IsNullOrWhiteSpace(json)) return null;
+
+            WebRioResponse response = new WebRioResponse();
+            using (MemoryStream memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
+            {
+                DataContractJsonSerializer deSerializer = new DataContractJsonSerializer(response.GetType());
+                response = deSerializer.ReadObject(memoryStream) as WebRioResponse;
+            }
+            return response;
         }
 
         public static Guid GetJti()

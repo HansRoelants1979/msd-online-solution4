@@ -26,6 +26,16 @@ namespace Tc.Usd.HostedControls
             _logger.LogInformation($"{ApplicationName} -- DoAction called for action: {args.Action}");
             if (args.Action.Equals(EntityRecords.Configuration.OpenOwr, StringComparison.OrdinalIgnoreCase))
                 DoActionsOnOpenOwr(args);
+            if (args.Action.Equals(EntityRecords.Configuration.OpenWebRioGlobal, StringComparison.OrdinalIgnoreCase))
+            {
+                DoActionsOnOpenWebRio(args,true);
+               
+            }
+        }
+
+        private void DoActionsOnOpenWebRio(RequestActionEventArgs args,bool global)
+        {
+            Dispatcher.InvokeAsync(() => { OpenWebRio(args,global); });
         }
 
         public void DoActionsOnOpenOwr(RequestActionEventArgs args)
