@@ -7,6 +7,126 @@
              mc:Ignorable="d" 
              d:DesignHeight="295" Width="325.368">
     <UserControl.Resources>
+        <LinearGradientBrush x:Key="DarkBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#FFF" Offset="0.0"/>
+                    <GradientStop Color="#AAA" Offset="1.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+        <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#FFF" />
+
+        <SolidColorBrush x:Key="NormalBorderBrush" Color="#D8D8D8" />
+        <SolidColorBrush x:Key="SolidBorderBrush" Color="#888" />
+        <SolidColorBrush x:Key="GlyphBrush" Color="#444" />
+
+        <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+                <Border 
+                x:Name="Border" 
+                Grid.ColumnSpan="2"
+                CornerRadius="5,10,10,5"
+                BorderBrush="{StaticResource NormalBorderBrush}"
+                BorderThickness="1" />
+                <Border 
+                Grid.Column="0"
+                CornerRadius="5,5,5,5" 
+                Margin="1" 
+                Background="{StaticResource WindowBackgroundBrush}" 
+                BorderBrush="{StaticResource NormalBorderBrush}"
+                BorderThickness="0,0,1,0" />
+                <Path 
+                x:Name="Arrow"
+                Grid.Column="1"     
+                Fill="{StaticResource GlyphBrush}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Data="M 0 0 L 4 4 L 8 0 Z"/>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="ToggleButton.IsMouseOver" Value="true">
+                    <Setter TargetName="Border" Property="Background" Value="{StaticResource DarkBrush}" />
+                </Trigger>
+                <Trigger Property="ToggleButton.IsChecked" Value="true">
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="ComboBoxTextBox" TargetType="TextBox">
+            <Border x:Name="PART_ContentHost" BorderThickness="2" Focusable="False" Background="{TemplateBinding Background}" CornerRadius="5,5,5,5" />
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="ComboBoxTemplate" TargetType="{x:Type ComboBox}">
+            <Grid>
+                <Rectangle Stroke="#FFe1e1e1" RadiusX="10" RadiusY="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" x:Name="Rectangle">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Color="#FFF9F9F9" Offset="0"/>
+                            <GradientStop Color="#FFd9d9d9" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+ 
+                <ToggleButton Name="ToggleButton" 
+                Template="{StaticResource ComboBoxToggleButton}" 
+                Focusable="false"
+                IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+                ClickMode="Press">
+                </ToggleButton>
+
+                <TextBox x:Name="PART_EditableTextBox"
+                Template="{StaticResource ComboBoxTextBox}" 
+                SelectionBrush="Transparent"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center" 
+                Margin="3,3,23,3"
+                Visibility="Hidden" />
+
+                <ContentPresenter
+                Name="ContentSite"
+                Content="{TemplateBinding SelectionBoxItem}"
+                Margin="3,3,23,3"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left" />
+
+                <Popup Name="Popup" Placement="Bottom"
+                IsOpen="{TemplateBinding IsDropDownOpen}"
+                AllowsTransparency="True" 
+                Focusable="False"
+                PopupAnimation="Slide">
+                    <Grid Name="DropDown" SnapsToDevicePixels="True" MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                        <Border x:Name="DropDownBorder" Background="{StaticResource WindowBackgroundBrush}" BorderThickness="1" BorderBrush="{StaticResource SolidBorderBrush}"/>
+                        <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                        </ScrollViewer>
+                    </Grid>
+                </Popup>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="HasItems" Value="false">
+                    <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
+                </Trigger>
+                <Trigger Property="IsGrouping" Value="true">
+                    <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                </Trigger>
+                <Trigger SourceName="Popup" Property="Popup.AllowsTransparency" Value="true">
+                    <Setter TargetName="DropDownBorder" Property="CornerRadius" Value="5"/>
+                    <Setter TargetName="DropDownBorder" Property="Margin" Value="0,2,0,0"/>
+                </Trigger>
+                <Trigger Property="IsEditable" Value="true">
+                    <Setter Property="IsTabStop" Value="false"/>
+                    <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible"/>
+                    <Setter TargetName="ContentSite" Property="Visibility" Value="Hidden"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
         <Style TargetType="Button" x:Key="Icon">
             <Setter Property="Cursor" Value="Hand" />
             <Setter Property="Height" Value="25" />
@@ -48,7 +168,8 @@
         <!-- this is where any toolbar assigned to this control will go -->
         <Border Grid.Row="0" CornerRadius="10,10,10,10" Background="#F8AC00" BorderBrush="#D8D8D8" BorderThickness="1,1,1,1">
             <Grid Height="30" Width="325">
-                <ComboBox x:Name="StoreSelector" HorizontalAlignment="Left" Margin="185,2,0,0" VerticalAlignment="Top" Width="76" Height="25" 
+                <ComboBox x:Name="StoreSelector" Template="{StaticResource ComboBoxTemplate}" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                      Margin="185,2,0,0" Width="76" Height="25" 
                       SelectionChanged="StoreSelector_SelectionChanged" KeyUp="StoreSelector_KeyUp" IsEditable="True" IsEnabled="True"
                       DisplayMemberPath="Name" IsTextSearchEnabled="False" VerticalContentAlignment="Center">
                 </ComboBox>
@@ -65,9 +186,9 @@
                        VerticalAlignment="Top" Width="50" FontWeight="Bold" RenderTransformOrigin="-2.135,0.706"/>
                 <Label x:Name="StoreSelectorLabel" Content="Budget Centre" HorizontalAlignment="Left" Margin="95,2,0,0" 
                        VerticalAlignment="Top" Width="93" FontWeight="Bold" Height="25"/>
-                <Button x:Name="LoginButton" Style="{StaticResource Icon}" Margin="290,2,0,0" Click="LoginButton_OnClick">
+                <Button x:Name="LoginButton" Style="{StaticResource Icon}" Margin="290,2,0,0" Click="LoginButton_OnClick" IsEnabled="False">
                     <Button.Tag>
-                        <ImageSource>Resources/Tick.png</ImageSource>
+                        <ImageSource>Resources/TickDisabled.png</ImageSource>
                     </Button.Tag>
                 </Button>
                 <Button x:Name="CancelButton" Style="{StaticResource Icon}" Margin="260,2,0,0" Click="CancelButton_OnClick">

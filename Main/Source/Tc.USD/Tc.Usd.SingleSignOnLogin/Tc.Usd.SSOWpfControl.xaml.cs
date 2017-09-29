@@ -106,6 +106,8 @@ namespace Tc.Usd.SingleSignOnLogin
         private void ToggleLoginButton()
         {
             this.LoginButton.IsEnabled = !(this.UserInitials.Text.Length == 0 || this.StoreSelector.SelectedIndex == -1);
+            if (this.LoginButton.IsEnabled)
+                LoginButton.Tag = new BitmapImage(new Uri(@"Resources/Tick.png", UriKind.Relative));
         }
 
         private void UserInitials_OnTextChanged(object sender, TextChangedEventArgs e)
