@@ -27,12 +27,13 @@ if (typeof (Tc.Crm.Scripts.Events.FollowUp) === "undefined") {
 
 Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
     "use strict";
-    var CUSTOMER_QUICK_VIEW_FORM = "AvailableContactDetails";
+    
     var FORM_MODE_CREATE = 1;
     var CLIENT_STATE_OFFLINE = "Offline";
 
     var EntitySetNames = {
-        Configuration: "tc_configurations"
+        Configuration: "tc_configurations",
+        ExternalLogins: "tc_externallogins"
     }
 
     var EntityNames = {
@@ -53,6 +54,7 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
         Emailaddress3: "emailaddress3",
         RescheduleCheck: "tc_reschedulecheck",
         RescheduleReason: "tc_reschedulereason",
+        IsDefaultDate: "tc_isdefaultdate"
     }
     var Configuration = {
         DueDateDefaultValue: "Tc.FollowUp.DueDateDefaultValue"
@@ -66,7 +68,17 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
         }
         else {
             if (dueDateValueAttr == null) return;
-            if (Xrm.Page.ui.getFormType() === FORM_MODE_CREATE) return;
+            if (Xrm.Page.ui.getFormType() === FORM_MODE_CREATE) {
+
+                // if changed on create form, clear the checkbox
+                Xrm.Page.getAttribute(Attributes.IsDefaultDate).setValue("");
+                return;
+            }
+            if (Xrm.Page.getAttribute(Attributes.IsDefaultDate).getValue() != null) {
+                // do nothing if true -- change the selection
+                Xrm.Page.getAttribute(Attributes.IsDefaultDate).setValue("");
+                return;
+            }
             showRescheduleReasonAndRescheduleCheckBoxFields();
         }
     }
@@ -232,6 +244,8 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
                 var now = new Date();
                 var endDate = new Date().setDate(now.getDate() + parseInt(dueDateDefaultValue));
                 dueDate.setValue(endDate);
+
+                Xrm.Page.getAttribute(Attributes.IsDefaultDate).setValue((new Date()).toLocaleTimeString());
             }
         },
         function (error) {
@@ -271,6 +285,7 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
             return Tc.Crm.Scripts.Common.Get(EntitySetNames.Configuration, query);
         }
     }
+
     function IsOfflineMode() {
         return Xrm.Page.context.client.getClientState() === CLIENT_STATE_OFFLINE
     }
@@ -307,10 +322,82 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
         }
         return result;
     }
+    var onstoreChange = function () {
+        var assignedStore = Xrm.Page.getAttribute('tc_assignedstore').getValue();
+
+        if (assignedStore === null) return;
+        Xrm.Page.getControl("ownerid").addPreSearch(addCustomFilterForStoreUsers);
+
+    }
+
+    var addCustomFilterForStoreUsers = function () {
+
+        var storeLookup = Xrm.Page.getAttribute('tc_assignedstore').getValue();
+        if (storeLookup === null) return;
+       
+           var fetchQuery = "<filter type='and'>" +
+              "<condition attribute='tc_primarystoreid' operator='eq' value='" + storeLookup[0].id + "' />" +
+            "</filter>";
+
+            Xrm.Page.getControl("ownerid").addCustomFilter(fetchQuery);      
+    }
+
+    var setLoggedInUserStore = function () {
+        var loggedInUserId = Xrm.Page.context.getUserId();
+        loggedInUserId = loggedInUserId.replace("{", "").replace("}", "");
+        var loggedInUserName = Xrm.Page.context.getUserName();
+
+        if (loggedInUserId != null && loggedInUserId != 'undefined') {
+            var loggedInUserLookup = new Array();
+            loggedInUserLookup[0] = new Object();
+            loggedInUserLookup[0].id = '{' + loggedInUserId.toUpperCase() + '}';
+            loggedInUserLookup[0].entityType = 'systemuser';
+            loggedInUserLookup[0].name = Xrm.Page.context.getUserName();
+
+            Xrm.Page.getAttribute("tc_loggedinuser").setValue(loggedInUserLookup);
+            var results = syncGetExternalLoginRecords(loggedInUserId);
+
+            if (results["@odata.count"] > 0) {
+                var budgetCenterId = results.value[0]["_tc_budgetcentreid_value"];
+                var budgetCenterName = results.value[0]["_tc_budgetcentreid_value@OData.Community.Display.V1.FormattedValue"];
+                var budgetCenterEntity = results.value[0]["_tc_budgetcentreid_value@Microsoft.Dynamics.CRM.lookuplogicalname"];
+                if (budgetCenterId !== null) {
+                    var loggedInUserStore = new Array();
+                    loggedInUserStore[0] = new Object();
+                    loggedInUserStore[0].id = '{' + budgetCenterId.toUpperCase() + '}';
+                    loggedInUserStore[0].entityType = budgetCenterEntity;
+                    loggedInUserStore[0].name = budgetCenterName;
+
+                    Xrm.Page.getAttribute("tc_storecreated").setValue(loggedInUserStore);
+                }
+
+            }
+        }
+
+
+    }
+
+    var syncGetExternalLoginRecords = function (loggedInUserId) {
+        try {
+            var query = "?$select=_tc_budgetcentreid_value&$filter=_ownerid_value eq " + loggedInUserId + "&$count=true";
+            var externalLoginResults = Tc.Crm.Scripts.Common.SyncGet(EntitySetNames.ExternalLogins, query);
+            return externalLoginResults;
+        } catch (e) {
+            console.log("Error in retrieving ExternalLoginRecords");
+            return null;
+        }
+    }
     // public methods
     return {
         OnSave: function (context) {
             var isValid = Tc.Crm.Scripts.Utils.Validation.ValidateGdprCompliance(context);
+
+            if (Xrm.Page.ui.getFormType() !== FORM_MODE_CREATE) {
+
+                // if changed on create form, clear the checkbox
+                Xrm.Page.getAttribute(Attributes.IsDefaultDate).setValue("");
+
+            }
             // uncomment in case of additional save actions
             //if (isValid) {                
             //}
@@ -327,12 +414,16 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
         OnLoad: function () {
             setRegardingField();
             setDueDateOnload();
+            setLoggedInUserStore();
         },
         OnContactPhoneOrContactEmailChange: function (executionContext) {
             contactPhoneOrContactEmailOnChange(executionContext);
         },
         OnContactMethodChange: function () {
             contactMethodOnChange();
+        },
+        OnStoreChange: function () {
+            onstoreChange();
         }
 
     };
