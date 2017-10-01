@@ -75,6 +75,12 @@
 
             public const string OpenOwr = "Tc.Usd.SingleSignOnController.Custom.OpenOwr";
         }
+
+        public static class UsdParameter
+        {
+            public const string JSessionId = "JSessionId";
+            public const string RequestType = "Type";
+        }
     }
 
     namespace Attributes
