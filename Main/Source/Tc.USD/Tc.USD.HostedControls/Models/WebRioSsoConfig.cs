@@ -15,7 +15,7 @@ namespace Tc.Usd.HostedControls.Models
         public string ExpirySeconds { get; set; }
         public string AdminApi { get; set; }
         public string ServiceUrl { get; set; }
-        public PageType RequestType { get; set; }
+        public RequestType RequestType { get; set; }
         public string JSessionId { get; set; }
         public List<string> Errors { get; set; }
     }

@@ -12,7 +12,7 @@ using Tc.Crm.Common.Constants;
 
 namespace Tc.Usd.HostedControls
 {
-    public enum PageType
+    public enum RequestType
     {
         Other,
         Admin,
@@ -75,6 +75,7 @@ namespace Tc.Usd.HostedControls
 
         private Dictionary<string, string> GetEventParameters(ResponseEntity response)
         {
+            if (response == null) throw new ArgumentNullException("response");
             var content = response.Content;
 
             var eventParameters = WebServiceExchangeHelper.ContentToEventParamsForWebRio(content);
@@ -91,6 +92,7 @@ namespace Tc.Usd.HostedControls
 
         private void FireOnSuccess(Dictionary<string, string> eventParameters, bool global)
         {
+            if (eventParameters == null) throw new ArgumentNullException("eventParameters");
             if (global)
                 FireEvent(EntityRecords.Configuration.GlobalSsoCompleteEvent, eventParameters);
         }
@@ -111,19 +113,37 @@ namespace Tc.Usd.HostedControls
         private WebRioSsoConfig GetWebRioSsoConfiguration(RequestActionEventArgs args)
         {
             var configuration = new WebRioSsoConfig();
-            configuration.JSessionId = GetParamValue(args, "JSessionId");
-            configuration.RequestType = (PageType)Enum.Parse(typeof(PageType), GetParamValue(args, "Type"));
+            configuration.JSessionId = GetParamValue(args, EntityRecords.UsdParameter.JSessionId);
+            configuration.RequestType = GetRequestType(args);
             CrmService.GetWebRioSsoConfiguration(_client.CrmInterface, configuration);
             configuration.Login = CrmService.GetSsoLoginDetails(_client.CrmInterface, _client.CrmInterface.GetMyCrmUserId());
             configuration.PrivateKey = CrmService.GetWebRioPrivateKey(_client.CrmInterface);
             ValidateConfiguration(configuration);
             return configuration;
         }
+
+        private RequestType GetRequestType(RequestActionEventArgs args)
+        {
+            var requestType = GetParamValue(args, EntityRecords.UsdParameter.RequestType);
+            if (string.IsNullOrWhiteSpace(requestType))
+                return RequestType.Other;
+            else if (requestType.Equals(RequestType.Admin.ToString(),StringComparison.OrdinalIgnoreCase)
+                                        || requestType.Equals(RequestType.Booking.ToString(), StringComparison.OrdinalIgnoreCase)
+                                        || requestType.Equals(RequestType.TravelPlanner.ToString(),StringComparison.OrdinalIgnoreCase))
+                return (RequestType)Enum.Parse(typeof(RequestType), requestType, true);
+            else
+                return RequestType.Other;
+        }
+
         private void ValidateConfiguration(WebRioSsoConfig configuration)
         {
+            if (configuration == null) throw new ArgumentNullException("configuration");
+
             var errors = new List<string>();
-            if (configuration.RequestType == PageType.Other)
-                errors.Add("Action call parameter Type is not valid.");
+
+            if (configuration.RequestType == RequestType.Other)
+                errors.Add("Action call parameter [Type] is missing or not valid.");
+
             if (configuration.Login == null
                     || string.IsNullOrWhiteSpace(configuration.Login.AbtaNumber)
                     || string.IsNullOrWhiteSpace(configuration.Login.BranchCode)
@@ -131,13 +151,30 @@ namespace Tc.Usd.HostedControls
                     || string.IsNullOrWhiteSpace(configuration.Login.EmployeeId))
                 errors.Add("Login details are missing for the logged-in user.");
 
+            int expirySeconds = -1;
+            if (string.IsNullOrWhiteSpace(configuration.ExpirySeconds) || !Int32.TryParse(configuration.ExpirySeconds,out expirySeconds))
+            {
+                errors.Add("Expiry seconds have not been specified or the one specified does not have the correct format.");
+            }
+
+            int notBeforeTime = -1;
+            if (string.IsNullOrWhiteSpace(configuration.NotBeforeTime) || !Int32.TryParse(configuration.NotBeforeTime, out notBeforeTime))
+            {
+                errors.Add("Not before time seconds have not been specified or the one specified does not have correct format.");
+            }
 
             if (string.IsNullOrWhiteSpace(configuration.PrivateKey))
                 errors.Add("Private key has not been provided");
 
-            if (string.IsNullOrWhiteSpace(configuration.ServiceUrl) || string.IsNullOrWhiteSpace(configuration.AdminApi))
+            if (string.IsNullOrWhiteSpace(configuration.ServiceUrl))
             {
                 errors.Add("SSO Url has not been configured properly.");
+            }
+            else
+            {
+                if (configuration.RequestType == RequestType.Admin)
+                    if (string.IsNullOrWhiteSpace(configuration.AdminApi))
+                        errors.Add("Admin Api has not been configured properly.");
             }
 
             configuration.Errors = errors;
@@ -145,13 +182,17 @@ namespace Tc.Usd.HostedControls
 
         private string GetUrl(WebRioSsoConfig configuration)
         {
-            if (configuration.RequestType == PageType.Admin)
+            if (configuration == null) throw new ArgumentNullException("configuration");
+            if (configuration.RequestType == RequestType.Admin)
                 return $"{configuration.ServiceUrl}/{configuration.AdminApi}";
             return null;
         }
 
         private ResponseEntity SendRequest(string url, string token, string jSessionId)
         {
+            if (string.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
+            if (string.IsNullOrWhiteSpace(token)) throw new ArgumentNullException("token");
+
             if (string.IsNullOrWhiteSpace(jSessionId))
             {
                 return _jtiService.SendHttpRequestWithCookie(HttpMethod.Post, url, token, string.Empty, null, null);
@@ -176,7 +217,7 @@ namespace Tc.Usd.HostedControls
 
         private WebRioJsonWebTokenPayload GetWebRioSsoTokenPayload(WebRioSsoConfig configuration)
         {
-            if (configuration == null) return null;
+            if (configuration == null) throw new ArgumentNullException("configuration");
 
             var payload = new WebRioJsonWebTokenPayload
             {
