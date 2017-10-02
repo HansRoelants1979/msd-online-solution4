@@ -87,6 +87,7 @@ namespace Tc.Usd.HostedControls
 
         private bool CheckIfApplicationIsOpen(params string[] appNames)
         {
+            if (appNames == null || appNames.Length == 0) return true;
             foreach (Session session in localSessionManager)
             {
                 foreach (IHostedApplication app in session)
