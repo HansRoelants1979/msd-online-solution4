@@ -80,10 +80,18 @@
 
     namespace UsdConstants
     {
+        public static class HttpCode
+        {
+            public const string InternalError = "501";
+        }
         public static class UsdParameter
         {
             public const string WebRioJSessionId = "JSessionId";
             public const string WebRioRequestType = "Type";
+            public const string ApplicationType = "applicationType";
+            public const string Application_WebRio = "WebRio";
+            public const string ResponseCode = "responseCode";
+            public const string ResponseMessage = "responseMessage";
         }
 
         public static class UsdHostedControl

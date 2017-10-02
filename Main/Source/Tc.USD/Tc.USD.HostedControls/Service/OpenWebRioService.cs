@@ -124,6 +124,7 @@ namespace Tc.Usd.HostedControls
         private void FireOnSuccess(Dictionary<string, string> eventParameters, bool global)
         {
             if (eventParameters == null) throw new ArgumentNullException("eventParameters");
+            eventParameters.Add(UsdParameter.ApplicationType,UsdParameter.Application_WebRio);
             if (global)
                 FireEvent(UsdEvent.GlobalSsoCompleteEvent, eventParameters);
         }
@@ -239,11 +240,12 @@ namespace Tc.Usd.HostedControls
         private void FireEventOnError(string message, bool global)
         {
             _logger.LogError(message);
-            var eventParams = new Dictionary<string, string> { { "responseCode", "501" }, { "responseMessage", message } };
+            var eventParameters = new Dictionary<string, string> { { UsdParameter.ResponseCode, HttpCode.InternalError }, { UsdParameter.ResponseMessage, message } };
+            eventParameters.Add(UsdParameter.ApplicationType, UsdParameter.Application_WebRio);
             if (global)
-                FireEvent(UsdEvent.GlobalSsoCompleteEvent, eventParams);
+                FireEvent(UsdEvent.GlobalSsoCompleteEvent, eventParameters);
             else
-                FireEvent(EntityRecords.Configuration.SsoCompleteEvent, eventParams);
+                FireEvent(EntityRecords.Configuration.SsoCompleteEvent, eventParameters);
         }
 
         private WebRioJsonWebTokenPayload GetWebRioSsoTokenPayload(WebRioSsoConfig configuration)
