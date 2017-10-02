@@ -9,6 +9,7 @@ using Tc.Usd.HostedControls.Models;
 using Tc.Crm.Common.IntegrationLayer.Model;
 using System.Text;
 using Tc.Crm.Common.Constants;
+using Tc.Crm.Common.Constants.UsdConstants;
 
 namespace Tc.Usd.HostedControls
 {
@@ -25,6 +26,11 @@ namespace Tc.Usd.HostedControls
         {
             try
             {
+                if (CheckIfWebRioIsOpen())
+                {
+                    FireEventOnError("Multiple instances of Web Rio cannot be openned - close existing ones first.", global);
+                    return;
+                }
                 var configuration = GetWebRioSsoConfiguration(args);
                 if (configuration.Errors != null && configuration.Errors.Count > 0)
                 {
@@ -73,6 +79,30 @@ namespace Tc.Usd.HostedControls
             }
         }
 
+        private bool CheckIfWebRioIsOpen()
+        {
+            return CheckIfApplicationIsOpen(UsdHostedControl.WebRioAdmin
+                                            , UsdHostedControl.WebRioConsultation);
+        }
+
+        private bool CheckIfApplicationIsOpen(params string[] appNames)
+        {
+            foreach (Session session in localSessionManager)
+            {
+                foreach (IHostedApplication app in session)
+                {
+                    for (int i = 0; i < appNames.Length; i++)
+                    {
+                        if (app.ApplicationName.Equals(appNames[i], StringComparison.OrdinalIgnoreCase))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
         private Dictionary<string, string> GetEventParameters(ResponseEntity response)
         {
             if (response == null) throw new ArgumentNullException("response");
@@ -94,7 +124,7 @@ namespace Tc.Usd.HostedControls
         {
             if (eventParameters == null) throw new ArgumentNullException("eventParameters");
             if (global)
-                FireEvent(EntityRecords.Configuration.GlobalSsoCompleteEvent, eventParameters);
+                FireEvent(UsdEvent.GlobalSsoCompleteEvent, eventParameters);
         }
 
         private void HandleConfigurationErrors(WebRioSsoConfig configuration, bool global)
@@ -113,7 +143,7 @@ namespace Tc.Usd.HostedControls
         private WebRioSsoConfig GetWebRioSsoConfiguration(RequestActionEventArgs args)
         {
             var configuration = new WebRioSsoConfig();
-            configuration.JSessionId = GetParamValue(args, EntityRecords.UsdParameter.JSessionId);
+            configuration.JSessionId = GetParamValue(args, UsdParameter.WebRioJSessionId);
             configuration.RequestType = GetRequestType(args);
             CrmService.GetWebRioSsoConfiguration(_client.CrmInterface, configuration);
             configuration.Login = CrmService.GetSsoLoginDetails(_client.CrmInterface, _client.CrmInterface.GetMyCrmUserId());
@@ -124,7 +154,7 @@ namespace Tc.Usd.HostedControls
 
         private RequestType GetRequestType(RequestActionEventArgs args)
         {
-            var requestType = GetParamValue(args, EntityRecords.UsdParameter.RequestType);
+            var requestType = GetParamValue(args, UsdParameter.WebRioRequestType);
             if (string.IsNullOrWhiteSpace(requestType))
                 return RequestType.Other;
             else if (requestType.Equals(RequestType.Admin.ToString(),StringComparison.OrdinalIgnoreCase)
@@ -205,12 +235,12 @@ namespace Tc.Usd.HostedControls
             }
         }
 
-        public void FireEventOnError(string message, bool global)
+        private void FireEventOnError(string message, bool global)
         {
             _logger.LogError(message);
             var eventParams = new Dictionary<string, string> { { "responseCode", "501" }, { "responseMessage", message } };
             if (global)
-                FireEvent(EntityRecords.Configuration.GlobalSsoCompleteEvent, eventParams);
+                FireEvent(UsdEvent.GlobalSsoCompleteEvent, eventParams);
             else
                 FireEvent(EntityRecords.Configuration.SsoCompleteEvent, eventParams);
         }

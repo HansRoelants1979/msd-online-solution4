@@ -6,6 +6,7 @@ using Tc.Crm.Common.IntegrationLayer.Jti.Service;
 using Tc.Crm.Common.Services;
 using EntityRecords = Tc.Crm.Common.Constants.EntityRecords;
 using Tc.Usd.HostedControls.Models;
+using Tc.Crm.Common.Constants.UsdConstants;
 
 namespace Tc.Usd.HostedControls
 {
@@ -26,10 +27,9 @@ namespace Tc.Usd.HostedControls
             _logger.LogInformation($"{ApplicationName} -- DoAction called for action: {args.Action}");
             if (args.Action.Equals(EntityRecords.Configuration.OpenOwr, StringComparison.OrdinalIgnoreCase))
                 DoActionsOnOpenOwr(args);
-            if (args.Action.Equals(EntityRecords.Configuration.OpenWebRioGlobal, StringComparison.OrdinalIgnoreCase))
+            if (args.Action.Equals(UsdAction.OpenWebRioGlobal, StringComparison.OrdinalIgnoreCase))
             {
                 DoActionsOnOpenWebRio(args,true);
-               
             }
         }
 
