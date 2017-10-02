@@ -74,6 +74,9 @@
             public const string GlobalSsoCompleteEvent = "Tc.Event.OnGlobalSsoComplete";
 
             public const string OpenOwr = "Tc.Usd.SingleSignOnController.Custom.OpenOwr";
+
+            public const string SsoLogin = "Tc.Event.SsoLogin";
+            public const string SsoCancel = "Tc.Event.SsoCancel";
         }
 
         public static class UsdParameter

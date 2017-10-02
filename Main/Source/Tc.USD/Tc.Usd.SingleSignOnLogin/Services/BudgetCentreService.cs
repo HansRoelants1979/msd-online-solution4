@@ -110,7 +110,7 @@ namespace Tc.Usd.SingleSignOnLogin.Services
             return extLogin.Id;
         }
 
-        private Guid CreateNewExternalLogin(string userInitials, string abta, Guid bcId, string branchcode, string employeeId, string extLogin)
+        private Guid CreateNewExternalLogin(string userInitials, string abta, Guid bcId, string branchcode, string employeeId, string name)
         {
             var extLoginEntity = new Entity(EntityName.ExternalLogin);
             extLoginEntity.Attributes.Add(Attributes.ExternalLogin.Initials, userInitials);
@@ -118,6 +118,8 @@ namespace Tc.Usd.SingleSignOnLogin.Services
             extLoginEntity.Attributes.Add(Attributes.ExternalLogin.BranchCode, branchcode);
             extLoginEntity.Attributes.Add(Attributes.ExternalLogin.BudgetCentreId, new EntityReference(EntityName.Store, bcId));
             extLoginEntity.Attributes.Add(Attributes.ExternalLogin.OwnerId, new EntityReference(EntityName.User, _myGuid));
+            extLoginEntity.Attributes.Add(Attributes.ExternalLogin.EmployeeId, employeeId);
+            extLoginEntity.Attributes.Add(Attributes.ExternalLogin.Name, name);
 
             var createReq = new CreateRequest {Target = extLoginEntity};
             return ((CreateResponse)_crmService.ExecuteCrmOrganizationRequest(createReq)).id;

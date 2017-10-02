@@ -4,15 +4,12 @@ using Tc.Crm.Service.Services;
 using FakeXrmEasy;
 using Tc.Crm.Service.Models;
 using System.Collections.ObjectModel;
-using System.Net;
 using Tc.Crm.Service.Constants.Crm;
 using Tc.Crm.Common;
 using Microsoft.Xrm.Sdk;
 using Tc.Crm.Common.Constants;
 using Attributes = Tc.Crm.Common.Constants.Attributes;
 using Microsoft.Xrm.Sdk.Query;
-using Tc.Crm.Service.Constants;
-using Tc.Crm.Service.Constants.Crm;
 
 namespace Tc.Crm.ServiceTests
 {
@@ -234,7 +231,22 @@ namespace Tc.Crm.ServiceTests
 
         public CustomerResponse ExecuteActionOnCustomerEvent(string data, Actions.OperationType operation)
         {
-            throw new NotImplementedException();
+            if (Switch == DataSwitch.Created)
+                return new CustomerResponse { Create = true, Existing = false, Id = Guid.NewGuid().ToString() };
+
+            if (Switch == DataSwitch.Updated)
+                return new CustomerResponse { Updated = true, Existing = false, Id = Guid.NewGuid().ToString() };
+
+            if (Switch == DataSwitch.Response_NULL)
+                throw new InvalidOperationException(Tc.Crm.Service.Constants.Messages.ResponseFromCrmIsNull);
+
+            if (Switch == DataSwitch.Response_Failed)
+                return new CustomerResponse { Existing = false, Id = null };
+            if (Switch == DataSwitch.Return_NULL)
+                return null;
+            if (Switch == DataSwitch.ActionThrowsError)
+                throw new Exception("Action faulted");
+            return null;
         }
     }
 }

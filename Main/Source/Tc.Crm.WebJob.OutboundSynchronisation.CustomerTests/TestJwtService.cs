@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using Tc.Crm.Common;
 using Tc.Crm.Common.IntegrationLayer.Jti.Models;
@@ -45,6 +46,15 @@ namespace Tc.Crm.OutboundSynchronisation.CustomerTests
         public double GetNotBeforeTime(string notBeforeSeconds)
         {
             return 0;
+        }
+
+        public ResponseEntity SendHttpRequestWithCookie(HttpMethod method, string serviceUrl, string token, string data, string correlationId, Dictionary<string, string> cookies)
+        {
+            return new ResponseEntity
+            {
+                Content = "Success",
+                StatusCode = HttpStatusCode.OK
+            };
         }
     }
 }

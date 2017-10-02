@@ -54,10 +54,10 @@ namespace Tc.Usd.SingleSignOnLogin
         {
             budgetCentreService = new BudgetCentreService(_client.CrmInterface);
             var parameters = ((DynamicsCustomerRecord)((AgentDesktopSession)localSessionManager.GlobalSession).Customer.DesktopCustomer).CapturedReplacementVariables;
-            var loadAllBudgetCenters = parameters.ContainsKey("$User")&& parameters["$User"].ContainsKey(Attributes.User.AllBudgetCentreAccess) &&
+            var loadAllBudgetCenters = parameters.ContainsKey("$User") && parameters["$User"].ContainsKey(Attributes.User.AllBudgetCentreAccess) &&
                 bool.Parse(parameters["$User"][Attributes.User.AllBudgetCentreAccess].value);
             this.StoreSelector.ItemsSource = budgetCentreService.GetBudgetCentre(loadAllBudgetCenters);
-            
+
             // this will populate any toolbars assigned to this control in config. 
             PopulateToolbars(ProgrammableToolbarTray);
             base.DesktopReady();
@@ -132,7 +132,7 @@ namespace Tc.Usd.SingleSignOnLogin
             var initials = UserInitials.Text;
             var budgetCentreId = ((BudgetCentre)StoreSelector.SelectedItem).StoreId;
             var abta = ((BudgetCentre)StoreSelector.SelectedItem).Abta;
-            var branchcode = ((BudgetCentre) StoreSelector.SelectedItem).BudgetCentreName;
+            var branchcode = ((BudgetCentre)StoreSelector.SelectedItem).BudgetCentreName;
 
             var employeeId = parameters["$User"][Attributes.User.PayrollNumber].value;
             var name = parameters["$User"][Attributes.User.FullName].value;
@@ -141,12 +141,12 @@ namespace Tc.Usd.SingleSignOnLogin
 
             var externalInfo =
                 ((DynamicsCustomerRecord)
-                    ((AgentDesktopSession) localSessionManager.GlobalSession).Customer.DesktopCustomer).Entities.Find(
+                    ((AgentDesktopSession)localSessionManager.GlobalSession).Customer.DesktopCustomer).Entities.Find(
                         e => e.LogicalName == EntityName.ExternalLogin);
             if (externalInfo != null)
             {
                 externalInfo.data[Attributes.ExternalLogin.Id] = new CRMApplicationData { value = extLoginId.ToString(), type = "String" };
-                externalInfo.data[Attributes.ExternalLogin.AbtaNumber] = new CRMApplicationData { value = abta, type = "String"};
+                externalInfo.data[Attributes.ExternalLogin.AbtaNumber] = new CRMApplicationData { value = abta, type = "String" };
                 externalInfo.data[Attributes.ExternalLogin.BudgetCentreId] = new CRMApplicationData { value = budgetCentreId.ToString(), type = "String" };
                 externalInfo.data[Attributes.ExternalLogin.Initials] = new CRMApplicationData { value = initials, type = "String" };
                 externalInfo.data[Attributes.ExternalLogin.Name] = new CRMApplicationData { value = name, type = "String" };
