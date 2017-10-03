@@ -1,0 +1,11 @@
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <entity name="tc_secureconfiguration" displayname="Secure Configuration" etc="10181" primaryidfield="tc_secureconfigurationid" primarynamefield="tc_name" disableplugins="false">
+    <fields>
+      <field displayname="Name" name="tc_name" type="string" customfield="true" />
+      <field displayname="Value" name="tc_value" type="string" customfield="true" />
+      <field displayname="Secure Configuration" name="tc_secureconfigurationid" type="guid" primaryKey="true" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+    </fields>
+  </entity>
+</entities>
