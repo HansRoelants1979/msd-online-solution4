@@ -92,6 +92,7 @@
             public const string Application_WebRio = "WebRio";
             public const string ResponseCode = "responseCode";
             public const string ResponseMessage = "responseMessage";
+            public const string Application = "AppName";
         }
 
         public static class UsdHostedControl
@@ -108,6 +109,8 @@
         public static class UsdAction
         {
             public const string OpenWebRioGlobal = "Tc.Usd.Global.SingleSignOnController.OpenWR";
+            public const string CloseApp = "Tc.Usd.Global.SingleSignOnController.CloseApp";
+            public const string Close = "Close";
         }
 
         public static class UsdEvent
