@@ -74,8 +74,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="account-patch.json" />
-    <None Include="account.json" />
+    <None Include="account-patch.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="account.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="App.config" />
     <None Include="customer-patch.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

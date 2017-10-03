@@ -24,7 +24,7 @@ namespace Tc.Crm.Service.Client.Console
             {
                 System.Console.WriteLine("Enter 1 to process Booking OR \n2 to process survey OR " +
                             "\n3 to cache OR \n4 to ping CRM OR \n5 to process Customer create  OR "+
-                            "\n6 to process Customer update.");
+                            "\n6 to process Customer update OR \n7 to process confirmation.");
 
                 var option = System.Console.ReadLine();
                 if (option == "1")

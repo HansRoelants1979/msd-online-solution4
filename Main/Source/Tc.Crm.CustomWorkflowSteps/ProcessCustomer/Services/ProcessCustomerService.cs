@@ -133,8 +133,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
                     };
                     return;
                 }
-                var xrmResponse = CommonXrm.CreateEntity(contact, crmService);
-                ProcessSocialProfile(new Guid(xrmResponse.Id.ToString()));
+                var xrmResponse = CommonXrm.CreateEntity(contact, crmService);                
                 payloadCustomer.CustomerId = xrmResponse.Id;
                 payloadCustomer.Response = new XrmUpdateResponse(){
                     Existing = false,
@@ -168,14 +167,14 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
                 }; 
                 foreach (var existingContact in existingContacts.Entities){
                     var contact = ContactHelper.GetContactEntityForCustomerPayload(existingContact, 
-                                                        customer, trace, operationType);
-                    ProcessSocialProfile(contact.Id);
+                                                        customer, trace, operationType);                   
                     updateRequest = new UpdateRequest { Target = contact };
                     multipleRequest.Requests.Add(updateRequest);
                     if (multipleRequest.Requests.Count == 500){
                         payloadCustomer.Response = CommonXrm.BulkUpdate(multipleRequest, crmService);
                         multipleRequest.Requests.Clear();
-                    }
+                    }                    
+                    ProcessSocialProfile(existingContact.Id);
                 }
                 if (multipleRequest.Requests.Count > 0){
                     payloadCustomer.Response = CommonXrm.BulkUpdate(multipleRequest, crmService);
@@ -188,12 +187,12 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
         {
             trace.Trace("Processing Social profile information - start");
             if (payloadCustomer.Customer.Social == null) return;           
-            var entityCollectionsocialProfiles = SocialProfileHelper.GetSocialProfileEntityFromPayload(payloadCustomer.Customer, CustomerID, trace);
+            var entityCollectionsocialProfiles = SocialProfileHelper.GetSocialProfileEntityFromPayload(payloadCustomer.Customer, CustomerID, trace);            
             if (entityCollectionsocialProfiles != null && entityCollectionsocialProfiles.Entities.Count > 0)
             {
                 foreach (Entity entitySocialProfile in entityCollectionsocialProfiles.Entities)
                 {
-                    CommonXrm.UpsertEntity(entitySocialProfile, crmService);
+                    XrmResponse xrmResponse = CommonXrm.UpsertEntity(entitySocialProfile, crmService);                    
                 }
             }
             trace.Trace("Processing Social Profile information - end");            
