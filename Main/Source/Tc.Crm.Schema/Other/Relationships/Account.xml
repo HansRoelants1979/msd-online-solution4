@@ -311,10 +311,10 @@
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
-  <EntityRelationship Name="tc_account_tc_bookingsummary_Customer">
+  <EntityRelationship Name="tc_account_tc_bookingsummary_customerid">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>2.0.0.6</IntroducedVersion>
+    <IntroducedVersion>1.0</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_bookingsummary</ReferencingEntityName>
     <ReferencedEntityName>Account</ReferencedEntityName>
@@ -325,7 +325,7 @@
     <CascadeUnshare>NoCascade</CascadeUnshare>
     <CascadeRollupView>NoCascade</CascadeRollupView>
     <IsValidForAdvancedFind>1</IsValidForAdvancedFind>
-    <ReferencingAttributeName>tc_Customer</ReferencingAttributeName>
+    <ReferencingAttributeName>tc_customerid</ReferencingAttributeName>
     <RelationshipDescription>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -336,14 +336,14 @@
         <NavPaneDisplayOption>UseCollectionName</NavPaneDisplayOption>
         <NavPaneArea>Details</NavPaneArea>
         <NavPaneOrder>10000</NavPaneOrder>
-        <NavigationPropertyName>tc_Customer</NavigationPropertyName>
+        <NavigationPropertyName>tc_customerid_account</NavigationPropertyName>
         <CustomLabels>
           <CustomLabel description="" languagecode="1033" />
         </CustomLabels>
         <RelationshipRoleType>1</RelationshipRoleType>
       </EntityRelationshipRole>
       <EntityRelationshipRole>
-        <NavigationPropertyName>tc_account_tc_bookingsummary_Customer</NavigationPropertyName>
+        <NavigationPropertyName>tc_account_tc_bookingsummary_customerid</NavigationPropertyName>
         <RelationshipRoleType>0</RelationshipRoleType>
       </EntityRelationshipRole>
     </EntityRelationshipRoles>

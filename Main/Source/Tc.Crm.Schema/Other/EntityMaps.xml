@@ -37,6 +37,11 @@
   </EntityMap>
   <EntityMap>
     <EntitySource>contact</EntitySource>
+    <EntityTarget>tc_bookingsummary</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>contact</EntitySource>
     <EntityTarget>tc_compensation</EntityTarget>
     <AttributeMaps />
   </EntityMap>
@@ -140,7 +145,17 @@
   </EntityMap>
   <EntityMap>
     <EntitySource>opportunity</EntitySource>
+    <EntityTarget>tc_booking</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>opportunity</EntitySource>
     <EntityTarget>tc_bookingsummary</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>opportunity</EntitySource>
+    <EntityTarget>tc_extrasresponse</EntityTarget>
     <AttributeMaps />
   </EntityMap>
   <EntityMap>
@@ -531,6 +546,16 @@
   <EntityMap>
     <EntitySource>tc_entitycache</EntitySource>
     <EntityTarget>tc_entitycachemessage</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_extrascategory</EntitySource>
+    <EntityTarget>tc_extra</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_extra</EntitySource>
+    <EntityTarget>tc_extrasresponse</EntityTarget>
     <AttributeMaps />
   </EntityMap>
   <EntityMap>
