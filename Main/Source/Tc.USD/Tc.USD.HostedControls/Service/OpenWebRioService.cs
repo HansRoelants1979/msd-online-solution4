@@ -10,6 +10,7 @@ using Tc.Crm.Common.IntegrationLayer.Model;
 using System.Text;
 using Tc.Crm.Common.Constants;
 using Tc.Crm.Common.Constants.UsdConstants;
+using System.Net;
 
 namespace Tc.Usd.HostedControls
 {
@@ -26,11 +27,6 @@ namespace Tc.Usd.HostedControls
         {
             try
             {
-                if (CheckIfWebRioIsOpen())
-                {
-                    FireEventOnError("Multiple instances of Web Rio cannot be openned - close existing ones first.", global);
-                    return;
-                }
                 var configuration = GetWebRioSsoConfiguration(args);
                 if (configuration.Errors != null && configuration.Errors.Count > 0)
                 {
@@ -38,6 +34,7 @@ namespace Tc.Usd.HostedControls
                     return;
                 }
 
+                SetRequestData(configuration);
                 var payload = GetWebRioSsoTokenPayload(configuration);
                 if (payload == null)
                 {
@@ -53,7 +50,7 @@ namespace Tc.Usd.HostedControls
 
                 var url = GetUrl(configuration);
 
-                ResponseEntity response = SendRequest(url, token, configuration.JSessionId);
+                ResponseEntity response = SendRequest(url, token, configuration.JSessionId,configuration.Data);
                 var eventParameters = GetEventParameters(response);
 
                
@@ -79,31 +76,17 @@ namespace Tc.Usd.HostedControls
             }
         }
 
-        private bool CheckIfWebRioIsOpen()
+        private void SetRequestData(WebRioSsoConfig configuration)
         {
-            return CheckIfApplicationIsOpen(UsdHostedControl.WebRioAdmin
-                                            , UsdHostedControl.WebRioConsultation);
-        }
-
-        private bool CheckIfApplicationIsOpen(params string[] appNames)
-        {
-            if (appNames == null || appNames.Length == 0) return true;
-            foreach (Session session in localSessionManager)
+            if (configuration.RequestType == RequestType.Admin)
+                configuration.Data = string.Empty;
+            else if(configuration.RequestType == RequestType.Booking)
             {
-                foreach (IHostedApplication app in session)
-                {
-                    for (int i = 0; i < appNames.Length; i++)
-                    {
-                        if (app.ApplicationName.Equals(appNames[i], StringComparison.OrdinalIgnoreCase))
-                        {
-                            return true;
-                        }
-                    }
-                }
+                configuration.Data = WebServiceExchangeHelper.SerializeOpenConsultationSsoRequestToJson(new WebRioSsoRequest { Consultation = configuration.ConsultationReference });
             }
-            return false;
         }
 
+        
         private Dictionary<string, string> GetEventParameters(ResponseEntity response)
         {
             if (response == null) throw new ArgumentNullException("response");
@@ -127,6 +110,8 @@ namespace Tc.Usd.HostedControls
             eventParameters.Add(UsdParameter.ApplicationType,UsdParameter.Application_WebRio);
             if (global)
                 FireEvent(UsdEvent.GlobalSsoCompleteEvent, eventParameters);
+            else
+                FireEvent(UsdEvent.SsoCompleteEvent, eventParameters);
         }
 
         private void HandleConfigurationErrors(WebRioSsoConfig configuration, bool global)
@@ -147,11 +132,32 @@ namespace Tc.Usd.HostedControls
             var configuration = new WebRioSsoConfig();
             configuration.JSessionId = GetParamValue(args, UsdParameter.WebRioJSessionId);
             configuration.RequestType = GetRequestType(args);
+            GetBookingDetails(args,configuration);
             CrmService.GetWebRioSsoConfiguration(_client.CrmInterface, configuration);
             configuration.Login = CrmService.GetSsoLoginDetails(_client.CrmInterface, _client.CrmInterface.GetMyCrmUserId());
             configuration.PrivateKey = CrmService.GetWebRioPrivateKey(_client.CrmInterface);
             ValidateConfiguration(configuration);
             return configuration;
+        }
+
+        public void GetBookingDetails(RequestActionEventArgs args, WebRioSsoConfig configuration)
+        {
+            if (configuration.RequestType != RequestType.Booking) return;
+            var url = GetParamValue(args, UsdParameter.Url);
+            var decodedUrl = WebUtility.UrlDecode(url);
+
+            decodedUrl = decodedUrl.Replace("%25", "");
+            decodedUrl = decodedUrl.Replace("%3d", "=");
+
+            var etc = decodedUrl.Substring(decodedUrl.IndexOf("etc="));
+            configuration.ObjectTypeCode = etc.Substring(4, etc.IndexOf('&') - 4);
+
+
+            var id = decodedUrl.Substring(decodedUrl.IndexOf("id="));
+            id = id.Substring(3, id.IndexOf("7d") - 3);
+            configuration.BookingSummaryId = id.Replace("7b", "");
+
+            CrmService.GetConsultationReferenceFromBookingSummary(_client.CrmInterface,configuration);
         }
 
         private RequestType GetRequestType(RequestActionEventArgs args)
@@ -217,23 +223,25 @@ namespace Tc.Usd.HostedControls
             if (configuration == null) throw new ArgumentNullException("configuration");
             if (configuration.RequestType == RequestType.Admin)
                 return $"{configuration.ServiceUrl}/{configuration.AdminApi}";
+            if(configuration.RequestType == RequestType.Booking)
+                return $"{configuration.ServiceUrl}/{configuration.OpenConsultationApi}";
             return null;
         }
 
-        private ResponseEntity SendRequest(string url, string token, string jSessionId)
+        private ResponseEntity SendRequest(string url, string token, string jSessionId,string data)
         {
             if (string.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
             if (string.IsNullOrWhiteSpace(token)) throw new ArgumentNullException("token");
 
             if (string.IsNullOrWhiteSpace(jSessionId))
             {
-                return _jtiService.SendHttpRequestWithCookie(HttpMethod.Post, url, token, string.Empty, null, null);
+                return _jtiService.SendHttpRequestWithCookie(HttpMethod.Post, url, token, data, null, null);
             }
             else
             {
                 var cookie = new Dictionary<string, string>();
                 cookie.Add("jsessionid", jSessionId);
-                return _jtiService.SendHttpRequestWithCookie(HttpMethod.Post, url, token, string.Empty, null, cookie);
+                return _jtiService.SendHttpRequestWithCookie(HttpMethod.Post, url, token, data, null, cookie);
             }
         }
 

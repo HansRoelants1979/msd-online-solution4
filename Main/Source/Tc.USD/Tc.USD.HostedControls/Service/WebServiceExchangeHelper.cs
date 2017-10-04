@@ -53,6 +53,19 @@ namespace Tc.Usd.HostedControls.Service
             return response;
         }
 
+        public static string SerializeOpenConsultationSsoRequestToJson(WebRioSsoRequest request)
+        {
+            if (request == null) return null;
+
+            using (var memoryStream = new MemoryStream())
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(WebRioSsoRequest));
+                serializer.WriteObject(memoryStream, request);
+                byte[] json = memoryStream.ToArray();
+                return Encoding.UTF8.GetString(json, 0, json.Length);
+            }
+        }
+
         public static Guid GetJti()
         {
             return Guid.NewGuid();

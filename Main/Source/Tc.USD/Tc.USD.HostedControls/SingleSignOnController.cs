@@ -29,6 +29,8 @@ namespace Tc.Usd.HostedControls
                 DoActionsOnOpenOwr(args);
             else if (args.Action.Equals(UsdAction.OpenWebRioGlobal, StringComparison.OrdinalIgnoreCase))
                 DoActionsOnOpenWebRio(args, true);
+            else if (args.Action.Equals(UsdAction.OpenWebRio, StringComparison.OrdinalIgnoreCase))
+                DoActionsOnOpenWebRio(args, false);
             else if (args.Action.Equals(UsdAction.CloseApp, StringComparison.OrdinalIgnoreCase))
                 DoActionsOnCloseApp(args);
             else

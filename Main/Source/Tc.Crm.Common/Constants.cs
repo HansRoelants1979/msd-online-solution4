@@ -65,6 +65,7 @@
             public const string WebRioJwtPrivateKeyConfigName = "Tc.WebRio.JwtPrivateKey";
             public const string WebRioAudWebRio = "webrio";
             public const string WebRioAdminApi = "Tc.Wr.Api.Admin";
+            public const string WebRioOpenConsultationApi = "Tc.Wr.Api.OpenConsultation";
             public const string WebRioServiceUrl = "Tc.Wr.SSOServiceUrl";
             public const string WebRioExpirySecondsFromNow = "Tc.Wr.SsoToken.ExpiredSecondsFromNow";
             public const string WebRioNotBeforeTimeSecondsFromNow = "Tc.Wr.SsoToken.NotBeforeTimeSecondsFromNow";
@@ -93,6 +94,7 @@
             public const string ResponseCode = "responseCode";
             public const string ResponseMessage = "responseMessage";
             public const string Application = "AppName";
+            public const string Url = "Url";
         }
 
         public static class UsdHostedControl
@@ -111,11 +113,13 @@
             public const string OpenWebRioGlobal = "Tc.Usd.Global.SingleSignOnController.OpenWR";
             public const string CloseApp = "Tc.Usd.Global.SingleSignOnController.CloseApp";
             public const string Close = "Close";
+            public const string OpenWebRio = "Tc.Usd.SingleSignOnController.OpenWebRio";
         }
 
         public static class UsdEvent
         {
             public const string GlobalSsoCompleteEvent = "Tc.Event.OnGlobalSsoComplete";
+            public const string SsoCompleteEvent = "Tc.Event.OnSsoComplete";
         }
     }
 

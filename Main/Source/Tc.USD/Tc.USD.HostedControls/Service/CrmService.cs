@@ -10,6 +10,25 @@ namespace Tc.Usd.HostedControls.Service
 {
     public class CrmService
     {
+        public static void GetConsultationReferenceFromBookingSummary(CrmServiceClient client,WebRioSsoConfig configuration)
+        {
+            if (client == null) return;
+            if (configuration == null) return;
+
+            RetrieveRequest request = new RetrieveRequest
+            {
+                ColumnSet = new ColumnSet("tc_name"),
+                Target = new Microsoft.Xrm.Sdk.EntityReference("tc_bookingsummary",new Guid(configuration.BookingSummaryId))
+            };
+            var response = (RetrieveResponse)client.ExecuteCrmOrganizationRequest(request, "Fetching booking summary record for Web Rio");
+            if (response == null) return;
+            var bookingSummary = response.Entity;
+            if (bookingSummary == null || !bookingSummary.Contains("tc_name") || bookingSummary["tc_name"] == null)
+                return;
+            configuration.ConsultationReference = bookingSummary["tc_name"].ToString();
+
+
+        }
         public static void GetWebRioSsoConfiguration(CrmServiceClient client,WebRioSsoConfig configuration)
         {
             if (client == null) return;
@@ -48,6 +67,8 @@ namespace Tc.Usd.HostedControls.Service
 
                 if (key.Equals(Er.Configuration.WebRioAdminApi, StringComparison.OrdinalIgnoreCase))
                     configuration.AdminApi = value;
+                else if (key.Equals(Er.Configuration.WebRioOpenConsultationApi, StringComparison.OrdinalIgnoreCase))
+                    configuration.OpenConsultationApi = value;
                 else if (key.Equals(Er.Configuration.WebRioServiceUrl, StringComparison.OrdinalIgnoreCase))
                     configuration.ServiceUrl = value;
                 else if (key.Equals(Er.Configuration.WebRioExpirySecondsFromNow, StringComparison.OrdinalIgnoreCase))

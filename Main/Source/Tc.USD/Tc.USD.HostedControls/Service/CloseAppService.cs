@@ -22,7 +22,8 @@ namespace Tc.Usd.HostedControls
             var application = GetParamValue(args, UsdParameter.Application);
             foreach (Session session in localSessionManager)
             {
-                localSessionManager.SetActiveSession(session.SessionId);
+                if (!session.Global)
+                    localSessionManager.SetActiveSession(session.SessionId);
                 foreach (IHostedApplication app in session)
                 {
                     if (app.ApplicationName.Equals(application, StringComparison.OrdinalIgnoreCase))
