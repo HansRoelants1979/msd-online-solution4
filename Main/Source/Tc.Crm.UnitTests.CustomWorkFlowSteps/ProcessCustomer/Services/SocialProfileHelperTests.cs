@@ -22,22 +22,6 @@ namespace Tc.Crm.CustomWorkFlowSteps.ProcessCustomer.Services.Tests
         public void GetSocialProfileEntityFromPayload_TraceIsNull()
         {
             SocialProfileHelper.GetSocialProfileEntityFromPayload(new Customer(), new Guid(), null);
-        }          
-
-        [TestMethod()]
-        [ExpectedException(typeof(InvalidPluginExecutionException), "Customer Social Profile is null.")]
-        public void GetSocialProfileEntityFromPayload_SocialProfileIsNull()
-        {
-            Customer c = new Customer{Social = null};
-            SocialProfileHelper.GetSocialProfileEntityFromPayload(c, new Guid(), trace);
-        }
-
-        [TestMethod()]
-        [ExpectedException(typeof(InvalidPluginExecutionException), "Customer Social Profile Length is null.")]
-        public void GetSocialProfileEntityFromPayload_SocialProfileLengthIsNull()
-        {
-            Customer c = new Customer{Social = new Social[] { }};
-            SocialProfileHelper.GetSocialProfileEntityFromPayload(c, new Guid(), trace);
         }
 
         [TestMethod()]        
