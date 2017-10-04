@@ -138,27 +138,24 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
             var email3 = emails.Length > 2 ? emails[2] : null;
             if (email1 != null)
             {
-                if (!string.IsNullOrWhiteSpace(email1.Address))
-                {
+                if (email1.EmailType != EmailType.NotSpecified)
                     contact[Attributes.Contact.EmailAddress1Type] = CommonXrm.GetEmailType(email1.EmailType);
-                    contact[Attributes.Contact.EmailAddress1] = email1.Address;
-                }
+                if (!string.IsNullOrWhiteSpace(email1.Address))                
+                    contact[Attributes.Contact.EmailAddress1] = email1.Address;                
             }
             if (email2 != null)
             {
-                if (!string.IsNullOrWhiteSpace(email2.Address))
-                {
+                if (email2.EmailType != EmailType.NotSpecified)
                     contact[Attributes.Contact.EmailAddress2Type] = CommonXrm.GetEmailType(email2.EmailType);
+                if (!string.IsNullOrWhiteSpace(email2.Address))
                     contact[Attributes.Contact.EmailAddress2] = email2.Address;
-                }
             }
             if (email3 != null)
             {
-                if (!string.IsNullOrWhiteSpace(email3.Address))
-                {
+                if (email3.EmailType != EmailType.NotSpecified)
                     contact[Attributes.Contact.EmailAddress3Type] = CommonXrm.GetEmailType(email3.EmailType);
+                if (!string.IsNullOrWhiteSpace(email3.Address))
                     contact[Attributes.Contact.EmailAddress3] = email3.Address;
-                }
             }
             trace.Trace("Contact populate email - end");
         }      
@@ -172,28 +169,24 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
             var phone3 = phoneNumbers.Length > 2 ? phoneNumbers[2] : null;
             if (phone1 != null)
             {
-                if (!string.IsNullOrWhiteSpace(phone1.Number))
-                {
+                if(phone1.PhoneType != PhoneType.NotSpecified)             
                     contact[Attributes.Contact.Telephone1Type] = CommonXrm.GetPhoneType(phone1.PhoneType);
-                    contact[Attributes.Contact.Telephone1] = phone1.Number;
-                }
+                if (!string.IsNullOrWhiteSpace(phone1.Number))
+                    contact[Attributes.Contact.Telephone1] = phone1.Number;                
             }
             if (phone2 != null)
             {
-                if (!string.IsNullOrWhiteSpace(phone2.Number))
-                {
+                if (phone2.PhoneType != PhoneType.NotSpecified)
                     contact[Attributes.Contact.Telephone2Type] = CommonXrm.GetPhoneType(phone2.PhoneType);
+                if (!string.IsNullOrWhiteSpace(phone2.Number))
                     contact[Attributes.Contact.Telephone2] = phone2.Number;
-                }
             }
             if (phone3 != null)
             {
-
-                if (!string.IsNullOrWhiteSpace(phone3.Number))
-                {
+                if (phone3.PhoneType != PhoneType.NotSpecified)
                     contact[Attributes.Contact.Telephone3Type] = CommonXrm.GetPhoneType(phone3.PhoneType);
+                if (!string.IsNullOrWhiteSpace(phone3.Number))
                     contact[Attributes.Contact.Telephone3] = phone3.Number;
-                }
             }
             trace.Trace("Contact populate phone - end");
         }      

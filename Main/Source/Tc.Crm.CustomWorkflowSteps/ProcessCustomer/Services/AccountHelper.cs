@@ -49,27 +49,24 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
             var email3 = emailList.Length > 2 ? emailList[2] : null;
             if (email1 != null)
             {
-                if (!string.IsNullOrWhiteSpace(email1.Address))
-                {
-                    account[Attributes.Account.EmailAddress1] = email1.Address;
+                if (email1.EmailType != EmailType.NotSpecified)
                     account[Attributes.Account.EmailAddress1Type] = CommonXrm.GetEmailType(email1.EmailType);
-                }
+                if (!string.IsNullOrWhiteSpace(email1.Address))
+                    account[Attributes.Account.EmailAddress1] = email1.Address;
             }
             if (email2 != null)
             {
-                if (!string.IsNullOrWhiteSpace(email2.Address))
-                {
-                    account[Attributes.Account.EmailAddress2] = email1.Address;
+                if (email2.EmailType != EmailType.NotSpecified)
                     account[Attributes.Account.EmailAddress2Type] = CommonXrm.GetEmailType(email2.EmailType);
-                }
+                if (!string.IsNullOrWhiteSpace(email2.Address))
+                    account[Attributes.Account.EmailAddress2] = email2.Address;
             }
             if (email3 != null)
             {
-                if (!string.IsNullOrWhiteSpace(email3.Address))
-                {
-                    account[Attributes.Account.EmailAddress3] = email3.Address;
+                if (email3.EmailType != EmailType.NotSpecified)
                     account[Attributes.Account.EmailAddress3Type] = CommonXrm.GetEmailType(email3.EmailType);
-                }
+                if (!string.IsNullOrWhiteSpace(email3.Address))
+                    account[Attributes.Account.EmailAddress3] = email3.Address;
             }
             trace.Trace("Account populate email - end");
         }
@@ -85,27 +82,24 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
             var phone3 = phoneList.Length > 2 ? phoneList[2] : null;
             if (phone1 != null)
             {
-                if (!string.IsNullOrWhiteSpace(phone1.Number))
-                {
-                    account[Attributes.Account.Telephone1] = phone1.Number;
+                if (phone1.PhoneType != PhoneType.NotSpecified)
                     account[Attributes.Account.Telephone1Type] = CommonXrm.GetPhoneType(phone1.PhoneType);
-                }
+                if (!string.IsNullOrWhiteSpace(phone1.Number))
+                    account[Attributes.Account.Telephone1] = phone1.Number;
             }
             if (phone2 != null)
             {
-                if (!string.IsNullOrWhiteSpace(phone2.Number))
-                {
-                    account[Attributes.Account.Telephone2] = phone2.Number;
+                if (phone2.PhoneType != PhoneType.NotSpecified)
                     account[Attributes.Account.Telephone2Type] = CommonXrm.GetPhoneType(phone2.PhoneType);
-                }
+                if (!string.IsNullOrWhiteSpace(phone2.Number))
+                    account[Attributes.Account.Telephone2] = phone2.Number;
             }
             if (phone3 != null)
             {
-                if (!string.IsNullOrWhiteSpace(phone3.Number))
-                {
-                    account[Attributes.Account.Telephone3] = phone3.Number;
+                if (phone3.PhoneType != PhoneType.NotSpecified)
                     account[Attributes.Account.Telephone3Type] = CommonXrm.GetPhoneType(phone3.PhoneType);
-                }
+                if (!string.IsNullOrWhiteSpace(phone3.Number))
+                    account[Attributes.Account.Telephone3] = phone3.Number;
             }
             trace.Trace("Account populate phone - end");
         }
