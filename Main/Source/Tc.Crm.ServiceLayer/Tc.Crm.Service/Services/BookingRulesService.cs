@@ -31,8 +31,9 @@ namespace Tc.Crm.Service.Services
             return false;
         }
 
-        public Entity MatchingBooking(Booking booking)
+        public Entity MatchingBooking(BookingIdentifier bookingIdentifier)
         {
+
             return new Entity();
         }
 
