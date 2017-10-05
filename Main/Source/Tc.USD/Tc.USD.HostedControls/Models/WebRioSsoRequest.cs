@@ -12,5 +12,8 @@ namespace Tc.Usd.HostedControls.Models
     {
         [DataMember(Name ="consultation")]
         public string Consultation { get; set; }
+
+        [DataMember(Name = "customer")]
+        public string Customer { get; set; }
     }
 }
