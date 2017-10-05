@@ -112,38 +112,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         OnTour,
         [EnumMember]
         TCV
-    }
-
-    [DataContract(Name = "ProductTypeCode")]
-    public enum ProductTypeCode
-    {
-        [EnumMember]
-        CC,
-        [EnumMember]
-        CE,
-        [EnumMember]
-        CH,
-        [EnumMember]
-        CO,
-        [EnumMember]
-        FC,
-        [EnumMember]
-        FY,
-        [EnumMember]
-        HR,
-        [EnumMember]
-        IN,
-        [EnumMember]
-        MS,
-        [EnumMember]
-        PH,
-        [EnumMember]
-        RL,
-        [EnumMember]
-        SP,
-        [EnumMember]
-        UP
-    }
+    }    
 
     [DataContract(Name = "BookingSystem")]
     public enum BookingSystem
@@ -501,20 +470,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         [EnumMember]
         Unknown
     }
-    [DataContract(Name = "ExtraServiceType")]
-    public enum ExtraServiceType
-    {
-        [EnumMember]
-        NotSpecified,
-        [EnumMember]
-        CarHire,
-        [EnumMember]
-        Insurance,
-        [EnumMember]
-        Miscellaneous,
-        [EnumMember]
-        OpInsurance        
-    }
+    
     [DataContract(Name = "TransferServiceLevel")]
     public enum TransferServiceLevel
     {
