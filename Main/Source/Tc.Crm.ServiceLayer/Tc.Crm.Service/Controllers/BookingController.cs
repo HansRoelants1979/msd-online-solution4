@@ -7,6 +7,7 @@ using System;
 using Tc.Crm.Service.Services;
 using System.Diagnostics;
 using Newtonsoft.Json;
+using Microsoft.Xrm.Sdk;
 
 namespace Tc.Crm.Service.Controllers
 {
@@ -30,7 +31,7 @@ namespace Tc.Crm.Service.Controllers
             try
             {
                 var messages = bookingService.Validate(bookingInfo);
-                if (messages != null && messages.Count !=0)
+                if (messages != null && messages.Count != 0)
                 {
                     var message = bookingService.GetStringFrom(messages);
                     Trace.TraceWarning(message);
@@ -48,7 +49,7 @@ namespace Tc.Crm.Service.Controllers
                     Trace.TraceWarning(Constants.Messages.CurrencyResolutionError);
                     return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.CurrencyResolutionError);
                 }
-                if (booking.Customer!= null && booking.Customer.CustomerIdentifier != null)
+                if (booking.Customer != null && booking.Customer.CustomerIdentifier != null)
                 {
                     if (string.IsNullOrWhiteSpace(booking.Customer.CustomerIdentifier.SourceMarket))
                     {
@@ -56,12 +57,8 @@ namespace Tc.Crm.Service.Controllers
                         return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.CustomerSourceMarketMissing);
                     }
                 }
-                var jsonData = JsonConvert.SerializeObject(booking);
-                var response = bookingService.Update(jsonData, crmService);
-                if (response.Created)
-                    return Request.CreateResponse(HttpStatusCode.Created, response.Id);
-                else
-                    return Request.CreateResponse(HttpStatusCode.NoContent, response.Id);
+                
+                return BookingUpdateService(booking);
 
             }
             catch (Exception ex)
@@ -70,6 +67,47 @@ namespace Tc.Crm.Service.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
+        }
+
+        private HttpResponseMessage BookingUpdateService(Booking booking)
+        {
+            var jsonData = JsonConvert.SerializeObject(booking);
+            var response = bookingService.Update(jsonData, crmService);
+            if (response.Created)
+                return Request.CreateResponse(HttpStatusCode.Created, response.Id);
+            else
+                return Request.CreateResponse(HttpStatusCode.NoContent, response.Id);
+        }
+
+        private HttpResponseMessage ExecuteBookingBusinessRules(Booking booking)
+        {
+            BookingRulesService bookingRules = new BookingRulesService();
+            Entity msdBooking = new Entity();
+            if (!bookingRules.IsOnTourorTCVAtCoreBooking(booking.BookingIdentifier))
+            {
+                if (!bookingRules.IsBookingConsultationEmpty(booking.BookingIdentifier))
+                {
+                    msdBooking = bookingRules.MatchingBooking(booking);
+                    if (!bookingRules.IsSameCustomer(booking, msdBooking))
+                    {
+                        if (bookingRules.MatchingCustomer(booking))
+                            return BookingUpdateService(booking);
+                        else
+                            return Request.CreateResponse((HttpStatusCode)422);
+                    }
+                    else
+                        return BookingUpdateService(booking);
+                }
+                else
+                    return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+            else
+            {
+                //if (bookingRules.MatchingCustomer(booking))
+                //OnTourBookingDelivered goes here
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+            
         }
     }
 }
