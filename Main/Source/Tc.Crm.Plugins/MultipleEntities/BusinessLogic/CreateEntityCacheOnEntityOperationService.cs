@@ -209,10 +209,10 @@ namespace Tc.Crm.Plugins.MultipleEntities.BusinessLogic
                         fields.Add(new Field { Name = attribute.Key, Type = attributeType, Value = GetMoney((Money)attribute.Value) });
                         break;
                     case FieldType.OptionSet:
-                        fields.Add(new Field { Name = attribute.Key, Type = attributeType, Value = GetOptionSet((OptionSetValue)attribute.Value) });
+                        fields.Add(new Field { Name = attribute.Key, Type = attributeType, Value = GetOptionSet(entity, attribute.Key) });
                         break;
                     case FieldType.Lookup:
-                        fields.Add(new Field { Name = attribute.Key, Type = attributeType, Value = GetLookup((EntityReference)attribute.Value) });
+                        fields.Add(new Field { Name = attribute.Key, Type = attributeType, Value = GetLookup(entity, attribute.Key) });
                         break;
                     case FieldType.RecordCollection:
                         fields.Add(new Field { Name = attribute.Key, Type = attributeType, Value = GetRecordCollection((EntityCollection)attribute.Value) });
@@ -293,36 +293,41 @@ namespace Tc.Crm.Plugins.MultipleEntities.BusinessLogic
         }
 
         /// <summary>
-        /// To prepare lookup object using entityreference
+        /// To prepare lookup object
         /// </summary>
-        /// <param name="entityReference"></param>
+        /// <param name="entity"></param>
+        /// <param name="attribute"></param>
         /// <returns></returns>
-        private Lookup GetLookup(EntityReference entityReference)
+        private Lookup GetLookup(Entity entity, string attribute)
         {
-            if (entityReference == null) return null;
-            trace.Trace("GetLookup - Start");            
+            if (entity == null || !entity.Attributes.Contains(attribute) || entity.Attributes[attribute] == null) return null;
+            var entityReference = (EntityReference)entity.Attributes[attribute];           
+            trace.Trace("GetLookup - Start");
             var lookup = new Lookup()
             {
                 Id = entityReference.Id,
-                Name = entityReference.Name,
+                Name = (entity.FormattedValues.Contains(attribute)) ? entity.FormattedValues[attribute] : entityReference.Name,
                 LogicalName = entityReference.LogicalName
-            };          
+            };      
             trace.Trace("GetLookup - End");
             return lookup;
         }
 
         /// <summary>
-        /// To prepare optionset object using optionsetvalue
+        /// To prepare optionset object
         /// </summary>
-        /// <param name="option"></param>
+        /// <param name="entity"></param>
+        /// <param name="attribute"></param>
         /// <returns></returns>
-        private OptionSet GetOptionSet(OptionSetValue option)
+        private OptionSet GetOptionSet(Entity entity, string attribute)
         {
-            if (option == null) return null;
+            if (entity == null || !entity.Attributes.Contains(attribute) || entity.Attributes[attribute] == null) return null;
+            var option = (OptionSetValue)entity.Attributes[attribute];
             trace.Trace("GetOptionSet - Start");
             var optionSet = new OptionSet()
             {
-                Value = option.Value
+                Value = option.Value,
+                Name = (entity.FormattedValues.Contains(attribute)) ? entity.FormattedValues[attribute] : null
             };            
             trace.Trace("GetOptionSet - End");
             return optionSet;

@@ -53,9 +53,9 @@ namespace Tc.Crm.UnitTests.Plugins
             if (getPostImage)
             {
                 var entPostImage = new Entity();
-                entPostImage.Attributes.Add(Attributes.Customer.Address1Street, "stre");
-                entPostImage.Attributes.Add(Attributes.Customer.EmailAddress2, "test@test.com");
-                entPostImage.Attributes.Add(Attributes.Customer.Telephone2, "97868686");
+                entPostImage.Attributes.Add(Attributes.Customer.Address2FlatorUnitNumber, "stre");
+                entPostImage.Attributes.Add(Attributes.Customer.EmailAddress1Type, new OptionSetValue(0));
+                entPostImage.Attributes.Add(Attributes.Customer.Telephone1Type, new OptionSetValue(0));
                 cntxt.PostEntityImages = new EntityImageCollection();
                 cntxt.PostEntityImages.Add("PostImage", entPostImage);
             }
@@ -209,7 +209,7 @@ namespace Tc.Crm.UnitTests.Plugins
             CheckUpdateCoditions(cache,false,false,false);            
         }
 
-        private void CheckUpdateCoditions(List<Entity> cache, bool containsAddress, bool containsTelephone, bool contaisEmail )
+        private void CheckUpdateCoditions(List<Entity> cache, bool containsAddress, bool containsTelephone, bool containsEmail )
         {
             Assert.IsTrue(cache.Count == 1);
             Assert.IsNotNull(cache[0].Attributes[Attributes.EntityCache.Name]);
@@ -222,9 +222,9 @@ namespace Tc.Crm.UnitTests.Plugins
             Assert.IsTrue(cache[0].Attributes[Attributes.EntityCache.SourceMarket].ToString() == iso2Code);
             Assert.IsTrue(cache[0].Attributes[Attributes.EntityCache.Name].ToString() == customerName);
             Assert.IsTrue(cache[0].Attributes[Attributes.EntityCache.Data].ToString().Length > 0);
-            Assert.IsTrue((containsTelephone) ? cache[0].Attributes[Attributes.EntityCache.Data].ToString().Contains(Attributes.Customer.Telephone2) : !cache[0].Attributes[Attributes.EntityCache.Data].ToString().Contains(Attributes.Customer.Telephone2));
-            Assert.IsTrue((containsAddress) ? cache[0].Attributes[Attributes.EntityCache.Data].ToString().Contains(Attributes.Customer.Address1Street) : !cache[0].Attributes[Attributes.EntityCache.Data].ToString().Contains(Attributes.Customer.Address1Street));
-            Assert.IsTrue((contaisEmail) ? cache[0].Attributes[Attributes.EntityCache.Data].ToString().Contains(Attributes.Customer.EmailAddress2) : !cache[0].Attributes[Attributes.EntityCache.Data].ToString().Contains(Attributes.Customer.EmailAddress2));
+            Assert.IsTrue((containsTelephone) ? cache[0].Attributes[Attributes.EntityCache.Data].ToString().Contains(Attributes.Customer.Telephone1Type) : !cache[0].Attributes[Attributes.EntityCache.Data].ToString().Contains(Attributes.Customer.Telephone1Type));
+            Assert.IsTrue((containsAddress) ? cache[0].Attributes[Attributes.EntityCache.Data].ToString().Contains(Attributes.Customer.Address2FlatorUnitNumber) : !cache[0].Attributes[Attributes.EntityCache.Data].ToString().Contains(Attributes.Customer.Address2FlatorUnitNumber));
+            Assert.IsTrue((containsEmail) ? cache[0].Attributes[Attributes.EntityCache.Data].ToString().Contains(Attributes.Customer.EmailAddress1Type) : !cache[0].Attributes[Attributes.EntityCache.Data].ToString().Contains(Attributes.Customer.EmailAddress1Type));
         }
     }
 }

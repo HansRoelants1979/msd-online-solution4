@@ -49,8 +49,8 @@ namespace Tc.Crm.Plugins.Customer.BusinessLogic
             {   
                 var primaryEntity = context.InputParameters[InputParameters.Target] as Entity;
                 entityImage.Attributes.AddRange(GetAddressDetails(primaryEntity));
-                entityImage.Attributes.AddRange(GetEmailDetails(primaryEntity));
                 entityImage.Attributes.AddRange(GetTelephoneDetails(primaryEntity));
+                entityImage.Attributes.AddRange(GetEmailDetails(primaryEntity));
             }
             trace.Trace("GetEntityImage - End");
             return entityImage;
@@ -84,13 +84,54 @@ namespace Tc.Crm.Plugins.Customer.BusinessLogic
         private AttributeCollection GetTelephoneDetails(Entity primaryEntity)
         {
             trace.Trace("GetTelephoneDetails - Start");
-            var listOfTelephoneFields = new List<string>(){ Attributes.Customer.Telephone1, Attributes.Customer.Telephone1Type,
-                                                            Attributes.Customer.Telephone2, Attributes.Customer.Telephone2Type,
-                                                            Attributes.Customer.Telephone3,Attributes.Customer.Telephone3Type};
+            var attributes = new AttributeCollection();
+            attributes.AddRange(GetTelephone1Details(primaryEntity));
+            attributes.AddRange(GetTelephone2Details(primaryEntity));
+            attributes.AddRange(GetTelephone3Details(primaryEntity));
             trace.Trace("GetTelephoneDetails - End");
+            return attributes;
+        }
+
+        /// <summary>
+        /// To get list of telephone1 details
+        /// </summary>
+        /// <param name="primaryEntity"></param>
+        /// <returns></returns>
+        private AttributeCollection GetTelephone1Details(Entity primaryEntity)
+        {
+            trace.Trace("GetTelephone1Details - Start");
+            var listOfTelephoneFields = new List<string>(){ Attributes.Customer.Telephone1, Attributes.Customer.Telephone1Type };
+            trace.Trace("GetTelephone1Details - End");
             return GetSelectedAttributesFromEntityImage(primaryEntity, listOfTelephoneFields);
         }
 
+        /// <summary>
+        /// To get list of telephone2 details
+        /// </summary>
+        /// <param name="primaryEntity"></param>
+        /// <returns></returns>
+        private AttributeCollection GetTelephone2Details(Entity primaryEntity)
+        {
+            trace.Trace("GetTelephone2Details - Start");
+            var listOfTelephoneFields = new List<string>(){ Attributes.Customer.Telephone2, Attributes.Customer.Telephone2Type };
+            trace.Trace("GetTelephone2Details - End");
+            return GetSelectedAttributesFromEntityImage(primaryEntity, listOfTelephoneFields);
+        }
+
+        /// <summary>
+        /// To get list of telephone3 details
+        /// </summary>
+        /// <param name="primaryEntity"></param>
+        /// <returns></returns>
+        private AttributeCollection GetTelephone3Details(Entity primaryEntity)
+        {
+            trace.Trace("GetTelephone3Details - Start");
+            var listOfTelephoneFields = new List<string>(){ Attributes.Customer.Telephone3, Attributes.Customer.Telephone3Type };
+            trace.Trace("GetTelephone3Details - End");
+            return GetSelectedAttributesFromEntityImage(primaryEntity, listOfTelephoneFields);
+        }
+
+        
         /// <summary>
         /// To get list of email details
         /// </summary>
@@ -99,11 +140,51 @@ namespace Tc.Crm.Plugins.Customer.BusinessLogic
         private AttributeCollection GetEmailDetails(Entity primaryEntity)
         {
             trace.Trace("GetEmailDetails - Start");
-            var listOfEmailFields = new List<string>() { Attributes.Customer.EmailAddress1, Attributes.Customer.EmailAddress1Type,
-                                                         Attributes.Customer.EmailAddress2, Attributes.Customer.EmailAddress2Type,
-                                                         Attributes.Customer.EmailAddress3, Attributes.Customer.EmailAddress3Type };
+            var attributes = new AttributeCollection();
+            attributes.AddRange(GetEmail1Details(primaryEntity));
+            attributes.AddRange(GetEmail2Details(primaryEntity));
+            attributes.AddRange(GetEmail3Details(primaryEntity));
             trace.Trace("GetEmailDetails - End");
+            return attributes;
+        }
+
+        /// <summary>
+        /// To get list of email1 details
+        /// </summary>
+        /// <param name="primaryEntity"></param>
+        /// <returns></returns>
+        private AttributeCollection GetEmail1Details(Entity primaryEntity)
+        {
+            trace.Trace("GetEmail1Details - Start");
+            var listOfEmailFields = new List<string>() { Attributes.Customer.EmailAddress1, Attributes.Customer.EmailAddress1Type };
+            trace.Trace("GetEmail1Details - End");
             return GetSelectedAttributesFromEntityImage(primaryEntity, listOfEmailFields);           
+        }
+
+        /// <summary>
+        /// To get list of email2 details
+        /// </summary>
+        /// <param name="primaryEntity"></param>
+        /// <returns></returns>
+        private AttributeCollection GetEmail2Details(Entity primaryEntity)
+        {
+            trace.Trace("GetEmail2Details - Start");
+            var listOfEmailFields = new List<string>() { Attributes.Customer.EmailAddress2, Attributes.Customer.EmailAddress2Type };
+            trace.Trace("GetEmail2Details - End");
+            return GetSelectedAttributesFromEntityImage(primaryEntity, listOfEmailFields);
+        }
+
+        /// <summary>
+        /// To get list of email3 details
+        /// </summary>
+        /// <param name="primaryEntity"></param>
+        /// <returns></returns>
+        private AttributeCollection GetEmail3Details(Entity primaryEntity)
+        {
+            trace.Trace("GetEmail3Details - Start");
+            var listOfEmailFields = new List<string>() { Attributes.Customer.EmailAddress3, Attributes.Customer.EmailAddress3Type };
+            trace.Trace("GetEmail3Details - End");
+            return GetSelectedAttributesFromEntityImage(primaryEntity, listOfEmailFields);
         }
 
         /// <summary>
