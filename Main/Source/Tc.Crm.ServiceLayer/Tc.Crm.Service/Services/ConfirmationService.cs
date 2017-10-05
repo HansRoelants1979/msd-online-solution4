@@ -4,6 +4,8 @@ using System.Diagnostics;
 using Tc.Crm.Service.Constants;
 using Tc.Crm.Common;
 using System.Text;
+using System.Net;
+using System.Collections.Generic;
 
 namespace Tc.Crm.Service.Services
 {
@@ -23,7 +25,9 @@ namespace Tc.Crm.Service.Services
                 if (ilResponse == null) throw new ArgumentNullException(Constants.Parameters.DataJson);
                 if (string.IsNullOrWhiteSpace(ilResponse.CorrelationId)) return new ConfirmationResponse { Message = Messages.CorrelationIdWasMissing, StatusCode = System.Net.HttpStatusCode.BadRequest };
                 if (crmService == null) throw new ArgumentNullException(Constants.Parameters.CrmService);
-                if (ilResponse.SourceSystemStatusCode == System.Net.HttpStatusCode.OK)
+                var successStatus = new List<HttpStatusCode> { HttpStatusCode.OK, HttpStatusCode.Created, HttpStatusCode.Accepted, HttpStatusCode.NonAuthoritativeInformation,
+                                                               HttpStatusCode.NoContent, HttpStatusCode.ResetContent, HttpStatusCode.PartialContent };
+                if (successStatus.Contains(ilResponse.SourceSystemStatusCode))
                 {
                     entityCacheId = crmService.ProcessEntityCacheMessage(Guid.Parse(ilResponse.CorrelationId), ilResponse.SourceSystemEntityID, Status.Inactive, EntityCacheMessageStatusReason.EndtoEndSuccess);
                     if (entityCacheId != Guid.Empty)
