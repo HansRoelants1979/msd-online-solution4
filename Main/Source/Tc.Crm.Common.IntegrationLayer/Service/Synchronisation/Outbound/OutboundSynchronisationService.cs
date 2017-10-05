@@ -226,7 +226,8 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
             {
                 IssuedAtTime = jwtService.GetIssuedAtTime().ToString(CultureInfo.InvariantCulture),
                 Expiry = outboundSynchronisationDataService.GetExpiry(),
-                NotBefore = outboundSynchronisationDataService.GetNotBeforeTime()
+                NotBefore = outboundSynchronisationDataService.GetNotBeforeTime(),
+				Issuer = "msd"
             };
 
             return payload;
