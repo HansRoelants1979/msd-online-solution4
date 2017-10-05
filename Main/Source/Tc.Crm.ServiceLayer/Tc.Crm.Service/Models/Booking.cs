@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Tc.Crm.Service.Models
 {
@@ -1099,6 +1100,8 @@ namespace Tc.Crm.Service.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
         [DataMember(Name = "social")]
         public Social[] Social { get; set; }
+
+        public string PatchParameters { get; set; }
 
     }
 

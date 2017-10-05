@@ -1091,8 +1091,10 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         public Social[] Social { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
-        [DataMember(Name = "permission")]
-        public Permission Permission { get; set; }
+        [DataMember(Name = "permissions")]
+        public Permission Permissions { get; set; }
+
+        public string PatchParameters { get; set; }
 
     }
 

@@ -1,6 +1,7 @@
 ﻿using JsonPatch;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Net;
@@ -9,6 +10,7 @@ using System.Web.Http;
 using Tc.Crm.Service.Filters;
 using Tc.Crm.Service.Models;
 using Tc.Crm.Service.Services;
+using System.Linq;
 
 namespace Tc.Crm.Service.Controllers
 {
@@ -104,6 +106,17 @@ namespace Tc.Crm.Service.Controllers
         {
             CustomerInformation customerInformation = new CustomerInformation();
             var customer = customerInformation.Customer;
+
+            string patchParameters = string.Empty;
+            customerInfo.Operations.ForEach(items => {
+                var item = items.Path.Split(new char[] { '/' });
+                if(customerInfo.Operations.Count == customerInfo.Operations.IndexOf(items) +1)
+                    patchParameters += (item.GetValue(item.Length - 1).ToString());
+                else
+                patchParameters += (item.GetValue(item.Length - 1).ToString()) + ",";
+            });
+
+            customer.PatchParameters = patchParameters;
             customer.CustomerIdentity = new CustomerIdentity();
             customer.CustomerIdentifier = new CustomerIdentifier();
             customer.CustomerGeneral = new CustomerGeneral();

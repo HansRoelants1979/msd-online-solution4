@@ -2,7 +2,6 @@
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
 using System;
-using System.Collections.Generic;
 using Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models;
 using Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Models;
 
@@ -120,7 +119,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
             var customer = payloadCustomer.Customer;
             var operationType = payloadCustomer.OperationType;
             if (operationType.ToUpper() == Enum.GetName(typeof(OperationType), OperationType.POST)){
-                var contact = ContactHelper.GetContactEntityForCustomerPayload(customer, trace, operationType);
+                var contact = ContactHelper.GetContactEntityForCustomerPayload(customer, trace);
                 var existingContact = CommonXrm.RetrieveMultipleRecords(contact.LogicalName, 
                                         new string[] { Attributes.Contact.SourceSystemId },
                                         new string[] { Attributes.Contact.SourceSystemId }, 
@@ -167,7 +166,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
                 }; 
                 foreach (var existingContact in existingContacts.Entities){
                     var contact = ContactHelper.GetContactEntityForCustomerPayload(existingContact, 
-                                                        customer, trace, operationType);                   
+                                                        customer, trace, OperationType.PATCH);                   
                     updateRequest = new UpdateRequest { Target = contact };
                     multipleRequest.Requests.Add(updateRequest);
                     if (multipleRequest.Requests.Count == 500){
