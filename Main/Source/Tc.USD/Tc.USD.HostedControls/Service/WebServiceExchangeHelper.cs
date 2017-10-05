@@ -28,10 +28,8 @@ namespace Tc.Usd.HostedControls.Service
             return eventParams;
         }
 
-        public static Dictionary<string, string> ContentToEventParamsForWebRio(string content)
+        public static Dictionary<string, string> ContentToEventParamsForWebRio(WebRioResponse ssoResult)
         {
-            var ssoResult = DeserializeJson(content);
-
             var eventParams = new Dictionary<string, string>();
             eventParams.Add("responseCode", ssoResult.ResponseCode);
             eventParams.Add("responseMessage", ssoResult.ResponseMessage);
@@ -40,7 +38,7 @@ namespace Tc.Usd.HostedControls.Service
             return eventParams;
         }
 
-        public static WebRioResponse DeserializeJson(string json)
+        public static WebRioResponse DeserializeWebRioSsoResponseJson(string json)
         {
             if (string.IsNullOrWhiteSpace(json)) return null;
 

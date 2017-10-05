@@ -51,7 +51,35 @@ namespace Tc.Usd.HostedControls
                 var url = GetUrl(configuration);
 
                 ResponseEntity response = SendRequest(url, token, configuration.JSessionId,configuration.Data);
-                var eventParameters = GetEventParameters(response);
+                var content = GetResponseContent(response);
+                var ssoResponse = GetWebRioSsoResponse(content);
+
+                if(ssoResponse == null)
+                {
+                    FireEventOnError("SSO Response is null or could not be parsed.", global);
+                    return;
+                }
+                if(ssoResponse.ResponseCode != HttpCode.Ok)
+                {
+                    if(string.IsNullOrWhiteSpace(ssoResponse.ResponseMessage))
+                    {
+                        FireEventOnError("The SSO response did not return a success. No details have been provided in the response.", global);
+                        return;
+                    }
+                    else
+                    {
+                        FireEventOnError($"The SSO response did not return a success. {ssoResponse.ResponseMessage}", global);
+                        return;
+                    }
+                }
+
+                if (ssoResponse.ResponseCode == HttpCode.Ok && string.IsNullOrWhiteSpace(ssoResponse.WebRioUrl))
+                {
+                    FireEventOnError("Response doesn't contain Web Rio Url.", global);
+                    return;
+                }
+
+                var eventParameters = GetEventParameters(ssoResponse,response);
 
                
                 if (eventParameters == null)
@@ -59,13 +87,7 @@ namespace Tc.Usd.HostedControls
                     FireEventOnError("Returned content could not be parsed.", global);
                     return;
                 }
-                if (!eventParameters.ContainsKey("webRioUrl") 
-                    || (eventParameters.ContainsKey("webRioUrl") && string.IsNullOrWhiteSpace(eventParameters["webRioUrl"])))
-                {
-                    FireEventOnError("Response doesn't contain Web Rio Url.", global);
-                    return;
-                }
-
+   
                 FireOnSuccess(eventParameters, global);
             }
             catch (Exception ex)
@@ -86,13 +108,28 @@ namespace Tc.Usd.HostedControls
             }
         }
 
-        
-        private Dictionary<string, string> GetEventParameters(ResponseEntity response)
+        private string GetResponseContent(ResponseEntity response)
+        {
+            if (response == null) return null;
+            return response.Content;
+        }
+        private WebRioResponse GetWebRioSsoResponse(string content)
+        {
+            if (string.IsNullOrWhiteSpace(content)) return null;
+            try
+            {
+                return WebServiceExchangeHelper.DeserializeWebRioSsoResponseJson(content);
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+        }
+        private Dictionary<string, string> GetEventParameters(WebRioResponse webRioResponse, ResponseEntity response)
         {
             if (response == null) throw new ArgumentNullException("response");
-            var content = response.Content;
-
-            var eventParameters = WebServiceExchangeHelper.ContentToEventParamsForWebRio(content);
+            var eventParameters = WebServiceExchangeHelper.ContentToEventParamsForWebRio(webRioResponse);
             if (eventParameters == null || eventParameters.Count == 0)
                 return null;
            
