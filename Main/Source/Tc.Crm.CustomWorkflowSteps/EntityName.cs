@@ -160,6 +160,7 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string MarketingByPhone = "tc_marketingbyphone";
         public const string SendMarketingBySms = "tc_sendmarketingbysms";
         public const string SendMarketingByEmail = "tc_sendmarketingbyemail";
+        public const string ModifiedOn = "modifiedon";
     }   
     public static class Account
     {
@@ -505,5 +506,12 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string OwnerId = "ownerid";
         public const string StoreId = "tc_budgetcentreid";
         public const string Initials = "tc_initials";
+    }
+
+    public static class EntityMerge
+    {
+        public const string Master = "tc_master";
+        public const string Subordinate = "tc_subordinate";
+        public const string ModifiedOn = "modifiedon";
     }
 }
