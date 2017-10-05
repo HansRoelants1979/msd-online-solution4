@@ -114,6 +114,32 @@ namespace Tc.Crm.CustomWorkflowSteps
             }
             return new OptionSetValue(value);
         }
+        public static OptionSetValue GetExtraServiceType(ExtraServiceType extraServiceType)
+        {
+            int value = -1;
+            switch (extraServiceType)
+            {
+                case ExtraServiceType.NotSpecified:
+                    value = 950000004;
+                    break;
+                case ExtraServiceType.CarHire:
+                    value = 950000000;
+                    break;
+                case ExtraServiceType.Insurance:
+                    value = 950000001;
+                    break;
+                case ExtraServiceType.Miscellaneous:
+                    value = 950000002;
+                    break;
+                case ExtraServiceType.OpInsurance:
+                    value = 950000003;
+                    break;                
+                default:
+                    value = 950000004;
+                    break;
+            }
+            return new OptionSetValue(value);
+        }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public static OptionSetValue GetBoardType(BoardType boardType)
         {
@@ -255,6 +281,30 @@ namespace Tc.Crm.CustomWorkflowSteps
 
             return new OptionSetValue(value);
         }
+        public static OptionSetValue GetAccommodationType(AccommodationType accommodationType)
+        {
+            int value = -1;
+            switch (accommodationType)
+            {
+                case AccommodationType.NotSpecified:
+                    value = 950000000;
+                    break;
+                case AccommodationType.Cruise:
+                    value = 950000001;
+                    break;
+                case AccommodationType.Hotel:
+                    value = 950000002;
+                    break;
+                case AccommodationType.Accommodation:
+                    value = 950000003;
+                    break;
+                default:
+                    value = 950000000;
+                    break;
+
+            }
+            return new OptionSetValue(value);
+        }
         public static OptionSetValue GetCustomerStatus(CustomerStatus customerStatus)
         {
             int value = -1;
@@ -387,6 +437,39 @@ namespace Tc.Crm.CustomWorkflowSteps
                     break;
                 default:
                     value = 950000003;
+                    break;
+            }
+
+            return new OptionSetValue(value);
+        }
+        public static OptionSetValue GetTransportType(TransportType transportType)
+        {
+            int value = -1;
+            switch (transportType)
+            {
+                case TransportType.NotSpecified:
+                    value = 950000006;
+                    break;
+                case TransportType.Coach:
+                    value = 950000000;
+                    break;
+                case TransportType.CharterFlight:
+                    value = 950000001;
+                    break;
+                case TransportType.ScheduledFlight:
+                    value = 950000002;
+                    break;
+                case TransportType.Ferry:
+                    value = 950000003;
+                    break;
+                case TransportType.Motorail:
+                    value = 950000004;
+                    break;
+                case TransportType.Rail:
+                    value = 950000005;
+                    break;
+                default:
+                    value = 950000006;
                     break;
             }
 
@@ -597,7 +680,75 @@ namespace Tc.Crm.CustomWorkflowSteps
             }
             return new OptionSetValue(value);
         }
-        
+        public static OptionSetValue GetProductTypeCode(ProductTypeCode productTypeCode)
+        {
+            int value = -1;
+            switch (productTypeCode)
+            {
+                case ProductTypeCode.NotSpecified:
+                    value = 950000000;
+                    break;
+                case ProductTypeCode.CC:
+                    value = 950000001;
+                    break;
+                case ProductTypeCode.CE:
+                    value = 950000002;
+                    break;
+                case ProductTypeCode.CH:
+                    value = 950000003;
+                    break;
+                case ProductTypeCode.CO:
+                    value = 950000004;
+                    break;
+                case ProductTypeCode.FC:
+                    value = 950000005;
+                    break;
+                case ProductTypeCode.FY:
+                    value = 950000006;
+                    break;
+                case ProductTypeCode.HR:
+                    value = 950000007;
+                    break;
+                case ProductTypeCode.IN:
+                    value = 950000008;
+                    break;
+                case ProductTypeCode.MS:
+                    value = 950000009;
+                    break;
+                case ProductTypeCode.PH:
+                    value = 950000010;
+                    break;
+                case ProductTypeCode.RL:
+                    value = 950000011;
+                    break;
+                case ProductTypeCode.SP:
+                    value = 950000012;
+                    break;
+                case ProductTypeCode.UP:
+                    value = 950000013;
+                    break;
+                default:
+                    value = 950000000;
+                    break;
+            }
+            return new OptionSetValue(value);
+        }
+
+        public static OptionSetValue GetSourceSystem(SourceSystem sourceSystem)
+        {
+            int value = -1;
+            switch (sourceSystem)
+            {
+                case SourceSystem.OnTour:
+                    value = 950000000;
+                    break;
+                case SourceSystem.TCV:
+                    value = 950000001;
+                    break;                
+            }
+            return new OptionSetValue(value);
+        }
+
         #endregion Option set mappings
         /// <summary>
         /// Call this method to create or update record

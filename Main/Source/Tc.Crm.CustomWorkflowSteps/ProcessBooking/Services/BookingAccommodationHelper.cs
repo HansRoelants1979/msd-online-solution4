@@ -70,6 +70,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             accommodationEntity[Attributes.Booking.StateCode] = new OptionSetValue((int)Statecode.Active);
             accommodationEntity[Attributes.Booking.StatusCode] = CommonXrm.GetAccommodationStatus(accommodation.Status);
             accommodationEntity[Attributes.Booking.Remarks] = RemarksHelper.GetRemarksTextFromPayload(accommodation.Remark);
+            accommodationEntity[Attributes.BookingAccommodation.AccommodationType] = CommonXrm.GetAccommodationType(accommodation.AccommodationType);
+            accommodationEntity[Attributes.BookingAccommodation.Duration] = (!string.IsNullOrWhiteSpace(accommodation.Duration)) ? 
+                                                                                accommodation.Duration : string.Empty;
             trace.Trace("Preparing Booking Transport information - End");
 
             return accommodationEntity;

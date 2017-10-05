@@ -24,6 +24,11 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 booking[Attributes.Booking.TourOperatorUpdatedDate] = !string.IsNullOrWhiteSpace(identifier.BookingUpdateDateTourOperator) ? Convert.ToDateTime(identifier.BookingUpdateDateTourOperator) : (DateTime?)null;
                 booking[Attributes.Booking.SourceApplication] = identifier.SourceApplication != SourceApplication.NotSpecified ? identifier.SourceApplication.ToString() : null;
                 booking[Attributes.Booking.SourceSystem] = identifier.BookingSystem.ToString();
+                booking[Attributes.Booking.DealSequenceNumber] = identifier.DealSequenceNumber;
+                booking[Attributes.Booking.ConsultationReferenceId] = (!string.IsNullOrWhiteSpace(identifier.ConsultationReference)) ?
+                        new EntityReference(EntityName.TravelPlanner,
+                        new Guid(identifier.ConsultationReference)) : null;
+                booking[Attributes.Booking.SourceSystemId] = CommonXrm.GetSourceSystem(identifier.SourceSystem);
                 trace.Trace("Booking populate identifier - end");
             }
             trace.Trace("Booking Identifier - end");
@@ -40,6 +45,11 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             booking[Attributes.Booking.BookerPhone2] = (identity.Booker.Mobile != null) ? identity.Booker.Mobile : string.Empty;
             booking[Attributes.Booking.BookerEmergencyPhone] = (identity.Booker.EmergencyNumber != null) ? identity.Booker.EmergencyNumber : string.Empty;
             booking[Attributes.Booking.BookerEmail] = (identity.Booker.Email != null) ? identity.Booker.Email : string.Empty;
+            booking[Attributes.Booking.BookerMobile1] = (identity.Booker.Mobile != null) ? identity.Booker.Mobile : string.Empty;           
+            booking[Attributes.Booking.AgentShortName] = (!string.IsNullOrWhiteSpace(identity.Booker.AgentShortName)) ? 
+                                                            identity.Booker.AgentShortName : string.Empty;            
+            booking[Attributes.Booking.Abta] = (!string.IsNullOrWhiteSpace(identity.Booker.Abta)) ? 
+                                                            identity.Booker.Abta : string.Empty;
             trace.Trace("Booking populate identity - end");
             trace.Trace("Booking Identity - end");
         }
@@ -51,6 +61,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
             booking[Attributes.Booking.BookerPhone2] = string.Empty;
             booking[Attributes.Booking.BookerEmergencyPhone] = string.Empty;
             booking[Attributes.Booking.BookerEmail] = string.Empty;
+            booking[Attributes.Booking.BookerMobile1] = string.Empty;
+            booking[Attributes.Booking.AgentShortName] = string.Empty;
+            booking[Attributes.Booking.Abta] = string.Empty;
             trace.Trace("Booking clear identity - end");
         }
 
@@ -80,6 +93,23 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
                 if (!string.IsNullOrWhiteSpace(general.Currency))
                     booking[Attributes.Booking.TransactionCurrencyId] = new EntityReference(EntityName.Currency, new Guid(general.Currency));
                 booking[Attributes.Booking.HasSourceMarketComplaint] = general.HasComplaint;
+                booking[Attributes.Booking.NumberOfDealsOnConsultation] = general.NumberOfDealsOnConsultation;                
+                booking[Attributes.Booking.AmountDueDate] = (!string.IsNullOrWhiteSpace(general.AmountDueDate)) ? 
+                    Convert.ToDateTime(general.AmountDueDate) : (DateTime?)null;
+                booking[Attributes.Booking.ProductTypeCode] = CommonXrm.GetProductTypeCode(general.ProductTypeCode);
+                booking[Attributes.Booking.ProductTypeCodeDescription] = (!string.IsNullOrWhiteSpace(general.ProductTypeCodeDescription)) ?
+                                                                        general.ProductTypeCodeDescription : null;
+                booking[Attributes.Booking.OperatorCode] = (!string.IsNullOrWhiteSpace(general.OperatorCode)) ?
+                                                                        general.OperatorCode : string.Empty;
+                booking[Attributes.Booking.OperatorCodeDescription] = (!string.IsNullOrWhiteSpace(general.OperatorCodeDescription)) ?
+                                                                        general.OperatorCodeDescription : string.Empty;
+                booking[Attributes.Booking.TotalDueAmount] = new Money(general.TotalDueAmount);
+                booking[Attributes.Booking.TotalPaid] = new Money(general.TotalPaid);
+                booking[Attributes.Booking.DepositAmount] = new Money(general.DepositAmount);
+                booking[Attributes.Booking.IsLowDeposit] = general.IsLowDeposit;
+                booking[Attributes.Booking.DepositDueDate] = Convert.ToDateTime(general.DepositDueDate);
+                booking[Attributes.Booking.CancellationDate] = Convert.ToDateTime(general.CancellationDate);
+                booking[Attributes.Booking.NumberOfSeniorCitizens] = general.NumberOfSeniorCitizens;
                 trace.Trace("Booking populate general - end");
             }
             trace.Trace("Booking general - end");
@@ -109,9 +139,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
         }
         public static int GetDurationFrom(Transport[] transports, ITracingService trace)
         {
-            if (transports == null || transports.Length == 0 ) return -1;
+            if (transports == null || transports.Length == 0) return -1;
 
-            var inboundTransport = transports.FirstOrDefault<Transport>(t=> t.TransferType == TransferType.Inbound);
+            var inboundTransport = transports.FirstOrDefault<Transport>(t => t.TransferType == TransferType.Inbound);
             var outboundTransport = transports.FirstOrDefault<Transport>(t => t.TransferType == TransferType.Outbound);
 
             if (inboundTransport == null || outboundTransport == null) return -1;
@@ -129,7 +159,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 
             if (startDate < endDate) return -1;
             var diff = (startDate - endDate).TotalDays;
-            
+
             return (int)diff;
         }
 

@@ -75,6 +75,7 @@
         public const string ActivityParty = "activityparty";
         public const string Store = "tc_store";
         public const string ExternalLogin = "tc_externallogin";
+        public const string TravelPlanner = "opportunity";
 
     }
     public static class Relationships
@@ -252,22 +253,24 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string TransactionCurrencyId = "transactioncurrencyid";
         public const string SourceSystem = "tc_sourcesystem";
         public const string SourceApplication = "tc_sourceapplication";
-        public const string SourceSystemId = "tc_sourcesystemid";
-        public const string ConsultationReferenceId = "tc_consultationreferenceid";
-        public const string DealSequenceNumber = "tc_dealsequencenumber";
-        public const string ProductTypeCode = "tc_producttypecode";
-        public const string ProductTypeCodeDescription = "tc_pr;oducttypecodedescription";
+        public const string NumberOfSeniorCitizens = "tc_numberofseniorcitizens";
+        public const string NumberOfDealsOnConsultation = "tc_numberofdealsonconsultation";
+        public const string AmountDueDate = "tc_amountduedate";
+        public const string ProductTypeCode = "tc_productTypeCode";
+        public const string ProductTypeCodeDescription = "tc_productTypeCodeDescription";
         public const string OperatorCode = "tc_operatorcode";
         public const string OperatorCodeDescription = "tc_operatorcodedescription";
         public const string TotalDueAmount = "tc_totaldueamount";
         public const string TotalPaid = "tc_totalpaid";
         public const string DepositDueDate = "tc_depositduedate";
         public const string DepositAmount = "tc_depositamount";
-        public const string IsLowDeposit = "tc_isLowdeposit";
+        public const string IsLowDeposit = "tc_islowdeposit";
         public const string CancellationDate = "tc_cancellationdate";
-        public const string AmountDueDate = "tc_amountduedate";
-        public const string NumberOfSeniorCitizens = "tc_numberOfSeniorCitizens";
-        public const string NumberOfDealsOnConsultation = "tc_numberofdealsonconsultation";
+        public const string BookerMobile1 = "tc_bookermobile1";
+        public const string Abta = "tc_abta";
+        public const string DealSequenceNumber = "tc_dealsequencenumber";
+        public const string ConsultationReferenceId = "tc_consultationreferenceid";
+        public const string SourceSystemId = "tc_sourcesystemid";
     }
     public static class BookingAccommodation
     {
@@ -295,7 +298,7 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string StartDateAndTime = "tc_startdateandtime";
         public const string TransferServiceLevel = "tc_transferserviceleveltype";
         public const string WithTransfer = "tc_withtransfer";
-        public const string AccommodationType = "tc_accommodationType";
+        public const string AccommodationType = "tc_accommodationtype";
         public const string Duration = "tc_duration";
     }
     public static class BookingTransport
@@ -316,6 +319,7 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string StartDateAndTime = "tc_startdateandtime";
         public const string TransferType = "tc_transfertype";
         public const string TransportCode = "tc_transportcode";
+        public const string TransportType = "tc_transporttype";
     }
     public static class Brand
     {
@@ -465,7 +469,7 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string Participants = "tc_participants";
         public const string StartDateAndTime = "tc_startdateandtime";
         public const string ExtraServiceType = "tc_extraservicetype";
-        public const string ExtraserviceDescription = "tc_extraservicedescription";
+        public const string ExtraServiceDescription = "tc_extraservicedescription";
     }
     public static class TourOperator
     {

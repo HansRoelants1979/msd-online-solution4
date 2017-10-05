@@ -54,7 +54,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 
             extraServiceEntity[Attributes.BookingExtraService.BookingId] = new EntityReference(EntityName.Booking, bookingId);
             extraServiceEntity[Attributes.Booking.Remarks] = RemarksHelper.GetRemarksTextFromPayload(extraService.Remark);
-
+            extraServiceEntity[Attributes.BookingExtraService.ExtraServiceType] = CommonXrm.GetExtraServiceType(extraService.ExtraServiceType);
+            extraServiceEntity[Attributes.BookingExtraService.ExtraServiceDescription] = (!string.IsNullOrWhiteSpace(extraService.ExtraServiceDescription)) ? 
+                                                                                        extraService.ExtraServiceDescription : string.Empty;
             trace.Trace("Preparing Booking Transfer information - End");
 
             return extraServiceEntity;

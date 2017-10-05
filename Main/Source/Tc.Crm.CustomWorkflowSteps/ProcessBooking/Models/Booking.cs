@@ -185,7 +185,16 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         [EnumMember]
         MidocoOwnSite
     }
-
+    [DataContract(Name = "SourceSystemId")]
+    public enum SourceSystem
+    {
+        [EnumMember]
+        NotSpecified,        
+        [EnumMember]
+        OnTour,
+        [EnumMember]
+        TCV
+    }
     [DataContract(Name = "AddressType")]
     public enum AddressType
     {
@@ -205,6 +214,39 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         Booked,
         [EnumMember]
         Cancelled
+    }
+
+    [DataContract(Name = "ProductTypeCode")]
+    public enum ProductTypeCode
+    {
+        [EnumMember]
+        NotSpecified,
+        [EnumMember]
+        CC,
+        [EnumMember]
+        CE,
+        [EnumMember]
+        CH,
+        [EnumMember]
+        CO,
+        [EnumMember]
+        FC,
+        [EnumMember]
+        FY,
+        [EnumMember]
+        HR,
+        [EnumMember]
+        IN,
+        [EnumMember]
+        MS,
+        [EnumMember]
+        PH,
+        [EnumMember]
+        RL,
+        [EnumMember]
+        SP,
+        [EnumMember]
+        UP
     }
 
     [DataContract(Name = "Gender")]
@@ -310,18 +352,18 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         [EnumMember(Value = "Partial Request")]
         PartialRequest
     }
-
-    [DataContract(Name = "AccommodationType")]
+    [DataContract(Name = "AccomodationType")]
     public enum AccommodationType
     {
         [EnumMember]
-        Cruise,
+        NotSpecified,        
+        [EnumMember]
+        Cruise,        
         [EnumMember]
         Hotel,
         [EnumMember]
         Accommodation
     }
-
     [DataContract(Name = "TransferType")]
     public enum TransferType
     {
@@ -341,6 +383,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
     public enum TransportType
     {
         [EnumMember]
+        NotSpecified,
+        [EnumMember]
         Coach,
         [EnumMember(Value = "Charter Flight")]
         CharterFlight,
@@ -357,6 +401,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
     [DataContract(Name = "ExtraServiceType")]
     public enum ExtraServiceType
     {
+        [EnumMember]
+        NotSpecified,
         [EnumMember(Value = "Car Hire")]
         CarHire,
         [EnumMember]
@@ -455,7 +501,20 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         [EnumMember]
         Unknown
     }
-
+    [DataContract(Name = "ExtraServiceType")]
+    public enum ExtraServiceType
+    {
+        [EnumMember]
+        NotSpecified,
+        [EnumMember]
+        CarHire,
+        [EnumMember]
+        Insurance,
+        [EnumMember]
+        Miscellaneous,
+        [EnumMember]
+        OpInsurance        
+    }
     [DataContract(Name = "TransferServiceLevel")]
     public enum TransferServiceLevel
     {
@@ -499,14 +558,13 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         public string IntegrationProcessingInitiated { get; set; }
 
         [DataMember(Name = "sourceSystemId")]
-        public SourceSystemId SourceSystemId { get; set; }
+        public SourceSystem SourceSystem { get; set; }
 
         [DataMember(Name = "consultationReference")]
         public string ConsultationReference { get; set; }
 
         [DataMember(Name = "dealSequenceNumber")]
         public int DealSequenceNumber { get; set; }
-
     }
 
     [DataContract(Name = "bookingGeneral")]
@@ -564,6 +622,12 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         [DataMember(Name = "hasComplaint")]
         public bool HasComplaint { get; set; }
 
+        [DataMember(Name = "numberOfDealsOnConsultation")]
+        public int NumberOfDealsOnConsultation { get; set; }
+
+        [DataMember(Name = "amountDueDate")]
+        public string AmountDueDate { get; set; }
+
         [DataMember(Name = "productTypeCode")]
         public ProductTypeCode ProductTypeCode { get; set; }
 
@@ -593,12 +657,6 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
 
         [DataMember(Name = "cancellationDate")]
         public string CancellationDate { get; set; }
-
-        [DataMember(Name = "amountDueDate")]
-        public string AmountDueDate { get; set; }
-
-        [DataMember(Name = "numberOfDealsOnConsultation")]
-        public decimal NumberOfDealsOnConsultation { get; set; }
 
         [DataMember(Name = "numberOfSeniorCitizens")]
         public int NumberOfSeniorCitizens { get; set; }
@@ -863,7 +921,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
         [DataMember(Name = "remark")]
-        public Remark[] Remark { get; set; }
+        public Remark[] Remark { get; set; }        
     }
 
 
@@ -1111,6 +1169,10 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         public string Mobile { get; set; }
         [DataMember(Name = "emergencyNumber")]
         public string EmergencyNumber { get; set; }
+        [DataMember(Name = "agentShortName")]
+        public string AgentShortName { get; set; }
+        [DataMember(Name = "abta")]
+        public string Abta { get; set; }
     }
 
     [DataContract(Name = "salesChannel")]
