@@ -84,6 +84,7 @@
         public static class HttpCode
         {
             public const string InternalError = "501";
+            public const string Ok = "200";
         }
         public static class UsdParameter
         {
