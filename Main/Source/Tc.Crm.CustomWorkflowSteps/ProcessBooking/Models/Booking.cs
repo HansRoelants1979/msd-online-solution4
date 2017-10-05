@@ -104,6 +104,47 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         [EnumMember(Value = "Easiware CRM")]
         EasiwareCRM
     }
+
+    [DataContract(Name = "SourceSystemId")]
+    public enum SourceSystemId
+    {
+        [EnumMember]
+        OnTour,
+        [EnumMember]
+        TCV
+    }
+
+    [DataContract(Name = "ProductTypeCode")]
+    public enum ProductTypeCode
+    {
+        [EnumMember]
+        CC,
+        [EnumMember]
+        CE,
+        [EnumMember]
+        CH,
+        [EnumMember]
+        CO,
+        [EnumMember]
+        FC,
+        [EnumMember]
+        FY,
+        [EnumMember]
+        HR,
+        [EnumMember]
+        IN,
+        [EnumMember]
+        MS,
+        [EnumMember]
+        PH,
+        [EnumMember]
+        RL,
+        [EnumMember]
+        SP,
+        [EnumMember]
+        UP
+    }
+
     [DataContract(Name = "BookingSystem")]
     public enum BookingSystem
     {
@@ -269,6 +310,18 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         [EnumMember(Value = "Partial Request")]
         PartialRequest
     }
+
+    [DataContract(Name = "AccommodationType")]
+    public enum AccommodationType
+    {
+        [EnumMember]
+        Cruise,
+        [EnumMember]
+        Hotel,
+        [EnumMember]
+        Accommodation
+    }
+
     [DataContract(Name = "TransferType")]
     public enum TransferType
     {
@@ -283,6 +336,37 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         [EnumMember(Value = "Transfer between hotels")]
         TransferBetweenHotels
     }
+
+    [DataContract(Name = "TransportType")]
+    public enum TransportType
+    {
+        [EnumMember]
+        Coach,
+        [EnumMember(Value = "Charter Flight")]
+        CharterFlight,
+        [EnumMember(Value = "Scheduled Flight")]
+        ScheduledFlight,
+        [EnumMember]
+        Ferry,
+        [EnumMember]
+        Motorail,
+        [EnumMember]
+        Rail
+    }
+
+    [DataContract(Name = "ExtraServiceType")]
+    public enum ExtraServiceType
+    {
+        [EnumMember(Value = "Car Hire")]
+        CarHire,
+        [EnumMember]
+        Insurance,
+        [EnumMember]
+        Miscellaneous,
+        [EnumMember(Value = "Op Insurance")]
+        OpInsurance
+    }
+
     [DataContract(Name = "CustomerStatus")]
     public enum CustomerStatus
     {
@@ -334,7 +418,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         Primary,
         [EnumMember]
         Promo
-    }    
+    }
 
     [DataContract(Name = "RemarkType")]
     public enum RemarkType
@@ -413,6 +497,16 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
 
         [DataMember(Name = "integrationProcessingInitiated")]
         public string IntegrationProcessingInitiated { get; set; }
+
+        [DataMember(Name = "sourceSystemId")]
+        public SourceSystemId SourceSystemId { get; set; }
+
+        [DataMember(Name = "consultationReference")]
+        public string ConsultationReference { get; set; }
+
+        [DataMember(Name = "dealSequenceNumber")]
+        public int DealSequenceNumber { get; set; }
+
     }
 
     [DataContract(Name = "bookingGeneral")]
@@ -469,6 +563,45 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
 
         [DataMember(Name = "hasComplaint")]
         public bool HasComplaint { get; set; }
+
+        [DataMember(Name = "productTypeCode")]
+        public ProductTypeCode ProductTypeCode { get; set; }
+
+        [DataMember(Name = "productTypeCodeDescription")]
+        public string ProductTypeCodeDescription { get; set; }
+
+        [DataMember(Name = "operatorCode")]
+        public string OperatorCode { get; set; }
+
+        [DataMember(Name = "operatorCodeDescription")]
+        public string OperatorCodeDescription { get; set; }
+
+        [DataMember(Name = "totalDueAmount")]
+        public decimal TotalDueAmount { get; set; }
+
+        [DataMember(Name = "totalPaid")]
+        public decimal TotalPaid { get; set; }
+
+        [DataMember(Name = "depositDueDate")]
+        public string DepositDueDate { get; set; }
+
+        [DataMember(Name = "depositAmount")]
+        public decimal DepositAmount { get; set; }
+
+        [DataMember(Name = "isLowDeposit")]
+        public bool IsLowDeposit { get; set; }
+
+        [DataMember(Name = "cancellationDate")]
+        public string CancellationDate { get; set; }
+
+        [DataMember(Name = "amountDueDate")]
+        public string AmountDueDate { get; set; }
+
+        [DataMember(Name = "numberOfDealsOnConsultation")]
+        public decimal NumberOfDealsOnConsultation { get; set; }
+
+        [DataMember(Name = "numberOfSeniorCitizens")]
+        public int NumberOfSeniorCitizens { get; set; }
     }
 
     [DataContract(Name = "bookingIdentity")]
@@ -477,6 +610,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
 
         [DataMember(Name = "booker")]
         public BookingBooker Booker { get; set; }
+
+        [DataMember(Name = "salesChannel")]
+        public BookingSalesChannel salesChannel { get; set; }
     }
 
     [DataContract(Name = "Remark")]
@@ -630,6 +766,12 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
 
         [DataMember(Name = "tourguideAssignment")]
         public TourGuideAssignment TourGuideAssignment { get; set; }
+
+        [DataMember(Name = "accommodationType")]
+        public AccommodationType AccommodationType { get; set; }
+
+        [DataMember(Name = "duration")]
+        public int Duration { get; set; }
     }
 
     [DataContract(Name = "transport")]
@@ -679,6 +821,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
         [DataMember(Name = "remark")]
         public Remark[] Remark { get; set; }
+
+        [DataMember(Name = "transportType")]
+        public TransportType TransportType { get; set; }
     }
 
     [DataContract(Name = "transfer")]
@@ -749,6 +894,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
         [DataMember(Name = "remark")]
         public Remark[] Remark { get; set; }
+
+        [DataMember(Name = "extraServiceType")]
+        public ExtraServiceType ExtraServiceType { get; set; }
     }
 
     [DataContract(Name = "services")]
@@ -864,7 +1012,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
 
     [DataContract(Name = "permission")]
     public class Permission
-    {        
+    {
         [DataMember(Name = "doNotContactInd")]
         public string DoNotContactInd { get; set; }
 
@@ -961,6 +1109,16 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         public string Mobile { get; set; }
         [DataMember(Name = "emergencyNumber")]
         public string EmergencyNumber { get; set; }
+    }
+
+    [DataContract(Name = "salesChannel")]
+    public class BookingSalesChannel
+    {
+        [DataMember(Name = "ABTA")]
+        public string ABTA { get; set; }
+
+        [DataMember(Name = "agentShortname")]
+        public string AgentShortname { get; set; }
     }
 }
 

@@ -9,7 +9,10 @@
       "bookingUpdateDateOnTour": "2016-11-30",
       "bookingUpdateDateTourOperator": "2016-07-27",
       "bookingSystem": "Nurvis",
-      "sourceApplication": "SAPBW"
+      "sourceApplication": "SAPBW",
+      "sourceSystemId": "OnTour",
+      "consultationReference": "Test",
+      "dealSequenceNumber": 123
     },
     "bookingGeneral": {
       "bookingStatus": "Booked",
@@ -28,7 +31,20 @@
       "numberOfChildren": 0,
       "numberOfInfants": 0,
       "currency": "EUR",
-      "duration": 14
+      "duration": 14,
+      "productTypeCode": "CC",
+      "productTypeCodeDescription": "Test",
+      "operatorCode": "Test",
+      "operatorCodeDescription": "Test",
+      "totalDueAmount": 123,
+      "totalPaid": 123,
+      "depositDueDate": "2017-01-02",
+      "depositAmount": 123,
+      "isLowDeposit": true,
+      "cancellationDate": "2017-01-02",
+      "amountDueDate": "2017-01-02",
+      "numberOfDealsOnConsultation" :  123,
+        "numberOfSeniorCitizens" : 1
     },
     "travelParticipant": [
       {
@@ -133,7 +149,9 @@
               "type": "TourOperator",
               "text": "GIATA Code: 135744"
             }
-          ]
+          ],          
+          "accommodationType": "Cruise",
+          "duration":  123
         }
       ],
       "transport": [
@@ -173,7 +191,8 @@
               "type": "Agency",
               "text": "EKMS Room Code: A2B"
             }
-          ]
+          ],
+          "transportType":  "Coach"
         }
       ],
       "transfer": [
@@ -247,7 +266,8 @@
               "type": "Agency",
               "text": "EKMS Room Code: A2B"
             }
-          ]
+          ],
+          "extraServiceType": "Insurance"
         }
       ]
     },
@@ -267,6 +287,10 @@
         "email": "email",
         "phone": "02151/315696",
         "emergencyNumber": ""
+      },
+      "salesChannel": {
+        "ABTA": "Test",
+        "agentShortname": "Test"
       }
     },
     "customer": {
@@ -288,7 +312,7 @@
         "middleName": "",
         "gender": "Male"
       },
-      "company": {},
+      "company": { },
       "address": [
         {
           "type": "Main",

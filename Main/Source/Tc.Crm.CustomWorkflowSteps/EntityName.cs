@@ -25,7 +25,7 @@
         public const string TourOperatorCodeToReplace = "UKI1";
 
         public const string ReplacedTourOperatorCode = "TCUK";
-        
+
     }
     public static class Department
     {
@@ -65,7 +65,7 @@
         public const string LocationOffice = "tc_locationoffice";
         public const string SocialProfile = "socialprofile";
         public const string SystemUserRoles = "systemuserroles";
-        public const string SystemUser = "systemuser";        
+        public const string SystemUser = "systemuser";
         public const string TourOperator = "tc_touroperator";
         public const string User = "systemuser";
         public const string BookingTransfer = "tc_bookingtransfer";
@@ -89,7 +89,7 @@
     public static class PayloadSurveyFieldMapping
     {
         public const int BookingNumber = 251884;
-        public const int SourceMarket = 251727;        
+        public const int SourceMarket = 251727;
         public const int Forename = 251886;
         public const int Surname = 251887;
         public const int TourOperatorCode = 251883;
@@ -208,8 +208,11 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string AgentTeam = "tc_agentteam";
         public const string BookerEmail = "tc_bookeremail";
         public const string BookerEmergencyPhone = "tc_bookeremergencyphone";
+        public const string BookerMobile = "tc_bookermobile1";
         public const string BookerPhone1 = "tc_bookerphone1";
         public const string BookerPhone2 = "tc_bookerphone2";
+        public const string SalesChannelABTA = "tc_abta";
+        public const string SalesChannelAgentShortName = "tc_agentShortName";
         public const string BookingDate = "tc_bookingdate";
         public const string BookingId = "tc_bookingid";
         public const string BrandId = "tc_brandid";
@@ -249,6 +252,22 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string TransactionCurrencyId = "transactioncurrencyid";
         public const string SourceSystem = "tc_sourcesystem";
         public const string SourceApplication = "tc_sourceapplication";
+        public const string SourceSystemId = "tc_sourcesystemid";
+        public const string ConsultationReferenceId = "tc_consultationreferenceid";
+        public const string DealSequenceNumber = "tc_dealsequencenumber";
+        public const string ProductTypeCode = "tc_producttypecode";
+        public const string ProductTypeCodeDescription = "tc_pr;oducttypecodedescription";
+        public const string OperatorCode = "tc_operatorcode";
+        public const string OperatorCodeDescription = "tc_operatorcodedescription";
+        public const string TotalDueAmount = "tc_totaldueamount";
+        public const string TotalPaid = "tc_totalpaid";
+        public const string DepositDueDate = "tc_depositduedate";
+        public const string DepositAmount = "tc_depositamount";
+        public const string IsLowDeposit = "tc_isLowdeposit";
+        public const string CancellationDate = "tc_cancellationdate";
+        public const string AmountDueDate = "tc_amountduedate";
+        public const string NumberOfSeniorCitizens = "tc_numberOfSeniorCitizens";
+        public const string NumberOfDealsOnConsultation = "tc_numberofdealsonconsultation";
     }
     public static class BookingAccommodation
     {
@@ -276,6 +295,8 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string StartDateAndTime = "tc_startdateandtime";
         public const string TransferServiceLevel = "tc_transferserviceleveltype";
         public const string WithTransfer = "tc_withtransfer";
+        public const string AccommodationType = "tc_accommodationType";
+        public const string Duration = "tc_duration";
     }
     public static class BookingTransport
     {
@@ -382,10 +403,10 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string StreetLine2 = "tc_streetline2";
         public const string StreetLine3 = "tc_streetline3";
     }
-    public static class Queue 
+    public static class Queue
     {
-    public const string QueueId = "queueid";    
-}
+        public const string QueueId = "queueid";
+    }
     public static class Region
     {
         public const string CountryId = "tc_countryid";
@@ -414,7 +435,7 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
     }
     public static class SystemUser
     {
-        public const string SystemUserId = "systemuserid";        
+        public const string SystemUserId = "systemuserid";
 
     }
     public static class BookingTransfer
@@ -431,7 +452,7 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string StartDateAndTime = "tc_startdateandtime";
         public const string TransferCode = "tc_transfercode";
         public const string TransferType = "tc_transfertype";
-
+        public const string TransferDescription = "tc_transferdescription";
     }
     public static class BookingExtraService
     {
@@ -443,7 +464,8 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string Order = "tc_order";
         public const string Participants = "tc_participants";
         public const string StartDateAndTime = "tc_startdateandtime";
-
+        public const string ExtraServiceType = "tc_extraservicetype";
+        public const string ExtraserviceDescription = "tc_extraservicedescription";
     }
     public static class TourOperator
     {
