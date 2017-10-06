@@ -102,6 +102,7 @@
         {
             public const string WebRioAdmin = "Tc.Wr.Admin";
             public const string WebRioConsultation = "Tc.Wr.Consultation";
+            public const string CrmGlobalManager = "CRM Global Manager";
         }
 
         public static class UsdActionCall
@@ -115,6 +116,7 @@
             public const string CloseApp = "Tc.Usd.Global.SingleSignOnController.CloseApp";
             public const string Close = "Close";
             public const string OpenWebRio = "Tc.Usd.SingleSignOnController.OpenWebRio";
+            public const string DisplayMessage = "DisplayMessage";
         }
 
         public static class UsdEvent
