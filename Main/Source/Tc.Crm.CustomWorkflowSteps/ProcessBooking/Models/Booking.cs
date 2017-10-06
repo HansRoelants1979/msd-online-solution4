@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
 {
@@ -1108,7 +1109,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         [DataMember(Name = "permissions")]
         public Permission Permissions { get; set; }
 
-        public string PatchParameters { get; set; }
+        [DataMember(Name = "PatchParameters")]
+        public List<string> PatchParameters { get; set; }
 
     }
 

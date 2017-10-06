@@ -1103,7 +1103,8 @@ namespace Tc.Crm.Service.Models
         [DataMember(Name = "social")]
         public Social[] Social { get; set; }
 
-        public string PatchParameters { get; set; }
+        [DataMember(Name = "PatchParameters")]
+        public List<string> PatchParameters { get; set; }
 
     }
 

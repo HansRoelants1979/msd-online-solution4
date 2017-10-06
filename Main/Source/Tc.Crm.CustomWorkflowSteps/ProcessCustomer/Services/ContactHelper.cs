@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xrm.Sdk;
 using System;
+using System.Collections.Generic;
 using Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models;
 
 namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
@@ -18,9 +19,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
                 throw new InvalidPluginExecutionException("Customer Identifier could not be retrieved from payload.");
 
             Entity contact = new Entity(EntityName.Contact);
-            string[] patchList = null;
-            if (!string.IsNullOrEmpty(customer.PatchParameters))
-                patchList = customer.PatchParameters.Split(',');
+             
             if (operationType == OperationType.POST){
                 contact[Attributes.Contact.SourceSystemId] = customer.CustomerIdentifier.CustomerId;
                 contact[Attributes.Contact.DuplicateSourceSystemId] = customer.CustomerIdentifier.CustomerId;
@@ -29,11 +28,11 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
                 contact[Attributes.Contact.SourceMarketId] = new EntityReference(EntityName.Country, 
                     new Guid(customer.CustomerIdentifier.SourceMarket));                                                                  
             }
-            PopulateIdentityInformation(contact, customer.CustomerIdentity, trace,operationType, patchList);
+            PopulateIdentityInformation(contact, customer.CustomerIdentity, trace,operationType, customer.PatchParameters);
             PopulateAddress(contact, customer.Address, trace);
-            PopulateEmail(contact, customer.Email, trace, operationType, patchList);
-            PopulatePhone(contact, customer.Phone, trace, operationType, patchList);
-            PopulatePermission(contact, customer.Permissions, trace, operationType, patchList);
+            PopulateEmail(contact, customer.Email, trace, operationType, customer.PatchParameters);
+            PopulatePhone(contact, customer.Phone, trace, operationType, customer.PatchParameters);
+            PopulatePermission(contact, customer.Permissions, trace, operationType, customer.PatchParameters);
             if (customer.CustomerGeneral != null)
             {
                 contact[Attributes.Contact.StatusCode] = CommonXrm.GetCustomerStatus(customer.CustomerGeneral.CustomerStatus);
@@ -62,7 +61,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
             return contact;
         }
         private static void PopulateIdentityInformation(Entity contact, CustomerIdentity identity, 
-            ITracingService trace, OperationType operationType = OperationType.POST,string[] patchList=null)
+            ITracingService trace, OperationType operationType = OperationType.POST,List<string> patchList=null)
         {
             trace.Trace("Contact populate identity - start");            
             if (identity == null) return;
@@ -71,18 +70,18 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
             if (!string.IsNullOrWhiteSpace(identity.LastName))
                 contact[Attributes.Contact.LastName] = identity.LastName;
             if(operationType == OperationType.PATCH){
-                if(patchList!=null && patchList.Length>0){
-                    if(Array.Exists(patchList, x => x == Attributes.Contact.Language)){
+                if(patchList!=null && patchList.Count>0){
+                    if(patchList.Contains("language")){
                         if (!string.IsNullOrWhiteSpace(identity.Language)) {
                             contact[Attributes.Contact.Language] = CommonXrm.GetLanguage(identity.Language);
                         } 
                     }
-                    if(Array.Exists(patchList, x => x == Attributes.Contact.Salutation)){
+                    if(patchList.Contains("salutation")){
                         if (!string.IsNullOrWhiteSpace(identity.Salutation)){
                             contact[Attributes.Contact.Salutation] = CommonXrm.GetSalutation(identity.Salutation);
                         } 
                     }
-                    if(Array.Exists(patchList, x => x == Attributes.Contact.Gender)){
+                    if(patchList.Contains("gender")){
                         contact[Attributes.Contact.Gender] = CommonXrm.GetGender(identity.Gender);
                     }
                 } 
@@ -155,7 +154,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
         }      
 
         private static void PopulateEmail(Entity contact, Email[] emails, ITracingService trace,
-            OperationType operationType = OperationType.POST, string[] patchList = null)
+            OperationType operationType = OperationType.POST, List<string> patchList = null)
         {            
             if (emails == null || emails.Length <= 0) return;
             trace.Trace("Contact populate email - start");
@@ -163,23 +162,23 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
             var email2 = emails.Length > 1 ? emails[1] : null;
             var email3 = emails.Length > 2 ? emails[2] : null;
             if (operationType == OperationType.PATCH){
-                if (patchList != null && patchList.Length > 0){
+                if (patchList != null && patchList.Count > 0){
                     if (email1 != null){
-                        if (Array.Exists(patchList, x => x == Attributes.Contact.EmailAddress1Type)){
+                        if (patchList.Contains("type")){
                             contact[Attributes.Contact.EmailAddress1Type] = CommonXrm.GetEmailType(email1.EmailType);
                         }
                         if (!string.IsNullOrWhiteSpace(email1.Address))
                             contact[Attributes.Contact.EmailAddress1] = email1.Address;
                     }
                     if (email2 != null){
-                        if (Array.Exists(patchList, x => x == Attributes.Account.EmailAddress2Type)){
+                        if (patchList.Contains("type")){
                             contact[Attributes.Contact.EmailAddress2Type] = CommonXrm.GetEmailType(email2.EmailType);
                         }
                         if (!string.IsNullOrWhiteSpace(email2.Address))
                             contact[Attributes.Contact.EmailAddress2] = email2.Address;
                     }
                     if (email3 != null){
-                        if (Array.Exists(patchList, x => x == Attributes.Account.EmailAddress3Type)){
+                        if (patchList.Contains("type")){
                             contact[Attributes.Contact.EmailAddress3Type] = CommonXrm.GetEmailType(email3.EmailType);
                         }
                         if (!string.IsNullOrWhiteSpace(email3.Address))
@@ -208,7 +207,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
         }      
 
         private static void PopulatePhone(Entity contact, Phone[] phoneNumbers, ITracingService trace,
-            OperationType operationType = OperationType.POST, string[] patchList = null)
+            OperationType operationType = OperationType.POST, List<string> patchList = null)
         {
             if (phoneNumbers == null || phoneNumbers.Length <= 0) return;
             trace.Trace("Contact populate phone - start");
@@ -216,23 +215,23 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
             var phone2 = phoneNumbers.Length > 1 ? phoneNumbers[1] : null;
             var phone3 = phoneNumbers.Length > 2 ? phoneNumbers[2] : null;
             if (operationType == OperationType.PATCH){
-                if (patchList != null && patchList.Length > 0){
+                if (patchList != null && patchList.Count > 0){
                     if (phone1 != null){
-                        if (Array.Exists(patchList, x => x == Attributes.Contact.Telephone1Type)){
+                        if (patchList.Contains("type")){
                             contact[Attributes.Contact.Telephone1Type] = CommonXrm.GetPhoneType(phone1.PhoneType);
                         }
                         if (!string.IsNullOrWhiteSpace(phone1.Number))
                             contact[Attributes.Contact.Telephone1] = phone1.Number;
                     }
                     if (phone2 != null){
-                        if (Array.Exists(patchList, x => x == Attributes.Contact.Telephone2Type)){
+                        if (patchList.Contains("type")){
                             contact[Attributes.Contact.Telephone2Type] = CommonXrm.GetPhoneType(phone2.PhoneType);
                         }
                         if (!string.IsNullOrWhiteSpace(phone2.Number))
                             contact[Attributes.Contact.Telephone2] = phone2.Number;
                     }
                     if (phone3 != null){
-                        if (Array.Exists(patchList, x => x == Attributes.Contact.Telephone2Type)){
+                        if (patchList.Contains("type")){
                             contact[Attributes.Contact.Telephone2Type] = CommonXrm.GetPhoneType(phone2.PhoneType);
                         }
                         if (!string.IsNullOrWhiteSpace(phone3.Number))
@@ -261,35 +260,35 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
         }      
 
         private static void PopulatePermission(Entity contact, Permission permission, ITracingService trace,
-            OperationType operationType = OperationType.POST, string[] patchList = null)
+            OperationType operationType = OperationType.POST, List<string> patchList = null)
         {
             if (permission == null) return;
             trace.Trace("Contact populate permission - start");    
             if(operationType == OperationType.PATCH)
             {
-                if (patchList != null)
+                if (patchList != null && patchList.Count >0)
                 {
-                    if (Array.Exists(patchList, x => x == Attributes.Contact.SendMarketingByPost)){
+                    if (patchList.Contains("mailAllowedInd")){
                         if (!string.IsNullOrWhiteSpace(permission.MailAllowedInd))
                             contact[Attributes.Contact.SendMarketingByPost] = CommonXrm.GetMarketingByPost(permission.MailAllowedInd);
                     }
-                    if (Array.Exists(patchList, x => x == Attributes.Contact.MarketingByPhone)){
+                    if (patchList.Contains("phoneAllowedInd")){
                         if (!string.IsNullOrWhiteSpace(permission.PhoneAllowedInd))
                             contact[Attributes.Contact.MarketingByPhone] = CommonXrm.GetMarketingByPhone(permission.PhoneAllowedInd);
                     }
-                    if (Array.Exists(patchList, x => x == Attributes.Contact.SendMarketingBySms)){
+                    if (patchList.Contains("smsAllowedInd")){
                         if (!string.IsNullOrWhiteSpace(permission.SmsAllowedInd))
                             contact[Attributes.Contact.SendMarketingBySms] = CommonXrm.GetMarketingBySms(permission.SmsAllowedInd);
                     }
-                    if (Array.Exists(patchList, x => x == Attributes.Contact.SendMarketingByEmail)){
+                    if (patchList.Contains("emailAllowedInd")){
                         if (!string.IsNullOrWhiteSpace(permission.EmailAllowedInd))
                             contact[Attributes.Contact.SendMarketingByEmail] = CommonXrm.GetMarketingByEmail(permission.EmailAllowedInd);
                     }
-                    if (Array.Exists(patchList, x => x == Attributes.Contact.ThomasCookMarketingConsent)){
+                    if (patchList.Contains("doNotContactInd")){
                         if (!string.IsNullOrWhiteSpace(permission.DoNotContactInd))
                             contact[Attributes.Contact.ThomasCookMarketingConsent] = CommonXrm.GetMarketingConsent(permission.DoNotContactInd);
                     }
-                    if (Array.Exists(patchList, x => x == Attributes.Contact.PreferredContactMethodCode)){
+                    if (patchList.Contains("preferredContactMethod")){
                         if (!string.IsNullOrWhiteSpace(permission.PreferredContactMethod))
                             contact[Attributes.Contact.PreferredContactMethodCode] = CommonXrm.GetPreferredContactMethodCode(permission.PreferredContactMethod);
                     }

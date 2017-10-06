@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xrm.Sdk;
 using System;
+using System.Collections.Generic;
 using Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models;
 
 namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
@@ -32,13 +33,11 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
                         (!string.IsNullOrWhiteSpace(customer.CustomerIdentifier.CustomerId)) ?
                         customer.CustomerIdentifier.CustomerId : string.Empty;
             }
-            string[] patchList = null;
-            if (!string.IsNullOrEmpty(customer.PatchParameters))
-                patchList = customer.PatchParameters.Split(',');
+             
             if ((customer.Email != null) || (customer.Email != null & customer.Email.Length > 0))
-                PopulateEmail(account, customer.Email, trace, operationType, patchList);
+                PopulateEmail(account, customer.Email, trace, operationType, customer.PatchParameters);
             if ((customer.Phone != null) || (customer.Phone != null & customer.Phone.Length > 0))
-                PopulatePhone(account, customer.Phone, trace, operationType, patchList);
+                PopulatePhone(account, customer.Phone, trace, operationType, customer.PatchParameters);
             if ((customer.Address != null) || (customer.Address != null & customer.Address.Length > 0))
                 PopulateAddress(account, customer.Address, trace);
             trace.Trace("Account populate fields - end");
@@ -47,7 +46,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
 
         #region Email
         private static void PopulateEmail(Entity account, Email[] emailList, ITracingService trace, 
-            OperationType operationType = OperationType.POST,string[] patchList = null)
+            OperationType operationType = OperationType.POST,List<string> patchList = null)
         {
             if (emailList == null || emailList.Length <= 0) return;
             trace.Trace("Account populate email - start");
@@ -55,23 +54,23 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
             var email2 = emailList.Length > 1 ? emailList[1] : null;
             var email3 = emailList.Length > 2 ? emailList[2] : null;
             if (operationType == OperationType.PATCH){
-                if (patchList != null && patchList.Length > 0){
+                if (patchList != null && patchList.Count > 0){
                     if (email1 != null){
-                        if (Array.Exists(patchList, x => x == Attributes.Account.EmailAddress1Type)){
+                        if (patchList.Contains("type")){
                             account[Attributes.Account.EmailAddress1Type] = CommonXrm.GetEmailType(email1.EmailType);
                         }
                         if (!string.IsNullOrWhiteSpace(email1.Address))
                             account[Attributes.Account.EmailAddress1] = email1.Address;
                     }
                     if (email2 != null){
-                        if (Array.Exists(patchList, x => x == Attributes.Account.EmailAddress2Type)){
+                        if (patchList.Contains("type")){
                             account[Attributes.Account.EmailAddress2Type] = CommonXrm.GetEmailType(email2.EmailType);
                         }
                         if (!string.IsNullOrWhiteSpace(email2.Address))
                             account[Attributes.Account.EmailAddress2] = email2.Address;
                     }
                     if (email3 != null){
-                        if (Array.Exists(patchList, x => x == Attributes.Account.EmailAddress3Type)){
+                        if (patchList.Contains("type")){
                             account[Attributes.Account.EmailAddress3Type] = CommonXrm.GetEmailType(email3.EmailType);
                         }
                         if (!string.IsNullOrWhiteSpace(email3.Address))
@@ -102,7 +101,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
 
         #region Phone
         private static void PopulatePhone(Entity account, Phone[] phoneList, ITracingService trace,
-            OperationType operationType = OperationType.POST,  string[] patchList = null)
+            OperationType operationType = OperationType.POST, List<string> patchList = null)
         {
             if (phoneList == null || phoneList.Length <= 0) return;
             trace.Trace("Account populate phone - start");
@@ -110,24 +109,24 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
             var phone2 = phoneList.Length > 1 ? phoneList[1] : null;
             var phone3 = phoneList.Length > 2 ? phoneList[2] : null;
             if (operationType == OperationType.PATCH){
-                if (patchList != null){
+                if (patchList != null && patchList.Count > 0 ){
                     if (phone1 != null){
-                        if (Array.Exists(patchList, x => x == Attributes.Account.Telephone1Type)){
+                        if (patchList.Contains("type")){
                             account[Attributes.Account.Telephone1Type] = CommonXrm.GetPhoneType(phone1.PhoneType);
                         }
                         if (!string.IsNullOrWhiteSpace(phone1.Number))
                             account[Attributes.Account.Telephone1] = phone1.Number;
                     }
                     if (phone2 != null){
-                        if(Array.Exists(patchList, x => x == Attributes.Account.Telephone2Type)){
+                        if(patchList.Contains("type")){
                             account[Attributes.Account.Telephone2Type] = CommonXrm.GetPhoneType(phone2.PhoneType);
                         }
                         if (!string.IsNullOrWhiteSpace(phone2.Number))
                             account[Attributes.Account.Telephone2] = phone2.Number;
                     }
                     if (phone3 != null) { 
-                        if(Array.Exists(patchList, x => x == Attributes.Account.Telephone2Type)){
-                            account[Attributes.Account.Telephone2Type] = CommonXrm.GetPhoneType(phone2.PhoneType);
+                        if(patchList.Contains("type")){
+                            account[Attributes.Account.Telephone3Type] = CommonXrm.GetPhoneType(phone3.PhoneType);
                         }
                         if (!string.IsNullOrWhiteSpace(phone3.Number))
                             account[Attributes.Account.Telephone3] = phone3.Number;

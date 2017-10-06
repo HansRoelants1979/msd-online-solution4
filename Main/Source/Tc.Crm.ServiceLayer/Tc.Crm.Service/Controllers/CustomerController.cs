@@ -107,13 +107,10 @@ namespace Tc.Crm.Service.Controllers
             CustomerInformation customerInformation = new CustomerInformation();
             var customer = customerInformation.Customer;
 
-            string patchParameters = string.Empty;
+            List<string> patchParameters = new List<string>();
             customerInfo.Operations.ForEach(items => {
-                var item = items.Path.Split(new char[] { '/' });
-                if(customerInfo.Operations.Count == customerInfo.Operations.IndexOf(items) +1)
-                    patchParameters += (item.GetValue(item.Length - 1).ToString());
-                else
-                patchParameters += (item.GetValue(item.Length - 1).ToString()) + ",";
+                if (items.ParsedPath.Count() > 0)
+                    patchParameters.Add(items.ParsedPath.Last().Name);
             });
 
             customer.PatchParameters = patchParameters;
