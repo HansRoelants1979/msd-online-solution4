@@ -47,6 +47,9 @@
         public const string BookingSystemIsUnknown = "Booking system provided is either null or unknown";
         public const string ResponseNull = "Response is Null.";
         public const string SourceKeyNotPresent = "Source system id of booking record is empty or null.";
+        public const string bookingNumberNotPresent = "Booking number is missing";
+        public const string BookingDatabaseNotPresent = "Booking database is unknown or not provided.";
+        public const string ConsultationReferenceNotPresent = "The booking received was from TCV but no consultationReference was provided within the supplied Json";
         public const string CustomerGeneralNotPresent = "Customer general is empty or null";
         public const string JsonWebTokenParserError = "Error while parsing JSON Web Token.";
         public const string SignatureValidationUnhandledError = "Error while validating the signature.";
@@ -74,7 +77,6 @@
         public const string CustomerDataPassedIsNullOrCouldNotBeParsed = "Customer data passed is null or could not be parsed.";
         public const string CustomerTypeNotPresent = "Customer type record is empty or null.";
         public const string CustomerIdentityNotPresent = "Customer Identity is null or empty";
-
         public const string FailedToUpdateEntityCacheMessage = FailedtoCreateSurvey;
         public const string ConfirmationDataPassedIsNullOrCouldNotBeParsed = "The payload could not be read.";
         public const string CorrelationIdWasMissing = "The correlationId was missing.";

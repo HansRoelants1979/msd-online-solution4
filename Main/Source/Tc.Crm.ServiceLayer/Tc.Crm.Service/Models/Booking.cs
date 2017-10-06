@@ -109,6 +109,8 @@ namespace Tc.Crm.Service.Models
     [DataContract(Name = "SourceSystemId")]
     public enum SourceSystemId
     {
+        [EnumMember(Value = "")]
+        Unknown,
         [EnumMember]
         OnTour,
         [EnumMember]

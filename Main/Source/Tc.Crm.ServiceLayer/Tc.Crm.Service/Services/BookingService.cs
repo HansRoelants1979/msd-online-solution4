@@ -60,6 +60,7 @@ namespace Tc.Crm.Service.Services
             var booking = bookingInformation.Booking;
             if(booking.BookingIdentifier == null)
             {
+                validationMessages.Add(Constants.Messages.bookingNumberNotPresent);
                 validationMessages.Add(Constants.Messages.SourceKeyNotPresent);
                 validationMessages.Add(Constants.Messages.BookingSystemIsUnknown);
                 validationMessages.Add(Constants.Messages.SourceMarketMissing);
@@ -67,18 +68,29 @@ namespace Tc.Crm.Service.Services
             else
             {
                 if (string.IsNullOrWhiteSpace(booking.BookingIdentifier.BookingNumber))
-                    validationMessages.Add(Constants.Messages.SourceKeyNotPresent);
+                    validationMessages.Add(Constants.Messages.bookingNumberNotPresent);
                 if (booking.BookingIdentifier.BookingSystem == BookingSystem.Unknown)
                     validationMessages.Add(Constants.Messages.BookingSystemIsUnknown);
                 if (string.IsNullOrWhiteSpace(booking.BookingIdentifier.SourceMarket))
                     validationMessages.Add(Constants.Messages.SourceMarketMissing);
+                if (booking.BookingIdentifier.SourceSystemId == SourceSystemId.Unknown)
+                    validationMessages.Add(Constants.Messages.BookingDatabaseNotPresent);
+                if(booking.BookingIdentifier.SourceSystemId == SourceSystemId.TCV)
+                {
+                    if(string.IsNullOrWhiteSpace( booking.BookingIdentifier.ConsultationReference))
+                        validationMessages.Add(Constants.Messages.ConsultationReferenceNotPresent);
+                }
             }
             
 
             if (booking.Customer != null && (booking.Customer.CustomerIdentifier == null
                 || string.IsNullOrWhiteSpace(booking.Customer.CustomerIdentifier.CustomerId)))
                 validationMessages.Add(Constants.Messages.CustomerIdIsNull);
-
+            else
+            {
+                if (string.IsNullOrWhiteSpace(booking.Customer.CustomerIdentifier.SourceMarket))
+                    validationMessages.Add(Constants.Messages.CustomerSourceMarketMissing);
+            }
             return validationMessages;
         }
 
