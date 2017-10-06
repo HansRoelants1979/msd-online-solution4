@@ -139,6 +139,9 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string StateCode = "statecode";
         public const string StatusCode = "statuscode";
         public const string DateOfDeath = "tc_dateofdeath";
+        public const string DisabledIndicator = "tc_disabledindicator";
+        public const string VIP = "tc_vip";
+        public const string Colleague = "tc_colleague";
         public const string EmailAddress1Type = "tc_emailaddress1type";
         public const string EmailAddress2Type = "tc_emailaddress2type";
         public const string EmailAddress3Type = "tc_emailaddress3type";
@@ -153,6 +156,7 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string Birthdate = "birthdate";
         public const string SourceSystemId = "tc_sourcesystemid";
         public const string DuplicateSourceSystemId = "tc_duplicatesourcesystemid";
+        public const string EmailAddressAvailable = "tc_emailaddressavailable";
         public const string FullName = "fullname";
         public const string ContactId = "contactid";
         public const string PreferredContactMethodCode = "preferredcontactmethodcode";
@@ -162,6 +166,25 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string SendMarketingBySms = "tc_sendmarketingbysms";
         public const string SendMarketingByEmail = "tc_sendmarketingbyemail";
         public const string ModifiedOn = "modifiedon";
+        public const string MarketingUpdated = "tc_marketingupdated";
+        public const string MarketingUpdatedBy = "tc_marketingupdatedby";
+
+        public const string MarketingConsentUpdated = "tc_marketingupdatedby";
+        public const string NoLongerLivingAtAddress = "tc_marketingupdatedby";
+        public const string Deceased = "tc_marketingupdatedby";
+        public const string AnnualInsurance = "tc_marketingupdatedby";
+        public const string AnnualInsuranceExpiryDate = "tc_marketingupdatedby";
+        public const string AnnualInsuranceExpiredDate = "tc_marketingupdatedby";
+        public const string PaymentByDirectDebit = "tc_marketingupdatedby";
+        public const string StoreCreated = "tc_marketingupdatedby";
+        public const string ClusterCreated = "tc_marketingupdatedby";
+        public const string RegionCreated = "tc_marketingupdatedby";
+        public const string TerrirtoryCreatedBy = "tc_marketingupdatedby";
+        public const string StoreModified = "tc_marketingupdatedby";
+        public const string ClusterModified = "tc_marketingupdatedby";
+        public const string RegionModified = "tc_marketingupdatedby";
+        public const string TerritoryModifiedBy = "tc_marketingupdatedby";       
+
     }   
     public static class Account
     {

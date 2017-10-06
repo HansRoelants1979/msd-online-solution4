@@ -16,14 +16,15 @@ namespace Tc.Crm.CustomWorkflowSteps
 
             try
             {
-                //EntityReference entityMerge = EntityMerge.Get<EntityReference>(executionContext);
-                //(new MergeCustomerService()).MergeCustomers(
-                //        EntityMerge.Get<EntityReference>(executionContext),
-                //        service,
-                //        trace);
+                EntityReference entityMerge = EntityMerge.Get<EntityReference>(executionContext);
+                (new MergeCustomerService()).MergeCustomers(
+                        EntityMerge.Get<EntityReference>(executionContext),
+                        service,
+                        trace);
             }            
             catch (Exception ex)
             {
+                trace.Trace("Exception in MergeCustomerActivity.Execute: {0}", ex.ToString());
                 throw new InvalidPluginExecutionException(OperationStatus.Failed, ex.ToString());
             }
         }
