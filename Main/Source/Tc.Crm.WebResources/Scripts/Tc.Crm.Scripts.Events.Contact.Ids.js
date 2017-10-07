@@ -35,7 +35,7 @@ var scriptLoader = scriptLoader || {
         return allLoaded;
     }
 };
-scriptLoader.load("Tc.Crm.Scripts.Events.Contact.Ids", ["Tc.Crm.Scripts.Utils.Validation"], function () {
+scriptLoader.load("Tc.Crm.Scripts.Events.Contact.Ids", ["Tc.Crm.Scripts.Utils.Validation", "Tc.Crm.Scripts.Library.Contact"], function () {
 // start script
 
 if (typeof (Tc) === "undefined") {

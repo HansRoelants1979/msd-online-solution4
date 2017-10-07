@@ -35,7 +35,7 @@
         return allLoaded;
     }
 };
-scriptLoader.load("Tc.Crm.Scripts.Events.Case", ["Tc.Crm.Scripts.Utils.Validation"], function () {
+scriptLoader.load("Tc.Crm.Scripts.Events.Case", ["Tc.Crm.Scripts.Utils.Validation", "Tc.Crm.Scripts.Library.Case"], function () {
 
 // start script
 if (typeof (Tc) === "undefined") {
@@ -71,20 +71,37 @@ Tc.Crm.Scripts.Events.Case = (function () {
     var CASE_BOOKING_ENTITY_NAME = "tc_booking"
     var CASE_SOURCE_MARKET_ENTITY_NAME = "tc_country"
     var FORM_MODE_CREATE = 1;
-    var FORM_MODE_UPDATE = 2;
-    
+    var FORM_MODE_UPDATE = 2;    
 
     var Attributes = {
         AlternativePhone: "tc_alternativephone",
-        OtherPartyPhone: "tc_otherpartyphone"
+        OtherPartyPhone: "tc_otherpartyphone",
+        ArrivalDate: "tc_arrivaldate",
+        DepartureDate: "tc_departuredate",
+        RepNotes: "tc_reportnotes"
     }
 
     function OnLoad() {
         Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.AlternativePhone);
         Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.OtherPartyPhone);
         validateCaseAssociatedCustomerPhoneNum();
-        preFilterLocationOfficeLookup();        
+        preFilterLocationOfficeLookup();
+        var currentItem = Xrm.Page.ui.formSelector.getCurrentItem();
+        if(currentItem == null || currentItem.getLabel() === "iDS Case") {
+        	setNotification();
+        }
     }
+
+    var setNotification = function () {
+    	if(Xrm.Page.getAttribute("tc_reportnotes")) {
+    		if(Xrm.Page.getAttribute("tc_reportnotes").getValue() == null) {
+    			Xrm.Page.ui.setFormNotification(" You must provide a value for Rep Notes to Resolve Case. ", "WARNING", 'note')
+    		} else {
+    			Xrm.Page.ui.clearFormNotification('note')
+    		}
+    	}
+    }
+
     var GetTheSourceMarketCurrency = function () {
                
         var sourceMarketId;
@@ -432,6 +449,19 @@ Tc.Crm.Scripts.Events.Case = (function () {
         return Xrm.Page.context.client.getClientState() === CLIENT_STATE_OFFLINE
     }
 
+    var validateArrivalDateGreaterOrEqualDeparture = function () {
+    	var arrivalDateControl = Xrm.Page.getControl(Attributes.ArrivalDate);
+    	var arrivalDate = Xrm.Page.data.entity.attributes.get(Attributes.ArrivalDate).getValue();
+    	var departureDate = Xrm.Page.data.entity.attributes.get(Attributes.DepartureDate).getValue();
+
+    	arrivalDateControl.clearNotification();
+    	if(arrivalDate != null && departureDate != null) {
+    		if(arrivalDate.setHours(0, 0, 0, 0) > departureDate.setHours(0, 0, 0, 0)) {
+    			arrivalDateControl.setNotification("Departure date should be equal or greater than Arrival date");
+    		}
+    	}
+    }
+
     // public methods
     return {
         OnLoad: function () {
@@ -443,6 +473,9 @@ Tc.Crm.Scripts.Events.Case = (function () {
         OnChangeTelephone2: function () {
             onChangeTelephone2();
         },
+        OnChangeRepNotes: function () {
+        	setNotification();
+        },
         OnSave: function (context) {
             var isValid = Tc.Crm.Scripts.Utils.Validation.ValidateGdprCompliance(context);
             if (isValid) {
@@ -450,6 +483,14 @@ Tc.Crm.Scripts.Events.Case = (function () {
                     Tc.Crm.Scripts.Library.Case.UpdateRelatedCompensationsSourceMarket();
                 }
             }            
+        },
+        OnValidateRepNotes: function () {
+        	var currentItem = Xrm.Page.ui.formSelector.getCurrentItem();
+        	if(currentItem == null || currentItem.getLabel() === "iDS Case") {
+        		var repNotes = Xrm.Page.data.entity.attributes.get(Attributes.RepNotes);
+        		return repNotes != null && repNotes.getValue() != null && repNotes.getValue() !== "";
+        	}
+        	return true;
         },
         OnCaseFieldChange: function () {
             GetTheSourceMarketCurrency();
@@ -464,6 +505,9 @@ Tc.Crm.Scripts.Events.Case = (function () {
             if (Xrm.Page.context.client.getClientState() === CLIENT_STATE_OFFLINE) {
                 Tc.Crm.Scripts.Library.Case.UpdateRelatedCompensationsSourceMarket();
             }
+        },
+        OnChangeArrivalOrDepartureDates: function () {
+        	validateArrivalDateGreaterOrEqualDeparture();
         }
     };
 })();
