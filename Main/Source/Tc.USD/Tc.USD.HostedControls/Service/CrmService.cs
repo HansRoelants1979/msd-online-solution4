@@ -1,11 +1,15 @@
 ﻿using Microsoft.Xrm.Sdk.Query;
 using System;
+using System.Linq;
+using System.ServiceModel;
+using Microsoft.Xrm.Sdk;
 using tcm = Tc.Usd.HostedControls.Models;
 using Microsoft.Xrm.Tooling.Connector;
 using Microsoft.Xrm.Sdk.Messages;
+using Tc.Crm.Common.Constants;
 using Er = Tc.Crm.Common.Constants.EntityRecords;
 using Tc.Crm.Common.Constants.Attributes;
-using Microsoft.Xrm.Sdk;
+using Tc.Crm.Common.Services;
 
 namespace Tc.Usd.HostedControls.Service
 {
@@ -281,7 +285,203 @@ namespace Tc.Usd.HostedControls.Service
                 return ((OptionSetValue)value).Value.ToString();
             return null;
         }
+        public static Entity GetOpportunity(CrmServiceClient client, ILogger logger, string opportunityId)
+        {
+            if (string.IsNullOrEmpty(opportunityId))
+                return null;
+            var query = new QueryExpression(EntityName.Opportunity)
+            {
+                ColumnSet =
+                    new ColumnSet(Opportunity.CustomerId, Opportunity.Initials, Opportunity.Name,
+                        Opportunity.EarliestDepartureDate, Opportunity.LatestDepartureDate, Opportunity.Duration,
+                        Opportunity.DeparturePoint1, Opportunity.DeparturePoint2, Opportunity.DeparturePoint3,
+                        Opportunity.DestinationCountry1, Opportunity.Region1, Opportunity.DestinationAirport1,
+                        Opportunity.Hotel1, Opportunity.DestinationCountry2, Opportunity.Region2,
+                        Opportunity.DestinationAirport2, Opportunity.Hotel2, Opportunity.DestinationCountry3,
+                        Opportunity.Region3, Opportunity.Hotel3, Opportunity.DestinationAirport3, Opportunity.Exclude1,
+                        Opportunity.Exclude2, Opportunity.Exclude3, Opportunity.HowDoYouWantToSearch)
+            };
+            query.LinkEntities.Add(new LinkEntity(EntityName.Opportunity, EntityName.Contact, Opportunity.CustomerId,
+                Contact.ContactId,
+                JoinOperator.Inner));
+            query.LinkEntities[0].Columns.AddColumns(Contact.ContactId, Crm.Common.Constants.Attributes.Customer.SourceSystemId, Crm.Common.Constants.Attributes.Customer.Salutation,
+                Crm.Common.Constants.Attributes.Customer.FirstName,
+                Crm.Common.Constants.Attributes.Customer.MiddleName,
+                Crm.Common.Constants.Attributes.Customer.LastName, Crm.Common.Constants.Attributes.Customer.Birthdate, Crm.Common.Constants.Attributes.Customer.Address1FlatorUnitNumber,
+                Crm.Common.Constants.Attributes.Customer.Address1HouseNumberoBuilding,
+                Crm.Common.Constants.Attributes.Customer.Address1Town, Crm.Common.Constants.Attributes.Customer.Address1CountryId, Crm.Common.Constants.Attributes.Customer.Address1County, Crm.Common.Constants.Attributes.Customer.Address1PostalCode,
+                Crm.Common.Constants.Attributes.Customer.Address2FlatorUnitNumber, Crm.Common.Constants.Attributes.Customer.Address2HouseNumberoBuilding, Crm.Common.Constants.Attributes.Customer.Address2Town,
+                Crm.Common.Constants.Attributes.Customer.Address2CountryId, Crm.Common.Constants.Attributes.Customer.Address2County, Crm.Common.Constants.Attributes.Customer.Address2PostalCode,
+                Crm.Common.Constants.Attributes.Customer.Telephone1Type,
+                Crm.Common.Constants.Attributes.Customer.Telephone1, Crm.Common.Constants.Attributes.Customer.Telephone2Type, Crm.Common.Constants.Attributes.Customer.Telephone2, Crm.Common.Constants.Attributes.Customer.Telephone3Type,
+                Crm.Common.Constants.Attributes.Customer.Telephone3, Crm.Common.Constants.Attributes.Customer.EmailAddress1Type,
+                Crm.Common.Constants.Attributes.Customer.EmailAddress1, Crm.Common.Constants.Attributes.Customer.EmailAddress2Type, Crm.Common.Constants.Attributes.Customer.EmailAddress2, Crm.Common.Constants.Attributes.Customer.EmailAddress3Type,
+                Crm.Common.Constants.Attributes.Customer.EmailAddress3);
+            query.LinkEntities[0].EntityAlias = AliasName.ContactQueryAliasName;
+            query.Criteria.Conditions.Add(new ConditionExpression(Opportunity.OpportunityId, ConditionOperator.Equal,
+                opportunityId));
+            var req = new RetrieveMultipleRequest
+            {
+                Query = query
+            };
+                var response =
+                    (RetrieveMultipleResponse)
+                    client.ExecuteCrmOrganizationRequest(req,
+                        $"Requesting {query.EntityName}");
+                var opportunity = response?.EntityCollection?.Entities?.FirstOrDefault();
+                if (opportunity != null)
+                    logger.LogInformation("Opportunity retrieved");
+                return opportunity;
+        }
 
+        public static Entity GetSsoDetails(Guid userId, ILogger logger, CrmServiceClient client)
+        {
+            var query = new QueryByAttribute(EntityName.ExternalLogin)
+            {
+                ColumnSet =
+                    new ColumnSet(ExternalLogin.AbtaNumber, ExternalLogin.BranchCode, ExternalLogin.EmployeeId,
+                        ExternalLogin.ExternalLoginId, ExternalLogin.Initials)
+            };
+            query.AddAttributeValue(ExternalLogin.OwnerId, userId);
+            var login = ExecuteQuery(query, client)?.EntityCollection?.Entities?.FirstOrDefault();
+            if (login == null)
+                return null;
+            var loginInfo =
+                $"Abtanumber is {login.GetAttributeValue<string>(ExternalLogin.AbtaNumber)}, BranchCode is {login.GetAttributeValue<string>(ExternalLogin.BranchCode)}, Employee Id is {login.GetAttributeValue<string>(ExternalLogin.EmployeeId)}, Initials are {login.GetAttributeValue<string>(ExternalLogin.Initials)}";
 
+            logger.LogInformation($"Requesting SSO Details result: {loginInfo}");
+            return login;
+        }
+
+        public static string GetPrivateInfo(ILogger logger, CrmServiceClient client)
+        {
+            var query = new QueryByAttribute(EntityName.SecurityConfiguration)
+            {
+                ColumnSet = new ColumnSet(SecureConfiguration.Value)
+            };
+            query.AddAttributeValue(SecureConfiguration.Name, Tc.Crm.Common.Constants.EntityRecords.Configuration.OwrJwtPrivateKeyConfigName);
+            var config = ExecuteQuery(query, client).EntityCollection?.Entities?.FirstOrDefault();
+            var privateKey = config?.GetAttributeValue<string>(SecureConfiguration.Value);
+            if (privateKey != null)
+                logger.LogInformation(
+                    $"Retrieved {Tc.Crm.Common.Constants.EntityRecords.Configuration.OwrJwtPrivateKeyConfigName} result {Tc.Crm.Common.Constants.EntityRecords.Configuration.OwrJwtPrivateKeyConfigName} is not null");
+            return privateKey;
+        }
+
+        public static string GetConfig(string name, ILogger logger, CrmServiceClient client)
+        {
+            var query = new QueryByAttribute(EntityName.Configuration)
+            {
+                ColumnSet = new ColumnSet(Crm.Common.Constants.Attributes.Configuration.Value)
+            };
+            query.AddAttributeValue(Crm.Common.Constants.Attributes.Configuration.Name, name);
+            var config = ExecuteQuery(query, client).EntityCollection?.Entities?.FirstOrDefault();
+
+            var value = config?.GetAttributeValue<string>(Crm.Common.Constants.Attributes.Configuration.Value);
+            logger.LogInformation($"Retrieved {name} result: {value}");
+            return value;
+        }
+
+        public static DataCollection<Entity> GetTravelPlannerRooms(string opportunityId, ILogger logger, CrmServiceClient client)
+        {
+            if (string.IsNullOrEmpty(opportunityId))
+                return null;
+            var query = new QueryByAttribute(EntityName.Room)
+            {
+                ColumnSet =
+                    new ColumnSet(Room.NoOfAdults, Room.NumberOfChildren, Room.Child1, Room.Child2, Room.Child3,
+                        Room.Child4, Room.Child5, Room.Child6, Room.Name)
+            };
+            query.AddAttributeValue(Room.OpportunityId, opportunityId);
+            var records = ExecuteQuery(query, client)?.EntityCollection?.Entities;
+            return records;
+        }
+
+        public static string GetIso2Code(CrmServiceClient client, Guid? countryId)
+        {
+            if (countryId != null)
+            {
+                var query = new QueryByAttribute(EntityName.Country)
+                {
+                    ColumnSet =
+                        new ColumnSet(Country.Iso2Code)
+                };
+                query.AddAttributeValue(Country.CountryId, countryId);
+                var country = ExecuteQuery(query, client)?.EntityCollection?.Entities?.FirstOrDefault();
+                if (country != null && country.Contains(Country.Iso2Code))
+                {
+                    return country.GetAttributeValue<string>(Country.Iso2Code);
+                }
+            }
+            return "";
+        }
+
+        public static string GetAirportIata(CrmServiceClient client, Guid? airportId)
+        {
+            if (airportId != null)
+            {
+                var query = new QueryByAttribute(EntityName.Gateway)
+                {
+                    ColumnSet =
+                        new ColumnSet(Gateway.Iata)
+                };
+                query.AddAttributeValue(Gateway.GatewayId, airportId);
+                var airport = ExecuteQuery(query, client)?.EntityCollection?.Entities?.FirstOrDefault();
+                if (airport != null && airport.Contains(Gateway.Iata))
+                {
+                    return airport.GetAttributeValue<string>(Gateway.Iata);
+                }
+            }
+            return "";
+        }
+
+        public static string GetRegionCode(CrmServiceClient client, Guid? regionId)
+        {
+            if (regionId != null)
+            {
+                var query = new QueryByAttribute(EntityName.Region)
+                {
+                    ColumnSet = new ColumnSet(Region.RegionCode)
+                };
+                query.AddAttributeValue(Region.RegionId, regionId);
+                var region = ExecuteQuery(query, client)?.EntityCollection?.Entities?.FirstOrDefault();
+                if (region != null && region.Contains(Region.RegionCode))
+                {
+                    return region.GetAttributeValue<string>(Region.RegionCode);
+                }
+            }
+            return "";
+        }
+
+        public static string GetHotelCode(CrmServiceClient client, Guid? hotelId)
+        {
+            if (hotelId != null)
+            {
+                var query = new QueryByAttribute(EntityName.Hotel)
+                {
+                    ColumnSet = new ColumnSet(Hotel.MasterHotelId)
+                };
+                query.AddAttributeValue(Hotel.HotelId, hotelId);
+                var hotel = ExecuteQuery(query, client)?.EntityCollection?.Entities?.FirstOrDefault();
+                if (hotel != null && hotel.Contains(Hotel.MasterHotelId))
+                {
+                    return hotel.GetAttributeValue<string>(Hotel.MasterHotelId);
+                }
+            }
+            return "";
+        }
+
+        private static RetrieveMultipleResponse ExecuteQuery(QueryByAttribute query, CrmServiceClient client)
+        {
+            var req = new RetrieveMultipleRequest
+            {
+                Query = query
+            };
+                var response =
+                    (RetrieveMultipleResponse)
+                    client.ExecuteCrmOrganizationRequest(req,
+                        $"Requesting {query.EntityName}");
+                return response;
+        }
     }
 }

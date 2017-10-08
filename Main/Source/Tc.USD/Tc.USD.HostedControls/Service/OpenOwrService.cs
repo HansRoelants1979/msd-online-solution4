@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel;
 using Microsoft.Crm.UnifiedServiceDesk.Dynamics;
 using Microsoft.Uii.Csr;
 using Microsoft.Xrm.Sdk;
-using Microsoft.Xrm.Sdk.Messages;
-using Microsoft.Xrm.Sdk.Query;
 using Tc.Crm.Common;
+using Tc.Crm.Common.Constants.Attributes;
+using Tc.Crm.Common.Constants.UsdConstants;
 using Tc.Crm.Common.IntegrationLayer.Jti.Models;
-using EntityRecords = Tc.Crm.Common.Constants.EntityRecords;
 using Tc.Usd.HostedControls.Service;
+using Configuration = Tc.Crm.Common.Constants.EntityRecords.Configuration;
 
 namespace Tc.Usd.HostedControls
 {
@@ -18,91 +16,67 @@ namespace Tc.Usd.HostedControls
     {
         public void CallSsoService(RequestActionEventArgs args)
         {
-            var opportunityId = GetParamValue(args, EntityRecords.Configuration.OwrOpportunityIdParamName);
-            var createdByInitials = GetCreatorsInitials(opportunityId);
-            var login = GetSsoDetails(_client.CrmInterface.GetMyCrmUserId());
-            var privateKey = GetPrivateInfo();
-            var expiredSeconds = GetConfig(EntityRecords.Configuration.OwrSsoTokenExpired);
-            var notBeforeSeconds = GetConfig(EntityRecords.Configuration.OwrSsoTokenNotBefore);
+            var opportunityId = GetParamValue(args, Configuration.OwrOpportunityIdParamName);
+            var opportunity = CrmService.GetOpportunity(_client.CrmInterface, _logger, opportunityId);
+            if (opportunity == null)
+            {
+                FireEventOnOwrError("There is no opportunity in context.");
+                return;
+            }
+
+            var rooms = CrmService.GetTravelPlannerRooms(opportunityId, _logger, _client.CrmInterface);
+            var createdByInitials = opportunity.GetAttributeValue<string>(Opportunity.Initials);
+            var login = CrmService.GetSsoDetails(_client.CrmInterface.GetMyCrmUserId(), _logger, _client.CrmInterface);
+            if (login == null)
+            {
+                FireEventOnOwrError("Login details are missing for the logged-in user.");
+                return;
+            }
+
+            var privateKey = CrmService.GetPrivateInfo(_logger, _client.CrmInterface);
+            if (privateKey == null)
+            {
+                FireEventOnOwrError("Private Key is missing in the system");
+                return;
+            }
+            var expiredSeconds = CrmService.GetConfig(Configuration.OwrSsoTokenExpired, _logger, _client.CrmInterface);
+            var notBeforeSeconds = CrmService.GetConfig(Configuration.OwrSsoTokenNotBefore, _logger, _client.CrmInterface);
+            if (expiredSeconds == null || notBeforeSeconds==null)
+            {
+                FireEventOnOwrError("Missing payload configuration");
+                return;
+            }
             var payload = GetPayload(login, expiredSeconds, notBeforeSeconds, createdByInitials);
             var token = _jtiService.CreateJwtToken(privateKey, payload);
-            var data = WebServiceExchangeHelper.GetCustomerTravelPlannerJson();
-            var serviceUrl = GetConfig(EntityRecords.Configuration.OwrUrlConfigName);
-            var content = _jtiService.SendHttpRequest(HttpMethod.Post, serviceUrl, token, data).Content;
-            var eventParams = WebServiceExchangeHelper.ContentToEventParams(content);
-
-            FireEvent(EntityRecords.Configuration.SsoCompleteEvent, eventParams);
-        }
-
-        private string GetCreatorsInitials(string opportunityId)
-        {
-            if (string.IsNullOrEmpty(opportunityId))
+            if (token == null)
             {
-                return null;
+                FireEventOnOwrError("JWT token is null");
+                return;
             }
-            var query = new QueryByAttribute("opportunity")
+            var owrJsonHelper = new OwrJsonHelper(_client.CrmInterface, opportunity);
+            var data = owrJsonHelper.GetCustomerTravelPlannerJson(rooms);
+            var serviceUrl = CrmService.GetConfig(Configuration.OwrUrlConfigName, _logger, _client.CrmInterface);
+            if (serviceUrl == null)
             {
-                ColumnSet = new ColumnSet("createdby")
-            };
-            query.AddAttributeValue("opportunityid", opportunityId);
-            var record = ExecuteQuery(query);
-            if (record == null) return null;
-            var createdById = record.GetAttributeValue<EntityReference>("createdby").Id;
-            var login = GetSsoDetails(createdById);
-            var initials = login?.GetAttributeValue<string>("tc_initials");
-            _logger.LogInformation($"crt (created by initials) are {initials}");
-            return initials;
-        }
-        private Entity GetSsoDetails(Guid userId)
-        {
-            var query = new QueryByAttribute("tc_externallogin")
+                FireEventOnOwrError("Service Url is null");
+                return;
+            }
+            var content = _jtiService.SendHttpRequest(HttpMethod.Post, serviceUrl, token, data).Content;
+            if (content == null)
             {
-                ColumnSet =
-                     new ColumnSet("tc_abtanumber", "tc_branchcode", "tc_employeeid", "tc_externalloginid", "tc_initials",
-                         "createdby")
-            };
-            query.AddAttributeValue("ownerid", userId);
-            var login = ExecuteQuery(query);
-            if (login == null) return null;
-            var loginInfo =
-                $"Abtanumber is {login.GetAttributeValue<string>("tc_abtanumber")}, BranchCode is {login.GetAttributeValue<string>("tc_branchcode")}, Employee Id is {login.GetAttributeValue<string>("tc_employeeid")}, Initials are {login.GetAttributeValue<string>("tc_initials")}";
-
-            _logger.LogInformation($"Requesting SSO Details result: {loginInfo}");
-            return login;
-        }
-
-
-        private string GetPrivateInfo()
-        {
-            var query = new QueryByAttribute("tc_secureconfiguration")
+                FireEventOnOwrError("Owr response content is null");
+                return;
+            }
+            var eventParams = WebServiceExchangeHelper.ContentToEventParams(content, _logger);
+            if (eventParams == null)
             {
-                ColumnSet = new ColumnSet("tc_value")
-            };
-            query.AddAttributeValue("tc_name", EntityRecords.Configuration.OwrJwtPrivateKeyConfigName);
-            var config = ExecuteQuery(query);
-            var privateKey = config?.GetAttributeValue<string>("tc_value");
-            if (privateKey != null)
-                _logger.LogInformation(
-                    $"Retrieved {EntityRecords.Configuration.OwrJwtPrivateKeyConfigName} result {EntityRecords.Configuration.OwrJwtPrivateKeyConfigName} is not null");
-            return privateKey;
+                FireEventOnOwrError("Failed to parse OWR response");
+                return;
+            }
+            FireEventOnOwrSuccess(eventParams);
         }
-
-        private string GetConfig(string name)
-        {
-            var query = new QueryByAttribute("tc_configuration")
-            {
-                ColumnSet = new ColumnSet("tc_value")
-            };
-            query.AddAttributeValue("tc_name", name);
-            var config = ExecuteQuery(query);
-            var value = config?.GetAttributeValue<string>("tc_value");
-            _logger.LogInformation($"Retrieved {name} result: {value}");
-            return value;
-        }
-
-        
-
-        private OwrJsonWebTokenPayload GetPayload(Entity login, string expiredSeconds, string notBeforeSeconds, string createdByInitials)
+        private OwrJsonWebTokenPayload GetPayload(Entity login, string expiredSeconds, string notBeforeSeconds,
+            string createdByInitials)
         {
             var payload = new OwrJsonWebTokenPayload
             {
@@ -110,52 +84,41 @@ namespace Tc.Usd.HostedControls
                 NotBefore = _jtiService.GetNotBeforeTime(notBeforeSeconds).ToString(),
                 Expiry = _jtiService.GetExpiry(expiredSeconds).ToString(),
                 Jti = WebServiceExchangeHelper.GetJti().ToString(),
-                BranchCode = login.GetAttributeValue<string>("tc_branchcode"),
-                AbtaNumber = login.GetAttributeValue<string>("tc_abtanumber"),
-                EmployeeId = login.GetAttributeValue<string>("tc_employeeid"),
-                Initials = login.GetAttributeValue<string>("tc_initials"),
+                BranchCode = login.GetAttributeValue<string>(ExternalLogin.BranchCode),
+                AbtaNumber = login.GetAttributeValue<string>(ExternalLogin.AbtaNumber),
+                EmployeeId = login.GetAttributeValue<string>(ExternalLogin.EmployeeId),
+                Initials = login.GetAttributeValue<string>(ExternalLogin.Initials),
                 CreatedBy = createdByInitials,
-                Aud = EntityRecords.Configuration.OwrAudOneWebRetail
+                Aud = Configuration.OwrAudOneWebRetail
             };
             return payload;
         }
+
         private string GetParamValue(RequestActionEventArgs args, string paramName)
         {
-            List<KeyValuePair<string, string>> actionDataList = Utility.SplitLines(args.Data, CurrentContext,
+            var actionDataList = Utility.SplitLines(args.Data, CurrentContext,
                 localSession);
             var paramValue = Utility.GetAndRemoveParameter(actionDataList, paramName);
             _logger.LogInformation($"Parameter {paramName} is {paramValue}");
             return paramValue;
         }
-        private Entity ExecuteQuery(QueryByAttribute query)
-        {
-            var req = new RetrieveMultipleRequest
-            {
-                Query = query
-            };
-            try
-            {
-                var response =
-                    (RetrieveMultipleResponse)
-                    _client.CrmInterface.ExecuteCrmOrganizationRequest(req,
-                        $"Requesting {query.EntityName}");
-                var record = response.EntityCollection?.Entities?.FirstOrDefault();
-                return record;
-            }
-            catch (FaultException<OrganizationServiceFault> ex)
-            {
-                _logger.LogError($"{ApplicationName} application terminated with an error::{ex}");
-            }
-            catch (TimeoutException ex)
-            {
-                _logger.LogError($"{ApplicationName} application terminated with an error::{ex}");
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"{ApplicationName} application terminated with an error::{ex}");
-            }
 
-            return null;
+        private void FireEventOnOwrError(string message)
+        {
+            _logger.LogError(message);
+            var eventParameters = new Dictionary<string, string> { { UsdParameter.ResponseCode, HttpCode.InternalError }, { UsdParameter.ResponseMessage, message } };
+            eventParameters.Add(UsdParameter.ApplicationType, UsdParameter.ApplicationOwr);
+            FireEvent(Crm.Common.Constants.EntityRecords.Configuration.SsoCompleteEvent, eventParameters);
         }
+
+        private void FireEventOnOwrSuccess(Dictionary<string, string> eventParameters)
+        {
+            if (eventParameters == null) throw new ArgumentNullException("eventParameters");
+            eventParameters.Add(UsdParameter.ApplicationType, UsdParameter.ApplicationOwr);
+            FireEvent(UsdEvent.SsoCompleteEvent, eventParameters);
+        }
+
+
+
     }
 }

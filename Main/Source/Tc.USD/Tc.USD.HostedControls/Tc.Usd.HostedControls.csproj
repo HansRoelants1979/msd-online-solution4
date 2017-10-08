@@ -121,8 +121,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(SolutionDir)\packages\Microsoft.CrmSdk.XrmTooling.CoreAssembly.7.1.0\lib\net45\Microsoft.Xrm.Tooling.Connector.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -158,6 +158,7 @@
   <ItemGroup>
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\SsoLogin.cs" />
+    <Compile Include="Models\OwrSearch.cs" />
     <Compile Include="Models\UsdLogger.cs" />
     <Compile Include="Models\WebRioResponse.cs" />
     <Compile Include="Models\WebRioSsoConfig.cs" />
@@ -165,6 +166,7 @@
     <Compile Include="Service\CrmService.cs" />
     <Compile Include="Service\CloseAppService.cs" />
     <Compile Include="Service\OpenWebRioService.cs" />
+    <Compile Include="Service\OwrJsonHelper.cs" />
     <Compile Include="Service\WebServiceExchangeHelper.cs" />
     <Compile Include="SingleSignOnController.cs" />
     <Compile Include="Service\OpenOwrService.cs" />

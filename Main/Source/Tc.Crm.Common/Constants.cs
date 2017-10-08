@@ -6,7 +6,6 @@
     }
     public static class EntityName
     {
-
         public const string Booking = "tc_booking";
         public const string BookingAccommodation = "tc_bookingaccommodation";
         public const string CustomerBookingRole = "tc_customerbookingrole";
@@ -25,6 +24,9 @@
         public const string SecurityConfiguration = "tc_secureconfiguration";
         public const string ExternalLogin = "tc_externallogin";
         public const string Store = "tc_store";
+        public const string Opportunity = "opportunity";
+        public const string Room = "tc_room";
+        public const string Region = "tc_region";
     }
     public static class AliasName
     {
@@ -39,6 +41,7 @@
         public const string ContactCaseAliasName = "contactincident.";
         public const string AccountCaseAliasName = "accountincident.";
         public const string BusinessUnitAliasName = "businessunit.";
+        public const string ContactQueryAliasName = "contact";
     }
    
     namespace EntityRecords
@@ -92,6 +95,7 @@
             public const string WebRioRequestType = "Type";
             public const string ApplicationType = "applicationType";
             public const string Application_WebRio = "WebRio";
+            public const string ApplicationOwr = "OWR";
             public const string ResponseCode = "responseCode";
             public const string ResponseMessage = "responseMessage";
             public const string Application = "AppName";
@@ -137,6 +141,7 @@
             public const string Initials = "tc_initials";
             public const string Name = "tc_name";
             public const string Id = "Id";
+            public const string ExternalLoginId = "tc_externalloginid";
             public const string OwnerId = "ownerid";            
         }
 
@@ -160,6 +165,7 @@
         public static class Gateway
         {
             public const string GatewayId = "tc_gatewayId";
+            public const string Iata = "tc_iata";
         }
 
         public static class Booking
@@ -188,6 +194,7 @@
         {
             public const string CountryId = "tc_countryid";
             public const string BusinessUnitId = "tc_sourcemarketbusinessunitid";
+            public const string Iso2Code = "tc_iso2code";
         }
 
         public static class BookingAccommodation
@@ -239,6 +246,33 @@
             public const string LastName = "lastname";
             public const string Birthdate = "birthdate";
             public const string SourceSystemId = "tc_sourcesystemid";
+            public const string MiddleName = "middlename";
+            public const string Address1FlatorUnitNumber = "tc_address1_flatorunitnumber";
+            public const string Address1HouseNumberoBuilding = "tc_address1_housenumberorbuilding";
+            public const string Address1Street = "tc_address1_street";
+            public const string Address1Town = "tc_address1_town";
+            public const string Address1County = "tc_address1_county";
+            public const string Address1CountryId = "tc_address1_countryid";
+            public const string Address1PostalCode = "tc_address1_postalcode";
+            public const string Address2FlatorUnitNumber = "tc_address2_flatorunitnumber";
+            public const string Address2HouseNumberoBuilding = "tc_address2_housenumberorbuilding";
+            public const string Address2Street = "tc_address2_street";
+            public const string Address2Town = "tc_address2_town";
+            public const string Address2County = "tc_address2_county";
+            public const string Address2CountryId = "tc_address2_countryid";
+            public const string Address2PostalCode = "tc_address2_postalcode";
+            public const string Telephone1 = "telephone1";
+            public const string Telephone1Type = "tc_telephone1type";
+            public const string Telephone2 = "telephone2";
+            public const string Telephone2Type = "tc_telephone2type";
+            public const string Telephone3 = "telephone3";
+            public const string Telephone3Type = "tc_telephone3type";
+            public const string EmailAddress1 = "emailaddress1";
+            public const string EmailAddress1Type = "tc_emailaddress1type";
+            public const string EmailAddress2 = "emailaddress2";
+            public const string EmailAddress2Type = "tc_emailaddress2type";
+            public const string EmailAddress3 = "emailaddress3";
+            public const string EmailAddress3Type = "tc_emailaddress3type";
         }
 
         public static class Contact
@@ -322,6 +356,55 @@
         {
             public const string Name = "tc_name";
             public const string Value = "tc_value";
+        }
+
+        public static class Opportunity
+        {
+            public const string Name = "name";
+            public const string OpportunityId = "opportunityid";
+            public const string CustomerId = "customerid";
+            public const string Initials = "tc_initials";
+            public const string EarliestDepartureDate = "tc_earliestdeparturedate";
+            public const string LatestDepartureDate = "tc_latestdeparturedate";
+            public const string Duration = "tc_duration";
+            public const string DeparturePoint1 = "tc_departurepoint1";
+            public const string DeparturePoint2 = "tc_departurepoint2";
+            public const string DeparturePoint3 = "tc_departurepoint3";
+            public const string DestinationCountry1 = "tc_destinationcountry1";
+            public const string Region1 = "tc_region1";
+            public const string DestinationAirport1 = "tc_destinationairport1";
+            public const string Hotel1 = "tc_hotel1";
+            public const string DestinationCountry2 = "tc_destinationcountry2";
+            public const string Region2 = "tc_region2";
+            public const string DestinationAirport2 = "tc_destinationairport2";
+            public const string Hotel2 = "tc_hotel2";
+            public const string DestinationCountry3 = "tc_destinationcountry3";
+            public const string Region3 = "tc_region3";
+            public const string Hotel3 = "tc_hotel3";
+            public const string DestinationAirport3 = "tc_destinationairport3";
+            public const string Exclude1 = "tc_exclude1";
+            public const string Exclude2 = "tc_exclude2";
+            public const string Exclude3 = "tc_exclude3";
+            public const string HowDoYouWantToSearch = "tc_howdoyouwanttosearch";
+        }
+        public static class Room
+        {
+            public const string OpportunityId = "tc_relatedtravelplannerid";
+            public const string NoOfAdults = "tc_noofadults";
+            public const string NumberOfChildren = "tc_numberofchildren";
+            public const string Child1 = "tc_child1";
+            public const string Child2 = "tc_child2";
+            public const string Child3 = "tc_child3";
+            public const string Child4 = "tc_child4";
+            public const string Child5 = "tc_child5";
+            public const string Child6 = "tc_child6";
+            public const string Name = "tc_name";
+        }
+
+        public static class Region
+        {
+            public const string RegionCode = "tc_regioncode";
+            public const string RegionId = "tc_regionid";
         }
     }
 }

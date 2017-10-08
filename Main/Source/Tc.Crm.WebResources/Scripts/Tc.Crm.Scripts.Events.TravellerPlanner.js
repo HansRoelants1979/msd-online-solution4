@@ -28,6 +28,7 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
     var RETAIL_LEVEL2_ACCESS = "Tc.Uk.Retail.Level2";
     var RETAIL_LEVEL3_ACCESS = "Tc.Uk.Retail.Level3";
     var LIME_WEB_PAGE_URL = "http://event/?eventname=Tc.Event.OnClickLimeRibbonButton";
+    var OWR_EVENT_URL = "http://event/?eventname=Tc.Event.OnOwrClick";
     
 
 
@@ -110,13 +111,34 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
         return enable = true;
 
     }
+
+    var owrRibbonButtonClick = function () {
+            window.open(OWR_EVENT_URL);
+    }
+
     var limeRibbonButtonClick = function () {
         if (window.IsUSD == true) {
             window.open(LIME_WEB_PAGE_URL);
 
         }
+    }
+    var webrioRibbonButtonClick = function () {
+        if (window.IsUSD == true) {
+            var consultationNo = Xrm.Page.getAttribute("name").getValue();
+            var customer = Xrm.Page.getAttribute("customerid").getValue();
+            var customerId;
+            if (customer != null) {
+                customerId = customer[0].id;
+            }
+            var strUrl = WEBRIO_WEB_PAGE_URL + "&ConsultationNo=" + consultationNo + "&CustomerId=" + customerId;
+            strUrl = strUrl.replace(/[{}]/g, "");
+
+            window.open(strUrl);
+
+        }
 
     }
+
     var reviewDateOnChange = function () {
 
         Xrm.Page.getControl(Attributes.ReviewDate).clearNotification();
@@ -207,6 +229,9 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
         OnLimeRibbonButtonClick: function () {
             limeRibbonButtonClick();
         },
+        OnWebRioRibbonButtonClick: function () {
+            webrioRibbonButtonClick();
+        },
         OnAddFollowUpRibbonButtonClick: function () {
             openNewFollowUp();
         },
@@ -224,6 +249,9 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
         },
         OnReviewDateFieldChange: function () {
             reviewDateOnChange();
+        },
+        OnOwrRibbonButtonClick: function() {
+            owrRibbonButtonClick();
         }
 
     };
