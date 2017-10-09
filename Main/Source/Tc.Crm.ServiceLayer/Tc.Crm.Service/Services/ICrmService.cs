@@ -23,8 +23,21 @@ namespace Tc.Crm.Service.Services
         Collection<tcm.SourceMarket> GetSourceMarkets();
         Collection<tcm.Hotel> GetHotels();
         bool PingCRM();
-        Guid ProcessEntityCacheMessage(Guid entityCacheMessageId, string outComeId, Status status, EntityCacheMessageStatusReason statusReason);
-        Guid ProcessEntityCacheMessage(Guid entityCacheMessageId, string outComeId, Status status, EntityCacheMessageStatusReason statusReason, string notes);
-        void ProcessEntityCache(Guid entityCacheId, Status status, EntityCacheStatusReason statusReason);
+        Guid ProcessEntityCacheMessage(Guid entityCacheMessageId, string outComeId, Status status, EntityCacheMessageStatusReason statusReason, string notes = null);
+
+		/// <summary>
+		/// Process EntityCache record: set status and status of latest entitycache message operation
+		/// </summary>
+		/// <param name="entityCacheId"></param>
+		/// <param name="status"></param>
+		/// <param name="statusReason"></param>
+		/// <param name="WasLastOperationSuccessful"></param>
+		void ProcessEntityCache(Guid entityCacheId, Status status, EntityCacheStatusReason statusReason, bool WasLastOperationSuccessful = false);
+
+		/// <summary>
+		/// Activate earliest EntityCache with same recordId and in Pending status
+		/// </summary>
+		/// <param name="entityCacheId">Guid of processed EntityCache record</param>
+		void ActivateRelatedPendingEntityCache(Guid entityCacheId);
     }
 }

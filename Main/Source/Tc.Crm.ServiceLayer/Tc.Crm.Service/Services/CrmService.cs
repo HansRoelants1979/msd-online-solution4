@@ -347,19 +347,6 @@ namespace Tc.Crm.Service.Services
         }
 
         /// <summary>
-        /// To process entitycachemessage record without notes
-        /// </summary>
-        /// <param name="entityCacheMessageId"></param>
-        /// <param name="outComeId"></param>
-        /// <param name="status"></param>
-        /// <param name="statusReason"></param>
-        /// <returns></returns>
-        public Guid ProcessEntityCacheMessage(Guid entityCacheMessageId, string outComeId, Status status, EntityCacheMessageStatusReason statusReason)
-        {
-            return ProcessEntityCacheMessage(entityCacheMessageId, outComeId, status, statusReason, null);
-        }
-
-        /// <summary>
         /// To process entitycachemessage record with notes
         /// </summary>
         /// <param name="entityCacheMessageId"></param>
@@ -368,7 +355,7 @@ namespace Tc.Crm.Service.Services
         /// <param name="statusReason"></param>
         /// <param name="notes"></param>
         /// <returns></returns>
-        public Guid ProcessEntityCacheMessage(Guid entityCacheMessageId, string outComeId, Status status, EntityCacheMessageStatusReason statusReason, string notes)
+        public Guid ProcessEntityCacheMessage(Guid entityCacheMessageId, string outComeId, Status status, EntityCacheMessageStatusReason statusReason, string notes = null)
         {
             var entityCacheId = Guid.Empty;
             var entityCacheMessages = GetEntityCacheMessages(entityCacheMessageId);
@@ -390,12 +377,46 @@ namespace Tc.Crm.Service.Services
             return entityCacheId;
         }
 
-        /// <summary>
-        /// To get entitycachemessage based on id
-        /// </summary>
-        /// <param name="entityCacheMessageId"></param>
-        /// <returns></returns>
-        private EntityCollection GetEntityCacheMessages(Guid entityCacheMessageId)
+		/// <summary>
+		/// Activate earliest EntityCache with same recordId and in Pending status
+		/// </summary>
+		/// <param name="entityCacheId">Guid of processed EntityCache record</param>
+		public void ActivateRelatedPendingEntityCache(Guid entityCacheId)
+		{
+			var fetchRecordIdQuery = $@"<fetch version='1.0' output-format='xml-platform' distinct='false' mapping='logical' >
+									<entity name='tc_entitycache' >
+										<attribute name='tc_recordid' />
+										<filter type='and' >
+											<condition attribute='tc_entitycacheid' operator='eq' value='{entityCacheId}' />
+										</filter>
+									</entity>
+								</fetch>";
+			EntityCollection requestResult = orgService.RetrieveMultiple(new FetchExpression(fetchRecordIdQuery));			
+			var recordId = (string)requestResult.Entities[0]["tc_recordid"];
+			var pendingRecordQuery = $@"<fetch top='1' version='1.0' output-format='xml-platform' distinct='false' mapping='logical'>
+										<entity name='tc_entitycache' >
+											<attribute name='tc_entitycacheid' />
+											<filter type='and' >
+												<condition attribute='statuscode' operator='eq' value='{(int)EntityCacheStatusReason.Pending}' />
+												<condition attribute='tc_recordid' operator='eq' value='{recordId}' />
+											</filter>
+											<order attribute='createdon' />
+										</entity>
+									</fetch>";
+			requestResult = orgService.RetrieveMultiple(new FetchExpression(pendingRecordQuery));
+			if (requestResult.Entities.Count == 1)
+			{
+				var pendingRecordId = (Guid)requestResult.Entities[0]["tc_entitycacheid"];
+				ProcessEntityCache(pendingRecordId, Status.Active, EntityCacheStatusReason.Active);
+			}
+		}
+
+		/// <summary>
+		/// To get entitycachemessage based on id
+		/// </summary>
+		/// <param name="entityCacheMessageId"></param>
+		/// <returns></returns>
+		private EntityCollection GetEntityCacheMessages(Guid entityCacheMessageId)
         {
             var entityCacheMessages = orgService.RetrieveMultiple(new QueryExpression
             {
@@ -432,20 +453,22 @@ namespace Tc.Crm.Service.Services
             return notes;
         }
 
-        /// <summary>
-        /// To update entitycache status
-        /// </summary>
-        /// <param name="entityCacheId"></param>
-        /// <param name="status"></param>
-        /// <param name="statusReason"></param>
-        public void ProcessEntityCache(Guid entityCacheId, Status status, EntityCacheStatusReason statusReason)
+		/// <summary>
+		/// To update entitycache status
+		/// </summary>
+		/// <param name="entityCacheId"></param>
+		/// <param name="status"></param>
+		/// <param name="statusReason"></param>
+		/// <param name="wasLastOperationSuccessful"></param>
+		public void ProcessEntityCache(Guid entityCacheId, Status status, EntityCacheStatusReason statusReason, bool wasLastOperationSuccessful = false)
         {
             var entityCache = new Entity(EntityName.EntityCache, entityCacheId);
             entityCache.Attributes[Attributes.EntityCache.StatusReason] = new OptionSetValue((int)statusReason);
             entityCache.Attributes[Attributes.EntityCache.State] = new OptionSetValue((int)status);
-            orgService.Update(entityCache);
-        }
+			entityCache.Attributes[Attributes.EntityCache.WasLastOperationSuccessful] = wasLastOperationSuccessful;
 
+			orgService.Update(entityCache);
+        }
        
         public string CreateXml(string xml, string cookie, int page, int count)
         {

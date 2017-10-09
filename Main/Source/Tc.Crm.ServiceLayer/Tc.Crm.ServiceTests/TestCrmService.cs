@@ -221,7 +221,7 @@ namespace Tc.Crm.ServiceTests
         /// <param name="entityCacheId"></param>
         /// <param name="status"></param>
         /// <param name="statusReason"></param>
-        public void ProcessEntityCache(Guid entityCacheId, Status status, EntityCacheStatusReason statusReason)
+        public void ProcessEntityCache(Guid entityCacheId, Status status, EntityCacheStatusReason statusReason, bool WasLastOperationSuccessful = false)
         {
             var entityCache = new Entity(EntityName.EntityCache, entityCacheId);
             entityCache.Attributes[Attributes.EntityCache.StatusReason] = new OptionSetValue((int)statusReason);
@@ -229,7 +229,13 @@ namespace Tc.Crm.ServiceTests
             orgService.Update(entityCache);
         }
 
-        public CustomerResponse ExecuteActionOnCustomerEvent(string data, Actions.OperationType operation)
+		public void ActivateRelatedPendingEntityCache(Guid entityCacheId)
+		{
+
+		}
+
+
+		public CustomerResponse ExecuteActionOnCustomerEvent(string data, Actions.OperationType operation)
         {
             if (Switch == DataSwitch.Created)
                 return new CustomerResponse { Create = true, Existing = false, Id = Guid.NewGuid().ToString() };

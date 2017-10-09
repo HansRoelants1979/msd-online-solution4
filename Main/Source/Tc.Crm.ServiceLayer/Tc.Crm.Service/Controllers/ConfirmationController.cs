@@ -27,19 +27,19 @@ namespace Tc.Crm.Service.Controllers
         public HttpResponseMessage Confirmations(string msDCorrelationId, IntegrationLayerResponse ilResponse)
         {
             try
-            {      
-                if(string.IsNullOrWhiteSpace(msDCorrelationId))
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, Messages.CorrelationIdWasMissing);
-                if (ilResponse == null)
+            {
+				Guid entityCacheMessageId;
+				if (string.IsNullOrWhiteSpace(msDCorrelationId))
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, Messages.MissingMsdCorrelationId);
+				if (!Guid.TryParse(msDCorrelationId, out entityCacheMessageId))
+					return Request.CreateResponse(HttpStatusCode.BadRequest, Messages.IncorrectMsdCorrelationId);
+				if (ilResponse == null)
                     return Request.CreateResponse(HttpStatusCode.BadRequest, Messages.ConfirmationDataPassedIsNullOrCouldNotBeParsed);
                 if(string.IsNullOrWhiteSpace(ilResponse.CorrelationId))
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, Messages.CorrelationIdWasMissing);
-                if(msDCorrelationId != ilResponse.CorrelationId)
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, Messages.CorrelationIdWasMissing);
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, Messages.MissingCorrelationId);
 
-                var confirmationResponse = confirmationService.ProcessResponse(ilResponse);               
-                return Request.CreateResponse(confirmationResponse.StatusCode, confirmationResponse.Message);             
-
+                var confirmationResponse = confirmationService.ProcessResponse(entityCacheMessageId, ilResponse);
+                return Request.CreateResponse(confirmationResponse.StatusCode, confirmationResponse.Message);
             }
             catch (Exception ex)
             {

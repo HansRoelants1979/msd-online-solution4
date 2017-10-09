@@ -333,7 +333,9 @@
             public const string State = "statecode";
             public const string EntityCacheId = "tc_entitycacheid";
             public const string CreatedOn = "createdon";
-        }
+			public const string WasLastOperationSuccessful = "tc_waslastoperationsuccessful";
+			public const string EligibleRetryTime = "tc_eligibleretrytime";
+		}
 
         public static class EntityCacheMessage
         {

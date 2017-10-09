@@ -43,12 +43,12 @@
         public const string Email2_Email = "customer/email2/address";
         public const string Email3_Type = "customer/email3/type";
         public const string Email3_Email = "customer/email3/address";
-        public const string Permissions_Allowmarketing = "customer/permissions/allowMarketing";
-        public const string Permissions_Donotallowemail = "customer/permissions/doNotAllowEmail";
-        public const string Permissions_Donotallowmail = "customer/permissions/doNotAllowMail";
-        public const string Permissions_Donotallowphonecalls = "customer/permissions/doNotAllowPhoneCalls";
-        public const string Permissions_Donotallowsms = "customer/permissions/doNotAllowSMS";
-    }
+		public const string Permissions_Allowmarketing = "customer/permissions/allowMarketing";
+		public const string Permissions_Donotallowemail = "customer/permissions/doNotAllowEmail";
+		public const string Permissions_Donotallowmail = "customer/permissions/doNotAllowMail";
+		public const string Permissions_Donotallowphonecalls = "customer/permissions/doNotAllowPhoneCalls";
+		public const string Permissions_Donotallowsms = "customer/permissions/doNotAllowSMS";
+	}
     public static class Attributes
     {
         public const string LastName = "lastname";
@@ -178,9 +178,12 @@
         public const string CustomerIdentityNotPresent = "Customer Identity is null or empty";
         public const string FailedToUpdateEntityCacheMessage = FailedtoCreateSurvey;
         public const string ConfirmationDataPassedIsNullOrCouldNotBeParsed = "The payload could not be read.";
-        public const string CorrelationIdWasMissing = "The correlationId was missing.";
-        public const string UnexpectedError = "An unexpected error has occurred.";
-    }
+        public const string MissingMsdCorrelationId = "msdCorrelationId is missing.";
+		public const string IncorrectMsdCorrelationId = "msdCorrelationId is not guid.";
+		public const string MissingCorrelationId = "correlationId missing in request body.";
+		public const string UnexpectedError = "An unexpected error has occurred.";
+		public const string MsdCorrelationIdDoesNotExist = "Record with id {0} does not exist";
+	}
     public static class Parameters
     {
         public const string JsonWebTokenRequest = "jsonWebTokenRequest";

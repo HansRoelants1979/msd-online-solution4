@@ -114,7 +114,6 @@ namespace Tc.Crm.Plugins.MultipleEntities.BusinessLogic
 								</filter>
 							</entity>
 						</fetch>";
-			var fetch = new FetchExpression(query);
 			EntityCollection countResult = service.RetrieveMultiple(new FetchExpression(query));
 			var count = (Int32)((AliasedValue)countResult.Entities[0]["totalCount"]).Value;
 			trace.Trace($"Existing non-successfull EntityCache related records count:{count}.");

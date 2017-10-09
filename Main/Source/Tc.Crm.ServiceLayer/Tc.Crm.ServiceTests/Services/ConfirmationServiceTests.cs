@@ -51,7 +51,7 @@ namespace Tc.Crm.ServiceTests.Services
         
         public void ConfirmationIsNull()
         {
-            var response = confirmationService.ProcessResponse(null);
+            var response = confirmationService.ProcessResponse(Guid.Empty, null);
             Assert.IsTrue(response.StatusCode == HttpStatusCode.GatewayTimeout);
             Assert.IsTrue(response.Message == Messages.FailedToUpdateEntityCacheMessage);
         }
@@ -59,15 +59,15 @@ namespace Tc.Crm.ServiceTests.Services
         [TestMethod()]       
         public void ConfirmationIsEmpty()
         {
-            var response = confirmationService.ProcessResponse(new IntegrationLayerResponse() { });
+            var response = confirmationService.ProcessResponse(Guid.NewGuid(), new IntegrationLayerResponse() { });
             Assert.IsTrue(response.StatusCode == HttpStatusCode.BadRequest);
-            Assert.IsTrue(response.Message == Messages.CorrelationIdWasMissing);
+            Assert.IsTrue(response.Message == Messages.MissingCorrelationId);
         }
 
         [TestMethod()]        
         public void CrmServiceIsNull()
         {
-            var response = confirmationService.ProcessResponse(new IntegrationLayerResponse() { CorrelationId="123" });
+            var response = confirmationService.ProcessResponse(Guid.NewGuid(), new IntegrationLayerResponse() { CorrelationId="123" });
             Assert.IsTrue(response.StatusCode == HttpStatusCode.GatewayTimeout);
             Assert.IsTrue(response.Message == Messages.FailedToUpdateEntityCacheMessage);
         }
@@ -77,9 +77,9 @@ namespace Tc.Crm.ServiceTests.Services
         [TestMethod()]
         public void WithoutCorrelationId()
         {
-            var response = confirmationService.ProcessResponse(new IntegrationLayerResponse() { SourceSystemEntityID="3445",SourceSystemRequest="request" });
+            var response = confirmationService.ProcessResponse(Guid.NewGuid(), new IntegrationLayerResponse() { SourceSystemEntityID="3445",SourceSystemRequest="request" });
             Assert.IsTrue(response.StatusCode == HttpStatusCode.BadRequest);
-            Assert.IsTrue(response.Message == Messages.CorrelationIdWasMissing);
+            Assert.IsTrue(response.Message == Messages.MissingCorrelationId);
         }
 
         [TestMethod()]
@@ -87,7 +87,7 @@ namespace Tc.Crm.ServiceTests.Services
         {
             var id = Guid.NewGuid();
             LoadData(id);
-            var resp = confirmationService.ProcessResponse(new IntegrationLayerResponse() { CorrelationId= id.ToString(),SourceSystemEntityID="" });
+            var resp = confirmationService.ProcessResponse(Guid.NewGuid(), new IntegrationLayerResponse() { CorrelationId= id.ToString(),SourceSystemEntityID="" });
             Assert.AreEqual(resp.StatusCode,System.Net.HttpStatusCode.OK);
             var entityCacheMessage = (from c in context.CreateQuery(EntityName.EntityCacheMessage)
                                       where c.Id == id
@@ -101,7 +101,7 @@ namespace Tc.Crm.ServiceTests.Services
         {
             var id = Guid.NewGuid();
             LoadData(id);
-            var resp = confirmationService.ProcessResponse(new IntegrationLayerResponse() { CorrelationId = id.ToString(), SourceSystemEntityID = "123",SourceSystemStatusCode=HttpStatusCode.OK });
+            var resp = confirmationService.ProcessResponse(Guid.NewGuid(), new IntegrationLayerResponse() { CorrelationId = id.ToString(), SourceSystemEntityID = "123",SourceSystemStatusCode=HttpStatusCode.OK });
             Assert.AreEqual(resp.StatusCode, System.Net.HttpStatusCode.OK);
             var entityCacheMessage = (from c in context.CreateQuery(EntityName.EntityCacheMessage)
                                       where c.Id == id

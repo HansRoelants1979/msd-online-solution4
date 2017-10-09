@@ -68,7 +68,7 @@ namespace Tc.Crm.ServiceTests.Controllers
         {
             var response = controller.Confirmations("", new IntegrationLayerResponse { });
             Assert.AreEqual(response.StatusCode, HttpStatusCode.BadRequest);
-            Assert.AreEqual(((System.Net.Http.ObjectContent)response.Content).Value, Service.Constants.Messages.CorrelationIdWasMissing);
+            Assert.AreEqual(((System.Net.Http.ObjectContent)response.Content).Value, Service.Constants.Messages.MissingMsdCorrelationId);
         }
 
         [TestMethod()]
@@ -77,7 +77,7 @@ namespace Tc.Crm.ServiceTests.Controllers
            var id = Guid.NewGuid();
            var response = controller.Confirmations(id.ToString(), new IntegrationLayerResponse { CorrelationId = Guid.NewGuid().ToString() ,SourceSystemEntityID="123" });
            Assert.AreEqual(response.StatusCode, HttpStatusCode.BadRequest);
-           Assert.AreEqual(((System.Net.Http.ObjectContent)response.Content).Value, Service.Constants.Messages.CorrelationIdWasMissing);
+           Assert.AreEqual(((System.Net.Http.ObjectContent)response.Content).Value, Service.Constants.Messages.MsdCorrelationIdDoesNotExist);
         }
 
         [TestMethod()]
@@ -87,7 +87,7 @@ namespace Tc.Crm.ServiceTests.Controllers
             LoadData(id);
             var response = controller.Confirmations(id.ToString(), new IntegrationLayerResponse { CorrelationId = Guid.NewGuid().ToString(), SourceSystemEntityID = "123" });
             Assert.AreEqual(response.StatusCode, HttpStatusCode.BadRequest);
-            Assert.AreEqual(((System.Net.Http.ObjectContent)response.Content).Value, Service.Constants.Messages.CorrelationIdWasMissing);
+            Assert.AreEqual(((System.Net.Http.ObjectContent)response.Content).Value, Service.Constants.Messages.MissingMsdCorrelationId);
         }
 
         [TestMethod()]

@@ -17,38 +17,38 @@ namespace Tc.Crm.Service.Services
             this.crmService = crmService;            
         }
 
-        public ConfirmationResponse ProcessResponse(IntegrationLayerResponse ilResponse)
+        public ConfirmationResponse ProcessResponse(Guid entityCacheMessageId, IntegrationLayerResponse ilResponse)
         {            
             try
             {
                 var entityCacheId = Guid.Empty;
                 if (ilResponse == null) throw new ArgumentNullException(Constants.Parameters.DataJson);
-                if (string.IsNullOrWhiteSpace(ilResponse.CorrelationId)) return new ConfirmationResponse { Message = Messages.CorrelationIdWasMissing, StatusCode = System.Net.HttpStatusCode.BadRequest };
-                if (crmService == null) throw new ArgumentNullException(Constants.Parameters.CrmService);
+				if (crmService == null) throw new ArgumentNullException(Constants.Parameters.CrmService);
+				if (string.IsNullOrWhiteSpace(ilResponse.CorrelationId)) return new ConfirmationResponse { Message = Messages.MissingCorrelationId, StatusCode = HttpStatusCode.BadRequest };                
                 var successStatus = new List<HttpStatusCode> { HttpStatusCode.OK, HttpStatusCode.Created, HttpStatusCode.Accepted, HttpStatusCode.NonAuthoritativeInformation,
                                                                HttpStatusCode.NoContent, HttpStatusCode.ResetContent, HttpStatusCode.PartialContent };
-                if (successStatus.Contains(ilResponse.SourceSystemStatusCode))
-                {
-                    entityCacheId = crmService.ProcessEntityCacheMessage(Guid.Parse(ilResponse.CorrelationId), ilResponse.SourceSystemEntityID, Status.Inactive, EntityCacheMessageStatusReason.EndtoEndSuccess);
-                    if (entityCacheId != Guid.Empty)
-                        crmService.ProcessEntityCache(entityCacheId, Status.Inactive, EntityCacheStatusReason.Succeeded);
-                }
-                else
-                {
-                    entityCacheId = crmService.ProcessEntityCacheMessage(Guid.Parse(ilResponse.CorrelationId), ilResponse.SourceSystemEntityID, Status.Inactive, EntityCacheMessageStatusReason.Failed, PrepareEntityCacheMessageNotes(ilResponse));
-                }
-                if (entityCacheId != Guid.Empty)
-                    return new ConfirmationResponse { StatusCode = System.Net.HttpStatusCode.OK, Message = string.Empty };
-                else
-                    return new ConfirmationResponse { Message = Messages.FailedToUpdateEntityCacheMessage, StatusCode = System.Net.HttpStatusCode.BadRequest };
 
+				var isSuccess = successStatus.Contains(ilResponse.SourceSystemStatusCode);
+				entityCacheId = crmService.ProcessEntityCacheMessage(entityCacheMessageId,
+					ilResponse.CorrelationId, Status.Inactive,
+					isSuccess ? EntityCacheMessageStatusReason.EndtoEndSuccess : EntityCacheMessageStatusReason.Failed,
+					isSuccess ? null : PrepareEntityCacheMessageNotes(ilResponse));
+				if (entityCacheId != Guid.Empty)
+				{
+					crmService.ProcessEntityCache(entityCacheId, isSuccess ? Status.Inactive : Status.Active, isSuccess ? EntityCacheStatusReason.Succeeded : EntityCacheStatusReason.InProgress, isSuccess);
+					if (isSuccess)
+					{
+						crmService.ActivateRelatedPendingEntityCache(entityCacheId);
+					}
+					return new ConfirmationResponse { StatusCode = HttpStatusCode.OK, Message = string.Empty };
+				}
+                return new ConfirmationResponse { Message = string.Format(Messages.MsdCorrelationIdDoesNotExist, entityCacheMessageId), StatusCode = HttpStatusCode.BadRequest };
             }
             catch(Exception ex)
             {
                 Trace.TraceError("Unexpected error occured at ProcessResponse::Message:{0}||Trace:{1}", ex.Message, ex.StackTrace.ToString());
-                return new ConfirmationResponse { Message = Messages.FailedToUpdateEntityCacheMessage, StatusCode = System.Net.HttpStatusCode.GatewayTimeout };
-            }
-            
+                return new ConfirmationResponse { Message = Messages.FailedToUpdateEntityCacheMessage, StatusCode = HttpStatusCode.GatewayTimeout };
+            }            
         }
 
         private string PrepareEntityCacheMessageNotes(IntegrationLayerResponse ilResponse)
@@ -60,7 +60,5 @@ namespace Tc.Crm.Service.Services
             if (!string.IsNullOrWhiteSpace(ilResponse.SourceSystemResponse)) notes.AppendLine("SourceSystemResponse: " + ilResponse.SourceSystemResponse);
             return notes.ToString();
         }
-
-
     }
 }
