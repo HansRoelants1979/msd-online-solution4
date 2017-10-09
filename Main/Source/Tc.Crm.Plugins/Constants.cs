@@ -90,8 +90,12 @@ namespace Tc.Crm.Plugins.Attributes
         public const string Data = "tc_data";
         public const string Operation = "tc_operation";
         public const string SourceMarket = "tc_sourcemarket";
-        public const string RecordId = "tc_recordid";        
-    }
+        public const string RecordId = "tc_recordid";
+		public const string EligibleRetryTime = "tc_eligibleretrytime";
+		public const string WasLastOperationSuccessful = "tc_waslastoperationsuccessful";
+		public const string StatusCode = "statuscode";
+		public const string Status = "status";
+	}
 
     public static class Customer
     {
@@ -287,4 +291,13 @@ namespace Tc.Crm.Plugins.OptionSetValues
         public const int Create = 950000000;
         public const int Update = 950000001;
     }
+
+	public enum EntityCacheStatusReason
+	{
+		Active = 1,
+		InProgress = 950000000,
+		Failed = 950000001,
+		Pending = 950000002,
+		Succeeded = 2
+	}
 }

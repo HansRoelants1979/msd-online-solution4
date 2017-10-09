@@ -97,17 +97,40 @@ namespace Tc.Crm.Plugins.MultipleEntities.BusinessLogic
             if (entityImage != null && entityImage.Attributes.Count > 0)
                 entityModel.Fields.AddRange(GetData(entityImage).Fields);
             entityCache.Attributes[Attributes.EntityCache.Data] = JsonHelper.SerializeJson(entityModel);
+			// set Pending status reason if needed
+			CheckPendingStatus(entityCache, primaryEntity);
             service.Create(entityCache);
             trace.Trace("DoActionsOnEntityUpdate - End");
         }
-        
 
-        /// <summary>
-        /// To prepare entitycache record
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
-        private Entity PrepareEntityCache(Entity entity)
+		private void CheckPendingStatus(Entity entityCache, Entity primaryEntity)
+		{
+			var query = $@"<fetch version='1.0' output-format='xml-platform' distinct='false' mapping='logical' aggregate='true'>
+							<entity name = 'tc_entitycache'>
+								<attribute name = 'tc_entitycacheid' alias = 'totalCount' aggregate = 'count' />
+								<filter type = 'and'>
+									<condition attribute = 'statuscode' operator= 'neq' value = '{(int)EntityCacheStatusReason.Succeeded}' />
+									<condition attribute = 'tc_recordid' operator= 'eq' value = '{primaryEntity.Id}' />
+								</filter>
+							</entity>
+						</fetch>";
+			var fetch = new FetchExpression(query);
+			EntityCollection countResult = service.RetrieveMultiple(new FetchExpression(query));
+			var count = (Int32)((AliasedValue)countResult.Entities[0]["totalCount"]).Value;
+			trace.Trace($"Existing non-successfull EntityCache related records count:{count}.");
+			if (count > 0)
+			{
+				entityCache[Attributes.EntityCache.StatusCode] = new OptionSetValue((int)EntityCacheStatusReason.Pending);
+				trace.Trace("EntityCache record will be created with Pending status.");
+			}
+		}
+
+		/// <summary>
+		/// To prepare entitycache record
+		/// </summary>
+		/// <param name="entity"></param>
+		/// <returns></returns>
+		private Entity PrepareEntityCache(Entity entity)
         {
             trace.Trace("PrepareEntityCache - Start");
             var entityCache = new Entity(Entities.EntityCache);
