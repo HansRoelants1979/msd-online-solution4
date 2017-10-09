@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Activities.Expressions;
 using System.Collections.Generic;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Tooling.Connector;
@@ -32,13 +33,13 @@ namespace Tc.Usd.HostedControls.Service
         private TravelPlanner GetTravelPlanner( DataCollection<Entity> rooms)
         {
             var travelPlanner = new TravelPlanner();
-            travelPlanner.Id = _opportunity.Id;
+            travelPlanner.TravelPlannerId = _opportunity.Id;
             travelPlanner.ConsultationReference = _opportunity.GetAttributeValue<string>(Opportunity.Name);
             travelPlanner.DepartureDateFrom = _opportunity.Contains(Opportunity.EarliestDepartureDate)
-                ? _opportunity.GetAttributeValue<DateTime>(Opportunity.EarliestDepartureDate).ToString()
+                ? GetOwrDateFormat(_opportunity.GetAttributeValue<DateTime>(Opportunity.EarliestDepartureDate))
                 : null;
             travelPlanner.DepartureDateTo = _opportunity.Contains(Opportunity.LatestDepartureDate)
-                ? _opportunity.GetAttributeValue<DateTime>(Opportunity.LatestDepartureDate).ToString()
+                ? GetOwrDateFormat(_opportunity.GetAttributeValue<DateTime>(Opportunity.LatestDepartureDate))
                 : null;
             var duration = _opportunity.GetAttributeValue<OptionSetValue>(Opportunity.Duration)?.Value;
             if (duration != null)
@@ -56,68 +57,34 @@ namespace Tc.Usd.HostedControls.Service
                     GetGatewayOwrName(_opportunity.GetAttributeValue<EntityReference>(Opportunity.DeparturePoint3))
                 };
             travelPlanner.Rooms = GetRoomsByEntity(rooms);
-            travelPlanner.Customer = GetCustomer(_opportunity);
+            travelPlanner.Customer = GetCustomer();
             return travelPlanner;
         }
 
-        private CustomerOwr GetCustomer(Entity opportunity)
+        private CustomerOwr GetCustomer()
         {
             var customer = new CustomerOwr();
 
             customer.CustomerIdentifier = new CustomerIdentifierOwr
             {
-                CustomerId = opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.SourceSystemId) ?
-                    ((AliasedValue)opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.SourceSystemId]).Value.ToString():""
+                CustomerId = _opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.SourceSystemId) ?
+                    ((AliasedValue)_opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.SourceSystemId]).Value.ToString():""
             };
             customer.CustomerIdentity = new CustomerIdentityOwr
             {
-                Salutation = opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Salutation) ?
-                opportunity.FormattedValues[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Salutation] : "",
-                FirstName = opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.FirstName) ?
-                    ((AliasedValue)opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.FirstName]).Value.ToString() : "",
-                MiddleName = opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.MiddleName) ?
-                    ((AliasedValue)opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.MiddleName]).Value.ToString() : "",
-                LastName = opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.LastName) ?
-                    ((AliasedValue)opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.LastName]).Value.ToString() : "",
-                BirthDate = opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Birthdate) ?
-                    ((AliasedValue)opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Birthdate]).Value.ToString() : ""
+                Salutation = _opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Salutation) ?
+                _opportunity.FormattedValues[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Salutation] : "",
+                FirstName = _opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.FirstName) ?
+                    ((AliasedValue)_opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.FirstName]).Value.ToString() : "",
+                MiddleName = _opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.MiddleName) ?
+                    ((AliasedValue)_opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.MiddleName]).Value.ToString() : "",
+                LastName = _opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.LastName) ?
+                    ((AliasedValue)_opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.LastName]).Value.ToString() : "",
+                BirthDate = _opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Birthdate) ?
+                   GetOwrDateFormat((DateTime)((AliasedValue)_opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Birthdate]).Value) : ""
 
             };
-            customer.Address = new[]
-            {
-                    new AddressOwr
-                    {
-                        FlatNumberUnit = opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address1FlatorUnitNumber) ?
-                            ((AliasedValue)opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address1FlatorUnitNumber]).Value.ToString():"",
-                        HouseNumberBuilding = opportunity.Contains(AliasName.ContactAliasName +
-                                                                  Crm.Common.Constants.Attributes.Customer.Address1HouseNumberoBuilding)?
-                           ((AliasedValue)opportunity[AliasName.ContactAliasName +
-                                                                  Crm.Common.Constants.Attributes.Customer.Address1HouseNumberoBuilding]).Value.ToString():"",
-                        Town = opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address1Town)?
-                            ((AliasedValue)opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address1Town]).Value.ToString():"",
-                        Country = opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address1CountryId) ?
-                            ((EntityReference)((AliasedValue)opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address1CountryId]).Value).Name:"",
-                        County = opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address1County)?
-                           ((AliasedValue) opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address1County]).Value.ToString():"",
-                        PostalCode = opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address1PostalCode)?
-                            ((AliasedValue)opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address1PostalCode]).Value.ToString():""
-                    },
-                    new AddressOwr
-                    {
-                        FlatNumberUnit = opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2FlatorUnitNumber)?
-                            ((AliasedValue)opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2FlatorUnitNumber]).Value.ToString():"",
-                        HouseNumberBuilding = opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2HouseNumberoBuilding)?
-                            ((AliasedValue)opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2HouseNumberoBuilding]).Value.ToString():"",
-                        Town = opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2Town)?
-                            ((AliasedValue)opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2Town]).Value.ToString():"",
-                        Country = opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2CountryId)?
-                           ((EntityReference)((AliasedValue)opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2CountryId]).Value).Name:"",
-                        County = opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2County)?
-                            ((AliasedValue)opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2County]).Value.ToString():"",
-                        PostalCode = opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2PostalCode)?
-                            ((AliasedValue)opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2PostalCode]).Value.ToString():""
-                    }
-                };
+            customer.Address = GetAddresses();
 
             customer.Phone = GetPhones();
             customer.Email = GetEmails();
@@ -155,19 +122,19 @@ namespace Tc.Usd.HostedControls.Service
                 switch (howDoYouWantToSearch)
                 {
                     case HowDoYouWantToSearch.All:
-                        return new string[] { };
+                        return new string[] { ((int)HowDoYouWantToSearch.All).ToString() };
                     case HowDoYouWantToSearch.ByCountry:
                         var destinationCountry1 = CrmService.GetIso2Code(_client, _opportunity.GetAttributeValue<EntityReference>(Opportunity.DestinationCountry1)?.Id) + " - " + _opportunity.GetAttributeValue<EntityReference>(Opportunity.DestinationCountry1)?.Name;
-                        return new[] { destinationCountry1 };
+                        return new[] { destinationCountry1, ((int)HowDoYouWantToSearch.ByCountry).ToString() };
                     case HowDoYouWantToSearch.ByRegion:
                         var destinationRegion1 = CrmService.GetRegionCode(_client, _opportunity.GetAttributeValue<EntityReference>(Opportunity.Region1)?.Id);
-                        return new[] { destinationRegion1 };
+                        return new[] { destinationRegion1, ((int)HowDoYouWantToSearch.ByRegion).ToString() };
                     case HowDoYouWantToSearch.ByHotel:
                         var hotel1 = CrmService.GetHotelCode(_client, _opportunity.GetAttributeValue<EntityReference>(Opportunity.Hotel1)?.Id);
-                        return new[] { hotel1 };
+                        return new[] { hotel1, ((int)HowDoYouWantToSearch.ByHotel).ToString()};
                     case HowDoYouWantToSearch.ByDestinationAirport:
                         var destinationAirport1 = GetGatewayOwrName(_opportunity.GetAttributeValue<EntityReference>(Opportunity.DestinationAirport1));
-                        return new[] { destinationAirport1 };
+                        return new[] { destinationAirport1, ((int)HowDoYouWantToSearch.ByDestinationAirport).ToString() };
                     default:
                         return new string[] { };
                 }
@@ -227,6 +194,45 @@ namespace Tc.Usd.HostedControls.Service
             return roomsOwr.ToArray();
         }
 
+        private AddressOwr[] GetAddresses()
+        {
+           var addresses = new[]
+            {
+                    new AddressOwr
+                    {
+                        FlatNumberUnit = _opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address1FlatorUnitNumber) ?
+                            ((AliasedValue)_opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address1FlatorUnitNumber]).Value.ToString():"",
+                        HouseNumberBuilding = _opportunity.Contains(AliasName.ContactAliasName +
+                                                                  Crm.Common.Constants.Attributes.Customer.Address1HouseNumberoBuilding)?
+                           ((AliasedValue)_opportunity[AliasName.ContactAliasName +
+                                                                  Crm.Common.Constants.Attributes.Customer.Address1HouseNumberoBuilding]).Value.ToString():"",
+                        Town = _opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address1Town)?
+                            ((AliasedValue)_opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address1Town]).Value.ToString():"",
+                        Country = _opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address1CountryId) ?
+                           CrmService.GetIso2Code(_client, ((EntityReference)((AliasedValue) _opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address1CountryId]).Value)?.Id) : "",
+                        County = _opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address1County)?
+                           ((AliasedValue) _opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address1County]).Value.ToString():"",
+                        PostalCode = _opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address1PostalCode)?
+                            ((AliasedValue)_opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address1PostalCode]).Value.ToString():""
+                    },
+                    new AddressOwr
+                    {
+                        FlatNumberUnit = _opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2FlatorUnitNumber)?
+                            ((AliasedValue)_opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2FlatorUnitNumber]).Value.ToString():"",
+                        HouseNumberBuilding = _opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2HouseNumberoBuilding)?
+                            ((AliasedValue)_opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2HouseNumberoBuilding]).Value.ToString():"",
+                        Town = _opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2Town)?
+                            ((AliasedValue)_opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2Town]).Value.ToString():"",
+                        Country = _opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2CountryId)?
+                          CrmService.GetIso2Code(_client, ((EntityReference)((AliasedValue) _opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address1CountryId]).Value)?.Id) : "",
+                        County = _opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2County)?
+                            ((AliasedValue)_opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2County]).Value.ToString():"",
+                        PostalCode = _opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2PostalCode)?
+                            ((AliasedValue)_opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2PostalCode]).Value.ToString():""
+                    }
+                };
+            return addresses;
+        }
         private PhoneOwr[] GetPhones()
         {
             var phones = new List<PhoneOwr>();
@@ -343,6 +349,12 @@ namespace Tc.Usd.HostedControls.Service
                 return gatewayOwrName;
             }
             return "";
+        }
+
+        private string GetOwrDateFormat(DateTime crmDate)
+        {
+            var correctDate = $"{crmDate:yyyy-MM-dd}";
+            return correctDate;
         }
     }
 }

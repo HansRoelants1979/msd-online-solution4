@@ -55,6 +55,7 @@ namespace Tc.Usd.HostedControls
             }
             var owrJsonHelper = new OwrJsonHelper(_client.CrmInterface, opportunity);
             var data = owrJsonHelper.GetCustomerTravelPlannerJson(rooms);
+            _logger.LogInformation($"Json to be passed to owr: {data}");
             var serviceUrl = CrmService.GetConfig(Configuration.OwrUrlConfigName, _logger, _client.CrmInterface);
             if (serviceUrl == null)
             {
@@ -64,13 +65,13 @@ namespace Tc.Usd.HostedControls
             var content = _jtiService.SendHttpRequest(HttpMethod.Post, serviceUrl, token, data).Content;
             if (content == null)
             {
-                FireEventOnOwrError("Owr response content is null");
+                FireEventOnOwrError("Owr response content is null. Please See Details in log output");
                 return;
             }
             var eventParams = WebServiceExchangeHelper.ContentToEventParams(content, _logger);
             if (eventParams == null)
             {
-                FireEventOnOwrError("Failed to parse OWR response");
+                FireEventOnOwrError("Failed to parse OWR response. Please See Details in log output");
                 return;
             }
             FireEventOnOwrSuccess(eventParams);

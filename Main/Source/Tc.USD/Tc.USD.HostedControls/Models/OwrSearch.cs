@@ -16,8 +16,8 @@ namespace Tc.Usd.HostedControls.Models
     [DataContract(Name = "travelPlanner")]
     public class TravelPlanner
     {
-        [DataMember(Name = "Id")]
-        public Guid Id { get; set; }
+        [DataMember(Name = "travelPlannerId")]
+        public Guid TravelPlannerId { get; set; }
 
         [DataMember(Name = "consultationReference")]
         public string ConsultationReference { get; set; }
@@ -56,6 +56,7 @@ namespace Tc.Usd.HostedControls.Models
         [DataMember(Name = "customerIdentity")]
         public CustomerIdentityOwr CustomerIdentity { get; set; }
 
+        [DataMember(Name= "address")]
         public AddressOwr[] Address { get; set; }
 
         [DataMember(Name = "phone")]
@@ -92,9 +93,10 @@ namespace Tc.Usd.HostedControls.Models
         
     }
 
+    [DataContract(Name = "rooms")]
     public class RoomOwr
     {
-        [DataMember(Name = "NumberOfAdults")]
+        [DataMember(Name = "numberOfAdults")]
         public int NumberOfAdults { get; set; }
 
         [DataMember(Name = "numberOfChildren")]
@@ -104,6 +106,7 @@ namespace Tc.Usd.HostedControls.Models
         public ChildrenAges[] ChildrensAges { get; set; }
     }
 
+    [DataContract(Name = "address")]
     public class AddressOwr
     {
         [DataMember(Name = "flatNumberUnit")]
