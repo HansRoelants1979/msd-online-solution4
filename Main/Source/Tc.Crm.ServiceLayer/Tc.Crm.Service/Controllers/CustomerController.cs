@@ -19,11 +19,13 @@ namespace Tc.Crm.Service.Controllers
 
         ICustomerService customerService;
         ICrmService crmService;
+        IPatchParameterService parameterService;
 
-        public CustomerController(ICustomerService customerService, ICrmService crmService)
+        public CustomerController(ICustomerService customerService, ICrmService crmService, IPatchParameterService parameterService)
         {
             this.customerService = customerService;
             this.crmService = crmService;
+            this.parameterService = parameterService;
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
@@ -102,23 +104,31 @@ namespace Tc.Crm.Service.Controllers
 
         }
 
-        private static CustomerInformation ProcessPatchJsonToActualJson(JsonPatchDocument<CustomerInformation> customerInfo)
+        private void AssignPatchParameters(JsonPatchDocument<CustomerInformation> customerInfo, CustomerInformation customerInformation)
         {
-            CustomerInformation customerInformation = new CustomerInformation();
-            var customer = customerInformation.Customer;
-
-            List<string> patchParameters = new List<string>();
-            customerInfo.Operations.ForEach(items => {
-                if (items.ParsedPath.Count() > 0)
-                    patchParameters.Add(items.ParsedPath.Last().Name);
+            customerInformation.Customer.PatchParameters = new List<string>();
+            customerInfo.Operations.ForEach(item => {
+                if (item.ParsedPath.Count() > 0)
+                {
+                    var path = item.Path;
+                    string attributeName = string.Empty;
+                    if (parameterService.Map.TryGetValue(item.Path, out attributeName))
+                        customerInformation.Customer.PatchParameters.Add(attributeName);
+                }
             });
+        }
 
-            customer.PatchParameters = patchParameters;
+        private void InitializeCustomer(CustomerInformation customerInfo)
+        {
+            if (customerInfo == null) return;
+            if (customerInfo.Customer == null) return;
+            var customer = customerInfo.Customer;
+
             customer.CustomerIdentity = new CustomerIdentity();
             customer.CustomerIdentifier = new CustomerIdentifier();
             customer.CustomerGeneral = new CustomerGeneral();
             customer.Company = new Company();
-            customer.Permission = new Permission();
+            customer.Permissions = new Permission();
             customer.Additional = new Additional();
             customer.Address = new[] { new Address(), new Address(), new Address() };
             customer.Address1 = new Address();
@@ -132,8 +142,15 @@ namespace Tc.Crm.Service.Controllers
             customer.Email1 = new Email();
             customer.Email2 = new Email();
             customer.Email3 = new Email();
+        }
 
-            customer.Social = new[] { new Social(), new Social(), new Social() };
+        private CustomerInformation ProcessPatchJsonToActualJson(JsonPatchDocument<CustomerInformation> customerInfo)
+        {
+            CustomerInformation customerInformation = new CustomerInformation();
+            var customer = customerInformation.Customer;
+
+            AssignPatchParameters(customerInfo,customerInformation);
+            InitializeCustomer(customerInformation);
 
             customerInfo.ApplyUpdatesTo(customerInformation);
 

@@ -1051,8 +1051,8 @@ namespace Tc.Crm.Service.Models
         [DataMember(Name = "customerIdentity")]
         public CustomerIdentity CustomerIdentity { get; set; }
 
-        [DataMember(Name = "permission")]
-        public Permission Permission { get; set; }
+        [DataMember(Name = "permissions")]
+        public Permission Permissions{ get; set; }
 
         [DataMember(Name = "company")]
         public Company Company { get; set; }
@@ -1103,7 +1103,7 @@ namespace Tc.Crm.Service.Models
         [DataMember(Name = "social")]
         public Social[] Social { get; set; }
 
-        [DataMember(Name = "PatchParameters")]
+        [DataMember]
         public List<string> PatchParameters { get; set; }
 
     }

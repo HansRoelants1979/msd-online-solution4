@@ -1,6 +1,107 @@
 ﻿namespace Tc.Crm.Service.Constants
 {
-
+    public static class Path
+    {
+        public const string Customeridentifier_Customerid = "customer/customerIdentifier/customerID";
+        public const string Customeridentifier_Sourcemarket = "customer/customerIdentifier/sourceMarket";
+        public const string Customergeneral_Customerstatus = "customer/customerGeneral/customerStatus";
+        public const string Customergeneral_Customertype = "customer/customerGeneral/customerType";
+        public const string Customeridentity_Salutation = "customer/customerIdentity/salutation";
+        public const string Customeridentity_Academictitle = "customer/customerIdentity/academicTitle";
+        public const string Customeridentity_Firstname = "customer/customerIdentity/firstName";
+        public const string Customeridentity_Middlename = "customer/customerIdentity/middleName";
+        public const string Customeridentity_Lastname = "customer/customerIdentity/lastname";
+        public const string Customeridentity_Language = "customer/customerIdentity/language";
+        public const string Customeridentity_Gender = "customer/customerIdentity/gender";
+        public const string Customeridentity_Birthdate = "customer/customerIdentity/birthDate";
+        public const string Company_Companyname = "customer/company/companyName";
+        public const string Additional_Segment = "customer/additional/segment";
+        public const string Additional_DateOfDeath = "customer/additional/dateOfdeath";
+        public const string Address1_Additionaladdressinfo = "customer/address1/additionalAddressInfo";
+        public const string Address1_Flatnumberunit = "customer/address1/flatNumberUnit";
+        public const string Address1_Housenumberbuilding = "customer/address1/houseNumberBuilding";
+        public const string Address1_Street = "customer/address1/street";
+        public const string Address1_Town = "customer/address1/town";
+        public const string Address1_Country = "customer/address1/country";
+        public const string Address1_County = "customer/address1/county";
+        public const string Address1_Postalcode = "customer/address1/postalCode";
+        public const string Address2_Additionaladdressinfo = "customer/address2/additionalAddressInfo";
+        public const string Address2_Flatnumberunit = "customer/address2/flatNumberUnit";
+        public const string Address2_Housenumberbuilding = "customer/address2/houseNumberBuilding";
+        public const string Address2_Street = "customer/address2/street";
+        public const string Address2_Town = "customer/address2/town";
+        public const string Address2_Country = "customer/address2/country";
+        public const string Address2_County = "customer/address2/county";
+        public const string Address2_Postalcode = "customer/address2/postalCode";
+        public const string Phone1_Type = "customer/phone1/type";
+        public const string Phone1_Number = "customer/phone1/number";
+        public const string Phone2_Type = "customer/phone2/type";
+        public const string Phone2_Number = "customer/phone2/number";
+        public const string Phone3_Type = "customer/phone3/type";
+        public const string Phone3_Number = "customer/phone3/number";
+        public const string Email1_Type = "customer/email1/type";
+        public const string Email1_Email = "customer/email1/address";
+        public const string Email2_Type = "customer/email2/type";
+        public const string Email2_Email = "customer/email2/address";
+        public const string Email3_Type = "customer/email3/type";
+        public const string Email3_Email = "customer/email3/address";
+        public const string Permissions_Allowmarketing = "customer/permissions/doNotContactInd";
+        public const string Permissions_Donotallowemail = "customer/permissions/emailAllowedInd";
+        public const string Permissions_Donotallowmail = "customer/permissions/mailAllowedInd";
+        public const string Permissions_Donotallowphonecalls = "customer/permissions/phoneAllowedInd";
+        public const string Permissions_Donotallowsms = "customer/permissions/smsAllowedInd";
+    }
+    public static class Attributes
+    {
+        public const string LastName = "lastname";
+        public const string FirstName = "firstname";
+        public const string Gender = "tc_gender";
+        public const string Language = "tc_language";
+        public const string SourceMarketId = "tc_sourcemarketid";
+        public const string Salutation = "tc_salutation";
+        public const string Telephone1Type = "tc_telephone1type";
+        public const string Telephone2Type = "tc_telephone2type";
+        public const string Telephone3Type = "tc_telephone3type";
+        public const string AcademicTitle = "tc_academictitle";
+        public const string Address1AdditionalInformation = "tc_address1_additionalinformation";
+        public const string Address1County = "tc_address1_county";
+        public const string Address1FlatOrUnitNumber = "tc_address1_flatorunitnumber";
+        public const string Address1HouseNumberOrBuilding = "tc_address1_housenumberorbuilding";
+        public const string Address1Town = "tc_address1_town";
+        public const string Address1CountryId = "tc_address1_countryid";
+        public const string Address1Street = "tc_address1_street";
+        public const string Address1PostalCode = "tc_address1_postalcode";
+        public const string Address2AdditionalInformation = "tc_address2_additionalinformation";
+        public const string Address2CountryId = "tc_address2_countryid";
+        public const string Address2Street = "tc_address2_street";
+        public const string Address2County = "tc_address2_county";
+        public const string Address2FlatOrUnitNumber = "tc_address2_flatorunitnumber";
+        public const string Address2HouseNumberOrBuilding = "tc_address2_housenumberorbuilding";
+        public const string Address2PostalCode = "tc_address2_postalcode";
+        public const string Address2Town = "tc_address2_town";
+        public const string StateCode = "statecode";
+        public const string StatusCode = "statuscode";
+        public const string DateOfDeath = "tc_dateofdeath";
+        public const string EmailAddress1Type = "tc_emailaddress1type";
+        public const string EmailAddress2Type = "tc_emailaddress2type";
+        public const string EmailAddress3Type = "tc_emailaddress3type";
+        public const string Segment = "tc_segment";
+        public const string Telephone1 = "telephone1";
+        public const string Telephone2 = "telephone2";
+        public const string Telephone3 = "telephone3";
+        public const string EmailAddress1 = "emailaddress1";
+        public const string EmailAddress2 = "emailaddress2";
+        public const string EmailAddress3 = "emailaddress3";
+        public const string MiddleName = "middlename";
+        public const string Birthdate = "birthdate";
+        public const string SourceSystemId = "tc_sourcesystemid";
+        public const string ThomasCookMarketingConsent = "tc_thomascookmarketingconsent";
+        public const string SendMarketingByPost = "tc_sendmarketingbypost";
+        public const string MarketingByPhone = "tc_marketingbyphone";
+        public const string SendMarketingBySms = "tc_sendmarketingbysms";
+        public const string SendMarketingByEmail = "tc_sendmarketingbyemail";
+        public const string Name = "name";
+    }
     public static class General
     {
         public const string BookingJsonSchema = "{ \"$schema\": \"http://json-schema.org/draft-04/schema#\", \"type\": \"object\", \"title\": \"ThomasCookIntegrationLayer\", \"description\": \"ThomasCookIntegrationLayer-draft\", \"definitions\": { \"address\": { \"type\": \"object\", \"properties\": { \"additionalAddressInfo\": { \"type\": \"string\" }, \"flatNumberUnit\": { \"type\": \"string\" }, \"houseNumberBuilding\": { \"type\": \"string\" }, \"box\": { \"type\": \"string\" }, \"town\": { \"type\": \"string\" }, \"country\": { \"type\": \"string\" }, \"county\": { \"type\": \"string\" }, \"number\": { \"type\": \"string\" }, \"postalCode\": { \"type\": \"string\" }, \"street\": { \"type\": \"string\" }, \"type\": { \"type\": \"string\", \"enum\": [ \"M\" ] } } }, \"booking\": { \"type\": \"object\", \"properties\": { \"bookingIdentifier\": { \"type\": \"object\", \"properties\": { \"sourceMarket\": { \"type\": \"string\" }, \"sourceSystem\": { \"type\": \"string\" }, \"bookingNumber\": { \"type\": \"string\" }, \"bookingVersionOnTour\": { \"type\": \"string\" }, \"bookingVersionTourOperator\": { \"type\": \"string\" }, \"bookingUpdateDateOnTour\": { \"type\": \"string\" }, \"bookingUpdateDateTourOperator\": { \"type\": \"string\" } } }, \"general\": { \"type\": \"object\", \"properties\": { \"bookingStatus\": { \"type\": \"string\", \"enum\": [ \"B\", \"C\" ] }, \"bookingDate\": { \"type\": \"string\" }, \"departureDate\": { \"type\": \"string\" }, \"returnDate\": { \"type\": \"string\" }, \"duration\": { \"type\": \"string\" }, \"destination\": { \"type\": \"string\" }, \"toCode\": { \"type\": \"string\" }, \"brand\": { \"type\": \"string\" }, \"brochureCode\": { \"type\": \"string\" }, \"isLateBooking\": { \"type\": \"boolean\" }, \"numberofParticipants\": { \"type\": \"integer\" }, \"numberOfAdults\": { \"type\": \"integer\" }, \"numberOfChildren\": { \"type\": \"integer\" }, \"numberOfInfants\": { \"type\": \"integer\" }, \"travelAmount\": { \"type\": \"number\" }, \"currency\": { \"type\": \"string\" }, \"hasComplaint\": { \"type\": \"boolean\" } } }, \"bookingIdentity\": { \"type\": \"object\", \"properties\": { \"booker\": { \"$ref\": \"#/definitions/booking_booker\" } } }, \"travelParticipant\": { \"type\": \"array\", \"items\": { \"type\": \"object\", \"properties\": { \"firstName\": { \"type\": \"string\" }, \"lastName\": { \"type\": \"string\" }, \"age\": { \"type\": \"integer\" }, \"gender\": { \"type\": \"string\", \"enum\": [ \"M\", \"F\", \"U\" ] }, \"relation\": { \"type\": \"string\", \"enum\": [ \"P\", \"C\", \"I\" ] }, \"travelParticipantIDOnTour\": { \"type\": \"string\" }, \"language\": { \"type\": \"string\" }, \"birthDate\": { \"type\": \"string\" }, \"Remark\": { \"type\": \"array\", \"items\": { \"$ref\": \"#/definitions/remark\" } } } } }, \"services\": { \"type\": \"object\", \"properties\": { \"accommodation\": { \"type\": \"array\", \"items\": { \"type\": \"object\", \"properties\": { \"accommodationCode\": { \"type\": \"string\" }, \"groupAccommodationCode\": { \"type\": \"string\" }, \"accommodationDescription\": { \"type\": \"string\" }, \"order\": { \"type\": \"integer\" }, \"startDate\": { \"type\": \"string\" }, \"endDate\": { \"type\": \"string\" }, \"roomType\": { \"type\": \"string\" }, \"boardType\": { \"type\": \"string\", \"enum\": [ \"AI\", \"HB\" ] }, \"status\": { \"type\": \"string\", \"enum\": [ \"OK\", \"R\", \"PR\" ] }, \"hasSharedRoom\": { \"type\": \"boolean\" }, \"numberOfParticipants\": { \"type\": \"integer\" }, \"numberOfRooms\": { \"type\": \"integer\" }, \"withTransfer\": { \"type\": \"boolean\" }, \"isExternalService\": { \"type\": \"boolean\" }, \"externalServiceCode\": { \"type\": \"string\" }, \"notificationRequired\": { \"type\": \"boolean\" }, \"needsTourGuideAssignment\": { \"type\": \"boolean\" }, \"isExternalTransfer\": { \"type\": \"boolean\" }, \"transferServiceLevel\": { \"type\": \"string\" }, \"travelParticipantAssignment\": { \"type\": \"array\", \"items\": { \"properties\": { \"travelParticipantID\": { \"type\": \"string\" } } } }, \"remark\": { \"type\": \"array\", \"items\": { \"$ref\": \"#/definitions/remark\" } }, \"tourguideAssignment\": { \"type\": \"object\", \"properties\": { \"tourguide\": { \"type\": \"object\", \"properties\": { \"tourguideID\": { \"type\": \"string\" }, \"tourguideName\": { \"type\": \"string\" }, \"brands\": { \"type\": \"array\", \"items\": { \"items\": [ { \"type\": \"object\", \"properties\": { \"brand\": { \"type\": \"string\" } } } ] } } } } } } } } }, \"transport\": { \"type\": \"array\", \"items\": { \"type\": \"object\", \"properties\": { \"transportCode\": { \"type\": \"string\" }, \"transportDescription\": { \"type\": \"string\" }, \"order\": { \"type\": \"integer\" }, \"startDate\": { \"type\": \"string\" }, \"endDate\": { \"type\": \"string\" }, \"transferType\": { \"type\": \"string\", \"enum\": [ \"I\", \"O\", \"TH\" ] }, \"departureAirport\": { \"type\": \"string\" }, \"arrivalAirport\": { \"type\": \"string\" }, \"carrierCode\": { \"type\": \"string\" }, \"flightNumber\": { \"type\": \"string\" }, \"flightIdentifier\": { \"type\": \"string\" }, \"numberOfParticipants\": { \"type\": \"integer\" }, \"travelParticipantAssignment\": { \"type\": \"array\", \"items\": { \"properties\": { \"travelParticipantID\": { \"type\": \"string\" } } } }, \"remark\": { \"type\": \"array\", \"items\": { \"$ref\": \"#/definitions/remark\" } } } } }, \"transfer\": { \"type\": \"array\", \"items\": { \"type\": \"object\", \"properties\": { \"transferCode\": { \"type\": \"string\" }, \"transferDescription\": { \"type\": \"string\" }, \"order\": { \"type\": \"integer\" }, \"startDate\": { \"type\": \"string\" }, \"category\": { \"type\": \"string\" }, \"endDate\": { \"type\": \"string\" }, \"transferType\": { \"type\": \"string\", \"enum\": [ \"I\", \"O\", \"TH\" ] }, \"departureAirport\": { \"type\": \"string\" }, \"arrivalAirport\": { \"type\": \"string\" }, \"travelParticipantAssignment\": { \"type\": \"array\", \"items\": { \"properties\": { \"travelParticipantID\": { \"type\": \"string\" } } } }, \"remark\": { \"type\": \"array\", \"items\": { \"$ref\": \"#/definitions/remark\" } } } } }, \"extraService\": { \"type\": \"array\", \"items\": { \"type\": \"object\", \"properties\": { \"extraServiceCode\": { \"type\": \"object\", \"properties\": {} }, \"extraServiceDescription\": { \"type\": \"object\", \"properties\": {} }, \"order\": { \"type\": \"integer\" }, \"startDate\": { \"type\": \"string\" }, \"endDate\": { \"type\": \"string\" }, \"travelParticipantAssignment\": { \"type\": \"array\", \"items\": { \"properties\": { \"travelParticipantID\": { \"type\": \"string\" } } } }, \"remark\": { \"type\": \"array\", \"items\": { \"$ref\": \"#/definitions/remark\" } } } } } } }, \"customer\": { \"$ref\": \"#/definitions/customer\" }, \"remark\": { \"type\": \"array\", \"items\": { \"$ref\": \"#/definitions/remark\" } } } }, \"customer\": { \"type\": \"object\", \"properties\": { \"customerIdentifier\": { \"type\": \"object\", \"properties\": { \"customerID\": { \"type\": \"string\" }, \"businessArea\": { \"type\": \"string\" }, \"sourceMarket\": { \"type\": \"string\" }, \"sourceSystem\": { \"type\": \"string\" } } }, \"general\": { \"type\": \"object\", \"properties\": { \"customerStatus\": { \"type\": \"string\", \"enum\": [ \"A\", \"D\", \"B\" ] }, \"customerType\": { \"type\": \"string\", \"enum\": [ \"P\", \"B\" ] } } }, \"customerIdentity\": { \"type\": \"object\", \"properties\": { \"salutation\": { \"type\": \"string\" }, \"academictitle\": { \"type\": \"string\" }, \"firstName\": { \"type\": \"string\" }, \"middleName\": { \"type\": \"string\" }, \"lastName\": { \"type\": \"string\" }, \"language\": { \"type\": \"string\" }, \"gender\": { \"type\": \"string\", \"enum\": [ \"M\", \"F\", \"U\" ] }, \"birthdate\": { \"type\": \"string\" } } }, \"company\": { \"type\": \"object\", \"properties\": { \"companyName\": { \"type\": \"string\" } } }, \"additional\": { \"type\": \"object\", \"properties\": { \"segment\": { \"type\": \"string\" }, \"dateOfdeath\": { \"type\": \"string\" } } }, \"address\": { \"type\": \"array\", \"items\": { \"$ref\": \"#/definitions/address\" } }, \"phone\": { \"type\": \"array\", \"additionalItems\": false, \"items\": [ { \"type\": \"object\", \"properties\": { \"type\": { \"type\": \"string\", \"enum\": [ \"H\", \"M\" ] }, \"number\": { \"type\": \"string\" } } } ] }, \"email\": { \"type\": \"array\", \"additionalItems\": false, \"items\": [ { \"type\": \"object\", \"properties\": { \"type\": { \"type\": \"string\", \"enum\": [ \"Pri\", \"Pro\" ] }, \"address\": { \"type\": \"string\" } } } ] }, \"social\": { \"type\": \"array\", \"additionalItems\": false, \"items\": [ { \"type\": \"object\", \"properties\": { \"type\": { \"type\": \"string\" }, \"value\": { \"type\": \"string\" } } } ] } } }, \"remark\": { \"type\": \"object\", \"properties\": { \"type\": { \"type\": \"string\", \"enum\": [ \"T\", \"A\" ] }, \"text\": { \"type\": \"string\" } } }, \"booking_booker\": { \"anyOf\": [ { \"$ref\": \"#/definitions/address\" }, { \"properties\": { \"email\": { \"type\": \"string\" }, \"phone\": { \"type\": \"string\" }, \"mobile\": { \"type\": \"string\" }, \"emergencyNumber\": { \"type\": \"string\" } } } ] } } }";
