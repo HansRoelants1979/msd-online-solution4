@@ -107,7 +107,8 @@ namespace Tc.Crm.Service.Controllers
         private void AssignPatchParameters(JsonPatchDocument<CustomerInformation> customerInfo, CustomerInformation customerInformation)
         {
             customerInformation.Customer.PatchParameters = new List<string>();
-            customerInfo.Operations.ForEach(item => {
+            customerInfo.Operations.ForEach(item =>
+            {
                 if (item.ParsedPath.Count() > 0)
                 {
                     var path = item.Path;
@@ -149,10 +150,10 @@ namespace Tc.Crm.Service.Controllers
             CustomerInformation customerInformation = new CustomerInformation();
             var customer = customerInformation.Customer;
 
-            ResolveNullValue(customerInfo);
-            AssignPatchParameters(customerInfo,customerInformation);
+            ResolveNullValueForEnumField(customerInfo);
+            AssignPatchParameters(customerInfo, customerInformation);
             InitializeCustomer(customerInformation);
-            
+
             customerInfo.ApplyUpdatesTo(customerInformation);
 
             customer.Address[0] = customer.Address1;
@@ -177,13 +178,13 @@ namespace Tc.Crm.Service.Controllers
             return customerInformation;
         }
 
-        private void ResolveNullValue(JsonPatchDocument<CustomerInformation> customerInfo)
+        private void ResolveNullValueForEnumField(JsonPatchDocument<CustomerInformation> customerInfo)
         {
             foreach (var item in customerInfo.Operations)
             {
-                if(item.ParsedPath.Last().Name.Equals("PhoneType"))
+                if (item.ParsedPath.Last().Name.Equals("PhoneType"))
                 {
-                    PhoneType phoneType= PhoneType.NotSpecified;
+                    PhoneType phoneType = PhoneType.NotSpecified;
                     var value = item.Value == null ? PhoneType.NotSpecified.ToString() : item.Value.ToString();
                     if (Enum.TryParse<PhoneType>(value, out phoneType))
                         item.Value = value;
@@ -200,9 +201,29 @@ namespace Tc.Crm.Service.Controllers
                     else
                         item.Value = EmailType.NotSpecified.ToString();
                 }
+
+                if (item.ParsedPath.Last().Name.Equals("CustomerStatus"))
+                {
+                    CustomerStatus customerStatus = CustomerStatus.NotSpecified;
+                    var value = item.Value == null ? CustomerStatus.NotSpecified.ToString() : item.Value.ToString();
+                    if (Enum.TryParse<CustomerStatus>(value, out customerStatus))
+                        item.Value = value;
+                    else
+                        item.Value = CustomerStatus.NotSpecified.ToString();
+                }
+                if (item.ParsedPath.Last().Name.Equals("Gender"))
+                {
+                    Gender gender = Gender.NotSpecified;
+                    var value = item.Value == null ? Gender.NotSpecified.ToString() : item.Value.ToString();
+                    if (Enum.TryParse<Gender>(value, out gender))
+                        item.Value = value;
+                    else
+                        item.Value = Gender.NotSpecified.ToString();
+                }
+
             }
 
-            
+
         }
 
     }

@@ -949,7 +949,7 @@ namespace Tc.Crm.Service.Models
     {
 
         [DataMember(Name = "customerStatus")]
-        public CustomerStatus CustomerStatus { get; set; }
+        public CustomerStatus? CustomerStatus { get; set; }
 
         [DataMember(Name = "customerType")]
         public CustomerType CustomerType { get; set; }
@@ -1098,11 +1098,7 @@ namespace Tc.Crm.Service.Models
         public Email Email2 { get; set; }
         [DataMember(Name = "email3")]
         public Email Email3 { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
-        [DataMember(Name = "social")]
-        public Social[] Social { get; set; }
-
+        
         [DataMember]
         public List<string> PatchParameters { get; set; }
 
@@ -1112,15 +1108,15 @@ namespace Tc.Crm.Service.Models
     public class Permission
     {
         [DataMember(Name = "allowMarketing")]
-        public string AllowMarketing { get; set; }
+        public bool? AllowMarketing { get; set; }
         [DataMember(Name = "doNotAllowEmail")]
-        public string DoNotAllowEmail { get; set; }
+        public bool? DoNotAllowEmail { get; set; }
         [DataMember(Name = "doNotAllowMail")]
-        public string DoNotAllowMail { get; set; }
+        public bool? DoNotAllowMail { get; set; }
         [DataMember(Name = "doNotAllowPhoneCalls")]
-        public string DoNotAllowPhoneCalls { get; set; }
+        public bool? DoNotAllowPhoneCalls { get; set; }
         [DataMember(Name = "doNotAllowSMS")]
-        public string DoNotAllowSms { get; set; }
+        public bool? DoNotAllowSms { get; set; }
     }
 
     [DataContract(Name = "booking_booker")]
