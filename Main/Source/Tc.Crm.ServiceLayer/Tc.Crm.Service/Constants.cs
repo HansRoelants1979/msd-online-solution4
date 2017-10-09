@@ -43,11 +43,11 @@
         public const string Email2_Email = "customer/email2/address";
         public const string Email3_Type = "customer/email3/type";
         public const string Email3_Email = "customer/email3/address";
-        public const string Permissions_Allowmarketing = "customer/permissions/doNotContactInd";
-        public const string Permissions_Donotallowemail = "customer/permissions/emailAllowedInd";
-        public const string Permissions_Donotallowmail = "customer/permissions/mailAllowedInd";
-        public const string Permissions_Donotallowphonecalls = "customer/permissions/phoneAllowedInd";
-        public const string Permissions_Donotallowsms = "customer/permissions/smsAllowedInd";
+        public const string Permissions_Allowmarketing = "customer/permissions/allowMarketing";
+        public const string Permissions_Donotallowemail = "customer/permissions/doNotAllowEmail";
+        public const string Permissions_Donotallowmail = "customer/permissions/doNotAllowMail";
+        public const string Permissions_Donotallowphonecalls = "customer/permissions/doNotAllowPhoneCalls";
+        public const string Permissions_Donotallowsms = "customer/permissions/doNotAllowSMS";
     }
     public static class Attributes
     {

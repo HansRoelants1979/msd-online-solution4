@@ -1111,18 +1111,16 @@ namespace Tc.Crm.Service.Models
     [DataContract(Name = "permission")]
     public class Permission
     {
-        [DataMember(Name = "doNotContactInd")]
-        public string DoNotContactInd { get; set; }
-        [DataMember(Name = "preferredContactMethod")]
-        public string PreferredContactMethod { get; set; }
-        [DataMember(Name = "emailAllowedInd")]
-        public string EmailAllowedInd { get; set; }
-        [DataMember(Name = "mailAllowedInd")]
-        public string MailAllowedInd { get; set; }
-        [DataMember(Name = "phoneAllowedInd")]
-        public string PhoneAllowedInd { get; set; }
-        [DataMember(Name = "smsAllowedInd")]
-        public string SmsAllowedInd { get; set; }
+        [DataMember(Name = "allowMarketing")]
+        public string AllowMarketing { get; set; }
+        [DataMember(Name = "doNotAllowEmail")]
+        public string DoNotAllowEmail { get; set; }
+        [DataMember(Name = "doNotAllowMail")]
+        public string DoNotAllowMail { get; set; }
+        [DataMember(Name = "doNotAllowPhoneCalls")]
+        public string DoNotAllowPhoneCalls { get; set; }
+        [DataMember(Name = "doNotAllowSMS")]
+        public string DoNotAllowSms { get; set; }
     }
 
     [DataContract(Name = "booking_booker")]
