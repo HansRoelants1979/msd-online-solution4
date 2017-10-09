@@ -14,6 +14,7 @@ using System.Linq;
 
 namespace Tc.Crm.Service.Controllers
 {
+    [RequireHttps]
     public class CustomerController : ApiController
     {
 
@@ -73,9 +74,10 @@ namespace Tc.Crm.Service.Controllers
             {
                 if (string.IsNullOrWhiteSpace(gbgId)) return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.CustomerIdIsNull);
 
-                if (customerInfo == null) throw new ArgumentNullException(Constants.Parameters.Customer);
+                if (customerInfo == null) return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.PayloadReadError);
 
                 CustomerInformation customerInformation = ProcessPatchJsonToActualJson(customerInfo);
+                if(customerInformation == null) return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.PayloadReadError);
                 customerService.ResolveReferences(customerInformation.Customer);
 
                 var validationMessages = customerService.ValidateCustomerPatchRequest(customerInformation);
@@ -153,8 +155,16 @@ namespace Tc.Crm.Service.Controllers
             ResolveNullValueForEnumField(customerInfo);
             AssignPatchParameters(customerInfo, customerInformation);
             InitializeCustomer(customerInformation);
-
-            customerInfo.ApplyUpdatesTo(customerInformation);
+            try
+            {
+                customerInfo.ApplyUpdatesTo(customerInformation);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError($"Message:{ex.Message} StackTrace:{ex.StackTrace.ToString()}");
+                return null;
+            }
+            
 
             customer.Address[0] = customer.Address1;
             customer.Address[1] = customer.Address2;

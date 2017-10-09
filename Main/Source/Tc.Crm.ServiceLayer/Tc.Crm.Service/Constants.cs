@@ -139,6 +139,7 @@
     }
     public static class Messages
     {
+        public const string PayloadReadError = "Payload could not be read.";
         public const string CustomerSourceMarketMissing = "Customer record doesn't have a source market or the source market provided could not be resolved.";
         public const string SourceMarketMissing = "Booking record doesn't have a source market or the source market provided could not be resolved.";
         public const string CurrencyResolutionError = "Currency could not be resolved.";
