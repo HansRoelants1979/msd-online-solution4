@@ -149,9 +149,10 @@ namespace Tc.Crm.Service.Controllers
             CustomerInformation customerInformation = new CustomerInformation();
             var customer = customerInformation.Customer;
 
+            ResolveNullValue(customerInfo);
             AssignPatchParameters(customerInfo,customerInformation);
             InitializeCustomer(customerInformation);
-
+            
             customerInfo.ApplyUpdatesTo(customerInformation);
 
             customer.Address[0] = customer.Address1;
@@ -175,5 +176,34 @@ namespace Tc.Crm.Service.Controllers
             customerInformation.Customer = customer;
             return customerInformation;
         }
+
+        private void ResolveNullValue(JsonPatchDocument<CustomerInformation> customerInfo)
+        {
+            foreach (var item in customerInfo.Operations)
+            {
+                if(item.ParsedPath.Last().Name.Equals("PhoneType"))
+                {
+                    PhoneType phoneType= PhoneType.NotSpecified;
+                    var value = item.Value == null ? PhoneType.NotSpecified.ToString() : item.Value.ToString();
+                    if (Enum.TryParse<PhoneType>(value, out phoneType))
+                        item.Value = value;
+                    else
+                        item.Value = PhoneType.NotSpecified.ToString();
+                }
+
+                if (item.ParsedPath.Last().Name.Equals("EmailType"))
+                {
+                    EmailType emailType = EmailType.NotSpecified;
+                    var value = item.Value == null ? EmailType.NotSpecified.ToString() : item.Value.ToString();
+                    if (Enum.TryParse<EmailType>(value, out emailType))
+                        item.Value = value;
+                    else
+                        item.Value = EmailType.NotSpecified.ToString();
+                }
+            }
+
+            
+        }
+
     }
 }
