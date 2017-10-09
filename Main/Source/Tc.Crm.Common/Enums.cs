@@ -13,7 +13,38 @@
         Account 
     }
 
-    public enum CaseStatusCode
+	public enum CustomerStatusCode
+	{
+		Unknown = 950000002,
+		Active = 1,
+		Blacklisted = 950000003,
+		Deceased = 950000004,
+		Inactive = 950000005
+	}
+
+	public enum Gender
+	{
+		Male = 950000000,
+		Female = 950000001,
+		Unknown = 950000002
+	}
+
+	public enum PhoneType
+	{
+		Mobile = 950000000,
+		Home = 950000001,
+		Business = 950000003,
+		Unknown = 950000002
+	}
+
+	public enum EmailType
+	{
+		Primary = 950000000,
+		Promotion = 950000001,
+		Unknown = 950000002
+	}
+
+	public enum CaseStatusCode
     {
         InProgress = 1,
         AssignedToLocalSourceMarket = 950000003,
@@ -44,7 +75,8 @@
         Active = 1,
         InProgress = 950000000,
         Failed = 950000001,
-        Succeeded = 2
+		Pending = 950000002,
+		Succeeded = 2
     }
 
     public enum EntityCacheOperation
