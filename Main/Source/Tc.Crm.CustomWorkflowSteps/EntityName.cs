@@ -168,22 +168,21 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string ModifiedOn = "modifiedon";
         public const string MarketingUpdated = "tc_marketingupdated";
         public const string MarketingUpdatedBy = "tc_marketingupdatedby";
-
-        public const string MarketingConsentUpdated = "tc_marketingupdatedby";
-        public const string NoLongerLivingAtAddress = "tc_marketingupdatedby";
-        public const string Deceased = "tc_marketingupdatedby";
-        public const string AnnualInsurance = "tc_marketingupdatedby";
-        public const string AnnualInsuranceExpiryDate = "tc_marketingupdatedby";
-        public const string AnnualInsuranceExpiredDate = "tc_marketingupdatedby";
-        public const string PaymentByDirectDebit = "tc_marketingupdatedby";
-        public const string StoreCreated = "tc_marketingupdatedby";
-        public const string ClusterCreated = "tc_marketingupdatedby";
-        public const string RegionCreated = "tc_marketingupdatedby";
-        public const string TerrirtoryCreatedBy = "tc_marketingupdatedby";
-        public const string StoreModified = "tc_marketingupdatedby";
-        public const string ClusterModified = "tc_marketingupdatedby";
-        public const string RegionModified = "tc_marketingupdatedby";
-        public const string TerritoryModifiedBy = "tc_marketingupdatedby";       
+        public const string MarketingConsentUpdated = "tc_marketingconsentupdated";
+        public const string NoLongerLivingAtAddress = "tc_nolongerlivingataddress";
+        public const string Deceased = "tc_deceased";
+        public const string AnnualInsurance = "tc_annualinsurance";        
+        public const string AnnualInsuranceExpiredDate = "tc_annualinsuranceexpiredate";
+        public const string TravelFinance = "tc_travelfinance";
+        public const string PaymentByDirectDebit = "tc_paymentbydirectdebit";
+        public const string StoreCreated = "tc_storecreated";
+        public const string ClusterCreated = "tc_clustercreated";
+        public const string RegionCreated = "tc_regioncreated";
+        public const string TerrirtoryCreatedBy = "tc_territorycreatedby";
+        public const string StoreModified = "tc_storemodified";
+        public const string ClusterModified = "tc_clustermodified";
+        public const string RegionModified = "tc_regionmodified";
+        public const string TerritoryModifiedBy = "tc_territorymodifiedby";       
 
     }   
     public static class Account

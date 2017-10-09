@@ -151,7 +151,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                     Attributes.Contact.NoLongerLivingAtAddress,
                     Attributes.Contact.Deceased,
                     Attributes.Contact.AnnualInsurance,
-                    Attributes.Contact.AnnualInsuranceExpiryDate,
+                    Attributes.Contact.TravelFinance,
                     Attributes.Contact.AnnualInsuranceExpiredDate,
                     Attributes.Contact.PaymentByDirectDebit,
                     Attributes.Contact.StoreCreated,
