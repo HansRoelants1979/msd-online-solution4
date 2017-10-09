@@ -2,10 +2,8 @@
 {
     public static class Path
     {
-        public const string Customeridentifier_Customerid = "customer/customerIdentifier/customerID";
         public const string Customeridentifier_Sourcemarket = "customer/customerIdentifier/sourceMarket";
         public const string Customergeneral_Customerstatus = "customer/customerGeneral/customerStatus";
-        public const string Customergeneral_Customertype = "customer/customerGeneral/customerType";
         public const string Customeridentity_Salutation = "customer/customerIdentity/salutation";
         public const string Customeridentity_Academictitle = "customer/customerIdentity/academicTitle";
         public const string Customeridentity_Firstname = "customer/customerIdentity/firstName";

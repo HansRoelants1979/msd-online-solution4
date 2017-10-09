@@ -76,7 +76,7 @@ namespace Tc.Crm.Service.Controllers
                 if (customerInfo == null) throw new ArgumentNullException(Constants.Parameters.Customer);
 
                 CustomerInformation customerInformation = ProcessPatchJsonToActualJson(customerInfo);
-
+                customerService.ResolveReferences(customerInformation.Customer);
 
                 var validationMessages = customerService.ValidateCustomerPatchRequest(customerInformation);
 
