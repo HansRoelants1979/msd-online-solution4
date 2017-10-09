@@ -541,13 +541,13 @@ namespace Tc.Crm.CustomWorkflowSteps
                     break;
                 case "":
                 case null:
-                    value = 950000009;
+                    value = -1;
                     break;
                 default:
-                    value = 950000009;
+                    value = -1;
                     break;
             }
-
+            if (value == -1) return null;
             return new OptionSetValue(value);
         }
         public static OptionSetValue GetLanguage(string text)

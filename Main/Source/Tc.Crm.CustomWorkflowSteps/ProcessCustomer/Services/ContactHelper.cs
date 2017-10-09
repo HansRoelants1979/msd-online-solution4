@@ -7,8 +7,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
 {
     public static class ContactHelper
     {
-        public static Entity GetContactEntityForCustomerPayload(Customer customer, 
-            ITracingService trace,OperationType operationType = OperationType.POST)
+        public static Entity GetContactEntityForCustomerPayload(Customer customer,ITracingService trace )
         {
             if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null;");
             trace.Trace("Contact populate fields - start");
@@ -19,20 +18,18 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
                 throw new InvalidPluginExecutionException("Customer Identifier could not be retrieved from payload.");
 
             Entity contact = new Entity(EntityName.Contact);
-             
-            if (operationType == OperationType.POST){
-                contact[Attributes.Contact.SourceSystemId] = customer.CustomerIdentifier.CustomerId;
-                contact[Attributes.Contact.DuplicateSourceSystemId] = customer.CustomerIdentifier.CustomerId;
-            }
-            if(!string.IsNullOrWhiteSpace(customer.CustomerIdentifier.SourceMarket)){
+
+            contact[Attributes.Contact.SourceSystemId] = customer.CustomerIdentifier.CustomerId;
+            contact[Attributes.Contact.DuplicateSourceSystemId] = customer.CustomerIdentifier.CustomerId;
+            if (!string.IsNullOrWhiteSpace(customer.CustomerIdentifier.SourceMarket)){
                 contact[Attributes.Contact.SourceMarketId] = new EntityReference(EntityName.Country, 
                     new Guid(customer.CustomerIdentifier.SourceMarket));                                                                  
             }
-            PopulateIdentityInformation(contact, customer.CustomerIdentity, trace,operationType, customer.PatchParameters);
+            PopulateIdentityInformation(contact, customer.CustomerIdentity, trace);
             PopulateAddress(contact, customer.Address, trace);
-            PopulateEmail(contact, customer.Email, trace, operationType, customer.PatchParameters);
-            PopulatePhone(contact, customer.Phone, trace, operationType, customer.PatchParameters);
-            PopulatePermission(contact, customer.Permissions, trace, operationType, customer.PatchParameters);
+            PopulateEmail(contact, customer.Email, trace);
+            PopulatePhone(contact, customer.Phone, trace);
+            PopulatePermission(contact, customer.Permissions, trace);
             if (customer.CustomerGeneral != null)
             {
                 contact[Attributes.Contact.StatusCode] = CommonXrm.GetCustomerStatus(customer.CustomerGeneral.CustomerStatus);
@@ -51,17 +48,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
             trace.Trace("Contact populate fields - end");
             return contact;
         }
-        public static Entity GetContactEntityForCustomerPayload(Entity existingContact, 
-            Customer customer, ITracingService trace, OperationType operationType = OperationType.POST)
-        {
-            trace.Trace("Contact populate id - start");
-            var contact = GetContactEntityForCustomerPayload(customer, trace, operationType);
-            contact["contactid"] = existingContact.GetAttributeValue<Guid>("contactid");
-            trace.Trace("Contact populate id - end");
-            return contact;
-        }
-        private static void PopulateIdentityInformation(Entity contact, CustomerIdentity identity, 
-            ITracingService trace, OperationType operationType = OperationType.POST,List<string> patchList=null)
+       
+        private static void PopulateIdentityInformation(Entity contact, CustomerIdentity identity,ITracingService trace)
         {
             trace.Trace("Contact populate identity - start");            
             if (identity == null) return;
@@ -69,32 +57,13 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
                 contact[Attributes.Contact.FirstName] = identity.FirstName;
             if (!string.IsNullOrWhiteSpace(identity.LastName))
                 contact[Attributes.Contact.LastName] = identity.LastName;
-            if(operationType == OperationType.PATCH){
-                if(patchList!=null && patchList.Count>0){
-                    if(patchList.Contains("language")){
-                        if (!string.IsNullOrWhiteSpace(identity.Language)) {
-                            contact[Attributes.Contact.Language] = CommonXrm.GetLanguage(identity.Language);
-                        } 
-                    }
-                    if(patchList.Contains("salutation")){
-                        if (!string.IsNullOrWhiteSpace(identity.Salutation)){
-                            contact[Attributes.Contact.Salutation] = CommonXrm.GetSalutation(identity.Salutation);
-                        } 
-                    }
-                    if(patchList.Contains("gender")){
-                        contact[Attributes.Contact.Gender] = CommonXrm.GetGender(identity.Gender);
-                    }
-                } 
+            if (!string.IsNullOrWhiteSpace(identity.Language)) {
+                contact[Attributes.Contact.Language] = CommonXrm.GetLanguage(identity.Language);
             }
-            else{
-                if (!string.IsNullOrWhiteSpace(identity.Language)) {
-                    contact[Attributes.Contact.Language] = CommonXrm.GetLanguage(identity.Language);
-                }
-                if (!string.IsNullOrWhiteSpace(identity.Salutation)){
-                    contact[Attributes.Contact.Salutation] = CommonXrm.GetSalutation(identity.Salutation);
-                }
-                contact[Attributes.Contact.Gender] = CommonXrm.GetGender(identity.Gender);
+            if (!string.IsNullOrWhiteSpace(identity.Salutation)){
+                contact[Attributes.Contact.Salutation] = CommonXrm.GetSalutation(identity.Salutation);
             }
+            contact[Attributes.Contact.Gender] = CommonXrm.GetGender(identity.Gender);
             if (!string.IsNullOrWhiteSpace(identity.Birthdate))
                 contact[Attributes.Contact.Birthdate] = Convert.ToDateTime(identity.Birthdate);
             if (!string.IsNullOrWhiteSpace(identity.MiddleName))
@@ -153,161 +122,72 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
             trace.Trace("Contact populate address - end");
         }      
 
-        private static void PopulateEmail(Entity contact, Email[] emails, ITracingService trace,
-            OperationType operationType = OperationType.POST, List<string> patchList = null)
+        private static void PopulateEmail(Entity contact, Email[] emails, ITracingService trace)
         {            
             if (emails == null || emails.Length <= 0) return;
             trace.Trace("Contact populate email - start");
             var email1 = emails[0];
             var email2 = emails.Length > 1 ? emails[1] : null;
             var email3 = emails.Length > 2 ? emails[2] : null;
-            if (operationType == OperationType.PATCH){
-                if (patchList != null && patchList.Count > 0){
-                    if (email1 != null){
-                        if (patchList.Contains("type")){
-                            contact[Attributes.Contact.EmailAddress1Type] = CommonXrm.GetEmailType(email1.EmailType);
-                        }
-                        if (!string.IsNullOrWhiteSpace(email1.Address))
-                            contact[Attributes.Contact.EmailAddress1] = email1.Address;
-                    }
-                    if (email2 != null){
-                        if (patchList.Contains("type")){
-                            contact[Attributes.Contact.EmailAddress2Type] = CommonXrm.GetEmailType(email2.EmailType);
-                        }
-                        if (!string.IsNullOrWhiteSpace(email2.Address))
-                            contact[Attributes.Contact.EmailAddress2] = email2.Address;
-                    }
-                    if (email3 != null){
-                        if (patchList.Contains("type")){
-                            contact[Attributes.Contact.EmailAddress3Type] = CommonXrm.GetEmailType(email3.EmailType);
-                        }
-                        if (!string.IsNullOrWhiteSpace(email3.Address))
-                            contact[Attributes.Contact.EmailAddress3] = email3.Address;
-                    }
-                }
+            if (email1 != null){
+                contact[Attributes.Contact.EmailAddress1Type] = CommonXrm.GetEmailType(email1.EmailType);
+                if (!string.IsNullOrWhiteSpace(email1.Address))
+                    contact[Attributes.Contact.EmailAddress1] = email1.Address;
             }
-            else{
-                if (email1 != null){
-                    contact[Attributes.Contact.EmailAddress1Type] = CommonXrm.GetEmailType(email1.EmailType);
-                    if (!string.IsNullOrWhiteSpace(email1.Address))
-                        contact[Attributes.Contact.EmailAddress1] = email1.Address;
-                }
-                if (email2 != null){
-                    contact[Attributes.Contact.EmailAddress2Type] = CommonXrm.GetEmailType(email2.EmailType);
-                    if (!string.IsNullOrWhiteSpace(email2.Address))
-                        contact[Attributes.Account.EmailAddress2] = email2.Address;
-                }
-                if (email3 != null){
-                    contact[Attributes.Contact.EmailAddress3Type] = CommonXrm.GetEmailType(email3.EmailType);
-                    if (!string.IsNullOrWhiteSpace(email3.Address))
-                        contact[Attributes.Contact.EmailAddress3] = email3.Address;
-                }
+            if (email2 != null){
+                contact[Attributes.Contact.EmailAddress2Type] = CommonXrm.GetEmailType(email2.EmailType);
+                if (!string.IsNullOrWhiteSpace(email2.Address))
+                    contact[Attributes.Account.EmailAddress2] = email2.Address;
+            }
+            if (email3 != null){
+                contact[Attributes.Contact.EmailAddress3Type] = CommonXrm.GetEmailType(email3.EmailType);
+                if (!string.IsNullOrWhiteSpace(email3.Address))
+                    contact[Attributes.Contact.EmailAddress3] = email3.Address;
             }
             trace.Trace("Contact populate email - end");
         }      
 
-        private static void PopulatePhone(Entity contact, Phone[] phoneNumbers, ITracingService trace,
-            OperationType operationType = OperationType.POST, List<string> patchList = null)
-        {
+        private static void PopulatePhone(Entity contact, Phone[] phoneNumbers, ITracingService trace){
             if (phoneNumbers == null || phoneNumbers.Length <= 0) return;
             trace.Trace("Contact populate phone - start");
             var phone1 = phoneNumbers[0];
             var phone2 = phoneNumbers.Length > 1 ? phoneNumbers[1] : null;
             var phone3 = phoneNumbers.Length > 2 ? phoneNumbers[2] : null;
-            if (operationType == OperationType.PATCH){
-                if (patchList != null && patchList.Count > 0){
-                    if (phone1 != null){
-                        if (patchList.Contains("type")){
-                            contact[Attributes.Contact.Telephone1Type] = CommonXrm.GetPhoneType(phone1.PhoneType);
-                        }
-                        if (!string.IsNullOrWhiteSpace(phone1.Number))
-                            contact[Attributes.Contact.Telephone1] = phone1.Number;
-                    }
-                    if (phone2 != null){
-                        if (patchList.Contains("type")){
-                            contact[Attributes.Contact.Telephone2Type] = CommonXrm.GetPhoneType(phone2.PhoneType);
-                        }
-                        if (!string.IsNullOrWhiteSpace(phone2.Number))
-                            contact[Attributes.Contact.Telephone2] = phone2.Number;
-                    }
-                    if (phone3 != null){
-                        if (patchList.Contains("type")){
-                            contact[Attributes.Contact.Telephone2Type] = CommonXrm.GetPhoneType(phone2.PhoneType);
-                        }
-                        if (!string.IsNullOrWhiteSpace(phone3.Number))
-                            contact[Attributes.Contact.Telephone3] = phone3.Number;
-                    }
-                }
+            if (phone1 != null){
+                contact[Attributes.Contact.Telephone1Type] = CommonXrm.GetPhoneType(phone1.PhoneType);
+                if (!string.IsNullOrWhiteSpace(phone1.Number))
+                    contact[Attributes.Contact.Telephone1] = phone1.Number;
             }
-            else{
-                if (phone1 != null){
-                    contact[Attributes.Contact.Telephone1Type] = CommonXrm.GetPhoneType(phone1.PhoneType);
-                    if (!string.IsNullOrWhiteSpace(phone1.Number))
-                        contact[Attributes.Contact.Telephone1] = phone1.Number;
-                }
-                if (phone2 != null){
-                    contact[Attributes.Contact.Telephone2Type] = CommonXrm.GetPhoneType(phone2.PhoneType);
-                    if (!string.IsNullOrWhiteSpace(phone2.Number))
-                        contact[Attributes.Contact.Telephone2] = phone2.Number;
-                }
-                if (phone3 != null){
-                    contact[Attributes.Contact.Telephone3Type] = CommonXrm.GetPhoneType(phone3.PhoneType);
-                    if (!string.IsNullOrWhiteSpace(phone3.Number))
-                        contact[Attributes.Contact.Telephone3] = phone3.Number;
-                }
+            if (phone2 != null){
+                contact[Attributes.Contact.Telephone2Type] = CommonXrm.GetPhoneType(phone2.PhoneType);
+                if (!string.IsNullOrWhiteSpace(phone2.Number))
+                    contact[Attributes.Contact.Telephone2] = phone2.Number;
+            }
+            if (phone3 != null){
+                contact[Attributes.Contact.Telephone3Type] = CommonXrm.GetPhoneType(phone3.PhoneType);
+                if (!string.IsNullOrWhiteSpace(phone3.Number))
+                    contact[Attributes.Contact.Telephone3] = phone3.Number;
             }
             trace.Trace("Contact populate phone - end");
         }      
 
-        private static void PopulatePermission(Entity contact, Permission permission, ITracingService trace,
-            OperationType operationType = OperationType.POST, List<string> patchList = null)
-        {
+        private static void PopulatePermission(Entity contact, Permission permission, ITracingService trace){
             if (permission == null) return;
             trace.Trace("Contact populate permission - start");    
-            if(operationType == OperationType.PATCH)
-            {
-                if (patchList != null && patchList.Count >0)
-                {
-                    if (patchList.Contains("mailAllowedInd")){
-                        if (!string.IsNullOrWhiteSpace(permission.MailAllowedInd))
-                            contact[Attributes.Contact.SendMarketingByPost] = CommonXrm.GetMarketingByPost(permission.MailAllowedInd);
-                    }
-                    if (patchList.Contains("phoneAllowedInd")){
-                        if (!string.IsNullOrWhiteSpace(permission.PhoneAllowedInd))
-                            contact[Attributes.Contact.MarketingByPhone] = CommonXrm.GetMarketingByPhone(permission.PhoneAllowedInd);
-                    }
-                    if (patchList.Contains("smsAllowedInd")){
-                        if (!string.IsNullOrWhiteSpace(permission.SmsAllowedInd))
-                            contact[Attributes.Contact.SendMarketingBySms] = CommonXrm.GetMarketingBySms(permission.SmsAllowedInd);
-                    }
-                    if (patchList.Contains("emailAllowedInd")){
-                        if (!string.IsNullOrWhiteSpace(permission.EmailAllowedInd))
-                            contact[Attributes.Contact.SendMarketingByEmail] = CommonXrm.GetMarketingByEmail(permission.EmailAllowedInd);
-                    }
-                    if (patchList.Contains("doNotContactInd")){
-                        if (!string.IsNullOrWhiteSpace(permission.DoNotContactInd))
-                            contact[Attributes.Contact.ThomasCookMarketingConsent] = CommonXrm.GetMarketingConsent(permission.DoNotContactInd);
-                    }
-                    if (patchList.Contains("preferredContactMethod")){
-                        if (!string.IsNullOrWhiteSpace(permission.PreferredContactMethod))
-                            contact[Attributes.Contact.PreferredContactMethodCode] = CommonXrm.GetPreferredContactMethodCode(permission.PreferredContactMethod);
-                    }
-                }
-            }
-            else {  
-                if(!string.IsNullOrWhiteSpace(permission.MailAllowedInd))
-                    contact[Attributes.Contact.SendMarketingByPost] = CommonXrm.GetMarketingByPost(permission.MailAllowedInd);
-                if (!string.IsNullOrWhiteSpace(permission.PhoneAllowedInd))
-                    contact[Attributes.Contact.MarketingByPhone] = CommonXrm.GetMarketingByPhone(permission.PhoneAllowedInd);
-                if (!string.IsNullOrWhiteSpace(permission.SmsAllowedInd))
-                    contact[Attributes.Contact.SendMarketingBySms] = CommonXrm.GetMarketingBySms(permission.SmsAllowedInd);
-                if (!string.IsNullOrWhiteSpace(permission.EmailAllowedInd))
-                    contact[Attributes.Contact.SendMarketingByEmail] = CommonXrm.GetMarketingByEmail(permission.EmailAllowedInd);            
-                if (!string.IsNullOrWhiteSpace(permission.DoNotContactInd))
-                    contact[Attributes.Contact.ThomasCookMarketingConsent] = CommonXrm.GetMarketingConsent(permission.DoNotContactInd);
-                if (!string.IsNullOrWhiteSpace(permission.PreferredContactMethod))
-                    contact[Attributes.Contact.PreferredContactMethodCode] = CommonXrm.GetPreferredContactMethodCode(permission.PreferredContactMethod);
-            }
+            
+            if(!string.IsNullOrWhiteSpace(permission.MailAllowedInd))
+                contact[Attributes.Contact.SendMarketingByPost] = CommonXrm.GetMarketingByPost(permission.MailAllowedInd);
+            if (!string.IsNullOrWhiteSpace(permission.PhoneAllowedInd))
+                contact[Attributes.Contact.MarketingByPhone] = CommonXrm.GetMarketingByPhone(permission.PhoneAllowedInd);
+            if (!string.IsNullOrWhiteSpace(permission.SmsAllowedInd))
+                contact[Attributes.Contact.SendMarketingBySms] = CommonXrm.GetMarketingBySms(permission.SmsAllowedInd);
+            if (!string.IsNullOrWhiteSpace(permission.EmailAllowedInd))
+                contact[Attributes.Contact.SendMarketingByEmail] = CommonXrm.GetMarketingByEmail(permission.EmailAllowedInd);            
+            if (!string.IsNullOrWhiteSpace(permission.DoNotContactInd))
+                contact[Attributes.Contact.ThomasCookMarketingConsent] = CommonXrm.GetMarketingConsent(permission.DoNotContactInd);
+            if (!string.IsNullOrWhiteSpace(permission.PreferredContactMethod))
+                contact[Attributes.Contact.PreferredContactMethodCode] = CommonXrm.GetPreferredContactMethodCode(permission.PreferredContactMethod);
+             
             trace.Trace("Contact populate permission - end");
         }      
     }

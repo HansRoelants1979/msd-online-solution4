@@ -19,14 +19,14 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services.Tests
         [ExpectedException(typeof(InvalidPluginExecutionException), "Customer is null.")]
         public void GetContactEntityForCustomerPayload_CustomerIsNull()
         {            
-            ContactHelper.GetContactEntityForCustomerPayload(null, trace, OperationType.POST);            
+            ContactHelper.GetContactEntityForCustomerPayload(null, trace);            
         }
 
         [TestMethod()]
         [ExpectedException(typeof(InvalidPluginExecutionException), "Tracing service is null.")]
         public void GetContactEntityForCustomerPayload_TraceIsNull()
         {            
-            ContactHelper.GetContactEntityForCustomerPayload(new Customer(), null, OperationType.POST);
+            ContactHelper.GetContactEntityForCustomerPayload(new Customer(), null);
         }
 
         Customer c = new Customer
@@ -80,13 +80,13 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services.Tests
         public void GetContactEntityForCustomerPayload_CustomerIdentifierIsNull()
         {
             c.CustomerIdentifier = null;
-            ContactHelper.GetContactEntityForCustomerPayload(c, trace, OperationType.POST);                      
+            ContactHelper.GetContactEntityForCustomerPayload(c, trace);                      
         }        
 
         [TestMethod()]
         public void GetContactEntityForCustomerPayload_PopulateIdentity()
         {            
-            var contact = ContactHelper.GetContactEntityForCustomerPayload(c, trace, OperationType.POST);            
+            var contact = ContactHelper.GetContactEntityForCustomerPayload(c, trace);            
             Assert.AreEqual(c.CustomerIdentity.FirstName, contact[Attributes.Contact.FirstName].ToString());
             Assert.AreEqual(c.CustomerIdentity.LastName, contact[Attributes.Contact.LastName].ToString());            
             Assert.AreEqual(950000006, ((OptionSetValue)(contact[Attributes.Contact.Language])).Value);
@@ -96,7 +96,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services.Tests
         [TestMethod()]
         public void GetContactEntityForCustomerPayload_PopulateAddress()
         {                       
-            var contact = ContactHelper.GetContactEntityForCustomerPayload(c, trace, OperationType.POST);
+            var contact = ContactHelper.GetContactEntityForCustomerPayload(c, trace);
             Assert.AreEqual(c.Address[0].Street, contact[Attributes.Contact.Address1Street].ToString());
             Assert.AreEqual(c.Address[0].Street, contact[Attributes.Contact.Address1Town].ToString());
             Assert.AreEqual(c.Address[1].Street, contact[Attributes.Contact.Address2Street].ToString());
@@ -106,7 +106,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services.Tests
         [TestMethod()]
         public void GetContactEntityForCustomerPayload_PopulatePermission()
         {          
-            var contact = ContactHelper.GetContactEntityForCustomerPayload(c, trace, OperationType.POST);
+            var contact = ContactHelper.GetContactEntityForCustomerPayload(c, trace);
             Assert.AreEqual(new OptionSetValue(950000000), contact[Attributes.Contact.MarketingByPhone]);
             Assert.AreEqual(new OptionSetValue(950000000), contact[Attributes.Contact.SendMarketingByEmail]);
             Assert.AreEqual(new OptionSetValue(950000000), contact[Attributes.Contact.SendMarketingByPost]);
@@ -118,7 +118,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services.Tests
         [TestMethod()]
         public void GetContactEntityForCustomerPayload_PopulatePhone()
         {
-            var contact = ContactHelper.GetContactEntityForCustomerPayload(c, trace, OperationType.POST);
+            var contact = ContactHelper.GetContactEntityForCustomerPayload(c, trace);
             Assert.AreEqual(c.Phone[0].Number, contact[Attributes.Contact.Telephone1].ToString());
             Assert.AreEqual(c.Phone[1].Number, contact[Attributes.Contact.Telephone2].ToString());
             Assert.AreEqual(c.Phone[2].Number, contact[Attributes.Contact.Telephone3].ToString());
@@ -127,7 +127,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services.Tests
         [TestMethod()]
         public void GetContactEntityForCustomerPayload_PopulateEmail()
         {            
-            var contact = ContactHelper.GetContactEntityForCustomerPayload(c, trace, OperationType.POST);
+            var contact = ContactHelper.GetContactEntityForCustomerPayload(c, trace);
             Assert.AreEqual(c.Email[0].Address, contact[Attributes.Contact.EmailAddress1].ToString());
             Assert.AreEqual(c.Email[1].Address, contact[Attributes.Contact.EmailAddress2].ToString());
             Assert.AreEqual(c.Email[2].Address, contact[Attributes.Contact.EmailAddress3].ToString());

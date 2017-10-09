@@ -19,6 +19,7 @@ namespace Tc.Crm.ServiceTests.Controllers.Tests
         XrmFakedContext context;
         ICustomerService customerService;
         ICrmService crmService;
+        IPatchParameterService parameterService;
         CustomerController controller;
         Customer customer;
 
@@ -27,8 +28,9 @@ namespace Tc.Crm.ServiceTests.Controllers.Tests
         {
             context = new XrmFakedContext();
             crmService = new TestCrmService(context);
+            parameterService = new PatchParameterService();
             customerService =new CustomerService(new CountryBucket(crmService), new SourceMarketBucket(crmService));
-            controller = new CustomerController(customerService, crmService);
+            controller = new CustomerController(customerService, crmService, parameterService);
             controller.Request = new System.Net.Http.HttpRequestMessage();
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
 
@@ -117,7 +119,8 @@ namespace Tc.Crm.ServiceTests.Controllers.Tests
             customerInfo.Customer = customer;
             TestCrmService service = new TestCrmService(context);
             service.Switch = DataSwitch.Response_NULL;
-            controller = new CustomerController(customerService, service);
+            parameterService = new PatchParameterService();
+            controller = new CustomerController(customerService, service, parameterService);
             controller.Request = new System.Net.Http.HttpRequestMessage();
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
             var response = controller.Create(customerInfo);
@@ -131,7 +134,8 @@ namespace Tc.Crm.ServiceTests.Controllers.Tests
             customerInfo.Customer = customer;
             TestCrmService service = new TestCrmService(context);
             service.Switch = DataSwitch.Created;
-            controller = new CustomerController(customerService, service);
+            parameterService = new PatchParameterService();
+            controller = new CustomerController(customerService, service, parameterService);
             controller.Request = new System.Net.Http.HttpRequestMessage();
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
             var response = controller.Create(customerInfo);
@@ -146,7 +150,8 @@ namespace Tc.Crm.ServiceTests.Controllers.Tests
             customerInfo.Add("Customer/CustomerGeneral/CustomerType", "Person");
             TestCrmService service = new TestCrmService(context);
             service.Switch = DataSwitch.Updated;
-            controller = new CustomerController(customerService, service);
+            parameterService = new PatchParameterService();
+            controller = new CustomerController(customerService, service, parameterService);
             controller.Request = new System.Net.Http.HttpRequestMessage();
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
             var response = controller.Update("123",customerInfo);

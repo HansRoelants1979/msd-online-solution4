@@ -7,8 +7,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
 {
     public static class AccountHelper
     {
-        public static Entity GetAccountEntityForCustomerPayload(Customer customer, ITracingService trace,
-            OperationType operationType = OperationType.POST)
+        public static Entity GetAccountEntityForCustomerPayload(Customer customer, ITracingService trace)
         {
             if (trace == null) throw new InvalidPluginExecutionException("Tracing service is null.");
             trace.Trace("Account populate fields - start");
@@ -25,19 +24,14 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
                 account[Attributes.Account.SourceMarketId] =
                     new EntityReference(EntityName.Country, new Guid(customer.CustomerIdentifier.SourceMarket));
             }
-            if (operationType == OperationType.POST){
-                account[Attributes.Account.SourceSystemId] = 
-                        (!string.IsNullOrWhiteSpace(customer.CustomerIdentifier.CustomerId)) ?
-                        customer.CustomerIdentifier.CustomerId : string.Empty;
-                account[Attributes.Account.DuplicateSourceSystemId] = 
-                        (!string.IsNullOrWhiteSpace(customer.CustomerIdentifier.CustomerId)) ?
-                        customer.CustomerIdentifier.CustomerId : string.Empty;
-            }
+
+            account[Attributes.Account.SourceSystemId] = customer.CustomerIdentifier.CustomerId; 
+            account[Attributes.Account.DuplicateSourceSystemId] = customer.CustomerIdentifier.CustomerId; 
              
             if ((customer.Email != null) || (customer.Email != null & customer.Email.Length > 0))
-                PopulateEmail(account, customer.Email, trace, operationType, customer.PatchParameters);
+                PopulateEmail(account, customer.Email, trace);
             if ((customer.Phone != null) || (customer.Phone != null & customer.Phone.Length > 0))
-                PopulatePhone(account, customer.Phone, trace, operationType, customer.PatchParameters);
+                PopulatePhone(account, customer.Phone, trace);
             if ((customer.Address != null) || (customer.Address != null & customer.Address.Length > 0))
                 PopulateAddress(account, customer.Address, trace);
             trace.Trace("Account populate fields - end");
@@ -45,56 +39,31 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
         }
 
         #region Email
-        private static void PopulateEmail(Entity account, Email[] emailList, ITracingService trace, 
-            OperationType operationType = OperationType.POST,List<string> patchList = null)
+        private static void PopulateEmail(Entity account, Email[] emailList, ITracingService trace)
         {
             if (emailList == null || emailList.Length <= 0) return;
             trace.Trace("Account populate email - start");
             var email1 = emailList[0];
             var email2 = emailList.Length > 1 ? emailList[1] : null;
             var email3 = emailList.Length > 2 ? emailList[2] : null;
-            if (operationType == OperationType.PATCH){
-                if (patchList != null && patchList.Count > 0){
-                    if (email1 != null){
-                        if (patchList.Contains("type")){
-                            account[Attributes.Account.EmailAddress1Type] = CommonXrm.GetEmailType(email1.EmailType);
-                        }
-                        if (!string.IsNullOrWhiteSpace(email1.Address))
-                            account[Attributes.Account.EmailAddress1] = email1.Address;
-                    }
-                    if (email2 != null){
-                        if (patchList.Contains("type")){
-                            account[Attributes.Account.EmailAddress2Type] = CommonXrm.GetEmailType(email2.EmailType);
-                        }
-                        if (!string.IsNullOrWhiteSpace(email2.Address))
-                            account[Attributes.Account.EmailAddress2] = email2.Address;
-                    }
-                    if (email3 != null){
-                        if (patchList.Contains("type")){
-                            account[Attributes.Account.EmailAddress3Type] = CommonXrm.GetEmailType(email3.EmailType);
-                        }
-                        if (!string.IsNullOrWhiteSpace(email3.Address))
-                            account[Attributes.Account.EmailAddress3] = email3.Address;
-                    }
-                }
+             
+               
+            if (email1 != null){
+                account[Attributes.Account.EmailAddress1Type] = CommonXrm.GetEmailType(email1.EmailType);
+                if (!string.IsNullOrWhiteSpace(email1.Address))
+                        account[Attributes.Account.EmailAddress1] = email1.Address;
             }
-            else{
-                if (email1 != null){
-                    account[Attributes.Account.EmailAddress1Type] = CommonXrm.GetEmailType(email1.EmailType);
-                    if (!string.IsNullOrWhiteSpace(email1.Address))
-                            account[Attributes.Account.EmailAddress1] = email1.Address;
-                }
-                if (email2 != null){
-                    account[Attributes.Account.EmailAddress2Type] = CommonXrm.GetEmailType(email2.EmailType);
-                    if (!string.IsNullOrWhiteSpace(email2.Address))
-                        account[Attributes.Account.EmailAddress2] = email2.Address;
-                }
-                if (email3 != null){
-                    account[Attributes.Account.EmailAddress3Type] = CommonXrm.GetEmailType(email3.EmailType);
-                    if (!string.IsNullOrWhiteSpace(email3.Address))
-                        account[Attributes.Account.EmailAddress3] = email3.Address;
-                }
+            if (email2 != null){
+                account[Attributes.Account.EmailAddress2Type] = CommonXrm.GetEmailType(email2.EmailType);
+                if (!string.IsNullOrWhiteSpace(email2.Address))
+                    account[Attributes.Account.EmailAddress2] = email2.Address;
             }
+            if (email3 != null){
+                account[Attributes.Account.EmailAddress3Type] = CommonXrm.GetEmailType(email3.EmailType);
+                if (!string.IsNullOrWhiteSpace(email3.Address))
+                    account[Attributes.Account.EmailAddress3] = email3.Address;
+            }
+             
             trace.Trace("Account populate email - end");
         }
         #endregion
