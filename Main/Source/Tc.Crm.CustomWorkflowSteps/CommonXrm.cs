@@ -503,7 +503,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                     value = 950000005;
                     break;
             }
-
+            if (value == -1) return null;
             return new OptionSetValue(value);
         }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
@@ -541,13 +541,10 @@ namespace Tc.Crm.CustomWorkflowSteps
                     break;
                 case "":
                 case null:
-                    value = -1;
-                    break;
+                    return null;  
                 default:
-                    value = -1;
-                    break;
+                    return null;
             }
-            if (value == -1) return null;
             return new OptionSetValue(value);
         }
         public static OptionSetValue GetLanguage(string text)
@@ -581,7 +578,7 @@ namespace Tc.Crm.CustomWorkflowSteps
                     value = 950000006;
                     break;
             }
-
+            if (value == -1) return null;
             return new OptionSetValue(value);
         }
 
@@ -599,85 +596,95 @@ namespace Tc.Crm.CustomWorkflowSteps
                 case "Mail":
                     value = 5;
                     break;
+                case "":
+                case null:
+                    value = -1;
+                    break;
                 default:
                     value = 1;
                     break;
             }
+            if (value == -1) return null;
             return new OptionSetValue(value);
         }    
             
-        public static OptionSetValue GetMarketingByEmail(string marketingByEmail)
+        public static OptionSetValue GetMarketingByEmail(bool? marketingByEmail)
         {
+            if (marketingByEmail == null) return null;
             int value = -1;
             switch (marketingByEmail)
             {
-                case "true":
-                    value = 950000000;
+                case true:
+                    value = 950000001;//No
                     break;
-                case "false":
-                    value = 950000001;
+                case false:
+                    value = 950000000;//Yes
                     break;
             }
             return new OptionSetValue(value);
         }
-
-        public static OptionSetValue GetMarketingByPost(string marketingByPost)
+         
+        public static OptionSetValue GetMarketingByPost(bool? marketingByPost)
         {
+            if (marketingByPost == null) return null;
             int value = -1;
             switch (marketingByPost)
             {
-                case "true":
-                    value = 950000000;
+                case true:
+                    value = 950000001;//No
                     break;
-                case "false":
-                    value = 950000001;
+                case false:
+                    value = 950000000;//Yes
                     break;
-            }
+            } 
             return new OptionSetValue(value);
         }
 
-        public static OptionSetValue GetMarketingByPhone(string marketingByPhone)
+        public static OptionSetValue GetMarketingByPhone(bool? marketingByPhone)
         {
+            if (marketingByPhone == null) return null;
             int value = -1;
             switch (marketingByPhone)
             {
-                case "true":
-                    value = 950000000;
+                case true:
+                    value = 950000001;//No
                     break;
-                case "false":
-                    value = 950000001;
+                case false:
+                    value = 950000000;//Yes
                     break;
             }
             return new OptionSetValue(value);
         }
 
-        public static OptionSetValue GetMarketingBySms(string marketingBySms)
+        public static OptionSetValue GetMarketingBySms(bool? marketingBySms)
         {
+            if (marketingBySms == null) return null;
             int value = -1;
             switch (marketingBySms)
             {
-                case "true":
-                    value = 950000000;
+                case true:
+                    value = 950000001;//No
                     break;
-                case "false":
-                    value = 950000001;
+                case false:
+                    value = 950000000;//Yes
                     break;
-            }
+            } 
             return new OptionSetValue(value);
         }
 
-        public static OptionSetValue GetMarketingConsent(string marketingConsent)
+        public static OptionSetValue GetMarketingConsent(bool? marketingConsent)
         {
+            if (marketingConsent == null) return null;
             int value = -1;
             switch (marketingConsent)
             {               
-                case "true":
-                    value = 950000000;
+                case true:
+                    value = 950000000;//No, Opt Me Out
                     break;
-                case "false":
-                    value = 950000001;
-                    break;               
-            }
+                case false:
+                    value = 950000001;//Yes, Opt Me In
+                    break;          
+            } 
             return new OptionSetValue(value);
         }
         public static OptionSetValue GetProductTypeCode(ProductTypeCode productTypeCode)

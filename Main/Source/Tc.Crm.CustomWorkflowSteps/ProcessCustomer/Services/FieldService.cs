@@ -34,15 +34,14 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
             if (patchList.Contains(attributeName))
                 entity[attributeName] = value;
         }
-        public void PopulateField(string attributeName, DateTime value)
+        public void PopulateField(string attributeName, DateTime? value)
         {
-            if (patchList.Contains(attributeName))
-                entity[attributeName] = value;
-        }
-        public void PopulateFieldWithNull(string attributeName)
-        {
-            if (patchList.Contains(attributeName))
+            if (!patchList.Contains(attributeName)) return;
+            if (value == null)
                 entity[attributeName] = null;
+            else
+                entity[attributeName] = value.Value;
         }
+       
     }
 }

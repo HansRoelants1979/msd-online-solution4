@@ -52,14 +52,13 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services.Tests
                     new Address { Street = "dummy", Town = "dummy", Country = "12345678-1234-1234-1234-123456789012" },
                     new Address { Street = "dummy", Town = "dummy", Country = "12345678-1234-1234-1234-123456789012" },
                 },
-            Permissions = new Permission
+            Permissions = new Permissions
             {              
-                DoNotContactInd = "true",
-                EmailAllowedInd = "true",
-                MailAllowedInd = "true",
-                PhoneAllowedInd = "true",
-                SmsAllowedInd = "true",
-                PreferredContactMethod ="Email"               
+                AllowMarketing=true,
+                DoNotAllowEmail=true,
+                DoNotAllowMail =true,
+                DoNotAllowPhoneCalls = true,
+                DoNotAllowSms=true             
             },
             Phone = new Phone[]
                 {

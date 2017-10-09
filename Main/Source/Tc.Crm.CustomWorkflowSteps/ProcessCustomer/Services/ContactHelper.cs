@@ -171,23 +171,14 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
             trace.Trace("Contact populate phone - end");
         }      
 
-        private static void PopulatePermission(Entity contact, Permission permission, ITracingService trace){
-            if (permission == null) return;
-            trace.Trace("Contact populate permission - start");    
-            
-            if(!string.IsNullOrWhiteSpace(permission.MailAllowedInd))
-                contact[Attributes.Contact.SendMarketingByPost] = CommonXrm.GetMarketingByPost(permission.MailAllowedInd);
-            if (!string.IsNullOrWhiteSpace(permission.PhoneAllowedInd))
-                contact[Attributes.Contact.MarketingByPhone] = CommonXrm.GetMarketingByPhone(permission.PhoneAllowedInd);
-            if (!string.IsNullOrWhiteSpace(permission.SmsAllowedInd))
-                contact[Attributes.Contact.SendMarketingBySms] = CommonXrm.GetMarketingBySms(permission.SmsAllowedInd);
-            if (!string.IsNullOrWhiteSpace(permission.EmailAllowedInd))
-                contact[Attributes.Contact.SendMarketingByEmail] = CommonXrm.GetMarketingByEmail(permission.EmailAllowedInd);            
-            if (!string.IsNullOrWhiteSpace(permission.DoNotContactInd))
-                contact[Attributes.Contact.ThomasCookMarketingConsent] = CommonXrm.GetMarketingConsent(permission.DoNotContactInd);
-            if (!string.IsNullOrWhiteSpace(permission.PreferredContactMethod))
-                contact[Attributes.Contact.PreferredContactMethodCode] = CommonXrm.GetPreferredContactMethodCode(permission.PreferredContactMethod);
-             
+        private static void PopulatePermission(Entity contact, Permissions permissions, ITracingService trace){
+            if (permissions == null) return;
+            trace.Trace("Contact populate permission - start");
+            contact[Attributes.Contact.SendMarketingByPost] = CommonXrm.GetMarketingByPost(permissions.DoNotAllowMail);
+            contact[Attributes.Contact.MarketingByPhone] = CommonXrm.GetMarketingByPhone(permissions.DoNotAllowPhoneCalls);
+            contact[Attributes.Contact.SendMarketingBySms] = CommonXrm.GetMarketingBySms(permissions.DoNotAllowSms);
+            contact[Attributes.Contact.SendMarketingByEmail] = CommonXrm.GetMarketingByEmail(permissions.DoNotAllowMail);
+            contact[Attributes.Contact.ThomasCookMarketingConsent] = CommonXrm.GetMarketingConsent(permissions.AllowMarketing); 
             trace.Trace("Contact populate permission - end");
         }      
     }

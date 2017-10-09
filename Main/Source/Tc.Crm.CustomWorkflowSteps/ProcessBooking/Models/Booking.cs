@@ -1025,26 +1025,19 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
         public string Number { get; set; }
     }
 
-    [DataContract(Name = "permission")]
-    public class Permission
+    [DataContract(Name = "permissions")]
+    public class Permissions
     {
-        [DataMember(Name = "doNotContactInd")]
-        public string DoNotContactInd { get; set; }
-
-        [DataMember(Name = "preferredContactMethod")]
-        public string PreferredContactMethod { get; set; }
-
-        [DataMember(Name = "emailAllowedInd")]
-        public string EmailAllowedInd { get; set; }
-
-        [DataMember(Name = "mailAllowedInd")]
-        public string MailAllowedInd { get; set; }
-
-        [DataMember(Name = "phoneAllowedInd")]
-        public string PhoneAllowedInd { get; set; }
-
-        [DataMember(Name = "smsAllowedInd")]
-        public string SmsAllowedInd { get; set; }
+        [DataMember(Name = "allowMarketing")]
+        public bool? AllowMarketing { get; set; }
+        [DataMember(Name = "doNotAllowEmail")]
+        public bool? DoNotAllowEmail { get; set; }
+        [DataMember(Name = "doNotAllowMail")]
+        public bool? DoNotAllowMail { get; set; }
+        [DataMember(Name = "doNotAllowPhoneCalls")]
+        public bool? DoNotAllowPhoneCalls { get; set; }
+        [DataMember(Name = "doNotAllowSMS")]
+        public bool? DoNotAllowSms { get; set; }
     }
 
     [DataContract(Name = "email")]
@@ -1107,7 +1100,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
         [DataMember(Name = "permissions")]
-        public Permission Permissions { get; set; }
+        public Permissions Permissions { get; set; }
 
         [DataMember(Name = "PatchParameters")]
         public List<string> PatchParameters { get; set; }

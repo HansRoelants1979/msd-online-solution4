@@ -17,10 +17,11 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
                 throw new InvalidPluginExecutionException("Customer Identifier could not be retrieved from payload.");
             Entity contact = new Entity(EntityName.Contact);
             var fieldService = new FieldService(contact, customer.PatchParameters);
-            fieldService.PopulateField(Attributes.Contact.SourceMarketId, 
-                (!string.IsNullOrWhiteSpace(customer.CustomerIdentifier.SourceMarket))
+            var sourceMarket = (!string.IsNullOrWhiteSpace(customer.CustomerIdentifier.SourceMarket))
                                               ? new EntityReference(EntityName.Country,
-                                              new Guid(customer.CustomerIdentifier.SourceMarket)) : null);
+                                              new Guid(customer.CustomerIdentifier.SourceMarket)) : null;
+
+            fieldService.PopulateField(Attributes.Contact.SourceMarketId, sourceMarket);
             PopulateIdentityInformation(customer.CustomerIdentity, trace,fieldService);
             PopulateAddress(customer.Address, trace, fieldService);
             PopulateEmail(customer.Email, trace, fieldService);
@@ -32,7 +33,10 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
             if (customer.Additional != null){
                 trace.Trace("Contact populate Additional details - start");
                 fieldService.PopulateField(Attributes.Contact.Segment, CommonXrm.GetSegment(customer.Additional.Segment));
-                //fieldService.PopulateField(Attributes.Contact.DateOfDeath, Convert.ToDateTime(customer.Additional.DateOfDeath));
+                DateTime? dateOfDeath = null;
+                if (!string.IsNullOrWhiteSpace(customer.Additional.DateOfDeath))
+                    dateOfDeath = Convert.ToDateTime(customer.Additional.DateOfDeath);
+                fieldService.PopulateField(Attributes.Contact.DateOfDeath,dateOfDeath);
                 trace.Trace("Contact populate Additional details - end");
             }
             trace.Trace("Contact populate fields - end");
@@ -54,10 +58,10 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
             if(salutation!=null)
                 fieldService.PopulateField(Attributes.Contact.Salutation, CommonXrm.GetSalutation(identity.Salutation));
             fieldService.PopulateField(Attributes.Contact.Gender, CommonXrm.GetGender(identity.Gender));
+            DateTime? dateOfBirth = null;
             if (!string.IsNullOrWhiteSpace(identity.Birthdate))
-                fieldService.PopulateField(Attributes.Contact.Birthdate,Convert.ToDateTime(identity.Birthdate)); 
-            else
-                fieldService.PopulateFieldWithNull(Attributes.Contact.Birthdate);
+                dateOfBirth = Convert.ToDateTime(identity.Birthdate);
+            fieldService.PopulateField(Attributes.Contact.Birthdate, dateOfBirth);
             trace.Trace("Contact populate identity - end");
         }
         #endregion
@@ -78,10 +82,10 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
                 fieldService.PopulateField(Attributes.Contact.Address1Street, address1.Street);
                 fieldService.PopulateField(Attributes.Contact.Address1PostalCode, address1.PostalCode);
                 fieldService.PopulateField(Attributes.Contact.Address1County, address1.County);
-                fieldService.PopulateField(Attributes.Contact.Address1CountryId,
-                    (!string.IsNullOrWhiteSpace(address1.Country))
+                var country = (!string.IsNullOrWhiteSpace(address1.Country))
                                               ? new EntityReference(EntityName.Country,
-                                              new Guid(address1.Country)) : null);
+                                              new Guid(address1.Country)) : null;
+                fieldService.PopulateField(Attributes.Contact.Address1CountryId, country);
             }
             if (address2 != null){
                 fieldService.PopulateField(Attributes.Contact.Address2AdditionalInformation, address2.AdditionalAddressInfo);
@@ -152,24 +156,22 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
         #endregion
 
         #region Permissions
-        private static void PopulatePermission(Permission permission, 
+        private static void PopulatePermission(Permissions permissions, 
             ITracingService trace,FieldService fieldService){
             trace.Trace("Contact populate permission - start");
-            if (permission == null) return;
+            if (permissions == null) return;
             if (fieldService == null) return;        
 
             fieldService.PopulateField(Attributes.Contact.SendMarketingByPost, 
-                CommonXrm.GetMarketingByPost(permission.MailAllowedInd));
+                CommonXrm.GetMarketingByPost(permissions.DoNotAllowMail));
             fieldService.PopulateField(Attributes.Contact.MarketingByPhone,
-                CommonXrm.GetMarketingByPhone(permission.PhoneAllowedInd));
+                CommonXrm.GetMarketingByPhone(permissions.DoNotAllowPhoneCalls));
             fieldService.PopulateField(Attributes.Contact.SendMarketingBySms, 
-                CommonXrm.GetMarketingBySms(permission.SmsAllowedInd));
+                CommonXrm.GetMarketingBySms(permissions.DoNotAllowSms));
             fieldService.PopulateField(Attributes.Contact.SendMarketingByEmail, 
-                CommonXrm.GetMarketingByEmail(permission.EmailAllowedInd));
+                CommonXrm.GetMarketingByEmail(permissions.DoNotAllowEmail));
             fieldService.PopulateField(Attributes.Contact.ThomasCookMarketingConsent, 
-                CommonXrm.GetMarketingConsent(permission.DoNotContactInd));
-            fieldService.PopulateField(Attributes.Contact.PreferredContactMethodCode, 
-                CommonXrm.GetPreferredContactMethodCode(permission.PreferredContactMethod));
+                CommonXrm.GetMarketingConsent(permissions.AllowMarketing));
             trace.Trace("Contact populate permission - end");
         }
 
