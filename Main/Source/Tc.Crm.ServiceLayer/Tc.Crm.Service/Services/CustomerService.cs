@@ -43,9 +43,8 @@ namespace Tc.Crm.Service.Services
             if (crmService == null) throw new ArgumentNullException(Constants.Parameters.CrmService);
 
             customerInformation.Customer.CustomerIdentifier.CustomerId = customerId;
-            //string customerData = JsonConvert.SerializeObject(customerInformation.Customer, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore });
-            string customerData = JsonConvert.SerializeObject(customerInformation.Customer);
-
+            string customerData = JsonConvert.SerializeObject(customerInformation.Customer, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore });
+            
             var response = crmService.ExecuteActionOnCustomerEvent(customerData, OperationType.Patch);
             if (response == null) throw new InvalidOperationException(Constants.Messages.ResponseNull);
             return response;
