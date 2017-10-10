@@ -636,7 +636,7 @@ scriptLoader.load("Tc.Crm.Scripts.Events.Compensation", ["Tc.Crm.Scripts.Common"
                 // init case type for compensation calculation
                 initCaseType();
             },
-            OnSave: function () {
+            OnSave: function (context) {
                 var isValid = Tc.Crm.Scripts.Utils.Validation.ValidateGdprCompliance(context);
                 // uncomment in case of additional save actions
                 if (isValid) {
