@@ -95,6 +95,7 @@ namespace Tc.Crm.Plugins.Attributes
 		public const string WasLastOperationSuccessful = "tc_waslastoperationsuccessful";
 		public const string StatusCode = "statuscode";
 		public const string Status = "status";
+		public const string EntityCacheId = "tc_entitycacheid";
 	}
 
     public static class Customer
