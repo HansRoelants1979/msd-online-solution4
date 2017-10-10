@@ -344,8 +344,7 @@ namespace Tc.Usd.HostedControls.Service
         {
             if (gatewayRef != null)
             {
-                var gatewayOwrName = gatewayRef.Id + " - " + gatewayRef.Name + " - " +
-                                     CrmService.GetAirportIata(_client, gatewayRef.Id);
+                var gatewayOwrName = gatewayRef.Id + " - " + CrmService.GetAirportName(_client, gatewayRef.Id) + " - " + gatewayRef.Name;
                 return gatewayOwrName;
             }
             return "";

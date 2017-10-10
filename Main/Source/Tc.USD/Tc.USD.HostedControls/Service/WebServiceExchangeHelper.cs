@@ -10,24 +10,16 @@ namespace Tc.Usd.HostedControls.Service
 {
     public class WebServiceExchangeHelper
     {
-        public static Dictionary<string, string> ContentToEventParams(string content, ILogger logger)
+        public static Dictionary<string, string> ContentToEventParams(OwrResponse response, ILogger logger)
         {
-            try
-            {
-                var ssoResult = DeserializeOwrResponseJson(content);
-                var eventParams = new Dictionary<string, string>();
-                eventParams.Add("ResponseCode", ssoResult.Definitions.OwrResponse.ResponseCode.ToString());
-                eventParams.Add("ResponseMessage", ssoResult.Definitions.OwrResponse.ResponseMessage);
-                eventParams.Add("LaunchUri", ssoResult.Definitions.OwrResponse.LaunchUri);
-            
-                return eventParams;
-            }
-            catch(Exception ex)
-            {
-               logger.LogError($"Failed trying to deserialize response from the server. Response text:{content}. Exception:{ex.ToString()}");
-            }
-            return null;
+            var eventParams = new Dictionary<string, string>();
+            eventParams.Add("ResponseCode", response.Definitions.OwrRequest.ResponseCode.ToString());
+            eventParams.Add("ResponseMessage", response.Definitions.OwrRequest.ResponseMessage);
+            eventParams.Add("LaunchUri", response.Definitions.OwrRequest.LaunchUri);
+
+            return eventParams;
         }
+
 
         public static Dictionary<string, string> ContentToEventParamsForWebRio(WebRioResponse ssoResult)
         {
@@ -41,16 +33,23 @@ namespace Tc.Usd.HostedControls.Service
 
         public static WebRioResponse DeserializeWebRioSsoResponseJson(string json)
         {
-            if (string.IsNullOrWhiteSpace(json)) return null;
-
-            var response = new WebRioResponse();
-            using (var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
+            try
             {
-                var deSerializer = new DataContractJsonSerializer(response.GetType());
-                response = deSerializer.ReadObject(memoryStream) as WebRioResponse;
-            }
+                if (string.IsNullOrWhiteSpace(json)) return null;
 
-            return response;
+                var response = new WebRioResponse();
+                using (var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
+                {
+                    var deSerializer = new DataContractJsonSerializer(response.GetType());
+                    response = deSerializer.ReadObject(memoryStream) as WebRioResponse;
+                }
+
+                return response;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public static string SerializeOpenConsultationSsoRequestToJson(WebRioSsoRequest request)
@@ -71,18 +70,24 @@ namespace Tc.Usd.HostedControls.Service
             return Guid.NewGuid();
         }
 
-        private static OwrResponseRoot DeserializeOwrResponseJson(string json)
+        public static OwrResponse DeserializeOwrResponseJson(string json, ILogger logger)
         {
             if (string.IsNullOrWhiteSpace(json)) return null;
-
-            var response = new OwrResponseRoot();
-            using (var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
+            try
             {
-                var deSerializer = new DataContractJsonSerializer(response.GetType());
-                response = deSerializer.ReadObject(memoryStream) as OwrResponseRoot;
+                var response = new OwrResponse();
+                using (var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
+                {
+                    var deSerializer = new DataContractJsonSerializer(response.GetType());
+                    response = deSerializer.ReadObject(memoryStream) as OwrResponse;
+                }
+                return response;
             }
-
-            return response;
+            catch (Exception ex)
+            {
+                logger.LogError($"Failed trying to deserialize response from the server. Exception:{ex.ToString()}");
+                return null;
+            }
         }
     }
 }

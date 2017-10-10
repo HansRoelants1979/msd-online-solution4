@@ -3,7 +3,7 @@
 namespace Tc.Usd.HostedControls.Models
 {
         [DataContract]
-        public class OwrResponseRoot
+        public class OwrResponse
         {
             [DataMember(Name = "title")]
             public string Title { get; set; }
@@ -16,12 +16,12 @@ namespace Tc.Usd.HostedControls.Models
         [DataContract(Name= "definitions")]
         public class Definitions
         {
-            [DataMember(Name = "owrResponse")]
-            public OwrResponse OwrResponse { get; set; }
+            [DataMember(Name = "owrRequest")]
+            public OwrRequest OwrRequest{ get; set; }
         }
 
-        [DataContract(Name="owrResponse")]
-        public class OwrResponse
+        [DataContract(Name= "owrRequest")]
+        public class OwrRequest
         {
             [DataMember(Name = "requestId")]
             public string RequestId { get; set; }

@@ -168,8 +168,9 @@
 
         public static class Gateway
         {
-            public const string GatewayId = "tc_gatewayId";
+            public const string GatewayId = "tc_gatewayid";
             public const string Iata = "tc_iata";
+            public const string Name = "tc_gateway";
         }
 
         public static class Booking

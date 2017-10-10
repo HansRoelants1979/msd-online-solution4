@@ -68,10 +68,16 @@ namespace Tc.Usd.HostedControls
                 FireEventOnOwrError("Owr response content is null. Please See Details in log output");
                 return;
             }
-            var eventParams = WebServiceExchangeHelper.ContentToEventParams(content, _logger);
+            var ssoResponse = WebServiceExchangeHelper.DeserializeOwrResponseJson(content, _logger);
+            if (ssoResponse == null)
+            {
+                FireEventOnOwrError($"SSO Response could not be parsed. Response is {content}");
+                return;
+            }
+            var eventParams = WebServiceExchangeHelper.ContentToEventParams(ssoResponse, _logger);
             if (eventParams == null)
             {
-                FireEventOnOwrError("Failed to parse OWR response. Please See Details in log output");
+                FireEventOnOwrError("SSO Response could not be parsed. Please See Details in log output");
                 return;
             }
             FireEventOnOwrSuccess(eventParams);

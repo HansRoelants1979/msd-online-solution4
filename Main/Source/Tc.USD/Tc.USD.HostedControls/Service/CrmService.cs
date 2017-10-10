@@ -418,20 +418,20 @@ namespace Tc.Usd.HostedControls.Service
             return "";
         }
 
-        public static string GetAirportIata(CrmServiceClient client, Guid? airportId)
+        public static string GetAirportName(CrmServiceClient client, Guid? airportId)
         {
             if (airportId != null)
             {
                 var query = new QueryByAttribute(EntityName.Gateway)
                 {
                     ColumnSet =
-                        new ColumnSet(Gateway.Iata)
+                        new ColumnSet(Gateway.Name)
                 };
                 query.AddAttributeValue(Gateway.GatewayId, airportId);
                 var airport = ExecuteQuery(query, client)?.EntityCollection?.Entities?.FirstOrDefault();
-                if (airport != null && airport.Contains(Gateway.Iata))
+                if (airport != null && airport.Contains(Gateway.Name))
                 {
-                    return airport.GetAttributeValue<string>(Gateway.Iata);
+                    return airport.GetAttributeValue<string>(Gateway.Name);
                 }
             }
             return "";
