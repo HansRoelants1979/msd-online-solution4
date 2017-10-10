@@ -41,7 +41,7 @@
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>Annotation</ReferencingEntityName>
     <ReferencedEntityName>Incident</ReferencedEntityName>
-    <CascadeAssign>Cascade</CascadeAssign>
+    <CascadeAssign>NoCascade</CascadeAssign>
     <CascadeDelete>Cascade</CascadeDelete>
     <CascadeReparent>Cascade</CascadeReparent>
     <CascadeShare>Cascade</CascadeShare>
@@ -61,7 +61,7 @@
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>Email</ReferencingEntityName>
     <ReferencedEntityName>Incident</ReferencedEntityName>
-    <CascadeAssign>Cascade</CascadeAssign>
+    <CascadeAssign>NoCascade</CascadeAssign>
     <CascadeDelete>Cascade</CascadeDelete>
     <CascadeReparent>Cascade</CascadeReparent>
     <CascadeShare>Cascade</CascadeShare>
@@ -92,6 +92,26 @@
         <Description description="Wählen Sie eine vorhandene Anfrage für den Kunden aus, die ausgefüllt wurde. Nur zur internen Verwendung." languagecode="1031" />
         <Description description="Select an existing case for the customer that has been populated. For internal use only." languagecode="1033" />
         <Description description="Sélectionnez un incident existant pour le client renseigné. Utilisation interne uniquement." languagecode="1036" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
+  <EntityRelationship Name="Incident_Letters">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IntroducedVersion>5.0.0.0</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>Letter</ReferencingEntityName>
+    <ReferencedEntityName>Incident</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>Cascade</CascadeDelete>
+    <CascadeReparent>Cascade</CascadeReparent>
+    <CascadeShare>Cascade</CascadeShare>
+    <CascadeUnshare>Cascade</CascadeUnshare>
+    <ReferencingAttributeName>RegardingObjectId</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Unique identifier of the object with which the letter activity is associated." languagecode="1033" />
+        <Description description="Eindeutiger Bezeichner des Objekts, dem die Briefaktivität zugeordnet ist." languagecode="1031" />
+        <Description description="Identificateur unique de l'objet auquel l'activité de lettre est associée." languagecode="1036" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -135,6 +155,26 @@
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
+  <EntityRelationship Name="Incident_Tasks">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IntroducedVersion>5.0.0.0</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>Task</ReferencingEntityName>
+    <ReferencedEntityName>Incident</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>Cascade</CascadeDelete>
+    <CascadeReparent>Cascade</CascadeReparent>
+    <CascadeShare>Cascade</CascadeShare>
+    <CascadeUnshare>Cascade</CascadeUnshare>
+    <ReferencingAttributeName>RegardingObjectId</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Unique identifier of the object with which the task is associated." languagecode="1033" />
+        <Description description="Identificateur unique de l'objet auquel la tâche est associée." languagecode="1036" />
+        <Description description="Eindeutiger Bezeichner des Objekts, dem die Aufgabe zugeordnet ist." languagecode="1031" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
   <EntityRelationship Name="incident_tc_assistancerequests">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
@@ -163,7 +203,7 @@
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tc_followup</ReferencingEntityName>
     <ReferencedEntityName>Incident</ReferencedEntityName>
-    <CascadeAssign>Cascade</CascadeAssign>
+    <CascadeAssign>NoCascade</CascadeAssign>
     <CascadeDelete>Cascade</CascadeDelete>
     <CascadeReparent>Cascade</CascadeReparent>
     <CascadeShare>Cascade</CascadeShare>

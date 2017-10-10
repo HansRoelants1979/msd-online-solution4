@@ -56,7 +56,7 @@
                     <Sequence DisplayName="StopWorkflowStep3: If No Action on Approval">
                       <Sequence.Variables>
                         <Variable x:TypeArguments="x:Object" Name="StopWorkflowStep3_1" />
-                        <Variable x:TypeArguments="x:String" Default="09ee7211-00b9-42e7-8d82-e6b53ac11c88" Name="stepLabelLabelId" />
+                        <Variable x:TypeArguments="x:String" Default="aa757034-3536-41cb-b395-623ecef198d5" Name="stepLabelLabelId" />
                         <Variable x:TypeArguments="x:String" Name="stepLabelDescription">
                           <Variable.Default>
                             <Literal x:TypeArguments="x:String" Value="" />
@@ -124,9 +124,35 @@
                         <Variable x:TypeArguments="x:Object" Name="UpdateStep5_1" />
                         <Variable x:TypeArguments="x:Object" Name="UpdateStep5_2" />
                         <Variable x:TypeArguments="x:Object" Name="UpdateStep5_3" />
+                        <Variable x:TypeArguments="x:Object" Name="UpdateStep5_4" />
+                        <Variable x:TypeArguments="x:Object" Name="UpdateStep5_5" />
                       </Sequence.Variables>
                       <Assign x:TypeArguments="mxs:Entity" To="[CreatedEntities(&quot;related_tc_compensationid#tc_compensation#Temp&quot;)]" Value="[New Entity(&quot;tc_compensation&quot;)]" />
                       <Assign x:TypeArguments="s:Guid" To="[CreatedEntities(&quot;related_tc_compensationid#tc_compensation#Temp&quot;).Id]" Value="[InputEntities(&quot;related_tc_compensationid#tc_compensation&quot;).Id]" />
+                      <mxswa:GetEntityProperty Attribute="tc_totalcompensationofferamount" Entity="[InputEntities(&quot;primaryEntity&quot;)]" EntityName="tc_compensationapproval" Value="[UpdateStep5_2]">
+                        <mxswa:GetEntityProperty.TargetType>
+                          <InArgument x:TypeArguments="s:Type">
+                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:Money" />
+                          </InArgument>
+                        </mxswa:GetEntityProperty.TargetType>
+                      </mxswa:GetEntityProperty>
+                      <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
+                        <mxswa:ActivityReference.Arguments>
+                          <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">SelectFirstNonNull</InArgument>
+                          <InArgument x:TypeArguments="s:Object[]" x:Key="Parameters">[New Object() { UpdateStep5_2 }]</InArgument>
+                          <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
+                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:Money" />
+                          </InArgument>
+                          <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep5_1]</OutArgument>
+                        </mxswa:ActivityReference.Arguments>
+                      </mxswa:ActivityReference>
+                      <mxswa:SetEntityProperty Attribute="tc_approvedamount" Entity="[CreatedEntities(&quot;related_tc_compensationid#tc_compensation#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep5_1]">
+                        <mxswa:SetEntityProperty.TargetType>
+                          <InArgument x:TypeArguments="s:Type">
+                            <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:Money" />
+                          </InArgument>
+                        </mxswa:SetEntityProperty.TargetType>
+                      </mxswa:SetEntityProperty>
                       <mxswa:ActivityReference AssemblyQualifiedName="Microsoft.Crm.Workflow.Activities.EvaluateExpression, Microsoft.Crm.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" DisplayName="EvaluateExpression">
                         <mxswa:ActivityReference.Arguments>
                           <InArgument x:TypeArguments="x:String" x:Key="ExpressionOperator">CreateCrmType</InArgument>
@@ -134,10 +160,10 @@
                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
                           </InArgument>
-                          <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep5_1]</OutArgument>
+                          <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep5_3]</OutArgument>
                         </mxswa:ActivityReference.Arguments>
                       </mxswa:ActivityReference>
-                      <mxswa:SetEntityProperty Attribute="tc_approvalstatus" Entity="[CreatedEntities(&quot;related_tc_compensationid#tc_compensation#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep5_1]">
+                      <mxswa:SetEntityProperty Attribute="tc_approvalstatus" Entity="[CreatedEntities(&quot;related_tc_compensationid#tc_compensation#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep5_3]">
                         <mxswa:SetEntityProperty.TargetType>
                           <InArgument x:TypeArguments="s:Type">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="mxs:OptionSetValue" />
@@ -151,10 +177,10 @@
                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                           </InArgument>
-                          <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep5_2]</OutArgument>
+                          <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep5_4]</OutArgument>
                         </mxswa:ActivityReference.Arguments>
                       </mxswa:ActivityReference>
-                      <mxswa:SetEntityProperty Attribute="tc_compensationapprovalrequired" Entity="[CreatedEntities(&quot;related_tc_compensationid#tc_compensation#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep5_2]">
+                      <mxswa:SetEntityProperty Attribute="tc_compensationapprovalrequired" Entity="[CreatedEntities(&quot;related_tc_compensationid#tc_compensation#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep5_4]">
                         <mxswa:SetEntityProperty.TargetType>
                           <InArgument x:TypeArguments="s:Type">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
@@ -168,10 +194,10 @@
                           <InArgument x:TypeArguments="s:Type" x:Key="TargetType">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
                           </InArgument>
-                          <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep5_3]</OutArgument>
+                          <OutArgument x:TypeArguments="x:Object" x:Key="Result">[UpdateStep5_5]</OutArgument>
                         </mxswa:ActivityReference.Arguments>
                       </mxswa:ActivityReference>
-                      <mxswa:SetEntityProperty Attribute="tc_sendforapproval" Entity="[CreatedEntities(&quot;related_tc_compensationid#tc_compensation#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep5_3]">
+                      <mxswa:SetEntityProperty Attribute="tc_sendforapproval" Entity="[CreatedEntities(&quot;related_tc_compensationid#tc_compensation#Temp&quot;)]" EntityName="tc_compensation" Value="[UpdateStep5_5]">
                         <mxswa:SetEntityProperty.TargetType>
                           <InArgument x:TypeArguments="s:Type">
                             <mxswa:ReferenceLiteral x:TypeArguments="s:Type" Value="x:Boolean" />
@@ -200,7 +226,7 @@
                     <Sequence DisplayName="StopWorkflowStep8: Quit">
                       <Sequence.Variables>
                         <Variable x:TypeArguments="x:Object" Name="StopWorkflowStep8_1" />
-                        <Variable x:TypeArguments="x:String" Default="4c20c662-359a-414c-ab0b-c8c8f732a5f3" Name="stepLabelLabelId" />
+                        <Variable x:TypeArguments="x:String" Default="8cfdb39f-15ef-4754-b329-b296eef543ac" Name="stepLabelLabelId" />
                         <Variable x:TypeArguments="x:String" Name="stepLabelDescription">
                           <Variable.Default>
                             <Literal x:TypeArguments="x:String" Value="" />
@@ -344,7 +370,7 @@
                     <Sequence DisplayName="StopWorkflowStep9: Quit">
                       <Sequence.Variables>
                         <Variable x:TypeArguments="x:Object" Name="StopWorkflowStep9_1" />
-                        <Variable x:TypeArguments="x:String" Default="08b7760c-35b9-4ad5-b18e-80a110ef1d1a" Name="stepLabelLabelId" />
+                        <Variable x:TypeArguments="x:String" Default="64b9d214-80ad-4801-af91-67ad6bdac313" Name="stepLabelLabelId" />
                         <Variable x:TypeArguments="x:String" Name="stepLabelDescription">
                           <Variable.Default>
                             <Literal x:TypeArguments="x:String" Value="" />

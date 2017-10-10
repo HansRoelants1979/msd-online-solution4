@@ -122,7 +122,7 @@
                   <row>
                     <cell id="{3642302c-5ea1-1813-8dda-17734ada7582}" locklevel="0" showlabel="true" rowspan="4">
                       <labels>
-                        <label description="Description" languagecode="1033" />
+                        <label description="Details" languagecode="1033" />
                         <label description="Beschreibung" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_caselinedescription" uniqueid="{ae661379-861b-6461-cbcc-c71b0b095468}" datafieldname="tc_caselinedescription" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" />
@@ -165,7 +165,7 @@
           </column>
           <column width="45%">
             <sections>
-              <section id="{3440d014-54ec-49d4-a717-83cf6b397caf}" name="tab_1_column_2_section_1" locklevel="0" showlabel="true" celllabelposition="Left" celllabelalignment="Left" labelwidth="150" columns="1" showbar="false" IsUserDefined="0">
+              <section id="{3440d014-54ec-49d4-a717-83cf6b397caf}" name="tab_1_column_2_section_1" locklevel="0" showlabel="true" celllabelposition="Left" celllabelalignment="Left" labelwidth="185" columns="1" showbar="false" IsUserDefined="0">
                 <labels>
                   <label description="Buchungsdetails" languagecode="1031" />
                   <label description="BOOKING DETAILS" languagecode="1033" />
@@ -178,6 +178,23 @@
                         <label description="Service Typ" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_servicetype" uniqueid="{1098599c-7562-6236-853c-c6bac6db2ee3}" datafieldname="tc_servicetype" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{a5435ab3-c3b3-9d77-9b30-828d3912407a}" showlabel="true" locklevel="0" visible="false">
+                      <labels>
+                        <label description="Supplier" languagecode="1033" />
+                      </labels>
+                      <control id="tc_supplier" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_supplier" disabled="false" uniqueid="{c2e189de-267c-6690-2486-c9aee26316be}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{A9AF0AB8-861D-4CFA-92A5-C6281FED7FAB}</DefaultViewId>
+                          <AllowFilterOff>false</AllowFilterOff>
+                        </parameters>
+                      </control>
                     </cell>
                   </row>
                   <row>
@@ -314,12 +331,23 @@
                   <row>
                     <cell id="{1d4ad4c9-0e47-e3ca-eb65-110b1ab19e4e}" locklevel="0" showlabel="true">
                       <labels>
-                        <label description="Notify Supplier?" languagecode="1033" />
+                        <label description="How do you wish to Notify Supplier?" languagecode="1033" />
                         <label description="Lieferanten benachrichtigen?" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_notifysupplier" uniqueid="{1de4b340-b98b-b648-7d9b-e303d64dea1a}" datafieldname="tc_notifysupplier" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" />
                     </cell>
                   </row>
+                  <row>
+                    <cell id="{d848e97d-7068-3816-078b-bdb0888e7741}" showlabel="true" locklevel="0" rowspan="4" visible="false">
+                      <labels>
+                        <label description="Ad-Hoc Email Body" languagecode="1033" />
+                      </labels>
+                      <control id="tc_adhocemailbody" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="tc_adhocemailbody" disabled="false" uniqueid="{6ed7ea48-0b82-bd73-68b8-4be777a76dc0}" />
+                    </cell>
+                  </row>
+                  <row />
+                  <row />
+                  <row />
                   <row>
                     <cell id="{acec5770-163e-853b-62d9-b752b05886c3}" locklevel="0" showlabel="true">
                       <labels>

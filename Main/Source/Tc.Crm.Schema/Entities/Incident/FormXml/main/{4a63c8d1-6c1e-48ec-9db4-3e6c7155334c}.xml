@@ -176,6 +176,14 @@
                     </cell>
                   </row>
                   <row>
+                    <cell id="{95a803c9-44a1-1a04-0c2d-609a5eea72d0}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Date of Incident" languagecode="1033" />
+                      </labels>
+                      <control id="tc_dateofincident" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="tc_dateofincident" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
                     <cell id="{b6f69544-6287-4b8a-b60c-3d66f1cac75d}" showlabel="true" locklevel="0" visible="false" userspacer="0">
                       <labels>
                         <label description="Subject" languagecode="1033" />
@@ -507,13 +515,21 @@
                       <control disabled="false" id="tc_tcproductrelated" uniqueid="{b680ca4e-aeb2-ab91-6847-08475114b842}" datafieldname="tc_tcproductrelated" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" />
                     </cell>
                   </row>
+                  <row>
+                    <cell id="{ec1805e2-8031-4020-b1d0-d08eac8c7034}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Was Welcome Email Sent" languagecode="1033" />
+                      </labels>
+                      <control id="tc_waswelcomeemailsent1" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="tc_waswelcomeemailsent1" disabled="false" />
+                    </cell>
+                  </row>
                 </rows>
               </section>
             </sections>
           </column>
         </columns>
       </tab>
-      <tab id="{9c5799d7-ad8b-8db9-ca47-d925368330da}" name="booking_details" showlabel="true" locklevel="0" IsUserDefined="0" expanded="true">
+      <tab id="{9c5799d7-ad8b-8db9-ca47-d925368330da}" name="booking_details" showlabel="true" locklevel="0" IsUserDefined="0" expanded="false">
         <labels>
           <label description="Buchungsdetails" languagecode="1031" />
           <label description="Booking Details" languagecode="1033" />
@@ -911,16 +927,16 @@
       <tab id="{95223ada-5b53-5b81-0174-e0168c1046d0}" name="CompensationOffer" showlabel="true" expanded="false" locklevel="0" IsUserDefined="0">
         <labels>
           <label description="Angebot &amp; Kompensation" languagecode="1031" />
-          <label description="Offer &amp; Compensation and Compensation History" languagecode="1033" />
+          <label description="Offer, Compensation, Compensation History" languagecode="1033" />
           <label description="offre &amp; compensation" languagecode="1036" />
         </labels>
         <columns>
           <column width="50%">
             <sections>
-              <section id="{eca14253-d7a9-6e49-435a-c00a29364b61}" height="auto" name="tab_9_section_1" showlabel="false" locklevel="0" IsUserDefined="0" celllabelalignment="Left" celllabelposition="Top" labelwidth="250" showbar="false" columns="11" layout="varwidth">
+              <section id="{eca14253-d7a9-6e49-435a-c00a29364b61}" height="auto" name="tab_9_section_1" showlabel="true" locklevel="0" IsUserDefined="0" celllabelalignment="Left" celllabelposition="Top" labelwidth="250" showbar="false" columns="11" layout="varwidth">
                 <labels>
                   <label description="Abschnitt" languagecode="1031" />
-                  <label description="Section" languagecode="1033" />
+                  <label description="OFFER &amp; COMPENSATION" languagecode="1033" />
                   <label description="Section" languagecode="1036" />
                 </labels>
                 <rows>
@@ -961,10 +977,10 @@
           </column>
           <column width="50%">
             <sections>
-              <section id="{49cc1042-a854-cbd4-b112-7acce804b3b5}" name="tab_13_section_1" showlabel="false" locklevel="0" IsUserDefined="0" labelwidth="115" showbar="false" columns="1" layout="varwidth">
+              <section id="{49cc1042-a854-cbd4-b112-7acce804b3b5}" name="tab_13_section_1" showlabel="true" locklevel="0" IsUserDefined="0" labelwidth="115" showbar="false" columns="1" layout="varwidth" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
                   <label description="Abschnitt" languagecode="1031" />
-                  <label description="Section" languagecode="1033" />
+                  <label description="HISTORY" languagecode="1033" />
                   <label description="Section" languagecode="1036" />
                 </labels>
                 <rows>
@@ -1914,6 +1930,7 @@
       <event name="onchange" active="false" application="false" attribute="tc_departuredate">
         <Handlers>
           <Handler passExecutionContext="false" enabled="true" handlerUniqueId="{7a64d393-2ae0-7060-2a75-764c8abde6a8}" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" functionName="Tc.Crm.Scripts.Events.Case.OnCaseFieldChangeMandatoryMetConditions" parameters="" />
+          <Handler functionName="Crm.Scripts.Events.Case.OnChangeArrivalOrDepartureDates" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{e4861097-489c-ab88-951b-e594d9d4e707}" enabled="true" parameters="" passExecutionContext="false" />
         </Handlers>
       </event>
       <event name="onchange" application="false" active="false" attribute="tc_bookingtravelamount">
@@ -1939,6 +1956,11 @@
       <event name="onsave" application="false" active="false">
         <Handlers>
           <Handler functionName="Tc.Crm.Scripts.Events.Case.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{5a471b49-5324-12e9-81e8-5e75b5867e3d}" enabled="true" parameters="" passExecutionContext="true" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_arrivaldate">
+        <Handlers>
+          <Handler functionName="Crm.Scripts.Events.Case.OnChangeArrivalOrDepartureDates" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{431b8841-451d-b726-76ab-d010d77e1bee}" enabled="true" parameters="" passExecutionContext="false" />
         </Handlers>
       </event>
     </events>

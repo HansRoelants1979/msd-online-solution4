@@ -994,6 +994,39 @@
             <Description description="" languagecode="1033" />
           </Descriptions>
         </attribute>
+        <attribute PhysicalName="tc_AdHocEmailBody">
+          <Type>ntext</Type>
+          <Name>tc_adhocemailbody</Name>
+          <LogicalName>tc_adhocemailbody</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>2.0.0.8</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <Format></Format>
+          <MaxLength>20000</MaxLength>
+          <displaynames>
+            <displayname description="Ad-Hoc Email Body" languagecode="1033" />
+          </displaynames>
+          <Descriptions>
+            <Description description="" languagecode="1033" />
+          </Descriptions>
+        </attribute>
         <attribute PhysicalName="tc_areaccommodationdetailscorrect">
           <Type>picklist</Type>
           <Name>tc_areaccommodationdetailscorrect</Name>
@@ -1756,7 +1789,7 @@
           <Format></Format>
           <MaxLength>2000</MaxLength>
           <displaynames>
-            <displayname description="Description" languagecode="1033" />
+            <displayname description="Details" languagecode="1033" />
             <displayname description="Beschreibung" languagecode="1031" />
           </displaynames>
           <Descriptions>
@@ -2639,14 +2672,14 @@
             <options>
               <option value="0" Color="#0000ff">
                 <labels>
-                  <label description="No" languagecode="1033" />
+                  <label description="Automatic" languagecode="1033" />
                   <label description="Nein" languagecode="1031" />
                   <label description="non" languagecode="1036" />
                 </labels>
               </option>
               <option value="1" Color="#0000ff">
                 <labels>
-                  <label description="Yes" languagecode="1033" />
+                  <label description="Ad-Hoc" languagecode="1033" />
                   <label description="Ja" languagecode="1031" />
                   <label description="Oui" languagecode="1036" />
                 </labels>
@@ -3017,6 +3050,39 @@
             <displayname description="Severity" languagecode="1033" />
             <displayname description="Schweregrad" languagecode="1031" />
             <displayname description="Gravité" languagecode="1036" />
+          </displaynames>
+          <Descriptions>
+            <Description description="" languagecode="1033" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tc_Supplier">
+          <Type>lookup</Type>
+          <Name>tc_supplier</Name>
+          <LogicalName>tc_supplier</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>2.0.0.8</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <LookupStyle>single</LookupStyle>
+          <LookupTypes />
+          <displaynames>
+            <displayname description="Supplier" languagecode="1033" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />

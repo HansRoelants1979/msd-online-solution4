@@ -1,16 +1,129 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RibbonDiffXml>
   <CustomActions>
+    <HideCustomAction HideActionId="tc.Mscrm.Form.tc_compensation.Activate.Hide" Location="Mscrm.Form.tc_compensation.Activate" />
+    <CustomAction Id="tc.Mscrm.Form.tc_compensation.Deactivate.CustomAction" Location="Mscrm.Form.tc_compensation.MainTab.Save.Controls._children" Sequence="60">
+      <CommandUIDefinition>
+        <Button Alt="$LocLabels:Mscrm.Form.tc_compensation.Deactivate.Alt" Command="tc.tc_compensation.Cancel.Command" Id="Mscrm.Form.tc_compensation.Deactivate" Image32by32="/_imgs/ribbon/Deactivate_32.png" Image16by16="/_imgs/ribbon/Deactivate_16.png" LabelText="$LocLabels:Mscrm.Form.tc_compensation.Deactivate.LabelText" Sequence="60" TemplateAlias="o2" ToolTipTitle="$LocLabels:Mscrm.Form.tc_compensation.Deactivate.ToolTipTitle" ToolTipDescription="$Resources(EntityPluralDisplayName):Ribbon.Tooltip.Deactivate" ModernImage="DeActivate" />
+      </CommandUIDefinition>
+    </CustomAction>
     <HideCustomAction HideActionId="tc.Mscrm.Form.tc_compensation.NewRecord.Hide" Location="Mscrm.Form.tc_compensation.NewRecord" />
+    <CustomAction Id="tc.Mscrm.From.tc_compensation.ReopenCompensation.CustomAction" Location="Mscrm.Form.tc_compensation.MainTab.Save.Controls._children" Sequence="50">
+      <CommandUIDefinition>
+        <Button Alt="$LocLabels:Mscrm.From.tc_compensation.ReopenCompensation.Alt" Command="tc.Compensation.ReOpenCompensationButton.Command" Id="Mscrm.From.tc_compensation.ReopenCompensation" Image32by32="$webresource:tc_reopencompensationicon32" Image16by16="$webresource:tc_reopencompensationicon16" LabelText="$LocLabels:Mscrm.From.tc_compensation.ReopenCompensation.LabelText" Sequence="50" TemplateAlias="o2" ToolTipTitle="$LocLabels:Mscrm.From.tc_compensation.ReopenCompensation.ToolTipTitle" ToolTipDescription="$LocLabels:Mscrm.From.tc_compensation.ReopenCompensation.ToolTipDescription" />
+      </CommandUIDefinition>
+    </CustomAction>
   </CustomActions>
   <Templates>
     <RibbonTemplates Id="Mscrm.Templates"></RibbonTemplates>
   </Templates>
-  <CommandDefinitions />
+  <CommandDefinitions>
+    <CommandDefinition Id="Mscrm.Form.Deactivate">
+      <EnableRules>
+        <EnableRule Id="Mscrm.CanWritePrimary" />
+      </EnableRules>
+      <DisplayRules>
+        <DisplayRule Id="Mscrm.CanWritePrimary" />
+        <DisplayRule Id="Mscrm.PrimaryIsActive" />
+        <DisplayRule Id="Mscrm.PrimaryEntityHasStatecode" />
+        <DisplayRule Id="Mscrm.PrimaryIsNotActivity" />
+        <DisplayRule Id="tc.tc_compensation.PaymentStatus.DisplayRule" />
+      </DisplayRules>
+      <Actions>
+        <JavaScriptFunction FunctionName="Mscrm.CommandBarActions.deactivate" Library="/_static/_common/scripts/CommandBarActions.js">
+          <CrmParameter Value="FirstPrimaryItemId" />
+          <CrmParameter Value="PrimaryEntityTypeName" />
+        </JavaScriptFunction>
+      </Actions>
+    </CommandDefinition>
+    <CommandDefinition Id="tc.Compensation.ReOpenCompensationButton.Command">
+      <EnableRules>
+        <EnableRule Id="Tc.Compensation.ReOpenCompensationButton.EnableRule" />
+      </EnableRules>
+      <DisplayRules />
+      <Actions>
+        <JavaScriptFunction FunctionName="Tc.Crm.Scripts.Events.Compensation.OnReopenCompensationButtonClick" Library="$webresource:tc_Tc.Crm.Scripts.Events.Compensation.js" />
+      </Actions>
+    </CommandDefinition>
+    <CommandDefinition Id="tc.tc_compensation.Cancel.Command">
+      <EnableRules>
+        <EnableRule Id="Mscrm.CanWritePrimary" />
+      </EnableRules>
+      <DisplayRules>
+        <DisplayRule Id="Mscrm.CanWritePrimary" />
+        <DisplayRule Id="Mscrm.PrimaryIsActive" />
+        <DisplayRule Id="Mscrm.PrimaryEntityHasStatecode" />
+        <DisplayRule Id="Mscrm.PrimaryIsNotActivity" />
+        <DisplayRule Id="tc.tc_compensation.PaymentStatus.DisplayRule" />
+      </DisplayRules>
+      <Actions>
+        <JavaScriptFunction FunctionName="Tc.Crm.Scripts.Events.Compensation.OnClickCancelRibbonButton" Library="Tc.Crm.Scripts.Events.Compensation.js" />
+      </Actions>
+    </CommandDefinition>
+  </CommandDefinitions>
   <RuleDefinitions>
     <TabDisplayRules />
-    <DisplayRules />
-    <EnableRules />
+    <DisplayRules>
+      <DisplayRule Id="Mscrm.CanWritePrimary">
+        <EntityPrivilegeRule PrivilegeType="Write" PrivilegeDepth="Basic" AppliesTo="PrimaryEntity" />
+      </DisplayRule>
+      <DisplayRule Id="Mscrm.PrimaryEntityHasStatecode">
+        <EntityPropertyRule AppliesTo="PrimaryEntity" PropertyName="HasStateCode" PropertyValue="true" />
+      </DisplayRule>
+      <DisplayRule Id="Mscrm.PrimaryIsActive">
+        <FormStateRule State="Existing" />
+      </DisplayRule>
+      <DisplayRule Id="Mscrm.PrimaryIsNotActivity">
+        <EntityPropertyRule AppliesTo="PrimaryEntity" PropertyName="IsActivity" PropertyValue="false" />
+      </DisplayRule>
+      <DisplayRule Id="tc.tc_compensation.PaymentStatus.DisplayRule">
+        <ValueRule Field="tc_paymentstatus" Value="950000002" Default="false" InvertResult="false" />
+      </DisplayRule>
+    </DisplayRules>
+    <EnableRules>
+      <EnableRule Id="Mscrm.CanWritePrimary">
+        <RecordPrivilegeRule PrivilegeType="Write" AppliesTo="PrimaryEntity" />
+      </EnableRule>
+      <EnableRule Id="Tc.Compensation.ReOpenCompensationButton.EnableRule">
+        <CustomRule FunctionName="Tc.Crm.Scripts.Events.Compensation.EnableReopenCompensationButton" Library="$webresource:tc_Tc.Crm.Scripts.Events.Compensation.js" Default="false" InvertResult="false" />
+      </EnableRule>
+    </EnableRules>
   </RuleDefinitions>
-  <LocLabels />
+  <LocLabels>
+    <LocLabel Id="Mscrm.Form.tc_compensation.Deactivate.Alt">
+      <Titles>
+        <Title description="Cancel" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+    <LocLabel Id="Mscrm.Form.tc_compensation.Deactivate.LabelText">
+      <Titles>
+        <Title description="Cancel" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+    <LocLabel Id="Mscrm.Form.tc_compensation.Deactivate.ToolTipTitle">
+      <Titles>
+        <Title description="Cancel" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+    <LocLabel Id="Mscrm.From.tc_compensation.ReopenCompensation.Alt">
+      <Titles>
+        <Title description="Reopen Compensation" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+    <LocLabel Id="Mscrm.From.tc_compensation.ReopenCompensation.LabelText">
+      <Titles>
+        <Title description="Reopen Compensation" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+    <LocLabel Id="Mscrm.From.tc_compensation.ReopenCompensation.ToolTipDescription">
+      <Titles>
+        <Title description="CR User can Reopen Compensation to make changes for Comeback payment  " languagecode="1033" />
+      </Titles>
+    </LocLabel>
+    <LocLabel Id="Mscrm.From.tc_compensation.ReopenCompensation.ToolTipTitle">
+      <Titles>
+        <Title description="Reopen Compensation" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+  </LocLabels>
 </RibbonDiffXml>

@@ -617,7 +617,7 @@
               <Description description="Status von Compensation" languagecode="1031" />
             </Descriptions>
             <states>
-              <state value="0" defaultstatus="1" invariantname="Active">
+              <state value="0" defaultstatus="950000000" invariantname="Active">
                 <labels>
                   <label description="Active" languagecode="1033" />
                   <label description="Actif" languagecode="1036" />
@@ -683,11 +683,24 @@
               <Description description="Grund für den Status von Compensation" languagecode="1031" />
             </Descriptions>
             <statuses>
-              <status value="1" state="0" TransitionData="" Color="#0000ff">
+              <status value="950000000" state="0" TransitionData="" Color="#0000ff">
                 <labels>
-                  <label description="Active" languagecode="1033" />
-                  <label description="Actif" languagecode="1036" />
-                  <label description="Aktiv" languagecode="1031" />
+                  <label description="In Progress" languagecode="1033" />
+                </labels>
+              </status>
+              <status value="950000001" state="0" TransitionData="" Color="#0000ff">
+                <labels>
+                  <label description="Payment Processed" languagecode="1033" />
+                </labels>
+              </status>
+              <status value="950000002" state="0" TransitionData="" Color="#0000ff">
+                <labels>
+                  <label description="Comeback In Progress" languagecode="1033" />
+                </labels>
+              </status>
+              <status value="950000003" state="0" TransitionData="" Color="#0000ff">
+                <labels>
+                  <label description="Comeback Payment Processed" languagecode="1033" />
                 </labels>
               </status>
               <status value="2" state="1" TransitionData="" Color="#52b40a">
@@ -853,6 +866,79 @@
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tc_ApprovedAmount">
+          <Type>money</Type>
+          <Name>tc_approvedamount</Name>
+          <LogicalName>tc_approvedamount</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.0.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <MinValue>0</MinValue>
+          <MaxValue>922337203685477</MaxValue>
+          <Accuracy>4</Accuracy>
+          <AccuracySource>2</AccuracySource>
+          <displaynames>
+            <displayname description="Approved Amount" languagecode="1033" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Field will be auto populated from compensation approve entity and compared vs total offered amount" languagecode="1033" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tc_approvedamount_Base">
+          <Type>money</Type>
+          <Name>tc_approvedamount_base</Name>
+          <LogicalName>tc_approvedamount_base</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>disabled</ImeMode>
+          <ValidForReadApi>1</ValidForReadApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.0.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <MinValue>-922337203685477</MinValue>
+          <MaxValue>922337203685477</MaxValue>
+          <Accuracy>4</Accuracy>
+          <AccuracySource>2</AccuracySource>
+          <CalculationOf>tc_ApprovedAmount</CalculationOf>
+          <displaynames>
+            <displayname description="Approved Amount (Base)" languagecode="1033" />
+            <displayname description="Approved Amount (de base)" languagecode="1036" />
+            <displayname description="'Approved Amount' (Basis)" languagecode="1031" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Value of the Approved Amount in base currency." languagecode="1033" />
+            <Description description="Valeur de Approved Amount dans la devise de base." languagecode="1036" />
+            <Description description="Wert von 'Approved Amount' in der Basiswährung." languagecode="1031" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="tc_BACSAccountName">

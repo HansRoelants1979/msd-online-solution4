@@ -13,7 +13,7 @@
         <columns>
           <column width="35%">
             <sections>
-              <section id="{247881ce-4574-4562-3644-195b27748911}" name="tab_2_section_1" showlabel="false" locklevel="0" IsUserDefined="0" labelwidth="150" columns="1" layout="varwidth" showbar="false" celllabelalignment="Left" celllabelposition="Left">
+              <section id="{247881ce-4574-4562-3644-195b27748911}" name="tab_2_section_1" showlabel="false" locklevel="0" IsUserDefined="0" labelwidth="210" columns="1" layout="varwidth" showbar="false" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
                   <label description="Abschnitt" languagecode="1031" />
                   <label description="Section" languagecode="1033" />
@@ -236,6 +236,14 @@
                       <control id="transactioncurrencyid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="transactioncurrencyid" disabled="false" />
                     </cell>
                   </row>
+                  <row>
+                    <cell id="{84c8de42-dc02-9d0b-e570-1eb9c3a14c17}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Send Recovery Notification to Supplier?" languagecode="1033" />
+                      </labels>
+                      <control id="tc_sendrecoverynotificationtosupplier" classid="{B0C6723A-8503-4fd7-BB28-C8A06AC933C2}" datafieldname="tc_sendrecoverynotificationtosupplier" disabled="false" uniqueid="{933a7e0a-9238-96e2-ea53-788462b578e9}" />
+                    </cell>
+                  </row>
                 </rows>
               </section>
             </sections>
@@ -253,7 +261,7 @@
                       <labels>
                         <label description="Category of Complaint" languagecode="1033" />
                       </labels>
-                      <control id="tc_categoryofcomplaint" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_categoryofcomplaint" disabled="false" />
+                      <control id="tc_categoryofcomplaint" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_categoryofcomplaint" disabled="false" uniqueid="{237458ea-11a1-bbbc-1682-e904ac757e82}" />
                     </cell>
                   </row>
                   <row>
@@ -356,7 +364,7 @@
           <label description="Compensation Level" languagecode="1033" />
         </labels>
         <columns>
-          <column width="35%">
+          <column width="34%">
             <sections>
               <section id="{6ab7c431-d485-b2bd-45ae-028e59d13905}" name="tab_3_section_1" showlabel="false" locklevel="0" IsUserDefined="0" labelwidth="170" columns="1" layout="varwidth" showbar="false" celllabelposition="Left" celllabelalignment="Left">
                 <labels>
@@ -417,17 +425,17 @@
               </section>
             </sections>
           </column>
-          <column width="50%">
+          <column width="66%">
             <sections>
-              <section id="{57615b64-868a-43b9-1d47-545ae5503e48}" name="tab_3_section_2" showlabel="false" locklevel="0" IsUserDefined="0" labelwidth="115" columns="1" layout="varwidth" showbar="false">
+              <section id="{57615b64-868a-43b9-1d47-545ae5503e48}" name="tab_3_section_2" showlabel="true" locklevel="0" IsUserDefined="0" labelwidth="115" columns="1" layout="varwidth" showbar="true" celllabelalignment="Left" celllabelposition="Left">
                 <labels>
                   <label description="Abschnitt" languagecode="1031" />
-                  <label description="Section" languagecode="1033" />
+                  <label description="PAYMENT METHOD SUMMARY FROM COMPENSATION" languagecode="1033" />
                   <label description="Section" languagecode="1036" />
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{090a9e8c-b547-1c35-68b5-daa138314cc9}" showlabel="true" auto="false" colspan="1">
+                    <cell id="{090a9e8c-b547-1c35-68b5-daa138314cc9}" showlabel="false" auto="false" colspan="1">
                       <labels>
                         <label description="Method of Payment" languagecode="1033" />
                         <label description="Zahlungsart" languagecode="1031" />
@@ -438,26 +446,6 @@
                           <ControlMode>Edit</ControlMode>
                         </parameters>
                       </control>
-                    </cell>
-                  </row>
-                </rows>
-              </section>
-            </sections>
-          </column>
-          <column width="15%">
-            <sections>
-              <section id="{46d620a0-18c1-0eec-d880-21716cb146a4}" name="tab_3_section_3" showlabel="false" locklevel="0" IsUserDefined="0" labelwidth="115" columns="1" layout="varwidth" showbar="false">
-                <labels>
-                  <label description="Abschnitt" languagecode="1031" />
-                  <label description="Section" languagecode="1033" />
-                  <label description="Section" languagecode="1036" />
-                </labels>
-                <rows>
-                  <row>
-                    <cell id="{27867db2-33e9-0dca-33e8-923d24008ca0}" showlabel="false">
-                      <labels>
-                        <label description="" languagecode="1033" />
-                      </labels>
                     </cell>
                   </row>
                 </rows>

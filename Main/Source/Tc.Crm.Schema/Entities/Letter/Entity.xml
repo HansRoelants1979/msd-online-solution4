@@ -5,6 +5,35 @@
   <EntityInfo>
     <entity Name="Letter">
       <attributes>
+        <attribute PhysicalName="RegardingObjectId">
+          <Type>lookup</Type>
+          <Name>regardingobjectid</Name>
+          <LogicalName>regardingobjectid</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>0</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>5.0.0.0</IntroducedVersion>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <LookupStyle>single</LookupStyle>
+          <displaynames>
+            <displayname description="Regarding" languagecode="1033" />
+            <displayname description="Concernant" languagecode="1036" />
+            <displayname description="Bezug" languagecode="1031" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Unique identifier of the object with which the letter activity is associated." languagecode="1033" />
+            <Description description="Eindeutiger Bezeichner des Objekts, dem die Briefaktivität zugeordnet ist." languagecode="1031" />
+            <Description description="Identificateur unique de l'objet auquel l'activité de lettre est associée." languagecode="1036" />
+          </Descriptions>
+        </attribute>
         <attribute PhysicalName="StateCode">
           <Type>state</Type>
           <Name>statecode</Name>

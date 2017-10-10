@@ -161,14 +161,13 @@
                         <label description="Send Compensation Offer" languagecode="1033" />
                         <label description="Kompensationsangebot schicken" languagecode="1031" />
                       </labels>
-                      <control disabled="false" id="tc_sendcompensationoffer" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_sendcompensationoffer" uniqueid="{1c69d278-99d3-92c6-7b3b-859a5766165e}" />
+                      <control disabled="false" id="tc_sendcompensationoffer" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_sendcompensationoffer" uniqueid="{1c69d278-99d3-92c6-7b3b-859a5766165e}" />
                     </cell>
-                    <cell id="{934892b2-be6d-c323-be1c-726274128873}" showlabel="true" locklevel="0" rowspan="5" visible="false">
+                    <cell id="{15906711-8ed0-eec2-1634-7ada8b1aebb3}" showlabel="true" locklevel="0" visible="false">
                       <labels>
-                        <label description="Offer Rejection Notes" languagecode="1033" />
-                        <label description="Angebot Ablehnungsscheine" languagecode="1031" />
+                        <label description="Approved Amount" languagecode="1033" />
                       </labels>
-                      <control id="tc_offerrejectionnotes" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="tc_offerrejectionnotes" disabled="false" uniqueid="{aa10cd11-8613-0b5e-dec7-aa333bbc1856}" />
+                      <control id="tc_approvedamount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tc_approvedamount" disabled="true" uniqueid="{c218d6b7-e479-5846-8492-9643a2d0cd55}" />
                     </cell>
                   </row>
                   <row>
@@ -178,6 +177,13 @@
                         <label description="Genehmigung schicken" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_sendforapproval" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="tc_sendforapproval" uniqueid="{bb7ab142-8806-4972-1c50-eca9ce0b66ca}" />
+                    </cell>
+                    <cell id="{934892b2-be6d-c323-be1c-726274128873}" showlabel="true" locklevel="0" rowspan="5" visible="false">
+                      <labels>
+                        <label description="Offer Rejection Notes" languagecode="1033" />
+                        <label description="Angebot Ablehnungsscheine" languagecode="1031" />
+                      </labels>
+                      <control id="tc_offerrejectionnotes" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="tc_offerrejectionnotes" disabled="false" uniqueid="{aa10cd11-8613-0b5e-dec7-aa333bbc1856}" />
                     </cell>
                   </row>
                   <row>
@@ -196,7 +202,7 @@
                         <label description="statut de l'offre" languagecode="1036" />
                         <label description="Kundenentscheidung" languagecode="1031" />
                       </labels>
-                      <control disabled="false" id="tc_offerstatus" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_offerstatus" uniqueid="{0b99e955-67b1-b491-5b47-e48830a01548}" />
+                      <control disabled="false" id="tc_offerstatus" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_offerstatus" uniqueid="{0b99e955-67b1-b491-5b47-e48830a01548}" />
                     </cell>
                   </row>
                   <row>
@@ -207,6 +213,13 @@
                         <label description="méthode d'accusé de réception" languagecode="1036" />
                       </labels>
                       <control disabled="false" id="tc_customerofferacknowledgement" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_customerofferacknowledgement" uniqueid="{7cb3e726-ba6a-bc63-e86d-1bda1b11e995}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{4139ba82-be82-7685-821e-e6977e49b1cb}" showlabel="false">
+                      <labels>
+                        <label description="" languagecode="1033" />
+                      </labels>
                     </cell>
                   </row>
                 </rows>
@@ -288,14 +301,14 @@
                         <label description="Non-Financial" languagecode="1033" />
                         <label description="Nichtfinanzielle" languagecode="1031" />
                       </labels>
-                      <control disabled="false" id="tc_nonfinancialcompensationtype" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_nonfinancialcompensationtype" uniqueid="{087e17b4-8b58-b153-59ac-27466cc9508e}" />
+                      <control disabled="true" id="tc_nonfinancialcompensationtype" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_nonfinancialcompensationtype" uniqueid="{087e17b4-8b58-b153-59ac-27466cc9508e}" />
                     </cell>
                     <cell id="{021e1507-a5ac-ca75-9aec-03e93c390d77}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Cash" languagecode="1033" />
                         <label description="Bar" languagecode="1031" />
                       </labels>
-                      <control disabled="false" id="tc_cashcompensationtype" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_cashcompensationtype" uniqueid="{e4c97243-9a9e-edea-60cb-3c8e030a93ed}" />
+                      <control disabled="true" id="tc_cashcompensationtype" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_cashcompensationtype" uniqueid="{e4c97243-9a9e-edea-60cb-3c8e030a93ed}" />
                     </cell>
                     <cell id="{2766e431-ac70-d199-2054-c14d97d5dd1b}" locklevel="0" showlabel="true">
                       <labels>
@@ -303,14 +316,14 @@
                         <label description="Bon de réduction" languagecode="1036" />
                         <label description="Gutschein" languagecode="1031" />
                       </labels>
-                      <control disabled="false" id="tc_vouchercompensationtype" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_vouchercompensationtype" uniqueid="{54a73e68-3188-8559-88d7-d5b319c76382}" />
+                      <control disabled="true" id="tc_vouchercompensationtype" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_vouchercompensationtype" uniqueid="{54a73e68-3188-8559-88d7-d5b319c76382}" />
                     </cell>
                     <cell id="{324b199a-9418-cccc-9aa4-977058716ada}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="BACS" languagecode="1033" />
                         <label description="BACS" languagecode="1031" />
                       </labels>
-                      <control disabled="false" id="tc_bacscompensationtype" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_bacscompensationtype" uniqueid="{1e876934-168b-2923-1604-c045da1b47cb}" />
+                      <control disabled="true" id="tc_bacscompensationtype" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_bacscompensationtype" uniqueid="{1e876934-168b-2923-1604-c045da1b47cb}" />
                     </cell>
                   </row>
                   <row>
@@ -319,7 +332,7 @@
                         <label description="CHAPS" languagecode="1033" />
                         <label description="CHAPS" languagecode="1031" />
                       </labels>
-                      <control disabled="false" id="tc_chapscompensationtype" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_chapscompensationtype" uniqueid="{8d08d5a0-9dc4-e2e3-9d04-5695d042c35d}" />
+                      <control disabled="true" id="tc_chapscompensationtype" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_chapscompensationtype" uniqueid="{8d08d5a0-9dc4-e2e3-9d04-5695d042c35d}" />
                     </cell>
                     <cell id="{9671b8d0-b65c-9a3d-db62-4a09107ad740}" showlabel="false">
                       <labels>
@@ -464,7 +477,7 @@
                     <cell id="{ecbd1380-6846-b72c-4b90-55b3cd0cc764}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Exchange Rate" languagecode="1033" />
-                        <label description="Tauschrate" languagecode="1031" />
+                        <label description="Bar-Wechselkurs" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_exchangerate" classid="{C3EFE0C3-0EC6-42be-8349-CBD9079DFD8E}" datafieldname="tc_exchangerate" uniqueid="{0d1a2c95-b178-2e30-545a-e64a264e9949}" />
                     </cell>
@@ -560,7 +573,7 @@
                     <cell id="{de39d91c-75c9-3da8-e37c-968e20a9c97c}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Sort Code i.e.123456" languagecode="1033" />
-                        <label description="Sort Code i.e.123456" languagecode="1031" />
+                        <label description="BACS-Konto-Sortiercode" languagecode="1031" />
                       </labels>
                       <control id="tc_bacsaccountsortcode" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_bacsaccountsortcode" uniqueid="{e7819ea4-0a45-10ab-57b4-50d76240864a}" disabled="false" />
                     </cell>
@@ -678,7 +691,7 @@
                         <label description="Décision" languagecode="1036" />
                         <label description="Entscheidung" languagecode="1031" />
                       </labels>
-                      <control disabled="false" id="tc_paymentstatus" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_paymentstatus" uniqueid="{0de9bc8e-5b73-8586-1d29-a634786ca8e0}" />
+                      <control disabled="false" id="tc_paymentstatus" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_paymentstatus" uniqueid="{0de9bc8e-5b73-8586-1d29-a634786ca8e0}" />
                     </cell>
                     <cell id="{19347d56-5099-78c4-a759-8463eee88076}" showlabel="false">
                       <labels>
@@ -824,7 +837,7 @@
                     <cell id="{e0a15896-b05c-1140-845c-cd0064109332}" locklevel="0" showlabel="true">
                       <labels>
                         <label description="Non Financial Sub-Type" languagecode="1033" />
-                        <label description="Nicht finanzieller Untertyp" languagecode="1031" />
+                        <label description="Kompensation Untertyp" languagecode="1031" />
                       </labels>
                       <control disabled="true" id="tc_nonfinancialcompensationsubtype" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_nonfinancialcompensationsubtype" uniqueid="{c6ba66da-9eda-1762-a75e-c709193d912a}" />
                     </cell>
@@ -838,7 +851,7 @@
                     <cell id="{ee111777-802c-3be8-9c47-aa950818c21d}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Non-Financial Other" languagecode="1033" />
-                        <label description="Nicht-finanzielle sonstige" languagecode="1031" />
+                        <label description="Andere Kompensation Sub-Type" languagecode="1031" />
                       </labels>
                       <control id="tc_nonfinancialcompensationsubtypeother" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tc_nonfinancialcompensationsubtypeother" disabled="true" uniqueid="{602b9cc1-8b6d-37ec-b3b3-3d2c0971dc0e}" />
                     </cell>
@@ -957,6 +970,11 @@
                           <WebResourceId>{184F4DBC-6F1B-E711-8110-1458D041F8E8}</WebResourceId>
                         </parameters>
                       </control>
+                      <events>
+                        <event name="onload" application="0">
+                          <dependencies />
+                        </event>
+                      </events>
                     </cell>
                   </row>
                   <row />
@@ -1073,7 +1091,7 @@
     <header id="{a92aba85-7268-438e-8148-cff6ccc89bf1}" columns="1111" labelwidth="115" celllabelposition="Left" celllabelalignment="Left">
       <rows>
         <row>
-          <cell id="{d8925829-3860-310b-1a53-a9d55876372d}" showlabel="false">
+          <cell id="{42d4ba96-9c38-36b9-74db-978781cbbc25}" showlabel="false">
             <labels>
               <label description="" languagecode="1033" />
             </labels>
@@ -1131,20 +1149,25 @@
     <footer id="{0880b446-b08c-4433-aeba-94db9d447189}" columns="111">
       <rows>
         <row>
-          <cell id="{4229eaa9-7100-24dc-b2c7-7b74b7a24c81}" showlabel="false">
+          <cell id="{2e07e364-2c31-c2a6-7133-7c859956c284}" showlabel="false">
             <labels>
               <label description="" languagecode="1033" />
             </labels>
           </cell>
-          <cell id="{284d6955-945d-d04e-0de6-71cb276329a6}" showlabel="false">
+          <cell id="{9875432a-2d15-8b4a-0584-24ee6b4cba05}" showlabel="true" locklevel="0">
             <labels>
-              <label description="" languagecode="1033" />
+              <label description="Status Reason" languagecode="1033" />
+              <label description="Raison du statut" languagecode="1036" />
+              <label description="Statusgrund" languagecode="1031" />
             </labels>
+            <control id="footer_statuscode" classid="{5D68B988-0661-4db2-BC3E-17598AD3BE6C}" datafieldname="statuscode" disabled="true" />
           </cell>
-          <cell id="{e808dd68-b609-1acd-d2a8-ee014e6142a5}" showlabel="false">
+          <cell id="{4c2d8e58-0d2b-0511-b091-515615890165}" showlabel="true" locklevel="0">
             <labels>
-              <label description="" languagecode="1033" />
+              <label description="Date Last Processed" languagecode="1033" />
+              <label description="Datum der letzten Bearbeitung" languagecode="1031" />
             </labels>
+            <control id="footer_tc_datelastprocessed" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="tc_datelastprocessed" disabled="true" uniqueid="{29ae241b-e55c-81bd-daa6-2cebb4c82cb7}" />
           </cell>
         </row>
       </rows>
@@ -1350,40 +1373,6 @@
           </parameters>
         </customControl>
       </controlDescription>
-      <controlDescription forControl="{0b99e955-67b1-b491-5b47-e48830a01548}">
-        <customControl id="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" formFactor="2">
-          <parameters>
-            <datafieldname>tc_offerstatus</datafieldname>
-          </parameters>
-        </customControl>
-        <customControl formFactor="0" name="MscrmControls.OptionSet.OptionSetControl">
-          <parameters>
-            <value>tc_offerstatus</value>
-          </parameters>
-        </customControl>
-        <customControl formFactor="1" name="MscrmControls.OptionSet.OptionSetControl">
-          <parameters>
-            <value>tc_offerstatus</value>
-          </parameters>
-        </customControl>
-      </controlDescription>
-      <controlDescription forControl="{0de9bc8e-5b73-8586-1d29-a634786ca8e0}">
-        <customControl id="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" formFactor="2">
-          <parameters>
-            <datafieldname>tc_paymentstatus</datafieldname>
-          </parameters>
-        </customControl>
-        <customControl formFactor="0" name="MscrmControls.OptionSet.OptionSetControl">
-          <parameters>
-            <value>tc_paymentstatus</value>
-          </parameters>
-        </customControl>
-        <customControl formFactor="1" name="MscrmControls.OptionSet.OptionSetControl">
-          <parameters>
-            <value>tc_paymentstatus</value>
-          </parameters>
-        </customControl>
-      </controlDescription>
       <controlDescription forControl="{36ae8b24-dcc0-87a1-4ba2-b3047c109e56}">
         <customControl id="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" formFactor="2">
           <parameters>
@@ -1398,23 +1387,6 @@
         <customControl formFactor="1" name="MscrmControls.OptionSet.OptionSetControl">
           <parameters>
             <value>tc_thomascookconfirmation</value>
-          </parameters>
-        </customControl>
-      </controlDescription>
-      <controlDescription forControl="{1c69d278-99d3-92c6-7b3b-859a5766165e}">
-        <customControl id="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" formFactor="0">
-          <parameters>
-            <datafieldname>tc_sendcompensationoffer</datafieldname>
-          </parameters>
-        </customControl>
-        <customControl id="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" formFactor="2">
-          <parameters>
-            <datafieldname>tc_sendcompensationoffer</datafieldname>
-          </parameters>
-        </customControl>
-        <customControl formFactor="1" name="MscrmControls.OptionSet.OptionSetControl">
-          <parameters>
-            <value>tc_sendcompensationoffer</value>
           </parameters>
         </customControl>
       </controlDescription>
@@ -1440,7 +1412,7 @@
       <Library name="posms_/Scripts/jquery.min.js" libraryUniqueId="{229179bb-2a5b-a570-c360-55c82801801d}" />
       <Library name="tc_es6promise.js" libraryUniqueId="{dc67601d-97b9-8045-56b7-ea92662b9ad3}" />
       <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{25e815e2-e42c-ec97-7a5d-76833c4d18c0}" />
-      <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{894b1273-32b6-65d8-78c1-dc0e78221c24}" />
+      <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{58d86968-0351-875c-9373-4b5578263892}" />
       <Library name="tc_Tc.Crm.Scripts.Library.Compensation.js" libraryUniqueId="{2d4a9d09-9133-9754-b416-9086eec627a7}" />
       <Library name="tc_Tc.Crm.Scripts.Events.Compensation.js" libraryUniqueId="{1a3611cb-72c1-b5a9-6220-ac4c7a576e55}" />
     </formLibraries>
@@ -1482,7 +1454,32 @@
       </event>
       <event name="onsave" application="false" active="false">
         <Handlers>
-          <Handler functionName="Tc.Crm.Scripts.Events.Compensation.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Compensation.js" handlerUniqueId="{691bb7ab-1e6a-7e9d-a0d3-e9612e682ea3}" enabled="true" parameters="" passExecutionContext="true" />
+          <Handler functionName="Tc.Crm.Scripts.Events.Compensation.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Compensation.js" handlerUniqueId="{cee8bb2d-1c12-c3d8-e229-0ceba37cede4}" enabled="true" parameters="" passExecutionContext="true" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_chapsamount">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Compensation.OnCompensationAmountChange" libraryName="tc_Tc.Crm.Scripts.Events.Compensation.js" handlerUniqueId="{e679bea7-b8b4-8b66-9058-a9e949355c55}" enabled="true" parameters="" passExecutionContext="false" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_bacsamount">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Compensation.OnCompensationAmountChange" libraryName="tc_Tc.Crm.Scripts.Events.Compensation.js" handlerUniqueId="{9ea62b3b-879d-dc9e-96ea-8c243212a661}" enabled="true" parameters="" passExecutionContext="false" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_voucheramount">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Compensation.OnCompensationAmountChange" libraryName="tc_Tc.Crm.Scripts.Events.Compensation.js" handlerUniqueId="{3b6a1c02-9bd8-8e1e-a39b-65a66d2cbab7}" enabled="true" parameters="" passExecutionContext="false" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_cashamount">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Compensation.OnCompensationAmountChange" libraryName="tc_Tc.Crm.Scripts.Events.Compensation.js" handlerUniqueId="{48a6a626-937e-ed0e-8455-48439ad29963}" enabled="true" parameters="" passExecutionContext="false" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_nonfinancialamount">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Compensation.OnCompensationAmountChange" libraryName="tc_Tc.Crm.Scripts.Events.Compensation.js" handlerUniqueId="{cbe35aeb-5d07-4cd7-3b44-154cbc4703b8}" enabled="true" parameters="" passExecutionContext="false" />
         </Handlers>
       </event>
     </events>

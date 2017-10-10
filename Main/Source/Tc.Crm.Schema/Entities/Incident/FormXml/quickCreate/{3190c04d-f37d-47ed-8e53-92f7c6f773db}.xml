@@ -452,6 +452,16 @@
           <Handler functionName="Tc.Crm.Scripts.Events.Case.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{6e5c1eed-bbd5-aa51-c218-a7b23b028c85}" enabled="true" parameters="" passExecutionContext="true" />
         </Handlers>
       </event>
+      <event name="onchange" application="false" active="false" attribute="tc_arrivaldate">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnChangeArrivalOrDepartureDates" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{83e8e2e2-639b-8b42-1a4d-1eead2893660}" enabled="true" parameters="" passExecutionContext="true" />
+        </Handlers>
+      </event>
+      <event name="onchange" application="false" active="false" attribute="tc_departuredate">
+        <Handlers>
+          <Handler functionName="Tc.Crm.Scripts.Events.Case.OnChangeArrivalOrDepartureDates" libraryName="tc_Tc.Crm.Scripts.Events.Case.js" handlerUniqueId="{39ab32b7-95dd-a068-a35b-52a6d64a7127}" enabled="true" parameters="" passExecutionContext="true" />
+        </Handlers>
+      </event>
     </events>
     <DisplayConditions Order="2">
       <Role Id="{627090ff-40a3-4053-8790-584edc5be201}" />

@@ -2603,28 +2603,43 @@
               <Description description="Raison du statut de l'activité." languagecode="1036" />
             </Descriptions>
             <statuses>
-              <status value="1" state="0">
+              <status value="1" state="0" TransitionData="" Color="#0000ff">
                 <labels>
                   <label description="Offen" languagecode="1031" />
                   <label description="Open" languagecode="1033" />
                   <label description="Ouvert" languagecode="1036" />
                 </labels>
               </status>
-              <status value="2" state="1">
+              <status value="950000000" state="0" TransitionData="" Color="#0000ff">
+                <labels>
+                  <label description="Response Pending" languagecode="1033" />
+                </labels>
+              </status>
+              <status value="950000001" state="0" TransitionData="" Color="#0000ff">
+                <labels>
+                  <label description="Response Added" languagecode="1033" />
+                </labels>
+              </status>
+              <status value="950000002" state="0" TransitionData="" Color="#0000ff">
+                <labels>
+                  <label description="Additional Info Needed" languagecode="1033" />
+                </labels>
+              </status>
+              <status value="2" state="1" TransitionData="" Color="#0000ff">
                 <labels>
                   <label description="Abgeschlossen" languagecode="1031" />
                   <label description="Completed" languagecode="1033" />
                   <label description="Terminé" languagecode="1036" />
                 </labels>
               </status>
-              <status value="3" state="2">
+              <status value="3" state="2" TransitionData="" Color="#0000ff">
                 <labels>
                   <label description="Storniert" languagecode="1031" />
                   <label description="Canceled" languagecode="1033" />
                   <label description="Annulé" languagecode="1036" />
                 </labels>
               </status>
-              <status value="4" state="3">
+              <status value="4" state="3" TransitionData="" Color="#0000ff">
                 <labels>
                   <label description="Geplant" languagecode="1031" />
                   <label description="Scheduled" languagecode="1033" />
@@ -2682,12 +2697,81 @@
             <Description description="Sujet associé à l'activité." languagecode="1036" />
           </Descriptions>
         </attribute>
+        <attribute PhysicalName="tc_assistanceslacompletedate">
+          <Type>datetime</Type>
+          <Name>tc_assistanceslacompletedate</Name>
+          <LogicalName>tc_assistanceslacompletedate</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.0.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <Format>datetime</Format>
+          <CanChangeDateTimeBehavior>1</CanChangeDateTimeBehavior>
+          <Behavior>1</Behavior>
+          <displaynames>
+            <displayname description="Assistance Sla Complete Date" languagecode="1033" />
+          </displaynames>
+          <Descriptions>
+            <Description description="status reason changes to Response Added" languagecode="1033" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tc_assistanceslastartdate">
+          <Type>datetime</Type>
+          <Name>tc_assistanceslastartdate</Name>
+          <LogicalName>tc_assistanceslastartdate</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.0.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <Format>datetime</Format>
+          <CanChangeDateTimeBehavior>1</CanChangeDateTimeBehavior>
+          <Behavior>1</Behavior>
+          <displaynames>
+            <displayname description="Assistance SLA Start Date" languagecode="1033" />
+          </displaynames>
+          <Descriptions>
+            <Description description="" languagecode="1033" />
+          </Descriptions>
+        </attribute>
         <attribute PhysicalName="tc_respondbykpiId">
           <Type>lookup</Type>
           <Name>tc_respondbykpiid</Name>
           <LogicalName>tc_respondbykpiid</LogicalName>
           <RequiredLevel>none</RequiredLevel>
           <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
           <ValidForUpdateApi>1</ValidForUpdateApi>
           <ValidForReadApi>1</ValidForReadApi>
           <ValidForCreateApi>1</ValidForCreateApi>
@@ -2714,6 +2798,39 @@
           </displaynames>
           <Descriptions>
             <Description description="Unique identifier for SLA KPI Instance associated with Assistance Request." languagecode="1033" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tc_sendto">
+          <Type>picklist</Type>
+          <Name>tc_sendto</Name>
+          <LogicalName>tc_sendto</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.0.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <AppDefaultValue>-1</AppDefaultValue>
+          <OptionSetName>tc_sendassistancerequestto</OptionSetName>
+          <displaynames>
+            <displayname description="Send to" languagecode="1033" />
+          </displaynames>
+          <Descriptions>
+            <Description description="" languagecode="1033" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="TimeZoneRuleVersionNumber">

@@ -673,6 +673,71 @@
             <Description description="Grund für den Status der Buchungsunterkunft" languagecode="1031" />
           </Descriptions>
         </attribute>
+        <attribute PhysicalName="tc_accommodationtype">
+          <Type>picklist</Type>
+          <Name>tc_accommodationtype</Name>
+          <LogicalName>tc_accommodationtype</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>2.0.0.8</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <AppDefaultValue>950000000</AppDefaultValue>
+          <optionset Name="tc_bookingaccommodation_tc_accommodationtype">
+            <OptionSetType>picklist</OptionSetType>
+            <IntroducedVersion>2.0.0.8</IntroducedVersion>
+            <IsCustomizable>1</IsCustomizable>
+            <displaynames>
+              <displayname description="Accommodation Type" languagecode="1033" />
+            </displaynames>
+            <Descriptions>
+              <Description description="" languagecode="1033" />
+            </Descriptions>
+            <options>
+              <option value="950000000" Color="#0000ff">
+                <labels>
+                  <label description="Unknown" languagecode="1033" />
+                </labels>
+              </option>
+              <option value="950000001" Color="#0000ff">
+                <labels>
+                  <label description="Cruise" languagecode="1033" />
+                </labels>
+              </option>
+              <option value="950000002" Color="#0000ff">
+                <labels>
+                  <label description="Hotel" languagecode="1033" />
+                </labels>
+              </option>
+              <option value="950000003" Color="#0000ff">
+                <labels>
+                  <label description="Accommodation" languagecode="1033" />
+                </labels>
+              </option>
+            </options>
+          </optionset>
+          <displaynames>
+            <displayname description="Accommodation Type" languagecode="1033" />
+          </displaynames>
+          <Descriptions>
+            <Description description="" languagecode="1033" />
+          </Descriptions>
+        </attribute>
         <attribute PhysicalName="tc_BoardType">
           <Type>picklist</Type>
           <Name>tc_boardtype</Name>
@@ -774,6 +839,39 @@
           <Descriptions>
             <Description description="Unique identifier for Booking associated with Booking Accommodation." languagecode="1033" />
             <Description description="einheitlicher Identifikator für Buchung zur Hotelbuchung" languagecode="1031" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tc_duration">
+          <Type>int</Type>
+          <Name>tc_duration</Name>
+          <LogicalName>tc_duration</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>2.0.0.8</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <MinValue>0</MinValue>
+          <MaxValue>100</MaxValue>
+          <displaynames>
+            <displayname description="Duration" languagecode="1033" />
+          </displaynames>
+          <Descriptions>
+            <Description description="" languagecode="1033" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="tc_EndDateandTime">

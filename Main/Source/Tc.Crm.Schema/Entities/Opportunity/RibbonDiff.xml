@@ -4,6 +4,11 @@
     <HideCustomAction HideActionId="tc.Mscrm.Form.opportunity.MarkAsLost.Hide" Location="Mscrm.Form.opportunity.MarkAsLost" />
     <HideCustomAction HideActionId="tc.Mscrm.Form.opportunity.MarkAsWon.Hide" Location="Mscrm.Form.opportunity.MarkAsWon" />
     <HideCustomAction HideActionId="tc.Mscrm.Form.opportunity.Recalculate.Hide" Location="Mscrm.Form.opportunity.Recalculate" />
+    <CustomAction Id="tc.Mscrm.Form.opportunity.ReopenOpp.CustomAction" Location="Mscrm.Form.opportunity.MainTab.Actions.Controls._children" Sequence="5">
+      <CommandUIDefinition>
+        <Button Alt="$Resources:Ribbon.Form.opportunity.MainTab.Actions.ReopenOpp" Command="Mscrm.Form.opportunity.ReopenOpp" Id="Mscrm.Form.opportunity.ReopenOpp" Image32by32="/_imgs/ribbon/ReopenOpportunity_32.png" Image16by16="/_imgs/ribbon/ReopenOpportunity_16.png" LabelText="$Resources:Ribbon.Form.opportunity.MainTab.Actions.ReopenOpp" Sequence="5" TemplateAlias="o1" ToolTipTitle="$Resources:Mscrm_Form_opportunity_MainTab_Actions_ReopenOpp_ToolTipTitle" ToolTipDescription="$Resources:Mscrm_Form_opportunity_MainTab_Actions_ReopenOpp_ToolTipDescription" ModernImage="ReOpenOpportunity" />
+      </CommandUIDefinition>
+    </CustomAction>
     <HideCustomAction HideActionId="tc.Mscrm.HomepageGrid.opportunity.MarkAsLost.Hide" Location="Mscrm.HomepageGrid.opportunity.MarkAsLost" />
     <HideCustomAction HideActionId="tc.Mscrm.HomepageGrid.opportunity.MarkAsWon.Hide" Location="Mscrm.HomepageGrid.opportunity.MarkAsWon" />
     <CustomAction Id="tc.Tc.TravellerPlanner.Button.Surprise.CustomAction" Location="Mscrm.Form.opportunity.MainTab.Actions.Controls._children" Sequence="10">
@@ -41,6 +46,19 @@
     <RibbonTemplates Id="Mscrm.Templates"></RibbonTemplates>
   </Templates>
   <CommandDefinitions>
+    <CommandDefinition Id="Mscrm.Form.opportunity.ReopenOpp">
+      <EnableRules>
+        <EnableRule Id="Mscrm.CanWritePrimary" />
+        <EnableRule Id="tc.TravellerPlanner.ReOpenButton.EnableRule" />
+      </EnableRules>
+      <DisplayRules>
+        <DisplayRule Id="Mscrm.CanWriteOpportunity" />
+        <DisplayRule Id="Mscrm.OpportunityIsClosed" />
+      </DisplayRules>
+      <Actions>
+        <JavaScriptFunction FunctionName="Mscrm.OpportunityCommandActions.opportunityReopen" Library="$webresource:Opportunity_main_system_library.js" />
+      </Actions>
+    </CommandDefinition>
     <CommandDefinition Id="tc.TravellerPlanner.SurpriseButton.Command">
       <EnableRules>
         <EnableRule Id="tc.TravellerPlanner.SurpriseButton.EnableRule" />
@@ -88,7 +106,7 @@
       </EnableRules>
       <DisplayRules />
       <Actions>
-        <JavaScriptFunction FunctionName="OWR" Library="$webresource:tc_Tc.Opportunity.Events" />
+        <JavaScriptFunction FunctionName="Tc.Crm.Scripts.Events.TravellerPlanner.OnOwrRibbonButtonClick" Library="Tc.Crm.Scripts.Events.TravellerPlanner.js" />
       </Actions>
     </CommandDefinition>
     <CommandDefinition Id="tc.TravelPlanner.WebrioButton.Command">
@@ -103,10 +121,23 @@
   </CommandDefinitions>
   <RuleDefinitions>
     <TabDisplayRules />
-    <DisplayRules />
+    <DisplayRules>
+      <DisplayRule Id="Mscrm.CanWriteOpportunity">
+        <EntityPrivilegeRule PrivilegeType="Write" PrivilegeDepth="Basic" EntityName="opportunity" />
+      </DisplayRule>
+      <DisplayRule Id="Mscrm.OpportunityIsClosed">
+        <FormStateRule State="Disabled" />
+      </DisplayRule>
+    </DisplayRules>
     <EnableRules>
+      <EnableRule Id="Mscrm.CanWritePrimary">
+        <RecordPrivilegeRule PrivilegeType="Write" AppliesTo="PrimaryEntity" />
+      </EnableRule>
       <EnableRule Id="tc.TravellerPlanner.OWRorWebrioButton.EnableRule">
         <CustomRule FunctionName="Tc.Crm.Scripts.Events.TravellerPlanner.EnableDisableOWRorWebrioButton" Library="$webresource:tc_Tc.Crm.Scripts.Events.TravellerPlanner.js" Default="false" InvertResult="false" />
+      </EnableRule>
+      <EnableRule Id="tc.TravellerPlanner.ReOpenButton.EnableRule">
+        <CustomRule FunctionName="Tc.Crm.Scripts.Events.TravellerPlanner.EnableReOpenRibbonButton" Library="$webresource:tc_Tc.Crm.Scripts.Events.TravellerPlanner.js" Default="false" InvertResult="false" />
       </EnableRule>
       <EnableRule Id="tc.TravellerPlanner.SurpriseButton.EnableRule">
         <FormStateRule State="Create" Default="true" InvertResult="true" />

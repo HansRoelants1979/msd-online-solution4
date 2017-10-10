@@ -124,8 +124,15 @@
       </FieldPermission>
     </FieldPermissions>
   </FieldSecurityProfile>
-  <FieldSecurityProfile name="Tc.CompensationLine.VoucherUpdate" fieldsecurityprofileid="{3ab8f05d-ce54-e711-8127-e0071b659e11}">
+  <FieldSecurityProfile name="Tc.CompensationLine.VoucherUpdate" description="Allows a user to make changes to the status reason of a voucher and set the date of cancellation." fieldsecurityprofileid="{3ab8f05d-ce54-e711-8127-e0071b659e11}">
     <FieldPermissions>
+      <FieldPermission>
+        <EntityName>tc_compensationline</EntityName>
+        <AttributeName>tc_vouchercancelledon</AttributeName>
+        <CanRead>4</CanRead>
+        <CanUpdate>4</CanUpdate>
+        <CanCreate>0</CanCreate>
+      </FieldPermission>
       <FieldPermission>
         <EntityName>tc_compensationline</EntityName>
         <AttributeName>tc_reasonforvouchercancellation</AttributeName>
@@ -191,6 +198,20 @@
   </FieldSecurityProfile>
   <FieldSecurityProfile name="Tc.Uk.Retail.UserLevel3" description="Read/Udate/Create:&#xA;- Payroll Number&#xA;- All Budget Centre Access&#xA;- Date of Death" fieldsecurityprofileid="{742aa960-9f7d-e711-8104-5065f38bb571}">
     <FieldPermissions>
+      <FieldPermission>
+        <EntityName>tc_store</EntityName>
+        <AttributeName>tc_storeclosed</AttributeName>
+        <CanRead>4</CanRead>
+        <CanUpdate>4</CanUpdate>
+        <CanCreate>4</CanCreate>
+      </FieldPermission>
+      <FieldPermission>
+        <EntityName>tc_store</EntityName>
+        <AttributeName>tc_adminhostbudgetcentre</AttributeName>
+        <CanRead>4</CanRead>
+        <CanUpdate>4</CanUpdate>
+        <CanCreate>4</CanCreate>
+      </FieldPermission>
       <FieldPermission>
         <EntityName>systemuser</EntityName>
         <AttributeName>tc_allbudgetcentreaccess</AttributeName>

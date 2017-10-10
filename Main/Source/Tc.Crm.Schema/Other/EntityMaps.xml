@@ -7,6 +7,11 @@
   </EntityMap>
   <EntityMap>
     <EntitySource>account</EntitySource>
+    <EntityTarget>tc_caseline</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>account</EntitySource>
     <EntityTarget>tc_compensation</EntityTarget>
     <AttributeMaps />
   </EntityMap>
@@ -176,6 +181,11 @@
   <EntityMap>
     <EntitySource>queue</EntitySource>
     <EntityTarget>tc_locationoffice</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>queue</EntitySource>
+    <EntityTarget>tc_store</EntityTarget>
     <AttributeMaps />
   </EntityMap>
   <EntityMap>
@@ -560,6 +570,11 @@
   </EntityMap>
   <EntityMap>
     <EntitySource>tc_gateway</EntitySource>
+    <EntityTarget>account</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_gateway</EntitySource>
     <EntityTarget>incident</EntityTarget>
     <AttributeMaps />
   </EntityMap>
@@ -696,6 +711,11 @@
   <EntityMap>
     <EntitySource>tc_store</EntitySource>
     <EntityTarget>tc_followup</EntityTarget>
+    <AttributeMaps />
+  </EntityMap>
+  <EntityMap>
+    <EntitySource>tc_store</EntitySource>
+    <EntityTarget>tc_store</EntityTarget>
     <AttributeMaps />
   </EntityMap>
   <EntityMap>

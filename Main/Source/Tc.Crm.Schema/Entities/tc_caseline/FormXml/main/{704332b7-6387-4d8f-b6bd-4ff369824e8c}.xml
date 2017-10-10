@@ -156,6 +156,23 @@
                     </cell>
                   </row>
                   <row>
+                    <cell id="{28a0338c-c700-6662-a1de-08a1a67826b5}" showlabel="true" locklevel="0" visible="false">
+                      <labels>
+                        <label description="Supplier" languagecode="1033" />
+                      </labels>
+                      <control id="tc_supplier" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_supplier" disabled="false" uniqueid="{277b586c-45ac-bc25-891b-8463991ebcd0}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{A9AF0AB8-861D-4CFA-92A5-C6281FED7FAB}</DefaultViewId>
+                          <AllowFilterOff>false</AllowFilterOff>
+                        </parameters>
+                      </control>
+                    </cell>
+                  </row>
+                  <row>
                     <cell id="{1d88d4db-8cb5-5a7e-bbdd-8a0793b7c593}" showlabel="true" locklevel="0" visible="false">
                       <labels>
                         <label description="Accommodation" languagecode="1033" />
@@ -400,12 +417,31 @@
                   <row>
                     <cell id="{9831e3c4-0e17-d087-3612-a27506a62e18}" showlabel="true" locklevel="0">
                       <labels>
-                        <label description="Do you wish to notify Supplier?" languagecode="1033" />
+                        <label description="How do you wish to notify Supplier?" languagecode="1033" />
                         <label description="Möchten Sie den Lieferanten benachrichtigen" languagecode="1031" />
                       </labels>
                       <control disabled="false" id="tc_notifysupplier" uniqueid="{b25795a9-52da-2672-1c9c-88c56636d6e8}" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tc_notifysupplier" />
                     </cell>
                   </row>
+                  <row>
+                    <cell id="{6aeb401e-81b3-e932-0948-9164629b533a}" showlabel="true" locklevel="0" visible="false" rowspan="5">
+                      <labels>
+                        <label description="Ad-Hoc Email Body" languagecode="1033" />
+                      </labels>
+                      <control id="tc_adhocemailbody" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="tc_adhocemailbody" disabled="false" uniqueid="{5aee7205-2129-5a3a-3402-b8d732853009}" />
+                    </cell>
+                  </row>
+                  <row />
+                  <row />
+                  <row />
+                  <row />
+                </rows>
+              </section>
+              <section name="{db553bb7-2361-4984-8c81-6a8e0ecfede2}_section_11" showlabel="false" showbar="false" locklevel="0" id="{e237edd0-4b18-579c-2d92-2597c694d57d}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115">
+                <labels>
+                  <label description="Section" languagecode="1033" />
+                </labels>
+                <rows>
                   <row>
                     <cell id="{db53a268-061c-2e5a-9a83-c47ad28978b8}" showlabel="true" locklevel="0">
                       <labels>

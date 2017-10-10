@@ -4,7 +4,7 @@
   <IntroducedVersion>1.0.0.51</IntroducedVersion>
   <FormPresentation>1</FormPresentation>
   <FormActivationState>1</FormActivationState>
-  <form shownavigationbar="true" showImage="false" maxWidth="1900">
+  <form>
     <tabs>
       <tab verticallayout="true" id="{574d1cf2-4eb8-475a-a9ef-116d919172e4}" IsUserDefined="1" name="{574d1cf2-4eb8-475a-a9ef-116d919172e4}" locklevel="0" expanded="true" showlabel="true">
         <labels>
@@ -29,7 +29,7 @@
                         <label description="Sujet" languagecode="1036" />
                         <label description="Betreff" languagecode="1031" />
                       </labels>
-                      <control id="subject" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="subject" />
+                      <control id="subject" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="subject" uniqueid="{5e33a69e-467d-b2b7-53d7-be5666733d48}" />
                     </cell>
                   </row>
                   <row>
@@ -95,6 +95,50 @@
                       </control>
                     </cell>
                   </row>
+                  <row>
+                    <cell id="{2043b1d6-116d-1bad-18c7-6197d016429a}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Status Reason" languagecode="1033" />
+                        <label description="Raison du statut" languagecode="1036" />
+                        <label description="Statusgrund" languagecode="1031" />
+                      </labels>
+                      <control id="statuscode" classid="{5D68B988-0661-4db2-BC3E-17598AD3BE6C}" datafieldname="statuscode" disabled="false" uniqueid="{06edbcb5-b3b8-34b8-8982-2594517e07d9}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{0bed3a12-649c-e3d4-ee1b-910366e2d2da}" showlabel="true" locklevel="0">
+                      <labels>
+                        <label description="Send to" languagecode="1033" />
+                      </labels>
+                      <control id="tc_sendto" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_sendto" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{0421464a-5c3a-1d7b-98b1-e6b5592011cb}" showlabel="false" locklevel="1" visible="false">
+                      <labels>
+                        <label description="Activity Status" languagecode="1033" />
+                        <label description="Statut d'activité" languagecode="1036" />
+                        <label description="Aktivitätsstatus" languagecode="1031" />
+                      </labels>
+                      <control id="statecode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="statecode" disabled="false" uniqueid="{9c374cb9-5392-1282-a316-a4ec5a1aee13}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{aa810836-5a7d-13c1-ab87-2ec4cdccad0e}" showlabel="true" locklevel="0" visible="false">
+                      <labels>
+                        <label description="Assistance SLA Start Date" languagecode="1033" />
+                      </labels>
+                      <control id="tc_assistanceslastartdate" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="tc_assistanceslastartdate" disabled="false" uniqueid="{1bba70ba-43d5-474a-2d48-d3aae0c7923d}" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{26b4d597-7340-48b8-11a9-91719881635b}" showlabel="true" locklevel="0" visible="false">
+                      <labels>
+                        <label description="Assistance Sla Complete Date" languagecode="1033" />
+                      </labels>
+                      <control id="tc_assistanceslacompletedate" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="tc_assistanceslacompletedate" disabled="false" uniqueid="{d9112158-9e41-55e7-7ad6-07e12d0e54ac}" />
+                    </cell>
+                  </row>
                 </rows>
               </section>
             </sections>
@@ -157,18 +201,10 @@
         </columns>
       </tab>
     </tabs>
-    <header id="{caeb2280-8ae3-4285-8748-6cedb67d486d}" celllabelposition="Top" columns="1111" labelwidth="115">
+    <header id="{caeb2280-8ae3-4285-8748-6cedb67d486d}" celllabelposition="Top" columns="1111" labelwidth="115" celllabelalignment="Left">
       <rows>
         <row>
-          <cell id="{00979060-2d40-4861-82e5-e80d4c1c53ba}">
-            <labels>
-              <label description="Priority" languagecode="1033" />
-              <label description="Priorité" languagecode="1036" />
-              <label description="Priorität" languagecode="1031" />
-            </labels>
-            <control id="header_prioritycode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="prioritycode" disabled="false" />
-          </cell>
-          <cell id="{f589ec51-47e9-4c44-9d0e-d916d6e080f8}">
+          <cell id="{53e68d52-7dee-0616-5eac-c16798a2aa74}" showlabel="true" locklevel="0">
             <labels>
               <label description="Due Date" languagecode="1033" />
               <label description="Date d’échéance" languagecode="1036" />
@@ -176,13 +212,21 @@
             </labels>
             <control id="header_scheduledend" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="scheduledend" disabled="false" />
           </cell>
-          <cell id="{7473669b-c09a-4e46-9624-00cea46ee667}">
+          <cell id="{33405750-c464-12e2-d413-98c7542becbc}" showlabel="true" locklevel="0">
             <labels>
-              <label description="Activity Status" languagecode="1033" />
-              <label description="Statut d'activité" languagecode="1036" />
-              <label description="Aktivitätsstatus" languagecode="1031" />
+              <label description="Priority" languagecode="1033" />
+              <label description="Priorité" languagecode="1036" />
+              <label description="Priorität" languagecode="1031" />
             </labels>
-            <control id="header_statecode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="statecode" disabled="false" />
+            <control id="header_prioritycode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="prioritycode" disabled="false" />
+          </cell>
+          <cell id="{6084b674-3ee7-ab26-45b4-be4ba9a1b3ac}" showlabel="true" locklevel="0" colspan="1">
+            <labels>
+              <label description="Status Reason" languagecode="1033" />
+              <label description="Raison du statut" languagecode="1036" />
+              <label description="Statusgrund" languagecode="1031" />
+            </labels>
+            <control id="header_statuscode" classid="{5D68B988-0661-4db2-BC3E-17598AD3BE6C}" datafieldname="statuscode" disabled="false" uniqueid="{449c34dc-2a5d-ca34-4204-330b772d0bc6}" />
           </cell>
           <cell id="{40e1562c-b432-479b-99c4-3683715a7eb2}">
             <labels>
@@ -195,13 +239,21 @@
         </row>
       </rows>
     </header>
-    <footer id="{e3d5d502-fb5e-42c3-9b21-adf8d35f21a4}" columns="111">
+    <footer id="{e3d5d502-fb5e-42c3-9b21-adf8d35f21a4}" columns="1111" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
       <rows>
         <row>
-          <cell id="{a019390e-c4e8-4ffc-8f82-b70f1eb06af7}" showlabel="false">
+          <cell id="{b45e75a4-65e8-00ee-c561-c57060e6816c}" showlabel="false">
             <labels>
               <label description="" languagecode="1033" />
             </labels>
+          </cell>
+          <cell id="{2ae0545a-b343-2a2c-1481-936370b08dd6}" showlabel="true" locklevel="0">
+            <labels>
+              <label description="Activity Status" languagecode="1033" />
+              <label description="Statut d'activité" languagecode="1036" />
+              <label description="Aktivitätsstatus" languagecode="1031" />
+            </labels>
+            <control id="footer_statecode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="statecode" disabled="true" />
           </cell>
           <cell id="{28c60d16-4e25-a32d-2d65-9dd508ba2b9e}" showlabel="true" locklevel="0">
             <labels>
@@ -253,19 +305,6 @@
       </NavBarAreas>
     </Navigation>
     <controlDescriptions />
-    <formLibraries>
-      <Library name="tc_es6promise.js" libraryUniqueId="{a55b77ca-5863-8708-0bc5-6ea31000e60d}" />
-      <Library name="tc_Tc.Crm.Scripts.Common.js" libraryUniqueId="{e600700d-ce60-6a9c-9452-c43a9aea298a}" />
-      <Library name="tc_Tc.Crm.Scripts.Utils.Validation.js" libraryUniqueId="{d6ac5d12-a073-8908-a350-26020a255b47}" />
-      <Library name="tc_Tc.Crm.Scripts.Events.Default.js" libraryUniqueId="{db53075e-e82e-a3a9-4762-a69a577b8c8c}" />
-    </formLibraries>
-    <events>
-      <event name="onsave" application="false" active="false">
-        <Handlers>
-          <Handler functionName="Tc.Crm.Scripts.Events.Default.OnSave" libraryName="tc_Tc.Crm.Scripts.Events.Default.js" handlerUniqueId="{18789986-ac1e-88c0-edda-b14b725928e7}" enabled="true" parameters="" passExecutionContext="true" />
-        </Handlers>
-      </event>
-    </events>
   </form>
   <IsCustomizable>1</IsCustomizable>
   <CanBeDeleted>1</CanBeDeleted>

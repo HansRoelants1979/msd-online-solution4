@@ -38,16 +38,6 @@
                     </cell>
                   </row>
                   <row>
-                    <cell id="{8b02e1dd-5a02-9195-e484-b17187a13a83}" showlabel="true" locklevel="0">
-                      <labels>
-                        <label description="Source Market" languagecode="1033" />
-                        <label description="Pays organisateur" languagecode="1036" />
-                        <label description="Quellmarkt" languagecode="1031" />
-                      </labels>
-                      <control id="tc_sourcemarketid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_sourcemarketid" disabled="false" />
-                    </cell>
-                  </row>
-                  <row>
                     <cell id="{1bbebc20-958c-3eb6-7de6-2c6deebb61b2}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Account Type" languagecode="1033" />
@@ -57,12 +47,37 @@
                     </cell>
                   </row>
                   <row>
+                    <cell id="{3b72e4bc-4a55-42d2-b2d5-d0778be29398}" showlabel="true" locklevel="0" visible="false">
+                      <labels>
+                        <label description="Service Type" languagecode="1033" />
+                      </labels>
+                      <control id="tc_servicetype" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_servicetype" disabled="false" uniqueid="{d87dce93-30b4-61da-c118-b14c525738eb}" />
+                    </cell>
+                  </row>
+                  <row>
                     <cell id="{d60a6651-d2b6-7771-9da8-b80e5e1ab6a8}" showlabel="true" locklevel="0">
                       <labels>
                         <label description="Key Account" languagecode="1033" />
                         <label description="Key Account" languagecode="1031" />
                       </labels>
                       <control id="tc_keyaccount" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_keyaccount" disabled="false" />
+                    </cell>
+                  </row>
+                  <row>
+                    <cell id="{512499b0-bd85-3212-0d72-68ca1d782c5d}" showlabel="true" locklevel="0" visible="false">
+                      <labels>
+                        <label description="Gateway" languagecode="1033" />
+                      </labels>
+                      <control id="tc_gateway" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_gateway" disabled="false" uniqueid="{bd9e3cc9-a5a7-5d1e-6a86-894397e40ed5}">
+                        <parameters>
+                          <AutoResolve>true</AutoResolve>
+                          <DisableMru>false</DisableMru>
+                          <DisableQuickFind>false</DisableQuickFind>
+                          <DisableViewPicker>false</DisableViewPicker>
+                          <DefaultViewId>{4E29CB42-F586-45B8-9D57-AF21CEA59536}</DefaultViewId>
+                          <AllowFilterOff>false</AllowFilterOff>
+                        </parameters>
+                      </control>
                     </cell>
                   </row>
                 </rows>
@@ -265,7 +280,7 @@
                 </labels>
                 <rows>
                   <row>
-                    <cell id="{f4dd080a-a146-4594-aebc-3ecec1b1f750}">
+                    <cell id="{f4dd080a-a146-4594-aebc-3ecec1b1f750}" showlabel="false">
                       <labels>
                         <label description="" languagecode="1033" />
                       </labels>
@@ -386,7 +401,7 @@
         </columns>
       </tab>
     </tabs>
-    <header id="{d5a03552-1183-4347-a237-1f894ba449eb}" columns="111" celllabelposition="Top" labelwidth="115">
+    <header id="{d5a03552-1183-4347-a237-1f894ba449eb}" columns="1111" celllabelposition="Top" labelwidth="115" celllabelalignment="Left">
       <rows>
         <row>
           <cell id="{32b1015a-3a88-62d3-dc32-a608c4309eb4}" showlabel="true" locklevel="0">
@@ -396,6 +411,12 @@
               <label description="Quellmarkt" languagecode="1031" />
             </labels>
             <control id="header_tc_sourcemarketid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tc_sourcemarketid" disabled="false" />
+          </cell>
+          <cell id="{80853b9b-dd7c-b907-9173-06b10c87e4e5}" showlabel="true" locklevel="0">
+            <labels>
+              <label description="Service Type" languagecode="1033" />
+            </labels>
+            <control id="header_tc_servicetype" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="tc_servicetype" disabled="false" />
           </cell>
           <cell id="{54b2d0a2-eb77-b3cd-b60a-03ea6944e98e}" showlabel="true" locklevel="1">
             <labels>
@@ -519,6 +540,36 @@
         <NavBarByRelationshipItem RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navProcessSessions" Sequence="9700" Area="ProcessCenter" Id="navProcessSessions" Show="false">
           <Titles>
             <Title LCID="1033" Text="Dialog Sessions" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_account_tc_compensation_Customer" Sequence="10000" Area="Info" Id="nav_tc_account_tc_compensation_Customer" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Compensation" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_account_tc_compensationLine_Customer" Sequence="10000" Area="Info" Id="nav_tc_account_tc_compensationLine_Customer" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Compensation Lines" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_account_tc_bookingsummary_customerid" Sequence="10000" Area="Info" Id="nav_tc_account_tc_bookingsummary_customerid" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Booking Summaries" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_account_tc_caseline_Supplier" Sequence="10000" Area="Info" Id="nav_tc_account_tc_caseline_Supplier" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Case Lines" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_account_tc_entitymerge_Master" Sequence="10000" Area="Info" Id="nav_tc_account_tc_entitymerge_Master" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Entity Merge" />
+          </Titles>
+        </NavBarByRelationshipItem>
+        <NavBarByRelationshipItem RelationshipName="tc_account_tc_entitymerge_Subordinate" Sequence="10000" Area="Info" Id="nav_tc_account_tc_entitymerge_Subordinate" Show="false">
+          <Titles>
+            <Title LCID="1033" Text="Entity Merge" />
           </Titles>
         </NavBarByRelationshipItem>
         <NavBarByRelationshipItem RelationshipName="account_entitlement_Customer" Sequence="10000" Area="Info" Id="navEntitlement" Show="false">

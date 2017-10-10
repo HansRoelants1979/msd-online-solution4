@@ -3,9 +3,14 @@
   <CustomActions>
     <HideCustomAction HideActionId="tc.Mscrm.Form.tc_surveyresponse.Convert.Case.Hide" Location="Mscrm.Form.tc_surveyresponse.Convert.Case" />
     <HideCustomAction HideActionId="tc.Mscrm.Form.tc_surveyresponse.Convert.Opportunity.Hide" Location="Mscrm.Form.tc_surveyresponse.Convert.Opportunity" />
-    <CustomAction Id="tc.tc_surveyresponse.Button.ConvertToComplaint.CustomAction" Location="Mscrm.Form.tc_surveyresponse.MainTab.Convert.Controls._children" Sequence="20">
+    <CustomAction Id="tc.tc_surveyresponse.Button.ConvertToComplaint.CustomAction" Location="Mscrm.Form.tc_surveyresponse.MainTab.Convert.Controls._children" Sequence="25">
       <CommandUIDefinition>
-        <Button Alt="$LocLabels:tc.tc_surveyresponse.Button.ConvertToComplaint.Alt" Command="tc.tc_surveyresponse.Command.ConvertToComplaint" Id="tc.tc_surveyresponse.Button.ConvertToComplaint" Image32by32="/_imgs/ribbon/ConvertCase_32.png" Image16by16="/_imgs/ribbon/ConvertCase_16.png" LabelText="$LocLabels:tc.tc_surveyresponse.Button.ConvertToComplaint.LabelText" Sequence="20" TemplateAlias="o1" ToolTipTitle="$LocLabels:tc.tc_surveyresponse.Button.ConvertToComplaint.ToolTipTitle" ToolTipDescription="$LocLabels:tc.tc_surveyresponse.Button.ConvertToComplaint.ToolTipDescription" />
+        <Button Alt="$LocLabels:tc.tc_surveyresponse.Button.ConvertToComplaint.Alt" Command="tc.tc_surveyresponse.Command.ConvertToComplaint" Id="tc.tc_surveyresponse.Button.ConvertToComplaint" Image32by32="/_imgs/ribbon/ConvertCase_32.png" Image16by16="/_imgs/ribbon/ConvertCase_16.png" LabelText="$LocLabels:tc.tc_surveyresponse.Button.ConvertToComplaint.LabelText" Sequence="25" TemplateAlias="o1" ToolTipTitle="$LocLabels:tc.tc_surveyresponse.Button.ConvertToComplaint.ToolTipTitle" ToolTipDescription="$LocLabels:tc.tc_surveyresponse.Button.ConvertToComplaint.ToolTipDescription" />
+      </CommandUIDefinition>
+    </CustomAction>
+    <CustomAction Id="tc.tc_surveyresponse.Button.CreateCustomer.CustomAction" Location="Mscrm.Form.tc_surveyresponse.MainTab.Convert.Controls._children" Sequence="20">
+      <CommandUIDefinition>
+        <Button Alt="$LocLabels:tc.tc_surveyresponse.Button.CreateCustomer.Alt" Command="tc.tc_surveyresponse.Command.CreateCustomer" Id="tc.tc_surveyresponse.Button.CreateCustomer" Image32by32="/_imgs/ribbon/newrecord32.png" Image16by16="/_imgs/ribbon/NewRecord_16.png" LabelText="$LocLabels:tc.tc_surveyresponse.Button.CreateCustomer.LabelText" Sequence="20" TemplateAlias="o1" ToolTipTitle="$LocLabels:tc.tc_surveyresponse.Button.CreateCustomer.ToolTipTitle" ToolTipDescription="$LocLabels:tc.tc_surveyresponse.Button.CreateCustomer.ToolTipDescription" />
       </CommandUIDefinition>
     </CustomAction>
   </CustomActions>
@@ -24,15 +29,35 @@
         <JavaScriptFunction FunctionName="isNaN" Library="$webresource:tc_es6promise.js" />
       </Actions>
     </CommandDefinition>
+    <CommandDefinition Id="tc.tc_surveyresponse.Command.CreateCustomer">
+      <EnableRules>
+        <EnableRule Id="tc.tc_surveyresponse.EnableRule.CreateCustomer" />
+      </EnableRules>
+      <DisplayRules>
+        <DisplayRule Id="tc.tc_surveyresponse.DisplayRule.CreateCustomer" />
+      </DisplayRules>
+      <Actions>
+        <JavaScriptFunction FunctionName="Tc.Crm.Scripts.Events.SurveyResponse.OnCreateCustomerClick" Library="$webresource:tc_Tc.Crm.Scripts.Events.SurveyResponse.js" />
+        <JavaScriptFunction FunctionName="isNaN" Library="$webresource:tc_Tc.Crm.Scripts.Common.js" />
+        <JavaScriptFunction FunctionName="isNaN" Library="$webresource:tc_es6promise.js" />
+      </Actions>
+    </CommandDefinition>
   </CommandDefinitions>
   <RuleDefinitions>
     <TabDisplayRules />
     <DisplayRules>
+      <DisplayRule Id="tc.tc_surveyresponse.DisplayRule.CreateCustomer">
+        <FormStateRule State="Existing" Default="false" InvertResult="false" />
+      </DisplayRule>
       <DisplayRule Id="tc.tc_surveyresponse.DisplayRule1.ConvertToComplaint">
         <FormStateRule State="Existing" Default="false" InvertResult="false" />
       </DisplayRule>
     </DisplayRules>
-    <EnableRules />
+    <EnableRules>
+      <EnableRule Id="tc.tc_surveyresponse.EnableRule.CreateCustomer">
+        <CustomRule FunctionName="Tc.Crm.Scripts.Events.SurveyResponse.CustomerHasValue" Library="$webresource:tc_Tc.Crm.Scripts.Events.SurveyResponse.js" Default="false" InvertResult="true" />
+      </EnableRule>
+    </EnableRules>
   </RuleDefinitions>
   <LocLabels>
     <LocLabel Id="tc.tc_surveyresponse.Button.ConvertToComplaint.Alt">
@@ -53,6 +78,26 @@
     <LocLabel Id="tc.tc_surveyresponse.Button.ConvertToComplaint.ToolTipTitle">
       <Titles>
         <Title description="To create a Case" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+    <LocLabel Id="tc.tc_surveyresponse.Button.CreateCustomer.Alt">
+      <Titles>
+        <Title description="New Customer" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+    <LocLabel Id="tc.tc_surveyresponse.Button.CreateCustomer.LabelText">
+      <Titles>
+        <Title description="Create Customer" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+    <LocLabel Id="tc.tc_surveyresponse.Button.CreateCustomer.ToolTipDescription">
+      <Titles>
+        <Title description="To create new customer record" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+    <LocLabel Id="tc.tc_surveyresponse.Button.CreateCustomer.ToolTipTitle">
+      <Titles>
+        <Title description="Create Customer" languagecode="1033" />
       </Titles>
     </LocLabel>
   </LocLabels>

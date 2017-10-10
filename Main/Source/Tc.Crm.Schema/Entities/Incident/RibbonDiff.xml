@@ -1,6 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RibbonDiffXml>
   <CustomActions>
+    <CustomAction Id="tc.incident.TCProductButton.Button.CustomAction" Location="Mscrm.Form.incident.MainTab.Save.Controls._children" Sequence="47">
+      <CommandUIDefinition>
+        <Button Command="tc.incident.TCProductButton.Command" Id="tc.incident.TCProductButton.Button" LabelText="$LocLabels:tc.incident.TCProductButton.Button.LabelText" Sequence="47" TemplateAlias="o1" ToolTipDescription="$LocLabels:tc.incident.TCProductButton.Button.ToolTipDescription" />
+      </CommandUIDefinition>
+    </CustomAction>
     <HideCustomAction HideActionId="tc.Mscrm.Form.incident.SaveAndRunRoutingRule.Hide" Location="Mscrm.Form.incident.SaveAndRunRoutingRule" />
   </CustomActions>
   <Templates>
@@ -12,6 +17,7 @@
         <EnableRule Id="Mscrm.CanChangeIncidentForm" />
         <EnableRule Id="Mscrm.IncidentIsActive" />
         <EnableRule Id="Mscrm.IsAvailableInMocaOffline" />
+        <EnableRule Id="tc.incident.Resolve.EnableRepNotes" />
       </EnableRules>
       <DisplayRules>
         <DisplayRule Id="Mscrm.CanChangeIncidentForm" />
@@ -19,6 +25,15 @@
       </DisplayRules>
       <Actions>
         <JavaScriptFunction FunctionName="Mscrm.CommandBarActions.resolve" Library="/_static/_common/scripts/CommandBarActions.js" />
+      </Actions>
+    </CommandDefinition>
+    <CommandDefinition Id="tc.incident.TCProductButton.Command">
+      <EnableRules>
+        <EnableRule Id="tc.incident.TCProductButton.EnableRule" />
+      </EnableRules>
+      <DisplayRules />
+      <Actions>
+        <JavaScriptFunction FunctionName="Tc.Crm.Scripts.Events.Case.OnTcProductRibbonButtonClick" Library="$webresource:tc_Tc.Crm.Scripts.Events.Case.js" />
       </Actions>
     </CommandDefinition>
   </CommandDefinitions>
@@ -50,7 +65,24 @@
           <CrmParameter Value="SelectedEntityTypeName" />
         </CustomRule>
       </EnableRule>
+      <EnableRule Id="tc.incident.Resolve.EnableRepNotes">
+        <CustomRule FunctionName="Tc.Crm.Scripts.Events.Case.OnValidateRepNotes" Library="$webresource:tc_Tc.Crm.Scripts.Events.Case.js" Default="true" InvertResult="false" />
+      </EnableRule>
+      <EnableRule Id="tc.incident.TCProductButton.EnableRule">
+        <CustomRule FunctionName="Tc.Crm.Scripts.Events.Case.EnableTcProductRibbonButton" Library="$webresource:tc_Tc.Crm.Scripts.Events.Case.js" Default="false" InvertResult="false" />
+      </EnableRule>
     </EnableRules>
   </RuleDefinitions>
-  <LocLabels />
+  <LocLabels>
+    <LocLabel Id="tc.incident.TCProductButton.Button.LabelText">
+      <Titles>
+        <Title description="TC Product / Non TC Product" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+    <LocLabel Id="tc.incident.TCProductButton.Button.ToolTipDescription">
+      <Titles>
+        <Title description="TC Product / Non TC Product" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+  </LocLabels>
 </RibbonDiffXml>
