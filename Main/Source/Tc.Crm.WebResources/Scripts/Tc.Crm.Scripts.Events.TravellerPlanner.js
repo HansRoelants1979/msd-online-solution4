@@ -29,6 +29,7 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
     var RETAIL_LEVEL3_ACCESS = "Tc.Uk.Retail.Level3";
     var LIME_WEB_PAGE_URL = "http://event/?eventname=Tc.Event.OnClickLimeRibbonButton";
     var OWR_EVENT_URL = "http://event/?eventname=Tc.Event.OnOwrClick";
+    var WEBRIO_WEB_PAGE_URL = "http://event/?eventname=Tc.Event.OnClickWebRioRibbonButton";
     
 
 
@@ -137,6 +138,20 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
 
         }
 
+    }
+    var webrioRibbonButtonClick = function () {
+        if (window.IsUSD == true) {
+            var consultationNo = Xrm.Page.getAttribute("name").getValue();
+            var customer = Xrm.Page.getAttribute("customerid").getValue();
+            var customerId;
+            if (customer != null) {
+                customerId = customer[0].id;
+            }
+            var strUrl = WEBRIO_WEB_PAGE_URL + "&ConsultationNo=" + consultationNo + "&CustomerId=" + customerId;
+            strUrl = strUrl.replace(/[{}]/g, "");
+
+            window.open(strUrl);
+        }
     }
 
     var reviewDateOnChange = function () {

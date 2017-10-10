@@ -20,8 +20,11 @@ namespace Tc.Usd.HostedControls.Models
         public List<string> Errors { get; set; }
         public string OpenConsultationApi { get; set; }
         public string BookingSummaryId { get; set; }
+        public string TravelPlannerSummaryId { get; set; }
         public string ObjectTypeCode { get; set; }
         public string ConsultationReference { get; set; }
         public string Data { get; set; }
+        public string CustomerId { get; set; }
+        public string NewConsultationApi { get; set; }
     }
 }

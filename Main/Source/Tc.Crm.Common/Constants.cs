@@ -69,6 +69,7 @@
             public const string WebRioAudWebRio = "webrio";
             public const string WebRioAdminApi = "Tc.Wr.Api.Admin";
             public const string WebRioOpenConsultationApi = "Tc.Wr.Api.OpenConsultation";
+            public const string WebRioNewConsultationApi = "Tc.Wr.Api.NewConsultation";
             public const string WebRioServiceUrl = "Tc.Wr.SSOServiceUrl";
             public const string WebRioExpirySecondsFromNow = "Tc.Wr.SsoToken.ExpiredSecondsFromNow";
             public const string WebRioNotBeforeTimeSecondsFromNow = "Tc.Wr.SsoToken.NotBeforeTimeSecondsFromNow";
@@ -88,6 +89,7 @@
         {
             public const string InternalError = "501";
             public const string Ok = "200";
+            public const string NotFound = "404";
         }
         public static class UsdParameter
         {
@@ -100,6 +102,8 @@
             public const string ResponseMessage = "responseMessage";
             public const string Application = "AppName";
             public const string Url = "Url";
+            public const string WebRioConsultationNo = "ConsultationNo";
+            public const string CustomerId = "CustomerId";
         }
 
         public static class UsdHostedControl

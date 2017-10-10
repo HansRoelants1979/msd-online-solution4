@@ -75,6 +75,8 @@ namespace Tc.Usd.HostedControls.Service
                     configuration.AdminApi = value;
                 else if (key.Equals(Er.Configuration.WebRioOpenConsultationApi, StringComparison.OrdinalIgnoreCase))
                     configuration.OpenConsultationApi = value;
+                else if (key.Equals(Er.Configuration.WebRioNewConsultationApi, StringComparison.OrdinalIgnoreCase))
+                    configuration.NewConsultationApi = value;
                 else if (key.Equals(Er.Configuration.WebRioServiceUrl, StringComparison.OrdinalIgnoreCase))
                     configuration.ServiceUrl = value;
                 else if (key.Equals(Er.Configuration.WebRioExpirySecondsFromNow, StringComparison.OrdinalIgnoreCase))
@@ -149,7 +151,7 @@ namespace Tc.Usd.HostedControls.Service
             return login;
 
         }
-
+       
         public static tcm.Customer GetCustomerDataForWebRioNewConsultation(CrmServiceClient client, string customerId)
         {
             var query = @"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>

@@ -11,6 +11,9 @@ using System.Text;
 using Tc.Crm.Common.Constants;
 using Tc.Crm.Common.Constants.UsdConstants;
 using System.Net;
+using System.Runtime.Serialization.Json;
+using System.IO;
+using Microsoft.Xrm.Tooling.Connector;
 
 namespace Tc.Usd.HostedControls
 {
@@ -27,13 +30,15 @@ namespace Tc.Usd.HostedControls
         {
             try
             {
+                
                 var configuration = GetWebRioSsoConfiguration(args);
+                
                 if (configuration.Errors != null && configuration.Errors.Count > 0)
                 {
                     HandleConfigurationErrors(configuration, global);
                     return;
                 }
-
+                
                 SetRequestData(configuration);
                 var payload = GetWebRioSsoTokenPayload(configuration);
                 if (payload == null)
@@ -50,11 +55,18 @@ namespace Tc.Usd.HostedControls
 
                 var url = GetUrl(configuration);
 
-                ResponseEntity response = SendRequest(url, token, configuration.JSessionId,configuration.Data);
+                ResponseEntity response;
+                
+                response = SendRequest(url, token, configuration.JSessionId,configuration.Data);
                 var content = GetResponseContent(response);
                 var ssoResponse = GetWebRioSsoResponse(content);
+                if (configuration.RequestType== RequestType.TravelPlanner
+                    && ssoResponse.ResponseCode.Equals(HttpCode.NotFound,StringComparison.OrdinalIgnoreCase))
+                {
+                    ssoResponse = OpenNewConsultation(_client.CrmInterface, configuration,token);
+                }
 
-                if(ssoResponse == null)
+                if (ssoResponse == null)
                 {
                     FireEventOnError("SSO Response is null or could not be parsed.", global);
                     return;
@@ -87,7 +99,8 @@ namespace Tc.Usd.HostedControls
                     FireEventOnError("Returned content could not be parsed.", global);
                     return;
                 }
-   
+
+               
                 FireOnSuccess(eventParameters, global);
             }
             catch (Exception ex)
@@ -98,16 +111,38 @@ namespace Tc.Usd.HostedControls
             }
         }
 
+        private WebRioResponse OpenNewConsultation(CrmServiceClient crmInterface, WebRioSsoConfig configuration,string token)
+        {
+            Customer cust = CrmService.GetCustomerDataForWebRioNewConsultation(_client.CrmInterface, configuration.CustomerId);
+            configuration.Data = SerializeNewConsultationSsoRequestToJson(cust);
+            
+            var url = $"{configuration.ServiceUrl}/{configuration.NewConsultationApi}";
+            var response = SendRequest(url, token, configuration.JSessionId, configuration.Data);
+            var content = GetResponseContent(response);
+            return GetWebRioSsoResponse(content);
+        }
+
+        private static string SerializeNewConsultationSsoRequestToJson(Customer customer)
+        {
+            var memoryStream = new MemoryStream();
+
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Customer));
+            serializer.WriteObject(memoryStream, customer);
+            byte[] json = memoryStream.ToArray();
+            return Encoding.UTF8.GetString(json, 0, json.Length);
+        }
+
         private void SetRequestData(WebRioSsoConfig configuration)
         {
             if (configuration.RequestType == RequestType.Admin)
                 configuration.Data = string.Empty;
-            else if(configuration.RequestType == RequestType.Booking)
+            else if(configuration.RequestType == RequestType.Booking || configuration.RequestType == RequestType.TravelPlanner)
             {
                 configuration.Data = WebServiceExchangeHelper.SerializeOpenConsultationSsoRequestToJson(new WebRioSsoRequest { Consultation = configuration.ConsultationReference });
             }
         }
 
+        
         private string GetResponseContent(ResponseEntity response)
         {
             if (response == null) return null;
@@ -149,6 +184,7 @@ namespace Tc.Usd.HostedControls
                 FireEvent(UsdEvent.GlobalSsoCompleteEvent, eventParameters);
             else
                 FireEvent(UsdEvent.SsoCompleteEvent, eventParameters);
+            
         }
 
         private void HandleConfigurationErrors(WebRioSsoConfig configuration, bool global)
@@ -169,8 +205,13 @@ namespace Tc.Usd.HostedControls
             var configuration = new WebRioSsoConfig();
             configuration.JSessionId = GetParamValue(args, UsdParameter.WebRioJSessionId);
             configuration.RequestType = GetRequestType(args);
-            GetBookingDetails(args,configuration);
+            
+            if (configuration.RequestType == RequestType.Booking)
+                GetBookingDetails(args,configuration);
+            else if (configuration.RequestType == RequestType.TravelPlanner)
+                GetTravelPlannerDetails(args, configuration);
             CrmService.GetWebRioSsoConfiguration(_client.CrmInterface, configuration);
+            
             configuration.Login = CrmService.GetSsoLoginDetails(_client.CrmInterface, _client.CrmInterface.GetMyCrmUserId());
             configuration.PrivateKey = CrmService.GetWebRioPrivateKey(_client.CrmInterface);
             ValidateConfiguration(configuration);
@@ -195,6 +236,13 @@ namespace Tc.Usd.HostedControls
             configuration.BookingSummaryId = id.Replace("7b", "");
 
             CrmService.GetConsultationReferenceFromBookingSummary(_client.CrmInterface,configuration);
+        }
+
+        public void GetTravelPlannerDetails(RequestActionEventArgs args, WebRioSsoConfig configuration)
+        {
+            if (configuration.RequestType != RequestType.TravelPlanner) return;
+            configuration.ConsultationReference= GetParamValue(args, UsdParameter.WebRioConsultationNo);
+            configuration.CustomerId= GetParamValue(args, UsdParameter.CustomerId);
         }
 
         private RequestType GetRequestType(RequestActionEventArgs args)
@@ -260,8 +308,9 @@ namespace Tc.Usd.HostedControls
             if (configuration == null) throw new ArgumentNullException("configuration");
             if (configuration.RequestType == RequestType.Admin)
                 return $"{configuration.ServiceUrl}/{configuration.AdminApi}";
-            if(configuration.RequestType == RequestType.Booking)
+            if ((configuration.RequestType == RequestType.Booking) || (configuration.RequestType == RequestType.TravelPlanner))
                 return $"{configuration.ServiceUrl}/{configuration.OpenConsultationApi}";
+
             return null;
         }
 
