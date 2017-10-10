@@ -62,6 +62,8 @@ namespace Tc.Crm.CustomWorkflowSteps
                         Bookingtransport.Set(executionContext, RetrivedEntity);
                     if (RetrivedEntity.LogicalName == "tc_bookingextraservice")
                         Bookingextraservice.Set(executionContext, RetrivedEntity);
+                    if (RetrivedEntity.LogicalName == "team")
+                        Team.Set(executionContext, RetrivedEntity);
                 }
 
 
@@ -148,6 +150,10 @@ namespace Tc.Crm.CustomWorkflowSteps
         [Output("EntityReference Bookingextraservice")]
         [ReferenceTarget("tc_bookingextraservice")]
         public OutArgument<EntityReference> Bookingextraservice { get; set; }
+
+        [Output("EntityReference Team")]
+        [ReferenceTarget("team")]
+        public OutArgument<EntityReference> Team { get; set; }
 
 
     }
