@@ -30,16 +30,17 @@ namespace Tc.Crm.Service.Services
 
 				var isSuccess = successStatus.Contains(ilResponse.SourceSystemStatusCode);
 				entityCacheId = crmService.ProcessEntityCacheMessage(entityCacheMessageId,
-					ilResponse.CorrelationId, Status.Inactive,
+					ilResponse.SourceSystemEntityID, Status.Inactive,
 					isSuccess ? EntityCacheMessageStatusReason.EndtoEndSuccess : EntityCacheMessageStatusReason.Failed,
 					isSuccess ? null : PrepareEntityCacheMessageNotes(ilResponse));
 				if (entityCacheId != Guid.Empty)
 				{
-					crmService.ProcessEntityCache(entityCacheId, isSuccess ? Status.Inactive : Status.Active, isSuccess ? EntityCacheStatusReason.Succeeded : EntityCacheStatusReason.InProgress, isSuccess);
+					// activate pending entity cache before putting to success to elimitate possibility plugin will create active request in between
 					if (isSuccess)
 					{
 						crmService.ActivateRelatedPendingEntityCache(entityCacheId);
 					}
+					crmService.ProcessEntityCache(entityCacheId, isSuccess ? Status.Inactive : Status.Active, isSuccess ? EntityCacheStatusReason.Succeeded : EntityCacheStatusReason.InProgress, isSuccess);
 					return new ConfirmationResponse { StatusCode = HttpStatusCode.OK, Message = string.Empty };
 				}
                 return new ConfirmationResponse { Message = string.Format(Messages.MsdCorrelationIdDoesNotExist, entityCacheMessageId), StatusCode = HttpStatusCode.BadRequest };

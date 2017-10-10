@@ -369,7 +369,7 @@ namespace Tc.Crm.Service.Client.Console
                 var file = File.ReadAllText("confirmation.json");
                 var entityCache = JsonConvert.DeserializeObject<IntegrationLayerResponse>(file);
 
-                var api = $"api/confirmations/{entityCache.SourceSystemEntityId}";
+                var api = $"api/confirmations/{entityCache.CorrelationId}";
 
                 var token = CreateJwtToken(true);
                 var data = JsonConvert.SerializeObject(entityCache);
