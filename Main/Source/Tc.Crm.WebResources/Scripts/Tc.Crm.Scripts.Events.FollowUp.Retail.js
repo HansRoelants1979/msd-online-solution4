@@ -1,4 +1,5 @@
-﻿if (typeof (Tc) === "undefined") {
+﻿var isDueDateDefaulted;
+if (typeof (Tc) === "undefined") {
     Tc = {
         __namespace: true
     };
@@ -27,7 +28,7 @@ if (typeof (Tc.Crm.Scripts.Events.FollowUp) === "undefined") {
 
 Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
     "use strict";
-    
+    var CUSTOMER_QUICK_VIEW_FORM = "AvailableContactDetails";
     var FORM_MODE_CREATE = 1;
     var CLIENT_STATE_OFFLINE = "Offline";
 
@@ -71,12 +72,12 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
             if (Xrm.Page.ui.getFormType() === FORM_MODE_CREATE) {
 
                 // if changed on create form, clear the checkbox
-                Xrm.Page.getAttribute(Attributes.IsDefaultDate).setValue("");
+                isDueDateDefaulted = false;
                 return;
             }
-            if (Xrm.Page.getAttribute(Attributes.IsDefaultDate).getValue() != null) {
+            if (isDueDateDefaulted) {
                 // do nothing if true -- change the selection
-                Xrm.Page.getAttribute(Attributes.IsDefaultDate).setValue("");
+                isDueDateDefaulted = false;
                 return;
             }
             showRescheduleReasonAndRescheduleCheckBoxFields();
@@ -245,7 +246,9 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
                 var endDate = new Date().setDate(now.getDate() + parseInt(dueDateDefaultValue));
                 dueDate.setValue(endDate);
 
-                Xrm.Page.getAttribute(Attributes.IsDefaultDate).setValue((new Date()).toLocaleTimeString());
+                isDueDateDefaulted = true;
+
+             
             }
         },
         function (error) {
@@ -322,11 +325,12 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
         }
         return result;
     }
-    var onstoreChange = function () {
+    var onAssignedStoreChange = function () {
+
         var assignedStore = Xrm.Page.getAttribute('tc_assignedstore').getValue();
 
         if (assignedStore === null) return;
-        Xrm.Page.getControl("ownerid").addPreSearch(addCustomFilterForStoreUsers);
+        addCustomFilterForStoreUsers();
 
     }
 
@@ -334,25 +338,51 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
 
         var storeLookup = Xrm.Page.getAttribute('tc_assignedstore').getValue();
         if (storeLookup === null) return;
-       
-           var fetchQuery = "<filter type='and'>" +
-              "<condition attribute='tc_primarystoreid' operator='eq' value='" + storeLookup[0].id + "' />" +
-            "</filter>";
 
-            Xrm.Page.getControl("ownerid").addCustomFilter(fetchQuery);      
+        var fetchQuery = "<fetch distinct='false' mapping='logical' output-format='xml-platform' version='1.0'>" +
+"<entity name='systemuser'>" +
+"<attribute name='fullname'/>" +
+"<attribute name='businessunitid'/>" +
+"<attribute name='title'/>" +
+"<attribute name='address1_telephone1'/>" +
+"<attribute name='positionid'/>" +
+"<attribute name='systemuserid'/>" +
+"<order descending='false' attribute='fullname'/>" +
+"<link-entity name='tc_store' alias='aa' to='tc_primarystoreid' from='tc_storeid'>" +
+"<filter type='and'>" +
+"<condition attribute='tc_storeid' operator='eq' value='" + storeLookup[0].id + "' />" +
+"</filter>" +
+"</link-entity>" +
+"</entity>" +
+"</fetch>"
+
+
+        var layoutXml = "<grid name='resultset' object='1' jump='systemuserid' select='1' icon='1' preview='1'>" +
+                                "<row name='result' id='systemuserid'>" +
+                                "<cell name='fullname' width='90' />" +
+                                "<cell name='businessunitid' width='90' />" +
+                                "<cell name='title' width='90' />" +
+                                "<cell name='address1_telephone1' width='100' />" +
+                                "<cell name='positionid' width='100' />" +
+                                "</row>" +
+                                "</grid>";
+
+        Xrm.Page.getControl("ownerid").addCustomView("{00000000-0000-0000-0000-000000000009}", "systemuser", "Associated Users Of Store", fetchQuery, layoutXml, true);
+
     }
 
     var setLoggedInUserStore = function () {
+        if (Xrm.Page.ui.getFormType() !== FORM_MODE_CREATE) return;
         var loggedInUserId = Xrm.Page.context.getUserId();
         loggedInUserId = loggedInUserId.replace("{", "").replace("}", "");
         var loggedInUserName = Xrm.Page.context.getUserName();
 
-        if (loggedInUserId != null && loggedInUserId != 'undefined') {
+        if (loggedInUserId === null && loggedInUserId === 'undefined') return; 
             var loggedInUserLookup = new Array();
             loggedInUserLookup[0] = new Object();
             loggedInUserLookup[0].id = '{' + loggedInUserId.toUpperCase() + '}';
             loggedInUserLookup[0].entityType = 'systemuser';
-            loggedInUserLookup[0].name = Xrm.Page.context.getUserName();
+            loggedInUserLookup[0].name = loggedInUserName;
 
             Xrm.Page.getAttribute("tc_loggedinuser").setValue(loggedInUserLookup);
             var results = syncGetExternalLoginRecords(loggedInUserId);
@@ -369,9 +399,10 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
                     loggedInUserStore[0].name = budgetCenterName;
 
                     Xrm.Page.getAttribute("tc_storecreated").setValue(loggedInUserStore);
-                }
-
-            }
+                    Xrm.Page.getAttribute("tc_assignedstore").setValue(loggedInUserStore);
+                    onAssignedStoreChange();
+                    Xrm.Page.getAttribute("tc_storecreated").setSubmitMode("always");
+                }            
         }
 
 
@@ -392,12 +423,6 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
         OnSave: function (context) {
             var isValid = Tc.Crm.Scripts.Utils.Validation.ValidateGdprCompliance(context);
 
-            if (Xrm.Page.ui.getFormType() !== FORM_MODE_CREATE) {
-
-                // if changed on create form, clear the checkbox
-                Xrm.Page.getAttribute(Attributes.IsDefaultDate).setValue("");
-
-            }
             // uncomment in case of additional save actions
             //if (isValid) {                
             //}
@@ -413,8 +438,9 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
         },
         OnLoad: function () {
             setRegardingField();
-            setDueDateOnload();
             setLoggedInUserStore();
+            setDueDateOnload();
+
         },
         OnContactPhoneOrContactEmailChange: function (executionContext) {
             contactPhoneOrContactEmailOnChange(executionContext);
@@ -423,7 +449,7 @@ Tc.Crm.Scripts.Events.FollowUp.Retail = (function () {
             contactMethodOnChange();
         },
         OnStoreChange: function () {
-            onstoreChange();
+            onAssignedStoreChange();
         }
 
     };
