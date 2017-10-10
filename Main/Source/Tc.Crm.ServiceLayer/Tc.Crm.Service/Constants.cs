@@ -177,7 +177,7 @@
         public const string CustomerDataPassedIsNullOrCouldNotBeParsed = "Customer data passed is null or could not be parsed.";
         public const string CustomerTypeNotPresent = "Customer type record is empty or null.";
         public const string CustomerIdentityNotPresent = "Customer Identity is null or empty";
-        public const string FailedToUpdateEntityCacheMessage = FailedtoCreateSurvey;
+        public const string FailedToUpdateEntityCacheMessage = "The corresponding operations can not be completed on downstream applications (MSD) for some reason. This should be considered as a temporary issue and retried.";
         public const string ConfirmationDataPassedIsNullOrCouldNotBeParsed = "The payload could not be read.";
         public const string MissingMsdCorrelationId = "msdCorrelationId is missing.";
 		public const string IncorrectMsdCorrelationId = "msdCorrelationId is not guid.";
@@ -206,7 +206,8 @@
         public const string CrmService = "crmService";
         public const string CustomerId = "customerId";
         public const string Data = "data";
-    }
+		public const string EntityCacheMessageId = "entityCacheMessageId";
+	}
 }
 namespace Tc.Crm.Service.Constants.Configuration
 {

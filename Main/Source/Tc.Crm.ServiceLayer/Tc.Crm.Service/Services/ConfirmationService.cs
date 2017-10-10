@@ -22,10 +22,10 @@ namespace Tc.Crm.Service.Services
             try
             {
                 var entityCacheId = Guid.Empty;
-                if (ilResponse == null) throw new ArgumentNullException(Constants.Parameters.DataJson);
-				if (crmService == null) throw new ArgumentNullException(Constants.Parameters.CrmService);
-				if (string.IsNullOrWhiteSpace(ilResponse.CorrelationId)) return new ConfirmationResponse { Message = Messages.MissingCorrelationId, StatusCode = HttpStatusCode.BadRequest };                
-                var successStatus = new List<HttpStatusCode> { HttpStatusCode.OK, HttpStatusCode.Created, HttpStatusCode.Accepted, HttpStatusCode.NonAuthoritativeInformation,
+				if (entityCacheMessageId == Guid.Empty) throw new ArgumentNullException(Parameters.EntityCacheMessageId);
+				if (ilResponse == null) throw new ArgumentNullException(Parameters.DataJson);
+				if (crmService == null) throw new ArgumentNullException(Parameters.CrmService);
+				var successStatus = new List<HttpStatusCode> { HttpStatusCode.OK, HttpStatusCode.Created, HttpStatusCode.Accepted, HttpStatusCode.NonAuthoritativeInformation,
                                                                HttpStatusCode.NoContent, HttpStatusCode.ResetContent, HttpStatusCode.PartialContent };
 
 				var isSuccess = successStatus.Contains(ilResponse.SourceSystemStatusCode);
