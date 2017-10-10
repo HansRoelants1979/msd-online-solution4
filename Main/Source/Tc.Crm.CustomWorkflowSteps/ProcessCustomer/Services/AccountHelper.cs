@@ -16,7 +16,6 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
                 throw new InvalidPluginExecutionException("Customer Identifier could not be retrieved from payload.");
             if (string.IsNullOrWhiteSpace(customer.CustomerIdentifier.CustomerId))
                 throw new InvalidPluginExecutionException("Customer Identifier could not be retrieved from payload.");
-
             Entity account = new Entity(EntityName.Account);
             if (customer.Company != null && !string.IsNullOrWhiteSpace(customer.Company.CompanyName))
                 account[Attributes.Account.Name] = customer.Company.CompanyName;
@@ -24,10 +23,8 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
                 account[Attributes.Account.SourceMarketId] =
                     new EntityReference(EntityName.Country, new Guid(customer.CustomerIdentifier.SourceMarket));
             }
-
             account[Attributes.Account.SourceSystemId] = customer.CustomerIdentifier.CustomerId; 
             account[Attributes.Account.DuplicateSourceSystemId] = customer.CustomerIdentifier.CustomerId; 
-             
             if ((customer.Email != null) || (customer.Email != null & customer.Email.Length > 0))
                 PopulateEmail(account, customer.Email, trace);
             if ((customer.Phone != null) || (customer.Phone != null & customer.Phone.Length > 0))
@@ -46,8 +43,6 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
             var email1 = emailList[0];
             var email2 = emailList.Length > 1 ? emailList[1] : null;
             var email3 = emailList.Length > 2 ? emailList[2] : null;
-             
-               
             if (email1 != null){
                 account[Attributes.Account.EmailAddress1Type] = CommonXrm.GetEmailType(email1.EmailType);
                 if (!string.IsNullOrWhiteSpace(email1.Address))
@@ -69,55 +64,27 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
         #endregion
 
         #region Phone
-        private static void PopulatePhone(Entity account, Phone[] phoneList, ITracingService trace,
-            OperationType operationType = OperationType.POST, List<string> patchList = null)
+        private static void PopulatePhone(Entity account, Phone[] phoneList, ITracingService trace)
         {
             if (phoneList == null || phoneList.Length <= 0) return;
             trace.Trace("Account populate phone - start");
             var phone1 = phoneList[0];
             var phone2 = phoneList.Length > 1 ? phoneList[1] : null;
-            var phone3 = phoneList.Length > 2 ? phoneList[2] : null;
-            if (operationType == OperationType.PATCH){
-                if (patchList != null && patchList.Count > 0 ){
-                    if (phone1 != null){
-                        if (patchList.Contains("type")){
-                            account[Attributes.Account.Telephone1Type] = CommonXrm.GetPhoneType(phone1.PhoneType);
-                        }
-                        if (!string.IsNullOrWhiteSpace(phone1.Number))
-                            account[Attributes.Account.Telephone1] = phone1.Number;
-                    }
-                    if (phone2 != null){
-                        if(patchList.Contains("type")){
-                            account[Attributes.Account.Telephone2Type] = CommonXrm.GetPhoneType(phone2.PhoneType);
-                        }
-                        if (!string.IsNullOrWhiteSpace(phone2.Number))
-                            account[Attributes.Account.Telephone2] = phone2.Number;
-                    }
-                    if (phone3 != null) { 
-                        if(patchList.Contains("type")){
-                            account[Attributes.Account.Telephone3Type] = CommonXrm.GetPhoneType(phone3.PhoneType);
-                        }
-                        if (!string.IsNullOrWhiteSpace(phone3.Number))
-                            account[Attributes.Account.Telephone3] = phone3.Number;
-                    }
-                }
+            var phone3 = phoneList.Length > 2 ? phoneList[2] : null; 
+            if (phone1 != null){
+                account[Attributes.Account.Telephone1Type] = CommonXrm.GetPhoneType(phone1.PhoneType);
+                if (!string.IsNullOrWhiteSpace(phone1.Number))
+                    account[Attributes.Account.Telephone1] = phone1.Number;
             }
-            else{
-                if (phone1 != null){
-                    account[Attributes.Account.Telephone1Type] = CommonXrm.GetPhoneType(phone1.PhoneType);
-                    if (!string.IsNullOrWhiteSpace(phone1.Number))
-                        account[Attributes.Account.Telephone1] = phone1.Number;
-                }
-                if (phone2 != null){
-                    account[Attributes.Account.Telephone2Type] = CommonXrm.GetPhoneType(phone2.PhoneType);
-                    if (!string.IsNullOrWhiteSpace(phone2.Number))
-                        account[Attributes.Account.Telephone2] = phone2.Number;
-                }
-                if (phone3 != null) {
-                    account[Attributes.Account.Telephone3Type] = CommonXrm.GetPhoneType(phone3.PhoneType);
-                    if (!string.IsNullOrWhiteSpace(phone3.Number))
-                            account[Attributes.Account.Telephone3] = phone3.Number;
-               }
+            if (phone2 != null){
+                account[Attributes.Account.Telephone2Type] = CommonXrm.GetPhoneType(phone2.PhoneType);
+                if (!string.IsNullOrWhiteSpace(phone2.Number))
+                    account[Attributes.Account.Telephone2] = phone2.Number;
+            }
+            if (phone3 != null) {
+                account[Attributes.Account.Telephone3Type] = CommonXrm.GetPhoneType(phone3.PhoneType);
+                if (!string.IsNullOrWhiteSpace(phone3.Number))
+                    account[Attributes.Account.Telephone3] = phone3.Number;
             }
             trace.Trace("Account populate phone - end");
         }
@@ -143,11 +110,10 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
             if (!string.IsNullOrWhiteSpace(address.PostalCode))
                 account[Attributes.Account.Address1PostalCode] = address.PostalCode;
             if (!string.IsNullOrWhiteSpace(address.County))
-            {
                 account[Attributes.Account.Address1County] = address.County;
+            if (!string.IsNullOrWhiteSpace(address.Country))
                 account[Attributes.Account.Address1CountryId] = new EntityReference(EntityName.Country,
-                                                                new Guid(address.Country));
-            }
+                                                               new Guid(address.Country));
             trace.Trace("Account populate address - end");
         }
         #endregion

@@ -21,11 +21,13 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
                 throw new InvalidPluginExecutionException("Customer Patch parameter is null.");
             Entity account = new Entity(EntityName.Account);
             var fieldService = new FieldService(account, customer.PatchParameters);
+            
+            
             fieldService.PopulateField(Attributes.Account.Name, customer.Company.CompanyName);
-            fieldService.PopulateField(Attributes.Account.SourceMarketId,
-               (!string.IsNullOrWhiteSpace(customer.CustomerIdentifier.SourceMarket))
-                                             ? new EntityReference(EntityName.Country,
-                                             new Guid(customer.CustomerIdentifier.SourceMarket)) : null);
+            var sourceMarket = (!string.IsNullOrWhiteSpace(customer.CustomerIdentifier.SourceMarket))
+                               ? new EntityReference(EntityName.Country,
+                               new Guid(customer.CustomerIdentifier.SourceMarket)) : null;
+            fieldService.PopulateField(Attributes.Account.SourceMarketId, sourceMarket);
             if ((customer.Email != null) || (customer.Email != null & customer.Email.Length > 0))
                 PopulateEmail(customer.Email, trace, fieldService);
             if ((customer.Phone != null) || (customer.Phone != null & customer.Phone.Length > 0))
@@ -44,14 +46,20 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
             var email2 = emailList.Length > 1 ? emailList[1] : null;
             var email3 = emailList.Length > 2 ? emailList[2] : null;
             if (email1 != null){
+                trace.Trace(email1.EmailType.ToString());
+                trace.Trace(CommonXrm.GetEmailType(email1.EmailType).Value.ToString());
                 fieldService.PopulateField(Attributes.Account.EmailAddress1Type, CommonXrm.GetEmailType(email1.EmailType));
                 fieldService.PopulateField(Attributes.Account.EmailAddress1, email1.Address);
             }
             if (email2 != null){
+                trace.Trace(email2.EmailType.ToString());
+                trace.Trace(CommonXrm.GetEmailType(email2.EmailType).Value.ToString());
                 fieldService.PopulateField(Attributes.Account.EmailAddress2Type, CommonXrm.GetEmailType(email2.EmailType));
                 fieldService.PopulateField(Attributes.Account.EmailAddress2, email2.Address);
             }
             if (email3 != null){
+                trace.Trace(email3.EmailType.ToString());
+                trace.Trace(CommonXrm.GetEmailType(email3.EmailType).Value.ToString());
                 fieldService.PopulateField(Attributes.Account.EmailAddress3Type, CommonXrm.GetEmailType(email3.EmailType));
                 fieldService.PopulateField(Attributes.Account.EmailAddress3, email3.Address);
             }
@@ -97,10 +105,9 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
             fieldService.PopulateField(Attributes.Account.Address1Street, address.Street);
             fieldService.PopulateField(Attributes.Account.Address1PostalCode, address.PostalCode);
             fieldService.PopulateField(Attributes.Account.Address1County, address.County);
-            fieldService.PopulateField(Attributes.Account.Address1CountryId,
-                     (!string.IsNullOrWhiteSpace(address.Country))
-                                               ? new EntityReference(EntityName.Country,
-                                               new Guid(address.Country)) : null);
+            var country = (!string.IsNullOrWhiteSpace(address.Country))
+                           ? new EntityReference(EntityName.Country,new Guid(address.Country)) : null;
+            fieldService.PopulateField(Attributes.Account.Address1CountryId, country);
             trace.Trace("Account populate address - end");
         }
         #endregion
