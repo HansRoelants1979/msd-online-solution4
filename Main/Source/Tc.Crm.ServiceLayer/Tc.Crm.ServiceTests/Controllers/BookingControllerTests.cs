@@ -23,7 +23,7 @@ namespace Tc.Crm.Service.Controllers.Tests
         public void TestSetup()
         {
             context = new XrmFakedContext();
-            
+
             crmService = new TestCrmService(context);
             bookingService = new BookingService(new CacheBuckets.BrandBucket(crmService)
                                                 , new CacheBuckets.CountryBucket(crmService)
@@ -82,12 +82,13 @@ namespace Tc.Crm.Service.Controllers.Tests
             bookingInfo.Booking = booking;
             var response = controller.Update(bookingInfo);
             Collection<string> messages = new Collection<string>();
+            messages.Add(Constants.Messages.BookingNumberNotPresent);
             messages.Add(Constants.Messages.SourceKeyNotPresent);
             messages.Add(Constants.Messages.BookingSystemIsUnknown);
             messages.Add(Constants.Messages.SourceMarketMissing);
             var expectedMessage = bookingService.GetStringFrom(messages);
-            Assert.AreEqual( HttpStatusCode.BadRequest, response.StatusCode);
-            Assert.AreEqual(expectedMessage, ((System.Net.Http.ObjectContent)response.Content).Value );
+            Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
+            Assert.AreEqual(expectedMessage, ((System.Net.Http.ObjectContent)response.Content).Value);
         }
 
         [TestMethod()]
@@ -99,9 +100,61 @@ namespace Tc.Crm.Service.Controllers.Tests
             booking.BookingIdentifier = new BookingIdentifier();
             booking.BookingIdentifier.BookingSystem = BookingSystem.Nurvis;
             booking.BookingIdentifier.SourceMarket = "DE";
+            booking.BookingIdentifier.SourceSystemId = SourceSystemId.OnTour;
             var response = controller.Update(bookingInfo);
             Assert.AreEqual(response.StatusCode, HttpStatusCode.BadRequest);
-            Assert.AreEqual(((System.Net.Http.ObjectContent)response.Content).Value, Constants.Messages.SourceKeyNotPresent);
+            Assert.AreEqual(((System.Net.Http.ObjectContent)response.Content).Value, Constants.Messages.BookingNumberNotPresent);
+        }
+
+        [TestMethod()]
+        public void BookingDatabaseNotPresentCheck()
+        {
+            BookingInformation bookingInfo = new BookingInformation();
+            Booking booking = new Booking();
+            bookingInfo.Booking = booking;
+            booking.BookingIdentifier = new BookingIdentifier();
+            booking.BookingIdentifier.BookingSystem = BookingSystem.Nurvis;
+            booking.BookingIdentifier.SourceMarket = "DE";
+            booking.BookingIdentifier.BookingNumber = "123423";
+            booking.BookingIdentifier.SourceSystemId = SourceSystemId.Unknown;
+            var response = controller.Update(bookingInfo);
+            Assert.AreEqual(response.StatusCode, HttpStatusCode.BadRequest);
+            Assert.AreEqual(Constants.Messages.BookingDatabaseNotPresent,((System.Net.Http.ObjectContent)response.Content).Value);
+        }
+
+        [TestMethod()]
+        public void BookingConsultationReferenceNotPresentForTCVCheck()
+        {
+            BookingInformation bookingInfo = new BookingInformation();
+            Booking booking = new Booking();
+            bookingInfo.Booking = booking;
+            booking.BookingIdentifier = new BookingIdentifier();
+            booking.BookingIdentifier.BookingSystem = BookingSystem.Nurvis;
+            booking.BookingIdentifier.SourceMarket = "DE";
+            booking.BookingIdentifier.BookingNumber = "123423";
+            booking.BookingIdentifier.SourceSystemId = SourceSystemId.TCV;
+            var response = controller.Update(bookingInfo);
+            Assert.AreEqual(response.StatusCode, HttpStatusCode.BadRequest);
+            Assert.AreEqual(Constants.Messages.ConsultationReferenceNotPresent, ((System.Net.Http.ObjectContent)response.Content).Value);
+        }
+
+        [TestMethod()]
+        public void CustomerSourceMarketMissingCheck()
+        {
+            BookingInformation bookingInfo = new BookingInformation();
+            Booking booking = new Booking();
+            bookingInfo.Booking = booking;
+            booking.BookingIdentifier = new BookingIdentifier();
+            booking.BookingIdentifier.BookingSystem = BookingSystem.Nurvis;
+            booking.BookingIdentifier.SourceMarket = "DE";
+            booking.BookingIdentifier.BookingNumber = "123423";
+            booking.BookingIdentifier.SourceSystemId = SourceSystemId.OnTour;
+            booking.Customer = new Customer();
+            booking.Customer.CustomerIdentifier = new CustomerIdentifier();
+            booking.Customer.CustomerIdentifier.CustomerId = "123";
+            var response = controller.Update(bookingInfo);
+            Assert.AreEqual(response.StatusCode, HttpStatusCode.BadRequest);
+            Assert.AreEqual(Constants.Messages.CustomerSourceMarketMissing, ((System.Net.Http.ObjectContent)response.Content).Value);
         }
 
         //[TestMethod()]
@@ -152,6 +205,7 @@ namespace Tc.Crm.Service.Controllers.Tests
         {
             BookingInformation bookingInfo = new BookingInformation();
             bookingInfo.Booking = bookingWithNmber;
+            bookingInfo.Booking.BookingIdentifier.SourceSystemId = SourceSystemId.OnTour;
             TestCrmService service = new TestCrmService(context);
             service.Switch = DataSwitch.Response_NULL;
             controller = new BookingController(bookingService, service);
@@ -161,13 +215,14 @@ namespace Tc.Crm.Service.Controllers.Tests
             Assert.AreEqual(response.StatusCode, HttpStatusCode.InternalServerError);
         }
 
-        
+
 
         [TestMethod()]
         public void ActionThrowsException()
         {
-             BookingInformation bookingInfo = new BookingInformation();
+            BookingInformation bookingInfo = new BookingInformation();
             bookingInfo.Booking = bookingWithNmber;
+            bookingInfo.Booking.BookingIdentifier.SourceSystemId = SourceSystemId.OnTour;
             TestCrmService service = new TestCrmService(context);
             service.Switch = DataSwitch.ActionThrowsError;
             controller = new BookingController(bookingService, service);

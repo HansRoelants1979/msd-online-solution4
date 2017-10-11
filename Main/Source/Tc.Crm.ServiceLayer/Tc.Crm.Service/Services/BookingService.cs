@@ -58,9 +58,9 @@ namespace Tc.Crm.Service.Services
                 return validationMessages;
             }
             var booking = bookingInformation.Booking;
-            if(booking.BookingIdentifier == null)
+            if (booking.BookingIdentifier == null)
             {
-                validationMessages.Add(Constants.Messages.bookingNumberNotPresent);
+                validationMessages.Add(Constants.Messages.BookingNumberNotPresent);
                 validationMessages.Add(Constants.Messages.SourceKeyNotPresent);
                 validationMessages.Add(Constants.Messages.BookingSystemIsUnknown);
                 validationMessages.Add(Constants.Messages.SourceMarketMissing);
@@ -68,29 +68,31 @@ namespace Tc.Crm.Service.Services
             else
             {
                 if (string.IsNullOrWhiteSpace(booking.BookingIdentifier.BookingNumber))
-                    validationMessages.Add(Constants.Messages.bookingNumberNotPresent);
+                    validationMessages.Add(Constants.Messages.BookingNumberNotPresent);
                 if (booking.BookingIdentifier.BookingSystem == BookingSystem.Unknown)
                     validationMessages.Add(Constants.Messages.BookingSystemIsUnknown);
                 if (string.IsNullOrWhiteSpace(booking.BookingIdentifier.SourceMarket))
                     validationMessages.Add(Constants.Messages.SourceMarketMissing);
                 if (booking.BookingIdentifier.SourceSystemId == SourceSystemId.Unknown)
                     validationMessages.Add(Constants.Messages.BookingDatabaseNotPresent);
-                if(booking.BookingIdentifier.SourceSystemId == SourceSystemId.TCV)
+                if (booking.BookingIdentifier.SourceSystemId == SourceSystemId.TCV)
                 {
-                    if(string.IsNullOrWhiteSpace( booking.BookingIdentifier.ConsultationReference))
+                    if (string.IsNullOrWhiteSpace(booking.BookingIdentifier.ConsultationReference))
                         validationMessages.Add(Constants.Messages.ConsultationReferenceNotPresent);
                 }
             }
-            
 
-            if (booking.Customer != null && (booking.Customer.CustomerIdentifier == null
-                || string.IsNullOrWhiteSpace(booking.Customer.CustomerIdentifier.CustomerId)))
-                validationMessages.Add(Constants.Messages.CustomerIdIsNull);
-            else
+            if (booking.Customer != null && (booking.Customer.CustomerIdentifier != null))
+            {
+                if (string.IsNullOrWhiteSpace(booking.Customer.CustomerIdentifier.CustomerId))
+                    validationMessages.Add(Constants.Messages.CustomerIdIsNull);
+            }
+            if ((booking.Customer != null && booking.Customer.CustomerIdentifier != null))
             {
                 if (string.IsNullOrWhiteSpace(booking.Customer.CustomerIdentifier.SourceMarket))
                     validationMessages.Add(Constants.Messages.CustomerSourceMarketMissing);
             }
+            
             return validationMessages;
         }
 
@@ -231,7 +233,7 @@ namespace Tc.Crm.Service.Services
             if (booking == null) return;
             if (booking.BookingGeneral == null) return;
 
-            if(string.IsNullOrWhiteSpace(booking.BookingGeneral.Currency))
+            if (string.IsNullOrWhiteSpace(booking.BookingGeneral.Currency))
             {
                 Trace.TraceWarning("Currency is empty, deriving currency from source market.");
                 var sourceMarket = booking.BookingIdentifier != null ? booking.BookingIdentifier.SourceMarket : null;
@@ -242,7 +244,7 @@ namespace Tc.Crm.Service.Services
                 }
                 switch (sourceMarket)
                 {
-                    case SourceMarketIsoCode.UK: booking.BookingGeneral.Currency = currencyBucket.GetBy(CurrencyCode.Pound);break;
+                    case SourceMarketIsoCode.UK: booking.BookingGeneral.Currency = currencyBucket.GetBy(CurrencyCode.Pound); break;
                     case SourceMarketIsoCode.France:
                     case SourceMarketIsoCode.Belgium:
                     case SourceMarketIsoCode.Germany:

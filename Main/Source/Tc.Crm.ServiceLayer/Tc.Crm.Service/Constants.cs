@@ -163,7 +163,7 @@
         public const string BookingSystemIsUnknown = "Booking system provided is either null or unknown";
         public const string ResponseNull = "Response is Null.";
         public const string SourceKeyNotPresent = "Source system id of booking record is empty or null.";
-        public const string bookingNumberNotPresent = "Booking number is missing";
+        public const string BookingNumberNotPresent = "Booking number is missing";
         public const string BookingDatabaseNotPresent = "Booking database is unknown or not provided.";
         public const string ConsultationReferenceNotPresent = "The booking received was from TCV but no consultationReference was provided within the supplied Json";
         public const string CustomerGeneralNotPresent = "Customer general is empty or null";

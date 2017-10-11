@@ -57,7 +57,6 @@ namespace Tc.Crm.Service.Controllers
                         return Request.CreateResponse(HttpStatusCode.BadRequest, Constants.Messages.CustomerSourceMarketMissing);
                     }
                 }
-                
                 return BookingUpdateService(booking);
 
             }
@@ -77,37 +76,6 @@ namespace Tc.Crm.Service.Controllers
                 return Request.CreateResponse(HttpStatusCode.Created, response.Id);
             else
                 return Request.CreateResponse(HttpStatusCode.NoContent, response.Id);
-        }
-
-        private HttpResponseMessage ExecuteBookingBusinessRules(Booking booking)
-        {
-            //BookingRulesService bookingRules = new BookingRulesService();
-            //Entity msdBooking = new Entity();
-            //if (!bookingRules.IsOnTourorTCVAtCoreBooking(booking.BookingIdentifier))
-            //{
-            //    if (!bookingRules.IsBookingConsultationEmpty(booking.BookingIdentifier))
-            //    {
-            //        msdBooking = bookingRules.MatchingBooking(booking);
-            //        if (!bookingRules.IsSameCustomer(booking, msdBooking))
-            //        {
-            //            if (bookingRules.MatchingCustomer(booking))
-            //                return BookingUpdateService(booking);
-            //            else
-            //                return Request.CreateResponse((HttpStatusCode)422);
-            //        }
-            //        else
-            //            return BookingUpdateService(booking);
-            //    }
-            //    else
-             return Request.CreateResponse(HttpStatusCode.BadRequest);
-            //}
-            //else
-            //{
-            //    //if (bookingRules.MatchingCustomer(booking))
-            //    //OnTourBookingDelivered goes here
-            //    return Request.CreateResponse(HttpStatusCode.BadRequest);
-            //}
-            
-        }
+        }        
     }
 }
