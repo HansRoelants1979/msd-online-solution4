@@ -11,7 +11,7 @@ using Tc.Crm.Service.Filters;
 using Tc.Crm.Service.Models;
 using Tc.Crm.Service.Services;
 using System.Linq;
-
+using Tc.Crm.Service.Constants;
 namespace Tc.Crm.Service.Controllers
 {
     [RequireHttps]
@@ -44,7 +44,6 @@ namespace Tc.Crm.Service.Controllers
                     Trace.TraceWarning(message);
                     return Request.CreateResponse(HttpStatusCode.BadRequest, message);
                 }
-
                 var customer = customerInfo.Customer;
                 customerService.ResolveReferences(customer);
                 var jsonData = JsonConvert.SerializeObject(customer);
@@ -61,7 +60,6 @@ namespace Tc.Crm.Service.Controllers
                 Trace.TraceError("Unexpected error Customer.Create::Message:{0}||Trace:{1}", ex.Message, ex.StackTrace.ToString());
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
-
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
@@ -106,19 +104,33 @@ namespace Tc.Crm.Service.Controllers
 
         }
 
-        private void AssignPatchParameters(JsonPatchDocument<CustomerInformation> customerInfo, CustomerInformation customerInformation)
-        {
+        private void AssignPatchParameters(JsonPatchDocument<CustomerInformation> customerInfo, 
+            CustomerInformation customerInformation){
             customerInformation.Customer.PatchParameters = new List<string>();
-            customerInfo.Operations.ForEach(item =>
-            {
-                if (item.ParsedPath.Count() > 0)
+            if (customerInformation.Customer.CustomerGeneral.CustomerType.ToString() == Attributes.CustomerType.Customer) {
+                customerInfo.Operations.ForEach(item =>
                 {
-                    var path = item.Path;
-                    string attributeName = string.Empty;
-                    if (parameterService.Map.TryGetValue(item.Path, out attributeName))
-                        customerInformation.Customer.PatchParameters.Add(attributeName);
-                }
-            });
+                    if (item.ParsedPath.Count() > 0)
+                    {
+                        var path = item.Path;
+                        string attributeName = string.Empty;
+                        if (parameterService.MapCustomer.TryGetValue(item.Path, out attributeName))
+                            customerInformation.Customer.PatchParameters.Add(attributeName);
+                    }
+                });
+            }
+            else if (customerInformation.Customer.CustomerGeneral.CustomerType.ToString() == Attributes.CustomerType.Account){
+                customerInfo.Operations.ForEach(item =>
+                {
+                    if (item.ParsedPath.Count() > 0)
+                    {
+                        var path = item.Path;
+                        string attributeName = string.Empty;
+                        if (parameterService.MapAccount.TryGetValue(item.Path, out attributeName))
+                            customerInformation.Customer.PatchParameters.Add(attributeName);
+                    }
+                });
+            }
         }
 
         private void InitializeCustomer(CustomerInformation customerInfo)
@@ -153,7 +165,7 @@ namespace Tc.Crm.Service.Controllers
             var customer = customerInformation.Customer;
 
             ResolveNullValueForEnumField(customerInfo);
-            AssignPatchParameters(customerInfo, customerInformation);
+            
             InitializeCustomer(customerInformation);
             try
             {
@@ -164,7 +176,7 @@ namespace Tc.Crm.Service.Controllers
                 Trace.TraceError($"Message:{ex.Message} StackTrace:{ex.StackTrace.ToString()}");
                 return null;
             }
-            
+            AssignPatchParameters(customerInfo, customerInformation);
 
             customer.Address[0] = customer.Address1;
             customer.Address[1] = customer.Address2;
