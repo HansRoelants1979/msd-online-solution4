@@ -60,6 +60,11 @@
         public const string Telephone1Type = "tc_telephone1type";
         public const string Telephone2Type = "tc_telephone2type";
         public const string Telephone3Type = "tc_telephone3type";
+
+        public const string Telephone1Type_Account = "tc_telephone1_type";
+        public const string Telephone2Type_Account = "tc_telephone2_type";
+        public const string Telephone3Type_Account = "tc_telephone3_type";
+
         public const string AcademicTitle = "tc_academictitle";
         public const string Address1AdditionalInformation = "tc_address1_additionalinformation";
         public const string Address1County = "tc_address1_county";
@@ -83,6 +88,11 @@
         public const string EmailAddress1Type = "tc_emailaddress1type";
         public const string EmailAddress2Type = "tc_emailaddress2type";
         public const string EmailAddress3Type = "tc_emailaddress3type";
+
+        public const string EmailAddress1Type_Account = "tc_emailaddress1_type";
+        public const string EmailAddress2Type_Account = "tc_emailaddress2_type";
+        public const string EmailAddress3Type_Account = "tc_emailaddress3_type";
+
         public const string Segment = "tc_segment";
         public const string Telephone1 = "telephone1";
         public const string Telephone2 = "telephone2";
@@ -99,6 +109,12 @@
         public const string SendMarketingBySms = "tc_sendmarketingbysms";
         public const string SendMarketingByEmail = "tc_sendmarketingbyemail";
         public const string Name = "name";
+
+        public static class CustomerType 
+        {
+            public const string Customer = "Person";
+            public const string Account = "Company";
+        }
     }
     public static class General
     {

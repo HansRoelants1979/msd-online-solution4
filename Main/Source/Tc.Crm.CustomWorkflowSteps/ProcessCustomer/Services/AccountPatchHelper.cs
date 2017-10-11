@@ -21,8 +21,6 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
                 throw new InvalidPluginExecutionException("Customer Patch parameter is null.");
             Entity account = new Entity(EntityName.Account);
             var fieldService = new FieldService(account, customer.PatchParameters);
-            
-            
             fieldService.PopulateField(Attributes.Account.Name, customer.Company.CompanyName);
             var sourceMarket = (!string.IsNullOrWhiteSpace(customer.CustomerIdentifier.SourceMarket))
                                ? new EntityReference(EntityName.Country,

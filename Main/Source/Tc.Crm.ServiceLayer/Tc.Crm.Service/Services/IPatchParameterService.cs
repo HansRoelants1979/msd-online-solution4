@@ -8,6 +8,7 @@ namespace Tc.Crm.Service.Services
 {
     public interface IPatchParameterService
     {
-        Dictionary<string, string> Map { get; set; }
+        Dictionary<string, string> MapCustomer { get; set; }
+        Dictionary<string, string> MapAccount { get; set; } 
     }
 }
