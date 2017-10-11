@@ -29,7 +29,10 @@ namespace Tc.Usd.HostedControls.Service
             if (response == null) return;
             var bookingSummary = response.Entity;
             if (bookingSummary == null || !bookingSummary.Contains("tc_name") || bookingSummary["tc_name"] == null)
+            {
+                configuration.Errors.Add("The id of the booking summary provided is invalid.");
                 return;
+            }
             configuration.ConsultationReference = bookingSummary["tc_name"].ToString();
 
 
