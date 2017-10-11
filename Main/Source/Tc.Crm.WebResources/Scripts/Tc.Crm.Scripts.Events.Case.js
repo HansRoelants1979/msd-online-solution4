@@ -37,211 +37,293 @@
 };
 scriptLoader.load("Tc.Crm.Scripts.Events.Case", ["Tc.Crm.Scripts.Utils.Validation", "Tc.Crm.Scripts.Library.Case"], function () {
 
-// start script
-if (typeof (Tc) === "undefined") {
-    Tc = {
-        __namespace: true
-    };
-}
-if (typeof (Tc.Crm) === "undefined") {
-    Tc.Crm = {
-        __namespace: true
-    };
-}
-if (typeof (Tc.Crm.Scripts) === "undefined") {
-    Tc.Crm.Scripts = {
-        __namespace: true
-    };
-}
-if (typeof (Tc.Crm.Scripts.Events) === "undefined") {
-    Tc.Crm.Scripts.Events = {
-        __namespace: true
-    };
-}
-
-Tc.Crm.Scripts.Events.Case = (function () {
-    "use strict";
-
-    var CLIENT_STATE_OFFLINE = "Offline";
-    var CASE_TYPE_CONTROL_BOOKINGREF = "tc_bookingreference";
-    var CASE_BOOKING_NUMBER = "tc_bookingid";
-    var CASE_SOURCE_MARKET_ID = "tc_sourcemarketid";
-    var CASE_SOURCE_MARKET_CURRENCY = "transactioncurrencyid";
-    var CASE_ENTITY_NAME = "incident";
-    var CASE_BOOKING_ENTITY_NAME = "tc_booking"
-    var CASE_SOURCE_MARKET_ENTITY_NAME = "tc_country"
-    var FORM_MODE_CREATE = 1;
-    var FORM_MODE_UPDATE = 2;    
-
-    var Attributes = {
-        AlternativePhone: "tc_alternativephone",
-        OtherPartyPhone: "tc_otherpartyphone",
-        ArrivalDate: "tc_arrivaldate",
-        DepartureDate: "tc_departuredate",
-        RepNotes: "tc_reportnotes"
+    // start script
+    if (typeof (Tc) === "undefined") {
+        Tc = {
+            __namespace: true
+        };
+    }
+    if (typeof (Tc.Crm) === "undefined") {
+        Tc.Crm = {
+            __namespace: true
+        };
+    }
+    if (typeof (Tc.Crm.Scripts) === "undefined") {
+        Tc.Crm.Scripts = {
+            __namespace: true
+        };
+    }
+    if (typeof (Tc.Crm.Scripts.Events) === "undefined") {
+        Tc.Crm.Scripts.Events = {
+            __namespace: true
+        };
     }
 
-    function OnLoad() {
-        Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.AlternativePhone);
-        Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.OtherPartyPhone);
-        validateCaseAssociatedCustomerPhoneNum();
-        preFilterLocationOfficeLookup();
-        var currentItem = Xrm.Page.ui.formSelector.getCurrentItem();
-        if(currentItem == null || currentItem.getLabel() === "iDS Case") {
-        	setNotification();
+    Tc.Crm.Scripts.Events.Case = (function () {
+        "use strict";
+
+        var ClientState = {
+            Offline: "Offline"
+        };
+
+        var CaseType = {
+            Incident: "Incident",
+            Complaint: "Complaint"
+        };
+
+        var SecurityRole = {
+            SystemAdministrator: "System Administrator",
+            HealthSafety: "Tc.Group.HealthSafety",
+            SystemMaintenance: "Tc.Administator.SystemMaintenance"
+        };
+
+        var FormMode = {
+            Create: 1,
+            Update: 2
+        };
+
+        var EntityNames = {
+            TransactionCurrency: "transactioncurrency",
+            LocationOffice: "tc_locationoffice",
+            Gateway: "tc_gateway",
+            GatewayLocationOffice: "tc_gateway_tc_locationoffice"
+        };
+
+        var EntitySetNames = {
+            Case: "incidents",
+            SecurityRole: "roles",
+            Booking: "tc_bookings",
+            Country: "tc_countries",
+            TransactionCurrency: "transactioncurrencies"
         }
-    }
 
-    var setNotification = function () {
-    	if(Xrm.Page.getAttribute("tc_reportnotes")) {
-    		if(Xrm.Page.getAttribute("tc_reportnotes").getValue() == null) {
-    			Xrm.Page.ui.setFormNotification(" You must provide a value for Rep Notes to Resolve Case. ", "WARNING", 'note')
-    		} else {
-    			Xrm.Page.ui.clearFormNotification('note')
-    		}
-    	}
-    }
+        var ProductTypes = {
+            TcProduct: 950000000,
+            NonTcProduct: 950000001
+        };
 
-    var GetTheSourceMarketCurrency = function () {
-               
-        var sourceMarketId;
-        var currencyId;
-        console.log("Get The Source Market Currency - Start");
-        if (Xrm.Page.getAttribute(CASE_TYPE_CONTROL_BOOKINGREF).getValue() == true) {
+        var Attributes = {
+            AlternativePhone: "tc_alternativephone",
+            OtherPartyPhone: "tc_otherpartyphone",
+            ArrivalDate: "tc_arrivaldate",
+            DepartureDate: "tc_departuredate",
+            RepNotes: "tc_reportnotes",
+            TcProductRelated: "tc_tcproductrelated",
+            BookingReference: "tc_bookingreference",
+            BookingId: "tc_bookingid",
+            SourceMarketId: "tc_sourcemarketid",
+            SourceMarketCurrency: "transactioncurrencyid",
+            CaseType: "tc_casetypeid",
+            Gateway: "tc_gateway",
+            ResortOffice: "tc_resortofficeid",
+            ProductType: "tc_producttype",
+            ReportedDate: "tc_datereported",
+            MandatoryConditions: "tc_mandatoryconditionsmet",
+            Description: "description",
+            ThirdPartyResponse: "tc_3rdpartyresponserequired",
+            CaseOriginCode: "caseorigincode",
+            CommunicationMethod: "tc_preferredmethodofcommunication",
+            BrandId: "tc_brandid",
+            Destination: "tc_destinationid",
+            Location: "tc_locationid",
+            Customer: "customerid",
+            IsHolidayStopping: "tc_istheholidaystoppingshorterthanplanned",
+            BookingTravelAmount: "tc_bookingtravelamount",
+            DurationOfStay: "tc_durationofstay",
+            LocationOfficeId: "tc_locationofficeid",
+            Name: "tc_name",
+            Address1FlatNumber: "tc_address1_flatorunitnumber",
+            Address1HouseNumber: "tc_address1_housenumberorbuilding",
+            Address1Street: "tc_address1_street",
+            Address1Town: "tc_address1_town",
+            Address1PostCode: "tc_address1_postcode",
+            Address1County: "tc_address1_county",
+            Address1Country: "tc_address1_country",
+            Address1AdditionalInformation: "tc_address1_additionalinformation",
+            GatewayId: "tc_gatewayid"
+        }
 
-            if (Xrm.Page.getAttribute(CASE_BOOKING_NUMBER).getValue() != null) {
+        function OnLoad() {
+            Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.AlternativePhone);
+            Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.OtherPartyPhone);
+            validateCaseAssociatedCustomerPhoneNum();
+            preFilterLocationOfficeLookup();
+            var currentItem = Xrm.Page.ui.formSelector.getCurrentItem();
+            if (currentItem == null || currentItem.getLabel() === "iDS Case") {
+                setNotification();
+            }
+        }
 
-                var BookingId = Xrm.Page.getAttribute(CASE_BOOKING_NUMBER).getValue()[0].id;
-                if (BookingId != null) {
-                    BookingId = BookingId.replace("{", "").replace("}", "");
-                    var SourceMarketReceivedPromise = getBooking(BookingId).then(
-                        function (bookingResponse) {
+        var setNotification = function () {
+            if (Xrm.Page.getAttribute(Attributes.RepNotes)) {
+                if (Xrm.Page.getAttribute(Attributes.RepNotes).getValue() == null) {
+                    Xrm.Page.ui.setFormNotification(" You must provide a value for Rep Notes to Resolve Case. ", "WARNING", 'note');
+                } else {
+                    Xrm.Page.ui.clearFormNotification('note');
+                }
+            }
+        }
 
-                            var booking = JSON.parse(bookingResponse.response);
-                            if (booking == null || booking == "" || booking == "undefined") return;
-                            if (booking.tc_SourceMarketId == null || booking.tc_SourceMarketId == "" || booking.tc_SourceMarketId == "undefined") return;
-                            if (booking.tc_SourceMarketId._transactioncurrencyid_value == null || booking.tc_SourceMarketId._transactioncurrencyid_value == "" || booking.tc_SourceMarketId._transactioncurrencyid_value == "undefined") return;
-                            currencyId = booking.tc_SourceMarketId._transactioncurrencyid_value;
+        var GetTheSourceMarketCurrency = function () {
+            var sourceMarketId;
+            var currencyId;
+            console.log("Get The Source Market Currency - Start");
+            if (Xrm.Page.getAttribute(Attributes.BookingReference).getValue() == true) {
+
+                if (Xrm.Page.getAttribute(Attributes.BookingId).getValue() != null) {
+
+                    var bookingId = Xrm.Page.getAttribute(Attributes.BookingId).getValue()[0].id;
+                    if (bookingId != null) {
+                        bookingId = bookingId.replace("{", "").replace("}", "");
+                        var SourceMarketReceivedPromise = getBooking(bookingId).then(
+                            function (bookingResponse) {
+
+                                var booking = JSON.parse(bookingResponse.response);
+                                if (booking == null || booking == "" || booking == "undefined") return;
+                                if (booking.tc_SourceMarketId == null || booking.tc_SourceMarketId == "" || booking.tc_SourceMarketId == "undefined") return;
+                                if (booking.tc_SourceMarketId._transactioncurrencyid_value == null || booking.tc_SourceMarketId._transactioncurrencyid_value == "" || booking.tc_SourceMarketId._transactioncurrencyid_value == "undefined") return;
+                                currencyId = booking.tc_SourceMarketId._transactioncurrencyid_value;
+                                if (currencyId != null) {
+                                    return getSourceMarketCurrencyname(currencyId);
+                                }
+                                else {
+                                    Xrm.Utility.alertDialog("Currency is not associated with Source Market");
+                                }
+                            }).catch(function (err) {
+                                throw new Error("Problem in retrieving the Source Market Currency");
+                            });
+
+                        SourceMarketReceivedPromise.then(
+                        function (SourceMarketReceivedPromiseResponse) {
+                            if (SourceMarketReceivedPromiseResponse == null || SourceMarketReceivedPromiseResponse == "" || SourceMarketReceivedPromiseResponse == "undefined") return;
+                            var Currency = JSON.parse(SourceMarketReceivedPromiseResponse.response);
+                            if (Currency == null || Currency == "" || Currency == "undefined") return;
+                            if (Currency.currencyname == null || Currency.currencyname == "" || Currency.currencyname == "undefined") return;
                             if (currencyId != null) {
-                                return getSourceMarketCurrencyname(currencyId);
+                                var currencyReference = [];
+                                currencyReference[0] = {};
+                                currencyReference[0].id = currencyId;
+                                currencyReference[0].entityType = EntityNames.TransactionCurrency;
+                                currencyReference[0].name = Currency.currencyname;
+
+                                Xrm.Page.getAttribute(Attributes.SourceMarketCurrency).setValue(currencyReference);
                             }
-
-                            else {
-
-                                Xrm.Utility.alertDialog("Currency is not associated with Source Market");
-
-                            }
-
                         }).catch(function (err) {
                             throw new Error("Problem in retrieving the Source Market Currency");
                         });
-
-
-                    SourceMarketReceivedPromise.then(
-                    function (SourceMarketReceivedPromiseResponse) {
-                        if (SourceMarketReceivedPromiseResponse == null || SourceMarketReceivedPromiseResponse == "" || SourceMarketReceivedPromiseResponse == "undefined") return;
-                        var Currency = JSON.parse(SourceMarketReceivedPromiseResponse.response);
-                        if (Currency == null || Currency == "" || Currency == "undefined") return;
-                        if (Currency.currencyname == null || Currency.currencyname == "" || Currency.currencyname == "undefined") return;
-                        if (currencyId != null) {
-                            var currencyReference = [];
-                            currencyReference[0] = {};
-                            currencyReference[0].id = currencyId;
-                            currencyReference[0].entityType = "transactioncurrency";
-                            currencyReference[0].name = Currency.currencyname;
-
-                            Xrm.Page.getAttribute(CASE_SOURCE_MARKET_CURRENCY).setValue(currencyReference);
-                        }
-
-                    }).catch(function (err) {
-                        throw new Error("Problem in retrieving the Source Market Currency");
-                    });
-
+                    }
                 }
+            }
+            else {
+                if (Xrm.Page.getAttribute(Attributes.SourceMarketId).getValue() != null) {
 
+                    sourceMarketId = Xrm.Page.getAttribute(Attributes.SourceMarketId).getValue()[0].id;
+                    if (sourceMarketId != null) {
+                        sourceMarketId = sourceMarketId.replace("{", "").replace("}", "");
+                        getSourceMarketCurrency(sourceMarketId).then(
+                           function (sourceMarketResponse) {
+                               if (sourceMarketResponse == null || sourceMarketResponse == "" || sourceMarketResponse == "undefined") return;
+                               var sourceMarket = JSON.parse(sourceMarketResponse.response);
+                               if (sourceMarket == null || sourceMarket == "" || sourceMarket == "undefined") return;
+                               if (sourceMarket._transactioncurrencyid_value == null || sourceMarket._transactioncurrencyid_value == "" || sourceMarket._transactioncurrencyid_value == "undefined") return;
+                               currencyId = sourceMarket._transactioncurrencyid_value;
+                               var currencyName = sourceMarket.transactioncurrencyid.currencyname;
+                               if (currencyId != null) {
+                                   var currencyReference = [];
+                                   currencyReference[0] = {};
+                                   currencyReference[0].id = currencyId;
+                                   currencyReference[0].entityType = EntityNames.TransactionCurrency;
+                                   currencyReference[0].name = currencyName;
+
+                                   Xrm.Page.getAttribute(Attributes.SourceMarketCurrency).setValue(currencyReference);
+                               }
+                               else {
+                                   Xrm.Utility.alertDialog("Currency is not associated with SourceMarket");
+                               }
+                           }).catch(function (err) {
+                               throw new Error("Problem in retrieving the Source Market Currency");
+                           });
+                    }
+                }
             }
 
-        }
-        else {
-            if (Xrm.Page.getAttribute(CASE_SOURCE_MARKET_ID).getValue() != null) {
-
-                sourceMarketId = Xrm.Page.getAttribute(CASE_SOURCE_MARKET_ID).getValue()[0].id;
-                if (sourceMarketId != null) {
-                    sourceMarketId = sourceMarketId.replace("{", "").replace("}", "");
-                    var SourceMarketCurrency = getSourceMarketCurrency(sourceMarketId).then(
-                       function (sourceMarketResponse) {
-                           if (sourceMarketResponse == null || sourceMarketResponse == "" || sourceMarketResponse == "undefined") return;
-                           var sourceMarket = JSON.parse(sourceMarketResponse.response);
-                           if (sourceMarket == null || sourceMarket == "" || sourceMarket == "undefined") return;
-                           if (sourceMarket._transactioncurrencyid_value == null || sourceMarket._transactioncurrencyid_value == "" || sourceMarket._transactioncurrencyid_value == "undefined") return;
-                           currencyId = sourceMarket._transactioncurrencyid_value;
-                           var currencyName = sourceMarket.transactioncurrencyid.currencyname;
-                           if (currencyId != null) {
-                               var currencyReference = [];
-                               currencyReference[0] = {};
-                               currencyReference[0].id = currencyId;
-                               currencyReference[0].entityType = "transactioncurrency";
-                               currencyReference[0].name = currencyName;
-
-                               Xrm.Page.getAttribute(CASE_SOURCE_MARKET_CURRENCY).setValue(currencyReference);
-
-                           }
-
-                           else {
-                               Xrm.Utility.alertDialog("Currency is not associated with SourceMarket");
-                           }
-
-                       }).catch(function (err) {
-                           throw new Error("Problem in retrieving the Source Market Currency");
-                       });
-
-                }
-
-            }
+            console.log("Get The Source Market Currency - End");
         }
 
-        console.log("Get The Source Market Currency - End");
-    }
-    function getBooking(bookingId) {
+        function getBooking(bookingId) {
+            var query = "?$select=_tc_sourcemarketid_value&$expand=tc_SourceMarketId($select=_transactioncurrencyid_value)";
+            return Tc.Crm.Scripts.Common.GetById(EntitySetNames.Booking, bookingId, query);
+        }
 
-        var query = "?$select=_tc_sourcemarketid_value&$expand=tc_SourceMarketId($select=_transactioncurrencyid_value)";
-        var entityName = "tc_bookings";
-        var id = bookingId;
-        return Tc.Crm.Scripts.Common.GetById(entityName, id, query);
+        function getSourceMarketCurrency(sourcMarketId) {
+            var query = "?$select=_transactioncurrencyid_value&$expand=transactioncurrencyid($select=currencyname)";
+            return Tc.Crm.Scripts.Common.GetById(EntitySetNames.Country, sourcMarketId, query);
+        }
 
-    }
-    function getSourceMarketCurrency(sourcMarketId) {
-        var query = "?$select=_transactioncurrencyid_value&$expand=transactioncurrencyid($select=currencyname)";
-        var entityName = "tc_countries";
-        return Tc.Crm.Scripts.Common.GetById(entityName, sourcMarketId, query);
-    }
-    function getSourceMarketCurrencyname(Currencyid) {
-        var query = "?$select=currencyname";
-        var entityName = "transactioncurrencies";
-        return Tc.Crm.Scripts.Common.GetById(entityName, Currencyid, query);
-    }
-    function MandatoryMetConditions() {
-        if (Xrm.Page.getControl("tc_bookingreference").getAttribute().getValue() == true) {
-            if (Xrm.Page.getControl("tc_mandatoryconditionsmet").getAttribute().getValue() == false) {
-                if (Xrm.Page.getControl("tc_casetypeid").getAttribute().getValue() != null) {
-                    if (Xrm.Page.getControl("tc_casetypeid").getAttribute().getValue()[0].name == "Complaint") {
-                        if (Xrm.Page.getControl("tc_resortofficeid").getAttribute().getValue() != null &&
-                            Xrm.Page.getControl("tc_datereported").getAttribute().getValue() != null &&
-                            Xrm.Page.getControl("tc_preferredmethodofcommunication").getAttribute().getValue() != null &&
-                            Xrm.Page.getControl("caseorigincode").getAttribute().getValue() != null &&
-                            Xrm.Page.getControl("description").getAttribute().getValue() != null
-                            ) {
-                            if (Xrm.Page.getControl("tc_producttype").getAttribute().getValue() == null || Xrm.Page.getControl("tc_producttype").getAttribute().getValue() != null &&
-                                Xrm.Page.getControl("tc_producttype").getAttribute().getValue() != "950000000") {
-                                if (Xrm.Page.getControl("tc_istheholidaystoppingshorterthanplanned").getAttribute().getValue() != null &&
-                                    Xrm.Page.getControl("tc_3rdpartyresponserequired").getAttribute().getValue() != null) {
-                                    Xrm.Page.getControl("tc_mandatoryconditionsmet").getAttribute().setValue(true);
+        function getSourceMarketCurrencyname(currencyId) {
+            var query = "?$select=currencyname";
+            return Tc.Crm.Scripts.Common.GetById(EntitySetNames.TransactionCurrency, currencyId, query);
+        }
+
+        function mandatoryMetConditions() {
+            if (Xrm.Page.getControl(Attributes.BookingReference).getAttribute().getValue() == true) {
+                if (Xrm.Page.getControl(Attributes.MandatoryConditions).getAttribute().getValue() == false) {
+                    if (Xrm.Page.getControl(Attributes.CaseType).getAttribute().getValue() != null) {
+                        if (Xrm.Page.getControl(Attributes.CaseType).getAttribute().getValue()[0].name == CaseType.Complaint) {
+                            if (Xrm.Page.getControl(Attributes.ResortOffice).getAttribute().getValue() != null &&
+                                Xrm.Page.getControl(Attributes.ReportedDate).getAttribute().getValue() != null &&
+                                Xrm.Page.getControl(Attributes.CommunicationMethod).getAttribute().getValue() != null &&
+                                Xrm.Page.getControl(Attributes.CaseOriginCode).getAttribute().getValue() != null &&
+                                Xrm.Page.getControl(Attributes.Description).getAttribute().getValue() != null
+                                ) {
+                                if (Xrm.Page.getControl(Attributes.ProductType).getAttribute().getValue() == null || Xrm.Page.getControl(Attributes.ProductType).getAttribute().getValue() != null &&
+                                    Xrm.Page.getControl(Attributes.ProductType).getAttribute().getValue() != "950000000") {
+                                    if (Xrm.Page.getControl(Attributes.IsHolidayStopping).getAttribute().getValue() != null &&
+                                        Xrm.Page.getControl(Attributes.ThirdPartyResponse).getAttribute().getValue() != null) {
+                                        Xrm.Page.getControl(Attributes.MandatoryConditions).getAttribute().setValue(true);
+                                        Xrm.Page.data.entity.save();
+                                    }
+                                }
+                                else {
+                                    Xrm.Page.getControl(Attributes.MandatoryConditions).getAttribute().setValue(true);
                                     Xrm.Page.data.entity.save();
                                 }
                             }
-                            else {
-                                Xrm.Page.getControl("tc_mandatoryconditionsmet").getAttribute().setValue(true);
-                                Xrm.Page.data.entity.save();
+                        }
+                    }
+                }
+            }
+
+            else {
+                if (Xrm.Page.getControl(Attributes.CaseType).getAttribute().getValue() != null) {
+                    if (Xrm.Page.getControl(Attributes.MandatoryConditions).getAttribute().getValue() == false) {
+                        if (Xrm.Page.getControl(Attributes.CaseType).getAttribute().getValue()[0].name == CaseType.Complaint) {
+                            if (Xrm.Page.getControl(Attributes.ResortOffice).getAttribute().getValue() != null &&
+                                Xrm.Page.getControl(Attributes.ReportedDate).getAttribute().getValue() != null &&
+                                Xrm.Page.getControl(Attributes.CommunicationMethod).getAttribute().getValue() != null &&
+                                Xrm.Page.getControl(Attributes.CaseOriginCode).getAttribute().getValue() != null &&
+                                Xrm.Page.getControl(Attributes.SourceMarketId).getAttribute().getValue() != null &&
+                                Xrm.Page.getControl(Attributes.BrandId).getAttribute().getValue() != null &&
+                                Xrm.Page.getControl(Attributes.Destination).getAttribute().getValue() != null &&
+                                Xrm.Page.getControl(Attributes.Location).getAttribute().getValue() != null &&
+                                Xrm.Page.getControl(Attributes.Gateway).getAttribute().getValue() != null &&
+                                Xrm.Page.getControl(Attributes.Description).getAttribute().getValue() != null &&
+                                Xrm.Page.getControl(Attributes.DepartureDate).getAttribute().getValue() != null &&
+                                Xrm.Page.getControl(Attributes.BookingTravelAmount).getAttribute().getValue() != null
+                                 ) {
+                                if (Xrm.Page.getControl(Attributes.ProductType).getAttribute().getValue() == null || Xrm.Page.getControl(Attributes.ProductType).getAttribute().getValue() != null &&
+                                    Xrm.Page.getControl(Attributes.ProductType).getAttribute().getValue() != "950000000") {
+                                    if (Xrm.Page.getControl(Attributes.IsHolidayStopping).getAttribute().getValue() != null &&
+                                        Xrm.Page.getControl(Attributes.ThirdPartyResponse).getAttribute().getValue() != null &&
+                                        Xrm.Page.getControl(Attributes.DurationOfStay).getAttribute().getValue() != null) {
+                                        Xrm.Page.getControl(Attributes.MandatoryConditions).getAttribute().setValue(true);
+                                        Xrm.Page.data.entity.save();
+                                    }
+                                }
+                                else {
+                                    Xrm.Page.getControl(Attributes.MandatoryConditions).getAttribute().setValue(true);
+                                    Xrm.Page.data.entity.save();
+                                }
                             }
                         }
                     }
@@ -249,269 +331,296 @@ Tc.Crm.Scripts.Events.Case = (function () {
             }
         }
 
-        else {
-            if (Xrm.Page.getControl("tc_casetypeid").getAttribute().getValue() != null) {
-                if (Xrm.Page.getControl("tc_mandatoryconditionsmet").getAttribute().getValue() == false) {
-                    if (Xrm.Page.getControl("tc_casetypeid").getAttribute().getValue()[0].name == "Complaint") {
-                        if (Xrm.Page.getControl("tc_resortofficeid").getAttribute().getValue() != null &&
-                            Xrm.Page.getControl("tc_datereported").getAttribute().getValue() != null &&
-                            Xrm.Page.getControl("tc_preferredmethodofcommunication").getAttribute().getValue() != null &&
-                            Xrm.Page.getControl("caseorigincode").getAttribute().getValue() != null &&
-                            Xrm.Page.getControl("tc_sourcemarketid").getAttribute().getValue() != null &&
-                            Xrm.Page.getControl("tc_brandid").getAttribute().getValue() != null &&
-                            Xrm.Page.getControl("tc_destinationid").getAttribute().getValue() != null &&
-                            Xrm.Page.getControl("tc_locationid").getAttribute().getValue() != null &&
-                            Xrm.Page.getControl("tc_gateway").getAttribute().getValue() != null &&
-                            Xrm.Page.getControl("description").getAttribute().getValue() != null &&
-                            Xrm.Page.getControl("tc_departuredate").getAttribute().getValue() != null &&
-                            Xrm.Page.getControl("tc_bookingtravelamount").getAttribute().getValue() != null
-                             ) {
-                            if (Xrm.Page.getControl("tc_producttype").getAttribute().getValue() == null || Xrm.Page.getControl("tc_producttype").getAttribute().getValue() != null &&
-                                Xrm.Page.getControl("tc_producttype").getAttribute().getValue() != "950000000") {
-                                if (Xrm.Page.getControl("tc_istheholidaystoppingshorterthanplanned").getAttribute().getValue() != null &&
-                                    Xrm.Page.getControl("tc_3rdpartyresponserequired").getAttribute().getValue() != null &&
-                                    Xrm.Page.getControl("tc_durationofstay").getAttribute().getValue() != null) {
-                                    Xrm.Page.getControl("tc_mandatoryconditionsmet").getAttribute().setValue(true);
-                                    Xrm.Page.data.entity.save();
+        function validateCaseAssociatedCustomerPhoneNum() {
+            var customer = Xrm.Page.getAttribute(Attributes.Customer).getValue();
+            if (customer == null)
+                return;
+            var customerId = customer[0].id;
+            if (customerId == null || customerId == "")
+                return;
+            customerId = customerId.replace("{", "").replace("}", "");
+            var entityType = customer[0].entityType;
+            if (entityType == null || entityType == "")
+                return;
+
+            getCustomerTelephoneNum(customerId, entityType).then(
+                            function (customerPhoneNumResponse) {
+                                var customer = JSON.parse(customerPhoneNumResponse.response);
+                                var telephoneNum = customer.telephone1;
+                                if (telephoneNum == null || telephoneNum == "") {
+                                    Xrm.Page.ui.clearFormNotification("TelNumNotification2");
+                                    Xrm.Page.ui.setFormNotification("Customer's telephone number is not Present", "WARNING", "TelNumNotification1");
+                                    return;
                                 }
-                            }
-                            else {
-                                Xrm.Page.getControl("tc_mandatoryconditionsmet").getAttribute().setValue(true);
-                                Xrm.Page.data.entity.save();
-                            }
-                        }
-                    }
-                }
+
+                                var regex = /^\+(?:[0-9] ?){9,14}[0-9]$/;
+                                if (regex.test(telephoneNum) == false) {
+                                    Xrm.Page.ui.clearFormNotification("TelNumNotification1");
+                                    Xrm.Page.ui.setFormNotification("The Customer's telephone number does not match the required format. The number should start with a + followed by the country dialing code and contain no spaces or other special characters i.e. +44 for UK.", "WARNING", "TelNumNotification2");
+                                }
+                                else {
+                                    Xrm.Page.ui.clearFormNotification("TelNumNotification2");
+                                    Xrm.Page.ui.clearFormNotification("TelNumNotification1");
+                                }
+
+                            }).catch(function (err) {
+
+                                throw new Error("Error in retrieving Customer's PhoneNumber");
+                            });
+        }
+
+        function getCustomerTelephoneNum(customerId, entityType) {
+
+            var query = "?$select=telephone1";
+            var entityName = entityType + "s";
+            if (isOfflineMode()) {
+                return Xrm.Mobile.offline.retrieveRecord(entityName, customerId, query);
+            }
+            else {
+                return Tc.Crm.Scripts.Common.GetById(entityName, customerId, query);
             }
         }
-    }
-    function validateCaseAssociatedCustomerPhoneNum() {
-        var Customer = Xrm.Page.getAttribute("customerid").getValue();
-        if (Customer == null)
-            return;
-        var CustomerId = Customer[0].id;
-        if (CustomerId == null || CustomerId == "")
-            return;
-        CustomerId = CustomerId.replace("{", "").replace("}", "");
-        var entityType = Customer[0].entityType;
-        if (entityType == null || entityType == "")
-            return;
 
-        var ValidateCustomerPhoneNum = getCustomerTelephoneNum(CustomerId, entityType).then(
-                        function (customerPhoneNumResponse) {
-                            var customer = JSON.parse(customerPhoneNumResponse.response);
-                            var telephoneNum = customer.telephone1;
-                            if (telephoneNum == null || telephoneNum == "") {
-                                Xrm.Page.ui.clearFormNotification("TelNumNotification2");
-                                Xrm.Page.ui.setFormNotification("Customer's telephone number is not Present", "WARNING", "TelNumNotification1");
-                                return;
-                            }
-
-                            var regex = /^\+(?:[0-9] ?){9,14}[0-9]$/;
-                            if (regex.test(telephoneNum) == false) {
-                                Xrm.Page.ui.clearFormNotification("TelNumNotification1");
-                                Xrm.Page.ui.setFormNotification("The Customer's telephone number does not match the required format. The number should start with a + followed by the country dialing code and contain no spaces or other special characters i.e. +44 for UK.", "WARNING", "TelNumNotification2");
-                            }
-                            else {
-                                Xrm.Page.ui.clearFormNotification("TelNumNotification2");
-                                Xrm.Page.ui.clearFormNotification("TelNumNotification1");
-                            }
-
-                        }).catch(function (err) {
-
-                            throw new Error("Error in retrieving Customer's PhoneNumber");
-                        });
-    }
-    function getCustomerTelephoneNum(customerId,entityType) {
-
-        var query = "?$select=telephone1";
-        var entityName = entityType + "s";
-        var id = customerId;
-        if (IsOfflineMode()) {
-            return Xrm.Mobile.offline.retrieveRecord(entityName, id, query);
+        var onChangeTelephone1 = function () {
+            Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.AlternativePhone);
         }
-        else {
-            return Tc.Crm.Scripts.Common.GetById(entityName, id, query);
-        }
-    }
-    var onChangeTelephone1 = function () {
-        Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.AlternativePhone);
-    }
-    var onChangeTelephone2 = function () {
-        Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.OtherPartyPhone);
-    }
 
-    var preFilterLocationOfficeLookup = function ()
-    {
-        if (!Xrm.Page.getAttribute("tc_resortofficeid")) return;
-        Xrm.Page.getControl("tc_resortofficeid").addPreSearch(function ()
-        {
-            filterLocationOfficeBasedOnSelectedGateway();
-        });
-    }
-
-    var filterLocationOfficeBasedOnSelectedGateway = function()
-    {
-        if (!Xrm.Page.getAttribute("tc_resortofficeid")) return;
-        if (Xrm.Page.getAttribute("tc_gateway") && Xrm.Page.getAttribute("tc_gateway").getValue() && Xrm.Page.getAttribute("tc_gateway").getValue().length > 0)
-        {
-            var gatewayId = Xrm.Page.getAttribute("tc_gateway").getValue()[0].id;
-            addCustomFilterForLocationOffice(gatewayId);
+        var onChangeTelephone2 = function () {
+            Tc.Crm.Scripts.Utils.Validation.ValidatePhoneNumber(Attributes.OtherPartyPhone);
         }
-        else
-        {
-            getGateWayFromBooking();
-        }
-    }
 
-    var getGateWayFromBooking = function()
-    {   
-        if (Xrm.Page.getAttribute("tc_bookingid") && Xrm.Page.getAttribute("tc_bookingid").getValue() && Xrm.Page.getAttribute("tc_bookingid").getValue().length > 0)
-        {
-            var bookingId = Xrm.Page.getAttribute("tc_bookingid").getValue()[0].id;
-            var query = "?$select=_tc_destinationgatewayid_value";
-            var entityName = "tc_bookings";
-            var id = formatEntityId(bookingId);
-            if (IsOfflineMode())
-            {
-                processCustomFilterPromise(Xrm.Mobile.offline.retrieveRecord(entityName, id, query));
-            }
-            else
-            {
-                processCustomFilterPromise(Tc.Crm.Scripts.Common.GetById(entityName, id, query));
-            }
+        var preFilterLocationOfficeLookup = function () {
+            if (!Xrm.Page.getAttribute(Attributes.ResortOffice)) return;
+            Xrm.Page.getControl(Attributes.ResortOffice).addPreSearch(function () {
+                filterLocationOfficeBasedOnSelectedGateway();
+            });
         }
-    }
 
-    var processCustomFilterPromise = function(promise)
-    {
-        promise.then(function (request)
-        {   
-            var booking = JSON.parse(request.response);
-            if (booking && booking._tc_destinationgatewayid_value)
-            {
-                var gatewayId = booking._tc_destinationgatewayid_value;
+        var filterLocationOfficeBasedOnSelectedGateway = function () {
+            if (!Xrm.Page.getAttribute(Attributes.ResortOffice)) return;
+            if (Xrm.Page.getAttribute(Attributes.Gateway) && Xrm.Page.getAttribute(Attributes.Gateway).getValue() && Xrm.Page.getAttribute(Attributes.Gateway).getValue().length > 0) {
+                var gatewayId = Xrm.Page.getAttribute(Attributes.Gateway).getValue()[0].id;
                 addCustomFilterForLocationOffice(gatewayId);
             }
-                
-        }).catch(function (err) {
-            console.log("ERROR: " + err.message);
-        });
-    }
+            else {
+                getGateWayFromBooking();
+            }
+        }
 
-    var addCustomFilterForLocationOffice = function(gatewayId)
-    {
-        var fetchXml = "<fetch distinct='true' mapping='logical' output-format='xml-platform' version='1.0'>" +
-                        "<entity name='tc_locationoffice'>" +
-                        "<attribute name='tc_locationofficeid'/>" +
-                        "<attribute name='tc_name'/>" +
-                        "<attribute name='tc_address1_flatorunitnumber'/>" +
-                        "<attribute name='tc_address1_housenumberorbuilding'/>" +
-                        "<attribute name='tc_address1_street'/>" +
-                        "<attribute name='tc_address1_town'/>" +
-                        "<attribute name='tc_address1_postcode'/>" +
-                        "<attribute name='tc_address1_county'/>" +
-                        "<attribute name='tc_address1_country'/>" +
-                        "<attribute name='tc_address1_additionalinformation'/>" +
-                        "<order descending='false' attribute='tc_name'/>" +
-                        "<link-entity name='tc_gateway_tc_locationoffice' intersect='true' visible='false' to='tc_locationofficeid' from='tc_locationofficeid'>" +
-                            "<link-entity name='tc_gateway' to='tc_gatewayid' from='tc_gatewayid' alias='aa'>" +
-                                "<filter type='and'>" +
-                                    "<condition attribute='tc_gatewayid' value='" + gatewayId + "' operator='eq'/>" +
-                                "</filter>" +
-                            "</link-entity>" +
-                       "</link-entity>" +
-                       "</entity>" +
-                       "</fetch>";
+        var getGateWayFromBooking = function () {
+            if (Xrm.Page.getAttribute(Attributes.BookingId) && Xrm.Page.getAttribute(Attributes.BookingId).getValue() && Xrm.Page.getAttribute(Attributes.BookingId).getValue().length > 0) {
+                var bookingId = Xrm.Page.getAttribute(Attributes.BookingId).getValue()[0].id;
+                var query = "?$select=_tc_destinationgatewayid_value";
+                var id = formatEntityId(bookingId);
+                if (isOfflineMode()) {
+                    processCustomFilterPromise(Xrm.Mobile.offline.retrieveRecord(EntitySetNames.Booking, id, query));
+                }
+                else {
+                    processCustomFilterPromise(Tc.Crm.Scripts.Common.GetById(EntitySetNames.Booking, id, query));
+                }
+            }
+        }
 
-        var layoutXml = "<grid name='resultset' object='1' jump='tc_locationofficeid' select='1' icon='1' preview='1'>" +
-                        "<row name='result' id='tc_locationofficeid'>" +
-                        "<cell name='tc_name' width='90' />" +
-                        "<cell name='tc_address1_flatorunitnumber' width='90' />" +
-                        "<cell name='tc_address1_housenumberorbuilding' width='90' />" +
-                        "<cell name='tc_address1_street' width='100' />" +
-                        "<cell name='tc_address1_town' width='100' />" +
-                        "<cell name='tc_address1_postcode' width='90' />" +
-                        "<cell name='tc_address1_county' width='100' />" +
-                        "<cell name='tc_address1_country' width='100' />" +
-                        "<cell name='tc_address1_additionalinformation' width='130' />" +
-                        "</row>" +
-                        "</grid>";
-        
-        Xrm.Page.getControl("tc_resortofficeid").addCustomView("{6fd72744-3676-41d4-8003-ae4cde9ac282}", "tc_locationoffice", "Associated Offices Of Gateway", fetchXml, layoutXml, true);
-    }
+        var processCustomFilterPromise = function (promise) {
+            promise.then(function (request) {
+                var booking = JSON.parse(request.response);
+                if (booking && booking._tc_destinationgatewayid_value) {
+                    var gatewayId = booking._tc_destinationgatewayid_value;
+                    addCustomFilterForLocationOffice(gatewayId);
+                }
 
-    var formatEntityId = function (id) {
-        return id !== null ? id.replace("{", "").replace("}", "") : null;
-    }
+            }).catch(function (err) {
+                console.log("ERROR: " + err.message);
+            });
+        }
 
-    function IsOfflineMode() {
-        return Xrm.Page.context.client.getClientState() === CLIENT_STATE_OFFLINE
-    }
+        var addCustomFilterForLocationOffice = function (gatewayId) {
+            var fetchXml = "<fetch distinct='true' mapping='logical' output-format='xml-platform' version='1.0'>" +
+                            "<entity name='" + EntityNames.LocationOffice + "'>" +
+                            "<attribute name='" + Attributes.LocationOfficeId + "'/>" +
+                            "<attribute name='" + Attributes.Name + "'/>" +
+                            "<attribute name='" + Attributes.Address1FlatNumber + "'/>" +
+                            "<attribute name='" + Attributes.Address1HouseNumber + "'/>" +
+                            "<attribute name='" + Attributes.Address1Street + "'/>" +
+                            "<attribute name='" + Attributes.Address1Town + "'/>" +
+                            "<attribute name='" + Attributes.Address1PostCode + "'/>" +
+                            "<attribute name='" + Attributes.Address1County + "'/>" +
+                            "<attribute name='" + Attributes.Address1Country + "'/>" +
+                            "<attribute name='" + Attributes.Address1AdditionalInformation + "'/>" +
+                            "<order descending='false' attribute='" + Attributes.Name + "'/>" +
+                            "<link-entity name='" + EntityNames.GatewayLocationOffice + "' intersect='true' visible='false' to='" + Attributes.LocationOfficeId + "' from='" + Attributes.LocationOfficeId + "'>" +
+                                "<link-entity name='" + EntityNames.Gateway + "' to='" + Attributes.GatewayId + "' from='" + Attributes.GatewayId + "' alias='aa'>" +
+                                    "<filter type='and'>" +
+                                        "<condition attribute='" + Attributes.GatewayId + "' value='" + gatewayId + "' operator='eq'/>" +
+                                    "</filter>" +
+                                "</link-entity>" +
+                           "</link-entity>" +
+                           "</entity>" +
+                           "</fetch>";
 
-    var validateArrivalDateGreaterOrEqualDeparture = function () {
-    	var arrivalDateControl = Xrm.Page.getControl(Attributes.ArrivalDate);
-    	var arrivalDate = Xrm.Page.data.entity.attributes.get(Attributes.ArrivalDate).getValue();
-    	var departureDate = Xrm.Page.data.entity.attributes.get(Attributes.DepartureDate).getValue();
+            var layoutXml = "<grid name='resultset' object='1' jump='" + Attributes.LocationOfficeId + "' select='1' icon='1' preview='1'>" +
+                            "<row name='result' id='" + Attributes.LocationOfficeId + "'>" +
+                            "<cell name='" + Attributes.Name + "' width='90' />" +
+                            "<cell name='" + Attributes.Address1FlatNumber + "' width='90' />" +
+                            "<cell name='" + Attributes.Address1HouseNumber + "' width='90' />" +
+                            "<cell name='" + Address1Street + "' width='100' />" +
+                            "<cell name='" + Attributes.Address1Town + "' width='100' />" +
+                            "<cell name='" + Attributes.Address1PostCode + "' width='90' />" +
+                            "<cell name='" + Attributes.Address1County + "' width='100' />" +
+                            "<cell name='" + Attributes.Address1Country + "' width='100' />" +
+                            "<cell name='" + Attributes.Address1AdditionalInformation + "' width='130' />" +
+                            "</row>" +
+                            "</grid>";
 
-    	arrivalDateControl.clearNotification();
-    	if(arrivalDate != null && departureDate != null) {
-    		if(arrivalDate.setHours(0, 0, 0, 0) > departureDate.setHours(0, 0, 0, 0)) {
-    			arrivalDateControl.setNotification("Departure date should be equal or greater than Arrival date");
-    		}
-    	}
-    }
+            Xrm.Page.getControl(Attributes.ResortOffice).addCustomView("{6fd72744-3676-41d4-8003-ae4cde9ac282}", EntityNames.LocationOffice, "Associated Offices Of Gateway", fetchXml, layoutXml, true);
+        }
 
-    // public methods
-    return {
-        OnLoad: function () {
-            OnLoad();
-        },
-        OnChangeTelephone1: function () {
-            onChangeTelephone1();
-        },
-        OnChangeTelephone2: function () {
-            onChangeTelephone2();
-        },
-        OnChangeRepNotes: function () {
-        	setNotification();
-        },
-        OnSave: function (context) {
-            var isValid = Tc.Crm.Scripts.Utils.Validation.ValidateGdprCompliance(context);
-            if (isValid) {
-                if (Xrm.Page.context.client.getClientState() !== CLIENT_STATE_OFFLINE) {
+        var formatEntityId = function (id) {
+            return id !== null ? id.replace("{", "").replace("}", "") : null;
+        }
+
+        function isOfflineMode() {
+            return Xrm.Page.context.client.getClientState() === ClientState.Offline;
+        }
+
+        var getNewTcProductValue = function (tcProductValue) {
+            if (tcProductValue === ProductTypes.TcProduct)
+                return ProductTypes.NonTcProduct;
+            else
+                return ProductTypes.TcProduct;
+        }
+
+        var getControlValue = function (controlName) {
+            return Xrm.Page.getAttribute(controlName) ? Xrm.Page.getAttribute(controlName).getValue() : null;
+        }
+
+        var setTcProductRelatedFieldValue = function () {
+            var tcProductRelatedFieldValue = getControlValue(Attributes.TcProductRelated);
+            if (tcProductRelatedFieldValue == null)
+                return;
+            Xrm.Page.getAttribute(Attributes.TcProductRelated).setValue(getNewTcProductValue(tcProductRelatedFieldValue));
+        }
+
+        var tcProductRibbonButtonEnabled = null;
+
+        var isIncidentType = function () {
+            var caseIdAttr = Xrm.Page.getAttribute(Attributes.CaseType);
+            if (caseIdAttr == null)
+                return false;
+
+            var value = caseIdAttr.getValue();
+            if (value == null || value.length === 0)
+                return false;
+
+            return value[0].name === CaseType.Incident;
+        }
+
+        var refreshRibbon = function (userRoleId) {
+            try {
+                var query = "?$select=name";
+                Tc.Crm.Scripts.Common.GetById(EntitySetNames.SecurityRole, userRoleId, query).then(
+                    function (securityRoleNameResponse) {
+                        var role = JSON.parse(securityRoleNameResponse.response);
+                        if (role == null || role == "" || role == "undefined") return;
+                        if (role.name === SecurityRole.SystemAdministrator || role.name === SecurityRole.HealthSafety || role.name === SecurityRole.SystemMaintenance) {
+                            tcProductRibbonButtonEnabled = isIncidentType();
+                            Xrm.Page.ui.refreshRibbon();
+                        }
+
+                    }).catch(function (error) {
+                        throw new Error("Problem in retrieving the Security Role");
+                    });
+            } catch (e) {
+                console.log("Error in retrieving SecurityRole");
+            }
+        }
+
+        var onTcProductRibbonButtonEnabled = function () {
+            var userRole = window.parent.Xrm.Page.context.getUserRoles();
+            if (userRole == null || userRole === "")
+                return;
+
+            for (var i = 0; i < userRole.length; i++) {
+                if (tcProductRibbonButtonEnabled == null)
+                    refreshRibbon(userRole[i]);
+            }
+            if (tcProductRibbonButtonEnabled == null) tcProductRibbonButtonEnabled = false;
+        }
+
+        var validateArrivalDateGreaterOrEqualDeparture = function () {
+            var arrivalDateControl = Xrm.Page.getControl(Attributes.ArrivalDate);
+            var arrivalDate = Xrm.Page.data.entity.attributes.get(Attributes.ArrivalDate).getValue();
+            var departureDate = Xrm.Page.data.entity.attributes.get(Attributes.DepartureDate).getValue();
+
+            arrivalDateControl.clearNotification();
+            if (arrivalDate != null && departureDate != null) {
+                if (arrivalDate.setHours(0, 0, 0, 0) > departureDate.setHours(0, 0, 0, 0)) {
+                    arrivalDateControl.setNotification("Departure date should be equal or greater than Arrival date");
+                }
+            }
+        }
+
+        // public methods
+        return {
+            OnLoad: function () {
+                OnLoad();
+            },
+            OnChangeTelephone1: function () {
+                onChangeTelephone1();
+            },
+            OnChangeTelephone2: function () {
+                onChangeTelephone2();
+            },
+            OnChangeRepNotes: function () {
+                setNotification();
+            },
+            OnSave: function (context) {
+                var isValid = Tc.Crm.Scripts.Utils.Validation.ValidateGdprCompliance(context);
+                if (isValid) {
+                    if (!isOfflineMode()) {
+                        Tc.Crm.Scripts.Library.Case.UpdateRelatedCompensationsSourceMarket();
+                    }
+                }
+            },
+            OnValidateRepNotes: function () {
+                var currentItem = Xrm.Page.ui.formSelector.getCurrentItem();
+                if (currentItem == null || currentItem.getLabel() === "iDS Case") {
+                    var repNotes = Xrm.Page.data.entity.attributes.get(Attributes.RepNotes);
+                    return repNotes != null && repNotes.getValue() != null && repNotes.getValue() !== "";
+                }
+                return true;
+            },
+            OnCaseFieldChange: function () {
+                GetTheSourceMarketCurrency();
+            },
+            OnCaseFieldChangeMandatoryMetConditions: function () {
+                mandatoryMetConditions();
+            },
+            OnChangeCustomer: function () {
+                validateCaseAssociatedCustomerPhoneNum();
+            },
+            OnChangeSourceMarket: function () {
+                if (isOfflineMode()) {
                     Tc.Crm.Scripts.Library.Case.UpdateRelatedCompensationsSourceMarket();
                 }
-            }            
-        },
-        OnValidateRepNotes: function () {
-        	var currentItem = Xrm.Page.ui.formSelector.getCurrentItem();
-        	if(currentItem == null || currentItem.getLabel() === "iDS Case") {
-        		var repNotes = Xrm.Page.data.entity.attributes.get(Attributes.RepNotes);
-        		return repNotes != null && repNotes.getValue() != null && repNotes.getValue() !== "";
-        	}
-        	return true;
-        },
-        OnCaseFieldChange: function () {
-            GetTheSourceMarketCurrency();
-        },
-        OnCaseFieldChangeMandatoryMetConditions: function () {
-            MandatoryMetConditions();
-        },
-        OnChangeCustomer: function () {
-            validateCaseAssociatedCustomerPhoneNum();
-        },
-        OnChangeSourceMarket: function () {
-            if (Xrm.Page.context.client.getClientState() === CLIENT_STATE_OFFLINE) {
-                Tc.Crm.Scripts.Library.Case.UpdateRelatedCompensationsSourceMarket();
+            },
+            OnChangeArrivalOrDepartureDates: function () {
+                validateArrivalDateGreaterOrEqualDeparture();
+            },
+            OnTcProductRibbonButtonClick: function () {
+                setTcProductRelatedFieldValue();
+            },
+            EnableTcProductRibbonButton: function () {
+                if (!isOfflineMode()) {
+                    if (tcProductRibbonButtonEnabled == null) {
+                        onTcProductRibbonButtonEnabled();
+                    }
+                    return tcProductRibbonButtonEnabled;
+                } else return false;
             }
-        },
-        OnChangeArrivalOrDepartureDates: function () {
-        	validateArrivalDateGreaterOrEqualDeparture();
-        }
-    };
-})();
+        };
+    })();
 
-// end script
-console.log('loaded events.case');
+    // end script
+    console.log('loaded events.case');
 });
