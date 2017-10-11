@@ -53,6 +53,8 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
     }
     var StateCode = {
         Open: 0,
+        Won: 1,
+        Lost: 2,
     }
     var getUserRoles = function () {
         var enable = false;
@@ -63,18 +65,30 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
             var results = syncGetSecurityRoles(userRoleId);
             var name = results.value[0]["name"];
             if (name == RETAIL_LEVEL2_ACCESS || name == RETAIL_LEVEL3_ACCESS) {
-                var ValidationAttr = getControlValue(Attributes.Validation);
-                if (ValidationAttr == null) return enable;
-                if (ValidationAttr == false && Xrm.Page.ui.getFormType() != FORM_MODE_CREATE) {
+                //var ValidationAttr = getControlValue(Attributes.Validation);
+                //if (ValidationAttr == null) return enable;
+                //if (ValidationAttr == false && Xrm.Page.ui.getFormType() != FORM_MODE_CREATE) {
                     enable = true;
-                }
+               // }
             }
             if (enable == true) break;
         }
         return enable;
     }
     var enableValidateRibbonButton = function () {
-        var enable = getUserRoles();
+        var enable = false;
+        var ValidationAttr = getControlValue(Attributes.Validation);
+        if (ValidationAttr == null) return enable;
+        if (ValidationAttr == true) return enable;
+        if(Xrm.Page.ui.getFormType() == FORM_MODE_CREATE) return enable;
+        enable = getUserRoles();
+        if (enable != null && enable != "" && enable != undefined)
+            return enable;
+    }
+    var enableReOpenRibbonButton = function () {        
+        var enable = false;
+        if (Xrm.Page.getAttribute(Attributes.StateCode).getValue() != StateCode.Lost) return enable;
+        enable = getUserRoles();
         if (enable != null && enable != "" && enable != undefined)
             return enable;
     }
@@ -267,6 +281,9 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
         },
         OnOwrRibbonButtonClick: function() {
             owrRibbonButtonClick();
+        },
+        EnableReOpenRibbonButton: function () {          
+           return enableReOpenRibbonButton();
         }
 
     };
