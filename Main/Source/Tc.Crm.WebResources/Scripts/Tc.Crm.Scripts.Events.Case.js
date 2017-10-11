@@ -62,6 +62,8 @@ scriptLoader.load("Tc.Crm.Scripts.Events.Case", ["Tc.Crm.Scripts.Utils.Validatio
     Tc.Crm.Scripts.Events.Case = (function () {
         "use strict";
 
+        var tcProductRibbonButtonEnabled = null;
+
         var ClientState = {
             Offline: "Offline"
         };
@@ -499,9 +501,8 @@ scriptLoader.load("Tc.Crm.Scripts.Events.Case", ["Tc.Crm.Scripts.Utils.Validatio
             if (tcProductRelatedFieldValue == null)
                 return;
             Xrm.Page.getAttribute(Attributes.TcProductRelated).setValue(getNewTcProductValue(tcProductRelatedFieldValue));
+            Xrm.Page.data.entity.save();
         }
-
-        var tcProductRibbonButtonEnabled = null;
 
         var isIncidentType = function () {
             var caseIdAttr = Xrm.Page.getAttribute(Attributes.CaseType);
@@ -515,36 +516,45 @@ scriptLoader.load("Tc.Crm.Scripts.Events.Case", ["Tc.Crm.Scripts.Utils.Validatio
             return value[0].name === CaseType.Incident;
         }
 
-        var refreshRibbon = function (userRoleId) {
-            try {
-                var query = "?$select=name";
-                Tc.Crm.Scripts.Common.GetById(EntitySetNames.SecurityRole, userRoleId, query).then(
-                    function (securityRoleNameResponse) {
-                        var role = JSON.parse(securityRoleNameResponse.response);
-                        if (role == null || role == "" || role == "undefined") return;
-                        if (role.name === SecurityRole.SystemAdministrator || role.name === SecurityRole.HealthSafety || role.name === SecurityRole.SystemMaintenance) {
-                            tcProductRibbonButtonEnabled = isIncidentType();
-                            Xrm.Page.ui.refreshRibbon();
-                        }
-
-                    }).catch(function (error) {
-                        throw new Error("Problem in retrieving the Security Role");
-                    });
-            } catch (e) {
-                console.log("Error in retrieving SecurityRole");
-            }
-        }
-
         var onTcProductRibbonButtonEnabled = function () {
-            var userRole = window.parent.Xrm.Page.context.getUserRoles();
-            if (userRole == null || userRole === "")
+            if (!isIncidentType()) {
+                tcProductRibbonButtonEnabled = false;
                 return;
-
-            for (var i = 0; i < userRole.length; i++) {
-                if (tcProductRibbonButtonEnabled == null)
-                    refreshRibbon(userRole[i]);
             }
-            if (tcProductRibbonButtonEnabled == null) tcProductRibbonButtonEnabled = false;
+
+            var userRole = window.parent.Xrm.Page.context.getUserRoles();
+            if (userRole == null || userRole === "") {
+                tcProductRibbonButtonEnabled = false;
+                return;
+            }
+
+            var promises = [];
+            var query = "?$select=name";
+            for (var i = 0; i < userRole.length; i++) {
+                var promise = Tc.Crm.Scripts.Common.GetById(EntitySetNames.SecurityRole, userRole[i], query);
+                promises.push(promise);
+            }
+            Promise.all(promises).then(
+                function (securityRoleNameResponse) {
+                    if (securityRoleNameResponse == null) {
+                        console.warn("Problem getting security roles");
+                        return;
+                    }
+                    for (var i = 0; i < securityRoleNameResponse.length; i++) {
+                        var role = JSON.parse(securityRoleNameResponse[i].response);
+                        if (role == null || role == "" || role == "undefined") continue;
+                        if (role.name === SecurityRole.SystemAdministrator || role.name === SecurityRole.HealthSafety || role.name === SecurityRole.SystemMaintenance) {
+                            tcProductRibbonButtonEnabled = true;
+                            break;
+                        }
+                    }
+                    if (tcProductRibbonButtonEnabled == null) tcProductRibbonButtonEnabled = false;
+                    Xrm.Page.ui.refreshRibbon();
+                },
+                function (error) {
+                    console.warn("Problem getting case lines");
+                    tcProductRibbonButtonEnabled = false;
+                });
         }
 
         var validateArrivalDateGreaterOrEqualDeparture = function () {
