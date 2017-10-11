@@ -92,6 +92,8 @@ namespace Tc.Crm.UnitTests.Plugins
         {
             followUpEntity.Attributes.Remove(Attributes.FollowUp.DueDate);
             followUpEntity.Attributes.Add(Attributes.FollowUp.DueDate, new DateTime(2018, 09, 15, 05, 06, 07, DateTimeKind.Local));
+            followUpEntity.Attributes.Remove(Attributes.FollowUp.RescheduleReason);
+            followUpEntity.Attributes.Add(Attributes.FollowUp.RescheduleReason, "Busy");
             var cntxt = GetPluginContext();       
             var fakedPlugin = context.ExecutePluginWith<Crm.Plugins.FollowUp.CreateNoteOnFollowUpOperation>(cntxt);
 
