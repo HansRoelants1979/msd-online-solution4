@@ -27,11 +27,11 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
                                     customer.CustomerIdentifier.CustomerId : string.Empty;
             account[Attributes.Account.SourceSystemId] = sourceSystemID; 
             account[Attributes.Account.DuplicateSourceSystemId] = sourceSystemID; 
-            if ((customer.Email != null) || (customer.Email != null & customer.Email.Length > 0))
+            if ((customer.Email != null) || (customer.Email != null && customer.Email.Length > 0))
                 PopulateEmail(account, customer.Email, trace);
-            if ((customer.Phone != null) || (customer.Phone != null & customer.Phone.Length > 0))
+            if ((customer.Phone != null) || (customer.Phone != null && customer.Phone.Length > 0))
                 PopulatePhone(account, customer.Phone, trace);
-            if ((customer.Address != null) || (customer.Address != null & customer.Address.Length > 0))
+            if ((customer.Address != null) || (customer.Address != null && customer.Address.Length > 0))
                 PopulateAddress(account, customer.Address, trace);
             trace.Trace("Account populate fields - end");
             return account;
