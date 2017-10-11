@@ -260,7 +260,7 @@ namespace Tc.Usd.HostedControls.Models
         FourtyFiveNights = 950000049
     }
 
-    [DataContract(Name = "childrensAges")]
+    [DataContract(Name = "childrenAges")]
     public enum ChildrenAges
     {
         [EnumMember(Value= "Unknown")]
@@ -305,7 +305,7 @@ namespace Tc.Usd.HostedControls.Models
         NineteenYearOld = 950000019
     }
 
-    [DataContract(Name = "PhoneType")]
+    [DataContract(Name = "рhoneType")]
     public enum PhoneType
     {
         [EnumMember(Value = "Unknown")]
@@ -318,7 +318,7 @@ namespace Tc.Usd.HostedControls.Models
         Business = 950000003
     }
 
-    [DataContract(Name = "EmailType")]
+    [DataContract(Name = "emailType")]
     public enum EmailType
     {
         [EnumMember(Value = "Unknown")]

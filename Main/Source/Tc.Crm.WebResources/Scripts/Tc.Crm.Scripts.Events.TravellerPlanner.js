@@ -149,22 +149,6 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
             strUrl = strUrl.replace(/[{}]/g, "");
 
             window.open(strUrl);
-
-        }
-
-    }
-    var webrioRibbonButtonClick = function () {
-        if (window.IsUSD == true) {
-            var consultationNo = Xrm.Page.getAttribute("name").getValue();
-            var customer = Xrm.Page.getAttribute("customerid").getValue();
-            var customerId;
-            if (customer != null) {
-                customerId = customer[0].id;
-            }
-            var strUrl = WEBRIO_WEB_PAGE_URL + "&ConsultationNo=" + consultationNo + "&CustomerId=" + customerId;
-            strUrl = strUrl.replace(/[{}]/g, "");
-
-            window.open(strUrl);
         }
     }
 

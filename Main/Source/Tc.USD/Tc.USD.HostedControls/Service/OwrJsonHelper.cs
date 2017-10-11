@@ -52,9 +52,9 @@ namespace Tc.Usd.HostedControls.Service
 
             travelPlanner.DeparturePoints = new[]
                 {
-                    GetGatewayOwrName(_opportunity.GetAttributeValue<EntityReference>(Opportunity.DeparturePoint1)),
-                    GetGatewayOwrName(_opportunity.GetAttributeValue<EntityReference>(Opportunity.DeparturePoint2)),
-                    GetGatewayOwrName(_opportunity.GetAttributeValue<EntityReference>(Opportunity.DeparturePoint3))
+                    _opportunity.GetAttributeValue<EntityReference>(Opportunity.DeparturePoint1)?.Name,
+                    _opportunity.GetAttributeValue<EntityReference>(Opportunity.DeparturePoint2)?.Name,
+                    _opportunity.GetAttributeValue<EntityReference>(Opportunity.DeparturePoint3)?.Name
                 };
             travelPlanner.Rooms = GetRoomsByEntity(rooms);
             travelPlanner.Customer = GetCustomer();
@@ -133,7 +133,7 @@ namespace Tc.Usd.HostedControls.Service
                         var hotel1 = CrmService.GetHotelCode(_client, _opportunity.GetAttributeValue<EntityReference>(Opportunity.Hotel1)?.Id);
                         return new[] { hotel1, ((int)HowDoYouWantToSearch.ByHotel).ToString()};
                     case HowDoYouWantToSearch.ByDestinationAirport:
-                        var destinationAirport1 = GetGatewayOwrName(_opportunity.GetAttributeValue<EntityReference>(Opportunity.DestinationAirport1));
+                        var destinationAirport1 = _opportunity.GetAttributeValue<EntityReference>(Opportunity.DestinationAirport1)?.Name;
                         return new[] { destinationAirport1, ((int)HowDoYouWantToSearch.ByDestinationAirport).ToString() };
                     default:
                         return new string[] { };
