@@ -30,6 +30,9 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
     var LIME_WEB_PAGE_URL = "http://event/?eventname=Tc.Event.OnClickLimeRibbonButton";
     var OWR_EVENT_URL = "http://event/?eventname=Tc.Event.OnOwrClick";
     var WEBRIO_WEB_PAGE_URL = "http://event/?eventname=Tc.Event.OnClickWebRioRibbonButton";
+    var WEBRIO_USD_PARAM_CONSULTATION = "&ConsultationNo=";
+    var WEBRIO_USD_PARAM_CUSTOMERID = "&CustomerId=";
+    var WEBRIO_USD_PARAM_TPID = "&EntityId=";
     
 
 
@@ -137,15 +140,26 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
 
         }
     }
+   
     var webrioRibbonButtonClick = function () {
         if (window.IsUSD == true) {
-            var consultationNo = Xrm.Page.getAttribute("name").getValue();
-            var customer = Xrm.Page.getAttribute("customerid").getValue();
+            var consultationNo = getControlValue(Attributes.Name);
+            var customer = getControlValue(Attributes.CustomerId);
+            if (consultationNo == null)
+            {
+                Xrm.Utility.alertDialog("Consultation reference number is missing.");
+                return;
+            }
+            if (customer == null) {
+                Xrm.Utility.alertDialog("Customer is missing.");
+                return;
+            }
+            var travelPlannerId = Xrm.Page.data.entity.getId();
             var customerId;
             if (customer != null) {
                 customerId = customer[0].id;
             }
-            var strUrl = WEBRIO_WEB_PAGE_URL + "&ConsultationNo=" + consultationNo + "&CustomerId=" + customerId;
+            var strUrl = WEBRIO_WEB_PAGE_URL + WEBRIO_USD_PARAM_CONSULTATION + consultationNo + WEBRIO_USD_PARAM_CUSTOMERID + customerId + WEBRIO_USD_PARAM_TPID + travelPlannerId;
             strUrl = strUrl.replace(/[{}]/g, "");
 
             window.open(strUrl);

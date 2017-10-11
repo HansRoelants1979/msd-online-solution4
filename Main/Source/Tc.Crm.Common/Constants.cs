@@ -104,6 +104,7 @@
             public const string Url = "Url";
             public const string WebRioConsultationNo = "ConsultationNo";
             public const string CustomerId = "CustomerId";
+            public const string EntityId = "EntityId";
         }
 
         public static class UsdHostedControl

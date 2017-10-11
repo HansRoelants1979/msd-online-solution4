@@ -24,6 +24,11 @@ namespace Tc.Crm.Common.IntegrationLayer.Jti.Models
         [DataMember(Name = "ini")]
         public string Initials { get; set; }
 
+        [DataMember(Name = "crt")]
+        public string TravelPlannerInitials { get; set; }
+
+        public bool IncludeInitials { get; set; }
+
         public override Dictionary<string, object> GeneratePayload()
         {
             var payload = base.GeneratePayload();
@@ -34,7 +39,10 @@ namespace Tc.Crm.Common.IntegrationLayer.Jti.Models
             payload.Add("abt", AbtaNumber);
             payload.Add("emp", EmployeeId);
             payload.Add("ini", Initials);
-            
+
+            if(IncludeInitials)
+                payload.Add("crt", TravelPlannerInitials);
+
             return payload;
         }
     }

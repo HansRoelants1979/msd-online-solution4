@@ -26,5 +26,7 @@ namespace Tc.Usd.HostedControls.Models
         public string Data { get; set; }
         public string CustomerId { get; set; }
         public string NewConsultationApi { get; set; }
+        public string TravelPlannerId { get; set; }
+        public string Initials { get; set; }
     }
 }

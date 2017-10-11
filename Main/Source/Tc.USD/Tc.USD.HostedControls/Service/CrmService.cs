@@ -30,7 +30,6 @@ namespace Tc.Usd.HostedControls.Service
             var bookingSummary = response.Entity;
             if (bookingSummary == null || !bookingSummary.Contains("tc_name") || bookingSummary["tc_name"] == null)
             {
-                configuration.Errors.Add("The id of the booking summary provided is invalid.");
                 return;
             }
             configuration.ConsultationReference = bookingSummary["tc_name"].ToString();
@@ -103,6 +102,7 @@ namespace Tc.Usd.HostedControls.Service
                                 <order attribute='tc_name' descending='false' />
                                 <filter type='and'>
                                   <condition attribute='tc_name' operator='eq' value='Tc.Wr.JwtPrivateKey' />
+                                  <condition attribute = 'statecode' operator= 'eq' value = '0' />
                                 </filter>
                               </entity>
                             </fetch>";
@@ -129,6 +129,7 @@ namespace Tc.Usd.HostedControls.Service
                                 <attribute name='tc_abtanumber' />
                                 <filter type='and'>
                                   <condition attribute='ownerid' operator='eq' value='{0}' />
+                                    <condition attribute = 'statecode' operator= 'eq' value = '0' />
                                 </filter>
                               </entity>
                             </fetch>";
@@ -263,6 +264,27 @@ namespace Tc.Usd.HostedControls.Service
             };
 
             return customer;
+        }
+
+        public static void GetInitialsFrom(CrmServiceClient client, tcm.WebRioSsoConfig configuration)
+        {
+            if (client == null) return;
+            if (configuration == null) return;
+
+            RetrieveRequest request = new RetrieveRequest
+            {
+                ColumnSet = new ColumnSet("tc_initials"),
+                Target = new Microsoft.Xrm.Sdk.EntityReference("opportunity", new Guid(configuration.TravelPlannerId))
+            };
+            var response = (RetrieveResponse)client.ExecuteCrmOrganizationRequest(request, "Fetching travel planner record for Web Rio");
+            if (response == null) return;
+            var travelPlanner = response.Entity;
+            if (travelPlanner == null || !travelPlanner.Contains("tc_initials") || travelPlanner["tc_initials"] == null)
+            {
+                return;
+            }
+            configuration.Initials = travelPlanner["tc_initials"].ToString();
+
         }
 
         private static string GetStringValue(Entity e, string fieldName)

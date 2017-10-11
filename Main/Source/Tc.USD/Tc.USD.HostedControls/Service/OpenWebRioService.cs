@@ -205,7 +205,14 @@ namespace Tc.Usd.HostedControls
             var configuration = new WebRioSsoConfig();
             configuration.JSessionId = GetParamValue(args, UsdParameter.WebRioJSessionId);
             configuration.RequestType = GetRequestType(args);
-            
+            if (configuration.RequestType == RequestType.TravelPlanner)
+            {
+                configuration.TravelPlannerId = GetParamValue(args, UsdParameter.EntityId);
+                if (!string.IsNullOrWhiteSpace(configuration.TravelPlannerId))
+                {
+                    CrmService.GetInitialsFrom(_client.CrmInterface, configuration);
+                }
+            }
             if (configuration.RequestType == RequestType.Booking)
                 GetBookingDetails(args,configuration);
             else if (configuration.RequestType == RequestType.TravelPlanner)
@@ -266,6 +273,18 @@ namespace Tc.Usd.HostedControls
 
             if (configuration.RequestType == RequestType.Other)
                 errors.Add("Action call parameter [Type] is missing or not valid.");
+
+            if (configuration.RequestType == RequestType.TravelPlanner)
+            {
+                if (string.IsNullOrWhiteSpace(configuration.Initials))
+                    errors.Add("The id of the travel planner provided is invalid or initials is missing.");
+                if (string.IsNullOrWhiteSpace(configuration.ConsultationReference))
+                    errors.Add("Consultation reference is missing.");
+            }
+
+            if (configuration.RequestType == RequestType.Booking)
+                if (string.IsNullOrWhiteSpace(configuration.ConsultationReference))
+                    errors.Add("The id of the booking summary provided is invalid or consultation reference is missing in booking reference.");
 
             if (configuration.Login == null
                     || string.IsNullOrWhiteSpace(configuration.Login.AbtaNumber)
@@ -358,6 +377,15 @@ namespace Tc.Usd.HostedControls
                 Initials = configuration.Login.Initials,
                 Aud = EntityRecords.Configuration.WebRioAudWebRio
             };
+
+            if (configuration.RequestType == RequestType.TravelPlanner)
+            {
+                payload.TravelPlannerInitials = configuration.Initials;
+                payload.IncludeInitials = true;
+            }
+            else
+                payload.IncludeInitials = false;
+
             return payload;
         }
     }
