@@ -319,7 +319,9 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
     return {
         OnLoad: function () {
             addEventHandlers();
+
             Tc.Crm.Scripts.Library.CaseLine.LoadSourceMarketAndSetDefaults();
+            Tc.Crm.Scripts.Library.CaseLine.FilterSupplierBasedOnGateway();
         },
         OnSave: function (context) {
             var isValid = Tc.Crm.Scripts.Utils.Validation.ValidateGdprCompliance(context);
@@ -339,6 +341,12 @@ Tc.Crm.Scripts.Events.CaseLine = ( function () {
         },
         OnCaseLinePropertyNameChange: function () {
             setAlternateEmailAddressOnPropertyName();
+        },
+        OnServiceTypeChange: function () {
+            Tc.Crm.Scripts.Library.CaseLine.FilterSupplierBasedOnGateway();
+        },
+        OnSupplierChange: function () {
+            Tc.Crm.Scripts.Library.CaseLine.PopulateSupplierEmail();
         }
     };
 })();

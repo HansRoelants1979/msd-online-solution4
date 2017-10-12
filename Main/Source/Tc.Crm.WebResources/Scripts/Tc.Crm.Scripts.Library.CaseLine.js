@@ -100,9 +100,17 @@ Tc.Crm.Scripts.Library.CaseLine = (function () {
         PackageHoliday: 40
     }
 
+    var ServiceType ={
+        Agency : 950000007,
+        CarHire : 950000008,
+        Excursion : 950000005,
+        Weddings : 950000006
+    }
+
     var Attributes = {
         Name: "tc_name",
         Case: "tc_caseid",
+        Booking: "tc_bookingid",
         CaseType: "tc_casetypeid",
         CaseCategory1: "tc_categorylevel1id",
         CaseCategory2: "tc_casecategory2id",
@@ -118,7 +126,10 @@ Tc.Crm.Scripts.Library.CaseLine = (function () {
         Impact: "tc_impact",
         BuildingWorkGrade: "tc_buildingworkgrade",
         OfferedAmount: "tc_offeredamount",
-        Comments: "tc_impactseveritycomments"
+        Comments: "tc_impactseveritycomments",
+        ServiceType: "tc_servicetype",
+        Supplier: "tc_supplier",
+        SupplierEmail : "emailaddress"
     }
 
     var TabsAndSections = {
@@ -754,11 +765,142 @@ Tc.Crm.Scripts.Library.CaseLine = (function () {
         }
     }
 
+    var filterSupplierBasedOnGateway = function () {
+        var serviceType = Xrm.Page.getAttribute(Attributes.ServiceType);
+        if (serviceType == null) return;
+        
+        serviceType = serviceType.getValue();
+        if (serviceType == null) return;
+
+        if ((serviceType == ServiceType.Agency || serviceType == ServiceType.CarHire ||
+            serviceType == ServiceType.Excursion || serviceType == ServiceType.Weddings) &&
+                (Xrm.Page.getAttribute(Attributes.Supplier) != null &&
+            Xrm.Page.getAttribute(Attributes.Supplier).getValue() == null)) {
+
+            var booking = Xrm.Page.getAttribute(Attributes.Booking);
+            var incident = Xrm.Page.getAttribute(Attributes.Case);
+
+            if (booking != null && booking.getValue() != null) {
+                var bookingId = booking.getValue();
+                bookingId = bookingId[0].id.replace("{", "").replace("}", "");
+                getBookingGateWay(bookingId);
+            }
+            else if(incident != null && incident.getValue() != null)
+            {
+                var caseId = incident.getValue();
+                caseId = caseId[0].id.replace("{", "").replace("}", "");
+                getCaseGateWay(caseId);
+            }
+        }
+        else
+        {
+            Xrm.Page.getAttribute(Attributes.Supplier).setValue(null);
+        }
+    }
+
+    function getCaseGateWay(caseId)
+    {
+        var req = new XMLHttpRequest();
+        req.open("GET", Xrm.Page.context.getClientUrl() + "/api/data/v8.2/incidents(" + caseId + ")?$select=_tc_gateway_value", false);
+        req.setRequestHeader("OData-MaxVersion", "4.0");
+        req.setRequestHeader("OData-Version", "4.0");
+        req.setRequestHeader("Accept", "application/json");
+        req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+        req.onreadystatechange = function () {
+            if (this.readyState === 4) {
+                req.onreadystatechange = null;
+                if (this.status === 200) {
+                    var result = JSON.parse(this.response);
+                    var gateway = result["_tc_gateway_value"];
+                    if (gateway != null)
+                    filterSupplier(gateway);
+                } else {
+                    console.log("Issue while getting  gateway from case;" + this.statusText);
+                }
+            }
+        };
+        req.send();
+    }
+
+    function getBookingGateWay(bookingId)
+    {
+        var req = new XMLHttpRequest();
+        req.open("GET", Xrm.Page.context.getClientUrl() + "/api/data/v8.2/tc_bookings(" + bookingId + ")?$select=_tc_destinationgatewayid_value", false);
+        req.setRequestHeader("OData-MaxVersion", "4.0");
+        req.setRequestHeader("OData-Version", "4.0");
+        req.setRequestHeader("Accept", "application/json");
+        req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+        req.onreadystatechange = function () {
+            if (this.readyState === 4) {
+                req.onreadystatechange = null;
+                if (this.status === 200) {
+                    var result = JSON.parse(this.response);
+                    var destinationGatewayId = result["_tc_destinationgatewayid_value"];
+                    if (destinationGatewayId != null)
+                    filterSupplier(destinationGatewayId);
+                } else {
+                    console.log("Issue while getting destination gateway from booking;"+this.statusText);
+                }
+            }
+        };
+        req.send();
+    }
+
+    function filterSupplier(gateway)
+    {
+        Xrm.Page.getControl(Attributes.Supplier).addPreSearch(function () {
+            addSupplierFilterPreSearch(gateway);
+        });
+    }
+
+    function addSupplierFilterPreSearch(gateway)
+    {
+            var supplierFilter =
+                "<filter type='and'>" +
+                    "<condition attribute='tc_gateway' operator='eq' value='" + gateway + "' />" +
+                    "<condition attribute='statecode' operator='eq' value='0' />" +
+                "</filter>";
+            Xrm.Page.getControl(Attributes.Supplier).addCustomFilter(supplierFilter);
+    }
+
+    function populateSupplierEmail()
+    {
+        var supplier = Xrm.Page.getAttribute(Attributes.Supplier);
+        if (supplier != null && supplier.getValue() != null) {
+            var supplierId = supplier.getValue();
+            supplierId = supplierId[0].id.replace("{", "").replace("}", "");
+            var req = new XMLHttpRequest();
+            req.open("GET", Xrm.Page.context.getClientUrl() + "/api/data/v8.2/accounts(" + supplierId + ")?$select=emailaddress1", false);
+            req.setRequestHeader("OData-MaxVersion", "4.0");
+            req.setRequestHeader("OData-Version", "4.0");
+            req.setRequestHeader("Accept", "application/json");
+            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+            req.onreadystatechange = function () {
+                if (this.readyState === 4) {
+                    req.onreadystatechange = null;
+                    if (this.status === 200) {
+                        var result = JSON.parse(this.response);
+                        var emailaddress1 = result["emailaddress1"];
+                        if (emailaddress1 != null)
+                            Xrm.Page.getAttribute(Attributes.SupplierEmail).setValue(emailaddress1);
+                        else
+                            Xrm.Page.getAttribute(Attributes.SupplierEmail).setValue(null);
+                    } else {
+                        console.log("Issue while getting email from supplier:" + this.statusText);
+                    }
+                }
+            };
+            req.send();
+        }
+    }
+
     // public
     return {
         LoadSourceMarketAndSetDefaults: loadSourceMarketAndSetDefaults,
         CalculateCompensation: calculateCompensation,
         ShowHideCompensationCalculator: showHideCompensationCalculator,
+        FilterSupplierBasedOnGateway: filterSupplierBasedOnGateway,
+        PopulateSupplierEmail : populateSupplierEmail,
         ClearCompensationCalculatorValues: function () {
             var attr = Xrm.Page.getAttribute(Attributes.ProposedCompensation);
             if (attr != null) attr.setValue(null);
