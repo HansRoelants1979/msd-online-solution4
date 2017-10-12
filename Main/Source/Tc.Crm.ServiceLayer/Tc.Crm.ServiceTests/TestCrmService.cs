@@ -55,7 +55,11 @@ namespace Tc.Crm.ServiceTests
             return null;
         }
 
-        public SurveyReturnResponse ExecuteActionForSurveyCreate(string data)
+		public string GetConfiguration(string name) => "configuration";
+
+		public int GetEntityCacheMessageCount(Guid entityCacheId) => 5;
+
+		public SurveyReturnResponse ExecuteActionForSurveyCreate(string data)
         {
             if (Switch == DataSwitch.Created)
                 return new Tc.Crm.Service.Models.SurveyReturnResponse { FailedSurveys=new List<FailedSurvey>() };
@@ -221,7 +225,7 @@ namespace Tc.Crm.ServiceTests
         /// <param name="entityCacheId"></param>
         /// <param name="status"></param>
         /// <param name="statusReason"></param>
-        public void ProcessEntityCache(Guid entityCacheId, Status status, EntityCacheStatusReason statusReason, bool WasLastOperationSuccessful = false)
+        public void ProcessEntityCache(Guid entityCacheId, Status status, EntityCacheStatusReason statusReason, bool WasLastOperationSuccessful = false, DateTime? time = null)
         {
             var entityCache = new Entity(EntityName.EntityCache, entityCacheId);
             entityCache.Attributes[Attributes.EntityCache.StatusReason] = new OptionSetValue((int)statusReason);

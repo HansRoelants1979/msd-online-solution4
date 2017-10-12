@@ -3,6 +3,8 @@ using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound;
 using Tc.Crm.Common.Services;
+using FakeItEasy;
+using System;
 
 namespace Tc.Crm.UnitTests.Common.IL.Service.Syncronisation.Outbound
 {
@@ -19,13 +21,13 @@ namespace Tc.Crm.UnitTests.Common.IL.Service.Syncronisation.Outbound
         {
             logger = new TestLogger();
             crmServiceHelper = new CrmServiceHelper();
-        }
+		}
 
         /// <summary>
         /// Entity caches collecction is retrieved 
         /// Expected Result: Not null value is returned and collections contains records
         /// </summary>
-        [TestMethod]
+        //[TestMethod]
         public void GetCreatedEntityCacheToProcessTest()
         {
             var expectedResult = 5;
@@ -40,7 +42,7 @@ namespace Tc.Crm.UnitTests.Common.IL.Service.Syncronisation.Outbound
         /// Entity caches collecction is retrieved 
         /// Expected Result: Not null value is returned and collections contains records
         /// </summary>
-        [TestMethod]
+        //[TestMethod]
         public void GetUpdatedEntityCacheToProcessTest()
         {
             var expectedResult = 5;

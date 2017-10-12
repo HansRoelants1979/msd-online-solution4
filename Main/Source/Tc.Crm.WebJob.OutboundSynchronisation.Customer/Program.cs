@@ -20,7 +20,7 @@ namespace Tc.Crm.OutboundSynchronisation.Customer
                 unitycontainer.RegisterType<ILogger, Logger>(new ContainerControlledLifetimeManager());
                 unitycontainer.RegisterType<IConfigurationService, ConfigurationService>(new ContainerControlledLifetimeManager());
                 unitycontainer.RegisterType<IOutboundSyncConfigurationService, OutboundSyncConfigurationService>(new ContainerControlledLifetimeManager());
-                unitycontainer.RegisterType<ICrmService, CrmService>(new ContainerControlledLifetimeManager());
+				unitycontainer.RegisterType<ICrmService, CrmService>(new ContainerControlledLifetimeManager());
                 unitycontainer.RegisterType<IJwtService, JwtService>(new ContainerControlledLifetimeManager());
                 unitycontainer.RegisterType<IRequestPayloadCreator, CreateCustomerRequestPayloadCreator>("CreateCustomerRequestPayloadCreator", new ContainerControlledLifetimeManager());
                 unitycontainer.RegisterType<IRequestPayloadCreator, UpdateCustomerRequestPayloadCreator>("UpdateCustomerRequestPayloadCreator", new ContainerControlledLifetimeManager());
@@ -37,8 +37,9 @@ namespace Tc.Crm.OutboundSynchronisation.Customer
                 using (var outboundSynchronisationCustomerService = unitycontainer.Resolve<IOutboundSynchronisationService>())
                 {
                     logger.LogInformation("Tc.Crm.OutboundSynchronisation.Customer Job Starts");
-                    outboundSynchronisationCustomerService.Run();
-                    logger.LogInformation("\r\n\r\nTc.Crm.OutboundSynchronisation.Customer Job Ends");
+                    outboundSynchronisationCustomerService.ProcessEntityCacheOperation(Operation.Create);
+					outboundSynchronisationCustomerService.ProcessEntityCacheOperation(Operation.Update);
+					logger.LogInformation("\r\n\r\nTc.Crm.OutboundSynchronisation.Customer Job Ends");
                 }
             }
             catch (FaultException<Microsoft.Xrm.Sdk.OrganizationServiceFault> ex)

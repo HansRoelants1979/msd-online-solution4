@@ -20,6 +20,7 @@ namespace Tc.Crm.UnitTests.Common.IL.Service.Syncronisation.Outbound
 		private const int batchSize = 5;
 		private const string entityName = "customer";
 		private const string secretKey = "secretKey";
+		private static readonly int[] retries = { 5, 10, 15 };
 		private const double issuedAtTime = 100;
 		private const string expiry = "exp";
 		private const string notBeforeTime = "nbf";
@@ -45,6 +46,14 @@ namespace Tc.Crm.UnitTests.Common.IL.Service.Syncronisation.Outbound
 			createRequestPayloadCreator = A.Fake<IRequestPayloadCreator>();
 			updateRequestPayloadCreator = A.Fake<IRequestPayloadCreator>();
 			outboundSyncConfigurationService = A.Fake<IOutboundSyncConfigurationService>();
+
+			A.CallTo(() => outboundSyncConfigurationService.BatchSize).Returns(batchSize);
+			A.CallTo(() => outboundSyncConfigurationService.EntityName).Returns(entityName);
+			A.CallTo(() => outboundSynchDataService.GetSecretKey()).Returns(secretKey);
+			A.CallTo(() => outboundSynchDataService.GetRetries()).Returns(retries);
+			A.CallTo(() => outboundSyncConfigurationService.CreateServiceUrl).Returns(createServiceUrl);
+			A.CallTo(() => outboundSyncConfigurationService.UpdateServiceUrl).Returns(updateServiceUrl);
+
 			outboundSynchService = new OutboundSynchronisationService(
 				logger,
 				outboundSynchDataService,
@@ -52,37 +61,44 @@ namespace Tc.Crm.UnitTests.Common.IL.Service.Syncronisation.Outbound
 				createRequestPayloadCreator,
 				updateRequestPayloadCreator,
 				outboundSyncConfigurationService);
-
-			A.CallTo(() => outboundSyncConfigurationService.BatchSize).Returns(batchSize);
-			A.CallTo(() => outboundSyncConfigurationService.EntityName).Returns(entityName);
-			A.CallTo(() => outboundSynchDataService.GetSecretKey()).Returns(secretKey);
-			A.CallTo(() => outboundSyncConfigurationService.CreateServiceUrl).Returns(createServiceUrl);
-			A.CallTo(() => outboundSyncConfigurationService.UpdateServiceUrl).Returns(updateServiceUrl);
 		}
 
 		[TestMethod]
-		public void TestIfNoEntitiesActive()
+		public void TestCreateNoRecordsToProcess()
 		{
 			// Given
 			A.CallTo(() => outboundSynchDataService.GetCreatedEntityCacheToProcess(entityName, batchSize)).Returns(new List<EntityCache>());
-			A.CallTo(() => outboundSynchDataService.GetUpdatedEntityCacheToProcess(entityName, batchSize)).Returns(new List<EntityCache>());
-
+			
 			// When
-			outboundSynchService.Run();
-
+			outboundSynchService.ProcessEntityCacheOperation(Operation.Create);
+			
 			// Then
-			A.CallTo(() => logger.LogInformation($"Configuration create record: {entityName}")).MustHaveHappened();
-			A.CallTo(() => logger.LogInformation($"The number of records: {batchSize}")).MustHaveHappened();
-
-			A.CallTo(() => logger.LogInformation($"Configuration update record: {entityName}")).MustHaveHappened();
-			A.CallTo(() => logger.LogInformation($"The number of records: {batchSize}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Processing {Enum.GetName(typeof(EntityCacheMessageStatusReason), Operation.Create)} EntityCache for entity: {entityName}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Integration layer endpoint: {createServiceUrl}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Retrieving entity cache records to process with maximum batch size: {batchSize}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Found 0 records to be processed")).MustHaveHappened();
 		}
 
 		[TestMethod]
-		public void TestCreateEntitiesActiveSuccessFlow()
+		public void TestUpdateNoRecordsToProcess()
 		{
 			// Given
-			var dateTime = DateTime.Now;
+			A.CallTo(() => outboundSynchDataService.GetUpdatedEntityCacheToProcess(entityName, batchSize)).Returns(new List<EntityCache>());
+			
+			// When
+			outboundSynchService.ProcessEntityCacheOperation(Operation.Create);
+
+			// Then
+			A.CallTo(() => logger.LogInformation($"Processing {Enum.GetName(typeof(EntityCacheMessageStatusReason), Operation.Create)} EntityCache for entity: {entityName}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Integration layer endpoint: {createServiceUrl}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Retrieving entity cache records to process with maximum batch size: {batchSize}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Found 0 records to be processed")).MustHaveHappened();
+		}
+
+		[TestMethod]
+		public void TestCreateSuccessResponse()
+		{
+			// Given
 			var payload = "payload";
 			var entityCache = new List<EntityCache>()
 			{
@@ -92,10 +108,11 @@ namespace Tc.Crm.UnitTests.Common.IL.Service.Syncronisation.Outbound
 					Data = "{'Fields':[{'Name':'territorycode','Type':8,'Value':{'__type':'OptionSet','Name':null,'Value':1}}]}",
 					Id = Guid.NewGuid(),
 					Name = "name1",
-					Operation = null,
+					Operation = EntityCacheOperation.Create,
 					RecordId = "id1",
 					SourceSystemId = "ssId1",
-					Type = "type1"
+					Type = "type1",
+					RequestsCount = 1
 				}
 			};
 			var entityCacheMessage = new EntityCacheMessage()
@@ -127,23 +144,24 @@ namespace Tc.Crm.UnitTests.Common.IL.Service.Syncronisation.Outbound
 			A.CallTo(() => jwtService.SendHttpRequest(HttpMethod.Post, createServiceUrl, jwtToken, payload, messageGuid.ToString())).Returns(responseEntity);
 
 			// When
-			outboundSynchService.Run();
+			outboundSynchService.ProcessEntityCacheOperation(Operation.Create);
 
 			// Then
-			A.CallTo(() => logger.LogInformation($"Configuration create record: {entityName}")).MustHaveHappened();
-			A.CallTo(() => logger.LogInformation($"The number of records: {batchSize}")).MustHaveHappened();
-			A.CallTo(() => logger.LogInformation($"The create endpoint: {createServiceUrl}")).MustHaveHappened();
-			A.CallTo(() => logger.LogInformation($"EntityCache/EntityCacheMessage : {entityCache[0].Name}/{entityCacheMessage.Name}")).MustHaveHappened();
-			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheStatus(entityCache[0].Id, (int)Status.Active, (int)EntityCacheStatusReason.InProgress)).MustHaveHappened();
-			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheMessageStatus(messageGuid, (int)Status.Inactive, (int)EntityCacheMessageStatusReason.SuccessfullySentToIL, A<string>._)).MustHaveHappened();
-			A.CallTo(() => logger.LogInformation($"EntityCacheMessage Status Reason: {Enum.GetName(typeof(EntityCacheMessageStatusReason), EntityCacheMessageStatusReason.SuccessfullySentToIL)}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Processing {Enum.GetName(typeof(EntityCacheMessageStatusReason), Operation.Create)} EntityCache for entity: {entityName}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Integration layer endpoint: {createServiceUrl}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Retrieving entity cache records to process with maximum batch size: {batchSize}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation("Found 1 records to be processed")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Executed call to integration layer.  EntityCacheMessage Status Reason: {Enum.GetName(typeof(EntityCacheMessageStatusReason), EntityCacheMessageStatusReason.SuccessfullySentToIL)}")).MustHaveHappened();
+
+			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheStatus(entityCache[0].Id, Status.Active, EntityCacheStatusReason.InProgress)).MustHaveHappened();
+			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheMessageStatus(messageGuid, Status.Inactive, EntityCacheMessageStatusReason.SuccessfullySentToIL, A<string>._)).MustHaveHappened();
+			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheSendToIntegrationLayerStatus(entityCache[0].Id, true, null)).MustHaveHappened();
 		}
 
 		[TestMethod]
-		public void TestCreateEntitiesActiveFailFlow()
+		public void TestCreateErrorResponseDoNextRetry()
 		{
 			// Given
-			var dateTime = DateTime.Now;
 			var payload = "payload";
 			var entityCache = new List<EntityCache>()
 			{
@@ -153,10 +171,11 @@ namespace Tc.Crm.UnitTests.Common.IL.Service.Syncronisation.Outbound
 					Data = "{'Fields':[{'Name':'territorycode','Type':8,'Value':{'__type':'OptionSet','Name':null,'Value':1}}]}",
 					Id = Guid.NewGuid(),
 					Name = "name1",
-					Operation = null,
+					Operation = EntityCacheOperation.Create,
 					RecordId = "id1",
 					SourceSystemId = "ssId1",
-					Type = "type1"
+					Type = "type1",
+					RequestsCount = 1
 				}
 			};
 			var entityCacheMessage = new EntityCacheMessage()
@@ -188,24 +207,84 @@ namespace Tc.Crm.UnitTests.Common.IL.Service.Syncronisation.Outbound
 			A.CallTo(() => jwtService.SendHttpRequest(HttpMethod.Post, createServiceUrl, jwtToken, payload, messageGuid.ToString())).Returns(responseEntity);
 
 			// When
-			outboundSynchService.Run();
+			outboundSynchService.ProcessEntityCacheOperation(Operation.Create);
 
 			// Then
-			A.CallTo(() => logger.LogInformation($"Configuration create record: {entityName}")).MustHaveHappened();
-			A.CallTo(() => logger.LogInformation($"The number of records: {batchSize}")).MustHaveHappened();
-			A.CallTo(() => logger.LogInformation($"The create endpoint: {createServiceUrl}")).MustHaveHappened();
-			A.CallTo(() => logger.LogInformation($"EntityCache/EntityCacheMessage : {entityCache[0].Name}/{entityCacheMessage.Name}")).MustHaveHappened();
-			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheStatus(entityCache[0].Id, (int)Status.Active, (int)EntityCacheStatusReason.InProgress)).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Processing {Enum.GetName(typeof(EntityCacheMessageStatusReason), Operation.Create)} EntityCache for entity: {entityName}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Integration layer endpoint: {createServiceUrl}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Retrieving entity cache records to process with maximum batch size: {batchSize}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation("Found 1 records to be processed")).MustHaveHappened();
 
-			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheMessageStatus(messageGuid, (int)Status.Inactive, (int)EntityCacheMessageStatusReason.Failed, A<string>._)).MustHaveHappened();
-			A.CallTo(() => logger.LogInformation($"EntityCacheMessage Status Reason: {Enum.GetName(typeof(EntityCacheMessageStatusReason), EntityCacheMessageStatusReason.Failed)}")).MustHaveHappened();
+			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheStatus(entityCache[0].Id, Status.Active, EntityCacheStatusReason.InProgress)).MustHaveHappened();
+			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheMessageStatus(messageGuid, Status.Inactive, EntityCacheMessageStatusReason.Failed, A<string>._)).MustHaveHappened();
+
+			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheSendToIntegrationLayerStatus(entityCache[0].Id, false, A<DateTime>.That.Matches(d => d > DateTime.UtcNow.AddMinutes(5) && d < DateTime.UtcNow.AddMinutes(10)))).MustHaveHappened();
+
+			A.CallTo(() => logger.LogInformation($"Executed call to integration layer.  EntityCacheMessage Status Reason: {Enum.GetName(typeof(EntityCacheMessageStatusReason), EntityCacheMessageStatusReason.Failed)}")).MustHaveHappened();
 		}
 
 		[TestMethod]
-		public void TestCreateEntitiesActiveExceptionFlow()
+		public void TestCreateMaxRetries()
 		{
 			// Given
-			var dateTime = DateTime.Now;
+			var entityCache = new List<EntityCache>()
+			{
+				new EntityCache()
+				{
+					SourceMarket = "sm1",
+					Data = "{'Fields':[{'Name':'territorycode','Type':8,'Value':{'__type':'OptionSet','Name':null,'Value':1}}]}",
+					Id = Guid.NewGuid(),
+					Name = "name1",
+					Operation = EntityCacheOperation.Create,
+					RecordId = "id1",
+					SourceSystemId = "ssId1",
+					Type = "type1",
+					RequestsCount = 4,
+					StatusReason = EntityCacheStatusReason.InProgress
+				}
+			};
+			var entityCacheMessage = new EntityCacheMessage()
+			{
+				EntityCacheId = entityCache[0].Id,
+				Name = string.Format(entityCacheMessageName, entityCache[0].RecordId, entityCache[0].Id)
+			};
+			var messageGuid = Guid.NewGuid();
+			var responseEntity = new Crm.Common.IntegrationLayer.Model.ResponseEntity()
+			{
+				StatusCode = HttpStatusCode.Unauthorized,
+				Content = "content",
+				Cookies = new Dictionary<string, string>()
+			};
+
+			A.CallTo(() => outboundSynchDataService.GetCreatedEntityCacheToProcess(entityName, batchSize)).Returns(entityCache);
+			A.CallTo(() => outboundSynchDataService.GetSecretKey()).Returns(secretKey);
+			A.CallTo(() => jwtService.GetIssuedAtTime()).Returns(issuedAtTime);
+			A.CallTo(() => outboundSynchDataService.GetExpiry()).Returns(expiry);
+			A.CallTo(() => outboundSynchDataService.GetNotBeforeTime()).Returns(notBeforeTime);
+
+			A.CallTo(() => jwtService.CreateJwtToken(
+				secretKey,
+				A<OutboundJsonWebTokenPayload>.That.Matches(el => el.Issuer == "msd" && el.Expiry == expiry && el.IssuedAtTime == issuedAtTime.ToString(CultureInfo.InvariantCulture) && el.NotBefore == notBeforeTime)))
+				.Returns(jwtToken);
+
+			// When
+			outboundSynchService.ProcessEntityCacheOperation(Operation.Create);
+
+			// Then
+			A.CallTo(() => logger.LogInformation($"Processing {Enum.GetName(typeof(EntityCacheMessageStatusReason), Operation.Create)} EntityCache for entity: {entityName}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Integration layer endpoint: {createServiceUrl}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Retrieving entity cache records to process with maximum batch size: {batchSize}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation("Found 1 records to be processed")).MustHaveHappened();
+
+			A.CallTo(() => logger.LogInformation($"EntityCache record: name1 reached maximum retries 3 of calls to integration layer and will be failed")).MustHaveHappened();
+			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheStatus(entityCache[0].Id, Status.Inactive, EntityCacheStatusReason.Failed)).MustHaveHappened();
+			A.CallTo(() => jwtService.SendHttpRequest(A<HttpMethod>._, A<string>._, A<string>._, A<string>._, A<string>._)).MustNotHaveHappened();
+		}
+
+		[TestMethod]
+		public void TestCreateExceptionThrownDoNextRetry()
+		{
+			// Given
 			var payload = "payload";
 			var entityCache = new List<EntityCache>()
 			{
@@ -215,10 +294,11 @@ namespace Tc.Crm.UnitTests.Common.IL.Service.Syncronisation.Outbound
 					Data = "{'Fields':[{'Name':'territorycode','Type':8,'Value':{'__type':'OptionSet','Name':null,'Value':1}}]}",
 					Id = Guid.NewGuid(),
 					Name = "name1",
-					Operation = null,
+					Operation = EntityCacheOperation.Create,
 					RecordId = "id1",
 					SourceSystemId = "ssId1",
-					Type = "type1"
+					Type = "type1",
+					RequestsCount = 1
 				}
 			};
 			var entityCacheMessage = new EntityCacheMessage()
@@ -244,24 +324,26 @@ namespace Tc.Crm.UnitTests.Common.IL.Service.Syncronisation.Outbound
 			A.CallTo(() => jwtService.SendHttpRequest(HttpMethod.Post, createServiceUrl, jwtToken, payload, messageGuid.ToString())).Throws(new Exception("error"));
 
 			// When
-			outboundSynchService.Run();
+			outboundSynchService.ProcessEntityCacheOperation(Operation.Create);
 
 			// Then
-			A.CallTo(() => logger.LogInformation($"Configuration create record: {entityName}")).MustHaveHappened();
-			A.CallTo(() => logger.LogInformation($"The number of records: {batchSize}")).MustHaveHappened();
-			A.CallTo(() => logger.LogInformation($"The create endpoint: {createServiceUrl}")).MustHaveHappened();
-			A.CallTo(() => logger.LogInformation($"EntityCache/EntityCacheMessage : {entityCache[0].Name}/{entityCacheMessage.Name}")).MustHaveHappened();
-			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheStatus(entityCache[0].Id, (int)Status.Active, (int)EntityCacheStatusReason.InProgress)).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Processing {Enum.GetName(typeof(EntityCacheMessageStatusReason), Operation.Create)} EntityCache for entity: {entityName}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Integration layer endpoint: {createServiceUrl}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Retrieving entity cache records to process with maximum batch size: {batchSize}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation("Found 1 records to be processed")).MustHaveHappened();
 
-			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheMessageStatus(messageGuid, (int)Status.Inactive, (int)EntityCacheMessageStatusReason.Failed, A<string>._)).MustHaveHappened();
-			A.CallTo(() => logger.LogInformation($"EntityCacheMessage Status Reason: {Enum.GetName(typeof(EntityCacheMessageStatusReason), EntityCacheMessageStatusReason.Failed)}")).MustHaveHappened();
+			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheStatus(entityCache[0].Id, Status.Active, EntityCacheStatusReason.InProgress)).MustHaveHappened();
+			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheMessageStatus(messageGuid, Status.Inactive, EntityCacheMessageStatusReason.Failed, A<string>._)).MustHaveHappened();
+			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheSendToIntegrationLayerStatus(entityCache[0].Id, false, A<DateTime>.That.Matches(d => d > DateTime.UtcNow.AddMinutes(5) && d < DateTime.UtcNow.AddMinutes(10)))).MustHaveHappened();
+
+			A.CallTo(() => logger.LogInformation($"Exception thrown while executing call to service layer. EntityCacheMessage Status Reason: {Enum.GetName(typeof(EntityCacheMessageStatusReason), EntityCacheMessageStatusReason.Failed)}")).MustHaveHappened();
+			A.CallTo(() => logger.LogError(A<string>._)).MustHaveHappened();
 		}
 
 		[TestMethod]
-		public void TestUpdateEntitiesActiveSuccessFlow()
+		public void TestUpdateSuccessResponse()
 		{
 			// Given
-			var dateTime = DateTime.Now;
 			var payload = "payload";
 			var entityCache = new List<EntityCache>()
 			{
@@ -271,7 +353,7 @@ namespace Tc.Crm.UnitTests.Common.IL.Service.Syncronisation.Outbound
 					Data = "{'Fields':[{'Name':'territorycode','Type':8,'Value':{'__type':'OptionSet','Name':null,'Value':1}}]}",
 					Id = Guid.NewGuid(),
 					Name = "name1",
-					Operation = null,
+					Operation = EntityCacheOperation.Update,
 					RecordId = "id1",
 					SourceSystemId = "ssId1",
 					Type = "type1"
@@ -306,25 +388,25 @@ namespace Tc.Crm.UnitTests.Common.IL.Service.Syncronisation.Outbound
 			A.CallTo(() => jwtService.SendHttpRequest(HttpMethod.Patch, updateServiceUrl + "/" + entityCache[0].SourceSystemId, jwtToken, payload, messageGuid.ToString())).Returns(responseEntity);
 
 			// When
-			outboundSynchService.Run();
+			outboundSynchService.ProcessEntityCacheOperation(Operation.Update);
 
 			// Then
-			A.CallTo(() => logger.LogInformation($"Configuration update record: {entityName}")).MustHaveHappened();
-			A.CallTo(() => logger.LogInformation($"The number of records: {batchSize}")).MustHaveHappened();
-			A.CallTo(() => logger.LogInformation($"The update endpoint: {updateServiceUrl}")).MustHaveHappened();
-			A.CallTo(() => logger.LogInformation($"EntityCache/EntityCacheMessage : {entityCache[0].Name}/{entityCacheMessage.Name}")).MustHaveHappened();
-			A.CallTo(() => logger.LogInformation($"EntityCache Status Reason: {Enum.GetName(typeof(EntityCacheStatusReason), EntityCacheStatusReason.InProgress)}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Processing {Enum.GetName(typeof(EntityCacheMessageStatusReason), Operation.Update)} EntityCache for entity: {entityName}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Integration layer endpoint: {updateServiceUrl}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Retrieving entity cache records to process with maximum batch size: {batchSize}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation("Found 1 records to be processed")).MustHaveHappened();
 
-			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheStatus(entityCache[0].Id, (int)Status.Active, (int)EntityCacheStatusReason.InProgress)).MustHaveHappened();
-			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheMessageStatus(messageGuid, (int)Status.Inactive, (int)EntityCacheMessageStatusReason.SuccessfullySentToIL, A<string>._)).MustHaveHappened();
-			A.CallTo(() => logger.LogInformation($"EntityCacheMessage Status Reason: {Enum.GetName(typeof(EntityCacheMessageStatusReason), EntityCacheMessageStatusReason.SuccessfullySentToIL)}")).MustHaveHappened();
+			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheStatus(entityCache[0].Id, Status.Active, EntityCacheStatusReason.InProgress)).MustHaveHappened();
+			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheMessageStatus(messageGuid, Status.Inactive, EntityCacheMessageStatusReason.SuccessfullySentToIL, A<string>._)).MustHaveHappened();
+			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheSendToIntegrationLayerStatus(entityCache[0].Id, true, null)).MustHaveHappened();
+
+			A.CallTo(() => logger.LogInformation($"Executed call to integration layer.  EntityCacheMessage Status Reason: {Enum.GetName(typeof(EntityCacheMessageStatusReason), EntityCacheMessageStatusReason.SuccessfullySentToIL)}")).MustHaveHappened();
 		}
 
 		[TestMethod]
-		public void TestUpdateEntitiesActiveFailFlow()
+		public void TestUpdateErrorResponseDoNextRetry()
 		{
 			// Given
-			var dateTime = DateTime.Now;
 			var payload = "payload";
 			var entityCache = new List<EntityCache>()
 			{
@@ -334,10 +416,12 @@ namespace Tc.Crm.UnitTests.Common.IL.Service.Syncronisation.Outbound
 					Data = "{'Fields':[{'Name':'territorycode','Type':8,'Value':{'__type':'OptionSet','Name':null,'Value':1}}]}",
 					Id = Guid.NewGuid(),
 					Name = "name1",
-					Operation = null,
+					Operation = EntityCacheOperation.Update,
 					RecordId = "id1",
 					SourceSystemId = "ssId1",
-					Type = "type1"
+					Type = "type1",
+					RequestsCount = 1,
+					StatusReason = EntityCacheStatusReason.InProgress
 				}
 			};
 			var entityCacheMessage = new EntityCacheMessage()
@@ -369,26 +453,83 @@ namespace Tc.Crm.UnitTests.Common.IL.Service.Syncronisation.Outbound
 			A.CallTo(() => jwtService.SendHttpRequest(HttpMethod.Patch, updateServiceUrl + "/" + entityCache[0].SourceSystemId, jwtToken, payload, messageGuid.ToString())).Returns(responseEntity);
 
 			// When
-			outboundSynchService.Run();
+			outboundSynchService.ProcessEntityCacheOperation(Operation.Update);
 
 			// Then
-			A.CallTo(() => logger.LogInformation($"Configuration update record: {entityName}")).MustHaveHappened();
-			A.CallTo(() => logger.LogInformation($"The number of records: {batchSize}")).MustHaveHappened();
-			A.CallTo(() => logger.LogInformation($"The update endpoint: {updateServiceUrl}")).MustHaveHappened();
-			A.CallTo(() => logger.LogInformation($"EntityCache/EntityCacheMessage : {entityCache[0].Name}/{entityCacheMessage.Name}")).MustHaveHappened();
-			A.CallTo(() => logger.LogInformation($"EntityCache Status Reason: {Enum.GetName(typeof(EntityCacheStatusReason), EntityCacheStatusReason.InProgress)}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Processing {Enum.GetName(typeof(EntityCacheMessageStatusReason), Operation.Update)} EntityCache for entity: {entityName}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Integration layer endpoint: {updateServiceUrl}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Retrieving entity cache records to process with maximum batch size: {batchSize}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation("Found 1 records to be processed")).MustHaveHappened();
 
-			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheStatus(entityCache[0].Id, (int)Status.Active, (int)EntityCacheStatusReason.InProgress)).MustHaveHappened();
+			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheStatus(entityCache[0].Id, Status.Active, EntityCacheStatusReason.InProgress)).MustHaveHappened();
+			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheMessageStatus(messageGuid, Status.Inactive, EntityCacheMessageStatusReason.Failed, A<string>._)).MustHaveHappened();
+			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheSendToIntegrationLayerStatus(entityCache[0].Id, false, A<DateTime>.That.Matches(d => d > DateTime.UtcNow.AddMinutes(5) && d < DateTime.UtcNow.AddMinutes(10)))).MustHaveHappened();
 
-			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheMessageStatus(messageGuid, (int)Status.Inactive, (int)EntityCacheMessageStatusReason.Failed, A<string>._)).MustHaveHappened();
-			A.CallTo(() => logger.LogInformation($"EntityCacheMessage Status Reason: {Enum.GetName(typeof(EntityCacheMessageStatusReason), EntityCacheMessageStatusReason.Failed)}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Executed call to integration layer.  EntityCacheMessage Status Reason: {Enum.GetName(typeof(EntityCacheMessageStatusReason), EntityCacheMessageStatusReason.Failed)}")).MustHaveHappened();
 		}
 
 		[TestMethod]
-		public void TestUpdateEntitiesActiveExceptionFlow()
+		public void TestUpdateMaxRetries()
 		{
 			// Given
-			var dateTime = DateTime.Now;
+			var entityCache = new List<EntityCache>()
+			{
+				new EntityCache()
+				{
+					SourceMarket = "sm1",
+					Data = "{'Fields':[{'Name':'territorycode','Type':8,'Value':{'__type':'OptionSet','Name':null,'Value':1}}]}",
+					Id = Guid.NewGuid(),
+					Name = "name1",
+					Operation = EntityCacheOperation.Update,
+					RecordId = "id1",
+					SourceSystemId = "ssId1",
+					Type = "type1",
+					RequestsCount = 4,
+					StatusReason = EntityCacheStatusReason.InProgress
+				}
+			};
+			var entityCacheMessage = new EntityCacheMessage()
+			{
+				EntityCacheId = entityCache[0].Id,
+				Name = string.Format(entityCacheMessageName, entityCache[0].RecordId, entityCache[0].Id)
+			};
+			var messageGuid = Guid.NewGuid();
+			var responseEntity = new Crm.Common.IntegrationLayer.Model.ResponseEntity()
+			{
+				StatusCode = HttpStatusCode.Unauthorized,
+				Content = "content",
+				Cookies = new Dictionary<string, string>()
+			};
+
+			A.CallTo(() => outboundSynchDataService.GetUpdatedEntityCacheToProcess(entityName, batchSize)).Returns(entityCache);
+			A.CallTo(() => outboundSynchDataService.GetSecretKey()).Returns(secretKey);
+			A.CallTo(() => jwtService.GetIssuedAtTime()).Returns(issuedAtTime);
+			A.CallTo(() => outboundSynchDataService.GetExpiry()).Returns(expiry);
+			A.CallTo(() => outboundSynchDataService.GetNotBeforeTime()).Returns(notBeforeTime);
+
+			A.CallTo(() => jwtService.CreateJwtToken(
+				secretKey,
+				A<OutboundJsonWebTokenPayload>.That.Matches(el => el.Issuer == "msd" && el.Expiry == expiry && el.IssuedAtTime == issuedAtTime.ToString(CultureInfo.InvariantCulture) && el.NotBefore == notBeforeTime)))
+				.Returns(jwtToken);
+
+			// When
+			outboundSynchService.ProcessEntityCacheOperation(Operation.Update);
+
+			// Then
+			A.CallTo(() => logger.LogInformation($"Processing {Enum.GetName(typeof(EntityCacheMessageStatusReason), Operation.Update)} EntityCache for entity: {entityName}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Integration layer endpoint: {updateServiceUrl}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Retrieving entity cache records to process with maximum batch size: {batchSize}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation("Found 1 records to be processed")).MustHaveHappened();
+
+			A.CallTo(() => logger.LogInformation($"EntityCache record: name1 reached maximum retries 3 of calls to integration layer and will be failed")).MustHaveHappened();
+			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheStatus(entityCache[0].Id, Status.Inactive, EntityCacheStatusReason.Failed)).MustHaveHappened();
+			A.CallTo(() => jwtService.SendHttpRequest(A<HttpMethod>._, A<string>._, A<string>._, A<string>._, A<string>._)).MustNotHaveHappened();
+		}
+
+		[TestMethod]
+		public void TestUpdateExceptionThrownDoNextRetry()
+		{
+			// Given
 			var payload = "payload";
 			var entityCache = new List<EntityCache>()
 			{
@@ -398,10 +539,11 @@ namespace Tc.Crm.UnitTests.Common.IL.Service.Syncronisation.Outbound
 					Data = "{'Fields':[{'Name':'territorycode','Type':8,'Value':{'__type':'OptionSet','Name':null,'Value':1}}]}",
 					Id = Guid.NewGuid(),
 					Name = "name1",
-					Operation = null,
+					Operation = EntityCacheOperation.Update,
 					RecordId = "id1",
 					SourceSystemId = "ssId1",
-					Type = "type1"
+					Type = "type1",
+					RequestsCount = 1
 				}
 			};
 			var entityCacheMessage = new EntityCacheMessage()
@@ -427,18 +569,20 @@ namespace Tc.Crm.UnitTests.Common.IL.Service.Syncronisation.Outbound
 			A.CallTo(() => jwtService.SendHttpRequest(HttpMethod.Patch, updateServiceUrl + "/" + entityCache[0].SourceSystemId, jwtToken, payload, messageGuid.ToString())).Throws(new Exception("error"));
 
 			// When
-			outboundSynchService.Run();
+			outboundSynchService.ProcessEntityCacheOperation(Operation.Update);
 
 			// Then
-			A.CallTo(() => logger.LogInformation($"Configuration update record: {entityName}")).MustHaveHappened();
-			A.CallTo(() => logger.LogInformation($"The number of records: {batchSize}")).MustHaveHappened();
-			A.CallTo(() => logger.LogInformation($"The update endpoint: {updateServiceUrl}")).MustHaveHappened();
-			A.CallTo(() => logger.LogInformation($"EntityCache/EntityCacheMessage : {entityCache[0].Name}/{entityCacheMessage.Name}")).MustHaveHappened();
-			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheStatus(entityCache[0].Id, (int)Status.Active, (int)EntityCacheStatusReason.InProgress)).MustHaveHappened();
-			A.CallTo(() => logger.LogInformation($"EntityCache Status Reason: {Enum.GetName(typeof(EntityCacheStatusReason), EntityCacheStatusReason.InProgress)}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Processing {Enum.GetName(typeof(EntityCacheMessageStatusReason), Operation.Update)} EntityCache for entity: {entityName}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Integration layer endpoint: {updateServiceUrl}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation($"Retrieving entity cache records to process with maximum batch size: {batchSize}")).MustHaveHappened();
+			A.CallTo(() => logger.LogInformation("Found 1 records to be processed")).MustHaveHappened();
 
-			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheMessageStatus(messageGuid, (int)Status.Inactive, (int)EntityCacheMessageStatusReason.Failed, A<string>._)).MustHaveHappened();
-			A.CallTo(() => logger.LogInformation($"EntityCacheMessage Status Reason: {Enum.GetName(typeof(EntityCacheMessageStatusReason), EntityCacheMessageStatusReason.Failed)}")).MustHaveHappened();
+			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheStatus(entityCache[0].Id, Status.Active, EntityCacheStatusReason.InProgress)).MustHaveHappened();
+			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheMessageStatus(messageGuid, Status.Inactive, EntityCacheMessageStatusReason.Failed, A<string>._)).MustHaveHappened();
+			A.CallTo(() => outboundSynchDataService.UpdateEntityCacheSendToIntegrationLayerStatus(entityCache[0].Id, false, A<DateTime>.That.Matches(d => d > DateTime.UtcNow.AddMinutes(5) && d < DateTime.UtcNow.AddMinutes(10)))).MustHaveHappened();
+
+			A.CallTo(() => logger.LogInformation($"Exception thrown while executing call to service layer. EntityCacheMessage Status Reason: {Enum.GetName(typeof(EntityCacheMessageStatusReason), EntityCacheMessageStatusReason.Failed)}")).MustHaveHappened();
+			A.CallTo(() => logger.LogError(A<string>._)).MustHaveHappened();
 		}
 	}
 }

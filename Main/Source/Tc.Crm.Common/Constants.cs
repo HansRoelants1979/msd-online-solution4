@@ -56,8 +56,9 @@
             public const string OutboundSynchronisationJwtPrivateKeyConfigName = "Tc.OutboundSynchronisation.JwtPrivateKey";
             public const string OutboundSynchronisationSsoTokenExpired = "Tc.OutboundSynchronisation.SsoTokenExpiredSeconds";
             public const string OutboundSynchronisationSsoTokenNotBefore = "Tc.OutboundSynchronisation.SsoTokenNotBeforeTimeSeconds";
+	        public const string OutboundSynchronisationMaxRetries = "Tc.OutboundSynchronisation.MaxRetries";
 
-            public const string OwrUrlConfigName = "Tc.Owr.SsoServiceUrl";
+			public const string OwrUrlConfigName = "Tc.Owr.SsoServiceUrl";
             public const string OwrDiagnosticSource = "Tc.Usd.SessionCustomActions";
             public const string OwrJwtPrivateKeyConfigName = "Tc.Owr.JwtPrivateKey";
             public const string OwrSsoTokenExpired = "Tc.Owr.SsoTokenExpiredSeconds";

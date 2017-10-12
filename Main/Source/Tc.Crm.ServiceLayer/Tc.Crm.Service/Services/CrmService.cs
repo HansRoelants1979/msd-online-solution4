@@ -16,6 +16,7 @@ using Tc.Crm.Common.Constants;
 using Attributes = Tc.Crm.Common.Constants.Attributes;
 using Tc.Crm.Common;
 using Tc.Crm.Service.Constants;
+using System.Linq;
 
 namespace Tc.Crm.Service.Services
 {
@@ -402,6 +403,38 @@ namespace Tc.Crm.Service.Services
             return entityCacheId;
         }
 
+		public string GetConfiguration(string name)
+		{
+			var query = $@"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>
+                      <entity name='{EntityName.Configuration}'>
+                        <attribute name='{Attributes.Configuration.Name}' />
+                        <attribute name='{Attributes.Configuration.Value}' />
+                        <filter type='and'>
+                          <condition attribute='{Attributes.Configuration.Name}' operator='eq' value='{name}' />
+                        </filter>
+                      </entity>
+                    </fetch>";
+			var response = orgService.RetrieveMultiple(new FetchExpression(query));
+			var config = response?.Entities?.FirstOrDefault();
+			var value = config?.GetAttributeValue<string>(Attributes.Configuration.Value);
+			return value;
+		}
+
+		public int GetEntityCacheMessageCount(Guid entityCacheId)
+		{
+			var query = $@"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false' aggregate='true'> 
+								<entity name='{EntityName.EntityCacheMessage}'> 
+									<attribute name='{Attributes.EntityCacheMessage.EntityCacheMessageId}' alias='totalCount' aggregate='count'/> 
+									<filter type='and'>
+									  <condition attribute='{Attributes.EntityCacheMessage.EntityCacheId}' operator='eq' value='{entityCacheId}' />
+									</filter>
+								</entity>
+						</fetch>";
+			EntityCollection result = orgService.RetrieveMultiple(new FetchExpression(query));
+			var count = (int)((AliasedValue)result?.Entities?.FirstOrDefault()?["totalCount"]).Value;
+			return count;
+		}
+
 		/// <summary>
 		/// Activate earliest EntityCache with same recordId and in Pending status
 		/// </summary>
@@ -485,12 +518,16 @@ namespace Tc.Crm.Service.Services
 		/// <param name="status"></param>
 		/// <param name="statusReason"></param>
 		/// <param name="wasLastOperationSuccessful"></param>
-		public void ProcessEntityCache(Guid entityCacheId, Status status, EntityCacheStatusReason statusReason, bool wasLastOperationSuccessful = false)
+		public void ProcessEntityCache(Guid entityCacheId, Status status, EntityCacheStatusReason statusReason, bool wasLastOperationSuccessful = false, DateTime? eligibleRetryTime = null)
         {
             var entityCache = new Entity(EntityName.EntityCache, entityCacheId);
-            entityCache.Attributes[Attributes.EntityCache.StatusReason] = new OptionSetValue((int)statusReason);
+			entityCache.Attributes[Attributes.EntityCache.StatusReason] = new OptionSetValue((int)statusReason);
             entityCache.Attributes[Attributes.EntityCache.State] = new OptionSetValue((int)status);
 			entityCache.Attributes[Attributes.EntityCache.WasLastOperationSuccessful] = wasLastOperationSuccessful;
+			if (eligibleRetryTime.HasValue)
+			{
+				entityCache.Attributes[Attributes.EntityCache.EligibleRetryTime] = eligibleRetryTime.Value;
+			}
 
 			orgService.Update(entityCache);
         }

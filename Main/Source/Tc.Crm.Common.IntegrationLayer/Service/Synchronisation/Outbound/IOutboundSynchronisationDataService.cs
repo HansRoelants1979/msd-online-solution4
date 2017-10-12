@@ -23,17 +23,12 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
         /// <returns>active antity cache entities for defined type</returns>
         List<EntityCache> GetUpdatedEntityCacheToProcess(string type, int numberOfElements);
 
-        List<EntityCache> PrepareEntityCacheModel(EntityCollection entityCacheCollection);
-
-        EntityCollection PrepareEntityCacheMessages(List<EntityCacheMessage> entityCacheMessageModelColletion);
-
-        Guid CreateEntityCacheMessage(EntityCacheMessage entityCacheMessageModel);
-
-        Entity PrepareEntityCacheMessage(EntityCacheMessage entityCacheMessageModel);
-
-        Guid CreateRecord(Entity entity);
-
-        void UpdateRecord(Entity entity);
+		/// <summary>
+		/// Create entity cache message
+		/// </summary>
+		/// <param name="entityCacheMessageModel">data model</param>
+		/// <returns></returns>
+		Guid CreateEntityCacheMessage(EntityCacheMessage entityCacheMessageModel);
 
         /// <summary>
         /// Update Entity Cache record
@@ -41,22 +36,30 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
         /// <param name="id">Record Id</param>
         /// <param name="stateCode"></param>
         /// <param name="statusCode"></param>
-        void UpdateEntityCacheStatus(Guid id, int stateCode, int statusCode);
+	    void UpdateEntityCacheStatus(Guid id, Enum stateCode, Enum statusCode);
 
-        /// <summary>
-        /// Update Entity Cache Message record
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="stateCode"></param>
-        /// <param name="statusCode"></param>
-        /// <param name="notes"></param>
-        void UpdateEntityCacheMessageStatus(Guid id, int stateCode, int statusCode, string notes = null);
+		/// <summary>
+		/// Update Entity Cache record with send to IL status
+		/// </summary>
+		/// <param name="id">Record Id</param>
+		/// <param name="wasSuccess">Whether call to IL was successful</param>
+		/// <param name="eligibleRetryTime">Eligible time for future retry</param>
+		void UpdateEntityCacheSendToIntegrationLayerStatus(Guid id, bool wasSuccess, DateTime? eligibleRetryTime = null);
 
-        /// <summary>
-        /// Get xpt value from CRM Configuration
-        /// </summary>
-        /// <returns></returns>
-        string GetExpiry();
+	    /// <summary>
+	    /// Update Entity Cache Message record
+	    /// </summary>
+	    /// <param name="id"></param>
+	    /// <param name="stateCode"></param>
+	    /// <param name="statusCode"></param>
+	    /// <param name="notes"></param>
+	    void UpdateEntityCacheMessageStatus(Guid id, Enum stateCode, Enum statusCode, string notes = null);
+
+		/// <summary>
+		/// Get xpt value from CRM Configuration
+		/// </summary>
+		/// <returns></returns>
+		string GetExpiry();
 
         /// <summary>
         /// 
@@ -69,5 +72,11 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
         /// </summary>
         /// <returns>Secret key value for JWT token</returns>
         string GetSecretKey();
-    }
+
+	    /// <summary>
+	    /// Get retry section from CRM Configuration
+	    /// </summary>
+	    /// <returns>array of retry times in minutes</returns>
+	    int[] GetRetries();
+	}
 }

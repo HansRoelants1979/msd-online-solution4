@@ -23,7 +23,10 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
         private readonly IRequestPayloadCreator createRequestPayloadCreator;
         private readonly IRequestPayloadCreator updateRequestPayloadCreator;
 
-        public OutboundSynchronisationService(ILogger logger,
+		private int MaxRetries { get; }
+		private int[] RetrySchedule { get; }
+
+		public OutboundSynchronisationService(ILogger logger,
             IOutboundSynchronisationDataService outboundSynchronisationService,
             IJwtService jwtService,
             IRequestPayloadCreator createRequestPayloadCreator,
@@ -36,145 +39,105 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
             this.configurationService = configurationService;
             this.createRequestPayloadCreator = createRequestPayloadCreator;
             this.updateRequestPayloadCreator = updateRequestPayloadCreator;
-        }
 
-        public void Run()
-        {
-            ProcessCreateEntityCache();
-            ProcessUpdateEntityCache();
-        }
+			RetrySchedule = outboundSynchronisationDataService.GetRetries();
+			MaxRetries = RetrySchedule.Length;
+		}
 
-        #region Private methods
+        public void ProcessEntityCacheOperation(Operation operation)
+		{
+			// base initialize
+			var entityName = configurationService.EntityName;
+			var batchSize = configurationService.BatchSize;
+			var serviceUrl = operation == Operation.Create ? configurationService.CreateServiceUrl : configurationService.UpdateServiceUrl;
+			HttpMethod httpMethod = operation == Operation.Create ? HttpMethod.Post : HttpMethod.Patch;
+			IRequestPayloadCreator payloadCreator = operation == Operation.Create ? createRequestPayloadCreator : updateRequestPayloadCreator;
 
-        private void ProcessCreateEntityCache()
-        {
-            var entityName = configurationService.EntityName;
-            logger.LogInformation($"Configuration create record: {entityName}");
-            var batchSize = configurationService.BatchSize;
-            logger.LogInformation($"The number of records: {batchSize}");
-
-            var entityCacheCollection = outboundSynchronisationDataService.GetCreatedEntityCacheToProcess(entityName, batchSize);
-            if (entityCacheCollection == null || entityCacheCollection.Count == 0) return;
-
-            var token = jwtService.CreateJwtToken(outboundSynchronisationDataService.GetSecretKey(), CreateTokenPayload());
-            var serviceUrl = configurationService.CreateServiceUrl;
-            logger.LogInformation($"The create endpoint: {serviceUrl}");
+			logger.LogInformation($"Processing {Enum.GetName(typeof(EntityCacheMessageStatusReason), operation)} EntityCache for entity: {entityName}");
+			logger.LogInformation($"Integration layer endpoint: {serviceUrl}");
+            logger.LogInformation($"Retrieving entity cache records to process with maximum batch size: {batchSize}");
+			// retrieve records
+			var entityCacheCollection = operation == Operation.Create ?
+				outboundSynchronisationDataService.GetCreatedEntityCacheToProcess(entityName, batchSize) : outboundSynchronisationDataService.GetUpdatedEntityCacheToProcess(entityName, batchSize);
+			logger.LogInformation($"Found {entityCacheCollection?.Count} records to be processed");
+			if (entityCacheCollection == null || entityCacheCollection.Count == 0) return;
+			// prepare jwt token
+            var token = jwtService.CreateJwtToken(outboundSynchronisationDataService.GetSecretKey(), CreateTokenPayload());			
             foreach (EntityCache entityCache in entityCacheCollection)
             {
-                var entityCacheMessage = new EntityCacheMessage
+				// don't do call if succeeded max retries (ex if request from integration layer to CRM failed and it was max retried)
+	            if (entityCache.StatusReason == EntityCacheStatusReason.InProgress && entityCache.RequestsCount > MaxRetries)
+	            {
+					logger.LogInformation($"EntityCache record: {entityCache.Name} reached maximum retries {MaxRetries} of calls to integration layer and will be failed");
+					outboundSynchronisationDataService.UpdateEntityCacheStatus(entityCache.Id, Status.Inactive, EntityCacheStatusReason.Failed);
+					continue;
+	            }
+				// create entity cache message
+	            var entityCacheMessage = new EntityCacheMessage
                 {
                     EntityCacheId = entityCache.Id,
-                    Name = string.Format(EntityCacheMessageName, entityCache.RecordId, entityCache.Id.ToString())
+                    Name = string.Format(EntityCacheMessageName, entityCache.RecordId, entityCache.Id)
                 };
-
-                var entityCacheMessageId = CreateEntityCacheMessage(entityCacheMessage);
-                logger.LogInformation($"EntityCache/EntityCacheMessage : {entityCache.Name}/{entityCacheMessage.Name}");
-                UpdateEntityCacheStatus(entityCache.Id, Status.Active, EntityCacheStatusReason.InProgress);
-
-                try
+				var entityCacheMessageId = outboundSynchronisationDataService.CreateEntityCacheMessage(entityCacheMessage);
+                logger.LogInformation($"Processing EntityCache/EntityCacheMessage : {entityCache.Name}/{entityCacheMessage.Name}");
+				// update entity cache
+				outboundSynchronisationDataService.UpdateEntityCacheStatus(entityCache.Id, Status.Active, EntityCacheStatusReason.InProgress);
+				// calculate next retry time in case if failure
+	            var eligibleRetryTime = GetEligibleRetryTime(RetrySchedule, entityCache.RequestsCount);
+	            string note = null;
+				var statusReason = EntityCacheMessageStatusReason.Failed;
+				var success = false;
+				try
                 {
                     var entityModel = JsonConvert.DeserializeObject<EntityModel>(entityCache.Data);
-                    var requestPayload = createRequestPayloadCreator.GetPayload(entityModel);
-                    var response = jwtService.SendHttpRequest(HttpMethod.Post, serviceUrl, token, requestPayload, entityCacheMessageId.ToString());
+                    var requestPayload = payloadCreator.GetPayload(entityModel);					
+					var url = operation == Operation.Update ? GetUpdateUrl(serviceUrl, entityCache.SourceSystemId) : serviceUrl;
+					var response = jwtService.SendHttpRequest(httpMethod, url, token, requestPayload, entityCacheMessageId.ToString());
 
-                    if (IsResponseSuccessful(response.StatusCode))
-                    {
-                        UpdateEntityCacheMessageStatus(entityCacheMessageId, Status.Inactive, EntityCacheMessageStatusReason.SuccessfullySentToIL);
-                        logger.LogInformation(
-                            $"EntityCacheMessage Status Reason: {Enum.GetName(typeof(EntityCacheMessageStatusReason), EntityCacheMessageStatusReason.SuccessfullySentToIL)}");
-                    }
-                    else
-                    {
-                        var notes = AppendNote(entityCacheMessage.Notes, response.StatusCode, response.Content);
-                        UpdateEntityCacheMessageStatus(entityCacheMessageId, Status.Inactive, EntityCacheMessageStatusReason.Failed, notes);
-                        logger.LogInformation(
-                            $"EntityCacheMessage Status Reason: {Enum.GetName(typeof(EntityCacheMessageStatusReason), EntityCacheMessageStatusReason.Failed)}");
-                    }
+					success = IsResponseSuccessful(response.StatusCode);
+					statusReason = success ? EntityCacheMessageStatusReason.SuccessfullySentToIL : EntityCacheMessageStatusReason.Failed;
+					note = success ? null : AppendNote(entityCacheMessage.Notes, response.StatusCode, response.Content);
+					logger.LogInformation($"Executed call to integration layer.  EntityCacheMessage Status Reason: {Enum.GetName(typeof(EntityCacheMessageStatusReason), statusReason)}");
                 }
                 catch (Exception e)
                 {
-                    logger.LogError(e.ToString());
-                    var notes = AppendNote(entityCacheMessage.Notes, HttpStatusCode.InternalServerError, "Internal server error.");
-                    UpdateEntityCacheMessageStatus(entityCacheMessageId, Status.Inactive, EntityCacheMessageStatusReason.Failed, notes);
-                    logger.LogInformation(
-                        $"EntityCacheMessage Status Reason: {Enum.GetName(typeof(EntityCacheMessageStatusReason), EntityCacheMessageStatusReason.Failed)}");
+					note = AppendNote(entityCacheMessage.Notes, HttpStatusCode.InternalServerError, "Internal server error.");
+	                logger.LogError(e.ToString());
+					logger.LogInformation($"Exception thrown while executing call to service layer. EntityCacheMessage Status Reason: {Enum.GetName(typeof(EntityCacheMessageStatusReason), statusReason)}");
                 }
+				finally
+				{
+					// do crash in case of connectivity problems to CRM
+					outboundSynchronisationDataService.UpdateEntityCacheSendToIntegrationLayerStatus(entityCache.Id, success, success ? (DateTime?)null : eligibleRetryTime);
+					outboundSynchronisationDataService.UpdateEntityCacheMessageStatus(entityCacheMessageId, Status.Inactive, statusReason, success ? null : note);
+				}
             }
         }
 
-        private void ProcessUpdateEntityCache()
-        {
-            var entityName = configurationService.EntityName;
-            logger.LogInformation($"Configuration update record: {entityName}");
-            var batchSize = configurationService.BatchSize;
-            logger.LogInformation($"The number of records: {batchSize}");
+		#region Private methods
 
-            var entityCacheCollection = outboundSynchronisationDataService.GetUpdatedEntityCacheToProcess(entityName, batchSize);
-            if (entityCacheCollection == null || entityCacheCollection.Count == 0) return;
+		/// <summary>
+		/// Get time for next retry
+		/// </summary>
+		/// <param name="retryMinutes"></param>
+		/// <param name="retry"></param>
+	    /// <returns></returns>
+	    private DateTime GetEligibleRetryTime(int[] retryMinutes, int retry) => (retryMinutes.Length > 0 && retry < retryMinutes.Length) ? DateTime.UtcNow.AddMinutes(retryMinutes[retry]) : DateTime.UtcNow;
 
-            var token = jwtService.CreateJwtToken(outboundSynchronisationDataService.GetSecretKey(), CreateTokenPayload());
-            var serviceUrl = configurationService.UpdateServiceUrl;
-            logger.LogInformation($"The update endpoint: {serviceUrl}");
-            var skippedrecords = new List<string>();
-            foreach (EntityCache entityCache in entityCacheCollection)
-            {
-                if (skippedrecords.Contains(entityCache.RecordId))
-                    continue;
+	    /// <summary>
+		/// Get integration layer service url
+		/// </summary>
+		/// <param name="serviceUrl"></param>
+		/// <param name="sourceSystemId"></param>
+		/// <returns></returns>
+		private static string GetUpdateUrl(string serviceUrl, string sourceSystemId) => $"{serviceUrl}{(serviceUrl.EndsWith("/") ? string.Empty : "/")}{sourceSystemId}";
 
-                var entityCacheMessage = new EntityCacheMessage
-                {
-                    EntityCacheId = entityCache.Id,
-                    Name = string.Format(EntityCacheMessageName, entityCache.RecordId, entityCache.Id.ToString())
-                };
-
-                var entityCacheMessageId = CreateEntityCacheMessage(entityCacheMessage);
-                logger.LogInformation($"EntityCache/EntityCacheMessage : {entityCache.Name}/{entityCacheMessage.Name}");
-                UpdateEntityCacheStatus(entityCache.Id, Status.Active, EntityCacheStatusReason.InProgress);
-                logger.LogInformation($"EntityCache Status Reason: {Enum.GetName(typeof(EntityCacheStatusReason), EntityCacheStatusReason.InProgress)}");
-
-                try
-                {
-                    var entityModel = JsonConvert.DeserializeObject<EntityModel>(entityCache.Data);
-                    var requestPayload = updateRequestPayloadCreator.GetPayload(entityModel);
-
-                    var url = CreateServiceUrl(serviceUrl, entityCache.SourceSystemId);
-                    var response = jwtService.SendHttpRequest(HttpMethod.Patch, url, token, requestPayload, entityCacheMessageId.ToString());
-
-                    if (IsResponseSuccessful(response.StatusCode))
-                    {
-                        UpdateEntityCacheMessageStatus(entityCacheMessageId, Status.Inactive, EntityCacheMessageStatusReason.SuccessfullySentToIL);
-                        logger.LogInformation($"EntityCacheMessage Status Reason: {Enum.GetName(typeof(EntityCacheMessageStatusReason), EntityCacheMessageStatusReason.SuccessfullySentToIL)}");
-                    }
-                    else
-                    {
-                        var notes = AppendNote(entityCacheMessage.Notes, response.StatusCode, response.Content);
-                        UpdateEntityCacheMessageStatus(entityCacheMessageId, Status.Inactive, EntityCacheMessageStatusReason.Failed, notes);
-                        skippedrecords.Add(entityCache.RecordId);
-                        logger.LogInformation($"EntityCacheMessage Status Reason: {Enum.GetName(typeof(EntityCacheMessageStatusReason), EntityCacheMessageStatusReason.Failed)}");
-                    }
-                }
-                catch (Exception e)
-                {
-                    logger.LogError(e.ToString());
-                    var notes = AppendNote(entityCacheMessage.Notes, HttpStatusCode.InternalServerError, "Internal server error.");
-                    UpdateEntityCacheMessageStatus(entityCacheMessageId, Status.Inactive, EntityCacheMessageStatusReason.Failed, notes);
-                    logger.LogInformation($"EntityCacheMessage Status Reason: {Enum.GetName(typeof(EntityCacheMessageStatusReason), EntityCacheMessageStatusReason.Failed)}");
-                }
-            }
-        }
-
-        private static string CreateServiceUrl(string serviceUrl, string sourceSystemId)
-        {
-            if (!serviceUrl.EndsWith("/"))
-                return serviceUrl + "/" + sourceSystemId;
-
-            return serviceUrl + sourceSystemId;
-        }
-
-        private bool IsResponseSuccessful(HttpStatusCode statusCode)
-        {
-            return (int) statusCode >= 200 && (int) statusCode <= 299;
-        }
+		/// <summary>
+		/// Check if service return successfull response 
+		/// </summary>
+		/// <param name="statusCode"></param>
+		/// <returns></returns>
+        private bool IsResponseSuccessful(HttpStatusCode statusCode) => (int)statusCode >= 200 && (int)statusCode <= 299;
 
         private string AppendNote(string notes, HttpStatusCode statusCode, string content)
         {
@@ -187,51 +150,13 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
             return notes;
         }
 
-        /// <summary>
-        /// To create entitycachemessage record
-        /// </summary>
-        /// <param name="entityCacheMessageModel"></param>
-        /// <returns></returns>
-        private Guid CreateEntityCacheMessage(EntityCacheMessage entityCacheMessageModel)
-        {
-            return outboundSynchronisationDataService.CreateEntityCacheMessage(entityCacheMessageModel);
-        }
-
-        /// <summary>
-        /// To update status of entitycache
-        /// </summary>
-        /// <param name="entityCacheId"></param>
-        /// <param name="status"></param>
-        /// <param name="statusReason"></param>
-        private void UpdateEntityCacheStatus(Guid entityCacheId, Status status, EntityCacheStatusReason statusReason)
-        {
-            outboundSynchronisationDataService.UpdateEntityCacheStatus(entityCacheId, (int)status, (int)statusReason);
-        }
-
-        /// <summary>
-        /// To update status of entitycachemessage
-        /// </summary>
-        /// <param name="entityCacheMessageId"></param>
-        /// <param name="status"></param>
-        /// <param name="statusReason"></param>
-        /// <param name="notes"></param>
-        private void UpdateEntityCacheMessageStatus(Guid entityCacheMessageId, Status status, EntityCacheMessageStatusReason statusReason, string notes = null)
-        {
-            outboundSynchronisationDataService.UpdateEntityCacheMessageStatus(entityCacheMessageId, (int)status, (int)statusReason, notes);
-        }
-
-        private OutboundJsonWebTokenPayload CreateTokenPayload()
-        {
-            var payload = new OutboundJsonWebTokenPayload
-            {
-                IssuedAtTime = jwtService.GetIssuedAtTime().ToString(CultureInfo.InvariantCulture),
-                Expiry = outboundSynchronisationDataService.GetExpiry(),
-                NotBefore = outboundSynchronisationDataService.GetNotBeforeTime(),
-				Issuer = "msd"
-            };
-
-            return payload;
-        }
+        private OutboundJsonWebTokenPayload CreateTokenPayload() => new OutboundJsonWebTokenPayload
+																	{
+																		IssuedAtTime = jwtService.GetIssuedAtTime().ToString(CultureInfo.InvariantCulture),
+																		Expiry = outboundSynchronisationDataService.GetExpiry(),
+																		NotBefore = outboundSynchronisationDataService.GetNotBeforeTime(),
+																		Issuer = "msd"
+																	};
 
         #endregion Private methods
 

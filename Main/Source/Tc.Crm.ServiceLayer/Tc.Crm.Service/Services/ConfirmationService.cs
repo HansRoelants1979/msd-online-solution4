@@ -6,16 +6,18 @@ using Tc.Crm.Common;
 using System.Text;
 using System.Net;
 using System.Collections.Generic;
+using Tc.Crm.Common.Constants.EntityRecords;
+using System.Linq;
 
 namespace Tc.Crm.Service.Services
 {
     public class ConfirmationService : IConfirmationService
     {
-        ICrmService crmService;        
-        public ConfirmationService(ICrmService crmService)
+        ICrmService crmService;
+		public ConfirmationService(ICrmService crmService)
         {
-            this.crmService = crmService;            
-        }
+            this.crmService = crmService;
+		}
 
         public ConfirmationResponse ProcessResponse(Guid entityCacheMessageId, IntegrationLayerResponse ilResponse)
         {            
@@ -36,11 +38,25 @@ namespace Tc.Crm.Service.Services
 				if (entityCacheId != Guid.Empty)
 				{
 					// activate pending entity cache before putting to success to elimitate possibility plugin will create active request in between
+					Status status;
+					EntityCacheStatusReason statusReason;
+					DateTime? eligibleRetryTime = null;
 					if (isSuccess)
 					{
+						status = Status.Inactive;
+						statusReason = EntityCacheStatusReason.Succeeded;
 						crmService.ActivateRelatedPendingEntityCache(entityCacheId);
 					}
-					crmService.ProcessEntityCache(entityCacheId, isSuccess ? Status.Inactive : Status.Active, isSuccess ? EntityCacheStatusReason.Succeeded : EntityCacheStatusReason.InProgress, isSuccess);
+					else
+					{
+						var count = crmService.GetEntityCacheMessageCount(entityCacheId);
+						var schedule = GetRetrySchedule();
+						var hasMoreRetries = count <= schedule.Length;
+						eligibleRetryTime = hasMoreRetries ? GetEligibleRetryTime(schedule, count - 1) : (DateTime?) null;						
+						status = hasMoreRetries ? Status.Active : Status.Inactive;
+						statusReason = hasMoreRetries ? EntityCacheStatusReason.InProgress : EntityCacheStatusReason.Failed;
+					}
+					crmService.ProcessEntityCache(entityCacheId, status, statusReason, isSuccess, eligibleRetryTime);
 					return new ConfirmationResponse { StatusCode = HttpStatusCode.OK, Message = string.Empty };
 				}
                 return new ConfirmationResponse { Message = string.Format(Messages.MsdCorrelationIdDoesNotExist, entityCacheMessageId), StatusCode = HttpStatusCode.BadRequest };
@@ -52,7 +68,14 @@ namespace Tc.Crm.Service.Services
             }            
         }
 
-        private string PrepareEntityCacheMessageNotes(IntegrationLayerResponse ilResponse)
+		private int[] GetRetrySchedule()
+		{
+			var config = crmService.GetConfiguration(Configuration.OutboundSynchronisationMaxRetries);
+			return config.Split(',').Select(int.Parse).ToArray();
+		}
+		private DateTime GetEligibleRetryTime(int[] retryMinutes, int retry) => (retryMinutes.Length > 0 && retry < retryMinutes.Length) ? DateTime.UtcNow.AddMinutes(retryMinutes[retry]) : DateTime.UtcNow;
+
+		private string PrepareEntityCacheMessageNotes(IntegrationLayerResponse ilResponse)
         {
             var notes = new StringBuilder();
             if (ilResponse == null) return notes.ToString();
