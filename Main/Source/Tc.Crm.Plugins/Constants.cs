@@ -155,6 +155,30 @@ namespace Tc.Crm.Plugins.Attributes
         public const string TimeZoneCode = "timezonecode";
         public const string SystemUserId = "systemuserid";        
     }
+
+    public static class Task
+    {
+        public const string Subject = "subject";
+        public const string Description = "description";
+    }
+
+    public static class PhoneCall
+    {
+        public const string Subject = "subject";
+        public const string Description = "description";
+    }
+
+    public static class AssistanceRequest
+    {
+        public const string Description = "description";
+        public const string ExchangeItemId = "exchangeitemid";
+    }
+
+    public static class Appointment
+    {
+        public const string Subject = "subject";
+        public const string Description = "description";
+    }
 }
 namespace Tc.Crm.Plugins
 {
@@ -255,7 +279,10 @@ namespace Tc.Crm.Plugins
         public const string Country = "tc_country";
         public const string FollowUp = "tc_followup";
         public const string UserSettings = "usersettings";
-
+        public const string Task = "task";
+        public const string Email = "email";
+        public const string Appointment = "appointment";
+        public const string AssistanceRequest = "tc_assistancerequest";               
     }
 
     public static class Relationships

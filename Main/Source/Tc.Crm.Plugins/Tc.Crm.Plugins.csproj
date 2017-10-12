@@ -91,6 +91,10 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Appointment\BusinessLogic\CreditCardPatternValidationOfAppointmentService.cs" />
+    <Compile Include="Appointment\CreditCardPatternValidationOfAppointment.cs" />
+    <Compile Include="AssistanceRequest\BusinessLogic\CreditCardPatternValidationOfAssistanceRequestService.cs" />
+    <Compile Include="AssistanceRequest\CreditCardPatternValidationOfAssistanceRequest.cs" />
     <Compile Include="CacheRequest\BusinessLogic\CachingApiService.cs" />
     <Compile Include="CacheRequest\BusinessLogic\CachingService.cs" />
     <Compile Include="CacheRequest\BusinessLogic\ICachingApiService.cs" />
@@ -106,10 +110,14 @@
     <Compile Include="Customer\CreateEntityCacheOnCustomerOperation.cs" />
     <Compile Include="Email\BusinessLogic\UpdateEmailBodyService.cs" />
     <Compile Include="Email\PreoperationUpdateEmailBody.cs" />
+    <Compile Include="MultipleEntities\BusinessLogic\CreditCardPatternValidationService.cs" />
     <Compile Include="MultipleEntities\CreateEntityCacheOnEntityOperation.cs" />
+    <Compile Include="MultipleEntities\CreditCardPatternValidation.cs" />
     <Compile Include="MultipleEntities\Helper\JsonHelper.cs" />
     <Compile Include="MultipleEntities\Model\EntityModel.cs" />
     <Compile Include="Note\PostNoteUpdateCreditCardPatternValidation.cs" />
+    <Compile Include="PhoneCall\BusinessLogic\CreditCardPatternValidationOfPhoneCallService.cs" />
+    <Compile Include="PhoneCall\CreditCardPatternValidationOfPhoneCall.cs" />
     <Compile Include="PreCaseLine.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Hotel\BusinessLogic\PostRelatingHotelToUserService.cs" />
@@ -119,6 +127,8 @@
     <Compile Include="PluginEntryPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PluginBase.cs" />
+    <Compile Include="Task\BusinessLogic\CreditCardPatternValidationOfTaskService.cs" />
+    <Compile Include="Task\CreditCardPatternValidationOfTask.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
