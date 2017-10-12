@@ -185,30 +185,6 @@ namespace Tc.Crm.Service.Services
 
             return currencies;
         }
-        //todo: method to map iata type codes and string value
-        private string GetGatewayType(int value)
-        {
-            string gatewayType = string.Empty;
-            switch (value)
-            {
-                case 950000000:
-                    gatewayType = "Airport";
-                    break;
-                case 950000001:
-                    gatewayType = "Port";  
-                    break;
-                case 950000002:
-                    gatewayType = "Train Station";
-                    break;
-                case 950000003:
-                    gatewayType = "Other";
-                    break;
-                default:
-                    gatewayType = "Airport";
-                    break;
-            }
-            return gatewayType;
-        }
 
         private string GetGatewayType(int value)
         {
@@ -216,19 +192,19 @@ namespace Tc.Crm.Service.Services
             switch (value)
             {
                 case 950000000:
-                    gatewayType = "Airport";
+                    gatewayType = Constants.GatewayType.Airport;
                     break;
                 case 950000001:
-                    gatewayType = "Port";  
+                    gatewayType = Constants.GatewayType.Port;  
                     break;
                 case 950000002:
-                    gatewayType = "Train Station";
+                    gatewayType = Constants.GatewayType.TrainStation;
                     break;
                 case 950000003:
-                    gatewayType = "Other";
+                    gatewayType = Constants.GatewayType.Other;  
                     break;
                 default:
-                    gatewayType = "Airport";
+                    gatewayType = Constants.GatewayType.Airport;
                     break;
             }
             return gatewayType;

@@ -113,7 +113,9 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -126,9 +128,11 @@
     <Compile Include="ProcessBooking\Services\AccountHelperTests.cs" />
     <Compile Include="ProcessBooking\Services\ContactHelperTests.cs" />
     <Compile Include="ProcessCustomer\Services\AccountHelperTests.cs" />
+    <Compile Include="ProcessCustomer\Services\AccountPatchHelperTests.cs" />
     <Compile Include="ProcessCustomer\Services\ContactHelperTests.cs" />
     <Compile Include="ProcessCustomer\Services\ProcessCustomerServiceTests.cs" />
     <Compile Include="ProcessCustomer\Services\SocialProfileHelperTests.cs" />
+    <Compile Include="ProcessCustomer\Services\ContactPatchHelperTests.cs" />
     <Compile Include="QueueIdentifier\Service\QueueIdentifierServiceTests.cs" />
     <Compile Include="RetrieveParentRecord\Services\RetrieveRecordProcessHelperTests.cs" />
     <Compile Include="TestOrganizationService.cs" />

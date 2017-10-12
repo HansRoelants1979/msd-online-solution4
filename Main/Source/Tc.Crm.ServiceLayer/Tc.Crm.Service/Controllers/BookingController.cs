@@ -11,7 +11,7 @@ using Microsoft.Xrm.Sdk;
 
 namespace Tc.Crm.Service.Controllers
 {
-    //[RequireHttps]
+    [RequireHttps]
     public class BookingController : ApiController
     {
         IBookingService bookingService;
