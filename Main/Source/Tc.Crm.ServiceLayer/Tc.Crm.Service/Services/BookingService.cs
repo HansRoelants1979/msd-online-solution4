@@ -121,7 +121,7 @@ namespace Tc.Crm.Service.Services
 
             var response = crmService.ExecuteActionForBookingUpdate(bookingData);
             if (response == null) throw new InvalidOperationException(Constants.Messages.ResponseNull);
-            return new BookingUpdateResponse { Created = response.Created, Id = response.Id.ToString() };
+            return new BookingUpdateResponse { Created = response.Created, Id = response.Id,ResponseCode= response.ResponseCode,ResponseMessage=response.ResponseMessage };
         }
 
         public void ResolveReferences(Booking booking){

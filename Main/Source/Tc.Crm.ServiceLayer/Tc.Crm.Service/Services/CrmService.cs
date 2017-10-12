@@ -46,7 +46,7 @@ namespace Tc.Crm.Service.Services
 
             var responseObject = JsonConvert.DeserializeObject<tcm.UpdateResponse>(actionResponse);
 
-            return new tcm.UpdateResponse { Created = responseObject.Created, Id = responseObject.Id };
+            return new tcm.UpdateResponse { Created = responseObject.Created, Id = responseObject.Id,ResponseCode=responseObject.ResponseCode,ResponseMessage = responseObject.ResponseMessage };
         }
 
         public tcm.CustomerResponse ExecuteActionOnCustomerEvent(string data, OperationType operation)
@@ -143,7 +143,7 @@ namespace Tc.Crm.Service.Services
 
             return brands;
         }
-        
+
         public Collection<tcm.Country> GetCountries()
         {
             var fetchXml = @"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>
@@ -185,7 +185,31 @@ namespace Tc.Crm.Service.Services
 
             return currencies;
         }
-        
+        //todo: method to map iata type codes and string value
+        private string GetGatewayType(int value)
+        {
+            string gatewayType = string.Empty;
+            switch (value)
+            {
+                case 950000000:
+                    gatewayType = "Airport";
+                    break;
+                case 950000001:
+                    gatewayType = "Port";  
+                    break;
+                case 950000002:
+                    gatewayType = "Train Station";
+                    break;
+                case 950000003:
+                    gatewayType = "Other";
+                    break;
+                default:
+                    gatewayType = "Airport";
+                    break;
+            }
+            return gatewayType;
+        }
+
         private string GetGatewayType(int value)
         {
             string gatewayType = string.Empty;

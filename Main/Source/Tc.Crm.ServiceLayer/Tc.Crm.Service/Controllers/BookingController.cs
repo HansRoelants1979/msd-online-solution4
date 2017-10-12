@@ -11,7 +11,7 @@ using Microsoft.Xrm.Sdk;
 
 namespace Tc.Crm.Service.Controllers
 {
-    [RequireHttps]
+    //[RequireHttps]
     public class BookingController : ApiController
     {
         IBookingService bookingService;
@@ -72,6 +72,10 @@ namespace Tc.Crm.Service.Controllers
         {
             var jsonData = JsonConvert.SerializeObject(booking);
             var response = bookingService.Update(jsonData, crmService);
+            if(response.ResponseCode == Tc.Crm.Service.Constants.Crm.ErrorCode.BadRequest)
+                return Request.CreateResponse(HttpStatusCode.BadRequest, response.ResponseMessage);
+            if (response.ResponseCode == Tc.Crm.Service.Constants.Crm.ErrorCode.ErrorCode422)
+                return Request.CreateResponse((HttpStatusCode)422, response.ResponseMessage);
             if (response.Created)
                 return Request.CreateResponse(HttpStatusCode.Created, response.Id);
             else

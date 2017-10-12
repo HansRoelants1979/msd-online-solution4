@@ -207,9 +207,10 @@
         public const string MissingMsdCorrelationId = "msdCorrelationId is missing.";
 		public const string IncorrectMsdCorrelationId = "msdCorrelationId is not guid.";
 		public const string MissingCorrelationId = "correlationId missing in request body.";
-		public const string UnexpectedError = "An unexpected error has occurred.";
+        public const string UnexpectedError = "An unexpected error has occurred.";
 		public const string MsdCorrelationIdDoesNotExist = "Record with id {0} does not exist";
-	}
+        public const string ConsultationReferenceIsNull = "The booking received was from TCV but no consultationReference was provided within the supplied Json";
+    }
     public static class Parameters
     {
         public const string JsonWebTokenRequest = "jsonWebTokenRequest";
@@ -232,7 +233,7 @@
         public const string CustomerId = "customerId";
         public const string Data = "data";
 		public const string EntityCacheMessageId = "entityCacheMessageId";
-	}
+    }
 }
 namespace Tc.Crm.Service.Constants.Configuration
 {
@@ -281,6 +282,11 @@ namespace Tc.Crm.Service.Constants.Crm
     public static class Contact
     {
         public const string LogicalName = "contact";
+    }
+    public static class ErrorCode
+    {
+        public const string BadRequest = "400";
+        public const string ErrorCode422 = "422";
     }
 }
 namespace Tc.Crm.Service.Constants.Crm.Fields

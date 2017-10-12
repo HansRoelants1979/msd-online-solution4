@@ -289,8 +289,10 @@ namespace Tc.Crm.Service.Client.Console
 
             while (true)
             {
-                System.Console.WriteLine("Reading the Json data");
-                var data = File.ReadAllText("booking.json");
+                System.Console.WriteLine("Enter the scenario number to process the Json file");
+                var option = System.Console.ReadLine();
+                if (string.IsNullOrEmpty(option) && Convert.ToInt32(option) >= 30) return;
+                var data = File.ReadAllText("Json//book"+ option.ToString() + ".json");
                 var api = "api/booking/update";
 
                 //create the token

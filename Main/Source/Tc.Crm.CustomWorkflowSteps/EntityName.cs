@@ -278,8 +278,8 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string NumberOfSeniorCitizens = "tc_numberofseniorcitizens";
         public const string NumberOfDealsOnConsultation = "tc_numberofdealsonconsultation";
         public const string AmountDueDate = "tc_amountduedate";
-        public const string ProductTypeCode = "tc_productTypeCode";
-        public const string ProductTypeCodeDescription = "tc_productTypeCodeDescription";
+        public const string ProductTypeCode = "tc_producttypecode";
+        public const string ProductTypeCodeDescription = "tc_producttypecodedescription";
         public const string OperatorCode = "tc_operatorcode";
         public const string OperatorCodeDescription = "tc_operatorcodedescription";
         public const string TotalDueAmount = "tc_totaldueamount";
@@ -561,5 +561,15 @@ namespace Tc.Crm.CustomWorkflowSteps.Attributes
         public const string Master = "tc_master";
         public const string Subordinate = "tc_subordinate";
         public const string ModifiedOn = "modifiedon";
+    }
+}
+
+namespace Tc.Crm.CustomWorkflowSteps.Constants
+{
+    public static class ResponseDetails
+    {
+        public const string ReturnErrorCode400 = "400";
+        public const string ReturnErrorCode422 = "422";
+        public const string ReturnSuccessCode20x = "200";
     }
 }

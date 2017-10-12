@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xrm.Sdk;
 using Tc.Crm.CustomWorkflowSteps.ProcessBooking.Models;
+using Tc.Crm.CustomWorkflowSteps.Constants;
 
 namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
 {
@@ -24,22 +25,50 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessBooking.Services
         /// <returns></returns>
         public string ProcessPayload()
         {
-            trace.Trace("Processing Process payload - start");
+            
 
             if (payloadBooking == null) throw new InvalidPluginExecutionException("Booking object created from payload json is null;");
 
             payloadBooking.DeleteBookingRole = true;
             payloadBooking.DeleteChildRecords = true;
 
-            ProcessCustomer();
-            ProcessBookingInfo();
-            ProcessAccommodation();
-            ProcessTransport();
-            ProcessTransfers();
-            ProcessExtraServices();
-            ProcessBookingRole();
+            var booking = payloadBooking.BookingInfo;
+            trace.Trace("Booking Rule Service - start");
+            BookingRulesService bookingRules = new BookingRulesService(payloadBooking);
+            bookingRules.SetRequiredFlags();
+            trace.Trace("Booking Rule Service - ends");
+
+            if (bookingRules.returnErrorCode400)
+                payloadBooking.Response.ResponseCode = ResponseDetails.ReturnErrorCode400;
+            if(bookingRules.returnErrorCode422)
+                payloadBooking.Response.ResponseCode = ResponseDetails.ReturnErrorCode422;
+
+            trace.Trace("updateBooking flag value- " + bookingRules.updateBooking.ToString());
+            trace.Trace("createBooking flag value- " + bookingRules.createBooking.ToString());
+            trace.Trace("createCustomer flag value- " + bookingRules.createCustomer.ToString());
+            trace.Trace("delinkCustomer flag value- " + bookingRules.delinkCustomer.ToString());
+            trace.Trace("linkCustomer flag value- " + bookingRules.linkCustomer.ToString());
+            trace.Trace("returnSuccessCode20x flag value- " + bookingRules.returnSuccessCode20x.ToString());
+
+            if (bookingRules.createCustomer)
+                ProcessCustomer();
+
+            if (bookingRules.updateBooking || bookingRules.createBooking)
+            {
+                ProcessBookingInfo();
+                ProcessAccommodation();
+                ProcessTransport();
+                ProcessTransfers();
+                ProcessExtraServices();
+                ProcessBookingRole();
+            }
+
+            if(bookingRules.returnSuccessCode20x)
+                payloadBooking.Response.ResponseCode = ResponseDetails.ReturnSuccessCode20x;
+
 
             trace.Trace("Processing Process payload - end");
+
             return JsonHelper.SerializeJson(payloadBooking.Response, trace);
             //return JsonHelper.SerializeJson(new BookingResponse { Created=true,Id=Guid.NewGuid().ToString()}, trace);
         }
