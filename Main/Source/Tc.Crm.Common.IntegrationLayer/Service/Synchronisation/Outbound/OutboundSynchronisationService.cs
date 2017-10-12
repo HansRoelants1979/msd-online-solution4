@@ -8,6 +8,11 @@ using Tc.Crm.Common.IntegrationLayer.Jti.Service;
 using Tc.Crm.Common.Models;
 using Tc.Crm.Common.Services;
 using EntityModel = Tc.Crm.Common.IntegrationLayer.Model.EntityModel;
+using Tc.Crm.Common.IntegrationLayer.Model;
+using System.IO;
+using System.Runtime.Serialization.Json;
+using System.Text;
+using Tc.Crm.Common.IntegrationLayer.Helper;
 
 namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
 {
@@ -22,6 +27,7 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
         private readonly IJwtService jwtService;
         private readonly IRequestPayloadCreator createRequestPayloadCreator;
         private readonly IRequestPayloadCreator updateRequestPayloadCreator;
+		private readonly IEntityModelDeserializer entityModelDeserializer;
 
 		private int MaxRetries { get; }
 		private int[] RetrySchedule { get; }
@@ -31,7 +37,8 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
             IJwtService jwtService,
             IRequestPayloadCreator createRequestPayloadCreator,
             IRequestPayloadCreator updateRequestPayloadCreator,
-            IOutboundSyncConfigurationService configurationService)
+            IOutboundSyncConfigurationService configurationService,
+			IEntityModelDeserializer entityModelDeserializer)
         {
             this.outboundSynchronisationDataService = outboundSynchronisationService;
             this.logger = logger;
@@ -39,6 +46,7 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
             this.configurationService = configurationService;
             this.createRequestPayloadCreator = createRequestPayloadCreator;
             this.updateRequestPayloadCreator = updateRequestPayloadCreator;
+			this.entityModelDeserializer = entityModelDeserializer;
 
 			RetrySchedule = outboundSynchronisationDataService.GetRetries();
 			MaxRetries = RetrySchedule.Length;
@@ -89,7 +97,7 @@ namespace Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound
 				var success = false;
 				try
                 {
-                    var entityModel = JsonConvert.DeserializeObject<EntityModel>(entityCache.Data);
+					var entityModel = entityModelDeserializer.Deserialize(entityCache.Data);
                     var requestPayload = payloadCreator.GetPayload(entityModel);					
 					var url = operation == Operation.Update ? GetUpdateUrl(serviceUrl, entityCache.SourceSystemId) : serviceUrl;
 					var response = jwtService.SendHttpRequest(httpMethod, url, token, requestPayload, entityCacheMessageId.ToString());

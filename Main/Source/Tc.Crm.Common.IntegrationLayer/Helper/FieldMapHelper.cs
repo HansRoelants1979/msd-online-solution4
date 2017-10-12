@@ -50,7 +50,7 @@ namespace Tc.Crm.Common.IntegrationLayer.Helper
                     value = field.Value as string;
                     break;
                 case FieldType.OptionSet:
-                    value = JsonConvert.DeserializeObject<OptionSetValue>(field.Value.ToString()).Value.ToString();
+                    value = ((OptionSet)field.Value).Value.ToString();
                     break;
                 default:
                     throw new NotImplementedException("Implement converting value");

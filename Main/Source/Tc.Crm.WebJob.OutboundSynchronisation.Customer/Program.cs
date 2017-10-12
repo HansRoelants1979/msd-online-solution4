@@ -5,6 +5,7 @@ using Tc.Crm.Common.IntegrationLayer.Jti.Service;
 using Tc.Crm.Common.IntegrationLayer.Service.Synchronisation;
 using Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound;
 using Tc.Crm.Common.Services;
+using Tc.Crm.Common.IntegrationLayer.Helper;
 
 namespace Tc.Crm.OutboundSynchronisation.Customer
 {
@@ -22,7 +23,8 @@ namespace Tc.Crm.OutboundSynchronisation.Customer
                 unitycontainer.RegisterType<IOutboundSyncConfigurationService, OutboundSyncConfigurationService>(new ContainerControlledLifetimeManager());
 				unitycontainer.RegisterType<ICrmService, CrmService>(new ContainerControlledLifetimeManager());
                 unitycontainer.RegisterType<IJwtService, JwtService>(new ContainerControlledLifetimeManager());
-                unitycontainer.RegisterType<IRequestPayloadCreator, CreateCustomerRequestPayloadCreator>("CreateCustomerRequestPayloadCreator", new ContainerControlledLifetimeManager());
+				unitycontainer.RegisterType<IEntityModelDeserializer, IEntityModelDeserializer>(new ContainerControlledLifetimeManager());
+				unitycontainer.RegisterType<IRequestPayloadCreator, CreateCustomerRequestPayloadCreator>("CreateCustomerRequestPayloadCreator", new ContainerControlledLifetimeManager());
                 unitycontainer.RegisterType<IRequestPayloadCreator, UpdateCustomerRequestPayloadCreator>("UpdateCustomerRequestPayloadCreator", new ContainerControlledLifetimeManager());
                 unitycontainer.RegisterType<IOutboundSynchronisationDataService, OutboundSynchronisationDataService>(new ContainerControlledLifetimeManager());
                 unitycontainer.RegisterType<IOutboundSynchronisationService, OutboundSynchronisationService>(new InjectionConstructor(

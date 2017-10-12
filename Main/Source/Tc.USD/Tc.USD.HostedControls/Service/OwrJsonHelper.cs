@@ -200,12 +200,12 @@ namespace Tc.Usd.HostedControls.Service
             {
                     new AddressOwr
                     {
-                        FlatNumberUnit = _opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address1FlatorUnitNumber) ?
-                            ((AliasedValue)_opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address1FlatorUnitNumber]).Value.ToString():"",
+                        FlatNumberUnit = _opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address1FlatOrUnitNumber) ?
+                            ((AliasedValue)_opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address1FlatOrUnitNumber]).Value.ToString():"",
                         HouseNumberBuilding = _opportunity.Contains(AliasName.ContactAliasName +
-                                                                  Crm.Common.Constants.Attributes.Customer.Address1HouseNumberoBuilding)?
+                                                                  Crm.Common.Constants.Attributes.Customer.Address1HouseNumberOrBuilding)?
                            ((AliasedValue)_opportunity[AliasName.ContactAliasName +
-                                                                  Crm.Common.Constants.Attributes.Customer.Address1HouseNumberoBuilding]).Value.ToString():"",
+                                                                  Crm.Common.Constants.Attributes.Customer.Address1HouseNumberOrBuilding]).Value.ToString():"",
                         Town = _opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address1Town)?
                             ((AliasedValue)_opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address1Town]).Value.ToString():"",
                         Country = _opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address1CountryId) ?
@@ -217,10 +217,10 @@ namespace Tc.Usd.HostedControls.Service
                     },
                     new AddressOwr
                     {
-                        FlatNumberUnit = _opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2FlatorUnitNumber)?
-                            ((AliasedValue)_opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2FlatorUnitNumber]).Value.ToString():"",
-                        HouseNumberBuilding = _opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2HouseNumberoBuilding)?
-                            ((AliasedValue)_opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2HouseNumberoBuilding]).Value.ToString():"",
+                        FlatNumberUnit = _opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2FlatOrUnitNumber)?
+                            ((AliasedValue)_opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2FlatOrUnitNumber]).Value.ToString():"",
+                        HouseNumberBuilding = _opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2HouseNumberOrBuilding)?
+                            ((AliasedValue)_opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2HouseNumberOrBuilding]).Value.ToString():"",
                         Town = _opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2Town)?
                             ((AliasedValue)_opportunity[AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2Town]).Value.ToString():"",
                         Country = _opportunity.Contains(AliasName.ContactAliasName + Crm.Common.Constants.Attributes.Customer.Address2CountryId)?

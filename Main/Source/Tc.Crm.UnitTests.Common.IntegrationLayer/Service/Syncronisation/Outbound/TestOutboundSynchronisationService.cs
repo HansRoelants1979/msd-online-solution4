@@ -11,6 +11,7 @@ using Tc.Crm.Common.IntegrationLayer.Service.Synchronisation;
 using Tc.Crm.Common.IntegrationLayer.Service.Synchronisation.Outbound;
 using Tc.Crm.Common.Models;
 using Tc.Crm.Common.Services;
+using Tc.Crm.Common.IntegrationLayer.Helper;
 
 namespace Tc.Crm.UnitTests.Common.IL.Service.Syncronisation.Outbound
 {
@@ -36,6 +37,7 @@ namespace Tc.Crm.UnitTests.Common.IL.Service.Syncronisation.Outbound
 		private IRequestPayloadCreator createRequestPayloadCreator;
 		private IRequestPayloadCreator updateRequestPayloadCreator;
 		private IOutboundSyncConfigurationService outboundSyncConfigurationService;
+		private IEntityModelDeserializer entityModelDeserializer; 
 
 		[TestInitialize]
 		public void TestInitialize()
@@ -46,6 +48,7 @@ namespace Tc.Crm.UnitTests.Common.IL.Service.Syncronisation.Outbound
 			createRequestPayloadCreator = A.Fake<IRequestPayloadCreator>();
 			updateRequestPayloadCreator = A.Fake<IRequestPayloadCreator>();
 			outboundSyncConfigurationService = A.Fake<IOutboundSyncConfigurationService>();
+			entityModelDeserializer = A.Fake<IEntityModelDeserializer>();
 
 			A.CallTo(() => outboundSyncConfigurationService.BatchSize).Returns(batchSize);
 			A.CallTo(() => outboundSyncConfigurationService.EntityName).Returns(entityName);
@@ -53,6 +56,19 @@ namespace Tc.Crm.UnitTests.Common.IL.Service.Syncronisation.Outbound
 			A.CallTo(() => outboundSynchDataService.GetRetries()).Returns(retries);
 			A.CallTo(() => outboundSyncConfigurationService.CreateServiceUrl).Returns(createServiceUrl);
 			A.CallTo(() => outboundSyncConfigurationService.UpdateServiceUrl).Returns(updateServiceUrl);
+			A.CallTo(() => entityModelDeserializer.Deserialize(A<string>._)).Returns(
+				new Crm.Common.IntegrationLayer.Model.EntityModel
+				{
+					Fields = new List<Crm.Common.IntegrationLayer.Model.Field>
+					{
+						new Crm.Common.IntegrationLayer.Model.Field
+						{
+							Name = Tc.Crm.Common.Constants.Attributes.Customer.FirstName,
+							Type = Crm.Common.IntegrationLayer.Model.FieldType.String,
+							Value = "Name"
+						}
+					}
+				});
 
 			outboundSynchService = new OutboundSynchronisationService(
 				logger,
@@ -60,7 +76,8 @@ namespace Tc.Crm.UnitTests.Common.IL.Service.Syncronisation.Outbound
 				jwtService,
 				createRequestPayloadCreator,
 				updateRequestPayloadCreator,
-				outboundSyncConfigurationService);
+				outboundSyncConfigurationService,
+				entityModelDeserializer);
 		}
 
 		[TestMethod]

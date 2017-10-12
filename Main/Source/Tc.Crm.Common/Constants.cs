@@ -253,18 +253,27 @@
             public const string Language = "tc_language";
             public const string FirstName = "firstname";
             public const string LastName = "lastname";
+            public const string MiddleName = "middlename";
             public const string Birthdate = "birthdate";
             public const string SourceSystemId = "tc_sourcesystemid";
-            public const string MiddleName = "middlename";
-            public const string Address1FlatorUnitNumber = "tc_address1_flatorunitnumber";
-            public const string Address1HouseNumberoBuilding = "tc_address1_housenumberorbuilding";
+	        public const string Segment = "tc_segment";
+	        public const string DateOfDeath = "tc_dateofdeath";
+	        public const string AcademicTitle = "tc_academicTitle";
+	        public const string Gender = "tc_gender";
+	        public const string StatusCode = "statuscode";
+	        public const string SourceMarket = "tc_sourcemarketid";
+	        public const string SocialProfile = "socialprofile_community";
+            public const string Address1FlatOrUnitNumber = "tc_address1_flatorunitnumber";
+	        public const string Address1AdditionaInformation = "tc_address1_additionalinformation";
+			public const string Address1HouseNumberOrBuilding = "tc_address1_housenumberorbuilding";
             public const string Address1Street = "tc_address1_street";
             public const string Address1Town = "tc_address1_town";
             public const string Address1County = "tc_address1_county";
             public const string Address1CountryId = "tc_address1_countryid";
             public const string Address1PostalCode = "tc_address1_postalcode";
-            public const string Address2FlatorUnitNumber = "tc_address2_flatorunitnumber";
-            public const string Address2HouseNumberoBuilding = "tc_address2_housenumberorbuilding";
+            public const string Address2FlatOrUnitNumber = "tc_address2_flatorunitnumber";
+	        public const string Address2AdditionaInformation = "tc_address2_additionalinformation";
+			public const string Address2HouseNumberOrBuilding = "tc_address2_housenumberorbuilding";
             public const string Address2Street = "tc_address2_street";
             public const string Address2Town = "tc_address2_town";
             public const string Address2County = "tc_address2_county";
@@ -355,7 +364,8 @@
             public const string StatusReason = "statuscode";
             public const string State = "statecode";
             public const string EntityCacheMessageId = "tc_entitycachemessageid";
-        }
+	        public const string CreatedOn = "createdon";
+		}
 
         public static class Configuration
         {

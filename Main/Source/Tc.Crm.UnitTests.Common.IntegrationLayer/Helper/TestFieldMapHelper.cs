@@ -196,7 +196,7 @@ namespace Tc.Crm.UnitTests.Common.IntegrationLayer.Helper
             {
                 Type = FieldType.OptionSet,
                 Name = "fieldName",
-                Value = JsonConvert.SerializeObject(new OptionSetValue(1000))
+                Value = new OptionSet { Value = 1000 }
             };
             var mapped = FieldMapHelper.TryMapField("fieldName", field, value => property = value);
             Assert.IsTrue(mapped);
@@ -526,7 +526,7 @@ namespace Tc.Crm.UnitTests.Common.IntegrationLayer.Helper
             var patch = new PatchElement();
             var expectedOperator = "op";
             var expectedPath = "path";
-            var expectedValue = JsonConvert.SerializeObject(new OptionSetValue(1000));
+            var expectedValue = new OptionSet { Value = 1000 };
             var field = new Field
             {
                 Type = FieldType.OptionSet,

@@ -5,7 +5,14 @@ using System.Runtime.Serialization;
 namespace Tc.Crm.Common.IntegrationLayer.Model
 {
     [DataContract(Name = "EntityModel")]
-    public class EntityModel
+	[KnownType(typeof(EntityModel))]
+	[KnownType(typeof(Field))]
+	[KnownType(typeof(OptionSet))]
+	[KnownType(typeof(Lookup))]
+	[KnownType(typeof(RecordCollection))]
+	[KnownType(typeof(EntityRecord))]
+	[KnownType(typeof(FieldType))]
+	public class EntityModel
     {
         [DataMember(Name = "Fields")]
         public List<Field> Fields { get; set; }
