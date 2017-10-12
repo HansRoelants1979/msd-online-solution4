@@ -115,6 +115,8 @@
             public const string Customer = "Person";
             public const string Account = "Company";
         }
+
+        
     }
     public static class General
     {
@@ -144,6 +146,13 @@
         public const string Netherlands = "NL";
         public const string Hungary = "HU";
 
+    }
+    public static class GatewayType
+    {
+        public const string Airport = "Airport";
+        public const string TrainStation = "Train Station";
+        public const string Port = "Port";
+        public const string Other = "Other";
     }
     public static class CurrencyCode
     {

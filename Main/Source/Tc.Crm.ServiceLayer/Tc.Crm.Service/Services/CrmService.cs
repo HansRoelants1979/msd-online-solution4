@@ -143,7 +143,7 @@ namespace Tc.Crm.Service.Services
 
             return brands;
         }
-
+        
         public Collection<tcm.Country> GetCountries()
         {
             var fetchXml = @"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>
@@ -185,28 +185,53 @@ namespace Tc.Crm.Service.Services
 
             return currencies;
         }
-
-        public Collection<tcm.Gateway> GetGateways()
+        
+        private string GetGatewayType(int value)
         {
+            string gatewayType = string.Empty;
+            switch (value)
+            {
+                case 950000000:
+                    gatewayType = "Airport";
+                    break;
+                case 950000001:
+                    gatewayType = "Port";  
+                    break;
+                case 950000002:
+                    gatewayType = "Train Station";
+                    break;
+                case 950000003:
+                    gatewayType = "Other";
+                    break;
+                default:
+                    gatewayType = "Airport";
+                    break;
+            }
+            return gatewayType;
+        }       
+        
+        public Dictionary<string,string> GetGateways()
+        {
+            Dictionary<string, string> getWayItems = new Dictionary<string, string>();
             var fetchXml = @"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>
                               <entity name='tc_gateway'>
                                 <attribute name='tc_iata' />
+                                <attribute name='tc_gatewaytype' /> 
                                 <attribute name='tc_gatewayid' />
                               </entity>
                             </fetch>";
             FetchExpression exp = new FetchExpression(fetchXml);
             var records = orgService.RetrieveMultiple(exp);
             if (records == null || records.Entities.Count == 0) return null;
-
-            var gateways = new Collection<tcm.Gateway>();
-            foreach (var item in records.Entities)
-            {
-                gateways.Add(new Models.Gateway { Code = item["tc_iata"].ToString(), Id = item.Id.ToString() });
+            foreach (var item in records.Entities){
+                var iata = item[Attributes.Gateway.Iata].ToString();
+                var typeValue = item.GetAttributeValue<OptionSetValue>(Attributes.Gateway.GatewayType).Value;
+                var typeString = GetGatewayType((int)typeValue);
+                var gateWay = new Models.Gateway { Code = $"{iata}_{typeString}", Id = item.Id.ToString()};
+                getWayItems.Add(gateWay.Code, gateWay.Id);
             };
-
-            return gateways;
+            return getWayItems;
         }
-
         public Collection<tcm.TourOperator> GetTourOperators()
         {
             var fetchXml = @"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>

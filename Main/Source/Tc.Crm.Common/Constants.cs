@@ -172,6 +172,8 @@
             public const string GatewayId = "tc_gatewayid";
             public const string Iata = "tc_iata";
             public const string Name = "tc_gateway";
+            public const string GatewayType = "tc_gatewaytype";
+            
         }
 
         public static class Booking

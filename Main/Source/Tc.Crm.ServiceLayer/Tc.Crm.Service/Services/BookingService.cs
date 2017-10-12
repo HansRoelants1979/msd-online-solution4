@@ -124,8 +124,7 @@ namespace Tc.Crm.Service.Services
             return new BookingUpdateResponse { Created = response.Created, Id = response.Id.ToString() };
         }
 
-        public void ResolveReferences(Booking booking)
-        {
+        public void ResolveReferences(Booking booking){
             ResolveCustomerReferences(booking.Customer);
             ResolveCurrency(booking);
             ResolveGeneralReferences(booking.BookingGeneral);
@@ -178,19 +177,18 @@ namespace Tc.Crm.Service.Services
         public void ResolveTransportReferences(Transport[] transports)
         {
             if (transports == null) return;
-            foreach (var transport in transports)
-            {
-                transport.ArrivalAirport = gatewayBucket.GetBy(transport.ArrivalAirport);
-                transport.DepartureAirport = gatewayBucket.GetBy(transport.DepartureAirport);
+            foreach (var transport in transports){ 
+                var type = gatewayBucket.MapTransportType(transport.TransportType);
+                transport.ArrivalAirport = gatewayBucket.GetBy($"{transport.ArrivalAirport}_{type}");
+                transport.DepartureAirport = gatewayBucket.GetBy($"{transport.DepartureAirport}_{type}");
             }
         }
         public void ResolveTransferReferences(Transfer[] transfers)
         {
             if (transfers == null) return;
-            foreach (var transfer in transfers)
-            {
-                transfer.ArrivalAirport = gatewayBucket.GetBy(transfer.ArrivalAirport);
-                transfer.DepartureAirport = gatewayBucket.GetBy(transfer.DepartureAirport);
+            foreach (var transfer in transfers){
+                transfer.ArrivalAirport = gatewayBucket.GetBy($"{transfer.ArrivalAirport}_{GatewayType.Airport}");
+                transfer.DepartureAirport = gatewayBucket.GetBy($"{transfer.DepartureAirport}_{GatewayType.Airport}");
             }
         }
 
@@ -225,7 +223,7 @@ namespace Tc.Crm.Service.Services
         {
             if (general == null) return;
             general.Brand = brandBucket.GetBy(general.Brand);
-            general.Destination = gatewayBucket.GetBy(general.Destination);
+            general.Destination = gatewayBucket.GetBy($"{general.Destination}_{GatewayType.Airport}");
             general.ToCode = tourOperatorBucket.GetBy(general.ToCode);
         }
         public void ResolveCurrency(Booking booking)

@@ -18,7 +18,7 @@ namespace Tc.Crm.Service.Services
         Collection<tcm.Brand>    GetBrands();
         Collection<tcm.Country> GetCountries();
         Collection<tcm.Currency> GetCurrencies();
-        Collection<tcm.Gateway> GetGateways();
+        Dictionary<string, string> GetGateways(); 
         Collection<tcm.TourOperator> GetTourOperators();
         Collection<tcm.SourceMarket> GetSourceMarkets();
         Collection<tcm.Hotel> GetHotels();

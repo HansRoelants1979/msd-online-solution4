@@ -93,11 +93,11 @@ namespace Tc.Crm.ServiceTests
             return currencies;
         }
 
-        public Collection<Gateway> GetGateways()
+        public Dictionary<string,string> GetGateways()
         {
-            Collection<Gateway> gateways = new Collection<Gateway>();
-            gateways.Add(new Gateway { Code = "HGR", Id = "54E0C5FE-D522-4148-9192-9C885BA3CED6" });
-            return gateways;
+            Dictionary<string, string> gatewaysDictionary = new Dictionary<string, string>();
+            gatewaysDictionary.Add("HGR_Airport","54E0C5FE-D522-4148-9192-9C885BA3CED6");
+            return gatewaysDictionary;
         }
 
         public Collection<TourOperator> GetTourOperators()
