@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Tc.Crm.Plugins.OptionSetValues
+﻿namespace Tc.Crm.Plugins.OptionSetValues
 {
     public static class CacheRequest
     {
@@ -14,26 +8,35 @@ namespace Tc.Crm.Plugins.OptionSetValues
     }
 
 }
+
 namespace Tc.Crm.Plugins.Attributes
 {
+    public static class QueueItem
+    {
+        public const string ObjectTypeCode = "objecttypecode";
+        public const string ObjectId = "objectid";
+    }
     public static class CacheRequest
     {
         public const string Name = "tc_name";
         public const string StateCode = "statecode";
         public const string StatusCode = "statuscode";
     }
+
     public static class Annotation
     {
         public const string Subject = "subject";
         public const string NoteText = "notetext";
         public const string ObjectId = "objectid";
     }
+
     public static class ConfigurationKeys
     {
         public const string Name = "tc_name";
         public const string Value = "tc_value";
         public const string LongValue = "tc_longvalue";
     }
+
     public static class Team
     {
         public const string Name = "name";
@@ -74,6 +77,7 @@ namespace Tc.Crm.Plugins.Attributes
     public static class Case
     {
         public const string SurveyId = "tc_surveyid";
+        public const string CaseId = "incidentid";
     }
 
     public static class Configuration
@@ -91,12 +95,19 @@ namespace Tc.Crm.Plugins.Attributes
         public const string Operation = "tc_operation";
         public const string SourceMarket = "tc_sourcemarket";
         public const string RecordId = "tc_recordid";
-		public const string EligibleRetryTime = "tc_eligibleretrytime";
-		public const string WasLastOperationSuccessful = "tc_waslastoperationsuccessful";
-		public const string StatusCode = "statuscode";
-		public const string Status = "status";
-		public const string EntityCacheId = "tc_entitycacheid";
-	}
+        public const string EligibleRetryTime = "tc_eligibleretrytime";
+        public const string WasLastOperationSuccessful = "tc_waslastoperationsuccessful";
+        public const string StatusCode = "statuscode";
+        public const string Status = "status";
+        public const string EntityCacheId = "tc_entitycacheid";
+    }
+
+    public static class EntityCacheMessage
+    {
+        public const string Name = "tc_name";
+        public const string OutcomeId = "tc_outcomeid";
+        public const string EntityCacheId = "tc_entitycacheid";
+    }
 
     public static class Customer
     {
@@ -132,6 +143,14 @@ namespace Tc.Crm.Plugins.Attributes
         public const string EmailAddress3Type = "tc_emailaddress3type";
     }
 
+    public static class Contact
+    {
+        public const string ContactId = "contactid";
+        public const string Owner = "ownerid";
+        public const string SourceSystemId = "tc_sourcesystemid";
+        public const string DuplicateSourceSystemId = "tc_duplicatesourcesystemid";
+    }
+
     public static class Country
     {
         public const string ISO2Code = "tc_iso2code";
@@ -141,19 +160,28 @@ namespace Tc.Crm.Plugins.Attributes
     {
         public const string PartyId = "partyid";
     }
+
     public static class FollowUp
     {
         public const string RescheduleCheck = "tc_reschedulecheck";
         public const string RescheduleReason = "tc_reschedulereason";
         public const string DueDate = "scheduledend";
         public const string ContactTime = "tc_contacttime";
-        
+
     }
 
     public static class UserSettings
     {
         public const string TimeZoneCode = "timezonecode";
-        public const string SystemUserId = "systemuserid";        
+        public const string SystemUserId = "systemuserid";
+    }
+
+    public static class EntityMerge
+    {
+        public const string Name = "tc_name";
+        public const string Master = "tc_master";
+        public const string Subordinate = "tc_subordinate";
+        public const string ExecutionTime = "tc_executiontime";
     }
 
     public static class Task
@@ -179,7 +207,17 @@ namespace Tc.Crm.Plugins.Attributes
         public const string Subject = "subject";
         public const string Description = "description";
     }
+
+    public static class Email
+    {
+        public const string Subject = "subject";
+        public const string Description = "description";
+        public const string Regarding = "regardingobjectid";
+        public const string DirectionCode = "directioncode";
+    }
 }
+
+   
 namespace Tc.Crm.Plugins
 {
     public static class CachingParameter
@@ -195,6 +233,7 @@ namespace Tc.Crm.Plugins
     public static class Configurationkeys
     {
         public const string CreditCardPattern = "Tc.Validation.GDPR.CreditCardPattern";
+        public const string CaseTitlePattern = "Tc.Validation.Email.CaseTitlePattern";
     }
 
     public static class SpecialCharacters
@@ -206,10 +245,11 @@ namespace Tc.Crm.Plugins
     public static class General
     {
         public const string RoleTcIdBase = "Tc.Ids.Base";
-        public const string RoleTcIdRep = "Tc.Ids.Rep";        
+        public const string RoleTcIdRep = "Tc.Ids.Rep";
     }
 
-    public static class ValidationMessages{
+    public static class ValidationMessages
+    {
         public const string ContextIsNull = "Context is null.";
         public const string TraceIsNull = "Trace is null.";
         public const string OrganizationServiceIsNull = "Organization service is null.";
@@ -255,7 +295,7 @@ namespace Tc.Crm.Plugins
     public static class InputParameters
     {
         public const string Target = "Target";
-        public const string Relationship  = "Relationship";
+        public const string Relationship = "Relationship";
         public const string RelatedEntities = "RelatedEntities";
     }
 
@@ -274,7 +314,7 @@ namespace Tc.Crm.Plugins
         public const string Booking = "tc_booking";
         public const string Phonecall = "phonecall";
         public const string Opportunity = "opportunity";
-        public const string Configuration = "tc_configuration";       
+        public const string Configuration = "tc_configuration";
         public const string EntityCache = "tc_entitycache";
         public const string Country = "tc_country";
         public const string FollowUp = "tc_followup";
@@ -282,7 +322,8 @@ namespace Tc.Crm.Plugins
         public const string Task = "task";
         public const string Email = "email";
         public const string Appointment = "appointment";
-        public const string AssistanceRequest = "tc_assistancerequest";               
+        public const string AssistanceRequest = "tc_assistancerequest";
+        public const string EntityMerge = "tc_entitymerge";
     }
 
     public static class Relationships
@@ -309,7 +350,7 @@ namespace Tc.Crm.Plugins
         Synchronous = 0,
         Asynchronous = 1
     }
-    
+
 }
 
 namespace Tc.Crm.Plugins.OptionSetValues
@@ -320,12 +361,12 @@ namespace Tc.Crm.Plugins.OptionSetValues
         public const int Update = 950000001;
     }
 
-	public enum EntityCacheStatusReason
-	{
-		Active = 1,
-		InProgress = 950000000,
-		Failed = 950000001,
-		Pending = 950000002,
-		Succeeded = 2
-	}
+    public enum EntityCacheStatusReason
+    {
+        Active = 1,
+        InProgress = 950000000,
+        Failed = 950000001,
+        Pending = 950000002,
+        Succeeded = 2
+    }
 }
