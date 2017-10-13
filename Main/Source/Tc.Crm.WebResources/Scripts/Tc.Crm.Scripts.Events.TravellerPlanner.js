@@ -111,7 +111,7 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
         if (Xrm.Page.ui.getFormType() == FORM_MODE_CREATE) return enable;
         if (Xrm.Page.getAttribute(Attributes.StateCode).getValue() != StateCode.Open) return enable;
         if (Xrm.Page.getAttribute(Attributes.CustomerId).getValue() === null) return enable;
-        var customerDuplicateSourceSystem = chekCustomerDuplicateSourceSystem();
+        var customerDuplicateSourceSystem = checkCustomerDuplicateSourceSystem();
         if (customerDuplicateSourceSystem === null && customerDuplicateSourceSystem === undefined && customerDuplicateSourceSystem === "") return enable;
         var ssoLoggined = getExternalLogin();
         if (ssoLoggined != false && ssoLoggined != undefined && ssoLoggined != "")
@@ -221,7 +221,7 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
             extraLoginRecordExist = true;
         return extraLoginRecordExist;
     }
-    function chekCustomerDuplicateSourceSystem() {
+    function checkCustomerDuplicateSourceSystem() {
         var duplicateSourceSystemId = null;
         var customer = getControlValue(Attributes.CustomerId);
         if (customer === null || customer === undefined || customer === "") return duplicateSourceSystemId;
