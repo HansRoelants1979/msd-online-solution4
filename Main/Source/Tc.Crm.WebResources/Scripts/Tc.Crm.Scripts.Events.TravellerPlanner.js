@@ -49,6 +49,7 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
     var EntitySetNames = {
         SecurityRole: "roles",
         ExternalLogins: "tc_externallogins",
+        Customer:"contacts",
     }
     var EntityName = {
         TravellerPlanner: "opportunity",
@@ -61,18 +62,14 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
     }
     var getUserRoles = function () {
         var enable = false;
-        var UserRole = window.parent.Xrm.Page.context.getUserRoles();
-        if (UserRole == null || UserRole == "" || UserRole == undefined) return enable;
-        for (var i = 0; i < UserRole.length; i++) {
-            var userRoleId = UserRole[i];
+        var userRole = window.parent.Xrm.Page.context.getUserRoles();
+        if (userRole === null || userRole === "" || userRole === undefined) return enable;
+        for (var i = 0; i < userRole.length; i++) {
+            var userRoleId = userRole[i];
             var results = syncGetSecurityRoles(userRoleId);
             var name = results.value[0]["name"];
-            if (name == RETAIL_LEVEL2_ACCESS || name == RETAIL_LEVEL3_ACCESS) {
-                //var ValidationAttr = getControlValue(Attributes.Validation);
-                //if (ValidationAttr == null) return enable;
-                //if (ValidationAttr == false && Xrm.Page.ui.getFormType() != FORM_MODE_CREATE) {
-                    enable = true;
-               // }
+            if (name === RETAIL_LEVEL2_ACCESS || name === RETAIL_LEVEL3_ACCESS) {               
+                    enable = true;               
             }
             if (enable == true) break;
         }
@@ -109,12 +106,13 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
 
     }
     var enableOWRorWebrioButton = function () {
-
-        var enable = false;
+         var enable = false;
         if (window.IsUSD != true) return enable;
         if (Xrm.Page.ui.getFormType() == FORM_MODE_CREATE) return enable;
         if (Xrm.Page.getAttribute(Attributes.StateCode).getValue() != StateCode.Open) return enable;
-        if (Xrm.Page.getAttribute(Attributes.CustomerId).getValue() == null) return enable;
+        if (Xrm.Page.getAttribute(Attributes.CustomerId).getValue() === null) return enable;
+        var customerDuplicateSourceSystem = chekCustomerDupicateSourceSystem();
+        if (customerDuplicateSourceSystem === null && customerDuplicateSourceSystem === undefined && customerDuplicateSourceSystem === "") return enable;
         var ssoLoggined = getExternalLogin();
         if (ssoLoggined != false && ssoLoggined != undefined && ssoLoggined != "")
             return ssoLoggined;
@@ -223,6 +221,20 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
             extraLoginRecordExist = true;
         return extraLoginRecordExist;
     }
+    function chekCustomerDupicateSourceSystem() {
+        var duplicateSourceSystemId = null;
+        var customer = getControlValue(Attributes.CustomerId);
+        if (customer === null || customer === undefined || customer === "") return duplicateSourceSystemId;
+        if (customer[0].id === null || customer[0].id === undefined || customer[0].id === "") return duplicateSourceSystemId;
+        var customerId = customer[0].id;
+        customerId = customerId.replace("{", "").replace("}", "");
+        var result = syncGetCustomer(customerId);
+        if (result === null || result === undefined || result === "") return duplicateSourceSystemId;
+        var recordCount = result["@odata.count"];
+        if (recordCount === 0) return duplicateSourceSystemId;
+         duplicateSourceSystemId = result.value[0]["tc_duplicatesourcesystemid"];
+         return duplicateSourceSystemId;
+    }
     var syncGetSecurityRoles = function (userRoleId) {
         try {
             var query = "?$select=name&$filter=roleid eq " + userRoleId;
@@ -244,6 +256,19 @@ Tc.Crm.Scripts.Events.TravellerPlanner = (function () {
             return null;
         }
     }
+
+    var syncGetCustomer = function (customerId) {
+        try {
+            var query = "?$select=tc_duplicatesourcesystemid&$filter=contactid eq " + customerId + "&$count=true";
+            var customerResults = Tc.Crm.Scripts.Common.SyncGet(EntitySetNames.Customer, query);
+            return customerResults;
+        } catch (e) {
+            console.log("Error in retrieving Customer records");
+            return null;
+        }
+    }
+
+    
     return {
         OnSave: function (context) {
             var isValid = Tc.Crm.Scripts.Utils.Validation.ValidateGdprCompliance(context);
