@@ -16,6 +16,10 @@ namespace Tc.Usd.SingleSignOnLogin.Models
 
         public string Cluster { get; set; }
 
+		public bool IsPrimary { get; set; }
+
+		public bool IsClosed { get; set; }
+
         public string SearchString => $"{Name} {Region} {BudgetCentreName} {Abta} {Cluster}";
     }
 }

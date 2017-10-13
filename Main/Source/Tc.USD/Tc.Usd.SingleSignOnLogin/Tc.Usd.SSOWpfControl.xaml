@@ -177,7 +177,32 @@
                           Margin="185,2,0,0" Width="76" Height="25" 
                           SelectionChanged="StoreSelector_SelectionChanged" KeyUp="StoreSelector_KeyUp" IsEditable="True" IsEnabled="True"
                           DisplayMemberPath="Name" IsTextSearchEnabled="False" VerticalContentAlignment="Center">
-                </ComboBox>
+					<ComboBox.ItemContainerStyle>
+						<Style TargetType="{x:Type ComboBoxItem}" BasedOn="{StaticResource {x:Type ComboBoxItem}}">
+							<Style.Triggers>
+								<DataTrigger Binding="{Binding IsPrimary}" Value="True">
+									<Setter Property="Template">
+										<Setter.Value>
+											<ControlTemplate TargetType="{x:Type ComboBoxItem}">
+												<Separator HorizontalAlignment="Stretch" IsEnabled="False" />
+											</ControlTemplate>
+										</Setter.Value>
+									</Setter>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding IsClosed}" Value="True">
+									<Setter Property="Template">
+										<Setter.Value>
+											<ControlTemplate TargetType="{x:Type ComboBoxItem}">
+												<Separator HorizontalAlignment="Stretch" IsEnabled="False" />
+											</ControlTemplate>
+										</Setter.Value>
+									</Setter>
+								</DataTrigger>
+
+							</Style.Triggers>
+						</Style>
+					</ComboBox.ItemContainerStyle>
+				</ComboBox>
                 <TextBox x:Name="UserInitials" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="50,2,0,0" TextWrapping="Wrap" Text="" 
                              VerticalAlignment="Top" Width="43" TextChanged="UserInitials_OnTextChanged" MaxLength ="3">
                     <TextBox.Resources>

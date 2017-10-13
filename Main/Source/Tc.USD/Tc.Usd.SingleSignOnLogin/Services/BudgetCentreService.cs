@@ -15,7 +15,7 @@ namespace Tc.Usd.SingleSignOnLogin.Services
     {
         private readonly Guid _myGuid;
         private readonly CrmServiceClient _crmService;
-        private readonly ColumnSet _storeColumnSet = new ColumnSet(Attributes.Store.StoreId, Attributes.Store.Abta, Attributes.Store.ClusterId, Attributes.Store.UkRegionId, Attributes.Store.Name, Attributes.Store.BudgetCentre);
+        private readonly ColumnSet _storeColumnSet = new ColumnSet(Attributes.Store.StoreId, Attributes.Store.Abta, Attributes.Store.ClusterId, Attributes.Store.UkRegionId, Attributes.Store.Name, Attributes.Store.BudgetCentre, Attributes.Store.StoreClosed);
 
         internal BudgetCentreService(CrmServiceClient crmClient)
         {
@@ -25,32 +25,79 @@ namespace Tc.Usd.SingleSignOnLogin.Services
 
         public List<BudgetCentre> GetBudgetCentre(bool allBudgetCentreAccess)
         {
-            var lst = new List<Entity>();
+            var result = new List<BudgetCentre>();
             var primaryStore = GetPrimaryStore();
-            if (primaryStore != null)
+            if (primaryStore != null && primaryStore.Attributes.Contains(Attributes.Store.StoreClosed) && !(bool)primaryStore.Attributes[Attributes.Store.StoreClosed])
             {
-                lst.Add(primaryStore);
-            }
-            lst.AddRange(GetStores(allBudgetCentreAccess).Where(b => primaryStore == null || (Guid)b[Attributes.Store.StoreId] != (Guid)primaryStore[Attributes.Store.StoreId]));
-            return lst.Select(ConvertEntityToBudgetCentre).ToList();
+				result.Add(ConvertEntityToBudgetCentre(primaryStore));
+				result.Add(new BudgetCentre { IsPrimary = true });
+			}
+			var stores = GetStores(allBudgetCentreAccess).Where(b => primaryStore == null || (Guid)b[Attributes.Store.StoreId] != (Guid)primaryStore[Attributes.Store.StoreId]);
+			bool hasRegular = false;
+			bool? closed = null;
+			foreach (var store in stores)
+			{
+				hasRegular = hasRegular || store.Attributes.Contains(Attributes.Store.StoreClosed) && !(bool)store.Attributes[Attributes.Store.StoreClosed];
+				if (hasRegular && !closed.HasValue && store.Attributes.Contains(Attributes.Store.StoreClosed) && (bool)store.Attributes[Attributes.Store.StoreClosed])
+				{
+					closed = true;
+					result.Add(new BudgetCentre { IsClosed = true });
+				}
+				result.Add(ConvertEntityToBudgetCentre(store));
+			}
+			
+            return result;
         }
 
         private List<Entity> GetStores(bool loadAllBudgetStores)
         {
-            var query = new QueryExpression
-            {
-                EntityName = EntityName.Store,
-                ColumnSet = _storeColumnSet
-            };
+			QueryBase query;
             if (!loadAllBudgetStores)
             {
-                var linkEntStore = new LinkEntity(EntityName.Store, "tc_store_systemuser", "tc_storeid", "tc_storeid", JoinOperator.Inner);
-                var linkEntUser = new LinkEntity("tc_store_systemuser", EntityName.User, "systemuserid", "systemuserid", JoinOperator.Inner);
-                linkEntStore.LinkEntities.Add(linkEntUser);
-                query.LinkEntities.Add(linkEntStore);
-                linkEntUser.LinkCriteria = new FilterExpression();
-                linkEntUser.LinkCriteria.AddCondition("systemuserid", ConditionOperator.Equal, _myGuid);
-            }
+				var request = $@"<fetch distinct='true' >
+									<entity name='{EntityName.Store}' >
+										<attribute name='{Attributes.Store.StoreId}' />
+										<attribute name='{Attributes.Store.Abta}' />
+										<attribute name='{Attributes.Store.ClusterId}' />
+										<attribute name='{Attributes.Store.UkRegionId}' />
+										<attribute name='{Attributes.Store.Name}' />
+										<attribute name='{Attributes.Store.BudgetCentre}' />
+										<attribute name='{Attributes.Store.StoreClosed}' />
+										<filter type='or' >
+											<filter type='and' >
+												<condition attribute='{Attributes.Store.StoreClosed}' operator='eq' value='0' />
+												<condition entityname='assigned' attribute='{Attributes.User.UserId}' operator='eq' value='{_myGuid}' />
+											</filter>
+											<filter type='and' >
+												<condition attribute='{Attributes.Store.StoreClosed}' operator='eq' value='1' />
+												<condition entityname='admin_regular_user' attribute='{Attributes.User.UserId}' operator='eq' value='{_myGuid}' />
+											</filter>
+											<filter type='and' >
+												<condition attribute='{Attributes.Store.StoreClosed}' operator='eq' value='1' />
+												<condition entityname='admin_primary_user' attribute='{Attributes.User.UserId}' operator='eq' value='{_myGuid}' />
+											</filter>
+										</filter>
+										<link-entity name='{EntityRelationName.StoreUser}' from='{Attributes.Store.StoreId}' to='{Attributes.Store.StoreId}' link-type='outer' alias='assigned' intersect='true' />
+										<link-entity name='{EntityName.Store}' from='{Attributes.Store.StoreId}' to='{Attributes.Store.AdminHostBudgetCenter}' link-type='outer' alias='admin_regular' >
+											<link-entity name='{EntityRelationName.StoreUser}' from='{Attributes.Store.StoreId}' to='{Attributes.Store.StoreId}' link-type='outer' alias='admin_regular_user' intersect='true' />
+										</link-entity>
+										<link-entity name='{EntityName.Store}' from='{Attributes.Store.StoreId}' to='{Attributes.Store.AdminHostBudgetCenter}' link-type='outer' alias='admin_primary' >
+											<link-entity name='{EntityName.User}' from='{Attributes.User.PrimaryStoreId}' to='{Attributes.Store.StoreId}' link-type='outer' alias='admin_primary_user' />
+										</link-entity>
+										<order attribute='{Attributes.Store.StoreClosed}' />
+										<order attribute='{Attributes.Store.Name}' />
+									</entity>
+								</fetch>";
+				query = new FetchExpression(request);
+			}
+			else
+			{
+				query = new QueryExpression
+				{
+					EntityName = EntityName.Store,
+					ColumnSet = _storeColumnSet
+				};
+			}
             var req = new RetrieveMultipleRequest
             {
                 Query = query
@@ -127,15 +174,15 @@ namespace Tc.Usd.SingleSignOnLogin.Services
 
         private static BudgetCentre ConvertEntityToBudgetCentre(Entity entity)
         {
-            return new BudgetCentre
-            {
-                StoreId = (Guid)entity[Attributes.Store.StoreId],
-                Name = $"{(string)entity[Attributes.Store.BudgetCentre]}({(string)entity[Attributes.Store.Name]})",
-                Abta = (string)entity[Attributes.Store.Abta],
-                BudgetCentreName = (string)entity[Attributes.Store.BudgetCentre],
-                Cluster = entity.Contains(Attributes.Store.ClusterId) ? ((EntityReference)entity[Attributes.Store.ClusterId]).Name : string.Empty,
-                Region = ((EntityReference)entity[Attributes.Store.UkRegionId]).Name
-            };
+			return new BudgetCentre
+			{
+				StoreId = (Guid)entity[Attributes.Store.StoreId],
+				Name = $"{(string)entity[Attributes.Store.BudgetCentre]}({(string)entity[Attributes.Store.Name]})",
+				Abta = (string)entity[Attributes.Store.Abta],
+				BudgetCentreName = (string)entity[Attributes.Store.BudgetCentre],
+				Cluster = entity.Contains(Attributes.Store.ClusterId) ? ((EntityReference)entity[Attributes.Store.ClusterId]).Name : string.Empty,
+				Region = ((EntityReference)entity[Attributes.Store.UkRegionId]).Name
+			};
         }
     }
 }

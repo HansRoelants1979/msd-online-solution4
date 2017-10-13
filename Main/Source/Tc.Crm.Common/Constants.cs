@@ -28,6 +28,11 @@
         public const string Room = "tc_room";
         public const string Region = "tc_region";
     }
+
+	public static class EntityRelationName
+	{
+		public const string StoreUser = "tc_store_systemuser";
+	}
     public static class AliasName
     {
         public const string AccommodationAliasName = "accommodation.";
@@ -332,7 +337,9 @@
             public const string BudgetCentre = "tc_budgetcentre";
             public const string ClusterId = "tc_clusterid";
             public const string UkRegionId = "tc_ukregionid";
-        }
+			public const string StoreClosed = "tc_storeclosed";
+			public const string AdminHostBudgetCenter = "tc_adminhostbudgetcentre";
+		}
 
         public static class SourceMarket
         {
