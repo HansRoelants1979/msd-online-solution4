@@ -195,7 +195,7 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services.Tests
         {
             // Given
             var customer = Testcustomer;
-            customer.Address[1] = null;
+            customer.Address[0] = null;
             // When        
             var result = AccountPatchHelper.GetAccountEntityForCustomerPayload(customer, tracingService);
             // Then

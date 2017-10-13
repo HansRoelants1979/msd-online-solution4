@@ -21,16 +21,17 @@ namespace Tc.Crm.CustomWorkflowSteps.ProcessCustomer.Services
                 throw new InvalidPluginExecutionException("Customer Patch parameter is null.");
             Entity account = new Entity(EntityName.Account);
             var fieldService = new FieldService(account, customer.PatchParameters);
-            fieldService.PopulateField(Attributes.Account.Name, customer.Company.CompanyName);
+            if(customer.Company!=null)
+                fieldService.PopulateField(Attributes.Account.Name, customer.Company.CompanyName);
             var sourceMarket = (!string.IsNullOrWhiteSpace(customer.CustomerIdentifier.SourceMarket))
                                ? new EntityReference(EntityName.Country,
                                new Guid(customer.CustomerIdentifier.SourceMarket)) : null;
             fieldService.PopulateField(Attributes.Account.SourceMarketId, sourceMarket);
-            if ((customer.Email != null) || (customer.Email != null & customer.Email.Length > 0))
+            if (customer.Email != null) 
                 PopulateEmail(customer.Email, trace, fieldService);
-            if ((customer.Phone != null) || (customer.Phone != null & customer.Phone.Length > 0))
+            if (customer.Phone != null) 
                 PopulatePhone( customer.Phone, trace, fieldService);
-            if ((customer.Address != null) || (customer.Address != null & customer.Address.Length > 0))
+            if (customer.Address != null) 
                 PopulateAddress(customer.Address, trace, fieldService);
             trace.Trace("Account populate fields - end");
             return account;
