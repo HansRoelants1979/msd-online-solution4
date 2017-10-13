@@ -324,6 +324,7 @@ namespace Tc.Crm.Plugins
         public const string Appointment = "appointment";
         public const string AssistanceRequest = "tc_assistancerequest";
         public const string EntityMerge = "tc_entitymerge";
+        public const string EntityCacheMessage = "tc_entitycachemessage";
     }
 
     public static class Relationships
@@ -351,6 +352,17 @@ namespace Tc.Crm.Plugins
         Asynchronous = 1
     }
 
+    public static class EntityCacheTypeNames
+    {
+        public const string Contact = "contact";
+        public const string Account = "account";
+    }
+
+    public enum EntityCacheType
+    {
+        Customer,
+        Account
+    }
 }
 
 namespace Tc.Crm.Plugins.OptionSetValues
