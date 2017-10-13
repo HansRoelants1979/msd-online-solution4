@@ -773,23 +773,23 @@ Tc.Crm.Scripts.Library.CaseLine = (function () {
         if (serviceType == null) return;
 
         if ((serviceType == ServiceType.Agency || serviceType == ServiceType.CarHire ||
-            serviceType == ServiceType.Excursion || serviceType == ServiceType.Weddings) &&
-                (Xrm.Page.getAttribute(Attributes.Supplier) != null &&
+            serviceType == ServiceType.Excursion || serviceType == ServiceType.Weddings))
+        {
+            if ((Xrm.Page.getAttribute(Attributes.Supplier) != null &&
             Xrm.Page.getAttribute(Attributes.Supplier).getValue() == null)) {
+                var booking = Xrm.Page.getAttribute(Attributes.Booking);
+                var incident = Xrm.Page.getAttribute(Attributes.Case);
 
-            var booking = Xrm.Page.getAttribute(Attributes.Booking);
-            var incident = Xrm.Page.getAttribute(Attributes.Case);
-
-            if (booking != null && booking.getValue() != null) {
-                var bookingId = booking.getValue();
-                bookingId = bookingId[0].id.replace("{", "").replace("}", "");
-                getBookingGateWay(bookingId);
-            }
-            else if(incident != null && incident.getValue() != null)
-            {
-                var caseId = incident.getValue();
-                caseId = caseId[0].id.replace("{", "").replace("}", "");
-                getCaseGateWay(caseId);
+                if (booking != null && booking.getValue() != null) {
+                    var bookingId = booking.getValue();
+                    bookingId = bookingId[0].id.replace("{", "").replace("}", "");
+                    getBookingGateWay(bookingId);
+                }
+                else if (incident != null && incident.getValue() != null) {
+                    var caseId = incident.getValue();
+                    caseId = caseId[0].id.replace("{", "").replace("}", "");
+                    getCaseGateWay(caseId);
+                }
             }
         }
         else
