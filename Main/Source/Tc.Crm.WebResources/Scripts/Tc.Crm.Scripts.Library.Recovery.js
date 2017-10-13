@@ -92,7 +92,7 @@ Tc.Crm.Scripts.Library.Recovery = (function () {
             }
             ).catch(function (err) {
                 throw new Error("Problem in retrieving the supplier email address from case line.");
-            });;
+            });
     }
 
     return {
