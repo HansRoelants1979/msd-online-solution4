@@ -69,7 +69,8 @@
             public const string OwrSsoTokenExpired = "Tc.Owr.SsoTokenExpiredSeconds";
             public const string OwrSsoTokenNotBefore = "Tc.Owr.SsoTokenNotBeforeTimeSeconds";
             public const string OwrAudOneWebRetail = "onewebretail";
-            public const string OwrOpportunityIdParamName = "opportunityId";
+            public const string OwrRecordIdParameterName = "Id";
+            public const string OwrRequestType = "Type";
 
             public const string WebRioJwtPrivateKeyConfigName = "Tc.WebRio.JwtPrivateKey";
             public const string WebRioAudWebRio = "webrio";

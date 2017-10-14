@@ -12,19 +12,39 @@ using Configuration = Tc.Crm.Common.Constants.EntityRecords.Configuration;
 
 namespace Tc.Usd.HostedControls
 {
+
+    public enum OwrRequestType
+    {
+        TravelPlanner
+    }
     public partial class SingleSignOnController
     {
         public void CallSsoService(RequestActionEventArgs args)
         {
-            var opportunityId = GetParamValue(args, Configuration.OwrOpportunityIdParamName);
-            var opportunity = CrmService.GetOpportunity(_client.CrmInterface, _logger, opportunityId);
+            var requestType = GetParamValue(args, Configuration.OwrRequestType);
+            var id = GetParamValue(args, Configuration.OwrRecordIdParameterName);
+            if (string.IsNullOrWhiteSpace(requestType) || string.IsNullOrWhiteSpace(id))
+            {
+                FireEventOnOwrError("Action is started with missing parameters");
+                return;
+            }
+            if (requestType.Equals(OwrRequestType.TravelPlanner.ToString(), StringComparison.OrdinalIgnoreCase))
+            {
+                CallTravelPlannerSso(id);
+            }
+        }
+
+        private void CallTravelPlannerSso(string id)
+        {
+            var opportunity = CrmService.GetOpportunity(_client.CrmInterface, _logger, id);
+
             if (opportunity == null)
             {
                 FireEventOnOwrError("There is no opportunity in context.");
                 return;
             }
 
-            var rooms = CrmService.GetTravelPlannerRooms(opportunityId, _logger, _client.CrmInterface);
+            var rooms = CrmService.GetTravelPlannerRooms(id, _logger, _client.CrmInterface);
             var createdByInitials = opportunity.GetAttributeValue<string>(Opportunity.Initials);
             var login = CrmService.GetSsoDetails(_client.CrmInterface.GetMyCrmUserId(), _logger, _client.CrmInterface);
             if (login == null)
@@ -41,7 +61,7 @@ namespace Tc.Usd.HostedControls
             }
             var expiredSeconds = CrmService.GetConfig(Configuration.OwrSsoTokenExpired, _logger, _client.CrmInterface);
             var notBeforeSeconds = CrmService.GetConfig(Configuration.OwrSsoTokenNotBefore, _logger, _client.CrmInterface);
-            if (expiredSeconds == null || notBeforeSeconds==null)
+            if (expiredSeconds == null || notBeforeSeconds == null)
             {
                 FireEventOnOwrError("Missing payload configuration");
                 return;
@@ -82,6 +102,7 @@ namespace Tc.Usd.HostedControls
             }
             FireEventOnOwrSuccess(eventParams);
         }
+
         private OwrJsonWebTokenPayload GetPayload(Entity login, string expiredSeconds, string notBeforeSeconds,
             string createdByInitials)
         {

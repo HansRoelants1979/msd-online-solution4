@@ -50,5 +50,6 @@ namespace Tc.Usd.HostedControls
         {
             Dispatcher.InvokeAsync(()=> { CallSsoService(args); });
         }
+    
     }
 }
