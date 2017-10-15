@@ -1,2 +1,8 @@
-Configuration,Name,Value,Description
-"83966b1f-cdad-e711-810a-5065f38bd561","Tc.OutboundSynchronisation.MaxRetries","5,30,90,720,1440","Retry mechanism configuration for doing calls to integration layer: value at specific index (identifies which retry call in sequence of retries is it) specifies time in minutes after previous failed call, when this retry should be executed"
+Configuration,Name,Value,Description,Group
+83966b1f-cdad-e711-810a-5065f38bd561,Tc.OutboundSynchronisation.MaxRetries,"5,30,90,72,01,440","Retry mechanism configuration for doing calls to integration layer: value at specific index (identifies which retry call in sequence of retries is it) specifies time in minutes after previous failed call, when this retry should be executed",
+054a1077-74a3-e711-8107-5065f38bc531,Tc.Wr.Api.Admin,rest/msd/admin,,WebRio
+59ad8b55-65ab-e711-8109-5065f38b74a1,Tc.Wr.Api.NewConsultation,rest/msd/newConsultation,,WebRio
+7326a3b2-b7a8-e711-810a-5065f38bd561,Tc.Wr.Api.OpenConsultation,rest/msd/openConsultation,,WebRio
+ed56b1ff-4598-e711-8106-5065f38bc531,Tc.Wr.SSOServiceUrl,http://localhost:8080/webrio-webapp,,WebRio
+bf815e58-099d-e711-8106-5065f38bc531,Tc.Wr.SsoToken.ExpiredSecondsFromNow,100,Seconds after which token is expired and should be rejected by wr web service,WebRio
+6dbe1933-189d-e711-8106-5065f38bc531,Tc.Wr.SsoToken.NotBeforeTimeSecondsFromNow,-10,Seconds before which token should be rejected by wr web service,WebRio
