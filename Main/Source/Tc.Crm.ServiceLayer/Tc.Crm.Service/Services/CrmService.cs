@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.Xrm.Sdk;
 using System.Configuration;
 using tcm = Tc.Crm.Service.Models;
@@ -15,13 +16,10 @@ using static Tc.Crm.Service.Constants.Crm.Actions;
 using Tc.Crm.Common.Constants;
 using Attributes = Tc.Crm.Common.Constants.Attributes;
 using Tc.Crm.Common;
-using Tc.Crm.Service.Constants;
-using System.Linq;
 
 namespace Tc.Crm.Service.Services
 {
-
-    public class CrmService : ICrmService, IDisposable
+	public class CrmService : ICrmService, IDisposable
     {
         private IOrganizationService orgService;
 
@@ -106,24 +104,6 @@ namespace Tc.Crm.Service.Services
             return (IOrganizationService)client;
         }
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-        bool disposed = false;
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposed) return;
-            if (disposing)
-            {
-                //dispose org service
-                if (orgService != null) ((IDisposable)orgService).Dispose();
-            }
-
-            disposed = true;
-        }
-
         public Collection<tcm.Brand> GetBrands()
         {
             var fetchXml = @"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>
@@ -133,14 +113,19 @@ namespace Tc.Crm.Service.Services
                               </entity>
                             </fetch>";
             FetchExpression exp = new FetchExpression(fetchXml);
-            var records = orgService.RetrieveMultiple(exp);
-            if (records == null || records.Entities.Count == 0) return null;
 
-            var brands = new Collection<tcm.Brand>();
+            var records = orgService.RetrieveMultiple(exp);
+
+	        if (records == null || records.Entities.Count == 0)
+	        {
+		        return null;
+	        }
+
+	        var brands = new Collection<tcm.Brand>();
             foreach (var item in records.Entities)
             {
-                brands.Add(new Models.Brand { Code = item["tc_brandcode"].ToString(), Id = item.Id.ToString() });
-            };
+                brands.Add(new tcm.Brand { Code = item["tc_brandcode"].ToString(), Id = item.Id.ToString() });
+            }
 
             return brands;
         }
@@ -161,7 +146,7 @@ namespace Tc.Crm.Service.Services
             foreach (var item in records.Entities)
             {
                 countries.Add(new Models.Country { Code = item["tc_iso2code"].ToString(), Id = item.Id.ToString() });
-            };
+            }
 
             return countries;
         }
@@ -182,7 +167,7 @@ namespace Tc.Crm.Service.Services
             foreach (var item in records.Entities)
             {
                 currencies.Add(new Models.Currency { Code = item["isocurrencycode"].ToString(), Id = item.Id.ToString() });
-            };
+            }
 
             return currencies;
         }
@@ -211,7 +196,7 @@ namespace Tc.Crm.Service.Services
             return gatewayType;
         }       
         
-        public Dictionary<string,string> GetGateways()
+        public Collection<tcm.Gateway> GetGateways()
         {
             Dictionary<string, string> getWayItems = new Dictionary<string, string>();
             var fetchXml = @"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>
@@ -224,14 +209,16 @@ namespace Tc.Crm.Service.Services
             FetchExpression exp = new FetchExpression(fetchXml);
             var records = orgService.RetrieveMultiple(exp);
             if (records == null || records.Entities.Count == 0) return null;
-            foreach (var item in records.Entities){
+
+	        var gateways = new Collection<tcm.Gateway>();
+			foreach (var item in records.Entities){
                 var iata = item[Attributes.Gateway.Iata].ToString();
                 var typeValue = item.GetAttributeValue<OptionSetValue>(Attributes.Gateway.GatewayType).Value;
                 var typeString = GetGatewayType((int)typeValue);
-                var gateWay = new Models.Gateway { Code = $"{iata}_{typeString}", Id = item.Id.ToString()};
-                getWayItems.Add(gateWay.Code, gateWay.Id);
+                var gateway = new Models.Gateway { Code = $"{iata}_{typeString}", Id = item.Id.ToString() };
+				gateways.Add(gateway);
             };
-            return getWayItems;
+            return gateways;
         }
         public Collection<tcm.TourOperator> GetTourOperators()
         {
@@ -273,20 +260,16 @@ namespace Tc.Crm.Service.Services
             var sourceMarkets = new Collection<tcm.SourceMarket>();
             foreach (var item in records.Entities)
             {
-                sourceMarkets.Add(new Models.SourceMarket
-                {
-                    Code = item["tc_iso2code"].ToString()
-                                                            ,
-                    Id = item.Id.ToString()
-                                                             ,
-                    BusinessUnitId = ((EntityReference)item["tc_sourcemarketbusinessunitid"]).Id.ToString()
-                });
-            };
-            foreach (var item in sourceMarkets)
-            {
-                item.TeamId = GetDefaultOwner(item.BusinessUnitId);
-            };
+	            var businessUnitId = ((EntityReference)item["tc_sourcemarketbusinessunitid"]).Id.ToString();
 
+				sourceMarkets.Add(new Models.SourceMarket
+                {
+                    Code = item["tc_iso2code"].ToString(),
+                    Id = item.Id.ToString(),
+                    BusinessUnitId = businessUnitId,
+					TeamId = GetDefaultOwner(businessUnitId)
+                });
+            }
 
             return sourceMarkets;
         }
@@ -588,5 +571,25 @@ namespace Tc.Crm.Service.Services
                 return false;
             }
         }
-    }
+
+	    public void Dispose()
+	    {
+		    Dispose(true);
+		    GC.SuppressFinalize(this);
+	    }
+
+	    bool disposed = false;
+
+	    protected virtual void Dispose(bool disposing)
+	    {
+		    if (disposed) return;
+		    if (disposing)
+		    {
+			    //dispose org service
+			    if (orgService != null) ((IDisposable)orgService).Dispose();
+		    }
+
+		    disposed = true;
+	    }
+	}
 }

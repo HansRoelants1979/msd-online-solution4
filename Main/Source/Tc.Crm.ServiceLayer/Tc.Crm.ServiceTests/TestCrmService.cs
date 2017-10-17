@@ -97,10 +97,10 @@ namespace Tc.Crm.ServiceTests
             return currencies;
         }
 
-        public Dictionary<string,string> GetGateways()
+        public Collection<Gateway> GetGateways()
         {
-            Dictionary<string, string> gatewaysDictionary = new Dictionary<string, string>();
-            gatewaysDictionary.Add("HGR_Airport","54E0C5FE-D522-4148-9192-9C885BA3CED6");
+            var gatewaysDictionary = new Collection<Gateway>();
+            gatewaysDictionary.Add(new Gateway() { Code = "HGR_Airport", Id = "54E0C5FE-D522-4148-9192-9C885BA3CED6"});
             return gatewaysDictionary;
         }
 
@@ -233,7 +233,12 @@ namespace Tc.Crm.ServiceTests
             orgService.Update(entityCache);
         }
 
-		public void ActivateRelatedPendingEntityCache(Guid entityCacheId)
+	    public IOrganizationService CreateOrgService()
+	    {
+		    throw new NotImplementedException();
+	    }
+
+	    public void ActivateRelatedPendingEntityCache(Guid entityCacheId)
 		{
 
 		}
@@ -258,5 +263,5 @@ namespace Tc.Crm.ServiceTests
                 throw new Exception("Action faulted");
             return null;
         }
-    }
+	}
 }

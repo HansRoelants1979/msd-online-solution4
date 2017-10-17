@@ -12,20 +12,14 @@ namespace Tc.Crm.Service.Services
     public class CustomerService : ICustomerService
     {
 
-        CountryBucket countryBucket;
-        SourceMarketBucket sourceMarketBucket;
+        private CountryBucket countryBucket;
+	    private SourceMarketBucket sourceMarketBucket;
 
         public CustomerService(CountryBucket countryBucket,
                                 SourceMarketBucket sourceMarketBucket)
         {
             this.countryBucket = countryBucket;
             this.sourceMarketBucket = sourceMarketBucket;
-
-            if (this.countryBucket.Items == null || this.countryBucket.Items.Count == 0)
-                this.countryBucket.FillBucket();
-
-            if (this.sourceMarketBucket.Items == null || this.sourceMarketBucket.Items.Count == 0)
-                this.sourceMarketBucket.FillBucket();
         }
 
         public CustomerResponse Create(string customerData, ICrmService crmService)
@@ -128,8 +122,12 @@ namespace Tc.Crm.Service.Services
             {
                 foreach (var address in customer.Address)
                 {
-                    address.Country = countryBucket.GetBy(address.Country);
-                }
+	                var country = countryBucket.GetBy(address.Country);
+					if (country != null)
+					{
+						address.Country = country.Id;
+					}
+				}
             }
 
             if (customer.CustomerIdentifier != null)

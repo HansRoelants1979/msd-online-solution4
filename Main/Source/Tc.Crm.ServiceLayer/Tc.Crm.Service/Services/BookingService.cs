@@ -10,21 +10,22 @@ namespace Tc.Crm.Service.Services
 {
     public class BookingService : IBookingService
     {
-        BrandBucket brandBucket;
-        CountryBucket countryBucket;
-        CurrencyBucket currencyBucket;
-        GatewayBucket gatewayBucket;
-        SourceMarketBucket sourceMarketBucket;
-        TourOperatorBucket tourOperatorBucket;
-        HotelBucket hotelBucket;
+        private BrandBucket brandBucket;
+	    private CountryBucket countryBucket;
+	    private CurrencyBucket currencyBucket;
+	    private GatewayBucket gatewayBucket;
+	    private SourceMarketBucket sourceMarketBucket;
+	    private TourOperatorBucket tourOperatorBucket;
+	    private HotelBucket hotelBucket;
 
-        public BookingService(BrandBucket brandBucket
-                                , CountryBucket countryBucket
-                                , CurrencyBucket currencyBucket
-                                , GatewayBucket gatewayBucket
-                                , SourceMarketBucket sourceMarketBucket
-                                , TourOperatorBucket tourOperatorBucket
-                                , HotelBucket hotelBucket)
+        public BookingService(
+			BrandBucket brandBucket, 
+			CountryBucket countryBucket, 
+			CurrencyBucket currencyBucket, 
+			GatewayBucket gatewayBucket, 
+			SourceMarketBucket sourceMarketBucket, 
+			TourOperatorBucket tourOperatorBucket, 
+			HotelBucket hotelBucket)
         {
             this.brandBucket = brandBucket;
             this.countryBucket = countryBucket;
@@ -33,22 +34,8 @@ namespace Tc.Crm.Service.Services
             this.sourceMarketBucket = sourceMarketBucket;
             this.tourOperatorBucket = tourOperatorBucket;
             this.hotelBucket = hotelBucket;
-
-            if (this.brandBucket.Items == null || this.brandBucket.Items.Count == 0)
-                this.brandBucket.FillBucket();
-            if (this.countryBucket.Items == null || this.countryBucket.Items.Count == 0)
-                this.countryBucket.FillBucket();
-            if (this.currencyBucket.Items == null || this.currencyBucket.Items.Count == 0)
-                this.currencyBucket.FillBucket();
-            if (this.gatewayBucket.Items == null || this.gatewayBucket.Items.Count == 0)
-                this.gatewayBucket.FillBucket();
-            if (this.sourceMarketBucket.Items == null || this.sourceMarketBucket.Items.Count == 0)
-                this.sourceMarketBucket.FillBucket();
-            if (this.tourOperatorBucket.Items == null || this.tourOperatorBucket.Items.Count == 0)
-                this.tourOperatorBucket.FillBucket();
-            if (this.hotelBucket.Items == null || this.hotelBucket.Items.Count == 0)
-                this.hotelBucket.FillBucket();
         }
+
         public Collection<string> Validate(BookingInformation bookingInformation)
         {
             var validationMessages = new Collection<string>();
@@ -179,16 +166,16 @@ namespace Tc.Crm.Service.Services
             if (transports == null) return;
             foreach (var transport in transports){ 
                 var type = gatewayBucket.MapTransportType(transport.TransportType);
-                transport.ArrivalAirport = gatewayBucket.GetBy($"{transport.ArrivalAirport}_{type}");
-                transport.DepartureAirport = gatewayBucket.GetBy($"{transport.DepartureAirport}_{type}");
+                transport.ArrivalAirport = gatewayBucket.GetBy($"{transport.ArrivalAirport}_{type}").Id;
+                transport.DepartureAirport = gatewayBucket.GetBy($"{transport.DepartureAirport}_{type}").Id;
             }
         }
         public void ResolveTransferReferences(Transfer[] transfers)
         {
             if (transfers == null) return;
             foreach (var transfer in transfers){
-                transfer.ArrivalAirport = gatewayBucket.GetBy($"{transfer.ArrivalAirport}_{GatewayType.Airport}");
-                transfer.DepartureAirport = gatewayBucket.GetBy($"{transfer.DepartureAirport}_{GatewayType.Airport}");
+                transfer.ArrivalAirport = gatewayBucket.GetBy($"{transfer.ArrivalAirport}_{GatewayType.Airport}").Id;
+                transfer.DepartureAirport = gatewayBucket.GetBy($"{transfer.DepartureAirport}_{GatewayType.Airport}").Id;
             }
         }
 
@@ -200,7 +187,7 @@ namespace Tc.Crm.Service.Services
             {
                 foreach (var address in customer.Address)
                 {
-                    address.Country = countryBucket.GetBy(address.Country);
+                    address.Country = countryBucket.GetBy(address.Country).Id;
                 }
             }
 
@@ -222,9 +209,9 @@ namespace Tc.Crm.Service.Services
         public void ResolveGeneralReferences(BookingGeneral general)
         {
             if (general == null) return;
-            general.Brand = brandBucket.GetBy(general.Brand);
-            general.Destination = gatewayBucket.GetBy($"{general.Destination}_{GatewayType.Airport}");
-            general.ToCode = tourOperatorBucket.GetBy(general.ToCode);
+            general.Brand = brandBucket.GetBy(general.Brand).Id;
+            general.Destination = gatewayBucket.GetBy($"{general.Destination}_{GatewayType.Airport}").Id;
+            general.ToCode = tourOperatorBucket.GetBy(general.ToCode).Id;
         }
         public void ResolveCurrency(Booking booking)
         {
@@ -242,21 +229,21 @@ namespace Tc.Crm.Service.Services
                 }
                 switch (sourceMarket)
                 {
-                    case SourceMarketIsoCode.UK: booking.BookingGeneral.Currency = currencyBucket.GetBy(CurrencyCode.Pound); break;
+                    case SourceMarketIsoCode.UK: booking.BookingGeneral.Currency = currencyBucket.GetBy(CurrencyCode.Pound).Id; break;
                     case SourceMarketIsoCode.France:
                     case SourceMarketIsoCode.Belgium:
                     case SourceMarketIsoCode.Germany:
-                    case SourceMarketIsoCode.Netherlands: booking.BookingGeneral.Currency = currencyBucket.GetBy(CurrencyCode.Euro); break;
-                    case SourceMarketIsoCode.CzechRepublic: booking.BookingGeneral.Currency = currencyBucket.GetBy(CurrencyCode.CzechKoruna); break;
-                    case SourceMarketIsoCode.Hungary: booking.BookingGeneral.Currency = currencyBucket.GetBy(CurrencyCode.HungarianForint); break;
-                    case SourceMarketIsoCode.Poland: booking.BookingGeneral.Currency = currencyBucket.GetBy(CurrencyCode.PolishZłoty); break;
+                    case SourceMarketIsoCode.Netherlands: booking.BookingGeneral.Currency = currencyBucket.GetBy(CurrencyCode.Euro).Id; break;
+                    case SourceMarketIsoCode.CzechRepublic: booking.BookingGeneral.Currency = currencyBucket.GetBy(CurrencyCode.CzechKoruna).Id; break;
+                    case SourceMarketIsoCode.Hungary: booking.BookingGeneral.Currency = currencyBucket.GetBy(CurrencyCode.HungarianForint).Id; break;
+                    case SourceMarketIsoCode.Poland: booking.BookingGeneral.Currency = currencyBucket.GetBy(CurrencyCode.PolishZłoty).Id; break;
                     default:
                         break;
                 }
             }
             else
             {
-                booking.BookingGeneral.Currency = currencyBucket.GetBy(booking.BookingGeneral.Currency);
+                booking.BookingGeneral.Currency = currencyBucket.GetBy(booking.BookingGeneral.Currency).Id;
             }
         }
     }

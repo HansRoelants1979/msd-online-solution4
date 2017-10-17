@@ -1,17 +1,18 @@
-﻿using Microsoft.Practices.Unity;
+﻿using System.Web.Http;
+using JsonPatch;
+using JsonPatch.Formatting;
+using JsonPatch.Paths.Resolvers;
+using Microsoft.Practices.Unity;
 using Newtonsoft.Json.Converters;
-using System.Web.Http;
 using Tc.Crm.Service.CacheBuckets;
 using Tc.Crm.Service.MessageHandlers;
+using Tc.Crm.Service.Models;
 using Tc.Crm.Service.Resolver;
 using Tc.Crm.Service.Services;
-using JsonPatch.Formatting;
-using JsonPatch;
-using JsonPatch.Paths.Resolvers;
 
 namespace Tc.Crm.Service
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Api")]
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Api")]
     public static class WebApiConfig
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
@@ -26,15 +27,15 @@ namespace Tc.Crm.Service
             container.RegisterType<ICustomerService, CustomerService>();
             container.RegisterType<ISurveyService, SurveyService>();
             container.RegisterType<ICachingService, CachingService>();
-            container.RegisterType<ICrmService, CrmService>(new ContainerControlledLifetimeManager());
-            container.RegisterType<IBucket, BrandBucket>(new ContainerControlledLifetimeManager());
-            container.RegisterType<IBucket, CountryBucket>(new ContainerControlledLifetimeManager());
-            container.RegisterType<IBucket, CurrencyBucket>(new ContainerControlledLifetimeManager());
-            container.RegisterType<IBucket, GatewayBucket>(new ContainerControlledLifetimeManager());
-            container.RegisterType<IBucket, TourOperatorBucket>(new ContainerControlledLifetimeManager());
-            container.RegisterType<ISourceMarketBucket, SourceMarketBucket>(new ContainerControlledLifetimeManager());
-            container.RegisterType<IHotelBucket, HotelBucket>(new ContainerControlledLifetimeManager());
-            container.RegisterType<IConfigurationService, ConfigurationService>();
+			container.RegisterType<ICrmService, CrmService>(new ContainerControlledLifetimeManager());
+			container.RegisterType<IReferenceBucket<Brand>, BrandBucket>(new ContainerControlledLifetimeManager());
+			container.RegisterType<IReferenceBucket<Country>, CountryBucket>(new ContainerControlledLifetimeManager());
+			container.RegisterType<IReferenceBucket<Currency>, CurrencyBucket>(new ContainerControlledLifetimeManager());
+			container.RegisterType<IReferenceBucket<Gateway>, GatewayBucket>(new ContainerControlledLifetimeManager());
+			container.RegisterType<IReferenceBucket<TourOperator>, TourOperatorBucket>(new ContainerControlledLifetimeManager());
+			container.RegisterType<IReferenceBucket<SourceMarket>, SourceMarketBucket>(new ContainerControlledLifetimeManager());
+			container.RegisterType<IReferenceBucket<Hotel>, HotelBucket>(new ContainerControlledLifetimeManager());
+			container.RegisterType<IConfigurationService, ConfigurationService>();
             container.RegisterType<IConfirmationService, ConfirmationService>();
 
             config.DependencyResolver = new UnityResolver(container);

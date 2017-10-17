@@ -1,10 +1,11 @@
-﻿namespace Tc.Crm.Service.Models
+﻿using Tc.Crm.Service.CacheBuckets;
+
+namespace Tc.Crm.Service.Models
 {
-    public class SourceMarket
+    public class SourceMarket : ReferenceBucketModel
     {
-        public string Id { get; set; }
-        public string Code { get; set; }
         public string TeamId { get; set; }
+
         public string BusinessUnitId { get; set; }
     }
 }

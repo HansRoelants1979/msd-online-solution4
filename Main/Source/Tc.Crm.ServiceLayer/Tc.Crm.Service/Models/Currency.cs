@@ -1,8 +1,8 @@
-﻿namespace Tc.Crm.Service.Models
+﻿using Tc.Crm.Service.CacheBuckets;
+
+namespace Tc.Crm.Service.Models
 {
-    public class Currency
+    public class Currency : ReferenceBucketModel
     {
-        public string Code { get; set; }
-        public string Id { get; set; }
     }
 }

@@ -1,9 +1,9 @@
-﻿namespace Tc.Crm.Service.Models
+﻿using Tc.Crm.Service.CacheBuckets;
+
+namespace Tc.Crm.Service.Models
 {
-    public class Hotel
+    public class Hotel : ReferenceBucketModel
     {
-        public string Id { get; set; }
-        public string Code { get; set; }
         public string DestinationId { get; set; }
     }
 }

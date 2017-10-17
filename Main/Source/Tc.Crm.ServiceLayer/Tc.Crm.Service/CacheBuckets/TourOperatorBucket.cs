@@ -1,44 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Tc.Crm.Service.Models;
 using Tc.Crm.Service.Services;
 
 namespace Tc.Crm.Service.CacheBuckets
 {
-    public class TourOperatorBucket:IBucket
-    {
-        ICrmService crmService;
-        public TourOperatorBucket(ICrmService crmService)
-        {
-            this.crmService = crmService;
-            //FillBucket();
-        }
+	public class TourOperatorBucket : ReferenceBucket<TourOperator>
+	{
+		public TourOperatorBucket(ICrmService crmService) : base(crmService) { }
 
-        public Dictionary<string, string> Items { get; set; }
-
-
-        public void FillBucket()
-        {
-            Items = new Dictionary<string, string>();
-            var tourOperators = crmService.GetTourOperators();
-            if (tourOperators == null) return;
-            foreach (var to in tourOperators)
-            {
-                Items.Add(to.Code, to.Id);
-            }
-        }
-
-        public string GetBy(string code)
-        {
-            if (string.IsNullOrWhiteSpace(code)) return null;
-            var id = string.Empty;
-            if (Items.TryGetValue(code, out id))
-                return id;
-            return string.Empty;
-        }
-
-        public void Init()
-        {
-            throw new NotImplementedException();
-        }
-    }
+		protected override IEnumerable<TourOperator> GetEntities()
+		{
+			return CrmService.GetTourOperators();
+		}
+	}
 }
